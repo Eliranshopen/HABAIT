@@ -1,0 +1,8 @@
+ok   apartment page 3D tab: here=null, wedge meshes 0 (none expected)
+ok   after 3D->360->back: selected r-living, here null
+ok   malformed you-are-here messages: no page errors (); last here {"x":-0.758,"z":1.146,"bearingDeg":720.5,"fovDeg":90,"room":"r-living"}
+ok   you-are-here for another room keeps the kitchen selection
+ok   you-are-here for the SELECTED room closes its sheet as designed (selected null); same scene again should not re-close
+ok   repeat you-are-here (same room) keeps a fresh selection
+ok   an unknown/exterior scene clears the marker
+ok   no page errors overall: 

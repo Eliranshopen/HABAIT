@@ -1,0 +1,41 @@
+{
+ "endpoint": "krea/v3/edit",
+ "args": {
+  "prompt": "<image-1> is a plain grey 3D clay render, a 360-degree equirectangular panorama (2:1) of the Rainbow tower site on the Tel Aviv coast (Sde Dov): the tower, the low buildings of the compound, the city, the beach and the Mediterranean sea. Return the SAME equirectangular panorama with EXACTLY the same projection, framing and geometry: the horizon at the same height, every building, the tower's outline, every balcony slab, road and shoreline at exactly the same pixel position, nothing added, removed, moved or resized; the left and right edges must continue each other seamlessly (it wraps around). Only replace the grey clay with real materials and a real environment: <image-2>, <image-3>, <image-4> are photographs of the SAME tower and site, copy their look exactly: the 39-floor tower wrapped in white undulating curved balcony slabs with planters and slim black glazing, white low buildings with perforated balcony screens, the Reading power-station chimney, Mediterranean sea and beach, palm trees, roads with cars, bright clear morning daylight, blue sky with few clouds. Photoreal, sharp, natural colours. No people, no text, no logos, no watermark.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d4af/T6H9PTzlUfnmVDG33u8G0_E_node-a-aerial_clay.png",
+   "https://v3b.fal.media/files/b/0ab0d4af/_cdHhg01A1p7AtOrOOqzo_E_ref_aerial_f1.png",
+   "https://v3b.fal.media/files/b/0ab0d4b0/ip-_6pRLFab3hlxCuIaPd_E_ref_facade_f110.png",
+   "https://v3b.fal.media/files/b/0ab0d4b0/Xnfp5aI973V2BnEU6Xboj_E_ref_terrace_f164.png"
+  ],
+  "image_size": {
+   "width": 2048,
+   "height": 1024
+  },
+  "reasoning_level": "high",
+  "model": "berry",
+  "output_format": "png"
+ },
+ "result": {
+  "images": [
+   {
+    "url": "https://v3b.fal.media/files/b/0ab0d4be/PGgRqW1bBUccQB7QOvbOE.png",
+    "content_type": "image/png",
+    "file_name": null,
+    "file_size": null,
+    "width": 2048,
+    "height": 1024
+   }
+  ],
+  "seed": 1372314551,
+  "prompt": "The 360-degree equirectangular panorama in <image-1> is rendered as a sharp, photorealistic coastal Tel Aviv scene matching the architecture, materials, and environment of <image-2>, <image-3>, and <image-4>. The central 39-floor tower features white undulating curved balcony slabs with glass railings, integrated planters with greenery, and floor-to-ceiling glass with slim black frames. The surrounding low-rise compound buildings and city blocks are finished in white and cream concrete with windows, balconies, and perforated balcony screens, while the beige Reading power-station and its tall chimney with red-and-white stripes stand near the coast on the left. The grey ground plane is replaced with paved city roads with cars, lush green trees and palm trees, a sandy beach, and the blue Mediterranean Sea with gentle white surf along the shoreline. The sky is a bright, clear morning blue with a few soft white clouds and natural sunlight matching the sun position and cast shadows of <image-1>. Every building outline, the tower's silhouette, every balcony slab, road, shoreline, horizon height, and equirectangular projection stays at the exact pixel position of <image-1>, with seamless wrap-around continuity between the left and right edges, and no people, text, logos, or watermarks.",
+  "timings": {
+   "prompt_expansion": 95.312,
+   "inference": 22.89523346401984
+  },
+  "has_nsfw_concepts": [
+   false
+  ]
+ },
+ "secs": 138
+}

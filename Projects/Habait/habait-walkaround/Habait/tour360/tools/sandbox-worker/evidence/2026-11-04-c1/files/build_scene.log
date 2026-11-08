@@ -1,0 +1,568 @@
+================================================================================================
+build_scene.py v1.5.0   (board 360-v2 T06 - whole-apartment builder)
+blender   4.5.10 LTS   python 3.11.11
+================================================================================================
+plan      /vercel/sandbox/hw/360walkaround/tours/apt846/plan.json
+schema    0.2.0-draft   apartment apt846
+geometry  GENERAL (D-WQ-28): polygon walls, oriented openings, panes[] - plan_general.py v0.2.0 decides, this file builds
+mode      ALL ROOMS (v1)
+rooms     11 to build (9 indoor)
+ceiling   290.0 cm  <- plan_meta.ceiling_height_cm  [ASSUMED, see assumptions[]]
+  ASSUMPTION  ceiling 290 cm (a plan drawing has no section; the 846 renders assumed 2.9 m)
+  ASSUMPTION  door heads 215 cm, railing 110 cm, facade glazing floor to ceiling
+  ASSUMPTION  the open-plan zone boundaries (kitchen | dining | living | hall, the terrace split, the wardrobe | bedroom) are virtual lines placed by hand
+  ASSUMPTION  the terrace's narrow south passage beyond the column is not a room
+  ASSUMPTION  the guest bathroom and the main bathroom floors are the convex hulls of their traced regions
+style     'Habait Modern' v1.3.0 (style-habait-modern.json) - 44 model(s), 37 class(es), 15 palette material(s)
+  OQ-V2-3 DEFAULT IN PLAY — 'Habait Modern' is V2-PLAN §9's proposed default name/direction and is NOT yet Slava-ruled. A rename or a redirection is a NEW VERSION FILE (style-<slug>-v2.json / a new style_slug), never an edit of this one: root CLAUDE.md §2 makes a style change a release.
+floor     TILE GRID from the material board habait-tel-aviv-luxury-v1 v1.3.0 (Habait/tour360/apartments/apt846/material-board.json): 6 mm joints, turned 18.56 deg (plan frame) about the plan origin - length-weighted mode of the room-loop edges mod 90, open zone bars excluded
+floor       floor          120 x 120 cm  STATED   <- surfaces.floor  [r-entrance, r-kitchen, r-dining, r-living, r-bedroom-main, r-wardrobe, r-bedroom-2]
+floor       floor_wet      60 x 60 cm  ASSUMED  <- no size stated in surfaces.bathrooms (room_surfaces.bathroom); the default 60 x 60 cm  [r-bath-main, r-bath-guest]
+floor       floor_outdoor  60 x 60 cm  ASSUMED  <- no size stated in surfaces.terrace (room_surfaces.balcony); the default 60 x 60 cm  [r-terrace-living, r-terrace-bedroom]
+kit       materials_kit v0.3.0: ceiling, fabric, floor, floor_outdoor, floor_wet, frame, glass, skirting, terrain, wall
+style     15 palette material(s): art_panel, ceramic_white, fabric_dark, fabric_rug, fabric_rug_border, fabric_warm, fabric_white, glass_clear, lamp_shade, metal_black, metal_brushed, mirror_glass, plant_green, wood_oak, wood_walnut
+built     FLOOR_r-entrance       + CEIL_r-entrance         (23-gon)
+built     FLOOR_r-kitchen        + CEIL_r-kitchen          (37-gon)
+built     FLOOR_r-dining         + CEIL_r-dining           (26-gon)
+built     FLOOR_r-living         + CEIL_r-living           (46-gon)
+built     FLOOR_r-terrace-living + CEIL_r-terrace-living   (107-gon)  roofed outdoor: the deck above
+built     FLOOR_r-terrace-bedroom + CEIL_r-terrace-bedroom  (40-gon)  roofed outdoor: the deck above
+built     FLOOR_r-bedroom-main   + CEIL_r-bedroom-main     (14-gon)
+built     FLOOR_r-wardrobe       + CEIL_r-wardrobe         (17-gon)
+built     FLOOR_r-bath-main      + CEIL_r-bath-main        (10-gon)
+built     FLOOR_r-bedroom-2      + CEIL_r-bedroom-2        (30-gon)
+built     FLOOR_r-bath-guest     + CEIL_r-bath-guest       (13-gon)
+built     WALL_w-1                    18-gon prism    26024.0 cm2 x 290.0 cm  interior
+built     WALL_w-2                    57-gon prism    11721.8 cm2 x 290.0 cm  interior
+built     WALL_w-3                    15-gon prism    11331.3 cm2 x 290.0 cm  interior
+built     WALL_w-4                    32-gon prism     7462.8 cm2 x 290.0 cm  interior
+built     WALL_w-5                    29-gon prism     6660.4 cm2 x 290.0 cm  interior
+built     WALL_w-6                     5-gon prism     6134.7 cm2 x 290.0 cm  interior
+built     WALL_w-7                     8-gon prism     5772.3 cm2 x 290.0 cm  interior
+built     WALL_w-8                    16-gon prism     5347.5 cm2 x 290.0 cm  interior
+built     WALL_w-9                     7-gon prism     3702.4 cm2 x 290.0 cm  interior
+built     WALL_w-10                    9-gon prism     3120.1 cm2 x 290.0 cm  interior
+built     WALL_w-11                    5-gon prism     3141.0 cm2 x 290.0 cm  interior
+built     WALL_w-12                   16-gon prism     3191.8 cm2 x 290.0 cm  interior
+built     WALL_w-13                   13-gon prism     3160.7 cm2 x 290.0 cm  interior
+built     WALL_w-14                   11-gon prism     2863.7 cm2 x 290.0 cm  interior
+built     WALL_w-15                    6-gon prism     1507.5 cm2 x 290.0 cm  interior
+built     WALL_w-16                    5-gon prism     1326.4 cm2 x 290.0 cm  interior
+built     WALL_w-17                   11-gon prism     1236.3 cm2 x 290.0 cm  interior
+built     WALL_w-18                    7-gon prism      993.6 cm2 x 290.0 cm  interior
+built     WALL_w-19                    7-gon prism     1009.8 cm2 x 290.0 cm  interior
+built     WALL_w-20                    5-gon prism      776.5 cm2 x 290.0 cm  interior
+built     WALL_w-21                    9-gon prism      699.1 cm2 x 290.0 cm  interior
+built     WALL_w-22                    5-gon prism      552.4 cm2 x 290.0 cm  interior
+built     WALL_w-23                    6-gon prism      561.9 cm2 x 290.0 cm  interior
+built     WALL_w-24                   10-gon prism      558.4 cm2 x 290.0 cm  interior
+built     WALL_w-25                    6-gon prism      441.3 cm2 x 290.0 cm  interior
+built     WALL_w-26                    9-gon prism      449.2 cm2 x 290.0 cm  interior
+built     WALL_w-27                    6-gon prism      330.0 cm2 x 290.0 cm  interior
+built     WALL_w-28                    7-gon prism      399.8 cm2 x 290.0 cm  interior
+built     WALL_w-29                    7-gon prism      405.4 cm2 x 290.0 cm  interior
+built     WALL_w-30                    8-gon prism      362.8 cm2 x 290.0 cm  interior
+built     WALL_w-31                    8-gon prism      330.8 cm2 x 290.0 cm  interior
+built     WALL_w-32                    4-gon prism      133.2 cm2 x 290.0 cm  interior
+built     WALL_w-33                    7-gon prism      249.9 cm2 x 290.0 cm  interior
+built     WALL_w-34                    7-gon prism      202.2 cm2 x 290.0 cm  interior
+built     WALL_w-35                    6-gon prism      215.5 cm2 x 290.0 cm  interior
+built     WALL_w-36                    8-gon prism      224.5 cm2 x 290.0 cm  interior
+built     WALL_w-37                    8-gon prism      234.6 cm2 x 290.0 cm  interior
+built     68 facing(s) at the traced faces (band to the wall 1.5-11.9 cm, buried 2 cm into the wall; no facing where the band exceeds 12 cm)
+          r-entrance             580.0 of   636.1 cm of 'wall' edges faced ( 91.2 %)
+          r-kitchen              283.8 of   287.6 cm of 'wall' edges faced ( 98.7 %)
+          r-living              1062.0 of  1079.5 cm of 'wall' edges faced ( 98.4 %)
+          r-terrace-living       153.0 of   153.0 cm of 'wall' edges faced (100.0 %)
+          r-terrace-bedroom       87.4 of    87.4 cm of 'wall' edges faced (100.0 %)
+          r-bedroom-main         984.8 of  1022.3 cm of 'wall' edges faced ( 96.3 %)
+          r-wardrobe             589.3 of   681.7 cm of 'wall' edges faced ( 86.5 %)
+          r-bath-main            723.4 of   757.1 cm of 'wall' edges faced ( 95.5 %)
+          r-bedroom-2            822.5 of   826.9 cm of 'wall' edges faced ( 99.5 %)
+          r-bath-guest           340.9 of   386.1 cm of 'wall' edges faced ( 88.3 %)
+built     57 skirting board(s) along the facings of 9 indoor room(s), 7.0 x 1.6 cm (only where a facing stands)
+built     GLASS_facade-1             186-gon glass    0.0-290.0 cm  facade
+built     GLASS_facade-2               5-gon glass    0.0-290.0 cm  facade
+built     GLASS_facade-3              64-gon glass    0.0-290.0 cm  facade
+built     GLASS_facade-4               7-gon glass    0.0-290.0 cm  facade
+built     GLASS_facade-5              21-gon glass    0.0-290.0 cm  facade
+built     GLASS_railing-6             97-gon glass    0.0-110.0 cm  railing
+built     GLASS_railing-7            118-gon glass    0.0-110.0 cm  railing
+built     GLASS_facade-8              40-gon glass    0.0-290.0 cm  facade
+built     GLASS_facade-9              12-gon glass    0.0-290.0 cm  facade
+built     GLASS_facade-10              8-gon glass    0.0-290.0 cm  facade
+built     GLASS_facade-11             25-gon glass    0.0-290.0 cm  facade
+built     GLASS_railing-12             5-gon glass    0.0-110.0 cm  railing
+built     16 frame post(s) closing pane joints the trace left open (0.20-9.76 cm): facade-1_end0->w-16, facade-1_end1->w-13, facade-2_end0->facade-1, facade-2_end1->facade-1, facade-3_end0->w-24, facade-3_end1->w-28, facade-5_end0->w-5, railing-6_end0->facade-1, facade-8_end0->facade-1, facade-8_end1->w-13, facade-9_end0->facade-10, facade-9_end1->facade-3, facade-10_end0->facade-9, facade-11_end1->w-5, railing-12_end0->railing-7, railing-12_end1->railing-7
+skipped   opening o-1 (opening, head 290 = ceiling, rooms ['r-entrance', 'r-living']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-2 (opening, head 290 = ceiling, rooms ['r-kitchen', 'r-living']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-3 (opening, head 290 = ceiling, rooms ['r-dining', 'r-kitchen']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-4 (opening, head 290 = ceiling, rooms ['r-dining', 'r-living']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-5 (opening, head 290 = ceiling, rooms ['r-living', 'r-terrace-living']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-7 (opening, head 290 = ceiling, rooms ['r-terrace-bedroom', 'r-terrace-living']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-8 (opening, head 290 = ceiling, rooms ['r-bedroom-main', 'r-wardrobe']): a virtual boundary - nothing cut, nothing built
+cut       o-6      door             93.8 cm at  -70.80 deg, 0-215 cm, through 13 object(s): WALL_w-2, WALL_w-10, FACING_r-living_e30_r0, FACING_r-living_e33_r0, FACING_r-wardrobe_e0_r0, FACING_r-wardrobe_e8_r0, FACING_r-bath-main_e3_r0, SKIRT_r-living_e30_r0, SKIRT_r-living_e33_r0, SKIRT_r-wardrobe_e0_r0, SKIRT_r-wardrobe_e8_r0, SKIRT_r-bath-main_e3_r0, INFILL_o-6
+cut       o-9      door             66.6 cm at  -70.00 deg, 0-215 cm, through 11 object(s): WALL_w-2, WALL_w-30, FACING_r-wardrobe_e7_r0, FACING_r-wardrobe_e8_r0, FACING_r-bath-main_e4_r0, FACING_r-bath-main_e6_r0, SKIRT_r-wardrobe_e7_r0, SKIRT_r-wardrobe_e8_r0, SKIRT_r-bath-main_e4_r0, SKIRT_r-bath-main_e6_r0, INFILL_o-9
+cut       o-10     door             93.6 cm at   35.70 deg, 0-215 cm, through 18 object(s): WALL_w-3, WALL_w-17, FACING_r-entrance_e2_r0, FACING_r-entrance_e3_r0, FACING_r-entrance_e21_r0, FACING_r-bedroom-2_e6_r0, FACING_r-bedroom-2_e7_r0, FACING_r-bedroom-2_e18_r0, FACING_r-bath-guest_e8_r0, SKIRT_r-entrance_e2_r0, SKIRT_r-entrance_e3_r0, SKIRT_r-entrance_e21_r0, SKIRT_r-bedroom-2_e6_r0, SKIRT_r-bedroom-2_e7_r0, SKIRT_r-bedroom-2_e18_r0, SKIRT_r-bath-guest_e8_r0, GLASS_facade-1, INFILL_o-10
+cut       o-11     door             60.9 cm at  -52.60 deg, 0-215 cm, through 9 object(s): WALL_w-4, WALL_w-11, WALL_w-12, WALL_w-31, FACING_r-entrance_e15_r0, FACING_r-entrance_e16_r0, SKIRT_r-entrance_e15_r0, SKIRT_r-entrance_e16_r0, INFILL_o-11
+cut       o-12     entrance_door   110.9 cm at  103.20 deg, 0-215 cm, through 7 object(s): WALL_w-1, WALL_w-4, WALL_w-9, WALL_w-11, FACING_r-entrance_e9_r0, SKIRT_r-entrance_e9_r0, INFILL_o-12
+cut       o-13     door            131.9 cm at  104.00 deg, 0-215 cm, through 15 object(s): WALL_w-5, WALL_w-28, FACING_r-living_e25_r0, FACING_r-terrace-bedroom_e37_r0, FACING_r-bedroom-main_e0_r0, FACING_r-bedroom-main_e2_r0, SKIRT_r-living_e25_r0, SKIRT_r-bedroom-main_e0_r0, SKIRT_r-bedroom-main_e2_r0, GLASS_facade-3, GLASS_facade-4, GLASS_facade-11, POST_facade-3_end1, POST_facade-11_end1, INFILL_o-13
+dropped   GLASS_facade-4 (consumed whole by a cutter)
+skipped   door frame o-13 x facade-4 (52 cm2 of it cut): the pane lies wholly inside the door's span: the cut leaves no glass edge beside the door
+built     door frame o-13 x facade-11 (369 cm2 of glass cut): DOORFRAME_o-13_facade-11_L, DOORFRAME_o-13_facade-11_R, DOORFRAME_o-13_facade-11_H - 6 x 7.39 cm in the pane's line (5.73 deg to the door line, -35.1 / -21.8 cm off it), clear 125.9 x 212.0 cm, enclosure {'left_glass_edge': True, 'right_glass_edge': None, 'head_cells': [369, 369]}
+fixtures  19 plan fixture(s) are FURNISHED with catalog models and procedural assemblies below - no placeholder mass is built
+built     floor/ceiling fill at 1 cm: 1,320,076 cells (33,403 in enclosed holes - bays, niche, thresholds), closing 6 cells; floor quads {'floor': 1325, 'floor_outdoor': 768, 'floor_wet': 477}, ceiling quads 1480 (9,363 sky cells over the outdoor rooms); the fill sits 0.25 cm under the floors and 0.25 cm over the ceilings - never coplanar with a room slab
+built     TERRAIN_ground       2932 x 2932 m at z=-5120 cm  <- plan_meta.ground_offset_cm (the unit's own height above the street); camera clip 2300 m
+world     HDRI slug qwantani_noon_puresky (qwantani_noon_puresky_4k.hdr) sha256 5156af85a70bd151... exterior_class non-locating strength 1.0 rot_z 38.9 deg
+light     L_sun  azimuth 165.0 deg (plan bearing), elevation 52.0 deg, 4.0 W/m2
+light     daylight panels SKIPPED - general plan: the rule keys on window/sliding_door openings in rect walls; the facade panes light the rooms directly
+light     L_ceil_r-entrance       AREA/DISK   77.5 W facing DOWN at plan (  366.6,   750.4,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-kitchen        AREA/DISK  102.2 W facing DOWN at plan (  793.9,   654.6,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-dining         AREA/DISK   93.7 W facing DOWN at plan ( 1022.2,   693.5,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-living         AREA/DISK  226.3 W facing DOWN at plan (  836.3,  1004.1,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-bedroom-main   AREA/DISK  113.1 W facing DOWN at plan (  737.6,  1371.2,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-wardrobe       AREA/DISK   70.8 W facing DOWN at plan (  485.4,  1269.8,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-bath-main      AREA/DISK   66.8 W facing DOWN at plan (  258.6,  1257.3,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-bedroom-2      AREA/DISK   95.9 W facing DOWN at plan (  630.1,   329.2,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-bath-guest     AREA/DISK   60.3 W facing DOWN at plan (  399.5,   580.8,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+catalog   16/16 locked model(s) hash-verified against style-habait-modern.json
+furniture kenney-furniture-kit-kitchenFridge           -> r-kitchen/k-tall at (617, 682) cm, facing 126 deg, floor, fixture:k-tall
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenFridge
+16:23:25 | INFO: Blender create Mesh node Mesh doorFreezer
+16:23:25 | INFO: Blender create Mesh node Mesh doorFridge
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 3 mesh object(s) from glb: doorFreezer, doorFridge, kitchenFridge(Clone)
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m1 at (820, 401) cm, facing 126 deg, on_top, fixture:k-counter
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door, kitchenCabinet(Clone)
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m2 at (786, 448) cm, facing 126 deg, on_top, fixture:k-counter
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.03s
+      imported 2 mesh object(s) from glb: door.001, kitchenCabinet(Clone).001
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m3 at (752, 494) cm, facing 126 deg, on_top, fixture:k-counter
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door.002, kitchenCabinet(Clone).002
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m4 at (719, 541) cm, facing 126 deg, on_top, fixture:k-counter
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door.003, kitchenCabinet(Clone).003
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m5 at (685, 587) cm, facing 126 deg, on_top, fixture:k-counter
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door.004, kitchenCabinet(Clone).004
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m6 at (651, 634) cm, facing 126 deg, on_top, fixture:k-counter
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door.005, kitchenCabinet(Clone).005
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-2-m1 at (949, 498) cm, facing 216 deg, on_top, fixture:k-counter-2
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door.006, kitchenCabinet(Clone).006
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-2-m2 at (908, 468) cm, facing 216 deg, on_top, fixture:k-counter-2
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door.007, kitchenCabinet(Clone).007
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-2-m3 at (866, 438) cm, facing 216 deg, on_top, fixture:k-counter-2
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh kitchenCabinet
+16:23:25 | INFO: Blender create Mesh node Mesh door
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: door.008, kitchenCabinet(Clone).008
+furniture kenney-furniture-kit-table                   -> r-dining/d-table at (978, 692) cm, facing 216 deg, floor, fixture:d-table
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh table
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: table(Clone)
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-2 at (1025, 628) cm, facing 216 deg, floor, derived:d-table
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh chairModernCushion
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone)
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-3 at (1042, 739) cm, facing 306 deg, floor, derived:d-table
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh chairModernCushion
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).001
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-4 at (914, 645) cm, facing 126 deg, floor, derived:d-table
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh chairModernCushion
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).002
+furniture kenney-furniture-kit-loungeDesignSofa        -> r-living/l-sofa at (808, 905) cm, facing 200 deg, floor, fixture:l-sofa
+16:23:25 | INFO: Data are loaded, start creating Blender stuff
+16:23:25 | INFO: Blender create Mesh node Mesh loungeDesignSofa
+16:23:25 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: loungeDesignSofa(Clone)
+furniture polyhaven-modern_arm_chair_01                -> r-living/l-armchair at (589, 953) cm, facing 113 deg, floor, fixture:l-armchair
+      appended 1 mesh object(s): modern_arm_chair_01
+furniture polyhaven-modern_coffee_table_01             -> r-living/l-coffee at (758, 1025) cm, facing 200 deg, floor, fixture:l-coffee
+      appended 1 mesh object(s): modern_coffee_table_01
+furniture kenney-furniture-kit-cabinetTelevision       -> r-living/l-tv-1 at (689, 1117) cm, facing 20 deg, floor, fixture:l-tv
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh cabinetTelevision
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: cabinetTelevision(Clone)
+furniture kenney-furniture-kit-cabinetTelevision       -> r-living/l-tv-2 at (831, 1167) cm, facing 20 deg, floor, fixture:l-tv
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh cabinetTelevision
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: cabinetTelevision(Clone).001
+furniture kenney-furniture-kit-televisionModern        -> r-living/l-tv-tv at (758, 1149) cm, facing 20 deg, on_top, derived:l-tv
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh televisionModern
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: televisionModern(Clone)
+furniture kenney-furniture-kit-bedDouble               -> r-bedroom-main/bm-bed at (712, 1431) cm, facing 20 deg, floor, fixture:bm-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh bedDouble
+16:23:26 | INFO: Blender create Mesh node Mesh cover
+16:23:26 | INFO: Blender create Mesh node Mesh pillowLeft
+16:23:26 | INFO: glTF import finished in 0.03s
+      imported 4 mesh object(s) from glb: bedDouble(Clone), cover, pillowLeft, pillowRight
+furniture kenney-furniture-kit-cabinetBedDrawerTable   -> r-bedroom-main/bm-bed-nightstand-l at (575, 1471) cm, facing 20 deg, floor, derived:bm-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh cabinetBedDrawerTable
+16:23:26 | INFO: Blender create Mesh node Mesh drawer
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: cabinetBedDrawerTable(Clone), drawer
+furniture kenney-furniture-kit-lampRoundTable          -> r-bedroom-main/bm-bed-lamp-l at (575, 1471) cm, facing 20 deg, on_top, derived:bm-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh lampRoundTable
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: lampRoundTable(Clone)
+furniture kenney-furniture-kit-cabinetBedDrawerTable   -> r-bedroom-main/bm-bed-nightstand-r at (793, 1549) cm, facing 20 deg, floor, derived:bm-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh cabinetBedDrawerTable
+16:23:26 | INFO: Blender create Mesh node Mesh drawer
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: cabinetBedDrawerTable(Clone).001, drawer.001
+furniture kenney-furniture-kit-lampRoundTable          -> r-bedroom-main/bm-bed-lamp-r at (793, 1549) cm, facing 20 deg, on_top, derived:bm-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh lampRoundTable
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: lampRoundTable(Clone).001
+furniture polyhaven-hanging_picture_frame_01           -> r-bedroom-main/bm-bed-art at (677, 1530) cm, facing 19 deg, wall, derived:bm-bed
+      appended 1 mesh object(s): hanging_picture_frame_01
+furniture kenney-furniture-kit-bedDouble               -> r-bedroom-2/b2-bed at (638, 281) cm, facing 126 deg, floor, fixture:b2-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh bedDouble
+16:23:26 | INFO: Blender create Mesh node Mesh cover
+16:23:26 | INFO: Blender create Mesh node Mesh pillowLeft
+16:23:26 | INFO: glTF import finished in 0.03s
+      imported 4 mesh object(s) from glb: bedDouble(Clone).001, cover.001, pillowLeft.001, pillowRight.001
+furniture kenney-furniture-kit-cabinetBedDrawerTable   -> r-bedroom-2/b2-bed-nightstand-l at (636, 149) cm, facing 126 deg, floor, derived:b2-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh cabinetBedDrawerTable
+16:23:26 | INFO: Blender create Mesh node Mesh drawer
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: cabinetBedDrawerTable(Clone).002, drawer.002
+furniture kenney-furniture-kit-lampRoundTable          -> r-bedroom-2/b2-bed-lamp-l at (636, 149) cm, facing 126 deg, on_top, derived:b2-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh lampRoundTable
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: lampRoundTable(Clone).002
+furniture kenney-furniture-kit-cabinetBedDrawerTable   -> r-bedroom-2/b2-bed-nightstand-r at (512, 320) cm, facing 126 deg, floor, derived:b2-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh cabinetBedDrawerTable
+16:23:26 | INFO: Blender create Mesh node Mesh drawer
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 2 mesh object(s) from glb: cabinetBedDrawerTable(Clone).003, drawer.003
+furniture kenney-furniture-kit-lampRoundTable          -> r-bedroom-2/b2-bed-lamp-r at (512, 320) cm, facing 126 deg, on_top, derived:b2-bed
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh lampRoundTable
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: lampRoundTable(Clone).003
+furniture polyhaven-hanging_picture_frame_01           -> r-bedroom-2/b2-bed-art at (547, 215) cm, facing 126 deg, wall, derived:b2-bed
+      appended 1 mesh object(s): hanging_picture_frame_01.001
+furniture kenney-furniture-kit-bathroomSinkSquare      -> r-bath-main/bm-vanity at (341, 1216) cm, facing 200 deg, floor, fixture:bm-vanity
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh bathroomSinkSquare
+16:23:26 | INFO: glTF import finished in 0.03s
+      imported 1 mesh object(s) from glb: bathroomSinkSquare(Clone)
+furniture kenney-furniture-kit-bathroomMirror          -> r-bath-main/bm-vanity-mirror at (349, 1193) cm, facing 200 deg, wall, derived:bm-vanity
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh bathroomMirror
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: bathroomMirror(Clone)
+furniture kenney-furniture-kit-toilet                  -> r-bath-main/bm-wc at (243, 1188) cm, facing 200 deg, floor, fixture:bm-wc
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh toilet
+16:23:26 | INFO: Blender create Mesh node Mesh cover
+16:23:26 | INFO: glTF import finished in 0.03s
+      imported 2 mesh object(s) from glb: cover.002, toilet(Clone)
+furniture kenney-furniture-kit-toilet                  -> r-bath-guest/bg-wc at (392, 524) cm, facing 216 deg, floor, fixture:bg-wc
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh toilet
+16:23:26 | INFO: Blender create Mesh node Mesh cover
+16:23:26 | INFO: glTF import finished in 0.03s
+      imported 2 mesh object(s) from glb: cover.003, toilet(Clone).001
+furniture kenney-furniture-kit-bathroomSinkSquare      -> r-bath-guest/bg-vanity at (401, 634) cm, facing 36 deg, floor, fixture:bg-vanity
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh bathroomSinkSquare
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: bathroomSinkSquare(Clone).001
+furniture kenney-furniture-kit-bathroomMirror          -> r-bath-guest/bg-vanity-mirror at (387, 653) cm, facing 36 deg, wall, derived:bg-vanity
+16:23:26 | INFO: Data are loaded, start creating Blender stuff
+16:23:26 | INFO: Blender create Mesh node Mesh bathroomMirror
+16:23:26 | INFO: glTF import finished in 0.02s
+      imported 1 mesh object(s) from glb: bathroomMirror(Clone).001
+door      o-6    leaf 89.2 x 211.7 cm into r-wardrobe, hinge +u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-9    leaf 62.0 x 211.7 cm into r-bath-main, hinge +u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-10   leaf 89.0 x 211.7 cm into r-entrance, hinge +u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-11   leaf 56.3 x 211.7 cm into r-entrance, hinge -u, open 12 deg (ajar 12 deg: a camera sees the doorway; 30 deg refused (passes 29 cm from cp-bathguest at 5 deg); 25 deg refused (passes 29 cm from cp-bathguest at 5 deg)), 16 parts
+door      o-12   entrance leaf LEAF_o-12 -> wood_walnut, hinge +u, 12 parts
+dropped   d-table-chair-1: 5.6 cm from camera cp-dining (bar 25)
+NOTE      furnishing w-closet-1: run trimmed 16 cm (a wall, a door zone or an earlier piece)
+NOTE      furnishing w-closet-2: run trimmed 52 cm (a wall, a door zone or an earlier piece)
+NOTE      furnishing b2-closet: moved 5 cm off its traced line, out of the wall behind it
+NOTE      furnishing b2-closet: run trimmed 7 cm (a wall, a door zone or an earlier piece)
+NOTE      furnishing k-counter: run trimmed 15 cm (a wall, a door zone or an earlier piece)
+NOTE      furnishing k-counter-2: run trimmed 31 cm (a wall, a door zone or an earlier piece)
+NOTE      furnishing l-sofa: kept (plan truth) but 24.5 cm from camera cp-living (bar 25)
+NOTE      furnishing bm-shower: kept (plan truth) but 8.2 cm from camera cp-bathMain (bar 25)
+NOTE      furnishing bm-vanity: moved 8 cm off its traced line, out of the wall behind it
+NOTE      furnishing bg-shower: run trimmed 22 cm (a wall, a door zone or an earlier piece)
+NOTE      furnishing bg-vanity: moved 10 cm off its traced line, out of the wall behind it
+NOTE      furnishing bg-vanity: kept (plan truth) but enters a wall, a pane or another room
+furnished 38 catalog placement(s) of 16 distinct model(s), 5 procedural assemblies (36 parts), 4 interior door(s) (76 parts) - general_furnish v0.1.1
+camera    CAM_cp-living (default) at plan (685.3, 935.1, 160) cm, yaw 111.3 deg -> world (6.853, -9.351, 1.6), euler_z -111.3 deg  [camera.panorama_type (4.3+)]  -- render_pano.py re-points this ONE object per camera_points[] entry at render time
+render    CYCLES/GPU seed 0, 4096x2048 draft, view_transform AgX look AgX - Punchy
+
+GEOMETRY CHECKS  (general plan: 37 wall pieces, 68 facings, 11 panes, 6 cut openings, 11 rooms; tolerance 1.000 mm)
+  [PASS] wall w-1 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-1].height_cm
+  [PASS] wall w-1 polygon extruded (top face area)                  measured    26024.03 cm2 expected    26024.03 cm2 eq.  0.00003 mm   <- walls[w-1].polygon_cm (shoelace)
+  [PASS] wall w-1 plan vertices on the extruded top                 18 / 18   <- walls[w-1].polygon_cm
+  [PASS] wall w-2 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-2].height_cm
+  [PASS] wall w-2 polygon extruded (top face area)                  measured    11721.76 cm2 expected    11721.78 cm2 eq.  0.00005 mm   <- walls[w-2].polygon_cm (shoelace)
+  [PASS] wall w-2 plan vertices on the extruded top                 57 / 57   <- walls[w-2].polygon_cm
+  [PASS] wall w-3 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-3].height_cm
+  [PASS] wall w-3 polygon extruded (top face area)                  measured    11331.32 cm2 expected    11331.31 cm2 eq.  0.00004 mm   <- walls[w-3].polygon_cm (shoelace)
+  [PASS] wall w-3 plan vertices on the extruded top                 15 / 15   <- walls[w-3].polygon_cm
+  [PASS] wall w-4 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-4].height_cm
+  [PASS] wall w-4 polygon extruded (top face area)                  measured     7462.82 cm2 expected     7462.82 cm2 eq.  0.00007 mm   <- walls[w-4].polygon_cm (shoelace)
+  [PASS] wall w-4 plan vertices on the extruded top                 32 / 32   <- walls[w-4].polygon_cm
+  [PASS] wall w-5 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-5].height_cm
+  [PASS] wall w-5 polygon extruded (top face area)                  measured     6660.39 cm2 expected     6660.39 cm2 eq.  0.00000 mm   <- walls[w-5].polygon_cm (shoelace)
+  [PASS] wall w-5 plan vertices on the extruded top                 29 / 29   <- walls[w-5].polygon_cm
+  [PASS] wall w-6 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-6].height_cm
+  [PASS] wall w-6 polygon extruded (top face area)                  measured     6134.66 cm2 expected     6134.66 cm2 eq.  0.00023 mm   <- walls[w-6].polygon_cm (shoelace)
+  [PASS] wall w-6 plan vertices on the extruded top                 5 / 5   <- walls[w-6].polygon_cm
+  [PASS] wall w-7 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-7].height_cm
+  [PASS] wall w-7 polygon extruded (top face area)                  measured     5772.25 cm2 expected     5772.25 cm2 eq.  0.00025 mm   <- walls[w-7].polygon_cm (shoelace)
+  [PASS] wall w-7 plan vertices on the extruded top                 8 / 8   <- walls[w-7].polygon_cm
+  [PASS] wall w-8 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-8].height_cm
+  [PASS] wall w-8 polygon extruded (top face area)                  measured     5347.60 cm2 expected     5347.49 cm2 eq.  0.00069 mm   <- walls[w-8].polygon_cm (shoelace)
+  [PASS] wall w-8 plan vertices on the extruded top                 16 / 16   <- walls[w-8].polygon_cm
+  [PASS] wall w-9 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-9].height_cm
+  [PASS] wall w-9 polygon extruded (top face area)                  measured     3702.36 cm2 expected     3702.36 cm2 eq.  0.00004 mm   <- walls[w-9].polygon_cm (shoelace)
+  [PASS] wall w-9 plan vertices on the extruded top                 7 / 7   <- walls[w-9].polygon_cm
+  [PASS] wall w-10 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-10].height_cm
+  [PASS] wall w-10 polygon extruded (top face area)                 measured     3119.99 cm2 expected     3120.05 cm2 eq.  0.00063 mm   <- walls[w-10].polygon_cm (shoelace)
+  [PASS] wall w-10 plan vertices on the extruded top                9 / 9   <- walls[w-10].polygon_cm
+  [PASS] wall w-11 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-11].height_cm
+  [PASS] wall w-11 polygon extruded (top face area)                 measured     3140.98 cm2 expected     3141.00 cm2 eq.  0.00028 mm   <- walls[w-11].polygon_cm (shoelace)
+  [PASS] wall w-11 plan vertices on the extruded top                5 / 5   <- walls[w-11].polygon_cm
+  [PASS] wall w-12 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-12].height_cm
+  [PASS] wall w-12 polygon extruded (top face area)                 measured     3191.77 cm2 expected     3191.78 cm2 eq.  0.00009 mm   <- walls[w-12].polygon_cm (shoelace)
+  [PASS] wall w-12 plan vertices on the extruded top                16 / 16   <- walls[w-12].polygon_cm
+  [PASS] wall w-13 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-13].height_cm
+  [PASS] wall w-13 polygon extruded (top face area)                 measured     3160.68 cm2 expected     3160.67 cm2 eq.  0.00004 mm   <- walls[w-13].polygon_cm (shoelace)
+  [PASS] wall w-13 plan vertices on the extruded top                13 / 13   <- walls[w-13].polygon_cm
+  [PASS] wall w-14 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-14].height_cm
+  [PASS] wall w-14 polygon extruded (top face area)                 measured     2863.66 cm2 expected     2863.66 cm2 eq.  0.00002 mm   <- walls[w-14].polygon_cm (shoelace)
+  [PASS] wall w-14 plan vertices on the extruded top                11 / 11   <- walls[w-14].polygon_cm
+  [PASS] wall w-15 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-15].height_cm
+  [PASS] wall w-15 polygon extruded (top face area)                 measured     1507.64 cm2 expected     1507.54 cm2 eq.  0.00110 mm   <- walls[w-15].polygon_cm (shoelace)
+  [PASS] wall w-15 plan vertices on the extruded top                6 / 6   <- walls[w-15].polygon_cm
+  [PASS] wall w-16 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-16].height_cm
+  [PASS] wall w-16 polygon extruded (top face area)                 measured     1326.43 cm2 expected     1326.43 cm2 eq.  0.00006 mm   <- walls[w-16].polygon_cm (shoelace)
+  [PASS] wall w-16 plan vertices on the extruded top                5 / 5   <- walls[w-16].polygon_cm
+  [PASS] wall w-17 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-17].height_cm
+  [PASS] wall w-17 polygon extruded (top face area)                 measured     1236.30 cm2 expected     1236.30 cm2 eq.  0.00001 mm   <- walls[w-17].polygon_cm (shoelace)
+  [PASS] wall w-17 plan vertices on the extruded top                11 / 11   <- walls[w-17].polygon_cm
+  [PASS] wall w-18 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-18].height_cm
+  [PASS] wall w-18 polygon extruded (top face area)                 measured      993.62 cm2 expected      993.63 cm2 eq.  0.00002 mm   <- walls[w-18].polygon_cm (shoelace)
+  [PASS] wall w-18 plan vertices on the extruded top                7 / 7   <- walls[w-18].polygon_cm
+  [PASS] wall w-19 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-19].height_cm
+  [PASS] wall w-19 polygon extruded (top face area)                 measured     1009.85 cm2 expected     1009.85 cm2 eq.  0.00002 mm   <- walls[w-19].polygon_cm (shoelace)
+  [PASS] wall w-19 plan vertices on the extruded top                7 / 7   <- walls[w-19].polygon_cm
+  [PASS] wall w-20 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-20].height_cm
+  [PASS] wall w-20 polygon extruded (top face area)                 measured      776.44 cm2 expected      776.49 cm2 eq.  0.00081 mm   <- walls[w-20].polygon_cm (shoelace)
+  [PASS] wall w-20 plan vertices on the extruded top                5 / 5   <- walls[w-20].polygon_cm
+  [PASS] wall w-21 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-21].height_cm
+  [PASS] wall w-21 polygon extruded (top face area)                 measured      699.06 cm2 expected      699.07 cm2 eq.  0.00002 mm   <- walls[w-21].polygon_cm (shoelace)
+  [PASS] wall w-21 plan vertices on the extruded top                9 / 9   <- walls[w-21].polygon_cm
+  [PASS] wall w-22 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-22].height_cm
+  [PASS] wall w-22 polygon extruded (top face area)                 measured      552.40 cm2 expected      552.40 cm2 eq.  0.00012 mm   <- walls[w-22].polygon_cm (shoelace)
+  [PASS] wall w-22 plan vertices on the extruded top                5 / 5   <- walls[w-22].polygon_cm
+  [PASS] wall w-23 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-23].height_cm
+  [PASS] wall w-23 polygon extruded (top face area)                 measured      561.92 cm2 expected      561.94 cm2 eq.  0.00059 mm   <- walls[w-23].polygon_cm (shoelace)
+  [PASS] wall w-23 plan vertices on the extruded top                6 / 6   <- walls[w-23].polygon_cm
+  [PASS] wall w-24 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-24].height_cm
+  [PASS] wall w-24 polygon extruded (top face area)                 measured      558.40 cm2 expected      558.41 cm2 eq.  0.00033 mm   <- walls[w-24].polygon_cm (shoelace)
+  [PASS] wall w-24 plan vertices on the extruded top                10 / 10   <- walls[w-24].polygon_cm
+  [PASS] wall w-25 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-25].height_cm
+  [PASS] wall w-25 polygon extruded (top face area)                 measured      441.28 cm2 expected      441.30 cm2 eq.  0.00052 mm   <- walls[w-25].polygon_cm (shoelace)
+  [PASS] wall w-25 plan vertices on the extruded top                6 / 6   <- walls[w-25].polygon_cm
+  [PASS] wall w-26 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-26].height_cm
+  [PASS] wall w-26 polygon extruded (top face area)                 measured      449.20 cm2 expected      449.21 cm2 eq.  0.00033 mm   <- walls[w-26].polygon_cm (shoelace)
+  [PASS] wall w-26 plan vertices on the extruded top                9 / 9   <- walls[w-26].polygon_cm
+  [PASS] wall w-27 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-27].height_cm
+  [PASS] wall w-27 polygon extruded (top face area)                 measured      330.03 cm2 expected      330.03 cm2 eq.  0.00003 mm   <- walls[w-27].polygon_cm (shoelace)
+  [PASS] wall w-27 plan vertices on the extruded top                6 / 6   <- walls[w-27].polygon_cm
+  [PASS] wall w-28 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-28].height_cm
+  [PASS] wall w-28 polygon extruded (top face area)                 measured      399.80 cm2 expected      399.80 cm2 eq.  0.00005 mm   <- walls[w-28].polygon_cm (shoelace)
+  [PASS] wall w-28 plan vertices on the extruded top                7 / 7   <- walls[w-28].polygon_cm
+  [PASS] wall w-29 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-29].height_cm
+  [PASS] wall w-29 polygon extruded (top face area)                 measured      405.37 cm2 expected      405.37 cm2 eq.  0.00005 mm   <- walls[w-29].polygon_cm (shoelace)
+  [PASS] wall w-29 plan vertices on the extruded top                7 / 7   <- walls[w-29].polygon_cm
+  [PASS] wall w-30 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-30].height_cm
+  [PASS] wall w-30 polygon extruded (top face area)                 measured      362.83 cm2 expected      362.83 cm2 eq.  0.00001 mm   <- walls[w-30].polygon_cm (shoelace)
+  [PASS] wall w-30 plan vertices on the extruded top                8 / 8   <- walls[w-30].polygon_cm
+  [PASS] wall w-31 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-31].height_cm
+  [PASS] wall w-31 polygon extruded (top face area)                 measured      330.81 cm2 expected      330.81 cm2 eq.  0.00002 mm   <- walls[w-31].polygon_cm (shoelace)
+  [PASS] wall w-31 plan vertices on the extruded top                8 / 8   <- walls[w-31].polygon_cm
+  [PASS] wall w-32 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-32].height_cm
+  [PASS] wall w-32 polygon extruded (top face area)                 measured      133.24 cm2 expected      133.24 cm2 eq.  0.00005 mm   <- walls[w-32].polygon_cm (shoelace)
+  [PASS] wall w-32 plan vertices on the extruded top                4 / 4   <- walls[w-32].polygon_cm
+  [PASS] wall w-33 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-33].height_cm
+  [PASS] wall w-33 polygon extruded (top face area)                 measured      249.93 cm2 expected      249.93 cm2 eq.  0.00000 mm   <- walls[w-33].polygon_cm (shoelace)
+  [PASS] wall w-33 plan vertices on the extruded top                7 / 7   <- walls[w-33].polygon_cm
+  [PASS] wall w-34 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-34].height_cm
+  [PASS] wall w-34 polygon extruded (top face area)                 measured      202.15 cm2 expected      202.15 cm2 eq.  0.00013 mm   <- walls[w-34].polygon_cm (shoelace)
+  [PASS] wall w-34 plan vertices on the extruded top                7 / 7   <- walls[w-34].polygon_cm
+  [PASS] wall w-35 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-35].height_cm
+  [PASS] wall w-35 polygon extruded (top face area)                 measured      215.52 cm2 expected      215.52 cm2 eq.  0.00003 mm   <- walls[w-35].polygon_cm (shoelace)
+  [PASS] wall w-35 plan vertices on the extruded top                6 / 6   <- walls[w-35].polygon_cm
+  [PASS] wall w-36 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-36].height_cm
+  [PASS] wall w-36 polygon extruded (top face area)                 measured      224.53 cm2 expected      224.52 cm2 eq.  0.00011 mm   <- walls[w-36].polygon_cm (shoelace)
+  [PASS] wall w-36 plan vertices on the extruded top                8 / 8   <- walls[w-36].polygon_cm
+  [PASS] wall w-37 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-37].height_cm
+  [PASS] wall w-37 polygon extruded (top face area)                 measured      234.56 cm2 expected      234.57 cm2 eq.  0.00012 mm   <- walls[w-37].polygon_cm (shoelace)
+  [PASS] wall w-37 plan vertices on the extruded top                8 / 8   <- walls[w-37].polygon_cm
+  [PASS] room r-entrance clear width (floor bbox, x)                measured    436.0000 cm  expected    436.0000 cm  err  0.00022 mm   <- rooms[r-entrance].clear_dims_cm[0]
+  [PASS] room r-entrance clear depth (floor bbox, y)                measured    472.4000 cm  expected    472.4000 cm  err  0.00002 mm   <- rooms[r-entrance].clear_dims_cm[1]
+  [PASS] room r-entrance floor triangulation area (23-gon)          measured    62516.44 cm2 expected    62516.44 cm2 eq.  0.00002 mm   <- rooms[r-entrance].loop (shoelace)
+  [PASS] room r-entrance floor-to-ceiling height                    measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-kitchen clear width (floor bbox, x)                 measured    442.3000 cm  expected    442.3000 cm  err  0.00034 mm   <- rooms[r-kitchen].clear_dims_cm[0]
+  [PASS] room r-kitchen clear depth (floor bbox, y)                 measured    550.7000 cm  expected    550.7000 cm  err  0.00003 mm   <- rooms[r-kitchen].clear_dims_cm[1]
+  [PASS] room r-kitchen floor triangulation area (37-gon)           measured   103742.19 cm2 expected   103742.19 cm2 eq.  0.00002 mm   <- rooms[r-kitchen].loop (shoelace)
+  [PASS] room r-kitchen floor-to-ceiling height                     measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-dining clear width (floor bbox, x)                  measured    326.2000 cm  expected    326.2000 cm  err  0.00008 mm   <- rooms[r-dining].clear_dims_cm[0]
+  [PASS] room r-dining clear depth (floor bbox, y)                  measured    457.3000 cm  expected    457.3000 cm  err  0.00005 mm   <- rooms[r-dining].clear_dims_cm[1]
+  [PASS] room r-dining floor triangulation area (26-gon)            measured    89464.15 cm2 expected    89464.16 cm2 eq.  0.00003 mm   <- rooms[r-dining].loop (shoelace)
+  [PASS] room r-dining floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-living clear width (floor bbox, x)                  measured    917.8000 cm  expected    917.8000 cm  err  0.00033 mm   <- rooms[r-living].clear_dims_cm[0]
+  [PASS] room r-living clear depth (floor bbox, y)                  measured    558.2000 cm  expected    558.2000 cm  err  0.00026 mm   <- rooms[r-living].clear_dims_cm[1]
+  [PASS] room r-living floor triangulation area (46-gon)            measured   310507.55 cm2 expected   310507.55 cm2 eq.  0.00000 mm   <- rooms[r-living].loop (shoelace)
+  [PASS] room r-living floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-terrace-living clear width (floor bbox, x)          measured    446.2000 cm  expected    446.2000 cm  err  0.00011 mm   <- rooms[r-terrace-living].clear_dims_cm[0]
+  [PASS] room r-terrace-living clear depth (floor bbox, y)          measured    811.9999 cm  expected    812.0000 cm  err  0.00059 mm   <- rooms[r-terrace-living].clear_dims_cm[1]
+  [PASS] room r-terrace-living floor triangulation area (107-gon)   measured   157066.16 cm2 expected   157066.17 cm2 eq.  0.00002 mm   <- rooms[r-terrace-living].loop (shoelace)
+  [PASS] room r-terrace-living floor-to-ceiling height              measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-terrace-bedroom clear width (floor bbox, x)         measured    224.5000 cm  expected    224.5000 cm  err  0.00011 mm   <- rooms[r-terrace-bedroom].clear_dims_cm[0]
+  [PASS] room r-terrace-bedroom clear depth (floor bbox, y)         measured    244.5000 cm  expected    244.5000 cm  err  0.00031 mm   <- rooms[r-terrace-bedroom].clear_dims_cm[1]
+  [PASS] room r-terrace-bedroom floor triangulation area (40-gon)   measured    29783.03 cm2 expected    29783.03 cm2 eq.  0.00004 mm   <- rooms[r-terrace-bedroom].loop (shoelace)
+  [PASS] room r-terrace-bedroom floor-to-ceiling height             measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-bedroom-main clear width (floor bbox, x)            measured    428.9000 cm  expected    428.9000 cm  err  0.00044 mm   <- rooms[r-bedroom-main].clear_dims_cm[0]
+  [PASS] room r-bedroom-main clear depth (floor bbox, y)            measured    444.9000 cm  expected    444.9000 cm  err  0.00036 mm   <- rooms[r-bedroom-main].clear_dims_cm[1]
+  [PASS] room r-bedroom-main floor triangulation area (14-gon)      measured   121875.97 cm2 expected   121875.97 cm2 eq.  0.00000 mm   <- rooms[r-bedroom-main].loop (shoelace)
+  [PASS] room r-bedroom-main floor-to-ceiling height                measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-wardrobe clear width (floor bbox, x)                measured    226.2000 cm  expected    226.2000 cm  err  0.00015 mm   <- rooms[r-wardrobe].clear_dims_cm[0]
+  [PASS] room r-wardrobe clear depth (floor bbox, y)                measured    368.5000 cm  expected    368.5000 cm  err  0.00042 mm   <- rooms[r-wardrobe].clear_dims_cm[1]
+  [PASS] room r-wardrobe floor triangulation area (17-gon)          measured    51349.99 cm2 expected    51349.98 cm2 eq.  0.00008 mm   <- rooms[r-wardrobe].loop (shoelace)
+  [PASS] room r-wardrobe floor-to-ceiling height                    measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-bath-main clear width (floor bbox, x)               measured    255.1000 cm  expected    255.1000 cm  err  0.00024 mm   <- rooms[r-bath-main].clear_dims_cm[0]
+  [PASS] room r-bath-main clear depth (floor bbox, y)               measured    265.8000 cm  expected    265.8000 cm  err  0.00001 mm   <- rooms[r-bath-main].clear_dims_cm[1]
+  [PASS] room r-bath-main floor triangulation area (10-gon)         measured    44658.60 cm2 expected    44658.60 cm2 eq.  0.00001 mm   <- rooms[r-bath-main].loop (shoelace)
+  [PASS] room r-bath-main floor-to-ceiling height                   measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-bedroom-2 clear width (floor bbox, x)               measured    420.0000 cm  expected    420.0000 cm  err  0.00019 mm   <- rooms[r-bedroom-2].clear_dims_cm[0]
+  [PASS] room r-bedroom-2 clear depth (floor bbox, y)               measured    429.7000 cm  expected    429.7000 cm  err  0.00019 mm   <- rooms[r-bedroom-2].clear_dims_cm[1]
+  [PASS] room r-bedroom-2 floor triangulation area (30-gon)         measured    93139.57 cm2 expected    93139.57 cm2 eq.  0.00001 mm   <- rooms[r-bedroom-2].loop (shoelace)
+  [PASS] room r-bedroom-2 floor-to-ceiling height                   measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-bath-guest clear width (floor bbox, x)              measured    225.3000 cm  expected    225.3000 cm  err  0.00026 mm   <- rooms[r-bath-guest].clear_dims_cm[0]
+  [PASS] room r-bath-guest clear depth (floor bbox, y)              measured    260.0000 cm  expected    260.0000 cm  err  0.00010 mm   <- rooms[r-bath-guest].clear_dims_cm[1]
+  [PASS] room r-bath-guest floor triangulation area (13-gon)        measured    33775.38 cm2 expected    33775.38 cm2 eq.  0.00002 mm   <- rooms[r-bath-guest].loop (shoelace)
+  [PASS] room r-bath-guest floor-to-ceiling height                  measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] pane facade-1 height                                       measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-1].sill_cm/head_cm
+  [PASS] pane facade-1 polygon extruded (top face area)             measured     3424.47 cm2 expected     3424.70 cm2 eq.  0.00075 mm   <- panes[facade-1].polygon_cm (shoelace)
+  [PASS] pane facade-2 height                                       measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-2].sill_cm/head_cm
+  [PASS] pane facade-2 polygon extruded (top face area)             measured      100.96 cm2 expected      100.96 cm2 eq.  0.00002 mm   <- panes[facade-2].polygon_cm (shoelace)
+  [PASS] pane facade-3 height                                       measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-3].sill_cm/head_cm
+  [PASS] pane facade-3 polygon extruded (top face area)             measured      966.03 cm2 expected      960.27 cm2 eq.  0.03918 mm   <- panes[facade-3].polygon_cm (shoelace)
+  [PASS] pane facade-5 height                                       measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-5].sill_cm/head_cm
+  [PASS] pane facade-5 polygon extruded (top face area)             measured      110.51 cm2 expected      110.51 cm2 eq.  0.00005 mm   <- panes[facade-5].polygon_cm (shoelace)
+  [PASS] pane railing-6 height                                      measured    110.0000 cm  expected    110.0000 cm  err  0.00002 mm   <- panes[railing-6].sill_cm/head_cm
+  [PASS] pane railing-6 polygon extruded (top face area)            measured      708.96 cm2 expected      708.99 cm2 eq.  0.00038 mm   <- panes[railing-6].polygon_cm (shoelace)
+  [PASS] pane railing-7 height                                      measured    110.0000 cm  expected    110.0000 cm  err  0.00002 mm   <- panes[railing-7].sill_cm/head_cm
+  [PASS] pane railing-7 polygon extruded (top face area)            measured     2679.38 cm2 expected     2679.35 cm2 eq.  0.00008 mm   <- panes[railing-7].polygon_cm (shoelace)
+  [PASS] pane facade-8 height                                       measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-8].sill_cm/head_cm
+  [PASS] pane facade-8 polygon extruded (top face area)             measured      544.84 cm2 expected      544.85 cm2 eq.  0.00019 mm   <- panes[facade-8].polygon_cm (shoelace)
+  [PASS] pane facade-9 height                                       measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-9].sill_cm/head_cm
+  [PASS] pane facade-9 polygon extruded (top face area)             measured       53.85 cm2 expected       53.85 cm2 eq.  0.00013 mm   <- panes[facade-9].polygon_cm (shoelace)
+  [PASS] pane facade-10 height                                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-10].sill_cm/head_cm
+  [PASS] pane facade-10 polygon extruded (top face area)            measured       81.35 cm2 expected       81.35 cm2 eq.  0.00003 mm   <- panes[facade-10].polygon_cm (shoelace)
+  [PASS] pane facade-11 height                                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- panes[facade-11].sill_cm/head_cm
+  [PASS] pane facade-11 polygon extruded (top face area)            measured      577.56 cm2 expected      577.55 cm2 eq.  0.00017 mm   <- panes[facade-11].polygon_cm (shoelace)
+  [PASS] pane railing-12 height                                     measured    110.0000 cm  expected    110.0000 cm  err  0.00002 mm   <- panes[railing-12].sill_cm/head_cm
+  [PASS] pane railing-12 polygon extruded (top face area)           measured      257.15 cm2 expected      257.16 cm2 eq.  0.00033 mm   <- panes[railing-12].polygon_cm (shoelace)
+  [PASS] facings reaching their wall's height (top face)            68 / 68   <- plan_general.facings() -> the wall each band reached
+  [PASS] door frame DOORFRAME_o-13_facade-11_L height               measured    213.0000 cm  expected    213.0000 cm  err  0.00011 mm   <- openings[o-13] sill/head + FRAME_W_CM (plan_general answer 2c)
+  [PASS] door frame DOORFRAME_o-13_facade-11_L footprint (top face area) measured       44.36 cm2 expected       44.36 cm2 eq.  0.00008 mm   <- plan_general.door_glass_frames() rect
+  [PASS] door frame DOORFRAME_o-13_facade-11_R height               measured    213.0000 cm  expected    213.0000 cm  err  0.00011 mm   <- openings[o-13] sill/head + FRAME_W_CM (plan_general answer 2c)
+  [PASS] door frame DOORFRAME_o-13_facade-11_R footprint (top face area) measured       44.36 cm2 expected       44.36 cm2 eq.  0.00047 mm   <- plan_general.door_glass_frames() rect
+  [PASS] door frame DOORFRAME_o-13_facade-11_H height               measured      6.0000 cm  expected      6.0000 cm  err  0.00018 mm   <- openings[o-13] sill/head + FRAME_W_CM (plan_general answer 2c)
+  [PASS] door frame DOORFRAME_o-13_facade-11_H footprint (top face area) measured     1024.35 cm2 expected     1024.31 cm2 eq.  0.00143 mm   <- plan_general.door_glass_frames() rect
+  [PASS] door frame o-13 x facade-11: bare glass faces inside the frame 2 / 2   <- plan_general.door_glass_frames() enclosure, 2-D
+  [PASS] pane joint posts at their pane's height                    16 / 16   <- plan_general.pane_joints() -> panes[].sill_cm/head_cm
+
+OPENING CHECKS  (rays across each cut opening: clear between sill and head, blocked just above the head)
+  [PASS] opening o-6    through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-6']
+  [PASS] opening o-9    through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-9']
+  [PASS] opening o-10   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-10']
+  [PASS] opening o-11   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-11']
+  [PASS] opening o-12   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-12']
+  [PASS] opening o-13   through 9/9 clear, above the head 3/3 blocked by ['GLASS_facade-11']
+
+CAMERA CLEARANCE  (bar 40 cm from any architectural mesh, measured on the built mesh; general plan: REPORTED - the points are authored and taken as given)
+  [PASS] camera cp-entrance        room r-entrance         clearance   48.17 cm from ENTRY_o-12_casing_m_p
+  [PASS] camera cp-kitchen         room r-kitchen          clearance   96.30 cm from kitchenCabinet(Clone).002
+  [PASS] camera cp-dining          room r-dining           clearance   97.43 cm from table(Clone)
+  [PASS] camera cp-living          room r-living           clearance   95.54 cm from modern_arm_chair_01
+  [PASS] camera cp-terraceLiving   room r-terrace-living   clearance   40.64 cm from WALL_w-13
+  [UNDER] camera cp-terraceBedroom  room r-terrace-bedroom  clearance   39.40 cm from FACING_r-terrace-bedroom_e35_r0
+  [PASS] camera cp-bedroomMain     room r-bedroom-main     clearance   49.70 cm from FACING_r-bedroom-main_e2_r0
+  [PASS] camera cp-wardrobe        room r-wardrobe         clearance   47.93 cm from CLOSET_w-closet-2_door2
+  [UNDER] camera cp-bathMain        room r-bath-main        clearance   39.58 cm from SHOWER_bm-shower_screen
+  [PASS] camera cp-bedroom2        room r-bedroom-2        clearance   45.73 cm from CLOSET_b2-closet_door4
+  [UNDER] camera cp-bathguest       room r-bath-guest       clearance   21.67 cm from DOOR_o-11_casing_m_p
+Info: Saved as "scene-full.blend"
+saved     /vercel/sandbox/hw/360walkaround/tours/apt846/scene-full.blend  (875,517 bytes)
+report    /vercel/sandbox/hw/360walkaround/tours/apt846/scene-full.report.json
+CHECKS    192/192 geometry passed (tol 1 mm), 8/11 camera clearance passed (bar 40 cm)
+REPORT    camera clearance: cp-terraceBedroom 39.4 cm from facing FACING_r-terrace-bedroom_e35_r0 - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+REPORT    camera clearance: cp-bathMain 39.58 cm from shower SHOWER_bm-shower_screen - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+REPORT    camera clearance: cp-bathguest 21.67 cm from door DOOR_o-11_casing_m_p - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+OK
+Blender 4.5.10 LTS (hash 6dc0b208d1b5 built 2026-05-19 01:31:21)
+
+could not get a list of mounted file-systems

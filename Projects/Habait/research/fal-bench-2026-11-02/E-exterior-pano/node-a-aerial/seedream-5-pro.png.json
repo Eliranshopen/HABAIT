@@ -1,0 +1,30 @@
+{
+ "endpoint": "bytedance/seedream/v5/pro/edit",
+ "args": {
+  "prompt": "Image 1 is a plain grey 3D clay render, a 360-degree equirectangular panorama (2:1) of the Rainbow tower site on the Tel Aviv coast (Sde Dov): the tower, the low buildings of the compound, the city, the beach and the Mediterranean sea. Return the SAME equirectangular panorama with EXACTLY the same projection, framing and geometry: the horizon at the same height, every building, the tower's outline, every balcony slab, road and shoreline at exactly the same pixel position, nothing added, removed, moved or resized; the left and right edges must continue each other seamlessly (it wraps around). Only replace the grey clay with real materials and a real environment: Images 2, 3, 4 are photographs of the SAME tower and site, copy their look exactly: the 39-floor tower wrapped in white undulating curved balcony slabs with planters and slim black glazing, white low buildings with perforated balcony screens, the Reading power-station chimney, Mediterranean sea and beach, palm trees, roads with cars, bright clear morning daylight, blue sky with few clouds. Photoreal, sharp, natural colours. No people, no text, no logos, no watermark.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d4af/EmMuuuTllfXc7C4MVVuIg_E_node-a-aerial_clay.png",
+   "https://v3b.fal.media/files/b/0ab0d4af/zz8zal9H-RxU4zOl6by2a_E_ref_aerial_f1.png",
+   "https://v3b.fal.media/files/b/0ab0d4b0/3X7esvF1LKaa93-zzLhJ9_E_ref_facade_f110.png",
+   "https://v3b.fal.media/files/b/0ab0d4b0/pUNo7Y4NsOxxp7BPWWYzp_E_ref_terrace_f164.png"
+  ],
+  "image_size": {
+   "width": 2048,
+   "height": 1024
+  },
+  "output_format": "png"
+ },
+ "result": {
+  "images": [
+   {
+    "url": "https://v3b.fal.media/files/b/0ab0d4be/2elU2ir1OuAUey70j38Cq_a56c94cac4734cc2a8c14c9ceaffdd88.png",
+    "content_type": "image/png",
+    "file_name": "a56c94cac4734cc2a8c14c9ceaffdd88.png",
+    "file_size": 4391291,
+    "width": null,
+    "height": null
+   }
+  ]
+ },
+ "secs": 142
+}

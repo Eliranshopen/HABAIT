@@ -1,0 +1,32 @@
+{
+ "node": "node-rb090",
+ "endpoint": "openai/gpt-image-2.5/sunburst/edit",
+ "request_id": "01a19c8c-d32a-7c01-a3b5-062f1fb3785a",
+ "strict": true,
+ "prompt_v": 2,
+ "prompt": "Image 1 is a plain grey computer render (clay) of a 360-degree equirectangular panorama (2:1; its left and right edges meet behind the camera and must continue into each other seamlessly) taken in the air a few dozen metres from the Rainbow tower, which fills a large part of the view: a stack of white, softly undulating curved balcony slabs with planters and frameless glass railings, floor-to-ceiling glazing with slim dark mullions; the sea, the chimney and the city around. Return the SAME equirectangular panorama as a photograph taken from EXACTLY this camera: the same projection, horizon and framing, every building, slab edge, railing, window line and the horizon exactly where image 1 draws them; the tower keeps its exact shape, height, floor count and position, nothing of it added, removed, moved or resized — a strict in-place re-texturing, not a new picture. The plain grey ground of image 1 is only a placeholder: fill it with the real surroundings seen in the photographs (the sea and beach where the horizon shows water, streets, low white buildings, palms and trees, parked cars), at the same scale and perspective, without hiding or altering any building image 1 draws. The other images are photographs and renders of this very tower and place (the tower from the air and up close, aerial photographs of the coast with the Reading power station): copy their materials, colours, sky, sea, light and the look of the surroundings exactly (white curved balcony slabs with planters and small trees, frameless glass railings, floor-to-ceiling glazing with slim dark mullions, the sea, the beach, the chimney, the low white city, palms and trees). Take the tower's materials from them, never their framing. The last image is a crop of the finished panorama of this same flight, taken from another point around the tower: match exactly its colour grade, white balance, exposure, sky and sea colour and the tower's materials. Soft bright morning light, clear pale-blue sky, photoreal, sharp. No people, no text, no logos, no watermark.",
+ "inputs": {
+  "clay": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-pano/node-rb090.png",
+  "refs": [
+   "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/intake/reference-site/kling-tower.png",
+   "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/intake/reference-site/THE-1.jpg",
+   "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/intake/reference-site/web-sdedov_reading_cc0.jpg"
+  ],
+  "last_ref_colour": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/refs/node-b-tower.crop.png",
+  "colour_ref_source": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-b-tower.png"
+ },
+ "settings": {
+  "image_size": {
+   "width": 3840,
+   "height": 1920
+  },
+  "quality": "high",
+  "fit": "3840x1920 -> 3840x1920"
+ },
+ "scores": {
+  "edges_kept_upper": 0.879,
+  "edges_kept_lower": 0.912,
+  "wrap_seam_diff": 17.3
+ },
+ "secs": 94
+}

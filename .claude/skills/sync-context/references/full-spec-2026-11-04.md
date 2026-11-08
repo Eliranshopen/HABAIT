@@ -1,0 +1,473 @@
+---
+name: sync-context
+description: "Use for one /sync-context pass over the whole context layer: refresh every CLAUDE.md and the root Context map, reconcile both memory systems (prune/relink/correct, never invent), then run the drift checks (16 on hold until re-pointed, 17 on hold: no remote) and the weekly metrics block."
+user-invocable: true
+---
+
+# Sync All Context — CLAUDE.md tree, root Context map, and memory
+
+> ⏸ **Local git on `main` since 2026-11-04; identity set, no remote (Eliran: local only).** Check 16 (worktree inventory) is on hold until re-pointed to the product repo's git worktrees (Eliran 2026-11-04: features in git worktrees under `.wt\`): print `SUSPENDED (check 16 — not re-pointed)`. Check 17 (versions) is on hold: report it `SUSPENDED (no remote)`. Check 0 reads file modified times, not commit dates. No step commits anything.
+
+One `/sync-context` run keeps the project's entire navigation layer in sync with reality. There are
+**three sync targets**, and every run touches all three:
+
+1. **CLAUDE.md context files** — refresh stale ones AND create missing per-folder cards.
+   **Rule in force since 2026-11-03 (root `CLAUDE.md` §8.6, Eliran): EVERY folder gets a card, vendor and build output excepted — the selection rule below is superseded.** Run `python .claude/skills/sync-context/generate-cards.py --check` (lists missing/stale) then `--apply` (writes them and `docs/context-map.generated.md`); the cartographer fills Purpose lines, never the tables.
+2. **Root Context map** — the `## Context map` section in the root `CLAUDE.md` must list every CLAUDE.md on disk.
+3. **Both memory systems** — repo `memory/` and the Claude Code auto-memory `MEMORY.md`, reconciled to reality.
+
+These are codebase navigation/context files, not documentation. **Actually edit the files** — don't just report.
+
+**How many checks exist (as of 2026-09-16):** on top of the three targets this skill runs **eighteen
+numbered drift checks, 0 through 17**, plus one report-only **Weekly metrics** block. Checks 0–4 are the
+original mechanical layer; checks 5–8 all come out of the single `check-context.mjs` command; checks 9–12
+are the memory-contract and generator checks; checks 13–15 cover the track-portfolio surfaces (all three
+absent today, so all three report SKIP); checks 16 and 17 (added 2026-09-16) are the worktree inventory of
+both repos and the version register (every `deploy/` and `archive/` tag and every live branch of both repos). Every check runs on every pass and is reported even when clean.
+Detail per check is in the two check sections below. Added by the harness upgrade plan
+(`docs/harness-upgrade-plan.md`), waves 1, 3 and 5, plus department-memory T03 and department-portfolio T05.
+
+The normative rules for targets 1 and 2 live in **`docs/CONTEXT-FILE-STANDARD.md`** (selection rule,
+per-folder template, root Context-map format). This skill executes that standard; if they ever disagree,
+the standard wins.
+
+---
+
+## Target 1 — CLAUDE.md context files
+
+### 1a. Find all CLAUDE.md files
+Use Glob to find every `**/CLAUDE.md` in the project (including the nested repos `Habait/MVP/app/**` and
+`Habait CRM/**` — a CLAUDE.md written inside those commits to THAT repo, which is intended; see
+CONTEXT-FILE-STANDARD §6).
+
+### 1b. Refresh each existing CLAUDE.md — compare against the codebase and fix (existing behavior)
+**File inventories** — Read the "Key files" / "Subfolders" tables. Glob the directory for actual files. Add any new load-bearing files missing from the table. Remove entries for deleted files.
+
+**Test counts** — If the file mentions test counts, count the actual test files and update the numbers.
+
+**Public API / class docs** — If the file documents classes, functions, or endpoints, grep the source code to verify they still exist and note new ones.
+
+**`<!-- last-updated: YYYY-MM-DD -->` marker** — Update to today's date on every file you modify. This marker (§3.3 of the standard, on its own line right after the H1) is the machine-read anchor this skill greps for staleness — keep the exact format.
+
+### 1c. Create missing per-folder CLAUDE.md files (NEW) — and never litter
+Apply the **selection rule** from `docs/CONTEXT-FILE-STANDARD.md` §2:
+- **CREATE** a CLAUDE.md in any *meaningful module* that lacks one — a folder with a coherent, nameable
+  purpose AND (multiple source files OR sub-modules a newcomer must be oriented to). See the standard's
+  §5 area allocation and §2.5 IN/OUT examples.
+- **NEVER create** in excluded trees — `node_modules/`, `.next/`/`.turbo`/`dist`/build output, `.git/`,
+  `qa-evidence/**` per-run dirs, per-listing scaffolding leaves, leaf route dirs, and per-board dirs
+  under `development/tasks/` (each already has its own `README.md`). One card at a tree's root explaining
+  the convention beats a card in every churny leaf.
+- **Borderline folders** get a row in the *parent's* `## Subfolders` table, not a thin stub (§2.4).
+
+**Delegate the writing to the `codebase-cartographer` agent.** That agent owns the per-folder CLAUDE.md
+layer: it surveys a folder, distills its purpose/key-files/gotchas from what actually exists, applies the
+selection rule, and stamps the `<!-- last-updated -->` marker. Spawn it for the create/refresh pass rather
+than hand-authoring cards here — it never invents files or purposes, and it's idempotent (re-running fills
+gaps and refreshes stale cards without churning correct ones).
+
+---
+
+## Target 2 — Root Context map (NEW hard check)
+
+The root `CLAUDE.md` has a **`## Context map`** section: a table (grouped by the standard's §5 areas) with
+**one row per CLAUDE.md on disk**, linking the folder to its card. Enforce the §4.3 completeness invariant
+in **both directions** — this is a hard check, not just "the index table looks right":
+
+- **No orphan card** — every CLAUDE.md found in step 1a appears as a row in the Context map. Add missing rows.
+- **No dead row** — every Context-map row points to a CLAUDE.md that exists on disk. Remove dead rows.
+
+Keep each row's purpose one-liner in sync with its card's title purpose. Delegate the map edit to the
+`codebase-cartographer` agent (it maintains the root index too), or update it directly if only a row or two
+drifted. The completeness invariant must hold across the nested repos as well (`Habait/MVP/app/**`,
+`Habait CRM/**`).
+
+---
+
+## Target 3 — Memory reconciliation (NEW) — both systems
+
+There are **two distinct memory systems** (see `memory/README.md` last bullet and the sync plan §5). Run
+the INDEX↔files parity + staleness pass on **both**:
+
+1. **Repo collective memory — `memory/`** (git-tracked). Index = `INDEX.md`; layers = `project/`, `runs/`,
+   `agents/`, `listings/`.
+2. **Claude Code auto-memory — `~/.claude/projects/C--RnD/memory/`** (cross-session,
+   NOT in the repo). Index = `MEMORY.md`; flat topic `.md` files.
+
+For each system, check parity **both directions**:
+- **Orphan file** (on disk, no index line) → add exactly one index line under the correct layer/header.
+- **Dead link** (index line points at a missing file) → remove the dead line.
+- **Duplicate index lines** for the same file → de-duplicate to one (except `agents/`/`listings/`, where
+  many lines per file is the legitimate append convention).
+- **Staleness** — where an entry's stated fact is contradicted by reality, correct the fact.
+
+**3e — the garden (moved here 2026-10-22, D-AUD-17/18/21; V-20, V-35):** shelve any one-off persona file still at the top level to `agents/_ephemeral/`; rotate every live `agents/<name>.md` over 200 KB onto its month shelf verbatim and in order (`memory/README.md` Size discipline: the archive-index block at the top of the live file, the newest ~150 KB live, the INDEX lines of the rotated entries repointed in the same change); regenerate `HOT.md` (`generate-hot.mjs`); run `verify-memory.mjs --strict` and FAIL the pass on a breach that survives the rotation; the rotation's path-limited commit is the one exception to this pass's "do not commit" rule. ⛔ Never delete a memory file; ⛔ never read INDEX whole — grep `memory/INDEX*.md`.
+
+### The non-negotiable memory rule (state it plainly, follow it exactly)
+**PRUNE / RELINK / CORRECT only — NEVER INVENT facts.** Memory reconciliation fixes pointers and prunes
+drift; it does not fabricate new "facts." If you can't ground a claim in a file that exists, don't write it.
+
+**`runs/` is APPEND-ONLY.** Never rewrite a `runs/` history file to correct it — append a *new* correcting
+entry that references the old one (per `memory/README.md`). You may add a *missing index pointer* for an
+existing `runs/` file (that's a parity fix, not a history rewrite), but never edit the run record itself.
+
+**Run the read-only verifier FIRST** (rnd-reorg T14, 2026-08-27): `node .claude/skills/sync-context/verify-memory.mjs`
+— it walks the four layers + `INDEX.md` and lists (1) orphan files with no INDEX line, (2) INDEX links
+whose target is missing, and WARNS (never fails) on (3) post-cutoff INDEX lines over the 400-char cap
+and (4) post-cutoff frontmatter outside the `actor:`/`type:` vocabulary in `memory/README.md`. Fix
+what it lists by hand (prune/relink/correct — a GENERATOR is refuted: frontmatter has no title, and
+932 bullets map onto ~336 files, not 1:1), then re-run until it prints `CLEAN`. Its output block goes
+into the report under `=== Memory ===`.
+
+The authoritative drift ledger for a given pass is `docs/memory-drift-report.md` (when present) —
+reconcile against it with judgment rather than re-deriving from scratch, but always re-verify each finding
+against the live files before acting on it.
+
+### 3d. Regenerate the two derived files LAST (2026-09-08, harness upgrade plan (`docs/harness-upgrade-plan.md`), wave 3)
+`memory/HOT.md` (the always-read file, ≤ 60 lines) and `memory/TOPICS.generated.md` are **generated, never
+hand-edited** — they are derived from the layers you just reconciled, so they are stale the moment you fix
+anything above. After reconciliation, in this order:
+```
+node .claude/skills/sync-context/generate-hot.mjs
+node .claude/skills/sync-context/generate-topics.mjs
+node .claude/skills/sync-context/generate-hot.mjs --check      # must exit 0
+node .claude/skills/sync-context/generate-topics.mjs --check    # must exit 0
+```
+The two `--check` runs are checks 11 and 10 below; running them here, after the regeneration, is what makes
+those checks PASS rather than a to-do handed to the next pass. If a `--check` still exits 1 after its
+generator ran, that is a real FAIL — report it, don't re-run the generator hoping for a different result.
+
+---
+
+## Checks 0–4 — mechanical drift detection (NEW, board `rnd-reorg` T09 / `CAPABILITY-PLAN.md` §11 CP-47)
+
+Targets 1–3 above refresh and reconcile; checks 0–4 are the enforcement layer CP-47 added on top of them
+— they **report**, they do not themselves rewrite prose. A check's finding is a signal to act on via the
+Target-1/2/3 passes above, or to hand to a human — never an instruction to auto-edit content. Run all
+five every `/sync-context` pass and include the `=== Checks 0–4 ===` block in the report even when every
+check is clean.
+
+**Scope note added 2026-09-08** (harness upgrade plan (`docs/harness-upgrade-plan.md`), waves 1/3/5): the
+numbered series now runs **0 through 15** plus a Weekly metrics block. "All five" in the paragraph above
+means checks 0–4 only — the enforcement layer as CP-47 shipped it. Checks 5–15 live in their own section
+directly after check 4 and carry the same rule: report-only signals, every one reported every pass.
+
+### Check 0 — card staleness vs. the folder's OWN churn
+For every `CLAUDE.md` found in Target 1a, compare its `<!-- last-updated -->` date against the folder's
+own last commit, **excluding the card file itself**:
+```
+git log -1 --format=%ad --date=short -- <folder> ':!<folder>/CLAUDE.md'
+```
+- Folder's last commit ≤ card date → **fine**. An untouched folder's old stamp is not drift.
+- Folder's last commit > card date → **DRIFT** — report both dates and the gap in days.
+
+**Known limitation, state it rather than over-claim:** this is a churn heuristic, not a content check. A
+thin-pointer card whose whole job is "point at `X/README.md`" (e.g. `memory/CLAUDE.md`) will show as
+"churned" any time a leaf file changes underneath it (e.g. `memory/runs/` gains an entry), even though
+its own claims may still be perfectly accurate. Report it as a flag for review, not an automatic
+rewrite order.
+
+**Calibration case (cite, don't re-derive):** `CAPABILITY-PLAN.md` §11 measured **15 of 40 cards stamped
+2026-07-26** (31 days stale) at study time. Dry-run this same check the same day this section was
+written (T09) and the number had already dropped to **6** — T02 (Phase-1 card corrections) and T05
+(identity) had, between them, refreshed 9 of those 15 cards as part of this same board's own execution.
+**The number is a snapshot of a moving target — always re-measure, never quote the study's figure as
+current.**
+
+**The same check also runs two standing tool contracts** (both delivered 2026-08-27 by T17/T18 — read
+their own file headers for the full contract before invoking them):
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/lint-bom.ps1
+  # every hook .ps1 must carry the UTF-8 BOM (EF BB BF). Exit 0 = clean; exit 1 = lists the offender(s).
+node qa-evidence/_tools/evidence-index.mjs --check
+  # the committed qa-evidence/INDEX.generated.md must match current disk. Exit 0 = current;
+  # exit 1 = stale — re-run WITHOUT --check to regenerate. Never hand-edit the generated file.
+```
+
+### Check 1 — §3.3 marker lint (since 2026-10-22 run by `check-context.mjs` as its check [1], V-09; the text below is the specification)
+Enforce `CONTEXT-FILE-STANDARD.md` §3.3 literally: **exactly one** `<!-- last-updated: YYYY-MM-DD -->`
+per card, that exact form (no trailing narrative inside the comment), on its own line, immediately after
+the H1 (i.e. line 2).
+```
+grep -c "last-updated" <card>       # must be 1
+grep -n "last-updated" <card>       # inspect: exact form? own line? line 2?
+```
+⚠ *(Historicized 2026-08-27: the root `CLAUDE.md` USED to fail this check — two markers, each with a
+large narrative block inside the HTML comment, neither after the H1. T15/7C fixed it the same day this
+check landed: the card now carries exactly one bare-form marker on line 3, so a failure here on the
+root card is a REAL regression, no longer the known expected finding.)* Cite any finding by pattern
+(`grep -n "last-updated" <card>`), never by a hardcoded line number — lines drift with every edit.
+
+### Check 2 — ship-ledger currency
+```
+ledger_newest = newest Date in docs/governance/SHIP-LEDGER.md §1's table (first column)
+runs_newest   = newest memory/runs/YYYY-MM-DD-*.md filename matching ship|deploy|live (case-insensitive)
+```
+`runs_newest`'s date > `ledger_newest` → **FLAG** (report the gap and the runs filename — this is the
+check that would have caught all three stale ship logs the study found). Otherwise: in sync.
+
+**Degrades to a reported SKIP, never a failure, when `docs/governance/SHIP-LEDGER.md` is absent:**
+```
+SKIP (check 2 — ship-ledger currency): docs/governance/SHIP-LEDGER.md not present
+```
+
+### Check 3 — `OWED.md` owners and age
+Parse `docs/governance/OWED.md` §3's table:
+- every row's `Owner` cell must be non-blank and not `TBD` (the file's own rule 2) → **FLAG** any
+  violation by `OWED-NNN` id;
+- every row whose `State` is not closed (whatever exact word the row uses — `OPEN`, `DRAFTED, NOT SENT`,
+  etc.) is reported **sorted by Age descending**, where `Age = the file's single As-of stamp − that
+  row's Opened date` (never hand-tracked separately — the file carries one As-of line specifically so
+  one edit refreshes every row's age).
+
+**Degrades to a reported SKIP, never a failure, when `docs/governance/OWED.md` is absent:**
+```
+SKIP (check 3 — OWED owners/age): docs/governance/OWED.md not present
+```
+
+### Check 4 — `GATE-NUMBER-REGISTER.md` integrity
+Parse the register for: one row per gate number in its stated range, no duplicate `FILED` status for the
+same number; cross-check its holes (numbers marked never-filed) against
+`ls Habait/MVP/docs/compliance-gate-*.md` — every memo on disk should have a row, and vice versa within
+the covered range.
+
+**Degrades to a reported SKIP, never a failure, when `Habait/MVP/docs/GATE-NUMBER-REGISTER.md` is
+absent** (as of this section being written it does not exist yet — another task on the same board is
+building it; this check must handle "not yet built" exactly as cleanly as "built and empty"):
+```
+SKIP (check 4 — gate-number register): Habait/MVP/docs/GATE-NUMBER-REGISTER.md not present
+```
+
+---
+
+## Checks 5–15 — contract, memory and portfolio integrity (NEW 2026-09-08, harness upgrade plan (`docs/harness-upgrade-plan.md`), waves 1/3/5 + department-memory T03 + department-portfolio T05)
+
+Same standing as checks 0–4: these **report**, they never rewrite prose on their own. Three shapes appear
+below and the report uses them literally — **PASS** (the invariant holds), **FAIL** (it is broken; fix it
+this pass), **SKIP** (the surface the check reads does not exist yet — a reported skip, never a failure).
+Run every one of 5–15 each pass and print its line even when it PASSes.
+
+### Checks 5–8 — one command, four invariants
+All four run from a single script; there is nothing to invoke per check:
+```
+node .claude/skills/sync-context/check-context.mjs            # add --json for the machine-readable block
+  # exit 0 = every one of checks 5–8 is PASS (or a reported SKIP)
+  # exit 1 = at least one FAIL — the FAIL text names the file and the invariant; fix it, then re-run once
+```
+Exit 1 is a real finding, not a flaky run: **never re-run the unchanged command hoping for exit 0.** The
+script's own output block goes into the report verbatim under `=== Checks 5–8 ===`; the four lines below
+say what each number means so a finding is actionable without reading the script.
+
+**Check 5 — byte-identity of the Machine resource rules block.** The Machine resource rules exist in more
+than one card by design (the machine-wide card and the harness copies). Every copy must be **byte-identical**
+to the canonical block — not "equivalent prose" — and the **git-identity line** must match across the copies
+too. FAIL names each copy that diverges. Fix by copying the canonical block over the divergent one; never
+"improve" the wording in one copy only, that is how the copies drifted in the first place.
+
+**Check 6 — card line ceilings.** Harness `CLAUDE.md` cards ≤ **120** lines; the root `CLAUDE.md` ≤ **200**
+lines; app-repo cards (`Habait/MVP/app/**`) are **report-only** — over-ceiling there is printed, never a
+FAIL (D13: that repo is additive-only for the harness). FAIL lists card, line count, ceiling. Fix by
+relocate-with-stub (the text moves to its owning home, a one-line pointer stays), never by deleting content.
+
+**Check 7 — startup token budget per session type.** Tokens = **chars / 4** of the whole `CLAUDE.md` chain
+for that session type **after stripping HTML comments**, and the chain **includes**
+`C:/Users/elira/.claude/CLAUDE.md`. Ceilings: **root-rooted ≤ 8000**, **app-rooted ≤ 15000**,
+**worktree ≤ 8000**. FAIL prints the session type, the measured number and the ceiling. Fix the same way as
+check 6 — move detail out to a path-scoped rule file or an archive doc and leave a pointer.
+
+**Check 8 — enforced-by claims vs. installed hooks.** Every `enforced-by` / `backed-by` claim that names a
+hook must match a hook **actually installed** in `C:/Users/elira/.claude/settings.json` or
+`.claude/settings.local.json`. FAIL lists the claim, its file, and the hook name it cannot find. Fix by
+correcting the claim or marking the law **UNENFORCED** — *not* by installing a hook (no agent in this
+workflow edits `settings*.json`; an install goes to `docs/OWNER-PASTE.md` for Eliran).
+
+### Check 9 — three-way memory-contract consistency (memory contract v2, R-4/R-8; since 2026-10-22 run by `check-context.mjs` as its check [9], V-17; the text below is the specification)
+The memory contract is stated in three places that must not drift apart: root `CLAUDE.md` section 0,
+`memory/README.md`, and `.claude/agents/_MEMORY_PREAMBLE.md`. Each of the **three marker phrases** must
+appear in **all three files**:
+1. `bounded read-first`
+2. `second reader`
+3. `An action is not done until its memory is written`
+```
+for f in CLAUDE.md memory/README.md .claude/agents/_MEMORY_PREAMBLE.md; do
+  echo "$f"
+  grep -ci "bounded read-first" "$f"
+  grep -ci "second reader" "$f"
+  grep -ci "An action is not done until its memory is written" "$f"
+done
+```
+**Count case-insensitively (`grep -ci`)** — the canonical wording capitalises phrase 2 as a list label
+("**Second reader:**") while the sub-agent pointer says "name the second reader", and both are the phrase.
+Match the words, not the capitalisation; do not "fix" a file's capitalisation to satisfy a case-sensitive grep.
+- **PASS** only when each phrase counts ≥ 1 in **3 of 3 files** (9 of 9 cells non-zero).
+- **FAIL** otherwise — name the missing phrase *and* the file, e.g.
+  `FAIL (check 9): "second reader" absent from .claude/agents/_MEMORY_PREAMBLE.md (2 of 3 files)`.
+Fix by restoring the phrase in the file that lost it — the root card's section 0 is canonical; the other two
+**quote** it, they never restate it differently.
+
+### Check 10 — RETIRED: memory/TOPICS.generated.md is untracked from this date and regenerated on demand by whoever needs the topic view (D-AUD-38, Q 8.4; V-18: no reader found). Text verbatim in [RETIRED-2026-10-22.md](RETIRED-2026-10-22.md).
+
+### Check 11 — HOT freshness
+```
+node .claude/skills/sync-context/generate-hot.mjs --check
+  # exit 0 = memory/HOT.md is current  → PASS ; exit 1 = stale → regenerate (3d) and re-check → FAIL
+```
+`memory/HOT.md` is the always-read file and is capped at **≤ 60 lines**; it is generated at every
+`/close-board` and every `/sync-context`. It is never hand-edited — an edit that survives a pass is a bug in
+the generator's inputs, not a fix.
+
+### Check 12 — memory caps, strict (ENFORCED here since 2026-10-22: Target 3e is the garden; R-9 amended by D-AUD-18 and D-AUD-21)
+```
+node .claude/skills/sync-context/verify-memory.mjs --strict
+  # --strict exits 1 on: a post-cutoff INDEX line > 400 chars, or a live memory/agents/<name>.md > 200 KB
+```
+Since 2026-10-22 this pass IS the chokepoint (V-20): a strict breach is rotated in Target 3e in the same pass — the oversized file onto its month shelf, verbatim, with the archive-index block and the INDEX lines repointed, in the pass's one allowed path-limited commit — and the pass FAILS only if the breach is still there after 3e ran. (/close-board's former Step 9 and /ship's former Step 5 merged here.)
+(The non-strict `verify-memory.mjs` run from Target 3 stays exactly as it is — this is the strict pass.)
+
+### Checks 13–15 — RETIRED: the three portfolio surfaces never existed and the checks printed SKIP in 18 of 20 passes since 2026-09-08 (D-AUD-17; V-21, V-22, V-23). Text verbatim in [RETIRED-2026-10-22.md](RETIRED-2026-10-22.md).
+
+### Check 16 — worktree inventory parity (added 2026-09-16) — SUSPENDED 2026-11-04 until re-pointed to `Projects/Habait/habait-walkaround`
+The work of this department happens in worktrees the root checkout cannot see — 14 app worktrees under
+`C:/RnD/.wt/` and Claude Code's own under `.claude/worktrees/` — and the root learned about them only
+through run entries. `docs/governance/WORKTREES.md` **§6** is now the inventory: ONE row per
+`git worktree list --porcelain` entry of BOTH repos (harness base `main` — it was `360-v1` until the 2026-09-16 organize pass fast-forwarded `main` onto it, R-ORG-4 — app base `origin/main`), with
+branch · tip · last commit · dirty paths · behind/ahead · merged read from git, and **Purpose · Deploy ·
+Record** read from the hand-kept `docs/governance/worktrees.json` (keyed by the path relative to
+`C:/RnD`). The table is GENERATED — the register's own schema forbids a hand-maintained one.
+```
+node .claude/skills/sync-context/check-worktrees.mjs --check
+  # exit 0 = PASS
+  # exit 1 = FAIL — a worktree on disk with no worktrees.json entry, an entry with no worktree on disk, or an
+  #          entry whose optional `branch` disagrees with the live branch → fix worktrees.json (name it or drop it)
+  #        = STALE — the committed §6 block differs from what git says now (tips move daily) → re-run WITHOUT
+  #          --check to regenerate, then re-check. Never hand-edit the block between the two markers.
+```
+Same standing as the Context map's parity rule (Target 2), both directions. ⛔ A row is **never** a prune
+list: every removal stays R7 and Eliran's own act (`WORKTREES.md` §3, W-1). Cards inside a worktree are
+still not cards of this checkout (`CONTEXT-FILE-STANDARD.md` §8 step 9) — the row records the worktree,
+the memory records the work.
+```
+SKIP (check 16 — worktree inventory): docs/governance/worktrees.json not present
+```
+
+### Check 17 — version register parity (added 2026-09-16)
+Every version is a git ref: a **`deploy/<name>` tag** (a build that went to a URL), an **`archive/<branch>` tag**
+(the tip of a CLOSED branch — close = tag + push, never delete: rulings R-ORG-1/R-ORG-2, `DECISIONS.md` §2.3),
+or a **live branch** (open work; the branch is the version until it closes). `docs/governance/VERSIONS.md` is
+GENERATED from both repos' refs (harness trunk `main`, app trunk `origin/main`): name · commit · date ·
+behind/ahead · merged · on-origin read from git, and **What · Where · Record** read from the hand-kept
+`docs/governance/versions.json` (keyed `<repo>:<ref>`; its `_unversioned` list names the known work that is
+deliberately NOT in git). The whole file is generated — never hand-edit it.
+```
+node .claude/skills/sync-context/check-versions.mjs --check
+  # exit 0 = PASS
+  # exit 1 = FAIL — a tag or live branch with no versions.json entry, an entry with no ref on disk, or a tag /
+  #          live branch whose tip is NOT on origin (the register exists so that nothing is local-only) → name
+  #          it, drop it, or push it
+  #        = FAIL — MOVED: a branch that carries an archive/ tag but whose tip moved past it (it is live again)
+  #        = STALE — the STABLE half of VERSIONS.md differs from git now: a ref appeared or disappeared, a name changed,
+  #          or a merged / on-origin cell flipped → re-run WITHOUT --check to regenerate, then re-check. Hashes, dates and
+  #          behind/ahead are NOT compared — the harness trunk is itself a row, so every harness commit moves them
+  #        = SKIP (exit 0) — versions.json absent, or a remote unreachable (printed, never a stack trace)
+```
+⛔ A row is never permission to delete a branch or a worktree: the removal commands are
+`docs/governance/PRUNE-PASTE-2026-09-16.md`, Eliran's own act. ⭐ A closed branch whose tip moves past its
+`archive/` tag is live again — Check 17 FAILs it as MOVED; re-tag or re-open it deliberately. A wrong tag gets a
+NEW tag and a note in `versions.json`, never a `git tag -f`. On-origin is read from ONE live `ls-remote` per repo
+(heads + tags), never from cached remote-tracking refs.
+```
+SKIP (check 17 — version register): docs/governance/versions.json not present
+```
+
+### Weekly metrics — report-only, never a gate
+```
+node .claude/skills/sync-context/metrics.mjs
+```
+Print its output verbatim in the report under `=== Weekly metrics ===`. It has **no PASS/FAIL**: it does not
+gate the pass, does not block a ship, and a number moving the wrong way is not a finding to fix on the spot.
+Read it with the caveat it exists to carry: **"dirty measures dirtiness, not truth"** — a working tree with
+uncommitted files scores dirty whether the work in it is good or bad, so the metric describes the tree's
+state, not the quality of what is in it. Quote a metric only with the command that measured it.
+
+---
+
+## Report what you changed (extended format)
+
+Report all three targets:
+
+```
+=== CLAUDE.md tree ===
+Refreshed X CLAUDE.md files:
+- path/to/CLAUDE.md — added 3 new files, updated test count 373→427
+- path/to/CLAUDE.md — removed deleted file entry
+Created Y new per-folder CLAUDE.md (cartographer): path/…, path/…
+No changes needed for Z files.
+
+=== Root Context map ===
+- added N rows (new cards), removed M dead rows — map now lists all K CLAUDE.md on disk (parity OK)
+
+=== Memory ===
+repo memory/:   fixed P orphan index lines, R dead links, D duplicates; corrected S stale facts
+                (runs/ history untouched — pointers only)
+auto-memory:    fixed … / clean (N↔N parity)
+
+=== Checks 0–4 ===
+0  card staleness : N cards flagged (folder churned after the card's stamp) — list; lint-bom PASS/FAIL; evidence-index PASS/FAIL
+1  marker lint    : N cards flagged (not exactly one / wrong form / not after H1) — list
+2  ship-ledger    : IN SYNC | GAP <n>d (ledger <date> vs runs <date>/<file>) | SKIP (register absent)
+3  OWED owners/age: N rows with blank/TBD owner (ids) | OPEN rows by age: <id> <n>d, … | SKIP (register absent)
+4  gate register  : N duplicate FILED / N holes vs disk | SKIP (register absent)
+
+=== Checks 5–8 (check-context.mjs, exit <0|1>) ===
+5  rules byte-id  : PASS | FAIL — <copy> diverges from the canonical block / git-identity line
+6  card ceilings  : PASS | FAIL — <card> <n> lines > <120|200> | report-only: <app card> <n> lines
+7  token budget   : PASS | FAIL — <root-rooted|app-rooted|worktree> <n> tokens > <8000|15000|8000>
+8  enforced-by    : PASS | FAIL — "<claim>" in <file> names hook <name>, not installed in settings
+
+=== Checks 9–17 ===
+9  memory contract: PASS (3 of 3 files × 3 phrases) | FAIL — "<phrase>" absent from <file> (<n> of 3)
+10 TOPICS fresh   : PASS | FAIL (generate-topics.mjs --check exit 1 — stale after regeneration)
+11 HOT fresh      : PASS | FAIL (generate-hot.mjs --check exit 1 — stale after regeneration)
+12 memory caps    : REPORTED (verify-memory.mjs --strict exit <0|1>) — <offenders, or none>;
+                    gates at /close-board, not here
+13 dashboard fresh: PASS | FAIL <n>d stale | SKIP (docs/track-portfolio.md not present)
+14 index links    : PASS | FAIL <n> broken / <n> missing rows | SKIP (docs/indexes/*.md not present)
+15 STATE blocks   : PASS | FAIL <track> missing/malformed | SKIP (docs/track-charter.md not present)
+16 worktrees      : PASS <n> live ↔ <n> named | FAIL <n> unnamed / <n> dead / <n> branch drift | STALE → regenerated → PASS
+                    | SKIP (docs/governance/worktrees.json not present)
+17 versions       : PASS <n> deploy / <n> archive / <n> live ↔ <n> named | FAIL <n> unnamed / <n> dead / <n> not on origin / <n> moved
+                    | STALE → regenerated → PASS | SKIP (docs/governance/versions.json not present, or origin unreachable)
+
+=== Weekly metrics ===
+<metrics.mjs output, verbatim — report-only, never gates; "dirty measures dirtiness, not truth">
+```
+
+If a target is already fully in sync, say so ("in sync — no changes") rather than omitting it. The same
+goes for checks 0–4 — a clean check is reported as clean, not left out.
+
+The same rule covers **checks 5–17 and the metrics block** (2026-09-08; checks 16 and 17 added 2026-09-16): print
+all eighteen numbered lines plus `=== Weekly metrics ===` every pass. A PASS line, a REPORTED line (check
+12) and a SKIP line (checks 13–15 today) are all results worth printing — an omitted line reads as "not run",
+which is a different and worse thing than "clean".
+
+---
+
+## Rules
+- **Actually edit the files** — don't just report what's wrong.
+- **Preserve each file's existing writing style and structure.** Don't rewrite sections that are already correct; only add/remove/update what actually changed.
+- **Match the house voice** — terse, navigational, honest (root `CLAUDE.md` §8; standard §1 rail 2).
+- **Never invent** — every CLAUDE.md line is distilled from files that exist; every memory fix is prune/relink/correct only.
+- **`runs/` is append-only** — correct with a new entry, never a rewrite.
+- **Delegate CLAUDE.md create/refresh + root-map maintenance to the `codebase-cartographer` agent** (it owns that layer and enforces the selection rule); do the memory reconciliation in-session.
+- **Do NOT `git commit`/`push`** as part of a sync run (cards inside `Habait/MVP/app` + `Habait CRM/` land in their own repos — flagged, intended).
+- Update the `<!-- last-updated -->` date on every CLAUDE.md you touch.
+- Keep it fast — use Glob/Grep to spot-check; don't read every source file line by line.
+- **Checks 0–4 are report-only diagnostics** — a DRIFT/FLAG finding tells you what to look at (and, for
+  check 0, may justify re-running Target 1's refresh on that card); it is never itself grounds to invent
+  a fact or rewrite prose you haven't verified.
+- **Checks 5–15 are report-only too, with one difference** (2026-09-08): a `check-context.mjs` **exit 1 is a
+  FAIL to fix this pass**, not a note for later — but fix it in the file that is wrong (relocate-with-stub,
+  restore the canonical block, correct the claim), never by editing `settings*.json` or installing a hook.
+  Check 12 is REPORTED here and gates only at `/close-board`; the Weekly metrics block never gates anything.
+- **The generated files are generated** — `memory/HOT.md` and `memory/TOPICS.generated.md` are written by
+  their generators (Target 3d) and hand-editing them is a defect, not a fix.

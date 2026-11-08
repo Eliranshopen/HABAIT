@@ -1,0 +1,19 @@
+ok   cube: the six face centres are PSV's (front yaw 0, right +90°, back 180°, left −90°, top +90° pitch, bottom −90°)
+ok   cube: direction → face → direction is the identity (2000 random directions, < 1e-9 rad)
+ok   cube: the viewer and the cutter (tools/make-tiles.mjs) use one formula (every face, a 9×9 grid)
+ok   cube: image x grows with yaw on the side faces and y grows downward (the cut is not mirrored)
+ok   cube: the mesh segment under a direction (PSV keys its per-segment level by the first vertex)
+ok   cube: texels per degree — a 2048 face holds 17.87 at its centre and √2 that on the worse axis at its side edge
+ok   cutter: a smooth synthetic panorama cut into faces reads back within 2/255 everywhere (seam and poles included)
+ok   cutter: the top face size, the three levels and where mipmaps stop (3840 → 512/1024/2048 from 2048; 7680 → 1024/2048/4096 from 4096)
+ok   levels: a 390×844 phone gets level 1 by CSS pixels and level 2 by its device pixels (×2); a 1440×900 desktop gets level 2
+ok   walk: wrap180, the turn, the fade window, the zoom and the config clamps
+FAIL arrival: tour.js arriveYaw = make-scenes bearing (camera → camera) − the target centre, on all 26 links of apt846
+     Cannot read properties of undefined (reading 'x')
+FAIL arrival: on every apt846 link the door back to the room you left is behind you (more than 90° from where you look)
+     reciprocal links: 36 !== 26
+ok   arrival: a scene without centreBearingDeg keeps its own heading (demo-01 and older tours unchanged)
+ok   field of view: the defaults are a 28 mm lens, not Pannellum's 100°
+ok   field of view: a desktop window keeps the horizontal bounds, a phone held upright is capped at 80° vertical
+
+13 passed, 2 failed

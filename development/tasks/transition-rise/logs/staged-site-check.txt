@@ -1,0 +1,16 @@
+ok   390 /
+ok   390 /landing.html?project=rainbow&v=a
+FAIL 390 /landing.html?project=rainbow&v=b (known optional 404 x3) — 2 errors: console: [cine] hold Unexpected token '<', "<!DOCTYPE "... is not valid JSON | console: [cine] video error orbit MEDIA_ELEMENT_ERROR: Format error
+ok   390 /apartment.html?project=rainbow&unit=846
+ok   390 /apartment.html?project=rainbow&unit=846&tab=3d
+FAIL 390 /flow.html?project=rainbow (known optional 404 x3) — 2 errors: console: [cine] hold Unexpected token '<', "<!DOCTYPE "... is not valid JSON | console: [cine] video error orbit MEDIA_ELEMENT_ERROR: Format error
+ok   390 /hold/
+ok   1440 /
+ok   1440 /landing.html?project=rainbow&v=a
+FAIL 1440 /landing.html?project=rainbow&v=b (known optional 404 x3) — 2 errors: console: [cine] hold Unexpected token '<', "<!DOCTYPE "... is not valid JSON | console: [cine] video error orbit MEDIA_ELEMENT_ERROR: Format error
+ok   1440 /apartment.html?project=rainbow&unit=846
+ok   1440 /apartment.html?project=rainbow&unit=846&tab=3d
+FAIL 1440 /flow.html?project=rainbow (known optional 404 x3) — 2 errors: console: [cine] hold Unexpected token '<', "<!DOCTYPE "... is not valid JSON | console: [cine] video error orbit MEDIA_ELEMENT_ERROR: Format error
+ok   1440 /hold/
+
+10/14 pass

@@ -1,0 +1,82 @@
+desktop   PASS  A1 platform link leads to /hold/
+desktop   PASS  B1 button shown at the hold after the clip
+desktop   PASS  B2 label + ≥44 px + on top + in view + rtl
+desktop   PASS  B3 button covers no pill / picker button / sound button
+desktop   PASS  C1 frame opens, project scope (no scope=apartment), from=hold, same page URL
+desktop   PASS  C2 tour opens on aerial
+desktop   PASS  C3 auto chain reaches the tower (hold node)
+desktop   PASS  C4 ✕ visible, button hidden, frame opaque
+desktop   PASS  C4b ✕ hides no tour control (at the tower)
+desktop   PASS  C5 tap 846 → descent → a room of the apartment inside the frame
+desktop   PASS  C6 ✕ is on top of the tour (clickable)
+desktop   PASS  C7 ✕ hides no tour control (in the room)
+desktop   PASS  D1 ✕ → frame removed, button back + focused, hold loop running
+desktop   PASS  D2 Esc (focus on the page) closes
+desktop   PASS  D3 open/close ×3 leaves no frame, button back
+desktop   PASS  E1 button hidden during the descent clip
+desktop   PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+desktop   PASS  E3 button not over the apartment tour
+desktop   PASS  Z1 zero page errors
+desktop   PASS  Z2 zero 4xx/5xx
+iphone13  PASS  A1 platform link leads to /hold/
+iphone13  PASS  B1 button shown at the hold after the clip
+iphone13  PASS  B2 label + ≥44 px + on top + in view + rtl
+iphone13  PASS  B3 button covers no pill / picker button / sound button
+iphone13  PASS  C1 frame opens, project scope (no scope=apartment), from=hold, same page URL
+iphone13  PASS  C2 tour opens on aerial
+iphone13  PASS  C3 auto chain reaches the tower (hold node)
+iphone13  PASS  C4 ✕ visible, button hidden, frame opaque
+iphone13  PASS  C4b ✕ hides no tour control (at the tower)
+iphone13  PASS  C5 tap 846 → descent → a room of the apartment inside the frame
+iphone13  PASS  C6 ✕ is on top of the tour (clickable)
+iphone13  PASS  C7 ✕ hides no tour control (in the room)
+iphone13  PASS  D1 ✕ → frame removed, button back + focused, hold loop running
+iphone13  PASS  D2 Esc (focus on the page) closes
+iphone13  PASS  D3 open/close ×3 leaves no frame, button back
+iphone13  PASS  E1 button hidden during the descent clip
+iphone13  PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+iphone13  PASS  E3 button not over the apartment tour
+iphone13  PASS  Z1 zero page errors
+iphone13  PASS  Z2 zero 4xx/5xx
+pixel7    PASS  A1 platform link leads to /hold/
+pixel7    PASS  B1 button shown at the hold after the clip
+pixel7    PASS  B2 label + ≥44 px + on top + in view + rtl
+pixel7    PASS  B3 button covers no pill / picker button / sound button
+pixel7    PASS  C1 frame opens, project scope (no scope=apartment), from=hold, same page URL
+pixel7    PASS  C2 tour opens on aerial
+pixel7    PASS  C3 auto chain reaches the tower (hold node)
+pixel7    PASS  C4 ✕ visible, button hidden, frame opaque
+pixel7    PASS  C4b ✕ hides no tour control (at the tower)
+pixel7    PASS  C5 tap 846 → descent → a room of the apartment inside the frame
+pixel7    PASS  C6 ✕ is on top of the tour (clickable)
+pixel7    PASS  C7 ✕ hides no tour control (in the room)
+pixel7    PASS  D1 ✕ → frame removed, button back + focused, hold loop running
+pixel7    PASS  D2 Esc (focus on the page) closes
+pixel7    PASS  D3 open/close ×3 leaves no frame, button back
+pixel7    PASS  E1 button hidden during the descent clip
+pixel7    PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+pixel7    PASS  E3 button not over the apartment tour
+pixel7    PASS  Z1 zero page errors
+pixel7    PASS  Z2 zero 4xx/5xx
+tablet    PASS  A1 platform link leads to /hold/
+tablet    PASS  B1 button shown at the hold after the clip
+tablet    PASS  B2 label + ≥44 px + on top + in view + rtl
+tablet    PASS  B3 button covers no pill / picker button / sound button
+tablet    PASS  C1 frame opens, project scope (no scope=apartment), from=hold, same page URL
+tablet    PASS  C2 tour opens on aerial
+tablet    FAIL  C3 auto chain reaches the tower (hold node)  "orbit4"
+tablet    PASS  C4 ✕ visible, button hidden, frame opaque
+tablet    PASS  C4b ✕ hides no tour control (at the tower)
+tablet    PASS  C5 tap 846 → descent → a room of the apartment inside the frame
+tablet    PASS  C6 ✕ is on top of the tour (clickable)
+tablet    PASS  C7 ✕ hides no tour control (in the room)
+tablet    PASS  D1 ✕ → frame removed, button back + focused, hold loop running
+tablet    PASS  D2 Esc (focus on the page) closes
+tablet    PASS  D3 open/close ×3 leaves no frame, button back
+tablet    PASS  E1 button hidden during the descent clip
+tablet    PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+tablet    PASS  E3 button not over the apartment tour
+tablet    PASS  Z1 zero page errors
+tablet    PASS  Z2 zero 4xx/5xx
+
+79/80 PASS · 1 FAIL · base http://127.0.0.1:8853

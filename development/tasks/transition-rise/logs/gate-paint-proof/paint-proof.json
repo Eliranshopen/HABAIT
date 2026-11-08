@@ -1,0 +1,1807 @@
+{
+  "schema": "tour360/paint-proof.v1",
+  "board": "habait-tour360",
+  "task": "T05b",
+  "actor": "habait-deploy-qa",
+  "url": "http://127.0.0.1:8851",
+  "startedAt": "2026-11-04T05:23:23.473Z",
+  "finishedAt": "2026-11-04T05:23:53.900Z",
+  "durationMs": 30426,
+  "verdict": "6/6 PASS",
+  "partial": false,
+  "host": {
+    "platform": "win32",
+    "node": "v24.22.1",
+    "chrome": "156.0.8078.80",
+    "chromeExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "webgl": {
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x0000A7A0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "maxTextureSize": 16384
+    }
+  },
+  "thresholds": {
+    "readyMaxMs": 60000,
+    "badgeMinPx": 12,
+    "paintBandOfFrame": {
+      "x0": 0.15,
+      "x1": 0.85,
+      "y0": 0.4,
+      "y1": 0.66
+    },
+    "paintMin": {
+      "stdLuma": 6,
+      "uniqueColours": 500,
+      "modalShareMax": 0.6
+    },
+    "frameChangedMin": 4,
+    "panoMinBytes": 100000
+  },
+  "chromeProcesses": {
+    "before": 22,
+    "after": 21,
+    "newSinceStart": [],
+    "browserCloseError": null
+  },
+  "screenshotsNote": "Captured as PNG by this script; converted to lossless WebP by qa-evidence/_tools/webp-lossless.mjs --verify (pixels byte-identical); only the converted PNGs are removed.",
+  "cells": [
+    {
+      "cell": "phone-he",
+      "ok": true,
+      "kind": "phone",
+      "lang": "he",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "isMobile": true,
+      "hasTouch": true,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 530,
+          "paint": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 123,
+            "stdLuma": 44.7,
+            "uniqueColours": 111364,
+            "modalShare": 0.011
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "סיור 360° · דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)",
+          "canvas": {
+            "w": 390,
+            "h": 844,
+            "cw": 780,
+            "ch": 1688
+          },
+          "firstScene": "orbit1"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיה",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              260,
+              23,
+              317,
+              48
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיית קונספט על בסיס תוכנית הדירה — הריהוט, הנוף וחלק מהמידות מדומיינים",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 2,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              71,
+              155,
+              375,
+              196
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "תמונות שנוצרו בבינה מלאכותית · לא צילום של הנכס",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              17,
+              814,
+              375,
+              832
+            ]
+          },
+          "htmlLang": "he",
+          "htmlDir": "rtl",
+          "tourLang": "he",
+          "languageButtons": [
+            "he:true",
+            "en:false",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": true,
+          "via": "touchscreen.tap",
+          "hotspotLabel": "מול המגדל",
+          "tapAt": [
+            202,
+            486
+          ],
+          "tapTargetPx": [
+            56,
+            56
+          ],
+          "moved": true,
+          "navMs": 243,
+          "sceneBefore": "orbit1",
+          "sceneAfter": "tower",
+          "loadsBefore": 2,
+          "loadsAfter": 3,
+          "roomTitleAfter": "מול המגדל",
+          "destinationMatchesLabel": true,
+          "paintAfter": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 121,
+            "stdLuma": 50.2,
+            "uniqueColours": 104102,
+            "modalShare": 0.021
+          },
+          "paintedAfter": true,
+          "frameMeanAbsDiffVsFirst": 48.8,
+          "frameChangedMin": 4,
+          "loadingOverlayGone": true,
+          "turnedViaHook": null,
+          "fallbackDiagnosis": null
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          },
+          "afterHotspot": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "node-a-aerial.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-o1-orbit.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-b-tower.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "hotspot caption: tapping the caption pill does not hit the hotspot (pointer-events none, outside the 56 px box) - the ring is the only live target"
+      ],
+      "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+      "document": {
+        "requested": "http://127.0.0.1:8851/?lang=he",
+        "finalUrl": "http://127.0.0.1:8851/?room=aerial&floor=parquet",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": null,
+        "vercelId": null,
+        "vercelCache": null,
+        "loadEventMs": 511
+      },
+      "readyMs": 530,
+      "bytesBeforeReady": 587860,
+      "screenshot": {
+        "file": "phone-he.webp",
+        "capturedAs": "phone-he.png",
+        "pngSha256": "e09fae4fbdb994fd",
+        "size": [
+          780,
+          1688
+        ]
+      },
+      "firstView": {
+        "room": "סיבוב · 2",
+        "zone": "מחוץ לבניין",
+        "hotspotsTotal": 1,
+        "hotspotsInView": 1
+      },
+      "afterHotspot": {
+        "room": "מול המגדל",
+        "zone": "מחוץ לבניין",
+        "screenshot": "phone-he-after-hotspot.webp",
+        "pngSha256": "2a80ef89071d3a36"
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 8,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 11,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 4,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 5321
+    },
+    {
+      "cell": "phone-en",
+      "ok": true,
+      "kind": "phone",
+      "lang": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "isMobile": true,
+      "hasTouch": true,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 281,
+          "paint": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 122.4,
+            "stdLuma": 48.3,
+            "uniqueColours": 119588,
+            "modalShare": 0.012
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "360° tour · Apartment 846 · floor 16 · Rainbow Tel Aviv (concept)",
+          "canvas": {
+            "w": 390,
+            "h": 844,
+            "cw": 780,
+            "ch": 1688
+          },
+          "firstScene": "orbit1"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Rendering",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              73,
+              23,
+              153,
+              48
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Concept visualization based on the apartment's floor plan — furnishings, views and some dimensions are imagined.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 3,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              15,
+              155,
+              319,
+              216
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "AI-generated images · not photographs of the property",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              15,
+              814,
+              373,
+              832
+            ]
+          },
+          "htmlLang": "en",
+          "htmlDir": "ltr",
+          "tourLang": "en",
+          "languageButtons": [
+            "he:false",
+            "en:true",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": true,
+          "via": "touchscreen.tap",
+          "hotspotLabel": "At the tower",
+          "tapAt": [
+            200,
+            486
+          ],
+          "tapTargetPx": [
+            56,
+            56
+          ],
+          "moved": true,
+          "navMs": 238,
+          "sceneBefore": "orbit1",
+          "sceneAfter": "tower",
+          "loadsBefore": 2,
+          "loadsAfter": 3,
+          "roomTitleAfter": "At the tower",
+          "destinationMatchesLabel": true,
+          "paintAfter": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 121.3,
+            "stdLuma": 50,
+            "uniqueColours": 104127,
+            "modalShare": 0.021
+          },
+          "paintedAfter": true,
+          "frameMeanAbsDiffVsFirst": 51.1,
+          "frameChangedMin": 4,
+          "loadingOverlayGone": true,
+          "turnedViaHook": null,
+          "fallbackDiagnosis": null
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          },
+          "afterHotspot": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "node-a-aerial.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-o1-orbit.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-b-tower.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "hotspot caption: tapping the caption pill does not hit the hotspot (pointer-events none, outside the 56 px box) - the ring is the only live target"
+      ],
+      "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+      "document": {
+        "requested": "http://127.0.0.1:8851/?lang=en",
+        "finalUrl": "http://127.0.0.1:8851/?lang=en&room=aerial&floor=parquet",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": null,
+        "vercelId": null,
+        "vercelCache": null,
+        "loadEventMs": 265
+      },
+      "readyMs": 281,
+      "bytesBeforeReady": 587860,
+      "screenshot": {
+        "file": "phone-en.webp",
+        "capturedAs": "phone-en.png",
+        "pngSha256": "4e4909faf5160e92",
+        "size": [
+          780,
+          1688
+        ]
+      },
+      "firstView": {
+        "room": "Orbit · 2",
+        "zone": "Outside",
+        "hotspotsTotal": 1,
+        "hotspotsInView": 1
+      },
+      "afterHotspot": {
+        "room": "At the tower",
+        "zone": "Outside",
+        "screenshot": "phone-en-after-hotspot.webp",
+        "pngSha256": "14e8ebd562e980db"
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 8,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 11,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 4940
+    },
+    {
+      "cell": "phone-fr",
+      "ok": true,
+      "kind": "phone",
+      "lang": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "isMobile": true,
+      "hasTouch": true,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 278,
+          "paint": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 122.7,
+            "stdLuma": 45.3,
+            "uniqueColours": 111289,
+            "modalShare": 0.015
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "Visite 360° · Appartement 846 · 16e étage · Rainbow Tel Aviv (concept)",
+          "canvas": {
+            "w": 390,
+            "h": 844,
+            "cw": 780,
+            "ch": 1688
+          },
+          "firstScene": "orbit1"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Simulation",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              73,
+              23,
+              156,
+              48
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Visualisation conceptuelle d'après le plan de l'appartement — le mobilier, les vues et certaines dimensions sont imaginés.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 3,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              15,
+              176,
+              319,
+              237
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "Images générées par IA · pas des photographies du bien",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              15,
+              814,
+              373,
+              832
+            ]
+          },
+          "htmlLang": "fr",
+          "htmlDir": "ltr",
+          "tourLang": "fr",
+          "languageButtons": [
+            "he:false",
+            "en:false",
+            "fr:true"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": true,
+          "via": "touchscreen.tap",
+          "hotspotLabel": "Devant la tour",
+          "tapAt": [
+            200,
+            486
+          ],
+          "tapTargetPx": [
+            56,
+            56
+          ],
+          "moved": true,
+          "navMs": 203,
+          "sceneBefore": "orbit1",
+          "sceneAfter": "tower",
+          "loadsBefore": 2,
+          "loadsAfter": 3,
+          "roomTitleAfter": "Devant la tour",
+          "destinationMatchesLabel": true,
+          "paintAfter": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 121.3,
+            "stdLuma": 50,
+            "uniqueColours": 104135,
+            "modalShare": 0.021
+          },
+          "paintedAfter": true,
+          "frameMeanAbsDiffVsFirst": 49,
+          "frameChangedMin": 4,
+          "loadingOverlayGone": true,
+          "turnedViaHook": null,
+          "fallbackDiagnosis": null
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          },
+          "afterHotspot": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "node-a-aerial.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-o1-orbit.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-b-tower.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "hotspot caption: tapping the caption pill does not hit the hotspot (pointer-events none, outside the 56 px box) - the ring is the only live target"
+      ],
+      "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+      "document": {
+        "requested": "http://127.0.0.1:8851/?lang=fr",
+        "finalUrl": "http://127.0.0.1:8851/?lang=fr&room=aerial&floor=parquet",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": null,
+        "vercelId": null,
+        "vercelCache": null,
+        "loadEventMs": 262
+      },
+      "readyMs": 278,
+      "bytesBeforeReady": 587860,
+      "screenshot": {
+        "file": "phone-fr.webp",
+        "capturedAs": "phone-fr.png",
+        "pngSha256": "ce3af209278d5bf1",
+        "size": [
+          780,
+          1688
+        ]
+      },
+      "firstView": {
+        "room": "Orbite · 2",
+        "zone": "Extérieur",
+        "hotspotsTotal": 1,
+        "hotspotsInView": 1
+      },
+      "afterHotspot": {
+        "room": "Devant la tour",
+        "zone": "Extérieur",
+        "screenshot": "phone-fr-after-hotspot.webp",
+        "pngSha256": "2ff591b23a69deea"
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 8,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 11,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 4783
+    },
+    {
+      "cell": "desktop-he",
+      "ok": true,
+      "kind": "desktop",
+      "lang": "he",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 307,
+          "paint": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 146.9,
+            "stdLuma": 40.6,
+            "uniqueColours": 123282,
+            "modalShare": 0.009
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "סיור 360° · דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)",
+          "canvas": {
+            "w": 1440,
+            "h": 900,
+            "cw": 1440,
+            "ch": 900
+          },
+          "firstScene": "orbit1"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיה",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              1296,
+              26,
+              1354,
+              53
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיית קונספט על בסיס תוכנית הדירה — הריהוט, הנוף וחלק מהמידות מדומיינים",
+            "permanent": "true",
+            "fontPx": 13.5,
+            "fontPxBox": 13.5,
+            "opacity": 1,
+            "lineBoxes": 2,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              1026,
+              183,
+              1418,
+              225
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "תמונות שנוצרו בבינה מלאכותית · לא צילום של הנכס",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              16,
+              870,
+              1424,
+              888
+            ]
+          },
+          "htmlLang": "he",
+          "htmlDir": "rtl",
+          "tourLang": "he",
+          "languageButtons": [
+            "he:true",
+            "en:false",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": true,
+          "via": "mouse.click",
+          "hotspotLabel": "מול המגדל",
+          "tapAt": [
+            729,
+            543
+          ],
+          "tapTargetPx": [
+            56,
+            56
+          ],
+          "moved": true,
+          "navMs": 196,
+          "sceneBefore": "orbit1",
+          "sceneAfter": "tower",
+          "loadsBefore": 2,
+          "loadsAfter": 3,
+          "roomTitleAfter": "מול המגדל",
+          "destinationMatchesLabel": true,
+          "paintAfter": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 131.9,
+            "stdLuma": 44.6,
+            "uniqueColours": 113524,
+            "modalShare": 0.041
+          },
+          "paintedAfter": true,
+          "frameMeanAbsDiffVsFirst": 54.3,
+          "frameChangedMin": 4,
+          "loadingOverlayGone": true,
+          "turnedViaHook": null,
+          "fallbackDiagnosis": null
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          },
+          "afterHotspot": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "node-a-aerial.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-o1-orbit.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-b-tower.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "hotspot caption: tapping the caption pill does not hit the hotspot (pointer-events none, outside the 56 px box) - the ring is the only live target"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+      "document": {
+        "requested": "http://127.0.0.1:8851/?lang=he",
+        "finalUrl": "http://127.0.0.1:8851/?room=aerial&floor=parquet",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": null,
+        "vercelId": null,
+        "vercelCache": null,
+        "loadEventMs": 288
+      },
+      "readyMs": 307,
+      "bytesBeforeReady": 587860,
+      "screenshot": {
+        "file": "desktop-he.webp",
+        "capturedAs": "desktop-he.png",
+        "pngSha256": "539d6d6a31aef6dd",
+        "size": [
+          1440,
+          900
+        ]
+      },
+      "firstView": {
+        "room": "סיבוב · 2",
+        "zone": "מחוץ לבניין",
+        "hotspotsTotal": 1,
+        "hotspotsInView": 1
+      },
+      "afterHotspot": {
+        "room": "מול המגדל",
+        "zone": "מחוץ לבניין",
+        "screenshot": "desktop-he-after-hotspot.webp",
+        "pngSha256": "91ed7304cb5634c9"
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 8,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 11,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 4,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 4829
+    },
+    {
+      "cell": "desktop-en",
+      "ok": true,
+      "kind": "desktop",
+      "lang": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 279,
+          "paint": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 146.4,
+            "stdLuma": 44.5,
+            "uniqueColours": 128908,
+            "modalShare": 0.008
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "360° tour · Apartment 846 · floor 16 · Rainbow Tel Aviv (concept)",
+          "canvas": {
+            "w": 1440,
+            "h": 900,
+            "cw": 1440,
+            "ch": 900
+          },
+          "firstScene": "orbit1"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Rendering",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              86,
+              26,
+              168,
+              53
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Concept visualization based on the apartment's floor plan — furnishings, views and some dimensions are imagined.",
+            "permanent": "true",
+            "fontPx": 13.5,
+            "fontPxBox": 13.5,
+            "opacity": 1,
+            "lineBoxes": 2,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              22,
+              183,
+              414,
+              225
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "AI-generated images · not photographs of the property",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              16,
+              870,
+              1424,
+              888
+            ]
+          },
+          "htmlLang": "en",
+          "htmlDir": "ltr",
+          "tourLang": "en",
+          "languageButtons": [
+            "he:false",
+            "en:true",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": true,
+          "via": "mouse.click",
+          "hotspotLabel": "At the tower",
+          "tapAt": [
+            729,
+            543
+          ],
+          "tapTargetPx": [
+            56,
+            56
+          ],
+          "moved": true,
+          "navMs": 232,
+          "sceneBefore": "orbit1",
+          "sceneAfter": "tower",
+          "loadsBefore": 2,
+          "loadsAfter": 3,
+          "roomTitleAfter": "At the tower",
+          "destinationMatchesLabel": true,
+          "paintAfter": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 132,
+            "stdLuma": 44.5,
+            "uniqueColours": 113587,
+            "modalShare": 0.041
+          },
+          "paintedAfter": true,
+          "frameMeanAbsDiffVsFirst": 56.5,
+          "frameChangedMin": 4,
+          "loadingOverlayGone": true,
+          "turnedViaHook": null,
+          "fallbackDiagnosis": null
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          },
+          "afterHotspot": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "node-a-aerial.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-o1-orbit.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-b-tower.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "hotspot caption: tapping the caption pill does not hit the hotspot (pointer-events none, outside the 56 px box) - the ring is the only live target"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+      "document": {
+        "requested": "http://127.0.0.1:8851/?lang=en",
+        "finalUrl": "http://127.0.0.1:8851/?lang=en&room=aerial&floor=parquet",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": null,
+        "vercelId": null,
+        "vercelCache": null,
+        "loadEventMs": 259
+      },
+      "readyMs": 279,
+      "bytesBeforeReady": 587860,
+      "screenshot": {
+        "file": "desktop-en.webp",
+        "capturedAs": "desktop-en.png",
+        "pngSha256": "132b6cc1e945ab16",
+        "size": [
+          1440,
+          900
+        ]
+      },
+      "firstView": {
+        "room": "Orbit · 2",
+        "zone": "Outside",
+        "hotspotsTotal": 1,
+        "hotspotsInView": 1
+      },
+      "afterHotspot": {
+        "room": "At the tower",
+        "zone": "Outside",
+        "screenshot": "desktop-en-after-hotspot.webp",
+        "pngSha256": "ad6baf787b25d165"
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 8,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 11,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 4881
+    },
+    {
+      "cell": "desktop-fr",
+      "ok": true,
+      "kind": "desktop",
+      "lang": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 293,
+          "paint": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 147,
+            "stdLuma": 39.8,
+            "uniqueColours": 121663,
+            "modalShare": 0.009
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "Visite 360° · Appartement 846 · 16e étage · Rainbow Tel Aviv (concept)",
+          "canvas": {
+            "w": 1440,
+            "h": 900,
+            "cw": 1440,
+            "ch": 900
+          },
+          "firstScene": "orbit1"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Simulation",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              86,
+              26,
+              171,
+              53
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Visualisation conceptuelle d'après le plan de l'appartement — le mobilier, les vues et certaines dimensions sont imaginés.",
+            "permanent": "true",
+            "fontPx": 13.5,
+            "fontPxBox": 13.5,
+            "opacity": 1,
+            "lineBoxes": 2,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              22,
+              183,
+              414,
+              225
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "Images générées par IA · pas des photographies du bien",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              16,
+              870,
+              1424,
+              888
+            ]
+          },
+          "htmlLang": "fr",
+          "htmlDir": "ltr",
+          "tourLang": "fr",
+          "languageButtons": [
+            "he:false",
+            "en:false",
+            "fr:true"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": true,
+          "via": "mouse.click",
+          "hotspotLabel": "Devant la tour",
+          "tapAt": [
+            729,
+            543
+          ],
+          "tapTargetPx": [
+            56,
+            56
+          ],
+          "moved": true,
+          "navMs": 215,
+          "sceneBefore": "orbit1",
+          "sceneAfter": "tower",
+          "loadsBefore": 2,
+          "loadsAfter": 3,
+          "roomTitleAfter": "Devant la tour",
+          "destinationMatchesLabel": true,
+          "paintAfter": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 132,
+            "stdLuma": 44.5,
+            "uniqueColours": 113587,
+            "modalShare": 0.041
+          },
+          "paintedAfter": true,
+          "frameMeanAbsDiffVsFirst": 53.8,
+          "frameChangedMin": 4,
+          "loadingOverlayGone": true,
+          "turnedViaHook": null,
+          "fallbackDiagnosis": null
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          },
+          "afterHotspot": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "node-a-aerial.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-o1-orbit.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            },
+            {
+              "file": "node-b-tower.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": null
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "hotspot caption: tapping the caption pill does not hit the hotspot (pointer-events none, outside the 56 px box) - the ring is the only live target"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+      "document": {
+        "requested": "http://127.0.0.1:8851/?lang=fr",
+        "finalUrl": "http://127.0.0.1:8851/?lang=fr&room=aerial&floor=parquet",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": null,
+        "vercelId": null,
+        "vercelCache": null,
+        "loadEventMs": 277
+      },
+      "readyMs": 293,
+      "bytesBeforeReady": 587860,
+      "screenshot": {
+        "file": "desktop-fr.webp",
+        "capturedAs": "desktop-fr.png",
+        "pngSha256": "80cda65a71742b95",
+        "size": [
+          1440,
+          900
+        ]
+      },
+      "firstView": {
+        "room": "Orbite · 2",
+        "zone": "Extérieur",
+        "hotspotsTotal": 1,
+        "hotspotsInView": 1
+      },
+      "afterHotspot": {
+        "room": "Devant la tour",
+        "zone": "Extérieur",
+        "screenshot": "desktop-fr-after-hotspot.webp",
+        "pngSha256": "1b63ee5eb89a3672"
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 8,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 11,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 3,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 4785
+    }
+  ]
+}

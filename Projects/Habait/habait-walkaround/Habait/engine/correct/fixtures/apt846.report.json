@@ -1,0 +1,403 @@
+{
+ "schema": "habait.intake-report/0.1",
+ "apartment_id": "apt846",
+ "title_he": "דירה 846 · Rainbow TLV, קומה 16",
+ "source": {
+  "pdf": "דירה 846- 16.pdf",
+  "unit": "846",
+  "project_he": "Rainbow TLV",
+  "plan_date": "15.10.2025",
+  "sha256": "ef02e51825a60a800f6ff3d249f43f8d19409f8d62e122383938a64706c222f7"
+ },
+ "plan": "plan.json",
+ "raster": {
+  "image": "../../_local/apt846/plan-crop.png",
+  "cm_to_px": [
+   2.25,
+   0,
+   -167,
+   0,
+   2.25,
+   297
+  ],
+  "note": "engine crop = tour360 crop shifted (-167, +297) px, same 2.25 px/cm (template match 1.000)"
+ },
+ "summary": {
+  "rooms_total": 11,
+  "rooms_named": 11,
+  "dims_total": 16,
+  "dims_read": 16,
+  "dims_checked": 2,
+  "dims_within_tol": 1,
+  "max_dev_pct": 3.6,
+  "tol_pct": 3,
+  "edit_cost": 1
+ },
+ "rooms": [
+  {
+   "room_id": "r-entrance",
+   "name_he": "כניסה",
+   "name_en": "Entrance",
+   "type": "hall",
+   "label_he": "כניסה",
+   "printed_dims_cm": null,
+   "printed_scope": null,
+   "measured_dims_cm": [
+    360.7,
+    533.5
+   ],
+   "deviation_pct": null,
+   "status": "no_print",
+   "openings": [
+    "o-1",
+    "o-10",
+    "o-11",
+    "o-12"
+   ],
+   "notes_he": null
+  },
+  {
+   "room_id": "r-kitchen",
+   "name_he": "מטבח",
+   "name_en": "Kitchen",
+   "type": "kitchen",
+   "label_he": "מטבח",
+   "printed_dims_cm": null,
+   "printed_scope": null,
+   "measured_dims_cm": [
+    337.1,
+    531.2
+   ],
+   "deviation_pct": null,
+   "status": "no_print",
+   "openings": [
+    "o-2",
+    "o-3"
+   ],
+   "notes_he": null
+  },
+  {
+   "room_id": "r-dining",
+   "name_he": "פינת אוכל",
+   "name_en": "Dining",
+   "type": "hall",
+   "label_he": "פינת אוכל",
+   "printed_dims_cm": null,
+   "printed_scope": null,
+   "measured_dims_cm": [
+    274.3,
+    419.3
+   ],
+   "deviation_pct": null,
+   "status": "no_print",
+   "openings": [
+    "o-3",
+    "o-4"
+   ],
+   "notes_he": null
+  },
+  {
+   "room_id": "r-living",
+   "name_he": "סלון",
+   "name_en": "Living room",
+   "type": "living",
+   "label_he": "חדר דיור",
+   "printed_dims_cm": [
+    744,
+    530
+   ],
+   "printed_scope": "part",
+   "measured_dims_cm": [
+    839.9,
+    513.4
+   ],
+   "deviation_pct": 12.9,
+   "status": "part",
+   "openings": [
+    "o-1",
+    "o-2",
+    "o-4",
+    "o-5",
+    "o-6"
+   ],
+   "notes_he": "open plan: kitchen | dining | living are virtual lines"
+  },
+  {
+   "room_id": "r-terrace-living",
+   "name_he": "מרפסת שמש",
+   "name_en": "Sun terrace",
+   "type": "balcony",
+   "label_he": "מרפסת שמש",
+   "printed_dims_cm": null,
+   "printed_scope": null,
+   "measured_dims_cm": [
+    377.6,
+    776.6
+   ],
+   "deviation_pct": null,
+   "status": "no_print",
+   "openings": [
+    "o-5",
+    "o-7"
+   ],
+   "notes_he": "the printed 1213×270 is the whole terrace (two rooms in plan.json)"
+  },
+  {
+   "room_id": "r-terrace-bedroom",
+   "name_he": "מרפסת · קצה החדרים",
+   "name_en": "Terrace, bedroom end",
+   "type": "balcony",
+   "label_he": null,
+   "printed_dims_cm": null,
+   "printed_scope": null,
+   "measured_dims_cm": [
+    184.2,
+    218.5
+   ],
+   "deviation_pct": null,
+   "status": "no_print",
+   "openings": [
+    "o-7",
+    "o-13"
+   ],
+   "notes_he": null
+  },
+  {
+   "room_id": "r-bedroom-main",
+   "name_he": "חדר שינה הורים",
+   "name_en": "Main bedroom",
+   "type": "bedroom",
+   "label_he": "חדר שינה הורים",
+   "printed_dims_cm": [
+    348,
+    344
+   ],
+   "printed_scope": "part",
+   "measured_dims_cm": [
+    392.5,
+    344.6
+   ],
+   "deviation_pct": 12.8,
+   "status": "part",
+   "openings": [
+    "o-8",
+    "o-13"
+   ],
+   "notes_he": "the wardrobe | bedroom line is virtual"
+  },
+  {
+   "room_id": "r-wardrobe",
+   "name_he": "פינת ארונות",
+   "name_en": "Wardrobe",
+   "type": "storage",
+   "label_he": "פינת ארונות",
+   "printed_dims_cm": [
+    185,
+    160
+   ],
+   "printed_scope": "part",
+   "measured_dims_cm": [
+    342,
+    165.8
+   ],
+   "deviation_pct": 84.9,
+   "status": "part",
+   "openings": [
+    "o-6",
+    "o-8",
+    "o-9"
+   ],
+   "notes_he": "the printed 185×160 is the closet niche, not the passage"
+  },
+  {
+   "room_id": "r-bath-main",
+   "name_he": "חדר רחצה הורים",
+   "name_en": "Main bathroom",
+   "type": "bathroom",
+   "label_he": "חדר רחצה הורים",
+   "printed_dims_cm": [
+    212,
+    210
+   ],
+   "printed_scope": "room",
+   "measured_dims_cm": [
+    217.7,
+    217.6
+   ],
+   "deviation_pct": 3.6,
+   "status": "bad",
+   "openings": [
+    "o-9"
+   ],
+   "notes_he": null
+  },
+  {
+   "room_id": "r-bedroom-2",
+   "name_he": "חדר שינה",
+   "name_en": "Bedroom",
+   "type": "bedroom",
+   "label_he": "חדר שינה",
+   "printed_dims_cm": [
+    342,
+    275
+   ],
+   "printed_scope": "room",
+   "measured_dims_cm": [
+    351.4,
+    281.5
+   ],
+   "deviation_pct": 2.7,
+   "status": "ok",
+   "openings": [
+    "o-10"
+   ],
+   "notes_he": null
+  },
+  {
+   "room_id": "r-bath-guest",
+   "name_he": "חדר רחצה כללי",
+   "name_en": "Guest bathroom",
+   "type": "bathroom",
+   "label_he": "חדר רחצה כללי",
+   "printed_dims_cm": null,
+   "printed_scope": null,
+   "measured_dims_cm": [
+    152.5,
+    256.5
+   ],
+   "deviation_pct": null,
+   "status": "no_print",
+   "openings": [
+    "o-11"
+   ],
+   "notes_he": "printed 140 is the shower width; no room size printed"
+  }
+ ],
+ "openings": [
+  {
+   "opening_id": "o-1",
+   "kind": "opening",
+   "rooms": [
+    "r-entrance",
+    "r-living"
+   ],
+   "width_cm": 435.9
+  },
+  {
+   "opening_id": "o-2",
+   "kind": "opening",
+   "rooms": [
+    "r-kitchen",
+    "r-living"
+   ],
+   "width_cm": 219.7
+  },
+  {
+   "opening_id": "o-3",
+   "kind": "opening",
+   "rooms": [
+    "r-dining",
+    "r-kitchen"
+   ],
+   "width_cm": 420.5
+  },
+  {
+   "opening_id": "o-4",
+   "kind": "opening",
+   "rooms": [
+    "r-dining",
+    "r-living"
+   ],
+   "width_cm": 251.5
+  },
+  {
+   "opening_id": "o-5",
+   "kind": "opening",
+   "rooms": [
+    "r-living",
+    "r-terrace-living"
+   ],
+   "width_cm": 187.6
+  },
+  {
+   "opening_id": "o-6",
+   "kind": "door",
+   "rooms": [
+    "r-living",
+    "r-wardrobe"
+   ],
+   "width_cm": 93.8
+  },
+  {
+   "opening_id": "o-7",
+   "kind": "opening",
+   "rooms": [
+    "r-terrace-bedroom",
+    "r-terrace-living"
+   ],
+   "width_cm": 179.3
+  },
+  {
+   "opening_id": "o-8",
+   "kind": "opening",
+   "rooms": [
+    "r-bedroom-main",
+    "r-wardrobe"
+   ],
+   "width_cm": 161.1
+  },
+  {
+   "opening_id": "o-9",
+   "kind": "door",
+   "rooms": [
+    "r-bath-main",
+    "r-wardrobe"
+   ],
+   "width_cm": 66.6
+  },
+  {
+   "opening_id": "o-10",
+   "kind": "door",
+   "rooms": [
+    "r-bedroom-2",
+    "r-entrance"
+   ],
+   "width_cm": 93.6
+  },
+  {
+   "opening_id": "o-11",
+   "kind": "door",
+   "rooms": [
+    "r-bath-guest",
+    "r-entrance"
+   ],
+   "width_cm": 60.9
+  },
+  {
+   "opening_id": "o-12",
+   "kind": "entrance_door",
+   "rooms": [
+    "outside",
+    "r-entrance"
+   ],
+   "width_cm": 110.9
+  },
+  {
+   "opening_id": "o-13",
+   "kind": "door",
+   "rooms": [
+    "r-bedroom-main",
+    "r-terrace-bedroom"
+   ],
+   "width_cm": 131.9
+  }
+ ],
+ "mismatches": [
+  {
+   "id": "m-1",
+   "kind": "dims",
+   "target": "r-bath-main",
+   "message_he": "\"חדר רחצה הורים\": בשרטוט ⁦212×210⁩, בתכנית ⁦218×218⁩ (סטייה 3.6%)"
+  }
+ ]
+}

@@ -1,0 +1,1284 @@
+{
+  "generator": {
+    "script": "catalog/fetch.mjs",
+    "version": "1.0.0",
+    "node": "v24.13.0",
+    "generated_utc": "2026-11-01T10:23:57+00:00",
+    "mode": "verify"
+  },
+  "manifest": {
+    "file": "360walkaround/catalog/catalog.manifest.json",
+    "rows": 57,
+    "fetched_rows": 57,
+    "sha256_after": "611560b7ab2ea65ca7ce2f586bc1f12d5fdac8587f22a113d1538754d74fd27b"
+  },
+  "totals": {
+    "bytes_on_disk": 287085023,
+    "bytes_downloaded_this_run": 0,
+    "files": 112,
+    "ok": 57,
+    "broken": 0
+  },
+  "packs": [
+    {
+      "source_id": "kenney-furniture-kit",
+      "error": null,
+      "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+      "bytes": 5130729,
+      "entries": 1557,
+      "sha256_matches_manifest": true
+    }
+  ],
+  "import_test": null,
+  "assets": [
+    {
+      "id": "polyhaven-modern_arm_chair_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/modern_arm_chair_01_2k.blend",
+      "bytes": 355136,
+      "sha256": "c6c92b5a07be4ab37e48fbf43c7ff233b90b1e364987e2bae790aed501fe97f6",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_legs_diff_2k.png",
+          "bytes": 10153780,
+          "sha256": "86cd587fe94c561695df91fc23cc48935be9bc2d98e811ac2be084bcb9ee2bdc"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_legs_metal_2k.png",
+          "bytes": 8264,
+          "sha256": "e280cde7e0775c960c448ea75e95e4023e3c47f6f5a825ee08d07b397ebbe98e"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_legs_nor_gl_2k.png",
+          "bytes": 10611050,
+          "sha256": "6364741a59f40e84f43c06f6e2b40b165613d0bb048ec8729a64b423de0d17d6"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_legs_rough_2k.png",
+          "bytes": 3497673,
+          "sha256": "fa49217cd4908d6c403fe37e0ee0b7f74d15168ac3b585ed8d22277c07f4e59b"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_pillow_diff_2k.png",
+          "bytes": 6961371,
+          "sha256": "b339fcdde4c1fc1c863b607d3eb878aca495c2edf452d1b9b45ef96641a13ac2"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_pillow_metal_2k.png",
+          "bytes": 8264,
+          "sha256": "e280cde7e0775c960c448ea75e95e4023e3c47f6f5a825ee08d07b397ebbe98e"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_pillow_nor_gl_2k.png",
+          "bytes": 7433277,
+          "sha256": "7b3c44c34ecfa8cf07a8930592364c52a7c543eecd9434b34df1ee46884a7680"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/textures/modern_arm_chair_01_pillow_rough_2k.png",
+          "bytes": 2512880,
+          "sha256": "cc00fe679b9be02e68c3d65980c99fa2b75251fad0649f025b281fe8881086d1"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-modern_coffee_table_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_01/modern_coffee_table_01_2k.blend",
+      "bytes": 235661,
+      "sha256": "e29a5a55b2793add33473e2d641c3dfbebd2d1098e62ccb957f7e11bcd54b46d",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_01/textures/modern_coffee_table_01_diff_2k.jpg",
+          "bytes": 1571631,
+          "sha256": "527c9cbe6162b5ba84c5427407148d45a051f38c8475b32b5cd3fc02534a7090"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_01/textures/modern_coffee_table_01_nor_gl_2k.exr",
+          "bytes": 3419670,
+          "sha256": "a16769a9735d6ad8b0ab9676acd12c8292d3bdbeb2d27e83c8c33bbbacf452b8"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_01/textures/modern_coffee_table_01_rough_2k.exr",
+          "bytes": 3030957,
+          "sha256": "0707e4f8c23982fc97d42b28e6fa43ac77f6d4052e676b9f2b0fcfb4e9d38051"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-modern_coffee_table_02",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/modern_coffee_table_02_2k.blend",
+      "bytes": 554655,
+      "sha256": "238f70d31434d69333cd50f2bf50da802dad1a920c3ecc472edef553804d61f6",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/textures/modern_coffee_table_02_base_diff_2k.png",
+          "bytes": 7538363,
+          "sha256": "bee8a09cbe85f2f15ea22b5403f0d586c20cbf0b4d7d08539d88581313822ae6"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/textures/modern_coffee_table_02_base_nor_gl_2k.png",
+          "bytes": 7450719,
+          "sha256": "2691a39eb01b115d61bea6d385c2b2f8caaa2abdd0c122af3566d285c43f710f"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/textures/modern_coffee_table_02_base_rough_2k.png",
+          "bytes": 2735611,
+          "sha256": "5e716b9af7ebb7a862e30a96bd15b790d4f2b811a84441424855f1a53fd0dcf4"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/textures/modern_coffee_table_02_wood_diff_2k.png",
+          "bytes": 18069529,
+          "sha256": "4a366d1e35c96bb7baf4b4cd754e6963ed1a5564038fb4d8db03b483d3ebf2cc"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/textures/modern_coffee_table_02_wood_nor_gl_2k.png",
+          "bytes": 15990447,
+          "sha256": "7ab4731158d3afc03c232686084b0e490d8f3e9012d39aad0e0d99fa845d44c8"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/textures/modern_coffee_table_02_wood_rough_2k.png",
+          "bytes": 6112653,
+          "sha256": "d482c12e87729e7c4753f1c76d533d4ec843ea3ad24dccfa07a7d2e424ca2e1d"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-modern_wooden_cabinet",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_wooden_cabinet/modern_wooden_cabinet_2k.blend",
+      "bytes": 779583,
+      "sha256": "2a2761da5af42b498e75e2f0cfeba716ca7cd86f3b357bb9bd326d7c98a92d5f",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_wooden_cabinet/textures/modern_wooden_cabinet_diff_2k.jpg",
+          "bytes": 2750362,
+          "sha256": "27fbd19573bdb8ab8587c63eddd9d350824f28a2f847796d63bd5f4813d45f0c"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_wooden_cabinet/textures/modern_wooden_cabinet_nor_gl_2k.exr",
+          "bytes": 4778298,
+          "sha256": "8967ea224682e14c6159f2a50f22133dad88f04e79709a51cb8855675fe4b1e4"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_wooden_cabinet/textures/modern_wooden_cabinet_rough_2k.exr",
+          "bytes": 3942111,
+          "sha256": "372b40cdf893199b9b1858495f656c9ee344132bef9667849b902bd1dcb71f86"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-modern_ceiling_lamp_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_ceiling_lamp_01/modern_ceiling_lamp_01_2k.blend",
+      "bytes": 330321,
+      "sha256": "7eea1d3318ce550b3251593de9c1110f8b9f76af1523ea19e87c3d638e3c117d",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_ceiling_lamp_01/textures/modern_ceiling_lamp_01_diff_2k.jpg",
+          "bytes": 240872,
+          "sha256": "b0341690dc56eeddd3efa8a91c179a26e163f330907e5483b6903626b600347e"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_ceiling_lamp_01/textures/modern_ceiling_lamp_01_metal_2k.exr",
+          "bytes": 77305,
+          "sha256": "74bbeb0483a70f7509e9a43757892a2073e0b30544824018c7451952ab8aab0c"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_ceiling_lamp_01/textures/modern_ceiling_lamp_01_nor_gl_2k.exr",
+          "bytes": 1671019,
+          "sha256": "406238c4d1827f216a7d967429277fe6ce053fb779e5d90f1e72396ab5764ffe"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-modern_ceiling_lamp_01/textures/modern_ceiling_lamp_01_rough_2k.jpg",
+          "bytes": 443113,
+          "sha256": "2af306d18d939389f6fa3f8f9d02253aa1cccaa218c794d7b7a9468c18610d92"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-potted_plant_02",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/potted_plant_02_2k.blend",
+      "bytes": 8110103,
+      "sha256": "b62ded8ac23b439d2d4457916241f45e029d1455cd792f426ef3b0e5f889589c",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/textures/potted_plant_02_leaves_alpha_2k.png",
+          "bytes": 229028,
+          "sha256": "487f86c1fc838dcd24bf67f9bd99706e3415271cecd34ce2ddaca9021707c781"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/textures/potted_plant_02_leaves_diff_2k.png",
+          "bytes": 16449773,
+          "sha256": "9b41fa87fc40921c881d7d2978f7f6ccdd2a888d91c70afe7226d51b37c7954b"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/textures/potted_plant_02_leaves_nor_gl_2k.png",
+          "bytes": 16470559,
+          "sha256": "59928af6a248559a5b5d6c5f8cb5ff1fc698f34cebe718eeca111b583e9d5ddd"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/textures/potted_plant_02_leaves_rough_2k.png",
+          "bytes": 4823415,
+          "sha256": "cdd55e470604e3aa9028acf51210e73a36f51df27d620ba4ac52195e8e445a04"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/textures/potted_plant_02_pot_diff_2k.png",
+          "bytes": 19344861,
+          "sha256": "5c7623b2b337bc9e996446eaa0fb851f441e0f26febe53fb19dde5c03fa89551"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/textures/potted_plant_02_pot_nor_gl_2k.png",
+          "bytes": 14010302,
+          "sha256": "7777ef34cd4bf72280b387b739a553b98856b301ba9323259f2235dd290f1ee6"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/textures/potted_plant_02_pot_rough_2k.png",
+          "bytes": 4580543,
+          "sha256": "0d4e9695804d40d44da77dcc9d749d410e8546e8eebd2e40b4e337941347871d"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-hanging_picture_frame_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/hanging_picture_frame_01_2k.blend",
+      "bytes": 203009,
+      "sha256": "86b17dde5ebf276c92e65d56b3061cb324110f57e1382b32fabeddb50c5913f0",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_artwork_diff_2k.png",
+          "bytes": 103916,
+          "sha256": "155d90b84f22abe5081caed4a74c933bc6bd3f25bf315ca594cdac1bcdd6c96d"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_artwork_nor_gl_2k.png",
+          "bytes": 150247,
+          "sha256": "f6ee69a1cf991d0fc2a33af6450b807f355f0a42d49f99f33f6a932134684ed7"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_artwork_roughness_2k.png",
+          "bytes": 12840,
+          "sha256": "b2304ac6c64a6992eefa40b9a5f5470310f36b2f11dab8e65afe85a999d6fad3"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_diff_2k.jpg",
+          "bytes": 355335,
+          "sha256": "2b51f42b1112838d53ac44187535e4e75909c48230b922073cd214c9313ac870"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_metallic_2k.exr",
+          "bytes": 33743,
+          "sha256": "53c41c03edb5db1e906939fdc351e52c40c5d54508f08fb85e53fd00badcf632"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_nor_gl_2k.exr",
+          "bytes": 1639824,
+          "sha256": "be7f715cb6451582ef8088fe3274afcbf9171086497bafb3719d91a1382c4567"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_opacity_2k.png",
+          "bytes": 1311216,
+          "sha256": "04787350327d790e0b8f54f82246d43e4a62a67bd1558c6ae8b271c7f113b256"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/textures/hanging_picture_frame_01_roughness_2k.jpg",
+          "bytes": 345007,
+          "sha256": "9c49bc162d7aca67c09342bad032c696089d7be7c9b7c932619ae903851d7185"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-steel_frame_shelves_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-steel_frame_shelves_01/steel_frame_shelves_01_2k.blend",
+      "bytes": 223024,
+      "sha256": "ee196ca52dd4422f77ee6b47ffa1bf270b29d4d8925e7a8f22856a29bb626d88",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-steel_frame_shelves_01/textures/steel_frame_shelves_01_diff_2k.jpg",
+          "bytes": 1679686,
+          "sha256": "f13b689662757c99dce62503fa98baa54d5c8aec1597fce1ab7c5b8d5a77f721"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-steel_frame_shelves_01/textures/steel_frame_shelves_01_metal_2k.exr",
+          "bytes": 452320,
+          "sha256": "8f6e1e7a8e146d7eb248633711ab47e5794a1a889f30dfc79724736d3c798e54"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-steel_frame_shelves_01/textures/steel_frame_shelves_01_nor_gl_2k.exr",
+          "bytes": 3043577,
+          "sha256": "9f03639e788bd023221249f946a801116524082288dfe7ba6fec0565a4a5e616"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-steel_frame_shelves_01/textures/steel_frame_shelves_01_rough_2k.exr",
+          "bytes": 2892710,
+          "sha256": "65b7c739426f444a846517ba6cef02254a203990a9f264414899ebf28692317c"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-wooden_display_shelves_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-wooden_display_shelves_01/wooden_display_shelves_01_2k.blend",
+      "bytes": 226011,
+      "sha256": "bfd4dc80d6e684fd156bb5c76d87708970cf2d5bbf4cb1805b96a71a7747d920",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-wooden_display_shelves_01/textures/wooden_display_shelves_01_diff_2k.jpg",
+          "bytes": 474742,
+          "sha256": "532b4fc7e9147cc35287cbc4796e789c3973f916b53019ff0fa10c068f96e056"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-wooden_display_shelves_01/textures/wooden_display_shelves_01_metal_2k.exr",
+          "bytes": 13916,
+          "sha256": "391a6cd0685d377e9f5b1d5a62d47242775153b19101f97ade752d9ca9fd5c8d"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-wooden_display_shelves_01/textures/wooden_display_shelves_01_nor_gl_2k.exr",
+          "bytes": 2799961,
+          "sha256": "a06a58a8036399e03783276deefc7918dec5eea24d3a23781dad1376e827f189"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-wooden_display_shelves_01/textures/wooden_display_shelves_01_rough_2k.jpg",
+          "bytes": 578575,
+          "sha256": "1372487007eea91d9d89d8a400bb6d5e28641bc9ea450ef51944be71cf5960ee"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "polyhaven-outdoor_table_chair_set_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/outdoor_table_chair_set_01_2k.blend",
+      "bytes": 427033,
+      "sha256": "e480fc1c3f76212f78d5a13a79f15886b2866c305bcd2758422cb89a775e9810",
+      "extra_files": [
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_chair_diff_2k.png",
+          "bytes": 14935457,
+          "sha256": "e2569d29d9713f79efed7b53bc6367764b96f28255df17f3c77fac0c4edac987"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_chair_metal_2k.png",
+          "bytes": 18846,
+          "sha256": "89c64f45d36a1059ad54f6d10c4869adbda76882d61026fd7009a8fde0968ebc"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_chair_nor_gl_2k.png",
+          "bytes": 13672173,
+          "sha256": "d2b2c7626c43efc3f92b9669e7bea161e46edbb7420908a7c967cb03087d180f"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_chair_rough_2k.png",
+          "bytes": 4754025,
+          "sha256": "6411b0d3ca1bdf71971ac6847fcbf624a4622923b53153534688b5f73944284b"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_table_diff_2k.png",
+          "bytes": 12733888,
+          "sha256": "12d76d703e45aa667893b17e690c3b0467d3a220cb9ce6334ac4e23f49352aae"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_table_metal_2k.png",
+          "bytes": 25719,
+          "sha256": "90504bfb3c555bffc1b29f01ad0bb9689f094d0cc69a0a7cb27bc25f803f9b52"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_table_nor_gl_2k.png",
+          "bytes": 11457500,
+          "sha256": "9ee3fb33cd54492dc81a344008d178f1f6d1d91eb836e3d8aac215b95ad65931"
+        },
+        {
+          "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/textures/outdoor_table_chair_set_01_table_rough_2k.png",
+          "bytes": 4313108,
+          "sha256": "f031453cca7f36d7be507e31c7aef675768b98a67a6d7307a379df2fdde44c99"
+        }
+      ],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": true,
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-loungeDesignSofa",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeDesignSofa/loungeDesignSofa.glb",
+      "bytes": 9128,
+      "sha256": "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-loungeSofaCorner",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeSofaCorner/loungeSofaCorner.glb",
+      "bytes": 13412,
+      "sha256": "bbdd91791e621ac71321eaf38a2432c53279792ef946707f23b216123bd52655",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-loungeDesignSofaCorner",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeDesignSofaCorner/loungeDesignSofaCorner.glb",
+      "bytes": 13744,
+      "sha256": "fe665d07d53fdc6bc96e9fed453874ba4202b008194e1e24100b067081c62be1",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-loungeChairRelax",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeChairRelax/loungeChairRelax.glb",
+      "bytes": 13904,
+      "sha256": "def698179e44de6cd17f4cfc2730273da54dd25458a29b079fbf4468abe5d98e",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-loungeSofaOttoman",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeSofaOttoman/loungeSofaOttoman.glb",
+      "bytes": 6960,
+      "sha256": "79087654136d7d69653fdc3b52a02d7833fe13e6a0a56b8dcdf652c611dbd959",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-tableCoffee",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-tableCoffee/tableCoffee.glb",
+      "bytes": 8256,
+      "sha256": "e38bea760fbd514efbb75528d09b4752c91af44677bbb97e6d4386c263525179",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-cabinetTelevision",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-cabinetTelevision/cabinetTelevision.glb",
+      "bytes": 10524,
+      "sha256": "811719593d676ff76f7b5904d52c845ce0396af2bc9a6a2636c4818ead320b99",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-televisionModern",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-televisionModern/televisionModern.glb",
+      "bytes": 6368,
+      "sha256": "d89519ad0a5f28b5b0dccb0d83209dccf610cda959578238dd21bbf9e219cfc6",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseOpen",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bookcaseOpen/bookcaseOpen.glb",
+      "bytes": 18020,
+      "sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-sideTable",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-sideTable/sideTable.glb",
+      "bytes": 8800,
+      "sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-lampRoundFloor",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-lampRoundFloor/lampRoundFloor.glb",
+      "bytes": 6600,
+      "sha256": "50fe1b5b588edf15bfa9cc880f71a02a4fda6036350b24733d0ef4de5cc5e908",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bedDouble",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bedDouble/bedDouble.glb",
+      "bytes": 23368,
+      "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bedSingle",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bedSingle/bedSingle.glb",
+      "bytes": 18636,
+      "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-cabinetBedDrawerTable",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-cabinetBedDrawerTable/cabinetBedDrawerTable.glb",
+      "bytes": 12200,
+      "sha256": "fec6271639df5aff9f8ac75d6679385eab2abb7c8d2f51abeba3ed689ddb6f0d",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseClosedWide",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bookcaseClosedWide/bookcaseClosedWide.glb",
+      "bytes": 23140,
+      "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-lampRoundTable",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-lampRoundTable/lampRoundTable.glb",
+      "bytes": 6604,
+      "sha256": "75bb644caaa3da003b4fcad7a931722dd61cd2858aab70cf660021d5061fa1b2",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-rugRound",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugRound/rugRound.glb",
+      "bytes": 10164,
+      "sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-pillow",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-pillow/pillow.glb",
+      "bytes": 5044,
+      "sha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bedBunk",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bedBunk/bedBunk.glb",
+      "bytes": 40784,
+      "sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-chairDesk",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-chairDesk/chairDesk.glb",
+      "bytes": 39016,
+      "sha256": "46406619186034cbe92b19b79a5f1a8e3f442a17a70a7524ef2c0ad0f35095c6",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-desk",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-desk/desk.glb",
+      "bytes": 15048,
+      "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseOpenLow",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bookcaseOpenLow/bookcaseOpenLow.glb",
+      "bytes": 11520,
+      "sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-rugSquare",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugSquare/rugSquare.glb",
+      "bytes": 3180,
+      "sha256": "18a63634e9bbdde0b309c008f4cd41df8455f7f2ffdb8fe8985fdf8c2cd06b3d",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-books",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-books/books.glb",
+      "bytes": 6864,
+      "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinet",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCabinet/kitchenCabinet.glb",
+      "bytes": 10444,
+      "sha256": "7238c57778935ae25db5e57e9f7af3ba7068c71b005ff7cfbff3b6f3b1a13200",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinetUpper",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCabinetUpper/kitchenCabinetUpper.glb",
+      "bytes": 8168,
+      "sha256": "8f2496feed85a745ffb6e554075b8450d647f8f68b01d6a010fcac1510fc173a",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinetCornerRound",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCabinetCornerRound/kitchenCabinetCornerRound.glb",
+      "bytes": 13656,
+      "sha256": "333ab73202cb87b76d4ff94939038dcaf315eda55285bdbeba20d255da488e97",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenSink",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenSink/kitchenSink.glb",
+      "bytes": 23480,
+      "sha256": "7b9610277d71f00dcf1bba49cf4d98d77ce5177e84bf76c7da2f8893e542f743",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenStoveElectric",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenStoveElectric/kitchenStoveElectric.glb",
+      "bytes": 18604,
+      "sha256": "cf646b960d7dfed1fac27898ff6de1f0671cfa33beecbed06ead7d0684517392",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenFridge",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenFridge/kitchenFridge.glb",
+      "bytes": 20116,
+      "sha256": "8af4f4bbb1b5525ad8226e97926a5af60fa8fb20a3cb74dbda5328a9d320dbab",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-hoodModern",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-hoodModern/hoodModern.glb",
+      "bytes": 3968,
+      "sha256": "f5ac7dbadd1d98813c48315e56fa6ab2e8783870b1fb7be30825177bbf2b2afe",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenMicrowave",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenMicrowave/kitchenMicrowave.glb",
+      "bytes": 11248,
+      "sha256": "dd6a6c919f4bebc6e2080fe419262cf97a0d6461ead3f3998aa3c9edf4d2bd27",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCoffeeMachine",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCoffeeMachine/kitchenCoffeeMachine.glb",
+      "bytes": 13332,
+      "sha256": "063f582c6fa0f00a9f24e3393dac2295491c4becdaf5513c893ab1a2826b6ec3",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-toilet",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-toilet/toilet.glb",
+      "bytes": 18112,
+      "sha256": "16165cfd03c56c2cb443b800570810a22ef770f65e7a468f6761d9dc14eaaeae",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomSink",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomSink/bathroomSink.glb",
+      "bytes": 22536,
+      "sha256": "39d4f19608cab7e0fed52303b2c689f5f51fae1bad9b6913cb53d838875e797e",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomSinkSquare",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomSinkSquare/bathroomSinkSquare.glb",
+      "bytes": 15108,
+      "sha256": "360853c822f268e7267c62ef20cf646f170a13d76254cc0804a1d397a4a3ea67",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-showerRound",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-showerRound/showerRound.glb",
+      "bytes": 72048,
+      "sha256": "1723208eaba3fb215089e02c8cdd3d7201d0980ad0c7b275319eb539f6094bfb",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bathtub",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathtub/bathtub.glb",
+      "bytes": 35500,
+      "sha256": "54c405c7035aab63dc41e709dc3c50fc5bcfbc4cddc91ffc54188075a6d25d01",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomCabinet",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomCabinet/bathroomCabinet.glb",
+      "bytes": 7216,
+      "sha256": "9db540227acaaedbbadc6a085f4a00460b73944e608afaad4770e53238a3b7f8",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomMirror",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomMirror/bathroomMirror.glb",
+      "bytes": 6792,
+      "sha256": "940b986894101ea59b50541554b6dc608a22b133057975849259009012984175",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-rugDoormat",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugDoormat/rugDoormat.glb",
+      "bytes": 13812,
+      "sha256": "bd888e41853342cdc0d34d3f09b99cedc50a144f47b514943b65cdb9a2cfd802",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-table",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-table/table.glb",
+      "bytes": 8196,
+      "sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-chairModernCushion",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-chairModernCushion/chairModernCushion.glb",
+      "bytes": 7376,
+      "sha256": "245132697e633e907e2b48c86d56f6c8543604a3440a055d1c71c06ce11d2858",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-chairModernFrameCushion",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-chairModernFrameCushion/chairModernFrameCushion.glb",
+      "bytes": 18592,
+      "sha256": "fd3351b077cafbd54224e20fa7a3a1b4a4304019cf44c25a6e7709ad71b852b8",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "kenney-furniture-kit-rugRectangle",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugRectangle/rugRectangle.glb",
+      "bytes": 3188,
+      "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified"
+    },
+    {
+      "id": "quaternius-X5kQPKzAWp",
+      "source_id": "quaternius-via-polypizza",
+      "format": "glb",
+      "file": "360walkaround/catalog/models/quaternius-X5kQPKzAWp/f627491f-7126-4323-8d01-0be933671078.glb",
+      "bytes": 210980,
+      "sha256": "0a81a9e0532f1ccb51a39d6a71bbc3fa2506dac22fa762b58194ed4741c2f5a0",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "hash_state": "verified"
+    },
+    {
+      "id": "quaternius-1kwsjhpY84",
+      "source_id": "quaternius-via-polypizza",
+      "format": "glb",
+      "file": "360walkaround/catalog/models/quaternius-1kwsjhpY84/7cf27481-8505-42f8-9172-ce209242de09.glb",
+      "bytes": 30700,
+      "sha256": "f3b338973f1710c9d7458c8a0dd4fe53eb2ba3adffed417cb2ca8bc9a4d9deeb",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "hash_state": "verified"
+    }
+  ]
+}

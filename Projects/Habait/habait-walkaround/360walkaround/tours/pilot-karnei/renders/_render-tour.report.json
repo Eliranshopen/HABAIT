@@ -1,0 +1,436 @@
+{
+  "generator": {
+    "script": "pipeline/render_tour.mjs",
+    "version": "0.1.0",
+    "started_utc": "2026-09-02T06:18:48+00:00",
+    "finished_utc": "2026-09-02T06:19:20+00:00",
+    "seconds": 31.47
+  },
+  "settings": {
+    "mode": "final",
+    "resolution": [
+      8192,
+      4096
+    ],
+    "samples": 256,
+    "wrap_pad": 512,
+    "scene": "scene-full.blend",
+    "chunk": 12,
+    "blender": "C:/Program Files/Blender Foundation/Blender 4.5/blender.exe",
+    "px_per_m": 80
+  },
+  "scene": {
+    "clean": true,
+    "why": "plan.json + the style lock + all four generator scripts hash the same as the scene report",
+    "planHash": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+    "scripts": [
+      {
+        "file": "build_scene.py",
+        "sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3"
+      },
+      {
+        "file": "materials_kit.py",
+        "sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6"
+      },
+      {
+        "file": "place_cameras.py",
+        "sha256": "99c144af4a3112d552467b9fb30fcba6bed0a874c80e69ad9d252b3068752b14"
+      },
+      {
+        "file": "placement_templates.py",
+        "sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161"
+      }
+    ],
+    "styleHash": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+    "built_utc": "2026-09-01T23:11:34+00:00",
+    "checks": "166/166"
+  },
+  "points_requested": [
+    "cp-entry",
+    "cp-dining",
+    "cp-living",
+    "cp-kitchen",
+    "cp-corridor",
+    "cp-mamad",
+    "cp-bed-2",
+    "cp-master",
+    "cp-bath-main",
+    "cp-ensuite",
+    "cp-master-lobby",
+    "cp-wc"
+  ],
+  "forced": [],
+  "runs": [
+    {
+      "points": [
+        "cp-entry",
+        "cp-dining",
+        "cp-living",
+        "cp-kitchen",
+        "cp-corridor",
+        "cp-mamad",
+        "cp-bed-2",
+        "cp-master",
+        "cp-bath-main",
+        "cp-ensuite",
+        "cp-master-lobby",
+        "cp-wc"
+      ],
+      "skip_if_clean": true,
+      "exit": 0,
+      "seconds": 2.56,
+      "skipped": [
+        "cp-entry",
+        "cp-dining",
+        "cp-living",
+        "cp-kitchen",
+        "cp-corridor",
+        "cp-mamad",
+        "cp-bed-2",
+        "cp-master",
+        "cp-bath-main",
+        "cp-ensuite",
+        "cp-master-lobby",
+        "cp-wc"
+      ],
+      "rendered": [],
+      "log": "renders/_logs/render-cp-entry-x12.log"
+    }
+  ],
+  "skipped_this_run": [
+    "cp-entry",
+    "cp-dining",
+    "cp-living",
+    "cp-kitchen",
+    "cp-corridor",
+    "cp-mamad",
+    "cp-bed-2",
+    "cp-master",
+    "cp-bath-main",
+    "cp-ensuite",
+    "cp-master-lobby",
+    "cp-wc"
+  ],
+  "rendered_this_run": [],
+  "point_checks": [
+    {
+      "id": "cp-entry",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 0.996613,
+        "invalid_pixels": 113640
+      },
+      "pano_bytes": 854024,
+      "depth_bytes": 1260883,
+      "seconds": 1756.436,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "98f112a2dec34356d7fc6d4465051bf3bfa586311e4983e202207ce52e50ac52",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-dining",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 0.998754,
+        "invalid_pixels": 41819
+      },
+      "pano_bytes": 1123598,
+      "depth_bytes": 1065575,
+      "seconds": 1800.616,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "791e605c42adddc54107ad836bd8c0ccaaa3b66dae1363ef6217d47436fd6303",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-living",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.38,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": -2,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 817492,
+      "depth_bytes": 952911,
+      "seconds": 1941.531,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 3,
+      "depth_check_worst_cm": 317.2,
+      "input_key": "45e061476f4a89bd09bdfc60675042e358d271f7b9e602218b91b0574bfd8359",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-kitchen",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 0.999101,
+        "invalid_pixels": 30151
+      },
+      "pano_bytes": 1307744,
+      "depth_bytes": 1030791,
+      "seconds": 1812.81,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 4,
+      "depth_check_worst_cm": 434.9,
+      "input_key": "cae82a6afd139f0d401936cc4ff6bbbb38012711be8ae67aaaa7f28ac040c8db",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-corridor",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 966042,
+      "depth_bytes": 1277546,
+      "seconds": 2006.555,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "0a96edef535b575c3d27a2e63551b971b40e202be29405f46626742a35a962ac",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-mamad",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.19,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 1176398,
+      "depth_bytes": 903769,
+      "seconds": 1828.907,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 1,
+      "depth_check_worst_cm": 16,
+      "input_key": "08693c9c10f1c467b3361ad4ff1738b7f0c374d2f110acdc9c1797299485446c",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-bed-2",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 1056566,
+      "depth_bytes": 1011166,
+      "seconds": 1850.427,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 1,
+      "depth_check_worst_cm": 12.9,
+      "input_key": "3a0eb2362b523d887551b142ee2248b851381a63b695d3fc84bd5ef06857266a",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-master",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 1071086,
+      "depth_bytes": 1017343,
+      "seconds": 1873.435,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 1,
+      "depth_check_worst_cm": 12.9,
+      "input_key": "2b68b7af471a55494c36a9bce03ccc58658ff2a939b161bd7ecc0853c4778a18",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-bath-main",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.38,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": -2,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 298296,
+      "depth_bytes": 1212674,
+      "seconds": 2096.775,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 5,
+      "depth_check_worst_cm": 266.184,
+      "input_key": "a61ff150982a87332b78fa784f299f157cbf7df31170ad1ec65f579c3107924b",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-ensuite",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 343034,
+      "depth_bytes": 1209223,
+      "seconds": 2087.115,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 3,
+      "depth_check_worst_cm": 321.5,
+      "input_key": "fc64f38e059a184dd1577b45b61e048ae4a0b27633a462d976fc51df8c3ad6a2",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-master-lobby",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.4,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.2,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 1000370,
+      "depth_bytes": 1294806,
+      "seconds": 2047.826,
+      "device_peak_mb": 1427.91,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "e30b14b08d25969a9afeef7c47790816bab80832d0384ba857df18bb00c28a2f",
+      "skipped_this_run": true
+    },
+    {
+      "id": "cp-wc",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.38,
+        "camera_z_m": 1.4,
+        "nadir_error_cm": -2,
+        "zenith_m": 1.19,
+        "expected_zenith_m": 1.2,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 233700,
+      "depth_bytes": 1144864,
+      "seconds": 1987.086,
+      "device_peak_mb": 1427.9,
+      "depth_checks_failed": 1,
+      "depth_check_worst_cm": 2,
+      "input_key": "3ab399ad5bd7193018c354912f9db8cccadc525820cb577aef562d00e94d23b4",
+      "skipped_this_run": true
+    }
+  ],
+  "top_view": {
+    "exit": 0,
+    "seconds": 21.59,
+    "ok": true,
+    "problems": [],
+    "size": [
+      1018,
+      1166
+    ],
+    "rooms": 14,
+    "colours_in_mask": 15,
+    "alignment": {
+      "dx": 0,
+      "dy": 0,
+      "iou": 0.967108
+    },
+    "zero_shift_iou": 0.967108,
+    "cm_per_px": {
+      "x": 1.249607073,
+      "y": 1.249607073
+    },
+    "plan_cm": {
+      "x0": -30,
+      "y0": -30.120923,
+      "x1": 1242.1,
+      "y1": 1426.920923
+    }
+  },
+  "cost_usd": 0,
+  "machine": "local — RTX A2000 Laptop 4 GB (ENV.md §1); $0, see pipeline/RENDER-LEDGER.md",
+  "verdict": "PASS"
+}

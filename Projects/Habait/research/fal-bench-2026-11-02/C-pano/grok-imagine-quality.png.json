@@ -1,0 +1,26 @@
+{
+ "endpoint": "xai/grok-imagine-image/quality/edit",
+ "args": {
+  "prompt": "Image 1 is a 360-degree equirectangular panorama (2:1) of a room in an apartment. Return the SAME equirectangular panorama with EXACTLY the same projection, framing and geometry: every wall, ceiling, window, glass slider, wardrobe, kitchen unit, sanitary fixture and piece of furniture at exactly the same pixel position, the same light and colours, nothing added, removed, moved or resized. Change ONLY these finishes: (1) the floor everywhere becomes a wide-plank natural oak parquet floor, matte, pale honey tone, long planks laid lengthwise, no gloss, one continuous surface with no grout lines and no tiles (in bathrooms and on terraces the same floor); (2) every interior door becomes a zero-line flush door in cream, frameless, no architrave, no panels, with a slim matte black lever (a dark blue or wooden door too); (3) remove every skirting board so the floor meets the walls in a clean line; (4) where a kitchen is visible its cabinetry continues to the end of its wall with matching handleless sand-grey lacquer fronts, no bare wall strip. Photoreal, sharp, a very high-end luxury finish. No people, no text, no logos.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d329/lV_haJavCPz5UFdbbGtnr_C_pano_04-living_src.png"
+  ],
+  "resolution": "2k",
+  "aspect_ratio": "2:1",
+  "output_format": "png"
+ },
+ "result": {
+  "images": [
+   {
+    "url": "https://v3b.fal.media/files/b/0ab0d329/3r6kkvstiudsVnA2qi72Q_p9yXXOZR.png",
+    "content_type": "image/png",
+    "file_name": "3r6kkvstiudsVnA2qi72Q_p9yXXOZR.png",
+    "file_size": null,
+    "width": 2912,
+    "height": 1456
+   }
+  ],
+  "revised_prompt": null
+ },
+ "secs": 18
+}

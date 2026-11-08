@@ -1,0 +1,538 @@
+{
+ "desktop": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view + rtl",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "w": 180,
+    "x": 14,
+    "y": 14,
+    "onTop": true,
+    "inView": true,
+    "dir": "rtl"
+   }
+  },
+  {
+   "id": "B3 button covers no pill / picker button / sound button",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C1 frame opens, project scope (no scope=apartment), from=hold, same page URL",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?floor=parquet&video=0&from=hold&ui=min",
+    "url": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartm"
+   }
+  },
+  {
+   "id": "C2 tour opens on aerial",
+   "pass": true,
+   "info": "aerial"
+  },
+  {
+   "id": "C3 auto chain reaches the tower (hold node)",
+   "pass": true,
+   "info": "tower"
+  },
+  {
+   "id": "C4 ✕ visible, button hidden, frame opaque",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "btn": "none",
+    "op": "1"
+   }
+  },
+  {
+   "id": "C4b ✕ hides no tour control (at the tower)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C5 tap 846 → descent → a room of the apartment inside the frame",
+   "pass": true,
+   "info": {
+    "hotspot": true,
+    "room": "terraceLiving",
+    "now": "terraceLiving"
+   }
+  },
+  {
+   "id": "C6 ✕ is on top of the tour (clickable)",
+   "pass": true
+  },
+  {
+   "id": "C7 ✕ hides no tour control (in the room)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "D1 ✕ → frame removed, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block",
+    "focus": "buildingBtn",
+    "url": "/hold/",
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc (focus on the page) closes",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves no frame, button back",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true,
+   "info": "none"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ],
+ "iphone13": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view + rtl",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "w": 180,
+    "x": 14,
+    "y": 14,
+    "onTop": true,
+    "inView": true,
+    "dir": "rtl"
+   }
+  },
+  {
+   "id": "B3 button covers no pill / picker button / sound button",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C1 frame opens, project scope (no scope=apartment), from=hold, same page URL",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?floor=parquet&video=0&from=hold&ui=min",
+    "url": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartm"
+   }
+  },
+  {
+   "id": "C2 tour opens on aerial",
+   "pass": true,
+   "info": "aerial"
+  },
+  {
+   "id": "C3 auto chain reaches the tower (hold node)",
+   "pass": true,
+   "info": "tower"
+  },
+  {
+   "id": "C4 ✕ visible, button hidden, frame opaque",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "btn": "none",
+    "op": "1"
+   }
+  },
+  {
+   "id": "C4b ✕ hides no tour control (at the tower)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C5 tap 846 → descent → a room of the apartment inside the frame",
+   "pass": true,
+   "info": {
+    "hotspot": true,
+    "room": "terraceLiving",
+    "now": "terraceLiving"
+   }
+  },
+  {
+   "id": "C6 ✕ is on top of the tour (clickable)",
+   "pass": true
+  },
+  {
+   "id": "C7 ✕ hides no tour control (in the room)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "D1 ✕ → frame removed, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block",
+    "focus": "buildingBtn",
+    "url": "/hold/",
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc (focus on the page) closes",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves no frame, button back",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true,
+   "info": "none"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ],
+ "pixel7": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view + rtl",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "w": 180,
+    "x": 14,
+    "y": 14,
+    "onTop": true,
+    "inView": true,
+    "dir": "rtl"
+   }
+  },
+  {
+   "id": "B3 button covers no pill / picker button / sound button",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C1 frame opens, project scope (no scope=apartment), from=hold, same page URL",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?floor=parquet&video=0&from=hold&ui=min",
+    "url": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartm"
+   }
+  },
+  {
+   "id": "C2 tour opens on aerial",
+   "pass": true,
+   "info": "aerial"
+  },
+  {
+   "id": "C3 auto chain reaches the tower (hold node)",
+   "pass": true,
+   "info": "tower"
+  },
+  {
+   "id": "C4 ✕ visible, button hidden, frame opaque",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "btn": "none",
+    "op": "1"
+   }
+  },
+  {
+   "id": "C4b ✕ hides no tour control (at the tower)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C5 tap 846 → descent → a room of the apartment inside the frame",
+   "pass": true,
+   "info": {
+    "hotspot": true,
+    "room": "terraceLiving",
+    "now": "terraceLiving"
+   }
+  },
+  {
+   "id": "C6 ✕ is on top of the tour (clickable)",
+   "pass": true
+  },
+  {
+   "id": "C7 ✕ hides no tour control (in the room)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "D1 ✕ → frame removed, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block",
+    "focus": "buildingBtn",
+    "url": "/hold/",
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc (focus on the page) closes",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves no frame, button back",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true,
+   "info": "none"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ],
+ "tablet": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view + rtl",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "w": 180,
+    "x": 14,
+    "y": 14,
+    "onTop": true,
+    "inView": true,
+    "dir": "rtl"
+   }
+  },
+  {
+   "id": "B3 button covers no pill / picker button / sound button",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C1 frame opens, project scope (no scope=apartment), from=hold, same page URL",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?floor=parquet&video=0&from=hold&ui=min",
+    "url": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartm"
+   }
+  },
+  {
+   "id": "C2 tour opens on aerial",
+   "pass": true,
+   "info": "aerial"
+  },
+  {
+   "id": "C3 auto chain reaches the tower (hold node)",
+   "pass": true,
+   "info": "tower"
+  },
+  {
+   "id": "C4 ✕ visible, button hidden, frame opaque",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "btn": "none",
+    "op": "1"
+   }
+  },
+  {
+   "id": "C4b ✕ hides no tour control (at the tower)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "C5 tap 846 → descent → a room of the apartment inside the frame",
+   "pass": true,
+   "info": {
+    "hotspot": true,
+    "room": "terraceLiving",
+    "now": "terraceLiving"
+   }
+  },
+  {
+   "id": "C6 ✕ is on top of the tour (clickable)",
+   "pass": true
+  },
+  {
+   "id": "C7 ✕ hides no tour control (in the room)",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "D1 ✕ → frame removed, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block",
+    "focus": "buildingBtn",
+    "url": "/hold/",
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc (focus on the page) closes",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves no frame, button back",
+   "pass": true,
+   "info": {
+    "frames": 0,
+    "btn": "block"
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8853/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true,
+   "info": "none"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ]
+}

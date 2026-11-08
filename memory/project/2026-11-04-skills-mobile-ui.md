@@ -1,0 +1,7 @@
+
+## 2026-11-04 · main session · Installed mobile-UI skills responsive-design and mobile-responsive
+- **Did:** Eliran asked for a skills.sh and web search for skills that help build phone UI, then said install. Searched npx skills find (7 queries), the skills.sh leaderboard and the web; read the candidates on GitHub. Installed with npx skills add --copy -y: responsive-design (wshobson/agents, MIT, 45-line SKILL.md + references) and mobile-responsive (AsadSumbul, MIT, 153 lines + check-overflow.js). Not installed: impeccable (downloads and runs a binary on first run, Eliran's call), design-mobile-apps (needs a paid Sleek API key), ceorkm mobile-app-ui-design (no license), React Native and native iOS/Android skills (Habait is plain web). Read both in full: text plus one local Playwright script. Frontmatter-only edits: allowed-tools on both; mobile-responsive got a 230-char description with the upstream one as a YAML comment. Counts 36 skills, 21 auto; lock pins 7. Told session rnd-9d by SendMessage, on Eliran's ask.
+- **Evidence:** `.claude/skills/mobile-responsive/CLAUDE.md`
+- **Learned:** check-overflow.js measures only rect.right minus clientWidth, so on a Hebrew RTL page it misses overflow to the left and reports clean. On Habait also check rect.left < -1 or scrollWidth > clientWidth.
+- **Owed / open:** impeccable is waiting for Eliran's call on its binary; the research folder auto-trace (2026-11-04) has a STALE context file, the other session's folder, left alone
+- **Second reader:** none

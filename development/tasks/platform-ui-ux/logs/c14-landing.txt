@@ -1,0 +1,23 @@
+# card 14 — the project landing (2026-11-03 18:27, main session as platform-dev)
+built: landing.html (structure, ids and test hooks kept; the legal <template> byte-identical), js/landing.js, css/landing.css, new js/target.js (one 'open the project' target shared with the home card).
+order: header → media (arm A: the cover still + 'לטיסה סביב הפרויקט' into the existing flight, same target as the home card; arm B: the flight frame) → the short caption under the media → title + tagline → availability (12 apartments, status chip in words + colour, rooms/area/floor in <bdi>, each a link to its apartment page) → featured-unit facts + the lead block (js/lead.js unchanged) → gallery (arm A, real stills only) → the legal summary.
+highlights: NOT built — project.json has no highlights field and this page forbids marketing text (D-WQ-18). Named for Eliran in CHANGES.md.
+legal: <details> whose summary is the full text's own first sentence ('הדמיה להמחשה בלבד.' / 'Illustration only.') + 'לנוסח המלא'; the full text opens in place. No wording changed.
+clay: the fixture fallback in loadMedia (the flight's exterior posters) is gone; no built apartment = no gallery. The cover still stays the hero.
+fixes during the card: play button overlapped the 3-line caption at 390 → caption moved under the still; status chip stretched at 390 → justify-self start; the play icon is not mirrored in RTL (media icon).
+
+## acceptance (buyer host buyer.test, reduced motion; before = the page before this card, same probes)
+desk/a: legal he equal True · en equal True (1103 chars) · stills 11 / badges 11 · clay/fixture images 0 · availability rows 12, all 200: True · console errors 0 · h-scroll False
+desk/b: legal he equal True · en equal True (1103 chars) · stills 0 / badges 0 · clay/fixture images 0 · availability rows 12, all 200: True · console errors 0 · h-scroll False
+phone/a: legal he equal True · en equal True (1103 chars) · stills 11 / badges 11 · clay/fixture images 0 · availability rows 12, all 200: True · console errors 0 · h-scroll False
+phone/b: legal he equal True · en equal True (1103 chars) · stills 0 / badges 0 · clay/fixture images 0 · availability rows 12, all 200: True · console errors 0 · h-scroll False
+no real stills (dist manifest 404): BEFORE gallery tiles 4 with 4 clay/fixture images → AFTER tiles 0, clay 0, gallery visible False.
+availability statuses (phone/a): 876=למכירה, 866=למכירה, 855=נמכרה, 856=למכירה, 857=למכירה, 845=נמכרה, 846=למכירה, 847=שמורה, 835=שמורה, 836=למכירה, 837=למכירה, 826=נמכרה
+
+## tests (preview tree)
+test/smoke.mjs: ok 12 · FAIL 0
+test/landing.test.mjs: ok 35 · FAIL 0
+test/card-overflow.test.mjs: ok 18 · FAIL 0
+test/apartment.test.mjs: ok 36 · FAIL 0
+test/browser.mjs: ok 25 · all green True
+frames: .wt/platform-ui-ux/after/c14/{before,after}/{desk,phone}_{a,b}{,_full}.png + phone_no_stills.png

@@ -1,0 +1,48 @@
+{
+  "rows": [
+    {
+      "step": "sandbox-spike-c1",
+      "tool": "Habait/tour360/tools/sandbox-worker/spike.mjs --go",
+      "finished_utc": "2026-11-04T16:25:01.005Z",
+      "inputs": {
+        "file_count": 122,
+        "upload_bytes": 293632261,
+        "file_list_sha256": "5208ecbf508be940ea079df27a6b0503ac7a3777a6b3d8bec0970d5eaefcf10d",
+        "blender": "4.5.10 sha256 198a4248b38899af661aa9241cebd746394eaddbfafbeb53152440de80b118f7",
+        "point": "cp-kitchen",
+        "res": "1024x512",
+        "samples": 16
+      },
+      "machine": {
+        "provider": "Vercel Sandbox",
+        "project": "habait-flow",
+        "sandbox": "sapphire-greasy-zebra-iEPYPf",
+        "vcpus": 4,
+        "memory_gb": 8,
+        "persistent": false,
+        "status_after_stop": "stopped"
+      },
+      "outputs": {
+        "pano.webp": "b6ca4d2dda17c0628aa347ab05ee0e4756e77166bd1e2a72570cc41d878219cf",
+        "depth.png": "7899fbfd9b9359f7133b768c8ec5c05e8c82041035291f5c282cd0e8d89291a3",
+        "pano.render.json": "03e0e3dcd820f083b965c7cce978e038cf9865620107c504f36ec25bf9bae4a5"
+      },
+      "verdict": "PASS",
+      "session_wall_s": 307.3,
+      "cost_usd_pro_rates": 0.0294,
+      "ledger": "360walkaround/pipeline/RENDER-LEDGER.md §2 row C1",
+      "earlier_attempts": [
+        {
+          "attempt": 1,
+          "failed": "download.blender.org 403 + 8 vCPU refused (<= 4)",
+          "session_s": 13.1
+        },
+        {
+          "attempt": 2,
+          "failed": "/vercel/sandbox missing in the image (curl write error)",
+          "session_s": 17.4
+        }
+      ]
+    }
+  ]
+}

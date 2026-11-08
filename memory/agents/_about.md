@@ -1,0 +1,2 @@
+# memory/agents/ — one file per sub-agent
+Created by the agent itself on its first run, from `memory/_TEMPLATE.md`, named exactly as the agent (`habait-fe.md`; the orchestrator writes `orchestrator-lessons.md`). The agent appends one entry per task at the end and adds one pointer line under `## agents` in `memory/INDEX.md`. The file's tail (~150 lines) is what the agent reads next time, so the newest entry is always last. Over 200 KB it rotates (see `memory/README.md`, The contract, rule 4).

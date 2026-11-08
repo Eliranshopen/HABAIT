@@ -1,0 +1,71 @@
+{
+ "schema": "habait.bench-registry/0.1",
+ "about": "One entry per fal endpoint the live bench (card 29, E2) knows. input_keys = the request keys the adapter fills; output_keys = where the image URL is in the answer. Prices are list prices as fal showed them on the date in price.checked; fal returns no bill, so the ledger books these estimates. A new endpoint = a new entry (+ an adapter file when its inputs are not the standard prompt + image_urls).",
+ "card_cap_usd_per_run": 10.0,
+ "endpoints": {
+  "openai/gpt-image-2.5/sunburst/edit": {
+   "label": "GPT Image 2.5 (OpenAI) edit",
+   "adapter": "gpt_image_25",
+   "role": "model of record (keyframes, panoramas, exterior nodes)",
+   "input_keys": ["prompt", "image_urls", "image_size", "quality", "num_images"],
+   "output_keys": ["images[0].url"],
+   "takes_reference_images": true,
+   "price": {"type": "flat", "usd": 1.20, "note": "quality high, any size up to 2048 on the long side",
+             "checked": "2026-11-02", "source": "research/fal-bench-2026-11-02 (89: build_page.py PRICES, ledger-A/C/E rows) + memory.md section 7"},
+   "tracks": ["keyframe", "flyover", "pano"],
+   "evidence": "89 called it 2026-11-02 (A-keyframe/gpt-image-2.5.png.json, E-exterior-pano/*/gpt-image-2.5.png.json); card 12 A1/A2"
+  },
+  "fal-ai/nano-banana-2/edit": {
+   "label": "Nano Banana 2 (Google) edit",
+   "adapter": "nano_banana_2",
+   "role": "cheap candidate; close on keyframes",
+   "input_keys": ["prompt", "image_urls", "resolution", "aspect_ratio", "output_format"],
+   "output_keys": ["images[0].url"],
+   "takes_reference_images": true,
+   "price": {"type": "by_resolution", "usd": {"1K": 0.08, "2K": 0.12},
+             "checked": "2026-11-02", "source": "89: build_page.py PRICES '$0.08 (2K: $0.12)', ledger-A/C rows"},
+   "tracks": ["keyframe", "flyover", "pano"],
+   "quirks": ["aspect_ratio must be 'auto' for a 2:1 equirect ('2:1' is rejected); the 2K answer is 2912x1440"],
+   "evidence": "the endpoint id exists: 89 called it 2026-11-02 (A-keyframe/nano-banana-2.png.json, C-pano/nano-banana-2.png.json, result has images[0].url)"
+  },
+  "fal-ai/flux-pro/v1/depth": {
+   "label": "FLUX.1 Depth [pro]",
+   "adapter": "flux_pro_depth",
+   "role": "depth-controlled text-to-image (no look image)",
+   "input_keys": ["prompt", "control_image_url", "image_size", "num_inference_steps", "guidance_scale", "seed", "output_format", "safety_tolerance"],
+   "output_keys": ["images[0].url"],
+   "takes_reference_images": false,
+   "price": {"type": "per_mp", "usd_per_mp": 0.05, "plus": 0.005,
+             "checked": "2026-11-02", "source": "card 12 REPORT-he.md (fal price list 2026-11-02), ab.py CANDS"},
+   "tracks": ["keyframe", "flyover", "pano"],
+   "quirks": ["control = depth drawn near-bright, linear in metres (card 12); no depth for the Kaggle flight frames, so the flyover track sends the clay RGB and fal estimates the depth (card 12 ctrl-B-claycontrol)",
+              "not 360-aware: the pano track measures how badly the seam breaks"],
+   "evidence": "card 12 B1/B2 (ledger-B2.json)"
+  },
+  "fal-ai/qwen-image-edit-2511": {
+   "label": "Qwen-Image-Edit-2511",
+   "adapter": "qwen_edit_2511",
+   "role": "open-weights edit model, no LoRA",
+   "input_keys": ["prompt", "image_urls", "image_size", "num_inference_steps", "guidance_scale", "seed", "output_format", "num_images"],
+   "output_keys": ["images[0].url"],
+   "takes_reference_images": false,
+   "price": {"type": "per_mp", "usd_per_mp": 0.03, "plus": 0.005,
+             "checked": "2026-11-02", "source": "card 12 REPORT-he.md (fal price list 2026-11-02), ab.py CONTROLS"},
+   "tracks": ["keyframe", "flyover", "pano"],
+   "evidence": "card 12 ctrl-C-nolora (ledger-B2.json)"
+  },
+  "fal-ai/qwen-image-edit-2511/lora": {
+   "label": "Qwen-Image-Edit-2511 + LoRA hbt846",
+   "adapter": "qwen_edit_2511",
+   "role": "open-weights edit + the project LoRA trained by card 12",
+   "input_keys": ["prompt", "image_urls", "loras", "image_size", "num_inference_steps", "guidance_scale", "seed", "output_format", "num_images"],
+   "output_keys": ["images[0].url"],
+   "takes_reference_images": false,
+   "lora": {"json": "Habait/engine/_local/experiments/look-lock/train/lora.json", "url_key": "diffusers_lora_file.url", "trigger": "hbt846 style", "scale": 1.0},
+   "price": {"type": "per_mp", "usd_per_mp": 0.035, "plus": 0.005,
+             "checked": "2026-11-02", "source": "card 12 REPORT-he.md (fal price list 2026-11-02), ab.py CANDS"},
+   "tracks": ["keyframe", "flyover", "pano"],
+   "evidence": "card 12 C1/C2 (ledger-B2.json)"
+  }
+ }
+}

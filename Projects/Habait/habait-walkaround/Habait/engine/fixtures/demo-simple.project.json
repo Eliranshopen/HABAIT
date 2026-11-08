@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.1.0",
+  "id": "demo-simple",
+  "developer": {
+    "id": "demo-developer",
+    "name_he": "יזם לדוגמה בע\"מ",
+    "name_en": "Demo Developer Ltd",
+    "brand": { "primary_color": "#1F4E79", "secondary_color": "#E8B04B" },
+    "contact": { "name": "Dana", "whatsapp": "972500000000" }
+  },
+  "project": {
+    "name": "Hadar 12",
+    "name_he": "הדר 12",
+    "city_he": "חולון",
+    "city_en": "Holon",
+    "address_he": "רחוב ההדר 12, חולון",
+    "status": "pre-sale",
+    "architect": "invented for the fixture",
+    "languages": ["he"],
+    "notes": "An invented small project: one 6-floor building, two unit types, three units. Exercises the schema on a project that is not Rainbow (principle 6: generic from day one)."
+  },
+  "site": {
+    "origin": { "lat": 32.0151, "lon": 34.7795, "quality": "manual", "source": "invented" },
+    "plot": { "block": "6020", "parcel": "41", "source": "invented" },
+    "north_deg": 12.0,
+    "north_source": "invented; the sheet arrow"
+  },
+  "building": {
+    "name": "Building A",
+    "floors_total": 6,
+    "floors_below_ground": 1,
+    "ground_floor_index": 0,
+    "floor_to_floor_cm": 300,
+    "ceiling_height_cm": 270,
+    "elevations": [
+      { "facing": "south", "file": "elevations/south.pdf", "kind": "pdf", "note": "invented path, not on disk" }
+    ]
+  },
+  "units": [
+    {
+      "id": "a-3-1",
+      "number": "7",
+      "type": "A",
+      "floor": 3,
+      "rooms_count": 4,
+      "area_m2": 98.5,
+      "terrace_m2": 12.0,
+      "files": { "plan_pdf": "plans/type-a.pdf" },
+      "plan_scale": "1:50",
+      "mirrored": false,
+      "status": "available",
+      "price_ils": 2950000
+    },
+    {
+      "id": "a-3-2",
+      "number": "8",
+      "type": "A",
+      "floor": 3,
+      "rooms_count": 4,
+      "area_m2": 98.5,
+      "terrace_m2": 12.0,
+      "files": { "plan_pdf": "plans/type-a.pdf" },
+      "plan_scale": "1:50",
+      "mirrored": true,
+      "status": "sold"
+    },
+    {
+      "id": "b-5-1",
+      "number": "11",
+      "type": "B",
+      "floor": 5,
+      "rooms_count": 5,
+      "area_m2": 131.0,
+      "terrace_m2": 24.0,
+      "files": { "plan_dwg": "plans/type-b.dwg", "plan_pdf": "plans/type-b.pdf" },
+      "plan_scale": "1:50",
+      "status": "reserved",
+      "price_ils": 4200000
+    }
+  ],
+  "style": {
+    "preset_ids": ["lived-in-morning"],
+    "reference_renders": [],
+    "notes": "no developer renders yet; the Habait default look"
+  },
+  "legal": {
+    "disclaimer_id": "he-ai-visualization-v0",
+    "rights_state": "own",
+    "consent_from_developer": true,
+    "publish_allowed": true
+  },
+  "provenance": {
+    "created_at": "2026-11-02T12:05:00+02:00",
+    "created_by": "lane A engine session (invented fixture)",
+    "sources": [],
+    "assumptions": ["everything: this project does not exist"]
+  }
+}

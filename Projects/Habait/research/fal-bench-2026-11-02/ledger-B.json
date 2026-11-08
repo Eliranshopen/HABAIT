@@ -1,0 +1,91 @@
+[
+ {
+  "at": "2026-11-02T09:45:30",
+  "endpoint": "blackforestlabs/flux-3-max/keyframes-to-video",
+  "usd": 0.22,
+  "note": "B flux-3-max-keyframes",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/flux-3-max-keyframes.mp4",
+  "secs": 18
+ },
+ {
+  "at": "2026-11-02T09:45:34",
+  "endpoint": "google/gemini-omni-flash/v1.1/edit",
+  "usd": 0.5,
+  "note": "B gemini-omni-flash-edit",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/gemini-omni-flash-edit.mp4",
+  "error": "[{'loc': ['body', 'prompt'], 'msg': 'Input blocked: The prompt could not be processed. Please try rephrasing the prompt or using different input.', 'type': 'content_policy_violation', 'url': 'https://docs.fal.ai/errors#content_policy_violation', 'input': {'prompt': \"the input video is a plain grey 3D clay render of a drone flight over the Tel Aviv coast (Sde Dov) toward the Rainbow tower, a 39-floor residential tower wrapped in white undulating curved balcony slabs. Re-render the SAME footage as",
+  "secs": 26
+ },
+ {
+  "at": "2026-11-02T09:46:06",
+  "endpoint": "blackforestlabs/flux-3/edit-video",
+  "usd": 0.15,
+  "note": "B flux-3-edit-video",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/flux-3-edit-video.mp4",
+  "secs": 55
+ },
+ {
+  "at": "2026-11-02T09:46:49",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 0.94,
+  "note": "B kling-4-v2v-edit",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/kling-4-v2v-edit.mp4",
+  "secs": 93
+ },
+ {
+  "at": "2026-11-02T09:49:17",
+  "endpoint": "fal-ai/kling-video/v3/pro/image-to-video",
+  "usd": 0.56,
+  "note": "B kling-3-pro-i2v",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/kling-3-pro-i2v.mp4",
+  "secs": 243
+ },
+ {
+  "at": "2026-11-02T09:49:38",
+  "endpoint": "fal-ai/kling-video/o3/pro/video-to-video/edit",
+  "usd": 0.84,
+  "note": "B kling-o3-pro-v2v-edit",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/kling-o3-pro-v2v-edit.mp4",
+  "secs": 264
+ },
+ {
+  "at": "2026-11-02T09:50:35",
+  "endpoint": "alibaba/wan-3.0/image-to-video",
+  "usd": 0.5,
+  "note": "B wan-3.0-i2v",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/wan-3.0-i2v.mp4",
+  "secs": 322
+ },
+ {
+  "at": "2026-11-02T09:51:18",
+  "endpoint": "alibaba/wan-3.0/reference-to-video",
+  "usd": 0.5,
+  "note": "B wan-3.0-reference",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/wan-3.0-reference.mp4",
+  "secs": 364
+ },
+ {
+  "at": "2026-11-02T09:53:18",
+  "endpoint": "google/gemini-omni-flash/v1.1/edit",
+  "usd": 0.5,
+  "note": "B gemini-omni-flash-edit",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/gemini-omni-flash-edit.mp4",
+  "secs": 47
+ },
+ {
+  "at": "2026-11-02T09:55:13",
+  "endpoint": "fal-ai/ltx-2.3-quality/render-to-real",
+  "usd": 0.27,
+  "note": "B ltx-2.3-render-to-real-5s",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/ltx-2.3-render-to-real-5s.mp4",
+  "secs": 159
+ },
+ {
+  "at": "2026-11-02T10:17:19",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 3.2,
+  "note": "B kling-4 full 17 s flight (Eliran approved 11:35)",
+  "out": "C:/RnD/Projects/Habait/research/fal-bench-2026-11-02/B-flyover/kling-4-full-flight.mp4",
+  "secs": 268
+ }
+]

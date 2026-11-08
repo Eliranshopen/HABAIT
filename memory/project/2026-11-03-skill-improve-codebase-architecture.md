@@ -1,0 +1,13 @@
+## 2026-11-03 · main session · install: improve-codebase-architecture
+- **Did:** on Eliran's command installed `improve-codebase-architecture` from `mattpocock/skills` for Claude Code as a real-folder copy (`npx skills add https://github.com/mattpocock/skills --skill improve-codebase-architecture -a claude-code --copy -y`). The CLI replaced the dangling junction and updated `skills-lock.json` itself (`installMode: copy`). The skill is explicit-only (`disable-model-invocation: true`), now 52 skills / 33 explicit. Two context files generated, purposes filled; the register, the skills map, root §1 and OWED-004 are updated.
+- **Evidence:** `.claude/skills/improve-codebase-architecture/SKILL.md` (71 lines) · `skills-lock.json` · `docs/skill-taxonomy.md` §2/§5 · `docs/governance/OWED.md` OWED-004 (resolved) · `generate-cards.py --check` → 0 missing.
+- **Learned:** the `skills` CLI symlink mode puts the real files in `.agents/skills/` and junctions them in; with no `.agents/` the junction dangles. `--copy` lands real files in `.claude/skills/` and needs no `.agents/`. The skill calls `codebase-design` and `domain-modeling` (not installed) and its Step 1 `git log` scan is suspended (no git): name the area by hand.
+- **Owed / open:** whether to also install `codebase-design` and `domain-modeling` — Eliran's call (not filed as OWED).
+- **Second reader:** `codebase-cartographer` — new skill folder and its two context files.
+
+## 2026-11-03 · main session · install: codebase-design + domain-modeling
+- **Did:** on Eliran's "yes" installed `codebase-design` and `domain-modeling` from `mattpocock/skills` the same way (`-a claude-code --copy -y`), closing the open item above. Both are auto-trigger; now 54 skills (21 auto · 33 explicit). Four context files generated with Purpose/Gotchas written; root §1, the skills map, `.claude/CLAUDE.md` and the register updated.
+- **Evidence:** `.claude/skills/codebase-design/SKILL.md` (114 lines) · `.claude/skills/domain-modeling/SKILL.md` (74 lines) · `skills-lock.json` (3 rows, `installMode: copy`) · `generate-cards.py --check` → 0 missing.
+- **Learned:** neither upstream `SKILL.md` declares `allowed-tools` (frontmatter standard item 2); left unedited because the lock hashes them. `domain-modeling` creates `GLOSSARY.md` and `docs/adr/` lazily — in a project that is a §8.7 change; Eliran's rulings still go to `memory/project/` + `docs/INHERITED-DECISIONS.md`. `DESIGN-IT-TWICE` fans out 3+ sub-agents: main session only, ≤ 5.
+- **Owed / open:** none.
+- **Second reader:** `codebase-cartographer` — two more skill folders and their four context files.

@@ -1,0 +1,22 @@
+ok   desktop S1a x during rise: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   desktop S1b reopen after x-in-rise: visible: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}{"tr":{"kind":"rise","frames":6,"ms":2531,"fps":2.4,"skipped":null},"preset":"3d","held":false}
+ok   desktop S1c settled on 3D preset: {"tr":{"kind":"rise","frames":6,"ms":2531,"fps":2.4,"skipped":null},"preset":"3d"}
+ok   desktop S1 errs: 
+ok   desktop S2 sheet reachable during rise: go button present=true
+ok   desktop S2 open->view in 360: final {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true} expect scene kitchen
+ok   desktop S2 errs: 
+ok   desktop S3 double-click go: final {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true} expect scene kitchen
+ok   desktop S3b two different rooms in 300ms: final {"scene":"dining","hidden":true,"op":"","inert":0,"load":true} expect scene null
+ok   desktop S3b scene is one of the two: dining
+ok   desktop S3 errs: 
+ok   desktop S4 esc during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop S4 esc during dive: tour stays in living (no ghost navigation): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop S4 x during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop S4 x during dive: tour stays in living (no ghost navigation): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop S5 esc during rise: {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop S5 reopen 0.5 s after esc: visible: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}{"kind":"rise","frames":17,"ms":1769,"fps":9.6,"skipped":null}
+ok   desktop S5 errs: 
+ok   desktop S6 open/close spam leaves the tour usable: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   desktop S6 then opens normally: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}
+ok   desktop S6 errs: 
+ok   desktop S7 dive into the room you are in: tour usable: {"scene":"living","hidden":true,"op":"","inert":0,"load":true} yaw before 70.0 after 0.0

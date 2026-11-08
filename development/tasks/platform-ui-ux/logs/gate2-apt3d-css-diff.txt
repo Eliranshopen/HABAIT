@@ -1,0 +1,38 @@
+< .apt-frame { position: relative; width: 100%; border-radius: var(--radius); overflow: hidden; background: #000; border: 1px solid var(--line); }
+< .apt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+< .apt-frame-tour { height: min(68dvh, 620px); }
+< .apt-frame-3d { height: min(60dvh, 560px); }
+< /* board apartment-3d card 04: on phones the opened panel scrolls up under the sticky bars, and the 3D frame fills the
+< .apt-back3d::before { content: '‹'; margin-inline-end: 6px; font-size: 18px; line-height: 0; }
+< [dir="ltr"] .apt-back3d::before { content: '›'; }
+<   .apt-frame-3d { height: calc(100dvh - 57px - 58px - 64px - 24px - var(--safe-top) - var(--safe-bottom)); min-height: 360px; max-height: 640px; }
+<   .apt-brand img:not([hidden]) + span { display: none; } /* phones: the logo alone, room for "back to the building" */
+< /* ---- card 10: the minimap in the corner of the 360 tour (plan-up top view, dot = the camera, cone = the view) ---- */
+< .apt-minimap { position: absolute; z-index: 2; top: 10px; inset-inline-end: 10px; width: clamp(104px, 30vw, 168px); aspect-ratio: 1 / 1;
+< .apt-minimap.is-big { width: clamp(200px, 62vw, 320px); cursor: zoom-out; }
+< .apt-minimap-svg { display: block; width: 100%; height: 100%; }
+< .apt-minimap .mm-node { fill: rgba(255, 255, 255, .55); stroke: rgba(11, 18, 32, .7); stroke-width: 1.5; vector-effect: non-scaling-stroke; cursor: pointer; }
+< .apt-minimap .mm-node.is-here { fill: none; stroke: none; }
+< .apt-minimap .mm-cone { fill: rgba(242, 169, 0, .38); stroke: rgba(242, 169, 0, .9); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+< .apt-minimap .mm-dot { fill: #f2a900; stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+>    platform-ui-ux card 16: on the design tokens — light page outside the media, dark only inside the frames (tour, 3D, lightbox).
+>    Sizes and positions of the 3D tab and the minimap (board apartment-3d) are unchanged; only their colour, radius and type moved
+> .page-apartment .apt-frame, .page-apartment .apt-lightbox {
+> /* title row: unit, status, the summary (rooms · area · floor), price, then the spec grid */
+> .apt-frame { position: relative; width: 100%; border-radius: var(--r-md); overflow: hidden; background: var(--chrome-bg); border: 1px solid var(--line); }
+> .apt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+> .apt-frame-tour { height: min(68dvh, 620px); }
+> .apt-frame-3d { height: min(60dvh, 560px); }
+> /* board apartment-3d card 04: on phones the opened panel scrolls up under the sticky bars, and the 3D frame fills the
+> .apt-back3d::before { content: '‹'; margin-inline-end: 6px; font-size: 18px; line-height: 0; }
+> [dir="ltr"] .apt-back3d::before { content: '›'; }
+>   .apt-frame-3d { height: calc(100dvh - 57px - 58px - 64px - 24px - var(--safe-top) - var(--safe-bottom)); min-height: 360px; max-height: 640px; }
+>   .apt-brand img:not([hidden]) + span { display: none; } /* phones: the logo alone, room for "back to the building" */
+> /* ---- card 10 (board apartment-3d): the minimap in the corner of the 360 tour (plan-up top view, dot = the camera, cone = the view).
+> .apt-minimap { position: absolute; z-index: 2; top: 10px; inset-inline-end: 10px; width: clamp(104px, 30vw, 168px); aspect-ratio: 1 / 1;
+> .apt-minimap.is-big { width: clamp(200px, 62vw, 320px); cursor: zoom-out; }
+> .apt-minimap-svg { display: block; width: 100%; height: 100%; }
+> .apt-minimap .mm-node { fill: color-mix(in srgb, var(--n-0) 55%, transparent); stroke: color-mix(in srgb, var(--chrome-bg) 70%, transparent); stroke-width: 1.5; vector-effect: non-scaling-stroke; cursor: pointer; }
+> .apt-minimap .mm-node.is-here { fill: none; stroke: none; }
+> .apt-minimap .mm-cone { fill: color-mix(in srgb, var(--brand-accent) 38%, transparent); stroke: color-mix(in srgb, var(--brand-accent) 90%, transparent); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+> .apt-minimap .mm-dot { fill: var(--brand-accent); stroke: var(--n-0); stroke-width: 2; vector-effect: non-scaling-stroke; }

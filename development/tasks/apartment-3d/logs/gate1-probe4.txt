@@ -1,0 +1,38 @@
+iphone13 &tab=3d#tour -> 3d (want 3d) ok
+iphone13 #3d -> 3d (want 3d) ok
+iphone13 &tab=photos#bogus -> photos (want photos) ok
+iphone13 #bogus -> tour (want tour) ok
+iphone13 (none) -> tour (want tour) ok
+iphone13 &tab=bogus#bogus -> tour (want tour) ok
+iphone13 #photos -> photos (want photos) ok
+iphone13 &tab=3d -> 3d (want 3d) ok
+iphone13 chip before entry hidden=true
+iphone13 after tab tap: {"tabsBottom":115,"panelTop":115,"sy":235}
+iphone13 tour tab tour, chip visible true, tour src ?scope=apartment&room=kitchen&floor=parquet&video=0&return=http%3A%2F%2F127.0.0.1%3A8899%2F%3Ftour%3Dhttp%253A%252F%252F127.0.0.1%253A8848%252F%253Fscope%253Dapartment%2526room%253DterraceLiving%2526floor%253Dparquet%2526video%253D0%26from%3Dplatform%26project%3Drainbow%26room%3Dtower&from=apartment&sid=985479d3-6f58-44aa-8b6f-8b151b7eeabb&lang=he
+iphone13 fallback: src changed true; room= bedroom2 (stub reports the scene it was loaded with, so the first goto is silently ignored)
+iphone13 errors: none
+pixel7 &tab=3d#tour -> 3d (want 3d) ok
+pixel7 #3d -> 3d (want 3d) ok
+pixel7 &tab=photos#bogus -> photos (want photos) ok
+pixel7 #bogus -> tour (want tour) ok
+pixel7 (none) -> tour (want tour) ok
+pixel7 &tab=bogus#bogus -> tour (want tour) ok
+pixel7 #photos -> photos (want photos) ok
+pixel7 &tab=3d -> 3d (want 3d) ok
+pixel7 chip before entry hidden=true
+pixel7 after tab tap: {"tabsBottom":115,"panelTop":115,"sy":235}
+pixel7 tour tab tour, chip visible true, tour src ?scope=apartment&room=kitchen&floor=parquet&video=0&return=http%3A%2F%2F127.0.0.1%3A8899%2F%3Ftour%3Dhttp%253A%252F%252F127.0.0.1%253A8848%252F%253Fscope%253Dapartment%2526room%253DterraceLiving%2526floor%253Dparquet%2526video%253D0%26from%3Dplatform%26project%3Drainbow%26room%3Dtower&from=apartment&sid=1cfb8ba7-bc42-43bc-896b-fffa35ecc450&lang=he
+pixel7 fallback: src changed true; room= bedroom2 (stub reports the scene it was loaded with, so the first goto is silently ignored)
+pixel7 errors: none
+desktop &tab=3d#tour -> 3d (want 3d) ok
+desktop #3d -> 3d (want 3d) ok
+desktop &tab=photos#bogus -> photos (want photos) ok
+desktop #bogus -> tour (want tour) ok
+desktop (none) -> tour (want tour) ok
+desktop &tab=bogus#bogus -> tour (want tour) ok
+desktop #photos -> photos (want photos) ok
+desktop &tab=3d -> 3d (want 3d) ok
+desktop chip before entry hidden=true
+desktop tour tab tour, chip visible true, tour src ?scope=apartment&room=kitchen&floor=parquet&video=0&return=http%3A%2F%2F127.0.0.1%3A8899%2F%3Ftour%3Dhttp%253A%252F%252F127.0.0.1%253A8848%252F%253Fscope%253Dapartment%2526room%253DterraceLiving%2526floor%253Dparquet%2526video%253D0%26from%3Dplatform%26project%3Drainbow%26room%3Dtower&from=apartment&sid=8e032a08-5d08-4921-bd1c-98a78cabd854&lang=he
+desktop fallback: src changed true; room= bedroom2 (stub reports the scene it was loaded with, so the first goto is silently ignored)
+desktop errors: none

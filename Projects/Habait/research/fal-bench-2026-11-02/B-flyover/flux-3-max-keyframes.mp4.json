@@ -1,0 +1,38 @@
+{
+ "endpoint": "blackforestlabs/flux-3-max/keyframes-to-video",
+ "args": {
+  "keyframes": [
+   {
+    "image_url": "https://v3b.fal.media/files/b/0ab0d326/Gj5d96J4YyUuviSyfWHVk_B_keyframe_s1_first.png",
+    "frame_index": 0
+   },
+   {
+    "image_url": "https://v3b.fal.media/files/b/0ab0d326/VITCDq_Y0tnfo4rY5cLIr_B_keyframe_s1_last_from_ltx.png",
+    "frame_index": 120
+   }
+  ],
+  "prompt": "Aerial drone shot: a slow, steady forward glide with a gentle descent over the Tel Aviv coast toward the Rainbow tower (white undulating curved balconies), the Mediterranean sea and beach on the left, the Reading chimney behind, low white buildings, trees and roads below, soft morning sun. Smooth continuous camera, photoreal, no cuts, no text, no people.",
+  "duration": 5,
+  "resolution": "720p",
+  "generate_audio": false,
+  "aspect_ratio": "16:9"
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0d327/nZLt2p6pFm9tEaTc89MTE_alligator.mp4",
+   "content_type": "video/mp4",
+   "file_name": "nZLt2p6pFm9tEaTc89MTE_alligator.mp4",
+   "file_size": 7994673,
+   "width": 1280,
+   "height": 704,
+   "fps": 24.0,
+   "duration": 5.041666666666667,
+   "num_frames": 121
+  },
+  "seed": 2135400458,
+  "timings": {
+   "inference": 5.073670447105542
+  }
+ },
+ "secs": 18
+}

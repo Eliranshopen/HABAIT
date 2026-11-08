@@ -1,0 +1,16 @@
+# card 09 — open phase B + baseline (2026-11-03 17:19, main session)
+precondition: card 01(b) changed to RELEASE by Eliran ('כן'); rnd-fd released 37 unchanged paths at 17:14 (.wt/apartment-3d manifest: files 198, released 37). Still held there, untouched here: apartment.html, css/apartment.css, js/apartment.js, js/apartment-3d.js, tools/build_zip.mjs, _local/dist/rainbow/846/* and the other platform files it lists.
+added: the 48 paths of logs/c09-paths.txt (178 addable minus test/shots/ test output, kept out so a test run can never be copied back). wt.py: 0 refusals. Manifest: 80 entries, live drift 0.
+held elsewhere, used READ-ONLY: 40 platform files.
+
+runnable tree: .wt/platform-ui-ux/tools/preview.py builds a THROWAWAY tree in the session scratchpad (live platform read-only + this board's working copies on top + three from .wt/apartment-3d read-only, since the live platform has no node_modules, OWED-023). Rebuilt per run, never edited, never copied back.
+
+## baseline, before any edit (PLAYWRIGHT_CORE / HABAIT_APP_DIR = tools/appdeps; Edge headless; one test at a time under timeout)
+test/smoke.mjs: exit 0 · ok 12 · FAIL 0
+test/landing.test.mjs: exit 0 · ok 35 · FAIL 0
+test/apartment.test.mjs: exit 0 · ok 36 · FAIL 0
+test/card-overflow.test.mjs: exit 0 · ok 18 · FAIL 0
+test/browser.mjs http://127.0.0.1:8852: exit 0 · ok 25 · FAIL 0 · 'all green'
+red baseline tests: none
+
+preview: PORT=8852 timeout 540 node serve.mjs (preview tree) -> 200 /, 200 /landing.html?project=rainbow, 200 /apartment.html?project=rainbow&unit=846; killed by PID; 8852 free after.

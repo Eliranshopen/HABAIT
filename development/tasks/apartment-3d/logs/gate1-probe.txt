@@ -1,0 +1,210 @@
+gate1 probe 2026-11-03T14:02:47.530Z
+PASS 176 · FAIL 4
+FAIL pixel7: Top shows 10 labels
+FAIL pixel7: fresh open, auto-rotation turns the model (azimuth 37.12 -> 37.05 in 2.5 s)
+FAIL pixel7: orbit keeps the projected mesh bbox inside the frame at 12 azimuths; worst margin -0.001 @-150.63  [-0.12:0.083 29.79:0.024 59.74:0.074 89.7:0.052 119.26:0.043 149.31:0.090 179.3:0.046 -150.63:-0.001 -120.24:0.015 -90.56:0.047 -60.48:0.059 -30.4:0.096]
+FAIL desktop: fresh open, auto-rotation turns the model (azimuth 37.12 -> 37.09 in 2.5 s)
+ok   iphone13 embedded 3d: projected mesh bbox in frame x 0.04..0.85 y 0.32..0.72
+ok   iphone13 embedded 3d: model under .dh-presets = 0.0% of its area
+ok   iphone13 embedded 3d: model under .cap = 0.0% of its area
+ok   iphone13 embedded top: projected mesh bbox in frame x 0.11..0.89 y 0.17..0.87
+ok   iphone13 embedded top: model under .dh-presets = 0.0% of its area
+ok   iphone13 embedded top: model under .cap = 0.0% of its area
+ok   iphone13 embedded outdoor: projected mesh bbox in frame x 0.04..0.87 y 0.42..0.70
+ok   iphone13 embedded outdoor: model under .dh-presets = 0.0% of its area
+ok   iphone13 embedded outdoor: model under .cap = 0.0% of its area
+ok   iphone13: page no horizontal overflow {"s":390,"w":390,"bs":390}
+ok   iphone13: dollhouse frame no horizontal overflow {"s":360,"w":360}
+ok   iphone13: caption collapsed to a pill ({"open":false,"pillVis":true,"pill":"הדמיה להמחשה בלבד.","shown":["none","none","none"]})
+ok   iphone13: tapping the pill shows legal.short he+en verbatim
+ok   iphone13: Top shows 11 labels
+ok   iphone13: label "כניסה6 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 6.252)
+ok   iphone13: label "כניסה6 מ״ר" inside the frame 78,213,146,229
+ok   iphone13: label "מטבח10 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 10.374)
+ok   iphone13: label "מטבח10 מ״ר" inside the frame 151,168,223,184
+ok   iphone13: label "פינת אוכל9 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 8.946)
+ok   iphone13: label "פינת אוכל9 מ״ר" inside the frame 187,192,275,208
+ok   iphone13: label "סלון31 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 31.051)
+ok   iphone13: label "סלון31 מ״ר" inside the frame 123,261,187,277
+ok   iphone13: label "מרפסת שמש16 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 15.707)
+ok   iphone13: label "מרפסת שמש16 מ״ר" inside the frame 218,240,324,256
+ok   iphone13: label "מרפסת · קצה החדרים3 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 2.978)
+ok   iphone13: label "מרפסת · קצה החדרים3 מ״ר" inside the frame 167,378,309,394
+ok   iphone13: label "חדר שינה הורים12 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 12.188)
+ok   iphone13: label "חדר שינה הורים12 מ״ר" inside the frame 115,338,233,354
+ok   iphone13: label "פינת ארונות5 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 5.135)
+ok   iphone13: label "פינת ארונות5 מ״ר" inside the frame 74,302,170,318
+ok   iphone13: label "חדר רחצה הורים4 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 4.466)
+ok   iphone13: label "חדר רחצה הורים4 מ״ר" inside the frame 25,363,143,379
+ok   iphone13: label "חדר שינה9 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 9.314)
+ok   iphone13: label "חדר שינה9 מ״ר" inside the frame 114,132,198,148
+ok   iphone13: label "חדר רחצה כללי3 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 3.378)
+ok   iphone13: label "חדר רחצה כללי3 מ״ר" inside the frame 177,216,289,232
+ok   iphone13: 0 overlapping label pairs in Top
+ok   iphone13: floor taps correct 10/10 (rooms with a pill-free point)
+ok   iphone13: a 40 px drag does not select
+ok   iphone13: tap on empty space deselects and hides the sheet
+ok   iphone13: Escape hides the sheet
+ok   iphone13: × hides the sheet
+ok   iphone13: r-entrance sheet "כניסה 6 מ״ר צפו ב-360° ×" posts scene entrance
+ok   iphone13: r-kitchen sheet "מטבח 10 מ״ר צפו ב-360° ×" posts scene kitchen
+ok   iphone13: r-dining sheet "פינת אוכל 9 מ״ר צפו ב-360° ×" posts scene dining
+ok   iphone13: r-living sheet "סלון 31 מ״ר צפו ב-360° ×" posts scene living
+ok   iphone13: r-terrace-living sheet "מרפסת שמש 16 מ״ר צפו ב-360° ×" posts scene terraceLiving
+ok   iphone13: r-terrace-bedroom sheet "מרפסת · קצה החדרים 3 מ״ר צפו ב-360° ×" posts scene terraceBedroom
+ok   iphone13: r-bedroom-main sheet "חדר שינה הורים 12 מ״ר צפו ב-360° ×" posts scene bedroomMain
+ok   iphone13: r-wardrobe sheet "פינת ארונות 5 מ״ר צפו ב-360° ×" posts scene wardrobe
+ok   iphone13: r-bath-main sheet "חדר רחצה הורים 4 מ״ר צפו ב-360° ×" posts scene bathMain
+ok   iphone13: r-bedroom-2 sheet "חדר שינה 9 מ״ר צפו ב-360° ×" posts scene bedroom2
+ok   iphone13: r-bath-guest sheet "חדר רחצה כללי 3 מ״ר צפו ב-360° ×" posts scene bathguest
+ok   iphone13: fresh open, auto-rotation turns the model (azimuth 37.12 -> 36.76 in 2.5 s)
+ok   iphone13: orbit keeps the projected mesh bbox inside the frame at 12 azimuths; worst margin 0.005 @-150.64  [-0.46:0.063 29.44:0.024 59.3:0.066 89.11:0.042 119.38:0.040 149.45:0.098 179.21:0.050 -150.64:0.005 -120.48:0.014 -90.96:0.046 -60.8:0.052 -30.64:0.077]
+ok   iphone13: idle -> 0 frames in 2.5 s
+ok   iphone13: idle with a selection -> 0 frames in 2.5 s
+ok   iphone13: floor finishes change the colour via postMessage {"parquet":"[0.4,0.25,0.13]","concrete":"[0.46,0.45,0.42]","marble":"[0.8,0.78,0.74]"}
+ok   iphone13: no page errors 
+ok   pixel7 embedded 3d: projected mesh bbox in frame x 0.04..0.84 y 0.36..0.67
+ok   pixel7 embedded 3d: model under .dh-presets = 0.0% of its area
+ok   pixel7 embedded 3d: model under .cap = 0.0% of its area
+ok   pixel7 embedded top: projected mesh bbox in frame x 0.04..0.96 y 0.20..0.83
+ok   pixel7 embedded top: model under .dh-presets = 0.0% of its area
+ok   pixel7 embedded top: model under .cap = 0.0% of its area
+ok   pixel7 embedded outdoor: projected mesh bbox in frame x 0.04..0.89 y 0.44..0.65
+ok   pixel7 embedded outdoor: model under .dh-presets = 0.0% of its area
+ok   pixel7 embedded outdoor: model under .cap = 0.0% of its area
+ok   pixel7: page no horizontal overflow {"s":412,"w":412,"bs":412}
+ok   pixel7: dollhouse frame no horizontal overflow {"s":382,"w":382}
+ok   pixel7: caption collapsed to a pill ({"open":false,"pillVis":true,"pill":"הדמיה להמחשה בלבד.","shown":["none","none","none"]})
+ok   pixel7: tapping the pill shows legal.short he+en verbatim
+ok   pixel7: label "כניסה6 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 6.252)
+ok   pixel7: label "כניסה6 מ״ר" inside the frame 72,296,140,312
+ok   pixel7: label "מטבח10 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 10.374)
+ok   pixel7: label "מטבח10 מ״ר" inside the frame 164,240,236,256
+ok   pixel7: label "פינת אוכל9 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 8.946)
+ok   pixel7: label "פינת אוכל9 מ״ר" inside the frame 210,270,298,286
+ok   pixel7: label "סלון31 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 31.051)
+ok   pixel7: label "סלון31 מ״ר" inside the frame 127,356,191,372
+ok   pixel7: label "מרפסת שמש16 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 15.707)
+ok   pixel7: label "מרפסת שמש16 מ״ר" inside the frame 251,330,357,346
+ok   pixel7: label "מרפסת · קצה החדרים3 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 2.978)
+ok   pixel7: label "מרפסת · קצה החדרים3 מ״ר" inside the frame 192,411,334,427
+ok   pixel7: label "חדר שינה הורים12 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 12.188)
+ok   pixel7: label "חדר שינה הורים12 מ״ר" inside the frame 124,452,242,468
+ok   pixel7: label "פינת ארונות5 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 5.135)
+ok   pixel7: label "פינת ארונות5 מ״ר" inside the frame 70,412,166,428
+ok   pixel7: label "חדר שינה9 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 9.314)
+ok   pixel7: label "חדר שינה9 מ״ר" inside the frame 118,195,202,211
+ok   pixel7: label "חדר רחצה כללי3 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 3.378)
+ok   pixel7: label "חדר רחצה כללי3 מ״ר" inside the frame 52,270,164,286
+ok   pixel7: 0 overlapping label pairs in Top
+ok   pixel7: floor taps correct 11/11 (rooms with a pill-free point)
+ok   pixel7: a 40 px drag does not select
+ok   pixel7: tap on empty space deselects and hides the sheet
+ok   pixel7: Escape hides the sheet
+ok   pixel7: × hides the sheet
+ok   pixel7: r-entrance sheet "כניסה 6 מ״ר צפו ב-360° ×" posts scene entrance
+ok   pixel7: r-kitchen sheet "מטבח 10 מ״ר צפו ב-360° ×" posts scene kitchen
+ok   pixel7: r-dining sheet "פינת אוכל 9 מ״ר צפו ב-360° ×" posts scene dining
+ok   pixel7: r-living sheet "סלון 31 מ״ר צפו ב-360° ×" posts scene living
+ok   pixel7: r-terrace-living sheet "מרפסת שמש 16 מ״ר צפו ב-360° ×" posts scene terraceLiving
+ok   pixel7: r-terrace-bedroom sheet "מרפסת · קצה החדרים 3 מ״ר צפו ב-360° ×" posts scene terraceBedroom
+ok   pixel7: r-bedroom-main sheet "חדר שינה הורים 12 מ״ר צפו ב-360° ×" posts scene bedroomMain
+ok   pixel7: r-wardrobe sheet "פינת ארונות 5 מ״ר צפו ב-360° ×" posts scene wardrobe
+ok   pixel7: r-bath-main sheet "חדר רחצה הורים 4 מ״ר צפו ב-360° ×" posts scene bathMain
+ok   pixel7: r-bedroom-2 sheet "חדר שינה 9 מ״ר צפו ב-360° ×" posts scene bedroom2
+ok   pixel7: r-bath-guest sheet "חדר רחצה כללי 3 מ״ר צפו ב-360° ×" posts scene bathguest
+ok   pixel7: idle -> 0 frames in 2.5 s
+ok   pixel7: idle with a selection -> 0 frames in 2.5 s
+ok   pixel7: floor finishes change the colour via postMessage {"parquet":"[0.4,0.25,0.13]","concrete":"[0.46,0.45,0.42]","marble":"[0.8,0.78,0.74]"}
+ok   pixel7: no page errors 
+ok   desktop embedded 3d: projected mesh bbox in frame x 0.04..0.87 y 0.16..0.87
+ok   desktop embedded 3d: model under .dh-presets = 0.0% of its area
+ok   desktop embedded 3d: model under .cap = 0.0% of its area
+ok   desktop embedded top: projected mesh bbox in frame x 0.27..0.73 y 0.15..0.88
+ok   desktop embedded top: model under .dh-presets = 0.0% of its area
+ok   desktop embedded top: model under .cap = 0.0% of its area
+ok   desktop embedded outdoor: projected mesh bbox in frame x 0.07..0.82 y 0.37..0.84
+ok   desktop embedded outdoor: model under .dh-presets = 0.0% of its area
+ok   desktop embedded outdoor: model under .cap = 0.0% of its area
+ok   desktop: page no horizontal overflow {"s":1440,"w":1440,"bs":1440}
+ok   desktop: dollhouse frame no horizontal overflow {"s":736,"w":736}
+ok   desktop: caption collapsed to a pill ({"open":false,"pillVis":true,"pill":"הדמיה להמחשה בלבד.","shown":["none","none","none"]})
+ok   desktop: tapping the pill shows legal.short he+en verbatim
+ok   desktop: Top shows 11 labels
+ok   desktop: label "כניסה6 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 6.252)
+ok   desktop: label "כניסה6 מ״ר" inside the frame 240,243,330,269
+ok   desktop: label "מטבח10 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 10.374)
+ok   desktop: label "מטבח10 מ״ר" inside the frame 329,189,425,215
+ok   desktop: label "פינת אוכל9 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 8.946)
+ok   desktop: label "פינת אוכל9 מ״ר" inside the frame 433,218,547,244
+ok   desktop: label "סלון31 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 31.051)
+ok   desktop: label "סלון31 מ״ר" inside the frame 295,302,379,328
+ok   desktop: label "מרפסת שמש16 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 15.707)
+ok   desktop: label "מרפסת שמש16 מ״ר" inside the frame 411,277,547,303
+ok   desktop: label "מרפסת · קצה החדרים3 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 2.978)
+ok   desktop: label "מרפסת · קצה החדרים3 מ״ר" inside the frame 443,395,625,421
+ok   desktop: label "חדר שינה הורים12 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 12.188)
+ok   desktop: label "חדר שינה הורים12 מ״ר" inside the frame 285,396,435,422
+ok   desktop: label "פינת ארונות5 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 5.135)
+ok   desktop: label "פינת ארונות5 מ״ר" inside the frame 235,348,359,374
+ok   desktop: label "חדר רחצה הורים4 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 4.466)
+ok   desktop: label "חדר רחצה הורים4 מ״ר" inside the frame 97,406,247,432
+ok   desktop: label "חדר שינה9 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 9.314)
+ok   desktop: label "חדר שינה9 מ״ר" inside the frame 283,145,393,171
+ok   desktop: label "חדר רחצה כללי3 מ״ר" = name + <bdi>area</bdi> מ״ר (plan 3.378)
+ok   desktop: label "חדר רחצה כללי3 מ״ר" inside the frame 139,199,283,225
+ok   desktop: 0 overlapping label pairs in Top
+ok   desktop: floor taps correct 10/10 (rooms with a pill-free point)
+ok   desktop: a 40 px drag does not select
+ok   desktop: tap on empty space deselects and hides the sheet
+ok   desktop: Escape hides the sheet
+ok   desktop: × hides the sheet
+ok   desktop: r-entrance sheet "כניסה 6 מ״ר צפו ב-360° ×" posts scene entrance
+ok   desktop: r-kitchen sheet "מטבח 10 מ״ר צפו ב-360° ×" posts scene kitchen
+ok   desktop: r-dining sheet "פינת אוכל 9 מ״ר צפו ב-360° ×" posts scene dining
+ok   desktop: r-living sheet "סלון 31 מ״ר צפו ב-360° ×" posts scene living
+ok   desktop: r-terrace-living sheet "מרפסת שמש 16 מ״ר צפו ב-360° ×" posts scene terraceLiving
+ok   desktop: r-terrace-bedroom sheet "מרפסת · קצה החדרים 3 מ״ר צפו ב-360° ×" posts scene terraceBedroom
+ok   desktop: r-bedroom-main sheet "חדר שינה הורים 12 מ״ר צפו ב-360° ×" posts scene bedroomMain
+ok   desktop: r-wardrobe sheet "פינת ארונות 5 מ״ר צפו ב-360° ×" posts scene wardrobe
+ok   desktop: r-bath-main sheet "חדר רחצה הורים 4 מ״ר צפו ב-360° ×" posts scene bathMain
+ok   desktop: r-bedroom-2 sheet "חדר שינה 9 מ״ר צפו ב-360° ×" posts scene bedroom2
+ok   desktop: r-bath-guest sheet "חדר רחצה כללי 3 מ״ר צפו ב-360° ×" posts scene bathguest
+ok   desktop: orbit keeps the projected mesh bbox inside the frame at 12 azimuths; worst margin 0.021 @-120.4  [-0.21:0.052 29.62:0.037 59.53:0.081 89.39:0.055 119.56:0.058 149.39:0.142 179.3:0.102 -150.55:0.073 -120.4:0.021 -90.71:0.058 -60.56:0.055 -30.56:0.105]
+ok   desktop: idle -> 0 frames in 2.5 s
+ok   desktop: idle with a selection -> 0 frames in 2.5 s
+ok   desktop: floor finishes change the colour via postMessage {"parquet":"[0.4,0.25,0.13]","concrete":"[0.46,0.45,0.42]","marble":"[0.8,0.78,0.74]"}
+ok   desktop: no page errors 
+ok   en: #floor=marble applied (marble)
+ok   en: labels in English ["Entrance6 m²","Kitchen10 m²","Dining9 m²","Living room31 m²","Sun terrace16 m²","Terrace, bedroom end3 m²","Main bedroom12 m²","Wardrobe5 m²","Main bathroom4 m²","Bedroom9 m²","Guest bathroom3 m²"] dir=rtl lang=he
+ok   zip has 3d/dollhouse.html (3d\dollhouse.html)
+ok   zip file://: loaded {"loaded":true,"tris":28820,"labs":11,"rooms":11}, 1 requests, 0 non-file: 
+ok   zip: no page errors 
+info iphone13: frame {"x":15,"y":115.953125,"width":360,"height":459} viewport {"width":390,"height":664}
+info iphone13 embedded 3d: overlap {".dh-presets":{"px":0,"frac":0,"rect":[54,10,306,54]},".cap":{"px":0,"frac":0,"rect":[217,424,350,449]},".dh-sheet":null}
+info iphone13 embedded top: overlap {".dh-presets":{"px":0,"frac":0,"rect":[54,10,306,54]},".cap":{"px":0,"frac":0,"rect":[217,424,350,449]},".dh-sheet":null}
+info iphone13 embedded outdoor: overlap {".dh-presets":{"px":0,"frac":0,"rect":[54,10,306,54]},".cap":{"px":0,"frac":0,"rect":[217,424,350,449]},".dh-sheet":null}
+info iphone13: opened caption overlap {".cap":{"px":21692,"frac":0.1623409669211196,"rect":[10,275,350,449]}}
+info iphone13: plan->model shift -7.611,-8.205 spread dx 0.000143419742585138 dz 0.000010259628295372636
+info iphone13: r-wardrobe no pill-free floor point visible
+info iphone13: r-entrance->entrance r-kitchen->kitchen r-dining->dining r-living->living r-terrace-living->terraceLiving r-terrace-bedroom->terraceBedroom r-bedroom-main->bedroomMain r-wardrobe->wardrobe r-bath-main->bathMain r-bedroom-2->bedroom2 r-bath-guest->bathguest
+info iphone13: after setPreset(3d) autoRotate=false
+info pixel7: frame {"x":15,"y":115.953125,"width":382,"height":634} viewport {"width":412,"height":839}
+info pixel7 embedded 3d: overlap {".dh-presets":{"px":0,"frac":0,"rect":[65,10,317,54]},".cap":{"px":0,"frac":0,"rect":[239,599,372,624]},".dh-sheet":null}
+info pixel7 embedded top: overlap {".dh-presets":{"px":0,"frac":0,"rect":[65,10,317,54]},".cap":{"px":0,"frac":0,"rect":[239,599,372,624]},".dh-sheet":null}
+info pixel7 embedded outdoor: overlap {".dh-presets":{"px":0,"frac":0,"rect":[65,10,317,54]},".cap":{"px":0,"frac":0,"rect":[239,599,372,624]},".dh-sheet":null}
+info pixel7: opened caption overlap {".cap":{"px":0,"frac":0,"rect":[10,450,372,624]}}
+info pixel7: plan->model shift -7.611,-8.205 spread dx 0.000143419742585138 dz 0.000010259628295372636
+info pixel7: r-entrance->entrance r-kitchen->kitchen r-dining->dining r-living->living r-terrace-living->terraceLiving r-terrace-bedroom->terraceBedroom r-bedroom-main->bedroomMain r-wardrobe->wardrobe r-bath-main->bathMain r-bedroom-2->bedroom2 r-bath-guest->bathguest
+info pixel7: after setPreset(3d) autoRotate=false
+info desktop: frame {"x":519,"y":365.453125,"width":736,"height":538} viewport {"width":1440,"height":900}
+info desktop embedded 3d: overlap {".dh-presets":{"px":0,"frac":0,"rect":[242,10,494,54]},".cap":{"px":0,"frac":0,"rect":[593,503,726,528]},".dh-sheet":null}
+info desktop embedded top: overlap {".dh-presets":{"px":0,"frac":0,"rect":[242,10,494,54]},".cap":{"px":0,"frac":0,"rect":[593,503,726,528]},".dh-sheet":null}
+info desktop embedded outdoor: overlap {".dh-presets":{"px":0,"frac":0,"rect":[242,10,494,54]},".cap":{"px":0,"frac":0,"rect":[593,503,726,528]},".dh-sheet":null}
+info desktop: opened caption overlap {".cap":{"px":8076,"frac":0.10253936008125952,"rect":[10,419,726,528]}}
+info desktop: plan->model shift -7.611,-8.205 spread dx 0.000143419742585138 dz 0.000010259628295372636
+info desktop: r-terrace-bedroom no pill-free floor point visible
+info desktop: r-entrance->entrance r-kitchen->kitchen r-dining->dining r-living->living r-terrace-living->terraceLiving r-terrace-bedroom->terraceBedroom r-bedroom-main->bedroomMain r-wardrobe->wardrobe r-bath-main->bathMain r-bedroom-2->bedroom2 r-bath-guest->bathguest
+info desktop: after setPreset(3d) autoRotate=false
+info zip contents: 3d panos plan README-he-en.txt stills unit.json 3d\apt846.glb 3d\dollhouse.html panos\01-entrance.webp panos\02-kitchen.webp panos\03-dining.webp panos\04-living.webp panos\05-terrace-living.webp panos\06-terrace-bedroom.webp panos\07-bedroom-main.webp panos\08-wardrobe.webp panos\09-bath-main.webp panos\10-bedroom-2.webp panos\11-bath-guest.webp plan\plan-846.png stills\01-entrance.jpg stills\02-kitchen.jpg stills\03-dining.jpg stills\04-living.jpg stills\05-terrace-living.jpg stills\06-terrace-bedroom.jpg stills\07-bedroom-main.jpg stills\08-wardrobe.jpg stills\09-bath-main.jpg stills\10-bedroom-2.jpg stills\11-bath-guest.jpg
+info zip requests: file:///C:/RnD/development/tasks/apartment-3d/logs/gate1-zip/3d/dollhouse.html

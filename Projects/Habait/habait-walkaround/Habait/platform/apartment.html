@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffcf9">
+<title>Habait · Apartment</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f5c8f'/%3E%3Cpath d='M8 24 Q16 6 24 24' fill='none' stroke='%23f2a900' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/apartment.css">
+<!--HABAIT_APT_CONFIG-->
+</head>
+<body class="page-apartment hb-base">
+<!-- The apartment layer (Eliran 2026-11-02 12:05): its own strip only (the five tabs), no project scenes; "back to the building" returns to the project level. -->
+<header class="apt-top">
+  <a class="apt-brand" id="brand" href="#"><img id="brandLogo" alt="" hidden><span id="brandName">Habait</span></a>
+  <div class="apt-top-actions">
+    <a class="btn btn-ghost apt-back" id="backBtn" href="#" data-i18n="apt.back">חזרה לבניין</a>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="language">EN</button>
+  </div>
+</header>
+
+<main class="apt-main">
+  <section class="apt-hero" aria-live="polite">
+    <div class="apt-hero-head">
+      <h1 id="aptTitle">…</h1>
+      <span class="badge" id="aptStatus" hidden></span>
+      <span class="badge badge-fixture" id="aptFixture" hidden>fixture</span>
+    </div>
+    <p class="apt-summary" id="aptSummary"></p>
+    <p class="apt-project" id="aptProject"></p>
+    <div class="apt-price" id="aptPrice"></div>
+    <dl class="hb-spec apt-spec" id="aptFacts"></dl>
+    <p class="apt-warn" id="aptNotBuilt" hidden data-i18n="apt.notBuilt"></p>
+  </section>
+
+  <nav class="apt-tabs" id="tabs" role="tablist" aria-label="apartment">
+    <button role="tab" type="button" data-tab="tour" id="tab-tour" aria-controls="panel-tour" data-i18n="apt.tab.tour">סיור 360°</button>
+    <button role="tab" type="button" data-tab="plan" id="tab-plan" aria-controls="panel-plan" data-i18n="apt.tab.plan">תכנית</button>
+    <button role="tab" type="button" data-tab="photos" id="tab-photos" aria-controls="panel-photos" data-i18n="apt.tab.photos">תמונות</button>
+    <button role="tab" type="button" data-tab="3d" id="tab-3d" aria-controls="panel-3d" data-i18n="apt.tab.3d">תלת-ממד</button>
+    <button role="tab" type="button" data-tab="about" id="tab-about" aria-controls="panel-about" data-i18n="apt.tab.about">אודות</button>
+  </nav>
+
+  <section class="apt-panel" id="panel-tour" role="tabpanel" aria-labelledby="tab-tour" hidden>
+    <div class="apt-panel-row" id="backTo3dRow" hidden><button type="button" class="btn btn-ghost apt-back3d" id="backTo3d" data-i18n="apt.3d.back">חזרה לתלת-ממד</button></div>
+    <div class="apt-frame apt-frame-tour"><iframe id="tourFrame" title="360" allow="fullscreen; gyroscope; accelerometer; xr-spatial-tracking" allowfullscreen></iframe></div>
+    <div class="apt-panel-row"><a class="btn btn-ghost" id="tourOpen" target="_blank" rel="noopener" data-i18n="apt.tour.open">פתיחה במסך מלא</a></div>
+    <p class="apt-empty" id="tourNone" hidden data-i18n="apt.tour.none"></p>
+    <p class="legal-short"></p>
+  </section>
+
+  <section class="apt-panel" id="panel-plan" role="tabpanel" aria-labelledby="tab-plan" hidden>
+    <a class="apt-plan" id="planLink" target="_blank" rel="noopener"><img id="planImg" alt=""></a>
+    <p class="apt-note" id="planNote"></p>
+    <p class="apt-empty" id="planNone" hidden data-i18n="apt.plan.none"></p>
+    <p class="legal-short"></p>
+  </section>
+
+  <section class="apt-panel" id="panel-photos" role="tabpanel" aria-labelledby="tab-photos" hidden>
+    <div class="apt-grid" id="photoGrid"></div>
+    <p class="apt-empty" id="photosNone" hidden data-i18n="apt.photos.none"></p>
+    <p class="legal-short"></p>
+  </section>
+
+  <section class="apt-panel" id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" hidden>
+    <div class="apt-frame apt-frame-3d"><iframe id="dollFrame" title="3D"></iframe></div>
+    <p class="apt-note" id="dollNote"></p>
+    <p class="apt-empty" id="dollNone" hidden data-i18n="apt.3d.none"></p>
+    <p class="legal-short"></p>
+  </section>
+
+  <section class="apt-panel" id="panel-about" role="tabpanel" aria-labelledby="tab-about" hidden>
+    <h2 data-i18n="apt.about.title">אודות הדירה וההדמיה</h2>
+    <p class="apt-tagline" id="aboutTagline"></p>
+    <dl class="apt-dl" id="aboutFacts"></dl>
+    <h3 data-i18n="apt.about.legal">הכיתוב המשפטי המלא</h3>
+    <div class="legal-full" id="aboutLegal"></div>
+    <p class="apt-note" id="aboutMeta"></p>
+    <p class="legal-short"></p>
+  </section>
+
+  <section class="agent-card" id="agent">
+    <div class="agent-avatar" id="agentAvatar" aria-hidden="true"></div>
+    <div class="agent-id"><b id="agentName"></b><span id="agentRole"></span></div>
+    <div class="agent-actions">
+      <a class="btn btn-whatsapp" id="waBtn" target="_blank" rel="noopener" data-i18n="unit.whatsapp">וואטסאפ</a>
+      <a class="btn btn-ghost" id="callBtn" data-i18n="apt.agent.call">התקשרו</a>
+      <a class="btn btn-ghost" id="mailBtn" hidden data-i18n="apt.agent.email">מייל</a>
+      <a class="btn btn-primary apt-zip" id="zipBtn" href="#"><span data-i18n="apt.zip">הורדת חבילת הדירה (ZIP)</span> <small id="zipSize"></small></a>
+    </div>
+  </section>
+</main>
+
+<footer class="apt-foot">
+  <details>
+    <summary><span class="legal-short-inline" id="footShort"></span> <span class="apt-more" data-i18n="apt.legal.full">הכיתוב המשפטי המלא</span></summary>
+    <div class="legal-full" id="footLegal"></div>
+  </details>
+</footer>
+
+<div class="apt-mobilebar" id="mobileBar">
+  <a class="btn btn-whatsapp" id="waBtn2" target="_blank" rel="noopener" data-i18n="unit.whatsapp">וואטסאפ</a>
+  <a class="btn btn-ghost" id="callBtn2" data-i18n="apt.agent.call">התקשרו</a>
+  <a class="btn btn-ghost" id="zipBtn2" href="#" aria-label="ZIP">ZIP</a>
+</div>
+
+<dialog class="apt-lightbox" id="lightbox">
+  <button class="sheet-close" id="lbClose" type="button" aria-label="close">×</button>
+  <img id="lbImg" alt="">
+  <span class="hb-ai-badge">הדמיה · <bdi>AI-generated</bdi></span>
+  <div class="apt-lb-row">
+    <button class="hud-btn" id="lbPrev" type="button" aria-label="previous">‹</button>
+    <span id="lbCap"></span>
+    <button class="hud-btn" id="lbNext" type="button" aria-label="next">›</button>
+  </div>
+</dialog>
+
+<script type="module" src="js/apartment.js"></script>
+</body>
+</html>

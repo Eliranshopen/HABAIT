@@ -1,0 +1,36 @@
+# card 04 — Studio durations m:ss, costs $0.00, numbers in <bdi>  (2026-11-03 16:42, main session as platform-dev)
+
+## helper assertions: timeout 60 node .wt/platform-ui-ux/tools/c04_assert.cjs <working-copy app.js>
+PASS  fmtDuration(5.041666) -> 0:05
+PASS  fmtDuration(65) -> 1:05
+PASS  fmtDuration(3725) -> 1:02:05
+PASS  fmtDuration(null) -> —
+PASS  fmtDuration(NaN) -> —
+PASS  fmtDuration(59.6) -> 1:00
+PASS  fmtCost(0.1) -> $0.10
+PASS  fmtCost(12.345) -> $12.35
+PASS  fmtCost(0) -> $0.00
+PASS  fmtCost(1.005) -> $1.01
+PASS  fmtCost(null) -> —
+11/11 pass · rounding: half-up on the decimal value (n.toFixed(10) then e2 shift), so 12.345 -> $12.35 and 1.005 -> $1.01
+exit 0
+
+## every duration / cost / number render site in app.js (working copy) and its helper
+42:const durHtml = (sec) => bdi(fmtDuration(sec));
+  line 50: costHtml(e.cap_usd)
+  line 71: <bdi>${pct}%</bdi>
+  line 97: costHtml(d.ledger_usd || 0)
+  line 98: bdi(`${(f.bytes / 1024).toFixed(0)} KB`)
+  line 111: <bdi>${n}</bdi>
+  line 125: durHtml(s.seconds)
+  line 140: costHtml(it._meta.usd || 0)
+  line 153: <bdi>${v.photoreal}/${v.clips.length}</bdi>
+  line 154: durHtml(c.duration_s)
+
+## residual grep (toFixed / raw $ / raw s suffix outside the helpers)
+98:  $('#file-list').innerHTML = d.files.map((f) => `<li><a href="/projects/${d.id}/intake/${encodeURIComponent(f.name)}" target="_blank">${esc(f.name)}</a><span>${bdi(`${(f.bytes / 1024).toFixed(0)} KB`)} <span class="x" data-name="${esc(f.name)}" title="הסר">✕</span></span></li>`).join('') || '<li class="muted">עדיין לא הועלו קבצים</li>';
+  ^ the only toFixed left is inside bdi(...KB) (file size, not a cost/duration) and inside fmtCost
+
+node --check: OK
+Visual check on real data: card 06 (fixture API).
+  line 111 (same line, estimate): costHtml(est), <bdi>${variants}</bdi>, <bdi>${n}</bdi>  — the estimate now shows cents ($X.XX) where it showed whole dollars

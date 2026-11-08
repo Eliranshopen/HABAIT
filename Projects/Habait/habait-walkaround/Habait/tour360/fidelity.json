@@ -1,0 +1,327 @@
+{
+  "$schema": "tour360/fidelity-rule.v2",
+  "max_deviation_pct": 1,
+  "min_finding_deg": 0.35,
+  "strong_gap_below_deg": 3,
+  "max_attempts": 5,
+  "rule": "Eliran Shopen, 2026-11-05: «סטייה נורמלית זה גג עד 2%», then «גם סטייה של 2% זה הרבה, אני רוצה להוריד את אחוז הסטייה למינימלי», and «אם יש סטייה מעל 2% אני גם לא רוצה שתבטל את ההדמייה אלא תעשה הכל כדי שהכל יהיה תקין והכל יופיע כמו בתכנית מכר». A room over max_deviation_pct is NEVER dropped or hidden: the gate's FAIL starts the fix loop, and the package refuses only while a room still fails.",
+  "parameters": {
+    "max_deviation_pct": "the per-room bar: PASS only when deviation_pct <= this AND the gate can resolve it in that room (resolution_pct <= this); the disclosure line carries this same number",
+    "min_finding_deg": "the narrowest run of failing columns that counts as a finding: 0.35 deg = ONE column at 1024 (so that 1% is resolvable in the dining room, whose walls are far); runs narrower than strong_gap_below_deg count only with a gap >= 2x delta, against the depth model's own noise",
+    "strong_gap_below_deg": "see min_finding_deg",
+    "max_attempts": "the fix loop's limit per room before it reports to Eliran; it never ships without the room. 5 since 2026-11-05 (the coordinator: the portal's acceptance run on apt846 needed band repairs beyond 3 — attempt 1 the skin, 2 a regeneration, 3..5 CG-guided band repairs)"
+  },
+  "fix_loop": [
+    "1. fidelity-gate FAIL on a room -> attempt 1: regenerate the skin with the CG render as Image 1 (gen-pano, the room's skin-prompts entry) and gate again",
+    "2. still FAIL -> attempts 2..max_attempts: CG-guided band repairs at the flagged bearings (close-seam --u <bearing u> --band-deg <width> --extra 'inside the band follow Image 2 ...'), each gated",
+    "3. past max_attempts -> stop and report the room's numbers to Eliran; the room is never shipped silently and never dropped: build-tour refuses to package until it passes",
+    "4. a deviation the trace itself carries (trace vs the plan's printed dimensions, UNRESOLVED rows) is fixed in the trace and the CG re-rendered, not in the skin"
+  ],
+  "read_by": [
+    "Habait/tour360/tools/fidelity-gate.mjs (the per-room verdict; --max-deviation-pct / --min-deg override for a probe, never for a ship)",
+    "Habait/tour360/tools/build-tour.mjs (refuses to package while any shipped interior picture lacks a PASS row for its exact bytes, and checks that the disclosure line carries max_deviation_pct)",
+    "the project runner's stepGate (project-runner worktree): pass these values to fidelity-gate.mjs, never a literal"
+  ],
+  "disclosure_line_key": "conceptLine (Habait/tour360/copy/tour360-copy.json): the approved text with this number; true only because the build refuses otherwise",
+  "consistency_judge": {
+    "runs": 3,
+    "verdict": "majority",
+    "keep_every_run": "apartments/<id>/_local/fidelity/consistency.json (every judge run is a row; none is overwritten)",
+    "rule": "The coordinator's ruling 2026-11-05 (option a, reported to Eliran): the vision judge disagrees with itself on unchanged pictures (apt846 bedroom-main: 3 PASS of 5 on the same 07/08 pair; fork B measured judge agreement 0.5-0.67). A group's verdict is the MAJORITY of 3 runs on unchanged pictures; a picture changed between runs restarts the count.",
+    "read_by": [
+      "Habait/tour360/tools/consistency-check.mjs (run it 3 times per group; the runner's consistency step does the same)"
+    ],
+    "render_context": true,
+    "render_rule": "R27 (the coordinator's ruling 2026-11-06): each photo is judged beside its OWN final render from the same viewpoint (apartment.json sets.original.cg_tour); the judge reports only differences the renders do not explain (furniture, materials, colours, fixtures, and architecture that departs from its own render). View-dependent architecture (a square corner with a doorway from the entrance, the rounded end from the living room) is not an inconsistency. Not a weaker judge: a photo that departs from its own render is still reported."
+  },
+  "band_edge": {
+    "max_structure": 5,
+    "max_line_step_px": 4,
+    "rule": "R25 (2026-11-05, the coordinator's order after Eliran found a visible cut in the LIVE 02-kitchen): no visible band edge ships. close-seam v3 (tools/band_blend.py) records per cut the structure left where the repaint meets the picture (<picture>.seam.json); fidelity-gate FAILS a picture whose repair chain has a cut above max_structure, or a v1/v2 composite (no readable cut) not listed in eye_cleared. Calibrated on apt846 crops 2026-11-05: visible cuts measured 5.4-12.1 (a sofa split, a doubled TV, an armchair cut, a counter step at 5.73); clean cuts 1.2-4.7. R25b (the coordinator, 2026-11-05 late, after a 12-px skirting step scored 1.8 on structure): at each cut every near-horizontal line both pictures carry (skirting, counter edge, shelf, wall-ceiling line) is matched between the picture and the repaint (normalised correlation >= 0.7); a step >= max_line_step_px FAILS. Calibrated: the skirting step 5 px, clean cuts 0-3 px.",
+    "eye_cleared": [
+      {
+        "file": "01-entrance__seam__s7__7c8ec9192b80.png",
+        "date": "2026-11-05",
+        "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/audit-edges-a.jpg (row 1: every band edge of the chain, u 0.856/0.889, 0.015/0.025, 0.8815/0.9065)"
+      },
+      {
+        "file": "04-living__seam__s7__be3f4415cbe4.png",
+        "date": "2026-11-05",
+        "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/audit-edges-b.jpg (u 0.108/0.292, 0.144/0.162, 0.174-0.256); its last band 0.842/11 was re-composited with v3 (04-living__seam3__s7__01439b6acd84, z04v3d.jpg)"
+      },
+      {
+        "file": "05-terrace-living__seam__s7__25544ee1a5cf.png",
+        "date": "2026-11-05",
+        "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/audit-edges-a.jpg (row 3: u 0.983/0.017)"
+      },
+      {
+        "file": "07-bedroom-main__seam__s7__fbd17cbb7b8c.png",
+        "date": "2026-11-05",
+        "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/audit-edges-a.jpg (row 4: u 0.1/0.24, 0.122/0.278)"
+      },
+      {
+        "file": "08-wardrobe__seam__s7__067ab7558cd8.png",
+        "date": "2026-11-05",
+        "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/audit-edges-a.jpg (row 5: u 0.518/0.602)"
+      },
+      {
+        "file": "08-wardrobe__seam__s7__0fadfdc0dc8f.png",
+        "date": "2026-11-05",
+        "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/z08c.jpg (the concrete finish's band 0.655/9: edges on the door jamb, u 0.6425/0.6675)"
+      }
+    ],
+    "read_by": [
+      "Habait/tour360/tools/band-lineage.mjs (called by fidelity-gate.mjs for every judged picture)",
+      "Habait/tour360/tools/close-seam.mjs + band_blend.py (write the sidecar)"
+    ]
+  },
+  "ref_scale": {
+    "tolerances": {
+      "transplant": 0.1,
+      "builtin": 0.15,
+      "loose": 0.25
+    },
+    "rule": "R28 (the coordinator's ruling 2026-11-06, after fork F found a --ref repair transplanting the reference's close-up at the wrong scale while the depth gate passed it at 0.19%): (a) every --ref band repair: the object's apparent width AFTER the repair vs BEFORE it (the same picture), +-10% (close-seam runs it after every --ref repair and writes it into the sidecar; band-lineage fails a --ref band without its PASS); (b) built-in, plan-dimensioned elements (kitchen run/column, wardrobes, vanities) vs the final render: +-15%; (c) loose furniture vs the final render: +-25%, with the R27 judge. Calibrated 2026-11-06: designed loose furniture runs 10-16% wider than the render's placeholder blocks; boxes are ~10% noisy.",
+    "read_by": [
+      "Habait/tour360/tools/ref-scale-check.mjs",
+      "Habait/tour360/tools/close-seam.mjs",
+      "Habait/tour360/tools/band-lineage.mjs"
+    ],
+    "near_camera_rule": "A camera-to-object distance under ~1.5 m uses the 1% depth gate as the authority: at that range the box widths of a vision call exaggerate (perspective, the object cut by the frame), so an R28 ratio there is reported, not enforced (the coordinator's ruling 2026-11-06).",
+    "exceptions": [
+      {
+        "file": "02-kitchen__seam3__s7__dfeeee8ac056.png",
+        "class": "builtin",
+        "ratio": "1.244-1.353",
+        "reason": "the coordinator's ruling 2026-11-06: the fridge is correct by eye, left of the sink as in the render; depth gate 0.24%; the column stands ~1 m from the kitchen camera, where R28's box widths are a measurement limit, not a transplant",
+        "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/fridge-02-kitchen-r28-exception.jpg"
+      }
+    ]
+  },
+  "image_models": {
+    "defaults": {
+      "finish": "nano-banana-2",
+      "repaint": "gpt25-high",
+      "regen": "gpt25-high"
+    },
+    "bakeoff_2026_11_06": {
+      "finish": {
+        "task": "02-kitchen parquet on the passing source (dfee), gated at the shipped webp (1%, R25) + eye",
+        "rows": [
+          {
+            "model": "seedream-4.5",
+            "usd": 0.04,
+            "direct": "FAIL 12.58%",
+            "floor_composite": "FAIL 32.42%",
+            "eye": "moves the camera"
+          },
+          {
+            "model": "gpt25-low",
+            "usd": 0.06,
+            "direct": "PASS 0.24%",
+            "floor_composite": "PASS 0.24%",
+            "eye": "grey patches of the old floor at the cabinet base"
+          },
+          {
+            "model": "nano-banana-2",
+            "usd": 0.08,
+            "direct": "PASS 0.24%",
+            "floor_composite": "PASS 0.24%",
+            "eye": "clean; kitchen kept"
+          },
+          {
+            "model": "flux-2-pro",
+            "usd": 0.13,
+            "direct": "PASS 0.24%",
+            "floor_composite": "PASS 0.24%",
+            "eye": "repaints the kitchen as white doors (direct), its fronts bleed into the composite"
+          },
+          {
+            "model": "gpt25-medium",
+            "usd": 0.2,
+            "direct": "not recorded",
+            "floor_composite": "not recorded",
+            "eye": "-"
+          }
+        ]
+      },
+      "regen": {
+        "task": "01-entrance fresh skin (fridge named), seed 50",
+        "rows": [
+          {
+            "model": "nano-banana-2",
+            "usd": 0.08,
+            "gate": "FAIL 14.64%",
+            "fridge_vs_render": "0.789 FAIL"
+          },
+          {
+            "model": "gpt25-medium",
+            "usd": 0.2,
+            "gate": "FAIL 7.51%",
+            "fridge_vs_render": "0.668 FAIL"
+          }
+        ]
+      },
+      "repaint": "not tested (budget); gpt25-high stays"
+    },
+    "rule": "R30 (Eliran 2026-11-06: «תבחר מודלים מ-FAL יותר זולים אבל עם תוצאה מושלמת»): the model per task type is data here, read by finish-pano / gen-pano (tools/image-models.mjs keys); a bake-off row is the evidence for each default. A floor-only composite (R26) is valid only when the pick grew from the finish's own source (fork F, 2026-11-06: after a regeneration the old floor does not fit under moved furniture)."
+  },
+  "known_deviations": [
+    {
+      "asset": "01-entrance",
+      "picture": "01-entrance__seam3__s7__b9673fc3c010.png (skin gpt25 s51)",
+      "what": "the integrated fridge sits tight against the white wall end and reads larger; the final render has the open passage (~90 cm) first and the fridge set back against the kitchen run",
+      "status": "shipped by the coordinator's ruling 2026-11-06 (better than a missing fixture; two regenerations, s51 and s52, both placed it this way) - for the coordinator's review",
+      "evidence": "Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/regen01-s51-vs-render.jpg",
+      "marker_avoid": {
+        "fixture": "k-tall",
+        "bearing_deg": [
+          55,
+          76
+        ],
+        "above_pitch_deg": -34,
+        "source": "measured on the shipped picture 2026-11-06 (qa-evidence/tour360/fix-846-fidelity-2026-11-05/hotspots-2026-11-06/moved-markers.jpg, row 2 left): the fridge column spans u 0.361-0.412 (plan bearing 56-74 deg) down to pitch -33 deg; R23b keeps hotspot markers off it (tools/hotspot-hit.mjs)"
+      }
+    }
+  ],
+  "consistency_checklist": {
+    "rule": "R31 + R32 (2026-11-06, the coordinator after Eliran found on the LIVE tour 04-living's kitchen with upper cabinets, a straight run and no stainless while 02/03 show open curved shelves on stainless — the R27 judge passed that group 3/3 — and 02's sink seemingly beside the fridge). The consistency verdict is deterministic code over fixed fields, never the judge's free text: (R32) per view the judge fills the group's checklist; every field must agree across the views that see it and match what the data expects (plan-derived defaults + apartments/<id>/consistency-expect.json); any mismatch = FAIL; (R31) the hob, sink and tall column positions become along-run offsets in cm and the gaps are checked against the plan's. judge.same and differences are kept as notes only.",
+    "read_by": [
+      "Habait/tour360/tools/consistency-check.mjs (deterministic(); --recheck <rows|last> re-applies it to cached answers at $0)"
+    ],
+    "spacing": {
+      "pairs": [
+        [
+          "sink",
+          "tall"
+        ],
+        [
+          "hob",
+          "sink"
+        ]
+      ],
+      "tol_cm": 30,
+      "grazing_deg": 20,
+      "bearing_noise_deg": 3,
+      "note": "x → bearing → the ray meets the run line (the sink's counter, its longest edge) through the fixture's plan point; the along-run gap between two fixtures vs the plan's. Hand measurement noise on the 2026-11-06 kitchen views was about ±15-20 cm, hence ±30. A ray within 20° of the run line is skipped. Each pair's tolerance = tol_cm + the along-run shift a ±bearing_noise_deg misreading of x causes for both fixtures (root-sum-square), so a far, oblique view gets a wider band and a near, square view a tight one."
+    },
+    "kitchen": {
+      "fields": {
+        "upper_cabinets": {
+          "values": [
+            "yes",
+            "no"
+          ],
+          "ask": "closed upper wall cabinets (cupboards with doors) mounted on the wall above the worktop anywhere on the run"
+        },
+        "shelves_open": {
+          "values": [
+            "yes",
+            "no"
+          ],
+          "ask": "open shelves (no doors) on the wall above the worktop"
+        },
+        "shelves_shape": {
+          "values": [
+            "curved",
+            "straight",
+            "none"
+          ],
+          "ask": "the open shelves' shape seen from above: curved (rounded or curved ends/fronts) or straight; none when there are no open shelves"
+        },
+        "backsplash": {
+          "values": [
+            "stainless",
+            "stone",
+            "tile",
+            "glass",
+            "paint",
+            "wood",
+            "none"
+          ],
+          "ask": "the wall finish between the worktop and whatever is above it"
+        },
+        "tall_type": {
+          "values": [
+            "fridge",
+            "oven",
+            "storage"
+          ],
+          "ask": "what the tall column visibly IS: fridge (full-height flush doors, a fridge-freezer), oven (built-in ovens at eye height), storage (plain doors, no appliance)"
+        },
+        "tall_front": {
+          "values": [
+            "same_as_run",
+            "stainless",
+            "glass",
+            "other"
+          ],
+          "ask": "the tall column's fronts: the same lacquer panels as the run's base fronts, stainless steel, glass, or other"
+        },
+        "oven_visible": {
+          "values": [
+            "yes",
+            "no"
+          ],
+          "ask": "a built-in oven front (a dark glass door with a handle or a control strip) is visible anywhere in the kitchen",
+          "requires": [
+            "hob_x"
+          ]
+        },
+        "oven_where": {
+          "values": [
+            "under_hob",
+            "tall_column",
+            "elsewhere",
+            "none"
+          ],
+          "ask": "where that oven is: directly under the hob, in the tall column, elsewhere, or none when no oven is visible",
+          "requires": [
+            "hob_x"
+          ]
+        },
+        "sink_fridge_gap_units": {
+          "type": "number",
+          "tol": 1,
+          "ask": "how many base-cabinet fronts (a door or a drawer stack, each about 60 cm wide) lie between the sink bowl and the tall column; 0 = the sink is right next to the column; null when the sink or the column is not visible",
+          "requires": [
+            "sink_x",
+            "tall_x"
+          ]
+        }
+      }
+    },
+    "default": {
+      "fields": {
+        "colour_family": {
+          "values": [
+            "white",
+            "cream_beige",
+            "sand_grey",
+            "grey",
+            "black",
+            "light_wood",
+            "dark_wood",
+            "metal",
+            "other"
+          ],
+          "ask": "the element's main colour family"
+        },
+        "material": {
+          "values": [
+            "lacquer",
+            "wood",
+            "stone",
+            "fabric",
+            "leather",
+            "metal",
+            "glass",
+            "tile",
+            "other"
+          ],
+          "ask": "the element's main material"
+        }
+      }
+    }
+  }
+}

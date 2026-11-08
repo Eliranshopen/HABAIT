@@ -1,0 +1,22 @@
+ok   iphone13 S1a x during rise: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   iphone13 S1b reopen after x-in-rise: visible: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}{"tr":{"kind":"rise","frames":9,"ms":1822,"fps":4.9,"skipped":null},"preset":"3d","held":false}
+ok   iphone13 S1c settled on 3D preset: {"tr":{"kind":"rise","frames":9,"ms":1822,"fps":4.9,"skipped":null},"preset":"3d"}
+ok   iphone13 S1 errs: 
+ok   iphone13 S2 sheet reachable during rise: go button present=true
+ok   iphone13 S2 open->view in 360: final {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true} expect scene kitchen
+ok   iphone13 S2 errs: 
+ok   iphone13 S3 double-click go: final {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true} expect scene kitchen
+ok   iphone13 S3b two different rooms in 300ms: final {"scene":"dining","hidden":true,"op":"","inert":0,"load":true} expect scene null
+ok   iphone13 S3b scene is one of the two: dining
+ok   iphone13 S3 errs: 
+ok   iphone13 S4 esc during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   iphone13 S4 esc during dive: tour stays in living (no ghost navigation): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   iphone13 S4 x during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   iphone13 S4 x during dive: tour stays in living (no ghost navigation): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   iphone13 S5 esc during rise: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   iphone13 S5 reopen 0.5 s after esc: visible: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}{"kind":"rise","frames":18,"ms":1806,"fps":10,"skipped":null}
+ok   iphone13 S5 errs: 
+ok   iphone13 S6 open/close spam leaves the tour usable: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   iphone13 S6 then opens normally: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}
+ok   iphone13 S6 errs: 
+ok   iphone13 S7 dive into the room you are in: tour usable: {"scene":"living","hidden":true,"op":"","inert":0,"load":true} yaw before 70.0 after 0.0

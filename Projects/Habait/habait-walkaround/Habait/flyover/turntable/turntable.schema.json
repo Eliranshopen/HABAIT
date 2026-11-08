@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "habait.turntable.v0",
+  "title": "turntable.json: 72-frame availability spinner (card 21). Points are pixels of a width x height frame, origin top-left.",
+  "type": "object",
+  "required": ["schema", "width", "height", "step_deg", "frames"],
+  "properties": {
+    "schema": {"type": "string", "enum": ["habait.turntable.v0"]},
+    "width": {"type": "integer", "enum": [1280]},
+    "height": {"type": "integer", "enum": [720]},
+    "step_deg": {"type": "integer", "enum": [5]},
+    "frames": {
+      "type": "array", "minItems": 72, "maxItems": 72,
+      "items": {
+        "type": "object",
+        "required": ["src", "angle", "hotspots"],
+        "properties": {
+          "src": {"type": "string", "pattern": "[0-9]{3}\\.webp"},
+          "angle": {"type": "integer", "minimum": 0, "maximum": 355},
+          "hotspots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["unit", "floor", "status", "points"],
+              "properties": {
+                "unit": {"type": "string"},
+                "floor": {"type": "integer"},
+                "status": {"type": "string", "enum": ["available", "for-sale", "reserved", "sold"]},
+                "points": {"type": "string", "pattern": "-?[0-9]+,-?[0-9]+( -?[0-9]+,-?[0-9]+){3,}"},
+                "labelPoints": {"type": "string", "pattern": "-?[0-9]+,-?[0-9]+"},
+                "visible_frac": {"type": ["number", "null"]}
+              }
+            }
+          },
+          "floors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["floor", "points"],
+              "properties": {
+                "floor": {"type": "integer"},
+                "points": {"type": "string", "pattern": "-?[0-9]+,-?[0-9]+( -?[0-9]+,-?[0-9]+){3,}"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

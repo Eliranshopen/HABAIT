@@ -1,0 +1,6 @@
+touchAction pan-y
+horizontal 140px 12 steps no wait: az 37.02->35.34 polar 50.61->50.61 events {"pointerdown":1,"touchstart":1,"pointermove":12,"touchmove":11,"pointerup":1}
+SAME with touch-action:none (diagnostic): az 35.34->33.02 polar 50.61->50.61 events {"pointerdown":1,"touchstart":1,"pointermove":12,"touchmove":11,"pointerup":1}
+horizontal 140px 12 steps 16ms: az 33.02->30.58 polar 50.61->50.61 events {"pointerdown":1,"touchstart":1,"pointermove":12,"touchmove":11,"pointerup":1}
+diag 140,20 steps 16ms: az 30.58->28.1 polar 50.61->50.61 events {"pointerdown":1,"touchstart":1,"pointermove":12,"touchmove":11,"pointerup":1}
+vertical 120px 16ms: az 28.1->25.63 polar 50.61->50.61 events {"pointerdown":1,"touchstart":1,"pointermove":12,"touchmove":11,"pointerup":1}

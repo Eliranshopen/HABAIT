@@ -1,0 +1,29 @@
+# card 16 — the apartment page frame (2026-11-03 21:57, main session as platform-dev)
+precondition: apartment-3d CLOSED 19:40 (rnd-fd); 40 freed platform files added (logs/c16-paths.txt). tools/build_zip.mjs (never changed here) released back to rnd-fd at its request (manifest 'released' key) so it can copy tokens/components/fonts into the apartment dist.
+apartment.html: data-theme light; preload Heebo + tokens.css + components.css before style.css; title row + #aptSummary; #aptFacts is now an hb-spec <dl>; phone CTA bar gets #zipBtn2. js/apartment.js (page level only): title and summary with <bdi>, spec grid, status as hb-chip, zipBtn2 = the same target/handler as zipBtn. css/apartment.css on the tokens (light page, dark frames; 3D/minimap sizes unchanged). style.css: the temporary .page-apartment --line alias removed.
+kept on purpose: apartment.js keeps its own DEV line — importing js/dev.js would break the standalone dist/ZIP, whose JS list build_zip.mjs fixes. 'חזרה לבניין' (#backBtn) existed and keeps its target.
+js/apartment-3d.js: working copy sha256 == sha256_at_open (untouched).
+
+## desk: console errors 0 · 4xx [] · 'Failed to construct URL' False · h-scroll False
+  title דירה <bdi>846</bdi> · summary <bdi>4</bdi> חדרים · <bdi>118</bdi> מ״ר · קומה <bdi>16</bdi> · spec cells 4 (bdi 4) · status hb-chip hb-chip--available למכירה · zipBtn2 href http://buyer.test:8852/_local/dist/rainbow/846/846.zip
+  tab tour: media top/bottom [216, 828] · CTA bar None · overlap 0 px
+  tab plan: media top/bottom [106, 828] · CTA bar None · overlap 0 px
+  tab photos: media top/bottom [-843, 828] · CTA bar None · overlap 0 px
+  tab 3d: media top/bottom [288, 828] · CTA bar None · overlap 0 px
+  tab about: media top/bottom [503, 828] · CTA bar None · overlap 0 px
+## phone: console errors 0 · 4xx [] · 'Failed to construct URL' False · h-scroll False
+  title דירה <bdi>846</bdi> · summary <bdi>4</bdi> חדרים · <bdi>118</bdi> מ״ר · קומה <bdi>16</bdi> · spec cells 4 (bdi 4) · status hb-chip hb-chip--available למכירה · zipBtn2 href http://buyer.test:8852/_local/dist/rainbow/846/846.zip
+  tab tour: media top/bottom [198, 772] · CTA bar [775, 844] · overlap 0 px
+  tab plan: media top/bottom [379, 772] · CTA bar [775, 844] · overlap 0 px
+  tab photos: media top/bottom [-2286, 772] · CTA bar [775, 844] · overlap 0 px
+  tab 3d: media top/bottom [132, 772] · CTA bar [775, 844] · overlap 0 px
+  tab about: media top/bottom [156, 772] · CTA bar [775, 844] · overlap 0 px
+at 390 every tab's media, scrolled fully into view (scrollIntoView block end, which honours the page's scroll-padding), ends at 772 and the bar starts at 775: 0 px overlap. At 1440 the bar is not shown.
+
+## tests (preview tree)
+test/smoke.mjs: ok 12 · FAIL 0
+test/apartment.test.mjs: ok 36 · FAIL 0
+test/landing.test.mjs: ok 35 · FAIL 0
+test/card-overflow.test.mjs: ok 18 · FAIL 0
+test/browser.mjs: ok 25 · all green True
+frames: .wt/platform-ui-ux/after/c16/{desk,phone}_{tour,plan,photos,3d,about,top_full}.png

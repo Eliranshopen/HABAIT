@@ -1,0 +1,62 @@
+# C:\RnD — harness repo, branch main (Eliran, 2026-11-04)
+
+# Secrets — never tracked (root §8.1)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# The Habait product — folded into this repo 2026-11-04 (Eliran: one repo; plan development/plans/2026-11-04-one-git-repo.md).
+# Its old .git is archived at C:\Habait-git-archive-2026-11-04. habait-walkaround/ keeps its own .gitignore.
+# Outside habait-walkaround/, only code and text enter git; tools and media stay on disk.
+Projects/Habait/tools/
+Projects/Habait/research/**
+Projects/Habait/mix/**
+Projects/Habait/development/**
+!Projects/Habait/research/**/
+!Projects/Habait/mix/**/
+!Projects/Habait/development/**/
+!Projects/Habait/research/**/*.md
+!Projects/Habait/research/**/*.html
+!Projects/Habait/research/**/*.js
+!Projects/Habait/research/**/*.mjs
+!Projects/Habait/research/**/*.cjs
+!Projects/Habait/research/**/*.css
+!Projects/Habait/research/**/*.json
+!Projects/Habait/research/**/*.py
+!Projects/Habait/research/**/*.txt
+!Projects/Habait/mix/**/*.md
+!Projects/Habait/development/**/*.md
+!Projects/Habait/development/**/*.json
+!Projects/Habait/development/**/*.jsonl
+# Dated backup / archive copies (root §8.6)
+*-backup-????-??-??/
+*-archive-????-??-??/
+
+# Working folders: copies of project files, not the record (root §8.7)
+.wt/*
+# ...but its context file holds the §8.7 procedure (moved from root CLAUDE.md 2026-11-04) — tracked
+!.wt/CLAUDE.md
+
+# Vendor and build output
+node_modules/
+__pycache__/
+.venv/
+venv/
+dist/
+build/
+.next/
+.cache/
+
+# Bulky board logs: frame dumps and raw command output
+development/tasks/*/logs/**/frames/
+*.out
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# the executor's working folder (run-job.mjs: downloads, renders, logs per project) — build output, never committed
+Projects/Habait/habait-walkaround/Habait/tour360/out/

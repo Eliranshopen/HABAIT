@@ -1,0 +1,5 @@
+# Re-sync summary (task 09 step 2) — 2026-11-03
+
+- Precondition met: `habait-da` gone from ListAgents, all 8 ports quiet, no process from `C:\Habait` (a new idle session `habait-f6` appeared 1 min before; not writing).
+- robocopy re-sync: 29,571 files seen, **268 copied** (107 Newer from the live session — flow.js, flow-cine.test.mjs, platform/_local/events.jsonl and 104 test screenshots — plus **161 Older**), 1 extra (`REPOINTED.md`, ours, kept), 0 failed. Log `logs/resync-all.log`.
+- ⚠ **Defect found and corrected:** robocopy copies *Older* source files by default, so the 161 files re-pointed in task 06 (dest newer than source) were overwritten with the source text. Fix: `repoint.py --apply` re-run on the copy (`logs/repoint-after-resync.md`), the provenance note re-added to the copied `CLAUDE.md`, `REPOINTED.md` regenerated. **Lesson, binding for any future re-sync: add `/XO` (exclude older) so re-pointed files are never reverted.** Verification 2 treats the files listed in `REPOINTED.md` as expected hash/size differences.

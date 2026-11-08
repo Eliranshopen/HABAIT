@@ -1,0 +1,27 @@
+256c256,265
+<     $('aptTitle').textContent = t('apt.title', { unit: U.id });
+---
+>     // platform-ui-ux card 16: title + summary with every number in <bdi>
+>     const withBdi = (node, text, value) => { const [pre, post] = text.split('\u0000'); const b = document.createElement('bdi'); b.textContent = String(value); node.replaceChildren(pre, b, post ?? ''); };
+>     withBdi($('aptTitle'), t('apt.title', { unit: '\u0000' }), U.id);
+>     const sum = $('aptSummary'); sum.replaceChildren();
+>     for (const [k, v, unit] of [['apt.fact.rooms', U.rooms], ['apt.fact.area', U.area_m2, true], ['apt.fact.floor', U.floor]]) {
+>       if (v === undefined || v === null) continue;
+>       if (sum.childNodes.length) sum.append(' · ');
+>       const b = document.createElement('bdi'); b.textContent = String(v);
+>       if (k === 'apt.fact.floor') sum.append(`${t(k)} `, b); else sum.append(b, ` ${t(k)}`);
+>     }
+260c269,270
+<     if (U.status) { st.hidden = false; st.className = `badge badge-${U.status}`; st.textContent = t(`status.${U.status}`); }
+---
+>     const CHIP = { 'for-sale': 'hb-chip--available', reserved: 'hb-chip--reserved', sold: 'hb-chip--sold' };
+>     if (U.status) { st.hidden = false; st.className = `hb-chip ${CHIP[U.status] || ''}`; st.textContent = t(`status.${U.status}`); }
+264c274,275
+<     $('aptFacts').innerHTML = unitFacts().map(([k, v]) => `<div class="fact"><b>${v}</b><span>${t(k)}</span></div>`).join('');
+---
+>     // the spec grid (components.css .hb-spec): label + value, numbers in <bdi>
+>     $('aptFacts').replaceChildren(...unitFacts().map(([k, v]) => { const d = document.createElement('div'); const dt = document.createElement('dt'); dt.textContent = t(k); const dd = document.createElement('dd'); const b = document.createElement('bdi'); b.textContent = String(v); dd.append(b); d.append(dt, dd); return d; }));
+527a539,541
+>   const zipBtn2 = $('zipBtn2');
+>   if (zipBtn2) { if (m.zip?.src) { zipBtn2.href = zipBtn.href; zipBtn2.setAttribute('download', zipBtn.getAttribute('download')); }
+>     zipBtn2.addEventListener('click', (e) => { e.preventDefault(); zipBtn.click(); }); }

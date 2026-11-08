@@ -1,0 +1,38 @@
+{
+ "endpoint": "krea/v3/edit",
+ "args": {
+  "prompt": "<image-1> is a 360-degree equirectangular panorama (2:1) of a room in an apartment. Return the SAME equirectangular panorama with EXACTLY the same projection, framing and geometry: every wall, ceiling, window, glass slider, wardrobe, kitchen unit, sanitary fixture and piece of furniture at exactly the same pixel position, the same light and colours, nothing added, removed, moved or resized. Change ONLY these finishes: (1) the floor everywhere becomes a wide-plank natural oak parquet floor, matte, pale honey tone, long planks laid lengthwise, no gloss, one continuous surface with no grout lines and no tiles (in bathrooms and on terraces the same floor); (2) every interior door becomes a zero-line flush door in cream, frameless, no architrave, no panels, with a slim matte black lever (a dark blue or wooden door too); (3) remove every skirting board so the floor meets the walls in a clean line; (4) where a kitchen is visible its cabinetry continues to the end of its wall with matching handleless sand-grey lacquer fronts, no bare wall strip. Photoreal, sharp, a very high-end luxury finish. No people, no text, no logos.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d327/CE9p2nXr7TibLT32xvgJc_C_pano_04-living_src.png"
+  ],
+  "image_size": {
+   "width": 2048,
+   "height": 1024
+  },
+  "reasoning_level": "high",
+  "model": "berry",
+  "output_format": "png"
+ },
+ "result": {
+  "images": [
+   {
+    "url": "https://v3b.fal.media/files/b/0ab0d330/E5B8tQNhqjQPp4aoCeLcw.png",
+    "content_type": "image/png",
+    "file_name": null,
+    "file_size": null,
+    "width": 2048,
+    "height": 1024
+   }
+  ],
+  "seed": 968628394,
+  "prompt": "The 360-degree equirectangular panorama in <image-1> maintains its exact projection, geometry, lighting, and furniture placement with updated architectural finishes. Every floor surface across the interior, kitchen, hallway, and outdoor terrace is a continuous, matte, pale-honey wide-plank natural oak parquet with long planks laid lengthwise and no tiles or grout lines. All skirting boards are removed so walls meet the oak floor in a clean line. On the far left, both the dark blue-grey door and the recessed white paneled door beside it are replaced with frameless, zero-line cream flush doors with no architraves or panels and slim matte black levers, matching the flush door to the right of the TV wall. In the left kitchen, the handleless sand-grey lacquer cabinetry extends seamlessly to the end of its wall with no bare wall strip. All furniture, rugs, curtains, windows, plants, lighting, and colors stay identical to <image-1>.",
+  "timings": {
+   "prompt_expansion": 70.382,
+   "inference": 11.365031040040776
+  },
+  "has_nsfw_concepts": [
+   false
+  ]
+ },
+ "secs": 93
+}

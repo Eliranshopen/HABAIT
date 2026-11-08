@@ -1,0 +1,18 @@
+# grep per card 05 (task text)
+exit 1
+# broader grep (own): physical props incl. border-left/right, float, translateX, inset-*, left/right with no colon-space
+css/tokens.css:83:@media (min-width: 720px) { :root { --gutter: var(--sp-8); } }
+css/components.css:14:  line-height: var(--lh-body);
+css/components.css:25:.hb-display { font-family: var(--font-display); font-weight: var(--fw-medium); font-size: var(--fs-display); line-height: var(--lh-display); margin: 0; text-wrap: balance; }
+css/components.css:26:.hb-h1 { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h1); line-height: var(--lh-heading); margin: 0; text-wrap: balance; }
+css/components.css:27:.hb-h2 { font-family: var(--font-text); font-weight: var(--fw-bold); font-size: var(--fs-h2); line-height: var(--lh-heading); margin: 0; }
+css/components.css:28:.hb-lead { font-size: var(--fs-lead); line-height: var(--lh-body); color: var(--text-muted); margin: 0; text-wrap: pretty; }
+css/components.css:29:.hb-body { font-size: var(--fs-body); line-height: var(--lh-body); margin: 0; }
+css/components.css:30:.hb-small { font-size: var(--fs-small); line-height: 1.5; color: var(--text-muted); }
+css/components.css:40:  font: inherit; font-weight: var(--fw-semibold); font-size: var(--fs-body); line-height: 1.2;
+css/components.css:73:.hb-media-card__title { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); line-height: var(--lh-heading); margin: 0; }
+css/components.css:77:.hb-chip { display: inline-flex; align-items: center; gap: var(--sp-2); min-block-size: 28px; padding-inline: var(--sp-3); border-radius: var(--r-full); font-size: var(--fs-small); font-weight: var(--fw-semibold); line-height: 1.2; background: var(--surface-sunken); color: var(--text); white-space: nowrap; }
+css/components.css:91:.hb-ai-badge { display: inline-flex; align-items: center; gap: var(--sp-1); padding: 2px var(--sp-2); border-radius: var(--r-sm); background: rgb(26 23 19 / 0.78); color: #fffcf9; font-size: 12px; font-weight: var(--fw-semibold); line-height: 1.4; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); white-space: nowrap; }
+css/components.css:116:@media (max-width: 560px) { .hb-file { grid-template-columns: auto 1fr auto; } .hb-file .hb-chip-select { grid-column: 2 / -1; justify-self: start; } }
+css/components.css:158:.hb-spec dd { font-size: var(--fs-h2); font-weight: var(--fw-bold); margin: 0; line-height: 1.2; }
+css/components.css:165:@media (min-width: 900px) { .hb-cta-bar--phone-only { display: none; } }

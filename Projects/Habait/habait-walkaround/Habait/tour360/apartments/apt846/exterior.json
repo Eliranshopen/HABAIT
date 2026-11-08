@@ -1,0 +1,330 @@
+{
+  "$schema": "tour360/exterior.v1",
+  "note": "the project layer as a chain of 360 scenes (Eliran 2026-11-02: no video; 12:05 via habait-98: an automatic 360 orbit of the area with life → the flight stops in front of the building and the buyer gets control + picks the apartment → continuous descent into it). Assets are equirects rendered from the studio site scene (Habait/studio tools/render_shots.py kind pano + tools/cube2equi.py) and skinned by _local/ext_nodes.mjs; u/v are hand-placed on the equirect (u 0.5 = the panorama centre = the tower / the apartment). autoNext/autoDwellMs = the scene moves on by itself (the view direction is carried); hold = the node the buyer gets control at. autoYaw = the yaw the last hop lands with inside the apartment (the room's view). Hotspots to the apartment/tower are projected with studio tools/world2equi.py (the terrace point of 846), not placed by eye.",
+  "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+  },
+  "scenes": [
+    {
+      "id": "aerial",
+      "name": {
+        "he": "מעוף ציפור",
+        "en": "Bird's eye",
+        "fr": "Vue aérienne"
+      },
+      "asset": "node-a-aerial",
+      "autoNext": "orbit1",
+      "autoDwellMs": 1500,
+      "hotspots": [
+        {
+          "to": "tower",
+          "u": 0.5,
+          "v": 0.621,
+          "label": {
+            "he": "אל המגדל",
+            "en": "To the tower",
+            "fr": "Vers la tour"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        }
+      ]
+    },
+    {
+      "id": "orbit1",
+      "name": {
+        "he": "סיבוב · 2",
+        "en": "Orbit · 2",
+        "fr": "Orbite · 2"
+      },
+      "asset": "node-o1-orbit",
+      "autoNext": "orbit2",
+      "autoDwellMs": 1500,
+      "hotspots": [
+        {
+          "to": "tower",
+          "u": 0.503,
+          "v": 0.62,
+          "label": {
+            "he": "אל המגדל",
+            "en": "To the tower",
+            "fr": "Vers la tour"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        }
+      ]
+    },
+    {
+      "id": "orbit2",
+      "name": {
+        "he": "סיבוב · 3",
+        "en": "Orbit · 3",
+        "fr": "Orbite · 3"
+      },
+      "asset": "node-o2-orbit",
+      "autoNext": "orbit3",
+      "autoDwellMs": 1500,
+      "hotspots": [
+        {
+          "to": "tower",
+          "u": 0.503,
+          "v": 0.617,
+          "label": {
+            "he": "אל המגדל",
+            "en": "To the tower",
+            "fr": "Vers la tour"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        }
+      ]
+    },
+    {
+      "id": "orbit3",
+      "name": {
+        "he": "סיבוב · 4",
+        "en": "Orbit · 4",
+        "fr": "Orbite · 4"
+      },
+      "asset": "node-o3-orbit",
+      "autoNext": "orbit4",
+      "autoDwellMs": 1500,
+      "hotspots": [
+        {
+          "to": "tower",
+          "u": 0.5,
+          "v": 0.616,
+          "label": {
+            "he": "אל המגדל",
+            "en": "To the tower",
+            "fr": "Vers la tour"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        }
+      ]
+    },
+    {
+      "id": "orbit4",
+      "name": {
+        "he": "סיבוב · 5",
+        "en": "Orbit · 5",
+        "fr": "Orbite · 5"
+      },
+      "asset": "node-o4-orbit",
+      "autoNext": "orbit5",
+      "autoDwellMs": 1500,
+      "hotspots": [
+        {
+          "to": "tower",
+          "u": 0.497,
+          "v": 0.617,
+          "label": {
+            "he": "אל המגדל",
+            "en": "To the tower",
+            "fr": "Vers la tour"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        }
+      ]
+    },
+    {
+      "id": "orbit5",
+      "name": {
+        "he": "סיבוב · 6",
+        "en": "Orbit · 6",
+        "fr": "Orbite · 6"
+      },
+      "asset": "node-o5-orbit",
+      "autoNext": "tower",
+      "autoDwellMs": 1500,
+      "hotspots": [
+        {
+          "to": "tower",
+          "u": 0.497,
+          "v": 0.619,
+          "label": {
+            "he": "אל המגדל",
+            "en": "To the tower",
+            "fr": "Vers la tour"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        }
+      ]
+    },
+    {
+      "id": "tower",
+      "name": {
+        "he": "מול המגדל",
+        "en": "At the tower",
+        "fr": "Devant la tour"
+      },
+      "asset": "node-b-tower",
+      "hold": true,
+      "hotspots": [
+        {
+          "to": "approach45",
+          "u": 0.5,
+          "v": 0.577,
+          "label": {
+            "he": "דירה 846 · קומה 16",
+            "en": "Apartment 846 · floor 16",
+            "fr": "Appartement 846 · 16e étage"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        },
+        {
+          "to": "aerial",
+          "u": 0.0,
+          "v": 0.6,
+          "label": {
+            "he": "חזרה למעוף",
+            "en": "Back up",
+            "fr": "Retour en vol"
+          }
+        }
+      ]
+    },
+    {
+      "id": "approach45",
+      "name": {
+        "he": "בדרך לדירה · 45 מ'",
+        "en": "Approach · 45 m",
+        "fr": "Approche · 45 m"
+      },
+      "asset": "node-e-approach45",
+      "autoNext": "approach25",
+      "autoDwellMs": 1000,
+      "hotspots": [
+        {
+          "to": "approach25",
+          "u": 0.5,
+          "v": 0.572,
+          "label": {
+            "he": "קרוב יותר",
+            "en": "Closer",
+            "fr": "Plus près"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        },
+        {
+          "to": "tower",
+          "u": 0.0,
+          "v": 0.6,
+          "label": {
+            "he": "חזרה",
+            "en": "Back",
+            "fr": "Retour"
+          }
+        }
+      ]
+    },
+    {
+      "id": "approach25",
+      "name": {
+        "he": "בדרך לדירה · 25 מ'",
+        "en": "Approach · 25 m",
+        "fr": "Approche · 25 m"
+      },
+      "asset": "node-f-approach25",
+      "autoNext": "facade",
+      "autoDwellMs": 1000,
+      "hotspots": [
+        {
+          "to": "facade",
+          "u": 0.5,
+          "v": 0.559,
+          "label": {
+            "he": "אל החזית",
+            "en": "To the facade",
+            "fr": "Vers la façade"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        },
+        {
+          "to": "approach45",
+          "u": 0.0,
+          "v": 0.6,
+          "label": {
+            "he": "חזרה",
+            "en": "Back",
+            "fr": "Retour"
+          }
+        }
+      ]
+    },
+    {
+      "id": "facade",
+      "name": {
+        "he": "מול החזית · קומה 16",
+        "en": "Facade · floor 16",
+        "fr": "Façade · 16e étage"
+      },
+      "asset": "node-c-facade",
+      "autoNext": "terraceOut",
+      "autoDwellMs": 1000,
+      "hotspots": [
+        {
+          "to": "terraceOut",
+          "u": 0.5,
+          "v": 0.543,
+          "label": {
+            "he": "דירה 846",
+            "en": "Apartment 846",
+            "fr": "Appartement 846"
+          },
+          "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+        },
+        {
+          "to": "tower",
+          "u": 0.0,
+          "v": 0.6,
+          "label": {
+            "he": "חזרה",
+            "en": "Back",
+            "fr": "Retour"
+          }
+        }
+      ]
+    },
+    {
+      "id": "terraceOut",
+      "name": {
+        "he": "מחוץ למרפסת",
+        "en": "Outside the terrace",
+        "fr": "Devant la terrasse"
+      },
+      "asset": "node-d-terrace",
+      "perFloor": true,
+      "autoNext": "terraceLiving",
+      "autoDwellMs": 1200,
+      "hotspots": [
+        {
+          "to": "terraceLiving",
+          "u": 0.5,
+          "v": 0.58,
+          "label": {
+            "he": "אל המרפסת",
+            "en": "Onto the terrace",
+            "fr": "Sur la terrasse"
+          }
+        },
+        {
+          "to": "facade",
+          "u": 0.0,
+          "v": 0.6,
+          "label": {
+            "he": "חזרה",
+            "en": "Back",
+            "fr": "Retour"
+          }
+        }
+      ],
+      "backFrom": {
+        "scene": "terraceLiving",
+        "u": 0.5,
+        "v": 0.62
+      },
+      "autoYaw": -114
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spike · rise out of the pano</title>
+<!-- board dollhouse-in-tour card 07 (option 3 spike, NOT a product file): the camera starts at the living room's panorama point
+     inside that room's depth mesh (Habait/platform/js/depthmesh.js: the room as the panorama saw it, the AI-skinned picture on it),
+     rises and pulls back to the dollhouse's 3D preset while the room fades out and the cut model appears. window.__spike.at(t)
+     sets the transition at progress t (0 = the tour's view, 1 = the dollhouse) and renders once, for deterministic frames;
+     window.__spike.play(ms) runs it in real time. Served by spike-run.cjs: /plat = the test platform, /eng = its dollhouse
+     outputs, /tour = the live apartment folder (read-only). -->
+<style>
+html, body { margin: 0; height: 100%; background: #efe9e0; overflow: hidden; font-family: system-ui, sans-serif; }
+#v { position: fixed; inset: 0; }
+#badge { position: fixed; inset-inline-end: 10px; bottom: 10px; padding: 4px 11px; border-radius: 999px; background: rgba(20, 16, 10, .78); color: #fff; font-size: 12px; z-index: 5; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "/plat/node_modules/three/build/three.module.js",
+  "three/addons/": "/plat/node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="v"></div>
+<div id="badge">הדמיה · AI-generated</div>
+<script type="module">
+import * as THREE from 'three';
+import { prepareDollhouse, computePresets, LIVE_LIGHTS } from '/plat/js/apartment-3d.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { loadDepthMap, buildDepthArrays, createDepthMesh, dirFromBearingPitch } from '/plat/js/depthmesh.js';
+
+const q = new URLSearchParams(location.search);
+const SCENE = { id: 'living', asset: '04-living', x_cm: 617 / 0.4 / 2.25, y_cm: 842 / 0.4 / 2.25, bearing0: 111.3, eye: 1.6 };
+const PANO = q.get('pano') || '/tour/_local/panos-parquet/04-living.webp';
+const buf = async (u) => (await fetch(u)).arrayBuffer();
+const D = '/plat/node_modules/three/examples/jsm/libs/draco/gltf/';
+const [glb, wrapper, wasm, light, floorTex, rep] = await Promise.all([
+  buf('/eng/apt846-parquet.glb'), fetch(D + 'draco_wasm_wrapper.js').then((r) => r.text()), buf(D + 'draco_decoder.wasm'),
+  buf('/eng/light.webp'), buf('/eng/floor-parquet.webp'), fetch('/eng/report.json').then((r) => r.json()),
+]);
+const P = await prepareDollhouse({ glb, draco: { wrapper, wasm }, lightmap: light, lightScale: rep.bake.scale, floorTextures: { parquet: floorTex }, floorTileM: 2, floorDefault: 'parquet' });
+// its own renderer (the viewer's orbit loop would turn the camera back to its target and push it out of the room): the same
+// look as the viewer with the baked light (Neutral tone map, a soft room environment, LIVE_LIGHTS.baked)
+const el = document.getElementById('v');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.setSize(el.clientWidth, el.clientHeight);
+renderer.setClearColor(0x000000, 0);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.NeutralToneMapping;
+el.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = LIVE_LIGHTS.baked.env;
+scene.add(new THREE.HemisphereLight(0xfbf7ef, 0x8c8478, LIVE_LIGHTS.baked.hemi));
+const sun = new THREE.DirectionalLight(0xfff3e2, LIVE_LIGHTS.baked.sun); sun.position.set(8, 14, 6); scene.add(sun);
+scene.add(P.model);
+const camera = new THREE.PerspectiveCamera(40, el.clientWidth / el.clientHeight, 0.05, 500);
+
+// the room as its panorama saw it, in the dollhouse's frame (plan cm -> GLB metres -> minus the model's centring shift)
+const origin = [SCENE.x_cm / 100 - P.shift.x, SCENE.eye, SCENE.y_cm / 100 - P.shift.z];
+const map = await loadDepthMap('/tour/depth/' + SCENE.asset + '.png');
+const tex = await new THREE.TextureLoader().loadAsync(PANO);
+tex.colorSpace = THREE.NoColorSpace;
+tex.generateMipmaps = false;
+tex.minFilter = THREE.LinearFilter;
+const room = createDepthMesh(buildDepthArrays(map, { segW: 128, segH: 64, origin, bearing0: SCENE.bearing0, maxRatio: 1.6 }), tex, { origin, bearing0: SCENE.bearing0 });
+room.material.transparent = true;
+room.material.depthTest = false;     // the room overlays the model while it stands, then fades: no z-fight with the cut walls
+room.material.depthWrite = false;
+room.renderOrder = 10;
+scene.add(room);
+
+// the two ends: the tour's view (yaw 0, pitch -2, the tour's 100 deg hfov) and the dollhouse's 3D preset
+const vfovOf = (hfov, aspect) => (2 * Math.atan(Math.tan((hfov * Math.PI) / 360) / aspect) * 180) / Math.PI;
+const A = { pos: new THREE.Vector3(...origin), target: new THREE.Vector3(...origin).add(new THREE.Vector3(...dirFromBearingPitch(SCENE.bearing0, -2))), fov: Math.min(100, vfovOf(+(q.get('hfov') || 100), camera.aspect)) };
+const pre = computePresets({ size: P.size.toArray(), outdoor: P.outdoor, fovDeg: 40, aspect: camera.aspect, hull: P.hull, points: P.silhouette, band: 1 })['3d'];
+const B = { pos: new THREE.Vector3(...pre.position), target: new THREE.Vector3(...pre.target), fov: 40 };
+// tunables (?fadeA=&fadeB=&liftB=): when the room fades (fractions of the move) and how long the climb leads the travel
+const FADE_A = +(q.get('fadeA') || 0.12), FADE_B = +(q.get('fadeB') || 0.55), LIFT_B = +(q.get('liftB') || 0.6);
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const smooth = (a, b, t) => { const x = Math.min(1, Math.max(0, (t - a) / (b - a))); return x * x * (3 - 2 * x); };
+function at(t) {
+  const k = ease(t);
+  // rise first, then pull back: the height leads the travel a little, so the camera leaves the room through its open top
+  const lift = smooth(0, LIFT_B, t);
+  camera.position.lerpVectors(A.pos, B.pos, k);
+  camera.position.y = A.pos.y + (B.pos.y - A.pos.y) * lift;
+  const target = new THREE.Vector3().lerpVectors(A.target, B.target, k);
+  camera.fov = A.fov + (B.fov - A.fov) * k;
+  camera.updateProjectionMatrix();
+  camera.lookAt(target);
+  room.material.uniforms.opacity.value = 1 - smooth(FADE_A, FADE_B, t);
+  room.visible = room.material.uniforms.opacity.value > 0.002;
+  renderer.render(scene, camera);
+  return { t, opacity: +room.material.uniforms.opacity.value.toFixed(3), y: +camera.position.y.toFixed(2), fov: +camera.fov.toFixed(1) };
+}
+async function play(ms = 1600, reverse = false) {
+  const t0 = performance.now();
+  return new Promise((done) => {
+    const step = () => { const p = Math.min(1, (performance.now() - t0) / ms); at(reverse ? 1 - p : p); if (p < 1) requestAnimationFrame(step); else done(); };
+    requestAnimationFrame(step);
+  });
+}
+window.__spike = { at, play, ready: true, A: { pos: A.pos.toArray(), fov: A.fov }, B: { pos: B.pos.toArray(), fov: B.fov }, origin };
+</script>
+</body>
+</html>

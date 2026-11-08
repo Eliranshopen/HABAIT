@@ -1,0 +1,79 @@
+{
+  "$schema": "../../contracts/flow.schema.json",
+  "project": "rainbow",
+  "start": "approach",
+  "defaults": {
+    "descend": "descend-846",
+    "enter": "enter-846"
+  },
+  "segments": [
+    {
+      "id": "approach",
+      "kind": "video",
+      "role": "approach",
+      "src": "../../_local/segments/rainbow/approach.mp4",
+      "poster": "../../_local/segments/rainbow/approach.first.jpg",
+      "duration_s": 8,
+      "title": {
+        "he": "מעל שדה דב, אל המגדל",
+        "en": "Over Sde Dov, towards the tower"
+      },
+      "next": "orbit"
+    },
+    {
+      "id": "orbit",
+      "kind": "video",
+      "role": "orbit",
+      "src": "../../_local/segments/rainbow/orbit.mp4",
+      "poster": "../../_local/segments/rainbow/orbit.first.jpg",
+      "duration_s": 17,
+      "title": {
+        "he": "סביב המגדל",
+        "en": "Around the tower"
+      },
+      "next": "hold-facade"
+    },
+    {
+      "id": "hold-facade",
+      "kind": "video",
+      "role": "hold",
+      "src": "../../_local/segments/rainbow/hold-facade.mp4",
+      "poster": "../../_local/segments/rainbow/hold-facade.first.jpg",
+      "duration_s": 3,
+      "loop": true,
+      "title": {
+        "he": "מול החזית · בחרו דירה",
+        "en": "At the facade · choose an apartment"
+      },
+      "next": null
+    },
+    {
+      "id": "descend-846",
+      "kind": "video",
+      "role": "descend",
+      "unit": "846",
+      "src": "../../_local/segments/rainbow/descend-846.mp4",
+      "poster": "../../_local/segments/rainbow/descend-846.first.jpg",
+      "duration_s": 5,
+      "title": {
+        "he": "יורדים אל המרפסת של 846",
+        "en": "Descending to the terrace of 846"
+      },
+      "next": "enter-846"
+    },
+    {
+      "id": "enter-846",
+      "kind": "video",
+      "role": "enter",
+      "unit": "846",
+      "src": "../../_local/segments/rainbow/enter-846.mp4",
+      "poster": "../../_local/segments/rainbow/enter-846.first.jpg",
+      "duration_s": 4,
+      "title": {
+        "he": "נכנסים לסלון",
+        "en": "Into the living room"
+      },
+      "next": "handoff"
+    }
+  ]
+}

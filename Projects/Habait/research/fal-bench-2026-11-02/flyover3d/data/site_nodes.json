@@ -1,0 +1,275 @@
+{
+ "frames": {
+  "world": "plan-world: X right, Y up the plan sheet, Z up, metres, the unit's floor at z 0; ground at -51.20",
+  "glb": "glTF Y-up: x = X, y = Z, z = -Y (Blender exporter)",
+  "yaw": "bearing of the equirect centre column (u = 0.5), degrees clockwise from +Y (plan up); north is at plan bearing 304.4"
+ },
+ "origin": {
+  "lat": 32.1036395,
+  "lon": 34.7847934,
+  "display_name": "set by hand in the dashboard",
+  "quality": "manual"
+ },
+ "unit_centre_world": [
+  6.487,
+  -8.2045,
+  0
+ ],
+ "apartment_hotspot_world": [
+  10.325,
+  -11.148,
+  1.0
+ ],
+ "apartment_hotspot_glb": [
+  10.325,
+  1.0,
+  11.148
+ ],
+ "glb": "site.glb",
+ "nodes": [
+  {
+   "id": "node-a-aerial",
+   "kind": "exterior",
+   "pos_world": [
+    196.3212,
+    -134.5492,
+    90
+   ],
+   "pos_glb": [
+    196.321,
+    90,
+    134.549
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 303.65,
+   "pano_clay": "renders/clay-pano-ortho/node-a-aerial.png",
+   "pano": "../../../../../tour360/apartments/apt846/_local/panos-ext/node-a-aerial.webp"
+  },
+  {
+   "id": "node-b-tower",
+   "kind": "exterior",
+   "pos_world": [
+    68.4477,
+    -47.2597,
+    17.7875
+   ],
+   "pos_glb": [
+    68.448,
+    17.788,
+    47.26
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 302.01,
+   "pano_clay": "renders/clay-pano-ortho/node-b-tower.png",
+   "pano": "../../../../../tour360/apartments/apt846/_local/panos-ext/node-b-tower.webp"
+  },
+  {
+   "id": "node-c-facade",
+   "kind": "exterior",
+   "pos_world": [
+    23.3073,
+    -20.8852,
+    3.1893
+   ],
+   "pos_glb": [
+    23.307,
+    3.189,
+    20.885
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 306.87,
+   "pano_clay": "renders/clay-pano-ortho/node-c-facade.png",
+   "pano": "../../../../../tour360/apartments/apt846/_local/panos-ext/node-c-facade.webp"
+  },
+  {
+   "id": "node-d-terrace",
+   "kind": "exterior",
+   "pos_world": [
+    14.8501,
+    -14.1077,
+    2.0247
+   ],
+   "pos_glb": [
+    14.85,
+    2.025,
+    14.108
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 300.02,
+   "pano_clay": "renders/clay-pano-ortho/node-d-terrace.png",
+   "pano": "../../../../../tour360/apartments/apt846/_local/panos-ext/node-d-terrace.webp"
+  },
+  {
+   "id": "entrance",
+   "kind": "interior",
+   "pos_world": [
+    3.053,
+    -7.684,
+    1.6
+   ],
+   "pos_glb": [
+    3.053,
+    1.6,
+    7.684
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 105.95,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/01-entrance.webp"
+  },
+  {
+   "id": "kitchen",
+   "kind": "interior",
+   "pos_world": [
+    8.378,
+    -5.324,
+    1.6
+   ],
+   "pos_glb": [
+    8.378,
+    1.6,
+    5.324
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 125.46,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/02-kitchen.webp"
+  },
+  {
+   "id": "dining",
+   "kind": "interior",
+   "pos_world": [
+    9.258,
+    -7.871,
+    1.6
+   ],
+   "pos_glb": [
+    9.258,
+    1.6,
+    7.871
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 56.84,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/03-dining.webp"
+  },
+  {
+   "id": "living",
+   "kind": "interior",
+   "pos_world": [
+    6.853,
+    -9.351,
+    1.6
+   ],
+   "pos_glb": [
+    6.853,
+    1.6,
+    9.351
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 111.27,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/04-living.webp"
+  },
+  {
+   "id": "terraceLiving",
+   "kind": "interior",
+   "pos_world": [
+    12.444,
+    -9.556,
+    1.6
+   ],
+   "pos_glb": [
+    12.444,
+    1.6,
+    9.556
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 355.91,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/05-terrace-living.webp"
+  },
+  {
+   "id": "terraceBedroom",
+   "kind": "interior",
+   "pos_world": [
+    10.0,
+    -13.702,
+    1.6
+   ],
+   "pos_glb": [
+    10.0,
+    1.6,
+    13.702
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 16.28,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/06-terrace-bedroom.webp"
+  },
+  {
+   "id": "bedroomMain",
+   "kind": "interior",
+   "pos_world": [
+    8.4,
+    -14.449,
+    1.6
+   ],
+   "pos_glb": [
+    8.4,
+    1.6,
+    14.449
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 344.91,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/07-bedroom-main.webp"
+  },
+  {
+   "id": "wardrobe",
+   "kind": "interior",
+   "pos_world": [
+    4.351,
+    -13.24,
+    1.6
+   ],
+   "pos_glb": [
+    4.351,
+    1.6,
+    13.24
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 106.37,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/08-wardrobe.webp"
+  },
+  {
+   "id": "bathMain",
+   "kind": "interior",
+   "pos_world": [
+    3.053,
+    -12.964,
+    1.6
+   ],
+   "pos_glb": [
+    3.053,
+    1.6,
+    12.964
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 36.81,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/09-bath-main.webp"
+  },
+  {
+   "id": "bedroom2",
+   "kind": "interior",
+   "pos_world": [
+    6.418,
+    -4.378,
+    1.6
+   ],
+   "pos_glb": [
+    6.418,
+    1.6,
+    4.378
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 35.17,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/10-bedroom-2.webp"
+  },
+  {
+   "id": "bathguest",
+   "kind": "interior",
+   "pos_world": [
+    4.631,
+    -5.649,
+    1.6
+   ],
+   "pos_glb": [
+    4.631,
+    1.6,
+    5.649
+   ],
+   "centre_yaw_deg_from_plus_y_cw": 15.69,
+   "pano": "../../../../../tour360/apartments/apt846/panos/balanced/11-bath-guest.webp"
+  }
+ ]
+}

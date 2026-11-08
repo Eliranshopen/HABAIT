@@ -1,0 +1,448 @@
+{
+ "$comment": "card 36: the cinematic flight flow.html plays by default (js/cine.js). Written by tools/build_segments.mjs from ONE video manifest (card 35 contract); do not edit by hand.",
+ "schema": "habait-platform/flow.cine.v1",
+ "project": "rainbow",
+ "generated_at": "2026-11-03T10:11:07.955Z",
+ "generated_by": "build_segments/1.2 (card 34, 2026-11-03: 5 segments, hold loop) + cine (card 36)",
+ "manifest": {
+  "path": "habait-walkaround/Habait/engine/_local/apt846-project/video/manifest.json",
+  "kind": "engine",
+  "sha256_16": "18eabd92ee3f561e"
+ },
+ "start": "orbit",
+ "hold": "hold-facade",
+ "focus_x": 0.47,
+ "focus_why": "units' centroid through the hold-arc rest camera (frame 65)",
+ "defaults": {
+  "descend": "descend-846",
+  "enter": "enter-846"
+ },
+ "caption": {
+  "id": "ai-visualization-v1",
+  "status": "DRAFT v1 (2026-11-02)",
+  "source": "data/sales-plans/legal/caption-v1.json",
+  "plan_date": "15.10.2025",
+  "he": {
+   "short_project": "הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית על בסיס תכניות הפרויקט Rainbow תל אביב מיום 15.10.2025 ומקורות ציבוריים. המסמכים המחייבים הם המפרט והתכניות החתומים. הסביבה, הנוף, האנשים והתאורה להמחשה.",
+   "micro": "הדמיה להמחשה בלבד · בסיוע AI · המחייב: המפרט והתכניות החתומים",
+   "short": "הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית מתכנית המכר של דירה {UNIT}, Rainbow תל אביב, מיום 15.10.2025. המסמכים המחייבים הם המפרט והתכניות החתומים. ריהוט, גימורים ונוף להמחשה."
+  },
+  "en": {
+   "short_project": "Illustration only. Generated with AI assistance from the plans of Rainbow Tel Aviv dated 15.10.2025 and public sources. The binding documents are the signed specification and plans. Surroundings, views, people and lighting are illustrative.",
+   "micro": "Illustration only · AI-assisted · Binding: the signed specification and plans",
+   "short": "Illustration only. Generated with AI assistance from the sales plan of unit {UNIT}, Rainbow Tel Aviv, dated 15.10.2025. The binding documents are the signed specification and plans. Furniture, finishes and views are illustrative."
+  }
+ },
+ "units": {
+  "826": {
+   "box_world": [
+    0.738,
+    -16.031,
+    -6.4,
+    14.431,
+    -0.378,
+    -3.5
+   ],
+   "centre": [
+    7.584,
+    -8.204,
+    -4.95
+   ],
+   "floor": 14
+  },
+  "835": {
+   "box_world": [
+    -3.58,
+    -23.963,
+    -3.2,
+    10.113,
+    -8.31,
+    -0.3
+   ],
+   "centre": [
+    3.266,
+    -16.137,
+    -1.75
+   ],
+   "floor": 15
+  },
+  "836": {
+   "box_world": [
+    0.738,
+    -16.031,
+    -3.2,
+    14.431,
+    -0.378,
+    -0.3
+   ],
+   "centre": [
+    7.584,
+    -8.204,
+    -1.75
+   ],
+   "floor": 15
+  },
+  "837": {
+   "box_world": [
+    -6.306,
+    -11.558,
+    -3.2,
+    7.387,
+    4.095,
+    -0.3
+   ],
+   "centre": [
+    0.54,
+    -3.731,
+    -1.75
+   ],
+   "floor": 15
+  },
+  "845": {
+   "box_world": [
+    -3.58,
+    -23.963,
+    0,
+    10.113,
+    -8.31,
+    2.9
+   ],
+   "centre": [
+    3.266,
+    -16.137,
+    1.45
+   ],
+   "floor": 16
+  },
+  "846": {
+   "box_world": [
+    0.738,
+    -16.031,
+    0,
+    14.431,
+    -0.378,
+    2.9
+   ],
+   "centre": [
+    7.584,
+    -8.204,
+    1.45
+   ],
+   "floor": 16
+  },
+  "847": {
+   "box_world": [
+    -6.306,
+    -11.558,
+    0,
+    7.387,
+    4.095,
+    2.9
+   ],
+   "centre": [
+    0.54,
+    -3.731,
+    1.45
+   ],
+   "floor": 16
+  },
+  "855": {
+   "box_world": [
+    -3.58,
+    -23.963,
+    3.2,
+    10.113,
+    -8.31,
+    6.1
+   ],
+   "centre": [
+    3.266,
+    -16.137,
+    4.65
+   ],
+   "floor": 17
+  },
+  "856": {
+   "box_world": [
+    0.738,
+    -16.031,
+    3.2,
+    14.431,
+    -0.378,
+    6.1
+   ],
+   "centre": [
+    7.584,
+    -8.204,
+    4.65
+   ],
+   "floor": 17
+  },
+  "857": {
+   "box_world": [
+    -6.306,
+    -11.558,
+    3.2,
+    7.387,
+    4.095,
+    6.1
+   ],
+   "centre": [
+    0.54,
+    -3.731,
+    4.65
+   ],
+   "floor": 17
+  },
+  "866": {
+   "box_world": [
+    0.738,
+    -16.031,
+    6.4,
+    14.431,
+    -0.378,
+    9.3
+   ],
+   "centre": [
+    7.584,
+    -8.204,
+    7.85
+   ],
+   "floor": 18
+  },
+  "876": {
+   "box_world": [
+    -7.293,
+    -30.523,
+    9.6,
+    6.4,
+    -14.87,
+    12.5
+   ],
+   "centre": [
+    -0.446,
+    -22.696,
+    11.05
+   ],
+   "floor": 19
+  }
+ },
+ "segments": [
+  {
+   "id": "orbit",
+   "role": "orbit",
+   "title": {
+    "he": "סביב המגדל",
+    "en": "Around the tower"
+   },
+   "next": "hold-facade",
+   "kind": "flat-video",
+   "src": "../../_local/segments/rainbow-cine/orbit.mp4",
+   "poster": "../../_local/segments/rainbow-cine/orbit.first.jpg",
+   "last": "../../_local/segments/rainbow-cine/orbit.last.jpg",
+   "fps": 24,
+   "frames": 409,
+   "duration_s": 17.042,
+   "size": [
+    1280,
+    720
+   ],
+   "camera": "../../_local/segments/rainbow-cine/orbit.camera.json",
+   "junction": {
+    "to": "hold-facade",
+    "dpos_m": 0.237,
+    "dyaw_deg": 0.19,
+    "dpitch_deg": 0,
+    "mode": "crossfade",
+    "seconds": 0.5,
+    "why": "the hold's rest frame = the orbit's end pose (same camera); Kling painted the two takes separately: a 0.5 s fade evens the colour",
+    "seam_mae": 27.38
+   },
+   "encode": {
+    "crf": 21,
+    "faststart": true,
+    "ssim_vs_source": 0.986216
+   }
+  },
+  {
+   "id": "hold-facade",
+   "role": "hold",
+   "title": {
+    "he": "מול החזית · בחרו דירה",
+    "en": "At the facade · choose an apartment"
+   },
+   "next": null,
+   "kind": "frames",
+   "track": "hold-arc",
+   "dir": "../../_local/segments/rainbow-cine/hold-arc",
+   "hi": "jpg",
+   "lo": "jpg_lo",
+   "pattern": "frame_%04d.jpg",
+   "frames": 169,
+   "size": [
+    1280,
+    720
+   ],
+   "size_lo": null,
+   "camera": "../../_local/segments/rainbow-cine/hold-arc/camera.json",
+   "rest_frame": 65,
+   "loop": false,
+   "preview": false,
+   "pills_near": null,
+   "units_at_rest": {
+    "826": [
+     0.509,
+     0.882
+    ],
+    "835": [
+     0.412,
+     0.825
+    ],
+    "836": [
+     0.509,
+     0.822
+    ],
+    "837": [
+     0.508,
+     0.784
+    ],
+    "845": [
+     0.412,
+     0.764
+    ],
+    "846": [
+     0.509,
+     0.762
+    ],
+    "847": [
+     0.508,
+     0.73
+    ],
+    "855": [
+     0.412,
+     0.703
+    ],
+    "856": [
+     0.509,
+     0.701
+    ],
+    "857": [
+     0.508,
+     0.676
+    ],
+    "866": [
+     0.509,
+     0.641
+    ],
+    "876": [
+     0.33,
+     0.582
+    ]
+   },
+   "junction": {
+    "to": "descend-846",
+    "dpos_m": 0.237,
+    "dyaw_deg": 0.19,
+    "dpitch_deg": -9,
+    "mode": "crossfade",
+    "seconds": 0.6,
+    "why": "the hold eases to its rest frame first; the descent starts at the same position 0.237 m but -9° pitch and an independent Kling take: 0.6 s crossfade (habait-flow: 0.35 s)",
+    "seam_mae": 56.39
+   }
+  },
+  {
+   "id": "descend-846",
+   "role": "descend",
+   "unit": "846",
+   "title": {
+    "he": "יורדים אל המרפסת של 846",
+    "en": "Descending to the terrace of 846"
+   },
+   "next": "enter-846",
+   "kind": "flat-video",
+   "src": "../../_local/segments/rainbow-cine/descend-846.mp4",
+   "poster": "../../_local/segments/rainbow-cine/descend-846.first.jpg",
+   "last": "../../_local/segments/rainbow-cine/descend-846.last.jpg",
+   "fps": 24,
+   "frames": 106,
+   "duration_s": 4.417,
+   "size": [
+    1280,
+    720
+   ],
+   "camera": "../../_local/segments/rainbow-cine/descend-846.camera.json",
+   "junction": {
+    "to": "enter-846",
+    "dpos_m": 0.068,
+    "dyaw_deg": 0.13,
+    "dpitch_deg": 0.03,
+    "mode": "cut",
+    "seconds": 0,
+    "why": "separate takes: crossfade",
+    "seam_mae": 14.16
+   }
+  },
+  {
+   "id": "enter-846",
+   "role": "enter",
+   "unit": "846",
+   "title": {
+    "he": "נכנסים לסלון",
+    "en": "Into the living room"
+   },
+   "next": "handoff",
+   "kind": "flat-video",
+   "src": "../../_local/segments/rainbow-cine/enter-846.mp4",
+   "poster": "../../_local/segments/rainbow-cine/enter-846.first.jpg",
+   "last": "../../_local/segments/rainbow-cine/enter-846.last.jpg",
+   "fps": 24,
+   "frames": 208,
+   "duration_s": 8.667,
+   "size": [
+    1280,
+    720
+   ],
+   "camera": "../../_local/segments/rainbow-cine/enter-846.camera.json",
+   "junction": null,
+   "handoff": {
+    "room": "living",
+    "pano": "../../_local/segments/rainbow-cine/handoff-living.webp",
+    "pano_from": "habait-walkaround/Habait/tour360/dist/apt846/panos-parquet/04-living.webp",
+    "bearing_deg": 111.3,
+    "last_camera": {
+     "yaw": 291.03,
+     "pitch": -1.43,
+     "pos": [
+      6.853,
+      -9.351,
+      1.6
+     ]
+    },
+    "start_yaw": 179.73,
+    "start_pitch": -1.43,
+    "hfov_deg": 65.47,
+    "view_yaw": 0,
+    "turn_s": 3,
+    "crossfade_s": 0.5,
+    "tour_params": {
+     "scope": "apartment",
+     "ui": "min",
+     "floor": "parquet",
+     "video": "0"
+    },
+    "tour_yaw_offset_deg": 0,
+    "why": "the enter ends at the room's camera point: same pose and field of view in the tour's own panorama, then a 180° turn to the windows (card 34's view)",
+    "registration": {
+     "dyaw": 1.25,
+     "dpitch": -2,
+     "fov_scale": 1.1,
+     "edge_ncc": 0.382,
+     "edge_ncc_at_clay_pose": 0.157,
+     "edge_ncc_15deg_off": 0.076,
+     "applied": true,
+     "how": "the tour panorama rendered as the clip camera (yaw/pitch/fov search around the clay pose), gradient-magnitude NCC vs the last frame of the clip"
+    }
+   }
+  }
+ ]
+}

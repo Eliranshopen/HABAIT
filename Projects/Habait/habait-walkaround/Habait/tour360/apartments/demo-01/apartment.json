@@ -1,0 +1,74 @@
+{
+ "$schema": "tour360/apartment.v1",
+ "id": "demo-01",
+ "status": "demo",
+ "title": {
+  "he": "דירת גן לדוגמה · 5 חדרים",
+  "en": "Sample garden apartment · 5 rooms",
+  "fr": "Appartement avec jardin (exemple) · 5 pièces"
+ },
+ "project": null,
+ "projectNote": "the floor plan's project/unit is unidentified — Slava names it (PLAN.md OQ-1); until then the tour is a sample and is never attributed to a project",
+ "plan": {
+  "image": "plan/floorplan.webp",
+  "imageSize": [
+   1200,
+   1200
+  ],
+  "viewBox": [
+   40,
+   280,
+   1085,
+   665
+  ],
+  "labelsLanguage": "he"
+ },
+ "sets": {
+  "balanced": {
+   "dir": "panos/balanced",
+   "width": 3548,
+   "height": 1774,
+   "format": "webp-lossless",
+   "tracked": true
+  },
+  "thumb": {
+   "dir": "panos/thumb",
+   "width": 640,
+   "height": 320,
+   "format": "webp",
+   "tracked": true
+  },
+  "full": {
+   "dir": "_local/full",
+   "width": 7096,
+   "height": 3548,
+   "format": "webp-lossless",
+   "tracked": false,
+   "note": "D:/RealEstate3D/enhanced-panoramas/web/full — not copied; see _local/SOURCES.md"
+  },
+  "originals": {
+   "dir": "_local/originals",
+   "width": 1774,
+   "height": 887,
+   "format": "png",
+   "tracked": false
+  }
+ },
+ "disclosure": {
+  "badgeKey": "badge",
+  "conceptLineKey": "conceptLine",
+  "aiNoteKey": "aiNote",
+  "copyPack": "../../copy/tour360-copy.json",
+  "permanent": true
+ },
+ "provenance": {
+  "generation": "ChatGPT ImageGen (built-in tool), 2026-09-07, 1774×887; prompts in prompts.json",
+  "enhancement": "Real-ESRGAN x4plus (ncnn-vulkan), 64 px circular pad, exact crop, TTA; per-image provenance/*-manifest.json",
+  "validation": "provenance/validation.json",
+  "geometryNote": "furnishings, exterior views and some proportions are imagined; not surveyed, not plan-exact (provenance/generation-manifest.md)"
+ },
+ "sceneCount": 13,
+ "defaultScene": "living",
+ "createdFrom": "D:/RealEstate3D (2026-09-07)",
+ "intakeDate": "2026-10-04"
+}

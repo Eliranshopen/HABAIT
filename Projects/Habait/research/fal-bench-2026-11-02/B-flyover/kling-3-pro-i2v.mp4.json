@@ -1,0 +1,19 @@
+{
+ "endpoint": "fal-ai/kling-video/v3/pro/image-to-video",
+ "args": {
+  "start_image_url": "https://v3b.fal.media/files/b/0ab0d326/P4wccY8SWNSRPe4HU1AHL_B_keyframe_s1_first.png",
+  "end_image_url": "https://v3b.fal.media/files/b/0ab0d326/WnF6B234vi1BAtwOPHO2U_B_keyframe_s1_last_from_ltx.png",
+  "prompt": "Aerial drone shot: a slow, steady forward glide with a gentle descent over the Tel Aviv coast toward the Rainbow tower (white undulating curved balconies), the Mediterranean sea and beach on the left, the Reading chimney behind, low white buildings, trees and roads below, soft morning sun. Smooth continuous camera, photoreal, no cuts, no text, no people.",
+  "duration": "5",
+  "generate_audio": false
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0d33f/bJ0ZAm_fVcpO18y8yLt0X_output.mp4",
+   "content_type": "video/mp4",
+   "file_name": "output.mp4",
+   "file_size": 22049822
+  }
+ },
+ "secs": 243
+}

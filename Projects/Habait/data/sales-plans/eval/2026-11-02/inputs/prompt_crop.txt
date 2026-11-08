@@ -1,0 +1,7 @@
+You are a floor-plan reader. Read the image file C:/Users/elira/AppData/Local/Temp/claude/C--RnD/9f40449b-1c9c-471a-9747-103ff1d22d0c/scratchpad/intake/crop.png (an Israeli sales plan sheet, Hebrew labels, scale 1:50, dimensions in cm). The image is a crop of the apartment plan only.
+Output ONLY a JSON object, no prose, with this shape:
+{"rooms":[{"name_he":"...","name_en":"...","type":"living|kitchen|dining|bedroom|bathroom|hall|storage|balcony|mamad|other","printed_dims_cm":[w,d] or null,"area_m2_estimate":number,"is_outdoor":bool}],
+ "printed_dimensions_cm":[all dimension numbers you can read on the apartment plan],
+ "openings":{"doors":n,"windows_or_glazing_runs":n},
+ "unit":{"number":"...","area_m2":number or null,"terrace_m2":number or null,"floor":n or null},
+ "confidence":0-1,"notes":"what was hard to read"}

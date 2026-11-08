@@ -1,0 +1,39 @@
+split 200 sessions: A=89 B=111
+     card band 95..105: NOT met (P(95..105) = 0.563 for any fair 50/50 hash at n=200); 99.9% band 77..123
+ok   assignment: 200 simulated sessions (fixed seed) inside the 99.9% binomial band; card band reported  (seed 25)
+ok   assignment: deterministic (same id -> same arm) and unbiased on 100,000 sessions  (A=50.11%, chi2(99)=108.5, sequential A=49.5%)
+ok   assignment: ?v=a|b overrides the hash; bad values fall back; the tab keeps its arm
+ok   report: the funnel per arm from the synthetic JSONL equals what was generated  (A visit=191 enter=0 click=25 submit=10 lead=22 meeting=8 | B visit=209 enter=84 click=53 submit=16 lead=46 meeting=16)
+ok   report: a PostHog-export file (properties envelope) reads like the JSONL
+ok   report CLI: missing input -> report with zeros that says so, exit 0  (report 2026-10-28..2026-11-03: A visits=0 leads=0 | B visits=0 leads=0 | used=0 test-excluded=0 -> C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/6683ba3a-fb19-404a-b004-9f31015522b3/scratchpad/gate1/preview/platform/_local/landing-test/reports/weekly-empty.md)
+ok   landing.html: the caption template equals disclaimer-he-en.md sections 1 + 2 (he + en)
+ok   browser iphone 390x844 arm A: RTL, only arm A on the page, facts + caption  (media=live, stills=11)
+ok   browser iphone 390x844 arm A: renders load; a tile opens the lightbox -> room_view with dwell + variant  (11 tiles)
+ok   browser iphone 390x844 arm A: the same lead form: WhatsApp tag + form submit -> lead_click/lead_submitted with variant
+ok   browser iphone 390x844 arm A: no page errors
+ok   browser iphone 390x844 arm B: RTL, only arm B on the page, facts + caption  (media=live, stills=11)
+ok   browser iphone 390x844 arm B: flow.html runs in the frame and its events carry variant b
+ok   browser iphone 390x844 arm B: the same lead form: WhatsApp tag + form submit -> lead_click/lead_submitted with variant
+ok   browser iphone 390x844 arm B: no page errors
+ok   browser android 412x915 arm A: RTL, only arm A on the page, facts + caption  (media=live, stills=11)
+ok   browser android 412x915 arm A: renders load; a tile opens the lightbox -> room_view with dwell + variant  (11 tiles)
+ok   browser android 412x915 arm A: the same lead form: WhatsApp tag + form submit -> lead_click/lead_submitted with variant
+ok   browser android 412x915 arm A: no page errors
+ok   browser android 412x915 arm B: RTL, only arm B on the page, facts + caption  (media=live, stills=11)
+ok   browser android 412x915 arm B: flow.html runs in the frame and its events carry variant b
+ok   browser android 412x915 arm B: the same lead form: WhatsApp tag + form submit -> lead_click/lead_submitted with variant
+ok   browser android 412x915 arm B: no page errors
+ok   browser desktop 1366x800 arm A: RTL, only arm A on the page, facts + caption  (media=live, stills=11)
+ok   browser desktop 1366x800 arm A: renders load; a tile opens the lightbox -> room_view with dwell + variant  (11 tiles)
+ok   browser desktop 1366x800 arm A: the same lead form: WhatsApp tag + form submit -> lead_click/lead_submitted with variant
+ok   browser desktop 1366x800 arm A: no page errors
+ok   browser desktop 1366x800 arm B: RTL, only arm B on the page, facts + caption  (media=live, stills=11)
+ok   browser desktop 1366x800 arm B: flow.html runs in the frame and its events carry variant b
+ok   browser desktop 1366x800 arm B: the same lead form: WhatsApp tag + form submit -> lead_click/lead_submitted with variant
+ok   browser desktop 1366x800 arm B: no page errors
+ok   browser desktop, no ?v: session 9d9b4167 -> arm A by hash (Node and browser agree)
+ok   browser desktop: language toggle -> English LTR, caption in English
+ok   browser desktop, no ?v: session 1f6d635e -> arm B by hash (Node and browser agree)
+ok   sink: the browser events went to the test file only, all test:true, every landing/frame event with variant  (33 events; report --include-test: A visits=4 leads=3, B visits=4 leads=3)
+landing test: 35/35 ok  (shots: C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/6683ba3a-fb19-404a-b004-9f31015522b3/scratchpad/gate1/preview/platform/_local/landing-test/shots)
+EXIT 0

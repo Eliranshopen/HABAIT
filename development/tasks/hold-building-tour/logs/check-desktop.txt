@@ -1,0 +1,22 @@
+desktop   PASS  A1 platform link leads to /hold/
+desktop   PASS  B1 button shown at the hold after the clip
+desktop   PASS  B2 label + ≥44 px + on top + in view + rtl
+desktop   PASS  B3 button covers no pill / picker button / sound button
+desktop   PASS  C1 frame opens, project scope (no scope=apartment), from=hold, same page URL
+desktop   PASS  C2 tour opens on aerial
+desktop   PASS  C3 auto chain reaches the tower (hold node)
+desktop   PASS  C4 ✕ visible, button hidden, frame opaque
+desktop   FAIL  C4b ✕ hides no tour control (at the tower)  ["<button type=\"button\" data-lang=\"fr\" lang=\"fr\" aria-pressed=\"false\">FR</button>"]
+desktop   PASS  C5 tap 846 → descent → a room of the apartment inside the frame
+desktop   PASS  C6 ✕ is on top of the tour (clickable)
+desktop   FAIL  C7 ✕ hides no tour control (in the room)  ["<button type=\"button\" data-lang=\"fr\" lang=\"fr\" aria-pressed=\"false\">FR</button>"]
+desktop   PASS  D1 ✕ → frame removed, button back + focused, hold loop running
+desktop   PASS  D2 Esc (focus on the page) closes
+desktop   PASS  D3 open/close ×3 leaves no frame, button back
+desktop   PASS  E1 button hidden during the descent clip
+desktop   PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+desktop   PASS  E3 button not over the apartment tour
+desktop   PASS  Z1 zero page errors
+desktop   PASS  Z2 zero 4xx/5xx
+
+18/20 PASS · 2 FAIL · base http://127.0.0.1:8853

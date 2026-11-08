@@ -1,0 +1,13 @@
+apt846-parquet bin 208388 51d187303cf2c0eb nBuffers 1
+apt846-concrete bin 208388 51d187303cf2c0eb nBuffers 1
+apt846-marble bin 208388 51d187303cf2c0eb nBuffers 1
+one shared BIN: true
+nodes live 27 wt 27
+node diffs: 0
+report nodes live 27 wt 27 tri diffs 0
+report totals live {"tool":"360walkaround/pipeline/export_dollhouse.py","version":"0.1.0","blender":"4.5.10 LTS","gltf_exporter":"4.5.51","generated_utc":"2026-11-02T12:42:32Z","design_rules":"skirting + door casings dropped, one flat colour per floor class, cream door leaves"}
+ wt {"tool":"360walkaround/pipeline/export_dollhouse.py","version":"0.1.0","blender":"4.5.10 LTS","gltf_exporter":"4.5.51","generated_utc":"2026-11-03T19:15:23Z","design_rules":"skirting + door casings dropped, one flat colour per floor class, cream door leaves"}
+report keys wt-only: bake
+wt materials web_floor_parquet,web_floor_outdoor,web_floor_wet,web_cap,glass,web_metal,web_ceramic,oak,web_walnut,web_door,web_frame,web_mirror,fabric_light,web_lamp,fabric_dark,web_furniture,web_wall
+wt prims with TEXCOORD_0 65/66
+materials on prims WITHOUT UV: glass

@@ -1,0 +1,7 @@
+
+## 2026-11-04 · main-session · habait-flow prod deploy 5 + live QA
+- **Did:** Eliran ran the prod deploy himself (! npx vercel@65.9.0 deploy --prod, staging folder deploy-prod-5 in another session's scratchpad): READY, aliased habait-flow.vercel.app (deployment habait-flow-ib8zsm2dg). Main session ran live QA: / /flow.html /demo-transition.html /hold/ /apartment.html /landing.html all 200, byte sizes equal the staged files; headless Chrome paints / (hero + AI badge), flow.html?project=rainbow (start button), /hold/ (tower + 12 unit pins, playwright-core, 0 HTTP>=400).
+- **Evidence:** `C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/019774e1-dca7-40c6-9f37-0d90c81d1a3d/scratchpad/paint`
+- **Learned:** chrome --headless --screenshot captures /hold/ before it finishes loading (stuck on the loading text even at 40 s); use a playwright-core probe (tools/appdeps) with timed waits for the paint proof. Evidence folder is a session scratchpad (index/flow-rainbow/hold3/demo .png, hold-probe.mjs).
+- **Owed / open:** (1) /demo-transition.html is public and shows a developer error (demo assets missing, run node test/transition.test.mjs --prep); not linked from any page. (2) 23 CLAUDE.md context files were staged and are public (e.g. /hold/data/CLAUDE.md, /js/CLAUDE.md 200) although stage_flow.py line 43 says context files are never staged. Both are Eliran's call; a fix needs a new deploy go.
+- **Second reader:** `habait-deploy-qa`

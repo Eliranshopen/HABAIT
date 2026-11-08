@@ -1,0 +1,42 @@
+transition-rise check 2026-11-04T07:18:37.255Z
+PASS 36 · FAIL 0
+
+ok   desktop: the dollhouse preloads hidden (#defer) once the tour is idle
+ok   desktop: the 3D button plays the rise ({"kind":"rise","frames":5,"ms":1926,"fps":2.6,"skipped":null})
+ok   desktop: the rise ends on the 3D preset ({"preset":"3d","held":false})
+ok   desktop: the layer is revealed
+ok   desktop: the rise starts on the tour's frame (central band mean |diff| 0.1 < 22 of 255)
+ok   desktop: control: the 3D preset is far from the tour frame (62.6 vs 0.1)
+ok   desktop: "view in 360" dives into the room and holds its view ({"t":{"kind":"dive","frames":2,"ms":1878,"fps":1.1,"skipped":null},"held":true})
+ok   desktop: the tour switches to the kitchen under the layer, which closes ({"scene":"kitchen","hidden":true,"yaw":0,"hfov":111.40672062405845})
+ok   desktop: the kitchen's move frame matches the tour's kitchen frame (|diff| 0.1)
+ok   desktop: no page errors 
+ok   desktop: race: "view in 360" during the rise's load still moves the tour ({"scene":"kitchen","hidden":true})
+ok   desktop: prefers-reduced-motion skips the move ({"kind":"rise","skipped":"reduced-motion"})
+ok   iphone13: the dollhouse preloads hidden (#defer) once the tour is idle
+ok   iphone13: the 3D button plays the rise ({"kind":"rise","frames":6,"ms":1925,"fps":3.1,"skipped":null})
+ok   iphone13: the rise ends on the 3D preset ({"preset":"3d","held":false})
+ok   iphone13: the layer is revealed
+ok   iphone13: the rise starts on the tour's frame (central band mean |diff| 18.2 < 22 of 255)
+ok   iphone13: control: the 3D preset is far from the tour frame (61.8 vs 18.2)
+ok   iphone13: "view in 360" dives into the room and holds its view ({"t":{"kind":"dive","frames":4,"ms":3476,"fps":1.2,"skipped":null},"held":true})
+ok   iphone13: the tour switches to the kitchen under the layer, which closes ({"scene":"kitchen","hidden":true,"yaw":0,"hfov":60})
+ok   iphone13: the kitchen's move frame matches the tour's kitchen frame (|diff| 8.1)
+ok   iphone13: no page errors 
+ok   iphone13: race: "view in 360" during the rise's load still moves the tour ({"scene":"kitchen","hidden":true})
+ok   iphone13: prefers-reduced-motion skips the move ({"kind":"rise","skipped":"reduced-motion"})
+ok   pixel7: the dollhouse preloads hidden (#defer) once the tour is idle
+ok   pixel7: the 3D button plays the rise ({"kind":"rise","frames":5,"ms":1655,"fps":3,"skipped":null})
+ok   pixel7: the rise ends on the 3D preset ({"preset":"3d","held":false})
+ok   pixel7: the layer is revealed
+ok   pixel7: the rise starts on the tour's frame (central band mean |diff| 16.0 < 22 of 255)
+ok   pixel7: control: the 3D preset is far from the tour frame (58.1 vs 16.0)
+ok   pixel7: "view in 360" dives into the room and holds its view ({"t":{"kind":"dive","frames":6,"ms":3386,"fps":1.8,"skipped":null},"held":true})
+ok   pixel7: the tour switches to the kitchen under the layer, which closes ({"scene":"kitchen","hidden":true,"yaw":0,"hfov":60})
+ok   pixel7: the kitchen's move frame matches the tour's kitchen frame (|diff| 1.3)
+ok   pixel7: no page errors 
+ok   pixel7: race: "view in 360" during the rise's load still moves the tour ({"scene":"kitchen","hidden":true})
+ok   pixel7: prefers-reduced-motion skips the move ({"kind":"rise","skipped":"reduced-motion"})
+info desktop: t0 {"opacity":1,"fov":85,"y":1.6} band |diff| 0.1
+info iphone13: t0 {"opacity":1,"fov":89.02,"y":1.6} band |diff| 18.2
+info pixel7: t0 {"opacity":1,"fov":99.23,"y":1.6} band |diff| 16.0

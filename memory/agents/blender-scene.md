@@ -1,0 +1,10 @@
+# blender-scene — lessons (newest last)
+<!-- created 2026-11-03 by the main session (rnd-fd), which ran board apartment-3d's Blender card itself (session started at C:\RnD, so the project agent was not loadable) -->
+
+## 2026-11-03 · main session as blender-scene · apartment-3d card 07 (`export_dollhouse.py --bake-light`)
+- **Did:** a light-only Cycles bake (Diffuse direct+indirect, colour off, CPU, seed 0, OIDN via a throwaway compositor scene) into ONE smart-UV atlas over the 26 web receivers; the originals light it (ceilings warm white, lights, luminaires, terrain; exported objects hidden, their part above the 1.2 m cut kept as an occluder in the material-board palette); three floor GLBs from one bake on one BIN chunk; `light.webp` 2048 (143 KB) + `light-1024.webp`; report `bake{}`.
+- **Evidence:** `development/tasks/apartment-3d/logs/c07-bake-manifest.json` (every run, hashes), `c07-nobake.txt` (no-flag GLB = `1259daf0…` = live), `c07-bake3.txt`, `.wt/apartment-3d/after/phase2/bake_preview.png`.
+- **Learned:** (1) bake time is ~13 s fixed + ~0.45 s per million texel-samples on this 20-thread CPU (2048²×128 = 263 s). (2) smart_project + pack_islands with a FRACTION margin of 0.004 filled 3.6 % of the square (thousands of furniture islands); 0.001 = 2 px at 2048 → 35 %. (3) UV islands under ~2 texels wide never bake and sample their neighbours on screen ("barcode" dashes along 5 cm slab sides) — neither a median leak fix nor no-mipmaps cures it; collapse them onto one unbaked texel (the atlas mean) in a strip kept free (scale the rest to 98 %). (4) bake in bake-mode AFTER simplify and BEFORE the furniture-ratio copies, or the UVs are lost and the triangle count moves. (5) `bpy.ops.uv.*` in background mode works with `tool_settings.use_uv_select_sync = True`.
+- **Owed / open:** none for card 07 (gate 2 judges it).
+- **Second reader:** `platform-dev` — the viewer consumes `light.webp` + `report.json bake.scale` (pointer added there).
+- gate2 (qa-reviewer): D1 floor barcode dashes at 2048 atlas (iPhone/DPR>=2) → logs/gate2-report.md; D2 Pixel7 bath label far → label ring

@@ -1,0 +1,22 @@
+{
+ "schema": "habait.layer-map/0.1",
+ "office": "AIA / US National CAD Standard layer names (A-WALL, A-DOOR, A-GLAZ, A-AREA-BDRY ...), as written by fixtures/make_sample_dxf.py",
+ "about": "Layer map for fixtures/sample.dxf. Same format as layer_maps/*.json (regex, case-insensitive, first class in 'order' wins). room_boundary = closed area polylines: when present the DXF reader takes rooms from them instead of segmenting free space.",
+ "order": ["ignore", "dimension", "text", "room_boundary", "door", "window", "railing", "column", "wall_fill", "wall_line", "slab_edge", "furniture", "plumbing"],
+ "classes": {
+  "ignore": ["^A-ANNO-NOTE$", "^DEFPOINTS$"],
+  "dimension": ["^A-ANNO-DIMS$"],
+  "text": ["^A-ANNO-TEXT$", "^A-AREA-IDEN$"],
+  "room_boundary": ["^A-AREA-BDRY$", "^A-AREA$"],
+  "door": ["^A-DOOR"],
+  "window": ["^A-GLAZ"],
+  "railing": ["^A-FLOR-HRAL$"],
+  "column": ["^S-COLS", "^A-COLS"],
+  "wall_fill": ["^A-WALL-PATT$"],
+  "wall_line": ["^A-WALL$", "^A-WALL-(FULL|PRHT|EXTR|INTR)"],
+  "slab_edge": ["^A-FLOR-OTLN$"],
+  "furniture": ["^A-FURN"],
+  "plumbing": ["^P-FIXT", "^A-FLOR-PFIX"]
+ },
+ "style_fallback": []
+}

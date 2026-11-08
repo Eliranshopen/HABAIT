@@ -1,0 +1,42 @@
+{
+ "endpoint": "blackforestlabs/flux-3-max/keyframes-to-video",
+ "args": {
+  "keyframes": [
+   {
+    "image_url": "https://v3b.fal.media/files/b/0ab0d46c/A03MlQbTl2c6HxibR6eHC_D_anchor_f193.png",
+    "frame_index": 0
+   },
+   {
+    "image_url": "https://v3b.fal.media/files/b/0ab0d46d/8pPvBEZA9NHF_J0lk6R04_D_mid_f300.png",
+    "frame_index": 107
+   },
+   {
+    "image_url": "https://v3b.fal.media/files/b/0ab0d46d/yEnaTT-Oc7wkk0O7RTBft_D_end_f409.png",
+    "frame_index": 216
+   }
+  ],
+  "prompt": "One continuous shot: from a terrace on the 16th floor of a modern tower in Tel Aviv the camera glides forward through the open glass slider into a bright living room (pale oak parquet, cream boucle sofa, travertine table, jute rug, sand-grey kitchen, cream flush doors) and moves across the room toward the door. Steady smooth camera, photoreal, morning light, no cuts, no people, no text.",
+  "duration": 9,
+  "resolution": "720p",
+  "generate_audio": false,
+  "aspect_ratio": "16:9"
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0d46e/Os4seL1FpAoMjVmWPPIws_alligator.mp4",
+   "content_type": "video/mp4",
+   "file_name": "Os4seL1FpAoMjVmWPPIws_alligator.mp4",
+   "file_size": 5961548,
+   "width": 1280,
+   "height": 704,
+   "fps": 24.0,
+   "duration": 9.041666666666666,
+   "num_frames": 217
+  },
+  "seed": 682217685,
+  "timings": {
+   "inference": 10.121972727123648
+  }
+ },
+ "secs": 30
+}

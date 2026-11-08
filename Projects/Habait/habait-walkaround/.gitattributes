@@ -1,0 +1,31 @@
+# habait-walkaround - the root attributes. Guards before content: this file is in the root commit.
+# Text is stored with LF. A file whose sha256 is recorded downstream is pinned to LF in the working tree as well,
+# so no checkout can rewrite it (core.autocrlf=true is the Git for Windows default and turns LF into CRLF).
+# Add a pin the moment a new file's hash becomes a checkpoint.
+* text=auto
+
+# Carried from 360walkaround/.gitattributes (CONTRACT 1.4; board 360-v2 T08; walkaround-production WP-04).
+# That file moves verbatim and keeps the same pins for its own subtree; these root copies hold if it is ever moved.
+# The two server/prompts files are not part of this repo (360walkaround/server stays in the lab); their pins are
+# carried as written.
+360walkaround/server/prompts/frozen-set-360.json text eol=lf
+360walkaround/server/prompts/what-check.md text eol=lf
+360walkaround/tours/*/plan.json text eol=lf
+360walkaround/tours/*/manifest.json text eol=lf
+360walkaround/tours/*/tour.json text eol=lf
+360walkaround/pipeline/assemble_tour.mjs text eol=lf
+360walkaround/pipeline/build_scene.py text eol=lf
+360walkaround/pipeline/materials_kit.py text eol=lf
+360walkaround/pipeline/placement_templates.py text eol=lf
+360walkaround/pipeline/plan_general.py text eol=lf
+360walkaround/pipeline/general_furnish.py text eol=lf
+360walkaround/catalog/style-habait-modern.json text eol=lf
+360walkaround/pipeline/render_pano.py text eol=lf
+
+# The pipeline records this file's sha256 (inputs.material_board.sha256, recorded as LF), and no line in
+# 360walkaround/.gitattributes can reach it (WP-04, 2026-11-01).
+Habait/tour360/apartments/*/material-board.json text eol=lf
+
+# A shell script checked out with CRLF fails in Git Bash on the first carriage return.
+# Habait/tour360/tools/deploy/.gitattributes pins only its own folder; this pins every one.
+*.sh text eol=lf

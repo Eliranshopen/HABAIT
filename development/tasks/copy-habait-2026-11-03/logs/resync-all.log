@@ -1,0 +1,308 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tuesday, November 3, 2026 12:40:05 PM
+   Source : C:\Habait\
+     Dest : C:\RnD\Projects\Habait\
+
+    Files : *.*
+	    
+Exc Files : *.pyc
+	    
+ Exc Dirs : node_modules
+	    __pycache__
+	    .cache
+	    worktrees
+	    C:\Habait\tools\habait-venv
+	    C:\Habait\tools\ghidra_12.1.4_PUBLIC
+	    C:\Habait\tools\downloads\blender
+	    
+  Options : *.* /NDL /S /E /DCOPY:DAT /COPY:DAT /NP /XJ /R:2 /W:2 
+
+------------------------------------------------------------------------------
+
+	  *EXTRA File 		   16027	C:\RnD\Projects\Habait\REPOINTED.md
+	    Older     		   10987	C:\Habait\CLAUDE.md
+	    Older     		  199242	C:\Habait\memory.md
+	    Older     		   22739	C:\Habait\SESSIONS.md
+	    Older     		    7394	C:\Habait\.claude\agents\blender-scene.md
+	    Older     		     562	C:\Habait\.claude\agents\CLAUDE.md
+	    Older     		    6685	C:\Habait\.claude\agents\cloud-render.md
+	    Older     		    6882	C:\Habait\.claude\agents\corpus-and-docs.md
+	    Older     		    7138	C:\Habait\.claude\agents\engine-builder.md
+	    Older     		    7445	C:\Habait\.claude\agents\genai-look.md
+	    Older     		    7252	C:\Habait\.claude\agents\platform-dev.md
+	    Older     		    6672	C:\Habait\.claude\agents\qa-reviewer.md
+	    Older     		   10492	C:\Habait\data\sales-plans\LABELING-GUIDE-he.md
+	    Older     		    8596	C:\Habait\data\sales-plans\README.md
+	    Older     		    4252	C:\Habait\data\sales-plans\eval\README.md
+	    Older     		     831	C:\Habait\data\sales-plans\eval\2026-11-02\inputs\prompt_crop.txt
+	    Older     		     892	C:\Habait\data\sales-plans\eval\2026-11-02\inputs\prompt_full-sheet.txt
+	    Older     		    7402	C:\Habait\data\sales-plans\legal\lawyer-checklist-he.md
+	    Older     		  117345	C:\Habait\development\tasks\habait-workplan-2026-11-02\README.md
+	    Older     		    3306	C:\Habait\development\tasks\habait-workplan-2026-11-02\run-tasks.md
+	    Older     		   10707	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-01-a1-intake-raster-v1.md
+	    Older     		   16681	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-02-a2-correction-screen.md
+	    Older     		   21027	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-03-a4-building-units.md
+	    Older     		   55069	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-04-a5-engine-cli.md
+	    Older     		   14420	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-05-a6-gates-qa-report.md
+	    Older     		   20853	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-06-a3-intake-dwg-ifc.md
+	    Older     		   28870	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-07-b1-furnish-from-plan.md
+	    Older     		    6075	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-08-b1b-infinigen-trial.md
+	    Older     		   11486	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-09-b4a-dollhouse-glb-export.md
+	    Older     		   25448	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-10-b4b-3d-tab-minimap.md
+	    Older     		   16341	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-11-b3-cheap-panos-bench.md
+	    Older     		   18645	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-12-b2-look-lock-lora-ab.md
+	    Older     		   17851	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-13-b5-360-transitions.md
+	    Older     		    6404	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-14-b5b-social-reel.md
+	    Older     		    8454	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-15-c1-projection-mapping-v1.md
+	    Older     		   17509	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-16-c2-life-layers.md
+	    Older     		   19514	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-17-c3a-flight-path-segments.md
+	    Older     		   30360	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-18-c3b-kaggle-render-farm.md
+	    Older     		   34415	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-19-c4-hotspot-polygons.md
+	    Older     		   32697	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-20-c5-enter-apartment-360.md
+	    Older     		   17052	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-21-c6a-turntable-availability.md
+	    Older     		   42021	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-22-c6b-all-units-batch.md
+	    Older     		   17645	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-23-d1b-apartment-page-zip.md
+	    Older     		   54273	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-24-d2-analytics-leads.md
+	    Older     		   19508	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-25-d3-landing-ab.md
+	    Older     		   16704	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-26-d4-light-admin.md
+	    Older     		    6341	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-27-d5-upload-queue.md
+	    Older     		    6508	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-28-e1-eval-set.md
+	    Older     		   25726	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-29-e2-live-bench.md
+	    Older     		   17544	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-30-e3-legal-caption-v1.md
+	    Older     		   24589	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-31-e4-engine-docs.md
+	    Older     		   11743	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-32-qa-gate-m1.md
+	    Older     		    5573	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-33-qa-gate-m2.md
+	    Older     		   61942	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-34-flow-integration-real-segments.md
+	    Older     		   30265	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-35-engine-video-stage-kling.md
+	    Older     		    8456	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-36-platform-cinematic-player.md
+	    Older     		   12379	C:\Habait\development\tasks\habait-workplan-2026-11-02\task-37-upload-to-flow-gap-map.md
+	    Older     		    6996	C:\Habait\docs\agent-team-org-chart.md
+	    Older     		    3669	C:\Habait\docs\_memory_preamble.txt
+	    Older     		    1326	C:\Habait\docs\governance\OWED.md
+	    Older     		    5588	C:\Habait\habait-walkaround\360walkaround\pipeline\probe\hello-depth-preview.png
+	    Older     		   68276	C:\Habait\habait-walkaround\360walkaround\pipeline\probe\hello-depth.exr
+	    Older     		     982	C:\Habait\habait-walkaround\360walkaround\pipeline\probe\hello-render.json
+	    Older     		  130095	C:\Habait\habait-walkaround\360walkaround\pipeline\probe\hello.png
+	    Older     		   68191	C:\Habait\habait-walkaround\360walkaround\tours\apt846-furnished\manifest.json
+	    Older     		  365796	C:\Habait\habait-walkaround\360walkaround\tours\apt846-furnished\scene-full.report.json
+	    Older     		   18437	C:\Habait\habait-walkaround\docs\rnd\2026-11-01-m1-status.md
+	    Older     		   35106	C:\Habait\habait-walkaround\docs\rnd\2026-11-01-realistic-render-research.md
+	    Older     		   39374	C:\Habait\habait-walkaround\Habait\engine\building.py
+	    Older     		   33415	C:\Habait\habait-walkaround\Habait\engine\README.md
+	    Older     		   45337	C:\Habait\habait-walkaround\Habait\engine\bench\habait_bench.py
+	    Older     		    7303	C:\Habait\habait-walkaround\Habait\engine\bench\README-he.md
+	    Older     		    2079	C:\Habait\habait-walkaround\Habait\engine\bench\adapters\qwen_edit_2511.py
+	    Older     		    9617	C:\Habait\habait-walkaround\Habait\engine\correct\README-he.md
+	    Older     		   18397	C:\Habait\habait-walkaround\Habait\engine\correct\serve.mjs
+	    Older     		    9563	C:\Habait\habait-walkaround\Habait\engine\correct\fixtures\ui-run.mjs
+	    Older     		   23748	C:\Habait\habait-walkaround\Habait\engine\docs\add-a-project-he.md
+	    Older     		   27419	C:\Habait\habait-walkaround\Habait\engine\docs\fresh-run-checklist-he.md
+	    Older     		   13375	C:\Habait\habait-walkaround\Habait\engine\docs\swap-a-model-he.md
+	    Older     		   37062	C:\Habait\habait-walkaround\Habait\engine\docs\upload-to-flow-gap-he.md
+	    Older     		   43489	C:\Habait\habait-walkaround\Habait\engine\experiments\look-lock\ab.py
+	    Older     		   19012	C:\Habait\habait-walkaround\Habait\engine\experiments\look-lock\compare.html
+	    Older     		   34762	C:\Habait\habait-walkaround\Habait\engine\experiments\panos-cheap\run.py
+	    Older     		    6423	C:\Habait\habait-walkaround\Habait\engine\fixtures\rainbow-846.project.json
+	    Older     		   19777	C:\Habait\habait-walkaround\Habait\engine\intake\README.md
+	    Older     		    4744	C:\Habait\habait-walkaround\Habait\engine\stages\building.py
+	    Older     		   11127	C:\Habait\habait-walkaround\Habait\engine\stages\common.py
+	    Older     		    6507	C:\Habait\habait-walkaround\Habait\engine\stages\export.py
+	    Older     		    5726	C:\Habait\habait-walkaround\Habait\engine\stages\paid.py
+	    Older     		   29899	C:\Habait\habait-walkaround\Habait\engine\stages\video.py
+	    Older     		   54598	C:\Habait\habait-walkaround\Habait\flyover\bake_skins.py
+	    Older     		    6253	C:\Habait\habait-walkaround\Habait\flyover\contact_sheet.py
+	    Older     		    7552	C:\Habait\habait-walkaround\Habait\flyover\projectors-panos.json
+	    Older     		     755	C:\Habait\habait-walkaround\Habait\flyover\projectors.json
+	    Older     		   28360	C:\Habait\habait-walkaround\Habait\flyover\project_skin.py
+	    Older     		    6952	C:\Habait\habait-walkaround\Habait\flyover\README.md
+	    Older     		   26949	C:\Habait\habait-walkaround\Habait\flyover\render_check.py
+	    Older     		   13738	C:\Habait\habait-walkaround\Habait\flyover\REPORT.md
+	    Older     		   13835	C:\Habait\habait-walkaround\Habait\flyover\batch\README-he.md
+	    Older     		   11042	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\flux3_edit_video.json
+	    Older     		   10966	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\gemini_omni_flash_edit.json
+	    Older     		   11064	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\kling4_v2v_5s.json
+	    Older     		    4853	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\kling4_v2v_5s_first49.json
+	    Older     		    7585	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\kling4_v2v_5s_first81.json
+	    Older     		   11063	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\ltx23_r2r_strong_5s.json
+	    Older     		    4869	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\ltx23_r2r_strong_5s_first49.json
+	    Older     		    7603	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\ltx23_r2r_strong_5s_first81.json
+	    Older     		   11018	C:\Habait\habait-walkaround\Habait\flyover\cloud\metrics\baselines\wan30_reference.json
+	    Older     		    8558	C:\Habait\habait-walkaround\Habait\flyover\equirect\README-he.md
+	    Older     		    6979	C:\Habait\habait-walkaround\Habait\flyover\hotspots\README-he.md
+	    Older     		   40513	C:\Habait\habait-walkaround\Habait\flyover\kaggle\push_pull.py
+	    Older     		    6356	C:\Habait\habait-walkaround\Habait\flyover\kaggle\README-he.md
+	    Older     		   65368	C:\Habait\habait-walkaround\Habait\flyover\life\life.py
+	    Older     		    7391	C:\Habait\habait-walkaround\Habait\flyover\life\README-he.md
+	    Older     		    3973	C:\Habait\habait-walkaround\Habait\flyover\panos\node-b-tower\projectors.json
+	    Older     		    3987	C:\Habait\habait-walkaround\Habait\flyover\panos\node-c-facade\projectors.json
+	    Older     		    8245	C:\Habait\habait-walkaround\Habait\flyover\turntable\README-he.md
+	    Older     		    8327	C:\Habait\habait-walkaround\Habait\platform\landing.html
+	    Newer     		   54417	C:\Habait\habait-walkaround\Habait\platform\js\flow.js
+	    Older     		   34294	C:\Habait\habait-walkaround\Habait\platform\test\analytics.test.mjs
+	    Older     		   15916	C:\Habait\habait-walkaround\Habait\platform\test\apartment.test.mjs
+	    Older     		   13165	C:\Habait\habait-walkaround\Habait\platform\test\card-overflow.test.mjs
+	    Newer     		   37044	C:\Habait\habait-walkaround\Habait\platform\test\flow-cine.test.mjs
+	    Older     		   31375	C:\Habait\habait-walkaround\Habait\platform\test\flow-real.test.mjs
+	    Older     		   25443	C:\Habait\habait-walkaround\Habait\platform\test\landing.test.mjs
+	    Older     		   23269	C:\Habait\habait-walkaround\Habait\platform\test\minimap.test.mjs
+	    Older     		   28927	C:\Habait\habait-walkaround\Habait\platform\test\transition.test.mjs
+	    Newer     		  263547	C:\Habait\habait-walkaround\Habait\platform\test\shots\approach-phone.png
+	    Newer     		  644258	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-desktop-en.png
+	    Newer     		  245389	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-phone.png
+	    Newer     		  204573	C:\Habait\habait-walkaround\Habait\platform\test\shots\enter-phone.png
+	    Newer     		  198086	C:\Habait\habait-walkaround\Habait\platform\test\shots\handoff-phone.png
+	    Newer     		  151376	C:\Habait\habait-walkaround\Habait\platform\test\shots\index.png
+	    Newer     		   48914	C:\Habait\habait-walkaround\Habait\platform\test\shots\picker-card-phone.png
+	    Newer     		   52302	C:\Habait\habait-walkaround\Habait\platform\test\shots\picker-en-phone.png
+	    Newer     		   48696	C:\Habait\habait-walkaround\Habait\platform\test\shots\picker-phone.png
+	    Newer     		  936929	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-overflow\desktop-en-lead-form.png
+	    Newer     		  907086	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-overflow\desktop-he-lead-form.png
+	    Newer     		  485660	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-overflow\iphone13-en-lead-form.png
+	    Newer     		  458919	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-overflow\iphone13-he-lead-form.png
+	    Newer     		  548407	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-overflow\pixel7-en-lead-form.png
+	    Newer     		  571840	C:\Habait\habait-walkaround\Habait\platform\test\shots\card-overflow\pixel7-he-lead-form.png
+	    Newer     		   1.0 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-01-orbit-open.png
+	    Newer     		   1.1 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-02-orbit-mid.png
+	    Newer     		   1.0 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-03-hold.png
+	    Newer     		 1038139	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-04-hold-drag.png
+	    Newer     		  887804	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-05-card.png
+	    Newer     		 1011517	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-06-descend.png
+	    Newer     		  809067	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-07-enter.png
+	    Newer     		  463016	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-08-enter-last.png
+	    Newer     		  320694	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-09-bridge-pose.png
+	    Newer     		  310374	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-09c-bridge-control-+10deg.png
+	    Newer     		  317306	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-09c-bridge-control-+20deg.png
+	    Newer     		  317801	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-09c-bridge-control--10deg.png
+	    Newer     		  337418	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-09c-bridge-control--20deg.png
+	    Newer     		  826380	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-10-bridge-turned.png
+	    Newer     		  851847	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\desktop-11-tour.png
+	    Newer     		  993783	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-01-orbit-open.png
+	    Newer     		  976899	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-02-orbit-mid.png
+	    Newer     		 1000541	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-03-hold.png
+	    Newer     		   1.0 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-04-hold-drag.png
+	    Newer     		  361055	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-05-card.png
+	    Newer     		  810982	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-06-descend.png
+	    Newer     		  627966	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-07-enter.png
+	    Newer     		  397683	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-08-enter-last.png
+	    Newer     		  292684	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-09-bridge-pose.png
+	    Newer     		  261969	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-09c-bridge-control-+10deg.png
+	    Newer     		  224150	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-09c-bridge-control-+20deg.png
+	    Newer     		  324395	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-09c-bridge-control--10deg.png
+	    Newer     		  293090	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-09c-bridge-control--20deg.png
+	    Newer     		  691357	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-10-bridge-turned.png
+	    Newer     		  744302	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\iphone13-11-tour.png
+	    Newer     		   1.1 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-01-orbit-open.png
+	    Newer     		   1.1 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-02-orbit-mid.png
+	    Newer     		   1.1 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-03-hold.png
+	    Newer     		   1.2 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-04-hold-drag.png
+	    Newer     		  614556	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-05-card.png
+	    Newer     		  956397	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-06-descend.png
+	    Newer     		  705478	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-07-enter.png
+	    Newer     		  444785	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-08-enter-last.png
+	    Newer     		  329248	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-09-bridge-pose.png
+	    Newer     		  286339	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-09c-bridge-control-+10deg.png
+	    Newer     		  256354	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-09c-bridge-control-+20deg.png
+	    Newer     		  382333	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-09c-bridge-control--10deg.png
+	    Newer     		  332503	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-09c-bridge-control--20deg.png
+	    Newer     		  868605	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-10-bridge-turned.png
+	    Newer     		  915846	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\pixel7-11-tour.png
+	    Newer     		  461760	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\iphone13-reference-before-after.jpg
+	    New File  		  687934	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\01-open.png
+	    New File  		  685869	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\02-orbit-mid.png
+	    New File  		  661899	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\03-hold.png
+	    New File  		  651488	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\04-hold-drag.png
+	    New File  		  254982	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\05-card.png
+	    New File  		  662452	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\06-descent-start.png
+	    New File  		  596674	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\07-descent-mid.png
+	    New File  		  604762	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\08-enter.png
+	    New File  		  679993	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\before-habait-platform\09-tour.png
+	    New File  		  534920	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\00-landing.png
+	    New File  		   1.0 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\01-open.png
+	    New File  		   1.0 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\02-orbit-mid.png
+	    New File  		  960278	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\03-hold.png
+	    New File  		 1008965	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\04-hold-drag.png
+	    New File  		  385936	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\05-card.png
+	    New File  		   1.0 m	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\06-descent-start.png
+	    New File  		  686936	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\07-descent-mid.png
+	    New File  		  668178	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\08-descent-end.png
+	    New File  		  676518	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-cine\compare\reference-habait-flow\09-tour.png
+	    Newer     		  847989	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-01-approach.png
+	    Newer     		  784308	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-02-orbit.png
+	    Newer     		  693165	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-03-hold.png
+	    Newer     		  602874	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-04-card.png
+	    Newer     		  694862	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-05-descend.png
+	    Newer     		  797806	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-06-enter.png
+	    Newer     		  811852	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-07-enter-last.png
+	    Newer     		  902656	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\desktop-08-tour.png
+	    Newer     		  703544	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-01-approach.png
+	    Newer     		  623562	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-02-orbit.png
+	    Newer     		  655737	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-03-hold.png
+	    Newer     		  254321	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-04-card.png
+	    Newer     		  675689	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-05-descend.png
+	    Newer     		  632720	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-06-enter.png
+	    Newer     		  668070	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-07-enter-last.png
+	    Newer     		  761132	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\iphone13-08-tour.png
+	    Newer     		  835431	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-01-approach.png
+	    Newer     		  766563	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-02-orbit.png
+	    Newer     		  863189	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-03-hold.png
+	    Newer     		  437899	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-04-card.png
+	    Newer     		  823355	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-05-descend.png
+	    Newer     		  755284	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-06-enter.png
+	    Newer     		  844289	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-07-enter-last.png
+	    Newer     		  942904	C:\Habait\habait-walkaround\Habait\platform\test\shots\flow-real\pixel7-08-tour.png
+	    Older     		   90120	C:\Habait\habait-walkaround\Habait\platform\tools\build_segments.mjs
+	    Older     		   45984	C:\Habait\habait-walkaround\Habait\platform\tools\build_zip.mjs
+	    Newer     		  307480	C:\Habait\habait-walkaround\Habait\platform\_local\events.jsonl
+	    Older     		    5715	C:\Habait\habait-walkaround\Habait\studio\README.md
+	    Older     		    3640	C:\Habait\habait-walkaround\Habait\studio\lib\env.mjs
+	    Older     		    7932	C:\Habait\habait-walkaround\Habait\studio\pipeline\stages\video.mjs
+	    Older     		   17038	C:\Habait\habait-walkaround\Habait\tour360\apartments\apt846\dollhouse\export-report.json
+	    Older     		   17045	C:\Habait\habait-walkaround\Habait\tour360\apartments\apt846\dollhouse\report.json
+	    Older     		   12163	C:\Habait\mix\Reengeneering for demo - ‰š…‡.md
+	    Older     		   23030	C:\Habait\mix\SESSIONS-archive-2026-11-02.md
+	    Older     		    2501	C:\Habait\research\fal-bench-2026-11-02\ledger-A.json
+	    Older     		    3273	C:\Habait\research\fal-bench-2026-11-02\ledger-B.json
+	    Older     		    3781	C:\Habait\research\fal-bench-2026-11-02\ledger-C.json
+	    Older     		    1757	C:\Habait\research\fal-bench-2026-11-02\ledger-D.json
+	    Older     		    2176	C:\Habait\research\fal-bench-2026-11-02\ledger-E-node-b-tower.json
+	    Older     		    1713	C:\Habait\research\fal-bench-2026-11-02\ledger-E-node-c-facade.json
+	    Older     		    1714	C:\Habait\research\fal-bench-2026-11-02\ledger-E.json
+	    Older     		    6734	C:\Habait\research\fal-bench-2026-11-02\ledger.json
+	    Older     		    5269	C:\Habait\research\fal-bench-2026-11-02\run_fal.py
+	    Older     		    7521	C:\Habait\research\fal-bench-2026-11-02\score.py
+	    Older     		   18592	C:\Habait\research\fal-bench-2026-11-02\flyover3d\HANDOFF.md
+	    Older     		    4233	C:\Habait\research\fal-bench-2026-11-02\site\files.json
+	    Older     		  168250	C:\Habait\research\product-research-2026-11-02\HABAIT-RESEARCH-2026-11-02.md
+	    Older     		   55285	C:\Habait\research\product-research-2026-11-02\SUMMARY-he.md
+	    Older     		   27518	C:\Habait\research\product-research-2026-11-02\WORKPLAN-he.md
+	    Older     		    6528	C:\Habait\tools\README.md
+	    Older     		   12031	C:\Habait\tools\bench\fidelity_gate.py
+	    Older     		   69226	C:\Habait\tools\bench\apt846-furnished\manifest.json
+	    Older     		  365690	C:\Habait\tools\bench\apt846-furnished\scene-full.report.json
+	    Older     		    4955	C:\Habait\tools\bench\site846\README.md
+	    Older     		    2092	C:\Habait\tools\deploy-vercel\check_live.mjs
+	    Older     		    2836	C:\Habait\tools\deploy-vercel\check_site.mjs
+	    Older     		    6000	C:\Habait\tools\deploy-vercel\README.md
+	    Older     		    2640	C:\Habait\tools\deploy-vercel\stage_all.sh
+	    Older     		    6544	C:\Habait\tools\deploy-vercel\stage_flow.py
+	    Older     		    6761	C:\Habait\tools\deploy-vercel\stage_platform.py
+	    Older     		    1474	C:\Habait\tools\deploy-vercel\stage_vercel.sh
+	    Older     		   12031	C:\Habait\tools\scripts\fidelity_gate.py
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :      1967         2      1965         0         0         0
+   Files :     29571       268     29303         0         0         1
+   Bytes :  30.414 g   69.19 m  30.346 g         0         0    15.6 k
+   Times :   0:00:01   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :           209,098,994 Bytes/sec.
+   Speed :            11,964.740 MegaBytes/min.
+   Ended : Tuesday, November 3, 2026 12:40:06 PM
+

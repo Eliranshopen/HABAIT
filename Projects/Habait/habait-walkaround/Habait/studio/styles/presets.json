@@ -1,0 +1,401 @@
+{
+ "schema": "habait-studio/presets.v1",
+ "source": "docs/rnd/2026-11-01-flyover-room-videos-proposal.md + the 2026-11-01 style research (studio reels, Israeli developer campaigns, tool preset catalogues); camera/lens numbers are archviz practice, not quotes",
+ "defaults": {
+  "tower_exterior": "tlv-golden-hour",
+  "facade_hero": "blue-hour-glow",
+  "interior": "tlv-golden-hour",
+  "social": "vertical-reel"
+ },
+ "variants": {
+  "morning": {
+   "name_he": "בוקר",
+   "name_en": "Morning",
+   "preset": "lived-in-morning",
+   "relight_prompt": null
+  },
+  "evening": {
+   "name_he": "ערב",
+   "name_en": "Evening",
+   "preset": "blue-hour-glow",
+   "relight_prompt": "Relight this exact room for early evening: deep blue dusk sky through the glass, city lights beginning to glow outside, warm interior lighting on (ceiling spots, a floor lamp, a warm LED cove), soft warm reflections on the floor. Keep every wall, window, door and piece of furniture exactly where it is; change only the light and the sky."
+  }
+ },
+ "delivery": {
+  "master": {
+   "aspect": "16:9",
+   "resolution": "1080p (4K hero)",
+   "fps": 24,
+   "codec": "H.264 MP4, H.265 for 4K"
+  },
+  "social": {
+   "aspect": "9:16",
+   "resolution": "1080x1920",
+   "fps": 30,
+   "length_s": "20-45",
+   "hook_s": 2,
+   "safe_zone": "top 15% / bottom 20% clear"
+  },
+  "clip_lengths_s": {
+   "exterior_approach": "8-12",
+   "per_room": "8-15",
+   "full_film": "60-90 (sales office up to 120)"
+  },
+  "disclaimer_he": "התמונה להמחשה בלבד · הדמיה שנוצרה בסיוע AI"
+ },
+ "presets": [
+  {
+   "id": "tlv-golden-hour",
+   "name_he": "שעת הזהב",
+   "name_en": "Tel Aviv Golden Hour",
+   "default_for": [
+    "tower",
+    "interior",
+    "sea-view"
+   ],
+   "when": "west / sea-facing towers, terraces, penthouses; the broadest-appeal default",
+   "time_of_day": "30-60 min before sunset, sun low over the Mediterranean",
+   "sky": "thin haze, a few warm cirrus",
+   "camera": {
+    "approach": "from over the sea toward the facade, slow rise then gentle push to the unit's floor",
+    "facade": "quarter orbit keeping the sun as rim light",
+    "entry": "through the terrace glass into the living room",
+    "room": "dolly toward the window, sun flares across the floor"
+   },
+   "fov_mm": {
+    "approach": 32,
+    "facade": 50,
+    "entry": 20,
+    "room": 22
+   },
+   "grade": "medium contrast, saturation +10%, warm WB ~5000K, slightly lifted blacks; Kodak 2383 print family",
+   "palette": [
+    "light European oak",
+    "cappuccino travertine",
+    "warm white walls",
+    "linen",
+    "brass / champagne metal",
+    "olive tree on the terrace"
+   ],
+   "lifestyle": "two glasses of white wine on the terrace, one person leaning on the rail, sheer curtains moving",
+   "music": "warm ambient / neo-classical piano and strings, 70-85 BPM",
+   "text": "thin geometric Hebrew sans, white lower-third, project name in English, developer logo bottom-right",
+   "prompt_fragment": "Photorealistic architectural film, Tel Aviv residential tower at golden hour, low warm sun over the Mediterranean, soft haze, long shadows, slow cinematic camera motion, warm Kodak film grade with lifted blacks, light oak floors and travertine catching sunlight, sheer linen curtains moving in a breeze, calm and aspirational, no people, smooth gimbal motion, 24 fps."
+  },
+  {
+   "id": "blue-hour-glow",
+   "name_he": "השעה הכחולה",
+   "name_en": "Blue Hour Glow",
+   "default_for": [
+    "facade-hero"
+   ],
+   "when": "the hero opening and the facade; dense urban towers where lit windows and the lobby sell",
+   "time_of_day": "15-25 min after sunset",
+   "sky": "deep cobalt-to-indigo gradient, no stars, city lights on",
+   "camera": {
+    "approach": "street-level rise along the facade revealing the skyline",
+    "facade": "slow orbit with the lit lobby in frame",
+    "entry": "push through the double-height lobby or the terrace glass",
+    "room": "slow push; warm interior vs cool window"
+   },
+   "fov_mm": {
+    "approach": 26,
+    "facade": 35,
+    "entry": 22,
+    "room": 22
+   },
+   "grade": "high contrast, cool shadows ~7000K with warm 2800K practicals, crisp blacks; teal-and-amber city night family",
+   "palette": [
+    "dark bronze / black metal frames",
+    "backlit stone",
+    "glass",
+    "walnut",
+    "black doors",
+    "smoked glass",
+    "brass"
+   ],
+   "lifestyle": "a lit lobby with a doorman, one lit terrace with people",
+   "music": "cinematic electronic-orchestral hybrid, slow build, 60-75 BPM",
+   "text": "bold white Hebrew slogan over the sky, logo lockup at the end",
+   "prompt_fragment": "Cinematic blue hour, modern Tel Aviv high-rise, deep indigo sky gradient, warm interior lights glowing in the apartments, illuminated lobby in stone and bronze, slow camera rise revealing skyline and sea, high-contrast teal-and-amber grade with clean blacks, reflections on glass, gentle camera motion, photoreal, 24 fps."
+  },
+  {
+   "id": "med-noon",
+   "name_he": "צהריים ים-תיכוני",
+   "name_en": "Mediterranean Noon",
+   "default_for": [],
+   "when": "white / light-stone facades, sculptural buildings, seafront projects; architecture-forward developers",
+   "time_of_day": "11:00-14:00, hard sun",
+   "sky": "saturated clear blue, the sea deep turquoise",
+   "camera": {
+    "approach": "high aerial descending toward roof terraces",
+    "facade": "lateral glide revealing balcony shadow patterns",
+    "entry": "terrace to interior",
+    "room": "pan from shaded interior to bright window, controlled exposure"
+   },
+   "fov_mm": {
+    "approach": 24,
+    "facade": 60,
+    "entry": 22,
+    "room": 22
+   },
+   "grade": "editorial: saturation +15%, strong contrast, neutral-cool WB 5600K, crisp micro-contrast, blue/terracotta complement",
+   "palette": [
+    "white plaster",
+    "light limestone",
+    "travertine",
+    "light oak",
+    "white bouclé",
+    "terracotta accents",
+    "pool blue"
+   ],
+   "lifestyle": "pool scene, towels, market flowers",
+   "music": "upbeat Mediterranean acoustic / indie, 95-110 BPM",
+   "text": "editorial magazine type, large and thin, English + Hebrew",
+   "prompt_fragment": "Bright Mediterranean noon, Tel Aviv seafront residential tower with a white facade and deep balcony shadows, saturated clear blue sky, turquoise sea, editorial architectural photography look, high contrast, vivid clean colours, slow lateral glide, crisp limestone and white plaster textures, photoreal, 24 fps."
+  },
+  {
+   "id": "soft-overcast",
+   "name_he": "אור רך",
+   "name_en": "Nordic Soft Overcast",
+   "default_for": [
+    "materials"
+   ],
+   "when": "architect-led projects, interior-heavy clips, materials showcase; buyers who distrust glossy renders",
+   "time_of_day": "bright-cloudy morning, no direct sun",
+   "sky": "overcast, big soft skylight",
+   "camera": {
+    "approach": "low and slow, almost static",
+    "facade": "slight push",
+    "entry": "slow walk-in",
+    "room": "slow dolly, long holds on materials"
+   },
+   "fov_mm": {
+    "approach": 40,
+    "facade": 50,
+    "entry": 26,
+    "room": 26
+   },
+   "grade": "low-medium contrast, saturation -15%, neutral-cool WB, soft highlight roll-off; Fuji Pro 400H muted filmic",
+   "palette": [
+    "pale oak",
+    "limewash walls",
+    "grey travertine",
+    "linen",
+    "wool",
+    "matte black fixtures",
+    "ceramics"
+   ],
+   "lifestyle": "a book, a coffee, plants, a crumpled throw; imperfection welcome",
+   "music": "sparse piano, ambient, 55-70 BPM",
+   "text": "small and quiet, room names and sqm only",
+   "prompt_fragment": "Soft overcast daylight, muted painterly architectural visualization, desaturated natural palette, pale oak floor, limewash walls, grey travertine, linen sofa, matte black fixtures, slow steady dolly at waist height, low-contrast film look, calm lived-in atmosphere, no direct sunlight, photoreal, 24 fps."
+  },
+  {
+   "id": "dark-cinematic",
+   "name_he": "יוקרה קולנועית",
+   "name_en": "Dark Cinematic Luxury",
+   "default_for": [
+    "penthouse"
+   ],
+   "when": "penthouses, branded residences, ultra-luxury, the sales-office screen",
+   "time_of_day": "night or late dusk",
+   "sky": "dark, city bokeh; optional wet street reflections",
+   "camera": {
+    "approach": "night aerial with city bokeh",
+    "facade": "very slow orbit",
+    "entry": "arrival, lobby, lift doors, corridor",
+    "room": "dolly through a dark corridor into the lit living room with the city view"
+   },
+   "fov_mm": {
+    "approach": 40,
+    "facade": 50,
+    "entry": 28,
+    "room": 30
+   },
+   "grade": "high contrast, crushed blacks, saturation -10%, warm practicals vs cool city, anamorphic flares, light grain; ARRI LogC to Rec709",
+   "palette": [
+    "dark walnut",
+    "fluted dark wood",
+    "Arabescato / Nero Marquina marble",
+    "smoked glass",
+    "brass",
+    "leather",
+    "backlit onyx"
+   ],
+   "lifestyle": "a whisky glass, a dressed table, a concierge",
+   "music": "cinematic strings / brass or slow electronic, 60-70 BPM, a swell at the reveal",
+   "text": "champagne thin type, English project name large, Hebrew small",
+   "prompt_fragment": "Dark cinematic luxury, night-time penthouse in a Tel Aviv tower, floor-to-ceiling windows with city-light bokeh, brass and walnut interior, fluted dark wood wall, marble island, deep shadows and soft practical lamps, slow anamorphic dolly, subtle lens flare, fine film grain, ARRI-style grade, elegant and exclusive, photoreal, 24 fps."
+  },
+  {
+   "id": "lived-in-morning",
+   "name_he": "בוקר ראשון",
+   "name_en": "Lived-In Morning",
+   "default_for": [
+    "family"
+   ],
+   "when": "family-oriented projects, kitchens and kids' rooms, urban renewal; social content",
+   "time_of_day": "07:30-09:30, clear, low eastern sun",
+   "sky": "fresh clear morning",
+   "camera": {
+    "approach": "low over the park / street",
+    "facade": "gentle rise",
+    "entry": "the door opens into the kitchen",
+    "room": "follow-shot, pan to the window"
+   },
+   "fov_mm": {
+    "approach": 28,
+    "facade": 40,
+    "entry": 26,
+    "room": 26
+   },
+   "grade": "natural contrast, saturation +5%, slightly warm 5200K, airy highlights; Portra 400",
+   "palette": [
+    "light oak",
+    "white quartz / limestone",
+    "rattan",
+    "linen",
+    "plants",
+    "black-framed interior glass partition"
+   ],
+   "lifestyle": "breakfast on the island, coffee steam, a dog, kids' backpacks",
+   "music": "acoustic guitar / indie-folk, 90-100 BPM",
+   "text": "friendly rounded Hebrew sans, conversational captions, room labels",
+   "prompt_fragment": "Bright early-morning light streaming into an open-plan kitchen and living room, lived-in realism, breakfast details and coffee steam, light oak floor, white stone island, rattan chairs, plants, black-framed glass partition, natural gimbal motion, Portra-like warm natural grade, soft shadows, photoreal, 24 fps."
+  },
+  {
+   "id": "vertical-reel",
+   "name_he": "ריל אנכי",
+   "name_en": "Vertical Reel Punch",
+   "default_for": [
+    "social"
+   ],
+   "when": "9:16 Instagram / TikTok teasers of 15-25 s, recut from any other preset",
+   "time_of_day": "inherits the parent preset (prefer golden hour or blue hour)",
+   "sky": "inherits",
+   "camera": {
+    "approach": "worm's-eye rise up the tower from the street",
+    "facade": "fast smooth push-in",
+    "entry": "macro detail to wide match-cut",
+    "room": "fast push-ins, one human beat max, loopable end"
+   },
+   "fov_mm": {
+    "approach": 18,
+    "facade": 20,
+    "entry": 20,
+    "room": 22
+   },
+   "grade": "parent preset +10% contrast and saturation, sharpened for small screens",
+   "palette": [
+    "inherits"
+   ],
+   "lifestyle": "one strong human beat at most",
+   "music": "110-125 BPM electronic or a licensed trend track, cuts on the beat",
+   "text": "big bold Hebrew captions centred in the safe zone, sound-off friendly, price / location callouts",
+   "prompt_fragment": "Vertical 9:16 cinematic reel, worm's-eye view rising up a glass residential tower in Tel Aviv, fast smooth push-in, macro close-up of travertine texture cutting to a wide terrace view of the sea, high-contrast punchy grade, golden hour, crisp and energetic but stable camera, loopable, photoreal, 30 fps."
+  },
+  {
+   "id": "painterly-concept",
+   "name_he": "קונספט מצויר",
+   "name_en": "Painterly Concept",
+   "default_for": [
+    "presale"
+   ],
+   "when": "very early pre-sale when the developer will not commit to finishes; architect-facing decks",
+   "time_of_day": "soft diffuse",
+   "sky": "abstract",
+   "camera": {
+    "approach": "slow pan",
+    "facade": "slow orbit",
+    "entry": "none",
+    "room": "none (stills and pans only)"
+   },
+   "fov_mm": {
+    "approach": 40,
+    "facade": 50,
+    "entry": 35,
+    "room": 35
+   },
+   "grade": "low saturation, paper texture, linework; or white model with outlines",
+   "palette": [
+    "indicated, not rendered",
+    "greenery and people as loose silhouettes"
+   ],
+   "lifestyle": "silhouettes",
+   "music": "light piano",
+   "text": "hand-drawn feel captions, 'הדמיה קונספטואלית'",
+   "prompt_fragment": "Painterly architectural concept illustration of a residential tower, loose watercolor washes with fine ink linework, soft diffuse light, muted palette, visible paper texture, people as light silhouettes, gentle slow pan, non-photoreal, elegant, 24 fps."
+  },
+  {
+   "id": "habait-tour-morning",
+   "name_he": "בוקר · הלוק של הסיור",
+   "name_en": "Habait Tour Morning",
+   "default_for": [],
+   "when": "any project with a skinned 360 tour (the keyframes copy the panos; the video prompt must say the same look, never a generic one)",
+   "time_of_day": "08:00-10:00, clear, soft eastern sun",
+   "sky": "clear pale-blue morning sky with a little haze",
+   "camera": {
+    "approach": "low over the park / street",
+    "facade": "gentle rise",
+    "entry": "the door opens into the kitchen",
+    "room": "follow-shot, pan to the window"
+   },
+   "fov_mm": {
+    "approach": 28,
+    "facade": 40,
+    "entry": 26,
+    "room": 26
+   },
+   "grade": "natural contrast, saturation +5%, slightly warm 5200K, airy highlights; Portra 400",
+   "palette": [
+    "pale limestone",
+    "warm white plaster",
+    "greige micro-cement",
+    "sand-grey lacquer",
+    "cream boucle",
+    "travertine",
+    "black-framed glazing"
+   ],
+   "lifestyle": "unstaged, no breakfast props, no people",
+   "music": "acoustic guitar / indie-folk, 90-100 BPM",
+   "text": "friendly rounded Hebrew sans, conversational captions, room labels",
+   "prompt_fragment": "Soft bright morning daylight through the glazing, the apartment's own finished design: a seamless honed pale limestone-look stone floor with no grout lines and no skirting boards, cream zero-line flush doors (frameless, no architrave), warm white plastered walls, a flat white ceiling with slim recessed spots and a warm LED cove, a warm greige micro-cement wall behind the TV, a handleless kitchen in matte sand-grey lacquer with a thin brushed stainless-steel worktop, slim black-framed floor-to-ceiling glazing with sheer off-white linen curtains, cream boucle sofas and armchairs, round pale travertine tables, woven jute rugs, light-oak dining furniture, olive trees in stone planters on the terrace; natural gimbal motion, warm natural grade, soft shadows, photoreal, 24 fps."
+  },
+  {
+   "id": "habait-tour-evening",
+   "name_he": "ערב · הלוק של הסיור",
+   "name_en": "Habait Tour Evening",
+   "default_for": [],
+   "when": "any project with a skinned 360 tour (the keyframes copy the panos; the video prompt must say the same look, never a generic one)",
+   "time_of_day": "18:30-19:30, blue hour",
+   "sky": "deep blue dusk sky, city lights beginning to glow",
+   "camera": {
+    "approach": "low over the park / street",
+    "facade": "gentle rise",
+    "entry": "the door opens into the kitchen",
+    "room": "follow-shot, pan to the window"
+   },
+   "fov_mm": {
+    "approach": 28,
+    "facade": 40,
+    "entry": 26,
+    "room": 26
+   },
+   "grade": "natural contrast, saturation +5%, slightly warm 5200K, airy highlights; Portra 400",
+   "palette": [
+    "pale limestone",
+    "warm white plaster",
+    "greige micro-cement",
+    "sand-grey lacquer",
+    "cream boucle",
+    "travertine",
+    "black-framed glazing"
+   ],
+   "lifestyle": "unstaged, no breakfast props, no people",
+   "music": "acoustic guitar / indie-folk, 90-100 BPM",
+   "text": "friendly rounded Hebrew sans, conversational captions, room labels",
+   "prompt_fragment": "Early evening blue hour: deep blue dusk sky through the glazing, city lights outside, warm interior lighting on (recessed spots, a floor lamp, a warm LED cove), the apartment's own finished design: a seamless honed pale limestone-look stone floor with no grout lines and no skirting boards, cream zero-line flush doors (frameless, no architrave), warm white plastered walls, a flat white ceiling with slim recessed spots and a warm LED cove, a warm greige micro-cement wall behind the TV, a handleless kitchen in matte sand-grey lacquer with a thin brushed stainless-steel worktop, slim black-framed floor-to-ceiling glazing with sheer off-white linen curtains, cream boucle sofas and armchairs, round pale travertine tables, woven jute rugs, light-oak dining furniture, olive trees in stone planters on the terrace; natural gimbal motion, warm-on-cool grade, photoreal, 24 fps."
+  }
+ ]
+}

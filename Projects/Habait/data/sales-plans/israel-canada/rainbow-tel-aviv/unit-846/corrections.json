@@ -1,0 +1,11 @@
+{
+  "unit_id": "ic-rainbow-846",
+  "plan_json_sha256_before": null,
+  "corrections": [],
+  "known_residuals": [
+    {"room": "חדר שינה", "printed_cm": [342, 275], "traced_area_m2": 9.314, "printed_area_m2": 9.405, "delta_pct": -1.0, "within_3pct": true},
+    {"room": "חדר שינה הורים", "printed_cm": [348, 344], "traced_area_m2": 12.188, "printed_area_m2": 11.971, "delta_pct": 1.8, "within_3pct": true},
+    {"note": "סכום שטחי החדרים הפנימיים בטרייס 91.10 מ\"ר מול 106.72 במפרט; ההפרש = קירות + חלקים יחסיים ברכוש המשותף (ראו SUMMARY 11.1), לא שגיאת טרייס"}
+  ],
+  "format": "each correction: {\"path\": \"rooms[r-living].name_he\", \"before\": ..., \"after\": ..., \"reason\": \"...\", \"by\": \"eliran|session-id\", \"date\": \"YYYY-MM-DD\"}"
+}

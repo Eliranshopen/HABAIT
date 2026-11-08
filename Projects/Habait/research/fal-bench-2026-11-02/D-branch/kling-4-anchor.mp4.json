@@ -1,0 +1,22 @@
+{
+ "endpoint": "kling/v4/video-to-video/edit",
+ "args": {
+  "video_url": "https://v3b.fal.media/files/b/0ab0d46c/k2CaRozxj6hM-xbtzyc3J_D_clay_193_409.mp4",
+  "prompt": "@Video1 is a plain grey 3D clay render of the camera continuing a single continuous shot: it starts on the terrace of the 16th floor of the Rainbow tower, Tel Aviv, glides toward and through the open glass slider into the living room, and moves across the room toward the door. @Image1 is the EXACT photoreal first frame of this shot: start from it exactly (same framing, same materials, same light) and keep its look for the whole clip. Keep every frame's camera motion, perspective and geometry exactly as in @Video1, only replace the clay with real materials. @Image2 is the look of the living room: wide-plank pale oak parquet, warm white plaster walls, cream boucle curved sofa, round travertine table, jute rug, sand-grey kitchen, cream flush doors without frames, no skirting. Bright clear morning daylight, neutral white light. Smooth, continuous, no cuts, no text, no people, no watermark.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d46d/0K__cwaW5j-CtvuWXkwL__D_anchor_f193.png",
+   "https://v3b.fal.media/files/b/0ab0d46d/Utc7pOqpKZVlcTC4-FP3b_B_kf_interior_gpt.png"
+  ],
+  "resolution": "720p",
+  "duration": 9
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0d479/wib-Y5wCY89xj0AqShDZz_output.mp4",
+   "content_type": "video/mp4",
+   "file_name": "output.mp4",
+   "file_size": 8816676
+  }
+ },
+ "secs": 130
+}

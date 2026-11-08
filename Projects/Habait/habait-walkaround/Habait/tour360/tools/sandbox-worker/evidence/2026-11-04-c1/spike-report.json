@@ -1,0 +1,212 @@
+{
+  "spike": "sandbox-worker C1",
+  "started_utc": "2026-11-04T16:19:52.155Z",
+  "point": "cp-kitchen",
+  "res": "1024x512",
+  "samples": 16,
+  "files": 122,
+  "upload_bytes": 293632261,
+  "file_list_sha256": "5208ecbf508be940ea079df27a6b0503ac7a3777a6b3d8bec0970d5eaefcf10d",
+  "blender": {
+    "version": "4.5.10",
+    "urls": [
+      "https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+      "https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+      "https://mirror.clarkson.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+      "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz"
+    ],
+    "sha256": "198a4248b38899af661aa9241cebd746394eaddbfafbeb53152440de80b118f7"
+  },
+  "price": {
+    "cpu_h": 0.128,
+    "gb_h": 0.0212,
+    "src": "https://vercel.com/docs/sandbox/pricing (Pro, iad1, read 2026-11-04)"
+  },
+  "phases": [
+    {
+      "name": "sysinfo",
+      "wall_s": 0.6,
+      "active_vcpu_s": 0.7,
+      "info": [
+        "4",
+        "               total        used        free      shared  buff/cache   available",
+        "Mem:            8404         278        8220           0          81        8126",
+        "Swap:              0           0           0",
+        "Ubuntu 26.04.1 LTS",
+        "6.18.56",
+        "Python 3.14.4",
+        "v24.22.1",
+        "CPU(s):                                  4",
+        "Model name:                              Intel(R) Xeon(R) Processor @ 2.50GHz",
+        "user=ubuntu uid=1000 home=/vercel pwd=/vercel",
+        "/dev/vdb         64G  3.4G   61G   6% /"
+      ]
+    },
+    {
+      "name": "prep_workdir",
+      "wall_s": 1,
+      "active_vcpu_s": 0.5,
+      "owner": "1000:1000"
+    },
+    {
+      "name": "apt",
+      "wall_s": 10.5,
+      "active_vcpu_s": 10.6
+    },
+    {
+      "name": "blender_download",
+      "wall_s": 12.1,
+      "active_vcpu_s": 4.7,
+      "sha256_ok": true,
+      "url": "https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+      "tries": [
+        {
+          "url": "https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+          "exit": 22,
+          "s": 0.4,
+          "err": "curl: (22) The requested URL returned error: 403"
+        },
+        {
+          "url": "https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+          "exit": 0,
+          "s": 11.5,
+          "err": ""
+        }
+      ]
+    },
+    {
+      "name": "blender_extract",
+      "wall_s": 16,
+      "active_vcpu_s": 18.5,
+      "version_lines": [
+        "Blender 4.5.10 LTS (hash 6dc0b208d1b5 built 2026-05-19 01:31:21)",
+        "Blender 4.5.10 LTS",
+        "\tbuild date: 2026-05-19"
+      ]
+    },
+    {
+      "name": "python_venv",
+      "wall_s": 17.4,
+      "active_vcpu_s": 17.9,
+      "versions": "numpy 2.5.4 cv2 5.0.0 pymupdf 2.1"
+    },
+    {
+      "name": "upload",
+      "wall_s": 143.9,
+      "active_vcpu_s": 7.5,
+      "batches": 10,
+      "mb": 293.6,
+      "mbit_s": null
+    },
+    {
+      "name": "render",
+      "wall_s": 100.4,
+      "active_vcpu_s": 360.6,
+      "exit_code": 0
+    }
+  ],
+  "vcpus": 4,
+  "sandbox": {
+    "name": "sapphire-greasy-zebra-iEPYPf",
+    "create_s": 0.6,
+    "timeout_ms": 2700000,
+    "memory_gb": 8,
+    "persistent": false,
+    "status_after_stop": "stopped"
+  },
+  "outputs": {
+    "pano.webp": {
+      "bytes": 22634,
+      "sha256": "b6ca4d2dda17c0628aa347ab05ee0e4756e77166bd1e2a72570cc41d878219cf"
+    },
+    "depth.png": {
+      "bytes": 53647,
+      "sha256": "7899fbfd9b9359f7133b768c8ec5c05e8c82041035291f5c282cd0e8d89291a3"
+    },
+    "pano.render.json": {
+      "bytes": 10049,
+      "sha256": "03e0e3dcd820f083b965c7cce978e038cf9865620107c504f36ec25bf9bae4a5"
+    },
+    "_render-tour.report.json": {
+      "bytes": 2837,
+      "sha256": "1bb08a8be1ef2996476adb11de4f74d195ff3cb783db6caf1b2a91ee0e9226c1"
+    },
+    "build_scene.log": {
+      "bytes": 65060,
+      "sha256": "54e8100a6bf8e3349e7e608d3ee91f971caaaae218f672a90387142b982ccf0c"
+    },
+    "render-cp-kitchen-x1.log": {
+      "bytes": 2056,
+      "sha256": "c821e97b7b7e42daa2a112369a8fab4d9210364ef9ed4187957af5a7d285e40c"
+    },
+    "scene-full.report.json": {
+      "bytes": 335427,
+      "sha256": "d577e643801a8bc6cc2a0fa42407916c171307b390ae495ad7666301e7c370cb"
+    },
+    "time-render.txt": {
+      "bytes": 944,
+      "sha256": "a38ae6de3f08fc938ff4c6e6a691dcb340af47a915087ddbdefe8dbee2abaa8f"
+    },
+    "mem.log": {
+      "bytes": 3063,
+      "sha256": "71f6de305694ec03150cf5b1cb0d1489616f02b86f786e4ce34affb76768d4b5"
+    }
+  },
+  "render_tour": {
+    "verdict": "PASS",
+    "runs": [
+      {
+        "points": [
+          "cp-kitchen"
+        ],
+        "skip_if_clean": false,
+        "exit": 0,
+        "seconds": 88.64,
+        "skipped": [],
+        "rendered": [
+          "cp-kitchen"
+        ],
+        "log": "renders/_logs/render-cp-kitchen-x1.log"
+      }
+    ],
+    "point_checks": [
+      {
+        "id": "cp-kitchen",
+        "ok": true,
+        "problems": [],
+        "depth": {
+          "w": 1024,
+          "h": 512,
+          "nadir_m": 1.6,
+          "camera_z_m": 1.6,
+          "nadir_error_cm": 0,
+          "zenith_m": 1.3,
+          "expected_zenith_m": 1.3,
+          "open_sky": false,
+          "valid_fraction": 1,
+          "invalid_pixels": 0
+        },
+        "pano_bytes": 22634,
+        "depth_bytes": 53647,
+        "seconds": 87.466,
+        "device_peak_mb": 674.14,
+        "depth_checks_failed": 0,
+        "depth_check_worst_cm": 0.001,
+        "input_key": "30e3ab6518ae8ae582103709970f9c916e78f9522eb7b5d8708c8acdfefdaaf7",
+        "skipped_this_run": false
+      }
+    ],
+    "scene_why": "scene-full.blend does not exist"
+  },
+  "render_exit": 0,
+  "session_wall_s": 307.3,
+  "cost_estimate_usd": {
+    "active_vcpu_h": 0.1169,
+    "provisioned_gb_h": 0.683,
+    "cpu": 0.015,
+    "memory": 0.0145,
+    "total": 0.0294,
+    "basis": "https://vercel.com/docs/sandbox/pricing (Pro, iad1, read 2026-11-04)"
+  },
+  "finished_utc": "2026-11-04T16:25:01.005Z"
+}

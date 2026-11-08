@@ -1,0 +1,16 @@
+# Follow-up fix after close, 2026-11-04 ~07:20 (main session). Reported by rnd-fd (board transition-rise, regression check).
+report: LIVE apartment.html?project=rainbow&unit=846&tab=3d on iPhone 13 (390x664): the 3D frame spans 230..691, under the sticky CTA bar at 595
+  (apartment-3d card 04 requires it above the bar); a later frame.click in the same check timed out ('.dh-sheet .go' covered by #mobileBar).
+  repro: development/tasks/transition-rise/logs/reg-check-04.cjs · output reg-check-04.baseline.out
+cause (this board, card 16 + ux-judge F11):
+  1. html scroll-padding-top (115) was added on top of the existing .apt-panel scroll-margin-top (115): they add, so the panel landed 115 px too low (scrollY 185 instead of 300).
+  2. the 44 px tap targets made the top bar 65 px (was 57): the tab strip stuck at 57 slid 8 px under it, and the 3D frame height formula assumed 57/58/64.
+fix (css/apartment.css only): --apt-top-h 65 / --apt-tabs-h 60 / --apt-bar-h 69 (+ safe areas), measured; one scroll offset (html scroll-padding),
+  the panel scroll-margin removed; tab strip sticky at --apt-top-h; the 3D frame = 100dvh - the three bars - 24.
+working folder: reopened .wt/platform-ui-ux (scripts/wt.py add now reopens a file closed earlier in the same task; the old pair moves to 'rounds'), closed with --go (1 file).
+evidence:
+  preview tree: reg-check-04 adapted to :8855 -> PASS 47 · FAIL 0 (iphone13 frame 124..571 < bar 595; pixel7 124..746 < 770); after tabs 60: 47/0.
+  preview: npm test all green · apartment.test all green · browser.mjs all green.
+  LIVE after copy-back: probe frame 125..571, tabs 65..125, bar 595 · minimap.test all green · apartment.test all green · npm test all green.
+  dist: node tools/build_zip.mjs fixtures/rainbow 846 --out _local/dist/rainbow/846 -> assets/css/apartment.css equals live; apartment.test all green after.
+not deployed (production needs Eliran's own go; the preview link of 2026-11-03 still has the old css).

@@ -1,0 +1,25 @@
+
+=== [1/1] cp-kitchen ======================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : /vercel/sandbox/hw/360walkaround/tours/apt846/scene-full.blend
+[render_pano] point      : cp-kitchen  plan (837.8,532.4,160) yaw 125.5
+[render_pano] camera     : (8.378, -5.324, 1.6) m  euler (90.0, 0.0, -125.5) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 1024x512 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 2048x512 over -360.0000..360.0000 deg, cropped back
+[render_pano] out        : /vercel/sandbox/hw/360walkaround/tours/apt846/renders/cp-kitchen
+[render_pano] input_key  : 30e3ab6518ae8ae5…
+[render_pano] render 1/1: 87.466 s wall  (cycles 87.11s, device peak 674.14 MB, host peak 837.81 MB)
+[render_pano] depth      : depth.png 53,647 B  valid 524,288 / 524,288  sky 0  range 0.965..8.604 m  (0.057 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-kitchen floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-kitchen ceiling z=290 cm]
+              SKIP  room r-kitchen is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 1024x512 22,634 B  zenith mean 155.6/255 (4 colours) · nadir mean 174.3/255 (19 colours) · no_hole=True
+[render_pano] sidecar    : /vercel/sandbox/hw/360walkaround/tours/apt846/renders/cp-kitchen/pano.render.json
+[render_pano] manifest   : /vercel/sandbox/hw/360walkaround/tours/apt846/manifest.json (key 'cp-kitchen')
+OK
+Saved: '/vercel/sandbox/hw/360walkaround/tours/apt846/renders/cp-kitchen/pano-pano-0001'
+Saved: '/vercel/sandbox/hw/360walkaround/tours/apt846/renders/cp-kitchen/pano-depth-0001'
+
+could not get a list of mounted file-systems

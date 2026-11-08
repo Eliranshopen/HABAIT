@@ -1,0 +1,22 @@
+after 1st rise {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":20.2}
+cycle 1 {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":24.2}
+cycle 2 {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":24.6}
+cycle 3 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":25.2}
+cycle 4 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":24.7}
+cycle 5 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":21}
+cycle 6 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":21.1}
+cycle 7 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":20.9}
+cycle 8 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":21}
+cycle 9 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":24.9}
+cycle 10 {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":20.9}
+ok   10 open/close cycles: base {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":20.2} end {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":20.9}
+dive living->kitchen {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":15.9}
+dive kitchen->living {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":22.7}
+dive living->dining {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":25.8}
+dive dining->living {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":21.2}
+dive living->kitchen {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":16.5}
+ok   5 dive cycles: before {"children":5,"geometries":78,"textures":4,"programs":14,"heapMB":20.9} after {"children":6,"geometries":79,"textures":5,"programs":15,"heapMB":16.5} (a held room mesh may remain: +1 child)
+page errors 0 
+ok   reduced motion rise: {"tr":{"kind":"rise","skipped":"reduced-motion"},"preset":"3d","held":false} {"hidden":false,"op":"","lop":""}
+ok   reduced motion dive switches: {"scene":"kitchen","hidden":true,"inert":0} errs 0
+ok   slow device (measured fps): {"tr":{"kind":"rise","frames":2,"ms":1199,"fps":1.7,"skipped":"slow-device"},"preset":"3d"} {"hidden":false,"op":""}

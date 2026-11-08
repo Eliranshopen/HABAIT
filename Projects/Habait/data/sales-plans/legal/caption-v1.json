@@ -1,0 +1,184 @@
+{
+  "schema": "habait.caption/1",
+  "id": "ai-visualization-v1",
+  "supersedes": "he-ai-visualization-v0",
+  "status": "DRAFT v1 (2026-11-02)",
+  "legal_review": {
+    "state": "pending",
+    "counsel": null,
+    "sent": false,
+    "package": "lawyer-package-he.md",
+    "sources": "sources.md",
+    "note_he": "טיוטה לעו\"ד, לא ייעוץ משפטי. לא לפרסום לרוכשים לפני חוות דעת עו\"ד."
+  },
+  "source_md": {
+    "file": "disclaimer-he-en.md",
+    "rule": "he/en.short == md \"## 1.\" and he/en.long == md \"## 2.\" exactly as tools/build_zip.mjs parseDisclaimerMd() returns them (lines joined with \\n, ** removed). The md stays the file the platform tests read; change both together or neither."
+  },
+  "placeholders": {
+    "syntax": "{UPPER_SNAKE}. tools/build_zip.mjs fillVars() replaces /\\{([A-Z_]+)\\}/ and leaves unknown or empty tokens in the text, so a published output must contain no \"{\". The card's {project}/{plan_date}/{developer} are {PROJECT}/{PLAN_DATE}/{DEVELOPER}.",
+    "PROJECT": {
+      "required": true,
+      "from": "project.json name.he / name.en"
+    },
+    "PLAN_DATE": {
+      "required": true,
+      "format": "DD.MM.YYYY",
+      "from": "plan.json plan_meta (source_label_he / trace_date) or meta.json drawing.date; the date printed on the sales plan, never typed by hand"
+    },
+    "UNIT": {
+      "required": "unit-level variants (short, long)",
+      "from": "units.json id (846, not apt846)"
+    },
+    "DEVELOPER": {
+      "required": false,
+      "used_in": "long",
+      "fallback": {
+        "he": "היזם",
+        "en": "the developer"
+      },
+      "note": "stays hidden until the developer consents (D-WQ-18)"
+    },
+    "ARCHITECT": {
+      "required": false,
+      "used_in": "long",
+      "fallback": {
+        "he": "כמצוין בתכנית המכר",
+        "en": "as stated on the sales plan"
+      }
+    },
+    "GEN_DATE": {
+      "required": true,
+      "used_in": "long",
+      "from": "build date"
+    },
+    "VERSION": {
+      "required": true,
+      "used_in": "long",
+      "from": "build version"
+    }
+  },
+  "he": {
+    "short": "הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית מתכנית המכר של דירה {UNIT}, {PROJECT}, מיום {PLAN_DATE}. המסמכים המחייבים הם המפרט והתכניות החתומים. ריהוט, גימורים ונוף להמחשה.",
+    "long": "הדמיה להמחשה בלבד.\nההדמיה הופקה על ידי Habait עבור {DEVELOPER} בסיוע כלי בינה מלאכותית, על בסיס תכנית המכר של דירה {UNIT} בפרויקט {PROJECT} מיום {PLAN_DATE} (אדריכל: {ARCHITECT}). הגאומטריה של הדירה (חדרים, קירות, פתחים) נגזרה מתכנית המכר; מראה החומרים, התאורה, הריהוט, האביזרים, הצמחייה, האנשים והנוף הם פרשנות חזותית ואינם חלק מהממכר.\nהמסמכים המחייבים הם אך ורק המפרט הטכני (לפי חוק המכר (דירות), תשל\"ג-1973, וצו מכר דירות (טופס של מפרט), תשל\"ד-1974) והתכניות החתומות המצורפות לחוזה המכר. בכל סתירה בין ההדמיה לבין המפרט והתכניות, המפרט והתכניות גוברים.\nריהוט, גימורים, כלים סניטריים, מטבח, ארונות, תאורה ואביזרים אינם כלולים בדירה אלא אם נאמר במפורש במפרט. גוונים, חומרים ופריטים שמופיעים בהדמיה עשויים להיות שונים מאלה שיסופקו בפועל.\nשטחים ומידות הם לפי תכניות היזם והמפרט; המידות בהדמיה מוצגות באופן מקורב ואינן מהוות מדידה. מיקום עמודים, קורות, פירים ומערכות עשוי להשתנות בהתאם לתכנון המפורט ולהוראות כל דין.\nהסביבה, הבניינים השכנים, הנוף והתאורה הטבעית מוצגים להמחשה בלבד ואינם מתחייבים.\nהופק: {GEN_DATE}, גרסה {VERSION}. גילוי: חלקים מההדמיה נוצרו או עובדו באמצעות בינה מלאכותית.",
+    "short_project": "הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית על בסיס תכניות הפרויקט {PROJECT} מיום {PLAN_DATE} ומקורות ציבוריים. המסמכים המחייבים הם המפרט והתכניות החתומים. הסביבה, הנוף, האנשים והתאורה להמחשה.",
+    "micro": "הדמיה להמחשה בלבד · בסיוע AI · המחייב: המפרט והתכניות החתומים",
+    "ai_disclosure": "גילוי: חלקים מההדמיה נוצרו או עובדו באמצעות בינה מלאכותית."
+  },
+  "en": {
+    "short": "Illustration only. Generated with AI assistance from the sales plan of unit {UNIT}, {PROJECT}, dated {PLAN_DATE}. The binding documents are the signed specification and plans. Furniture, finishes and views are illustrative.",
+    "long": "Illustration only.\nThis visualization was produced by Habait for {DEVELOPER} with the assistance of artificial-intelligence tools, based on the sales plan of unit {UNIT} in {PROJECT} dated {PLAN_DATE} (architect: {ARCHITECT}). The apartment geometry (rooms, walls, openings) is derived from the sales plan; materials, lighting, furniture, accessories, vegetation, people and views are a visual interpretation and are not part of the property sold.\nThe binding documents are solely the technical specification (under the Sale (Apartments) Law, 5733-1973, and the Sale (Apartments) (Specification Form) Order, 5734-1974) and the signed plans attached to the sale agreement. In any discrepancy between this visualization and the specification and plans, the specification and plans prevail.\nFurniture, finishes, sanitary fixtures, kitchen, closets, lighting and accessories are not included unless expressly stated in the specification. Colours, materials and items shown may differ from those actually supplied.\nAreas and dimensions are per the developer's plans and specification; dimensions in the visualization are approximate and do not constitute a measurement. The location of columns, beams, shafts and building systems may change according to the detailed design and applicable law.\nSurroundings, neighbouring buildings, views and natural light are shown for illustration only and are not guaranteed.\nProduced {GEN_DATE}, version {VERSION}. Disclosure: parts of this visualization were created or processed using artificial intelligence.",
+    "short_project": "Illustration only. Generated with AI assistance from the plans of {PROJECT} dated {PLAN_DATE} and public sources. The binding documents are the signed specification and plans. Surroundings, views, people and lighting are illustrative.",
+    "micro": "Illustration only · AI-assisted · Binding: the signed specification and plans",
+    "ai_disclosure": "Disclosure: parts of this visualization were created or processed using artificial intelligence."
+  },
+  "short": {
+    "he": "הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית מתכנית המכר של דירה {UNIT}, {PROJECT}, מיום {PLAN_DATE}. המסמכים המחייבים הם המפרט והתכניות החתומים. ריהוט, גימורים ונוף להמחשה.",
+    "en": "Illustration only. Generated with AI assistance from the sales plan of unit {UNIT}, {PROJECT}, dated {PLAN_DATE}. The binding documents are the signed specification and plans. Furniture, finishes and views are illustrative."
+  },
+  "full": {
+    "he": "הדמיה להמחשה בלבד.\nההדמיה הופקה על ידי Habait עבור {DEVELOPER} בסיוע כלי בינה מלאכותית, על בסיס תכנית המכר של דירה {UNIT} בפרויקט {PROJECT} מיום {PLAN_DATE} (אדריכל: {ARCHITECT}). הגאומטריה של הדירה (חדרים, קירות, פתחים) נגזרה מתכנית המכר; מראה החומרים, התאורה, הריהוט, האביזרים, הצמחייה, האנשים והנוף הם פרשנות חזותית ואינם חלק מהממכר.\nהמסמכים המחייבים הם אך ורק המפרט הטכני (לפי חוק המכר (דירות), תשל\"ג-1973, וצו מכר דירות (טופס של מפרט), תשל\"ד-1974) והתכניות החתומות המצורפות לחוזה המכר. בכל סתירה בין ההדמיה לבין המפרט והתכניות, המפרט והתכניות גוברים.\nריהוט, גימורים, כלים סניטריים, מטבח, ארונות, תאורה ואביזרים אינם כלולים בדירה אלא אם נאמר במפורש במפרט. גוונים, חומרים ופריטים שמופיעים בהדמיה עשויים להיות שונים מאלה שיסופקו בפועל.\nשטחים ומידות הם לפי תכניות היזם והמפרט; המידות בהדמיה מוצגות באופן מקורב ואינן מהוות מדידה. מיקום עמודים, קורות, פירים ומערכות עשוי להשתנות בהתאם לתכנון המפורט ולהוראות כל דין.\nהסביבה, הבניינים השכנים, הנוף והתאורה הטבעית מוצגים להמחשה בלבד ואינם מתחייבים.\nהופק: {GEN_DATE}, גרסה {VERSION}. גילוי: חלקים מההדמיה נוצרו או עובדו באמצעות בינה מלאכותית.",
+    "en": "Illustration only.\nThis visualization was produced by Habait for {DEVELOPER} with the assistance of artificial-intelligence tools, based on the sales plan of unit {UNIT} in {PROJECT} dated {PLAN_DATE} (architect: {ARCHITECT}). The apartment geometry (rooms, walls, openings) is derived from the sales plan; materials, lighting, furniture, accessories, vegetation, people and views are a visual interpretation and are not part of the property sold.\nThe binding documents are solely the technical specification (under the Sale (Apartments) Law, 5733-1973, and the Sale (Apartments) (Specification Form) Order, 5734-1974) and the signed plans attached to the sale agreement. In any discrepancy between this visualization and the specification and plans, the specification and plans prevail.\nFurniture, finishes, sanitary fixtures, kitchen, closets, lighting and accessories are not included unless expressly stated in the specification. Colours, materials and items shown may differ from those actually supplied.\nAreas and dimensions are per the developer's plans and specification; dimensions in the visualization are approximate and do not constitute a measurement. The location of columns, beams, shafts and building systems may change according to the detailed design and applicable law.\nSurroundings, neighbouring buildings, views and natural light are shown for illustration only and are not guaranteed.\nProduced {GEN_DATE}, version {VERSION}. Disclosure: parts of this visualization were created or processed using artificial intelligence."
+  },
+  "ai_disclosure": {
+    "he": "גילוי: חלקים מההדמיה נוצרו או עובדו באמצעות בינה מלאכותית.",
+    "en": "Disclosure: parts of this visualization were created or processed using artificial intelligence.",
+    "where": "closing sentence of long (verbatim); every short variant already says \"בסיוע בינה מלאכותית\" / \"AI-assisted\"",
+    "metadata": {
+      "exif_xmp": "build_zip.mjs already writes \"<short.en> | plan <PLAN_DATE> | AI-assisted\" into still metadata",
+      "iptc_digital_source_type_proposed": "http://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "state": "proposed, not implemented; question 8 for counsel (EU AI Act art. 50(2) machine-readable marking)"
+    }
+  },
+  "variants": {
+    "short": "unit-level, one line: interior frames, apartment panos, stills, the 3D tab, apartment and landing pages next to media",
+    "long": "unit-level, paragraph: page footers, \"about\" screens, ZIP README",
+    "short_project": "NEW in v1, not pinned by any test: project/exterior level where there is no unit and the geometry is the building mass (aerial orbit, hold screen, building picker, turntable, exterior 360 nodes)",
+    "micro": "NEW in v1, not pinned by any test: a persistent corner line where the short line cannot be legible (video corner, reel, equirect watermark); never alone: the short or short_project must be on the same screen or on the opening/closing card",
+    "ai_disclosure": "the AI sentence on its own, for metadata and for outputs that carry micro only"
+  },
+  "usage": {
+    "video_overlay": {
+      "outputs": "aerial orbit, approach/descent, enter-846 clips, flyover video (cards 17/18/20, habait-98's flow)",
+      "variant": "short_project (exterior) or short (clips that end inside the apartment)",
+      "placement": "opening card >= 3 s burned into the frames + micro as a persistent corner line, text height >= 2.5% of the frame",
+      "burned_in": true
+    },
+    "pano_overlay": {
+      "outputs": "360 viewer (tour360 apartment tour, exterior 360 nodes, flyover3d hold)",
+      "variant": "short (apartment panos) / short_project (exterior nodes)",
+      "placement": "fixed bottom line in the viewer HTML + long behind an \"about this visualization\" button + micro burned into the equirect bottom so a shared screenshot keeps it",
+      "burned_in": "micro only"
+    },
+    "hold_screen": {
+      "outputs": "the stop in front of the building with the unit picker (flow.html .picker-disclaimer, :8899 hold)",
+      "variant": "short_project",
+      "placement": "fixed line under the picker; the unit card shows short with the unit filled"
+    },
+    "page_footer": {
+      "outputs": "every platform page (apartment.html, landing.html, index/flow)",
+      "variant": "long",
+      "placement": "footer, he + en by page language; the short sits next to each visual"
+    },
+    "apartment_page": {
+      "outputs": "apartment.html (card 23): every tab incl. the 3D tab (card 10)",
+      "variant": "short under every tab (.legal-short) + long in the footer and in \"about\"",
+      "state": "live, reads the md through build_zip"
+    },
+    "landing_page": {
+      "outputs": "landing.html (card 25), both arms",
+      "variant": "short next to the media and in the lightbox + long in the footer",
+      "state": "live, template pinned to the md by test/landing.test.mjs"
+    },
+    "zip_readme": {
+      "outputs": "README-he-en.txt in the unit ZIP (build_zip.mjs)",
+      "variant": "long he + en",
+      "placement": "with PLAN_DATE and the sha256 of the plan crop used",
+      "state": "live"
+    },
+    "stills": {
+      "outputs": "stills cut from panos (ZIP, landing tiles, lightbox)",
+      "variant": "short burned into the bottom margin",
+      "metadata": "ai_disclosure.metadata",
+      "state": "live"
+    },
+    "tab_3d": {
+      "outputs": "the 3D tab (card 10) and the offline dollhouse.html in the ZIP",
+      "variant": "short under the canvas + long in <details>",
+      "state": "live"
+    },
+    "reel": {
+      "outputs": "social reel 9:16 (card 14, not built)",
+      "variant": "micro persistent + short on the end card >= 3 s",
+      "notes": "no developer logo (D-WQ-18)"
+    },
+    "turntable": {
+      "outputs": "availability spinner (card 21)",
+      "variant": "short_project",
+      "placement": "fixed line under the spinner"
+    }
+  },
+  "rules": [
+    "The caption sits next to the visual on the same screen or in the same frame; a footer or README alone is not enough (sources.md S7: reservations that are not in the ad are not imputed to the reader; a first misleading contact stays misleading).",
+    "Placeholders are filled automatically from plan.json / project.json / units.json; a published output never contains \"{\".",
+    "The text is identical in every output; any wording change = a new caption version + counsel.",
+    "Same language as the page; bilingual outputs carry both.",
+    "Never the competitor wording \"areas ... not verified\" / \"אינם מאומתים\": it contradicts the product (geometry from the sales plan, documented gates).",
+    "Until counsel signs off: status DRAFT, private pitch only (project.json legal.publish_allowed false)."
+  ],
+  "inventory_2026_11_02": {
+    "note": "where caption-like text lives today (read-only survey by card 30; owners change their own files)",
+    "identical_to_v1": [
+      "Habait/platform/landing.html #legalTemplate (pinned by test/landing.test.mjs)",
+      "Habait/platform/_local/dist/rainbow/846/apartment.json legal (built by tools/build_zip.mjs from the md)",
+      "Habait/platform/demo-transition.html (short, filled for 846)"
+    ],
+    "divergent": [
+      "Habait/platform/fixtures/rainbow/project.json disclaimer: \"...השטחים לפי תכניות היזם ואינם מאומתים\" (residence.tech wording) -> shown by js/picker.js (.picker-disclaimer, unit card) and the apartment.js fallback; owner habait-1d (platform)",
+      "Habait/engine/fixtures/rainbow-846.project.json legal.disclaimer_he + disclaimer_id he-ai-visualization-v0 -> set disclaimer_id ai-visualization-v1; owner habait-1d (engine)",
+      "Habait/tour360/copy/tour360-copy.json optionLine / aiNote / lookDesignedNote; owner habait-ba (= habait-98)",
+      "Habait/studio/styles/presets.json disclaimer_he; owner habait-ba (= habait-98)",
+      "research/fal-bench-2026-11-02/flyover3d (hold screen): no caption found; owner habait-ba (= habait-98)"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "habait-flow-functions",
+  "private": true,
+  "type": "module",
+  "description": "Server dependencies of the habait-flow functions (/api/studio-*); stage_flow.py --studio copies this file to the deploy root.",
+  "dependencies": {
+    "@clerk/backend": "3.26.1",
+    "@vercel/blob": "2.8.2",
+    "@vercel/sandbox": "3.8.0"
+  }
+}

@@ -1,0 +1,458 @@
+{
+ "$schema": "tour360/scenes.v1",
+ "apartment": "demo-01",
+ "coordinateNotes": {
+  "u_v": "normalized position on the FULL equirectangular image: u 0→1 left→right (0.5 = image centre = yaw 0), v 0→1 top→bottom",
+  "yaw_deg": "(u - 0.5) * 360",
+  "pitch_deg_source_formula": "-12 - min(5, (v - 0.60) * 35) — the placement the source tour validated visually; the geometric alternative is (0.5 - v) * 180",
+  "plan": "x/y in the 1200×1200 pixel space of plan/floorplan.webp; the sheet shows viewBox 40 280 1085 665",
+  "initialU": "the generation manifest's estimate of the best initial horizontal view; kept as data only — the viewer starts at `heading` (D-T360-16)",
+  "plan-bearing": "a link with no calibrated marker falls back to the plan bearing atan2(dx, -dy) from this scene to the target",
+  "heading": "the start yaw of the room in degrees (0 = image centre), at pitch -2 — what the source tour applied on every room entry (panorama-viewer.ts visit()); hotspots use it as targetYaw (D-T360-16)"
+ },
+ "scenes": [
+  {
+   "id": "living",
+   "name": {
+    "he": "סלון",
+    "en": "Living lounge",
+    "fr": "Salon"
+   },
+   "zone": {
+    "he": "מרחב מגורים פתוח",
+    "en": "Open living",
+    "fr": "Séjour ouvert"
+   },
+   "asset": "01-living",
+   "plan": {
+    "x": 900,
+    "y": 675
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "initialU": 0.4,
+   "hotspots": [
+    {
+     "to": "kitchen",
+     "u": 0.52,
+     "v": 0.68,
+     "source": "calibrated"
+    },
+    {
+     "to": "hall",
+     "u": 0.34,
+     "v": 0.66,
+     "source": "calibrated"
+    },
+    {
+     "to": "bedroom4",
+     "u": 0.605,
+     "v": 0.61,
+     "source": "calibrated"
+    },
+    {
+     "to": "guest-wc",
+     "u": 0.64,
+     "v": 0.7,
+     "source": "calibrated"
+    },
+    {
+     "to": "terrace",
+     "u": 0.013,
+     "v": 0.67,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "kitchen",
+   "name": {
+    "he": "מטבח ופינת אוכל",
+    "en": "Kitchen & dining",
+    "fr": "Cuisine et salle à manger"
+   },
+   "zone": {
+    "he": "מרחב מגורים פתוח",
+    "en": "Open living",
+    "fr": "Séjour ouvert"
+   },
+   "asset": "02-kitchen",
+   "plan": {
+    "x": 940,
+    "y": 440
+   },
+   "heading": -15,
+   "northOffset": 0,
+   "initialU": 0.42,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.045,
+     "v": 0.65,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "hall",
+   "name": {
+    "he": "מסדרון",
+    "en": "Connecting hallway",
+    "fr": "Couloir"
+   },
+   "zone": {
+    "he": "לב הבית",
+    "en": "The heart of the home",
+    "fr": "Le cœur de la maison"
+   },
+   "asset": "03-hall",
+   "plan": {
+    "x": 684,
+    "y": 554
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "initialU": 0.59,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.748,
+     "v": 0.66,
+     "source": "calibrated"
+    },
+    {
+     "to": "primary",
+     "u": 0.05,
+     "v": 0.69,
+     "source": "calibrated"
+    },
+    {
+     "to": "bedroom2",
+     "u": 0.962,
+     "v": 0.69,
+     "source": "calibrated"
+    },
+    {
+     "to": "bedroom3",
+     "u": 0.235,
+     "v": 0.67,
+     "source": "calibrated"
+    },
+    {
+     "to": "main-bath",
+     "u": 0.496,
+     "v": 0.67,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "primary",
+   "name": {
+    "he": "חדר הורים",
+    "en": "Primary suite",
+    "fr": "Suite parentale"
+   },
+   "zone": {
+    "he": "החדרים הפרטיים",
+    "en": "Private spaces",
+    "fr": "Espaces privés"
+   },
+   "asset": "04-primary",
+   "plan": {
+    "x": 670,
+    "y": 652
+   },
+   "heading": 40,
+   "northOffset": 0,
+   "initialU": 0.63,
+   "hotspots": [
+    {
+     "to": "hall",
+     "u": 0.293,
+     "v": 0.65,
+     "source": "calibrated"
+    },
+    {
+     "to": "ensuite",
+     "u": 0.071,
+     "v": 0.69,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "bedroom2",
+   "name": {
+    "he": "חדר שינה 2",
+    "en": "Bedroom two",
+    "fr": "Chambre 2"
+   },
+   "zone": {
+    "he": "החדרים הפרטיים",
+    "en": "Private spaces",
+    "fr": "Espaces privés"
+   },
+   "asset": "05-bedroom2",
+   "plan": {
+    "x": 607,
+    "y": 616
+   },
+   "heading": -30,
+   "northOffset": 0,
+   "initialU": 0.4,
+   "hotspots": [
+    {
+     "to": "hall",
+     "u": 0.788,
+     "v": 0.67,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "bedroom3",
+   "name": {
+    "he": "חדר שינה 3 (ממ\"ד)",
+    "en": "Bedroom three (safe room)",
+    "fr": "Chambre 3 (pièce sécurisée)"
+   },
+   "zone": {
+    "he": "החדרים הפרטיים",
+    "en": "Private spaces",
+    "fr": "Espaces privés"
+   },
+   "asset": "06-bedroom3",
+   "plan": {
+    "x": 600,
+    "y": 516
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "initialU": 0.49,
+   "hotspots": [
+    {
+     "to": "hall",
+     "u": 0.785,
+     "v": 0.67,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "bedroom4",
+   "name": {
+    "he": "חדר שינה 4",
+    "en": "Bedroom four",
+    "fr": "Chambre 4"
+   },
+   "zone": {
+    "he": "החדרים הפרטיים",
+    "en": "Private spaces",
+    "fr": "Espaces privés"
+   },
+   "asset": "07-bedroom4-v2",
+   "plan": {
+    "x": 1007,
+    "y": 632
+   },
+   "heading": 80,
+   "northOffset": 0,
+   "initialU": 0.72,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.354,
+     "v": 0.66,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "main-bath",
+   "name": {
+    "he": "חדר רחצה",
+    "en": "Main bathroom",
+    "fr": "Salle de bains"
+   },
+   "zone": {
+    "he": "חדרי רחצה",
+    "en": "Bathrooms",
+    "fr": "Salles d'eau"
+   },
+   "asset": "08-main-bath",
+   "plan": {
+    "x": 698,
+    "y": 459
+   },
+   "heading": 60,
+   "northOffset": 0,
+   "initialU": 0.62,
+   "hotspots": [
+    {
+     "to": "hall",
+     "u": 0.974,
+     "v": 0.69,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "ensuite",
+   "name": {
+    "he": "מקלחת הורים",
+    "en": "Private shower room",
+    "fr": "Salle d'eau parentale"
+   },
+   "zone": {
+    "he": "חדרי רחצה",
+    "en": "Bathrooms",
+    "fr": "Salles d'eau"
+   },
+   "asset": "09-ensuite",
+   "plan": {
+    "x": 619,
+    "y": 750
+   },
+   "heading": -25,
+   "northOffset": 0,
+   "initialU": 0.47,
+   "hotspots": [
+    {
+     "to": "primary",
+     "u": 0.834,
+     "v": 0.72,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "guest-wc",
+   "name": {
+    "he": "שירותי אורחים",
+    "en": "Guest washroom",
+    "fr": "Toilettes invités"
+   },
+   "zone": {
+    "he": "חדרי רחצה",
+    "en": "Bathrooms",
+    "fr": "Salles d'eau"
+   },
+   "asset": "10-guest-wc",
+   "plan": {
+    "x": 1044,
+    "y": 549
+   },
+   "heading": 15,
+   "northOffset": 0,
+   "initialU": 0.57,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.26,
+     "v": 0.72,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "terrace",
+   "name": {
+    "he": "מרפסת",
+    "en": "Wraparound terrace",
+    "fr": "Terrasse"
+   },
+   "zone": {
+    "he": "החיים בחוץ",
+    "en": "Life outside",
+    "fr": "La vie dehors"
+   },
+   "asset": "11-terrace",
+   "plan": {
+    "x": 908,
+    "y": 839
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "initialU": 0.5,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.507,
+     "v": 0.61,
+     "source": "calibrated"
+    },
+    {
+     "to": "garden",
+     "u": 0.292,
+     "v": 0.64,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "garden",
+   "name": {
+    "he": "גינה",
+    "en": "Garden deck",
+    "fr": "Jardin"
+   },
+   "zone": {
+    "he": "החיים בחוץ",
+    "en": "Life outside",
+    "fr": "La vie dehors"
+   },
+   "asset": "12-garden",
+   "plan": {
+    "x": 355,
+    "y": 595
+   },
+   "heading": 10,
+   "northOffset": 0,
+   "initialU": 0.56,
+   "hotspots": [
+    {
+     "to": "terrace",
+     "u": 0.64,
+     "v": 0.62,
+     "source": "calibrated"
+    },
+    {
+     "to": "utility",
+     "u": 0.551,
+     "v": 0.63,
+     "source": "calibrated"
+    }
+   ]
+  },
+  {
+   "id": "utility",
+   "name": {
+    "he": "מחסן ושירות",
+    "en": "Utility & storage",
+    "fr": "Buanderie et rangement"
+   },
+   "zone": {
+    "he": "שירות ואחסון",
+    "en": "Utility",
+    "fr": "Rangement"
+   },
+   "asset": "13-utility-v2",
+   "plan": {
+    "x": 347,
+    "y": 423
+   },
+   "heading": -40,
+   "northOffset": 0,
+   "initialU": 0.45,
+   "hotspots": [
+    {
+     "to": "garden",
+     "u": 0.74,
+     "v": 0.66,
+     "source": "calibrated"
+    }
+   ]
+  }
+ ]
+}

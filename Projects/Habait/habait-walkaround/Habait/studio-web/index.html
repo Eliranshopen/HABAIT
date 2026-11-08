@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Habait Studio — פורטל היזם</title>
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/studio/studio.css">
+</head>
+<body>
+<header class="st-head">
+  <a class="st-brand" href="/studio/">Habait <span>Studio</span></a>
+  <div class="st-user" id="st-user"></div>
+</header>
+
+<main class="st-main">
+  <section id="st-boot" class="st-center"><p class="st-muted">טוען…</p></section>
+
+  <section id="st-signin" class="st-signin" hidden>
+    <h1>פורטל היזם</h1>
+    <p class="st-lead">מעלים את תכנית המכר והקבצים של הפרויקט, וסוכן AI בונה ממנה את אתר ההדמיה: דף הפרויקט והדירות, סרט הבניין, וסיור 360° בדירה עם החלפת ריהוט ושורת שינויים. כל תמונה מסומנת הדמיה.</p>
+    <div id="st-clerk"></div>
+  </section>
+
+  <section id="st-list" hidden>
+    <div class="st-row">
+      <h1>הפרויקטים שלי</h1>
+      <form id="st-new" class="st-new">
+        <input class="st-input" id="st-new-name" placeholder="שם פרויקט חדש" maxlength="80" required>
+        <button class="hb-btn hb-btn--primary" type="submit">פרויקט חדש</button>
+      </form>
+    </div>
+    <ul class="st-projects" id="st-projects"></ul>
+    <p class="st-muted" id="st-empty" hidden>עוד אין פרויקטים. פתחו פרויקט חדש והעלו את תכנית המכר.</p>
+  </section>
+
+  <section id="st-project" hidden>
+    <div class="st-row">
+      <div>
+        <a href="#" id="st-back" class="st-back">→ כל הפרויקטים</a>
+        <h1 id="st-pname"></h1>
+      </div>
+      <div class="st-spent" id="st-spent"></div>
+    </div>
+
+    <ol class="st-steps" id="st-steps"></ol>
+
+    <div class="st-grid">
+      <div class="st-col">
+        <div class="st-card">
+          <h2>קבצים</h2>
+          <label class="st-drop" id="st-drop">
+            <input type="file" id="st-file" multiple disabled accept=".pdf,.png,.jpg,.jpeg,.webp,.xlsx,.xls,.csv,.dwg,.dxf,.zip">
+            <strong>גררו לכאן או בחרו קבצים</strong>
+            <span>תכנית מכר (PDF), חוברת, מחירון, הדמיות ותמונות · עד 50MB לקובץ</span>
+          </label>
+          <ul class="st-files" id="st-files"></ul>
+          <button class="hb-btn hb-btn--primary st-wide" id="st-read" type="button">הסוכן יקרא את תכנית המכר</button>
+          <p class="st-muted st-small" id="st-read-note"></p>
+        </div>
+
+        <div class="st-card" id="st-spec-card" hidden>
+          <h2>מה הסוכן קרא מתכנית המכר</h2>
+          <div id="st-spec"></div>
+          <div class="st-uncert" id="st-uncert"></div>
+          <button class="hb-btn hb-btn--primary st-wide" id="st-approve" type="button">הנתונים תואמים לתכנית המכר: אישור</button>
+          <p class="st-muted st-small">ההדמיה תיבנה רק מנתונים שאישרתם, כדי שתהיה זהה לתכנית המכר.</p>
+        </div>
+
+        <div class="st-card" id="st-build-card" hidden>
+          <h2>בניית ההדמיה</h2>
+          <p class="st-muted st-small st-build-what">הסוכן בונה מתכנית המכר את אתר ההדמיה: דף הפרויקט והדירות, וסיור 360° בדירה עם החלפת ריהוט ושורת שינויים. הוא יעצור פעם אחת כדי שתאשרו את שרטוט הדירה מול תכנית המכר.</p>
+          <div id="st-build-start">
+            <label class="st-consent"><input type="checkbox" id="st-consent"> <span id="st-consent-text"></span></label>
+            <p class="st-draft">טיוטה · הנוסח הסופי של ההסכמה באישור Habait</p>
+            <button class="hb-btn hb-btn--primary st-wide" id="st-build" type="button" disabled>בנו את ההדמיה</button>
+          </div>
+          <div id="st-job" hidden>
+            <div class="st-job-head"><b id="st-job-stage"></b><span id="st-job-pct"></span></div>
+            <div class="st-bar"><span id="st-job-bar"></span></div>
+            <div id="st-job-fid"></div>
+            <ul class="st-log" id="st-job-log"></ul>
+            <div class="st-results" id="st-job-results"></div>
+            <p class="st-err" id="st-job-err" hidden></p>
+          </div>
+        </div>
+
+        <div class="st-card st-trace-card" id="st-trace-card" hidden>
+          <h2>שרטוט הדירה</h2>
+          <div id="st-trace-review" class="st-review" hidden>
+            <b>ממשיכים לדייק</b>
+            <p class="st-small">הבדיקה האוטומטית מצאה הבדל בין השרטוט לתכנית המכר. המערכת ממשיכה לתקן לבד, והבנייה תמשיך ברגע שהשרטוט יתאים לתכנית.</p>
+          </div>
+          <div id="st-trace-check"></div>
+          <p class="st-muted st-small" id="st-trace-lead">השרטוט (בצבע) מונח על תכנית המכר, אחרי שהבדיקה האוטומטית השוותה כל מידה מודפסת לשרטוט.</p>
+          <div class="st-trace-img" id="st-trace-img"></div>
+          <p class="st-muted st-small" id="st-trace-note"></p>
+          <button class="hb-btn hb-btn--primary st-wide" id="st-trace-ok" type="button">השרטוט תואם לתכנית המכר: אישור</button>
+          <form class="st-trace-fix" id="st-trace-fix">
+            <textarea class="st-input" id="st-trace-text" rows="3" maxlength="2000" placeholder="משהו לא תואם? כתבו מה לתקן, למשל: חסר חלון בחדר השינה הצפוני"></textarea>
+            <button class="hb-btn hb-btn--secondary" type="submit">שליחת תיקון</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="st-card st-chat">
+        <h2>הסוכן</h2>
+        <div class="st-msgs" id="st-msgs" aria-live="polite"></div>
+        <form class="st-ask" id="st-ask">
+          <input class="st-input" id="st-q" placeholder="שאלו את הסוכן על הפרויקט, או בקשו את הצעד הבא" maxlength="2000" autocomplete="off">
+          <button class="hb-btn hb-btn--primary" type="submit">שליחה</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+<script type="module" src="/studio/studio.js"></script>
+</body>
+</html>

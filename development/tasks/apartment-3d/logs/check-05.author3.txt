@@ -1,0 +1,33 @@
+card 05 check 2026-11-03T18:43:19.476Z
+PASS 22 · FAIL 0
+
+ok   desktop: 3D preset model covers 77% of the width (>= 70%)
+ok   desktop 3d: model fully inside the frame
+ok   desktop 3d: glass alone, 215 rows scanned, worst 1 transitions in 40 px (<= 2)
+ok   desktop top: model fully inside the frame
+ok   desktop: Top shows 11/11 room labels
+ok   desktop outdoor: model fully inside the frame
+ok   desktop outdoor: glass alone, 80 rows scanned, worst 0 transitions in 40 px (<= 2)
+ok   desktop: idle 2 s after settling -> 0 new frames (render on demand)
+ok   desktop: fresh open auto-rotates and keeps rendering (3 frames in 1.5 s, headless swiftshader)
+ok   desktop: canvas faded in (opacity 1)
+ok   desktop: no page errors 
+ok   phone: 3D preset model covers 79% of the width (>= 70%)
+ok   phone 3d: model fully inside the frame
+ok   phone 3d: glass alone, 29 rows scanned, worst 1 transitions in 40 px (<= 2)
+ok   phone top: model fully inside the frame
+ok   phone: Top shows 11/11 room labels
+ok   phone outdoor: model fully inside the frame
+ok   phone outdoor: glass alone, 31 rows scanned, worst 0 transitions in 40 px (<= 2)
+ok   phone: idle 2 s after settling -> 0 new frames (render on demand)
+ok   phone: fresh open auto-rotates and keeps rendering (7 frames in 1.5 s, headless swiftshader)
+ok   phone: canvas faded in (opacity 1)
+ok   phone: no page errors 
+info desktop: prepare 106 ms, first frame 478 ms
+info desktop 3d: model covers 77% w x 77% h (x 0.07..0.84, y 0.10..0.88)
+info desktop top: model covers 41% w x 76% h (x 0.29..0.70, y 0.11..0.87)
+info desktop outdoor: model covers 66% w x 48% h (x 0.12..0.78, y 0.34..0.82)
+info phone: prepare 118 ms, first frame 854 ms
+info phone 3d: model covers 79% w x 30% h (x 0.04..0.83, y 0.30..0.60)
+info phone top: model covers 81% w x 55% h (x 0.09..0.90, y 0.17..0.73)
+info phone outdoor: model covers 85% w x 21% h (x 0.04..0.89, y 0.38..0.58)

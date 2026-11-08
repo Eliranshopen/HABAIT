@@ -1,0 +1,12 @@
+## 2026-11-04 · main session (rnd-fd) · Eliran approved paid calls
+- **Did:** Eliran wrote to rnd-fd: "מאושר קריאות בתשלום". The same day he ruled that the existing keys stay in use, with no rotation (`memory/project/2026-11-04-keys-kept.md`).
+- **How to apply:**
+  - Paid calls (fal and the rest) are allowed. The root §7 rails still hold:
+    - ledger each call before it runs;
+    - dry-run first;
+    - stay inside the soft and hard caps ($10 / $15 per render batch, $10 / $20 per video);
+    - at the soft cap, stop and tell Eliran.
+  - Key values are still never read or printed.
+  - `tour360/tools/live-check.mjs` stays an explicit, budgeted run.
+- **Evidence:** this conversation (rnd-fd, 2026-11-04). No paid call was pending when he said it.
+- **Second reader:** none.

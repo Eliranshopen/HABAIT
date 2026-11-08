@@ -1,0 +1,15 @@
+{
+  "name": "habait-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Habait buyer-facing flow v0: project -> 360 flight -> apartment card -> descend/enter -> tour hand-off",
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "validate": "node contracts/validate.mjs fixtures/rainbow",
+    "test": "node contracts/validate.mjs fixtures/rainbow && node test/smoke.mjs"
+  },
+  "dependencies": {
+    "three": "0.170.0"
+  }
+}

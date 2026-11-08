@@ -1,0 +1,17 @@
+# card 15 — chrome over the visualization on the tokens (2026-11-03 18:20, main session as platform-dev)
+js/picker.js: 0 lines changed. It holds no colour, font or radius value — only positions (style.left/top/display, lines 130, 208-242); its card, pills, legend and drawer are styled from css/style.css, which card 13 put on the --chrome-* tokens.
+css/flow-real.css: 6 value-only replacements — legal band background/colour, overlay radius/background/border/colour/text-shadow, tap-chip radius → color-mix of --chrome-bg/--chrome-fg, --chrome-line, --chrome-text-shadow, --r-md, --r-full. No position, size or timing line touched. Literal grep after: 0.
+/hold/ (flyover3d) untouched; it gets the new values through css/style.css's @import of tokens.css (proved cross-origin by browser.mjs, card 13).
+
+## anchors, flow.html?seg=hold-facade, reduced motion (before = after card 13, read before this card's edit)
+before: {"desk":{"band":[0,871.6,1440,28.4],"overlay":[440,732,560,68],"pill846":[753.2,665.4,51.7,24],"card":[16,317,400,471],"bandWithCard":[0,871.6,1440,28.4],"errors":[]},"phone":{"band":[0,815.6,390,28.4],"overlay":[12,108,366,84.7],"pill846":[224.2,608,51.7,24],"card":[0,334,390,482],"bandWithCard":[0,815.6,390,28.4],"errors":[]}}
+after:  {"desk":{"band":[0,871.6,1440,28.4],"overlay":[440,732,560,68],"pill846":[753.2,665.4,51.7,24],"card":[16,317,400,471],"bandWithCard":[0,871.6,1440,28.4],"errors":[]},"phone":{"band":[0,815.6,390,28.4],"overlay":[12,108,366,84.7],"pill846":[224.2,608,51.7,24],"card":[0,334,390,482],"bandWithCard":[0,815.6,390,28.4],"errors":[]}}
+max anchor difference: 0 px (limit 1 px)
+
+## tests
+baseline for this card (board tree before the edit): flow-real 38/0; flow-cine 42/1 on run 1 — '[iphone13] a real tap on 846 -> the glide stops under it (13.20 -> 12.52)' — then 43/0, 43/0 on two re-runs; the live-only tree 43/0 twice → a timing flake of cine under SwiftShader load, not a CSS effect.
+after: test/flow-real.test.mjs ok 38 FAIL 0
+after: test/flow-cine.test.mjs ok 43 FAIL 0
+after: test/card-overflow.test.mjs ok 18 FAIL 0
+preview.py now mirrors the real depth (habait-walkaround/Habait/platform + tour360 dist/scenes + Projects/Habait/data/sales-plans/legal, read-only) because flow-real/flow-cine read those; --base-only builds the live tree alone for baselines.
+frames: .wt/platform-ui-ux/after/c15/{before,after}/{desk,phone}_{hold,card}.png

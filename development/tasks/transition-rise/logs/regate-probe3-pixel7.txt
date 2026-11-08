@@ -1,0 +1,22 @@
+ok   pixel7 S1a x during rise: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   pixel7 S1b reopen after x-in-rise: visible: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}{"tr":{"kind":"rise","frames":7,"ms":1745,"fps":4,"skipped":null},"preset":"3d","held":false}
+ok   pixel7 S1c settled on 3D preset: {"tr":{"kind":"rise","frames":7,"ms":1745,"fps":4,"skipped":null},"preset":"3d"}
+ok   pixel7 S1 errs: 
+ok   pixel7 S2 sheet reachable during rise: go button present=true
+ok   pixel7 S2 open->view in 360: final {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true} expect scene kitchen
+ok   pixel7 S2 errs: 
+ok   pixel7 S3 double-click go: final {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true} expect scene kitchen
+ok   pixel7 S3b two different rooms in 300ms: final {"scene":"dining","hidden":true,"op":"","inert":0,"load":true} expect scene null
+ok   pixel7 S3b scene is one of the two: dining
+ok   pixel7 S3 errs: 
+ok   pixel7 S4 esc during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   pixel7 S4 esc during dive: tour stays in living (no ghost navigation): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   pixel7 S4 x during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   pixel7 S4 x during dive: tour stays in living (no ghost navigation): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+ok   pixel7 S5 esc during rise: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   pixel7 S5 reopen 0.5 s after esc: visible: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}{"kind":"rise","frames":18,"ms":1667,"fps":10.8,"skipped":null}
+ok   pixel7 S5 errs: 
+ok   pixel7 S6 open/close spam leaves the tour usable: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   pixel7 S6 then opens normally: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}
+ok   pixel7 S6 errs: 
+ok   pixel7 S7 dive into the room you are in: tour usable: {"scene":"living","hidden":true,"op":"","inert":0,"load":true} yaw before 70.0 after 0.0

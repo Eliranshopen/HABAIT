@@ -1,0 +1,42 @@
+ok   zip: <= 25 MB with panos, stills, plan, GLB, offline HTML, README  (zip: 27 files, 4.49 MB (<=25))
+zip: 27 files, 4.49 MB (<=25)
+ok   zip: README carries the full legal text (he + en), variables filled, plan date
+ok   iphone: Hebrew RTL, title, price, status, white-label colour
+ok   iphone: tab tour
+ok   iphone: tab plan
+ok   iphone: tab photos
+ok   iphone: tab 3d
+ok   iphone: tab about
+ok   iphone: WhatsApp link = wa.me/<number>?text=<he message>\nrainbow|846|<session>
+ok   iphone: "חזרה לבניין" goes to the project level (hold node), not inside the apartment strip
+ok   iphone: no requests outside 127.0.0.1 before any tap on WhatsApp  (26 requests, all local)
+ok   iphone: no page errors
+ok   pixel: Hebrew RTL, title, price, status, white-label colour
+ok   pixel: tab tour
+ok   pixel: tab plan
+ok   pixel: tab photos
+ok   pixel: tab 3d
+ok   pixel: tab about
+ok   pixel: WhatsApp link = wa.me/<number>?text=<he message>\nrainbow|846|<session>
+ok   pixel: "חזרה לבניין" goes to the project level (hold node), not inside the apartment strip
+ok   pixel: no requests outside 127.0.0.1 before any tap on WhatsApp  (26 requests, all local)
+ok   pixel: no page errors
+ok   desktop: Hebrew RTL, title, price, status, white-label colour
+ok   desktop: tab tour
+ok   desktop: tab plan
+ok   desktop: tab photos
+ok   desktop: tab 3d
+ok   desktop: tab about
+ok   desktop: WhatsApp link = wa.me/<number>?text=<he message>\nrainbow|846|<session>
+ok   desktop: "חזרה לבניין" goes to the project level (hold node), not inside the apartment strip
+ok   desktop: no requests outside 127.0.0.1 before any tap on WhatsApp  (26 requests, all local)
+ok   desktop: English LTR toggle re-renders tabs and caption
+ok   desktop: tapping WhatsApp is the only way out (wa.me, new tab)
+ok   desktop: no page errors
+tabs 5/5 ok on 3 viewports
+wa.me link contains rainbow|846|cdbf116c-ee7a-4e87-a8dc-29ef4aba1e7a
+ok   dist page (self-contained build): opens on #photos, carries the flight sid into WhatsApp and the tour
+ok   zip: 3d/dollhouse.html opens offline from file:// and shows the GLB  (28820 triangles, 66 meshes, 229 colours, 0 network requests)
+
+all green; screenshots in C:\Users\elira\AppData\Local\Temp\habait-apartment-shots
+exit 0

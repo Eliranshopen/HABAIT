@@ -1,0 +1,6 @@
+# Vercel PREVIEW deploy 2 (2026-11-03 23:37, main session) — from the LIVE files after both copy-backs
+go: Eliran 2026-11-03 "go ל-preview ב-Vercel" + the blanket approval 21:50 (previews). Production needs its own go (root §9).
+staged: the LIVE Projects/Habait/tools/deploy-vercel/stage_flow.py (runs now: platform node_modules installed, OWED-023 resolved) into scratchpad/deploy-preview-2 (310.5 MB).
+local check (python http.server :8852, killed by PID): 7 pages x 390/1440: page errors 0; 0 x 4xx except the 3 known optional /_local/segments/rainbow-cine/* probes on flow.html and landing arm B (never staged; the flight falls back).
+deploy: npx vercel@65.9.0 link --yes --project habait-flow; npx vercel@65.9.0 deploy --yes (NO --prod). The .env.local that link writes was deleted unread before the deploy.
+result: https://habait-flow-fd9fypg6c-eliran-5390.vercel.app · Preview · Ready (vercel ls). Production untouched: the latest Production deployment is still 14 h old.

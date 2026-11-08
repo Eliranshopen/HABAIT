@@ -1,0 +1,41 @@
+<claude-code-hint v="1" type="plugin" value="vercel@claude-plugins-official" />
+{
+ "id": "jmw3feujnf27718",
+ "project": "pmw3fcht50f1448",
+ "state": "review",
+ "stage": "review",
+ "percent": 10,
+ "needs": {
+  "type": "habait_review",
+  "stage": "trace",
+  "verdict": "FAIL",
+  "summary": "48 מתוך 71 בדיקות עברו"
+ },
+ "review": {
+  "stage": "trace",
+  "mismatches": 31
+ },
+ "sandbox": {
+  "id": null,
+  "name": "job-jmw3feujnf27718-1",
+  "stage": "trace",
+  "vcpus": 2,
+  "timeoutMin": 30,
+  "started": "2026-11-05T10:52:11.860Z",
+  "snapshot": "snap_DXWv2R1bYGj8Q9ItGqBhsfg3UkQc",
+  "estUsd": 0.1704,
+  "ended": "2026-11-05T10:58:35.077Z",
+  "minutes": 6.4
+ },
+ "dispatches": 1,
+ "heartbeat": "2026-11-05T10:58:35.077Z",
+ "executor": "748177e6-8ba:656",
+ "error": null,
+ "log": [
+  "10:52:10 נכנס לתור הבנייה",
+  "10:52:13 הבנייה הופעלה בשרת (שרטוט ובדיקה, ניסיון 1)",
+  "10:52:16 הורדו 1 קבצים והקריאה המאושרת",
+  "10:52:17 הסוכן משרטט את הדירה מתוך תכנית המכר ובודק אותה מול התכנית",
+  "10:58:34 ההדמיה לא עברה בדיקת התאמה אוטומטית לתכנית המכר והועברה לבדיקה של Habait"
+ ]
+}

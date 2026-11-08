@@ -1,0 +1,45 @@
+card 03 check 2026-11-03T19:24:05.986Z
+PASS 40 · FAIL 0
+
+ok   rooms block has 11 entries (want 11)
+ok   room r-entrance: he/area match the plan
+ok   room r-entrance: scene entrance exists
+ok   room r-kitchen: he/area match the plan
+ok   room r-kitchen: scene kitchen exists
+ok   room r-dining: he/area match the plan
+ok   room r-dining: scene dining exists
+ok   room r-living: he/area match the plan
+ok   room r-living: scene living exists
+ok   room r-terrace-living: he/area match the plan
+ok   room r-terrace-living: scene terraceLiving exists
+ok   room r-terrace-bedroom: he/area match the plan
+ok   room r-terrace-bedroom: scene terraceBedroom exists
+ok   room r-bedroom-main: he/area match the plan
+ok   room r-bedroom-main: scene bedroomMain exists
+ok   room r-wardrobe: he/area match the plan
+ok   room r-wardrobe: scene wardrobe exists
+ok   room r-bath-main: he/area match the plan
+ok   room r-bath-main: scene bathMain exists
+ok   room r-bedroom-2: he/area match the plan
+ok   room r-bedroom-2: scene bedroom2 exists
+ok   room r-bath-guest: he/area match the plan
+ok   room r-bath-guest: scene bathguest exists
+ok   desktop: viewer knows 11 rooms
+ok   desktop: 11/11 labels visible in Top (desktop must show all 11)
+ok   desktop: 11 labels visible in Top (>= 7)
+ok   desktop: no page errors 
+ok   iphone13: viewer knows 11 rooms
+ok   iphone13: 11/11 labels visible in Top (desktop must show all 11)
+ok   iphone13: 11 labels visible in Top (>= 7)
+ok   iphone13: no page errors 
+ok   pixel7: viewer knows 11 rooms
+ok   pixel7: 11/11 labels visible in Top (desktop must show all 11)
+ok   pixel7: 11 labels visible in Top (>= 7)
+ok   pixel7: no page errors 
+ok   select: selected = r-living
+ok   select: camera target within 0.3 m of the living centroid (-1.284,0,1.502 vs -1.284,0.01,1.502)
+ok   select: sheet visible with the 360 button
+ok   enter-room posted: [{"type":"habait:enter-room","scene":"living","room_id":"r-living"}]
+ok   tap on the kitchen floor selects r-kitchen
+
+EXIT 0

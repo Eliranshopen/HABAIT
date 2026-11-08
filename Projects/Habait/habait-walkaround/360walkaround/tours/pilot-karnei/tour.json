@@ -1,0 +1,3590 @@
+{
+  "schema": "tour/0.1.0",
+  "tour_id": "pilot-karnei",
+  "_doc": {
+    "contract": "one of the four shared file contracts (CONTRACT §16.4 A8-8 / C-360-81): EXTEND freely, ⛔ RESHAPE only on-board. Producer: pipeline/assemble_tour.mjs (walkthrough-engineer). Consumers: T09 viewer/minimap, T10 ruler/dimensions.",
+    "units": "positions and offsets in CENTIMETRES, angles in DEGREES, areas in m², decoded depth in METRES. ⛔ A unit change is a reshape, not an extension.",
+    "frame": "x right (+east on the drawing), y down (+south on the drawing); origin = outer NW corner of the building envelope",
+    "scenes": "one per plan.json camera_point, in the plan's own order. `pano`/`depth` paths are relative to the tour directory and were validated against manifest.json AND the bytes on disk.",
+    "links": "scenes[].links[] — `kind` spot|door, `target` a scene id, `offset_cm` the plan-frame offset from THIS camera to the aim point. Derived angles are in the RENDER's convention (see meta.projection), ⛔ not PSV's.",
+    "minimap": "the top view + the world↔uv affine (READ from renders/topview.registration.json, validated here, never recomputed) + room polygons in normalised image coords (u,v ∈ [0,1], v=0 at the image TOP) + room→points.",
+    "rooms": "plan.json's own numbers, exact: printed_dims_cm is what the drawing prints, clear_dims_cm is what the trace measures. ⛔ Neither is a measurement of a built unit.",
+    "meta": "provenance: the plan + manifest hashes, the pinned date, the depth contract, ceiling-height provenance, and the disclosure KEYS (⛔ never wording)."
+  },
+  "meta": {
+    "assembled": {
+      "tool": "pipeline/assemble_tour.mjs",
+      "tool_version": "0.1.0",
+      "tool_sha256": "dec1655e91bc852995507b7e79c3e86727a163e390fe0ca496f2fb786e5e7ba3",
+      "date_utc": "2026-09-02T06:19:11+00:00",
+      "date": "2026-09-02",
+      "date_note": "⛔ NOT a wall clock. Pinned to the newest INPUT timestamp (max of the referenced rows' rendered_utc and manifest.updated_utc) so that a rerun over unchanged inputs is byte-identical."
+    },
+    "plan": {
+      "file": "plan.json",
+      "sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+      "schema_version": "0.1.0",
+      "apartment_id": "pilot-karnei",
+      "source_file": "Habait/MVP/app/public/projects/karnei-plans/apt-6.jpg",
+      "source_sha256": "532e9dc53ce101fbdae45f8d7310220120f476e121180f35e1efce1e7a1360c9",
+      "tracer": "walkthrough-engineer (board 360-v2, task T02)",
+      "trace_date": "2026-09-01",
+      "scale_basis": "least-squares fit through the origin on FOUR printed dimensions only (MAMAD 280 + 330, toilet 125 + 165): 1.0448 px/cm (0.95712 cm/px). Every other printed dimension is a held-out check, not a fit input.",
+      "rights_state": "partner-supplied",
+      "rights_note": "developer floor-plan drawing supplied by הרי זהב for the Habait project pages; what a CG tour derived from it may be shown to is OQ-360-11 (Slava's). CONTRACT A8-13 / C-360-85.",
+      "assumptions": [
+        "ceiling_height_cm 260 is ASSUMED - the drawing carries no section and no height dimension",
+        "parapet height 110 cm on both balconies and the service balcony is ASSUMED",
+        "window sill/head heights are ASSUMED - the drawing is a plan only",
+        "camera eye height 140 cm is ported from the reference product (research/walkaround-reference/REPORT.md 2.1), not from this drawing"
+      ],
+      "disagreements": [
+        {
+          "id": "D-01",
+          "room": "r-bath-main",
+          "printed_cm": 185,
+          "traced_cm": 175.7,
+          "delta_cm": -9.3,
+          "axis": "y",
+          "resolution": "drawing kept, printed number recorded",
+          "why": "the printed 185 cannot be honoured without contradicting three printed dimensions the drawing DOES satisfy exactly. The bathroom's south wall is the MAMAD's north wall; the whole west N-S chain (bath / MAMAD 330 / bedroom 305 / master 395) measures to within 0.5 cm end to end at the fitted scale. Moving that one wall 9.3 cm would break the other three. Excluded from the T14 measurement-accuracy population - it is a drawing-internal conflict, not a pipeline error."
+        }
+      ],
+      "virtual_boundaries": [
+        "r-kitchen north (y) and east (x) are open-plan zone boundaries with NO drawn line. The north one is placed from the PRINTED depth 362, so that number is CIRCULAR and is not usable as ruler ground truth. The east one lands on the south balcony's west edge, a drawn line, and independently reproduces the printed width 278 to -0.6 cm.",
+        "r-living west is an open-plan boundary placed on the hall east wall's west face extended south - a DRAWN structural line, not the printed 368; it independently reproduces the printed 368 to +2.4 cm.",
+        "r-corridor / r-dining are one physically continuous space split on the free-standing partition's own line (SCHEMA 6).",
+        "r-master / r-master-lobby are split on the master bedroom's east wall line extended north."
+      ]
+    },
+    "manifest": {
+      "file": "manifest.json",
+      "sha256": "c83b5b2cb68c1cebc41d7c70b6b005deb411c204b1e293afa1d9dd9984973b6d",
+      "schema": "render-manifest/0.1.0",
+      "updated_utc": "2026-09-02T06:19:11+00:00",
+      "newest_batch": {
+        "tool": "pipeline/render_tour.mjs",
+        "version": "0.1.0",
+        "mode": "final",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "samples": 256,
+        "finished_utc": "2026-09-02T06:19:20+00:00",
+        "cost_usd": 0
+      },
+      "render_quality_note": "⚠ the newest batch's `mode` describes what these panos ARE today. T13 re-renders the pilot; nothing here claims final quality."
+    },
+    "ceiling": {
+      "height_cm": 260,
+      "provenance": "ASSUMED",
+      "why": "ceiling_height_cm 260 is ASSUMED - the drawing carries no section and no height dimension"
+    },
+    "depth": {
+      "encoding": "rgb24-be",
+      "scale": 100,
+      "invalid_value": 0,
+      "units": "m",
+      "decode": "(R<<16 | G<<8 | B) / scale ⇒ metres (radial distance from the camera origin, NOT planar depth)",
+      "refusal": "⛔ C-360-83: a decoder meeting an encoding/scale it does not know THROWS. It never falls back. This assembler refuses to emit a scene whose row declares anything else.",
+      "recorded_per_scene": true
+    },
+    "projection": {
+      "type": "equirectangular",
+      "api": "camera.panorama_type (4.3+)",
+      "fov": "360x180",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "row_mapping": "lat = -90 + (row+0.5)/H*180 ; row 0 = BOTTOM (Blender buffer)",
+      "col_mapping": "u = (col+0.5)/W ; u=0.5 = camera forward ; u increases to the right",
+      "png_scanline_order": "top row first (this file flips the Blender buffer)"
+    },
+    "angles": {
+      "bearing_deg": "plan bearing of the offset: 0 = −y (up on the drawing), 90 = +x, clockwise, [0,360) — SCHEMA §1",
+      "az_from_forward_deg": "azimuth measured FROM this scene's camera forward (its yaw_deg), positive toward the viewer's RIGHT — the sidecar's own 'u=0.5 = forward, u increases to the right'",
+      "elev_deg": "positive up",
+      "texture_uv": "the equirect texture coordinate of the aim direction: u = wrap01(0.5 + az/360), v = 0.5 − elev/180, v=0 at the image TOP",
+      "psv": "⛔ NOT PhotoSphereViewer coordinates. T09 maps these to PSV and measures the mapping."
+    },
+    "disclosure": {
+      "note": "⛔ KEYS ONLY — no wording is authored in this file. DS-9's words are Slava's (OQ-360-10, A8-19/C-360-87); the viewer resolves each key per language through app/src/ui/copy.ts.",
+      "keys": [
+        {
+          "key": "ds1.badge",
+          "surface": "DS-1",
+          "binds": "every viewer state — permanent, non-dismissible",
+          "wording": null,
+          "wording_owner": "shipped in V1 (app/src/ui/badge.ts)"
+        },
+        {
+          "key": "ds5.nadir",
+          "surface": "DS-5",
+          "binds": "the nadir disk",
+          "wording": null,
+          "wording_owner": "shipped in V1"
+        },
+        {
+          "key": "ds8.scope_notice",
+          "surface": "DS-8",
+          "binds": "leaving a scene an edit belongs to",
+          "wording": null,
+          "wording_owner": "shipped in V1 (edit lane; V2 has no edit lane yet)"
+        },
+        {
+          "key": "ds9.measurement_provenance",
+          "surface": "DS-9",
+          "binds": "any distance, area or room dimension rendered to a human; ⛔ the ruler renders no number while this surface is absent",
+          "wording": null,
+          "wording_owner": "Slava — OQ-360-10 (PROPOSED wording ships as PROPOSED)"
+        },
+        {
+          "key": "ds9.cg_render_caption",
+          "surface": "DS-9",
+          "binds": "the scene itself: a CG render built from the project's floor plan, furniture illustrative",
+          "wording": null,
+          "wording_owner": "Slava — OQ-360-10 / copy pack"
+        }
+      ],
+      "exposure": "⛔ INTERNAL ONLY — OWED-022 binds V2 identically (C-360-86), and the drawing's own rights are OQ-360-11. Nothing assembled here is shown to a third party."
+    },
+    "paths": {
+      "tour_dir_track_rel": "tours/pilot-karnei",
+      "asset_refs": "every `path` in this file is relative to the tour directory"
+    }
+  },
+  "scenes": [
+    {
+      "id": "cp-entry",
+      "room_id": "r-dining",
+      "room_name_he": "מבואה ופינת אוכל",
+      "room_name_en": "Entry and dining",
+      "position_cm": [
+        780,
+        640,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 250,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "inside the entrance door, looking west into the flat",
+      "pano": {
+        "path": "renders/cp-entry/pano.webp",
+        "bytes": 854024,
+        "sha256": "af2df3cf24a40bff6f911ffee4cfc94d743ff326c602783d1b858f7212bdd271",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-entry/depth.png",
+        "bytes": 1260883,
+        "sha256": "5583eb90f4aa538080585b15efa7fa3b4f6a4bc5d0e73c21479cd12e1e8aaada",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-01T23:43:29+00:00",
+      "minimap_uv": [
+        0.636742,
+        0.459919
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-corridor",
+          "target_room": "r-corridor",
+          "offset_cm": [
+            -380,
+            -20,
+            -10
+          ],
+          "distance_cm": 380.657,
+          "distance_xy_cm": 380.526,
+          "bearing_deg": 273.0128,
+          "az_from_forward_deg": 23.0128,
+          "elev_deg": -1.5054,
+          "texture_uv": [
+            0.563924,
+            0.508363
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-partition"
+            ]
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-corridor|r-dining",
+          "via_opening": {
+            "id": "o-corridor-south",
+            "kind": "opening",
+            "wall_id": "v-corridor-s",
+            "width_cm": 91.7,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              464.3,
+              723.65,
+              130
+            ],
+            "offset_cm": [
+              -315.7,
+              83.65,
+              -10
+            ],
+            "distance_cm": 326.747,
+            "bearing_deg": 255.1596,
+            "az_from_forward_deg": 5.1596,
+            "elev_deg": -1.7538,
+            "texture_uv": [
+              0.514332,
+              0.509743
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "via_opening_choice": {
+            "rule": "a clear sightline from this camera first, then the nearest centre (squared XY), then the id",
+            "considered": [
+              {
+                "id": "o-corridor-south",
+                "distance_xy_cm": 326.594,
+                "direct": true
+              },
+              {
+                "id": "o-corridor-north",
+                "distance_xy_cm": 472.274,
+                "direct": false
+              }
+            ]
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-kitchen",
+          "target_room": "r-kitchen",
+          "offset_cm": [
+            -140,
+            350,
+            -10
+          ],
+          "distance_cm": 377.094,
+          "distance_xy_cm": 376.962,
+          "bearing_deg": 201.8014,
+          "az_from_forward_deg": -48.1986,
+          "elev_deg": -1.5196,
+          "texture_uv": [
+            0.366115,
+            0.508442
+          ],
+          "sightline": {
+            "direct": true
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-kitchen",
+          "via_opening": {
+            "id": "o-kitchen-north",
+            "kind": "opening",
+            "wall_id": "v-kitchen-n",
+            "width_cm": 277.4,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              626.5,
+              790.9,
+              130
+            ],
+            "offset_cm": [
+              -153.5,
+              150.9,
+              -10
+            ],
+            "distance_cm": 215.483,
+            "bearing_deg": 225.4894,
+            "az_from_forward_deg": -24.5106,
+            "elev_deg": -2.6599,
+            "texture_uv": [
+              0.431915,
+              0.514777
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "via_opening_choice": {
+            "rule": "a clear sightline from this camera first, then the nearest centre (squared XY), then the id",
+            "considered": [
+              {
+                "id": "o-kitchen-north",
+                "distance_xy_cm": 215.251,
+                "direct": true
+              },
+              {
+                "id": "o-kitchen-east",
+                "distance_xy_cm": 332.23,
+                "direct": true
+              }
+            ]
+          },
+          "best_aim": "target"
+        },
+        {
+          "kind": "door",
+          "target": "cp-living",
+          "target_room": "r-living",
+          "offset_cm": [
+            210,
+            300,
+            -10
+          ],
+          "distance_cm": 366.333,
+          "distance_xy_cm": 366.197,
+          "bearing_deg": 145.008,
+          "az_from_forward_deg": -104.992,
+          "elev_deg": -1.5642,
+          "texture_uv": [
+            0.208355,
+            0.50869
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-hall-e",
+              "w-living-n"
+            ]
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-living",
+          "via_opening": {
+            "id": "o-living-west",
+            "kind": "opening",
+            "wall_id": "v-living-w",
+            "width_cm": 428.9,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              805.2,
+              938.45,
+              130
+            ],
+            "offset_cm": [
+              25.2,
+              298.45,
+              -10
+            ],
+            "distance_cm": 299.679,
+            "bearing_deg": 175.1736,
+            "az_from_forward_deg": -74.8264,
+            "elev_deg": -1.9123,
+            "texture_uv": [
+              0.292149,
+              0.510624
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-wc",
+          "target_room": "r-wc",
+          "offset_cm": [
+            -214.9,
+            -379.8,
+            -37.5
+          ],
+          "distance_cm": 437.991,
+          "distance_xy_cm": 436.383,
+          "bearing_deg": 330.4978,
+          "az_from_forward_deg": 80.4978,
+          "elev_deg": -4.9116,
+          "texture_uv": [
+            0.723605,
+            0.527287
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-wc-s"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-wc",
+          "via_opening": {
+            "id": "d-wc",
+            "kind": "door",
+            "wall_id": "w-wc-w",
+            "width_cm": 66.9,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              495.6,
+              300.05,
+              102.5
+            ],
+            "offset_cm": [
+              -284.4,
+              -339.95,
+              -37.5
+            ],
+            "distance_cm": 444.81,
+            "bearing_deg": 320.0844,
+            "az_from_forward_deg": 70.0844,
+            "elev_deg": -4.8361,
+            "texture_uv": [
+              0.694679,
+              0.526867
+            ],
+            "sightline": {
+              "direct": false,
+              "blocked_by": [
+                "w-wc-s"
+              ],
+              "through": [
+                "d-wc"
+              ],
+              "min_aperture_margin_cm": 25.68
+            }
+          },
+          "best_aim": "none"
+        },
+        {
+          "kind": "spot",
+          "target": "cp-dining",
+          "target_room": "r-dining",
+          "offset_cm": [
+            -160,
+            -170,
+            -140
+          ],
+          "distance_cm": 272.213,
+          "distance_xy_cm": 233.452,
+          "bearing_deg": 316.7357,
+          "az_from_forward_deg": 66.7357,
+          "elev_deg": -30.9509,
+          "texture_uv": [
+            0.685377,
+            0.671949
+          ],
+          "sightline": {
+            "direct": true
+          },
+          "aim_height_cm": 0,
+          "aim_height_rule": "floor level (z=0)",
+          "best_aim": "target"
+        }
+      ]
+    },
+    {
+      "id": "cp-dining",
+      "room_id": "r-dining",
+      "room_name_he": "מבואה ופינת אוכל",
+      "room_name_en": "Entry and dining",
+      "position_cm": [
+        620,
+        470,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 180,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "dining table",
+      "pano": {
+        "path": "renders/cp-dining/pano.webp",
+        "bytes": 1123598,
+        "sha256": "f8b7e307f84ea152fbe894217dc447991820179a744ea5b0c465bfe4e752ba5b",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-dining/depth.png",
+        "bytes": 1065575,
+        "sha256": "4ed0d4aac11206d28732ab57a9d00b2c9d17be739696e5f6061f701239336849",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T00:51:10+00:00",
+      "minimap_uv": [
+        0.510966,
+        0.343244
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-corridor",
+          "target_room": "r-corridor",
+          "offset_cm": [
+            -220,
+            150,
+            -10
+          ],
+          "distance_cm": 266.458,
+          "distance_xy_cm": 266.271,
+          "bearing_deg": 235.7131,
+          "az_from_forward_deg": 55.7131,
+          "elev_deg": -2.1508,
+          "texture_uv": [
+            0.654759,
+            0.511949
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-partition"
+            ]
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-corridor|r-dining",
+          "via_opening": {
+            "id": "o-corridor-south",
+            "kind": "opening",
+            "wall_id": "v-corridor-s",
+            "width_cm": 91.7,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              464.3,
+              723.65,
+              130
+            ],
+            "offset_cm": [
+              -155.7,
+              253.65,
+              -10
+            ],
+            "distance_cm": 297.793,
+            "bearing_deg": 211.5432,
+            "az_from_forward_deg": 31.5432,
+            "elev_deg": -1.9244,
+            "texture_uv": [
+              0.58762,
+              0.510691
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "via_opening_choice": {
+            "rule": "a clear sightline from this camera first, then the nearest centre (squared XY), then the id",
+            "considered": [
+              {
+                "id": "o-corridor-south",
+                "distance_xy_cm": 297.625,
+                "direct": true
+              },
+              {
+                "id": "o-corridor-north",
+                "distance_xy_cm": 238.944,
+                "direct": false
+              }
+            ]
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-kitchen",
+          "target_room": "r-kitchen",
+          "offset_cm": [
+            20,
+            520,
+            -10
+          ],
+          "distance_cm": 520.481,
+          "distance_xy_cm": 520.384,
+          "bearing_deg": 177.7974,
+          "az_from_forward_deg": -2.2026,
+          "elev_deg": -1.1009,
+          "texture_uv": [
+            0.493882,
+            0.506116
+          ],
+          "sightline": {
+            "direct": true
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-kitchen",
+          "via_opening": {
+            "id": "o-kitchen-north",
+            "kind": "opening",
+            "wall_id": "v-kitchen-n",
+            "width_cm": 277.4,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              626.5,
+              790.9,
+              130
+            ],
+            "offset_cm": [
+              6.5,
+              320.9,
+              -10
+            ],
+            "distance_cm": 321.122,
+            "bearing_deg": 178.8396,
+            "az_from_forward_deg": -1.1604,
+            "elev_deg": -1.7845,
+            "texture_uv": [
+              0.496777,
+              0.509914
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "via_opening_choice": {
+            "rule": "a clear sightline from this camera first, then the nearest centre (squared XY), then the id",
+            "considered": [
+              {
+                "id": "o-kitchen-north",
+                "distance_xy_cm": 320.966,
+                "direct": true
+              },
+              {
+                "id": "o-kitchen-east",
+                "distance_xy_cm": 522.481,
+                "direct": true
+              }
+            ]
+          },
+          "best_aim": "target"
+        },
+        {
+          "kind": "door",
+          "target": "cp-living",
+          "target_room": "r-living",
+          "offset_cm": [
+            370,
+            470,
+            -10
+          ],
+          "distance_cm": 598.247,
+          "distance_xy_cm": 598.164,
+          "bearing_deg": 141.789,
+          "az_from_forward_deg": -38.211,
+          "elev_deg": -0.9578,
+          "texture_uv": [
+            0.393858,
+            0.505321
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-hall-e",
+              "w-living-n"
+            ]
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-living",
+          "via_opening": {
+            "id": "o-living-west",
+            "kind": "opening",
+            "wall_id": "v-living-w",
+            "width_cm": 428.9,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              805.2,
+              938.45,
+              130
+            ],
+            "offset_cm": [
+              185.2,
+              468.45,
+              -10
+            ],
+            "distance_cm": 503.83,
+            "bearing_deg": 158.4288,
+            "az_from_forward_deg": -21.5712,
+            "elev_deg": -1.1373,
+            "texture_uv": [
+              0.44008,
+              0.506318
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-wc",
+          "target_room": "r-wc",
+          "offset_cm": [
+            -54.9,
+            -209.8,
+            -37.5
+          ],
+          "distance_cm": 220.082,
+          "distance_xy_cm": 216.864,
+          "bearing_deg": 345.3358,
+          "az_from_forward_deg": 165.3358,
+          "elev_deg": -9.8105,
+          "texture_uv": [
+            0.959266,
+            0.554503
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-wc-s"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-wc",
+          "via_opening": {
+            "id": "d-wc",
+            "kind": "door",
+            "wall_id": "w-wc-w",
+            "width_cm": 66.9,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              495.6,
+              300.05,
+              102.5
+            ],
+            "offset_cm": [
+              -124.4,
+              -169.95,
+              -37.5
+            ],
+            "distance_cm": 213.927,
+            "bearing_deg": 323.7966,
+            "az_from_forward_deg": 143.7966,
+            "elev_deg": -10.0958,
+            "texture_uv": [
+              0.899435,
+              0.556088
+            ],
+            "sightline": {
+              "direct": false,
+              "blocked_by": [
+                "w-wc-s"
+              ],
+              "through": [
+                "d-wc"
+              ],
+              "min_aperture_margin_cm": 24.57
+            }
+          },
+          "best_aim": "none"
+        },
+        {
+          "kind": "spot",
+          "target": "cp-entry",
+          "target_room": "r-dining",
+          "offset_cm": [
+            160,
+            170,
+            -140
+          ],
+          "distance_cm": 272.213,
+          "distance_xy_cm": 233.452,
+          "bearing_deg": 136.7357,
+          "az_from_forward_deg": -43.2643,
+          "elev_deg": -30.9509,
+          "texture_uv": [
+            0.379821,
+            0.671949
+          ],
+          "sightline": {
+            "direct": true
+          },
+          "aim_height_cm": 0,
+          "aim_height_rule": "floor level (z=0)",
+          "best_aim": "target"
+        }
+      ]
+    },
+    {
+      "id": "cp-living",
+      "room_id": "r-living",
+      "room_name_he": "חדר מגורים",
+      "room_name_en": "Living room",
+      "position_cm": [
+        990,
+        940,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 180,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "living room centre",
+      "pano": {
+        "path": "renders/cp-living/pano.webp",
+        "bytes": 817492,
+        "sha256": "1db930acc5d1c87989eb128e042a640f2b204026b0c379442640c14961b27c00",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-living/depth.png",
+        "bytes": 952911,
+        "sha256": "d4d761379a5cf9985029049b0abc0add922ed2bbc0e130c4f81eaf7b74253602",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T01:23:39+00:00",
+      "minimap_uv": [
+        0.801824,
+        0.665815
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-entry",
+          "target_room": "r-dining",
+          "offset_cm": [
+            -210,
+            -300,
+            -10
+          ],
+          "distance_cm": 366.333,
+          "distance_xy_cm": 366.197,
+          "bearing_deg": 325.008,
+          "az_from_forward_deg": 145.008,
+          "elev_deg": -1.5642,
+          "texture_uv": [
+            0.9028,
+            0.50869
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-hall-e",
+              "w-living-n"
+            ]
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-living",
+          "via_opening": {
+            "id": "o-living-west",
+            "kind": "opening",
+            "wall_id": "v-living-w",
+            "width_cm": 428.9,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              805.2,
+              938.45,
+              130
+            ],
+            "offset_cm": [
+              -184.8,
+              -1.55,
+              -10
+            ],
+            "distance_cm": 185.077,
+            "bearing_deg": 270.4806,
+            "az_from_forward_deg": 90.4806,
+            "elev_deg": -3.0973,
+            "texture_uv": [
+              0.751335,
+              0.517207
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "best_aim": "opening"
+        }
+      ]
+    },
+    {
+      "id": "cp-kitchen",
+      "room_id": "r-kitchen",
+      "room_name_he": "מטבח",
+      "room_name_en": "Kitchen",
+      "position_cm": [
+        640,
+        990,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 90,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "kitchen work zone",
+      "pano": {
+        "path": "renders/cp-kitchen/pano.webp",
+        "bytes": 1307744,
+        "sha256": "4f97c490319636cc5305fd1b142a98316c84128dcb148c32cd2a00547a2262a4",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-kitchen/depth.png",
+        "bytes": 1030791,
+        "sha256": "e3eea862140e611deab9afd4f5bc0cfc4aa01a1cdf1ec79b64eb1af0370d1f25",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T01:54:00+00:00",
+      "minimap_uv": [
+        0.526688,
+        0.700132
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-entry",
+          "target_room": "r-dining",
+          "offset_cm": [
+            140,
+            -350,
+            -10
+          ],
+          "distance_cm": 377.094,
+          "distance_xy_cm": 376.962,
+          "bearing_deg": 21.8014,
+          "az_from_forward_deg": -68.1986,
+          "elev_deg": -1.5196,
+          "texture_uv": [
+            0.310559,
+            0.508442
+          ],
+          "sightline": {
+            "direct": true
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-kitchen",
+          "via_opening": {
+            "id": "o-kitchen-east",
+            "kind": "opening",
+            "wall_id": "v-kitchen-e",
+            "width_cm": 362,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              765.2,
+              971.9,
+              130
+            ],
+            "offset_cm": [
+              125.2,
+              -18.1,
+              -10
+            ],
+            "distance_cm": 126.896,
+            "bearing_deg": 81.7738,
+            "az_from_forward_deg": -8.2262,
+            "elev_deg": -4.5199,
+            "texture_uv": [
+              0.477149,
+              0.52511
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "via_opening_choice": {
+            "rule": "a clear sightline from this camera first, then the nearest centre (squared XY), then the id",
+            "considered": [
+              {
+                "id": "o-kitchen-east",
+                "distance_xy_cm": 126.502,
+                "direct": true
+              },
+              {
+                "id": "o-kitchen-north",
+                "distance_xy_cm": 199.557,
+                "direct": true
+              }
+            ]
+          },
+          "best_aim": "target"
+        }
+      ]
+    },
+    {
+      "id": "cp-corridor",
+      "room_id": "r-corridor",
+      "room_name_he": "מסדרון",
+      "room_name_en": "Corridor",
+      "position_cm": [
+        400,
+        620,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 180,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "corridor centre",
+      "pano": {
+        "path": "renders/cp-corridor/pano.webp",
+        "bytes": 966042,
+        "sha256": "d07080616a5100d1fe9d1c0bfb7f1755dfeaa791dce5ca6b203cd749af083e78",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-corridor/depth.png",
+        "bytes": 1277546,
+        "sha256": "e086bfcf1198a32a13b2ebf10fd806947d63c0b3336f1117acd2c5314218ea76",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T02:27:34+00:00",
+      "minimap_uv": [
+        0.338024,
+        0.446192
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-bath-main",
+          "target_room": "r-bath-main",
+          "offset_cm": [
+            -70,
+            -490,
+            -37.5
+          ],
+          "distance_cm": 496.393,
+          "distance_xy_cm": 494.975,
+          "bearing_deg": 351.8699,
+          "az_from_forward_deg": 171.8699,
+          "elev_deg": -4.3325,
+          "texture_uv": [
+            0.977416,
+            0.52407
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-bath-s"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-bath-main|r-corridor",
+          "via_opening": {
+            "id": "d-bath-main",
+            "kind": "door",
+            "wall_id": "w-bath-s",
+            "width_cm": 76.9,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              393.75,
+              217.55,
+              102.5
+            ],
+            "offset_cm": [
+              -6.25,
+              -402.45,
+              -37.5
+            ],
+            "distance_cm": 404.242,
+            "bearing_deg": 359.1103,
+            "az_from_forward_deg": 179.1103,
+            "elev_deg": -5.3228,
+            "texture_uv": [
+              0.997529,
+              0.529571
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-bath-main"
+              ],
+              "min_aperture_margin_cm": 38.196
+            }
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-bed-2",
+          "target_room": "r-bed-2",
+          "offset_cm": [
+            -225,
+            120,
+            -37.5
+          ],
+          "distance_cm": 257.743,
+          "distance_xy_cm": 255,
+          "bearing_deg": 241.9275,
+          "az_from_forward_deg": 61.9275,
+          "elev_deg": -8.3659,
+          "texture_uv": [
+            0.672021,
+            0.546477
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-bed2-e"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-bed-2|r-corridor",
+          "via_opening": {
+            "id": "d-bed-2",
+            "kind": "door",
+            "wall_id": "w-bed2-e",
+            "width_cm": 76.5,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              329.25,
+              843.65,
+              102.5
+            ],
+            "offset_cm": [
+              -70.75,
+              223.65,
+              -37.5
+            ],
+            "distance_cm": 237.552,
+            "bearing_deg": 197.5544,
+            "az_from_forward_deg": 17.5544,
+            "elev_deg": -9.0827,
+            "texture_uv": [
+              0.548762,
+              0.550459
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-bed-2"
+              ],
+              "min_aperture_margin_cm": 18.177
+            }
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-dining",
+          "target_room": "r-dining",
+          "offset_cm": [
+            220,
+            -150,
+            -10
+          ],
+          "distance_cm": 266.458,
+          "distance_xy_cm": 266.271,
+          "bearing_deg": 55.7131,
+          "az_from_forward_deg": -124.2869,
+          "elev_deg": -2.1508,
+          "texture_uv": [
+            0.154759,
+            0.511949
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-partition"
+            ]
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-corridor|r-dining",
+          "via_opening": {
+            "id": "o-corridor-south",
+            "kind": "opening",
+            "wall_id": "v-corridor-s",
+            "width_cm": 91.7,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              464.3,
+              723.65,
+              130
+            ],
+            "offset_cm": [
+              64.3,
+              103.65,
+              -10
+            ],
+            "distance_cm": 122.384,
+            "bearing_deg": 148.1863,
+            "az_from_forward_deg": -31.8137,
+            "elev_deg": -4.6869,
+            "texture_uv": [
+              0.411629,
+              0.526038
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "via_opening_choice": {
+            "rule": "a clear sightline from this camera first, then the nearest centre (squared XY), then the id",
+            "considered": [
+              {
+                "id": "o-corridor-south",
+                "distance_xy_cm": 121.975,
+                "direct": true
+              },
+              {
+                "id": "o-corridor-north",
+                "distance_xy_cm": 337.433,
+                "direct": true
+              }
+            ]
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-mamad",
+          "target_room": "r-mamad",
+          "offset_cm": [
+            -228,
+            -220,
+            -37.5
+          ],
+          "distance_cm": 319.046,
+          "distance_xy_cm": 316.834,
+          "bearing_deg": 313.977,
+          "az_from_forward_deg": 133.977,
+          "elev_deg": -6.75,
+          "texture_uv": [
+            0.872158,
+            0.5375
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-mamad-e"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-corridor|r-mamad",
+          "via_opening": {
+            "id": "d-mamad",
+            "kind": "door",
+            "wall_id": "w-mamad-e",
+            "width_cm": 77.2,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              324.15,
+              481.3,
+              102.5
+            ],
+            "offset_cm": [
+              -75.85,
+              -138.7,
+              -37.5
+            ],
+            "distance_cm": 162.472,
+            "bearing_deg": 331.3274,
+            "az_from_forward_deg": 151.3274,
+            "elev_deg": -13.3447,
+            "texture_uv": [
+              0.920354,
+              0.574137
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-mamad"
+              ],
+              "min_aperture_margin_cm": 17.662
+            }
+          },
+          "best_aim": "opening"
+        },
+        {
+          "kind": "door",
+          "target": "cp-master-lobby",
+          "target_room": "r-master-lobby",
+          "offset_cm": [
+            0.9,
+            364.6,
+            -37.5
+          ],
+          "distance_cm": 366.525,
+          "distance_xy_cm": 364.601,
+          "bearing_deg": 179.8586,
+          "az_from_forward_deg": -0.1414,
+          "elev_deg": -5.8723,
+          "texture_uv": [
+            0.499607,
+            0.532624
+          ],
+          "sightline": {
+            "direct": true,
+            "through": [
+              "d-master"
+            ],
+            "min_aperture_margin_cm": 38.471
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-corridor|r-master-lobby",
+          "via_opening": {
+            "id": "d-master",
+            "kind": "door",
+            "wall_id": "w-bed2-s",
+            "width_cm": 77.1,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              400.75,
+              898.2,
+              102.5
+            ],
+            "offset_cm": [
+              0.75,
+              278.2,
+              -37.5
+            ],
+            "distance_cm": 280.717,
+            "bearing_deg": 179.8455,
+            "az_from_forward_deg": -0.1545,
+            "elev_deg": -7.6769,
+            "texture_uv": [
+              0.499571,
+              0.542649
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-master"
+              ],
+              "min_aperture_margin_cm": 38.533
+            }
+          },
+          "best_aim": "target"
+        }
+      ]
+    },
+    {
+      "id": "cp-mamad",
+      "room_id": "r-mamad",
+      "room_name_he": "ממ\"ד",
+      "room_name_en": "Safe room (MAMAD)",
+      "position_cm": [
+        172,
+        400,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 90,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "safe room",
+      "pano": {
+        "path": "renders/cp-mamad/pano.webp",
+        "bytes": 1176398,
+        "sha256": "799ecbbe6b870aa05ae0d865ea97d78766ed7030e9d55f3ab49702c805b2ff14",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-mamad/depth.png",
+        "bytes": 903769,
+        "sha256": "5558172c1090ba4d896d03213153a1918b4ce05109db673ab910bf2f63045d32",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T02:58:11+00:00",
+      "minimap_uv": [
+        0.158793,
+        0.295201
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-corridor",
+          "target_room": "r-corridor",
+          "offset_cm": [
+            228,
+            220,
+            -37.5
+          ],
+          "distance_cm": 319.046,
+          "distance_xy_cm": 316.834,
+          "bearing_deg": 133.977,
+          "az_from_forward_deg": 43.977,
+          "elev_deg": -6.75,
+          "texture_uv": [
+            0.622158,
+            0.5375
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-mamad-e"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-corridor|r-mamad",
+          "via_opening": {
+            "id": "d-mamad",
+            "kind": "door",
+            "wall_id": "w-mamad-e",
+            "width_cm": 77.2,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              324.15,
+              481.3,
+              102.5
+            ],
+            "offset_cm": [
+              152.15,
+              81.3,
+              -37.5
+            ],
+            "distance_cm": 176.538,
+            "bearing_deg": 118.1174,
+            "az_from_forward_deg": 28.1174,
+            "elev_deg": -12.2642,
+            "texture_uv": [
+              0.578104,
+              0.568134
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-mamad"
+              ],
+              "min_aperture_margin_cm": 32.482
+            }
+          },
+          "best_aim": "opening"
+        }
+      ]
+    },
+    {
+      "id": "cp-bed-2",
+      "room_id": "r-bed-2",
+      "room_name_he": "חדר שינה",
+      "room_name_en": "Bedroom",
+      "position_cm": [
+        175,
+        740,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 90,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "bedroom",
+      "pano": {
+        "path": "renders/cp-bed-2/pano.webp",
+        "bytes": 1056566,
+        "sha256": "14acfa13e2246afda77bce9824c8bbb1468cc8d2c3d9fd2301a11b0778371146",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-bed-2/depth.png",
+        "bytes": 1011166,
+        "sha256": "f73572de7eeef6299486fb6ca050782449fa4db286ddb3271f6eb3e1da42d238",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T03:29:09+00:00",
+      "minimap_uv": [
+        0.161151,
+        0.528551
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-corridor",
+          "target_room": "r-corridor",
+          "offset_cm": [
+            225,
+            -120,
+            -37.5
+          ],
+          "distance_cm": 257.743,
+          "distance_xy_cm": 255,
+          "bearing_deg": 61.9275,
+          "az_from_forward_deg": -28.0725,
+          "elev_deg": -8.3659,
+          "texture_uv": [
+            0.422021,
+            0.546477
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-bed2-e"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-bed-2|r-corridor",
+          "via_opening": {
+            "id": "d-bed-2",
+            "kind": "door",
+            "wall_id": "w-bed2-e",
+            "width_cm": 76.5,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              329.25,
+              843.65,
+              102.5
+            ],
+            "offset_cm": [
+              154.25,
+              103.65,
+              -37.5
+            ],
+            "distance_cm": 189.585,
+            "bearing_deg": 123.8996,
+            "az_from_forward_deg": 33.8996,
+            "elev_deg": -11.4083,
+            "texture_uv": [
+              0.594165,
+              0.56338
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-bed-2"
+              ],
+              "min_aperture_margin_cm": 33.983
+            }
+          },
+          "best_aim": "opening"
+        }
+      ]
+    },
+    {
+      "id": "cp-master",
+      "room_id": "r-master",
+      "room_name_he": "חדר שינה הורים",
+      "room_name_en": "Master bedroom",
+      "position_cm": [
+        175,
+        1100,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 90,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "master bedroom",
+      "pano": {
+        "path": "renders/cp-master/pano.webp",
+        "bytes": 1071086,
+        "sha256": "9ef786ccd42b702cb318a3f0d0ff048ebdc7f65bb098fcb1c00b4c0a2fad1ce2",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-master/depth.png",
+        "bytes": 1017343,
+        "sha256": "92dad73b0353e94a3b64dd8dea6c97b4a149276f77c4e120cba880cbab676d41",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T04:00:31+00:00",
+      "minimap_uv": [
+        0.161151,
+        0.775627
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-ensuite",
+          "target_room": "r-ensuite",
+          "offset_cm": [
+            231.7,
+            81.1,
+            -37.5
+          ],
+          "distance_cm": 248.331,
+          "distance_xy_cm": 245.483,
+          "bearing_deg": 109.2911,
+          "az_from_forward_deg": 19.2911,
+          "elev_deg": -8.6853,
+          "texture_uv": [
+            0.553587,
+            0.548252
+          ],
+          "sightline": {
+            "direct": true,
+            "through": [
+              "d-ensuite"
+            ],
+            "min_aperture_margin_cm": 12.743
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-ensuite|r-master",
+          "via_opening": {
+            "id": "d-ensuite",
+            "kind": "door",
+            "wall_id": "w-master-e",
+            "width_cm": 78.4,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              331.8,
+              1179.1,
+              102.5
+            ],
+            "offset_cm": [
+              156.8,
+              79.1,
+              -37.5
+            ],
+            "distance_cm": 179.581,
+            "bearing_deg": 116.7693,
+            "az_from_forward_deg": 26.7693,
+            "elev_deg": -12.0532,
+            "texture_uv": [
+              0.574359,
+              0.566962
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-ensuite"
+              ],
+              "min_aperture_margin_cm": 35.971
+            }
+          },
+          "best_aim": "target"
+        },
+        {
+          "kind": "door",
+          "target": "cp-master-lobby",
+          "target_room": "r-master-lobby",
+          "offset_cm": [
+            225.9,
+            -115.4,
+            -10
+          ],
+          "distance_cm": 253.866,
+          "distance_xy_cm": 253.669,
+          "bearing_deg": 62.94,
+          "az_from_forward_deg": -27.06,
+          "elev_deg": -2.2575,
+          "texture_uv": [
+            0.424833,
+            0.512542
+          ],
+          "sightline": {
+            "direct": true
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-master|r-master-lobby",
+          "via_opening": {
+            "id": "o-master-lobby",
+            "kind": "opening",
+            "wall_id": "v-master-lobby",
+            "width_cm": 146.4,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              325.4,
+              977.6,
+              130
+            ],
+            "offset_cm": [
+              150.4,
+              -122.4,
+              -10
+            ],
+            "distance_cm": 194.17,
+            "bearing_deg": 50.8603,
+            "az_from_forward_deg": -39.1397,
+            "elev_deg": -2.9521,
+            "texture_uv": [
+              0.391279,
+              0.516401
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "best_aim": "target"
+        }
+      ]
+    },
+    {
+      "id": "cp-bath-main",
+      "room_id": "r-bath-main",
+      "room_name_he": "חדר רחצה",
+      "room_name_en": "Main bathroom",
+      "position_cm": [
+        330,
+        130,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 270,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "main bathroom",
+      "pano": {
+        "path": "renders/cp-bath-main/pano.webp",
+        "bytes": 298296,
+        "sha256": "58ddf3039cb76e5e13ef585ebf73d95656f7001e52e06b6f5f0febeaf5c2e70d",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-bath-main/depth.png",
+        "bytes": 1212674,
+        "sha256": "ef86645c9238a8881dfe2c3585af4d84e55e485d726dce184ce143c335ce8308",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T04:35:35+00:00",
+      "minimap_uv": [
+        0.282997,
+        0.109895
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-corridor",
+          "target_room": "r-corridor",
+          "offset_cm": [
+            70,
+            490,
+            -37.5
+          ],
+          "distance_cm": 496.393,
+          "distance_xy_cm": 494.975,
+          "bearing_deg": 171.8699,
+          "az_from_forward_deg": -98.1301,
+          "elev_deg": -4.3325,
+          "texture_uv": [
+            0.227416,
+            0.52407
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-bath-s"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-bath-main|r-corridor",
+          "via_opening": {
+            "id": "d-bath-main",
+            "kind": "door",
+            "wall_id": "w-bath-s",
+            "width_cm": 76.9,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              393.75,
+              217.55,
+              102.5
+            ],
+            "offset_cm": [
+              63.75,
+              87.55,
+              -37.5
+            ],
+            "distance_cm": 114.609,
+            "bearing_deg": 143.9396,
+            "az_from_forward_deg": -126.0604,
+            "elev_deg": -19.0988,
+            "texture_uv": [
+              0.149832,
+              0.606105
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-bath-main"
+              ],
+              "min_aperture_margin_cm": 26.545
+            }
+          },
+          "best_aim": "opening"
+        }
+      ]
+    },
+    {
+      "id": "cp-ensuite",
+      "room_id": "r-ensuite",
+      "room_name_he": "חדר רחצה הורים",
+      "room_name_en": "En-suite bathroom",
+      "position_cm": [
+        406.7,
+        1181.1,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 210,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~67.8 cm plan-space clearance to the nearest drawn wall face",
+      "pano": {
+        "path": "renders/cp-ensuite/pano.webp",
+        "bytes": 343034,
+        "sha256": "a95e5102b36e149eab8f69110939fc0e138e2fc0d7a0c310f55cf384e78673da",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-ensuite/depth.png",
+        "bytes": 1209223,
+        "sha256": "d9532dd2eca4d157c21d29ea17da96f748442478f22d22911f41c1d77b02af1b",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T05:10:30+00:00",
+      "minimap_uv": [
+        0.343291,
+        0.831288
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-master",
+          "target_room": "r-master",
+          "offset_cm": [
+            -231.7,
+            -81.1,
+            -37.5
+          ],
+          "distance_cm": 248.331,
+          "distance_xy_cm": 245.483,
+          "bearing_deg": 289.2911,
+          "az_from_forward_deg": 79.2911,
+          "elev_deg": -8.6853,
+          "texture_uv": [
+            0.720253,
+            0.548252
+          ],
+          "sightline": {
+            "direct": true,
+            "through": [
+              "d-ensuite"
+            ],
+            "min_aperture_margin_cm": 12.743
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-ensuite|r-master",
+          "via_opening": {
+            "id": "d-ensuite",
+            "kind": "door",
+            "wall_id": "w-master-e",
+            "width_cm": 78.4,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              331.8,
+              1179.1,
+              102.5
+            ],
+            "offset_cm": [
+              -74.9,
+              -2,
+              -37.5
+            ],
+            "distance_cm": 83.787,
+            "bearing_deg": 271.5296,
+            "az_from_forward_deg": 61.5296,
+            "elev_deg": -26.5875,
+            "texture_uv": [
+              0.670915,
+              0.647708
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-ensuite"
+              ],
+              "min_aperture_margin_cm": 39.029
+            }
+          },
+          "best_aim": "target"
+        }
+      ]
+    },
+    {
+      "id": "cp-master-lobby",
+      "room_id": "r-master-lobby",
+      "room_name_he": "מבואת חדר הורים",
+      "room_name_en": "Master lobby",
+      "position_cm": [
+        400.9,
+        984.6,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 317,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~73.6 cm plan-space clearance to the nearest drawn wall face",
+      "pano": {
+        "path": "renders/cp-master-lobby/pano.webp",
+        "bytes": 1000370,
+        "sha256": "956191cb9540a97c709c08dde29036b93988b1495eb9f2f2d6296b3d3ed2d6a0",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-master-lobby/depth.png",
+        "bytes": 1294806,
+        "sha256": "c33171aabd1cbd044dd993c2a090e2b396e9008d28150447849567779a1e3330",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T05:44:46+00:00",
+      "minimap_uv": [
+        0.338731,
+        0.696425
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-corridor",
+          "target_room": "r-corridor",
+          "offset_cm": [
+            -0.9,
+            -364.6,
+            -37.5
+          ],
+          "distance_cm": 366.525,
+          "distance_xy_cm": 364.601,
+          "bearing_deg": 359.8586,
+          "az_from_forward_deg": 42.8586,
+          "elev_deg": -5.8723,
+          "texture_uv": [
+            0.619052,
+            0.532624
+          ],
+          "sightline": {
+            "direct": true,
+            "through": [
+              "d-master"
+            ],
+            "min_aperture_margin_cm": 38.471
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-corridor|r-master-lobby",
+          "via_opening": {
+            "id": "d-master",
+            "kind": "door",
+            "wall_id": "w-bed2-s",
+            "width_cm": 77.1,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              400.75,
+              898.2,
+              102.5
+            ],
+            "offset_cm": [
+              -0.15,
+              -86.4,
+              -37.5
+            ],
+            "distance_cm": 94.187,
+            "bearing_deg": 359.9005,
+            "az_from_forward_deg": 42.9005,
+            "elev_deg": -23.4622,
+            "texture_uv": [
+              0.619168,
+              0.630345
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-master"
+              ],
+              "min_aperture_margin_cm": 38.539
+            }
+          },
+          "best_aim": "target"
+        },
+        {
+          "kind": "door",
+          "target": "cp-master",
+          "target_room": "r-master",
+          "offset_cm": [
+            -225.9,
+            115.4,
+            -10
+          ],
+          "distance_cm": 253.866,
+          "distance_xy_cm": 253.669,
+          "bearing_deg": 242.94,
+          "az_from_forward_deg": -74.06,
+          "elev_deg": -2.2575,
+          "texture_uv": [
+            0.294278,
+            0.512542
+          ],
+          "sightline": {
+            "direct": true
+          },
+          "aim_height_cm": 130,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-master|r-master-lobby",
+          "via_opening": {
+            "id": "o-master-lobby",
+            "kind": "opening",
+            "wall_id": "v-master-lobby",
+            "width_cm": 146.4,
+            "sill_cm": 0,
+            "head_cm": 260,
+            "centre_cm": [
+              325.4,
+              977.6,
+              130
+            ],
+            "offset_cm": [
+              -75.5,
+              -7,
+              -10
+            ],
+            "distance_cm": 76.48,
+            "bearing_deg": 275.297,
+            "az_from_forward_deg": -41.703,
+            "elev_deg": -7.5131,
+            "texture_uv": [
+              0.384158,
+              0.541739
+            ],
+            "sightline": {
+              "direct": true
+            }
+          },
+          "best_aim": "target"
+        }
+      ]
+    },
+    {
+      "id": "cp-wc",
+      "room_id": "r-wc",
+      "room_name_he": "שירותים",
+      "room_name_en": "Toilet",
+      "position_cm": [
+        565.1,
+        260.2,
+        140
+      ],
+      "eye_height_cm": 140,
+      "yaw_deg": 143,
+      "yaw_note": "the SEED yaw the pano was rendered facing; the viewer preserves the user's own pose across a swap (M-360-5)",
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~62.5 cm plan-space clearance to the nearest drawn wall face",
+      "pano": {
+        "path": "renders/cp-wc/pano.webp",
+        "bytes": 233700,
+        "sha256": "c1e75884cdbf7627476ca7613be37d08f9e02bbae6ce8042945f12248b032149",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "format": "webp"
+      },
+      "depth": {
+        "path": "renders/cp-wc/depth.png",
+        "bytes": 1144864,
+        "sha256": "5446bf91981b8a00ab8a125e078ab2db349ca82636bf871c916de653187e7cfb",
+        "resolution": [
+          8192,
+          4096
+        ],
+        "encoding": "rgb24-be",
+        "scale": 100,
+        "invalid_value": 0,
+        "units": "m"
+      },
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "denoise": true,
+        "seed": 0
+      },
+      "rendered_utc": "2026-09-02T06:18:00+00:00",
+      "minimap_uv": [
+        0.467809,
+        0.199254
+      ],
+      "links": [
+        {
+          "kind": "door",
+          "target": "cp-dining",
+          "target_room": "r-dining",
+          "offset_cm": [
+            54.9,
+            209.8,
+            -37.5
+          ],
+          "distance_cm": 220.082,
+          "distance_xy_cm": 216.864,
+          "bearing_deg": 165.3358,
+          "az_from_forward_deg": 22.3358,
+          "elev_deg": -9.8105,
+          "texture_uv": [
+            0.562044,
+            0.554503
+          ],
+          "sightline": {
+            "direct": false,
+            "blocked_by": [
+              "w-wc-s"
+            ]
+          },
+          "aim_height_cm": 102.5,
+          "aim_height_rule": "door mid-height ((sill+head)/2 of via_opening)",
+          "edge": "r-dining|r-wc",
+          "via_opening": {
+            "id": "d-wc",
+            "kind": "door",
+            "wall_id": "w-wc-w",
+            "width_cm": 66.9,
+            "sill_cm": 0,
+            "head_cm": 205,
+            "centre_cm": [
+              495.6,
+              300.05,
+              102.5
+            ],
+            "offset_cm": [
+              -69.5,
+              39.85,
+              -37.5
+            ],
+            "distance_cm": 88.456,
+            "bearing_deg": 240.1708,
+            "az_from_forward_deg": 97.1708,
+            "elev_deg": -25.0835,
+            "texture_uv": [
+              0.769919,
+              0.639353
+            ],
+            "sightline": {
+              "direct": true,
+              "through": [
+                "d-wc"
+              ],
+              "min_aperture_margin_cm": 29.723
+            }
+          },
+          "best_aim": "opening"
+        }
+      ]
+    }
+  ],
+  "graph": {
+    "rule": "SCHEMA §6 / F-360-116 — an edge is an OPENING's own `rooms` pair. ⛔ Never reverse-indexed from walls: a footprint wall here bounds up to five rooms.",
+    "aim_rule": "`best_aim` per link: 'target' = the prescribed aim (the far room's nearest point at door mid-height) has a clear line from this camera; 'opening' = it does not, but the doorway does — render the marker at `via_opening.offset_cm`; 'none' = neither is visible from here (the route turns a corner), so a marker painted in either direction lands on a wall. Pure plan geometry (segment vs wall footprint, the opening's own 3-D aperture as the hole) — ⛔ no depth is read.",
+    "edges": [
+      {
+        "rooms": [
+          "r-balcony-north",
+          "r-dining"
+        ],
+        "openings": [
+          "d-balcony-north"
+        ],
+        "kinds": [
+          "door"
+        ],
+        "walkable": false,
+        "links": 0,
+        "not_walkable_because": "r-balcony-north has no camera point (SCHEMA §7: an outdoor room carries none)"
+      },
+      {
+        "rooms": [
+          "r-balcony-south",
+          "r-living"
+        ],
+        "openings": [
+          "d-balcony-south"
+        ],
+        "kinds": [
+          "sliding_door"
+        ],
+        "walkable": false,
+        "links": 0,
+        "not_walkable_because": "r-balcony-south has no camera point (SCHEMA §7: an outdoor room carries none)"
+      },
+      {
+        "rooms": [
+          "r-bath-main",
+          "r-corridor"
+        ],
+        "openings": [
+          "d-bath-main"
+        ],
+        "kinds": [
+          "door"
+        ],
+        "walkable": true,
+        "links": 2
+      },
+      {
+        "rooms": [
+          "r-bath-main",
+          "r-service-balcony"
+        ],
+        "openings": [
+          "d-service-balcony"
+        ],
+        "kinds": [
+          "glazed_door"
+        ],
+        "walkable": false,
+        "links": 0,
+        "not_walkable_because": "r-service-balcony has no camera point (SCHEMA §7: an outdoor room carries none)"
+      },
+      {
+        "rooms": [
+          "r-bed-2",
+          "r-corridor"
+        ],
+        "openings": [
+          "d-bed-2"
+        ],
+        "kinds": [
+          "door"
+        ],
+        "walkable": true,
+        "links": 2
+      },
+      {
+        "rooms": [
+          "r-corridor",
+          "r-dining"
+        ],
+        "openings": [
+          "o-corridor-north",
+          "o-corridor-south"
+        ],
+        "kinds": [
+          "opening",
+          "opening"
+        ],
+        "walkable": true,
+        "links": 3
+      },
+      {
+        "rooms": [
+          "r-corridor",
+          "r-mamad"
+        ],
+        "openings": [
+          "d-mamad"
+        ],
+        "kinds": [
+          "door"
+        ],
+        "walkable": true,
+        "links": 2
+      },
+      {
+        "rooms": [
+          "r-corridor",
+          "r-master-lobby"
+        ],
+        "openings": [
+          "d-master"
+        ],
+        "kinds": [
+          "door"
+        ],
+        "walkable": true,
+        "links": 2
+      },
+      {
+        "rooms": [
+          "r-dining",
+          "r-kitchen"
+        ],
+        "openings": [
+          "o-kitchen-east",
+          "o-kitchen-north"
+        ],
+        "kinds": [
+          "opening",
+          "opening"
+        ],
+        "walkable": true,
+        "links": 3
+      },
+      {
+        "rooms": [
+          "r-dining",
+          "r-living"
+        ],
+        "openings": [
+          "o-living-west"
+        ],
+        "kinds": [
+          "opening"
+        ],
+        "walkable": true,
+        "links": 3
+      },
+      {
+        "rooms": [
+          "r-dining",
+          "r-wc"
+        ],
+        "openings": [
+          "d-wc"
+        ],
+        "kinds": [
+          "door"
+        ],
+        "walkable": true,
+        "links": 3
+      },
+      {
+        "rooms": [
+          "r-ensuite",
+          "r-master"
+        ],
+        "openings": [
+          "d-ensuite"
+        ],
+        "kinds": [
+          "door"
+        ],
+        "walkable": true,
+        "links": 2
+      },
+      {
+        "rooms": [
+          "r-master",
+          "r-master-lobby"
+        ],
+        "openings": [
+          "o-master-lobby"
+        ],
+        "kinds": [
+          "opening"
+        ],
+        "walkable": true,
+        "links": 2
+      }
+    ],
+    "counts": {
+      "rooms": 14,
+      "rooms_with_points": 11,
+      "points": 12,
+      "edges": 13,
+      "walkable_edges": 10,
+      "door_links": 24,
+      "spot_links": 2,
+      "links": 26,
+      "orphan_points": 0,
+      "components": 1,
+      "aim": {
+        "target": 11,
+        "opening": 13,
+        "none": 2
+      }
+    }
+  },
+  "minimap": {
+    "image": {
+      "path": "renders/topview.png",
+      "bytes": 1250969,
+      "sha256": "8acb63350a9ded12ccde9674051c081932445b4b95594160a352bf71a934a647"
+    },
+    "room_mask": {
+      "path": "renders/topview-roomids.png",
+      "bytes": 15447,
+      "sha256": "b7b1a3c3e2e66f368dff718234e4674e783f9c54c0b9a1fc2d21b065acc653e4",
+      "decode": "match the pixel's exact RGB triple against rooms[].rgb; (0,0,0) = no room",
+      "background_rgb": [
+        0,
+        0,
+        0
+      ],
+      "anti_aliasing": "NONE — rasterised from plan.json's room loops at pixel centres, even-odd rule"
+    },
+    "depth": {
+      "path": "renders/topview-depth.png",
+      "bytes": 30239,
+      "sha256": "d663c3621b2f6d9667dad7e49d5655488321ff08c60d078bcf5422764306f11b"
+    },
+    "size_px": [
+      1018,
+      1166
+    ],
+    "registration": {
+      "source": "renders/topview.registration.json",
+      "validated_here": {
+        "world_uv_world_worst_cm": 1.137e-13,
+        "legend_vs_plan_worst_px": 0.0004711,
+        "bars": {
+          "round_trip_cm": 1,
+          "legend_px": 0.01
+        }
+      },
+      "origin_cm": [
+        -30,
+        -30.120923
+      ],
+      "span_cm": [
+        1272.1,
+        1457.041846
+      ],
+      "cm_per_px": [
+        1.249607073,
+        1.249607073
+      ],
+      "world_to_uv": "u = (x_cm − origin_cm[0]) / span_cm[0] ; v = (y_cm − origin_cm[1]) / span_cm[1]",
+      "uv_to_world": "x_cm = origin_cm[0] + u·span_cm[0] ; y_cm = origin_cm[1] + v·span_cm[1]",
+      "uv_note": "u,v are EDGE-based continuous image coordinates in [0,1] (0 = the left/top edge of the image). ⚠ The sidecar's polygon_px are pixel-CENTRE indices: u = (col_px + 0.5)/width, v = (row_px + 0.5)/height. Half a pixel is 0.62 cm here.",
+      "no_flip": "row 0 is the image's TOP scanline and the SMALLEST plan y — the affine flips neither axis (plan y grows downward, SCHEMA §1)"
+    },
+    "rooms": [
+      {
+        "room_id": "r-bath-main",
+        "rgb": [
+          230,
+          25,
+          75
+        ],
+        "hex": "#E6194B",
+        "polygon_uv": [
+          [
+            0.136153,
+            0.038243
+          ],
+          [
+            0.408065,
+            0.038243
+          ],
+          [
+            0.408065,
+            0.158761
+          ],
+          [
+            0.136153,
+            0.158761
+          ]
+        ],
+        "centroid_uv": [
+          0.272109,
+          0.098502
+        ]
+      },
+      {
+        "room_id": "r-service-balcony",
+        "rgb": [
+          60,
+          180,
+          75
+        ],
+        "hex": "#3CB44B",
+        "polygon_uv": [
+          [
+            0.027199,
+            0.038243
+          ],
+          [
+            0.116422,
+            0.038243
+          ],
+          [
+            0.116422,
+            0.158761
+          ],
+          [
+            0.027199,
+            0.158761
+          ]
+        ],
+        "centroid_uv": [
+          0.07181,
+          0.098502
+        ]
+      },
+      {
+        "room_id": "r-wc",
+        "rgb": [
+          255,
+          225,
+          25
+        ],
+        "hex": "#FFE119",
+        "polygon_uv": [
+          [
+            0.418285,
+            0.142495
+          ],
+          [
+            0.51694,
+            0.142495
+          ],
+          [
+            0.51694,
+            0.25615
+          ],
+          [
+            0.418285,
+            0.25615
+          ]
+        ],
+        "centroid_uv": [
+          0.467613,
+          0.199322
+        ]
+      },
+      {
+        "room_id": "r-balcony-north",
+        "rgb": [
+          0,
+          130,
+          200
+        ],
+        "hex": "#0082C8",
+        "polygon_uv": [
+          [
+            0.428111,
+            0.036046
+          ],
+          [
+            0.726987,
+            0.036046
+          ],
+          [
+            0.726987,
+            0.247708
+          ],
+          [
+            0.537772,
+            0.247708
+          ],
+          [
+            0.537772,
+            0.124582
+          ],
+          [
+            0.428111,
+            0.124582
+          ]
+        ],
+        "centroid_uv": [
+          0.577549,
+          0.141877
+        ]
+      },
+      {
+        "room_id": "r-mamad",
+        "rgb": [
+          245,
+          130,
+          48
+        ],
+        "hex": "#F58230",
+        "polygon_uv": [
+          [
+            0.049524,
+            0.181203
+          ],
+          [
+            0.269397,
+            0.181203
+          ],
+          [
+            0.269397,
+            0.407415
+          ],
+          [
+            0.049524,
+            0.407415
+          ]
+        ],
+        "centroid_uv": [
+          0.159461,
+          0.294309
+        ]
+      },
+      {
+        "room_id": "r-bed-2",
+        "rgb": [
+          145,
+          30,
+          180
+        ],
+        "hex": "#911EB4",
+        "polygon_uv": [
+          [
+            0.043943,
+            0.423132
+          ],
+          [
+            0.277415,
+            0.423132
+          ],
+          [
+            0.277415,
+            0.632872
+          ],
+          [
+            0.043943,
+            0.632872
+          ]
+        ],
+        "centroid_uv": [
+          0.160679,
+          0.528002
+        ]
+      },
+      {
+        "room_id": "r-master",
+        "rgb": [
+          70,
+          240,
+          240
+        ],
+        "hex": "#46F0F0",
+        "polygon_uv": [
+          [
+            0.043943,
+            0.641382
+          ],
+          [
+            0.279381,
+            0.641382
+          ],
+          [
+            0.279381,
+            0.912274
+          ],
+          [
+            0.043943,
+            0.912274
+          ]
+        ],
+        "centroid_uv": [
+          0.161662,
+          0.776828
+        ]
+      },
+      {
+        "room_id": "r-master-lobby",
+        "rgb": [
+          240,
+          50,
+          230
+        ],
+        "hex": "#F032E6",
+        "polygon_uv": [
+          [
+            0.279381,
+            0.641382
+          ],
+          [
+            0.396588,
+            0.641382
+          ],
+          [
+            0.396588,
+            0.750576
+          ],
+          [
+            0.289443,
+            0.750576
+          ],
+          [
+            0.289443,
+            0.74186
+          ],
+          [
+            0.279381,
+            0.74186
+          ]
+        ],
+        "centroid_uv": [
+          0.337984,
+          0.695979
+        ]
+      },
+      {
+        "room_id": "r-ensuite",
+        "rgb": [
+          210,
+          245,
+          60
+        ],
+        "hex": "#D2F53C",
+        "polygon_uv": [
+          [
+            0.289443,
+            0.750576
+          ],
+          [
+            0.396588,
+            0.750576
+          ],
+          [
+            0.396588,
+            0.912274
+          ],
+          [
+            0.289443,
+            0.912274
+          ]
+        ],
+        "centroid_uv": [
+          0.343015,
+          0.831425
+        ]
+      },
+      {
+        "room_id": "r-kitchen",
+        "rgb": [
+          250,
+          190,
+          212
+        ],
+        "hex": "#FABED4",
+        "polygon_uv": [
+          [
+            0.407043,
+            0.563485
+          ],
+          [
+            0.625108,
+            0.563485
+          ],
+          [
+            0.625108,
+            0.811933
+          ],
+          [
+            0.407043,
+            0.811933
+          ]
+        ],
+        "centroid_uv": [
+          0.516076,
+          0.687709
+        ]
+      },
+      {
+        "room_id": "r-living",
+        "rgb": [
+          0,
+          128,
+          128
+        ],
+        "hex": "#008080",
+        "polygon_uv": [
+          [
+            0.656552,
+            0.51757
+          ],
+          [
+            0.947881,
+            0.51757
+          ],
+          [
+            0.947881,
+            0.811933
+          ],
+          [
+            0.656552,
+            0.811933
+          ]
+        ],
+        "centroid_uv": [
+          0.802217,
+          0.664752
+        ]
+      },
+      {
+        "room_id": "r-corridor",
+        "rgb": [
+          220,
+          190,
+          255
+        ],
+        "hex": "#DCBEFF",
+        "polygon_uv": [
+          [
+            0.287399,
+            0.181203
+          ],
+          [
+            0.38857,
+            0.181203
+          ],
+          [
+            0.38857,
+            0.548798
+          ],
+          [
+            0.396588,
+            0.548798
+          ],
+          [
+            0.396588,
+            0.632872
+          ],
+          [
+            0.287399,
+            0.632872
+          ]
+        ],
+        "centroid_uv": [
+          0.341994,
+          0.407038
+        ]
+      },
+      {
+        "room_id": "r-dining",
+        "rgb": [
+          170,
+          110,
+          40
+        ],
+        "hex": "#AA6E28",
+        "polygon_uv": [
+          [
+            0.38857,
+            0.181203
+          ],
+          [
+            0.408065,
+            0.181203
+          ],
+          [
+            0.408065,
+            0.265141
+          ],
+          [
+            0.656552,
+            0.265141
+          ],
+          [
+            0.656552,
+            0.811933
+          ],
+          [
+            0.625108,
+            0.811933
+          ],
+          [
+            0.625108,
+            0.563485
+          ],
+          [
+            0.407043,
+            0.563485
+          ],
+          [
+            0.407043,
+            0.548798
+          ],
+          [
+            0.38857,
+            0.548798
+          ],
+          [
+            0.38857,
+            0.485862
+          ],
+          [
+            0.406179,
+            0.485862
+          ],
+          [
+            0.406179,
+            0.256493
+          ],
+          [
+            0.38857,
+            0.256493
+          ]
+        ],
+        "centroid_uv": [
+          0.522561,
+          0.496568
+        ]
+      },
+      {
+        "room_id": "r-balcony-south",
+        "rgb": [
+          255,
+          250,
+          200
+        ],
+        "hex": "#FFFAC8",
+        "polygon_uv": [
+          [
+            0.625108,
+            0.829915
+          ],
+          [
+            0.953384,
+            0.829915
+          ],
+          [
+            0.953384,
+            0.964228
+          ],
+          [
+            0.625108,
+            0.964228
+          ]
+        ],
+        "centroid_uv": [
+          0.789246,
+          0.897072
+        ]
+      }
+    ],
+    "room_points": {
+      "r-bath-main": [
+        "cp-bath-main"
+      ],
+      "r-service-balcony": [],
+      "r-wc": [
+        "cp-wc"
+      ],
+      "r-balcony-north": [],
+      "r-mamad": [
+        "cp-mamad"
+      ],
+      "r-bed-2": [
+        "cp-bed-2"
+      ],
+      "r-master": [
+        "cp-master"
+      ],
+      "r-master-lobby": [
+        "cp-master-lobby"
+      ],
+      "r-ensuite": [
+        "cp-ensuite"
+      ],
+      "r-kitchen": [
+        "cp-kitchen"
+      ],
+      "r-living": [
+        "cp-living"
+      ],
+      "r-corridor": [
+        "cp-corridor"
+      ],
+      "r-dining": [
+        "cp-dining",
+        "cp-entry"
+      ],
+      "r-balcony-south": []
+    },
+    "points_uv": {
+      "cp-entry": [
+        0.636742,
+        0.459919
+      ],
+      "cp-dining": [
+        0.510966,
+        0.343244
+      ],
+      "cp-living": [
+        0.801824,
+        0.665815
+      ],
+      "cp-kitchen": [
+        0.526688,
+        0.700132
+      ],
+      "cp-corridor": [
+        0.338024,
+        0.446192
+      ],
+      "cp-mamad": [
+        0.158793,
+        0.295201
+      ],
+      "cp-bed-2": [
+        0.161151,
+        0.528551
+      ],
+      "cp-master": [
+        0.161151,
+        0.775627
+      ],
+      "cp-bath-main": [
+        0.282997,
+        0.109895
+      ],
+      "cp-ensuite": [
+        0.343291,
+        0.831288
+      ],
+      "cp-master-lobby": [
+        0.338731,
+        0.696425
+      ],
+      "cp-wc": [
+        0.467809,
+        0.199254
+      ]
+    }
+  },
+  "rooms": [
+    {
+      "id": "r-bath-main",
+      "name_he": "חדר רחצה",
+      "name_en": "Main bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        345,
+        185
+      ],
+      "clear_dims_cm": [
+        345.9,
+        175.6
+      ],
+      "area_m2": 6.074,
+      "bbox_cm": [
+        143.2,
+        25.6,
+        489.1,
+        201.2
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": {
+        "id": "D-01",
+        "room": "r-bath-main",
+        "printed_cm": 185,
+        "traced_cm": 175.7,
+        "delta_cm": -9.3,
+        "axis": "y",
+        "resolution": "drawing kept, printed number recorded",
+        "why": "the printed 185 cannot be honoured without contradicting three printed dimensions the drawing DOES satisfy exactly. The bathroom's south wall is the MAMAD's north wall; the whole west N-S chain (bath / MAMAD 330 / bedroom 305 / master 395) measures to within 0.5 cm end to end at the fitted scale. Moving that one wall 9.3 cm would break the other three. Excluded from the T14 measurement-accuracy population - it is a drawing-internal conflict, not a pipeline error."
+      },
+      "camera_points": [
+        "cp-bath-main"
+      ]
+    },
+    {
+      "id": "r-service-balcony",
+      "name_he": "מרפסת שירות",
+      "name_en": "Service balcony",
+      "type": "service_balcony",
+      "is_outdoor": true,
+      "printed_dims_cm": null,
+      "clear_dims_cm": [
+        113.5,
+        175.6
+      ],
+      "area_m2": 1.993,
+      "bbox_cm": [
+        4.6,
+        25.6,
+        118.1,
+        201.2
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": null,
+      "camera_points": []
+    },
+    {
+      "id": "r-wc",
+      "name_he": "שירותים",
+      "name_en": "Toilet",
+      "type": "toilet",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        125,
+        165
+      ],
+      "clear_dims_cm": [
+        125.5,
+        165.6
+      ],
+      "area_m2": 2.078,
+      "bbox_cm": [
+        502.1,
+        177.5,
+        627.6,
+        343.1
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": null,
+      "camera_points": [
+        "cp-wc"
+      ]
+    },
+    {
+      "id": "r-balcony-north",
+      "name_he": "מרפסת צפונית",
+      "name_en": "North balcony",
+      "type": "balcony",
+      "is_outdoor": true,
+      "printed_dims_cm": null,
+      "clear_dims_cm": [
+        380.2,
+        308.4
+      ],
+      "area_m2": 9.223,
+      "bbox_cm": [
+        514.6,
+        22.4,
+        894.8,
+        330.8
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": null,
+      "camera_points": []
+    },
+    {
+      "id": "r-mamad",
+      "name_he": "ממ\"ד",
+      "name_en": "Safe room (MAMAD)",
+      "type": "safe_room",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        280,
+        330
+      ],
+      "clear_dims_cm": [
+        279.7,
+        329.6
+      ],
+      "area_m2": 9.219,
+      "bbox_cm": [
+        33,
+        233.9,
+        312.7,
+        563.5
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": null,
+      "camera_points": [
+        "cp-mamad"
+      ]
+    },
+    {
+      "id": "r-bed-2",
+      "name_he": "חדר שינה",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        297,
+        305
+      ],
+      "clear_dims_cm": [
+        297,
+        305.6
+      ],
+      "area_m2": 9.076,
+      "bbox_cm": [
+        25.9,
+        586.4,
+        322.9,
+        892
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": null,
+      "camera_points": [
+        "cp-bed-2"
+      ]
+    },
+    {
+      "id": "r-master",
+      "name_he": "חדר שינה הורים",
+      "name_en": "Master bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        299,
+        395
+      ],
+      "clear_dims_cm": [
+        299.5,
+        394.7
+      ],
+      "area_m2": 11.821,
+      "bbox_cm": [
+        25.9,
+        904.4,
+        325.4,
+        1299.1
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": true,
+      "disagreement": null,
+      "camera_points": [
+        "cp-master"
+      ]
+    },
+    {
+      "id": "r-master-lobby",
+      "name_he": "מבואת חדר הורים",
+      "name_en": "Master lobby",
+      "type": "hall",
+      "is_outdoor": false,
+      "printed_dims_cm": null,
+      "clear_dims_cm": [
+        149.1,
+        159.1
+      ],
+      "area_m2": 2.356,
+      "bbox_cm": [
+        325.4,
+        904.4,
+        474.5,
+        1063.5
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": true,
+      "disagreement": null,
+      "camera_points": [
+        "cp-master-lobby"
+      ]
+    },
+    {
+      "id": "r-ensuite",
+      "name_he": "חדר רחצה הורים",
+      "name_en": "En-suite bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        135,
+        235
+      ],
+      "clear_dims_cm": [
+        136.3,
+        235.6
+      ],
+      "area_m2": 3.211,
+      "bbox_cm": [
+        338.2,
+        1063.5,
+        474.5,
+        1299.1
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": null,
+      "camera_points": [
+        "cp-ensuite"
+      ]
+    },
+    {
+      "id": "r-kitchen",
+      "name_he": "מטבח",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        278,
+        362
+      ],
+      "clear_dims_cm": [
+        277.4,
+        362
+      ],
+      "area_m2": 10.042,
+      "bbox_cm": [
+        487.8,
+        790.9,
+        765.2,
+        1152.9
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": true,
+      "disagreement": null,
+      "camera_points": [
+        "cp-kitchen"
+      ]
+    },
+    {
+      "id": "r-living",
+      "name_he": "חדר מגורים",
+      "name_en": "Living room",
+      "type": "living",
+      "is_outdoor": false,
+      "printed_dims_cm": [
+        368,
+        428
+      ],
+      "clear_dims_cm": [
+        370.6,
+        428.9
+      ],
+      "area_m2": 15.895,
+      "bbox_cm": [
+        805.2,
+        724,
+        1175.8,
+        1152.9
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": true,
+      "disagreement": null,
+      "camera_points": [
+        "cp-living"
+      ]
+    },
+    {
+      "id": "r-corridor",
+      "name_he": "מסדרון",
+      "name_en": "Corridor",
+      "type": "corridor",
+      "is_outdoor": false,
+      "printed_dims_cm": null,
+      "clear_dims_cm": [
+        138.9,
+        658.1
+      ],
+      "area_m2": 8.595,
+      "bbox_cm": [
+        335.6,
+        233.9,
+        474.5,
+        892
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": true,
+      "disagreement": null,
+      "camera_points": [
+        "cp-corridor"
+      ]
+    },
+    {
+      "id": "r-dining",
+      "name_he": "מבואה ופינת אוכל",
+      "name_en": "Entry and dining",
+      "type": "hall",
+      "is_outdoor": false,
+      "printed_dims_cm": null,
+      "clear_dims_cm": [
+        340.9,
+        919
+      ],
+      "area_m2": 15.771,
+      "bbox_cm": [
+        464.3,
+        233.9,
+        805.2,
+        1152.9
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": true,
+      "disagreement": null,
+      "camera_points": [
+        "cp-dining",
+        "cp-entry"
+      ]
+    },
+    {
+      "id": "r-balcony-south",
+      "name_he": "מרפסת דרומית",
+      "name_en": "South balcony",
+      "type": "balcony",
+      "is_outdoor": true,
+      "printed_dims_cm": null,
+      "clear_dims_cm": [
+        417.6,
+        195.7
+      ],
+      "area_m2": 8.172,
+      "bbox_cm": [
+        765.2,
+        1179.1,
+        1182.8,
+        1374.8
+      ],
+      "dims_source": "plan.json, exact — `clear_dims_cm` is the traced interior-face bounding box, `printed_dims_cm` is what the drawing prints (null where it prints none)",
+      "has_virtual_boundary": false,
+      "disagreement": null,
+      "camera_points": []
+    }
+  ]
+}

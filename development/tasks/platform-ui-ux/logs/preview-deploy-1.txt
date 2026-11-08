@@ -1,0 +1,9 @@
+# Vercel PREVIEW deploy 1 (2026-11-03 20:53, main session)
+go: Eliran, verbatim: "go ל-preview ב-Vercel" (a preview only; production needs its own go, root §9).
+staged: the preview tree (live platform read-only + this board's working copy + three from .wt/apartment-3d) by a scratch copy of the working-copy stage_flow.py whose R points at that tree; out = scratchpad/deploy-preview-1 (307.4 MB; _local/dist/rainbow/846 29 files staged).
+local check before upload (python http.server :8852, killed by PID): 7 pages x 390/1440, page errors 0; 0 x 4xx except 3 x 404 on /_local/segments/rainbow-cine/* on flow.html and landing arm B — pre-existing optional cine probes (stage_flow never deploys _local/segments), the flight falls back.
+deploy: npx vercel@65.9.0 link --yes --project habait-flow; npx vercel@65.9.0 deploy --yes (NO --prod). Account eliran-5390.
+result: https://habait-flow-qxl71je9p-eliran-5390.vercel.app · target preview · Ready (vercel inspect). Production alias untouched: latest Production deployment still 11 h old; https://habait-flow.vercel.app/ serves the old home (0 matches for tokens.css/home-card).
+access: the preview URL answers 302 to Vercel Authentication — only the logged-in team (Eliran) can open it.
+note: 'vercel link' wrote .env.local (pulled env) into the staging folder; it was deleted unread right after the deploy. Vercel's CLI ignores .env.local by default on upload; that could not be confirmed from outside because the preview sits behind authentication (/.env.local -> 302).
+not in this preview: the apartment page frame (card 16, waits for apartment-3d).

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://127.0.0.1:8850/css/style.css">
+<title>הדמיית ריחוף אינטראקטיבית — Rainbow TLV (טיוטה)</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0b0d10; color: #f2efe8; font-family: Heebo, system-ui, sans-serif; overflow: hidden; }
+  #c { position: fixed; inset: 0; display: block; }
+  #hud { position: fixed; top: 12px; right: 12px; left: 12px; display: flex; justify-content: space-between; align-items: flex-start; pointer-events: none; gap: 12px; }
+  .panel { background: rgba(10,12,16,.72); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 10px 14px; pointer-events: auto; backdrop-filter: blur(6px); font-size: 14px; line-height: 1.5; max-width: 380px; }
+  .panel b { font-weight: 600; }
+  button { font: inherit; background: #0e5a4a; color: #fff; border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; margin-inline-start: 6px; }
+  button.ghost { background: transparent; border: 1px solid rgba(255,255,255,.35); }
+  #bar { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); width: min(720px, 86vw); pointer-events: auto; }
+  #bar input { width: 100%; }
+  #bar .labels { display: flex; justify-content: space-between; font-size: 12px; color: #c9c4b8; direction: ltr; }
+  #hot { position: fixed; transform: translate(-50%, -50%); pointer-events: auto; cursor: pointer; display: none; }
+  #hot .dot { width: 18px; height: 18px; border-radius: 50%; background: #ffcc55; box-shadow: 0 0 0 6px rgba(255,204,85,.25), 0 0 18px rgba(255,204,85,.8); animation: pulse 1.6s infinite; margin: 0 auto; }
+  #hot .lbl { margin-top: 6px; background: rgba(10,12,16,.8); padding: 3px 10px; border-radius: 999px; font-size: 13px; white-space: nowrap; }
+  @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.25) } }
+  :root { --picker-bottom: 16px; --picker-top: 72px; }
+  #pickerStage { position: fixed; inset: 0; pointer-events: none; }
+  #pickerStage > * { pointer-events: auto; }
+  #fade { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity .6s; }
+  #enter { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%); display: none; }
+  #enter button { font-size: 16px; padding: 12px 22px; }
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; background: #0b0d10; font-size: 16px; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="loading">טוען את ההדמיה…</div>
+<div id="hud">
+  <div class="panel" id="info"><b>הדמיית ריחוף אינטראקטיבית</b> · טיוטה ראשונה<br>
+    גרירה: להסתכל סביב · גלגלת / הסליידר: לטוס אל המגדל · לחיצה על הנקודה הצהובה: לטוס אל דירה 846.<br>
+    <span id="status" style="color:#c9c4b8"></span></div>
+  <div class="panel"><button id="reset" class="ghost">חזרה למעוף</button><button id="toApt">טוס לדירה 846</button></div>
+</div>
+<div id="hot" style="display:none"><div class="dot"></div><div class="lbl">דירה 846 · קומה 16</div></div>
+<div id="pickerStage"></div>
+<div id="bar" class="panel"><input id="t" type="range" min="0" max="1000" value="0"><div class="labels"><span>terrace 846</span><span>facade</span><span>tower</span><span>aerial</span></div></div>
+<div id="enter"><button id="enterBtn">להיכנס לדירה (הדמיית 360) ←</button></div>
+<video id="clip" playsinline muted preload="auto" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;display:none;background:#000;z-index:5"></video>
+<div id="fade"></div>
+<script>
+  function showErr(m){ var s=document.getElementById('status'); if(s) s.textContent='שגיאה: '+m; var l=document.getElementById('loading'); if(l) l.textContent='שגיאה: '+m; }
+  window.addEventListener('error', function(e){ showErr(e.message||String(e)); });
+  window.addEventListener('unhandledrejection', function(e){ showErr((e.reason&&e.reason.message)||String(e.reason)); });
+</script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

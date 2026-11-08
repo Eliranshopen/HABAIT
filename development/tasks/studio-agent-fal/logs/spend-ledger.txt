@@ -1,0 +1,31 @@
+# studio-agent-fal — paid-call ledger (root §7: written BEFORE each call; actual cost appended after)
+budget for the build-night check: <= $1.00 total (Eliran's blanket approval 2026-11-03 21:50; default caps $10 soft / $15 hard)
+2026-11-03 23:26 PLANNED · fal openrouter/router/vision · anthropic/claude-sonnet-5.5 · (1) one intake read of a throwaway project holding a copy of apt846's sales plan PDF (179 KB) — estimate $0.30; (2) two chat questions on it — estimate $0.05 each; total estimate $0.40
+2026-11-03 23:27 RESULT · the 3 calls above failed with fal HTTP 400 'Reasoning is mandatory' — actual cost $0 (project ledger rows usd 0)
+2026-11-03 23:27 PLANNED · one probe call, reasoning:true, a 1-line prompt, max_tokens 300 — estimate $0.01
+2026-11-03 23:27 RESULT · probe ok, actual $0.000228 (54 tokens); with reasoning:true the output is the answer alone
+2026-11-03 23:27 PLANNED · re-run of the live check (1 intake read + 2 chat answers), estimate $0.40
+2026-11-03 23:29 RESULT · live check: intake read $0.1336 (47 s, 10 rooms, confidence 0.85) + chat $0.0148 + $0.0197 = $0.1681 total; night total $0.1683 (incl. the probe) of the $1 budget
+2026-11-04 10:03 PLANNED · OWED-013 new FAL_KEY probe (Eliran: "החלפתי תמשיך"): one fal LLM call, 1-line prompt, max_tokens 300, reasoning:true — estimate $0.001 (last probe $0.000228)
+2026-11-04 10:03 RESULT · probe ok, actual $0.000076, authenticated 2xx with the key in the live .env (sha256-6 071cf9)
+2026-11-04 10:03 NOTE · OWED-013: the probing key's sha256-6 (071cf9) EQUALS the archive copy's (the old value) -> rotation NOT confirmed; OWED-013 stays open. Possible causes: .env not saved, or a FAL_KEY in the Windows environment overrides the file (loadEnv prefers process.env). Asked Eliran.
+2026-11-04 10:06 PLANNED · OWED-013 re-probe (Eliran: "תבדוק שוב"): one fal LLM call, estimate $0.001
+2026-11-04 10:07 RESULT · re-probe ok $0.000076; key sha256-6 still 071cf9 = archive (old) -> rotation still not confirmed
+2026-11-04 19:00 rnd-9d | probe | fal openrouter/router/vision claude-sonnet-5.5, max_tokens 5 | est 0.0005 USD | is the fal account unlocked (Eliran asked)
+2026-11-04 19:57 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-04 21:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-04 22:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-04 23:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 00:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 01:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 02:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 03:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 04:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 05:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 06:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 07:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 08:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 09:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 10:14 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | is fal unlocked
+2026-11-05 11:09 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | new FAL_KEY from Eliran works?
+2026-11-05 11:09 rnd-9d | probe | fal openrouter/router/vision, max_tokens 5 | est 0.0005 USD | new FAL_KEY re-check

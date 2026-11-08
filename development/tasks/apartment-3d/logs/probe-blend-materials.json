@@ -1,0 +1,768 @@
+{
+ "blend": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\scene.blend",
+ "materials": 26,
+ "with_images": 8,
+ "missing_images": [],
+ "list": [
+  {
+   "material": "M_wall_plaster",
+   "users": 114,
+   "images": [],
+   "base": [
+    0.878,
+    0.862,
+    0.838
+   ],
+   "objects_sample": [
+    "DOORFRAME_o-13_facade-11_H",
+    "DOORFRAME_o-13_facade-11_L",
+    "DOORFRAME_o-13_facade-11_R",
+    "FACING_r-bath-guest_e0_r0"
+   ],
+   "objects": 114
+  },
+  {
+   "material": "M_metal_black",
+   "users": 81,
+   "images": [],
+   "base": [
+    0.045,
+    0.045,
+    0.048
+   ],
+   "objects_sample": [
+    "CLOSET_b2-closet_handle1",
+    "CLOSET_b2-closet_handle2",
+    "CLOSET_b2-closet_handle3",
+    "CLOSET_b2-closet_handle4"
+   ],
+   "objects": 81
+  },
+  {
+   "material": "M_wood_oak",
+   "users": 66,
+   "images": [],
+   "base": [
+    0.47,
+    0.33,
+    0.19
+   ],
+   "objects_sample": [
+    "CLOSET_b2-closet_carcass",
+    "CLOSET_b2-closet_door1",
+    "CLOSET_b2-closet_door2",
+    "CLOSET_b2-closet_door3"
+   ],
+   "objects": 66
+  },
+  {
+   "material": "M_wood_walnut",
+   "users": 19,
+   "images": [],
+   "base": [
+    0.2,
+    0.13,
+    0.08
+   ],
+   "objects_sample": [
+    "CLOSET_b2-closet_plinth",
+    "CLOSET_w-closet-1_plinth",
+    "CLOSET_w-closet-2_plinth",
+    "ENTRY_o-12_casing_m_head"
+   ],
+   "objects": 19
+  },
+  {
+   "material": "M_metal",
+   "users": 16,
+   "images": [],
+   "base": [
+    0.075,
+    0.075,
+    0.078
+   ],
+   "objects_sample": [
+    "POST_facade-10_end0",
+    "POST_facade-11_end1",
+    "POST_facade-1_end0",
+    "POST_facade-1_end1"
+   ],
+   "objects": 16
+  },
+  {
+   "material": "M_glass",
+   "users": 14,
+   "images": [],
+   "base": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "objects_sample": [
+    "GLASS_facade-1",
+    "GLASS_facade-10",
+    "GLASS_facade-11",
+    "GLASS_facade-2"
+   ],
+   "objects": 14
+  },
+  {
+   "material": "M_lamp_shade",
+   "users": 13,
+   "images": [],
+   "base": [
+    0.95,
+    0.9,
+    0.82
+   ],
+   "objects_sample": [
+    "FIXTURE_r-bath-guest",
+    "FIXTURE_r-bath-main",
+    "FIXTURE_r-bedroom-2",
+    "FIXTURE_r-bedroom-main"
+   ],
+   "objects": 13
+  },
+  {
+   "material": "M_metal_brushed",
+   "users": 13,
+   "images": [],
+   "base": [
+    0.58,
+    0.57,
+    0.55
+   ],
+   "objects_sample": [
+    "SHOWER_bg-shower_head",
+    "SHOWER_bg-shower_riser",
+    "SHOWER_bg-shower_screen_rail",
+    "SHOWER_bm-shower_head"
+   ],
+   "objects": 13
+  },
+  {
+   "material": "M_ceiling_paint",
+   "users": 12,
+   "images": [],
+   "base": [
+    0.93,
+    0.928,
+    0.922
+   ],
+   "objects_sample": [
+    "CEILFILL",
+    "CEIL_r-bath-guest",
+    "CEIL_r-bath-main",
+    "CEIL_r-bedroom-2"
+   ],
+   "objects": 12
+  },
+  {
+   "material": "M_ceramic_white",
+   "users": 8,
+   "images": [],
+   "base": [
+    0.9,
+    0.9,
+    0.885
+   ],
+   "objects_sample": [
+    "SHOWER_bg-shower_tray",
+    "SHOWER_bm-shower_tray",
+    "bathroomSinkSquare(Clone)",
+    "bathroomSinkSquare(Clone).001"
+   ],
+   "objects": 8
+  },
+  {
+   "material": "M_fabric_white",
+   "users": 8,
+   "images": [],
+   "base": [
+    0.86,
+    0.84,
+    0.8
+   ],
+   "objects_sample": [
+    "bedDouble(Clone)",
+    "bedDouble(Clone).001",
+    "cover",
+    "cover.001"
+   ],
+   "objects": 8
+  },
+  {
+   "material": "M_floor_laminate_floor_02",
+   "users": 8,
+   "images": [
+    {
+     "name": "laminate_floor_02_Diffuse_2k.jpg",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\pipeline\\probe\\probe-assets\\textures\\laminate_floor_02\\laminate_floor_02_Diffuse_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "laminate_floor_02_Rough_2k.jpg",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\pipeline\\probe\\probe-assets\\textures\\laminate_floor_02\\laminate_floor_02_Rough_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "laminate_floor_02_nor_gl_2k.jpg",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\pipeline\\probe\\probe-assets\\textures\\laminate_floor_02\\laminate_floor_02_nor_gl_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.36,
+    0.24,
+    0.14
+   ],
+   "objects_sample": [
+    "FLOORFILL_floor",
+    "FLOOR_r-bedroom-2",
+    "FLOOR_r-bedroom-main",
+    "FLOOR_r-dining"
+   ],
+   "objects": 8
+  },
+  {
+   "material": "M_fabric_dark",
+   "users": 4,
+   "images": [],
+   "base": [
+    0.26,
+    0.24,
+    0.22
+   ],
+   "objects_sample": [
+    "chairModernCushion(Clone)",
+    "chairModernCushion(Clone).001",
+    "chairModernCushion(Clone).002",
+    "loungeDesignSofa(Clone)"
+   ],
+   "objects": 4
+  },
+  {
+   "material": "M_mirror_glass",
+   "users": 4,
+   "images": [],
+   "base": [
+    0.88,
+    0.89,
+    0.9
+   ],
+   "objects_sample": [
+    "bathroomMirror(Clone)",
+    "bathroomMirror(Clone)",
+    "bathroomMirror(Clone).001",
+    "bathroomMirror(Clone).001"
+   ],
+   "objects": 4
+  },
+  {
+   "material": "M_floor_outdoor",
+   "users": 3,
+   "images": [],
+   "base": [
+    0.66,
+    0.63,
+    0.58
+   ],
+   "objects_sample": [
+    "FLOORFILL_floor_outdoor",
+    "FLOOR_r-terrace-bedroom",
+    "FLOOR_r-terrace-living"
+   ],
+   "objects": 3
+  },
+  {
+   "material": "M_floor_wet",
+   "users": 3,
+   "images": [],
+   "base": [
+    0.8,
+    0.78,
+    0.75
+   ],
+   "objects_sample": [
+    "FLOORFILL_floor_wet",
+    "FLOOR_r-bath-guest",
+    "FLOOR_r-bath-main"
+   ],
+   "objects": 3
+  },
+  {
+   "material": "M_art_panel",
+   "users": 2,
+   "images": [],
+   "base": [
+    0.7,
+    0.67,
+    0.62
+   ],
+   "objects_sample": [
+    "hanging_picture_frame_01",
+    "hanging_picture_frame_01.001"
+   ],
+   "objects": 2
+  },
+  {
+   "material": "M_fabric_warm",
+   "users": 2,
+   "images": [],
+   "base": [
+    0.62,
+    0.55,
+    0.47
+   ],
+   "objects_sample": [
+    "cover",
+    "cover.001"
+   ],
+   "objects": 2
+  },
+  {
+   "material": "hanging_picture_frame_01",
+   "users": 1,
+   "images": [
+    {
+     "name": "hanging_picture_frame_01_nor_gl.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_nor_gl_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_diff.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_diff_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_metallic.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_metallic_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_roughness.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_roughness_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_opacity.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_opacity_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "objects_sample": [
+    "hanging_picture_frame_01"
+   ],
+   "objects": 1
+  },
+  {
+   "material": "hanging_picture_frame_01.001",
+   "users": 1,
+   "images": [
+    {
+     "name": "hanging_picture_frame_01_nor_gl.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_nor_gl_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_diff.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_diff_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_metallic.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_metallic_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_roughness.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_roughness_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_opacity.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_opacity_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "objects_sample": [
+    "hanging_picture_frame_01.001"
+   ],
+   "objects": 1
+  },
+  {
+   "material": "hanging_picture_frame_01_glass",
+   "users": 1,
+   "images": [
+    {
+     "name": "hanging_picture_frame_01_opacity.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_opacity_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_roughness.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_roughness_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_metallic.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_metallic_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_diff.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_diff_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_artwork_nor_gl.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_artwork_nor_gl_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "objects_sample": [
+    "hanging_picture_frame_01"
+   ],
+   "objects": 1
+  },
+  {
+   "material": "hanging_picture_frame_01_glass.001",
+   "users": 1,
+   "images": [
+    {
+     "name": "hanging_picture_frame_01_opacity.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_opacity_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_roughness.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_roughness_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_metallic.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_metallic_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_diff.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_diff_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "hanging_picture_frame_01_artwork_nor_gl.png.001",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-hanging_picture_frame_01\\textures\\hanging_picture_frame_01_artwork_nor_gl_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "objects_sample": [
+    "hanging_picture_frame_01.001"
+   ],
+   "objects": 1
+  },
+  {
+   "material": "M_terrain",
+   "users": 1,
+   "images": [],
+   "base": [
+    0.302,
+    0.345,
+    0.204
+   ],
+   "objects_sample": [
+    "TERRAIN_ground"
+   ],
+   "objects": 1
+  },
+  {
+   "material": "modern_arm_chair_01_legs",
+   "users": 1,
+   "images": [
+    {
+     "name": "modern_arm_chair_01_legs_diff.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_legs_diff_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_arm_chair_01_legs_metal.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_legs_metal_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_arm_chair_01_legs_rough.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_legs_rough_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_arm_chair_01_legs_nor_gl.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_legs_nor_gl_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "objects_sample": [
+    "modern_arm_chair_01"
+   ],
+   "objects": 1
+  },
+  {
+   "material": "modern_arm_chair_01_pillow",
+   "users": 1,
+   "images": [
+    {
+     "name": "modern_arm_chair_01_pillow_diff.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_pillow_diff_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_arm_chair_01_pillow_metal.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_pillow_metal_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_arm_chair_01_pillow_rough.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_pillow_rough_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_arm_chair_01_pillow_nor_gl.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_arm_chair_01\\textures\\modern_arm_chair_01_pillow_nor_gl_2k.png",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "objects_sample": [
+    "modern_arm_chair_01"
+   ],
+   "objects": 1
+  },
+  {
+   "material": "modern_coffee_table_01",
+   "users": 1,
+   "images": [
+    {
+     "name": "modern_coffee_table_01_diff.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_coffee_table_01\\textures\\modern_coffee_table_01_diff_2k.jpg",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_coffee_table_01_rough.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_coffee_table_01\\textures\\modern_coffee_table_01_rough_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    },
+    {
+     "name": "modern_coffee_table_01_nor_gl.png",
+     "file": "C:\\RnD\\Projects\\Habait\\habait-walkaround\\Habait\\studio\\_local\\projects\\apt846-rainbow-tlv\\renders\\..\\..\\..\\..\\..\\..\\360walkaround\\catalog\\models\\polyhaven-modern_coffee_table_01\\textures\\modern_coffee_table_01_nor_gl_2k.exr",
+     "exists": true,
+     "packed": false,
+     "size": [
+      2048,
+      2048
+     ]
+    }
+   ],
+   "base": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "objects_sample": [
+    "modern_coffee_table_01"
+   ],
+   "objects": 1
+  }
+ ]
+}

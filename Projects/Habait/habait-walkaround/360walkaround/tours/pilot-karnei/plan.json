@@ -1,0 +1,1743 @@
+{
+  "schema_version": "0.1.0",
+  "units": "cm",
+  "axes": "x right (+east on the drawing), y down (+south on the drawing); origin = outer NW corner of the building envelope",
+  "apartment_id": "pilot-karnei",
+  "plan_meta": {
+    "source_file": "Habait/MVP/app/public/projects/karnei-plans/apt-6.jpg",
+    "source_sha256": "532e9dc53ce101fbdae45f8d7310220120f476e121180f35e1efce1e7a1360c9",
+    "source_label_he": "דירה 6 - דגם עולה - קומה 2 - 4 חדרים - 111 מ\"ר - 2 מרפסות 8 מ\"ר + 9 מ\"ר",
+    "project": "הרי זהב, קרני שומרון",
+    "unit_label": "Apartment 6 (דירה 6), floor 2",
+    "tracer": "walkthrough-engineer (board 360-v2, task T02)",
+    "trace_date": "2026-09-01",
+    "trace_method": "subpixel luminance-crossing edge detection at threshold 166 on the 1600x1600 source raster; every wall face measured, no hand-placed vertices",
+    "scale_basis": "least-squares fit through the origin on FOUR printed dimensions only (MAMAD 280 + 330, toilet 125 + 165): 1.0448 px/cm (0.95712 cm/px). Every other printed dimension is a held-out check, not a fit input.",
+    "scale_px_per_cm": 1.0448,
+    "raster_origin_px": [
+      89.34,
+      62.08
+    ],
+    "rights_state": "partner-supplied",
+    "rights_note": "developer floor-plan drawing supplied by הרי זהב for the Habait project pages; what a CG tour derived from it may be shown to is OQ-360-11 (Slava's). CONTRACT A8-13 / C-360-85.",
+    "ceiling_height_cm": 260.0,
+    "assumptions": [
+      "ceiling_height_cm 260 is ASSUMED - the drawing carries no section and no height dimension",
+      "parapet height 110 cm on both balconies and the service balcony is ASSUMED",
+      "window sill/head heights are ASSUMED - the drawing is a plan only",
+      "camera eye height 140 cm is ported from the reference product (research/walkaround-reference/REPORT.md 2.1), not from this drawing"
+    ],
+    "disagreements": [
+      {
+        "id": "D-01",
+        "room": "r-bath-main",
+        "printed_cm": 185,
+        "traced_cm": 175.7,
+        "delta_cm": -9.3,
+        "axis": "y",
+        "resolution": "drawing kept, printed number recorded",
+        "why": "the printed 185 cannot be honoured without contradicting three printed dimensions the drawing DOES satisfy exactly. The bathroom's south wall is the MAMAD's north wall; the whole west N-S chain (bath / MAMAD 330 / bedroom 305 / master 395) measures to within 0.5 cm end to end at the fitted scale. Moving that one wall 9.3 cm would break the other three. Excluded from the T14 measurement-accuracy population - it is a drawing-internal conflict, not a pipeline error."
+      }
+    ],
+    "virtual_boundaries": [
+      "r-kitchen north (y) and east (x) are open-plan zone boundaries with NO drawn line. The north one is placed from the PRINTED depth 362, so that number is CIRCULAR and is not usable as ruler ground truth. The east one lands on the south balcony's west edge, a drawn line, and independently reproduces the printed width 278 to -0.6 cm.",
+      "r-living west is an open-plan boundary placed on the hall east wall's west face extended south - a DRAWN structural line, not the printed 368; it independently reproduces the printed 368 to +2.4 cm.",
+      "r-corridor / r-dining are one physically continuous space split on the free-standing partition's own line (SCHEMA 6).",
+      "r-master / r-master-lobby are split on the master bedroom's east wall line extended north."
+    ]
+  },
+  "rooms": [
+    {
+      "id": "r-bath-main",
+      "name_he": "חדר רחצה",
+      "name_en": "Main bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          143.2,
+          25.6
+        ],
+        [
+          489.1,
+          25.6
+        ],
+        [
+          489.1,
+          201.2
+        ],
+        [
+          143.2,
+          201.2
+        ]
+      ],
+      "printed_dims_cm": [
+        345,
+        185
+      ],
+      "note": "printed depth 185 disagrees with the drawing (see plan_meta.disagreements D-01)",
+      "area_m2": 6.074,
+      "clear_dims_cm": [
+        345.9,
+        175.6
+      ],
+      "bbox_cm": [
+        143.2,
+        25.6,
+        489.1,
+        201.2
+      ]
+    },
+    {
+      "id": "r-service-balcony",
+      "name_he": "מרפסת שירות",
+      "name_en": "Service balcony",
+      "type": "service_balcony",
+      "is_outdoor": true,
+      "loop": [
+        [
+          4.6,
+          25.6
+        ],
+        [
+          118.1,
+          25.6
+        ],
+        [
+          118.1,
+          201.2
+        ],
+        [
+          4.6,
+          201.2
+        ]
+      ],
+      "printed_dims_cm": null,
+      "note": "no printed dimension; not one of the two balconies in the plan legend",
+      "area_m2": 1.993,
+      "clear_dims_cm": [
+        113.5,
+        175.6
+      ],
+      "bbox_cm": [
+        4.6,
+        25.6,
+        118.1,
+        201.2
+      ]
+    },
+    {
+      "id": "r-wc",
+      "name_he": "שירותים",
+      "name_en": "Toilet",
+      "type": "toilet",
+      "is_outdoor": false,
+      "loop": [
+        [
+          502.1,
+          177.5
+        ],
+        [
+          627.6,
+          177.5
+        ],
+        [
+          627.6,
+          343.1
+        ],
+        [
+          502.1,
+          343.1
+        ]
+      ],
+      "printed_dims_cm": [
+        125,
+        165
+      ],
+      "note": null,
+      "area_m2": 2.078,
+      "clear_dims_cm": [
+        125.5,
+        165.6
+      ],
+      "bbox_cm": [
+        502.1,
+        177.5,
+        627.6,
+        343.1
+      ]
+    },
+    {
+      "id": "r-balcony-north",
+      "name_he": "מרפסת צפונית",
+      "name_en": "North balcony",
+      "type": "balcony",
+      "is_outdoor": true,
+      "loop": [
+        [
+          514.6,
+          22.4
+        ],
+        [
+          894.8,
+          22.4
+        ],
+        [
+          894.8,
+          330.8
+        ],
+        [
+          654.1,
+          330.8
+        ],
+        [
+          654.1,
+          151.4
+        ],
+        [
+          514.6,
+          151.4
+        ]
+      ],
+      "printed_dims_cm": null,
+      "note": "plan legend prints the AREA (9 m2), not W/D; L-shaped around the toilet",
+      "area_m2": 9.223,
+      "clear_dims_cm": [
+        380.2,
+        308.4
+      ],
+      "bbox_cm": [
+        514.6,
+        22.4,
+        894.8,
+        330.8
+      ]
+    },
+    {
+      "id": "r-mamad",
+      "name_he": "ממ\"ד",
+      "name_en": "Safe room (MAMAD)",
+      "type": "safe_room",
+      "is_outdoor": false,
+      "loop": [
+        [
+          33.0,
+          233.9
+        ],
+        [
+          312.7,
+          233.9
+        ],
+        [
+          312.7,
+          563.5
+        ],
+        [
+          33.0,
+          563.5
+        ]
+      ],
+      "printed_dims_cm": [
+        280,
+        330
+      ],
+      "note": null,
+      "area_m2": 9.219,
+      "clear_dims_cm": [
+        279.7,
+        329.6
+      ],
+      "bbox_cm": [
+        33.0,
+        233.9,
+        312.7,
+        563.5
+      ]
+    },
+    {
+      "id": "r-bed-2",
+      "name_he": "חדר שינה",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          25.9,
+          586.4
+        ],
+        [
+          322.9,
+          586.4
+        ],
+        [
+          322.9,
+          892.0
+        ],
+        [
+          25.9,
+          892.0
+        ]
+      ],
+      "printed_dims_cm": [
+        297,
+        305
+      ],
+      "note": null,
+      "area_m2": 9.076,
+      "clear_dims_cm": [
+        297.0,
+        305.6
+      ],
+      "bbox_cm": [
+        25.9,
+        586.4,
+        322.9,
+        892.0
+      ]
+    },
+    {
+      "id": "r-master",
+      "name_he": "חדר שינה הורים",
+      "name_en": "Master bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          25.9,
+          904.4
+        ],
+        [
+          325.4,
+          904.4
+        ],
+        [
+          325.4,
+          1299.1
+        ],
+        [
+          25.9,
+          1299.1
+        ]
+      ],
+      "printed_dims_cm": [
+        299,
+        395
+      ],
+      "note": null,
+      "area_m2": 11.821,
+      "clear_dims_cm": [
+        299.5,
+        394.7
+      ],
+      "bbox_cm": [
+        25.9,
+        904.4,
+        325.4,
+        1299.1
+      ]
+    },
+    {
+      "id": "r-master-lobby",
+      "name_he": "מבואת חדר הורים",
+      "name_en": "Master lobby",
+      "type": "hall",
+      "is_outdoor": false,
+      "loop": [
+        [
+          325.4,
+          904.4
+        ],
+        [
+          474.5,
+          904.4
+        ],
+        [
+          474.5,
+          1063.5
+        ],
+        [
+          338.2,
+          1063.5
+        ],
+        [
+          338.2,
+          1050.8
+        ],
+        [
+          325.4,
+          1050.8
+        ]
+      ],
+      "printed_dims_cm": null,
+      "note": "no printed dimension; private vestibule inside the master suite",
+      "area_m2": 2.356,
+      "clear_dims_cm": [
+        149.1,
+        159.1
+      ],
+      "bbox_cm": [
+        325.4,
+        904.4,
+        474.5,
+        1063.5
+      ]
+    },
+    {
+      "id": "r-ensuite",
+      "name_he": "חדר רחצה הורים",
+      "name_en": "En-suite bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          338.2,
+          1063.5
+        ],
+        [
+          474.5,
+          1063.5
+        ],
+        [
+          474.5,
+          1299.1
+        ],
+        [
+          338.2,
+          1299.1
+        ]
+      ],
+      "printed_dims_cm": [
+        135,
+        235
+      ],
+      "note": null,
+      "area_m2": 3.211,
+      "clear_dims_cm": [
+        136.3,
+        235.6
+      ],
+      "bbox_cm": [
+        338.2,
+        1063.5,
+        474.5,
+        1299.1
+      ]
+    },
+    {
+      "id": "r-kitchen",
+      "name_he": "מטבח",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "is_outdoor": false,
+      "loop": [
+        [
+          487.8,
+          790.9
+        ],
+        [
+          765.2,
+          790.9
+        ],
+        [
+          765.2,
+          1152.9
+        ],
+        [
+          487.8,
+          1152.9
+        ]
+      ],
+      "printed_dims_cm": [
+        278,
+        362
+      ],
+      "note": "open plan: north and east boundaries are VIRTUAL, set from the printed dimensions",
+      "area_m2": 10.042,
+      "clear_dims_cm": [
+        277.4,
+        362.0
+      ],
+      "bbox_cm": [
+        487.8,
+        790.9,
+        765.2,
+        1152.9
+      ]
+    },
+    {
+      "id": "r-living",
+      "name_he": "חדר מגורים",
+      "name_en": "Living room",
+      "type": "living",
+      "is_outdoor": false,
+      "loop": [
+        [
+          805.2,
+          724.0
+        ],
+        [
+          1175.8,
+          724.0
+        ],
+        [
+          1175.8,
+          1152.9
+        ],
+        [
+          805.2,
+          1152.9
+        ]
+      ],
+      "printed_dims_cm": [
+        368,
+        428
+      ],
+      "note": "open plan: the west boundary is VIRTUAL - the hall east wall's west face extended south (a drawn structural line, NOT the printed 368)",
+      "area_m2": 15.895,
+      "clear_dims_cm": [
+        370.6,
+        428.9
+      ],
+      "bbox_cm": [
+        805.2,
+        724.0,
+        1175.8,
+        1152.9
+      ]
+    },
+    {
+      "id": "r-corridor",
+      "name_he": "מסדרון",
+      "name_en": "Corridor",
+      "type": "corridor",
+      "is_outdoor": false,
+      "loop": [
+        [
+          335.6,
+          233.9
+        ],
+        [
+          464.3,
+          233.9
+        ],
+        [
+          464.3,
+          769.5
+        ],
+        [
+          474.5,
+          769.5
+        ],
+        [
+          474.5,
+          892.0
+        ],
+        [
+          335.6,
+          892.0
+        ]
+      ],
+      "printed_dims_cm": null,
+      "note": "no printed dimension; split from r-dining on the partition line (see SCHEMA 6)",
+      "area_m2": 8.595,
+      "clear_dims_cm": [
+        138.9,
+        658.1
+      ],
+      "bbox_cm": [
+        335.6,
+        233.9,
+        474.5,
+        892.0
+      ]
+    },
+    {
+      "id": "r-dining",
+      "name_he": "מבואה ופינת אוכל",
+      "name_en": "Entry and dining",
+      "type": "hall",
+      "is_outdoor": false,
+      "loop": [
+        [
+          464.3,
+          233.9
+        ],
+        [
+          489.1,
+          233.9
+        ],
+        [
+          489.1,
+          356.2
+        ],
+        [
+          805.2,
+          356.2
+        ],
+        [
+          805.2,
+          1152.9
+        ],
+        [
+          765.2,
+          1152.9
+        ],
+        [
+          765.2,
+          790.9
+        ],
+        [
+          487.8,
+          790.9
+        ],
+        [
+          487.8,
+          769.5
+        ],
+        [
+          464.3,
+          769.5
+        ],
+        [
+          464.3,
+          677.8
+        ],
+        [
+          486.7,
+          677.8
+        ],
+        [
+          486.7,
+          343.6
+        ],
+        [
+          464.3,
+          343.6
+        ]
+      ],
+      "printed_dims_cm": null,
+      "note": "no printed dimension; entry + dining + the strip between kitchen and living",
+      "area_m2": 15.771,
+      "clear_dims_cm": [
+        340.9,
+        919.0
+      ],
+      "bbox_cm": [
+        464.3,
+        233.9,
+        805.2,
+        1152.9
+      ]
+    },
+    {
+      "id": "r-balcony-south",
+      "name_he": "מרפסת דרומית",
+      "name_en": "South balcony",
+      "type": "balcony",
+      "is_outdoor": true,
+      "loop": [
+        [
+          765.2,
+          1179.1
+        ],
+        [
+          1182.8,
+          1179.1
+        ],
+        [
+          1182.8,
+          1374.8
+        ],
+        [
+          765.2,
+          1374.8
+        ]
+      ],
+      "printed_dims_cm": null,
+      "note": "plan legend prints the AREA (8 m2), not W/D",
+      "area_m2": 8.172,
+      "clear_dims_cm": [
+        417.6,
+        195.7
+      ],
+      "bbox_cm": [
+        765.2,
+        1179.1,
+        1182.8,
+        1374.8
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "id": "w-ext-n",
+      "rect_cm": [
+        0.0,
+        0.0,
+        514.6,
+        25.6
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-service-balcony",
+        "r-bath-main",
+        "r-wc",
+        "r-balcony-north",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-svc-e",
+      "rect_cm": [
+        118.1,
+        25.6,
+        143.2,
+        201.2
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-service-balcony",
+        "r-bath-main"
+      ]
+    },
+    {
+      "id": "w-svc-rail",
+      "rect_cm": [
+        0.0,
+        25.6,
+        4.6,
+        201.2
+      ],
+      "kind": "parapet",
+      "height_cm": 110.0,
+      "sides": [
+        "r-service-balcony",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-bath-s",
+      "rect_cm": [
+        0.0,
+        201.2,
+        489.1,
+        233.9
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-bath-main",
+        "r-service-balcony",
+        "r-mamad",
+        "r-corridor",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "w-ext-w-mamad",
+      "rect_cm": [
+        0.0,
+        233.9,
+        33.0,
+        563.5
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-mamad",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-mamad-e",
+      "rect_cm": [
+        312.7,
+        233.9,
+        335.6,
+        563.5
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-mamad",
+        "r-corridor"
+      ]
+    },
+    {
+      "id": "w-mamad-s",
+      "rect_cm": [
+        0.0,
+        563.5,
+        335.6,
+        586.4
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-mamad",
+        "r-bed-2",
+        "r-corridor"
+      ]
+    },
+    {
+      "id": "w-ext-w-bed2",
+      "rect_cm": [
+        0.0,
+        586.4,
+        25.9,
+        892.0
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-bed-2",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-bed2-e",
+      "rect_cm": [
+        322.9,
+        586.4,
+        335.6,
+        892.0
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-bed-2",
+        "r-corridor"
+      ]
+    },
+    {
+      "id": "w-bed2-s",
+      "rect_cm": [
+        0.0,
+        892.0,
+        487.8,
+        904.4
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-bed-2",
+        "r-master",
+        "r-corridor",
+        "r-master-lobby"
+      ]
+    },
+    {
+      "id": "w-ext-w-master",
+      "rect_cm": [
+        0.0,
+        904.4,
+        25.9,
+        1299.1
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-master",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-master-e",
+      "rect_cm": [
+        325.4,
+        1050.8,
+        338.2,
+        1299.1
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-master",
+        "r-ensuite",
+        "r-master-lobby"
+      ]
+    },
+    {
+      "id": "w-ens-n",
+      "rect_cm": [
+        325.4,
+        1050.8,
+        474.5,
+        1063.5
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-master-lobby",
+        "r-ensuite"
+      ]
+    },
+    {
+      "id": "w-ext-s",
+      "rect_cm": [
+        0.0,
+        1299.1,
+        529.9,
+        1324.3
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-master",
+        "r-ensuite",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-kit-w",
+      "rect_cm": [
+        474.5,
+        769.5,
+        487.8,
+        1324.3
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-corridor",
+        "r-dining",
+        "r-kitchen",
+        "r-ensuite",
+        "r-master-lobby"
+      ]
+    },
+    {
+      "id": "w-partition",
+      "rect_cm": [
+        464.3,
+        343.6,
+        486.7,
+        677.8
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-corridor",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "w-wc-w",
+      "rect_cm": [
+        489.1,
+        177.5,
+        502.1,
+        356.2
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-wc",
+        "r-dining",
+        "r-bath-main"
+      ]
+    },
+    {
+      "id": "w-wc-n",
+      "rect_cm": [
+        489.1,
+        151.4,
+        654.1,
+        177.5
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-wc",
+        "r-balcony-north"
+      ]
+    },
+    {
+      "id": "w-wc-e",
+      "rect_cm": [
+        627.6,
+        151.4,
+        654.1,
+        356.2
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-wc",
+        "r-balcony-north",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "w-wc-s",
+      "rect_cm": [
+        502.1,
+        343.1,
+        627.6,
+        356.2
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-wc",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "w-balcn-w",
+      "rect_cm": [
+        489.1,
+        22.4,
+        514.6,
+        177.5
+      ],
+      "kind": "interior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-balcony-north",
+        "r-bath-main"
+      ]
+    },
+    {
+      "id": "w-balcn-s",
+      "rect_cm": [
+        654.1,
+        330.8,
+        916.9,
+        356.2
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-balcony-north",
+        "r-dining",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-balcn-e",
+      "rect_cm": [
+        894.8,
+        22.4,
+        916.9,
+        356.2
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-balcony-north",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-balcn-rail",
+      "rect_cm": [
+        514.6,
+        0.0,
+        894.8,
+        22.4
+      ],
+      "kind": "parapet",
+      "height_cm": 110.0,
+      "sides": [
+        "r-balcony-north",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-hall-e",
+      "rect_cm": [
+        805.2,
+        330.8,
+        827.3,
+        724.0
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-dining",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-living-n",
+      "rect_cm": [
+        805.2,
+        703.1,
+        1212.1,
+        724.0
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-living",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-living-e",
+      "rect_cm": [
+        1175.8,
+        703.1,
+        1212.1,
+        1179.1
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-living",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-south-glaz",
+      "rect_cm": [
+        474.5,
+        1152.9,
+        1212.1,
+        1179.1
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-kitchen",
+        "r-living",
+        "r-dining",
+        "r-balcony-south",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-balcs-e",
+      "rect_cm": [
+        1182.8,
+        1179.1,
+        1205.0,
+        1374.8
+      ],
+      "kind": "exterior",
+      "height_cm": 260.0,
+      "sides": [
+        "r-balcony-south",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-balcs-rail-s",
+      "rect_cm": [
+        765.2,
+        1374.8,
+        1205.0,
+        1396.8
+      ],
+      "kind": "parapet",
+      "height_cm": 110.0,
+      "sides": [
+        "r-balcony-south",
+        "outside"
+      ]
+    },
+    {
+      "id": "w-balcs-rail-w",
+      "rect_cm": [
+        743.2,
+        1179.1,
+        765.2,
+        1374.8
+      ],
+      "kind": "parapet",
+      "height_cm": 110.0,
+      "sides": [
+        "r-balcony-south",
+        "outside"
+      ]
+    },
+    {
+      "id": "v-corridor-n",
+      "rect_cm": [
+        464.3,
+        233.9,
+        464.3,
+        343.6
+      ],
+      "kind": "virtual",
+      "height_cm": 0.0,
+      "sides": [
+        "r-corridor",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "v-corridor-s",
+      "rect_cm": [
+        464.3,
+        677.8,
+        464.3,
+        769.5
+      ],
+      "kind": "virtual",
+      "height_cm": 0.0,
+      "sides": [
+        "r-corridor",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "v-corridor-s2",
+      "rect_cm": [
+        464.3,
+        769.5,
+        474.5,
+        769.5
+      ],
+      "kind": "virtual",
+      "height_cm": 0.0,
+      "sides": [
+        "r-corridor",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "v-kitchen-n",
+      "rect_cm": [
+        487.8,
+        790.9,
+        765.2,
+        790.9
+      ],
+      "kind": "virtual",
+      "height_cm": 0.0,
+      "sides": [
+        "r-kitchen",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "v-kitchen-e",
+      "rect_cm": [
+        765.2,
+        790.9,
+        765.2,
+        1152.9
+      ],
+      "kind": "virtual",
+      "height_cm": 0.0,
+      "sides": [
+        "r-kitchen",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "v-living-w",
+      "rect_cm": [
+        805.2,
+        724.0,
+        805.2,
+        1152.9
+      ],
+      "kind": "virtual",
+      "height_cm": 0.0,
+      "sides": [
+        "r-living",
+        "r-dining"
+      ]
+    },
+    {
+      "id": "v-master-lobby",
+      "rect_cm": [
+        325.4,
+        904.4,
+        325.4,
+        1050.8
+      ],
+      "kind": "virtual",
+      "height_cm": 0.0,
+      "sides": [
+        "r-master",
+        "r-master-lobby"
+      ]
+    }
+  ],
+  "openings": [
+    {
+      "id": "d-entrance",
+      "kind": "entrance_door",
+      "wall_id": "w-hall-e",
+      "axis": "y",
+      "start_cm": 577.6,
+      "end_cm": 674.3,
+      "width_cm": 96.7,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-dining",
+        "outside"
+      ],
+      "note": null
+    },
+    {
+      "id": "d-mamad",
+      "kind": "door",
+      "wall_id": "w-mamad-e",
+      "axis": "y",
+      "start_cm": 442.7,
+      "end_cm": 519.9,
+      "width_cm": 77.2,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-mamad",
+        "r-corridor"
+      ],
+      "note": "steel MAMAD door"
+    },
+    {
+      "id": "d-bed-2",
+      "kind": "door",
+      "wall_id": "w-bed2-e",
+      "axis": "y",
+      "start_cm": 805.4,
+      "end_cm": 881.9,
+      "width_cm": 76.5,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-bed-2",
+        "r-corridor"
+      ],
+      "note": null
+    },
+    {
+      "id": "d-master",
+      "kind": "door",
+      "wall_id": "w-bed2-s",
+      "axis": "x",
+      "start_cm": 362.2,
+      "end_cm": 439.3,
+      "width_cm": 77.1,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-corridor",
+        "r-master-lobby"
+      ],
+      "note": null
+    },
+    {
+      "id": "d-ensuite",
+      "kind": "door",
+      "wall_id": "w-master-e",
+      "axis": "y",
+      "start_cm": 1139.9,
+      "end_cm": 1218.3,
+      "width_cm": 78.4,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-master",
+        "r-ensuite"
+      ],
+      "note": "hinged in the master/en-suite wall; reached from the master bedroom"
+    },
+    {
+      "id": "d-bath-main",
+      "kind": "door",
+      "wall_id": "w-bath-s",
+      "axis": "x",
+      "start_cm": 355.3,
+      "end_cm": 432.2,
+      "width_cm": 76.9,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-bath-main",
+        "r-corridor"
+      ],
+      "note": null
+    },
+    {
+      "id": "d-wc",
+      "kind": "door",
+      "wall_id": "w-wc-w",
+      "axis": "y",
+      "start_cm": 266.6,
+      "end_cm": 333.5,
+      "width_cm": 66.9,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-wc",
+        "r-dining"
+      ],
+      "note": null
+    },
+    {
+      "id": "d-balcony-north",
+      "kind": "door",
+      "wall_id": "w-balcn-s",
+      "axis": "x",
+      "start_cm": 688.5,
+      "end_cm": 785.0,
+      "width_cm": 96.5,
+      "sill_cm": 0.0,
+      "head_cm": 205.0,
+      "rooms": [
+        "r-dining",
+        "r-balcony-north"
+      ],
+      "note": null
+    },
+    {
+      "id": "d-service-balcony",
+      "kind": "glazed_door",
+      "wall_id": "w-svc-e",
+      "axis": "y",
+      "start_cm": 50.7,
+      "end_cm": 186.8,
+      "width_cm": 136.1,
+      "sill_cm": 0.0,
+      "head_cm": 225.0,
+      "rooms": [
+        "r-bath-main",
+        "r-service-balcony"
+      ],
+      "note": null
+    },
+    {
+      "id": "d-balcony-south",
+      "kind": "sliding_door",
+      "wall_id": "w-south-glaz",
+      "axis": "x",
+      "start_cm": 862.0,
+      "end_cm": 1099.4,
+      "width_cm": 237.4,
+      "sill_cm": 0.0,
+      "head_cm": 225.0,
+      "rooms": [
+        "r-living",
+        "r-balcony-south"
+      ],
+      "note": null
+    },
+    {
+      "id": "o-corridor-north",
+      "kind": "opening",
+      "wall_id": "v-corridor-n",
+      "axis": "y",
+      "start_cm": 233.9,
+      "end_cm": 343.6,
+      "width_cm": 109.7,
+      "sill_cm": 0.0,
+      "head_cm": 260.0,
+      "rooms": [
+        "r-corridor",
+        "r-dining"
+      ],
+      "note": "open plan - no door, no head"
+    },
+    {
+      "id": "o-corridor-south",
+      "kind": "opening",
+      "wall_id": "v-corridor-s",
+      "axis": "y",
+      "start_cm": 677.8,
+      "end_cm": 769.5,
+      "width_cm": 91.7,
+      "sill_cm": 0.0,
+      "head_cm": 260.0,
+      "rooms": [
+        "r-corridor",
+        "r-dining"
+      ],
+      "note": "cased opening at the partition south end"
+    },
+    {
+      "id": "o-kitchen-north",
+      "kind": "opening",
+      "wall_id": "v-kitchen-n",
+      "axis": "x",
+      "start_cm": 487.8,
+      "end_cm": 765.2,
+      "width_cm": 277.4,
+      "sill_cm": 0.0,
+      "head_cm": 260.0,
+      "rooms": [
+        "r-kitchen",
+        "r-dining"
+      ],
+      "note": "open plan"
+    },
+    {
+      "id": "o-kitchen-east",
+      "kind": "opening",
+      "wall_id": "v-kitchen-e",
+      "axis": "y",
+      "start_cm": 790.9,
+      "end_cm": 1152.9,
+      "width_cm": 362.0,
+      "sill_cm": 0.0,
+      "head_cm": 260.0,
+      "rooms": [
+        "r-kitchen",
+        "r-dining"
+      ],
+      "note": "open plan"
+    },
+    {
+      "id": "o-living-west",
+      "kind": "opening",
+      "wall_id": "v-living-w",
+      "axis": "y",
+      "start_cm": 724.0,
+      "end_cm": 1152.9,
+      "width_cm": 428.9,
+      "sill_cm": 0.0,
+      "head_cm": 260.0,
+      "rooms": [
+        "r-living",
+        "r-dining"
+      ],
+      "note": "open plan"
+    },
+    {
+      "id": "o-master-lobby",
+      "kind": "opening",
+      "wall_id": "v-master-lobby",
+      "axis": "y",
+      "start_cm": 904.4,
+      "end_cm": 1050.8,
+      "width_cm": 146.4,
+      "sill_cm": 0.0,
+      "head_cm": 260.0,
+      "rooms": [
+        "r-master",
+        "r-master-lobby"
+      ],
+      "note": "open plan"
+    },
+    {
+      "id": "win-bath-main",
+      "kind": "window",
+      "wall_id": "w-ext-n",
+      "axis": "x",
+      "start_cm": 263.2,
+      "end_cm": 330.0,
+      "width_cm": 66.8,
+      "sill_cm": 140.0,
+      "head_cm": 220.0,
+      "rooms": [
+        "r-bath-main",
+        "outside"
+      ],
+      "note": null
+    },
+    {
+      "id": "win-mamad",
+      "kind": "window",
+      "wall_id": "w-ext-w-mamad",
+      "axis": "y",
+      "start_cm": 347.4,
+      "end_cm": 445.9,
+      "width_cm": 98.5,
+      "sill_cm": 100.0,
+      "head_cm": 200.0,
+      "rooms": [
+        "r-mamad",
+        "outside"
+      ],
+      "note": "MAMAD steel window"
+    },
+    {
+      "id": "win-bed-2",
+      "kind": "window",
+      "wall_id": "w-ext-w-bed2",
+      "axis": "y",
+      "start_cm": 673.7,
+      "end_cm": 812.5,
+      "width_cm": 138.8,
+      "sill_cm": 90.0,
+      "head_cm": 220.0,
+      "rooms": [
+        "r-bed-2",
+        "outside"
+      ],
+      "note": null
+    },
+    {
+      "id": "win-master-w",
+      "kind": "window",
+      "wall_id": "w-ext-w-master",
+      "axis": "y",
+      "start_cm": 1022.1,
+      "end_cm": 1182.9,
+      "width_cm": 160.8,
+      "sill_cm": 90.0,
+      "head_cm": 220.0,
+      "rooms": [
+        "r-master",
+        "outside"
+      ],
+      "note": null
+    },
+    {
+      "id": "win-master-s",
+      "kind": "window",
+      "wall_id": "w-ext-s",
+      "axis": "x",
+      "start_cm": 103.0,
+      "end_cm": 261.9,
+      "width_cm": 158.9,
+      "sill_cm": 90.0,
+      "head_cm": 220.0,
+      "rooms": [
+        "r-master",
+        "outside"
+      ],
+      "note": null
+    },
+    {
+      "id": "win-ensuite-s",
+      "kind": "window",
+      "wall_id": "w-ext-s",
+      "axis": "x",
+      "start_cm": 347.1,
+      "end_cm": 425.6,
+      "width_cm": 78.5,
+      "sill_cm": 140.0,
+      "head_cm": 220.0,
+      "rooms": [
+        "r-ensuite",
+        "outside"
+      ],
+      "note": null
+    },
+    {
+      "id": "win-kitchen-s",
+      "kind": "window",
+      "wall_id": "w-south-glaz",
+      "axis": "x",
+      "start_cm": 548.1,
+      "end_cm": 705.1,
+      "width_cm": 157.0,
+      "sill_cm": 90.0,
+      "head_cm": 220.0,
+      "rooms": [
+        "r-kitchen",
+        "outside"
+      ],
+      "note": null
+    }
+  ],
+  "camera_points": [
+    {
+      "id": "cp-entry",
+      "room_id": "r-dining",
+      "x": 780.0,
+      "y": 640.0,
+      "z": 140.0,
+      "yaw_deg": 250.0,
+      "note": "inside the entrance door, looking west into the flat"
+    },
+    {
+      "id": "cp-dining",
+      "room_id": "r-dining",
+      "x": 620.0,
+      "y": 470.0,
+      "z": 140.0,
+      "yaw_deg": 180.0,
+      "note": "dining table"
+    },
+    {
+      "id": "cp-living",
+      "room_id": "r-living",
+      "x": 990.0,
+      "y": 940.0,
+      "z": 140.0,
+      "yaw_deg": 180.0,
+      "note": "living room centre"
+    },
+    {
+      "id": "cp-kitchen",
+      "room_id": "r-kitchen",
+      "x": 640.0,
+      "y": 990.0,
+      "z": 140.0,
+      "yaw_deg": 90.0,
+      "note": "kitchen work zone"
+    },
+    {
+      "id": "cp-corridor",
+      "room_id": "r-corridor",
+      "x": 400.0,
+      "y": 620.0,
+      "z": 140.0,
+      "yaw_deg": 180.0,
+      "note": "corridor centre"
+    },
+    {
+      "id": "cp-mamad",
+      "room_id": "r-mamad",
+      "x": 172.0,
+      "y": 400.0,
+      "z": 140.0,
+      "yaw_deg": 90.0,
+      "note": "safe room"
+    },
+    {
+      "id": "cp-bed-2",
+      "room_id": "r-bed-2",
+      "x": 175.0,
+      "y": 740.0,
+      "z": 140.0,
+      "yaw_deg": 90.0,
+      "note": "bedroom"
+    },
+    {
+      "id": "cp-master",
+      "room_id": "r-master",
+      "x": 175.0,
+      "y": 1100.0,
+      "z": 140.0,
+      "yaw_deg": 90.0,
+      "note": "master bedroom"
+    },
+    {
+      "id": "cp-bath-main",
+      "room_id": "r-bath-main",
+      "x": 330.0,
+      "y": 130.0,
+      "z": 140.0,
+      "yaw_deg": 270.0,
+      "note": "main bathroom"
+    },
+    {
+      "id": "cp-ensuite",
+      "room_id": "r-ensuite",
+      "x": 406.7,
+      "y": 1181.1,
+      "z": 140.0,
+      "yaw_deg": 210.0,
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~67.8 cm plan-space clearance to the nearest drawn wall face"
+    },
+    {
+      "id": "cp-master-lobby",
+      "room_id": "r-master-lobby",
+      "x": 400.9,
+      "y": 984.6,
+      "z": 140.0,
+      "yaw_deg": 317.0,
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~73.6 cm plan-space clearance to the nearest drawn wall face"
+    },
+    {
+      "id": "cp-wc",
+      "room_id": "r-wc",
+      "x": 565.1,
+      "y": 260.2,
+      "z": 140.0,
+      "yaw_deg": 143.0,
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~62.5 cm plan-space clearance to the nearest drawn wall face"
+    }
+  ]
+}

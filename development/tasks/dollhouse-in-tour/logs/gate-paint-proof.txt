@@ -1,0 +1,10 @@
+paint-proof http://127.0.0.1:8851 - Chrome 156.0.8078.80 - WebGL ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x0000A7A0) Direct3D11 vs_5_0 ps_5_0, D3D11) (max texture 16384)
+PASS phone-he    390x844 | doc 200 noindex, nofollow | ready 0.6s paint std=45.2 uniq=112696 modal=0.011 | disclosure 3/3 he badge=13px | hotspot "מול המגדל" via touchscreen.tap orbit1->tower loads 2->3 mad=49.1 | scroll 390/390 | errors 0, panos 3x200
+PASS phone-en    390x844 | doc 200 noindex, nofollow | ready 0.3s paint std=45.5 uniq=112586 modal=0.013 | disclosure 3/3 en badge=13px | hotspot "At the tower" via touchscreen.tap orbit1->tower loads 2->3 mad=49.3 | scroll 390/390 | errors 0, panos 3x200
+PASS phone-fr    390x844 | doc 200 noindex, nofollow | ready 0.3s paint std=44.6 uniq=109517 modal=0.015 | disclosure 3/3 fr badge=13px | hotspot "Devant la tour" via touchscreen.tap orbit1->tower loads 2->3 mad=48.6 | scroll 390/390 | errors 0, panos 3x200
+PASS desktop-he  1440x900 | doc 200 noindex, nofollow | ready 0.3s paint std=45.2 uniq=130192 modal=0.007 | disclosure 3/3 he badge=13px | hotspot "מול המגדל" via mouse.click orbit1->tower loads 2->3 mad=56.9 | scroll 1440/1440 | errors 0, panos 3x200
+PASS desktop-en  1440x900 | doc 200 noindex, nofollow | ready 0.3s paint std=47.3 uniq=133870 modal=0.007 | disclosure 3/3 en badge=13px | hotspot "At the tower" via mouse.click orbit1->tower loads 2->3 mad=58.1 | scroll 1440/1440 | errors 0, panos 3x200
+PASS desktop-fr  1440x900 | doc 200 noindex, nofollow | ready 0.4s paint std=46.1 uniq=131356 modal=0.007 | disclosure 3/3 fr badge=13px | hotspot "Devant la tour" via mouse.click orbit1->tower loads 2->3 mad=57.3 | scroll 1440/1440 | errors 0, panos 3x200
+6/6 PASS
+chrome processes new since start: none
+wrote C:\RnD\development\tasks\dollhouse-in-tour\logs\paint-proof\paint-proof.json

@@ -1,0 +1,389 @@
+{
+ "pair": "living-0-2-ai-coffee-marble",
+ "scene": "living",
+ "lang": "he",
+ "phone": false,
+ "repeat": 1,
+ "marker": {
+  "id": "living-0-2",
+  "category": "coffee_table",
+  "count": 1,
+  "span_deg": [
+   37.1,
+   23.6
+  ],
+  "yaw": 31.83,
+  "pitch": -34.87
+ },
+ "item": "ai-coffee-marble",
+ "when": "2026-11-04T11:49:34.964Z",
+ "steps": {
+  "turnMs": 82575
+ },
+ "errors": [
+  "console: Failed to load resource: the server responded with a status of 403 (Forbidden)"
+ ],
+ "ring": {
+  "x": 720,
+  "y": 450,
+  "w": 44,
+  "onScreen": true,
+  "label": "להחליף את שולחן הקפה",
+  "opacity": "1"
+ },
+ "ringsOnScreen": [
+  {
+   "id": "living-270-2",
+   "x": -632,
+   "y": 437,
+   "visible": true
+  },
+  {
+   "id": "living-0-4",
+   "x": 16,
+   "y": 146,
+   "visible": true
+  },
+  {
+   "id": "living-0-1",
+   "x": 319,
+   "y": 406,
+   "visible": true
+  },
+  {
+   "id": "living-0-3",
+   "x": 573,
+   "y": 462,
+   "visible": true
+  },
+  {
+   "id": "living-180-1",
+   "x": 22,
+   "y": 22,
+   "visible": true
+  },
+  {
+   "id": "living-270-1",
+   "x": -5856,
+   "y": -2137,
+   "visible": true
+  },
+  {
+   "id": "living-0-2",
+   "x": 720,
+   "y": 450,
+   "visible": true
+  },
+  {
+   "id": "living-90-3",
+   "x": 1014,
+   "y": 468,
+   "visible": true
+  },
+  {
+   "id": "living-set-1",
+   "x": 564,
+   "y": 210,
+   "visible": true
+  },
+  {
+   "id": "living-set-2",
+   "x": -4592,
+   "y": 1604,
+   "visible": true
+  }
+ ],
+ "pick": {
+  "chip": "בחרו פריט במקום שולחן הקפה",
+  "items": [
+   {
+    "id": "ai-coffee-marble",
+    "selected": "false"
+   },
+   {
+    "id": "ai-coffee-walnut",
+    "selected": "false"
+   }
+  ],
+  "open": 1,
+  "hintHidden": true
+ },
+ "pillSteps": [
+  {
+   "s": 0.5,
+   "text": "מחילים את השינוי שלכם… בדרך כלל כ־15 שניות"
+  },
+  {
+   "s": 53.6,
+   "text": "התוצאה חזרה בזווית אחרת. מנסים שוב… · ניסיון 2 מתוך 2"
+  },
+  {
+   "s": 72.7,
+   "text": "בודקים את התוצאה… · ניסיון 2 מתוך 2"
+  },
+  {
+   "s": 82.3,
+   "text": "משבצים את השינוי בחדר…"
+  },
+  {
+   "s": 82.4,
+   "text": "מחילים את השינוי…"
+  }
+ ],
+ "lastTurn": {
+  "text": "להחליף את שולחן הקפה ב-Round marble coffee table",
+  "attempts": [
+   {
+    "attempt": 1,
+    "model": "fal-ai/nano-banana-2/edit",
+    "reach": "object",
+    "living": false,
+    "ring": 0.596,
+    "ring_band": "outside",
+    "ring_n": 40640,
+    "ring_total": 40640,
+    "fraction": 0.935,
+    "judge": null,
+    "held": false
+   },
+   {
+    "attempt": 2,
+    "model": "fal-ai/nano-banana-2/edit",
+    "reach": "object",
+    "living": false,
+    "ring": 0.009,
+    "ring_band": "outside",
+    "ring_n": 40640,
+    "ring_total": 40640,
+    "fraction": 0.239,
+    "judge": {
+     "held": true,
+     "original_present": false,
+     "product_present": true,
+     "product_box": [
+      308,
+      298,
+      689,
+      699
+     ],
+     "product_box_raw": [
+      308,
+      298,
+      747,
+      699
+     ],
+     "box_kept": 0.868,
+     "placed": true,
+     "count": 1,
+     "rest_unchanged": 3,
+     "note": "The original coffee table was successfully replaced with the requested round marble top table on a black drum base."
+    },
+    "held": true
+   }
+  ],
+  "error": null,
+  "piece": {
+   "id": "living-0-2",
+   "category": "coffee_table",
+   "box": [
+    304,
+    312,
+    612,
+    622
+   ],
+   "count": 1,
+   "seen": {
+    "found": false,
+    "box": null,
+    "outline": null,
+    "touches_edge": [],
+    "note": "seen: piece seen returned no JSON",
+    "tries": 2
+   }
+  },
+  "view": {
+   "yaw": 37.83,
+   "pitch": -41.54,
+   "hfov": 76.1
+  },
+  "piece_seen": {
+   "found": false,
+   "box": null,
+   "outline": null,
+   "touches_edge": [],
+   "note": "seen: piece seen returned no JSON",
+   "tries": 2
+  },
+  "seen_accepted": false,
+  "full_box": [
+   304,
+   312,
+   612,
+   622
+  ],
+  "lift": [],
+  "likeness": {
+   "score": 3,
+   "found": true,
+   "why": "The round marble-topped coffee table with the black cylindrical base is accurately placed in the scene."
+  },
+  "region_fraction": 0.289,
+  "pasted_fraction": 0.198
+ },
+ "pill": "מחילים את השינוי…",
+ "landed": true,
+ "live": {
+  "model": "fal-ai/nano-banana-2/edit",
+  "attempt": 2,
+  "ring": 0.009,
+  "judge": {
+   "held": true,
+   "original_present": false,
+   "product_present": true,
+   "product_box": [
+    308,
+    298,
+    689,
+    699
+   ],
+   "product_box_raw": [
+    308,
+    298,
+    747,
+    699
+   ],
+   "box_kept": 0.868,
+   "placed": true,
+   "count": 1,
+   "rest_unchanged": 3,
+   "note": "The original coffee table was successfully replaced with the requested round marble top table on a black drum base."
+  },
+  "usd": 0.083,
+  "fraction": 0.239,
+  "item": "ai-coffee-marble",
+  "likeness": {
+   "score": 3,
+   "found": true,
+   "why": "The round marble-topped coffee table with the black cylindrical base is accurately placed in the scene."
+  },
+  "region_fraction": 0.289,
+  "marker": {
+   "before": {
+    "yaw": 31.83,
+    "pitch": -34.87
+   },
+   "after": {
+    "yaw": 37.65,
+    "pitch": -41.45,
+    "outlines": [
+     [
+      [
+       18.1,
+       -28.65
+      ],
+      [
+       57.29,
+       -28.69
+      ],
+      [
+       64.65,
+       -49.59
+      ],
+      [
+       10.67,
+       -49.5
+      ]
+     ]
+    ],
+    "count": 1,
+    "item": "ai-coffee-marble"
+   }
+  }
+ },
+ "card": {
+  "shown": true,
+  "name": "שולחן סלון שיש",
+  "price": "הדמיה · AI-generated",
+  "note": "פריט לדוגמה שנוצר בבינה מלאכותית, לא מוצר למכירה.",
+  "link": "",
+  "linkText": ""
+ },
+ "markerAfter": {
+  "item": "ai-coffee-marble",
+  "yaw": 37.65,
+  "pitch": -41.45,
+  "count": 1
+ },
+ "view": {
+  "yaw": 37.83,
+  "pitch": -41.54,
+  "hfov": 76.1
+ },
+ "secondTap": {
+  "chip": "בחרו פריט במקום שולחן סלון שיש",
+  "selected": [
+   "ai-coffee-marble"
+  ]
+ },
+ "linked": null,
+ "markerRestored": {
+  "item": null,
+  "yaw": 31.83,
+  "pitch": -34.87
+ },
+ "cardAfterUndo": false,
+ "ledger": {
+  "rows": [
+   {
+    "seq": 155,
+    "op": "live_edit",
+    "scene": "living",
+    "status": "settled",
+    "usd": 0.091,
+    "attempt": 1,
+    "seconds": 52.913,
+    "model": "fal-ai/nano-banana-2/edit"
+   },
+   {
+    "seq": 156,
+    "op": "live_edit",
+    "scene": "living",
+    "status": "settled",
+    "usd": 0.083,
+    "attempt": 2,
+    "seconds": 18.928,
+    "model": "fal-ai/nano-banana-2/edit"
+   },
+   {
+    "seq": 157,
+    "op": "live_replace_judge",
+    "scene": "living",
+    "status": "settled",
+    "usd": 0.0028,
+    "held": true,
+    "seconds": 5.209
+   },
+   {
+    "seq": 158,
+    "op": "live_likeness",
+    "scene": "living",
+    "status": "settled",
+    "usd": 0.004,
+    "score": 3,
+    "seconds": 4.021
+   }
+  ],
+  "usd": 0.1808,
+  "total": 114.9567
+ },
+ "files": {
+  "crop": "crop.jpg",
+  "result-1": "result-1.jpg",
+  "edit-1": "edit-1.json",
+  "result-2": "result-2.jpg",
+  "edit-2": "edit-2.json",
+  "judge-1": "judge-1.json",
+  "likeness": "likeness.json"
+ },
+ "ms": 105875
+}

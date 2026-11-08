@@ -1,0 +1,29 @@
+# card 08 — Studio live check on the real server (2026-11-03 17:51, main session as platform-dev)
+go: Eliran 2026-11-03 'תעשה מה שצריך בשביל להגיע לתוצאה ושנתקדם' read as the card 01(c) npm ci go, working copy only (task-01 §Answers).
+1. manifest: the Studio's runnable set (47 files under Habait/studio, no node_modules, no _local, no .env) added with wt.py (copy, live hashes).
+2. `timeout 540 npm ci --no-audit --no-fund` in the working copy's Habait/studio: exit 0, 9 packages, 10 s. node_modules is never in the manifest, so never copied back.
+3. `HABAIT_PORT=8853 timeout 540 node server.mjs` from the working copy (port set by env, no server edit). The working copy holds no .env, so no key is loaded; /api/env: llm ready (the subscription CLI), fal 'missing FAL_KEY', allow_spend false, projects_dir = the working copy's _local/projects. No .env was opened or printed.
+4. headless (Edge, 1440x900): new project 'ui-check' via the wizard; upload of research/.../current/desk_01_home.png: row states ['uploading:progress', 'done'] -> final {'state': 'done', 'name': 'desk_01_home.png', 'meta': '146 KB · הועלה', 'role': 'הדמיה'}; fixture banner shown: False; back on הפרויקטים שלי the cards are ['ui-check']; console errors 0.
+   every non-GET request the UI made: ['POST /api/projects', 'POST /api/projects/ui-check/files', 'PATCH /api/projects/ui-check'] — no run, no approve-plan, no stage endpoint.
+   on disk: _local/projects/ui-check/intake/desk_01_home.png (149,096 bytes); state.json stages {} (0 started), ledger.json [] ($0); notes = '[roles] {"desk_01_home.png":"render"}'.
+5. server killed by PID; :8853 free after.
+6. `timeout 300 node test/run.mjs` (working copy): 13 passed, 1 failed. The failure is environmental, not this board's: 'every shot is 8k+1 frames' opens ../tour360/apartments/apt846/plan.general.json relative to the studio, which is not in the working copy (tour360 is out of scope and never copied in); the file exists live. No test touches the dashboard. Output:
+
+     ok   stage order is fixed
+     ok   slugify keeps hebrew and ascii
+     ok   dotenv parses quotes and comments
+     ok   project store round trip
+     ok   centroid and world frame
+     ok   facade normal points outward
+     ok   shots from a toy plan
+     ok   shots on the real 846 plan
+     ok   cp slug and pano match
+     FAIL every shot is 8k+1 frames within the 720p budget: ENOENT: no such file or directory, open 'C:\RnD\.wt\platform-ui-ux\files\Projects\Habait\habait-walkaround\Habait\tour360\apartments\apt846\plan.general.json'
+     ok   video pricing
+     ok   overpass → local metres
+     ok   presets are well-formed
+     ok   fixture matches IntakeSchema
+   
+   13 passed, 1 failed
+
+frames: .wt/platform-ui-ux/after/studio-live/01_new_project.png, 02_uploaded.png, 03_projects.png. The 'ui-check' project stays in the working copy's _local (never in the manifest, never copied back).

@@ -1,0 +1,28 @@
+{
+  "_suspended": "SUSPENDED 2026-11-03 — no git (Eliran: \"I dont want any git you know. no git\"). Frozen history; the git worktrees below are removed by Eliran (OWED-012). Working folders are recorded in their own .wt/<name>/manifest.json (root CLAUDE.md §8.7).",
+  "_about": "The hand-kept half of the worktree inventory (root CLAUDE.md §8.7; WORKTREES.md rule 8). One entry per `git worktree list` row of the harness repo (C:/RnD) and the product repo (Projects/Habait/habait-walkaround), keyed by its path relative to C:/RnD. Written in the main checkout the minute a worktree is created; removed only after Eliran removes the worktree. check-worktrees.mjs (/sync-context Check 16) fails on a worktree without an entry or an entry without a worktree.",
+  "C:/RnD": {
+    "purpose": "harness main checkout — stays on main, only merged into",
+    "branch": "main",
+    "deploy": "none",
+    "record": "memory/runs/2026-11-03-worktree-rule-live.md"
+  },
+  "Projects/Habait/habait-walkaround": {
+    "purpose": "product repo main checkout — origin unreachable, 2 unpushed commits (OWED-011)",
+    "branch": "main",
+    "deploy": "none from here",
+    "record": "docs/governance/OWED.md OWED-011"
+  },
+  ".wt/new-git-pending": {
+    "purpose": "drop every use of the old git (old remote, old-account identity) from /worktree-ops and two comments; UNCOMMITTED until Eliran configures the new git",
+    "branch": "new-git-pending",
+    "deploy": "none",
+    "record": "memory/runs/2026-11-03-old-git-dropped.md"
+  },
+  ".wt/worktree-setup": {
+    "purpose": "first worktree: re-pointed the worktree tooling to the real repos; merged into main 62b54f7, tagged archive/worktree-setup — awaiting Eliran's removal",
+    "branch": "worktree-setup",
+    "deploy": "none",
+    "record": "memory/runs/2026-11-03-worktree-rule-live.md"
+  }
+}

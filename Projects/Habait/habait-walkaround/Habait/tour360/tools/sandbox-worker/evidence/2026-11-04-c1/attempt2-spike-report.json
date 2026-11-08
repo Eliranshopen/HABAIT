@@ -1,0 +1,75 @@
+{
+  "spike": "sandbox-worker C1",
+  "started_utc": "2026-11-04T16:18:43.931Z",
+  "point": "cp-kitchen",
+  "res": "1024x512",
+  "samples": 16,
+  "files": 122,
+  "upload_bytes": 293632261,
+  "file_list_sha256": "5208ecbf508be940ea079df27a6b0503ac7a3777a6b3d8bec0970d5eaefcf10d",
+  "blender": {
+    "version": "4.5.10",
+    "urls": [
+      "https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+      "https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+      "https://mirror.clarkson.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+      "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz"
+    ],
+    "sha256": "198a4248b38899af661aa9241cebd746394eaddbfafbeb53152440de80b118f7"
+  },
+  "price": {
+    "cpu_h": 0.128,
+    "gb_h": 0.0212,
+    "src": "https://vercel.com/docs/sandbox/pricing (Pro, iad1, read 2026-11-04)"
+  },
+  "phases": [
+    {
+      "name": "sysinfo",
+      "wall_s": 0.6,
+      "active_vcpu_s": 0.8,
+      "info": [
+        "4",
+        "               total        used        free      shared  buff/cache   available",
+        "Mem:            8404         293        8204           0          82        8110",
+        "Swap:              0           0           0",
+        "Ubuntu 26.04.1 LTS",
+        "6.18.56",
+        "Python 3.14.4",
+        "v24.22.1",
+        "CPU(s):                                  4",
+        "Model name:                              Intel(R) Xeon(R) Processor @ 2.90GHz"
+      ]
+    },
+    {
+      "name": "apt",
+      "wall_s": 11.9,
+      "active_vcpu_s": 7.8
+    },
+    {
+      "name": "blender_download",
+      "wall_s": 3.2,
+      "active_vcpu_s": 0.2,
+      "error": "no mirror served the verified tarball: [{\"url\":\"https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":22,\"s\":0.3,\"err\":\"curl: (22) The requested URL returned error: 403\"},{\"url\":\"https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":23,\"s\":0.7,\"err\":\"curl: (23) client returned ERROR on write of 8192 bytes\"},{\"url\":\"https://mirror.clarkson.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":23,\"s\":0.5,\"err\":\"curl: (23) client returned ERROR on write of 16120 bytes\"},{\"url\":\"https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":23,\"s\":1.5,\"err\":\"curl: (23) client returned ERROR on write of 8192 bytes\"}]"
+    }
+  ],
+  "vcpus": 4,
+  "sandbox": {
+    "name": "gold-left-python-Cq3mX2",
+    "create_s": 0.6,
+    "timeout_ms": 2700000,
+    "memory_gb": 8,
+    "persistent": false,
+    "status_after_stop": "stopped"
+  },
+  "error": "Error: blender_download: no mirror served the verified tarball: [{\"url\":\"https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":22,\"s\":0.3,\"err\":\"curl: (22) The requested URL returned error: 403\"},{\"url\":\"https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":23,\"s\":0.7,\"err\":\"curl: (23) client returned ERROR on write of 8192 bytes\"},{\"url\":\"https://mirror.clarkson.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":23,\"s\":0.5,\"err\":\"curl: (23) client returned ERROR on write of 16120 bytes\"},{\"url\":\"https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz\",\"exit\":23,\"s\":1.5,\"err\":\"curl: (23) client returned ERROR on write of 8192 bytes\"}]\n    at phase (file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:150:20)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:191:3",
+  "session_wall_s": 17.4,
+  "cost_estimate_usd": {
+    "active_vcpu_h": 0.0024,
+    "provisioned_gb_h": 0.039,
+    "cpu": 0.0003,
+    "memory": 0.0008,
+    "total": 0.0011,
+    "basis": "https://vercel.com/docs/sandbox/pricing (Pro, iad1, read 2026-11-04)"
+  },
+  "finished_utc": "2026-11-04T16:19:02.841Z"
+}

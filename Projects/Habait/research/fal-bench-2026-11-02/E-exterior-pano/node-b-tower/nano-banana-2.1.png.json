@@ -1,0 +1,29 @@
+{
+ "endpoint": "google/nano-banana-2.1/edit",
+ "args": {
+  "prompt": "Image 1 is a plain grey 3D clay render, a 360-degree equirectangular panorama (2:1) of the Rainbow tower site on the Tel Aviv coast (Sde Dov): the tower, the low buildings of the compound, the city, the beach and the Mediterranean sea. Return the SAME equirectangular panorama with EXACTLY the same projection and framing: the horizon at the same height, every drawn building, the tower's outline and every balcony slab at exactly the same pixel position, nothing moved or resized; the left and right edges must continue each other seamlessly (it wraps around). The plain grey ground is only a placeholder: fill it with the real surroundings as in the photographs (the city's streets, roofs, trees, the beach, the sea, the coastline where the sea patch is drawn), keeping every drawn building. Replace the grey clay of the buildings with real materials: Images 2, 3, 4 are photographs of the SAME tower and site, copy their look exactly: the 39-floor tower wrapped in white undulating curved balcony slabs with planters and slim black glazing, white low buildings with perforated balcony screens, the Reading power-station chimney, Mediterranean sea and beach, palm trees, roads with cars, bright clear morning daylight, blue sky with few clouds. Photoreal, sharp, natural colours. No people, no text, no logos, no watermark.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d4c0/0m9EK9OnLPNrMbnvFVzIM_E_node-b-tower_clay.png",
+   "https://v3b.fal.media/files/b/0ab0d4c0/ZDu8zBMn1n0bAy6ex_wCh_E_ref_aerial_f1.png",
+   "https://v3b.fal.media/files/b/0ab0d4c0/agrj4GELUFEOKOFyHPf3e_E_ref_facade_f110.png",
+   "https://v3b.fal.media/files/b/0ab0d4c1/ccHCBAV9Uz1_bz72auk-8_E_ref_terrace_f164.png"
+  ],
+  "resolution": "2K",
+  "aspect_ratio": "auto",
+  "output_format": "png"
+ },
+ "result": {
+  "images": [
+   {
+    "url": "https://v3b.fal.media/files/b/0ab0d4c1/Hch8j9xDbgdTC1LtB_Qu5_vSEPwBNp.png",
+    "content_type": "image/png",
+    "file_name": "Hch8j9xDbgdTC1LtB_Qu5_vSEPwBNp.png",
+    "file_size": null,
+    "width": 2912,
+    "height": 1440
+   }
+  ],
+  "description": ""
+ },
+ "secs": 26
+}

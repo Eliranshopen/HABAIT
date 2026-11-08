@@ -1,0 +1,24 @@
+# card 05 — styleguide.html headless (2026-11-03 16:52)
+served: working-copy platform/ by python http.server on 127.0.0.1:8852 (timeout 540), killed by PID; 8852 free after. Edge headless via tools/appdeps playwright-core.
+frames: .wt/platform-ui-ux/after/c05/{desk,phone}_styleguide{,_full}.png
+fixes during the card: favicon 404 (one console error) → <link rel=icon href=data:,>; ramp hex labels rendered reversed in RTL → code isolated ltr.
+
+desk/no-preference | errors 0 | hscroll false (1440/1440) | Heebo true | Frank true | woff2 ["200 heebo-hebrew-wght-normal.woff2","200 frank-ruhl-libre-latin-700-normal.woff2","200 heebo-latin-wght-normal.woff2","200 frank-ruhl-libre-hebrew-500-normal.woff2","200 heebo-latin-ext-wght-normal.woff2","200 frank-ruhl-libre-hebrew-700-normal.woff2","200 frank-ruhl-libre-latin-500-normal.woff2"] | google 0 | >=400 0 | btn transition 0.15s | cols [[720,265,720],[0,265,720]]
+desk/reduce | errors 0 | hscroll false (1440/1440) | Heebo true | Frank true | woff2 ["200 heebo-hebrew-wght-normal.woff2","200 frank-ruhl-libre-latin-700-normal.woff2","200 heebo-latin-wght-normal.woff2","200 frank-ruhl-libre-hebrew-500-normal.woff2","200 heebo-latin-ext-wght-normal.woff2","200 frank-ruhl-libre-hebrew-700-normal.woff2","200 frank-ruhl-libre-latin-500-normal.woff2"] | google 0 | >=400 0 | btn transition 0s | cols [[720,265,720],[0,265,720]]
+phone/no-preference | errors 0 | hscroll false (390/390) | Heebo true | Frank true | woff2 ["200 heebo-hebrew-wght-normal.woff2","200 frank-ruhl-libre-latin-700-normal.woff2","200 heebo-latin-wght-normal.woff2","200 heebo-latin-ext-wght-normal.woff2","200 frank-ruhl-libre-hebrew-500-normal.woff2","200 frank-ruhl-libre-latin-500-normal.woff2","200 frank-ruhl-libre-hebrew-700-normal.woff2"] | google 0 | >=400 0 | btn transition 0.15s | cols [[0,570,390],[0,7128,390]]
+phone/reduce | errors 0 | hscroll false (390/390) | Heebo true | Frank true | woff2 ["200 heebo-hebrew-wght-normal.woff2","200 frank-ruhl-libre-latin-700-normal.woff2","200 frank-ruhl-libre-hebrew-500-normal.woff2","200 heebo-latin-wght-normal.woff2","200 heebo-latin-ext-wght-normal.woff2","200 frank-ruhl-libre-hebrew-700-normal.woff2","200 frank-ruhl-libre-latin-500-normal.woff2"] | google 0 | >=400 0 | btn transition 0s | cols [[0,570,390],[0,7128,390]]
+
+fonts: document.fonts.check('16px Heebo') and ('32px "Frank Ruhl Libre"') true in all four runs; every woff2 200 from the same origin; 0 requests to fonts.googleapis.com / fonts.gstatic.com.
+reduced motion: .hb-btn--primary transition-duration 0.15s normally, 0s under prefers-reduced-motion: reduce.
+horizontal scroll at 390: none (scrollWidth 390 = clientWidth 390). Columns side by side at 1440 (x 720 and 0, width 720), stacked at 390.
+
+physical-property grep on css/tokens.css css/components.css: no match (grep exit 1).
+font sizes (bytes):
+    frank-ruhl-libre-hebrew-500-normal.woff2
+    frank-ruhl-libre-hebrew-700-normal.woff2
+    frank-ruhl-libre-latin-500-normal.woff2
+    frank-ruhl-libre-latin-700-normal.woff2
+    heebo-hebrew-wght-normal.woff2
+    heebo-latin-ext-wght-normal.woff2
+    heebo-latin-wght-normal.woff2
+first paint (heebo-hebrew + heebo-latin + frank-ruhl-libre-hebrew-700) = 49,016 bytes, budget 120 KB.

@@ -1,0 +1,26 @@
+{
+  "$schema": "tour360/fidelity-rule.v2",
+  "max_deviation_pct": 1,
+  "min_finding_deg": 0.35,
+  "strong_gap_below_deg": 3,
+  "max_attempts": 3,
+  "rule": "Eliran Shopen, 2026-11-05: «סטייה נורמלית זה גג עד 2%», then «גם סטייה של 2% זה הרבה, אני רוצה להוריד את אחוז הסטייה למינימלי», and «אם יש סטייה מעל 2% אני גם לא רוצה שתבטל את ההדמייה אלא תעשה הכל כדי שהכל יהיה תקין והכל יופיע כמו בתכנית מכר». A room over max_deviation_pct is NEVER dropped or hidden: the gate's FAIL starts the fix loop, and the package refuses only while a room still fails.",
+  "parameters": {
+    "max_deviation_pct": "the per-room bar: PASS only when deviation_pct <= this AND the gate can resolve it in that room (resolution_pct <= this); the disclosure line carries this same number",
+    "min_finding_deg": "the narrowest run of failing columns that counts as a finding: 0.35 deg = ONE column at 1024 (so that 1% is resolvable in the dining room, whose walls are far); runs narrower than strong_gap_below_deg count only with a gap >= 2x delta, against the depth model's own noise",
+    "strong_gap_below_deg": "see min_finding_deg",
+    "max_attempts": "the fix loop's limit per room before it reports to Eliran; it never ships without the room"
+  },
+  "fix_loop": [
+    "1. fidelity-gate FAIL on a room -> attempt 1: regenerate the skin with the CG render as Image 1 (gen-pano, the room's skin-prompts entry) and gate again",
+    "2. still FAIL -> attempts 2..max_attempts: CG-guided band repairs at the flagged bearings (close-seam --u <bearing u> --band-deg <width> --extra 'inside the band follow Image 2 ...'), each gated",
+    "3. past max_attempts -> stop and report the room's numbers to Eliran; the room is never shipped silently and never dropped: build-tour refuses to package until it passes",
+    "4. a deviation the trace itself carries (trace vs the plan's printed dimensions, UNRESOLVED rows) is fixed in the trace and the CG re-rendered, not in the skin"
+  ],
+  "read_by": [
+    "Habait/tour360/tools/fidelity-gate.mjs (the per-room verdict; --max-deviation-pct / --min-deg override for a probe, never for a ship)",
+    "Habait/tour360/tools/build-tour.mjs (refuses to package while any shipped interior picture lacks a PASS row for its exact bytes, and checks that the disclosure line carries max_deviation_pct)",
+    "the project runner's stepGate (project-runner worktree): pass these values to fidelity-gate.mjs, never a literal"
+  ],
+  "disclosure_line_key": "conceptLine (Habait/tour360/copy/tour360-copy.json): the approved text with this number; true only because the build refuses otherwise"
+}

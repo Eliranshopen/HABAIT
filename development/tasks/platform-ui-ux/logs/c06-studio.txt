@@ -1,0 +1,31 @@
+# card 06 — Studio A: fixture API, my projects, new project, upload (2026-11-03 17:03, main session as platform-dev)
+fixture: .wt/platform-ui-ux/tools/studio-fixture-api.cjs on 127.0.0.1:8853 (timeout 540, killed by PID; 8853 free after). Routes mirrored from the live studio/server.mjs (read-only); GETs from the live _local/projects (read-only); statics from the working copy; every non-GET -> 405 {"error":"fixture: read-only"}. curl POST /api/projects -> 405.
+check: .wt/platform-ui-ux/tools/c0607_check.cjs (Edge headless), two runs: full project list and --empty.
+tokens in the Studio: dashboard/tokens.css, components.css, fonts/*.woff2 are generated copies (platform/tools/sync-tokens.mjs --write); `timeout 60 node platform/test/tokens-sync.test.mjs` -> see below.
+frames (.wt/platform-ui-ux/after/studio/): desk_00_projects_empty.png, desk_01_projects.png, desk_02_new.png, desk_03_new_refused.png, desk_04_project_upload.png, desk_05_upload_refused.png, desk_06_review.png, desk_07_create.png, desk_08_results.png, desk_09_advanced.png, desk_10_project_full.png, phone_00_projects_empty.png, phone_01_projects.png, phone_02_new.png, phone_03_new_refused.png, phone_04_project_upload.png, phone_05_upload_refused.png, phone_06_review.png, phone_07_create.png, phone_08_results.png, phone_09_advanced.png, phone_10_project_full.png
+note: element frames 06/07/08 at 390 show the sticky top bar mid-frame — Playwright scrolls while capturing a tall element; the 10_project_full frames are the page as rendered.
+
+## desk
+console errors: 3, all of them the browser's own log of the three provoked 405s: ['POST /api/projects -> 405', 'POST /api/projects -> 405', 'POST /api/projects/apt846-rainbow-tlv/files -> 405'] (empty run: 0)
+horizontal scroll: none
+raw float (\d+\.\d{3,}) in innerText per frame: 0 hits in every frame
+empty state visible with --empty: True
+keyboard: Tab x5 from the top reaches the drop zone; Enter opens the file chooser: True
+new project refused: message "הפרויקט לא נוצר: השרת הזה במצב תצוגה (קריאה בלבד).", banner shown True, stays on /#/new
+upload refused: row state=error text="PDF c06-tiny-plan.pdf × 1 KB · לא נשמר: השרת הזה במצב תצוגה (קריאה בלבד)." (no fake success)
+direct POST from the page: 405
+
+## phone
+console errors: 3, all of them the browser's own log of the three provoked 405s: ['POST /api/projects -> 405', 'POST /api/projects -> 405', 'POST /api/projects/apt846-rainbow-tlv/files -> 405'] (empty run: 0)
+horizontal scroll: none
+raw float (\d+\.\d{3,}) in innerText per frame: 0 hits in every frame
+empty state visible with --empty: True
+keyboard: Tab x5 from the top reaches the drop zone; Enter opens the file chooser: True
+new project refused: message "הפרויקט לא נוצר: השרת הזה במצב תצוגה (קריאה בלבד).", banner shown True, stays on /#/new
+upload refused: row state=error text="PDF c06-tiny-plan.pdf × 1 KB · לא נשמר: השרת הזה במצב תצוגה (קריאה בלבד)." (no fake success)
+direct POST from the page: 405
+
+first run (before fixes): one raw float '71.91666666666666' in the Advanced stage table (shots note) -> notes now pass through cleanNote(); heading focus ring after route change removed.
+## tokens-sync test (2026-11-03 17:03)
+PASS fonts/heebo-latin-wght-normal.woff2
+all copies equal their source

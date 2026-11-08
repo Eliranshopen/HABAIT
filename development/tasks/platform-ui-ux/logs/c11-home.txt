@@ -1,0 +1,30 @@
+# card 11 — the home page on the tokens (2026-11-03 17:31, main session as platform-dev)
+index.html rewritten on tokens.css + components.css + new css/home.css (style.css no longer linked here; card 13 migrates it). The card targets (external hold + inline intro / intro.html / flow.html), the DEV extras and analytics capture('project_open') are kept. ?theme=dark|light = Gate 1 preview only (URL, never stored); default light.
+copy (DRAFT for Eliran, in js/i18n.js home.*): hero 'סיור בבניין, לפני שהוא קם.' / 'Walk through a building before it rises.'; sub 'טיסה סביב הפרויקט, בחירת דירה מתוך הטיסה, וכניסה פנימה.'; CTA 'לסיור בפרויקט'; empty 'עוד אין פרויקטים להצגה' + text + 'לנסות שוב'; footer 'Habait · סיורים בפרויקטים שעוד לא נבנו'.
+card: project.json has no city field -> the card shows the tagline (no city invented). Developer mark on the light plate (card 10). AI badge on the hero and on every card cover.
+accessibility-statement link: an empty SLOT in the footer for buyers; dev view shows a dashed TODO marker. Text and target are Eliran's (§6).
+
+status summary vs data: fixtures/rainbow/units.json has 12 units, statuses {'for-sale': 7, 'sold': 3, 'reserved': 2} -> computed '12 דירות · 7 פנויות' (available = status 'for-sale'). Rendered in every run: ['12 דירות · 7 פנויות'].
+
+## runs (buyer host buyer.test -> 127.0.0.1, DEV false; preview tree on :8852, killed by PID, free after)
+light/desk: theme light body bg rgb(255, 252, 249) · cards 1 · console errors 0 · h-scroll False (1440/1440) · dev text visible False · Heebo True
+light/phone: theme light body bg rgb(255, 252, 249) · cards 1 · console errors 0 · h-scroll False (390/390) · dev text visible False · Heebo True
+dark/desk: theme dark body bg rgb(26, 23, 19) · cards 1 · console errors 0 · h-scroll False (1440/1440) · dev text visible False · Heebo True
+dark/phone: theme dark body bg rgb(26, 23, 19) · cards 1 · console errors 0 · h-scroll False (390/390) · dev text visible False · Heebo True
+empty/desk: empty state visible True · text "עוד אין פרויקטים להצגה כאן יופיעו הפרויקטים שבשיווק, כל אחד עם טיסה סביב הבניין וסיור בדירות. לנסות שוב" · console errors 0 · h-scroll False
+empty/phone: empty state visible True · text "עוד אין פרויקטים להצגה כאן יופיעו הפרויקטים שבשיווק, כל אחד עם טיסה סביב הבניין וסיור בדירות. לנסות שוב" · console errors 0 · h-scroll False
+
+## keyboard path (Tab from the top) with the measured focus ring
+light/desk:
+  a.home-brand "Habait" [outline 2px rgb(0, 93, 131)]
+  button#langToggle.hb-btn "EN" [outline 2px rgb(0, 93, 131)]
+  a.home-card__link "Rainbow תל אביב" [::after outline 2px rgb(0, 93, 131)]
+dark/phone:
+  a.home-brand "Habait" [outline 2px rgb(128, 190, 224)]
+  button#langToggle.hb-btn "EN" [outline 2px rgb(128, 190, 224)]
+  a.home-card__link "Rainbow תל אביב" [::after outline 2px rgb(128, 190, 224)]
+order = brand (home link) → language toggle → the project card (one tab stop: the title link is stretched over the card; the CTA inside is its visual). The footer has no focusable element for buyers until the accessibility link exists — the path ends at the card.
+
+## tokens only: css/home.css literal grep (hex, rgb(a), hsl(a), numeric radius, font-family not var(...)): 0 hits (a first pattern reported 1 false hit: `font-family:\s*(?!var\()` backtracks over the space; corrected pattern used)
+frames (.wt/platform-ui-ux/after/c11/): desk_light, desk_light_full, desk_dark, desk_dark_full, phone_light, phone_light_full, phone_dark, phone_dark_full, desk_empty, phone_empty, desk_light_focus_card
+fix during the card: the card's AI badge was pushed out of view by a position override; it keeps components.css's absolute position now (z-index only).

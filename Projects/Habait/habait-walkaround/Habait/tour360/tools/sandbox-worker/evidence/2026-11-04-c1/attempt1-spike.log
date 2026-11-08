@@ -1,0 +1,17 @@
+[    0.8 s] create with 8 vCPU refused: Status code 400 is not ok: `resources.vcpus` should be <= 4
+[    1.2 s] created sandbox salmon-scientific-tahr-vYA73U (4 vCPU) in 1.2 s
+[    1.5 s] === sysinfo
+[    2.0 s]     sysinfo: 0.6 s wall, 0.7 active vCPU-s
+[    2.4 s] === apt
+[   12.2 s]     apt: 9.7 s wall, 7 active vCPU-s
+[   12.5 s] === blender_download
+[   13.1 s]     blender_download: 0.6 s wall, 0 active vCPU-s  ERROR download/sha256 exit 22: curl: (22) The requested URL returned error: 403
+
+[   13.1 s] ERROR Error: blender_download: download/sha256 exit 22: curl: (22) The requested URL returned error: 403
+
+    at phase (file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:143:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:184:3
+[   14.3 s] stop() returned
+[   14.7 s] status after stop (poll 1): stopped
+[   14.7 s] done in 13.1 s; est. $0.0009

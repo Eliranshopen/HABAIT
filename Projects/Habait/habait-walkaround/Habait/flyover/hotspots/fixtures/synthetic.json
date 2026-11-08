@@ -1,0 +1,20 @@
+{
+ "about": "card 19 selftest fixture: a level camera at (0, 0, 10) heading plan bearing 0 (+Y). Probes repeat card 17's rendered orientation probe (red ahead u 0.5, green right/clockwise u 0.75, blue behind u 0.0, yellow left u 0.25). Boxes are plan-world [x0,y0,z0,x1,y1,z1]; want = split | single | visible | camera-inside-box | camera-in-column | nadir | occluded.",
+ "camera": {"pos": [0.0, 0.0, 10.0], "yaw": 0.0},
+ "probes": [
+  {"name": "ahead (+Y)", "point": [0.0, 10.0, 10.0], "u": 0.5},
+  {"name": "right = clockwise from above (+X)", "point": [10.0, 0.0, 10.0], "u": 0.75},
+  {"name": "behind (-Y)", "point": [0.0, -10.0, 10.0], "u": 0.0},
+  {"name": "left (-X)", "point": [-10.0, 0.0, 10.0], "u": 0.25}
+ ],
+ "occluder": {"polygon_world": [[-10, 30], [10, 30], [10, 50], [-10, 50]], "z": [0, 40]},
+ "boxes": [
+  {"name": "a box behind the camera across the u 0/1 seam", "box": [-2, -20, 5, 2, -15, 15], "want": "split"},
+  {"name": "a box ahead", "box": [-2, 15, 5, 2, 20, 15], "want": "single"},
+  {"name": "camera inside the box", "box": [-1, -1, 9, 1, 1, 11], "want": "camera-inside-box"},
+  {"name": "a box straight below the camera (default)", "box": [-3, -3, 0, 3, 3, 5], "want": "camera-in-column"},
+  {"name": "a box straight below the camera (--keep-pole-bands)", "box": [-3, -3, 0, 3, 3, 5], "keep_pole": true, "want": "nadir"},
+  {"name": "a unit on the near face of the plate", "box": [-4, 29, 8, 4, 33, 12], "occluder": true, "want": "visible"},
+  {"name": "a unit on the far face of the plate", "box": [-4, 47, 8, 4, 51, 12], "occluder": true, "want": "occluded"}
+ ]
+}

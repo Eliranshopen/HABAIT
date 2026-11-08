@@ -1,0 +1,23 @@
+# habait-walkaround .gitleaks.toml - adopted at WP-20 (2026-11-01) on the main session's ruling; WP-24's CI reads it; three measured false-positive shapes, on generic-api-key only.
+# The default rules, plus three narrow allowlists on generic-api-key only, for identifiers that rule reads as keys.
+# Measured on the first cut: 126 findings, all generic-api-key, none a credential.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "render-cache keys: the 360walkaround pipeline's input_key is the sha256 of a render's inputs (88 findings)"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+regexes = ['''input_key"\s*:\s*"[0-9a-f]{64}"''']
+
+[[allowlists]]
+description = "Vercel deployment ids are identifiers, not credentials (34 findings, one lab commit subject in docs/rnd/HISTORY.md)"
+targetRules = ["generic-api-key"]
+regexes = ['''^dpl_[A-Za-z0-9]{28}$''']
+
+[[allowlists]]
+description = "the tour assembler's dotted surface keys, in assemble_tour.mjs and the tour.json it writes (4 findings)"
+targetRules = ["generic-api-key"]
+condition = "AND"
+paths = ['''(^|[\\/])360walkaround[\\/]pipeline[\\/]assemble_tour\.mjs$''', '''(^|[\\/])360walkaround[\\/]tours[\\/][^\\/]+[\\/]tour\.json$''']
+regexes = ['''(?i)^[a-z][a-z0-9]*(?:[._][a-z0-9]+)+$''']

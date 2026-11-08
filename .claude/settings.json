@@ -1,0 +1,9 @@
+{
+  "plansDirectory": "development/plans",
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)"
+    ]
+  }
+}

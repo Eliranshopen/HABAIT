@@ -1,0 +1,16 @@
+const { spawn } = require('child_process');
+const { chromium } = require('C:/RnD/Projects/Habait/tools/appdeps/node_modules/playwright-core');
+const PLAT='C:/RnD/.wt/apartment-3d/files/Projects/Habait/habait-walkaround/Habait/platform';
+const OUT='C:/RnD/.wt/apartment-3d/after/gate3/';
+(async()=>{const srv=spawn(process.execPath,['serve.mjs'],{cwd:PLAT,env:{...process.env,PORT:'8851'},stdio:'ignore'});
+await new Promise(r=>setTimeout(r,1200));
+const b=await chromium.launch({channel:'chrome',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});
+try{const ctx=await b.newContext({viewport:{width:1440,height:900},deviceScaleFactor:2});
+await ctx.route('http://127.0.0.1:8848/**',r=>r.fulfill({status:200,contentType:'text/html',body:'x'}));
+const p=await ctx.newPage();await p.goto('http://127.0.0.1:8851/apartment.html?project=rainbow&unit=846&tab=3d');
+const fr=await(await p.$('#dollFrame')).contentFrame();await fr.waitForFunction(()=>window.__dollhouse&&window.__dollhouse.loaded,null,{timeout:90000});
+const set=async(mode)=>{await fr.evaluate((mode)=>{const v=window.__dollhouseView;v.setPreset('top',{animate:false});v.setPreset('top',{animate:false});
+ window.__dollhouse.floorTexture; v.scene.traverse(o=>{if(!o.isMesh)return;for(const m of [].concat(o.material)){ if(m.name==='web_floor_parquet'){ if(!m.__map)m.__map=m.map; m.map=mode==='nomap'?null:m.__map; if(mode==='nomap')m.color.setRGB(.6,.45,.3); else m.color.setRGB(1,1,1); m.needsUpdate=true;} if(mode==='nolm'&&m.lightMap){m.__lm=m.lightMap;m.lightMap=null;m.needsUpdate=true;} else if(m.__lm&&mode!=='nolm'){m.lightMap=m.__lm;m.needsUpdate=true;}}});},mode);
+ await p.waitForTimeout(3500);await p.screenshot({path:OUT+'d1_'+mode+'.png',clip:{x:700,y:500,width:300,height:200}});};
+for(const m of ['map','nomap','nolm'])await set(m);
+}finally{await b.close();srv.kill();}})();

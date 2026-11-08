@@ -1,0 +1,28 @@
+{
+ "desktop": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8853/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": false
+  },
+  {
+   "id": "Z run completed",
+   "pass": false,
+   "info": "page.evaluate: TypeError: Cannot read properties of null (reading 'getBoundingClientRect')\n    at eval (eval at evaluate (:290:30), <anonymous>:1:71)\n    at UtilityScript.evaluate (<anonymous>:292:16)"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ]
+}

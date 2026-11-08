@@ -1,0 +1,299 @@
+{
+ "schema": "habait/printed-dims-map.v0",
+ "about": "Where each printed dimension of the 846 sales sheet sits, in the plan.json frame (cm, origin = plan crop top-left, +y down). Stand-in for the dimension lines card 01's report.json will carry; plan_gate prefers report.json 'dimensions' when present.",
+ "plan": "360walkaround/tours/apt846/plan.json",
+ "intake": "Habait/studio/fixtures/apt846.intake.json",
+ "how_read": "habait engine-builder (card 05), 2026-11-02, by eye on plan.json's OWN source crop Habait/tour360/apartments/apt846/_local/plan/plan-crop.png (3750x3900, 2.25 px/cm; read on a 0.4x overlay with the traced loops drawn, plan cm = px * 1.1111). NOT on Habait/engine/_local/apt846/plan-crop.png: that crop has a different origin and plan.json is not registered to it. anchor = the printed number's position (it sits on its dimension line); angle_deg = the line's direction (atan2(dy,dx), +y down); plan_gate snaps it to the room's nearest long edge within 12 deg and slides an anchor that falls in a wall perpendicular to the line into the room. Kind decided from the drawing before any chord was measured. Second pass (same day): the end ticks a_cm/b_cm of 342, 275, 744, 344, 160, 270 read on cm-gridded zooms of the same crop (label anchors sat up to 25 cm beside their lines); 348, 212, 210 keep the label anchor (ticks not legible at the zoom used). |a-b| vs the printed value is the reading check (344 reads 372: the bottom tick is misread, the line's position and direction are not).",
+ "kinds": {
+  "room_clear": "wall face to wall face of a traced room (or of an open-plan union): checked, 3 %",
+  "overall": "outer dimension of the unit or terrace: needs the dimension line's end ticks (card 01), not checked here",
+  "opening": "a facade opening length (the rescue opening): not a room, not checked here",
+  "sub_element": "an element inside a room that plan.json does not trace (shower stall, closet niche): not checked",
+  "partial": "a line that ends on a partition tip, not on a wall bounding the room chord: not checked"
+ },
+ "dimensions": [
+  {
+   "value_cm": 342,
+   "kind": "room_clear",
+   "rooms": [
+    "r-bedroom-2"
+   ],
+   "anchor_cm": [
+    546.7,
+    262.2
+   ],
+   "angle_deg": 127,
+   "label": "bedroom, long side",
+   "a_cm": [
+    667.7,
+    131.5
+   ],
+   "b_cm": [
+    462.4,
+    403.5
+   ]
+  },
+  {
+   "value_cm": 275,
+   "kind": "room_clear",
+   "rooms": [
+    "r-bedroom-2"
+   ],
+   "anchor_cm": [
+    694.4,
+    238.9
+   ],
+   "angle_deg": 37,
+   "label": "bedroom, short side",
+   "a_cm": [
+    581.3,
+    162.4
+   ],
+   "b_cm": [
+    806.4,
+    330.4
+   ]
+  },
+  {
+   "value_cm": 744,
+   "kind": "room_clear",
+   "rooms": [
+    "r-kitchen",
+    "r-dining",
+    "r-living"
+   ],
+   "anchor_cm": [
+    1005.6,
+    872.2
+   ],
+   "angle_deg": 102,
+   "label": "open-plan kitchen+dining+living along the facade, chained with 344",
+   "a_cm": [
+    1139.8,
+    514.8
+   ],
+   "b_cm": [
+    900.0,
+    1237.0
+   ]
+  },
+  {
+   "value_cm": 344,
+   "kind": "room_clear",
+   "rooms": [
+    "r-bedroom-main"
+   ],
+   "anchor_cm": [
+    827.8,
+    1405.6
+   ],
+   "angle_deg": 102,
+   "label": "main bedroom depth along the facade",
+   "a_cm": [
+    900.0,
+    1237.0
+   ],
+   "b_cm": [
+    783.3,
+    1589.9
+   ]
+  },
+  {
+   "value_cm": 348,
+   "kind": "room_clear",
+   "rooms": [
+    "r-bedroom-main"
+   ],
+   "anchor_cm": [
+    691.1,
+    1488.9
+   ],
+   "angle_deg": 18,
+   "label": "main bedroom width along the south wall"
+  },
+  {
+   "value_cm": 212,
+   "kind": "room_clear",
+   "rooms": [
+    "r-bath-main"
+   ],
+   "anchor_cm": [
+    188.9,
+    1255.6
+   ],
+   "angle_deg": 102,
+   "label": "main bathroom"
+  },
+  {
+   "value_cm": 210,
+   "kind": "room_clear",
+   "rooms": [
+    "r-bath-main"
+   ],
+   "anchor_cm": [
+    255.6,
+    1344.4
+   ],
+   "angle_deg": 18,
+   "label": "main bathroom (bath tub line)"
+  },
+  {
+   "value_cm": 160,
+   "kind": "room_clear",
+   "rooms": [
+    "r-wardrobe"
+   ],
+   "anchor_cm": [
+    438.9,
+    1408.9
+   ],
+   "angle_deg": 18,
+   "label": "wardrobe width along the south wall",
+   "a_cm": [
+    350.4,
+    1393.0
+   ],
+   "b_cm": [
+    498.3,
+    1441.0
+   ]
+  },
+  {
+   "value_cm": 270,
+   "kind": "room_clear",
+   "rooms": [
+    "r-terrace-living"
+   ],
+   "anchor_cm": [
+    1283.3,
+    807.8
+   ],
+   "angle_deg": 18,
+   "label": "sun terrace depth",
+   "a_cm": [
+    1148.8,
+    773.0
+   ],
+   "b_cm": [
+    1400.8,
+    859.8
+   ]
+  },
+  {
+   "value_cm": 530,
+   "kind": "partial",
+   "rooms": [
+    "r-living"
+   ],
+   "anchor_cm": [
+    722.2,
+    1122.2
+   ],
+   "angle_deg": 18,
+   "label": "living: west tick on the bedroom partition's tip, not on the room's west wall"
+  },
+  {
+   "value_cm": 185,
+   "kind": "sub_element",
+   "rooms": [
+    "r-wardrobe"
+   ],
+   "anchor_cm": [
+    505.6,
+    1377.8
+   ],
+   "angle_deg": 108,
+   "label": "closet niche depth"
+  },
+  {
+   "value_cm": 140,
+   "kind": "sub_element",
+   "rooms": [
+    "r-bath-guest"
+   ],
+   "anchor_cm": [
+    466.7,
+    486.7
+   ],
+   "angle_deg": 37,
+   "label": "guest bathroom shower stall"
+  },
+  {
+   "value_cm": 199,
+   "kind": "sub_element",
+   "rooms": [
+    "r-bath-guest"
+   ],
+   "anchor_cm": [
+    388.9,
+    514.4
+   ],
+   "angle_deg": 127,
+   "label": "guest bathroom length (sheet prints 199; was 99 until 2026-11-02 18:55, card 06 finding)"
+  },
+  {
+   "value_cm": 474,
+   "kind": "opening",
+   "rooms": [
+    "r-terrace-living"
+   ],
+   "anchor_cm": [
+    1050.0,
+    1177.8
+   ],
+   "angle_deg": 108,
+   "label": "rescue opening (פתח חילוץ) on the facade"
+  },
+  {
+   "value_cm": 822,
+   "kind": "overall",
+   "rooms": [],
+   "anchor_cm": [
+    433.3,
+    1605.6
+   ],
+   "angle_deg": 18,
+   "label": "unit, south side, outer"
+  },
+  {
+   "value_cm": 1213,
+   "kind": "overall",
+   "rooms": [],
+   "anchor_cm": [
+    1433.3,
+    1183.3
+   ],
+   "angle_deg": 105,
+   "label": "terrace, outer length"
+  }
+ ],
+ "area_pairs": [
+  {
+   "rooms": [
+    "r-bedroom-2"
+   ],
+   "dims_cm": [
+    342,
+    275
+   ]
+  },
+  {
+   "rooms": [
+    "r-bedroom-main"
+   ],
+   "dims_cm": [
+    348,
+    344
+   ]
+  },
+  {
+   "rooms": [
+    "r-bath-main"
+   ],
+   "dims_cm": [
+    212,
+    210
+   ]
+  }
+ ]
+}

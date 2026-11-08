@@ -1,0 +1,105 @@
+{
+ "step": "card 07 export_dollhouse --bake-light (final = bake6, after gate 3 fixes)",
+ "when": "2026-11-03 final bake ~19:00",
+ "session": "rnd-fd (Blender ruled to this board by Eliran, card 02c)",
+ "command": "blender -b <live scene.blend> --factory-startup -P 360walkaround/pipeline/export_dollhouse.py -- --out <wt>/Habait/engine/_local/apt846/dollhouse --name apt846 --floor parquet --furniture-colours neutral --bake-light --bake-res 2048 --bake-samples 128 --floor-variants parquet,concrete,marble --preview after/phase2/bake_preview.png",
+ "inputs": {
+  "scene.blend": "C:/RnD/Projects/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/scene.blend",
+  "scene_sha256": "2bc0d5d80e2d24a20b28cbd2a474a1a5e63598b40548d145e4783bb01ba7e53b",
+  "script_sha256": "3a154dbebf6f22b354da4b427ebc41ab1433233d65beea54985decdb2f3dc67a"
+ },
+ "outputs": {
+  "apt846-concrete.glb": "079717d3f6346ab02081db79c9aed75ec00d5d307a60231a715611798d3d7005",
+  "apt846-marble.glb": "9d3565447641e0f4e483b264d28b1ec8324dbc8e112f1397b95f177c597ae143",
+  "apt846-parquet.glb": "2732cb2c7eac3ac6346aa67b989b56820be2fb855c965ec9786344426cca5809",
+  "apt846.glb": "2732cb2c7eac3ac6346aa67b989b56820be2fb855c965ec9786344426cca5809",
+  "floor-concrete.webp": "97e6dd03a5310c68ab06e91375334faae4a80c42e30e344a542e9c2eb8e0c87f",
+  "floor-marble.webp": "cbeb010aa8a8fa7e296832674957c1c40222ce97eb402451e3b2a1a10bed7b7a",
+  "floor-parquet.webp": "6adcc4f182e46ffb843b2fc515c1c6673b2c817f4cb2d92f3b4914bec8a5ca4d",
+  "floor-textures.json": "1ca578d845e8f18e0104195eabba26c149dfba5237dbba8d13eeb7f957e54b67",
+  "light-1024.webp": "7258605d318b38a38afdba0bf169601eb6eec7ae6341dc05ff6e0f39736cbcaf",
+  "light.webp": "6c22a18e730c5c97b44bb9b10484c2b2ae16b860196cfa6ae41404cc16729317",
+  "loadtest-cpu4.json": "046a7ede786387792f4b62ee1a31ebbbae6dab9e3f8791d25b638a8b92cf5ec9",
+  "loadtest.json": "8c6577b8c9a42757fb284847519f72ab9232bca4fa705df9aec43fbf95938ee8",
+  "report.json": "518d30645274eadf52d2f9388c52a08ba7d2745b68a0d8b2cf2efd6d824f5603",
+  "top.png": "ecc24e2e273e900c3bb0feb83df844b61a931ff17c96a36467d15f4360f6f0ec"
+ },
+ "bake": {
+  "res": 2048,
+  "samples": 128,
+  "seconds": 157.71,
+  "total_seconds": 191.19,
+  "atlas_bytes": 156680,
+  "scale": 0.248674,
+  "denoise": "oidn (compositor Denoise)",
+  "leak_fix_texels": 57780,
+  "occluded_fix_texels": 257853,
+  "dark_texel_fraction": 0.433658,
+  "valid_texel_fraction": 0.3579,
+  "one_bin_chunk": true,
+  "main_bin_sha256": "51d187303cf2c0eb6f4ce36f01392173602d98158579325eed818466e78f8362"
+ },
+ "no_bake_identity": {
+  "glb_sha256": "1259daf0b254debe31651c36291ef6433bae2cfea292fab9edc3588fdf161c5c",
+  "equals_live_apt846.glb": true,
+  "log": "logs/c07-nobake.txt"
+ },
+ "runs": [
+  {
+   "log": "logs/c07-nobake.txt",
+   "what": "no flag, byte-identity proof",
+   "wall_s": 5.9
+  },
+  {
+   "log": "logs/c07-smoke.txt",
+   "what": "smoke 256 px / 4 spp",
+   "wall_s": 17
+  },
+  {
+   "log": "logs/c07-smoke2.txt",
+   "what": "smoke 512/16, UV pack",
+   "wall_s": 20
+  },
+  {
+   "log": "logs/c07-smoke3.txt",
+   "what": "smoke 1024/16, margin 0.001"
+  },
+  {
+   "log": "logs/c07-bake.txt",
+   "what": "full 2048/128 #1 (barcode on thin edges)",
+   "wall_s": 332.7
+  },
+  {
+   "log": "logs/c07-smoke4.txt",
+   "what": "smoke 512/8, edge leak fix"
+  },
+  {
+   "log": "logs/c07-bake2.txt",
+   "what": "full #2 (leak fix; barcode stayed)",
+   "wall_s": 284.6
+  },
+  {
+   "log": "logs/c07-smoke5.txt",
+   "what": "smoke 2048/1, thin-island collapse"
+  },
+  {
+   "log": "logs/c07-bake3.txt",
+   "what": "full #3 FINAL (thin islands -> atlas mean; barcode gone)",
+   "wall_s": 305.5
+  },
+  {
+   "log": "logs/c07-bake4.txt",
+   "what": "full: + occluded-texel fix (D1 not cured)"
+  },
+  {
+   "log": "logs/c07-bake5.txt",
+   "what": "full: + furniture wholly above the cut no longer occludes"
+  },
+  {
+   "log": "logs/c07-bake6.txt",
+   "what": "full FINAL: floorfill casts no shadow (the D1 stripes), CEILFILL = ceiling"
+  }
+ ],
+ "cost_usd": 0,
+ "timeout_s": 540
+}

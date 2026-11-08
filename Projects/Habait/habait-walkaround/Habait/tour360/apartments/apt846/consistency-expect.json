@@ -1,0 +1,10 @@
+{
+  "$schema": "tour360/consistency-expect.v1",
+  "$note": "What the DATA says each checklist field must be (parity row 32, 2026-11-06). Plan-derived values (upper_cabinets, shelves_open from fixture_hints uppers; tall_type from the plan's tall_type) are added by consistency-check.mjs itself; this file adds the material board and Eliran's rulings. A field not named here is checked for agreement between views only.",
+  "kitchen": {
+    "backsplash": { "want": "stainless", "source": "material-board.json kitchen: a brushed stainless-steel function-wall splashback; plan k-counter words_en" },
+    "tall_front": { "want": "same_as_run", "source": "material-board.json fixture_words.tall_unit_fridge: behind the SAME handleless matte sand-grey lacquer fronts as the run" },
+    "oven_visible": { "want": "yes", "source": "Eliran's ruling 2026-11-06: the oven is built in under the hob (plan k-tall tall_type_source)" },
+    "oven_where": { "want": "under_hob", "source": "Eliran's ruling 2026-11-06: the oven is built in under the hob" }
+  }
+}

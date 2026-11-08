@@ -1,0 +1,166 @@
+ M .gitignore
+ M 360walkaround/pipeline/probe/hello-depth.exr
+ M 360walkaround/pipeline/probe/hello-render.json
+ M 360walkaround/pipeline/probe/hello.png
+ M 360walkaround/tours/apt846-furnished/manifest.json
+ M 360walkaround/tours/apt846-furnished/scene-full.report.json
+ M Habait/engine/building.py
+ M Habait/engine/correct/README-he.md
+ M Habait/engine/correct/fixtures/ui-run.mjs
+ M Habait/engine/correct/serve.mjs
+ M Habait/engine/experiments/panos-cheap/run.py
+ M Habait/engine/fixtures/rainbow-846.project.json
+ M Habait/engine/gates/fixtures/apt846.dims.json
+ M Habait/engine/intake/tracer_cv.py
+ M Habait/engine/schema/project.schema.json
+ M Habait/flyover/README.md
+ M Habait/flyover/bake_skins.py
+ M Habait/flyover/cloud/A-blender-cycles/kaggle/kernel-metadata.json
+ M Habait/flyover/cloud/A-blender-cycles/kaggle/kernel_a.py
+ M Habait/flyover/cloud/A-blender-cycles/kernel_a_driver.py
+ M Habait/flyover/cloud/A-blender-cycles/orbit_render.py
+ M Habait/flyover/cloud/B1-wan22-fun5b-control/kaggle/kernel_b1.py
+ M Habait/flyover/cloud/B1-wan22-fun5b-control/run_fun5b.py
+ M Habait/flyover/cloud/B2-wan21-vace13b/kaggle/kernel_b2.py
+ M Habait/flyover/cloud/B2-wan21-vace13b/run_vace.py
+ M Habait/flyover/cloud/build_kernels.py
+ M Habait/flyover/cloud/metrics/baselines/flux3_edit_video.json
+ M Habait/flyover/cloud/metrics/baselines/gemini_omni_flash_edit.json
+ D Habait/flyover/cloud/metrics/baselines/kling4_fullflight_first121.jpg
+ D Habait/flyover/cloud/metrics/baselines/kling4_fullflight_first121.json
+ M Habait/flyover/cloud/metrics/baselines/kling4_v2v_5s.json
+ D Habait/flyover/cloud/metrics/baselines/kling4_v2v_5s_OFFSET12_NEG.jpg
+ D Habait/flyover/cloud/metrics/baselines/kling4_v2v_5s_OFFSET12_NEG.json
+ M Habait/flyover/cloud/metrics/baselines/ltx23_r2r_strong_5s.json
+ D Habait/flyover/cloud/metrics/baselines/wan30_reference_NEG.jpg
+ D Habait/flyover/cloud/metrics/baselines/wan30_reference_NEG.json
+ M Habait/flyover/cloud/metrics/edge_stability.py
+ M Habait/flyover/contact_sheet.py
+ M Habait/flyover/equirect/README-he.md
+ M Habait/flyover/equirect/path.json
+ M Habait/flyover/equirect/render_segments.py
+ M Habait/flyover/panos/node-b-tower/projectors.json
+ M Habait/flyover/panos/node-c-facade/projectors.json
+ M Habait/flyover/project_skin.py
+ M Habait/flyover/projectors-panos.json
+ M Habait/flyover/projectors.json
+ M Habait/flyover/render_check.py
+ M Habait/platform/README.md
+ M Habait/platform/contracts/units.schema.json
+ M Habait/platform/contracts/validate.mjs
+ M Habait/platform/css/style.css
+ M Habait/platform/fixtures/rainbow/project.json
+ M Habait/platform/fixtures/rainbow/units.json
+ M Habait/platform/flow.html
+ M Habait/platform/index.html
+ M Habait/platform/js/analytics.js
+ M Habait/platform/js/apartment.js
+ M Habait/platform/js/flow.js
+ M Habait/platform/js/lead.js
+ M Habait/platform/js/picker.js
+ M Habait/platform/serve.mjs
+ M Habait/platform/test/apartment.test.mjs
+ M Habait/platform/test/browser.mjs
+ M Habait/platform/test/minimap.test.mjs
+ M Habait/platform/test/smoke.mjs
+ M Habait/platform/tools/build_zip.mjs
+ M Habait/studio/README.md
+ M Habait/studio/fixtures/apt846.intake.json
+ M Habait/studio/lib/env.mjs
+ M Habait/studio/pipeline/stages/video.mjs
+ M Habait/tour360/apartments/apt846/dollhouse/export-report.json
+ M Habait/tour360/tools/build-tour.mjs
+ M Habait/tour360/viewer/template.html
+ M Habait/tour360/viewer/tour.css
+ M Habait/tour360/viewer/tour.js
+ M docs/rnd/2026-11-01-m1-status.md
+ M docs/rnd/2026-11-01-realistic-render-research.md
+?? 360walkaround/pipeline/furnish_from_plan.py
+?? Habait/engine/README.md
+?? Habait/engine/bench/
+?? Habait/engine/cli.py
+?? Habait/engine/docs/
+?? Habait/engine/experiments/look-lock/
+?? Habait/engine/gates/fixtures/apt846.dims.json.bak-99
+?? Habait/engine/intake/README.md
+?? Habait/engine/intake/fixtures/
+?? Habait/engine/intake/intake_dwg.py
+?? Habait/engine/intake/intake_ifc.py
+?? Habait/engine/intake/intake_pdf_vector.py
+?? Habait/engine/intake/intake_raster.py
+?? Habait/engine/intake/layer_maps/
+?? Habait/engine/intake/lexicon_he.json
+?? Habait/engine/intake/vector_common.py
+?? Habait/engine/stack_units.py
+?? Habait/engine/stages/
+?? Habait/engine/test/
+?? Habait/engine/video/
+?? Habait/flyover/REPORT-C5-he.md
+?? Habait/flyover/REPORT.md
+?? Habait/flyover/batch/
+?? Habait/flyover/cloud/A-blender-cycles/kaggle_full/
+?? Habait/flyover/cloud/A-blender-cycles/out_k/
+?? Habait/flyover/cloud/A-blender-cycles/out_v2/
+?? Habait/flyover/cloud/A-blender-cycles/out_v4/
+?? Habait/flyover/cloud/A-blender-cycles/out_v5/
+?? Habait/flyover/cloud/B1-wan22-fun5b-control/out_k/
+?? Habait/flyover/cloud/B1-wan22-fun5b-control/out_k2/
+?? Habait/flyover/cloud/B1-wan22-fun5b-control/out_v1/
+?? Habait/flyover/cloud/B2-wan21-vace13b/out_k/
+?? Habait/flyover/cloud/B2-wan21-vace13b/out_k2/
+?? Habait/flyover/cloud/B2-wan21-vace13b/out_v1/
+?? Habait/flyover/cloud/REPORT.md
+?? Habait/flyover/cloud/metrics/baselines/kling4_v2v_5s_first49.json
+?? Habait/flyover/cloud/metrics/baselines/kling4_v2v_5s_first81.json
+?? Habait/flyover/cloud/metrics/baselines/ltx23_r2r_strong_5s_first49.json
+?? Habait/flyover/cloud/metrics/baselines/ltx23_r2r_strong_5s_first81.json
+?? Habait/flyover/cloud/metrics/baselines/wan30_reference.jpg
+?? Habait/flyover/cloud/metrics/baselines/wan30_reference.json
+?? Habait/flyover/enter.py
+?? Habait/flyover/export_glb.py
+?? Habait/flyover/hotspots/
+?? Habait/flyover/kaggle/
+?? Habait/flyover/life/
+?? Habait/flyover/skins-extra/
+?? Habait/flyover/turntable/
+?? Habait/platform/_local_serve.log
+?? Habait/platform/apps-script/
+?? Habait/platform/audio/
+?? Habait/platform/build_units.mjs
+?? Habait/platform/contracts/project.schema.json
+?? Habait/platform/css/cine.css
+?? Habait/platform/css/dashboard.css
+?? Habait/platform/css/flow-real.css
+?? Habait/platform/css/landing.css
+?? Habait/platform/css/transition.css
+?? Habait/platform/dashboard.html
+?? Habait/platform/demo-transition.html
+?? Habait/platform/fixtures/rainbow/flow.cine.json
+?? Habait/platform/fixtures/rainbow/flow.real.json
+?? Habait/platform/fixtures/rainbow/orbit_real.mp4
+?? Habait/platform/js/cine.js
+?? Habait/platform/js/dashboard.js
+?? Habait/platform/js/depthmesh.js
+?? Habait/platform/js/landing.js
+?? Habait/platform/js/posthog-adapter.js
+?? Habait/platform/js/transition360.js
+?? Habait/platform/js/vendor/posthog-js-1.444.2.LICENSE.txt
+?? Habait/platform/js/vendor/posthog-js-1.444.2.module.slim.no-external.js
+?? Habait/platform/landing.html
+?? Habait/platform/report_weekly.mjs
+?? Habait/platform/test/analytics.test.mjs
+?? Habait/platform/test/build_units.test.mjs
+?? Habait/platform/test/card-overflow.test.mjs
+?? Habait/platform/test/flow-cine.test.mjs
+?? Habait/platform/test/flow-real.test.mjs
+?? Habait/platform/test/landing.test.mjs
+?? Habait/platform/test/shots/
+?? Habait/platform/test/transition.test.mjs
+?? Habait/platform/tools/build_segments.mjs
+?? Habait/platform/tools/events-sink.mjs
+?? Habait/studio/tools/hold_arc_clay.py
+?? Habait/studio/tools/hold_pan_clay.py
+?? Habait/tour360/apartments/apt846/depth/
+?? Habait/tour360/apartments/apt846/dollhouse/report.json
+?? Habait/tour360/apartments/apt846/dollhouse/top.png
+?? Habait/tour360/apartments/apt846/guide/

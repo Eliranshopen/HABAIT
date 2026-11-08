@@ -1,0 +1,46 @@
+[    0.6 s] created sandbox sapphire-greasy-zebra-iEPYPf (4 vCPU) in 0.6 s
+[    1.0 s] === sysinfo
+[    1.5 s]     sysinfo: 0.6 s wall, 0.7 active vCPU-s
+[    1.8 s] === prep_workdir
+[    2.8 s]     prep_workdir: 1 s wall, 0.5 active vCPU-s
+[    3.3 s] === apt
+[   13.7 s]     apt: 10.5 s wall, 10.6 active vCPU-s
+[   14.0 s] === blender_download
+[   26.1 s]     blender_download: 12.1 s wall, 4.7 active vCPU-s
+[   26.3 s] === blender_extract
+[   42.3 s]     blender_extract: 16 s wall, 18.5 active vCPU-s
+[   42.6 s] === python_venv
+[   59.9 s]     python_venv: 17.4 s wall, 17.9 active vCPU-s
+[   60.2 s] === upload
+[  204.1 s]     upload: 143.9 s wall, 7.5 active vCPU-s
+[  204.3 s] === render
+render_tour.mjs v0.1.0  tour=360walkaround/tours/apt846  mode=draft 1024x512@16spp  wrap-pad=512  points=1  force=[cp-kitchen]
+          golden depth fixture: golden: 32/32 pixels match; unknown-encoding refused: true | OK
+          scene: STALE — scene-full.blend does not exist
+
+=== scene build ==============================================
+          REPORT    camera clearance: cp-terraceBedroom 39.4 cm from facing FACING_r-terrace-bedroom_e35_r0 - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+          REPORT    camera clearance: cp-bathMain 39.58 cm from shower SHOWER_bm-shower_screen - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+          REPORT    camera clearance: cp-bathguest 21.67 cm from door DOOR_o-11_casing_m_p - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+          OK
+          scene built in 11.1 s
+
+=== chunk 1/1: 1 point(s) (forcing cp-kitchen) ====================
+          === [1/1] cp-kitchen ======================================
+          [render_pano] point      : cp-kitchen  plan (837.8,532.4,160) yaw 125.5
+          [render_pano] wrap pad   : 512 px each side  -> rendered 2048x512 over -360.0000..360.0000 deg, cropped back
+          [render_pano] render 1/1: 87.466 s wall  (cycles 87.11s, device peak 674.14 MB, host peak 837.81 MB)
+          [render_pano] depth      : depth.png 53,647 B  valid 524,288 / 524,288  sky 0  range 0.965..8.604 m  (0.057 s)
+          [render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+          [render_pano] pano       : pano.webp 1024x512 22,634 B  zenith mean 155.6/255 (4 colours) · nadir mean 174.3/255 (19 colours) · no_hole=True
+          OK
+
+=== summary =================================================
+  OK   cp-kitchen           87.5 s  nadir 1.6 m (0 cm)  valid 100.00%  22 KB
+  total 99.8 s · 1 rendered, 0 skipped · $0.00 · verdict PASS
+OK
+EXIT=0
+[  304.8 s]     render: 100.4 s wall, 360.6 active vCPU-s
+[  308.6 s] stop() returned
+[  308.9 s] status after stop (poll 1): stopped
+[  308.9 s] done in 307.3 s; est. $0.0294

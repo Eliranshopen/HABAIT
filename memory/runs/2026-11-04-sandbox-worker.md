@@ -1,0 +1,26 @@
+## 2026-11-04 · worker of session rnd-9d · sandbox-worker spike: the project runner's Blender render in Vercel Sandbox
+- **Did:**
+  - `spike.mjs` (@vercel/sandbox 3.8.0, run under `vercel env run` from the habait-flow-linked scratch folder; no token file, and no `.env*` was written) booted a 4 vCPU / 8 GB sandbox in habait-flow.
+  - It installed Blender 4.5.10 (sha256-verified) and numpy/opencv/pymupdf, uploaded 122 files (294 MB), and ran render_tour.mjs on apt846 cp-kitchen at 1024x512 @ 16 spp.
+  - **Verdict PASS:** build_scene 11.1 s, Cycles CPU 87.5 s, nadir 0 cm, peak 2.05/8.4 GB.
+  - The sandbox was verified `stopped`. Three sessions, 0.094 h, $0.031 at Pro rates.
+  - Production design plan written. Nothing deployed, no env var changed.
+- **Evidence:**
+  - `.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/evidence/2026-11-04-c1/spike-report.json`
+  - commits `8fb53cd` (ledger row before boot), `53f0139`, `58feaff` on branch sandbox-worker
+  - `360walkaround/pipeline/RENDER-LEDGER.md` §2 row C1
+  - plan `development/plans/2026-11-04-sandbox-worker.md`
+- **Learned:**
+  - The team refuses vCPUs > 4, which looks like Hobby: a 45-minute session cap, cron once a day, 5 free active-CPU hours a month (about 4 draft apartments).
+  - `/vercel/sandbox` does not exist in the SDK 3.8 image: create it with sudo.
+  - download.blender.org answers 403 from the sandbox; the official mirrors work, gated by the official sha256.
+  - A draft 11-room apartment is about 16.5 min of render on 4 vCPU, about $0.20 at Pro rates. The production setting (2048x1024 @ 32 spp) is extrapolated at about 2.1 h / $1.50 and does not fit one Hobby session.
+  - `file-ledger.mjs loadEnv` reads `process.env` first, so FAL_KEY can reach the VM as sandbox env with no file.
+  - Today's build_scene 1.5.0 renders cp-kitchen without the cooktop, sink and uppers that the committed 1.4.0 render shows (same plan sha). This is a possible fidelity gap, not a sandbox effect.
+- **Owed / open:**
+  - Eliran: Hobby vs Pro (a cost call), and any new habait-flow env var (`CRON_SECRET` only if the sweep cron is used).
+  - Prove the rest of run-job in the VM: trace with pymupdf/OpenCV/fal, sharp, Playwright/Chromium, Blob upload.
+  - Build `build-snapshot.mjs`, `api/studio-dispatch` and `api/studio-sweep` in a worktree after project-runner merges.
+  - fix-846-fidelity: check the kitchen fixtures in build_scene 1.5.0.
+  - Merging `.wt/sandbox-worker` is Eliran's.
+- **Second reader:** `habait-deploy-qa`. The dispatcher and sweep are habait-flow functions it will preflight and QA, and Sandbox jobs change what "the build ran" means. Pointer added to `memory/agents/habait-deploy-qa.md`.

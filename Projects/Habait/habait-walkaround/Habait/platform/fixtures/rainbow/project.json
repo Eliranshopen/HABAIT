@@ -1,0 +1,42 @@
+{
+  "id": "rainbow",
+  "name": { "he": "Rainbow תל אביב", "en": "Rainbow Tel Aviv" },
+  "tagline": { "he": "מגדל מגורים על קו הים · הדמיה", "en": "Seafront residential tower · concept" },
+  "developer": { "he": "ישראל קנדה", "en": "Israel Canada" },
+  "brand": {
+    "logo": "logo.svg",
+    "primary": "#0f5c8f",
+    "accent": "#f2a900",
+    "background": "#0b1220"
+  },
+  "exterior": {
+    "mode": "external",
+    "url": "http://127.0.0.1:8899/",
+    "params": { "tour": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0", "from": "platform" },
+    "intro": { "clip": "orbit_real.mp4", "mode": "inline", "note": "Step 1: Kling 4.0 v2v over the Blender clay orbit (Habait/flyover/orbit, 2026-11-02 15:37): one clockwise 14 s orbit at 228 m + 3 s descent, ends at the node-b-tower pose where the hold opens; 17.0 s, 1280x720. mode inline (Eliran 15:55: no loading screen between the video and the hold): the card links straight to the hold viewer with ?orbit=<clip url>, and the viewer plays the clip full-screen while its scene loads behind it; mode absent = intro.html plays the clip, then navigates. Previous interim clip: intro-approach-interim.mp4." },
+    "alt": { "label": { "he": "גרסת תחנות 360 (גיבוי)", "en": "360-node version (fallback)" }, "url": "http://127.0.0.1:8848/", "params": { "from": "platform" } },
+    "note": "Eliran's rulings 2026-11-02: step 1 = rendered orbit VIDEO (Habait/flyover/orbit, ends at node-b-tower pose); step 2 = :8899 three.js hold at node-b (photoreal node-b 360 as sphere, picker pills per unit, click -> PBR flight to the terrace), presentable again since 13:50 (habait-89); step 3 = :8848 ?scope=apartment photoreal 360 of the apartment. :8848 node chain = fallback for step 2. flow.json = internal placeholder player and the reference UX."
+  },
+  "flow": "flow.json",
+  "units": "units.json",
+  "cover": "cover-aerial-skinned.jpg",
+  "leads": {
+    "whatsapp_number": "",
+    "whatsapp_note": "2026-11-04 (Eliran, \"להסתיר\", F20): the placeholder 972500000000 is removed; empty = the WhatsApp and call buttons are hidden until the developer's real sales number is set here",
+    "webhook_url": "",
+    "webhook_note": "Google Apps Script web-app URL that receives a JSON POST; empty = log to console only"
+  },
+  "analytics": {
+    "posthog_key": "",
+    "posthog_host": "https://us.i.posthog.com",
+    "whatsapp_viewed_line": false,
+    "lead_secret": "",
+    "note": "card 24 (D2): empty posthog_key = events stay in the first-party JSONL (_local/events.jsonl), zero third-party requests. whatsapp_viewed_line = Eliran's product decision (T2), off. See apps-script/README-he.md"
+  },
+  "disclaimer": {
+    "he": "הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית על בסיס תכניות הפרויקט Rainbow Tel Aviv מיום 15.10.2025 ומקורות ציבוריים. המסמכים המחייבים הם המפרט והתכניות החתומים. הסביבה, הנוף, האנשים והתאורה להמחשה.",
+    "en": "Illustration only. Generated with AI assistance from the plans of Rainbow Tel Aviv dated 15.10.2025 and public sources. The binding documents are the signed specification and plans. Surroundings, views, people and lighting are illustrative."
+  },
+  "fixture": true,
+  "fixture_note": "clay exteriors downscaled from studio/_local/projects/apt846-rainbow-tlv/renders/clay-pano; the videos are ffmpeg crossfades between stills, not the real flight; every unit except 846 is invented"
+}

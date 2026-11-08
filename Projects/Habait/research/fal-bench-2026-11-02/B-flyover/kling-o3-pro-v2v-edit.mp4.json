@@ -1,0 +1,20 @@
+{
+ "endpoint": "fal-ai/kling-video/o3/pro/video-to-video/edit",
+ "args": {
+  "video_url": "https://v3b.fal.media/files/b/0ab0d326/AllzZ7K8CRwW4lPRETRC7_B_clay_s1_5s.mp4",
+  "prompt": "@Video1 is a plain grey 3D clay render of a drone flight over the Tel Aviv coast (Sde Dov) toward the Rainbow tower, a 39-floor residential tower wrapped in white undulating curved balcony slabs. Re-render the SAME footage as photoreal aerial drone video: keep every frame's camera motion, perspective, horizon and building geometry exactly as in @Video1, only replace the clay materials with real ones. @Image1 shows the real look to copy: white curved balconies with planters, slim black glazing, the Mediterranean sea and beach, the Reading power-station chimney, low white buildings, trees, roads, soft morning sun, clear sky. Smooth, continuous, no cuts, no text, no people, no watermark.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d327/wqQYxfVGC06rFnTiGd_Fg_B_keyframe_s1_first.png"
+  ],
+  "keep_audio": false
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0d341/kihcAHWekM4d75odeJyF3_output.mp4",
+   "content_type": "video/mp4",
+   "file_name": "output.mp4",
+   "file_size": 18943447
+  }
+ },
+ "secs": 264
+}

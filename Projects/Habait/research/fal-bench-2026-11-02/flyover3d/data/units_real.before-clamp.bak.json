@@ -1,0 +1,347 @@
+{
+ "project": "rainbow-tlv",
+ "currency": "ILS",
+ "price_note": "written by Habait/engine/building.py from project.json; hotspots are filled by C4 (card 19) | stack_units.py: every unit except the hero has a stacked-approx box (hero footprint, 3.2 m floor pitch, 2.9 m ceiling, bays of +-9.0 m along the facade); prices/status/areas copied from the platform fixture",
+ "units": [
+  {
+   "id": "826",
+   "floor": 14,
+   "box_world": [
+    0.738,
+    -16.031,
+    -6.4,
+    14.431,
+    -0.378,
+    -3.5
+   ],
+   "type": "L",
+   "rooms": 4,
+   "area_m2": 118,
+   "outdoor_m2": 22,
+   "price": 7750000,
+   "status": "sold",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -6,
+     "pitch_deg": -18
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 14, bay +0 m along the facade); "
+  },
+  {
+   "id": "835",
+   "floor": 15,
+   "box_world": [
+    -2.894,
+    -24.266,
+    -3.2,
+    10.799,
+    -8.613,
+    -0.3
+   ],
+   "type": "K",
+   "rooms": 3,
+   "area_m2": 92,
+   "outdoor_m2": 14,
+   "price": 6100000,
+   "status": "reserved",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -40,
+     "pitch_deg": -11
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 15, bay -9 m along the facade); "
+  },
+  {
+   "id": "836",
+   "floor": 15,
+   "box_world": [
+    0.738,
+    -16.031,
+    -3.2,
+    14.431,
+    -0.378,
+    -0.3
+   ],
+   "type": "L",
+   "rooms": 4,
+   "area_m2": 118,
+   "outdoor_m2": 22,
+   "price": 7850000,
+   "status": "for-sale",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -6,
+     "pitch_deg": -11
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 15, bay +0 m along the facade); "
+  },
+  {
+   "id": "837",
+   "floor": 15,
+   "box_world": [
+    4.37,
+    -7.796,
+    -3.2,
+    18.063,
+    7.857,
+    -0.3
+   ],
+   "type": "M",
+   "rooms": 5,
+   "area_m2": 142,
+   "outdoor_m2": 30,
+   "price": 9650000,
+   "status": "for-sale",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": 16,
+     "pitch_deg": -11
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 15, bay +9 m along the facade); "
+  },
+  {
+   "id": "845",
+   "floor": 16,
+   "box_world": [
+    -2.894,
+    -24.266,
+    0.0,
+    10.799,
+    -8.613,
+    2.9
+   ],
+   "type": "K",
+   "rooms": 3,
+   "area_m2": 92,
+   "outdoor_m2": 14,
+   "price": 6200000,
+   "status": "sold",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -40,
+     "pitch_deg": -4
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 16, bay -9 m along the facade); "
+  },
+  {
+   "id": "847",
+   "floor": 16,
+   "box_world": [
+    4.37,
+    -7.796,
+    0.0,
+    18.063,
+    7.857,
+    2.9
+   ],
+   "type": "M",
+   "rooms": 5,
+   "area_m2": 142,
+   "outdoor_m2": 30,
+   "price": 9800000,
+   "status": "reserved",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": 16,
+     "pitch_deg": -4
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 16, bay +9 m along the facade); "
+  },
+  {
+   "id": "apt846",
+   "floor": 16,
+   "box_world": [
+    0.738,
+    -16.031,
+    0.0,
+    14.431,
+    -0.378,
+    2.9
+   ],
+   "type": "L",
+   "rooms": 3,
+   "area_m2": 106.72,
+   "outdoor_m2": 26.15,
+   "price": 0,
+   "status": "for-sale",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&tour=apt846",
+   "hotspots": [],
+   "note": "status 'unknown' in project.json; for-sale is a v0 placeholder; price 0 = no price in project.json; bbox3d in units-geometry.json (site-enu-m): z 51.2-54.4 m, facing 169.4 deg S"
+  },
+  {
+   "id": "855",
+   "floor": 17,
+   "box_world": [
+    -2.894,
+    -24.266,
+    3.2,
+    10.799,
+    -8.613,
+    6.1
+   ],
+   "type": "K",
+   "rooms": 3,
+   "area_m2": 92,
+   "outdoor_m2": 14,
+   "price": 6300000,
+   "status": "sold",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -40,
+     "pitch_deg": 3
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 17, bay -9 m along the facade); "
+  },
+  {
+   "id": "856",
+   "floor": 17,
+   "box_world": [
+    0.738,
+    -16.031,
+    3.2,
+    14.431,
+    -0.378,
+    6.1
+   ],
+   "type": "L",
+   "rooms": 4,
+   "area_m2": 118,
+   "outdoor_m2": 22,
+   "price": 8050000,
+   "status": "for-sale",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -6,
+     "pitch_deg": 3
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 17, bay +0 m along the facade); "
+  },
+  {
+   "id": "857",
+   "floor": 17,
+   "box_world": [
+    4.37,
+    -7.796,
+    3.2,
+    18.063,
+    7.857,
+    6.1
+   ],
+   "type": "M",
+   "rooms": 5,
+   "area_m2": 142,
+   "outdoor_m2": 30,
+   "price": 9950000,
+   "status": "for-sale",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": 16,
+     "pitch_deg": 3
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 17, bay +9 m along the facade); "
+  },
+  {
+   "id": "866",
+   "floor": 18,
+   "box_world": [
+    0.738,
+    -16.031,
+    6.4,
+    14.431,
+    -0.378,
+    9.3
+   ],
+   "type": "L",
+   "rooms": 4,
+   "area_m2": 118,
+   "outdoor_m2": 22,
+   "price": 8150000,
+   "status": "for-sale",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -6,
+     "pitch_deg": 10
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 18, bay +0 m along the facade); "
+  },
+  {
+   "id": "876",
+   "floor": 19,
+   "box_world": [
+    -6.526,
+    -32.5,
+    9.6,
+    7.167,
+    -16.847,
+    12.5
+   ],
+   "type": "PH",
+   "rooms": 6,
+   "area_m2": 210,
+   "outdoor_m2": 80,
+   "price": 0,
+   "status": "for-sale",
+   "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+   "hotspots": [
+    {
+     "segment": "hold-facade",
+     "t_start": 0,
+     "t_end": 6,
+     "yaw_deg": -6,
+     "pitch_deg": 17
+    }
+   ],
+   "note": "box_source: stacked-approx (hero apt846 footprint stacked to floor 19, bay -18 m along the facade); price 0 = price on request"
+  }
+ ]
+}

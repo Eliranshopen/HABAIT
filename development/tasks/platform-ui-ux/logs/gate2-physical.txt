@@ -1,0 +1,36 @@
+## platform/css/style.css
+83:.project-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+108:  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+137:@keyframes hs-pop { from { transform: translate(-50%, -50%) scale(.6); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+139:.hud { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 10px; padding: 10px 14px; z-index: 5; pointer-events: none; }
+174:  position: absolute; z-index: 30; left: 0; right: 0; bottom: 0; max-height: 80dvh; overflow: auto;
+178:@keyframes sheet-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+206:  .sheet { left: auto; right: auto; inset-inline-end: 16px; bottom: 84px; width: 400px; max-height: calc(100dvh - 180px); border-radius: var(--r-md); border: 1px solid var(--chrome-line); padding-top: 14px; }
+216:@keyframes drawer-in { from { transform: translateX(var(--drawer-from, -20px)); opacity: 0; } to { transform: none; opacity: 1; } }
+234:  position: absolute; z-index: 40; left: 50%; transform: translateX(-50%); bottom: calc(96px + var(--safe-bottom));
+251:  position: absolute; top: calc(var(--picker-top, 12px) + var(--safe-top)); left: 50%; transform: translateX(-50%);
+255:.picker-bottom { position: absolute; left: 0; right: 0; bottom: calc(var(--picker-bottom, 12px) + var(--safe-bottom)); display: grid; justify-items: center; gap: 8px; padding: 0 12px; }
+## platform/css/landing.css
+30:.hero-play:hover { transform: translateY(-1px); }
+## platform/css/apartment.css
+## platform/css/dashboard.css
+## platform/css/home.css
+## platform/css/flow-real.css
+12:  position: fixed; left: 0; right: 0; bottom: 0; z-index: 35;
+29:  position: fixed; z-index: 6; left: 50%; transform: translateX(-50%); bottom: calc(var(--caption-h) + 72px);
+37:.flow-pool-video { position: absolute; left: 0; top: 0; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+40:  position: fixed; left: 0; right: 0; top: 0; bottom: var(--caption-h); width: 100%; height: calc(100% - var(--caption-h));
+46:  position: fixed; z-index: 36; left: 50%; bottom: calc(var(--caption-h) + 120px); transform: translateX(-50%);
+## platform/css/tokens.css
+## platform/css/components.css
+45:.hb-btn:active { transform: translateY(1px); }
+66:a.hb-media-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
+## studio/dashboard/style.css
+152:.toast { position: fixed; inset-block-end: var(--sp-6); inset-inline-start: 50%; transform: translateX(50%); background: var(--surface-inverse); color: var(--text-on-inverse); padding: var(--sp-3) var(--sp-5); border-radius: var(--r-full); box-shadow: var(--shadow-2); z-index: 60; font-size: var(--fs-small); max-inline-size: calc(100vw - 2 * var(--gutter)); }
+153:[dir="ltr"] .toast { transform: translateX(-50%); }
+## studio/dashboard/tokens.css
+## studio/dashboard/components.css
+46:.hb-btn:active { transform: translateY(1px); }
+67:a.hb-media-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
+## platform/styleguide.html
+40:  .sg-tokens > div:hover .sg-motion { transform: translateX(-24px); }

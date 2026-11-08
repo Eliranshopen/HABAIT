@@ -1,0 +1,457 @@
+{
+  "$schema": "tour360/cameras.v1",
+  "apartment": "apt846",
+  "note": "Apartment 846, TOWER-RED floor 16, type L, Rainbow Tel Aviv (Israel Canada; DBLK Architects sales plan dated 15.10.2025, 1:50). Coordinates are pixels of the plan crop rendered from the PDF at 288 dpi (plan-crop.png, 3750x3900): about 2.25 px per cm; the drawing is rotated about 20 degrees, bearings are measured in image space (0 = up, clockwise). The viewer's plan sheet is the same crop scaled by planScale.",
+  "plan": {
+    "crop": "_local/plan/plan-crop.png",
+    "width": 3750,
+    "height": 3900,
+    "pxPerCm": 2.25,
+    "planScale": 0.4,
+    "sheet": "plan/floorplan.webp"
+  },
+  "refWindowPx": 1700,
+  "eye_m": 1.6,
+  "scenes": [
+    {
+      "id": "entrance",
+      "asset": "01-entrance",
+      "at": [
+        732,
+        1729
+      ],
+      "lookAt": [
+        1607,
+        1979
+      ],
+      "zone": "living",
+      "links": [
+        {
+          "to": "living",
+          "via": [
+            1250,
+            1950
+          ]
+        },
+        {
+          "to": "kitchen",
+          "via": [
+            1500,
+            1350
+          ]
+        },
+        {
+          "to": "bathguest",
+          "via": [
+            1083,
+            1354
+          ]
+        },
+        {
+          "to": "bedroom2",
+          "via": [
+            1346,
+            1156
+          ],
+          "note": "added 2026-11-05: the bedroom-2 door o-10 (kitchen -> bedroom2 is hidden from the moved kitchen camera)"
+        }
+      ]
+    },
+    {
+      "id": "kitchen",
+      "asset": "02-kitchen",
+      "at": [
+        1987,
+        1243
+      ],
+      "lookAt": [
+        2352,
+        1503
+      ],
+      "zone": "living",
+      "links": [
+        {
+          "to": "dining",
+          "via": [
+            2120,
+            1560
+          ]
+        },
+        {
+          "to": "living",
+          "via": [
+            1750,
+            1850
+          ]
+        },
+        {
+          "to": "entrance",
+          "via": [
+            1200,
+            1600
+          ]
+        },
+        {
+          "to": "bedroom2",
+          "via": [
+            1437,
+            1042
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dining",
+      "asset": "03-dining",
+      "at": [
+        2083,
+        1771
+      ],
+      "lookAt": [
+        2562,
+        1458
+      ],
+      "zone": "living",
+      "links": [
+        {
+          "to": "kitchen",
+          "via": [
+            1900,
+            1250
+          ]
+        },
+        {
+          "to": "living",
+          "via": [
+            1750,
+            2050
+          ]
+        },
+        {
+          "to": "terraceLiving",
+          "via": [
+            2260,
+            2440
+          ]
+        }
+      ]
+    },
+    {
+      "id": "living",
+      "asset": "04-living",
+      "at": [
+        1542,
+        2104
+      ],
+      "lookAt": [
+        2292,
+        2396
+      ],
+      "zone": "living",
+      "links": [
+        {
+          "to": "terraceLiving",
+          "via": [
+            2260,
+            2440
+          ]
+        },
+        {
+          "to": "dining",
+          "via": [
+            2100,
+            1700
+          ]
+        },
+        {
+          "to": "kitchen",
+          "via": [
+            1850,
+            1300
+          ]
+        },
+        {
+          "to": "entrance",
+          "via": [
+            900,
+            1750
+          ]
+        },
+        {
+          "to": "bedroomMain",
+          "via": [
+            1156,
+            2635
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terraceLiving",
+      "asset": "05-terrace-living",
+      "at": [
+        2800,
+        2150
+      ],
+      "lookAt": [
+        2750,
+        1450
+      ],
+      "zone": "terrace",
+      "links": [
+        {
+          "to": "living",
+          "via": [
+            2260,
+            2440
+          ]
+        },
+        {
+          "to": "dining",
+          "via": [
+            2300,
+            1900
+          ]
+        },
+        {
+          "to": "terraceBedroom",
+          "via": [
+            2300,
+            2950
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terraceBedroom",
+      "asset": "06-terrace-bedroom",
+      "at": [
+        2273,
+        3026
+      ],
+      "lookAt": [
+        2565,
+        2026
+      ],
+      "zone": "terrace",
+      "links": [
+        {
+          "to": "terraceLiving",
+          "via": [
+            2480,
+            2250
+          ]
+        }
+      ],
+      "exception": "camera exception (the coordinator's ruling 2026-11-05): moved 63 cm off the terrace armchair it stood on (nadir 1.08 m); its nearest jamb is 60.7 cm, under the 100 cm rule, accepted for this point only: the terrace allows no better with the chair in place and the authored point had 74 cm; a jamb painted wrong is fixed by a band repair, never by another move"
+    },
+    {
+      "id": "bedroomMain",
+      "asset": "07-bedroom-main",
+      "at": [
+        1879,
+        2945
+      ],
+      "lookAt": [
+        1762,
+        2511
+      ],
+      "zone": "bedrooms",
+      "links": [
+        {
+          "to": "living",
+          "via": [
+            1156,
+            2635
+          ]
+        },
+        {
+          "to": "wardrobe",
+          "via": [
+            1200,
+            2990
+          ]
+        }
+      ],
+      "note": "moved 2026-10-28 (Q02b): the first point stood inside the drawn bed (bm-bed); now on the free floor east of the bed, looking across it to the head wall"
+    },
+    {
+      "id": "wardrobe",
+      "asset": "08-wardrobe",
+      "at": [
+        1183,
+        2650
+      ],
+      "lookAt": [
+        1537,
+        2754
+      ],
+      "zone": "bedrooms",
+      "links": [
+        {
+          "to": "bedroomMain",
+          "via": [
+            1230,
+            3000
+          ]
+        },
+        {
+          "to": "bathMain",
+          "via": [
+            896,
+            2885
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bathMain",
+      "asset": "09-bath-main",
+      "at": [
+        664,
+        2837
+      ],
+      "lookAt": [
+        789,
+        2670
+      ],
+      "zone": "bedrooms",
+      "links": [
+        {
+          "to": "wardrobe",
+          "via": [
+            896,
+            2885
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bedroom2",
+      "asset": "10-bedroom-2",
+      "at": [
+        1444,
+        985
+      ],
+      "lookAt": [
+        1771,
+        521
+      ],
+      "zone": "bedrooms",
+      "links": [
+        {
+          "to": "kitchen",
+          "via": [
+            1437,
+            1042
+          ]
+        },
+        {
+          "to": "entrance",
+          "via": [
+            1346,
+            1156
+          ],
+          "note": "added 2026-11-05: the bedroom-2 door o-10 (kitchen -> bedroom2 is hidden from the moved kitchen camera)"
+        }
+      ],
+      "note": "nudged 2026-10-28 (Q02b): the point stood 6 cm from the drawn bed (b2-bed); moved to the freest floor nearby"
+    },
+    {
+      "id": "bathguest",
+      "asset": "11-bath-guest",
+      "at": [
+        963,
+        1282
+      ],
+      "lookAt": [
+        1004,
+        1136
+      ],
+      "zone": "bedrooms",
+      "links": [
+        {
+          "to": "entrance",
+          "via": [
+            1083,
+            1354
+          ]
+        }
+      ]
+    }
+  ],
+  "names": {
+    "entrance": {
+      "he": "כניסה",
+      "en": "Entrance",
+      "fr": "Entrée"
+    },
+    "kitchen": {
+      "he": "מטבח",
+      "en": "Kitchen",
+      "fr": "Cuisine"
+    },
+    "dining": {
+      "he": "פינת אוכל",
+      "en": "Dining",
+      "fr": "Salle à manger"
+    },
+    "living": {
+      "he": "סלון",
+      "en": "Living room",
+      "fr": "Séjour"
+    },
+    "terraceLiving": {
+      "he": "מרפסת שמש",
+      "en": "Sun terrace",
+      "fr": "Terrasse"
+    },
+    "terraceBedroom": {
+      "he": "מרפסת · קצה החדרים",
+      "en": "Terrace · bedroom end",
+      "fr": "Terrasse · côté chambres"
+    },
+    "bedroomMain": {
+      "he": "חדר שינה הורים",
+      "en": "Main bedroom",
+      "fr": "Chambre principale"
+    },
+    "wardrobe": {
+      "he": "פינת ארונות",
+      "en": "Dressing nook",
+      "fr": "Dressing"
+    },
+    "bathMain": {
+      "he": "חדר רחצה הורים",
+      "en": "Main bathroom",
+      "fr": "Salle de bain principale"
+    },
+    "bedroom2": {
+      "he": "חדר שינה",
+      "en": "Second bedroom",
+      "fr": "Deuxième chambre"
+    },
+    "bathguest": {
+      "he": "חדר רחצה כללי",
+      "en": "Guest bathroom",
+      "fr": "Salle de bain invités"
+    }
+  },
+  "zones": {
+    "living": {
+      "he": "מרחב מגורים פתוח",
+      "en": "Open living",
+      "fr": "Séjour ouvert"
+    },
+    "terrace": {
+      "he": "מרפסת השמש",
+      "en": "The terrace",
+      "fr": "La terrasse"
+    },
+    "bedrooms": {
+      "he": "אגף החדרים",
+      "en": "Bedrooms",
+      "fr": "Chambres"
+    }
+  }
+}

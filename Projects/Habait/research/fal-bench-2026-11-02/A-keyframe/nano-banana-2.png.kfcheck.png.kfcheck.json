@@ -1,0 +1,142 @@
+{
+ "verdict": "FAIL",
+ "reasons": [
+  "keyframe edges in clay 0.78 < 0.8",
+  "best match is 4.71 deg away from the clay view, +0.057 over the clay view (another viewpoint)"
+ ],
+ "size": {
+  "clay": [
+   1280,
+   720
+  ],
+  "keyframe": [
+   2560,
+   1440
+  ],
+  "aspect_diff": 0.0
+ },
+ "tol_px": 24,
+ "edges": {
+  "clay_in_keyframe": 0.858,
+  "keyframe_in_clay": 0.78,
+  "n_clay": 92914,
+  "n_keyframe": 92164
+ },
+ "by_class": {
+  "walls": {
+   "share_of_frame": 0.058,
+   "clay_edges_in_keyframe": 0.838,
+   "n": 12638
+  },
+  "glazing": {
+   "share_of_frame": 0.026,
+   "clay_edges_in_keyframe": 0.841,
+   "n": 6242
+  },
+  "doors": {
+   "share_of_frame": 0.054,
+   "clay_edges_in_keyframe": 0.869,
+   "n": 5740
+  },
+  "furniture": {
+   "share_of_frame": 0.621,
+   "clay_edges_in_keyframe": 0.901,
+   "n": 52192
+  },
+  "floors_ceilings": {
+   "share_of_frame": 0.239,
+   "clay_edges_in_keyframe": 0.727,
+   "n": 14683
+  }
+ },
+ "best_shift": {
+  "dx": 37,
+  "dy": -73,
+  "score": 0.294,
+  "score_at_zero": 0.237,
+  "gain": 0.057,
+  "deg": 4.71
+ },
+ "openings": [
+  {
+   "id": "o-1",
+   "kind": "passage",
+   "kept": null,
+   "shift_deg": null,
+   "new": null,
+   "pass": null,
+   "note": "a passage has no frame to keep (the pano test judges its floor, advisory there too)",
+   "visible": 1.0
+  },
+  {
+   "id": "o-2",
+   "kind": "passage",
+   "kept": null,
+   "shift_deg": null,
+   "new": null,
+   "pass": null,
+   "note": "a passage has no frame to keep (the pano test judges its floor, advisory there too)",
+   "visible": 1.0
+  },
+  {
+   "id": "o-6",
+   "kind": "door",
+   "kept": null,
+   "shift_deg": null,
+   "new": null,
+   "pass": null,
+   "note": "occluded in the clay depth",
+   "visible": 0.09
+  },
+  {
+   "id": "o-8",
+   "kind": "passage",
+   "kept": null,
+   "shift_deg": null,
+   "new": null,
+   "pass": null,
+   "note": "occluded in the clay depth",
+   "visible": 0.19
+  },
+  {
+   "id": "o-9",
+   "kind": "door",
+   "kept": null,
+   "shift_deg": null,
+   "new": null,
+   "pass": null,
+   "note": "occluded in the clay depth",
+   "visible": 0.0
+  },
+  {
+   "id": "o-10",
+   "kind": "door",
+   "kept": 0.954,
+   "shift_deg": 0.17,
+   "new": 0.0,
+   "pass": true,
+   "note": null,
+   "visible": 1.0
+  },
+  {
+   "id": "o-11",
+   "kind": "door",
+   "kept": null,
+   "shift_deg": null,
+   "new": null,
+   "pass": null,
+   "note": "occluded in the clay depth",
+   "visible": 0.41
+  },
+  {
+   "id": "o-12",
+   "kind": "entrance_door",
+   "kept": 0.845,
+   "shift_deg": 0.49,
+   "new": 0.0,
+   "pass": true,
+   "note": null,
+   "visible": 1.0
+  }
+ ]
+}

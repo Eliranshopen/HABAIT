@@ -1,0 +1,8 @@
+ok   pixel7 R1 close+reopen during dive: tour stays living, layer still open (no stale enter-room): {"scene":"living","hidden":false,"op":"","inert":15,"load":true}
+ok   pixel7 R1b a new dive after the reopen still enters the room: {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   pixel7 R1 errs: 
+ok   pixel7 R2a plain enter-room while open: goes + closes: {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   pixel7 R2b enter-room while closed: ignored: {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   pixel7 R4 Esc in frame during dive (<=2 presses): closed and no ghost navigation: {"scene":"living","hidden":true,"op":"","inert":0,"load":true} closedWithin2=true
+ok   pixel7 R7 same-room dive from yaw 70: {"scene":"living","hidden":true,"yaw":0,"pitch":-2,"hfov":60} heading null
+ok   pixel7 R7 same-room dive from yaw -120: {"scene":"living","hidden":true,"yaw":0,"pitch":-2,"hfov":60} heading null

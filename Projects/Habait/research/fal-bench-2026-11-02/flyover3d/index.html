@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><link rel="icon" href="data:,">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://127.0.0.1:8850/css/style.css">
+<title>הדמיית ריחוף אינטראקטיבית — Rainbow TLV (טיוטה)</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0b0d10; color: #f2efe8; font-family: Heebo, system-ui, sans-serif; overflow: hidden; }
+  #c { position: fixed; inset: 0; display: block; }
+  #hud { position: fixed; top: 12px; right: 12px; left: 12px; display: flex; justify-content: space-between; align-items: flex-start; pointer-events: none; gap: 12px; }
+  .panel { background: rgba(10,12,16,.72); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 10px 14px; pointer-events: auto; backdrop-filter: blur(6px); font-size: 14px; line-height: 1.5; max-width: 380px; }
+  .panel b { font-weight: 600; }
+  button { font: inherit; background: #0e5a4a; color: #fff; border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; margin-inline-start: 6px; }
+  button.ghost { background: transparent; border: 1px solid rgba(255,255,255,.35); }
+  #bar { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); width: min(720px, 86vw); pointer-events: auto; }
+  #bar input { width: 100%; }
+  #bar .labels { display: flex; justify-content: space-between; font-size: 12px; color: #c9c4b8; direction: ltr; }
+  #hot { position: fixed; transform: translate(-50%, -50%); pointer-events: auto; cursor: pointer; display: none; }
+  #hot .dot { width: 18px; height: 18px; border-radius: 50%; background: #ffcc55; box-shadow: 0 0 0 6px rgba(255,204,85,.25), 0 0 18px rgba(255,204,85,.8); animation: pulse 1.6s infinite; margin: 0 auto; }
+  #hot .lbl { margin-top: 6px; background: rgba(10,12,16,.8); padding: 3px 10px; border-radius: 999px; font-size: 13px; white-space: nowrap; }
+  @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.25) } }
+  :root { --picker-bottom: 16px; --picker-top: 72px; }
+  /* the picker's own CSS (:8850/css/style.css) decides what takes pointer events: pills, card, drawer yes; the full-screen layers and
+     .picker-chrome NO. The old `#pickerStage > * { pointer-events: auto }` here overrode that and let .picker-chrome swallow every click
+     on the pills and the canvas (Eliran 2.11 evening: "הבוחר נתקע"). */
+  #pickerStage { position: fixed; inset: 0; pointer-events: none; }
+  #pickerStage > .sheet, #pickerStage > .drawer { pointer-events: auto; }
+  /* wide screens: the legend / units row sits at the inline-start edge, clear of the pills on the tower (826 touched it at the video pose) */
+  @media (min-width: 900px) { #pickerStage .picker-bottom { justify-items: start; padding-inline-start: 24px; } #pickerStage .picker-row { justify-content: flex-start; } #pickerStage .picker-disclaimer { text-align: start; } }   /* the unit card and the units drawer take clicks; the pills via .hotspot (ab's css) */
+  #fade { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity .6s; }
+  #enter { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%); display: none; }
+  #enter button { font-size: 16px; padding: 12px 22px; }
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; background: #0b0d10; font-size: 16px; }
+  /* the orbit clip (step 1) plays full-screen over everything while the hold loads behind it; it never shows a loading screen */
+  #clip { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; background: #000; z-index: 5; }
+  #clipSkip { position: fixed; top: max(14px, env(safe-area-inset-top)); left: 14px; z-index: 6; display: none; background: rgba(10,16,30,.55); color: #fff; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 8px 16px; font: 500 14px Heebo, system-ui, sans-serif; cursor: pointer; }
+  /* a thin line at the bottom of the clip's last frame while the hold finishes loading: never a black screen, never text */
+  #soundBtn { position: fixed; top: max(14px, env(safe-area-inset-top)); right: 14px; z-index: 6; display: none; width: 44px; height: 44px; padding: 0; border-radius: 50%; background: rgba(10,16,30,.55); border: 1px solid rgba(255,255,255,.3); font-size: 18px; cursor: pointer; }
+  /* the project title over the opening seconds of the orbit clip (fades in at 1 s, out at 6 s) */
+  #clipTitle { position: fixed; right: 6vw; bottom: 12vh; z-index: 6; display: none; text-align: right; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.55); pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+  #clipTitle .t1 { font: 700 clamp(28px, 5vw, 64px)/1.1 Heebo, system-ui, sans-serif; letter-spacing: .01em; }
+  #clipTitle .t2 { font: 400 clamp(14px, 1.8vw, 22px)/1.4 Heebo, system-ui, sans-serif; opacity: .9; margin-top: 6px; }
+  #clipLegal { position: fixed; left: 12px; bottom: max(10px, env(safe-area-inset-bottom)); z-index: 6; display: none; font: 400 11px/1.3 Heebo, system-ui, sans-serif; color: rgba(255,255,255,.75); text-shadow: 0 1px 6px rgba(0,0,0,.6); max-width: 70vw; direction: rtl; }
+  #dragHint { position: fixed; left: 50%; bottom: max(96px, calc(env(safe-area-inset-bottom) + 96px)); transform: translateX(-50%); z-index: 6; display: none; opacity: 0; transition: opacity .6s; pointer-events: none; background: rgba(10,16,30,.5); color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: 9px 16px; font: 500 14px Heebo, system-ui, sans-serif; white-space: nowrap; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  #dragHint.on { opacity: 1; }
+  @media (max-width: 640px) { #dragHint { bottom: max(150px, calc(env(safe-area-inset-bottom) + 150px)); font-size: 13px; } }
+  #clipLine { position: fixed; left: 0; bottom: 0; height: 3px; width: 0; z-index: 6; background: rgba(255,255,255,.85); display: none; transition: width .25s; }
+/* board hold-building-tour (Eliran 2026-11-04): "הדמיית הבניין והסביבה" at the hold opens the tour's exterior chain (aerial → orbit →
+   tower → descent → facade → the apartment) in a frame over this page, same URL; ✕ / Esc back to the hold. The button takes the
+   top inline-end corner, free once the clip's skip button is gone; the same glass chrome as #soundBtn / #clipSkip. */
+#buildingBtn { position: fixed; top: max(14px, env(safe-area-inset-top)); left: max(14px, env(safe-area-inset-left)); z-index: 6; display: none; margin: 0; min-height: 44px; padding: 10px 18px; background: rgba(10,16,30,.62); color: #fff; border: 1px solid rgba(255,255,255,.34); border-radius: 999px; font: 500 15px/1.2 Heebo, system-ui, sans-serif; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+#buildingBtn:hover { background: rgba(10,16,30,.8); }
+#buildingBtn:focus-visible, #buildingClose:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* board exterior-film: the film overlay (cover on every screen: the tower sits in the middle of every frame) */
+#buildingFilm { position: fixed; inset: 0; z-index: 20; display: none; background: #000; opacity: 0; transition: opacity .45s; }
+#buildingVideo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+#buildingLine { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.85); transform-origin: right center; transform: scaleX(0); }
+#buildingFilm::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 140px; z-index: 0; pointer-events: none; background: linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,0)); }   /* the disclosure stays legible over a bright sky */
+#buildingFilm .film-legal, #buildingFilm .film-badge, #buildingLine { z-index: 1; }
+#buildingFilm .film-legal { position: absolute; left: 12px; bottom: max(14px, env(safe-area-inset-bottom)); max-width: min(70vw, calc(100vw - 172px));   /* never under the badge (phones) */ font: 400 11px/1.3 Heebo, system-ui, sans-serif; color: rgba(255,255,255,.8); text-shadow: 0 1px 6px rgba(0,0,0,.6); direction: rtl; }
+#buildingFilm .film-badge { position: absolute; right: 12px; bottom: max(14px, env(safe-area-inset-bottom)); padding: 3px 8px; border-radius: 999px; font: 600 11px/1.4 Heebo, system-ui, sans-serif; color: #fff; background: rgba(10,16,30,.62); border: 1px solid rgba(255,255,255,.3); }
+#buildingEnd { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; background: rgba(5,8,16,.45); direction: rtl; }
+#buildingEnd[hidden] { display: none; }
+#buildingEnd button { min-height: 48px; min-width: 240px; padding: 12px 22px; border-radius: 999px; font: 600 16px/1.2 Heebo, system-ui, sans-serif; cursor: pointer; border: 1px solid rgba(255,255,255,.4); background: rgba(10,16,30,.62); color: #fff; }
+#buildingEnd #buildingEnter { background: #fff; color: #0b1220; border-color: #fff; }
+#buildingEnd button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* the ✕ sits top-centre over the film (board exterior-film: no tour chrome under it any more, one rule for every width) */
+#buildingClose { position: fixed; top: max(14px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); z-index: 21; display: none; margin: 0; width: 44px; height: 44px; padding: 0; border-radius: 50%; background: rgba(10,16,30,.62); color: #fff; border: 1px solid rgba(255,255,255,.34); font: 400 22px/1 Heebo, system-ui, sans-serif; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+@media (prefers-reduced-motion: reduce) { #buildingFilm { transition: none; } }
+/* the unit card on a phone with the lead form open (1d, M1 v2 defect 5, 2026-11-03; same five rules as platform/css/flow-real.css):
+   the lead form's two inputs kept their intrinsic ~207 px inside the 1fr 1fr row, the card body grew to 422 px and #unitSheet
+   scrolled sideways inside itself (sheet scrollWidth 440 vs 390 on an iPhone 13). Tracks that may shrink + inputs that fill them. */
+#unitSheet .sheet-body > * { min-width: 0; }
+#unitSheet .unit-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+#unitSheet .unit-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#unitSheet .lead-form .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#unitSheet .lead-form input:not([type=checkbox]) { min-width: 0; width: 100%; }
+/* phone-portrait chrome up (3.11): at the hold the apartments sit on the lower floors = the lower half of a portrait screen, where the
+   picker's bottom row (legend, the apartments button, the disclaimer) and the drag hint covered 846, 836 and 826. The sky/upper floors
+   above carry no pills, so on a portrait phone that row and the hint live up there. */
+@media (max-width: 640px) and (orientation: portrait) {
+  #pickerStage .picker-bottom { top: calc(env(safe-area-inset-top) + 64px); bottom: auto !important; }
+  #dragHint { bottom: auto !important; top: calc(env(safe-area-inset-top) + 236px); }
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<canvas id="arc" style="position:fixed;inset:0;display:none;touch-action:none;cursor:grab"></canvas>
+<div id="loading">טוען את ההדמיה…</div>
+<div id="hud">
+  <div class="panel" id="info"><b>הדמיית ריחוף אינטראקטיבית</b> · טיוטה ראשונה<br>
+    גרירה: להסתכל סביב · גלגלת / הסליידר: לטוס אל המגדל · לחיצה על הנקודה הצהובה: לטוס אל דירה 846.<br>
+    <span id="status" style="color:#c9c4b8"></span></div>
+  <div class="panel" id="hudButtons"><button id="reset" class="ghost">חזרה למעוף</button><button id="toApt">טוס לדירה 846</button></div>
+</div>
+<div id="hot" style="display:none"><div class="dot"></div><div class="lbl">דירה 846 · קומה 16</div></div>
+<div id="pickerStage"></div>
+<div id="bar" class="panel"><input id="t" type="range" min="0" max="1000" value="0"><div class="labels"><span>terrace 846</span><span>facade</span><span>tower</span><span>aerial</span></div></div>
+<div id="enter"><button id="enterBtn">להיכנס לדירה (הדמיית 360) ←</button></div>
+<video id="clip" playsinline muted preload="auto"></video>
+<canvas id="birds" style="position:fixed;inset:0;z-index:5;pointer-events:none"></canvas>
+<audio id="amb" loop preload="auto" src="./data/audio/ambience.m4a"></audio>
+<button id="clipSkip" type="button">דלג</button>
+<div id="clipTitle" aria-hidden="true"><div class="t1"></div><div class="t2"></div></div>
+<div id="clipLegal">הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית על בסיס תכניות הפרויקט Rainbow תל אביב מיום 15.10.2025 ומקורות ציבוריים. המסמכים המחייבים הם המפרט והתכניות החתומים. הסביבה, הנוף, האנשים והתאורה להמחשה.</div>
+<button id="soundBtn" type="button" title="צליל" aria-label="צליל">🔇</button>
+<div id="clipLine"></div>
+<button id="buildingBtn" type="button">הדמיית הבניין והסביבה</button>
+<button id="buildingClose" type="button" aria-label="סגירה וחזרה לבחירת דירה" title="סגירה">✕</button>
+<div id="buildingFilm" role="dialog" aria-modal="true" aria-label="הדמיית הבניין והסביבה">
+  <video id="buildingVideo" muted playsinline preload="none" disablepictureinpicture></video>
+  <div id="buildingLine"></div>
+  <span class="film-badge">הדמיה · AI-generated</span>
+  <div class="film-legal">הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית על בסיס תכניות הפרויקט Rainbow תל אביב מיום 15.10.2025 ומקורות ציבוריים. המסמכים המחייבים הם המפרט והתכניות החתומים. הסביבה, הנוף, האנשים והתאורה להמחשה.</div>
+  <div id="buildingEnd" hidden>
+    <button id="buildingEnter" type="button">כניסה לדירה 846 (הדמיית 360)</button>
+    <button id="buildingAgain" type="button">צפייה חוזרת</button>
+    <button id="buildingBack" type="button">חזרה לבחירת דירה</button>
+  </div>
+</div>
+<div id="dragHint" aria-hidden="true">⟷ גררו לסיבוב · גלגלת או צביטה לזום</div>
+<div id="fade"></div>
+<script>
+  // Step 1 (the orbit video) starts HERE, before the module and its imports are even fetched: ?orbit=<clip url> (habait-ab's shell,
+  // project.json exterior.intro.mode = "inline"). Eliran 15:55: nothing between the video and the hold — no loading text, no black.
+  (function () {
+    // Background sound (Eliran 2.11 evening): birds + waves, calm, from the first frame of the video and on through the hold.
+    // Browsers allow sound only after the user touched this site (the project card click counts in Chrome); if play() is refused
+    // the page stays silent, shows the speaker button, and starts the sound on the first tap anywhere.
+    var amb = document.getElementById('amb'), sb = document.getElementById('soundBtn');
+    var sound = window.__sound = { on: false, blocked: false };
+    function setIcon() { sb.textContent = sound.on ? '🔊' : '🔇'; }
+    function startSound() { amb.volume = 0.6; var pr = amb.play(); if (pr && pr.then) pr.then(function () { sound.on = true; sound.blocked = false; setIcon(); }, function () { sound.blocked = true; setIcon(); }); else { sound.on = true; setIcon(); } }
+    function stopSound() { amb.pause(); sound.on = false; setIcon(); }
+    sb.addEventListener('click', function (e) { e.stopPropagation(); if (sound.on) stopSound(); else startSound(); });
+    window.addEventListener('pointerdown', function () { if (!sound.on && sound.blocked && !sound.userOff) startSound(); }, true);
+    sb.addEventListener('click', function () { if (!sound.on) sound.userOff = true; else sound.userOff = false; });
+    sb.style.display = 'block'; startSound();
+    var src = new URLSearchParams(location.search).get('orbit'); if (!src) return;
+    var v = document.getElementById('clip'), skip = document.getElementById('clipSkip');
+    var o = window.__orbit = { el: v, ended: false, error: false, skipped: false, startedAt: performance.now() };
+    document.getElementById('loading').style.display = 'none';
+    v.addEventListener('ended', function () { o.ended = true; });
+    v.addEventListener('error', function () { o.error = true; });
+    skip.addEventListener('click', function () { o.skipped = true; skip.style.display = 'none'; });
+    v.src = src; v.style.display = 'block'; skip.style.display = 'block';
+    var ttl = document.getElementById('clipTitle'); ttl.style.display = 'block'; document.getElementById('clipLegal').style.display = 'block';
+    setTimeout(function () { ttl.style.opacity = '1'; }, 1000); setTimeout(function () { ttl.style.opacity = '0'; }, 6500); setTimeout(function () { ttl.style.display = 'none'; }, 8000);
+    var p = v.play(); if (p && p.catch) p.catch(function () { o.error = true; });
+  })();
+  function showErr(m){ var s=document.getElementById('status'); if(s) s.textContent='שגיאה: '+m; var l=document.getElementById('loading'); if(l) l.textContent='שגיאה: '+m; }
+  window.addEventListener('error', function(e){ showErr(e.message||String(e)); });
+  window.addEventListener('unhandledrejection', function(e){ showErr((e.reason&&e.reason.message)||String(e.reason)); });
+</script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

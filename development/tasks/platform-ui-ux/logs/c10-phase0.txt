@@ -1,0 +1,31 @@
+# card 10 — Phase 0 on the pages (2026-11-03 17:28, main session as platform-dev)
+changes: new js/dev.js = the ONE DEV definition (moved unchanged from index.html; Node-safe because test/landing.test.mjs imports landing.js in Node); index.html imports it; landing.js gates #fixtureBadge on DEV && meta.fixture; flow.html loads js/dev.js, and css/style.css hides #fixtureNote unless <html data-dev="1"> (flow.js, which toggles the note, is out of scope and untouched).
+fonts: index.html, landing.html, flow.html get <link rel=preload> of heebo-hebrew + css/tokens.css before every other stylesheet. apartment.html is still HELD by .wt/apartment-3d -> its link moves to card 16 (after that board's copy-back).
+developer mark: project.json has no light logo variant (brand: logo, primary, accent, background) -> a light plate (#fffcf9) behind .project-logo in css/style.css.
+regression found and fixed: with real Heebo loaded, the English micro caption on flow.html wraps to 2 lines (44 px). css/flow-real.css set --caption-h: 30px on body.has-legal, which shadowed the measured height flow.js writes on <html> (ResizeObserver), so the unit card covered the band (card-overflow iphone13 en: card bottom 634.0 > band top 620.2). The default moved to :root; the measured value now wins. flow.js untouched.
+
+## buyer view (390x844 iPhone UA, host buyer.test -> 127.0.0.1 so DEV is false; no ?dev) and ?dev=1
+home buyer: data-dev=None · 'תצוגת פיתוח' in visible text: 0 · 'placeholders': 0 · fonts.check(16px Heebo): True · Google Fonts requests: 0 · page errors: 0
+landing buyer: data-dev=None · 'תצוגת פיתוח' in visible text: 0 · 'placeholders': 0 · fonts.check(16px Heebo): True · Google Fonts requests: 0 · page errors: 0
+flow buyer: data-dev=None · 'תצוגת פיתוח' in visible text: 0 · 'placeholders': 0 · fonts.check(16px Heebo): True · Google Fonts requests: 0 · page errors: 0
+home ?dev=1: data-dev=1 · 'תצוגת פיתוח' in visible text: 1 · 'placeholders': 0 · fonts.check(16px Heebo): True · Google Fonts requests: 0 · page errors: 0
+landing ?dev=1: data-dev=1 · 'תצוגת פיתוח' in visible text: 1 · 'placeholders': 0 · fonts.check(16px Heebo): True · Google Fonts requests: 0 · page errors: 0
+flow ?dev=1: data-dev=1 · 'תצוגת פיתוח' in visible text: 0 · 'placeholders': 0 · fonts.check(16px Heebo): True · Google Fonts requests: 0 · page errors: 0
+flow ?dev=1 shows 0 because flow.js itself hides the start overlay in today's flight (on 127.0.0.1 too); forced visible to test the gate:
+  buyer.test ?project=rainbow&dev=1 {"forcedShown":"block/text-visible","dev":"1","noteHiddenAttr":false,"noteDisplay":"block","overlayHidden":false,"overlayDisplay":"flex","overlayClass":"overlay overl
+  buyer.test ?project=rainbow {"forcedShown":"none/text-not-visible","dev":null,"noteHiddenAttr":false,"noteDisplay":"none","overlayHidden":false,"overlayDisplay":"flex","overlayClass":"overlay overlay-
+
+## developer mark contrast (pixel sample of the rendered .project-logo, phone home, 2x DPR; plate = its most common colour)
+element box (CSS px): {'x': 218, 'y': 429.25, 'width': 139, 'height': 40} · image 278x82 px · plate rgb [255, 252, 249] at [12, 0] (19036 px)
+  mark cluster rgb [15, 92, 143] · 1217 px · sample at [28, 21] · contrast vs plate 6.97:1
+  mark cluster rgb [0, 0, 0] · 740 px · sample at [76, 32] · contrast vs plate 20.54:1
+  mark cluster rgb [18, 26, 44] · 649 px · sample at [0, 0] · contrast vs plate 16.98:1
+  mark cluster rgb [235, 167, 4] · 132 px · sample at [42, 35] · contrast vs plate 2.04:1
+reading: the mark = the blue square (6.97:1) and the RAINBOW wordmark (black, 20.54:1) -> >= 3:1. rgb [18,26,44] is the card behind the plate's rounded corners (not mark). The amber arc (2.04:1 vs plate) sits INSIDE the blue square: vs #0f5c8f it is ~3.3:1, decoration of the mark, not its boundary.
+
+## tests (preview tree rebuilt from the working copy; same commands as the card 09 baseline)
+test/smoke.mjs: ok 12 · FAIL 0
+test/landing.test.mjs: ok 35 · FAIL 0
+test/card-overflow.test.mjs: ok 18 · FAIL 0
+test/browser.mjs @ :8852: ok 25 · all green
+= the card 09 baseline (12 / 35 / 18 / 25). frames: .wt/platform-ui-ux/after/c10/. 8852 killed by PID, free after.

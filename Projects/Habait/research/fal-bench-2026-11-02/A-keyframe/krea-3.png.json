@@ -1,0 +1,37 @@
+{
+ "endpoint": "krea/v3/edit",
+ "args": {
+  "prompt": "<image-1> is a plain computer render (a clay render) of the living room of a new apartment in the Rainbow tower, Tel Aviv. Re-render it as a photograph taken from exactly the same camera: the same position, angle, lens and crop, every wall, ceiling, floor plane, door, window frame and the glass slider at exactly the same pixel position, nothing added, removed or moved. <image-2>, <image-3>, <image-4> are photographs of the SAME apartment (its 360° tour, already furnished in its final design): copy their materials, furniture style, colours, light and mood exactly, never their framing, EXCEPT the floor: ignore the tiled floor of the reference photos, the floor of this image is a wide-plank natural oak parquet floor, matte, pale honey tone, long planks laid lengthwise, no gloss, one continuous surface across the whole apartment, no tiles and no grout lines anywhere. The look: a wide-plank natural oak parquet floor, matte, pale honey tone, long planks laid lengthwise, no gloss; the floor meets the walls with NO skirting board (a clean shadow-gap line, no baseboard); warm white plastered walls; a flat warm white ceiling with slim recessed spots and a linear warm LED cove; a micro-cement feature wall in warm greige behind the TV; zero-line interior doors (full-height, frameless, flush with the wall, no architrave, no panels, painted the wall colour, a slim matte black lever); a bulthaup kitchen with handleless matte sand-grey lacquer fronts and a thin brushed stainless-steel worktop; slim black-framed floor-to-ceiling glazing with sheer off-white linen curtains; the furniture of the reference photos: a cream boucle curved sectional sofa, a round pale travertine coffee table, a woven jute round rug, a cream boucle swivel armchair, a low sand-grey lacquer TV unit, a round light-oak dining table with cream upholstered chairs under a white paper pendant, olive trees in stone planters on the terrace. Every plain furniture piece of <image-1> becomes a designer piece of the same size at the same place in that style (the sofa becomes the cream boucle sectional, the armchair the cream swivel chair, the TV unit the low sand-grey lacquer unit, the coffee table the round travertine table), keeping the floor layout of <image-1>. Soft bright morning daylight. Photoreal, sharp, natural colours. No people, no text, no logos, no watermark.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d32b/AzgGFr09rES9_a-tU0G5Q_A_clay_ext-enter.png",
+   "https://v3b.fal.media/files/b/0ab0d32b/MHhiFBwr4HgvCMzVsM9Wm_tour-living-yaw0.png",
+   "https://v3b.fal.media/files/b/0ab0d32b/URVDAFSY-uSRZgDl0Jgc5_tour-living-yaw70.png",
+   "https://v3b.fal.media/files/b/0ab0d32b/dlHymayLbDpHqQ0uHdJ-J_tour-living-yaw-70.png"
+  ],
+  "reasoning_level": "high",
+  "model": "berry",
+  "output_format": "png"
+ },
+ "result": {
+  "images": [
+   {
+    "url": "https://v3b.fal.media/files/b/0ab0d336/cmDMYxaEj5h1mgP6NlyGD.png",
+    "content_type": "image/png",
+    "file_name": null,
+    "file_size": null,
+    "width": 2736,
+    "height": 1536
+   }
+  ],
+  "seed": 207298868,
+  "prompt": "A sharp, photorealistic interior photograph of the exact living room in <image-1>, keeping the identical camera position, angle, lens, framing, wall planes, ceiling, window frames, right-hand glass slider frame, and furniture placement of <image-1>, rendered with the materials, furniture design, palette, and soft bright morning daylight of <image-2>, <image-3>, and <image-4>. Across the entire apartment, the floor is a single continuous surface of wide-plank natural oak parquet laid lengthwise in a matte pale-honey tone with no gloss, no tiles, and no grout lines, meeting the walls at a clean recessed shadow-gap with no skirting board. The left wall behind the black flat-screen TV is textured warm greige micro-cement as in <image-3>, with a sheer off-white linen curtain at the slim black floor-to-ceiling window frame on the far left, and the TV console is a low handleless matte sand-grey lacquer unit. In the center, at the exact position of the table and chair in <image-1>, a pale travertine coffee table rests on a woven natural jute round rug in front of a cream bouclé swivel armchair. On the right, the sofa is a plush cream bouclé curved sectional with neutral cushions as in <image-2>. The remaining walls are warm white plaster under a flat warm white ceiling with slim recessed spots and a linear warm LED cove. The back door is a flush frameless zero-line door painted warm white like the wall with a slim matte black lever. On the back right, the bulthaup kitchen features handleless matte sand-grey lacquer fronts on the tall unit and base cabinets with a thin brushed stainless-steel worktop.",
+  "timings": {
+   "prompt_expansion": 72.268,
+   "inference": 27.176162926014513
+  },
+  "has_nsfw_concepts": [
+   false
+  ]
+ },
+ "secs": 114
+}

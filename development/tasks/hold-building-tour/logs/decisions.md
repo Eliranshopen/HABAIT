@@ -1,0 +1,10 @@
+# Decisions — board hold-building-tour (T0, logged by the main session rnd-1f, 2026-11-04)
+
+1. **Button place:** the hold's top inline-end corner (top-left in RTL), free once the clip's "דלג" is gone; the sound button holds the other corner. Glass chrome like `#soundBtn` / `#clipSkip`, 44 px high. Shown only at the hold (`isAtHold()`), never during a clip, the descent ease, or inside.
+2. **Tour scope:** the tour's project scope = `?tour=` path with `scope`, `room`, `from`, `ui`, `return` removed, then `from=hold&ui=min`. `floor` / `video` / `lang` are kept from the hand-off URL. No `return` param → the tour's own "חזרה לבניין" stays inside the frame (goes to its tower node) and never navigates the page.
+3. **Pause:** the hold's render loop halts once the frame has loaded (one WebGL at a time on phones); the birds and the ambience stop and come back as they were on close.
+4. **✕ place:** ≥ 900 px top-centre; < 900 px the row below the tour's top row, inline-end side. Measured: the corner ✕ covered the tour's FR language button (desktop), the centred ✕ covered the guide button (phones). Check C4b/C7 samples a 5×5 grid under the ✕ for any tour control.
+5. **Esc:** closes the overlay only while focus is on the hold page (e.g. on the ✕). Inside the frame Esc stays the tour's (it closes its sheets, video, 3D view) — forwarding it would close the overlay when the buyer meant to close a sheet.
+6. **Descent guard:** `building.leaving` is set on the first line of `flyToApartment()`: the hold eases back ~450–650 ms before the descent clip, and during that ease the button was still tappable (tablet E1). Reset by `#reset` (debug path).
+7. **Analytics:** `building_open` / `building_close` through the existing `analytics.capture` (no new key, no new vendor), wrapped so a missing analytics never breaks the button.
+8. **`qa_chain.cjs` is stale** (pre-existing): it waits for `a.project-card`, which the platform redesign removed; `check-building.cjs` starts from the home page's `#heroCta` (the platform's own `projectHref`) instead. Not fixed here (out of scope; tools/deploy-vercel is not in this board).

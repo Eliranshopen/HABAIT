@@ -1,0 +1,83 @@
+```json
+{
+  "rooms": [
+    {
+      "name_he": "חדר שינה",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 12.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "מטבח",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 8.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "חדר ילדים",
+      "name_en": "Children's Room",
+      "type": "bedroom",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 10.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "חדר רחצה",
+      "name_en": "Bathroom",
+      "type": "bathroom",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 4.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "שירותים",
+      "name_en": "Toilet",
+      "type": "bathroom",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 2.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "פרוזדור ארונות",
+      "name_en": "Closet Corridor",
+      "type": "hall",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 3.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "מרפסת גדולה",
+      "name_en": "Large Terrace",
+      "type": "balcony",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 18.0,
+      "is_outdoor": true
+    },
+    {
+      "name_he": "מרפסת פינתית",
+      "name_en": "Corner Terrace",
+      "type": "balcony",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 4.0,
+      "is_outdoor": true
+    }
+  ],
+  "printed_dimensions_cm": [250, 305, 360, 620, 200, 140, 330, 185, 90, 155, 175],
+  "openings": {
+    "doors": 6,
+    "windows_or_glazing_runs": 5
+  },
+  "unit": {
+    "number": null,
+    "area_m2": null,
+    "terrace_m2": null,
+    "floor": null
+  },
+  "confidence": 0.75,
+  "notes": "Some dimension numbers are partially visible or cut off at edges. Room-specific dimensions (w,d) are not clearly printed for individual rooms. Unit number and total area statistics are not visible in this cropped view. Hebrew labels are readable but some dimension text is small or unclear at image resolution."
+}
+```

@@ -1,0 +1,168 @@
+/* The apartment sales page (apartment.html). Loads after css/style.css and reuses its variables, .btn, .badge.
+   platform-ui-ux card 16: on the design tokens — light page outside the media, dark only inside the frames (tour, 3D, lightbox).
+   Sizes and positions of the 3D tab and the minimap (board apartment-3d) are unchanged; only their colour, radius and type moved
+   to tokens. Logical properties only. */
+
+/* light page: the legacy names (style.css, lead UI) re-pointed to the theme for this page; the frames keep the dark chrome */
+body.page-apartment {
+  --fg: var(--text); --muted: var(--text-muted); --panel: var(--surface-raised); --panel-solid: var(--surface-raised);
+  --chrome-line: var(--line-strong); --chrome-well: var(--surface-sunken);
+  background: var(--surface); color: var(--text); min-block-size: 100dvh; overflow-x: hidden; line-height: var(--lh-body);
+}
+.page-apartment .apt-frame, .page-apartment .apt-lightbox {
+  --fg: var(--chrome-fg); --muted: var(--chrome-muted); --panel: var(--chrome-panel); --panel-solid: var(--chrome-panel-solid);
+  --chrome-line: color-mix(in srgb, var(--n-50) 14%, transparent);
+}
+/* the sticky bars' real heights (measured 2026-11-04 at 390 px: top bar 10+44 tap target+10+1 border = 65, tab strip 60 (8+42+8 plus borders),
+   CTA bar 69). One source for the tab strip's sticky offset, the scroll padding and the 3D frame on phones. */
+html:has(body.page-apartment) { --apt-top-h: calc(65px + var(--safe-top)); --apt-tabs-h: 60px; --apt-bar-h: calc(69px + var(--safe-bottom)); }
+/* phones: anything scrolled into view clears the sticky bars and the CTA bar (the only scroll offset: no scroll-margin
+   on the panels as well, the two add up — rnd-fd regression report 2026-11-04) */
+html:has(body.page-apartment) { scroll-padding-block: calc(var(--apt-top-h) + var(--apt-tabs-h)) calc(var(--apt-bar-h) + 3px); }
+
+.apt-top {
+  position: sticky; inset-block-start: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: calc(10px + var(--safe-top)) 14px 10px;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-block-end: 1px solid var(--line);
+}
+.apt-brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); min-height: var(--tap-min); min-width: 0; color: var(--text); }
+.apt-brand img { height: 26px; width: auto; background: var(--n-0); border-radius: var(--r-sm); padding: 2px 6px; box-sizing: content-box; }
+.apt-brand span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.apt-top-actions { display: flex; gap: 8px; align-items: center; flex: none; }
+.apt-back { padding: 7px 12px; font-size: var(--fs-small); border-color: var(--line-strong); color: var(--text); }
+.apt-back::before { content: '›'; margin-inline-end: 6px; font-size: 18px; line-height: 0; }
+[dir="ltr"] .apt-back::before { content: '‹'; }
+.page-apartment .lang-toggle { border-color: var(--line-strong); color: var(--brand-ink); min-block-size: var(--tap-min); min-inline-size: var(--tap-min); }
+
+.apt-main { max-width: 1100px; margin: 0 auto; padding: 14px 14px calc(96px + var(--safe-bottom)); display: grid; gap: 14px; }
+
+/* title row: unit, status, the summary (rooms · area · floor), price, then the spec grid */
+.apt-hero { display: grid; gap: var(--sp-2); }
+.apt-hero-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.apt-hero-head h1 { margin: 0; font-family: var(--font-display); font-size: var(--fs-h1); font-weight: var(--fw-bold); line-height: var(--lh-heading); }
+.apt-summary { margin: 0; font-size: var(--fs-lead); font-weight: var(--fw-medium); color: var(--text); }
+.apt-summary bdi { font-variant-numeric: tabular-nums; }
+.apt-project { margin: 0; color: var(--text-muted); }
+.apt-price { font-size: var(--fs-h2); font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
+.apt-spec { margin-block-start: var(--sp-1); grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); max-inline-size: 560px; }
+.apt-warn { margin: 0; font-size: var(--fs-small); color: var(--status-reserved-ink); }
+
+/* the apartment strip: five tabs, scrollable on narrow phones, sticky under the top bar */
+.apt-tabs {
+  position: sticky; inset-block-start: var(--apt-top-h); z-index: 9;
+  display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
+  padding: 8px 0; background: var(--surface);
+}
+.apt-tabs::-webkit-scrollbar { display: none; }
+@media (max-width: 520px) {
+  [dir="rtl"] .apt-tabs { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px); mask-image: linear-gradient(to right, transparent 0, #000 28px); }
+  [dir="ltr"] .apt-tabs { -webkit-mask-image: linear-gradient(to left, transparent 0, #000 28px); mask-image: linear-gradient(to left, transparent 0, #000 28px); }
+}
+.apt-tabs [role=tab] {
+  flex: 1 0 auto; min-height: 42px; padding: 8px 14px; border-radius: var(--r-full); cursor: pointer; font: inherit;
+  border: 1px solid var(--line-strong); background: var(--surface-raised); color: var(--text); font-weight: var(--fw-semibold); white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.apt-tabs [role=tab]:hover { background: var(--surface-sunken); }
+.apt-tabs [role=tab][aria-selected=true] { background: var(--text); border-color: var(--text); color: var(--surface); }
+.apt-tabs [role=tab]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.apt-panel { display: grid; gap: 10px; }
+.apt-frame { position: relative; width: 100%; border-radius: var(--r-md); overflow: hidden; background: var(--chrome-bg); border: 1px solid var(--line); }
+.apt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.apt-frame-tour { height: min(68dvh, 620px); }
+.apt-frame-3d { height: min(60dvh, 560px); }
+/* board apartment-3d card 04: on phones the opened panel scrolls up under the sticky bars (the html scroll-padding above),
+   and the 3D frame fills the space between the tab strip and the WhatsApp bar, with a 24 px breath */
+.apt-back3d::before { content: '‹'; margin-inline-end: 6px; font-size: 18px; line-height: 0; }
+[dir="ltr"] .apt-back3d::before { content: '›'; }
+@media (max-width: 899px) {
+  .apt-frame-3d { height: calc(100dvh - var(--apt-top-h) - var(--apt-tabs-h) - var(--apt-bar-h) - 24px); min-height: 360px; max-height: 640px; }
+}
+.apt-panel-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.apt-panel-row .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+.apt-note { margin: 0; font-size: var(--fs-small); color: var(--text-muted); }
+.apt-empty { margin: 0; padding: 18px; border: 1px dashed var(--line-strong); border-radius: var(--r-md); color: var(--text-muted); text-align: center; }
+
+.apt-plan { display: block; background: var(--n-0); border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); }
+.apt-plan img { display: block; width: 100%; height: auto; max-height: 80dvh; object-fit: contain; }
+
+.apt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; }
+.apt-photo { margin: 0; display: grid; gap: 4px; }
+.apt-photo button { position: relative; padding: 0; border: 0; background: var(--surface-sunken); border-radius: var(--r-md); overflow: hidden; cursor: zoom-in; display: block; width: 100%; }
+/* stills carry the burned legal strip at the bottom: show the whole image, never crop it */
+.apt-photo img { display: block; width: 100%; height: auto; }
+.apt-photo figcaption { font-size: var(--fs-small); color: var(--text-muted); }
+
+.apt-dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+.apt-dl dt { color: var(--text-muted); }
+.apt-dl dd { margin: 0; font-weight: var(--fw-semibold); }
+.apt-panel h2 { margin: 4px 0 0; font-size: var(--fs-h2); }
+.apt-panel h3 { margin: 8px 0 0; font-size: var(--fs-body); }
+.apt-tagline { margin: 0; color: var(--text-muted); }
+
+/* the legal caption: short line at the bottom of every tab, full text in "about" and the page footer (wording unchanged) */
+.legal-short { margin: 2px 0 0; font-size: 12px; line-height: 1.45; color: var(--text-muted); border-block-start: 1px solid var(--line); padding-block-start: 8px; }
+.legal-full { font-size: var(--fs-small); color: var(--text-muted); }
+.legal-full p { margin: 0 0 8px; }
+.apt-foot { max-width: 1100px; margin: 0 auto; padding: 0 14px calc(90px + var(--safe-bottom)); font-size: 12px; color: var(--text-muted); }
+.apt-foot summary { cursor: pointer; list-style: none; min-block-size: var(--tap-min); display: flex; align-items: center; flex-wrap: wrap; gap: 0 var(--sp-2); }
+.apt-foot summary::-webkit-details-marker { display: none; }
+.apt-more { color: var(--brand-ink); font-weight: var(--fw-semibold); text-decoration: underline; white-space: nowrap; }
+
+/* agent card */
+.agent-card {
+  display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center;
+  padding: 14px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--surface-raised); box-shadow: var(--shadow-1);
+}
+.agent-avatar { width: 48px; height: 48px; border-radius: var(--r-full); display: grid; place-items: center; background: var(--brand-primary); color: var(--brand-on-primary); font-weight: var(--fw-bold); }
+.agent-id { display: grid; }
+.agent-id span { font-size: var(--fs-small); color: var(--text-muted); }
+.agent-actions { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.agent-actions .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+.agent-actions .apt-zip { grid-column: 1 / -1; }
+.apt-zip small { opacity: .8; font-weight: var(--fw-medium); direction: ltr; unicode-bidi: isolate; }
+
+/* phones: the sticky CTA bar (WhatsApp, call, ZIP). Its height is reserved as the page's bottom padding (.apt-main,
+   .apt-foot) and as scroll-padding, so it never covers a frame scrolled into view. */
+.apt-mobilebar {
+  position: fixed; inset-inline: 0; inset-block-end: 0; z-index: 12; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px;
+  padding: 10px 14px calc(10px + var(--safe-bottom)); background: color-mix(in srgb, var(--surface) 94%, transparent);
+  border-block-start: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.apt-mobilebar .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+.apt-mobilebar .btn[hidden] { display: none !important; }
+
+.apt-photo .hb-ai-badge, .apt-lightbox .hb-ai-badge { position: absolute; inset-block-start: var(--sp-2); inset-inline-end: var(--sp-2); z-index: 1; }
+.apt-lightbox { width: min(1100px, 96vw); max-height: 94dvh; padding: 10px; border: 1px solid var(--chrome-line); border-radius: var(--r-md); background: var(--chrome-panel-solid); color: var(--chrome-fg); }
+.apt-lightbox::backdrop { background: var(--chrome-scrim); }
+.apt-lightbox img { display: block; width: 100%; height: auto; max-height: 78dvh; object-fit: contain; border-radius: var(--r-sm); }
+.apt-lightbox .sheet-close { z-index: 2; background: var(--chrome-panel); }
+.apt-lb-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 8px; }
+
+@media (max-width: 479px) {
+  .apt-brand img:not([hidden]) + span { display: none; } /* phones: the logo alone, room for "back to the building" */
+}
+
+@media (min-width: 900px) {
+  .apt-main { grid-template-columns: 1fr 320px; align-items: start; padding-bottom: 32px; }
+  .apt-hero, .apt-tabs, .apt-panel { grid-column: 1; }
+  .agent-card { grid-column: 2; grid-row: 1 / span 3; position: sticky; top: 76px; }
+  .apt-mobilebar { display: none; }
+  .apt-foot { padding-bottom: 24px; }
+}
+
+/* ---- card 10 (board apartment-3d): the minimap in the corner of the 360 tour (plan-up top view, dot = the camera, cone = the view).
+   platform-ui-ux card 16: colours from the chrome tokens; sizes and behaviour unchanged ---- */
+.apt-minimap { position: absolute; z-index: 2; top: 10px; inset-inline-end: 10px; width: clamp(104px, 30vw, 168px); aspect-ratio: 1 / 1;
+  border-radius: var(--r-md); background: color-mix(in srgb, var(--chrome-bg) 62%, transparent); backdrop-filter: blur(4px); border: 1px solid var(--chrome-line-strong);
+  box-shadow: var(--chrome-shadow-sm); padding: 4px; cursor: zoom-in; transition: width .25s ease; }
+.apt-minimap.is-big { width: clamp(200px, 62vw, 320px); cursor: zoom-out; }
+.apt-minimap-svg { display: block; width: 100%; height: 100%; }
+.apt-minimap .mm-node { fill: color-mix(in srgb, var(--n-0) 55%, transparent); stroke: color-mix(in srgb, var(--chrome-bg) 70%, transparent); stroke-width: 1.5; vector-effect: non-scaling-stroke; cursor: pointer; }
+.apt-minimap .mm-node.is-here { fill: none; stroke: none; }
+.apt-minimap .mm-cone { fill: color-mix(in srgb, var(--brand-accent) 38%, transparent); stroke: color-mix(in srgb, var(--brand-accent) 90%, transparent); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.apt-minimap .mm-dot { fill: var(--brand-accent); stroke: var(--n-0); stroke-width: 2; vector-effect: non-scaling-stroke; }

@@ -1,0 +1,469 @@
+{
+ "pair": "living-0-1-ai-sofa-leather",
+ "scene": "living",
+ "lang": "he",
+ "phone": false,
+ "repeat": 1,
+ "marker": {
+  "id": "living-0-1",
+  "category": "sofa",
+  "count": 1,
+  "span_deg": [
+   70,
+   38.8
+  ],
+  "yaw": -11.29,
+  "pitch": -22.66
+ },
+ "item": "ai-sofa-leather",
+ "when": "2026-11-04T11:51:20.844Z",
+ "steps": {
+  "turnMs": 50300
+ },
+ "errors": [
+  "console: Failed to load resource: the server responded with a status of 403 (Forbidden)"
+ ],
+ "ring": {
+  "x": 720,
+  "y": 450,
+  "w": 44,
+  "onScreen": true,
+  "label": "להחליף את הספה",
+  "opacity": "1"
+ },
+ "ringsOnScreen": [
+  {
+   "id": "living-270-2",
+   "x": -130,
+   "y": 444,
+   "visible": true
+  },
+  {
+   "id": "living-0-4",
+   "x": 650,
+   "y": 265,
+   "visible": true
+  },
+  {
+   "id": "living-0-1",
+   "x": 720,
+   "y": 450,
+   "visible": true
+  },
+  {
+   "id": "living-0-3",
+   "x": 890,
+   "y": 573,
+   "visible": true
+  },
+  {
+   "id": "living-180-1",
+   "x": 13787,
+   "y": 11205,
+   "visible": true
+  },
+  {
+   "id": "living-270-1",
+   "x": -649,
+   "y": -204,
+   "visible": true
+  },
+  {
+   "id": "living-0-2",
+   "x": 1076,
+   "y": 639,
+   "visible": true
+  },
+  {
+   "id": "living-90-3",
+   "x": 1952,
+   "y": 1062,
+   "visible": true
+  },
+  {
+   "id": "living-set-1",
+   "x": 973,
+   "y": 336,
+   "visible": true
+  },
+  {
+   "id": "living-set-2",
+   "x": 175,
+   "y": 424,
+   "visible": true
+  }
+ ],
+ "pick": {
+  "chip": "בחרו פריט במקום הספה",
+  "items": [
+   {
+    "id": "ai-sofa-boucle",
+    "selected": "false"
+   },
+   {
+    "id": "ai-sofa-linen",
+    "selected": "false"
+   },
+   {
+    "id": "ai-sofa-leather",
+    "selected": "false"
+   }
+  ],
+  "open": 1,
+  "hintHidden": true
+ },
+ "pillSteps": [
+  {
+   "s": 0.6,
+   "text": "מחילים את השינוי שלכם… בדרך כלל כ־15 שניות"
+  },
+  {
+   "s": 39.6,
+   "text": "בודקים את התוצאה…"
+  },
+  {
+   "s": 50.1,
+   "text": "משבצים את השינוי בחדר…"
+  }
+ ],
+ "lastTurn": {
+  "text": "להחליף את הספה ב-Cognac leather sofa",
+  "attempts": [
+   {
+    "attempt": 1,
+    "model": "fal-ai/nano-banana-2/edit",
+    "reach": "object",
+    "living": false,
+    "ring": 0.001,
+    "ring_band": "outside",
+    "ring_n": 8820,
+    "ring_total": 40640,
+    "fraction": 0.473,
+    "judge": {
+     "held": true,
+     "original_present": false,
+     "product_present": true,
+     "product_box": [
+      238,
+      198,
+      888,
+      712
+     ],
+     "product_box_raw": [
+      238,
+      198,
+      888,
+      712
+     ],
+     "box_kept": 1,
+     "placed": true,
+     "count": 1,
+     "rest_unchanged": 3,
+     "note": "The sectional sofa was cleanly replaced with the requested cognac leather mid-century sofa."
+    },
+    "held": true
+   }
+  ],
+  "error": null,
+  "piece": {
+   "id": "living-0-1",
+   "category": "sofa",
+   "box": [
+    227,
+    237,
+    719,
+    789
+   ],
+   "count": 1,
+   "seen": {
+    "found": true,
+    "box": [
+     221,
+     0,
+     1000,
+     796
+    ],
+    "outline": [
+     [
+      415,
+      125
+     ],
+     [
+      230,
+      445
+     ],
+     [
+      220,
+      545
+     ],
+     [
+      275,
+      648
+     ],
+     [
+      370,
+      775
+     ],
+     [
+      470,
+      785
+     ],
+     [
+      575,
+      755
+     ],
+     [
+      535,
+      605
+     ],
+     [
+      1000,
+      505
+     ],
+     [
+      1000,
+      215
+     ],
+     [
+      615,
+      0
+     ]
+    ],
+    "touches_edge": [
+     "left",
+     "bottom"
+    ],
+    "note": "Large modular sectional sofa with chaise lounge and throw cushions.",
+    "tries": 2
+   }
+  },
+  "view": {
+   "yaw": -17.29,
+   "pitch": -31.93,
+   "hfov": 90
+  },
+  "piece_seen": {
+   "found": true,
+   "box": [
+    221,
+    0,
+    1000,
+    796
+   ],
+   "outline": [
+    [
+     415,
+     125
+    ],
+    [
+     230,
+     445
+    ],
+    [
+     220,
+     545
+    ],
+    [
+     275,
+     648
+    ],
+    [
+     370,
+     775
+    ],
+    [
+     470,
+     785
+    ],
+    [
+     575,
+     755
+    ],
+    [
+     535,
+     605
+    ],
+    [
+     1000,
+     505
+    ],
+    [
+     1000,
+     215
+    ],
+    [
+     615,
+     0
+    ]
+   ],
+   "touches_edge": [
+    "left",
+    "bottom"
+   ],
+   "note": "Large modular sectional sofa with chaise lounge and throw cushions.",
+   "tries": 2
+  },
+  "seen_accepted": true,
+  "full_box": [
+   221,
+   0,
+   1000,
+   796
+  ],
+  "lift": [
+   "left",
+   "bottom"
+  ],
+  "likeness": {
+   "score": 3,
+   "found": true,
+   "why": "The sofa is faithfully reproduced with the exact leather upholstery, tufting pattern, armrest design, and black metal frame."
+  },
+  "region_fraction": 0.659,
+  "pasted_fraction": 0.459
+ },
+ "pill": "מחילים את השינוי…",
+ "landed": true,
+ "live": {
+  "model": "fal-ai/nano-banana-2/edit",
+  "attempt": 1,
+  "ring": 0.001,
+  "judge": {
+   "held": true,
+   "original_present": false,
+   "product_present": true,
+   "product_box": [
+    238,
+    198,
+    888,
+    712
+   ],
+   "product_box_raw": [
+    238,
+    198,
+    888,
+    712
+   ],
+   "box_kept": 1,
+   "placed": true,
+   "count": 1,
+   "rest_unchanged": 3,
+   "note": "The sectional sofa was cleanly replaced with the requested cognac leather mid-century sofa."
+  },
+  "usd": 0.091,
+  "fraction": 0.473,
+  "item": "ai-sofa-leather",
+  "likeness": {
+   "score": 3,
+   "found": true,
+   "why": "The sofa is faithfully reproduced with the exact leather upholstery, tufting pattern, armrest design, and black metal frame."
+  },
+  "region_fraction": 0.659,
+  "marker": {
+   "before": {
+    "yaw": -11.29,
+    "pitch": -22.66
+   },
+   "after": {
+    "yaw": -23.68,
+    "pitch": -36.59,
+    "outlines": [
+     [
+      [
+       -47.57,
+       -10.89
+      ],
+      [
+       4.99,
+       -11.65
+      ],
+      [
+       19.19,
+       -53.7
+      ],
+      [
+       -63.78,
+       -49.37
+      ]
+     ]
+    ],
+    "count": 1,
+    "item": "ai-sofa-leather"
+   }
+  }
+ },
+ "card": {
+  "shown": true,
+  "name": "ספת עור קוניאק",
+  "price": "הדמיה · AI-generated",
+  "note": "פריט לדוגמה שנוצר בבינה מלאכותית, לא מוצר למכירה.",
+  "link": "",
+  "linkText": ""
+ },
+ "markerAfter": {
+  "item": "ai-sofa-leather",
+  "yaw": -23.68,
+  "pitch": -36.59,
+  "count": 1
+ },
+ "view": {
+  "yaw": -17.29,
+  "pitch": -31.93,
+  "hfov": 90
+ },
+ "secondTap": {
+  "chip": "בחרו פריט במקום ספת עור קוניאק",
+  "selected": [
+   "ai-sofa-leather"
+  ]
+ },
+ "linked": null,
+ "markerRestored": {
+  "item": null,
+  "yaw": -11.29,
+  "pitch": -22.66
+ },
+ "cardAfterUndo": false,
+ "ledger": {
+  "rows": [
+   {
+    "seq": 159,
+    "op": "live_edit",
+    "scene": "living",
+    "status": "settled",
+    "usd": 0.091,
+    "attempt": 1,
+    "seconds": 39.188,
+    "model": "fal-ai/nano-banana-2/edit"
+   },
+   {
+    "seq": 160,
+    "op": "live_replace_judge",
+    "scene": "living",
+    "status": "settled",
+    "usd": 0.0029,
+    "held": true,
+    "seconds": 5.466
+   },
+   {
+    "seq": 161,
+    "op": "live_likeness",
+    "scene": "living",
+    "status": "settled",
+    "usd": 0.004,
+    "score": 3,
+    "seconds": 4.409
+   }
+  ],
+  "usd": 0.0979,
+  "total": 115.0546
+ },
+ "files": {
+  "crop": "crop.jpg",
+  "result-1": "result-1.jpg",
+  "edit-1": "edit-1.json",
+  "judge-1": "judge-1.json",
+  "likeness": "likeness.json"
+ },
+ "ms": 73748
+}

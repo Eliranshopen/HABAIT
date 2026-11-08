@@ -1,0 +1,7 @@
+desktop   PASS  A1 platform link leads to /hold/
+desktop   FAIL  B1 button shown at the hold after the clip  undefined
+desktop   FAIL  Z run completed  "page.evaluate: TypeError: Cannot read properties of null (reading 'getBoundingClientRect')\n    at eval (eval at evaluate (:290:30), <anonymous>:1:71)\n    at UtilityScript.evaluate (<anonymous>:292:16)"
+desktop   PASS  Z1 zero page errors
+desktop   PASS  Z2 zero 4xx/5xx
+
+3/5 PASS · 2 FAIL · base http://127.0.0.1:8853

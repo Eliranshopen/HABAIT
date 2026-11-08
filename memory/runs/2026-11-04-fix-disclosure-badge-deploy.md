@@ -1,0 +1,13 @@
+## 2026-11-04 · main session rnd-db · deploy: fix-disclosure-badge → habait-flow (and the collision with exterior-film)
+- **Did:** on Eliran's "כן" + scope "Only my fix" shipped `dpl_eDQTT7o6o2S6hprXnaCGkP1VJwTc` (habait-flow-n49hczc10): הדמיה badge, concept, AI note and tools back in the buyer flow (F01/F03), placeholder WhatsApp/phone hidden (F20). Staged from live main `7b6f617`; `hold/app.js` + `hold/index.html` pinned to the prod bytes fetched just before, `hold/data/video/building-film-*` dropped.
+- **Evidence:** `docs/governance/SHIP-LEDGER.md` (rows `dpl_Em7YappX…` rnd-32 and `dpl_eDQTT7o6…` rnd-db); `Projects/Habait/research/feature-split-2026-11-04/fix-disclosure-badge-evidence/` (stage + prod site_check 14/14, prod tour ui=min checks); served `hold/app.js` sha256 `8cf074b880f9…` = the pinned bytes; `/hold/data/video/building-film-poster.jpg` 404 on prod (checked during /sync-context).
+- **Learned:** rnd-32 deployed exterior-film A (`dpl_Em7YappXsXsEuBGfBYs9dj9JoU3k`) on Eliran's go about 1 min before; my deploy superseded it, so **the building film is NOT in production** although it had its go. My cross-session messages were held and expired (permission-mode mismatch) and its ledger row did not exist yet; the "no go" I assumed was wrong. Before a deploy: re-read the newest SHIP-LEDGER row and re-fetch prod hashes IMMEDIATELY before `vercel deploy`, not minutes earlier.
+- **Owed / open:** a combined redeploy (main has both: `c7a3677` film + `7b6f617` fix) on Eliran's own go, by ONE session; then prod checks for both (site_check 14/14, film checks, badge in ui=min).
+- **Second reader:** `habait-deploy-qa` · rnd-32 (exterior-film owner) via Eliran (messages do not reach it).
+
+## 2026-11-04 · main session rnd-db · correction: the building film IS in production again
+- **Did:** Eliran reported seeing the film; re-checked prod. Another session redeployed after rnd-db's deploy; the owed combined redeploy is NOT needed and was not run (rnd-db's stage `deploy-fdb-2` discarded unused).
+- **Evidence:** prod `hold/app.js` sha256 `0036cbbe2dbe…` (= live main with the film), `hold/data/video/building-film-720.mp4` 200 (11.97 MB) and `-1080.mp4` 200 (28.56 MB); badge fix still live: `tour/index.html` 0 × `ui-min #tour-badge`, rainbow `project.json` `whatsapp_number` "", 846 `apartment.json` 0 × 972500000000. Not re-run: the full site_check on this newer deployment.
+- **Learned:** prod moves under you while sessions run in parallel — re-check right before reporting state.
+- **Owed / open:** the newer deployment's SHIP-LEDGER row belongs to the session that ran it.
+- **Second reader:** `habait-deploy-qa`.

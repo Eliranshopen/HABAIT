@@ -1,0 +1,56 @@
+---
+name: 21st-ui-build
+description: Build or substantially change production UI using the current project's design context, existing components, and grounded 21st inspiration. Use when implementing a page, section, component, responsive redesign, or visual polish in an existing web project. Trigger for requests such as "build this UI", "implement this screen", "make this page production-ready", or "use 21st to create the interface". Use 21st-ui-explore first when the visual direction is intentionally undecided, and 21st-ui-review for critique-only work.
+disable-model-invocation: true
+---
+> Explicit-invocation only since 2026-10-22 — D-AUD-30 (Q 6.2, DEC-055; B-07, B-08): borrowed UI skill, archived only after /skill-doctor exists or on his word, D14 not ruled; invoke it by name (`/21st-ui-build`); the flag is reversible and nothing is archived.
+
+# Build project-aware UI
+
+Preserve the product's identity while using 21st supply to accelerate implementation.
+
+## Workflow
+
+1. Read `.21st/design.json` and `.21st/DESIGN.md`. If neither exists, run
+   `21st init --design-context`.
+2. Inspect the target route, its closest components, project instructions, and
+   existing tokens. Treat explicit project facts as stronger than generic taste.
+3. Search before generating:
+
+   ```bash
+   21st search "<specific UI need>" --context auto
+   ```
+
+4. Reuse installed project primitives first. Retrieve or install a 21st result
+   only when it reduces duplication or materially improves the result.
+5. If no result fits, generate project-aware alternatives:
+
+   ```bash
+   21st generate "<goal and constraints>" --context auto --variants 3
+   ```
+
+6. Implement the selected direction in the project's real framework. Do not
+   paste sketch HTML when the project expects React components, tokens, or
+   established APIs.
+7. Preserve responsive behavior, keyboard interaction, visible focus,
+   semantics, reduced motion, loading states, empty states, and error states.
+8. Run the project's checks and `21st review <changed paths>`. Apply only safe,
+   deterministic fixes automatically.
+⚠ **Machine resource rules** (root `CLAUDE.md`; backed by the `test-guard` hook once it is installed per `.claude/hooks/README.md` — until then this line is the only rule): every test, build, server, browser or render command runs in Git Bash as `timeout N <cmd>` (tests 300 s, build/typecheck 540, servers/sweeps/renders 540 per chunk, 1800 once `BASH_MAX_TIMEOUT_MS` is raised) with the tool timeout above N; one heavy run at a time; foreground only; kill what you start by PID; never sleep-poll a backgrounded run — stop it, kill its tree, re-run bounded once.
+
+## Design rules
+
+- Prefer project tokens over new arbitrary values.
+- Prefer existing components over parallel lookalikes.
+- Preserve established density, radii, typography, iconography, and layout
+  rhythm unless the user explicitly requests a redesign.
+- Use real product copy and states when available.
+- Avoid decorative gradients, excessive cards, glass effects, huge headlines,
+  and animation unless supported by the project or requested.
+- Never claim a component, token, or capability exists without inspecting it.
+
+## Handoff
+
+Report the direction used, reused 21st/project components, files changed, and
+verification performed. Record a durable visual choice in
+`.21st/design.json` under `decisions` when the user selects a new direction.

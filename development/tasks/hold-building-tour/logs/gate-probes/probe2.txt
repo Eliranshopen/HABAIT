@@ -1,0 +1,13 @@
+FAIL Q1 open then close at 200ms: ambience playing again (sound.on=true) {"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS Q2 close during orbit (orbit1): hold live, picker card opens {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"card":true,"errs":[]}
+PASS Q3 room (terraceLiving) -> close -> 846 -> continue -> apartment tour {"tsrc":"http://127.0.0.1:8853/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=","errs":[]}
+PASS Q3b button hidden in apartment tour, Esc opens nothing {"frames":0,"btn":"none","close":"none","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS Q4 Esc focus in frame: overlay stays {"frames":1,"btn":"none","close":"block","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS Q4b Esc on page closes {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS Q5 button hidden during orbit clip ["none","none","none","none","none","none"]
+PASS Q5b programmatic click during clip does nothing {"frames":0,"btn":"none","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS Q5c programmatic click during descent ease does nothing {"frames":0,"btn":"none","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS Q6 reduced motion: opens opaque, closes, no errors {"op":"1","s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS Q7 iphone13 button/close reachable {"bb":{"w":180,"h":44,"x":14,"y":14,"onTop":true,"vw":390},"cb":{"x":14,"y":74,"w":44,"onTop":true,"vw":390},"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS Q7 iphone13L button/close reachable {"bb":{"w":180,"h":44,"x":14,"y":14,"onTop":true,"vw":750},"cb":{"x":14,"y":74,"w":44,"onTop":true,"vw":750},"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS Q7 pixel7L button/close reachable {"bb":{"w":180,"h":44,"x":14,"y":14,"onTop":true,"vw":863},"cb":{"x":14,"y":74,"w":44,"onTop":true,"vw":863},"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}

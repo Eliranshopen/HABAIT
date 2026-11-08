@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Habait · Flight</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f5c8f'/%3E%3Cpath d='M8 24 Q16 6 24 24' fill='none' stroke='%23f2a900' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="js/dev.js"></script>
+<script type="importmap">
+  { "imports": { "three": "./node_modules/three/build/three.module.js" } }
+</script>
+</head>
+<body class="page-flow">
+<div id="stage" class="stage">
+  <div id="viewer" class="viewer"></div>
+  <div id="hotspots" class="hotspot-layer" aria-live="polite"></div>
+  <!-- the one video element of the flight: muted + playsinline so iOS autoplays after the start tap -->
+  <video id="video" muted playsinline webkit-playsinline preload="auto" crossorigin="anonymous" hidden></video>
+  <video id="preload" muted playsinline preload="auto" hidden></video>
+</div>
+
+<header class="hud hud-top">
+  <a class="hud-brand" id="hudBrand" href="index.html" aria-label="projects"><img id="brandLogo" alt="" hidden><span id="brandName">Habait</span></a>
+  <div class="hud-title" id="segTitle"></div>
+  <div class="hud-actions">
+    <button class="hud-btn" id="gyroBtn" type="button" hidden data-i18n-title="hud.gyro" title="gyro">◎</button>
+    <button class="hud-btn" id="unitsBtn" type="button" data-i18n-title="hud.units" title="apartments">▤</button>
+    <button class="hud-btn lang-toggle" id="langToggle" type="button" aria-label="language">EN</button>
+  </div>
+</header>
+
+<footer class="hud hud-bottom">
+  <div class="progress" id="progress"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="hud-row">
+    <button class="hud-chip" id="toFacadeBtn" type="button" hidden data-i18n="hud.toFacade">אל החזית · בחירת דירה</button>
+    <span class="hud-hint" id="hint" data-i18n="hud.hint">גררו כדי להסתכל סביב</span>
+  </div>
+</footer>
+
+<!-- start overlay: iOS needs a tap before video.play() and before the gyro permission -->
+<div class="overlay overlay-start" id="startOverlay">
+  <div class="overlay-card">
+    <img id="startLogo" class="start-logo" alt="" hidden>
+    <h1 id="startTitle"></h1>
+    <p id="startTagline" class="muted"></p>
+    <button class="btn btn-primary btn-lg" id="startBtn" type="button" data-i18n="start.cta">התחילו את הטיסה</button>
+    <p class="tiny muted" data-i18n="start.note">360° · גררו או סובבו את הטלפון כדי להסתכל סביב</p>
+    <p class="tiny muted" id="fixtureNote" hidden data-i18n="start.fixture">תצוגת פיתוח: קטעי הטיסה הם placeholders (clay), לא ההדמיה הסופית</p>
+  </div>
+</div>
+
+<!-- the apartment card (#unitSheet) and the apartments drawer (#unitsDrawer) are created by js/picker.js -->
+
+<!-- hand-off to the apartment 360 tour -->
+<div class="overlay overlay-handoff" id="handoffOverlay" hidden>
+  <div class="overlay-card">
+    <h2 id="handoffTitle"></h2>
+    <p id="handoffSub" class="muted"></p>
+    <a class="btn btn-primary btn-lg" id="handoffLink" href="#" rel="noopener" data-i18n="handoff.cta">היכנסו לדירה</a>
+    <button class="btn btn-ghost" id="handoffBack" type="button" data-i18n="handoff.back">חזרה אל החזית</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<div class="loading" id="loading" hidden><div class="spinner"></div></div>
+
+<script type="module" src="js/flow.js"></script>
+</body>
+</html>

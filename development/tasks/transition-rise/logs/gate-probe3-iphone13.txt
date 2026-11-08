@@ -1,0 +1,14 @@
+ok   iphone13 S1a x during rise: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   iphone13 S1b reopen after x-in-rise: visible: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}{"tr":{"kind":"rise","frames":7,"ms":1772,"fps":4,"skipped":null},"preset":"3d","held":false}
+ok   iphone13 S1c settled on 3D preset: {"tr":{"kind":"rise","frames":7,"ms":1772,"fps":4,"skipped":null},"preset":"3d"}
+ok   iphone13 S1 errs: 
+ok   iphone13 S2 sheet reachable during rise: go button present=true
+ok   iphone13 S2 open->view in 360: final {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true} expect scene kitchen
+ok   iphone13 S2 errs: 
+ok   iphone13 S4 esc during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+FAIL iphone13 S4 esc during dive: tour stays in living (no ghost navigation): {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   iphone13 S4 x during dive (immediate): {"scene":"living","hidden":true,"op":"","inert":0,"load":true}
+FAIL iphone13 S4 x during dive: tour stays in living (no ghost navigation): {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   iphone13 S6 open/close spam leaves the tour usable: {"scene":"living","hidden":true,"op":"0","inert":0,"load":true}
+ok   iphone13 S6 then opens normally: {"scene":"living","hidden":false,"op":"","inert":15,"load":true}
+ok   iphone13 S6 errs: 

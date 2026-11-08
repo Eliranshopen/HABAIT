@@ -1,0 +1,18 @@
+{
+ "frames": 240,
+ "dir": "jpg",
+ "pattern": "frame_%04d.jpg",
+ "camera": "camera.json",
+ "width": 1280,
+ "height": 720,
+ "loop": true,
+ "lo": {
+  "dir": "jpg_lo",
+  "pattern": "frame_%04d.jpg",
+  "width": 640,
+  "height": 360
+ },
+ "note": "Kling 4.0 v2v over ring_clay.mp4 (10 s, 24 fps): a full 360-degree orbit around the tower at the hold radius; centre_frame 121 = the orbit clip end pose; loop (frame 241 of the clay == frame 1) | remapped: Kling ring frames mapped to the clay orbit by edge correlation: clay = -0.022*k + 197.1 (mod 240); total turn -8 deg; loop=True",
+ "pills_near": 4,
+ "preview": true
+}

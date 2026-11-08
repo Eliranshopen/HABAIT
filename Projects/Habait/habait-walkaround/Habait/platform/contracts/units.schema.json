@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "habait/platform/units.v0",
+  "title": "units.json v0 - the apartments of one project and where they sit in each flight segment",
+  "type": "object",
+  "required": ["project", "currency", "units"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "project": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "description": "project id, same as flow.json project and the fixtures/<id> folder" },
+    "currency": { "type": "string", "enum": ["ILS", "USD", "EUR"] },
+    "price_note": { "type": "string" },
+    "segment_fps": {
+      "type": "object",
+      "description": "optional: frames per second of each flight segment (segment id -> fps), so t <-> frame converts without the segment's camera.json: t_start = (frame - 1) / fps",
+      "additionalProperties": { "type": "number", "exclusiveMinimum": 0 }
+    },
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/unit" }
+    }
+  },
+  "$defs": {
+    "unit": {
+      "type": "object",
+      "required": ["id", "floor", "type", "rooms", "area_m2", "outdoor_m2", "price", "status", "tour_url", "hotspots"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$" },
+        "floor": { "type": "integer", "minimum": -5, "maximum": 120 },
+        "box_world": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "type": "number" }, "description": "optional [x0,y0,z0,x1,y1,z1] in plan-world metres (X right, Y up the plan, Z up; floor 16 floor = z 0; z0 = (floor-16) * floor_to_floor (3.2 m), z1 = z0 + ceiling (2.9 m); ground -51.2); projected to hotspots with studio/tools/world2equi.py" },
+        "outline_world": {
+          "type": "object",
+          "required": ["polygon"],
+          "additionalProperties": false,
+          "description": "optional true outline of the unit (rooms + walls + terraces) in plan-world metres, same frame as box_world; when present the hotspot hull is built from it instead of the box_world AABB",
+          "properties": {
+            "polygon": { "type": "array", "minItems": 3, "description": "[[X, Y], ...] plan-world metres (X = x_cm/100, Y = -y_cm/100), open ring", "items": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } } },
+            "z0": { "type": "number", "description": "floor level of the unit in plan-world metres (default box_world z0)" },
+            "z1": { "type": "number", "description": "ceiling level (default box_world z1)" },
+            "source": { "type": "string", "description": "where the outline comes from (traced plan, stacked-approx, ...)" }
+          }
+        },
+        "type": { "type": "string", "description": "the developer's type letter/name (L, K, M, PH...)" },
+        "rooms": { "type": "number", "minimum": 1, "maximum": 20 },
+        "area_m2": { "type": "number", "minimum": 10 },
+        "outdoor_m2": { "type": "number", "minimum": 0 },
+        "price": { "type": "number", "minimum": 0, "description": "0 = price on request" },
+        "status": { "type": "string", "enum": ["for-sale", "sold", "reserved", "unknown"] },
+        "tour_url": { "type": "string", "minLength": 1, "description": "external URL of the apartment 360 tour (hand-off target); empty-string is not allowed, use the sales page instead" },
+        "segments": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "flight segment ids for this unit; default descend-<id> / enter-<id>; falls back to flow.defaults",
+          "properties": {
+            "descend": { "type": "string" },
+            "enter": { "type": "string" }
+          }
+        },
+        "hotspots": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/hotspot" }
+        },
+        "note": { "type": "string" }
+      }
+    },
+    "hotspot": {
+      "type": "object",
+      "required": ["segment", "t_start", "t_end", "yaw_deg", "pitch_deg"],
+      "additionalProperties": false,
+      "description": "where the unit is on the equirect of a segment between t_start and t_end seconds. t is in seconds from the segment's FIRST frame (frame 1 = t 0), not from the start of the flight; a per-frame hotspot has t_start = (frame - 1) / fps, t_end = frame / fps. yaw 0 = panorama centre (u = 0.5), positive = to the right/clockwise; pitch positive = up. yaw = (u - 0.5) * 360, pitch = (0.5 - v) * 180.",
+      "properties": {
+        "segment": { "type": "string" },
+        "t_start": { "type": "number", "minimum": 0, "description": "seconds from the segment's first frame" },
+        "t_end": { "type": "number", "minimum": 0, "description": "seconds from the segment's first frame" },
+        "frame": { "type": "integer", "minimum": 1, "description": "optional segment-local frame (1-based) when hotspots are emitted per frame; t_start = (frame - 1) / fps" },
+        "visible_frac": { "type": "number", "minimum": 0, "maximum": 1, "description": "optional share of the unit's box not hidden by the building on this frame" },
+        "in_view_hint": { "type": "boolean", "description": "optional: the unit is inside the director's default framing (view_hint) on this frame" },
+        "polygons": {
+          "type": "array",
+          "minItems": 1,
+          "description": "optional multi-part outline: one ring per part (a unit across the u 0/1 seam = 2 parts); replaces the two-record seam split. A reader that knows only polygon keeps working: polygon, when also present, is the largest part",
+          "items": { "$ref": "#/$defs/equirect_polygon" }
+        },
+        "yaw_deg": { "type": "number", "minimum": -180, "maximum": 180 },
+        "pitch_deg": { "type": "number", "minimum": -90, "maximum": 90 },
+        "polygon": {
+          "type": "array",
+          "minItems": 3,
+          "description": "optional outline on the equirect, [[yaw_deg, pitch_deg], ...] (residence.tech-style projected bbox); v0 player draws the marker only",
+          "items": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } }
+        }
+      }
+    },
+    "equirect_polygon": {
+      "type": "array",
+      "minItems": 3,
+      "description": "one ring on the equirect, [[yaw_deg, pitch_deg], ...] (same convention as hotspot.polygon)",
+      "items": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } }
+    }
+  }
+}

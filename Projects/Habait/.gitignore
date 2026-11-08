@@ -1,0 +1,32 @@
+﻿# Dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Build outputs
+dist/
+build/
+.next/
+coverage/
+
+# Logs and temporary files
+*.log
+*.tmp
+.cache/
+
+# Local Python environments
+.venv/
+venv/
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local Blender installation
+tools/blender-4.5.10/

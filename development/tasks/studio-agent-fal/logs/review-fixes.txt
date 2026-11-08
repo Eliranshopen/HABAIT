@@ -1,0 +1,6 @@
+# fixes after the refute review (logs/review.md), 2026-11-03 23:37
+2a (money): lib/llm.mjs structured() uses fal ONLY when the caller passes allowFal (today: the intake stage, which gates with ctx.spendGate and ledgers) AND spending is on; any other caller (plan.mjs, tools/pick_views.mjs) falls back to the API key / the subscription CLI. Test: 'review 2a' — 0 requests reach fal.
+2b (money): lib/chat.mjs holds a per-project in-flight lock around the paid call; a second question while one is under way is refused ('הסוכן עדיין עונה'). Test: 'review 2b' — one ledger row.
+4: POST /api/projects/:id/chat with a non-JSON body answers 400.
+tests: working copy llm-fal 9/9 · run.mjs 13/14 (known missing tour360 file in the copy). LIVE after copy-back + npm ci: llm-fal 9/9 · run.mjs 14/14.
+copy-back: python scripts/wt.py close studio-agent-fal --go -> closed 64 file(s) (10 changed or new).

@@ -1,0 +1,83 @@
+```json
+{
+  "rooms": [
+    {
+      "name_he": "חדר דיור",
+      "name_en": "Living room",
+      "type": "living",
+      "printed_dims_cm": [545, 395],
+      "area_m2_estimate": 21.5,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "מטבח",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 8.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "חדר שינה",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 12.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "חדר דיור נוסף",
+      "name_en": "Additional living area",
+      "type": "living",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 10.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "בית שמוש",
+      "name_en": "Bathroom",
+      "type": "bathroom",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 4.0,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "חדר אמבטיה",
+      "name_en": "Bathroom",
+      "type": "bathroom",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 3.5,
+      "is_outdoor": false
+    },
+    {
+      "name_he": "מרפסת גג",
+      "name_en": "Roof terrace",
+      "type": "balcony",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 35.0,
+      "is_outdoor": true
+    },
+    {
+      "name_he": "מרפסת שירות",
+      "name_en": "Service balcony",
+      "type": "balcony",
+      "printed_dims_cm": null,
+      "area_m2_estimate": 4.0,
+      "is_outdoor": true
+    }
+  ],
+  "printed_dimensions_cm": [545, 395, 890, 305, 185, 190, 275, 115, 265],
+  "openings": {
+    "doors": 6,
+    "windows_or_glazing_runs": 8
+  },
+  "unit": {
+    "number": "דירה 048",
+    "area_m2": null,
+    "terrace_m2": null,
+    "floor": null
+  },
+  "confidence": 0.75,
+  "notes": "Some dimension labels were difficult to read due to image resolution. Room names partially visible. Terrace area estimate based on visual proportion. Unit number visible in top right corner as 048."
+}
+```

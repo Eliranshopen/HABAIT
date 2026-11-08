@@ -1,0 +1,68 @@
+{
+  "schema": "habait-studio/worker-snapshot.v1",
+  "snapshotId": "snap_PH845feN7iISWw12KTBWuokFLeOT",
+  "key": "43a86cd+6612f96cc8f5+py5+blender4.5.10",
+  "head": "11a20ca",
+  "listHash": "6612f96cc8f553441cebabd2cd0e6eb0b97af786df40d5502c440d97a1b0bd32",
+  "files": 355,
+  "bytes": 303886906,
+  "withBlender": true,
+  "chrome": "/vercel/sandbox/chrome",
+  "pip": [
+    "numpy",
+    "opencv-python-headless",
+    "pymupdf",
+    "shapely",
+    "scikit-image"
+  ],
+  "blender": "4.5.10",
+  "built": "2026-11-05T13:04:34.466Z",
+  "seconds": 285.2,
+  "phases": [
+    {
+      "name": "tooling",
+      "s": 4.9
+    },
+    {
+      "name": "python-venv",
+      "s": 17
+    },
+    {
+      "name": "apt",
+      "s": 9.4
+    },
+    {
+      "name": "blender",
+      "s": 20.8
+    },
+    {
+      "name": "upload",
+      "s": 224.7
+    },
+    {
+      "name": "chromium-deps",
+      "s": 0.5
+    },
+    {
+      "name": "chromium",
+      "s": 0.9
+    },
+    {
+      "name": "blender-smoke",
+      "s": 0.4
+    },
+    {
+      "name": "smoke",
+      "s": 0.5
+    },
+    {
+      "name": "snapshot",
+      "s": 5.4
+    }
+  ],
+  "vcpus": 4,
+  "refreshed_from": "snap_3zqDV281SaPj37nQ9vXndwNOQjuj",
+  "code_files": 261,
+  "refreshed": "2026-11-05T13:29:06.602Z",
+  "refresh_seconds": 18.2
+}

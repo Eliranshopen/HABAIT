@@ -1,0 +1,15 @@
+APT photos {"imgs":11,"badges":0,"lightboxBadge":false,"planBadge":false}
+HOME bdi {"bdi":["AI-generat","AI-generat","Rainbow תל","12","7"],"summary":"מגדל מגורים על קו הים · הדמיה","badge":2}
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8853/#/p/apt846-rainbow-tlv
+Call log:
+[2m  - navigating to "http://127.0.0.1:8853/#/p/apt846-rainbow-tlv", waiting until "load"[22m
+
+    at C:\RnD\.wt\platform-ui-ux\tools\gate2\extra.cjs:10:11 {
+  name: 'Error'
+}
+
+Node.js v24.22.1

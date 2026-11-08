@@ -1,0 +1,51 @@
+dollhouse-in-tour check 2026-11-04T05:02:06.224Z
+PASS 48 · FAIL 0
+
+ok   desktop: the 3D button shows in the living room
+ok   desktop: the 3D layer opens with the dollhouse loaded
+ok   desktop: "you are here" on the living room's camera point ({"x":-0.758,"z":1.146,"bearingDeg":111.3,"fovDeg":111.4,"room":"r-living"})
+ok   desktop: the dollhouse floor follows the tour (concrete): concrete
+ok   desktop: the cone follows the view (tour +60 deg -> marker 60.0 deg)
+ok   desktop: Esc closes the layer
+ok   desktop: the button reopens it (frame kept)
+ok   desktop: the tour behind the layer is inert
+ok   desktop: a real tap reaches the 3D (focus inside the frame)
+ok   desktop: after a tap in the 3D, Esc closes the layer and the tour is live again
+ok   desktop: "view in 360" moves the tour to the kitchen and closes the layer ({"scene":"kitchen","layerHidden":true})
+ok   desktop: reopened without the kitchen's 'view in 360' sheet (selected null)
+ok   desktop: reopened in the kitchen, the marker moved there (r-kitchen)
+ok   desktop: the close button closes the layer
+ok   desktop: no page errors 
+ok   desktop: from=apartment hides the 3D button
+ok   iphone13: the 3D button shows in the living room
+ok   iphone13: the 3D layer opens with the dollhouse loaded
+ok   iphone13: "you are here" on the living room's camera point ({"x":-0.758,"z":1.146,"bearingDeg":111.3,"fovDeg":60,"room":"r-living"})
+ok   iphone13: the dollhouse floor follows the tour (concrete): concrete
+ok   iphone13: the cone follows the view (tour +60 deg -> marker 60.0 deg)
+ok   iphone13: Esc closes the layer
+ok   iphone13: the button reopens it (frame kept)
+ok   iphone13: the tour behind the layer is inert
+ok   iphone13: a real tap reaches the 3D (focus inside the frame)
+ok   iphone13: after a tap in the 3D, Esc closes the layer and the tour is live again
+ok   iphone13: "view in 360" moves the tour to the kitchen and closes the layer ({"scene":"kitchen","layerHidden":true})
+ok   iphone13: reopened without the kitchen's 'view in 360' sheet (selected null)
+ok   iphone13: reopened in the kitchen, the marker moved there (r-kitchen)
+ok   iphone13: the close button closes the layer
+ok   iphone13: no page errors 
+ok   iphone13: from=apartment hides the 3D button
+ok   pixel7: the 3D button shows in the living room
+ok   pixel7: the 3D layer opens with the dollhouse loaded
+ok   pixel7: "you are here" on the living room's camera point ({"x":-0.758,"z":1.146,"bearingDeg":111.3,"fovDeg":60,"room":"r-living"})
+ok   pixel7: the dollhouse floor follows the tour (concrete): concrete
+ok   pixel7: the cone follows the view (tour +60 deg -> marker 60.0 deg)
+ok   pixel7: Esc closes the layer
+ok   pixel7: the button reopens it (frame kept)
+ok   pixel7: the tour behind the layer is inert
+ok   pixel7: a real tap reaches the 3D (focus inside the frame)
+ok   pixel7: after a tap in the 3D, Esc closes the layer and the tour is live again
+ok   pixel7: "view in 360" moves the tour to the kitchen and closes the layer ({"scene":"kitchen","layerHidden":true})
+ok   pixel7: reopened without the kitchen's 'view in 360' sheet (selected null)
+ok   pixel7: reopened in the kitchen, the marker moved there (r-kitchen)
+ok   pixel7: the close button closes the layer
+ok   pixel7: no page errors 
+ok   pixel7: from=apartment hides the 3D button

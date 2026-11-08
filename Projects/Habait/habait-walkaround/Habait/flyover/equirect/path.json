@@ -1,0 +1,107 @@
+{
+ "schema": "habait-flyover/equirect-path.v1",
+ "note": "Card 17 (C3a), 2026-11-02. One camera path in four fixed segments for an equirect 360 flight: approach (high over Sde Dov from the NE, the direction of the developer's official aerial THE-1) -> orbit (REUSED: the per-frame poses of habait-ab's running orbit, Habait/flyover/orbit/camera.json, frames 1 .. end_pose.frames[0], ending at node-b-tower) -> hold-facade (a short seamless loop at node-b) -> descend-846 (node-b -> node-e -> node-f -> node-c -> node-d -> 1.5 m outside opening o-5 of unit 846, floor 16). Evaluated by render_segments.py; this file holds anchors, timing and easing only. No second orbit path is defined here.",
+ "frame_world": "plan-world metres: X right, Y up the plan sheet, Z up, the unit's floor (16) at z 0, ground at -51.2 (= studio 'X = x_cm/100, Y = -y_cm/100'); north at plan bearing 304.4",
+ "fps": 24,
+ "north_plan_bearing_deg": 304.4,
+ "projection": {
+  "type": "equirect",
+  "level": true,
+  "centre": "u 0.5 = the segment's heading (yaw_deg_from_plus_y_cw in camera.json); the camera never pitches or rolls, so the horizon stays at v 0.5. The director's framing (e.g. the orbit's -16 deg pitch at the tower) is kept per frame as view_hint for the player.",
+  "draft_res": "1024x512",
+  "final_res": "4096x2048",
+  "engine": "Cycles panoramic equirectangular (decision T0: one render per frame, no cube-face seam, GPU OptiX/CUDA on Kaggle; EEVEE has no panoramic camera and the 6-face route needs an OpenGL context that is unproven on Kaggle)"
+ },
+ "sources": {
+  "orbit_camera": "../orbit/camera.json",
+  "exterior": "Habait/tour360/apartments/apt846/exterior.json",
+  "nodes": "Habait/studio/_local/projects/apt846-rainbow-tlv/derived/shots.pano-nodes.json",
+  "units": "Habait/engine/_local/rainbow/units.json",
+  "plan": "Habait/studio/_local/projects/apt846-rainbow-tlv/derived/plan.json"
+ },
+ "segments": [
+  {
+   "name": "approach",
+   "kind": "polar-spiral",
+   "frames": 192,
+   "about": "orbit:ring.centre_xy",
+   "from": {"bearing_true_deg": 45.0, "radius_m": 520.0, "z": 230.0, "why": "high over Sde Dov from the NE (THE-1 direction), ~22 deg down to the tower"},
+   "to": "orbit:first",
+   "direction": "clockwise",
+   "aim": "orbit:aim",
+   "easing": "smoothstep",
+   "note": "frames u = i/N, i = 0..N-1; u = 1 is orbit frame 1, which starts from rest, so the approach eases out to rest there"
+  },
+  {
+   "name": "orbit",
+   "kind": "orbit-camera",
+   "source": "orbit_camera",
+   "take": "first..end_pose",
+   "note": "frames 1 .. end_pose.frames[0] of habait-ab's orbit (orbit + its descent spiral into node-b-tower); its 12 static hold frames are replaced by hold-facade. Position and yaw are taken as they are; its pitch becomes view_hint."
+  },
+  {
+   "name": "hold-facade",
+   "kind": "loop",
+   "frames": 72,
+   "anchor": "orbit:end",
+   "drift_right_m": 0.6,
+   "drift_up_m": 0.3,
+   "easing": "out-and-back (1 - cos 2 pi u) / 2, u = i/N, i = 1..N",
+   "note": "3 s seamless loop: starts and ends at rest at node-b-tower (frame N = the node pose exactly), so frames 1..N repeat while the buyer picks a unit; yaw fixed"
+  },
+  {
+   "name": "descend-846",
+   "kind": "spline",
+   "frames": 120,
+   "spline": "centripetal Catmull-Rom through the anchors on (x, y, z, yaw, hint pitch); arc length eased by smoothstep",
+   "anchors": [
+    {"id": "node-b-tower", "from": "orbit:end"},
+    {"id": "node-e-approach45", "pos": [48.5, -34.9, 11.3], "look": [10.325, -11.148, 3.0]},
+    {"id": "node-f-approach25", "pos": [31.5, -24.35, 5.7], "look": [10.325, -11.148, 2.0]},
+    {"id": "node-c-facade", "pos": [23.3073, -20.8852, 3.1893], "look": [10.325, -11.148, 1.4819]},
+    {"id": "node-d-terrace", "pos": [14.8501, -14.1077, 2.0247], "look": [8.8839, -10.6598, 1.4952]},
+    {"id": "o-5+1.5m", "from": "end"}
+   ]
+  }
+ ],
+ "end": {
+  "unit": "apt846",
+  "floor": 16,
+  "opening": "o-5",
+  "opening_kind": "living -> terrace-living (NOT o-13, the bedroom terrace door)",
+  "o5_a_world": [10.007, -12.085],
+  "o5_b_world": [10.609, -10.308],
+  "o5_centre_world": [10.325, -11.148],
+  "normal_out_xy": [0.947126, -0.320861],
+  "normal_out_true_bearing_deg": 164.3,
+  "offset_m": 1.5,
+  "eye_z": 1.6,
+  "look": "inward along -normal_out, into the living room (plan bearing 288.7)",
+  "box_world_846": [0.738, -16.031, 0.0, 14.431, -0.378, 2.9],
+  "railing_h_m": 1.1,
+  "ceiling_z": 2.9
+ },
+ "descend_template": {
+  "schema": "habait-flyover/descend-template.v1",
+  "note": "Card 22 (C6b), 2026-11-02, additive: one descend path per unit group, offset in height per floor; read by Habait/flyover/batch/batch_units.py. render_segments.py does not read this key and the four segments above are unchanged. The base is descend-846 itself: the template at (type L, floor 16) reproduces its 120 poses exactly (batch_units.py checks it on every run).",
+  "base_segment": "descend-846",
+  "base_unit": "apt846",
+  "base_floor": 16,
+  "frames": 120,
+  "floor_to_floor_m": 3.2,
+  "variables": {
+   "floor": "the unit's floor (units.json); dz = (floor - base_floor) * floor_to_floor_m, which must equal the unit's box_world z0",
+   "end_frame": "the group's end pose and facade normal: origin = end position at eye height, axis 1 = the facade normal out, axis 2 = along the facade, axis 3 = z"
+  },
+  "start": "orbit:end = node-b-tower, the hold-facade pose; shared by every unit and never offset (every descend branches from the hold loop)",
+  "anchors": "the base segment's anchors after the start (node-e, node-f, node-c, node-d) and their look points, expressed in the base end frame (o-5 normal) and re-placed in the group's end frame (rotation about z + translation), then + dz; the end anchor = the group's end pose + dz",
+  "end_rule": {
+   "traced": "a group whose footprint is apt846's own (type L: 826/836/846/856/866, units-stacked bay 0): the base end, 1.5 m outside o-5 on the living terrace, eye 1.6, looking in along -normal_out",
+   "stacked-approx": "K/M/PH (units-stacked.json; their footprints and openings are unknown until their plans are traced): the facade = the floor-plate edge (units-geometry.json building.plate_en) hit first by a ray from the unit box centre along that edge's outward normal; the living opening = that foot point on the plate edge; end = 1.5 m outside it along the normal, eye 1.6, looking in"
+  },
+  "group_key": ["type", "facade true bearing rounded to 0.5 deg", "box_world plan rectangle rounded to 0.05 m"],
+  "eye_z": 1.6,
+  "offset_m": 1.5,
+  "output": "Habait/flyover/equirect/_local/segments/descend-<unit>/{camera.json, frames/frame_####.png}; global frames = descend-846's (the descends are alternatives at the same place in the flight)"
+ }
+}

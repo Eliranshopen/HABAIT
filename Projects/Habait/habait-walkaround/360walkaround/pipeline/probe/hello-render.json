@@ -1,0 +1,43 @@
+{
+  "probe": "T01 hello-render",
+  "date": "2026-11-02",
+  "blender": "4.5.10 LTS",
+  "blender_hash": "6dc0b208d1b5",
+  "python": "3.11.11",
+  "panorama_api": "camera.panorama_type (4.3+)",
+  "backend": "CPU",
+  "devices": [],
+  "device_note": "no GPU backend available -- fell back to CPU",
+  "resolution": [
+    512,
+    256
+  ],
+  "samples": 32,
+  "seed": 0,
+  "denoise": false,
+  "wall_clock_s": 1.092,
+  "outputs": {
+    "pano_png": "hello.png",
+    "pano_bytes": 130095,
+    "depth_exr": "hello-depth.exr",
+    "depth_exr_bytes": 68276
+  },
+  "depth": {
+    "exr_size": [
+      512,
+      256
+    ],
+    "min_m": 1.400026,
+    "max_m": 13.446656,
+    "sky_pixels": 68164,
+    "nadir_m": 1.400026,
+    "nadir_expected_m": 1.4,
+    "nadir_error_pct": 0.0019,
+    "preview_png": "hello-depth-preview.png"
+  },
+  "checks": {
+    "png_is_requested_size": true,
+    "png_is_2to1_equirect": true,
+    "depth_is_metres_at_nadir": true
+  }
+}

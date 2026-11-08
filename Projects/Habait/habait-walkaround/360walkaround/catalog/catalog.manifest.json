@@ -1,0 +1,1478 @@
+{
+  "schema_version": "1.0",
+  "generated": "2026-09-01",
+  "generated_by": "capability-scout, board 360-v2 T11",
+  "style": "Habait Modern — warm-neutral (OQ-V2-3 default in play; not yet Slava-ruled)",
+  "room_type_vocabulary": [
+    "living",
+    "bedroom",
+    "kids",
+    "kitchen",
+    "bathroom",
+    "dining"
+  ],
+  "extra_room_tags_in_use": [
+    "balcony"
+  ],
+  "sha256_note": "Every row carries sha256:null by design (T11 rail: no binaries mirrored beyond tiny liveness probes). T12's fetch.mjs --seal mode fills this per row on first real fetch, then verifies on every later run — schema does not change shape when it does.",
+  "sources": [
+    {
+      "id": "polyhaven",
+      "name": "Poly Haven",
+      "homepage": "https://polyhaven.com",
+      "licence_page": "https://polyhaven.com/license",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "row_count": 10,
+      "coverage_note": "521 total models catalogued (api.polyhaven.com/assets?type=models, keyless, fetched 2026-09-01). Strong on photoreal PBR seating/tables/lighting/plants. ZERO bathroom fixtures, ZERO wardrobes/closets/dressers, ZERO rugs (all confirmed by keyword sweep of all 521 names). All 5 of its sofo(a) models are vintage/antique by their OWN description text — see RESEARCH.md."
+    },
+    {
+      "id": "kenney-furniture-kit",
+      "name": "Kenney — Furniture Kit",
+      "homepage": "https://kenney.nl/assets/furniture-kit",
+      "licence_page": "https://kenney.nl/assets/furniture-kit",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "pack_direct_zip_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "pack_zip_sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+      "pack_zip_bytes": 5130729,
+      "row_count": 45,
+      "coverage_note": "ONE CC0 pack, 140 named single-file .glb models (verified via `unzip -Z1` on a one-time scratchpad-only download, not committed anywhere — T12 refetches fresh per rail 4). Covers every one of the 6 standard room types including full bathroom fixtures and rugs, both categories Poly Haven has zero of. Low-poly flat-shaded game-asset style — geometry is clean/modern but untextured beyond flat colour; T12 will want a materials pass (see RESEARCH.md style-coherence risk)."
+    },
+    {
+      "id": "quaternius-via-polypizza",
+      "name": "Quaternius (origin), individually mirrored on Poly Pizza",
+      "homepage": "https://quaternius.com",
+      "licence_page": "https://quaternius.com/packs/ultimatefurniture.html",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Origin (quaternius.com): license = \"CC0\" linking the CC0 deed, stated for all packs including Ultimate Furniture Pack. Mirror (poly.pizza asset page) independently shows \"CC0 1.0\" for this exact file, linking the same deed, author credited \"Quaternius\".",
+        "url": "https://quaternius.com/packs/ultimatefurniture.html",
+        "mirror_asset_page_pattern": "https://poly.pizza/m/<id>",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "row_count": 2,
+      "coverage_note": "Quaternius's OWN site only offers pack-level bulk downloads (a Google Drive folder link for Ultimate Furniture Pack — fragile, no stable per-file URL, no HEAD-checkable liveness). poly.pizza mirrors many individual Quaternius CC0 files with stable static.poly.pizza direct URLs (HEAD-verified 200, gltf-binary) AND independently redisplays \"CC0 1.0\" + the CC0 deed link + \"Quaternius\" author credit on each mirrored asset page — used here purely as the practical per-file download vector for two specific modern sofas; licence authority is still Quaternius's own CC0 statement."
+    }
+  ],
+  "assets": [
+    {
+      "id": "polyhaven-modern_arm_chair_01",
+      "name": "modern arm chair 01",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/modern_arm_chair_01",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modern_arm_chair_01/modern_arm_chair_01_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 8916,
+      "dimensions_cm": [
+        82,
+        99,
+        102
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/modern_arm_chair_01.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "c6c92b5a07be4ab37e48fbf43c7ff233b90b1e364987e2bae790aed501fe97f6",
+      "notes": "Used already in T03 probe. Photoreal PBR armchair, clean modern lines."
+    },
+    {
+      "id": "polyhaven-modern_coffee_table_01",
+      "name": "modern coffee table 01",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/modern_coffee_table_01",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modern_coffee_table_01/modern_coffee_table_01_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 4504,
+      "dimensions_cm": [
+        120,
+        60,
+        39
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/modern_coffee_table_01.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "e29a5a55b2793add33473e2d641c3dfbebd2d1098e62ccb957f7e11bcd54b46d",
+      "notes": "Used already in T03 probe."
+    },
+    {
+      "id": "polyhaven-modern_coffee_table_02",
+      "name": "modern coffee table 02",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/modern_coffee_table_02",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modern_coffee_table_02/modern_coffee_table_02_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 13645,
+      "dimensions_cm": [
+        120,
+        120,
+        37
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/modern_coffee_table_02.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "238f70d31434d69333cd50f2bf50da802dad1a920c3ecc472edef553804d61f6",
+      "notes": "Description: \"contemporary rectangular coffee table with a dark stone base... deco-inspired, clean finish.\" Alt to modern_coffee_table_01."
+    },
+    {
+      "id": "polyhaven-modern_wooden_cabinet",
+      "name": "modern wooden cabinet",
+      "room_types": [
+        "living",
+        "bedroom"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/modern_wooden_cabinet",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modern_wooden_cabinet/modern_wooden_cabinet_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 24976,
+      "dimensions_cm": [
+        244,
+        52,
+        68
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/modern_wooden_cabinet.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "2a2761da5af42b498e75e2f0cfeba716ca7cd86f3b357bb9bd326d7c98a92d5f",
+      "notes": "Description: \"minimalist contemporary design.\" WARDROBE-GAP WORKAROUND: nearest CC0 stand-in for bedroom wardrobe/dresser storage — no purpose-built CC0 wardrobe found anywhere swept (see RESEARCH.md)."
+    },
+    {
+      "id": "polyhaven-modern_ceiling_lamp_01",
+      "name": "modern ceiling lamp 01",
+      "room_types": [
+        "living",
+        "dining",
+        "bedroom"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/modern_ceiling_lamp_01",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/modern_ceiling_lamp_01/modern_ceiling_lamp_01_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 5602,
+      "dimensions_cm": [
+        43,
+        43,
+        95
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/modern_ceiling_lamp_01.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "7eea1d3318ce550b3251593de9c1110f8b9f76af1523ea19e87c3d638e3c117d",
+      "notes": "Used already in T03 probe. Pendant lamp, multi-room."
+    },
+    {
+      "id": "polyhaven-potted_plant_02",
+      "name": "potted plant 02",
+      "room_types": [
+        "living",
+        "bedroom",
+        "kitchen",
+        "dining"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/potted_plant_02",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/potted_plant_02/potted_plant_02_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 69806,
+      "dimensions_cm": [
+        70,
+        66,
+        84
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/potted_plant_02.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "b62ded8ac23b439d2d4457916241f45e029d1455cd792f426ef3b0e5f889589c",
+      "notes": "Used already in T03 probe. High poly (69.8k) — flag for T12 if a decimated LOD is needed at scale."
+    },
+    {
+      "id": "polyhaven-hanging_picture_frame_01",
+      "name": "hanging picture frame 01",
+      "room_types": [
+        "living",
+        "bedroom"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/hanging_picture_frame_01",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/hanging_picture_frame_01/hanging_picture_frame_01_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 2586,
+      "dimensions_cm": [
+        59,
+        2,
+        84
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/hanging_picture_frame_01.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "86b17dde5ebf276c92e65d56b3061cb324110f57e1382b32fabeddb50c5913f0",
+      "notes": "Description: \"modern minimalist... slim black metal frame, white mat... clean, simple wall decoration.\" Wall-art gap filled — its two siblings (02/03) are vintage/ornate, REJECTED, see RESEARCH.md."
+    },
+    {
+      "id": "polyhaven-steel_frame_shelves_01",
+      "name": "steel frame shelves 01",
+      "room_types": [
+        "living",
+        "kitchen"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/steel_frame_shelves_01",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/steel_frame_shelves_01/steel_frame_shelves_01_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": 4348,
+      "dimensions_cm": [
+        110,
+        50,
+        214
+      ],
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/steel_frame_shelves_01.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "ee196ca52dd4422f77ee6b47ffa1bf270b29d4d8925e7a8f22856a29bb626d88",
+      "notes": "Description: \"modern industrial steel-frame shelf... clean lines.\" Open shelving."
+    },
+    {
+      "id": "polyhaven-wooden_display_shelves_01",
+      "name": "wooden display shelves 01",
+      "room_types": [
+        "living",
+        "kids"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/wooden_display_shelves_01",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/wooden_display_shelves_01/wooden_display_shelves_01_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/wooden_display_shelves_01.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "bfd4dc80d6e684fd156bb5c76d87708970cf2d5bbf4cb1805b96a71a7747d920",
+      "notes": "Description: \"modern pine display shelf... clean, minimalist bookshelf.\" Alt shelving unit, good for a kids room low-storage/display piece."
+    },
+    {
+      "id": "polyhaven-outdoor_table_chair_set_01",
+      "name": "outdoor table chair set 01",
+      "room_types": [
+        "dining"
+      ],
+      "source_id": "polyhaven",
+      "source_asset_url": "https://polyhaven.com/a/outdoor_table_chair_set_01",
+      "direct_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/blend/2k/outdoor_table_chair_set_01/outdoor_table_chair_set_01_2k.blend",
+      "archive_path": null,
+      "format": "blend",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/outdoor_table_chair_set_01.png?width=256",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Poly Haven publishes its ENTIRE library... under CC0 1.0 (public-domain dedication): no attribution required, commercial use allowed, no share-alike.",
+        "url": "https://polyhaven.com/license",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "e480fc1c3f76212f78d5a13a79f15886b2866c305bcd2758422cb89a775e9810",
+      "notes": "Description: \"compact outdoor foldable table & two chairs... patios.\" BONUS row for balcony dressing (r-balcony-north/south have no camera point per plan_meta.assumptions but are visible through the south sliding door, GT-23) — tag informally extends past the required 6; T12 may ignore if balconies stay undressed."
+    },
+    {
+      "id": "kenney-furniture-kit-loungeDesignSofa",
+      "name": "lounge Design Sofa",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/loungeDesignSofa.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53",
+      "notes": "MODERN SOFA — closes the Poly Haven gap (T03 finding). Low-poly flat-shaded; needs a Blender PBR material pass in T12 to read as photoreal next to Poly Haven pieces (see RESEARCH.md \"style-coherence risk\")."
+    },
+    {
+      "id": "kenney-furniture-kit-loungeSofaCorner",
+      "name": "lounge Sofa Corner",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/loungeSofaCorner.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "bbdd91791e621ac71321eaf38a2432c53279792ef946707f23b216123bd52655",
+      "notes": "MODERN corner/sectional sofa, alt to loungeDesignSofa."
+    },
+    {
+      "id": "kenney-furniture-kit-loungeDesignSofaCorner",
+      "name": "lounge Design Sofa Corner",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/loungeDesignSofaCorner.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "fe665d07d53fdc6bc96e9fed453874ba4202b008194e1e24100b067081c62be1",
+      "notes": "MODERN L-shaped design sofa, third sofa option."
+    },
+    {
+      "id": "kenney-furniture-kit-loungeChairRelax",
+      "name": "lounge Chair Relax",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/loungeChairRelax.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "def698179e44de6cd17f4cfc2730273da54dd25458a29b079fbf4468abe5d98e",
+      "notes": "Modern lounge/relax armchair, low-poly companion to the sofa set."
+    },
+    {
+      "id": "kenney-furniture-kit-loungeSofaOttoman",
+      "name": "lounge Sofa Ottoman",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/loungeSofaOttoman.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "79087654136d7d69653fdc3b52a02d7833fe13e6a0a56b8dcdf652c611dbd959",
+      "notes": "Matching ottoman/footstool for the lounge sofa set."
+    },
+    {
+      "id": "kenney-furniture-kit-tableCoffee",
+      "name": "table Coffee",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/tableCoffee.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "e38bea760fbd514efbb75528d09b4752c91af44677bbb97e6d4386c263525179",
+      "notes": "Coffee table, low-poly, matches the Kenney sofa set stylistically."
+    },
+    {
+      "id": "kenney-furniture-kit-cabinetTelevision",
+      "name": "cabinet Television",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/cabinetTelevision.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "811719593d676ff76f7b5904d52c845ce0396af2bc9a6a2636c4818ead320b99",
+      "notes": "TV console/unit."
+    },
+    {
+      "id": "kenney-furniture-kit-televisionModern",
+      "name": "television Modern",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/televisionModern.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "d89519ad0a5f28b5b0dccb0d83209dccf610cda959578238dd21bbf9e219cfc6",
+      "notes": "Flat-screen TV model, pairs with cabinetTelevision."
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseOpen",
+      "name": "bookcase Open",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bookcaseOpen.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c",
+      "notes": "Open bookcase/shelving."
+    },
+    {
+      "id": "kenney-furniture-kit-sideTable",
+      "name": "side Table",
+      "room_types": [
+        "living",
+        "bedroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/sideTable.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472",
+      "notes": "Small side/accent table."
+    },
+    {
+      "id": "kenney-furniture-kit-lampRoundFloor",
+      "name": "lamp Round Floor",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/lampRoundFloor.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "50fe1b5b588edf15bfa9cc880f71a02a4fda6036350b24733d0ef4de5cc5e908",
+      "notes": "Floor lamp."
+    },
+    {
+      "id": "kenney-furniture-kit-bedDouble",
+      "name": "bed Double",
+      "room_types": [
+        "bedroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bedDouble.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "notes": "Double/queen bed frame — master or secondary bedroom."
+    },
+    {
+      "id": "kenney-furniture-kit-bedSingle",
+      "name": "bed Single",
+      "room_types": [
+        "bedroom",
+        "kids"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bedSingle.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "notes": "Single bed — secondary bedroom or kids room."
+    },
+    {
+      "id": "kenney-furniture-kit-cabinetBedDrawerTable",
+      "name": "cabinet Bed Drawer Table",
+      "room_types": [
+        "bedroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/cabinetBedDrawerTable.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "fec6271639df5aff9f8ac75d6679385eab2abb7c8d2f51abeba3ed689ddb6f0d",
+      "notes": "Nightstand with drawer."
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseClosedWide",
+      "name": "bookcase Closed Wide",
+      "room_types": [
+        "bedroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bookcaseClosedWide.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "notes": "WARDROBE-GAP WORKAROUND #2: wide closed-door cabinet, nearest CC0 wardrobe stand-in from this pack (see modern_wooden_cabinet for the Poly Haven alt, and RESEARCH.md for why no purpose-built CC0 wardrobe was found)."
+    },
+    {
+      "id": "kenney-furniture-kit-lampRoundTable",
+      "name": "lamp Round Table",
+      "room_types": [
+        "bedroom",
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/lampRoundTable.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "75bb644caaa3da003b4fcad7a931722dd61cd2858aab70cf660021d5061fa1b2",
+      "notes": "Table lamp for a nightstand or side table."
+    },
+    {
+      "id": "kenney-furniture-kit-rugRound",
+      "name": "rug Round",
+      "room_types": [
+        "bedroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/rugRound.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db",
+      "notes": "Round area rug."
+    },
+    {
+      "id": "kenney-furniture-kit-pillow",
+      "name": "pillow",
+      "room_types": [
+        "bedroom",
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/pillow.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6",
+      "notes": "Throw pillow, small decor accent."
+    },
+    {
+      "id": "kenney-furniture-kit-bedBunk",
+      "name": "bed Bunk",
+      "room_types": [
+        "kids"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bedBunk.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+      "notes": "Bunk bed — dedicated kids-room piece."
+    },
+    {
+      "id": "kenney-furniture-kit-chairDesk",
+      "name": "chair Desk",
+      "room_types": [
+        "kids"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/chairDesk.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "46406619186034cbe92b19b79a5f1a8e3f442a17a70a7524ef2c0ad0f35095c6",
+      "notes": "Desk chair."
+    },
+    {
+      "id": "kenney-furniture-kit-desk",
+      "name": "desk",
+      "room_types": [
+        "kids"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/desk.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "notes": "Study desk."
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseOpenLow",
+      "name": "bookcase Open Low",
+      "room_types": [
+        "kids"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bookcaseOpenLow.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+      "notes": "Low open bookcase, kid-height storage/toys."
+    },
+    {
+      "id": "kenney-furniture-kit-rugSquare",
+      "name": "rug Square",
+      "room_types": [
+        "kids",
+        "dining"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/rugSquare.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "18a63634e9bbdde0b309c008f4cd41df8455f7f2ffdb8fe8985fdf8c2cd06b3d",
+      "notes": "Square rug, playful in a kids room."
+    },
+    {
+      "id": "kenney-furniture-kit-books",
+      "name": "books",
+      "room_types": [
+        "kids",
+        "living"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/books.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+      "notes": "Book stack decor accent."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinet",
+      "name": "kitchen Cabinet",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenCabinet.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "7238c57778935ae25db5e57e9f7af3ba7068c71b005ff7cfbff3b6f3b1a13200",
+      "notes": "Base cabinet run."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinetUpper",
+      "name": "kitchen Cabinet Upper",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenCabinetUpper.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "8f2496feed85a745ffb6e554075b8450d647f8f68b01d6a010fcac1510fc173a",
+      "notes": "Upper wall cabinet."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinetCornerRound",
+      "name": "kitchen Cabinet Corner Round",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenCabinetCornerRound.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "333ab73202cb87b76d4ff94939038dcaf315eda55285bdbeba20d255da488e97",
+      "notes": "Rounded corner cabinet."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenSink",
+      "name": "kitchen Sink",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenSink.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "7b9610277d71f00dcf1bba49cf4d98d77ce5177e84bf76c7da2f8893e542f743",
+      "notes": "Kitchen sink."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenStoveElectric",
+      "name": "kitchen Stove Electric",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenStoveElectric.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "cf646b960d7dfed1fac27898ff6de1f0671cfa33beecbed06ead7d0684517392",
+      "notes": "Electric stove/cooktop."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenFridge",
+      "name": "kitchen Fridge",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenFridge.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "8af4f4bbb1b5525ad8226e97926a5af60fa8fb20a3cb74dbda5328a9d320dbab",
+      "notes": "Refrigerator."
+    },
+    {
+      "id": "kenney-furniture-kit-hoodModern",
+      "name": "hood Modern",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/hoodModern.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "f5ac7dbadd1d98813c48315e56fa6ab2e8783870b1fb7be30825177bbf2b2afe",
+      "notes": "Modern range hood."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenMicrowave",
+      "name": "kitchen Microwave",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenMicrowave.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "dd6a6c919f4bebc6e2080fe419262cf97a0d6461ead3f3998aa3c9edf4d2bd27",
+      "notes": "Microwave, counter accessory."
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCoffeeMachine",
+      "name": "kitchen Coffee Machine",
+      "room_types": [
+        "kitchen"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/kitchenCoffeeMachine.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "063f582c6fa0f00a9f24e3393dac2295491c4becdaf5513c893ab1a2826b6ec3",
+      "notes": "Counter decor accessory."
+    },
+    {
+      "id": "kenney-furniture-kit-toilet",
+      "name": "toilet",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/toilet.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "16165cfd03c56c2cb443b800570810a22ef770f65e7a468f6761d9dc14eaaeae",
+      "notes": "WC — closes the \"Poly Haven has zero bathroom fixtures\" gap for the main bathroom + guest WC."
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomSink",
+      "name": "bathroom Sink",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bathroomSink.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "39d4f19608cab7e0fed52303b2c689f5f51fae1bad9b6913cb53d838875e797e",
+      "notes": "Vanity sink."
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomSinkSquare",
+      "name": "bathroom Sink Square",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bathroomSinkSquare.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "360853c822f268e7267c62ef20cf646f170a13d76254cc0804a1d397a4a3ea67",
+      "notes": "Square/modern vanity sink, alt for the en-suite."
+    },
+    {
+      "id": "kenney-furniture-kit-showerRound",
+      "name": "shower Round",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/showerRound.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "1723208eaba3fb215089e02c8cdd3d7201d0980ad0c7b275319eb539f6094bfb",
+      "notes": "Shower enclosure — for the master en-suite (חדר רחצה הורים)."
+    },
+    {
+      "id": "kenney-furniture-kit-bathtub",
+      "name": "bathtub",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bathtub.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "54c405c7035aab63dc41e709dc3c50fc5bcfbc4cddc91ffc54188075a6d25d01",
+      "notes": "Bathtub — for the main bathroom (חדר רחצה)."
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomCabinet",
+      "name": "bathroom Cabinet",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bathroomCabinet.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "9db540227acaaedbbadc6a085f4a00460b73944e608afaad4770e53238a3b7f8",
+      "notes": "Vanity storage cabinet."
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomMirror",
+      "name": "bathroom Mirror",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/bathroomMirror.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "940b986894101ea59b50541554b6dc608a22b133057975849259009012984175",
+      "notes": "Bathroom mirror."
+    },
+    {
+      "id": "kenney-furniture-kit-rugDoormat",
+      "name": "rug Doormat",
+      "room_types": [
+        "bathroom"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/rugDoormat.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "bd888e41853342cdc0d34d3f09b99cedc50a144f47b514943b65cdb9a2cfd802",
+      "notes": "Bath mat stand-in (doormat-shaped rug)."
+    },
+    {
+      "id": "kenney-furniture-kit-table",
+      "name": "table",
+      "room_types": [
+        "dining"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/table.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61",
+      "notes": "Plain dining table — Poly Haven's own \"dining_table\" was REJECTED as rustic/gingham-draped (see RESEARCH.md), so this pack supplies the dining table."
+    },
+    {
+      "id": "kenney-furniture-kit-chairModernCushion",
+      "name": "chair Modern Cushion",
+      "room_types": [
+        "dining"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/chairModernCushion.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "245132697e633e907e2b48c86d56f6c8543604a3440a055d1c71c06ce11d2858",
+      "notes": "MODERN dining chair — literally named \"modern\" by the source; Poly Haven's only dining chair (dining_chair_02) was REJECTED as tufted brown leather (see RESEARCH.md)."
+    },
+    {
+      "id": "kenney-furniture-kit-chairModernFrameCushion",
+      "name": "chair Modern Frame Cushion",
+      "room_types": [
+        "dining"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/chairModernFrameCushion.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "fd3351b077cafbd54224e20fa7a3a1b4a4304019cf44c25a6e7709ad71b852b8",
+      "notes": "Second modern dining chair option."
+    },
+    {
+      "id": "kenney-furniture-kit-rugRectangle",
+      "name": "rug Rectangle",
+      "room_types": [
+        "living",
+        "dining"
+      ],
+      "source_id": "kenney-furniture-kit",
+      "source_asset_url": "https://kenney.nl/assets/furniture-kit",
+      "direct_download_url": "https://kenney.nl/media/pages/assets/furniture-kit/440e0608a4-1677580847/kenney_furniture-kit.zip",
+      "archive_path": "Models/GLTF format/rugRectangle.glb",
+      "format": "glb (packed inside a single pack .zip)",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://kenney.nl/media/pages/assets/furniture-kit/4573c6a40b-1677580842/sample.png",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "\"Download this package (140 assets) for free, CC0 licensed!\" — licence cell links \"Creative Commons CC0\" to the CC0 deed.",
+        "url": "https://kenney.nl/assets/furniture-kit",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "notes": "Rectangular area rug — Poly Haven has ZERO rug models at all (confirmed via keyword sweep of all 521 models); this pack is the rug source for every room."
+    },
+    {
+      "id": "quaternius-X5kQPKzAWp",
+      "name": "Sofa (Quaternius)",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "quaternius-via-polypizza",
+      "source_asset_url": "https://poly.pizza/m/X5kQPKzAWp",
+      "direct_download_url": "https://static.poly.pizza/f627491f-7126-4323-8d01-0be933671078.glb",
+      "archive_path": null,
+      "format": "glb",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://static.poly.pizza/f627491f-7126-4323-8d01-0be933671078.webp",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Origin (quaternius.com): license = \"CC0\" linking the CC0 deed, stated for all packs including Ultimate Furniture Pack. Mirror (poly.pizza asset page) independently shows \"CC0 1.0\" for this exact file, linking the same deed, author credited \"Quaternius\".",
+        "url": "https://quaternius.com/packs/ultimatefurniture.html",
+        "mirror_asset_page_pattern": "https://poly.pizza/m/<id>",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "0a81a9e0532f1ccb51a39d6a71bbc3fa2506dac22fa762b58194ed4741c2f5a0",
+      "notes": "PRIMARY MODERN SOFA candidate — L-shaped sectional, visually confirmed modern (thumbnail reviewed). Author \"Quaternius\" credited on both quaternius.com (origin) and the poly.pizza mirror page."
+    },
+    {
+      "id": "quaternius-1kwsjhpY84",
+      "name": "L Couch (Quaternius)",
+      "room_types": [
+        "living"
+      ],
+      "source_id": "quaternius-via-polypizza",
+      "source_asset_url": "https://poly.pizza/m/1kwsjhpY84",
+      "direct_download_url": "https://static.poly.pizza/7cf27481-8505-42f8-9172-ce209242de09.glb",
+      "archive_path": null,
+      "format": "glb",
+      "tri_count": null,
+      "dimensions_cm": null,
+      "thumbnail_url": "https://static.poly.pizza/7cf27481-8505-42f8-9172-ce209242de09.webp",
+      "licence": {
+        "status": "CC0-verified",
+        "quote": "Origin (quaternius.com): license = \"CC0\" linking the CC0 deed, stated for all packs including Ultimate Furniture Pack. Mirror (poly.pizza asset page) independently shows \"CC0 1.0\" for this exact file, linking the same deed, author credited \"Quaternius\".",
+        "url": "https://quaternius.com/packs/ultimatefurniture.html",
+        "mirror_asset_page_pattern": "https://poly.pizza/m/<id>",
+        "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_date": "2026-09-01"
+      },
+      "sha256": "f3b338973f1710c9d7458c8a0dd4fe53eb2ba3adffed417cb2ca8bc9a4d9deeb",
+      "notes": "Alt modern L-shaped sofa, visually confirmed. Same author/licence chain as X5kQPKzAWp."
+    }
+  ]
+}

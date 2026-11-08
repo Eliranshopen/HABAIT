@@ -1,0 +1,42 @@
+ok   entrance: btn true, marker room r-entrance, bearing marker 142.9 / wedge geometry 142.9 / expected 142.9, pos delta vs cameras.json 0.00,0.00 cm
+ok   kitchen: btn true, marker room r-kitchen, bearing marker 162.5 / wedge geometry 162.5 / expected 162.5, pos delta vs cameras.json 0.06,0.00 cm
+ok   dining: btn true, marker room r-dining, bearing marker 93.8 / wedge geometry 93.8 / expected 93.8, pos delta vs cameras.json 0.06,0.03 cm
+ok   living: btn true, marker room r-living, bearing marker 148.3 / wedge geometry 148.3 / expected 148.3, pos delta vs cameras.json -0.00,0.03 cm
+ok   terraceLiving: btn true, marker room r-terrace-living, bearing marker 32.9 / wedge geometry 32.9 / expected 32.9, pos delta vs cameras.json -0.01,0.09 cm
+ok   terraceBedroom: btn true, marker room r-terrace-bedroom, bearing marker 53.3 / wedge geometry 53.3 / expected 53.3, pos delta vs cameras.json 0.03,0.02 cm
+ok   bedroomMain: btn true, marker room r-bedroom-main, bearing marker 21.9 / wedge geometry 21.9 / expected 21.9, pos delta vs cameras.json 0.03,0.06 cm
+ok   wardrobe: btn true, marker room r-wardrobe, bearing marker 143.4 / wedge geometry 143.4 / expected 143.4, pos delta vs cameras.json 0.02,0.04 cm
+ok   bathMain: btn true, marker room r-bath-main, bearing marker 73.8 / wedge geometry 73.8 / expected 73.8, pos delta vs cameras.json 0.00,0.00 cm
+ok   bedroom2: btn true, marker room r-bedroom-2, bearing marker 72.2 / wedge geometry 72.2 / expected 72.2, pos delta vs cameras.json 0.06,0.07 cm
+ok   bathguest: btn true, marker room r-bath-guest, bearing marker 52.7 / wedge geometry 52.7 / expected 52.7, pos delta vs cameras.json 0.02,0.06 cm
+ok   exterior aerial (scene aerial): 3D button hidden true
+ok   exterior orbit1 (scene orbit1): 3D button hidden true
+ok   exterior orbit2 (scene orbit2): 3D button hidden true
+ok   exterior orbit3 (scene orbit3): 3D button hidden true
+ok   exterior orbit4 (scene orbit4): 3D button hidden true
+ok   exterior orbit5 (scene orbit5): 3D button hidden true
+ok   exterior tower (scene tower): 3D button hidden true
+ok   exterior approach45 (scene approach45): 3D button hidden true
+ok   exterior approach25 (scene approach25): 3D button hidden true
+ok   exterior facade (scene facade): 3D button hidden true
+ok   exterior terraceOut (scene terraceOut): 3D button hidden true
+info tour exports: ready,scene,sceneKey,lang,visited,viewer,rotating,interacted,loads,edits,live,liveMeta,original,applying,unlocked,hooks,catalog,marker,markers,maxTexture,look,lookSwitch,panoSet,fullSet,tiles,floor,videos,hooks_guide,hooks_measure,cone
+ok   40x open/close: no new errors (), iframes #t-3d-frame/all=1/1
+info posts to frame while closed after a turn: 0 (0 expected; patch may not stick cross-doc)
+ok   keyboard: Enter on button -> focus t-3d-close; Esc -> focus back on t-3d-btn
+ok   keyboard: Space on the focused close button closes it
+info Tab x4 from the close button lands on: t-3d-frame > t-3d-frame > t-3d-frame > t-3d-frame (aria-modal, no trap implemented => focus may leave to tour controls behind the layer)
+info Esc with focus inside the dollhouse iframe closes the layer: false
+info elementFromPoint with layer open: t-3d-frame | t-3d-head | t-3d-frame | t-3d-frame | t-3d-title
+ok   no page errors across A-D: 
+ok   lang=he: {"dir":"rtl","lang":"he","title":"תלת-ממד","titleX":1233,"closeX":34,"W":1280,"aria":"סגירה","btnTitle":"תלת-ממד","closeW":44,"closeH":44,"titleDir":"rtl","titleAlign":"start","titleLeft":1198,"titleRight":1268}
+ok   lang=en: {"dir":"ltr","lang":"en","title":"3D view","titleX":42,"closeX":1246,"W":1280,"aria":"Close","btnTitle":"3D view","closeW":44,"closeH":44,"titleDir":"ltr","titleAlign":"start","titleLeft":12,"titleRight":72}
+ok   lang=fr: {"dir":"ltr","lang":"fr","title":"Vue 3D","titleX":39,"closeX":1246,"W":1280,"aria":"Fermer","btnTitle":"Vue 3D","closeW":44,"closeH":44,"titleDir":"ltr","titleAlign":"start","titleLeft":12,"titleRight":67}
+ok   iphone13: {"sw":390,"bw":390,"iw":390,"headTop":0,"headL":0,"headR":390,"headH":61,"closeL":12,"closeR":56,"closeW":44,"frameT":61,"frameB":664,"ih":664,"frameW":390} dollhouse scrollW 390/390; 3D button box {"l":14,"r":58,"t":206,"b":250,"w":44,"h":44,"W":390,"H":664}; errors 0
+ok   pixel7: {"sw":412,"bw":412,"iw":412,"headTop":0,"headL":0,"headR":412,"headH":61,"closeL":12,"closeR":56,"closeW":44,"frameT":61,"frameB":839,"ih":839,"frameW":412} dollhouse scrollW 412/412; 3D button box {"l":12,"r":56,"t":293.5,"b":337.5,"w":44,"h":44,"W":412,"H":839}; errors 0
+ok   se: {"sw":320,"bw":320,"iw":320,"headTop":0,"headL":0,"headR":320,"headH":61,"closeL":12,"closeR":56,"closeW":44,"frameT":61,"frameB":568,"ih":568,"frameW":320} dollhouse scrollW 320/320; 3D button box {"l":14,"r":58,"t":158,"b":202,"w":44,"h":44,"W":320,"H":568}; errors 0
+ok   iphone13-land: {"sw":750,"bw":750,"iw":750,"headTop":0,"headL":0,"headR":750,"headH":61,"closeL":12,"closeR":56,"closeW":44,"frameT":61,"frameB":342,"ih":342,"frameW":750} dollhouse scrollW 750/750; 3D button box {"l":18,"r":62,"t":45,"b":89,"w":44,"h":44,"W":750,"H":342}; errors 0
+ok   ?floor=marble: dollhouse floor marble
+info tour floor controls found: [":פרקט",":בטון",":שיש",":פרקט",":בטון",":שיש"]
+ok   ?floor=parquet: dollhouse floor parquet
+ok   ?floor=concrete: dollhouse floor concrete

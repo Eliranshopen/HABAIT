@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A1330">
+<meta name="color-scheme" content="dark">
+<title>__TITLE__</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A1330'/%3E%3Cpath d='M16 30 32 17l16 13v17H38V36H26v11H16z' fill='white'/%3E%3C/svg%3E">
+<style>/*__PANNELLUM_CSS__*/</style>
+<style>/*__TOUR_CSS__*/</style>
+</head>
+<body>
+<main class="t-root" id="t-root">
+  <div id="pano" class="t-pano" dir="ltr" tabindex="0"></div>
+  <svg class="t-measure-svg" id="t-measure-svg" aria-hidden="true"></svg>
+    <div class="t-shade t-shade-top" aria-hidden="true"></div>
+  <div class="t-shade t-shade-bottom" aria-hidden="true"></div>
+
+  <header class="t-head">
+    <div class="t-head-start">
+      <span class="t-brand" dir="ltr" lang="en">Habait</span>
+      <span id="tour-badge" class="t-badge" data-permanent="true" role="note"></span>
+    </div>
+    <div class="t-head-end">
+      <!-- 2026-11-08 (Eliran: «שכל הפיצ'רים האלה יכנסו תחת כפתור 'שינוי עיצוב'… ככה זה לא יכסה לי את המסך»): ONE header button opens the look switch, the floor finishes and the typed bar -->
+      <button type="button" class="t-design-btn" id="t-design-btn" aria-expanded="false" aria-controls="t-design" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg><span class="t-design-label" id="t-design-label"></span><span class="t-design-state" id="t-design-state"></span></button>
+      <button type="button" class="t-icon-btn t-help" id="t-help" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1.1.9-1.1 1.6v.6"/><path d="M12 16.8h.01"/></svg></button>
+      <button type="button" class="t-icon-btn t-guide" id="t-guide" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3.2"/><path d="M6.5 20.5v-3.5a5.5 5.5 0 0 1 11 0v3.5"/><path d="M17.5 4.5c1.6 1.2 1.6 4 0 5.2M20 2.5c2.8 2.1 2.8 7.1 0 9.2"/></svg></button>
+      <button type="button" class="t-icon-btn t-ruler" id="t-ruler" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17 17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></svg></button>
+      <button type="button" class="t-return" id="t-skip" hidden></button>
+      <a class="t-return" id="t-return" hidden></a>
+      <div class="t-lang" role="group" id="t-lang">
+        <button type="button" data-lang="he" lang="he">עב</button>
+        <button type="button" data-lang="en" lang="en">EN</button>
+        <button type="button" data-lang="fr" lang="fr">FR</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="t-title" aria-live="polite">
+    <p class="t-zone" id="t-zone"></p>
+    <h1 class="t-room" id="t-room"></h1>
+    <p class="t-apt" id="t-apt"></p>
+    <p id="tour-concept" class="t-concept" data-permanent="true"></p>
+  </section>
+
+  <aside class="t-guide-card" id="t-guide-card" hidden>
+    <video class="t-guide-video" id="t-guide-video" playsinline hidden></video>
+    <div class="t-guide-figure" id="t-guide-figure" aria-hidden="true">
+      <svg viewBox="0 0 96 96"><defs><linearGradient id="t-guide-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8def"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient></defs>
+        <circle class="t-guide-ring" cx="48" cy="48" r="45"/><circle cx="48" cy="48" r="40" fill="url(#t-guide-g)"/>
+        <circle cx="48" cy="38" r="13" fill="#fde9d6"/><path d="M35 36c0-9 6-15 13-15s13 6 13 15c-2-4-6-6-13-6s-11 2-13 6z" fill="#3b2a20"/>
+        <path d="M24 82c2-14 11-22 24-22s22 8 24 22a40 40 0 0 1-48 0z" fill="#f3f4f6"/><path d="M40 60c3 5 13 5 16 0" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+        <circle cx="43" cy="38" r="1.6" fill="#1f1f1f"/><circle cx="53" cy="38" r="1.6" fill="#1f1f1f"/><path d="M44 44c2 2 6 2 8 0" fill="none" stroke="#b5654a" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="t-guide-eq"><i></i><i></i><i></i><i></i></span>
+    </div>
+    <div class="t-guide-body">
+      <div class="t-guide-name" id="t-guide-name"></div>
+      <div class="t-guide-count" id="t-guide-count"></div>
+      <p class="t-guide-text" id="t-guide-text"></p>
+      <div class="t-guide-actions"><button type="button" class="t-guide-btn" id="t-guide-next"></button><button type="button" class="t-guide-btn t-guide-btn-stop" id="t-guide-stop"></button></div>
+    </div>
+  </aside>
+
+  <div class="t-measure-bar" id="t-measure-bar" hidden>
+    <span class="t-measure-hint" id="t-measure-hint"></span>
+    <button type="button" class="t-measure-clear" id="t-measure-clear"></button>
+    <span class="t-measure-note" id="t-measure-note"></span>
+  </div>
+
+  <div class="t-tools" id="t-tools">
+    <button type="button" class="t-icon-btn" id="t-3d-btn" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg></button>
+    <button type="button" class="t-icon-btn" id="t-plan-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></svg></button>
+    <button type="button" class="t-icon-btn t-fine" id="t-zoom-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+    <button type="button" class="t-icon-btn t-fine" id="t-zoom-out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+    <button type="button" class="t-icon-btn" id="t-rotate" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4.5h-4.5"/></svg></button>
+    <button type="button" class="t-icon-btn" id="t-reset"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></button>
+    <button type="button" class="t-icon-btn" id="t-full"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <!-- 2026-11-08: on phones the header has no room for the (?) button: it sits at the end of this rail instead (CSS shows one of the two) -->
+    <button type="button" class="t-icon-btn t-help-rail" id="t-help-rail" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1.1.9-1.1 1.6v.6"/><path d="M12 16.8h.01"/></svg></button>
+  </div>
+
+  <!-- board dollhouse-in-tour (2026-11-03): the 3D dollhouse over the tour; the frame loads on the first open -->
+  <div class="t-3d" id="t-3d" role="dialog" aria-modal="true" aria-labelledby="t-3d-title" hidden>
+    <div class="t-3d-head"><h2 id="t-3d-title" class="t-3d-sr"></h2><button type="button" class="t-3d-close" id="t-3d-close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <iframe class="t-3d-frame" id="t-3d-frame" title="3D" allow="fullscreen"></iframe>
+  </div>
+
+  <!-- 2026-11-08: the guided tour of the buttons (coach marks): a click-catching layer, the spotlight, the card (tour.js COACH_*) -->
+  <div class="t-coach" id="t-coach" data-first-visit hidden>
+    <div class="t-coach-block" id="t-coach-block"></div>
+    <div class="t-coach-spot" id="t-coach-spot" aria-hidden="true"></div>
+    <div class="t-coach-card" id="t-coach-card" role="dialog" aria-modal="true" aria-labelledby="t-coach-text" aria-describedby="t-coach-count">
+      <div class="t-coach-bar" id="t-coach-bar" aria-hidden="true"><i class="t-coach-fill" id="t-coach-fill"></i></div>
+      <p class="t-coach-count t-num" id="t-coach-count" dir="ltr"></p>
+      <p class="t-coach-text" id="t-coach-text"></p>
+      <div class="t-coach-actions"><button type="button" class="t-coach-btn t-coach-skip" id="t-coach-skip" data-first-visit-dismiss></button><span class="t-coach-gap"></span><button type="button" class="t-coach-btn" id="t-coach-prev"></button><button type="button" class="t-coach-btn t-coach-next" id="t-coach-next"></button></div>
+    </div>
+  </div>
+
+  <!-- 2026-11-08: the «שינוי עיצוב» panel (desktop: under the header; phone: a bottom sheet). Its sections receive the existing
+       controls at start-up (tour.js moves them: same ids, same handlers); nothing in it covers the panorama until it is opened -->
+  <div class="t-design" id="t-design" role="dialog" aria-modal="false" aria-labelledby="t-design-title" hidden>
+    <div class="t-design-head"><h2 class="t-design-title" id="t-design-title"></h2><button type="button" class="t-icon-btn t-close t-design-close" id="t-design-close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <section class="t-design-sec" id="t-design-look"><h3 class="t-design-sub" id="t-design-look-h"></h3></section>
+    <section class="t-design-sec" id="t-design-floor"><h3 class="t-design-sub" id="t-design-floor-h"></h3></section>
+    <section class="t-design-sec" id="t-design-type"><h3 class="t-design-sub" id="t-design-type-h"></h3></section>
+  </div>
+
+  <div class="t-bottom">
+    <div class="t-item-card" id="t-item-card" hidden>
+      <img class="t-item-thumb" id="t-item-thumb" alt="" decoding="async">
+      <div class="t-item-body">
+        <p class="t-item-name" id="t-item-name" dir="auto"></p>
+        <p class="t-item-price" id="t-item-price"></p>
+        <p class="t-item-note" id="t-item-note"></p>
+      </div>
+      <a class="t-pill t-pill-quiet t-item-link" id="t-item-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+      <button type="button" class="t-icon-btn t-close t-item-close" id="t-item-close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <p class="t-mk-hint" id="t-mk-hint" role="status" hidden></p>
+    <div class="t-pick" id="t-pick" hidden>
+      <div class="t-pick-head">
+        <p class="t-pick-chip" id="t-pick-chip" dir="auto"></p>
+        <button type="button" class="t-icon-btn t-close t-pick-close" id="t-pick-close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="t-catalog-bar" id="t-catalog-bar" role="listbox"></div>
+    </div>
+    <form class="t-change-bar" id="t-change-bar" hidden autocomplete="off">
+      <input class="t-change-input t-bar-input" id="t-bar-input" type="text" dir="auto" autocomplete="off" autocapitalize="sentences" enterkeyhint="send" maxlength="300">
+      <button type="submit" class="t-change-apply t-bar-apply" id="t-bar-apply"></button>
+    </form>
+    <div class="t-look" id="t-look" role="group" hidden>
+      <div class="t-look-seg">
+        <button type="button" data-look="designed" aria-pressed="true"></button>
+        <button type="button" data-look="original" aria-pressed="false"></button>
+      </div>
+      <p class="t-look-note" id="t-look-note" dir="auto"></p>
+    </div>
+    <div class="t-video-bar" id="t-video-bar" hidden>
+      <button type="button" class="t-pill" id="t-video-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span id="t-video-btn-text"></span></button>
+      <div class="t-look-seg t-floor-seg" id="t-floor-seg" role="group"></div>
+    </div>
+    <div class="t-actions" id="t-actions" hidden>
+      <button type="button" class="t-pill t-pill-quiet" id="t-undo" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg><span id="t-undo-text"></span></button>
+      <button type="button" class="t-pill" id="t-change-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg><span id="t-change-btn-text"></span><span class="t-pill-count t-num" id="t-change-count" dir="ltr" hidden></span></button>
+      <button type="button" class="t-pill t-pill-quiet" id="t-compare" aria-pressed="false" hidden><span id="t-compare-text"></span></button>
+    </div>
+    <div class="t-travel">
+      <button type="button" class="t-icon-btn t-step" id="t-prev"><svg class="t-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="t-count">
+        <p class="t-count-main" id="t-count"></p>
+        <p class="t-count-sub" id="t-hint"></p>
+      </div>
+      <button type="button" class="t-icon-btn t-step" id="t-next"><svg class="t-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+    <div class="t-strip" id="t-strip" role="list"></div>
+    <footer id="tour-ai-note" class="t-ai" data-permanent="true"><span class="t-ai-dot" aria-hidden="true"></span><span id="t-ai-text"></span></footer>
+  </div>
+
+  <div class="t-video" id="t-video" hidden>
+    <video class="t-video-el" id="t-video-el" playsinline preload="auto"></video>
+    <div class="t-video-top">
+      <p class="t-video-title" id="t-video-title" dir="auto"></p>
+      <div class="t-video-top-end">
+        <button type="button" class="t-icon-btn t-video-sound" id="t-video-sound" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="t-snd-on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="t-snd-off" d="M16 9l5 6M21 9l-5 6"/></svg></button>
+        <button type="button" class="t-pill t-pill-quiet" id="t-video-skip"><span id="t-video-skip-text"></span></button>
+      </div>
+    </div>
+    <button type="button" class="t-video-play" id="t-video-play" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="t-look-seg t-floor-seg t-video-floors" id="t-video-floors" role="group"></div>
+  </div>
+  <div class="t-loading" id="t-loading" role="status"><span class="t-spinner" aria-hidden="true"></span><span id="t-loading-text"></span></div>
+  <div class="t-error" id="t-error" role="alert" hidden><p id="t-error-text"></p><button type="button" id="t-retry"></button></div>
+
+  <div class="t-sheet" id="t-sheet" hidden>
+    <div class="t-sheet-backdrop" data-close></div>
+    <div class="t-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="t-sheet-title">
+      <div class="t-sheet-head">
+        <div>
+          <h2 id="t-sheet-title"></h2>
+          <p class="t-sheet-hint" id="t-sheet-hint"></p>
+        </div>
+        <button type="button" class="t-icon-btn t-close" id="t-sheet-close" data-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="t-plan-wrap"><svg class="t-plan" id="t-plan" role="group" aria-hidden="false"></svg></div>
+      <div class="t-plan-list" id="t-plan-list" role="list"></div>
+    </div>
+  </div>
+
+  <div class="t-sheet" id="t-change" hidden>
+    <div class="t-sheet-backdrop" data-close></div>
+    <div class="t-sheet-panel is-narrow" role="dialog" aria-modal="true" aria-labelledby="t-change-title">
+      <div class="t-sheet-head">
+        <div>
+          <h2 id="t-change-title"></h2>
+          <p class="t-sheet-hint" id="t-change-hint"></p>
+        </div>
+        <button type="button" class="t-icon-btn t-close" id="t-change-close" data-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="t-change-list" id="t-change-list" role="group"></div>
+      <div class="t-change-row" id="t-change-row">
+        <input class="t-change-input" id="t-change-input" type="text" dir="auto" autocomplete="off" autocapitalize="sentences" enterkeyhint="send" maxlength="300" disabled>
+        <button type="button" class="t-change-apply" id="t-change-apply" hidden></button>
+      </div>
+      <p class="t-change-note" id="t-change-note"></p>
+      <button type="button" class="t-change-reset" id="t-change-reset" hidden></button>
+    </div>
+  </div>
+</main>
+<script type="application/json" id="tour-data">__TOUR_DATA__</script>
+<script>/*__PANNELLUM_JS__*/</script>
+<script>/*__TOUR_JS__*/</script>
+<script>/*__EDIT_LIVE_JS__*/</script>
+</body>
+</html>

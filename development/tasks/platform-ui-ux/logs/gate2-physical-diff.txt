@@ -1,0 +1,12 @@
+## style changed/added lines with physical props:
+108:>   position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+139:> .hud { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 10px; padding: 10px 14px; z-index: 5; pointer-events: none; }
+174:>   position: absolute; z-index: 30; left: 0; right: 0; bottom: 0; max-height: 80dvh; overflow: auto;
+206:>   .sheet { left: auto; right: auto; inset-inline-end: 16px; bottom: 84px; width: 400px; max-height: calc(100dvh - 180px); border-radius: var(--r-md); border: 1px solid var(--chrome-line); padding-top: 14px; }
+234:>   position: absolute; z-index: 40; left: 50%; transform: translateX(-50%); bottom: calc(96px + var(--safe-bottom));
+251:>   position: absolute; top: calc(var(--picker-top, 12px) + var(--safe-top)); left: 50%; transform: translateX(-50%);
+255:> .picker-bottom { position: absolute; left: 0; right: 0; bottom: calc(var(--picker-bottom, 12px) + var(--safe-bottom)); display: grid; justify-items: center; gap: 8px; padding: 0 12px; }
+## flow-real changed/added lines with physical props:
+## landing changed/added lines with physical props:
+## apartment changed/added lines with physical props:
+## dashboard changed/added lines with physical props:

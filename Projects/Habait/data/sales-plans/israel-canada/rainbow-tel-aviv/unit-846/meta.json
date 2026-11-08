@@ -1,0 +1,56 @@
+{
+  "developer": "ישראל קנדה",
+  "project_name": "Rainbow Tel Aviv",
+  "address": null,
+  "city": "תל אביב",
+  "building": {
+    "name": "TOWER-RED",
+    "floors_total": 40,
+    "floor_of_unit": 16,
+    "typical_floor_to_floor_cm": 320,
+    "has_floor_key": true,
+    "has_site_key": true,
+    "site_buildings": ["R", "R²", "Y", "G", "B", "O", "I", "P"],
+    "facade_note": "התכנון הייחודי של מגדל המגורים גורר רשת עמודים בקומות — בחלקם גלויים ובחלקם משופעים; מיקום העמודים, מידות וצורה אינם סופיים (הערה על הגיליון)"
+  },
+  "unit": {
+    "number": "846",
+    "type_mark": "L",
+    "rooms_count": 3,
+    "area_m2": 106.72,
+    "terrace_m2": 26.15,
+    "other_areas": [{ "label": "חלקה המקורה", "m2": 14.34 }, { "label": "חלקה הבולטת לתחום הציבורי", "m2": 0.28 }]
+  },
+  "drawing": {
+    "scale": "1:50",
+    "date": "15.10.2025",
+    "architect": "DBLK Architects",
+    "north_deg_clockwise_from_up": 291.6,
+    "north_note": "חץ הצפון ליד מפתח הקומה; נמדד על הגיליון ב-6736×4764 (apartment.json, 2026-10-28)",
+    "printed_dimensions_cm": [822, 744, 530, 348, 344, 342, 275, 270, 212, 210, 185, 160, 140, 99, 474, 1213],
+    "is_vector_pdf": false
+  },
+  "rooms": [
+    { "name_he": "כניסה", "name_en": "Entrance", "type": "hall", "printed_dims_cm": null, "area_m2": null, "is_outdoor": false, "glazing": "none", "notes": null },
+    { "name_he": "מטבח", "name_en": "Kitchen", "type": "kitchen", "printed_dims_cm": null, "area_m2": null, "is_outdoor": false, "glazing": "facade", "notes": "open plan with dining and living" },
+    { "name_he": "פינת אוכל", "name_en": "Dining", "type": "dining", "printed_dims_cm": null, "area_m2": null, "is_outdoor": false, "glazing": "facade", "notes": null },
+    { "name_he": "חדר דיור", "name_en": "Living room", "type": "living", "printed_dims_cm": [744, 530], "area_m2": null, "is_outdoor": false, "glazing": "facade", "notes": "door to the sun terrace" },
+    { "name_he": "מרפסת שמש", "name_en": "Sun terrace", "type": "terrace", "printed_dims_cm": [1213, 270], "area_m2": 26.15, "is_outdoor": true, "glazing": "railing", "notes": "roofed; narrow passage (מעבר צר) at the south end; קו קומה מעל" },
+    { "name_he": "חדר שינה הורים", "name_en": "Main bedroom", "type": "master_bedroom", "printed_dims_cm": [348, 344], "area_m2": null, "is_outdoor": false, "glazing": "facade", "notes": "opens to the terrace" },
+    { "name_he": "פינת ארונות", "name_en": "Wardrobe", "type": "wardrobe", "printed_dims_cm": [185, 160], "area_m2": null, "is_outdoor": false, "glazing": "none", "notes": null },
+    { "name_he": "חדר רחצה הורים", "name_en": "Main bathroom", "type": "bathroom", "printed_dims_cm": [212, 210], "area_m2": null, "is_outdoor": false, "glazing": "none", "notes": null },
+    { "name_he": "חדר שינה", "name_en": "Bedroom", "type": "bedroom", "printed_dims_cm": [342, 275], "area_m2": null, "is_outdoor": false, "glazing": "window", "notes": null },
+    { "name_he": "חדר רחצה כללי", "name_en": "Guest bathroom", "type": "bathroom", "printed_dims_cm": [140, 99], "area_m2": null, "is_outdoor": false, "glazing": "none", "notes": "with a ventilation shaft (אוורור) beside it" }
+  ],
+  "openings_summary": "entrance door from the corridor (west); glass door from the living room to the sun terrace; the main bedroom opens to the terrace's south end; facade glazing along the whole east side",
+  "images": [
+    { "file": "דירה 846- 16.pdf", "kind": "floor_plan", "description": "the sales plan sheet: unit plan 1:50, floor key with the unit hatched, site key with eight buildings (R, R², Y, G, B, O, I, P), north arrow, plot line, areas table, DBLK title block", "useful_for": ["plan_trace", "tower_mass", "site_context"] }
+  ],
+  "style_hints": ["developer branding: Israel Canada / Rainbow Tel Aviv", "no finishes on the sheet; furniture drawn as thin outlines"],
+  "uncertainties": [
+    "no street address on the sheet (the project is in the Sde Dov compound, north Tel Aviv — from the web, not the document)",
+    "floor-to-floor height is not drawn (320 cm assumed)",
+    "the tower footprint is only a small floor key; the architect's massing or DWG would replace it"
+  ],
+  "confidence": 0.86
+}

@@ -1,0 +1,62 @@
+/* platform-ui-ux card 15: colour, font and radius come from the chrome tokens (css/tokens.css); positions, sizes and timing unchanged.
+   card 34 (2026-11-03): the legal caption v1 on every flow.html screen + the real flight (flow.html?real=1).
+   Loaded by js/flow.js only, so css/style.css (which habait-98's :8899 hold also loads, cross-origin) is untouched.
+   Layout: a fixed caption band at the bottom of the screen (micro, or the project caption on the placeholder flight); the
+   stage, the HUD, the sheets and the apartment tour sit above it, so the band never covers content and nothing covers it.
+   Longer variants (short_project / short) are an overlay at the bottom of the stage, over the video. */
+/* platform-ui-ux card 10: the default sits on :root, not on body.has-legal. js/flow.js measures the band (ResizeObserver) and
+   writes --caption-h on <html>; a body-level default shadowed that value for everything inside <body>, so a band that wraps to
+   two lines (English with the real Heebo loaded) was covered by the sheet. The measured height now wins, as flow.js intends. */
+:root { --caption-h: 30px; }
+.legal-band {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 35;
+  padding: 6px 14px calc(6px + var(--safe-bottom)); background: color-mix(in srgb, var(--chrome-bg) 94%, transparent); border-top: 1px solid var(--chrome-line);
+  color: color-mix(in srgb, var(--chrome-fg) 88%, transparent); font-size: 11px; line-height: 1.4; text-align: center; letter-spacing: .01em;
+  user-select: none; -webkit-user-select: none;
+}
+.has-legal .stage { bottom: var(--caption-h); }
+.has-legal .hud-bottom { bottom: var(--caption-h); padding-bottom: 12px; }
+.has-legal .overlay { bottom: var(--caption-h); }
+.has-legal .loading { bottom: var(--caption-h); }
+.has-legal .sheet { bottom: var(--caption-h); padding-bottom: 18px; max-height: calc(80dvh - var(--caption-h)); }
+.has-legal .drawer { bottom: var(--caption-h); }
+.has-legal .drawer-body { padding-bottom: 16px; }
+.has-legal .toast { bottom: calc(96px + var(--caption-h)); }
+@media (min-width: 820px) {
+  .has-legal .sheet { bottom: calc(84px + var(--caption-h)); max-height: calc(100dvh - 180px - var(--caption-h)); }
+}
+.legal-overlay {
+  position: fixed; z-index: 6; left: 50%; transform: translateX(-50%); bottom: calc(var(--caption-h) + 72px);
+  width: min(560px, calc(100% - 24px)); padding: 8px 12px; border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--chrome-bg) 66%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--chrome-line);
+  color: var(--chrome-fg); font-size: 11.5px; line-height: 1.45; text-align: center; pointer-events: none; text-shadow: var(--chrome-text-shadow);
+}
+.legal-overlay[hidden] { display: none; }
+
+/* the real flight: buffered videos stay in the render tree (rVFC fires, iOS decodes) but are invisible */
+.flow-pool-video { position: absolute; left: 0; top: 0; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+/* the apartment tour, loaded behind the descent and shown over enter's last frame (the same box as the stage) */
+.tour-frame {
+  position: fixed; left: 0; right: 0; top: 0; bottom: var(--caption-h); width: 100%; height: calc(100% - var(--caption-h));
+  border: 0; z-index: 32; background: transparent; opacity: 0; pointer-events: none; transition: opacity .18s linear;
+}
+.tour-frame.shown { opacity: 1; pointer-events: auto; }
+/* a blocked autoplay (iOS low-power): a chip over the frame, never a modal */
+.tap-chip {
+  position: fixed; z-index: 36; left: 50%; bottom: calc(var(--caption-h) + 120px); transform: translateX(-50%);
+  border: 1px solid var(--chrome-line); background: var(--panel); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: var(--fg); border-radius: var(--r-full); padding: 10px 18px; font: inherit; font-weight: 700; cursor: pointer;
+}
+
+/* M1 v2 defect 5 (2026-11-03): the unit card (#unitSheet, built by js/picker.js) must fit the phone with the lead form open.
+   The form's two inputs kept their intrinsic width (~207 px each, the default size=20) inside the `1fr 1fr` row of
+   css/style.css (1fr = minmax(auto, 1fr)), so the card body grew to 422 px (> 354 on a 390 px iPhone) and the sheet, which is
+   overflow:auto, scrolled sideways inside itself when the phone field took focus: cut on the left in RTL, on the right in
+   English, on desktop too. Same cure as css/landing.css's lead form: tracks that may shrink (minmax(0, 1fr)) and inputs
+   that fill their track. Scoped to flow.html (this file); css/style.css and js/picker.js, live in habait-98's :8899, unchanged.
+   Guarded by test/card-overflow.test.mjs (iPhone 13, Pixel 7, desktop x he, en). */
+#unitSheet .sheet-body > * { min-width: 0; }
+#unitSheet .unit-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+#unitSheet .unit-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#unitSheet .lead-form .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#unitSheet .lead-form input:not([type=checkbox]) { min-width: 0; width: 100%; }

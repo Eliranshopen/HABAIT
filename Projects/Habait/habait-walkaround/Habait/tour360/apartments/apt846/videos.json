@@ -1,0 +1,48 @@
+{
+  "$schema": "tour360/videos.v1",
+  "note": "written by hand 2026-11-02 10:55: NO video (Eliran); only the floor finishes and their panorama sets remain",
+  "floors": [
+    {
+      "id": "parquet",
+      "name": {
+        "he": "פרקט",
+        "en": "Oak parquet",
+        "fr": "Parquet"
+      },
+      "panos": "panos-parquet",
+      "words": "a wide-plank natural oak parquet floor, matte, pale honey tone, long planks laid lengthwise, no gloss"
+    },
+    {
+      "id": "concrete",
+      "name": {
+        "he": "בטון",
+        "en": "Concrete",
+        "fr": "Béton"
+      },
+      "panos": "panos-concrete",
+      "words": "a seamless smooth polished micro-concrete floor in warm light grey, matte, no joints, no tiles, no grout lines"
+    },
+    {
+      "id": "marble",
+      "name": {
+        "he": "שיש",
+        "en": "Marble",
+        "fr": "Marbre"
+      },
+      "panos": "panos-marble",
+      "words": "a seamless smooth honed white marble floor with soft grey veining, book-matched, no visible joints, no grout lines"
+    }
+  ],
+  "defaultFloor": "parquet",
+  "sets": {
+    "parquet": {
+      "rooms": {}
+    },
+    "concrete": {
+      "rooms": {}
+    },
+    "marble": {
+      "rooms": {}
+    }
+  }
+}

@@ -1,0 +1,53 @@
+ok   status aliases: English + Hebrew -> the units.v0 enum; anything else -> null  (17 aliases)
+ok   prices: integer ILS from sheet formats; bad values rejected  (9 formats)
+ok   CSV: BOM, CRLF, quotes, commas/newlines inside quotes, Hebrew headers, title row, extra columns  (title row skipped, columns by name)
+ok   JSON (Apps Script) shapes: rows[], values[][], bare array; ok:false is an error
+ok   note: the machine "box_source: ...;" clause is recognised
+FAIL the shipped CSV fixture parses: 12 rows, Hebrew statuses, in sync with fixtures/rainbow/units.json
+     Error: קובץ המקור לא נמצא: C:\RnD\.wt\transition-rise\run\Projects\Habait\habait-walkaround\Habait\platform\_local\units-status.csv
+         at Module.loadSource (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/build_units.mjs:184:56)
+         at file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:171:30
+         at step (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:41:28)
+ok   846 row changed in the CSV -> engine units.json copy: status/price/note updated, geometry byte-for-byte  (SKIPPED: Habait/engine/_local/rainbow/units.json not on this machine (section 3 covers geometry))
+ok   a sheet note keeps the machine box_source clause of a stacked unit  (SKIPPED (no engine file))
+FAIL geometry-rich units.json (box_world, outline_world, polygons): replace + insert + clear a note, deep diff 0, validate.mjs OK
+     Error: ENOENT: no such file or directory, open 'C:\RnD\.wt\transition-rise\run\Projects\Habait\habait-walkaround\Habait\platform\_local\units-status.csv'
+         at readFileSync (node:fs:483:20)
+         at csvFixture (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:52:26)
+         at csvWith (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:55:17)
+FAIL invalid status -> Hebrew FAIL, exit 1, units.json bytes unchanged, no backup
+     Error: ENOENT: no such file or directory, open 'C:\RnD\.wt\transition-rise\run\Projects\Habait\habait-walkaround\Habait\platform\_local\units-status.csv'
+         at readFileSync (node:fs:483:20)
+         at csvFixture (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:52:26)
+         at csvWith (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:55:17)
+FAIL all bad cells are reported at once (status + price), nothing written
+     Error: ENOENT: no such file or directory, open 'C:\RnD\.wt\transition-rise\run\Projects\Habait\habait-walkaround\Habait\platform\_local\units-status.csv'
+         at readFileSync (node:fs:483:20)
+         at csvFixture (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:52:26)
+         at csvWith (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:55:17)
+ok   duplicate unit row / no header / missing source -> FAIL exit 1; no --units -> usage exit 2
+FAIL an invalid units.json (fails the schema before the merge) is refused, not written
+     AssertionError [ERR_ASSERTION]: The input did not match the regular expression /לא עובר ולידציה.*הקובץ לא היה תקין גם לפני המיזוג/. Input:
+     
+     'FAIL: קובץ המקור לא נמצא: C:\\RnD\\.wt\\transition-rise\\run\\Projects\\Habait\\habait-walkaround\\Habait\\platform\\_local\\units-status.csv\n' +
+       'units.json לא השתנה (C:\\Users\\elira\\AppData\\Local\\Temp\\habait-build-units-096wrn\\invalid\\units.json).\n'
+ok   unknown unit id in the sheet -> warning, exit 0, the other rows applied
+ok   Apps Script JSON source (local .json mock) -> applied
+FAIL URL sources through an injected fetch (no network): published CSV, Apps Script JSON, unpublished HTML, http, network error
+     AssertionError [ERR_ASSERTION]: 846: סטטוס for-sale → sold; 846: מחיר 7,950,000 → 8,000,000
+         at file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:350:12
+         at async step (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:41:22)
+         at async file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:341:3
+ok   --dist: apartment.json gets unit.status + unit.price only (note, legal, everything else unchanged)  (copy of _local/dist/rainbow/846; 2 lines differ)
+FAIL no-op: the shipped CSV against a fixture copy -> exit 0, "אין שינוי", no backup, bytes unchanged
+     AssertionError [ERR_ASSERTION]: FAIL: קובץ המקור לא נמצא: C:\RnD\.wt\transition-rise\run\Projects\Habait\habait-walkaround\Habait\platform\_local\units-status.csv
+     units.json לא השתנה (C:\Users\elira\AppData\Local\Temp\habait-build-units-096wrn\noop\units.json).
+     
+     
+FAIL --out writes elsewhere (input untouched); --dry-run writes nothing
+     Error: ENOENT: no such file or directory, open 'C:\RnD\.wt\transition-rise\run\Projects\Habait\habait-walkaround\Habait\platform\_local\units-status.csv'
+         at readFileSync (node:fs:483:20)
+         at csvFixture (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:52:26)
+         at csvWith (file:///C:/RnD/.wt/transition-rise/run/Projects/Habait/habait-walkaround/Habait/platform/test/build_units.test.mjs:55:17)
+ok   backups: one per write, named <file>.bak-<YYYYMMDD-HHMMSS>, the newest 10 kept  (10 kept)
+build_units test: 12/20 ok, 8 FAILED

@@ -1,0 +1,18 @@
+# card 13 — literals (2026-11-03 17:59)
+card grep: grep -nE '#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\(|font-family|border-radius:\s*[0-9]'
+platform/css/style.css: strict 2 · strict hits that are not 'font-family: var(--token)': 0
+    30:  font-family: var(--font);
+    252:.picker-chrome { position: absolute; inset: 0; z-index: 6; pointer-events: none; font-family: var(--font); color: var(--fg); }
+platform/css/landing.css: strict 0 · strict hits that are not 'font-family: var(--token)': 0
+platform/css/dashboard.css: strict 1 · strict hits that are not 'font-family: var(--token)': 0
+    10:html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); line-height: 1.45; }
+studio/dashboard/style.css: strict 3 · strict hits that are not 'font-family: var(--token)': 0
+    15:.brand__name { font-family: var(--font-display); font-size: 1.25rem; }
+    16:.brand__name span { font-family: var(--font-text); font-weight: var(--fw-regular); color: var(--text-muted); font-size: var(--fs-body); }
+    40:.pcard__ph { inline-size: 100%; block-size: 100%; display: grid; place-items: center; font-family: var(--font-display); font-size: 3rem; color: var(--text-muted); background: linear-gradient(160deg, var(--surface-sunken), var(--line)); }
+reading: every remaining strict hit is the PROPERTY name font-family set to a token (var(--font) / var(--font-text) / var(--font-display)); 0 literal values remain.
+NOT migrated: platform/css/apartment.css — still HELD by .wt/apartment-3d (moves to card 16). Out of scope by the card: cine.css, transition.css; flow-real.css got only the forced --line → --chrome-line rename (its token pass is card 15).
+font-size literals kept on purpose: they are layout (the pills, HUD and card sizes are covered by card-overflow/browser tests); plan default 4 = chrome gets colour, font family and radius only.
+
+tokens added to css/tokens.css (theme-independent, dark over the media): --chrome-bg/fg/muted/panel/panel-hover/panel-solid/line/line-strong/well/track/shade/scrim/text-shadow/shadow/shadow-sm/ok/warn/sold/unknown/on-light; --heat-hot/warm/cold (dev dashboard). Studio copy re-synced (tokens-sync: all copies equal).
+contrast.mjs after: summary: 0 theme pair(s) failing · 0 brand pair(s) needing their fallback rule

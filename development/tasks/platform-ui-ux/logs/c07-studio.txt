@@ -1,0 +1,32 @@
+# card 07 — Studio B: review, create, results, advanced (2026-11-03 17:03, main session as platform-dev)
+same fixture and check run as c06-studio.txt; values below from the 1440 run (390 identical unless noted).
+review: '0.82' appears 1 time(s) in body innerText (Advanced closed; its raw intake note also says 0.82 when opened — the raw view by design).
+flags: 10 = uncertainties.length 10; rows flagged: 8. Each flag and the field it sits on:
+  - address: Street address is not printed; 'שדה דב' is the neighbourhood/area name provided by the user, not read from the plan
+  - building: The site key shows R2 hatched (not R) — it is unclear whether TOWER-RED corresponds to R or R2; the title block says TOWER-RED
+  - floors: Total number of floors in the building is not printed on this plan
+  - floor_height: Floor-to-floor height is not printed on this plan
+  - other_areas: The 0.28 m² 'חלקה הבולטת לתחום הציבורי' (portion protruding into public domain) is listed in the area table but its physical location on the plan is not labelled
+  - north: The north arrow direction (225°) is approximate; the filled sector points roughly SW but exact angle is hard to determine from the compass symbol
+  - rooms: Individual room areas in m² are not printed; only the total unit area (106.72 m²) and terrace area (26.15 m²) are given
+  - rooms: The 199 dimension on the general bathroom is read from tile r1c2; it could be 199 or possibly 190 — the digit is small
+  - rooms: Dimension 180 near מעבר צר may be a railing height (H≈180) rather than a horizontal dimension
+  - other: The phone number 03-5273230 and permit 1222-25 are printed on the plan but not captured in the schema
+mapping rule (app.js UNCERTAIN_FIELD): first regex that matches the entry's text names its field; unmatched -> a row 'פרטים בתכנית שלא נקלטו' that exists only then. Nothing else is flagged.
+keyboard review -> create: Enter on 'אישור והמשך ליצירה' moves focus to #btn-create (plan.json already exists, so no approve-plan call; with a plan.draft.json it calls approve-plan first).
+create button: "צור את ההדמיה · כ-$4.05" (estimate via fmtCost)
+timeline contains '%': False; steps:
+  - intake:done:הושלם · 1:21
+  - site:done:הושלם · 0:40
+  - plan:done:הושלם · 0:00
+  - shots:done:הושלם · 0:00
+  - scene:done:הושלם · 1:14
+  - clay:done:הושלם · 1:06:45
+  - keyframes:needs-you:צריך אותך · 1:03
+  - video:done:הושלם · 4:26
+  - assemble:needs-you:צריך אותך · 0:29
+results in order: exterior=ready , building=empty (עוד לא בשרשרת הזו) , apartment=ready
+(a) exterior = this chain's kind:exterior clips; (b) building with clickable apartments = not produced by the Studio chain, says so; (c) apartment = master per variant + 12 room clips collapsed with m:ss.
+advanced: collapsed by default, one level deep (no nested details): True
+leave (#/) and return (#/p/<id>): timeline identical, state re-read from disk: True
+phone: conf 1, flags 10, review->create btn-create, restored True, h-scroll none

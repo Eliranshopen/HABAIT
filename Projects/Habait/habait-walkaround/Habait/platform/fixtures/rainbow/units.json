@@ -1,0 +1,275 @@
+{
+  "$schema": "../../contracts/units.schema.json",
+  "project": "rainbow",
+  "currency": "ILS",
+  "price_note": "FIXTURE: every price and every unit except 846's geometry is invented for testing the flow; 846 = TOWER-RED type L floor 16 (the only real unit, concept status)",
+  "units": [
+    {
+      "id": "846",
+      "floor": 16,
+      "type": "L",
+      "rooms": 4,
+      "area_m2": 118,
+      "outdoor_m2": 22,
+      "price": 7950000,
+      "status": "for-sale",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "note": "the real apartment of the pitch (sales plan DBLK 15.10.2025); descend-846 / enter-846 exist in flow.json",
+      "hotspots": [
+        {
+          "segment": "approach",
+          "t_start": 5.0,
+          "t_end": 8.0,
+          "yaw_deg": 0,
+          "pitch_deg": -3
+        },
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -6,
+          "pitch_deg": -4,
+          "polygon": [
+            [
+              -14,
+              -1
+            ],
+            [
+              2,
+              -1
+            ],
+            [
+              2,
+              -7
+            ],
+            [
+              -14,
+              -7
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "845",
+      "floor": 16,
+      "type": "K",
+      "rooms": 3,
+      "area_m2": 92,
+      "outdoor_m2": 14,
+      "price": 6200000,
+      "status": "sold",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -40,
+          "pitch_deg": -4
+        }
+      ]
+    },
+    {
+      "id": "847",
+      "floor": 16,
+      "type": "M",
+      "rooms": 5,
+      "area_m2": 142,
+      "outdoor_m2": 30,
+      "price": 9800000,
+      "status": "reserved",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": 16,
+          "pitch_deg": -4
+        }
+      ]
+    },
+    {
+      "id": "856",
+      "floor": 17,
+      "type": "L",
+      "rooms": 4,
+      "area_m2": 118,
+      "outdoor_m2": 22,
+      "price": 8050000,
+      "status": "for-sale",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -6,
+          "pitch_deg": 3
+        }
+      ]
+    },
+    {
+      "id": "855",
+      "floor": 17,
+      "type": "K",
+      "rooms": 3,
+      "area_m2": 92,
+      "outdoor_m2": 14,
+      "price": 6300000,
+      "status": "sold",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -40,
+          "pitch_deg": 3
+        }
+      ]
+    },
+    {
+      "id": "857",
+      "floor": 17,
+      "type": "M",
+      "rooms": 5,
+      "area_m2": 142,
+      "outdoor_m2": 30,
+      "price": 9950000,
+      "status": "for-sale",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": 16,
+          "pitch_deg": 3
+        }
+      ]
+    },
+    {
+      "id": "836",
+      "floor": 15,
+      "type": "L",
+      "rooms": 4,
+      "area_m2": 118,
+      "outdoor_m2": 22,
+      "price": 7850000,
+      "status": "for-sale",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -6,
+          "pitch_deg": -11
+        }
+      ]
+    },
+    {
+      "id": "835",
+      "floor": 15,
+      "type": "K",
+      "rooms": 3,
+      "area_m2": 92,
+      "outdoor_m2": 14,
+      "price": 6100000,
+      "status": "reserved",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -40,
+          "pitch_deg": -11
+        }
+      ]
+    },
+    {
+      "id": "837",
+      "floor": 15,
+      "type": "M",
+      "rooms": 5,
+      "area_m2": 142,
+      "outdoor_m2": 30,
+      "price": 9650000,
+      "status": "for-sale",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": 16,
+          "pitch_deg": -11
+        }
+      ]
+    },
+    {
+      "id": "866",
+      "floor": 18,
+      "type": "L",
+      "rooms": 4,
+      "area_m2": 118,
+      "outdoor_m2": 22,
+      "price": 8150000,
+      "status": "for-sale",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -6,
+          "pitch_deg": 10
+        }
+      ]
+    },
+    {
+      "id": "826",
+      "floor": 14,
+      "type": "L",
+      "rooms": 4,
+      "area_m2": 118,
+      "outdoor_m2": 22,
+      "price": 7750000,
+      "status": "sold",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -6,
+          "pitch_deg": -18
+        }
+      ]
+    },
+    {
+      "id": "876",
+      "floor": 19,
+      "type": "PH",
+      "rooms": 6,
+      "area_m2": 210,
+      "outdoor_m2": 80,
+      "price": 0,
+      "status": "for-sale",
+      "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+      "note": "price 0 = price on request",
+      "hotspots": [
+        {
+          "segment": "hold-facade",
+          "t_start": 0,
+          "t_end": 6,
+          "yaw_deg": -6,
+          "pitch_deg": 17
+        }
+      ]
+    }
+  ]
+}

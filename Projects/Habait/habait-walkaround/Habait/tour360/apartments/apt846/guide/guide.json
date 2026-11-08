@@ -1,0 +1,98 @@
+{
+ "schema": "habait-tour/guide.v1",
+ "made": "2026-11-03c (plan-only facts: no sea view, orientation from the plan north 304.4, openings widths)",
+ "voice": {
+  "he": {
+   "engine": "edge-tts (Microsoft neural)",
+   "voice": "he-IL-HilaNeural",
+   "rate": "-4%"
+  }
+ },
+ "presenter": {
+  "kind": "talking (minimax/h3-max/lip-sync/image-to-video, 768P) where <asset>.mp4 exists, else the stylised SVG",
+  "image": "guide/presenter/presenter.png (bytedance/seedream/v5/pro/text-to-image, $0.07)",
+  "test": "all 11 rooms (Eliran 3.11 12:30 approved)"
+ },
+ "he": {
+  "name": "המדריכה של Habait",
+  "steps": [
+   {
+    "scene": "entrance",
+    "text": "ברוכים הבאים לדירה 846 במגדל Rainbow תל אביב, בקומה 16. דירת ארבעה חדרים, לפי תכנית המכר מיום 15 באוקטובר 2025. ההדמיה להמחשה בלבד, והמידות לפי התכנית. נתחיל בכניסה: מבואה של כ-6 מטר, עם דלת כניסה ברוחב 1.1 מטר ופתח רחב של כ-4.4 מטר אל הסלון.",
+    "audio": "guide/he/01-entrance.mp3",
+    "seconds": 27.58,
+    "video": "guide/he/01-entrance.mp4"
+   },
+   {
+    "scene": "kitchen",
+    "text": "המטבח, כ-10 מטר, פתוח אל פינת האוכל בפתח של כ-4.2 מטר ואל הסלון בפתח של כ-2.2 מטר. קו עבודה רציף ומקום לאי מרכזי.",
+    "audio": "guide/he/02-kitchen.mp3",
+    "seconds": 13.18,
+    "video": "guide/he/02-kitchen.mp4"
+   },
+   {
+    "scene": "dining",
+    "text": "פינת האוכל, כ-9 מטר, יושבת בין המטבח לסלון, עם פתח של כ-2.5 מטר אל הסלון. יש כאן מקום לשולחן של שישה עד שמונה סועדים.",
+    "audio": "guide/he/03-dining.mp3",
+    "seconds": 12.29,
+    "video": "guide/he/03-dining.mp4"
+   },
+   {
+    "scene": "living",
+    "text": "הסלון, כ-31 מטר, הוא הלב של הדירה. חזית זכוכית עם יציאה למרפסת השמש בפתח של כ-1.9 מטר. המרפסת פונה דרום-מזרח. כאן אפשר גם לבחור ריצוף: פרקט, בטון או שַׁיִשׁ.",
+    "audio": "guide/he/04-living.mp3",
+    "seconds": 18.79,
+    "video": "guide/he/04-living.mp4"
+   },
+   {
+    "scene": "terraceLiving",
+    "text": "מרפסת השמש, כ-16 מטר, בהמשך ישיר לסלון, פונה דרום-מזרח. מעקה זכוכית, מקום לפינת ישיבה ולשולחן, ומעבר של כ-1.8 מטר אל המרפסת הקטנה בקצה אגף החדרים. המרפסות המעוגלות הן הקו המזהה של מגדל Rainbow.",
+    "audio": "guide/he/05-terrace-living.mp3",
+    "seconds": 20.11,
+    "video": "guide/he/05-terrace-living.mp4"
+   },
+   {
+    "scene": "terraceBedroom",
+    "text": "מרפסת קטנה, כ-3 מטר, בקצה אגף החדרים, עם דלת של כ-1.3 מטר מחדר השינה של ההורים. פינה שקטה לקפה של בוקר.",
+    "audio": "guide/he/06-terrace-bedroom.mp3",
+    "seconds": 11.71,
+    "video": "guide/he/06-terrace-bedroom.mp4"
+   },
+   {
+    "scene": "bedroomMain",
+    "text": "חדר השינה של ההורים, כ-12 מטר, עם יציאה למרפסת הקטנה ומעבר של כ-1.6 מטר אל פינת הארונות. מכאן ממשיכים לחדר הרחצה הפרטי.",
+    "audio": "guide/he/07-bedroom-main.mp3",
+    "seconds": 12.65,
+    "video": "guide/he/07-bedroom-main.mp4"
+   },
+   {
+    "scene": "wardrobe",
+    "text": "פינת הארונות, כ-5 מטר, בין חדר ההורים לחדר הרחצה שלהם. ארונות משני הצדדים ומעבר נוח.",
+    "audio": "guide/he/08-wardrobe.mp3",
+    "seconds": 9.77,
+    "video": "guide/he/08-wardrobe.mp4"
+   },
+   {
+    "scene": "bathMain",
+    "text": "חדר הרחצה של ההורים, כ-4 וחצי מטר, עם מקלחון, כיור ושירותים. הריצוף והכלים הסניטריים להמחשה בלבד.",
+    "audio": "guide/he/09-bath-main.mp3",
+    "seconds": 11.02,
+    "video": "guide/he/09-bath-main.mp4"
+   },
+   {
+    "scene": "bedroom2",
+    "text": "חדר השינה השני, כ-9 מטר, עם כניסה מהמבואה. מתאים לחדר ילדים או לחדר עבודה.",
+    "audio": "guide/he/10-bedroom-2.mp3",
+    "seconds": 8.47,
+    "video": "guide/he/10-bedroom-2.mp4"
+   },
+   {
+    "scene": "bathguest",
+    "text": "חדר הרחצה הכללי, כ-3 וחצי מטר, סמוך לכניסה ולחדר השני. כאן מסתיים הסיור המודרך. אפשר להמשיך לסייר בחופשיות, למדוד מרחקים בכלי המדידה, או להשאיר פרטים ונחזור אליכם.",
+    "audio": "guide/he/11-bath-guest.mp3",
+    "seconds": 16.92,
+    "video": "guide/he/11-bath-guest.mp4"
+   }
+  ]
+ }
+}

@@ -1,0 +1,49 @@
+# habait-walkaround - the root ignore rules. Guards before content: this file is in the root commit.
+
+# Secrets: no .env file is ever committed; only the names-only example is tracked.
+.env*
+!.env.example
+
+# Machine-local files: media live in the shared drive (WALK_MEDIA_DIR); media-pull restores them here.
+_local/
+node_modules/
+*.blend1
+media/cache/
+
+# Evidence images go to the shared drive; the evidence reports stay tracked.
+qa-evidence/**/*.png
+qa-evidence/**/*.jpg
+qa-evidence/**/*.jpeg
+qa-evidence/**/*.webp
+qa-evidence/**/*.mp4
+
+# D-WP-15 (Slava, 2026-11-01, "Drive inputs only"): the two floor-plan pictures are drive inputs, never git.
+# media-pull restores them for builds; these two lines keep them out of every commit.
+Habait/tour360/apartments/apt846/plan/floorplan.webp
+Habait/tour360/apartments/demo-01/plan/floorplan.webp
+
+# 2026-11-02 (habait-4b, snapshot commit at Eliran's explicit request in his chat): rebuildable render
+# artefacts of lane C (2.4 GB of frames, bakes, caches) stay out of git. Source, contracts, scripts and the
+# small tracked media sets stay in. Owners of Habait/flyover (habait-ab) may refine these lines.
+Habait/flyover/renders/
+Habait/flyover/renders-*/
+Habait/flyover/orbit/
+Habait/flyover/*.blend
+Habait/flyover/**/*.npy
+Habait/flyover/**/*.exr
+__pycache__/
+*.pyc
+
+# card 21/ab v5 hand-over (habait-4b, 2026-11-02 17:55): extra GPT skins are machine-local masters (379 MB)
+Habait/flyover/skins-extra/**/*.png
+Habait/flyover/skins-extra/**/*.jpg
+Habait/platform/fixtures/**/*.bak-*
+Habait/engine/_local/**/*.bak-*
+
+# 2026-11-04 (main session, first commit before feature worktrees, Eliran's go): rebuildable evidence stays
+# on disk, out of git — test screenshots (88 MB) and flyover cloud run outputs (122 MB). Files are not moved.
+Habait/platform/test/shots/
+Habait/flyover/cloud/**/out_*/
+
+# fix-846-fidelity 2026-11-05: tour build output (dist-like), never tracked
+Habait/tour360/out/

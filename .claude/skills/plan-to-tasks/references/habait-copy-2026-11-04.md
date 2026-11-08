@@ -1,0 +1,207 @@
+---
+name: plan-to-tasks
+description: "Reads a plan file and creates task files assigned to the agent team. Discovers available agents from .claude/agents/, matches tasks to agents by capability, and creates missing agents when needed."
+argument-hint: <path-to-plan-file>
+user-invocable: true
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent
+model: opus
+---
+
+You are the **Task Orchestrator**. Your job is to read a plan file, break it into discrete tasks, assign each task to the most appropriate agent from the team, and create any missing agents needed.
+
+## Inputs
+
+- **Plan file path:** `$ARGUMENTS` (the user passes the path to a plan file)
+- **Agent directory:** `.claude/agents/` (discover available agents here)
+- **Task output directory:** `development/tasks/` (write task files here)
+
+## Workflow
+
+### Step 1: Discover the Agent Team
+
+Scan `.claude/agents/` to build an inventory of all available agents. Read each agent's frontmatter to extract name, description, tools, model — **and `status`, `owner-track`, `charter`, `boundary`** (the header standard, `.claude/agents/CLAUDE.md`). Categorize by capability domain **and by track**.
+
+**The lifecycle filter (2026-08-27, board `rnd-reorg` T13 / CP-02+CP-03 — this step is why the `status:` key is not decoration):**
+
+- `status: live` agents are the assignable pool. **Prefer them, always.**
+- `status: dormant` = the agent's whole TRACK is not currently running (today: the eight `owner-track: visualizer` workers, inherited ruling D1 — "may return", nothing archived). It is still a real, spawnable definition. You **may** assign one when the plan genuinely needs that capability — but **only if the task file says so out loud**, in one line: *"Assigned to `<name>` (`status: dormant`, track `<track>`) because <the capability no live agent has>."* Silence is the failure mode, not the assignment.
+- `status: archived` = **do not assign.** If a plan appears to need one, that is a signal the plan is reviving a retired capability — surface it to the operator and let a human decide, rather than quietly resurrecting it.
+- ⛔ **`status` is not a fitness score.** A `dormant` agent is not "worse"; its track is quiet. Never demote a live agent's match because a dormant one reads as more specialised, and never treat `owner-track` as a permission boundary — an agent's `boundary:` line is the boundary.
+- **Read `charter:` and `boundary:` before matching**, not just `description:`. The description sells the agent; the boundary says what it will refuse and who takes that job instead — that is the line a bad assignment crosses.
+- ⚠ A definition that fails to parse does not exist to the Agent tool. If any file's frontmatter is unreadable, report it rather than routing around it (8 of 19 definitions were silently invisible until 2026-08-27 — an unquoted `description:` containing `: `).
+
+### Step 2: Read and Parse the Plan
+
+Read the plan file at `$ARGUMENTS`. Extract: title, overview, phases, steps with dependencies, testing strategy, risks.
+
+### Step 3: Match Tasks to Agents
+
+For each step, determine the best agent by matching work type to agent capabilities — `charter:` and `boundary:` first, `description:` second. One task = one agent. Split multi-domain tasks. Apply Step 1's lifecycle filter: live by default, dormant only with the stated reason, archived never.
+
+### Step 4: Create Missing Agents
+
+If the plan requires capabilities not covered by existing agents, create new agent files in `.claude/agents/` following the existing format — **nine frontmatter keys, all of them, or the definition is half-born.** Copy this shape (see `.claude/agents/CLAUDE.md` for the vocabulary and the rails):
+
+```
+---
+name: <kebab-case, matches the filename>
+description: "ALWAYS double-quoted. An unquoted scalar containing ': ' fails to load the whole definition; ' #' truncates it silently. Inner quotes as '…'. This text is a PROMPT — the Agent tool picks by it."
+model: sonnet | opus
+tools: Read, Write, Edit, Bash, Glob, Grep
+color: <any>
+status: live
+owner-track: habait | visualizer | agency | harness-ops | research
+charter: "ONE quoted line — what this agent is for."
+boundary: "ONE quoted line — what it must NOT do, and who takes that job instead."
+---
+```
+
+Then, in the prompt body, **inline the collective-memory contract verbatim from `.claude/agents/_MEMORY_PREAMBLE.md`** (it is a paste template, not an include — a new definition without it is outside the harness's memory contract), and **create nothing else**: `owner-track` takes one of the five existing values, and ⛔ **no new definition ever gets `Agent` in `tools:`** (one level deep is a platform constraint — exactly one definition, `orchestrator`, holds it).
+
+⛔ **Rule 5 still governs: create conservatively.** Check `docs/agent-team-org-chart.md` before creating — a new definition needs a charter no existing one covers. Every agent you mint acquires a `memory/agents/<name>.md` on its first run, and Step 7 is the only thing that ever cleans one up.
+
+### Step 5: Generate Task Files
+
+Create `development/tasks/{plan-slug}/`:
+- `README.md` — task board index with execution order
+- `task-{NN}-{slug}.md` — individual tasks with acceptance criteria
+- `run-tasks.md` — execution guide with post-task checklist
+
+**Added 2026-09-08:** the WIP check (Step 10) runs BEFORE this step writes anything; the `README.md` carries Step 8's standing rails and **every per-task brief inherits them verbatim** — the bounded read-first, the write-last, the second-reader rail — plus its own `ruling-tier` (Step 9), its gate `Check:`/`Reviewer scope:` lines if it declares a gate (Step 11), and its model pin (Step 14). A brief without the rails is outside the harness memory contract. The board directory is committed at creation (Step 12).
+
+### Step 6: Summary Report
+
+Output what was created, which agents are assigned, and how to start execution. **Name every assignment's `status` and `owner-track`**, and state explicitly any task assigned to a `dormant` agent and why. If you created a definition, say so; if you retired one (Step 7), say where its memory went.
+
+### Step 7: Retire Agents That Will Not Be Reused (the counterpart this skill never had)
+
+⭐ This skill has always **created** agents and never retired one — the one-off board personas shelved in `memory/agents/_ephemeral/` (27 of them, 2026-08-27) are that omission's exhaust. Retirement now lives in the same skill, so the lifecycle closes where it opened.
+
+**When:** at board close-out, or whenever an agent this skill created is not going to be used again (a one-round persona, a superseded specialist, a capability folded into another agent). This step runs at the END of a board's life, not during the plan-to-tasks pass that created it.
+
+**How — three moves, in this order:**
+
+1. **Label, never move.** Set `status: archived` in the definition's frontmatter and leave the file exactly where it is. ⛔ **Never relocate a definition into a subfolder of `.claude/agents/`.** Whether agent discovery recurses into subfolders is UNVERIFIED (`.claude/agents/_probe/probe-discovery.md` is the standing test; its result belongs in `docs/agent-team-org-chart.md`), and skills such as `studio-v2` delegate to definitions **by name** — a move can silently delete a live worker mid-pipeline. A label costs nothing and breaks nothing.
+2. **Shelve its memory.** Move `memory/agents/<name>.md` → `memory/agents/_ephemeral/<name>.md` (read that folder's `README.md` first — it states the same rule from the memory side and names the files deliberately excluded because they still have live readers). **Never delete a memory file**; history stays readable.
+3. **Repoint, don't rewrite.** Every `memory/INDEX.md` line pointing at the old path is repointed to `_ephemeral/` **in the same change** — dead links are the failure this step exists to prevent. INDEX entries are append-only and corrections are forward-only: fix the LINK, never the historical sentence.
+
+**Never archive** an agent still named by a skill, by a board's standing rails, or by a `CLAUDE.md` row — grep the name across `.claude/`, `development/tasks/`, `docs/` and `memory/` first, and say what you grepped. And ⛔ **a DORMANT track is not a retirement**: `status: dormant` (D1's visualizer workers; D2 keeps the agency's `scraper` `live` on a parked track) means "the track is quiet, the agent still works" — never upgrade dormant to archived without an explicit ruling from the operator.
+
+Record every retirement in the run's memory entry: which agent, why it will not be reused, where its memory now lives.
+
+### Step 8: The Standing-Rails Template Every Board Carries (added 2026-09-08)
+
+Paste this block under **Standing rails** in the board `README.md`; Step 5 inherits it verbatim into every per-task brief it writes.
+
+1. **Bounded read-first:** `memory/HOT.md`, then the LAST ~150 lines of your own `memory/agents/<name>.md` (plus its archive-index block), then `memory/listings/<id>.md` only if the task names a listing. ⛔ Never read `memory/INDEX.md` whole — grep it.
+2. **Write last, once:** ONE entry (`memory/_TEMPLATE.md`) into the layer that owns the fact, plus ONE ≤400-char pointer line under that layer's existing `memory/INDEX.md` header. ⛔ Never add a header.
+3. **Second reader:** at write time, name which OTHER actor must know this; append ONE pointer line into each named actor's `memory/agents/<name>.md` — `→ see <entry> — why it binds you`. No affected actor = say "none".
+4. **An action is not done until its memory is written.**
+5. **Ruling tier** (Step 9) — every brief carries its own `T0` / `T1` / `T2`; a one-off persona also carries the `_ephemeral/` write path (Step 13).
+
+Pointer: the full contract is `memory/README.md` and root `CLAUDE.md` §0 — quote them, never restate them differently.
+Source: harness upgrade plan (`docs/harness-upgrade-plan.md`), wave 3 (T04's second-reader rail).
+
+### Step 9: Every Task Gets a `ruling-tier` (added 2026-09-08)
+
+Add one field to each task file — `**Ruling tier:** T0 | T1 | T2` — and name it in the Step 6 report. This replaces the flat AskUserQuestion habit: only T1 and T2 reach Eliran at all.
+
+- **T0 — the agent decides and logs.** Reversible, inside one lane, no money, no user-visible surface. The decision goes into the task file and the memory entry; asking here is the waste this tier exists to remove.
+- **T1 — one question to Eliran.** A choice that binds another lane, changes a record's shape, or spends. ONE question, the options named, a default stated so silence still moves.
+- **T2 — the question PLUS an independent fresh-context check.** Payments, auth, migrations, legal. The checker is a fresh Sonnet sub-agent that never saw the implementing session and is prompted to refute (Step 11's reviewer rules apply).
+- ⛔ **The tier is set when the task is written, not when it gets uncomfortable.** Raising a tier mid-task is fine and gets logged; silently lowering one is not.
+
+Pointer: where the logged decision lands (a `project/` law vs the run entry) is `memory/README.md`'s answer.
+Source: harness upgrade plan (`docs/harness-upgrade-plan.md`), wave 5 (R-13).
+
+### Step 10: The WIP Check — Count Before You File (added 2026-09-08)
+
+⛔ **Runs BEFORE Step 5 writes anything.** The one count authority is `development/tasks/CLAUDE.md`'s board table, never a folder count:
+
+```
+grep -oE "EXECUTING|IN-PROGRESS|LIVE" development/tasks/CLAUDE.md | sort | uniq -c
+```
+
+- **Read rows, not matches** — a `State` cell carries one of the eight fixed words, while `EXECUTING`/`LIVE` also appear inside prose cells. Report the board slugs you counted, so the number is checkable.
+- **At 3 in flight, stop and report.** Name them, and ask which one closes first. ⛔ Do not file a fourth "just as a draft" — a filed board is in flight.
+- **The ask overrides the limit only when it says so** (R-13): Eliran naming the override in the request is the only exception, and the new board's README records that they did.
+- The ceiling describes what already happened: the plan measured **3 boards EXECUTING/IN-PROGRESS/LIVE at once, and 3 filed on one day** (harness upgrade plan, wave 5, measured 2026-09-08).
+
+Pointer: the State vocabulary and the table are `development/tasks/CLAUDE.md`'s; this step only reads them.
+Source: harness upgrade plan (`docs/harness-upgrade-plan.md`), wave 5 (R-13).
+
+### Step 11: The Gate Template Line — a Runnable Check and a Reviewer Scope (added 2026-09-08)
+
+Every gate a board declares gets these two lines in its task file, and its gate memo repeats them:
+
+- **`Check:`** the ONE runnable pass/fail command and its expected result — a bounded test call, `timeout 540 npm run typecheck`, a screenshot diff, a `merge-base --is-ancestor`. ⛔ "Reviewed and looks right" is not a check; a gate with no runnable check is not a gate.
+- **`Reviewer scope:`** one line, narrow — "correctness only", "i18n key parity only", "the frozen paths only".
+- **The reviewer is a FRESH Sonnet sub-agent prompted to refute**, never the implementing session and never the author of the code. A session reviewing its own work measures its own confidence.
+- The Machine resource rules govern the check itself: it runs in Git Bash as `timeout N <cmd>`, one heavy run at a time, foreground only.
+
+Pointer: `qa-evidence/CLAUDE.md` owns the evidence paths; `memory/README.md` owns where the verdict is written.
+Source: harness upgrade plan (`docs/harness-upgrade-plan.md`), wave 5.
+
+### Step 12: Commit the Board Directory at Creation (added 2026-09-08)
+
+> ⛔ **Suspended 2026-11-03 — no git** (Eliran: "I dont want any git you know. no git"). Skip items 1–4: a board is plain files. Register it in the board table of `development/tasks/CLAUDE.md` instead; no OWED row is opened for being untracked.
+
+R-15: a board that exists only in the working tree is a board nobody else can read.
+
+1. Immediately after Step 5 writes the files: `git add development/tasks/<slug>/`, then one commit naming the slug. ⛔ Never `git add -A`; ⛔ never stage `Habait/MVP/docs/research/karnei-assets/` (R2); ⛔ never commit into the app repo from the harness (D13).
+2. Then prove it: `git ls-files development/tasks/<slug>/` must list the files. An EMPTY result means the board is untracked.
+3. **An untracked board gets an OWED row in the same turn** — `docs/governance/OWED.md`, one line, `Owner` never blank and never TBD, `Source` naming the board directory. `/close-board` Step 11 re-checks this at close.
+4. If the commit is blocked, hand Eliran the exact `!`-prefixed command (the `/ship` Step 6 pattern) and open the OWED row anyway. ⛔ Never route around a block.
+
+Pointer: the debt's shape and its rules are `docs/governance/OWED.md` §1's, not this skill's.
+Source: harness upgrade plan (`docs/harness-upgrade-plan.md`), wave 5 (R-15).
+
+### Step 13: One-Off Personas Write to `_ephemeral/` From Their FIRST Entry (added 2026-09-08)
+
+The 27 personas shelved on 2026-08-27 were shelved *afterwards*; this step stops the debt at the source (AGT-2).
+
+- When Step 4 mints an agent for **one board only**, its brief names `memory/agents/_ephemeral/<name>.md` as its memory file from the first write. ⛔ It never starts in `memory/agents/` to be moved later.
+- Its `memory/INDEX.md` pointer lines point at the `_ephemeral/` path from the first line, so nothing needs repointing at close.
+- Say which it is **in the task file**: a one-board persona (`_ephemeral/`) or a standing capability (`memory/agents/`). Silence defaults to `_ephemeral/`.
+- ⛔ **A standing agent is never demoted into `_ephemeral/`** by this step — Step 7 is the only path there, and only at retirement.
+
+Pointer: `memory/agents/_ephemeral/README.md` states the same rule from the memory side; read it first.
+Source: harness upgrade plan (`docs/harness-upgrade-plan.md`), wave 3.
+
+### Step 14: Model Pins — Sonnet Reads, Opus Drafts and Judges, Nothing Inherits (added 2026-09-08)
+
+Every definition Step 4 mints and every brief Step 5 writes names its model explicitly:
+
+- **`sonnet`** — reading, verifying, counting, refuting, fresh-context checks (Step 11's reviewer).
+- **`opus`** — drafting, authoring, judging, any call that rules between options.
+- ⛔ **Never `model: inherit` on a worker definition.** A sub-agent must not inherit the main session's model; that is how a model nobody priced ends up running a leaf task.
+- State the pin in the Step 6 report beside `status` and `owner-track`, so the round's spend shape is readable without opening every file.
+
+Pointer: `docs/governance/MODEL-PINS.md` is the register for a pin CHANGE; this step only sets a new definition's pin.
+Source: harness upgrade plan (`docs/harness-upgrade-plan.md`), §6 (model tiering: Sonnet reads/verifies, Opus judges, Fable never inherited).
+
+### Step 15: The Fan-out Ceiling — Five Workers per Burst, Larger Boards in Waves (added 2026-10-22, D-AUD-36)
+
+⭐ Earned by a measured failure three times over: the session limit killed nine parallel readers at 02:55 on 2026-10-21, five more agents at about 06:3x, and the fresh critic at 16:4x — the same class that ended fan-outs on 2026-08-16 and 2026-09-08 (`07-process.md` H-19; `memory/project/2026-10-22-five-workers-per-burst.md`). Every death cost hours of resume work; none cost correctness, because the briefs were resumable. The ceiling is the mechanism.
+
+- **At most five workers run in parallel from one session.** A wave table that needs more is cut into bursts of five; the next burst launches when the first has returned, never before. The board README's wave table says which burst each card is in.
+- **Budget the whole session, not the wave.** A board whose waves sum past what one session can carry is filed as two sessions on purpose (brief §5 of the audit: "one session, two at most"), with the resume point written in the README's Key state before the first burst launches.
+- **Every brief is resumable by construction:** it states what it has already written, so a worker that dies on the limit is resumed in place with `SendMessage` and finishes from its saved work, or is relaunched fresh with the same brief; the main session records which happened.
+- **The hook half of this rule** is `agent-model-guard.ps1` (prepared 2026-10-22, installed on Eliran's paste — `docs/OWNER-PASTE.md`): the sixth `Agent` launch inside sixty seconds is denied with this rule quoted. Until Eliran installs it, this step is the only bound — say so in the Step 6 report.
+
+Pointer: the resume mechanics are the Agent tool's (`SendMessage` to the agent's id); the memory of each death is in the round's run entry.
+Source: the self-audit's lane H (`docs/research/rnd-audit-2026-10/07-process.md` H-19, V-01) and inherited ruling D-AUD-36 (2026-10-22).
+
+## Rules
+
+1. **Always discover agents first** — never assume which agents exist
+2. **Match by capability, not name** — read `charter:` and `boundary:` before `description:`
+3. **Split multi-domain tasks** — one task = one agent = one domain
+4. **Respect dependencies** — mark task ordering explicitly
+5. **Create agents conservatively** — only if NO existing agent can handle it, and only with all nine frontmatter keys + the inlined memory contract
+6. **Be specific in task instructions** — each task must be self-contained
+7. **Include file paths** — every task must list files it will create/modify
+8. **Acceptance criteria are mandatory** — every task needs clear, testable criteria
+9. **Prefer `status: live`** — a `dormant` assignment must say so in the task file; an `archived` one is never made silently (Step 1)
+10. **Retire what you minted** — an agent that will not be reused gets `status: archived` + its memory shelved in `_ephemeral/` + its INDEX lines repointed (Step 7); ⛔ the definition file never moves
+11. **Five workers per burst** — a wave never launches more than five parallel workers; larger boards run in bursts, the next after the first returns; a board past one session is filed as two sessions with its resume point written first (Step 15, D-AUD-36)

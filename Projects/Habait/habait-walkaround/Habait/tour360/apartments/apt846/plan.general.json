@@ -1,0 +1,8225 @@
+{
+  "schema_version": "0.2.0-draft",
+  "units": "cm",
+  "geometry": "general",
+  "axes": "x right, y down on the plan crop (raster frame, 2.25 px/cm); origin = the crop's top-left; angles are bearings, 0 = up (-y), clockwise",
+  "apartment_id": "apt846",
+  "plan_meta": {
+    "source_file": "apartments/apt846/_local/plan/plan-crop.png (a 288 dpi crop of the sales plan PDF 'דירה 846- 16.pdf', 1:50, DBLK 15.10.2025)",
+    "source_sha256": "ef02e51825a60a800f6ff3d249f43f8d19409f8d62e122383938a64706c222f7",
+    "tracer": "main session, trace-rooms.mjs (raster: grey fill = walls, double strokes = glazing, wall-connected single strokes = door leaves; zone bars from the config)",
+    "trace_date": "2026-10-28",
+    "trace_method": "flood fill from each camera inside a barrier mask built from the drawing; wall footprints from the grey fill (opened, 37 pieces); openings from region contacts and wall-end gaps; panes from double strokes split by adjacency",
+    "scale_basis": "2.268 px/cm: the 1:50 sheet at 288 dpi (F12, 2026-11-05; was 2.25). The room loops' wall vertices were snapped onto the wall/pane polygon faces (0.5 cm inside) — the flood fill had left them 2.7-4.7 cm inside the walls, and the CG builds its wall faces from the loops. Residuals vs the printed dimensions after: {'r-bedroom-main': 1.21, 'r-bath-main': 0.37, 'r-bedroom-2': -0.29}",
+    "scale_px_per_cm": 2.268,
+    "raster_origin_px": [
+      0,
+      0
+    ],
+    "rights_state": "partner-supplied",
+    "rights_note": "the developer's sales plan held by Slava; a private pitch only until Israel Canada consents (D-WQ-18, OWED-658)",
+    "ceiling_height_cm": 290,
+    "floor_height_cm": 5120,
+    "ground_offset_cm": -5120,
+    "floor_height_note": "floor 16 at about 3.2 m floor to floor (an assumption: the sales plan carries no section); the ground sits that far below the unit",
+    "assumptions": [
+      "ceiling 290 cm (a plan drawing has no section; the 846 renders assumed 2.9 m)",
+      "door heads 215 cm, railing 110 cm, facade glazing floor to ceiling",
+      "the open-plan zone boundaries (kitchen | dining | living | hall, the terrace split, the wardrobe | bedroom) are virtual lines placed by hand",
+      "the guest bathroom and the main bathroom floors are the convex hulls of their traced regions",
+      "the terrace's south passage and end strip are traced (F5, 2026-11-05); the open/covered split follows the plan's 'קו קומה מעל'"
+    ],
+    "disagreements": [],
+    "virtual_boundaries": [
+      "kitchen|dining",
+      "kitchen+dining|living",
+      "entrance|living",
+      "terraceLiving|terraceBedroom",
+      "wardrobe|bedroomMain",
+      "door bathguest",
+      "door bathMain",
+      "terrace south end"
+    ],
+    "axes_note": "raster px = cm * scale_px_per_cm (unchanged pixels: only the cm values moved)",
+    "printed_dimensions": [
+      {
+        "id": "pdf-01",
+        "printed_cm": 347.7,
+        "a_cm": [
+          846.9,
+          1549.3
+        ],
+        "b_cm": [
+          517.8,
+          1437.4
+        ]
+      },
+      {
+        "id": "pdf-02",
+        "printed_cm": 160,
+        "a_cm": [
+          508.3,
+          1434.1
+        ],
+        "b_cm": [
+          356.8,
+          1382.6
+        ]
+      },
+      {
+        "id": "pdf-03",
+        "printed_cm": 210,
+        "a_cm": [
+          347.4,
+          1379.4
+        ],
+        "b_cm": [
+          148.5,
+          1311.8
+        ]
+      },
+      {
+        "id": "pdf-05",
+        "printed_cm": 343.6,
+        "a_cm": [
+          778.3,
+          1557.5
+        ],
+        "b_cm": [
+          888.9,
+          1232.2
+        ]
+      },
+      {
+        "id": "pdf-06",
+        "printed_cm": 744.3,
+        "a_cm": [
+          892.1,
+          1222.6
+        ],
+        "b_cm": [
+          1131.6,
+          518
+        ]
+      },
+      {
+        "id": "pdf-07",
+        "printed_cm": 243.9,
+        "a_cm": [
+          782.6,
+          1584.2
+        ],
+        "b_cm": [
+          704.1,
+          1815.1
+        ]
+      },
+      {
+        "id": "pdf-08",
+        "printed_cm": 529.5,
+        "a_cm": [
+          964.1,
+          1210.7
+        ],
+        "b_cm": [
+          462.8,
+          1040.1
+        ]
+      },
+      {
+        "id": "pdf-09",
+        "printed_cm": 185,
+        "a_cm": [
+          489.3,
+          1458
+        ],
+        "b_cm": [
+          548.8,
+          1282.8
+        ]
+      },
+      {
+        "id": "pdf-10",
+        "printed_cm": 212.5,
+        "a_cm": [
+          165.8,
+          1348
+        ],
+        "b_cm": [
+          234.2,
+          1146.8
+        ]
+      },
+      {
+        "id": "pdf-12",
+        "printed_cm": 525.1,
+        "a_cm": [
+          816.1,
+          1642.2
+        ],
+        "b_cm": [
+          319,
+          1473.2
+        ]
+      },
+      {
+        "id": "pdf-13",
+        "printed_cm": 165.2,
+        "a_cm": [
+          309.6,
+          1470
+        ],
+        "b_cm": [
+          153.2,
+          1416.8
+        ]
+      },
+      {
+        "id": "pdf-14",
+        "printed_cm": 275.8,
+        "a_cm": [
+          206.5,
+          1388.2
+        ],
+        "b_cm": [
+          117.6,
+          1649.3
+        ]
+      },
+      {
+        "id": "pdf-15",
+        "printed_cm": 151.9,
+        "a_cm": [
+          160.2,
+          1672.7
+        ],
+        "b_cm": [
+          111.3,
+          1816.6
+        ]
+      },
+      {
+        "id": "pdf-16",
+        "printed_cm": 133.6,
+        "a_cm": [
+          850.9,
+          1691
+        ],
+        "b_cm": [
+          807.8,
+          1817.5
+        ]
+      },
+      {
+        "id": "pdf-19",
+        "printed_cm": 55.2,
+        "a_cm": [
+          861.2,
+          1749.9
+        ],
+        "b_cm": [
+          809,
+          1732.2
+        ]
+      },
+      {
+        "id": "pdf-20",
+        "printed_cm": 93.2,
+        "a_cm": [
+          809,
+          1732.2
+        ],
+        "b_cm": [
+          720.7,
+          1702.2
+        ]
+      },
+      {
+        "id": "pdf-21",
+        "printed_cm": 608.6,
+        "a_cm": [
+          720.7,
+          1702.2
+        ],
+        "b_cm": [
+          144.5,
+          1506.3
+        ]
+      },
+      {
+        "id": "pdf-22",
+        "printed_cm": 120.4,
+        "a_cm": [
+          144.5,
+          1506.3
+        ],
+        "b_cm": [
+          30.5,
+          1467.6
+        ]
+      },
+      {
+        "id": "pdf-23",
+        "printed_cm": 439.1,
+        "a_cm": [
+          433.1,
+          317.3
+        ],
+        "b_cm": [
+          81.1,
+          54.9
+        ]
+      },
+      {
+        "id": "pdf-24",
+        "printed_cm": 525.3,
+        "a_cm": [
+          502.2,
+          212.1
+        ],
+        "b_cm": [
+          81.1,
+          -101.9
+        ]
+      },
+      {
+        "id": "pdf-25",
+        "printed_cm": 275,
+        "a_cm": [
+          578.7,
+          159.7
+        ],
+        "b_cm": [
+          799.2,
+          324.1
+        ]
+      },
+      {
+        "id": "pdf-26",
+        "printed_cm": 341.2,
+        "a_cm": [
+          456.1,
+          240.6
+        ],
+        "b_cm": [
+          252.2,
+          514.1
+        ]
+      },
+      {
+        "id": "pdf-27",
+        "printed_cm": 342.2,
+        "a_cm": [
+          458.9,
+          401.2
+        ],
+        "b_cm": [
+          663.4,
+          126.8
+        ]
+      },
+      {
+        "id": "pdf-28",
+        "printed_cm": 199.1,
+        "a_cm": [
+          467.9,
+          420.4
+        ],
+        "b_cm": [
+          348.9,
+          580.1
+        ]
+      },
+      {
+        "id": "pdf-29",
+        "printed_cm": 140,
+        "a_cm": [
+          507,
+          534
+        ],
+        "b_cm": [
+          394.7,
+          450.4
+        ]
+      },
+      {
+        "id": "pdf-30",
+        "printed_cm": 207.6,
+        "a_cm": [
+          410.6,
+          175.6
+        ],
+        "b_cm": [
+          534.7,
+          9.1
+        ]
+      },
+      {
+        "id": "pdf-31",
+        "printed_cm": 128.9,
+        "a_cm": [
+          80.2,
+          537.1
+        ],
+        "b_cm": [
+          209.1,
+          537.1
+        ]
+      },
+      {
+        "id": "pdf-32",
+        "printed_cm": 474.2,
+        "a_cm": [
+          979.6,
+          1403.3
+        ],
+        "b_cm": [
+          1132.2,
+          954.4
+        ]
+      },
+      {
+        "id": "pdf-33",
+        "printed_cm": 270.1,
+        "a_cm": [
+          1141.1,
+          768.4
+        ],
+        "b_cm": [
+          1396.8,
+          855.3
+        ]
+      },
+      {
+        "id": "pdf-34",
+        "printed_cm": 1212.7,
+        "a_cm": [
+          1619,
+          587.5
+        ],
+        "b_cm": [
+          1228.5,
+          1735.6
+        ]
+      }
+    ],
+    "printed_dimensions_unread": [
+      {
+        "printed_cm": 822,
+        "why": "the overall exterior length; the reader did not lock onto its line"
+      },
+      {
+        "printed_cm": 185,
+        "why": "the closet run w-closet-2; no tick pair found"
+      },
+      {
+        "printed_cm": 474,
+        "why": "labels the rescue-opening glazing (פתח חילוץ), not a room"
+      }
+    ],
+    "face_bias_cm": 1,
+    "printed_dimensions_hand_2026_11_05": [
+      {
+        "id": "bm-348",
+        "printed_cm": 348,
+        "a_cm": [
+          517.3,
+          1437.1
+        ],
+        "b_cm": [
+          846.6,
+          1548.9
+        ],
+        "rooms": [
+          "r-bedroom-main"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "bm-344",
+        "printed_cm": 344,
+        "a_cm": [
+          888.5,
+          1231.7
+        ],
+        "b_cm": [
+          778,
+          1557.2
+        ],
+        "rooms": [
+          "r-bedroom-main"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "b2-342",
+        "printed_cm": 342,
+        "a_cm": [
+          458.5,
+          400.9
+        ],
+        "b_cm": [
+          663.2,
+          126.9
+        ],
+        "rooms": [
+          "r-bedroom-2"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "b2-275",
+        "printed_cm": 275,
+        "a_cm": [
+          578.7,
+          159.5
+        ],
+        "b_cm": [
+          798.8,
+          323.8
+        ],
+        "rooms": [
+          "r-bedroom-2"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "bath-212",
+        "printed_cm": 212,
+        "a_cm": [
+          233.9,
+          1146.4
+        ],
+        "b_cm": [
+          165.5,
+          1347.9
+        ],
+        "rooms": [
+          "r-bath-main"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "lv-530",
+        "printed_cm": 530,
+        "a_cm": [
+          462.2,
+          1039.9
+        ],
+        "b_cm": [
+          964,
+          1210.2
+        ],
+        "rooms": [
+          "r-living",
+          "r-entrance"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "lv-744",
+        "printed_cm": 744,
+        "a_cm": [
+          891.9,
+          1222.4
+        ],
+        "b_cm": [
+          1131.2,
+          517.4
+        ],
+        "rooms": [
+          "r-living",
+          "r-dining",
+          "r-kitchen"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "tl-270",
+        "printed_cm": 270,
+        "a_cm": [
+          1140.5,
+          768
+        ],
+        "b_cm": [
+          1396.5,
+          854.9
+        ],
+        "rooms": [
+          "r-terrace-living"
+        ],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "tl-1213",
+        "printed_cm": 1213,
+        "a_cm": [
+          1228.3,
+          1735.5
+        ],
+        "b_cm": [
+          1618.5,
+          586.2
+        ],
+        "rooms": [],
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)",
+        "measures": "the building's length along the facade (its south extension line lands on the end of the facade wall, its north one on the slab/building outline) — NOT the terrace's length; checked against the traced wall/pane polygons only"
+      },
+      {
+        "id": "w-160",
+        "printed_cm": 160,
+        "a_cm": [
+          356.3,
+          1382.3
+        ],
+        "b_cm": [
+          508.1,
+          1433.8
+        ],
+        "fixture": "w-closet-1",
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "bm-210",
+        "printed_cm": 210,
+        "a_cm": [
+          148.3,
+          1311.4
+        ],
+        "b_cm": [
+          347.4,
+          1379
+        ],
+        "fixture": "bm-shower",
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      },
+      {
+        "id": "bg-140",
+        "printed_cm": 140,
+        "a_cm": [
+          394.7,
+          450.1
+        ],
+        "b_cm": [
+          506.7,
+          533.8
+        ],
+        "fixture": "bg-shower",
+        "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
+      }
+    ],
+    "printed_dimensions_source": "the PDF's dimension chains (24dimension_m layer; dim_chains.py on pdf-vectors.json, auto-trace run-pdf-846), tick to tick = the printed value, mapped into this frame (sheet offset 1750,380 px at 2.2677 px/cm); 30 lines (the overall line of a chained dimension is left out, its parts are kept). Measured by tools/printed_dimensions.py (2026-11-05)"
+  },
+  "rooms": [
+    {
+      "id": "r-entrance",
+      "name_he": "כניסה",
+      "name_en": "Entrance",
+      "type": "hall",
+      "is_outdoor": false,
+      "loop": [
+        [
+          552.94,
+          487.7
+        ],
+        [
+          554.17,
+          484.38
+        ],
+        [
+          626.42,
+          536.09
+        ],
+        [
+          634.08,
+          545.98
+        ],
+        [
+          538.07,
+          673.73
+        ],
+        [
+          533.93,
+          685.62
+        ],
+        [
+          202.78,
+          957.24
+        ],
+        [
+          195,
+          957.02
+        ],
+        [
+          224.23,
+          794.92
+        ],
+        [
+          222.39,
+          793.89
+        ],
+        [
+          226.78,
+          752.28
+        ],
+        [
+          247.37,
+          658.17
+        ],
+        [
+          339.48,
+          684.33
+        ],
+        [
+          342.03,
+          675.82
+        ],
+        [
+          348.21,
+          676.91
+        ],
+        [
+          429.93,
+          691.2
+        ],
+        [
+          440.18,
+          640.29
+        ],
+        [
+          445.24,
+          633.28
+        ],
+        [
+          446.19,
+          630.26
+        ],
+        [
+          453.67,
+          625.2
+        ],
+        [
+          500.74,
+          564.2
+        ],
+        [
+          501.37,
+          557.22
+        ],
+        [
+          552.61,
+          488.17
+        ]
+      ],
+      "clear_dims_cm": [
+        439.1,
+        472.8
+      ],
+      "bbox_cm": [
+        195,
+        484.4,
+        634.1,
+        957.2
+      ],
+      "area_m2": 6.289,
+      "edge_kinds": [
+        "line",
+        "open",
+        "wall",
+        "wall",
+        "line",
+        "open",
+        "open",
+        "wall",
+        "wall",
+        "wall",
+        "open",
+        "line",
+        "line",
+        "wall",
+        "wall",
+        "wall",
+        "wall",
+        "line",
+        "line",
+        "open",
+        "wall",
+        "wall",
+        "wall"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-kitchen",
+      "name_he": "מטבח",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "is_outdoor": false,
+      "loop": [
+        [
+          826.26,
+          225.28
+        ],
+        [
+          901.93,
+          278.37
+        ],
+        [
+          889.72,
+          295.63
+        ],
+        [
+          897.1,
+          301.48
+        ],
+        [
+          908.73,
+          287
+        ],
+        [
+          913.57,
+          287.03
+        ],
+        [
+          978.87,
+          335.52
+        ],
+        [
+          979.76,
+          340.87
+        ],
+        [
+          967.82,
+          353.81
+        ],
+        [
+          1010.62,
+          386.71
+        ],
+        [
+          842.56,
+          771.63
+        ],
+        [
+          634.52,
+          709.03
+        ],
+        [
+          661.81,
+          667.56
+        ],
+        [
+          670.63,
+          669.74
+        ],
+        [
+          669.35,
+          656.55
+        ],
+        [
+          664.48,
+          657.44
+        ],
+        [
+          630.06,
+          706.35
+        ],
+        [
+          571.83,
+          689.58
+        ],
+        [
+          617.26,
+          624.31
+        ],
+        [
+          612.77,
+          614.33
+        ],
+        [
+          643.09,
+          573.8
+        ],
+        [
+          693.15,
+          608.43
+        ],
+        [
+          727.48,
+          563.89
+        ],
+        [
+          725.3,
+          556.45
+        ],
+        [
+          688.69,
+          527.38
+        ],
+        [
+          680.04,
+          524.43
+        ],
+        [
+          681.98,
+          521.83
+        ],
+        [
+          769,
+          405.51
+        ],
+        [
+          783.93,
+          406.55
+        ],
+        [
+          827.18,
+          438.29
+        ],
+        [
+          863.29,
+          390.18
+        ],
+        [
+          821.03,
+          356.75
+        ],
+        [
+          813.48,
+          346.04
+        ],
+        [
+          845.98,
+          302.59
+        ],
+        [
+          863.26,
+          279.39
+        ],
+        [
+          817.86,
+          240.77
+        ],
+        [
+          825.86,
+          225.84
+        ]
+      ],
+      "clear_dims_cm": [
+        438.8,
+        546.3
+      ],
+      "bbox_cm": [
+        571.8,
+        225.3,
+        1010.6,
+        771.6
+      ],
+      "area_m2": 10.283,
+      "edge_kinds": [
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "open",
+        "open",
+        "line",
+        "line",
+        "open",
+        "open",
+        "line",
+        "open",
+        "line",
+        "line",
+        "wall",
+        "open",
+        "open",
+        "line",
+        "open",
+        "line",
+        "wall",
+        "wall",
+        "open",
+        "open",
+        "open",
+        "open",
+        "line",
+        "wall",
+        "wall",
+        "open",
+        "line",
+        "line"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-dining",
+      "name_he": "פינת אוכל",
+      "name_en": "Dining",
+      "type": "hall",
+      "is_outdoor": false,
+      "loop": [
+        [
+          1056.59,
+          419.52
+        ],
+        [
+          1059.56,
+          422.38
+        ],
+        [
+          1064.97,
+          411.06
+        ],
+        [
+          1070.45,
+          409.74
+        ],
+        [
+          1112.31,
+          446.71
+        ],
+        [
+          1134.75,
+          479.37
+        ],
+        [
+          1134.52,
+          485.02
+        ],
+        [
+          1117.26,
+          491.67
+        ],
+        [
+          1123.21,
+          501.35
+        ],
+        [
+          1141.96,
+          492.06
+        ],
+        [
+          1160.52,
+          537
+        ],
+        [
+          1169.35,
+          575.79
+        ],
+        [
+          1170.63,
+          591.67
+        ],
+        [
+          1149.55,
+          591.32
+        ],
+        [
+          1150.79,
+          603.27
+        ],
+        [
+          1152.08,
+          600.97
+        ],
+        [
+          1171.53,
+          599.6
+        ],
+        [
+          1170.54,
+          645.02
+        ],
+        [
+          1162.3,
+          687.8
+        ],
+        [
+          1158.06,
+          700.65
+        ],
+        [
+          1138.3,
+          693.9
+        ],
+        [
+          1088.52,
+          847.4
+        ],
+        [
+          847.92,
+          774.7
+        ],
+        [
+          1015.96,
+          390.71
+        ]
+      ],
+      "clear_dims_cm": [
+        323.6,
+        456.7
+      ],
+      "bbox_cm": [
+        847.9,
+        390.7,
+        1171.5,
+        847.4
+      ],
+      "area_m2": 8.822,
+      "edge_kinds": [
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "open",
+        "line"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-living",
+      "name_he": "סלון",
+      "name_en": "Living room",
+      "type": "living",
+      "is_outdoor": false,
+      "loop": [
+        [
+          544.74,
+          680.82
+        ],
+        [
+          551.6,
+          686.26
+        ],
+        [
+          555.92,
+          688.29
+        ],
+        [
+          612.4,
+          733.23
+        ],
+        [
+          622.12,
+          726.59
+        ],
+        [
+          628.27,
+          712.5
+        ],
+        [
+          632.74,
+          712.5
+        ],
+        [
+          838.59,
+          775.99
+        ],
+        [
+          843.95,
+          779.56
+        ],
+        [
+          848.81,
+          779.07
+        ],
+        [
+          1086.69,
+          852.69
+        ],
+        [
+          1031.79,
+          1013.7
+        ],
+        [
+          1049.77,
+          1018.15
+        ],
+        [
+          1043.58,
+          1041.85
+        ],
+        [
+          991.09,
+          1196.2
+        ],
+        [
+          973.12,
+          1192.26
+        ],
+        [
+          963.75,
+          1208.44
+        ],
+        [
+          960.14,
+          1212.07
+        ],
+        [
+          950.6,
+          1213.89
+        ],
+        [
+          960.12,
+          1219.21
+        ],
+        [
+          951.23,
+          1242.51
+        ],
+        [
+          898.04,
+          1224.62
+        ],
+        [
+          896.83,
+          1210.71
+        ],
+        [
+          893.75,
+          1213.39
+        ],
+        [
+          884.35,
+          1219.7
+        ],
+        [
+          452.29,
+          1073.55
+        ],
+        [
+          423.31,
+          1161.41
+        ],
+        [
+          415.89,
+          1178.02
+        ],
+        [
+          172.85,
+          1098.72
+        ],
+        [
+          183.95,
+          1022.04
+        ],
+        [
+          293.39,
+          1054.6
+        ],
+        [
+          304.22,
+          1024.01
+        ],
+        [
+          283.97,
+          1015.74
+        ],
+        [
+          271.63,
+          1010.12
+        ],
+        [
+          214.77,
+          995.03
+        ],
+        [
+          213.33,
+          991.48
+        ],
+        [
+          190.41,
+          982.97
+        ],
+        [
+          192.97,
+          968.1
+        ],
+        [
+          540.08,
+          686.51
+        ]
+      ],
+      "clear_dims_cm": [
+        913.9,
+        561.7
+      ],
+      "bbox_cm": [
+        172.8,
+        680.8,
+        1086.7,
+        1242.5
+      ],
+      "area_m2": 30.845,
+      "edge_kinds": [
+        "wall",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "open",
+        "open",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "open",
+        "line",
+        "wall",
+        "open",
+        "open",
+        "line",
+        "wall",
+        "open",
+        "line",
+        "wall",
+        "wall",
+        "wall",
+        "wall",
+        "wall",
+        "line",
+        "open",
+        "line",
+        "wall",
+        "wall",
+        "open",
+        "open"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-terrace-living",
+      "name_he": "מרפסת שמש",
+      "name_en": "Sun terrace",
+      "type": "balcony",
+      "is_outdoor": true,
+      "roofed": true,
+      "loop": [
+        [
+          1281.58,
+          567.18
+        ],
+        [
+          1287.7,
+          577.14
+        ],
+        [
+          1309.26,
+          592.27
+        ],
+        [
+          1310.18,
+          600.93
+        ],
+        [
+          1318.45,
+          600
+        ],
+        [
+          1332.94,
+          622.62
+        ],
+        [
+          1354.07,
+          637.1
+        ],
+        [
+          1354.96,
+          646.43
+        ],
+        [
+          1362,
+          645.54
+        ],
+        [
+          1372.12,
+          655.65
+        ],
+        [
+          1377.38,
+          667.56
+        ],
+        [
+          1385.32,
+          660.02
+        ],
+        [
+          1384.82,
+          647.31
+        ],
+        [
+          1376.59,
+          651.19
+        ],
+        [
+          1367.26,
+          642.46
+        ],
+        [
+          1367.37,
+          631.24
+        ],
+        [
+          1396.67,
+          653.13
+        ],
+        [
+          1421.2,
+          684.64
+        ],
+        [
+          1423.97,
+          696.19
+        ],
+        [
+          1417.94,
+          697.5
+        ],
+        [
+          1417.06,
+          704.17
+        ],
+        [
+          1431.65,
+          723.12
+        ],
+        [
+          1426.76,
+          763.18
+        ],
+        [
+          1396.35,
+          852.75
+        ],
+        [
+          1392.84,
+          853.81
+        ],
+        [
+          1393.37,
+          861.55
+        ],
+        [
+          1334.62,
+          1030.46
+        ],
+        [
+          1309.52,
+          1066.17
+        ],
+        [
+          1261.9,
+          1108.93
+        ],
+        [
+          1255.04,
+          1111.06
+        ],
+        [
+          1205.47,
+          1166.91
+        ],
+        [
+          1161.56,
+          1264.16
+        ],
+        [
+          987.8,
+          1221.82
+        ],
+        [
+          1002.76,
+          1176.82
+        ],
+        [
+          1005.75,
+          1175.5
+        ],
+        [
+          1007.06,
+          1164.12
+        ],
+        [
+          1022.52,
+          1172.82
+        ],
+        [
+          1026.88,
+          1171.03
+        ],
+        [
+          1024.7,
+          1165.77
+        ],
+        [
+          1008.32,
+          1160.44
+        ],
+        [
+          1009.8,
+          1156.08
+        ],
+        [
+          1012.23,
+          1148.98
+        ],
+        [
+          1032.64,
+          1153.87
+        ],
+        [
+          1030.46,
+          1149.01
+        ],
+        [
+          1013.28,
+          1145.88
+        ],
+        [
+          1014.73,
+          1141.65
+        ],
+        [
+          1017.02,
+          1134.92
+        ],
+        [
+          1018.22,
+          1131.41
+        ],
+        [
+          1023.15,
+          1116.94
+        ],
+        [
+          1039.29,
+          1123.91
+        ],
+        [
+          1043.65,
+          1121.73
+        ],
+        [
+          1041.47,
+          1117.26
+        ],
+        [
+          1024.1,
+          1114.2
+        ],
+        [
+          1025.7,
+          1109.49
+        ],
+        [
+          1027.67,
+          1103.72
+        ],
+        [
+          1044.54,
+          1110.22
+        ],
+        [
+          1050.3,
+          1103.57
+        ],
+        [
+          1048.02,
+          1097.92
+        ],
+        [
+          1030.69,
+          1094.87
+        ],
+        [
+          1034.47,
+          1083.79
+        ],
+        [
+          1037.33,
+          1075.43
+        ],
+        [
+          1040.26,
+          1066.85
+        ],
+        [
+          1055.56,
+          1070.14
+        ],
+        [
+          1059.13,
+          1067.46
+        ],
+        [
+          1040.32,
+          1066.67
+        ],
+        [
+          1041.47,
+          1062.2
+        ],
+        [
+          1083.86,
+          937.72
+        ],
+        [
+          1125.77,
+          951.76
+        ],
+        [
+          1126.98,
+          965.18
+        ],
+        [
+          1121.73,
+          971.83
+        ],
+        [
+          1128.27,
+          971.33
+        ],
+        [
+          1129.66,
+          963.39
+        ],
+        [
+          1139.02,
+          956.62
+        ],
+        [
+          1184.31,
+          971.59
+        ],
+        [
+          1203.67,
+          998.71
+        ],
+        [
+          1233.23,
+          899.9
+        ],
+        [
+          1221.33,
+          881.35
+        ],
+        [
+          1220.44,
+          863.79
+        ],
+        [
+          1217.36,
+          865.97
+        ],
+        [
+          1210.9,
+          874.4
+        ],
+        [
+          1194.85,
+          869.01
+        ],
+        [
+          1193.55,
+          854.96
+        ],
+        [
+          1214.68,
+          789.68
+        ],
+        [
+          1210.71,
+          791.87
+        ],
+        [
+          1190.48,
+          856.75
+        ],
+        [
+          1184.06,
+          865.39
+        ],
+        [
+          1167.57,
+          859.84
+        ],
+        [
+          1166.67,
+          842.16
+        ],
+        [
+          1157.07,
+          856.31
+        ],
+        [
+          1140.59,
+          850.79
+        ],
+        [
+          1139.29,
+          832.94
+        ],
+        [
+          1129.78,
+          847.15
+        ],
+        [
+          1117.57,
+          843.05
+        ],
+        [
+          1144.64,
+          766.27
+        ],
+        [
+          1159.78,
+          704.84
+        ],
+        [
+          1167.21,
+          691.27
+        ],
+        [
+          1177.42,
+          628.73
+        ],
+        [
+          1172.54,
+          557.01
+        ],
+        [
+          1159.37,
+          512.76
+        ],
+        [
+          1133.48,
+          456.81
+        ]
+      ],
+      "clear_dims_cm": [
+        443.9,
+        807.4
+      ],
+      "bbox_cm": [
+        987.8,
+        456.8,
+        1431.7,
+        1264.2
+      ],
+      "area_m2": 15.63,
+      "edge_kinds": [
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "wall",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "wall",
+        "line",
+        "line",
+        "open",
+        "open",
+        "open",
+        "line",
+        "wall",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "wall",
+        "line",
+        "open",
+        "wall",
+        "open",
+        "open",
+        "wall",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-terrace-bedroom",
+      "name_he": "מרפסת · קצה החדרים",
+      "name_en": "Terrace, bedroom end",
+      "type": "balcony",
+      "is_outdoor": true,
+      "roofed": false,
+      "loop": [
+        [
+          1124.31,
+          1260.12
+        ],
+        [
+          1126.09,
+          1265.87
+        ],
+        [
+          1135.32,
+          1270.24
+        ],
+        [
+          1140.18,
+          1271.63
+        ],
+        [
+          1135.81,
+          1264.09
+        ],
+        [
+          1159.27,
+          1269.36
+        ],
+        [
+          1070.54,
+          1469.15
+        ],
+        [
+          960.25,
+          1725.06
+        ],
+        [
+          801.93,
+          1674.38
+        ],
+        [
+          898.29,
+          1477.28
+        ],
+        [
+          1004.51,
+          1521.15
+        ],
+        [
+          1041.93,
+          1431.12
+        ],
+        [
+          1033.19,
+          1426.13
+        ],
+        [
+          1031.75,
+          1416.67
+        ],
+        [
+          1040.97,
+          1380.06
+        ],
+        [
+          1048.51,
+          1364.19
+        ],
+        [
+          1055.56,
+          1360.71
+        ],
+        [
+          1052.48,
+          1348.81
+        ],
+        [
+          1042.76,
+          1350.5
+        ],
+        [
+          1033.93,
+          1361.51
+        ],
+        [
+          1040.97,
+          1373.91
+        ],
+        [
+          1035.71,
+          1375.2
+        ],
+        [
+          1039.29,
+          1385.32
+        ],
+        [
+          1022.16,
+          1421.41
+        ],
+        [
+          1006.56,
+          1414.59
+        ],
+        [
+          1005.75,
+          1400.4
+        ],
+        [
+          1011.01,
+          1383.63
+        ],
+        [
+          1009.23,
+          1379.66
+        ],
+        [
+          1002.68,
+          1402.08
+        ],
+        [
+          997.05,
+          1410.46
+        ],
+        [
+          979.56,
+          1403.83
+        ],
+        [
+          973.67,
+          1400.84
+        ],
+        [
+          968.88,
+          1398.73
+        ],
+        [
+          934.11,
+          1383.41
+        ],
+        [
+          985.97,
+          1227.1
+        ]
+      ],
+      "clear_dims_cm": [
+        357.4,
+        498
+      ],
+      "bbox_cm": [
+        801.9,
+        1227.1,
+        1159.3,
+        1725.1
+      ],
+      "area_m2": 6.739,
+      "edge_kinds": [
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "wall",
+        "line",
+        "wall",
+        "wall",
+        "wall",
+        "line",
+        "open",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "wall",
+        "open",
+        "open",
+        "line",
+        "line",
+        "line",
+        "wall",
+        "wall",
+        "wall",
+        "wall",
+        "line",
+        "line"
+      ],
+      "note": "F5/F6 2026-11-05 (fidelity audit; Eliran: the roof per the plan): the terrace continues past the column as the plan's narrow passage (~41 cm) to the end strip"
+    },
+    {
+      "id": "r-bedroom-main",
+      "name_he": "חדר שינה הורים",
+      "name_en": "Main bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          936.95,
+          1248.45
+        ],
+        [
+          907.29,
+          1373.98
+        ],
+        [
+          862.85,
+          1495.69
+        ],
+        [
+          829.4,
+          1570.11
+        ],
+        [
+          777.63,
+          1557.23
+        ],
+        [
+          779.96,
+          1548.02
+        ],
+        [
+          770.18,
+          1554.37
+        ],
+        [
+          507.01,
+          1468.67
+        ],
+        [
+          567.54,
+          1293.31
+        ],
+        [
+          564.38,
+          1279.07
+        ],
+        [
+          579.57,
+          1127.56
+        ]
+      ],
+      "clear_dims_cm": [
+        430,
+        442.5
+      ],
+      "bbox_cm": [
+        507,
+        1127.6,
+        937,
+        1570.1
+      ],
+      "area_m2": 12.185,
+      "edge_kinds": [
+        "line",
+        "wall",
+        "line",
+        "wall",
+        "open",
+        "line",
+        "wall",
+        "wall",
+        "line",
+        "open",
+        "wall"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-wardrobe",
+      "name_he": "פינת ארונות",
+      "name_en": "Wardrobe",
+      "type": "storage",
+      "is_outdoor": false,
+      "loop": [
+        [
+          458.52,
+          1085.51
+        ],
+        [
+          575.28,
+          1125.04
+        ],
+        [
+          559.41,
+          1286.35
+        ],
+        [
+          557.92,
+          1286.82
+        ],
+        [
+          508.01,
+          1434.45
+        ],
+        [
+          496.03,
+          1429.86
+        ],
+        [
+          484.47,
+          1457.22
+        ],
+        [
+          348.33,
+          1411.26
+        ],
+        [
+          377.1,
+          1313.94
+        ],
+        [
+          426.3,
+          1176.76
+        ],
+        [
+          426.39,
+          1164.48
+        ],
+        [
+          449.31,
+          1099.21
+        ],
+        [
+          527.78,
+          1126.09
+        ],
+        [
+          529.96,
+          1123.41
+        ],
+        [
+          529.96,
+          1119.44
+        ],
+        [
+          459.42,
+          1096.13
+        ],
+        [
+          456.31,
+          1088.62
+        ]
+      ],
+      "clear_dims_cm": [
+        227,
+        371.7
+      ],
+      "bbox_cm": [
+        348.3,
+        1085.5,
+        575.3,
+        1457.2
+      ],
+      "area_m2": 5.187,
+      "edge_kinds": [
+        "wall",
+        "open",
+        "wall",
+        "wall",
+        "open",
+        "line",
+        "wall",
+        "wall",
+        "wall",
+        "line",
+        "open",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "wall"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-bath-main",
+      "name_he": "חדר רחצה הורים",
+      "name_en": "Main bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          139.05,
+          1339
+        ],
+        [
+          166.81,
+          1257.54
+        ],
+        [
+          206.66,
+          1140.68
+        ],
+        [
+          207.33,
+          1137.8
+        ],
+        [
+          402.7,
+          1203.56
+        ],
+        [
+          392.27,
+          1262.12
+        ],
+        [
+          367.63,
+          1328.3
+        ],
+        [
+          335.68,
+          1408.98
+        ],
+        [
+          223.86,
+          1368.96
+        ],
+        [
+          169.26,
+          1349.17
+        ]
+      ],
+      "clear_dims_cm": [
+        263.6,
+        271.2
+      ],
+      "bbox_cm": [
+        139.1,
+        1137.8,
+        402.7,
+        1409
+      ],
+      "area_m2": 4.532,
+      "edge_kinds": [
+        "wall",
+        "wall",
+        "wall",
+        "wall",
+        "wall",
+        "open",
+        "wall",
+        "wall",
+        "wall",
+        "wall"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-bedroom-2",
+      "name_he": "חדר שינה",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          616.9,
+          103.34
+        ],
+        [
+          639.98,
+          119.5
+        ],
+        [
+          656.85,
+          123.14
+        ],
+        [
+          661.17,
+          129.6
+        ],
+        [
+          668.85,
+          131.85
+        ],
+        [
+          840.86,
+          260.14
+        ],
+        [
+          841.36,
+          267.65
+        ],
+        [
+          640.56,
+          536.52
+        ],
+        [
+          633.04,
+          532.26
+        ],
+        [
+          632.74,
+          524.7
+        ],
+        [
+          678.17,
+          464.29
+        ],
+        [
+          675.89,
+          462.1
+        ],
+        [
+          671.03,
+          460.32
+        ],
+        [
+          671.53,
+          465.58
+        ],
+        [
+          626.09,
+          527.78
+        ],
+        [
+          621.73,
+          527.78
+        ],
+        [
+          564.78,
+          486.81
+        ],
+        [
+          570.14,
+          474.4
+        ],
+        [
+          560.79,
+          476.52
+        ],
+        [
+          417.31,
+          370.46
+        ],
+        [
+          573.57,
+          166.31
+        ],
+        [
+          586.9,
+          167.06
+        ],
+        [
+          615.48,
+          190.87
+        ],
+        [
+          619.44,
+          190.08
+        ],
+        [
+          588.19,
+          165.38
+        ],
+        [
+          583.7,
+          152.76
+        ],
+        [
+          600.11,
+          130.69
+        ],
+        [
+          602.33,
+          127.64
+        ],
+        [
+          616.58,
+          103.77
+        ]
+      ],
+      "clear_dims_cm": [
+        424.1,
+        433.2
+      ],
+      "bbox_cm": [
+        417.3,
+        103.3,
+        841.4,
+        536.5
+      ],
+      "area_m2": 9.384,
+      "edge_kinds": [
+        "line",
+        "line",
+        "line",
+        "open",
+        "open",
+        "line",
+        "wall",
+        "wall",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "line",
+        "line",
+        "open",
+        "line",
+        "line",
+        "wall",
+        "wall",
+        "open",
+        "line",
+        "line",
+        "open",
+        "line",
+        "wall",
+        "line",
+        "wall",
+        "wall"
+      ],
+      "note": null
+    },
+    {
+      "id": "r-bath-guest",
+      "name_he": "חדר רחצה כללי",
+      "name_en": "Guest bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "loop": [
+        [
+          305.57,
+          568.62
+        ],
+        [
+          346.39,
+          514.71
+        ],
+        [
+          385.24,
+          462.67
+        ],
+        [
+          389.87,
+          455.18
+        ],
+        [
+          434.79,
+          410.76
+        ],
+        [
+          435.22,
+          410.02
+        ],
+        [
+          469.98,
+          420.84
+        ],
+        [
+          533.04,
+          479.76
+        ],
+        [
+          533.04,
+          481.92
+        ],
+        [
+          486.31,
+          574.05
+        ],
+        [
+          425.62,
+          667.03
+        ],
+        [
+          346.46,
+          656.74
+        ],
+        [
+          308.39,
+          571.38
+        ]
+      ],
+      "clear_dims_cm": [
+        227.4,
+        257
+      ],
+      "bbox_cm": [
+        305.6,
+        410,
+        533,
+        667
+      ],
+      "area_m2": 3.403,
+      "edge_kinds": [
+        "wall",
+        "wall",
+        "wall",
+        "wall",
+        "line",
+        "line",
+        "line",
+        "open",
+        "wall",
+        "open",
+        "wall",
+        "open",
+        "wall"
+      ],
+      "note": null
+    }
+  ],
+  "walls": [
+    {
+      "id": "w-1",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          180.75,
+          757.54
+        ],
+        [
+          222.22,
+          765.87
+        ],
+        [
+          116.37,
+          1353.17
+        ],
+        [
+          113.79,
+          1356.25
+        ],
+        [
+          73.21,
+          1342.56
+        ],
+        [
+          73.21,
+          1340.87
+        ],
+        [
+          74.5,
+          1335.12
+        ],
+        [
+          77.18,
+          1333.73
+        ],
+        [
+          101.39,
+          1199.7
+        ],
+        [
+          101.39,
+          1184.33
+        ],
+        [
+          112,
+          1124.8
+        ],
+        [
+          128.27,
+          1035.32
+        ],
+        [
+          131.35,
+          1033.04
+        ],
+        [
+          132.24,
+          1028.67
+        ],
+        [
+          158.33,
+          881.85
+        ],
+        [
+          160.02,
+          881.85
+        ],
+        [
+          160.02,
+          872.12
+        ],
+        [
+          180.75,
+          757.94
+        ]
+      ],
+      "area_cm2": 25613
+    },
+    {
+      "id": "w-2",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          220.04,
+          794.94
+        ],
+        [
+          222.62,
+          794.94
+        ],
+        [
+          222.62,
+          797.62
+        ],
+        [
+          188.69,
+          983.23
+        ],
+        [
+          190.08,
+          985.42
+        ],
+        [
+          213.39,
+          992.96
+        ],
+        [
+          214.29,
+          995.14
+        ],
+        [
+          189.19,
+          987.2
+        ],
+        [
+          184.72,
+          1008.33
+        ],
+        [
+          286.61,
+          1043.65
+        ],
+        [
+          288.79,
+          1042.76
+        ],
+        [
+          294.94,
+          1023.41
+        ],
+        [
+          283.93,
+          1019.44
+        ],
+        [
+          283.53,
+          1017.16
+        ],
+        [
+          302.48,
+          1024.7
+        ],
+        [
+          292.76,
+          1052.88
+        ],
+        [
+          290.58,
+          1052.88
+        ],
+        [
+          183.43,
+          1016.27
+        ],
+        [
+          168.45,
+          1098.81
+        ],
+        [
+          413.99,
+          1182.94
+        ],
+        [
+          418.45,
+          1174.21
+        ],
+        [
+          425,
+          1176.79
+        ],
+        [
+          398.12,
+          1251.79
+        ],
+        [
+          392.86,
+          1248.21
+        ],
+        [
+          407.84,
+          1205.46
+        ],
+        [
+          406.55,
+          1203.27
+        ],
+        [
+          235.42,
+          1145.54
+        ],
+        [
+          237.2,
+          1136.21
+        ],
+        [
+          234.52,
+          1143.25
+        ],
+        [
+          230.56,
+          1139.78
+        ],
+        [
+          230.16,
+          1143.75
+        ],
+        [
+          206.75,
+          1135.81
+        ],
+        [
+          148.12,
+          1307.74
+        ],
+        [
+          147.22,
+          1309.92
+        ],
+        [
+          138.49,
+          1308.23
+        ],
+        [
+          145.93,
+          1312.2
+        ],
+        [
+          141.57,
+          1314.38
+        ],
+        [
+          145.54,
+          1315.28
+        ],
+        [
+          135.32,
+          1341.27
+        ],
+        [
+          125.2,
+          1337.7
+        ],
+        [
+          126.59,
+          1333.73
+        ],
+        [
+          123.41,
+          1332.04
+        ],
+        [
+          123.41,
+          1329.37
+        ],
+        [
+          146.43,
+          1201.98
+        ],
+        [
+          149.9,
+          1198.02
+        ],
+        [
+          129.66,
+          1319.64
+        ],
+        [
+          131.85,
+          1318.35
+        ],
+        [
+          172.42,
+          1198.02
+        ],
+        [
+          175,
+          1197.12
+        ],
+        [
+          173.31,
+          1195.34
+        ],
+        [
+          194.84,
+          1133.13
+        ],
+        [
+          193.55,
+          1130.95
+        ],
+        [
+          166.27,
+          1121.73
+        ],
+        [
+          163.59,
+          1123.02
+        ],
+        [
+          153.87,
+          1178.97
+        ],
+        [
+          151.19,
+          1179.86
+        ],
+        [
+          220.04,
+          795.44
+        ]
+      ],
+      "area_cm2": 11536.5
+    },
+    {
+      "id": "w-3",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          844.35,
+          264.98
+        ],
+        [
+          862,
+          278.67
+        ],
+        [
+          555.95,
+          687.8
+        ],
+        [
+          539.29,
+          674.6
+        ],
+        [
+          635.81,
+          545.44
+        ],
+        [
+          629.66,
+          538.39
+        ],
+        [
+          633.13,
+          533.93
+        ],
+        [
+          639.78,
+          537.9
+        ],
+        [
+          641.96,
+          537
+        ],
+        [
+          798.91,
+          325.79
+        ],
+        [
+          807.34,
+          329.76
+        ],
+        [
+          801.19,
+          325
+        ],
+        [
+          806.45,
+          322.72
+        ],
+        [
+          801.98,
+          321.83
+        ],
+        [
+          843.95,
+          265.48
+        ]
+      ],
+      "area_cm2": 11151.9
+    },
+    {
+      "id": "w-4",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          414.88,
+          370.83
+        ],
+        [
+          456.75,
+          402.58
+        ],
+        [
+          452.38,
+          406.94
+        ],
+        [
+          433.83,
+          394.64
+        ],
+        [
+          395.04,
+          447.12
+        ],
+        [
+          392.86,
+          448.41
+        ],
+        [
+          385.81,
+          444.05
+        ],
+        [
+          391.96,
+          448.81
+        ],
+        [
+          386.71,
+          451.09
+        ],
+        [
+          391.07,
+          452.38
+        ],
+        [
+          303.77,
+          569.25
+        ],
+        [
+          305.16,
+          573.61
+        ],
+        [
+          346.13,
+          580.65
+        ],
+        [
+          342.56,
+          588.19
+        ],
+        [
+          347.42,
+          582.04
+        ],
+        [
+          349.6,
+          587.3
+        ],
+        [
+          349.6,
+          582.04
+        ],
+        [
+          355.85,
+          585.52
+        ],
+        [
+          343.95,
+          654.37
+        ],
+        [
+          336.9,
+          653.47
+        ],
+        [
+          347.42,
+          593.95
+        ],
+        [
+          259.23,
+          577.58
+        ],
+        [
+          261.01,
+          566.17
+        ],
+        [
+          281.75,
+          568.35
+        ],
+        [
+          281.75,
+          531.75
+        ],
+        [
+          295.44,
+          531.35
+        ],
+        [
+          302.88,
+          520.73
+        ],
+        [
+          303.77,
+          528.17
+        ],
+        [
+          307.34,
+          527.78
+        ],
+        [
+          416.27,
+          381.85
+        ],
+        [
+          411.41,
+          376.59
+        ],
+        [
+          414.48,
+          371.23
+        ]
+      ],
+      "area_cm2": 7344.8
+    },
+    {
+      "id": "w-5",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          908.33,
+          1374.8
+        ],
+        [
+          919.74,
+          1378.77
+        ],
+        [
+          919.74,
+          1382.24
+        ],
+        [
+          922.82,
+          1380.06
+        ],
+        [
+          977.98,
+          1404.37
+        ],
+        [
+          974.9,
+          1410.52
+        ],
+        [
+          939.58,
+          1396.43
+        ],
+        [
+          912.7,
+          1459.92
+        ],
+        [
+          910.02,
+          1461.21
+        ],
+        [
+          909.62,
+          1472.22
+        ],
+        [
+          981.94,
+          1503.97
+        ],
+        [
+          985.91,
+          1504.86
+        ],
+        [
+          987.2,
+          1503.08
+        ],
+        [
+          1017.66,
+          1428.97
+        ],
+        [
+          977.08,
+          1411.41
+        ],
+        [
+          978.87,
+          1405.16
+        ],
+        [
+          981.94,
+          1409.62
+        ],
+        [
+          982.84,
+          1406.55
+        ],
+        [
+          993.35,
+          1411.41
+        ],
+        [
+          993.35,
+          1415.77
+        ],
+        [
+          996.43,
+          1411.81
+        ],
+        [
+          1040.97,
+          1431.25
+        ],
+        [
+          1003.97,
+          1520.24
+        ],
+        [
+          898.61,
+          1475.79
+        ],
+        [
+          901.19,
+          1466.07
+        ],
+        [
+          899.9,
+          1464.29
+        ],
+        [
+          895.54,
+          1474.01
+        ],
+        [
+          877.38,
+          1466.47
+        ],
+        [
+          908.33,
+          1375.2
+        ]
+      ],
+      "area_cm2": 6555
+    },
+    {
+      "id": "w-6",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          1112.9,
+          853.57
+        ],
+        [
+          1186.9,
+          878.27
+        ],
+        [
+          1164.48,
+          952.38
+        ],
+        [
+          1090.38,
+          927.68
+        ],
+        [
+          1112.9,
+          854.07
+        ]
+      ],
+      "area_cm2": 6037.2
+    },
+    {
+      "id": "w-7",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          942.66,
+          1399.9
+        ],
+        [
+          1011.01,
+          1428.97
+        ],
+        [
+          981.94,
+          1499.6
+        ],
+        [
+          913.59,
+          1470.44
+        ],
+        [
+          915.38,
+          1464.68
+        ],
+        [
+          918.45,
+          1464.29
+        ],
+        [
+          916.67,
+          1461.61
+        ],
+        [
+          942.66,
+          1400.4
+        ]
+      ],
+      "area_cm2": 5680.6
+    },
+    {
+      "id": "w-8",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          121.23,
+          1342.16
+        ],
+        [
+          484.13,
+          1465.18
+        ],
+        [
+          485.42,
+          1467.36
+        ],
+        [
+          506.15,
+          1472.62
+        ],
+        [
+          765.48,
+          1560.81
+        ],
+        [
+          774.21,
+          1563.89
+        ],
+        [
+          774.7,
+          1567.06
+        ],
+        [
+          776.88,
+          1564.78
+        ],
+        [
+          831.55,
+          1583.33
+        ],
+        [
+          831.15,
+          1590.38
+        ],
+        [
+          214.68,
+          1381.35
+        ],
+        [
+          209.42,
+          1377.88
+        ],
+        [
+          207.24,
+          1378.77
+        ],
+        [
+          127.88,
+          1351.88
+        ],
+        [
+          120.34,
+          1349.21
+        ],
+        [
+          121.23,
+          1342.56
+        ]
+      ],
+      "area_cm2": 5265.3
+    },
+    {
+      "id": "w-9",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          204.56,
+          570.54
+        ],
+        [
+          257.04,
+          570.54
+        ],
+        [
+          242.46,
+          653.47
+        ],
+        [
+          201.09,
+          646.43
+        ],
+        [
+          206.75,
+          615.08
+        ],
+        [
+          204.56,
+          612.4
+        ],
+        [
+          204.56,
+          571.03
+        ]
+      ],
+      "area_cm2": 3643.5
+    },
+    {
+      "id": "w-10",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          451.98,
+          1075
+        ],
+        [
+          889.78,
+          1223.12
+        ],
+        [
+          888.89,
+          1229.27
+        ],
+        [
+          885.32,
+          1224.9
+        ],
+        [
+          886.21,
+          1229.27
+        ],
+        [
+          458.53,
+          1083.73
+        ],
+        [
+          455.06,
+          1087.7
+        ],
+        [
+          448.41,
+          1086.01
+        ],
+        [
+          451.98,
+          1075.4
+        ]
+      ],
+      "area_cm2": 3070.3
+    },
+    {
+      "id": "w-11",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          247.82,
+          640.67
+        ],
+        [
+          431.25,
+          673.31
+        ],
+        [
+          428.97,
+          689.58
+        ],
+        [
+          246.03,
+          657.44
+        ],
+        [
+          247.82,
+          641.07
+        ]
+      ],
+      "area_cm2": 3091.8
+    },
+    {
+      "id": "w-12",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          482.84,
+          262.8
+        ],
+        [
+          488.1,
+          266.27
+        ],
+        [
+          487.7,
+          268.55
+        ],
+        [
+          294.05,
+          528.17
+        ],
+        [
+          221.33,
+          528.67
+        ],
+        [
+          220.93,
+          567.06
+        ],
+        [
+          213.89,
+          567.46
+        ],
+        [
+          213.89,
+          537.5
+        ],
+        [
+          216.47,
+          537
+        ],
+        [
+          213.89,
+          536.11
+        ],
+        [
+          213.89,
+          521.63
+        ],
+        [
+          290.08,
+          521.63
+        ],
+        [
+          437.8,
+          323.21
+        ],
+        [
+          441.37,
+          323.21
+        ],
+        [
+          440.48,
+          319.64
+        ],
+        [
+          482.84,
+          263.19
+        ]
+      ],
+      "area_cm2": 3140.5
+    },
+    {
+      "id": "w-13",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          1102.28,
+          839.48
+        ],
+        [
+          1213.89,
+          876.98
+        ],
+        [
+          1185.62,
+          970.44
+        ],
+        [
+          1133.63,
+          953.27
+        ],
+        [
+          1133.13,
+          951.49
+        ],
+        [
+          1136.71,
+          946.63
+        ],
+        [
+          1166.27,
+          955.95
+        ],
+        [
+          1190.48,
+          876.98
+        ],
+        [
+          1163.1,
+          867.26
+        ],
+        [
+          1163.59,
+          862.9
+        ],
+        [
+          1160.52,
+          866.37
+        ],
+        [
+          1100.1,
+          846.13
+        ],
+        [
+          1101.88,
+          839.98
+        ]
+      ],
+      "area_cm2": 3111.2
+    },
+    {
+      "id": "w-14",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          587.7,
+          115.97
+        ],
+        [
+          600.99,
+          126.98
+        ],
+        [
+          578.08,
+          157.84
+        ],
+        [
+          569.64,
+          153.47
+        ],
+        [
+          575.79,
+          158.33
+        ],
+        [
+          571.03,
+          160.52
+        ],
+        [
+          575.4,
+          161.41
+        ],
+        [
+          500.89,
+          259.72
+        ],
+        [
+          488.99,
+          250.89
+        ],
+        [
+          488.99,
+          248.21
+        ],
+        [
+          587.3,
+          116.37
+        ]
+      ],
+      "area_cm2": 2818.5
+    },
+    {
+      "id": "w-15",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          336.41,
+          1425.89
+        ],
+        [
+          768.06,
+          1572.32
+        ],
+        [
+          778.17,
+          1575.79
+        ],
+        [
+          779.07,
+          1579.37
+        ],
+        [
+          336.9,
+          1429.46
+        ],
+        [
+          336.01,
+          1426.39
+        ]
+      ],
+      "area_cm2": 1485.4
+    },
+    {
+      "id": "w-16",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          624.8,
+          57.34
+        ],
+        [
+          639.78,
+          69.25
+        ],
+        [
+          600.5,
+          123.41
+        ],
+        [
+          584.62,
+          111.11
+        ],
+        [
+          624.8,
+          57.74
+        ]
+      ],
+      "area_cm2": 1305.6
+    },
+    {
+      "id": "w-17",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          473.12,
+          413.99
+        ],
+        [
+          558.63,
+          477.48
+        ],
+        [
+          514.09,
+          537.9
+        ],
+        [
+          508.83,
+          534.82
+        ],
+        [
+          514.09,
+          533.04
+        ],
+        [
+          510.12,
+          532.64
+        ],
+        [
+          510.62,
+          530.85
+        ],
+        [
+          548.91,
+          479.27
+        ],
+        [
+          470.44,
+          420.63
+        ],
+        [
+          469.54,
+          418.45
+        ],
+        [
+          472.62,
+          414.48
+        ]
+      ],
+      "area_cm2": 1216.6
+    },
+    {
+      "id": "w-18",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          559.13,
+          1287.9
+        ],
+        [
+          565.67,
+          1290.97
+        ],
+        [
+          514.98,
+          1435.62
+        ],
+        [
+          510.62,
+          1433.83
+        ],
+        [
+          514.98,
+          1430.75
+        ],
+        [
+          510.62,
+          1430.36
+        ],
+        [
+          559.13,
+          1288.39
+        ]
+      ],
+      "area_cm2": 977.1
+    },
+    {
+      "id": "w-19",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          433.43,
+          318.75
+        ],
+        [
+          436.11,
+          321.03
+        ],
+        [
+          289.29,
+          518.06
+        ],
+        [
+          253.08,
+          518.55
+        ],
+        [
+          253.08,
+          515.48
+        ],
+        [
+          287.9,
+          514.09
+        ],
+        [
+          432.94,
+          319.25
+        ]
+      ],
+      "area_cm2": 993.2
+    },
+    {
+      "id": "w-20",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          508.83,
+          1467.36
+        ],
+        [
+          776.88,
+          1558.23
+        ],
+        [
+          776.49,
+          1560.42
+        ],
+        [
+          507.94,
+          1470.44
+        ],
+        [
+          508.33,
+          1467.86
+        ]
+      ],
+      "area_cm2": 765.4
+    },
+    {
+      "id": "w-21",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          639.78,
+          37.5
+        ],
+        [
+          662.7,
+          54.66
+        ],
+        [
+          645.04,
+          79.37
+        ],
+        [
+          639.78,
+          77.58
+        ],
+        [
+          629.17,
+          90.38
+        ],
+        [
+          644.15,
+          69.25
+        ],
+        [
+          642.46,
+          65.67
+        ],
+        [
+          627.38,
+          55.16
+        ],
+        [
+          639.29,
+          37.9
+        ]
+      ],
+      "area_cm2": 687.9
+    },
+    {
+      "id": "w-22",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          409.13,
+          378.77
+        ],
+        [
+          411.41,
+          381.35
+        ],
+        [
+          306.85,
+          520.24
+        ],
+        [
+          306.85,
+          515.48
+        ],
+        [
+          408.73,
+          379.17
+        ]
+      ],
+      "area_cm2": 543.5
+    },
+    {
+      "id": "w-23",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          168.45,
+          1351.88
+        ],
+        [
+          334.62,
+          1407.84
+        ],
+        [
+          335.12,
+          1410.02
+        ],
+        [
+          332.94,
+          1410.91
+        ],
+        [
+          169.74,
+          1355.36
+        ],
+        [
+          168.45,
+          1352.28
+        ]
+      ],
+      "area_cm2": 553.1
+    },
+    {
+      "id": "w-24",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          1089.48,
+          845.63
+        ],
+        [
+          1095.63,
+          847.42
+        ],
+        [
+          1095.63,
+          849.6
+        ],
+        [
+          1079.76,
+          896.43
+        ],
+        [
+          1076.69,
+          899.5
+        ],
+        [
+          1078.08,
+          901.19
+        ],
+        [
+          1072.72,
+          917.06
+        ],
+        [
+          1069.64,
+          921.03
+        ],
+        [
+          1064.38,
+          918.45
+        ],
+        [
+          1089.48,
+          846.13
+        ]
+      ],
+      "area_cm2": 549.8
+    },
+    {
+      "id": "w-25",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          347.92,
+          1412.7
+        ],
+        [
+          486.31,
+          1459.42
+        ],
+        [
+          486.81,
+          1462.5
+        ],
+        [
+          350.99,
+          1417.06
+        ],
+        [
+          347.02,
+          1415.38
+        ],
+        [
+          347.42,
+          1413.1
+        ]
+      ],
+      "area_cm2": 434.3
+    },
+    {
+      "id": "w-26",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          1072.72,
+          925.5
+        ],
+        [
+          1132.74,
+          945.34
+        ],
+        [
+          1132.24,
+          951.49
+        ],
+        [
+          1128.77,
+          947.12
+        ],
+        [
+          1129.66,
+          951.49
+        ],
+        [
+          1061.31,
+          928.57
+        ],
+        [
+          1062.6,
+          926.79
+        ],
+        [
+          1071.03,
+          929.46
+        ],
+        [
+          1072.72,
+          925.89
+        ]
+      ],
+      "area_cm2": 442
+    },
+    {
+      "id": "w-27",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          490.77,
+          268.95
+        ],
+        [
+          493.35,
+          270.24
+        ],
+        [
+          492.46,
+          272.52
+        ],
+        [
+          420.24,
+          369.44
+        ],
+        [
+          417.96,
+          369.05
+        ],
+        [
+          490.77,
+          269.44
+        ]
+      ],
+      "area_cm2": 324.8
+    },
+    {
+      "id": "w-28",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          891.57,
+          1224.4
+        ],
+        [
+          895.04,
+          1229.27
+        ],
+        [
+          894.15,
+          1224.9
+        ],
+        [
+          950.6,
+          1243.85
+        ],
+        [
+          948.81,
+          1249.6
+        ],
+        [
+          890.67,
+          1231.05
+        ],
+        [
+          891.57,
+          1224.9
+        ]
+      ],
+      "area_cm2": 393.5
+    },
+    {
+      "id": "w-29",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          208.53,
+          1382.74
+        ],
+        [
+          323.21,
+          1421.03
+        ],
+        [
+          323.61,
+          1423.31
+        ],
+        [
+          321.43,
+          1424.21
+        ],
+        [
+          216.07,
+          1388.49
+        ],
+        [
+          208.53,
+          1385.81
+        ],
+        [
+          208.53,
+          1383.13
+        ]
+      ],
+      "area_cm2": 398.9
+    },
+    {
+      "id": "w-30",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          365.97,
+          1328.47
+        ],
+        [
+          372.12,
+          1330.26
+        ],
+        [
+          372.12,
+          1332.44
+        ],
+        [
+          354.46,
+          1380.95
+        ],
+        [
+          349.6,
+          1379.17
+        ],
+        [
+          354.07,
+          1375.69
+        ],
+        [
+          349.6,
+          1375.69
+        ],
+        [
+          365.48,
+          1328.97
+        ]
+      ],
+      "area_cm2": 356.9
+    },
+    {
+      "id": "w-31",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          440.08,
+          625.69
+        ],
+        [
+          445.73,
+          630.06
+        ],
+        [
+          437.4,
+          641.57
+        ],
+        [
+          432.54,
+          670.63
+        ],
+        [
+          426.79,
+          669.74
+        ],
+        [
+          425.5,
+          667.96
+        ],
+        [
+          430.75,
+          638.89
+        ],
+        [
+          439.58,
+          626.09
+        ]
+      ],
+      "area_cm2": 325.6
+    },
+    {
+      "id": "w-32",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          577.18,
+          121.23
+        ],
+        [
+          578.08,
+          124.31
+        ],
+        [
+          508.33,
+          216.07
+        ],
+        [
+          577.18,
+          121.73
+        ]
+      ],
+      "area_cm2": 131.5
+    },
+    {
+      "id": "w-33",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          506.15,
+          216.47
+        ],
+        [
+          507.94,
+          218.25
+        ],
+        [
+          484.13,
+          250.4
+        ],
+        [
+          499.11,
+          261.9
+        ],
+        [
+          494.74,
+          267.66
+        ],
+        [
+          477.98,
+          254.37
+        ],
+        [
+          506.15,
+          216.96
+        ]
+      ],
+      "area_cm2": 246.1
+    },
+    {
+      "id": "w-34",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          223.51,
+          531.75
+        ],
+        [
+          279.07,
+          531.75
+        ],
+        [
+          279.07,
+          534.82
+        ],
+        [
+          227.98,
+          534.82
+        ],
+        [
+          224.9,
+          537.9
+        ],
+        [
+          224.01,
+          567.46
+        ],
+        [
+          223.51,
+          532.14
+        ]
+      ],
+      "area_cm2": 198.7
+    },
+    {
+      "id": "w-35",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          477.98,
+          259.23
+        ],
+        [
+          480.16,
+          261.51
+        ],
+        [
+          477.48,
+          265.48
+        ],
+        [
+          441.37,
+          313.89
+        ],
+        [
+          436.51,
+          315.67
+        ],
+        [
+          477.48,
+          259.72
+        ]
+      ],
+      "area_cm2": 212.3
+    },
+    {
+      "id": "w-36",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          509.23,
+          1435.22
+        ],
+        [
+          514.58,
+          1436.51
+        ],
+        [
+          511.01,
+          1440.48
+        ],
+        [
+          514.98,
+          1440.08
+        ],
+        [
+          503.97,
+          1469.15
+        ],
+        [
+          499.11,
+          1467.36
+        ],
+        [
+          498.71,
+          1465.18
+        ],
+        [
+          508.83,
+          1435.62
+        ]
+      ],
+      "area_cm2": 221
+    },
+    {
+      "id": "w-37",
+      "kind": "interior",
+      "height_cm": 290,
+      "polygon_cm": [
+        [
+          348.31,
+          1380.56
+        ],
+        [
+          354.07,
+          1381.85
+        ],
+        [
+          350.1,
+          1385.81
+        ],
+        [
+          354.07,
+          1385.32
+        ],
+        [
+          344.35,
+          1413.59
+        ],
+        [
+          342.16,
+          1413.99
+        ],
+        [
+          337.7,
+          1410.91
+        ],
+        [
+          347.92,
+          1380.95
+        ]
+      ],
+      "area_cm2": 230.9
+    },
+    {
+      "id": "w-end-screen",
+      "kind": "interior",
+      "height_cm": 180,
+      "polygon_cm": [
+        [
+          959.85,
+          1725.98
+        ],
+        [
+          801.49,
+          1675.29
+        ],
+        [
+          805.15,
+          1663.86
+        ],
+        [
+          963.51,
+          1714.55
+        ]
+      ],
+      "area_cm2": 1995.6
+    }
+  ],
+  "openings": [
+    {
+      "id": "o-1",
+      "kind": "opening",
+      "rooms": [
+        "r-entrance",
+        "r-living"
+      ],
+      "a_cm": [
+        202.08,
+        960.52
+      ],
+      "b_cm": [
+        536.61,
+        686.61
+      ],
+      "centre_cm": [
+        369.54,
+        823.41
+      ],
+      "angle_deg": -39.3,
+      "width_cm": 432.4,
+      "sill_cm": 0,
+      "head_cm": 290,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-2",
+      "kind": "opening",
+      "rooms": [
+        "r-kitchen",
+        "r-living"
+      ],
+      "a_cm": [
+        632.24,
+        710.52
+      ],
+      "b_cm": [
+        840.58,
+        774.6
+      ],
+      "centre_cm": [
+        735.62,
+        742.26
+      ],
+      "angle_deg": 17.1,
+      "width_cm": 218,
+      "sill_cm": 0,
+      "head_cm": 290,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-3",
+      "kind": "opening",
+      "rooms": [
+        "r-dining",
+        "r-kitchen"
+      ],
+      "a_cm": [
+        844.74,
+        772.52
+      ],
+      "b_cm": [
+        1013,
+        390.77
+      ],
+      "centre_cm": [
+        928.47,
+        582.64
+      ],
+      "angle_deg": -66.2,
+      "width_cm": 417.2,
+      "sill_cm": 0,
+      "head_cm": 290,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-4",
+      "kind": "opening",
+      "rooms": [
+        "r-dining",
+        "r-living"
+      ],
+      "a_cm": [
+        845.83,
+        776.19
+      ],
+      "b_cm": [
+        1084.42,
+        849.6
+      ],
+      "centre_cm": [
+        964.98,
+        812.8
+      ],
+      "angle_deg": 17.1,
+      "width_cm": 249.5,
+      "sill_cm": 0,
+      "head_cm": 290,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-5",
+      "kind": "opening",
+      "rooms": [
+        "r-living",
+        "r-terrace-living"
+      ],
+      "a_cm": [
+        992.76,
+        1198.91
+      ],
+      "b_cm": [
+        1052.48,
+        1022.62
+      ],
+      "centre_cm": [
+        1024.31,
+        1105.95
+      ],
+      "angle_deg": -71.3,
+      "width_cm": 186.1,
+      "sill_cm": 0,
+      "head_cm": 290,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-6",
+      "kind": "door",
+      "rooms": [
+        "r-living",
+        "r-wardrobe"
+      ],
+      "a_cm": [
+        420.63,
+        1174.6
+      ],
+      "b_cm": [
+        451.49,
+        1086.9
+      ],
+      "centre_cm": [
+        435.91,
+        1131.05
+      ],
+      "angle_deg": -70.8,
+      "width_cm": 93.1,
+      "sill_cm": 0,
+      "head_cm": 215,
+      "source": "wall-gap"
+    },
+    {
+      "id": "o-7",
+      "kind": "opening",
+      "rooms": [
+        "r-terrace-bedroom",
+        "r-terrace-living"
+      ],
+      "a_cm": [
+        986.9,
+        1223.81
+      ],
+      "b_cm": [
+        1159.42,
+        1266.96
+      ],
+      "centre_cm": [
+        1068.85,
+        1244.35
+      ],
+      "angle_deg": 14,
+      "width_cm": 177.9,
+      "sill_cm": 0,
+      "head_cm": 290,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-8",
+      "kind": "opening",
+      "rooms": [
+        "r-bedroom-main",
+        "r-wardrobe"
+      ],
+      "a_cm": [
+        562,
+        1286.61
+      ],
+      "b_cm": [
+        576.79,
+        1127.48
+      ],
+      "centre_cm": [
+        569.44,
+        1206.94
+      ],
+      "angle_deg": -84.7,
+      "width_cm": 159.8,
+      "sill_cm": 0,
+      "head_cm": 290,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-9",
+      "kind": "door",
+      "rooms": [
+        "r-bath-main",
+        "r-wardrobe"
+      ],
+      "a_cm": [
+        373.61,
+        1322.02
+      ],
+      "b_cm": [
+        396.23,
+        1259.92
+      ],
+      "centre_cm": [
+        384.92,
+        1290.87
+      ],
+      "angle_deg": -70,
+      "width_cm": 66.1,
+      "sill_cm": 0,
+      "head_cm": 215,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-10",
+      "kind": "door",
+      "rooms": [
+        "r-bedroom-2",
+        "r-entrance"
+      ],
+      "a_cm": [
+        555.56,
+        482.84
+      ],
+      "b_cm": [
+        630.95,
+        537
+      ],
+      "centre_cm": [
+        591.96,
+        509.03
+      ],
+      "angle_deg": 35.7,
+      "width_cm": 92.9,
+      "sill_cm": 0,
+      "head_cm": 215,
+      "source": "wall-gap"
+    },
+    {
+      "id": "o-11",
+      "kind": "door",
+      "rooms": [
+        "r-bath-guest",
+        "r-entrance"
+      ],
+      "a_cm": [
+        453.97,
+        621.33
+      ],
+      "b_cm": [
+        490.67,
+        573.31
+      ],
+      "centre_cm": [
+        472.12,
+        597.62
+      ],
+      "angle_deg": -52.6,
+      "width_cm": 60.4,
+      "sill_cm": 0,
+      "head_cm": 215,
+      "source": "region-contact"
+    },
+    {
+      "id": "o-12",
+      "kind": "entrance_door",
+      "rooms": [
+        "outside",
+        "r-entrance"
+      ],
+      "a_cm": [
+        246.03,
+        657.44
+      ],
+      "b_cm": [
+        220.93,
+        764.58
+      ],
+      "centre_cm": [
+        233.43,
+        711.01
+      ],
+      "angle_deg": 103.2,
+      "width_cm": 110,
+      "sill_cm": 0,
+      "head_cm": 215,
+      "source": "wall-gap"
+    },
+    {
+      "id": "o-13",
+      "kind": "door",
+      "rooms": [
+        "r-bedroom-main",
+        "r-terrace-bedroom"
+      ],
+      "a_cm": [
+        940.08,
+        1247.82
+      ],
+      "b_cm": [
+        908.33,
+        1374.8
+      ],
+      "centre_cm": [
+        924.21,
+        1311.31
+      ],
+      "angle_deg": 104,
+      "width_cm": 130.9,
+      "sill_cm": 0,
+      "head_cm": 215,
+      "source": "wall-gap"
+    }
+  ],
+  "panes": [
+    {
+      "id": "facade-1",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          625.2,
+          105.85
+        ],
+        [
+          629.17,
+          105.85
+        ],
+        [
+          648.61,
+          120.34
+        ],
+        [
+          650.79,
+          118.15
+        ],
+        [
+          646.43,
+          114.68
+        ],
+        [
+          650.4,
+          115.48
+        ],
+        [
+          653.87,
+          119.05
+        ],
+        [
+          655.16,
+          117.26
+        ],
+        [
+          658.73,
+          117.26
+        ],
+        [
+          656.55,
+          119.94
+        ],
+        [
+          657.84,
+          122.12
+        ],
+        [
+          662.3,
+          125.2
+        ],
+        [
+          662.7,
+          123.02
+        ],
+        [
+          663.59,
+          125.69
+        ],
+        [
+          664.88,
+          123.91
+        ],
+        [
+          663.59,
+          126.09
+        ],
+        [
+          664.48,
+          126.98
+        ],
+        [
+          808.63,
+          234.52
+        ],
+        [
+          810.42,
+          234.13
+        ],
+        [
+          820.14,
+          220.93
+        ],
+        [
+          822.32,
+          220.04
+        ],
+        [
+          810.81,
+          235.02
+        ],
+        [
+          813.89,
+          238.49
+        ],
+        [
+          826.69,
+          222.22
+        ],
+        [
+          824.11,
+          220.04
+        ],
+        [
+          826.29,
+          220.04
+        ],
+        [
+          901.69,
+          276.49
+        ],
+        [
+          903.87,
+          275.99
+        ],
+        [
+          829.37,
+          220.04
+        ],
+        [
+          832.04,
+          220.44
+        ],
+        [
+          904.76,
+          274.7
+        ],
+        [
+          903.87,
+          277.78
+        ],
+        [
+          907.84,
+          281.75
+        ],
+        [
+          985.02,
+          338.19
+        ],
+        [
+          985.02,
+          339.98
+        ],
+        [
+          983.23,
+          338.59
+        ],
+        [
+          982.34,
+          339.48
+        ],
+        [
+          971.83,
+          353.57
+        ],
+        [
+          971.83,
+          356.25
+        ],
+        [
+          974.4,
+          358.04
+        ],
+        [
+          985.02,
+          343.95
+        ],
+        [
+          985.02,
+          346.13
+        ],
+        [
+          975.79,
+          358.43
+        ],
+        [
+          976.59,
+          359.82
+        ],
+        [
+          1047.22,
+          412.3
+        ],
+        [
+          1051.59,
+          407.84
+        ],
+        [
+          1049.4,
+          412.3
+        ],
+        [
+          1054.27,
+          410.02
+        ],
+        [
+          1050.3,
+          413.59
+        ],
+        [
+          1052.48,
+          416.27
+        ],
+        [
+          1060.81,
+          404.37
+        ],
+        [
+          1062.6,
+          404.37
+        ],
+        [
+          1054.66,
+          416.27
+        ],
+        [
+          1068.35,
+          404.37
+        ],
+        [
+          1075.79,
+          404.37
+        ],
+        [
+          1104.46,
+          426.79
+        ],
+        [
+          1109.82,
+          432.14
+        ],
+        [
+          1104.07,
+          428.97
+        ],
+        [
+          1123.02,
+          448.41
+        ],
+        [
+          1121.73,
+          447.52
+        ],
+        [
+          1121.23,
+          449.31
+        ],
+        [
+          1140.18,
+          477.08
+        ],
+        [
+          1140.18,
+          485.42
+        ],
+        [
+          1137.6,
+          484.52
+        ],
+        [
+          1122.12,
+          492.96
+        ],
+        [
+          1121.23,
+          494.74
+        ],
+        [
+          1123.41,
+          498.21
+        ],
+        [
+          1140.18,
+          488.99
+        ],
+        [
+          1141.07,
+          486.81
+        ],
+        [
+          1145.54,
+          486.81
+        ],
+        [
+          1157.84,
+          513.19
+        ],
+        [
+          1159.13,
+          513.19
+        ],
+        [
+          1158.73,
+          515.87
+        ],
+        [
+          1166.67,
+          537.5
+        ],
+        [
+          1172.82,
+          559.92
+        ],
+        [
+          1175.89,
+          582.94
+        ],
+        [
+          1175.89,
+          593.45
+        ],
+        [
+          1173.71,
+          594.35
+        ],
+        [
+          1174.21,
+          597.02
+        ],
+        [
+          1176.79,
+          597.42
+        ],
+        [
+          1177.28,
+          600.5
+        ],
+        [
+          1176.79,
+          639.29
+        ],
+        [
+          1171.53,
+          674.6
+        ],
+        [
+          1162.7,
+          705.06
+        ],
+        [
+          1159.13,
+          704.17
+        ],
+        [
+          1157.84,
+          705.95
+        ],
+        [
+          1156.94,
+          702.78
+        ],
+        [
+          1137.1,
+          700.6
+        ],
+        [
+          1150.79,
+          705.95
+        ],
+        [
+          1137.6,
+          702.38
+        ],
+        [
+          1136.71,
+          703.27
+        ],
+        [
+          1137.1,
+          705.46
+        ],
+        [
+          1141.07,
+          706.75
+        ],
+        [
+          1135.81,
+          706.75
+        ],
+        [
+          1140.67,
+          709.03
+        ],
+        [
+          1139.78,
+          709.92
+        ],
+        [
+          1135.32,
+          708.13
+        ],
+        [
+          1131.85,
+          717.36
+        ],
+        [
+          1106.25,
+          792.36
+        ],
+        [
+          1111.11,
+          795.83
+        ],
+        [
+          1106.25,
+          794.05
+        ],
+        [
+          1104.46,
+          797.62
+        ],
+        [
+          1109.33,
+          801.19
+        ],
+        [
+          1103.57,
+          800.69
+        ],
+        [
+          1096.53,
+          821.03
+        ],
+        [
+          1097.42,
+          821.83
+        ],
+        [
+          1094.84,
+          826.29
+        ],
+        [
+          1099.21,
+          828.97
+        ],
+        [
+          1094.84,
+          827.58
+        ],
+        [
+          1093.06,
+          831.55
+        ],
+        [
+          1097.92,
+          833.73
+        ],
+        [
+          1097.42,
+          835.12
+        ],
+        [
+          1090.38,
+          834.62
+        ],
+        [
+          1095.63,
+          821.43
+        ],
+        [
+          1093.95,
+          820.54
+        ],
+        [
+          1096.13,
+          820.14
+        ],
+        [
+          1097.92,
+          815.28
+        ],
+        [
+          1136.21,
+          699.7
+        ],
+        [
+          1150.4,
+          700.6
+        ],
+        [
+          1141.07,
+          697.52
+        ],
+        [
+          1138,
+          694.84
+        ],
+        [
+          1138.89,
+          694.05
+        ],
+        [
+          1138.49,
+          695.34
+        ],
+        [
+          1141.07,
+          697.52
+        ],
+        [
+          1158.33,
+          701.49
+        ],
+        [
+          1166.67,
+          671.92
+        ],
+        [
+          1171.03,
+          645.04
+        ],
+        [
+          1171.92,
+          599.6
+        ],
+        [
+          1151.69,
+          600.5
+        ],
+        [
+          1150.79,
+          602.78
+        ],
+        [
+          1149.9,
+          591.67
+        ],
+        [
+          1151.19,
+          593.45
+        ],
+        [
+          1171.53,
+          591.67
+        ],
+        [
+          1166.67,
+          559.13
+        ],
+        [
+          1156.94,
+          525.1
+        ],
+        [
+          1141.07,
+          489.88
+        ],
+        [
+          1123.91,
+          498.71
+        ],
+        [
+          1123.41,
+          500.89
+        ],
+        [
+          1117.76,
+          491.67
+        ],
+        [
+          1119.94,
+          493.35
+        ],
+        [
+          1137.6,
+          483.23
+        ],
+        [
+          1131.35,
+          472.62
+        ],
+        [
+          1112.9,
+          446.63
+        ],
+        [
+          1097.92,
+          429.86
+        ],
+        [
+          1068.75,
+          407.84
+        ],
+        [
+          1066.17,
+          408.73
+        ],
+        [
+          1056.85,
+          420.63
+        ],
+        [
+          1077.18,
+          438.69
+        ],
+        [
+          1056.45,
+          420.63
+        ],
+        [
+          1063.1,
+          410.52
+        ],
+        [
+          1052.48,
+          418.45
+        ],
+        [
+          1025.1,
+          396.83
+        ],
+        [
+          1022.52,
+          395.04
+        ],
+        [
+          1020.73,
+          396.43
+        ],
+        [
+          1021.63,
+          394.64
+        ],
+        [
+          1020.24,
+          393.25
+        ],
+        [
+          969.54,
+          355.85
+        ],
+        [
+          968.25,
+          353.57
+        ],
+        [
+          969.54,
+          354.46
+        ],
+        [
+          971.33,
+          352.78
+        ],
+        [
+          981.94,
+          337.7
+        ],
+        [
+          910.91,
+          284.42
+        ],
+        [
+          897.72,
+          300.69
+        ],
+        [
+          899.01,
+          301.98
+        ],
+        [
+          891.96,
+          298.02
+        ],
+        [
+          890.18,
+          295.83
+        ],
+        [
+          892.46,
+          296.33
+        ],
+        [
+          904.37,
+          279.56
+        ],
+        [
+          829.37,
+          223.51
+        ],
+        [
+          827.18,
+          223.12
+        ],
+        [
+          815.67,
+          239.38
+        ],
+        [
+          847.02,
+          262.8
+        ],
+        [
+          843.06,
+          262.8
+        ],
+        [
+          841.67,
+          260.12
+        ],
+        [
+          665.38,
+          128.77
+        ],
+        [
+          663.59,
+          128.27
+        ],
+        [
+          663.99,
+          130.56
+        ],
+        [
+          662.7,
+          127.38
+        ],
+        [
+          661.41,
+          129.17
+        ],
+        [
+          662.7,
+          126.98
+        ],
+        [
+          653.47,
+          119.94
+        ],
+        [
+          649.01,
+          123.41
+        ],
+        [
+          641.57,
+          117.76
+        ],
+        [
+          640.18,
+          119.05
+        ],
+        [
+          640.18,
+          116.87
+        ],
+        [
+          625.69,
+          106.25
+        ]
+      ],
+      "bbox_cm": [
+        625.2,
+        105.85,
+        1177.28,
+        835.12
+      ],
+      "diag_cm": 914.7
+    },
+    {
+      "id": "facade-2",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          912.3,
+          281.75
+        ],
+        [
+          921.92,
+          287.5
+        ],
+        [
+          985.02,
+          334.62
+        ],
+        [
+          985.02,
+          336.01
+        ],
+        [
+          912.7,
+          282.14
+        ]
+      ],
+      "bbox_cm": [
+        912.3,
+        281.75,
+        985.02,
+        336.01
+      ],
+      "diag_cm": 90.7
+    },
+    {
+      "id": "facade-3",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          1060.81,
+          920.63
+        ],
+        [
+          1059.52,
+          931.25
+        ],
+        [
+          1063.49,
+          932.94
+        ],
+        [
+          1060.42,
+          931.65
+        ],
+        [
+          1058.63,
+          932.54
+        ],
+        [
+          1054.27,
+          945.73
+        ],
+        [
+          1059.13,
+          948.41
+        ],
+        [
+          1053.37,
+          948.41
+        ],
+        [
+          1034.42,
+          1004.37
+        ],
+        [
+          1039.29,
+          1007.04
+        ],
+        [
+          1033.93,
+          1006.15
+        ],
+        [
+          1032.14,
+          1010.62
+        ],
+        [
+          1052.48,
+          1016.77
+        ],
+        [
+          1052.88,
+          1012.3
+        ],
+        [
+          1040.08,
+          1008.33
+        ],
+        [
+          1041.47,
+          1008.33
+        ],
+        [
+          1055.16,
+          1012.8
+        ],
+        [
+          1055.16,
+          1016.27
+        ],
+        [
+          1052.48,
+          1019.44
+        ],
+        [
+          1029.56,
+          1086.9
+        ],
+        [
+          1022.02,
+          1109.33
+        ],
+        [
+          1023.41,
+          1110.22
+        ],
+        [
+          1055.16,
+          1018.55
+        ],
+        [
+          1055.16,
+          1021.63
+        ],
+        [
+          1003.57,
+          1172.82
+        ],
+        [
+          1005.26,
+          1175.5
+        ],
+        [
+          1002.68,
+          1175.5
+        ],
+        [
+          993.85,
+          1201.98
+        ],
+        [
+          989.88,
+          1201.98
+        ],
+        [
+          990.28,
+          1199.7
+        ],
+        [
+          988.99,
+          1198.81
+        ],
+        [
+          970.44,
+          1193.15
+        ],
+        [
+          969.54,
+          1197.52
+        ],
+        [
+          983.23,
+          1201.98
+        ],
+        [
+          969.54,
+          1198.41
+        ],
+        [
+          968.25,
+          1199.31
+        ],
+        [
+          967.36,
+          1202.78
+        ],
+        [
+          972.22,
+          1205.06
+        ],
+        [
+          966.96,
+          1204.17
+        ],
+        [
+          966.07,
+          1205.46
+        ],
+        [
+          965.18,
+          1208.53
+        ],
+        [
+          967.36,
+          1208.53
+        ],
+        [
+          964.68,
+          1210.32
+        ],
+        [
+          966.96,
+          1211.21
+        ],
+        [
+          964.68,
+          1210.71
+        ],
+        [
+          963.89,
+          1212.1
+        ],
+        [
+          952.78,
+          1245.14
+        ],
+        [
+          952.78,
+          1241.67
+        ],
+        [
+          963,
+          1212.5
+        ],
+        [
+          962.5,
+          1211.21
+        ],
+        [
+          960.32,
+          1211.61
+        ],
+        [
+          962.5,
+          1210.32
+        ],
+        [
+          960.71,
+          1209.42
+        ],
+        [
+          963.39,
+          1209.92
+        ],
+        [
+          964.29,
+          1208.53
+        ],
+        [
+          1000.89,
+          1102.78
+        ],
+        [
+          970.93,
+          1191.37
+        ],
+        [
+          990.28,
+          1198.41
+        ],
+        [
+          991.17,
+          1197.52
+        ],
+        [
+          1051.59,
+          1019.84
+        ],
+        [
+          1051.19,
+          1018.06
+        ],
+        [
+          1031.75,
+          1012.3
+        ],
+        [
+          1002.18,
+          1097.42
+        ],
+        [
+          1060.81,
+          921.03
+        ]
+      ],
+      "bbox_cm": [
+        952.78,
+        920.63,
+        1063.49,
+        1245.14
+      ],
+      "diag_cm": 342.9
+    },
+    {
+      "id": "facade-4",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          927.28,
+          1316.57
+        ],
+        [
+          924.6,
+          1328.47
+        ],
+        [
+          910.52,
+          1369.05
+        ],
+        [
+          913.99,
+          1370.83
+        ],
+        [
+          906.55,
+          1372.12
+        ],
+        [
+          910.02,
+          1368.65
+        ],
+        [
+          927.28,
+          1317.06
+        ]
+      ],
+      "bbox_cm": [
+        906.55,
+        1316.57,
+        927.28,
+        1372.12
+      ],
+      "diag_cm": 59.3
+    },
+    {
+      "id": "facade-5",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          875.2,
+          1462.5
+        ],
+        [
+          876.09,
+          1469.54
+        ],
+        [
+          874.8,
+          1473.12
+        ],
+        [
+          872.62,
+          1473.51
+        ],
+        [
+          869.05,
+          1483.73
+        ],
+        [
+          874.31,
+          1485.91
+        ],
+        [
+          873.41,
+          1486.81
+        ],
+        [
+          869.05,
+          1485.02
+        ],
+        [
+          868.15,
+          1486.31
+        ],
+        [
+          867.26,
+          1489.38
+        ],
+        [
+          872.12,
+          1492.06
+        ],
+        [
+          866.37,
+          1491.67
+        ],
+        [
+          849.21,
+          1543.25
+        ],
+        [
+          843.45,
+          1556.45
+        ],
+        [
+          845.63,
+          1550.3
+        ],
+        [
+          843.06,
+          1550.3
+        ],
+        [
+          845.63,
+          1548.91
+        ],
+        [
+          843.06,
+          1548.02
+        ],
+        [
+          845.63,
+          1548.51
+        ],
+        [
+          847.02,
+          1546.73
+        ],
+        [
+          875.2,
+          1463
+        ]
+      ],
+      "bbox_cm": [
+        843.06,
+        1462.5,
+        876.09,
+        1556.45
+      ],
+      "diag_cm": 99.6
+    },
+    {
+      "id": "railing-6",
+      "kind": "railing",
+      "sill_cm": 0,
+      "head_cm": 110,
+      "polygon_cm": [
+        [
+          1129.66,
+          453.27
+        ],
+        [
+          1132.74,
+          454.17
+        ],
+        [
+          1265.48,
+          553.37
+        ],
+        [
+          1264.58,
+          550.69
+        ],
+        [
+          1266.27,
+          548.91
+        ],
+        [
+          1264.09,
+          547.22
+        ],
+        [
+          1262.3,
+          548.51
+        ],
+        [
+          1263.69,
+          547.22
+        ],
+        [
+          1262.3,
+          545.83
+        ],
+        [
+          1259.72,
+          546.33
+        ],
+        [
+          1255.26,
+          540.58
+        ],
+        [
+          1247.32,
+          534.82
+        ],
+        [
+          1250.89,
+          534.82
+        ],
+        [
+          1256.65,
+          540.58
+        ],
+        [
+          1257.94,
+          540.08
+        ],
+        [
+          1268.06,
+          547.62
+        ],
+        [
+          1269.84,
+          552.88
+        ],
+        [
+          1275.1,
+          552.88
+        ],
+        [
+          1275.6,
+          554.66
+        ],
+        [
+          1280.46,
+          556.85
+        ],
+        [
+          1292.36,
+          568.35
+        ],
+        [
+          1292.76,
+          572.32
+        ],
+        [
+          1296.73,
+          572.72
+        ],
+        [
+          1302.48,
+          580.26
+        ],
+        [
+          1304.66,
+          578.47
+        ],
+        [
+          1302.48,
+          580.65
+        ],
+        [
+          1303.37,
+          581.55
+        ],
+        [
+          1305.56,
+          581.55
+        ],
+        [
+          1312.2,
+          588.19
+        ],
+        [
+          1313.89,
+          587.3
+        ],
+        [
+          1313.1,
+          588.59
+        ],
+        [
+          1314.38,
+          589.48
+        ],
+        [
+          1315.28,
+          595.63
+        ],
+        [
+          1318.75,
+          595.63
+        ],
+        [
+          1320.54,
+          598.31
+        ],
+        [
+          1321.83,
+          597.02
+        ],
+        [
+          1320.54,
+          595.63
+        ],
+        [
+          1323.21,
+          596.13
+        ],
+        [
+          1323.21,
+          597.92
+        ],
+        [
+          1321.83,
+          597.02
+        ],
+        [
+          1321.03,
+          598.81
+        ],
+        [
+          1322.72,
+          600.5
+        ],
+        [
+          1323.61,
+          599.6
+        ],
+        [
+          1329.76,
+          607.54
+        ],
+        [
+          1327.58,
+          609.33
+        ],
+        [
+          1325.79,
+          606.75
+        ],
+        [
+          1322.72,
+          609.33
+        ],
+        [
+          1318.75,
+          605.36
+        ],
+        [
+          1321.03,
+          601.88
+        ],
+        [
+          1317.06,
+          597.92
+        ],
+        [
+          1313.89,
+          600.5
+        ],
+        [
+          1311.31,
+          598.31
+        ],
+        [
+          1310.42,
+          600.5
+        ],
+        [
+          1309.52,
+          595.63
+        ],
+        [
+          1312.2,
+          593.06
+        ],
+        [
+          1309.13,
+          591.67
+        ],
+        [
+          1311.31,
+          589.48
+        ],
+        [
+          1309.52,
+          587.3
+        ],
+        [
+          1304.66,
+          591.27
+        ],
+        [
+          1300.69,
+          587.3
+        ],
+        [
+          1303.77,
+          583.33
+        ],
+        [
+          1302.88,
+          582.44
+        ],
+        [
+          1301.59,
+          581.55
+        ],
+        [
+          1299.8,
+          582.94
+        ],
+        [
+          1300.69,
+          581.55
+        ],
+        [
+          1298.91,
+          579.76
+        ],
+        [
+          1295.83,
+          582.44
+        ],
+        [
+          1291.87,
+          578.47
+        ],
+        [
+          1293.65,
+          575.79
+        ],
+        [
+          1291.47,
+          574.11
+        ],
+        [
+          1287.9,
+          576.69
+        ],
+        [
+          1289.29,
+          572.72
+        ],
+        [
+          1286.61,
+          573.21
+        ],
+        [
+          1281.75,
+          566.57
+        ],
+        [
+          1266.27,
+          555.16
+        ],
+        [
+          1264.98,
+          557.34
+        ],
+        [
+          1264.58,
+          553.77
+        ],
+        [
+          1242.06,
+          537
+        ],
+        [
+          1240.77,
+          539.29
+        ],
+        [
+          1240.28,
+          535.71
+        ],
+        [
+          1217.86,
+          518.95
+        ],
+        [
+          1216.96,
+          521.13
+        ],
+        [
+          1216.07,
+          517.66
+        ],
+        [
+          1195.34,
+          502.18
+        ],
+        [
+          1193.55,
+          501.29
+        ],
+        [
+          1192.66,
+          503.57
+        ],
+        [
+          1193.15,
+          500.89
+        ],
+        [
+          1191.77,
+          499.6
+        ],
+        [
+          1169.74,
+          483.23
+        ],
+        [
+          1168.85,
+          485.42
+        ],
+        [
+          1167.56,
+          481.45
+        ],
+        [
+          1149.9,
+          468.25
+        ],
+        [
+          1145.93,
+          465.58
+        ],
+        [
+          1144.64,
+          467.86
+        ],
+        [
+          1145.04,
+          465.18
+        ],
+        [
+          1143.25,
+          463.39
+        ],
+        [
+          1130.06,
+          453.67
+        ]
+      ],
+      "bbox_cm": [
+        1129.66,
+        453.27,
+        1329.76,
+        609.33
+      ],
+      "diag_cm": 253.8
+    },
+    {
+      "id": "railing-7",
+      "kind": "railing",
+      "sill_cm": 0,
+      "head_cm": 110,
+      "polygon_cm": [
+        [
+          1363.79,
+          627.88
+        ],
+        [
+          1367.76,
+          629.17
+        ],
+        [
+          1389.78,
+          645.93
+        ],
+        [
+          1392.46,
+          643.25
+        ],
+        [
+          1391.57,
+          642.46
+        ],
+        [
+          1393.75,
+          642.46
+        ],
+        [
+          1412.3,
+          659.62
+        ],
+        [
+          1412.3,
+          661.81
+        ],
+        [
+          1398.61,
+          647.72
+        ],
+        [
+          1393.75,
+          643.75
+        ],
+        [
+          1392.46,
+          645.04
+        ],
+        [
+          1391.57,
+          646.83
+        ],
+        [
+          1408.33,
+          662.7
+        ],
+        [
+          1418.45,
+          676.79
+        ],
+        [
+          1428.97,
+          700.6
+        ],
+        [
+          1425,
+          701.49
+        ],
+        [
+          1428.17,
+          706.75
+        ],
+        [
+          1430.36,
+          706.75
+        ],
+        [
+          1436.11,
+          712.1
+        ],
+        [
+          1436.9,
+          743.35
+        ],
+        [
+          1432.54,
+          766.77
+        ],
+        [
+          1402.08,
+          856.75
+        ],
+        [
+          1399.9,
+          858.43
+        ],
+        [
+          1400.4,
+          856.25
+        ],
+        [
+          1396.43,
+          855.85
+        ],
+        [
+          1343.45,
+          1011.51
+        ],
+        [
+          1347.02,
+          1013.69
+        ],
+        [
+          1347.92,
+          1012.3
+        ],
+        [
+          1398.61,
+          862.4
+        ],
+        [
+          1398.61,
+          865.97
+        ],
+        [
+          1348.31,
+          1014.58
+        ],
+        [
+          1335.52,
+          1042.36
+        ],
+        [
+          1321.03,
+          1063.1
+        ],
+        [
+          1306.45,
+          1078.08
+        ],
+        [
+          1303.37,
+          1078.08
+        ],
+        [
+          1301.59,
+          1075.79
+        ],
+        [
+          1299.4,
+          1077.18
+        ],
+        [
+          1246.43,
+          1123.91
+        ],
+        [
+          1243.85,
+          1126.59
+        ],
+        [
+          1246.92,
+          1129.17
+        ],
+        [
+          1259.23,
+          1118.15
+        ],
+        [
+          1235.02,
+          1142.86
+        ],
+        [
+          1218.25,
+          1163.99
+        ],
+        [
+          1214.68,
+          1171.03
+        ],
+        [
+          1212.1,
+          1171.53
+        ],
+        [
+          1225.79,
+          1152.08
+        ],
+        [
+          1245.63,
+          1130.06
+        ],
+        [
+          1242.96,
+          1127.38
+        ],
+        [
+          1237.7,
+          1132.74
+        ],
+        [
+          1218.25,
+          1155.65
+        ],
+        [
+          1202.78,
+          1178.57
+        ],
+        [
+          1191.37,
+          1200.2
+        ],
+        [
+          1194.05,
+          1202.38
+        ],
+        [
+          1209.03,
+          1175.89
+        ],
+        [
+          1193.55,
+          1206.75
+        ],
+        [
+          1178.57,
+          1242.96
+        ],
+        [
+          1167.56,
+          1264.58
+        ],
+        [
+          1167.06,
+          1268.06
+        ],
+        [
+          1164.88,
+          1269.44
+        ],
+        [
+          1194.05,
+          1203.67
+        ],
+        [
+          1190.87,
+          1201.98
+        ],
+        [
+          1188.69,
+          1205.46
+        ],
+        [
+          1072.32,
+          1471.83
+        ],
+        [
+          1071.03,
+          1474.4
+        ],
+        [
+          1069.25,
+          1474.4
+        ],
+        [
+          1077.58,
+          1450.2
+        ],
+        [
+          1079.76,
+          1445.73
+        ],
+        [
+          1074.5,
+          1463
+        ],
+        [
+          1162.7,
+          1262.8
+        ],
+        [
+          1163.99,
+          1259.72
+        ],
+        [
+          1162.7,
+          1259.23
+        ],
+        [
+          1165.77,
+          1255.75
+        ],
+        [
+          1204.56,
+          1169.35
+        ],
+        [
+          1205.95,
+          1167.06
+        ],
+        [
+          1204.17,
+          1174.6
+        ],
+        [
+          1224.4,
+          1145.93
+        ],
+        [
+          1238.99,
+          1129.66
+        ],
+        [
+          1252.68,
+          1117.26
+        ],
+        [
+          1255.26,
+          1111.51
+        ],
+        [
+          1254.37,
+          1115.48
+        ],
+        [
+          1292.36,
+          1082.44
+        ],
+        [
+          1296.73,
+          1078.08
+        ],
+        [
+          1298.51,
+          1073.61
+        ],
+        [
+          1297.62,
+          1076.69
+        ],
+        [
+          1299.8,
+          1075.79
+        ],
+        [
+          1317.06,
+          1058.23
+        ],
+        [
+          1333.73,
+          1033.04
+        ],
+        [
+          1343.06,
+          1011.01
+        ],
+        [
+          1395.54,
+          856.75
+        ],
+        [
+          1393.25,
+          856.75
+        ],
+        [
+          1395.54,
+          854.96
+        ],
+        [
+          1393.25,
+          854.07
+        ],
+        [
+          1396.43,
+          854.07
+        ],
+        [
+          1427.28,
+          763.19
+        ],
+        [
+          1432.14,
+          738.1
+        ],
+        [
+          1431.65,
+          719.15
+        ],
+        [
+          1426.39,
+          713
+        ],
+        [
+          1428.97,
+          709.92
+        ],
+        [
+          1426.79,
+          707.64
+        ],
+        [
+          1423.31,
+          711.21
+        ],
+        [
+          1424.21,
+          706.75
+        ],
+        [
+          1421.53,
+          708.13
+        ],
+        [
+          1417.56,
+          704.17
+        ],
+        [
+          1419.74,
+          701.09
+        ],
+        [
+          1417.56,
+          698.81
+        ],
+        [
+          1418.85,
+          697.12
+        ],
+        [
+          1421.53,
+          699.31
+        ],
+        [
+          1424.21,
+          696.63
+        ],
+        [
+          1426.39,
+          697.52
+        ],
+        [
+          1417.56,
+          677.68
+        ],
+        [
+          1409.13,
+          666.27
+        ],
+        [
+          1407.44,
+          667.96
+        ],
+        [
+          1407.84,
+          663.99
+        ],
+        [
+          1396.83,
+          652.58
+        ],
+        [
+          1386.21,
+          644.64
+        ],
+        [
+          1384.92,
+          646.83
+        ],
+        [
+          1384.52,
+          643.25
+        ],
+        [
+          1364.19,
+          628.27
+        ]
+      ],
+      "bbox_cm": [
+        1069.25,
+        627.88,
+        1436.9,
+        1474.4
+      ],
+      "diag_cm": 922.9
+    },
+    {
+      "id": "facade-8",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          1157.44,
+          706.35
+        ],
+        [
+          1160.02,
+          710.32
+        ],
+        [
+          1158.33,
+          709.42
+        ],
+        [
+          1157.44,
+          711.21
+        ],
+        [
+          1160.02,
+          713
+        ],
+        [
+          1141.96,
+          765.48
+        ],
+        [
+          1142.46,
+          766.77
+        ],
+        [
+          1144.15,
+          766.27
+        ],
+        [
+          1141.96,
+          767.66
+        ],
+        [
+          1143.25,
+          768.95
+        ],
+        [
+          1140.67,
+          768.95
+        ],
+        [
+          1120.34,
+          828.47
+        ],
+        [
+          1121.73,
+          829.76
+        ],
+        [
+          1119.94,
+          830.26
+        ],
+        [
+          1116.87,
+          839.98
+        ],
+        [
+          1115.48,
+          840.38
+        ],
+        [
+          1112.9,
+          839.48
+        ],
+        [
+          1114.19,
+          835.12
+        ],
+        [
+          1112.9,
+          832.44
+        ],
+        [
+          1115.08,
+          832.44
+        ],
+        [
+          1123.91,
+          806.85
+        ],
+        [
+          1121.73,
+          805.16
+        ],
+        [
+          1123.91,
+          805.56
+        ],
+        [
+          1125.69,
+          801.19
+        ],
+        [
+          1123.41,
+          799.8
+        ],
+        [
+          1125.69,
+          799.8
+        ],
+        [
+          1126.98,
+          797.62
+        ],
+        [
+          1135.81,
+          771.63
+        ],
+        [
+          1134.52,
+          770.73
+        ],
+        [
+          1137.1,
+          767.66
+        ],
+        [
+          1135.81,
+          766.27
+        ],
+        [
+          1137.1,
+          766.77
+        ],
+        [
+          1138.89,
+          763.69
+        ],
+        [
+          1154.76,
+          716.07
+        ],
+        [
+          1152.98,
+          713.39
+        ],
+        [
+          1155.16,
+          713.89
+        ],
+        [
+          1156.94,
+          709.92
+        ],
+        [
+          1154.37,
+          707.24
+        ],
+        [
+          1156.94,
+          708.13
+        ],
+        [
+          1157.44,
+          706.75
+        ]
+      ],
+      "bbox_cm": [
+        1112.9,
+        706.35,
+        1160.02,
+        840.38
+      ],
+      "diag_cm": 142.1
+    },
+    {
+      "id": "facade-9",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          1076.69,
+          937.4
+        ],
+        [
+          1080.26,
+          938.29
+        ],
+        [
+          1054.27,
+          1012.3
+        ],
+        [
+          1051.98,
+          1011.01
+        ],
+        [
+          1053.77,
+          1011.9
+        ],
+        [
+          1054.66,
+          1010.62
+        ],
+        [
+          1060.81,
+          992.46
+        ],
+        [
+          1073.61,
+          954.56
+        ],
+        [
+          1071.43,
+          952.78
+        ],
+        [
+          1074.11,
+          952.78
+        ],
+        [
+          1078.97,
+          938.69
+        ],
+        [
+          1077.18,
+          937.4
+        ]
+      ],
+      "bbox_cm": [
+        1051.98,
+        937.4,
+        1080.26,
+        1012.3
+      ],
+      "diag_cm": 80.1
+    },
+    {
+      "id": "facade-10",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          1082.04,
+          939.19
+        ],
+        [
+          1078.08,
+          953.27
+        ],
+        [
+          1079.76,
+          954.56
+        ],
+        [
+          1078.08,
+          954.17
+        ],
+        [
+          1076.29,
+          958.13
+        ],
+        [
+          1055.56,
+          1020.24
+        ],
+        [
+          1055.56,
+          1015.48
+        ],
+        [
+          1082.04,
+          939.58
+        ]
+      ],
+      "bbox_cm": [
+        1055.56,
+        939.19,
+        1082.04,
+        1020.24
+      ],
+      "diag_cm": 85.3
+    },
+    {
+      "id": "facade-11",
+      "kind": "facade",
+      "sill_cm": 0,
+      "head_cm": 290,
+      "polygon_cm": [
+        [
+          989.38,
+          1202.38
+        ],
+        [
+          993.85,
+          1202.38
+        ],
+        [
+          989.88,
+          1204.17
+        ],
+        [
+          988.99,
+          1207.24
+        ],
+        [
+          991.67,
+          1209.03
+        ],
+        [
+          932.54,
+          1380.95
+        ],
+        [
+          959.03,
+          1301.98
+        ],
+        [
+          958.13,
+          1300.3
+        ],
+        [
+          930.36,
+          1380.06
+        ],
+        [
+          929.46,
+          1376.09
+        ],
+        [
+          955.46,
+          1302.88
+        ],
+        [
+          953.27,
+          1301.59
+        ],
+        [
+          955.46,
+          1301.59
+        ],
+        [
+          957.24,
+          1297.62
+        ],
+        [
+          955.06,
+          1296.33
+        ],
+        [
+          955.46,
+          1294.94
+        ],
+        [
+          957.24,
+          1295.83
+        ],
+        [
+          959.03,
+          1292.76
+        ],
+        [
+          983.73,
+          1220.93
+        ],
+        [
+          986.31,
+          1212.1
+        ],
+        [
+          984.52,
+          1209.42
+        ],
+        [
+          986.81,
+          1209.92
+        ],
+        [
+          988.49,
+          1205.95
+        ],
+        [
+          986.31,
+          1204.17
+        ],
+        [
+          989.38,
+          1202.78
+        ]
+      ],
+      "bbox_cm": [
+        929.46,
+        1202.38,
+        993.85,
+        1380.95
+      ],
+      "diag_cm": 189.8
+    },
+    {
+      "id": "railing-12",
+      "kind": "railing",
+      "sill_cm": 0,
+      "head_cm": 110,
+      "polygon_cm": [
+        [
+          1162.7,
+          1274.21
+        ],
+        [
+          1162.3,
+          1279.07
+        ],
+        [
+          1088.59,
+          1447.12
+        ],
+        [
+          1086.41,
+          1448.81
+        ],
+        [
+          1162.7,
+          1274.7
+        ]
+      ],
+      "bbox_cm": [
+        1086.41,
+        1274.21,
+        1162.7,
+        1448.81
+      ],
+      "diag_cm": 190.5
+    },
+    {
+      "id": "railing-13",
+      "kind": "railing",
+      "sill_cm": 0,
+      "head_cm": 110,
+      "polygon_cm": [
+        [
+          1070.54,
+          1469.15
+        ],
+        [
+          959.85,
+          1725.98
+        ],
+        [
+          952.5,
+          1722.81
+        ],
+        [
+          1063.19,
+          1465.98
+        ]
+      ],
+      "bbox_cm": [
+        952.5,
+        1465.98,
+        1070.54,
+        1725.98
+      ],
+      "diag_cm": 237.6
+    }
+  ],
+  "camera_points": [
+    {
+      "id": "cp-entrance",
+      "room_id": "r-entrance",
+      "x": 322.9,
+      "y": 762.3,
+      "z": 160,
+      "yaw_deg": 105.9,
+      "note": "from cameras.json entrance | jamb rule (place_cameras.py): moved from (302.9, 762.3), nearest jamb 82.0 -> 102.0 cm"
+    },
+    {
+      "id": "cp-kitchen",
+      "room_id": "r-kitchen",
+      "x": 876.2,
+      "y": 548.2,
+      "z": 160,
+      "yaw_deg": 125.5,
+      "note": "from cameras.json kitchen | jamb rule (place_cameras.py): moved from (831.2, 528.2), nearest jamb 52.6 -> 100.7 cm",
+      "seam_bearing_deg": 202
+    },
+    {
+      "id": "cp-dining",
+      "room_id": "r-dining",
+      "x": 918.5,
+      "y": 780.9,
+      "z": 160,
+      "yaw_deg": 56.8,
+      "note": "from cameras.json dining",
+      "seam": "plain"
+    },
+    {
+      "id": "cp-living",
+      "room_id": "r-living",
+      "x": 679.9,
+      "y": 927.7,
+      "z": 160,
+      "yaw_deg": 111.3,
+      "note": "from cameras.json living"
+    },
+    {
+      "id": "cp-terraceLiving",
+      "room_id": "r-terrace-living",
+      "x": 1234.5,
+      "y": 948,
+      "z": 160,
+      "yaw_deg": 355.9,
+      "note": "from cameras.json terraceLiving"
+    },
+    {
+      "id": "cp-terraceBedroom",
+      "room_id": "r-terrace-bedroom",
+      "x": 1002.1,
+      "y": 1334.3,
+      "z": 160,
+      "yaw_deg": 16.3,
+      "note": "from cameras.json terraceBedroom | jamb rule (place_cameras.py): moved from (992.1, 1359.3), nearest jamb 73.6 -> 102.2 cm | camera exception (the coordinator's ruling 2026-11-05): moved 63 cm off the terrace armchair it stood on (nadir 1.08 m); its nearest jamb is 60.7 cm, under the 100 cm rule, accepted for this point only: the terrace allows no better with the chair in place and the authored point had 74 cm; a jamb painted wrong is fixed by a band repair, never by another move",
+      "jamb_exception": {
+        "nearest_jamb_cm": 60.7,
+        "rule_cm": 100,
+        "reason": "camera exception (the coordinator's ruling 2026-11-05): moved 63 cm off the terrace armchair it stood on (nadir 1.08 m); its nearest jamb is 60.7 cm, under the 100 cm rule, accepted for this point only: the terrace allows no better with the chair in place and the authored point had 74 cm; a jamb painted wrong is fixed by a band repair, never by another move"
+      }
+    },
+    {
+      "id": "cp-bedroomMain",
+      "room_id": "r-bedroom-main",
+      "x": 828.3,
+      "y": 1298.4,
+      "z": 160,
+      "yaw_deg": 344.9,
+      "note": "from cameras.json bedroomMain | jamb rule (place_cameras.py): moved from (833.3, 1433.4), nearest jamb 51.2 -> 100.7 cm"
+    },
+    {
+      "id": "cp-wardrobe",
+      "room_id": "r-wardrobe",
+      "x": 521.6,
+      "y": 1168.5,
+      "z": 160,
+      "yaw_deg": 106.4,
+      "note": "from cameras.json wardrobe | jamb rule (place_cameras.py): moved from (431.6, 1313.5), nearest jamb 47.8 -> 100.4 cm"
+    },
+    {
+      "id": "cp-bathMain",
+      "room_id": "r-bath-main",
+      "x": 292.9,
+      "y": 1251.1,
+      "z": 160,
+      "yaw_deg": 36.8,
+      "note": "from cameras.json bathMain | jamb rule (place_cameras.py): moved from (302.9, 1286.1), nearest jamb 79.3 -> 101.2 cm"
+    },
+    {
+      "id": "cp-bedroom2",
+      "room_id": "r-bedroom-2",
+      "x": 636.7,
+      "y": 434.3,
+      "z": 160,
+      "yaw_deg": 35.2,
+      "note": "from cameras.json bedroom2"
+    },
+    {
+      "id": "cp-bathguest",
+      "room_id": "r-bath-guest",
+      "x": 424.4,
+      "y": 565.4,
+      "z": 160,
+      "yaw_deg": 15.7,
+      "note": "from cameras.json bathguest | jamb rule (place_cameras.py): moved from (459.4, 560.4), nearest jamb 33.8 -> 63.3 cm"
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "k-counter",
+      "room_id": "r-kitchen",
+      "kind": "counter",
+      "polygon_cm": [
+        [
+          865.11,
+          277.2
+        ],
+        [
+          921.42,
+          319.11
+        ],
+        [
+          667.55,
+          659.63
+        ],
+        [
+          611.32,
+          617.75
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 90,
+      "centre_cm": [
+        766.35,
+        468.42
+      ],
+      "angle_deg": 126.7,
+      "size_cm": [
+        424.7,
+        70.2
+      ],
+      "source": "the drawing's casework layer (PDF vectors; auto-trace run-pdf-846 fx-drawn-6/13/14, hob fx-drawn-7, sink fx-5), mapped to the hand frame 2026-11-05",
+      "note": "the long leg of the L along the partition wall, from the tall column to the facade (drawing's casework layer, 2026-11-05): the 4-burner hob about 120 cm from the facade corner, the sink about 85 cm from the tall column",
+      "words_en": "the LONG run of the one fitted L kitchen, against the partition wall behind it (not an island): handleless fronts in matte sand-grey lacquer with a recessed grip channel, the thin brushed stainless-steel worktop, the brushed stainless-steel function-wall splashback with one long horizontal rail and TWO slim open stainless shelves on it (no upper wall cabinets anywhere on the run; the hob keeps a slim extractor above it); ON THIS RUN: the flush black 4-burner induction hob in the NORTHERN part of the run, about 120 cm before the corner where the run meets the facade and the short leg under a slim ceiling-flush extractor, the flush integrated sink with a slim stainless tap in the SOUTHERN part of the run, about 85 cm before the tall column; the tall fridge column closes its south end"
+    },
+    {
+      "id": "k-tall",
+      "room_id": "r-kitchen",
+      "kind": "tall_unit",
+      "polygon_cm": [
+        [
+          569.4,
+          688.1
+        ],
+        [
+          618,
+          724.3
+        ],
+        [
+          666.7,
+          659
+        ],
+        [
+          618.1,
+          622.8
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 220,
+      "centre_cm": [
+        618.05,
+        673.55
+      ],
+      "angle_deg": 126.7,
+      "size_cm": [
+        60.6,
+        81.5
+      ],
+      "source": "the drawing's casework layer (PDF vectors; auto-trace run-pdf-846 fx-drawn-6/13/14, hob fx-drawn-7, sink fx-5), mapped to the hand frame 2026-11-05",
+      "note": "the tall column at the south end of the run, 60.6 along the run and 81.5 deep (drawn standing proud of the counter front)",
+      "tall_type": "fridge",
+      "tall_type_source": "the drawing (דירה 846- 16.pdf): the standard fridge symbol on the casework layer (a box with a proud double front line and end ticks; crop qa-evidence/tour360/fix-846-fidelity-2026-11-05/band-edges/pdf846-kitchen-fridge.png); no oven drawn - built in under the hob by Eliran's ruling 2026-11-06"
+    },
+    {
+      "id": "k-counter-2",
+      "room_id": "r-kitchen",
+      "kind": "counter",
+      "polygon_cm": [
+        [
+          921.4,
+          319.1
+        ],
+        [
+          879.6,
+          375.2
+        ],
+        [
+          980.9,
+          450.7
+        ],
+        [
+          1022.7,
+          394.5
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 90,
+      "centre_cm": [
+        951.15,
+        384.88
+      ],
+      "angle_deg": 36.7,
+      "size_cm": [
+        126.3,
+        70
+      ],
+      "source": "the drawing's casework layer (PDF vectors; auto-trace run-pdf-846 fx-drawn-6/13/14, hob fx-drawn-7, sink fx-5), mapped to the hand frame 2026-11-05",
+      "note": "the short leg of the L ALONG THE FACADE under the window (drawing's casework layer, 2026-11-05; the hand trace had it 95 cm into the room): a plain counter 126 x 70 continuing the long run's front line, no appliance",
+      "words_en": "the SHORT leg of the same L kitchen, running along the facade under the window from the corner where the long run meets the facade: a plain counter about 126 by 70 cm with square corners, the same sand-grey handleless fronts and the same thin brushed stainless-steel worktop; NO hob, NO sink, no appliance on it; no uppers (the window is above it)"
+    },
+    {
+      "id": "d-table",
+      "room_id": "r-dining",
+      "kind": "table",
+      "polygon_cm": [
+        [
+          983.43,
+          769.64
+        ],
+        [
+          887.1,
+          699.7
+        ],
+        [
+          957.04,
+          603.37
+        ],
+        [
+          1053.37,
+          673.31
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 75,
+      "centre_cm": [
+        970.24,
+        686.51
+      ],
+      "angle_deg": 36,
+      "size_cm": [
+        120,
+        120
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "the round dining table (drawn as a box)",
+      "words_en": "a round light-oak dining table about 120 cm across with six upholstered chairs in sand linen around it; it is a dining table, NOT a kitchen island and NOT a counter"
+    },
+    {
+      "id": "l-sofa",
+      "room_id": "r-living",
+      "kind": "sofa",
+      "polygon_cm": [
+        [
+          891.77,
+          977.28
+        ],
+        [
+          681.45,
+          902.48
+        ],
+        [
+          711.41,
+          818.35
+        ],
+        [
+          921.73,
+          893.15
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 75,
+      "centre_cm": [
+        801.59,
+        897.82
+      ],
+      "angle_deg": 19.6,
+      "size_cm": [
+        225,
+        90
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": ""
+    },
+    {
+      "id": "l-armchair",
+      "room_id": "r-living",
+      "kind": "sofa",
+      "polygon_cm": [
+        [
+          612.9,
+          1005.65
+        ],
+        [
+          524.11,
+          974.01
+        ],
+        [
+          555.75,
+          885.22
+        ],
+        [
+          644.54,
+          916.87
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 75,
+      "centre_cm": [
+        584.33,
+        945.44
+      ],
+      "angle_deg": 19.6,
+      "size_cm": [
+        95,
+        95
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "the armchair",
+      "words_en": "an ivory boucle armchair"
+    },
+    {
+      "id": "l-coffee",
+      "room_id": "r-living",
+      "kind": "table",
+      "polygon_cm": [
+        [
+          782.44,
+          1064.58
+        ],
+        [
+          698.31,
+          1034.62
+        ],
+        [
+          721.53,
+          969.15
+        ],
+        [
+          805.65,
+          999.11
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 40,
+      "centre_cm": [
+        751.98,
+        1016.87
+      ],
+      "angle_deg": 19.6,
+      "size_cm": [
+        90,
+        70
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "the coffee table",
+      "words_en": "a low round travertine coffee table"
+    },
+    {
+      "id": "l-tv",
+      "room_id": "r-living",
+      "kind": "tv_unit",
+      "polygon_cm": [
+        [
+          886.71,
+          1203.87
+        ],
+        [
+          606.25,
+          1104.07
+        ],
+        [
+          621.23,
+          1062
+        ],
+        [
+          901.69,
+          1161.81
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 50,
+      "centre_cm": [
+        753.97,
+        1132.94
+      ],
+      "angle_deg": 19.6,
+      "size_cm": [
+        300,
+        45
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "the TV unit against the 530 wall"
+    },
+    {
+      "id": "bm-bed",
+      "room_id": "r-bedroom-main",
+      "kind": "bed",
+      "polygon_cm": [
+        [
+          587.3,
+          1487.8
+        ],
+        [
+          657.14,
+          1291.57
+        ],
+        [
+          825.4,
+          1351.49
+        ],
+        [
+          755.56,
+          1547.72
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 55,
+      "centre_cm": [
+        706.35,
+        1419.64
+      ],
+      "angle_deg": 109.6,
+      "size_cm": [
+        210,
+        180
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": ""
+    },
+    {
+      "id": "w-closet-1",
+      "room_id": "r-wardrobe",
+      "kind": "wardrobe",
+      "polygon_cm": [
+        [
+          500.1,
+          1454.85
+        ],
+        [
+          350.59,
+          1401.58
+        ],
+        [
+          370.53,
+          1345.53
+        ],
+        [
+          520.04,
+          1398.8
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 240,
+      "centre_cm": [
+        435.32,
+        1400.19
+      ],
+      "angle_deg": 19.6,
+      "size_cm": [
+        160,
+        60
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "the 160 run"
+    },
+    {
+      "id": "w-closet-2",
+      "room_id": "r-wardrobe",
+      "kind": "wardrobe",
+      "polygon_cm": [
+        [
+          437.56,
+          1439.23
+        ],
+        [
+          499.17,
+          1266.32
+        ],
+        [
+          555.22,
+          1286.26
+        ],
+        [
+          493.61,
+          1459.17
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 240,
+      "centre_cm": [
+        496.39,
+        1362.75
+      ],
+      "angle_deg": 109.6,
+      "size_cm": [
+        185,
+        60
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "the 185 run"
+    },
+    {
+      "id": "b2-bed",
+      "room_id": "r-bedroom-2",
+      "kind": "bed",
+      "polygon_cm": [
+        [
+          666.57,
+          401.29
+        ],
+        [
+          506.05,
+          284.62
+        ],
+        [
+          599.31,
+          156.25
+        ],
+        [
+          759.82,
+          272.92
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 55,
+      "centre_cm": [
+        632.94,
+        278.77
+      ],
+      "angle_deg": 36,
+      "size_cm": [
+        200,
+        160
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": ""
+    },
+    {
+      "id": "b2-closet",
+      "room_id": "r-bedroom-2",
+      "kind": "wardrobe",
+      "polygon_cm": [
+        [
+          558.83,
+          484.13
+        ],
+        [
+          398.31,
+          367.56
+        ],
+        [
+          433.23,
+          319.44
+        ],
+        [
+          593.75,
+          436.01
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 240,
+      "centre_cm": [
+        496.03,
+        401.79
+      ],
+      "angle_deg": 36,
+      "size_cm": [
+        200,
+        60
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "the closet run against the wall shared with the guest bath"
+    },
+    {
+      "id": "bm-shower",
+      "room_id": "r-bath-main",
+      "kind": "shower",
+      "polygon_cm": [
+        [
+          338.1,
+          1402.07
+        ],
+        [
+          141.87,
+          1332.23
+        ],
+        [
+          171.83,
+          1248.1
+        ],
+        [
+          368.06,
+          1317.94
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 10,
+      "centre_cm": [
+        254.97,
+        1325.08
+      ],
+      "angle_deg": 19.6,
+      "size_cm": [
+        210,
+        90
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "a low tray"
+    },
+    {
+      "id": "bm-vanity",
+      "room_id": "r-bath-main",
+      "kind": "vanity",
+      "polygon_cm": [
+        [
+          375,
+          1236.71
+        ],
+        [
+          290.87,
+          1206.85
+        ],
+        [
+          307.54,
+          1160.12
+        ],
+        [
+          391.67,
+          1189.98
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 85,
+      "centre_cm": [
+        341.27,
+        1198.41
+      ],
+      "angle_deg": 19.6,
+      "size_cm": [
+        90,
+        50
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": ""
+    },
+    {
+      "id": "bm-wc",
+      "room_id": "r-bath-main",
+      "kind": "wc",
+      "polygon_cm": [
+        [
+          212.4,
+          1200
+        ],
+        [
+          232.34,
+          1143.85
+        ],
+        [
+          269.74,
+          1157.14
+        ],
+        [
+          249.8,
+          1213.29
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 45,
+      "centre_cm": [
+        241.07,
+        1178.57
+      ],
+      "angle_deg": 109.6,
+      "size_cm": [
+        60,
+        40
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": ""
+    },
+    {
+      "id": "bg-shower",
+      "room_id": "r-bath-guest",
+      "kind": "shower",
+      "polygon_cm": [
+        [
+          495.37,
+          549.67
+        ],
+        [
+          382.97,
+          468.02
+        ],
+        [
+          435.45,
+          395.7
+        ],
+        [
+          547.85,
+          477.35
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 10,
+      "centre_cm": [
+        465.41,
+        472.69
+      ],
+      "angle_deg": 36,
+      "size_cm": [
+        140,
+        90
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": "a low tray"
+    },
+    {
+      "id": "bg-wc",
+      "room_id": "r-bath-guest",
+      "kind": "wc",
+      "polygon_cm": [
+        [
+          355.36,
+          532.24
+        ],
+        [
+          390.38,
+          484.13
+        ],
+        [
+          422.42,
+          507.44
+        ],
+        [
+          387.4,
+          555.56
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 45,
+      "centre_cm": [
+        388.89,
+        519.84
+      ],
+      "angle_deg": 126,
+      "size_cm": [
+        60,
+        40
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": ""
+    },
+    {
+      "id": "bg-vanity",
+      "room_id": "r-bath-guest",
+      "kind": "vanity",
+      "polygon_cm": [
+        [
+          409.42,
+          680.26
+        ],
+        [
+          345.14,
+          633.63
+        ],
+        [
+          374.31,
+          593.55
+        ],
+        [
+          438.59,
+          640.18
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 85,
+      "centre_cm": [
+        391.87,
+        636.9
+      ],
+      "angle_deg": 36,
+      "size_cm": [
+        80,
+        50
+      ],
+      "source": "sales-plan drawing, read by hand",
+      "note": ""
+    },
+    {
+      "id": "l-laundry",
+      "room_id": "r-living",
+      "kind": "wardrobe",
+      "polygon_cm": [
+        [
+          226.09,
+          1128.47
+        ],
+        [
+          292.16,
+          1149.9
+        ],
+        [
+          313.59,
+          1083.83
+        ],
+        [
+          247.52,
+          1062.4
+        ]
+      ],
+      "z_cm": 0,
+      "height_cm": 220,
+      "centre_cm": [
+        269.84,
+        1106.15
+      ],
+      "angle_deg": 108,
+      "size_cm": [
+        70,
+        70
+      ],
+      "source": "sales-plan drawing, read by hand (fidelity audit F8, 2026-11-05)",
+      "note": "the washing-machine niche on the west wall (circle-in-square on the plan), closed by a zero-line flush door; the electrical cabinet beside it sits in the wall mass and is not modelled",
+      "words_en": "a tall zero-line flush door closing the laundry niche in the wall recess, painted the wall colour, a slim matte black lever; no washing machine visible",
+      "finish": "white"
+    }
+  ]
+}

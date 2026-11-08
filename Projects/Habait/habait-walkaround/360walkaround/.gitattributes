@@ -1,0 +1,55 @@
+# 360walkaround/.gitattributes — CONTRACT §1.4.
+#
+# ⛔ These two files' sha256 is a CONTRACT FACT: the frozen set's harness prints its hash first and
+# REFUSES on a wrong count or split, and the WHAT-check prompt is versioned by content. This machine's
+# `core.autocrlf=true` would rewrite every LF to CRLF on checkout and silently change both hashes —
+# which is a contract fact quietly becoming false, not a formatting preference.
+#
+# T06 creates the two files; the pin is here from T01 so it can never arrive after the first checkout.
+server/prompts/frozen-set-360.json text eol=lf
+server/prompts/what-check.md text eol=lf
+
+# ── V2 (board 360-v2) — the same law, now over the pipeline's recorded hashes (T08, F-360-132) ──
+# MEASURED, not assumed: `git cat-file --filters HEAD:tours/pilot-karnei/plan.json` on this machine
+# (`core.autocrlf=true`, `text` unspecified) writes **1743 CRLF pairs, sha256 6ecd11ef…**, while all
+# twelve of `manifest.json`'s render rows record the LF hash **d39ae01d…**. So on a FRESH CLONE:
+#   · `render_tour.mjs`'s rerun-skip keys on that hash ⇒ it re-renders all 12 points (~1908 s of GPU)
+#     for a line-ending reason;
+#   · `assemble_tour.mjs` refuses every scene as a STALE render (loudly, and wrongly);
+#   · `assemble_tour.mjs`'s own bytes feed `tour.json`'s `meta.assembled.tool_sha256`, and `plan.json`
+#     / `manifest.json` feed `meta.plan.sha256` / `meta.manifest.sha256` — so the committed `tour.json`
+#     stops being what the assembler produces, and T08's byte-identical-rerun criterion is false.
+# ⇒ every file whose sha256 is RECORDED somewhere downstream is pinned to LF. ⛔ Add a line here the
+#   moment a new file's hash becomes a checkpoint; a hash of a file git is allowed to rewrite is not a
+#   checkpoint.
+tours/*/plan.json text eol=lf
+tours/*/manifest.json text eol=lf
+tours/*/tour.json text eol=lf
+pipeline/assemble_tour.mjs text eol=lf
+
+# ── walkaround-production WP-04 (2026-11-01) — the rest of the hashes a scene report RECORDS ──
+# The 846 scenes were built in a worktree checked out under `core.autocrlf=true`, so five inputs were
+# recorded as their CRLF bytes and two as LF, and NO fresh export was clean: `git archive` of 875b4750
+# reads «build_scene.py changed» under autocrlf=true and «placement_templates.py changed» under false.
+# Pinned here and re-keyed ONCE to the LF form of the same content, no render:
+# tours/apt846-furnished/REKEY.md (the proof), pipeline/tools/rekey-reports.mjs (the tool, + --check).
+# MEASURED, the scene report's generator scripts (build_scene.py:2470-2476, 2572-2575): materials_kit
+#   63e35246… → 7018a8bc…, placement_templates 3b82d7f7… → 3c25bedb…, plan_general 1b2cd674… →
+#   9616d913… were CRLF; build_scene 49e485fc… and general_furnish c0beb324… were LF but unpinned, so an
+#   autocrlf=true clone wrote them CRLF and read the scene as stale.
+pipeline/build_scene.py text eol=lf
+pipeline/materials_kit.py text eol=lf
+pipeline/placement_templates.py text eol=lf
+pipeline/plan_general.py text eol=lf
+pipeline/general_furnish.py text eol=lf
+# MEASURED, the style lock (inputs.style_sha256 + style.file_sha256, build_scene.py:2487, 2525):
+#   8fae3723… CRLF → be613e60… LF — the LF hash pilot-karnei's September report already records.
+catalog/style-habait-modern.json text eol=lf
+# MEASURED, the render script: render_pano.py hashes ITSELF into every point's input_key
+#   (settings.script_sha256, render_pano.py:900): 11a42936… CRLF → 13d695a9… LF, so all 22 of 846's
+#   input_keys were re-derived with it (the canonical form first reproduced every recorded key).
+pipeline/render_pano.py text eol=lf
+# ⚠ NOT pinnable from this file: Habait/tour360/apartments/apt846/material-board.json
+#   (inputs.material_board.sha256, recorded LF cb3b584c…) lives outside 360walkaround/. Its eol moves
+#   no key today — the freshness test reads its words (render_tour.mjs:184), the point key copies the
+#   recorded value — but its pin belongs in that tree's own (or the new repo's root) .gitattributes.

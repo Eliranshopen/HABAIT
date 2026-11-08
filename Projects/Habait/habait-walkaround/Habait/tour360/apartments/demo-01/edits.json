@@ -1,0 +1,135 @@
+{
+ "$schema": "tour360/edits.v1",
+ "apartment": "demo-01",
+ "note": "Prepared examples of the text-edit feature (PLAN.md section 9). Each entry is a small RGBA patch in balanced-panorama pixels, made offline by tools/edit-pano.py (crop, instruction editor, changed-region paste) and drawn over the panorama by the page in `order`. Furniture and decor only. The base panoramas are never modified.",
+ "scenes": {
+  "living": [
+   {
+    "id": "sofa",
+    "order": 1,
+    "label": {
+     "he": "ספה פינתית בצבע אפור כהה",
+     "en": "A dark grey corner sofa",
+     "fr": "Un canapé d'angle gris foncé"
+    },
+    "patch": "01-living~sofa.webp",
+    "x": 195,
+    "y": 936,
+    "w": 1150,
+    "h": 534,
+    "look": {
+     "u": 0.216,
+     "v": 0.63
+    },
+    "spanDeg": 116.7,
+    "provenance": {
+     "endpoint": "fal-ai/flux-pro/kontext",
+     "prompt": "Replace the cream sectional sofa with a modern L-shaped sectional sofa upholstered in dark charcoal-grey fabric, the same size, in the same position and orientation, with the chaise on the left. Keep a few cushions in muted tones on it. Keep everything else in the photo exactly as it is: the wall, the painting, the curtains, the sliding glass door and the view outside, the floor, the rug, the round coffee table and the objects on it, the lighting and shadows, and the camera angle.",
+     "usd": 0.04,
+     "generated": "2026-10-04T16:31:19Z",
+     "seconds": 9.9,
+     "resultSha256": "939b8df274592ba9acce92e79f0bd259ea7e41bac5ffaf8fc00df171aced40ce",
+     "patchSha256": "f30ed81a6aa4217733d2740b3ae106a59c3f58aec4e28f1e85b192685cca630b",
+     "patchBytes": 88374,
+     "paste": {
+      "mode": "diff",
+      "box": [
+       150,
+       290,
+       1190,
+       730
+      ],
+      "thr": 22,
+      "grow": 28,
+      "pad": 10,
+      "feather": 9.0
+     }
+    }
+   },
+   {
+    "id": "tv",
+    "order": 2,
+    "label": {
+     "he": "טלוויזיה גדולה יותר",
+     "en": "A bigger TV",
+     "fr": "Un téléviseur plus grand"
+    },
+    "patch": "01-living~tv.webp",
+    "x": 2355,
+    "y": 719,
+    "w": 550,
+    "h": 332,
+    "look": {
+     "u": 0.735,
+     "v": 0.5
+    },
+    "spanDeg": 55.8,
+    "provenance": {
+     "endpoint": "blackforestlabs/flux-3/edit-image",
+     "prompt": "Replace the wall-mounted television with a much larger 85-inch flat-screen television. The new television is clearly wider and taller than the current one: it spans almost the full width of the marble wall panel, with only a narrow margin of marble on each side. It hangs on the same wall, centred above the wooden console, with a thin black bezel, and the screen is switched off and black. Keep everything else exactly as it is: the marble wall panel, the wooden console, the soundbar, the two ceramic vases, the lit shelves on the right, the lighting and the camera angle.",
+     "usd": 0.024,
+     "generated": "2026-10-04T16:35:13Z",
+     "seconds": 70.7,
+     "resultSha256": "28ef9fcdb3bd045640e2b19beefa35cde9a58c9316741fc49c0cbc476670c212",
+     "patchSha256": "257e1fcc737af29bf2b5c4b70c6cc8cf98be136a60e121a25d5b7199e415d920",
+     "patchBytes": 13876,
+     "paste": {
+      "mode": "diff",
+      "box": [
+       225,
+       140,
+       1115,
+       695
+      ],
+      "thr": 22,
+      "grow": 28,
+      "pad": 10,
+      "feather": 9.0
+     }
+    }
+   },
+   {
+    "id": "table",
+    "order": 3,
+    "label": {
+     "he": "שולחן סלון משיש שחור",
+     "en": "A black marble coffee table",
+     "fr": "Une table basse en marbre noir"
+    },
+    "patch": "01-living~table.webp",
+    "x": 981,
+    "y": 1164,
+    "w": 686,
+    "h": 399,
+    "look": {
+     "u": 0.375,
+     "v": 0.74
+    },
+    "spanDeg": 69.6,
+    "provenance": {
+     "endpoint": "fal-ai/flux-pro/kontext",
+     "prompt": "Replace the round light-wood coffee table with a round coffee table that has a black marble top with fine white veining and a slim brass base, the same size and in the same position. Keep the glass vase with green stems, the stacked books and the dark bowl on the table. Keep everything else exactly as it is: the sofa, the rug, the floor, the dining chairs, the lighting and shadows, and the camera angle.",
+     "usd": 0.04,
+     "generated": "2026-10-04T16:34:51Z",
+     "seconds": 11.0,
+     "resultSha256": "125b29454879413a253ece68af04f09d89bdbbc50d4ef4bc0fe3c51b2258f97d",
+     "patchSha256": "96cfdc7837897ebb92a987936ea616c891e902e5d102f8b3ec31a38bbb9d2139",
+     "patchBytes": 58438,
+     "paste": {
+      "mode": "diff",
+      "box": [
+       250,
+       190,
+       1040,
+       832
+      ],
+      "thr": 22,
+      "grow": 28,
+      "pad": 3,
+      "feather": 3.5
+     }
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,93 @@
+{
+  "project": "rainbow",
+  "project_name": {
+    "he": "Rainbow תל אביב",
+    "en": "Rainbow Tel Aviv"
+  },
+  "unit": {
+    "id": "846",
+    "floor": 16,
+    "type": "L",
+    "rooms": 4,
+    "area_m2": 118,
+    "outdoor_m2": 22,
+    "price": 7950000,
+    "status": "for-sale",
+    "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
+    "note": "the real apartment of the pitch (sales plan DBLK 15.10.2025); descend-846 / enter-846 exist in flow.json",
+    "currency": "ILS"
+  },
+  "plan": {
+    "src": "media/plan.png",
+    "width": 1500,
+    "height": 1560,
+    "date": "15.10.2025",
+    "architect": "DBLK Architects",
+    "source_sha256": "ef02e51825a60a800f6ff3d249f43f8d19409f8d62e122383938a64706c222f7",
+    "source": "apartments/apt846/_local/plan/plan-crop.png (a 288 dpi crop of the sales plan PDF 'דירה 846- 16.pdf', 1:50, DBLK 15.10.2025)"
+  },
+  "glb": {
+    "src": "3d/apt846.glb",
+    "html": "3d/dollhouse.html",
+    "bytes": 174036,
+    "sha256": "1259daf0b254debe31651c36291ef6433bae2cfea292fab9edc3588fdf161c5c",
+    "placeholder": false,
+    "source": "C:/RnD/.wt/apartment-3d/files/Projects/Habait/habait-walkaround/Habait/engine/_local/apt846/dollhouse/apt846-parquet.glb",
+    "floors": {
+      "parquet": {
+        "material": "web_floor_parquet",
+        "color": [
+          0.4,
+          0.25,
+          0.13
+        ],
+        "roughness": 0.550000011920929,
+        "metalness": 0,
+        "name": {
+          "he": "פרקט",
+          "en": "Oak parquet",
+          "fr": "Parquet"
+        },
+        "glb": "apt846-parquet.glb"
+      },
+      "concrete": {
+        "material": "web_floor_concrete",
+        "color": [
+          0.46,
+          0.45,
+          0.42
+        ],
+        "roughness": 0.699999988079071,
+        "metalness": 0,
+        "name": {
+          "he": "בטון",
+          "en": "Concrete",
+          "fr": "Béton"
+        },
+        "glb": "apt846-concrete.glb"
+      },
+      "marble": {
+        "material": "web_floor_marble",
+        "color": [
+          0.8,
+          0.78,
+          0.74
+        ],
+        "roughness": 0.25,
+        "metalness": 0,
+        "name": {
+          "he": "שיש",
+          "en": "Marble",
+          "fr": "Marbre"
+        },
+        "glb": "apt846-marble.glb"
+      }
+    },
+    "default_floor": "parquet",
+    "floor_note": "3 floor GLBs, one BIN chunk: the switch applies each GLB's floor material",
+    "rooms": 11
+  },
+  "legal_status": "DRAFT v0 (2026-11-02), ממתין לחוות דעת עו״ד / pending legal review",
+  "generated": "2026-11-03T13:45:07.984Z",
+  "version": "0.1.20261103"
+}

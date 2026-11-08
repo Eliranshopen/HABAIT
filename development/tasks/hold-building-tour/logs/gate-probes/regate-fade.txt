@@ -1,0 +1,33 @@
+PASS A close@0ms: ambience restored (play, 0.6, icon on) {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS A close@50ms: ambience restored (play, 0.6, icon on) {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS A close@200ms: ambience restored (play, 0.6, icon on) {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS A close@550ms: ambience restored (play, 0.6, icon on) {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS A close@700ms: ambience restored (play, 0.6, icon on) {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS A close@1500ms: ambience restored (play, 0.6, icon on) {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS B fast open/close x3: ambience playing 0.6 {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"errs":[]}
+PASS B2 full-open, close, reopen, close@100: ambience 0.6 {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS B3 open and stay: ambience faded to paused {"frames":1,"btn":"none","close":"block","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS B3b then close: restored {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS C mute, open/close@0: stays muted {"m":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"},"s":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"},"errs":[]}
+PASS C2 unmute after: plays {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false,\"userOff\":true}","icon":"🔊"}
+PASS C mute, open/close@200: stays muted {"m":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"},"s":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"},"errs":[]}
+PASS C2 unmute after: plays {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false,\"userOff\":true}","icon":"🔊"}
+PASS C mute, open/close@1500: stays muted {"m":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"},"s":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"},"errs":[]}
+PASS C2 unmute after: plays {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false,\"userOff\":true}","icon":"🔊"}
+PASS D open/close@100 then 846 hand-off: #tourFrame apartment, ambience paused vol~0 {"s":{"frames":0,"btn":"none","close":"none","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"src":"http://127.0.0.1:8853/tour/?scope=apartment&room=terraceLiving&floor=parquet&vid","errs":[]}
+PASS D2 stays paused later {"frames":0,"btn":"none","close":"none","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS D open/close@1500 then 846 hand-off: #tourFrame apartment, ambience paused vol~0 {"s":{"frames":0,"btn":"none","close":"none","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"src":"http://127.0.0.1:8853/tour/?scope=apartment&room=terraceLiving&floor=parquet&vid","errs":[]}
+PASS D2 stays paused later {"frames":0,"btn":"none","close":"none","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+enterBtn display inline-block
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.evaluate: TypeError: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'.
+    at eval (eval at evaluate (:290:30), <anonymous>:1:75)
+    at UtilityScript.evaluate (<anonymous>:292:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at st (C:\RnD\development\tasks\hold-building-tour\logs\gate-probes\lib.cjs:18:21)
+    at C:\RnD\development\tasks\hold-building-tour\logs\gate-probes\regate-fade.cjs:57:40
+
+Node.js v24.22.1

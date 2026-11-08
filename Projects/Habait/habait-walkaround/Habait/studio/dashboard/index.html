@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Habait Studio</title>
+<link rel="icon" href="data:,">
+<!-- board platform-ui-ux cards 06-07: the Studio on the shared design system. tokens.css / components.css / fonts/ are
+     generated copies of Habait/platform (platform/tools/sync-tokens.mjs); never edit them here. -->
+<link rel="preload" href="/fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/components.css">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="hb-base">
+<a class="skip" href="#main">דילוג לתוכן</a>
+<header class="topbar">
+  <div class="hb-container topbar__in">
+    <a class="brand" href="#/" aria-label="Habait Studio · הפרויקטים שלי"><span class="brand__mark" aria-hidden="true"></span><span class="brand__name">Habait <span>Studio</span></span></a>
+    <nav class="topbar__nav" aria-label="ניווט ראשי"><a href="#/" class="topbar__link" data-nav="projects">הפרויקטים שלי</a></nav>
+    <details class="envmenu">
+      <summary class="hb-btn hb-btn--ghost hb-btn--sm" id="env-summary">מצב המערכת</summary>
+      <div class="envmenu__panel hb-card" id="envbar"></div>
+    </details>
+  </div>
+</header>
+
+<div id="fixture-banner" class="fixture-banner" role="status" hidden>
+  <div class="hb-container"><b>מצב תצוגה — שמירה כבויה.</b> השרת הזה קורא בלבד: העלאה, שמירה והרצה לא נשמרות.</div>
+</div>
+
+<main id="main" class="hb-container main" tabindex="-1">
+
+  <!-- ============ הפרויקטים שלי ============ -->
+  <section id="view-projects" class="view" aria-labelledby="h-projects" hidden>
+    <div class="pagehead">
+      <div><h1 class="hb-h1" id="h-projects">הפרויקטים שלי</h1></div>
+      <a class="hb-btn hb-btn--primary" id="projects-new" href="#/new">פרויקט חדש</a>
+    </div>
+    <ul id="project-grid" class="project-grid" aria-label="פרויקטים"></ul>
+    <div id="projects-empty" class="hb-empty" hidden>
+      <div class="hb-empty__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-7h6v7"/></svg></div>
+      <p class="hb-empty__title">עוד אין פרויקטים</p>
+      <p class="hb-empty__text">כאן יופיעו הפרויקטים שלכם. פרויקט מתחיל בתכנית המכר: מעלים אותה, המערכת קוראת אותה, אתם מאשרים מה היא הבינה, והיא מפיקה את הסרטון ואת הסיור בדירה.</p>
+      <a class="hb-btn hb-btn--primary" href="#/new">פרויקט חדש</a>
+    </div>
+    <p id="projects-loading" class="hb-small">טוען את הפרויקטים…</p>
+  </section>
+
+  <!-- ============ פרויקט חדש ============ -->
+  <section id="view-new" class="view" aria-labelledby="h-new" hidden>
+    <a class="back" href="#/">→ הפרויקטים שלי</a>
+    <div class="wizard hb-card">
+      <ol class="wizard__steps" aria-label="שלבי האשף">
+        <li aria-current="step"><span>1</span> פרטי הפרויקט</li>
+        <li><span>2</span> הקבצים</li>
+      </ol>
+      <h1 class="hb-h1" id="h-new">פרויקט חדש</h1>
+      <p class="hb-lead">שני פרטים, ומיד אחר כך מעלים את הקבצים.</p>
+      <form id="new-form" class="form" novalidate>
+        <label class="field"><span class="field__label">שם הפרויקט</span>
+          <input class="input" name="name" required autocomplete="off" placeholder="לדוגמה: Rainbow תל אביב · דירה 846" aria-describedby="name-err">
+          <span class="field__err" id="name-err" hidden>צריך שם לפרויקט.</span></label>
+        <label class="field"><span class="field__label">כתובת <span class="field__opt">(אם ידועה)</span></span>
+          <input class="input" name="address" autocomplete="street-address" placeholder="רחוב ועיר, או lat,lon">
+          <span class="field__help">המערכת מאתרת לפיה את הבניין והסביבה. אפשר להשלים אחר כך.</span></label>
+        <p class="form__msg" id="new-msg" role="alert" hidden></p>
+        <div class="form__actions"><button class="hb-btn hb-btn--primary" type="submit">המשך להעלאת הקבצים</button><a class="hb-btn hb-btn--ghost" href="#/">ביטול</a></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ פרויקט ============ -->
+  <section id="view-project" class="view" aria-labelledby="p-name" hidden>
+    <a class="back" href="#/">→ הפרויקטים שלי</a>
+    <div class="phead">
+      <div class="phead__text"><h1 class="hb-h1" id="p-name"></h1><p class="hb-small" id="p-sub"></p></div>
+      <div class="phead__meta"><span class="hb-chip" id="p-status"></span><span class="hb-chip hb-chip--plain" id="p-ledger"></span></div>
+    </div>
+
+    <nav class="stepnav" aria-label="שלבי הפרויקט">
+      <a href="#s-upload" data-step="upload"><span class="stepnav__n">1</span><span>העלאה</span><small data-sub="upload"></small></a>
+      <a href="#s-review" data-step="review"><span class="stepnav__n">·</span><span>מה המערכת הבינה</span><small data-sub="review"></small></a>
+      <a href="#s-create" data-step="create"><span class="stepnav__n">2</span><span>יצירה</span><small data-sub="create"></small></a>
+      <a href="#s-results" data-step="results"><span class="stepnav__n">3</span><span>התוצאות</span><small data-sub="results"></small></a>
+    </nav>
+
+    <!-- 1 · upload -->
+    <section class="step-sec" id="s-upload" aria-labelledby="h-upload">
+      <h2 class="hb-h2" id="h-upload"><span class="step-sec__n">1</span> הקבצים מהיזם</h2>
+      <div id="drop" class="hb-drop" role="button" tabindex="0" aria-describedby="drop-types" aria-label="העלאת קבצים: גררו לכאן או לחצו Enter לבחירה">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+        <p class="hb-drop__title">גררו לכאן את קבצי הפרויקט</p>
+        <p class="hb-drop__types" id="drop-types">תכנית מכר (PDF), הדמיות ותמונות (JPG, PNG, WEBP), תכנית וקטורית (JSON, DXF) · עד <bdi class="hb-num">200 MB</bdi> לקובץ</p>
+        <span class="hb-btn hb-btn--secondary hb-btn--sm" aria-hidden="true">בחירת קבצים</span>
+        <input id="file-input" type="file" multiple hidden accept=".pdf,.jpg,.jpeg,.png,.webp,.json,.dxf,.dwg">
+      </div>
+      <ul id="file-list" class="hb-files" aria-label="הקבצים בפרויקט"></ul>
+      <p class="hb-small roles-note">התפקיד של כל קובץ (תכנית מכר / הדמיה / חזית / אחר) הוא הצעה של המערכת ואפשר לשנות אותו. עד שה-API יתמוך בתפקיד, הוא נשמר בשדה ההערות.</p>
+      <div class="grid2">
+        <label class="field"><span class="field__label">כתובת</span><input class="input" id="p-address" placeholder="רחוב ועיר, או lat,lon"></label>
+        <label class="field"><span class="field__label">הערות למערכת</span><input class="input" id="p-notes" placeholder="למשל: דירה לדוגמה, פונה לים, קומה 16"></label>
+      </div>
+      <div class="form__actions"><button class="hb-btn hb-btn--secondary hb-btn--sm" id="btn-save-basic" type="button">שמירת הכתובת וההערות</button></div>
+    </section>
+
+    <!-- review -->
+    <section class="step-sec" id="s-review" aria-labelledby="h-review">
+      <h2 class="hb-h2" id="h-review"><span class="step-sec__n">·</span> מה המערכת הבינה</h2>
+      <div id="review" class="review"></div>
+    </section>
+
+    <!-- the developer's agent (plan studio-agent-fal): answers only from this project's data, through a fal model -->
+    <section class="step-sec agent" id="s-agent" aria-labelledby="h-agent">
+      <h2 class="hb-h2" id="h-agent"><span class="step-sec__n" aria-hidden="true">?</span> שאלו את הסוכן</h2>
+      <p class="hb-small agent__note">הסוכן עונה רק מהנתונים של הפרויקט הזה: הקבצים שהעליתם, מה שהמערכת קראה מהם ומצב השלבים. מה שלא כתוב שם, הוא יגיד שאינו יודע. כל תשובה עולה כמה סנטים ונרשמת בהוצאות הפרויקט.</p>
+      <ol class="agent__log" id="agent-log" aria-live="polite" aria-label="השיחה עם הסוכן"></ol>
+      <form class="agent__form" id="agent-form">
+        <label class="hb-sr" for="agent-input">שאלה לסוכן</label>
+        <textarea class="input agent__input" id="agent-input" rows="2" placeholder="למשל: כמה חדרים יש בדירה, ומה לא היה ברור בתכנית?" maxlength="2000"></textarea>
+        <button class="hb-btn hb-btn--secondary" type="submit" id="agent-send">שליחה</button>
+      </form>
+      <p class="hb-small agent__err" id="agent-err" role="alert" hidden></p>
+    </section>
+
+    <!-- 2 · create -->
+    <section class="step-sec" id="s-create" aria-labelledby="h-create">
+      <h2 class="hb-h2" id="h-create"><span class="step-sec__n">2</span> יצירה</h2>
+      <div class="create">
+        <div class="create__action">
+          <button class="hb-btn hb-btn--primary create__btn" id="btn-create" type="button">צור את ההדמיה <span class="hb-btn__meta" id="create-cost"></span></button>
+          <p class="hb-small" id="create-hint"></p>
+          <p class="hb-small">אפשר לסגור את הדף בזמן העבודה; המצב נשמר בשרת ומוצג כשחוזרים.</p>
+        </div>
+        <div id="blocker" class="banner" role="alert" hidden></div>
+        <ol id="timeline" class="hb-steps" aria-label="שלבי העבודה"></ol>
+      </div>
+    </section>
+
+    <!-- 3 · results -->
+    <section class="step-sec" id="s-results" aria-labelledby="h-results">
+      <h2 class="hb-h2" id="h-results"><span class="step-sec__n">3</span> התוצאות</h2>
+      <div id="results" class="results"></div>
+    </section>
+
+    <!-- advanced: one level deep, collapsed -->
+    <details class="adv hb-card hb-card--flat" id="adv">
+      <summary><span class="hb-h2">הגדרות מתקדמות</span><span class="hb-small">סגנונות, גרסאות, מיקום, פנורמות, הרצה חלקית ולוג</span></summary>
+      <div class="adv__body">
+        <div class="grid3">
+          <label class="field"><span class="field__label">סגנון בוקר</span><select class="input" id="v-morning"></select></label>
+          <label class="field"><span class="field__label">סגנון ערב</span><select class="input" id="v-evening"></select></label>
+          <label class="field"><span class="field__label">גרסאות</span><select class="input" id="o-variants"><option value="morning,evening">בוקר + ערב</option><option value="morning">בוקר בלבד</option><option value="evening">ערב בלבד</option></select></label>
+          <label class="field"><span class="field__label">lat,lon (אם הכתובת לא מזוהה)</span><input class="input" id="p-latlon" placeholder="32.112, 34.782" dir="ltr"></label>
+          <label class="field field--wide"><span class="field__label">תיקיית פנורמות מולבשות קיימות</span><input class="input" id="p-panos" placeholder="Habait/tour360/apartments/apt846/panos/balanced" dir="ltr"></label>
+        </div>
+        <div class="grid3">
+          <label class="field"><span class="field__label">רזולוציית clay</span><select class="input" id="o-res"><option>320x180</option><option>480x270</option><option selected>640x360</option><option>960x540</option><option>1280x720</option></select></label>
+          <label class="field"><span class="field__label">clay samples</span><input class="input" id="o-samples" type="number" value="16" min="4" max="256"></label>
+          <label class="field"><span class="field__label">מנוע</span><select class="input" id="o-engine"><option>CYCLES</option><option>EEVEE</option></select></label>
+          <label class="field"><span class="field__label">מקס' פריימים ל-shot (0 = הכל)</span><input class="input" id="o-maxframes" type="number" value="0" min="0"></label>
+          <label class="field"><span class="field__label">רזולוציית וידאו</span><select class="input" id="o-vres"><option>480p</option><option selected>720p</option><option>1080p</option></select></label>
+          <label class="check"><input type="checkbox" id="o-refine"> detail refine ×2</label>
+        </div>
+        <div class="form__actions"><button class="hb-btn hb-btn--secondary" id="btn-save-meta" type="button">שמירת ההגדרות</button></div>
+        <h3 class="adv__h">שלבים להרצה חלקית</h3>
+        <div id="stage-picks" class="stage-picks"></div>
+        <div class="form__actions">
+          <button class="hb-btn hb-btn--secondary" id="btn-run-sel" type="button">הרצת השלבים הנבחרים</button>
+          <label class="check"><input type="checkbox" id="force"> להריץ מחדש גם מה שהושלם</label>
+          <button class="hb-btn hb-btn--ghost" id="btn-approve-plan" type="button" hidden>אישור טיוטת התכנית (plan.draft → plan.json)</button>
+        </div>
+        <h3 class="adv__h">כל השלבים</h3>
+        <div id="stages" class="stages"></div>
+        <h3 class="adv__h">לוג</h3>
+        <pre id="log" class="log" dir="ltr" tabindex="0" aria-label="לוג ההרצה"></pre>
+      </div>
+    </details>
+  </section>
+</main>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>

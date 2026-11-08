@@ -1,0 +1,15 @@
+run-project pbuild846: apartment done in 0 s
+  entrance         01-entrance          yaw 297  clear 84 cm  links living,bedroom2,bathGuest
+  kitchen          02-kitchen           yaw  21  clear 100 cm  links living,dining
+  dining           03-dining            yaw  93  clear 102 cm  links kitchen,living
+  living           04-living            yaw 102  clear 128 cm  links entrance,kitchen,dining,terraceLiving,wardrobe
+  terraceLiving    05-terrace-living    yaw 150  clear 102 cm  links living,terraceBedroom
+  terraceBedroom   06-terrace-bedroom   yaw  55  clear 80 cm  links terraceLiving,bedroomMain
+  bedroomMain      07-bedroom-main      yaw 118  clear 78 cm  links wardrobe,terraceBedroom
+  wardrobe         08-wardrobe          yaw 330  clear 72 cm  links living,bedroomMain,bathMain
+  bathMain         09-bath-main         yaw 164  clear 60 cm  links wardrobe
+  bedroom2         10-bedroom-2         yaw  38  clear 58 cm  links entrance
+  bathGuest        11-bath-guest        yaw 140  clear 57 cm  links entrance
+run-project pbuild846: cameras done in 1 s
+run-project pbuild846: prompts done in 0 s
+run-project pbuild846: furnish done in 8 s

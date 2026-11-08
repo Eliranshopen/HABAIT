@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.1.0",
+  "id": "rainbow-tlv",
+  "developer": {
+    "id": "israel-canada",
+    "name_he": "ישראל קנדה",
+    "name_en": "Israel Canada",
+    "brand": { "website": "https://rainbowtlv.com/" }
+  },
+  "project": {
+    "name": "Rainbow Tel Aviv",
+    "name_he": "ריינבו תל אביב",
+    "city_he": "תל אביב",
+    "city_en": "Tel Aviv",
+    "address_he": "שדה דב, תל אביב",
+    "neighbourhood_he": "מתחם שדה דב",
+    "status": "sales",
+    "architect": "DBLK Architects",
+    "website": "https://rainbowtlv.com/",
+    "languages": ["he", "en"],
+    "notes": "The lane-A fixture: one real unit (846, floor 16, type L) from the developer's sales plan; everything else on the site is from public sources"
+  },
+  "site": {
+    "origin_plan_cm": [648.7, 820.45],
+    "origin": {
+      "lat": 32.1036395,
+      "lon": 34.7847934,
+      "quality": "fitted",
+      "source": "plot 111 TML 3001 (block 6634, municipal plot 2593), Tel Aviv GIS IView2 layer 837 + the sales-plan compound fit, habait-af 2026-11-01 (C:/RnD/Projects/Habait/tools/bench/site846/plot-fit.json)"
+    },
+    "plot": {
+      "block": "6634",
+      "plan_id": "TML 3001",
+      "municipal_plot": "2593",
+      "source": "Tel Aviv GIS IView2 layer 837; plot 111"
+    },
+    "north_deg": 304.4,
+    "north_source": "Eshkol street grid + plot 111 fit (IoU 0.89 vs 0.71 at the sheet arrow's 291.6), habait-af 2026-11-01; both sales-plan arrows carry the same ~13 deg offset",
+    "bbox_latlon": [32.0995, 34.7795, 32.1078, 34.7900],
+    "osm": {
+      "query_radius_m": 500,
+      "cache_file": "../../studio/_local/projects/apt846-rainbow-tlv/derived/site.json",
+      "pulled_at": "2026-11-01"
+    },
+    "orthophoto": "../../studio/_local/projects/apt846-rainbow-tlv/derived/orthophoto.png"
+  },
+  "building": {
+    "id": "tower-red",
+    "name": "TOWER-RED",
+    "floors_total": 40,
+    "floors_below_ground": 0,
+    "ground_floor_index": 0,
+    "floor_to_floor_cm": 320,
+    "ceiling_height_cm": 290,
+    "floor_key": {
+      "file": "../../studio/_local/projects/apt846-rainbow-tlv/derived/site-key.json",
+      "kind": "traced-json",
+      "note": "the floor key on the sales sheet (unit hatched) and the site key with eight buildings R, R2, Y, G, B, O, I, P"
+    },
+    "footprint": {
+      "file": "../../studio/_local/projects/apt846-rainbow-tlv/derived/tower-footprint.json",
+      "frame": "unit-plan-cm",
+      "source": "habait/tower-footprint.v1, traced from the floor key by the studio"
+    },
+    "elevations": [],
+    "facade_note": "התכנון הייחודי של מגדל המגורים גורר רשת עמודים בקומות, בחלקם גלויים ובחלקם משופעים; מיקום העמודים, מידות וצורה אינם סופיים (הערה על הגיליון)",
+    "floors_source": "39 residential floors + ground (permit 20251222, developer counter 39; contractor reel says 40 storeys); floor-to-floor 320 cm is an assumption, the sheet has no section"
+  },
+  "units": [
+    {
+      "id": "apt846",
+      "number": "846",
+      "type": "L",
+      "floor": 16,
+      "rooms_count": 3,
+      "area_m2": 106.72,
+      "terrace_m2": 26.15,
+      "other_areas": [
+        { "label": "חלקה המקורה", "m2": 14.34 },
+        { "label": "חלקה הבולטת לתחום הציבורי", "m2": 0.28 }
+      ],
+      "files": {
+        "plan_pdf": "../../../דירה 846- 16.pdf",
+        "plan_json": "../../../360walkaround/tours/apt846/plan.json",
+        "intake_json": "../../studio/fixtures/apt846.intake.json"
+      },
+      "plan_scale": "1:50",
+      "mirrored": false,
+      "status": "unknown",
+      "facing": ["south", "east"],
+      "placement": {},
+      "tour_id": "apt846",
+      "notes": "תכנית מכר DBLK 15.10.2025; the sheet is a vector PDF (8515 paths, text as outlines) rendered to raster by the intake"
+    }
+  ],
+  "style": {
+    "material_board": "../../tour360/apartments/apt846/material-board.json",
+    "preset_ids": ["tlv-golden-hour", "habait-tour-morning", "habait-tour-evening"],
+    "reference_renders": [
+      { "file": "../../studio/_local/projects/apt846-rainbow-tlv/intake/reference-site/THE-1.jpg", "kind": "aerial", "note": "aerial from inland, tower + sea + Reading chimney, daytime", "rights_state": "partner-supplied" },
+      { "file": "../../studio/_local/projects/apt846-rainbow-tlv/intake/reference-site/THE-2.jpg", "kind": "exterior", "note": "tower at sunset over the sea, podium with rooftop pool", "rights_state": "partner-supplied" },
+      { "file": "../../studio/_local/projects/apt846-rainbow-tlv/intake/reference-site/THE-3.png", "kind": "exterior", "note": "street view, the 8-floor boutique buildings, tower behind", "rights_state": "partner-supplied" }
+    ],
+    "notes": "The developer's renders define the look (generic look rejected 2026-11-01); the material board is the Habait Tel Aviv luxury v1"
+  },
+  "legal": {
+    "disclaimer_id": "ai-visualization-v1",
+    "disclaimer_he": "הדמיה להמחשה בלבד; נוצרה בסיוע AI מתכנית המכר מיום 15.10.2025; המחייב: המפרט הטכני והתכנית החתומה.",
+    "rights_state": "partner-supplied",
+    "rights_note": "the developer's sales plan held by Slava; a private pitch only until Israel Canada consents (D-WQ-18, OWED-658)",
+    "consent_from_developer": false,
+    "publish_allowed": false
+  },
+  "provenance": {
+    "created_at": "2026-11-02T12:00:00+02:00",
+    "created_by": "lane A engine session (A0 fixture built from the real files)",
+    "sources": [
+      { "file": "../../../דירה 846- 16.pdf", "sha256": "0c74ab308917dd177aa9d307a2c7877ef0c9a1801849b85ad1b1b3eb542c0f0a", "received_from": "Slava", "received_at": "2026-11-01", "note": "the sales plan sheet, A2, 1:50" },
+      { "file": "../../studio/_local/projects/apt846-rainbow-tlv/project.json", "note": "the studio's project record (latlon, north, presets)" },
+      { "file": "../../studio/fixtures/apt846.intake.json", "note": "the hand-checked intake: 16 printed dimensions, unit table" }
+    ],
+    "assumptions": [
+      "floor_to_floor_cm 320 and ceiling_height_cm 290: the sheet has no section",
+      "floors_total 40: permit + contractor reel, not the sheet",
+      "bbox_latlon: a 500 m box around the plot origin, not a surveyed boundary",
+      "unit status unknown: no price list from the developer"
+    ]
+  }
+}

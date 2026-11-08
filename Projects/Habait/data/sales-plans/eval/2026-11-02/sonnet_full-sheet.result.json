@@ -1,0 +1,197 @@
+{
+ "label": "sonnet_full-sheet",
+ "rooms": {
+  "gt": 10,
+  "pred": 8,
+  "matched": 6,
+  "recall": 0.6,
+  "precision": 0.75,
+  "f1": 0.667,
+  "type_accuracy": 0.833,
+  "name_exact_rate": 0.5,
+  "missing_gt": [
+   "כניסה",
+   "פינת אוכל",
+   "חדר שינה הורים",
+   "פינת ארונות"
+  ],
+  "extra_pred": [
+   "חדר דיור נוסף",
+   "מרפסת שירות"
+  ],
+  "matches": [
+   {
+    "gt": "חדר שינה",
+    "pred": "חדר שינה",
+    "pred_en": "Bedroom",
+    "score": 1.0,
+    "type_ok": true,
+    "gt_group": "bedroom",
+    "pred_group": "bedroom",
+    "gt_dims": [
+     342,
+     275
+    ],
+    "pred_dims": null,
+    "dims": "missing"
+   },
+   {
+    "gt": "חדר דיור",
+    "pred": "חדר דיור",
+    "pred_en": "Living room",
+    "score": 1.0,
+    "type_ok": true,
+    "gt_group": "living",
+    "pred_group": "living",
+    "gt_dims": [
+     744,
+     530
+    ],
+    "pred_dims": [
+     545,
+     395
+    ],
+    "dims": "wrong"
+   },
+   {
+    "gt": "מטבח",
+    "pred": "מטבח",
+    "pred_en": "Kitchen",
+    "score": 1.0,
+    "type_ok": true,
+    "gt_group": "kitchen",
+    "pred_group": "kitchen",
+    "gt_dims": null,
+    "pred_dims": null,
+    "dims": "n/a"
+   },
+   {
+    "gt": "חדר רחצה הורים",
+    "pred": "חדר אמבטיה",
+    "pred_en": "Bathroom",
+    "score": 0.869,
+    "type_ok": true,
+    "gt_group": "bathroom",
+    "pred_group": "bathroom",
+    "gt_dims": [
+     212,
+     210
+    ],
+    "pred_dims": null,
+    "dims": "missing"
+   },
+   {
+    "gt": "מרפסת שמש",
+    "pred": "מרפסת גג",
+    "pred_en": "Roof terrace",
+    "score": 0.838,
+    "type_ok": true,
+    "gt_group": "balcony",
+    "pred_group": "balcony",
+    "gt_dims": [
+     1213,
+     270
+    ],
+    "pred_dims": null,
+    "dims": "missing"
+   },
+   {
+    "gt": "חדר רחצה כללי",
+    "pred": "בית שמוש",
+    "pred_en": "Bathroom",
+    "score": 0.65,
+    "type_ok": false,
+    "gt_group": "bathroom",
+    "pred_group": "toilet",
+    "gt_dims": [
+     140,
+     99
+    ],
+    "pred_dims": null,
+    "dims": "missing"
+   }
+  ]
+ },
+ "dims": {
+  "gt_count": 16,
+  "pred_count": 9,
+  "hit": 2,
+  "recall": 0.125,
+  "precision": 0.222,
+  "missed_values": [
+   822.0,
+   744.0,
+   530.0,
+   348.0,
+   344.0,
+   342.0,
+   270.0,
+   212.0,
+   210.0,
+   160.0,
+   140.0,
+   99.0,
+   474.0,
+   1213.0
+  ],
+  "room_dims_rooms": 7,
+  "room_dims_correct": 0
+ },
+ "unit": {
+  "correct": 0,
+  "total": 4,
+  "fields": {
+   "number": {
+    "gt": "846",
+    "pred": "דירה 048",
+    "ok": false
+   },
+   "area_m2": {
+    "gt": 106.72,
+    "pred": null,
+    "ok": false
+   },
+   "terrace_m2": {
+    "gt": 26.15,
+    "pred": null,
+    "ok": false
+   },
+   "floor": {
+    "gt": 16,
+    "pred": null,
+    "ok": false
+   }
+  }
+ },
+ "openings": {
+  "gt_doors_in_trace": 6,
+  "pred_doors": 6,
+  "pred_windows_or_glazing_runs": 8
+ },
+ "edit_cost": {
+  "total": 32.75,
+  "from_scratch": 39.0,
+  "breakdown": {
+   "rooms_to_add": 4,
+   "rooms_to_remove": 2,
+   "rooms_to_rename": 3,
+   "rooms_to_retype": 0,
+   "room_dims_to_fix": 7,
+   "dim_values_to_add": 14,
+   "dim_values_to_remove": 7,
+   "unit_fields_to_fix": 4
+  },
+  "weights": {
+   "add_room": 2.0,
+   "remove_room": 1.0,
+   "rename_room": 1.0,
+   "retype_room": 1.0,
+   "fix_room_dims": 1.0,
+   "add_dim": 0.5,
+   "remove_dim": 0.25,
+   "fix_unit_field": 1.0
+  }
+ },
+ "edit_score": 0.16,
+ "model_confidence": 0.75
+}

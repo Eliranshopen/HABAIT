@@ -1,0 +1,73 @@
+[{"stream_name":"stdout","time":0.927434081,"data":"$ nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv\n"}
+,{"stream_name":"stdout","time":0.927474645,"data":"name, memory.total [MiB], driver_version\n"}
+,{"stream_name":"stdout","time":0.927480787,"data":"Tesla T4, 15360 MiB, 580.178.04\n"}
+,{"stream_name":"stdout","time":0.927491629,"data":"Tesla T4, 15360 MiB, 580.178.04\n"}
+,{"stream_name":"stdout","time":0.927494852,"data":"\n"}
+,{"stream_name":"stdout","time":1.451601312,"data":"glb: /kaggle/input/datasets/eliranhabait/habait-orbit-inputs/site.glb\n"}
+,{"stream_name":"stdout","time":28.389718738,"data":"$ cd /tmp/habait_a \u0026\u0026 wget -q https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz -O b.tar.xz \u0026\u0026 tar -xf b.tar.xz \u0026\u0026 rm b.tar.xz\n"}
+,{"stream_name":"stdout","time":28.389760848,"data":"\n"}
+,{"stream_name":"stdout","time":28.584987676,"data":"$ /tmp/habait_a/blender-4.5.10-linux-x64/blender -b --factory-startup --version\n"}
+,{"stream_name":"stdout","time":28.585010468,"data":"Blender 4.5.10 LTS (hash 6dc0b208d1b5 built 2026-05-19 01:31:21)\n"}
+,{"stream_name":"stdout","time":28.585013565,"data":"Blender 4.5.10 LTS\n"}
+,{"stream_name":"stdout","time":28.585016009,"data":"\tbuild date: 2026-05-19\n"}
+,{"stream_name":"stdout","time":28.585018603,"data":"\tbuild time: 01:31:21\n"}
+,{"stream_name":"stdout","time":28.585020921,"data":"\tbuild commit date: 2026-05-18\n"}
+,{"stream_name":"stdout","time":28.585023159,"data":"\tbuild commit time: 13:28\n"}
+,{"stream_name":"stdout","time":28.585025789,"data":"\tbuild hash: 6dc0b208d1b5\n"}
+,{"stream_name":"stdout","time":28.585041841,"data":"\tbuild branch: blender-v4.5-release\n"}
+,{"stream_name":"stdout","time":28.58504605,"data":"\tbuild platform: Linux\n"}
+,{"stream_name":"stdout","time":28.585049955,"data":"\tbuild type: Release\n"}
+,{"stream_name":"stdout","time":28.585058549,"data":"\tbuild c flags:  -Wall -Werror=implicit-function-declaration -Wstrict-prototypes -Werror=return-type -Werror=vla -Wmissing-prototypes -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wlogical-op -Wundef -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Wformat-signedness -Wrestrict -Wno-stringop-overread -Wno-stringop-overflow -Wnonnull -Wabsolute-value -Wuninitialized -Wredundant-decls -Wshadow -Wimplicit-fallthrough=5 -Wno-error=unused-but-set-variable  -march=x86-64-v2 -std=gnu11 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  \n"}
+,{"stream_name":"stdout","time":28.585067775,"data":"\tbuild c++ flags:  -Wuninitialized -Wredundant-decls -Wall -Wno-invalid-offsetof -Wno-sign-compare -Wlogical-op -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Werror=return-type -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wundef -Wcomma-subscript -Wformat-signedness -Wrestrict -Wno-suggest-override -Wuninitialized -Wno-stringop-overread -Wno-stringop-overflow -Wimplicit-fallthrough=5 -Wundef -Wmissing-declarations  -march=x86-64-v2 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  \n"}
+,{"stream_name":"stdout","time":28.58507299,"data":"\tbuild link flags:  -Wl,--version-script='/home/blender/git/blender-v450/blender.git/source/creator/symbols_unix.map'\n"}
+,{"stream_name":"stdout","time":28.585076686,"data":"\tbuild system: CMake\n"}
+,{"stream_name":"stdout","time":28.585080002,"data":"\n"}
+,{"stream_name":"stdout","time":39.024803062,"data":"--- proof_dev_128spp rc=1 10s\n"}
+,{"stream_name":"stdout","time":39.02483602,"data":"[dev] OPTIX ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stdout","time":39.024843369,"data":"Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":39.024860817,"data":"Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":39.024863509,"data":"Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":39.02486577,"data":"\n"}
+,{"stream_name":"stdout","time":39.024868139,"data":"Refer to the Cycles GPU rendering documentation for possible solutions:\n"}
+,{"stream_name":"stdout","time":39.024870439,"data":"https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html\n"}
+,{"stream_name":"stdout","time":39.024872745,"data":"\n"}
+,{"stream_name":"stdout","time":39.024874855,"data":"E1102 11:03:20.170708    47 denoiser_gpu.cpp:123] GPU denoiser creation has failed.\n"}
+,{"stream_name":"stdout","time":39.024877282,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":39.024880034,"data":"  File \"/tmp/habait_a/orbit_render.py\", line 233, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":39.024918885,"data":"    bpy.ops.render.render(write_still=True)\n"}
+,{"stream_name":"stdout","time":39.02492315,"data":"  File \"/tmp/habait_a/blender-4.5.10-linux-x64/4.5/scripts/modules/bpy/ops.py\", line 109, in __call__\n"}
+,{"stream_name":"stdout","time":39.024927687,"data":"    ret = _op_call(self.idname_py(), kw)\n"}
+,{"stream_name":"stdout","time":39.024931567,"data":"          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":39.024934994,"data":"RuntimeError: Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":39.024938309,"data":"Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":39.0249417,"data":"\n"}
+,{"stream_name":"stdout","time":39.024944815,"data":"\n"}
+,{"stream_name":"stdout","time":39.02541589,"data":"steady 999s/frame -\u003e 252 frames = 4195.8 min\n"}
+,{"stream_name":"stdout","time":45.605500766,"data":"--- orbit_clay_16spp rc=1 7s\n"}
+,{"stream_name":"stdout","time":45.605531505,"data":"[dev] OPTIX ['Tesla T4', 'Tesla T4']\n"}
+,{"stream_name":"stdout","time":45.605536491,"data":"Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":45.605540826,"data":"Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":45.605545023,"data":"Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":45.605548619,"data":"\n"}
+,{"stream_name":"stdout","time":45.605552344,"data":"Refer to the Cycles GPU rendering documentation for possible solutions:\n"}
+,{"stream_name":"stdout","time":45.605556235,"data":"https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html\n"}
+,{"stream_name":"stdout","time":45.605559686,"data":"\n"}
+,{"stream_name":"stdout","time":45.605563087,"data":"E1102 11:03:26.861690    71 denoiser_gpu.cpp:123] GPU denoiser creation has failed.\n"}
+,{"stream_name":"stdout","time":45.605567043,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":45.605570698,"data":"  File \"/tmp/habait_a/orbit_render.py\", line 253, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":45.605575638,"data":"    bpy.ops.render.render(write_still=True)\n"}
+,{"stream_name":"stdout","time":45.605579482,"data":"  File \"/tmp/habait_a/blender-4.5.10-linux-x64/4.5/scripts/modules/bpy/ops.py\", line 109, in __call__\n"}
+,{"stream_name":"stdout","time":45.60558398,"data":"    ret = _op_call(self.idname_py(), kw)\n"}
+,{"stream_name":"stdout","time":45.605587874,"data":"          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":45.605591687,"data":"RuntimeError: Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":45.605606016,"data":"Error: Failed to create OptiX denoiser\n"}
+,{"stream_name":"stdout","time":45.605610257,"data":"\n"}
+,{"stream_name":"stdout","time":45.605613968,"data":"\n"}
+,{"stream_name":"stdout","time":45.606492282,"data":"SUMMARY {\"route\": \"A-blender-cycles\", \"phases\": {\"download_extract_s\": 26.9, \"proof_dev_128spp\": {\"compute\": null, \"devices\": null, \"exposure\": null, \"first_frame_s\": null, \"steady_s_per_frame\": null, \"import_s\": null, \"total_s\": null, \"wall_s\": 10.4, \"error\": 1, \"replaced_slots\": null}, \"orbit_clay_16spp\": {\"compute\": null, \"devices\": null, \"exposure\": null, \"first_frame_s\": null, \"steady_s_per_frame\": null, \"import_s\": null, \"total_s\": null, \"wall_s\": 6.6, \"error\": 1, \"replaced_slots\": null}}, \"wall_s\": 44.7, \"projection_252_frames_min_at_128spp\": 4195.8}\n"}
+,{"stream_name":"stderr","time":48.046566216,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":48.046599784,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":48.430770513,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":48.430797297,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":50.272842513,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":51.416061891,"data":"[NbConvertApp] Writing 315946 bytes to __results__.html\n"}
+]

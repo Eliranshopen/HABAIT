@@ -1,0 +1,42 @@
+render_tour.mjs v0.1.0  tour=360walkaround/tours/pbuild846  mode=draft 2048x1024@16spp  wrap-pad=512  points=3
+          golden depth fixture: golden: 32/32 pixels match; unknown-encoding refused: true | OK
+          scene: STALE — scene-full.blend does not exist
+
+=== scene build ==============================================
+          REPORT    camera clearance: cp-wardrobe 35.39 cm from door DOOR_o-6_leaf - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+          REPORT    camera clearance: cp-bedroom2 36.38 cm from closet CLOSET_b2-closet_door3 - under the 40 cm bar; a general plan's points are authored, so this is reported, not failed
+          OK
+          scene built in 14.1 s
+
+=== chunk 1/1: 3 point(s) ====================
+          === [1/3] cp-entrance =====================================
+          [render_pano] point      : cp-entrance  plan (311.1,768.9,160) yaw 297
+          [render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+          [render_pano] render 1/1: 259.292 s wall  (cycles 258.55s, device peak 1105.27 MB, host peak 1451.87 MB)
+          [render_pano] depth      : depth.png 179,674 B  valid 2,097,152 / 2,097,152  sky 0  range 0.538..8.938 m  (0.253 s)
+          [render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+          [render_pano] pano       : pano.webp 2048x1024 44,854 B  zenith mean 182.0/255 (5 colours) · nadir mean 175.9/255 (8 colours) · no_hole=True
+          OK
+          === [2/3] cp-kitchen ======================================
+          [render_pano] point      : cp-kitchen  plan (795.4,651.1,160) yaw 21
+          [render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+          [render_pano] render 1/1: 242.961 s wall  (cycles 242.31s, device peak 1105.27 MB, host peak 1451.87 MB)
+          [render_pano] depth      : depth.png 147,023 B  valid 2,097,152 / 2,097,152  sky 0  range 1.149..7.523 m  (0.202 s)
+          [render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+          [render_pano] pano       : pano.webp 2048x1024 66,294 B  zenith mean 158.7/255 (6 colours) · nadir mean 183.4/255 (14 colours) · no_hole=True
+          OK
+          === [3/3] cp-dining =======================================
+          [render_pano] point      : cp-dining  plan (1056.7,574,160) yaw 93
+          [render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+          [render_pano] render 1/1: 242.839 s wall  (cycles 242.19s, device peak 1105.27 MB, host peak 1451.87 MB)
+          [render_pano] depth      : depth.png 165,052 B  valid 2,097,152 / 2,097,152  sky 0  range 0.850..10.143 m  (0.21 s)
+          [render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+          [render_pano] pano       : pano.webp 2048x1024 83,754 B  zenith mean 149.1/255 (7 colours) · nadir mean 169.8/255 (9 colours) · no_hole=True
+          OK
+
+=== summary =================================================
+  OK   cp-entrance         259.3 s  nadir 1.6 m (0 cm)  valid 100.00%  44 KB
+  OK   cp-kitchen          243.0 s  nadir 1.6 m (0 cm)  valid 100.00%  65 KB
+  OK   cp-dining           242.8 s  nadir 1.6 m (0 cm)  valid 100.00%  82 KB
+  total 761.6 s · 3 rendered, 0 skipped · $0.00 · verdict PASS
+OK

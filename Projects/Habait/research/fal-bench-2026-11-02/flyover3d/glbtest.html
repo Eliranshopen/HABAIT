@@ -1,0 +1,11 @@
+<!doctype html><meta charset="utf-8"><body style="background:#111;color:#eee;font:16px monospace"><pre id="log">start</pre>
+<script type="module">
+import { GLTFLoader } from './lib/GLTFLoader.js';
+const lines=['start']; const t0=Date.now();
+const log=(m)=>{lines.push(((Date.now()-t0)/1000).toFixed(1)+'s '+m); if(lines.length>8) lines.shift(); document.getElementById('log').textContent=lines.join('\n');};
+new GLTFLoader().load('./data/site.glb',(g)=>{let n=0;g.scene.traverse(o=>{if(o.isMesh)n++});log('LOADED meshes='+n);},
+ (e)=>{log('progress '+(e.loaded/1e6).toFixed(1)+' MB');},
+ (err)=>{log('ERROR '+(err&&err.message||err));});
+window.addEventListener('error',e=>log('window error '+e.message));
+window.addEventListener('unhandledrejection',e=>log('rejection '+(e.reason&&e.reason.message||e.reason)));
+</script>

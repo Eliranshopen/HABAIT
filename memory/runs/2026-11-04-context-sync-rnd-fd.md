@@ -1,0 +1,15 @@
+## 2026-11-04 · main session (rnd-fd) · /sync-context pass after git came back
+- **Did:**
+  - Context files: 0 missing. 3 generated files refreshed. `development/tasks/hold-building-tour` goes stale again at once because its board is active (rnd-1f).
+  - check-context: FAILED Check 6 on the root `CLAUDE.md` (20.3 KB, line 71 at 828 chars). Another session rewrote that line at the same moment, so it now PASSES (6 checks). My duplicate copy of the git detail was removed from `.wt/CLAUDE.md`.
+  - Auto-memory: the stale "no git / no identity" facts are corrected (repo-local identity set, local git on `main`, no remote). Added `feedback-keys-and-paid-calls`. MEMORY.md is 12 lines for 12 files.
+- **Evidence:**
+  - `check-context.mjs` exit 0 after the fix.
+  - `verify-memory.mjs --strict`: CLEAN.
+  - `generate-cards.py --check`: 0 missing.
+  - Root §11 identity row.
+- **Learned:** several sessions edit the root card the same day. Re-read a line right before relocating it, and re-run the check after the edit instead of trusting your own write.
+- **Owed / open:**
+  - SHIP-LEDGER §1 still says "(no deploys yet)" after three habait-flow production deploys on 2026-11-04. The ledger stays frozen until Eliran names a remote (root §8.5); the deploys are recorded in `runs/`.
+  - Checks 16 and 17 stay suspended (no remote).
+- **Second reader:** none.

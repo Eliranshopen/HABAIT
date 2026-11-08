@@ -1,0 +1,23 @@
+{
+ "endpoint": "kling/v4/video-to-video/edit",
+ "args": {
+  "video_url": "https://v3b.fal.media/files/b/0ab0d3c9/XGSKYuPN-mOtDdWAqXqqA_B_clay_flight_full.mp4",
+  "prompt": "@Video1 is a plain grey 3D clay render of ONE continuous drone shot, 17 seconds: it starts high over the Tel Aviv coast (Sde Dov), flies toward the Rainbow tower, a 39-floor residential tower wrapped in white undulating curved balcony slabs with planters and slim black glazing, descends along the facade to a terrace on the 16th floor, and glides through the open glass slider into the living room of the apartment. Re-render the SAME footage as photoreal video: keep every frame's camera motion, perspective, horizon and geometry exactly as in @Video1, only replace the clay materials with real ones. @Image1 is the real look of the exterior: white curved balconies, Mediterranean sea and beach, the Reading power-station chimney, low white buildings, trees and roads. @Image2 is the real look of the facade up close. @Image3 is the real look of the living room the camera enters: wide-plank pale oak parquet, warm white plaster walls, cream boucle curved sofa, round travertine table, jute rug, sand-grey kitchen, cream flush doors without frames, no skirting. Bright clear MORNING daylight throughout, sun high, neutral white light, blue sky, NO sunset or golden-hour tones. Smooth, continuous, no cuts, no text, no people, no watermark.",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0d3cb/KpwO8gv2_paMObnJysIVz_B_keyframe_s1_first.png",
+   "https://v3b.fal.media/files/b/0ab0d3cc/Th2x4LPxWKC1I0xQVbUE8_B_kf_s2_parquet.png",
+   "https://v3b.fal.media/files/b/0ab0d3cc/B5Wg_be79PYg64F9t98Jn_B_kf_interior_gpt.png"
+  ],
+  "resolution": "720p",
+  "duration": 17
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0d3e7/JtVN1oorkJoxWDSnzcg7p_output.mp4",
+   "content_type": "video/mp4",
+   "file_name": "output.mp4",
+   "file_size": 24099955
+  }
+ },
+ "secs": 268
+}

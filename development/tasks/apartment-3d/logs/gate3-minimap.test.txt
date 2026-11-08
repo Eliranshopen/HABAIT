@@ -1,0 +1,32 @@
+ok   manifest: minimap block with a point per interior scene  (11 scenes, 564x640 px, top from: GLB bounds (report.json top agrees to <1e-3 m, exact value kept))
+ok   frame: cameras.json px / pxPerCm = plan.general.json camera_points (cm)  (11 cameras, worst 0.063 cm, each inside its room loop)
+ok   frame: GLB floor_<room> bounds x100 = plan.general.json room loops (cm)  (11 floors, worst 0.00 cm)
+ok   frame: top.png camera (GLB bounds, exporter formula) = top.png alpha bbox  (0.96 px off (1 px = 0.81 cm))
+ok   frame: every camera dot falls on modelled floor in top.png (alpha > 0)  (11/11)
+ok   presets: Top looks straight down plan-up, Outdoor from the terrace side, low  (top polar 0.06 deg, outdoor polar 68.0 deg)
+ok   iphone: the minimap mounts in the tour corner with the top view, the first view message lands  (117 px wide)
+ok   iphone: minimap dot vs cameras.json (screen read-back), living / kitchen / bedroomMain  (living 0.0 cm, kitchen 0.0 cm, bedroomMain 0.0 cm; all 11/11, worst 0.0 cm)
+ok   iphone: yaw and fov turn the cone (bearing = centreBearingDeg + yaw)  (living yaw 90 -> 201.3 deg on the plan)
+ok   iphone: tapping a room on the minimap asks the tour to go there (habait:goto)
+ok   iphone: 3D tab preloaded at idle while hidden (GLB + Draco decoded, no WebGL yet)  (prepare 107 ms)
+ok   iphone: 3D tab opens < 2000 ms after the tap (Fast 4G, preloaded)  (450 ms, 28820 triangles)
+FAIL iphone: the 3D floor follows the tour's floor switch (marble, then concrete live)
+     marble colour 1,1,1
+ok   iphone: presets 3D / Top / Outdoor (RTL bar, animated)  (polar: 3d 50.61, top 0.06, outdoor 68 deg)
+ok   iphone: no requests outside 127.0.0.1, no page errors  (15 requests, all local)
+ok   pixel: the minimap mounts in the tour corner with the top view, the first view message lands  (124 px wide)
+ok   pixel: minimap dot vs cameras.json (screen read-back), living / kitchen / bedroomMain  (living 0.0 cm, kitchen 0.0 cm, bedroomMain 0.0 cm; all 11/11, worst 0.0 cm)
+ok   pixel: yaw and fov turn the cone (bearing = centreBearingDeg + yaw)  (living yaw 90 -> 201.3 deg on the plan)
+ok   pixel: tapping a room on the minimap asks the tour to go there (habait:goto)
+ok   pixel: 3D tab preloaded at idle while hidden (GLB + Draco decoded, no WebGL yet)  (prepare 93 ms)
+ok   pixel: 3D tab opens < 2000 ms after the tap (Fast 4G, preloaded)  (399 ms, 28820 triangles)
+FAIL pixel: the 3D floor follows the tour's floor switch (marble, then concrete live)
+     marble colour 1,1,1
+ok   pixel: presets 3D / Top / Outdoor (RTL bar, animated)  (polar: 3d 50.61, top 0.06, outdoor 68 deg)
+ok   pixel: no requests outside 127.0.0.1, no page errors  (15 requests, all local)
+ok   3D tab timings (ms; warm = tap after the idle preload, cold = page opened on #3d)  (iphone warm fast-4g 450; iphone warm fast-4g cpu4 1041; iphone cold #3d fast-4g cpu1 serve.mjs 2401; iphone cold #3d fast-4g cpu4 serve.mjs 3184; iphone cold #3d fast-4g cpu1 gzip 2462; iphone cold #3d fast-4g cpu4 gzip 3384; pixel warm fast-4g 399; pixel warm fast-4g cpu4 862; pixel cold #3d fast-4g cpu1 serve.mjs 2427; pixel cold #3d fast-4g cpu4 serve.mjs 3258; pixel cold #3d fast-4g cpu1 gzip 2485; pixel cold #3d fast-4g cpu4 gzip 3244)
+minimap: 3/3 scenes positioned within 20cm (all 11 scenes on 2 phones; worst 0.0 cm)
+3d tab (three.js + Draco, not model-viewer) loaded in 450ms (4G) after the tap; cold #3d deep link 2401/2427ms on serve.mjs (no gzip), 2462/2485ms gzip-served
+
+2 failing; screenshots in C:\Users\elira\AppData\Local\Temp\habait-minimap-shots
+EXIT 1

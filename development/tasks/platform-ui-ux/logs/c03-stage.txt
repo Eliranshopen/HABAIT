@@ -1,0 +1,55 @@
+# card 03 — stage_flow.py stages _local/dist/<project>/<unit>/  (2026-11-03 16:41, main session as platform-dev)
+
+## pre-existing blocker found (not this card's change)
+The LIVE stage_flow.py (unmodified) fails on this machine at the vendor step: Habait/platform/node_modules/three is absent in C:\RnD\Projects\Habait (the cut-over did not carry node_modules). Same FileNotFoundError with the working-copy script.
+For this check only, a scratch copy of the working-copy script took three.module.js from .wt/apartment-3d/files/.../platform/node_modules/three (read-only). The working-copy script itself is unchanged on that line.
+Consequence: the next deploy needs platform node_modules (npm ci, card 01c second part) or that vendor path — Eliran's call.
+
+## decisions
+- staged per unit: apartment.json, media/** (stills, panos, plan.png, top.webp, apt846.glb, dollhouse.html, logo.svg), and the ZIP the manifest links (zip.src=846.zip, 4,692,176 bytes; apartment.js:476-478 sets zipBtn.href from m.zip.src)
+- not staged: index.html and assets/ (the standalone page copy; the site serves its own apartment.html), CLAUDE.md
+- projects: only those with fixtures/<project>/ (the site stages them); units: only folders with apartment.json
+
+## determinism
+two runs into scratch stage1 / stage2: file lists byte-identical (cmp), 1777 files each, 307.2 MB
+
+## _local files in the staged list (all of them)
+./_local/dist/rainbow/846/846.zip
+./_local/dist/rainbow/846/apartment.json
+./_local/dist/rainbow/846/media/apt846.glb
+./_local/dist/rainbow/846/media/dollhouse.html
+./_local/dist/rainbow/846/media/logo.svg
+./_local/dist/rainbow/846/media/panos/01-entrance.webp
+./_local/dist/rainbow/846/media/panos/02-kitchen.webp
+./_local/dist/rainbow/846/media/panos/03-dining.webp
+./_local/dist/rainbow/846/media/panos/04-living.webp
+./_local/dist/rainbow/846/media/panos/05-terrace-living.webp
+./_local/dist/rainbow/846/media/panos/06-terrace-bedroom.webp
+./_local/dist/rainbow/846/media/panos/07-bedroom-main.webp
+./_local/dist/rainbow/846/media/panos/08-wardrobe.webp
+./_local/dist/rainbow/846/media/panos/09-bath-main.webp
+./_local/dist/rainbow/846/media/panos/10-bedroom-2.webp
+./_local/dist/rainbow/846/media/panos/11-bath-guest.webp
+./_local/dist/rainbow/846/media/plan.png
+./_local/dist/rainbow/846/media/stills/01-entrance.jpg
+./_local/dist/rainbow/846/media/stills/02-kitchen.jpg
+./_local/dist/rainbow/846/media/stills/03-dining.jpg
+./_local/dist/rainbow/846/media/stills/04-living.jpg
+./_local/dist/rainbow/846/media/stills/05-terrace-living.jpg
+./_local/dist/rainbow/846/media/stills/06-terrace-bedroom.jpg
+./_local/dist/rainbow/846/media/stills/07-bedroom-main.jpg
+./_local/dist/rainbow/846/media/stills/08-wardrobe.jpg
+./_local/dist/rainbow/846/media/stills/09-bath-main.jpg
+./_local/dist/rainbow/846/media/stills/10-bedroom-2.jpg
+./_local/dist/rainbow/846/media/stills/11-bath-guest.jpg
+./_local/dist/rainbow/846/media/top.webp
+count under _local: 29; outside _local/dist/rainbow/846: 0
+
+## headless pass (Edge headless, 1440x900, scratch stage1 served on 127.0.0.1:8852 by python http.server, killed by PID; 8852 free after)
+run 1: landing 36 responses, 3 x 404 all on /_local/segments/rainbow-cine/* (cine flight; _local/segments is out of scope by the card), _local/dist 1 request 0 bad; apartment 8 responses 0 bad
+run 2 (lazy images forced eager + scroll):
+  /landing.html?project=rainbow | responses 25 | >=400 0 | _local/dist requests 12 bad 0 | <img> from _local/dist 11 of 13 | pageerrors []
+  /apartment.html?project=rainbow&unit=846 | responses 8 | >=400 0 | _local/dist requests 1 bad 0 | <img> from _local/dist 0 of 3 | pageerrors []
+
+RESULT: 0 x 4xx on _local/dist/ in both runs. The apartment page's new URL throw (apartment-3d's fix) was not seen on the local stage.
+Takes effect only on the next deploy, with its own go from Eliran (root §9).

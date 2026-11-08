@@ -1,0 +1,28 @@
+{
+ "schema": "habait.layer-map/0.1",
+ "office": "D BLK Architects (as seen in the optional-content groups of a 2025 sales-sheet PDF; xref prefix '<floor xref>|' kept)",
+ "about": "CAD layer name (regex, case-insensitive, first class in 'order' wins) -> semantic class. One map serves the PDF reader (OCG names) and the DXF reader (DXF layer names). Classes: wall_fill (solid hatch of a cut wall/column), wall_line (wall outlines), column, window (glazing / sashes), door (leaves + swings), railing (balcony/terrace edge, a room boundary), slab_edge (slab or beam edge, a room boundary only for outdoor rooms), dimension, text (room labels), furniture, plumbing, ignore. Anything unmatched is 'unmapped' and listed in the report.",
+ "order": ["ignore", "dimension", "text", "door", "window", "railing", "column", "wall_fill", "wall_line", "slab_edge", "furniture", "plumbing"],
+ "classes": {
+  "ignore": ["29schematy", "30strip", "26kav migrash", "27kav binyan", "08siman", "10text bold", "11text meyuchad", "21hatch meshutaf", "23hatch rizuf", "G-DETAIL", "G-IMPT$", "Temporary Structures", "14mabat karov", "15mabat ruchok", "^0$"],
+  "dimension": ["24dimension", "25dim", "A-ANNO-DIMS", "DIM"],
+  "text": ["09text", "A-ANNO-TEXT", "A-AREA-IDEN", "ROOM.?NAME"],
+  "door": ["05door", "A-DOOR", "DOOR"],
+  "window": ["O-WIN", "A-GLAZ", "WINDOW", "GLAZ"],
+  "railing": ["G-STAIRS-HRAL", "A-FLOR-HRAL", "RAIL"],
+  "column": ["S-COLS", "S-COLS-\\d", "S-COLM"],
+  "wall_fill": ["H-CONC", "V40-1", "20hatch walls", "22hatch pir", "G-IMPT-1", "A-WALL-PATT", "HATCH.*WALL"],
+  "wall_line": ["W-CONC", "W-BLOCK", "01wall", "A-WALL", "WALL"],
+  "slab_edge": ["\\|V15", "\\|V20", "\\|V25", "\\|V40$", "A-FLOR-OTLN", "SLAB"],
+  "furniture": ["F-FURN", "A-FURN", "FURN"],
+  "plumbing": ["P-PLUMBING", "P-FIXT", "A-FLOR-PFIX", "PLUMB"]
+ },
+ "style_fallback": [
+  {"kind": "fill", "fill_grey": 0.5, "cls": "wall_fill", "why": "a PDF without layers: mid-grey solid fill is the cut-wall poche on most Israeli sales sheets"},
+  {"kind": "stroke", "min_width": 1.2, "cls": "wall_line"},
+  {"kind": "stroke", "max_width": 0.4, "cls": "dimension"}
+ ],
+ "barriers": ["wall_fill", "wall_line", "column", "window", "railing"],
+ "outdoor_barriers": ["slab_edge"],
+ "label_text_height_pt": null
+}

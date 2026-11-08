@@ -1,0 +1,75 @@
+ok   desktop: real tap on 3D button opens layer, focus on x: {"hidden":false,"active":"t-3d-close","inert":["pano","t-measure-svg","DIV","DIV","HEADER","SECTION","t-guide-card","t-measure-bar","t-tools","DIV","t-video","t-loading","t-error","t-sheet","t-change"],"layerInert":false,"rootInert":false,"scene":"living","yaw":0}
+ok   desktop: inert on siblings only, not layer/root: ["pano","t-measure-svg","DIV","DIV","HEADER","SECTION","t-guide-card","t-measure-bar","t-tools","DIV","t-video","t-loading","t-error","t-sheet","t-change"]
+ok   desktop: point where 3D btn was hits: layer
+ok   desktop: taps on 7 tool positions: scene/layer unchanged (t-3d-btn,t-plan-btn,t-zoom-in,t-zoom-out,t-rotate,t-reset,t-full)
+ok   desktop: Tab x8 stays in layer: t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame
+ok   desktop: keyboard arrows do not move the tour behind (yaw 0 -> 0)
+ok   desktop: real drag rotates the dollhouse: az 36.97->9.37, polar 50.61->46.71
+ok   desktop: tour yaw unchanged by 3D drag (0 -> 0)
+ok   desktop: real drag moves focus into the frame: t-3d-frame
+ok   desktop: preset buttons: תלת-ממד:true מלמעלה:false מבחוץ:false
+ok   desktop: real tap on preset "מלמעלה" changes preset 3d -> top
+ok   desktop: Esc with focus in frame, no room selected (selected=null) closes layer in ONE press: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"living","yaw":0}
+ok   desktop: after close: no inert left, focus back on 3D button: {"inert":[],"active":"t-3d-btn"}
+ok   desktop: tour drag works after close: yaw 0 -> -18.15
+ok   desktop: 3D button re-opens with real tap after close
+ok   desktop: kitchen label found: {"x":735,"y":300}
+ok   desktop: real tap on label selects kitchen: r-kitchen
+ok   desktop: 1st Esc closes the sheet only (layer hidden=false, selected=null)
+ok   desktop: 2nd Esc closes the layer: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"living","yaw":-19.37}
+ok   desktop: sheet go button: {"x":598.6953125,"y":762,"t":"צפו ב-360°"}
+ok   desktop: real tap on "go" moves tour to kitchen, layer closed, nothing inert: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   desktop: real tap on x closes: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   desktop: Esc with focus on x closes: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   desktop: x15 open/Esc churn: nothing inert, {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   desktop: no page/console errors 
+ok   iphone13: real tap on 3D button opens layer, focus on x: {"hidden":false,"active":"t-3d-close","inert":["pano","t-measure-svg","DIV","DIV","HEADER","SECTION","t-guide-card","t-measure-bar","t-tools","DIV","t-video","t-loading","t-error","t-sheet","t-change"],"layerInert":false,"rootInert":false,"scene":"living","yaw":0}
+ok   iphone13: inert on siblings only, not layer/root: ["pano","t-measure-svg","DIV","DIV","HEADER","SECTION","t-guide-card","t-measure-bar","t-tools","DIV","t-video","t-loading","t-error","t-sheet","t-change"]
+ok   iphone13: point where 3D btn was hits: layer
+ok   iphone13: taps on 5 tool positions: scene/layer unchanged (t-3d-btn,t-plan-btn,t-rotate,t-reset,t-full)
+ok   iphone13: Tab x8 stays in layer: t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame
+ok   iphone13: keyboard arrows do not move the tour behind (yaw 0 -> 0)
+ok   iphone13: real drag rotates the dollhouse: az 36.7->-15.6, polar 50.61->43.19
+ok   iphone13: tour yaw unchanged by 3D drag (0 -> 0)
+ok   iphone13: real drag moves focus into the frame: t-3d-frame
+ok   iphone13: preset buttons: תלת-ממד:true מלמעלה:false מבחוץ:false
+ok   iphone13: real tap on preset "מלמעלה" changes preset 3d -> top
+ok   iphone13: Esc with focus in frame, no room selected (selected=null) closes layer in ONE press: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"living","yaw":0}
+ok   iphone13: after close: no inert left, focus back on 3D button: {"inert":[],"active":"t-3d-btn"}
+ok   iphone13: tour drag works after close: yaw 0 -> -29.99
+ok   iphone13: 3D button re-opens with real tap after close
+ok   iphone13: kitchen label found: {"x":204,"y":231}
+ok   iphone13: real tap on label selects kitchen: r-kitchen
+ok   iphone13: 1st Esc closes the sheet only (layer hidden=false, selected=null)
+ok   iphone13: 2nd Esc closes the layer: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"living","yaw":-32.78}
+ok   iphone13: sheet go button: {"x":114.6953125,"y":526,"t":"צפו ב-360°"}
+ok   iphone13: real tap on "go" moves tour to kitchen, layer closed, nothing inert: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   iphone13: real tap on x closes: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   iphone13: Esc with focus on x closes: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   iphone13: x15 open/Esc churn: nothing inert, {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   iphone13: no page/console errors 
+ok   pixel7: real tap on 3D button opens layer, focus on x: {"hidden":false,"active":"t-3d-close","inert":["pano","t-measure-svg","DIV","DIV","HEADER","SECTION","t-guide-card","t-measure-bar","t-tools","DIV","t-video","t-loading","t-error","t-sheet","t-change"],"layerInert":false,"rootInert":false,"scene":"living","yaw":0}
+ok   pixel7: inert on siblings only, not layer/root: ["pano","t-measure-svg","DIV","DIV","HEADER","SECTION","t-guide-card","t-measure-bar","t-tools","DIV","t-video","t-loading","t-error","t-sheet","t-change"]
+ok   pixel7: point where 3D btn was hits: layer
+ok   pixel7: taps on 5 tool positions: scene/layer unchanged (t-3d-btn,t-plan-btn,t-rotate,t-reset,t-full)
+ok   pixel7: Tab x8 stays in layer: t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,t-3d-frame,BODY,t-3d-close,t-3d-frame
+ok   pixel7: keyboard arrows do not move the tour behind (yaw 0 -> 0)
+ok   pixel7: real drag rotates the dollhouse: az 36.76->-2.06, polar 50.61->45.06
+ok   pixel7: tour yaw unchanged by 3D drag (0 -> 0)
+ok   pixel7: real drag moves focus into the frame: t-3d-frame
+ok   pixel7: preset buttons: תלת-ממד:true מלמעלה:false מבחוץ:false
+ok   pixel7: real tap on preset "מלמעלה" changes preset 3d -> top
+ok   pixel7: Esc with focus in frame, no room selected (selected=null) closes layer in ONE press: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"living","yaw":0}
+ok   pixel7: after close: no inert left, focus back on 3D button: {"inert":[],"active":"t-3d-btn"}
+ok   pixel7: tour drag works after close: yaw 0 -> -29.86
+ok   pixel7: 3D button re-opens with real tap after close
+ok   pixel7: kitchen label found: {"x":216,"y":313}
+ok   pixel7: real tap on label selects kitchen: r-kitchen
+ok   pixel7: 1st Esc closes the sheet only (layer hidden=false, selected=null)
+ok   pixel7: 2nd Esc closes the layer: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"living","yaw":-33.05}
+ok   pixel7: sheet go button: {"x":114.6953125,"y":701,"t":"צפו ב-360°"}
+ok   pixel7: real tap on "go" moves tour to kitchen, layer closed, nothing inert: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   pixel7: real tap on x closes: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   pixel7: Esc with focus on x closes: {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   pixel7: x15 open/Esc churn: nothing inert, {"hidden":true,"active":"t-3d-btn","inert":[],"layerInert":false,"rootInert":false,"scene":"kitchen","yaw":0}
+ok   pixel7: no page/console errors 

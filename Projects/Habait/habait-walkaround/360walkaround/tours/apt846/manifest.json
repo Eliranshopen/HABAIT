@@ -1,0 +1,1572 @@
+{
+  "schema": "render-manifest/0.1.0",
+  "tour_id": "apt846",
+  "points": {
+    "cp-living": {
+      "kind": "pano",
+      "point_id": "cp-living",
+      "room_id": "r-living",
+      "dir": "renders/cp-living",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 304678,
+          "sha256": "7c509f512edc5aa294f92e6a290c7596661090a8c6e353707c7db80be0f0c24b"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1042011,
+          "sha256": "4ef0f9a57f1d6a887ad08e69c09c51f2a036393468472df6c4d1871fd4cf0780"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1283.85
+        ],
+        "cycles_time": [
+          1274.7
+        ],
+        "depth_pack": 2.331
+      },
+      "memory": {
+        "device_peak_mb": 867.86,
+        "host_peak_mb": 6200.84,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "8191c2f0e36d031e4637b0b2b41a854c9b4bd1e223475bc22bbeb9c355355039",
+      "inputs": {
+        "point": "cp-living",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T12:46:31+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-kitchen": {
+      "kind": "pano",
+      "point_id": "cp-kitchen",
+      "room_id": "r-kitchen",
+      "dir": "renders/cp-kitchen",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 315710,
+          "sha256": "dff483cb8d33d84c20e66ca77e9a82a516ec214f142ca994a5f50aaadd01fffa"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1067474,
+          "sha256": "6e43f1869e6a1f0c782bda6d7683f25713b4d9a329921f33a659cd7b43b3e676"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1198.451
+        ],
+        "cycles_time": [
+          1189.56
+        ],
+        "depth_pack": 2.184
+      },
+      "memory": {
+        "device_peak_mb": 867.86,
+        "host_peak_mb": 6200.84,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "66db980d86c55d99388e7da2f6e12ff3e209b6e478e2248682c8ca08cee7fb89",
+      "inputs": {
+        "point": "cp-kitchen",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T11:41:48+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-bedroomMain": {
+      "kind": "pano",
+      "point_id": "cp-bedroomMain",
+      "room_id": "r-bedroom-main",
+      "dir": "renders/cp-bedroomMain",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 235868,
+          "sha256": "654bcbe822deaa1e232ac8c8eed9df86a362105495c3f66caa0260f3cb166494"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1251098,
+          "sha256": "70a5468efe881cfa4edde5c13e637a18f17c93a74aa9cd3c61fa8a6d7abdb2aa"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1513.232
+        ],
+        "cycles_time": [
+          1502.77
+        ],
+        "depth_pack": 2.758
+      },
+      "memory": {
+        "device_peak_mb": 867.86,
+        "host_peak_mb": 6200.84,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "92852835f471514be2362055d61af7f0f79d2a8a299a6dc24ac10dd3814ec019",
+      "inputs": {
+        "point": "cp-bedroomMain",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T13:39:59+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-entrance": {
+      "kind": "pano",
+      "point_id": "cp-entrance",
+      "room_id": "r-entrance",
+      "dir": "renders/cp-entrance",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 238046,
+          "sha256": "a184ccaee9d7bda842092994465e7be4c3ccceabdb7bf665f1c1c3108c792a5f"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1225580,
+          "sha256": "9fa8e6f6af2c5e1797315a595ad4ddd1f648d41bb473ff793a171155bef461a6"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1250.598
+        ],
+        "cycles_time": [
+          1238.03
+        ],
+        "depth_pack": 2.938
+      },
+      "memory": {
+        "device_peak_mb": 867.86,
+        "host_peak_mb": 6200.83,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "aa325725dcc4c6d2f37e65d6cd1bbd4a5a10d5d744e16b260a2fe03a2922ed1f",
+      "inputs": {
+        "point": "cp-entrance",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T11:21:28+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-dining": {
+      "kind": "pano",
+      "point_id": "cp-dining",
+      "room_id": "r-dining",
+      "dir": "renders/cp-dining",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 395046,
+          "sha256": "f2f864b6b46eac584e7d023678027179d9993c0044ae2cd57654a65d233b428a"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1020118,
+          "sha256": "3ef6ff548045f2cbcad4317e3a787fd4b76cbc0dd58ec09969a617a4fed4f8c4"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1319.009
+        ],
+        "cycles_time": [
+          1297.61
+        ],
+        "depth_pack": 5.894
+      },
+      "memory": {
+        "device_peak_mb": 867.86,
+        "host_peak_mb": 6200.84,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "59b7295fbbf709fef5f283c5decc5fd36a61c204fb2b00b8fb94fed0518f54d3",
+      "inputs": {
+        "point": "cp-dining",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T12:05:09+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-terraceLiving": {
+      "kind": "pano",
+      "point_id": "cp-terraceLiving",
+      "room_id": "r-terrace-living",
+      "dir": "renders/cp-terraceLiving",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 307984,
+          "sha256": "edff0b0a80e356c1898adc8348b08dc2f2f5cf8f3f48b1212ed646e860d2a378"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 934039,
+          "sha256": "6a3af955b049841ec88499ebb8133722c1973c67b3bee8c74f20153eb3697204"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1022.228
+        ],
+        "cycles_time": [
+          1013.18
+        ],
+        "depth_pack": 2.324
+      },
+      "memory": {
+        "device_peak_mb": 867.87,
+        "host_peak_mb": 6200.84,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "40efb0ac249f9007f46e5cbfb8654c20483f10ec8053df2a974eccf8cf11a8a6",
+      "inputs": {
+        "point": "cp-terraceLiving",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T12:24:18+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-terraceBedroom": {
+      "kind": "pano",
+      "point_id": "cp-terraceBedroom",
+      "room_id": "r-terrace-bedroom",
+      "dir": "renders/cp-terraceBedroom",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 350690,
+          "sha256": "e2c4dd2ba5916a7e64af8b6fa2ade13254191c3845b49bf52fb365fd65468274"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1311734,
+          "sha256": "fa779127ebee731b7f89ba2d696e57c030c8e8691c946ae7c8358d9dd452ab11"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1269.195
+        ],
+        "cycles_time": [
+          1260.02
+        ],
+        "depth_pack": 2.519
+      },
+      "memory": {
+        "device_peak_mb": 867.87,
+        "host_peak_mb": 6200.84,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "fba309bbe07d6f5c2c680af890670cbda88dd579c7e63813a392b8146da52a6b",
+      "inputs": {
+        "point": "cp-terraceBedroom",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T13:14:01+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-wardrobe": {
+      "kind": "pano",
+      "point_id": "cp-wardrobe",
+      "room_id": "r-wardrobe",
+      "dir": "renders/cp-wardrobe",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 210548,
+          "sha256": "86585aaddc6135c4b2984698beabb986a3dd766a68268250a31c28c40de1c91e"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1320754,
+          "sha256": "374bfce95a5a0926ccd0c8e461b171c64849cfc6441226402ba5067f71dde10b"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1380.898
+        ],
+        "cycles_time": [
+          1365.3
+        ],
+        "depth_pack": 4.249
+      },
+      "memory": {
+        "device_peak_mb": 867.86,
+        "host_peak_mb": 6200.84,
+        "post_render_peak_mb": 3360.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "d3f4ba3a2607acdae20f4cc7f29ffcc49242442437e7034ac5bf77742bb19316",
+      "inputs": {
+        "point": "cp-wardrobe",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.4.0",
+            "script_sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f",
+            "materials_kit_version": "0.3.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T11:00:26+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true,
+            "material_board": {
+              "mode": "auto",
+              "path": "Habait/tour360/apartments/apt846/material-board.json",
+              "sha256": "cb3b584cee84e4368ba07acfb5d730f526b9ca352766ca5be7eb4a376eb217ac",
+              "words": {
+                "room_surfaces": {
+                  "bathroom": "bathrooms",
+                  "balcony": "terrace"
+                },
+                "surfaces": {
+                  "floor": "large-format pale limestone-look porcelain floor tiles (120 by 120 cm, matte, light sand, thin grout lines) — Image 1 already draws this floor’s grout grid at its true places and spacing: keep every grout line exactly where it is, make the tiles follow that grid, and draw no other floor pattern",
+                  "bathrooms": "large pale stone-look tiles, a floating oak vanity, a round backlit mirror, matte black fittings, a frameless glass shower screen (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)",
+                  "terrace": "pale porcelain terrace tiles, a built-in planter with olive trees, a lounger and a low table (the floor’s grout grid is drawn in Image 1 at its true places: keep every grout line where it is)"
+                }
+              },
+              "version": "1.2.0"
+            }
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T14:11:01+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-bathMain": {
+      "kind": "pano",
+      "point_id": "cp-bathMain",
+      "room_id": "r-bath-main",
+      "dir": "renders/cp-bathMain",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 251100,
+          "sha256": "12817ca149aeaf4a4cb7759bf9118805b244a0afd4e16401b2d4d4d19ed9ebe2"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1183411,
+          "sha256": "0b1f1c0f301739c0d70eaa180cc3a8bfd0da2eb5f075ff67b712ca53ebc067db"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1147.914
+        ],
+        "cycles_time": [
+          1139.36
+        ],
+        "depth_pack": 2.288
+      },
+      "memory": {
+        "device_peak_mb": 916,
+        "host_peak_mb": 6248.75,
+        "post_render_peak_mb": 3408.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "da56d85e5fd33a5fe5b50744a00f9672dd6e64a9be58b5a83f10fa25385e2291",
+      "inputs": {
+        "point": "cp-bathMain",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.3.0",
+            "script_sha256": "a19f5879dfdec0ca4ae61f2b728f50acd56467680ba851c057e815f85a8f8429",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "ee451c6bfe2dcbd29ad7063fed02ead93efb294520581aa2e2ee776a8f9ab551",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T00:10:09+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T01:22:15+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-bedroom2": {
+      "kind": "pano",
+      "point_id": "cp-bedroom2",
+      "room_id": "r-bedroom-2",
+      "dir": "renders/cp-bedroom2",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 835332,
+          "sha256": "de4ca4aa49d443cbcbbb11fd8acf8621e434b1c11249f1f063d33f11927303d8"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1455017,
+          "sha256": "d07cda1a72a2037eaba93b12297fc6f96f5282d9fa1a4cd33f457aa84e455edc"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1233.598
+        ],
+        "cycles_time": [
+          1224.64
+        ],
+        "depth_pack": 2.684
+      },
+      "memory": {
+        "device_peak_mb": 916,
+        "host_peak_mb": 6248.75,
+        "post_render_peak_mb": 3408.67,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "03935a77e97470fd1d06c5b33f5b58fd122751325e18b0bb331ada1308721bb5",
+      "inputs": {
+        "point": "cp-bedroom2",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.3.0",
+            "script_sha256": "a19f5879dfdec0ca4ae61f2b728f50acd56467680ba851c057e815f85a8f8429",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "ee451c6bfe2dcbd29ad7063fed02ead93efb294520581aa2e2ee776a8f9ab551",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T00:10:09+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T01:43:06+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-bathguest": {
+      "kind": "pano",
+      "point_id": "cp-bathguest",
+      "room_id": "r-bath-guest",
+      "dir": "renders/cp-bathguest",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 353810,
+          "sha256": "d54477923e542c292fe5ff4d5022f91f8d952535f8bdb6db9df054ffb350aecc"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1396472,
+          "sha256": "a1d4ccef0fa1c8fdf4877337e5b502a8a7cf8f623dd4b1b7fc0d5986111bd278"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 128,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1352.324
+        ],
+        "cycles_time": [
+          1344.12
+        ],
+        "depth_pack": 2.372
+      },
+      "memory": {
+        "device_peak_mb": 915.99,
+        "host_peak_mb": 6248.74,
+        "post_render_peak_mb": 3408.66,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "f304bd5d1ef359b1943e19e53138c2ab165b076bca343a50bc50f2f6bbf67e50",
+      "inputs": {
+        "point": "cp-bathguest",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.3.0",
+            "script_sha256": "a19f5879dfdec0ca4ae61f2b728f50acd56467680ba851c057e815f85a8f8429",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.2.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "ee451c6bfe2dcbd29ad7063fed02ead93efb294520581aa2e2ee776a8f9ab551",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-10-29T00:10:09+00:00",
+            "plan_general_version": "0.2.0",
+            "plan_general_sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/tours/apt846/plan.json",
+            "plan_sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/.claude/worktrees/ui-ux-inspiration-research-288163/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 128,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.3.0",
+          "script_sha256": "13d695a96f8c864072c2a8e6747ce22c12460c047464c3c11440bf90159d1aa9",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-10-29T02:05:58+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    }
+  },
+  "depth_contract": {
+    "encoding": "rgb24-be",
+    "scale": 100,
+    "decode": "(R<<16 | G<<8 | B) / 100 => metres (radial distance from the camera origin)",
+    "invalid_value": 0
+  },
+  "plan_source": {
+    "copied_from": "Habait/tour360/apartments/apt846/plan.general.json",
+    "sha256": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+    "schema_version": "0.2.0-draft",
+    "copied_utc": "2026-10-28T20:06:44+00:00",
+    "note": "the main session owns the source file; re-copied 2026-10-28 22:05 local, the stable Q02b plan: 19 fixtures, cp-bedroomMain and cp-bedroom2 moved off the furniture",
+    "previous_sha256": "107a078d75d561f67bd7429bf6e86fc907c4349a53bde77906043bc6a70dd8e3"
+  },
+  "rights_state": "partner-supplied - a private pitch only until Israel Canada consents (D-WQ-18, OWED-658)",
+  "updated_utc": "2026-10-29T14:11:01+00:00",
+  "batches": [
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T02:25:16+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-bedroomMain"
+      ],
+      "seconds": 1137.29,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T02:48:13+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-terraceBedroom"
+      ],
+      "seconds": 1364.72,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T11:21:29+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-entrance"
+      ],
+      "seconds": 1279.7,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T11:41:48+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-kitchen"
+      ],
+      "seconds": 1208.2,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T12:05:10+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-dining"
+      ],
+      "seconds": 1335.59,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T12:24:19+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-terraceLiving"
+      ],
+      "seconds": 1030.09,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T12:46:32+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-living"
+      ],
+      "seconds": 1291.59,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T13:14:02+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-terraceBedroom"
+      ],
+      "seconds": 1277.59,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T13:40:00+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-bedroomMain"
+      ],
+      "seconds": 1522.47,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-10-29T14:11:03+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 128,
+      "wrap_pad": 512,
+      "points": [
+        "cp-wardrobe"
+      ],
+      "seconds": 1395.52,
+      "verdict": "PASS",
+      "cost_usd": 0
+    }
+  ]
+}

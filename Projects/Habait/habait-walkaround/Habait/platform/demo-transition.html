@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>Habait · מעבר 360 בתוך הדירה</title>
+<link rel="icon" href="data:,">
+<!-- card 13 (B5): living -> kitchen and living -> terrace on the depth mesh, cross-fade on arrival, plain fade under 15 fps.
+     Offline: every asset is local (three from node_modules, panoramas + depth from _local/transition, written by
+     `node test/transition.test.mjs --prep`). Serve the platform folder (serve.mjs or the test's own server) and open
+     /demo-transition.html; ?lang=en for English, ?force=fade to see the fallback. -->
+<link rel="stylesheet" href="css/transition.css">
+<script type="importmap">
+  { "imports": { "three": "./node_modules/three/build/three.module.js" } }
+</script>
+</head>
+<body class="t360-page">
+<div class="t360-stage" id="stage"><div class="t360-hs-layer" id="hs"></div></div>
+<header class="t360-top"><h1 id="title">דירה 846</h1><span class="room" id="room"></span></header>
+<footer class="t360-bottom">
+  <nav class="t360-chips" id="chips" aria-label="rooms"></nav>
+  <details class="t360-adv" id="adv">
+    <summary id="advTitle">הגדרות מתקדמות</summary>
+    <label><input type="checkbox" id="forceFade"> <span id="forceLbl">מעבר פשוט (fade) בלבד</span></label>
+    <span class="t360-stats" id="stats">–</span>
+  </details>
+  <p class="t360-legal" id="legal"></p>
+</footer>
+<script type="module">
+import { TransitionViewer } from './js/transition360.js';
+
+const q = new URLSearchParams(location.search);
+const lang = q.get('lang') === 'en' ? 'en' : 'he';
+const T = {
+  he: { title: 'דירה 846', adv: 'הגדרות מתקדמות', force: 'מעבר פשוט (fade) בלבד', err: 'חסרים קבצי ההדגמה. הריצו: node test/transition.test.mjs --prep',
+    legal: 'הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית מתכנית המכר של דירה 846, Rainbow תל אביב, מיום 15.10.2025. המסמכים המחייבים הם המפרט והתכניות החתומים. ריהוט, גימורים ונוף להמחשה.' },
+  en: { title: 'Apartment 846', adv: 'Advanced settings', force: 'Plain fade only', err: 'Demo assets missing. Run: node test/transition.test.mjs --prep',
+    legal: 'Illustration only. Generated with AI assistance from the sales plan of unit 846, Rainbow Tel Aviv, dated 15.10.2025. The binding documents are the signed specification and plans. Furniture, finishes and views are illustrative.' },
+}[lang];
+document.documentElement.lang = lang; document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+document.getElementById('title').textContent = T.title;
+document.getElementById('advTitle').textContent = T.adv;
+document.getElementById('forceLbl').textContent = T.force;
+document.getElementById('legal').textContent = T.legal;
+
+const MANIFEST = '_local/transition/apt846.json';
+const demo = (window.__demo = { ready: false, error: null });
+try {
+  const res = await fetch(MANIFEST);
+  if (!res.ok) throw new Error(T.err);
+  const manifest = await res.json();
+  const stage = document.getElementById('stage');
+  const viewer = new TransitionViewer(stage, { manifest, baseUrl: new URL(MANIFEST, location.href).href });
+  stage.insertBefore(viewer.tr.canvas, stage.firstChild);
+  demo.viewer = viewer;
+  const nameOf = (id) => (viewer.scenes[id].name && viewer.scenes[id].name[lang]) || id;
+  const hsLayer = document.getElementById('hs');
+  const chips = document.getElementById('chips');
+  let buttons = [];
+  function renderRoom() {
+    const id = viewer.view.scene;
+    document.getElementById('room').textContent = nameOf(id);
+    hsLayer.textContent = '';
+    buttons = viewer.scenes[id].hotspots.filter((h) => viewer.scenes[h.to]).map((h) => {
+      const b = document.createElement('button');
+      b.className = 't360-hs'; b.type = 'button'; b.dataset.to = h.to; b.textContent = nameOf(h.to);
+      b.addEventListener('click', () => go(h.to));
+      hsLayer.appendChild(b);
+      // the door on the panorama: scenes.json u/v -> plan bearing / pitch
+      return { b, bearing: viewer.scenes[id].bearing0 + (h.u - 0.5) * 360, pitch: (0.5 - h.v) * 180 };
+    });
+    chips.textContent = '';
+    for (const sid of Object.keys(viewer.scenes)) {
+      const c = document.createElement('button');
+      c.className = 't360-chip'; c.type = 'button'; c.textContent = nameOf(sid); c.dataset.scene = sid;
+      c.setAttribute('aria-current', String(sid === id));
+      c.addEventListener('click', () => go(sid));
+      chips.appendChild(c);
+    }
+    place();
+  }
+  function place() {
+    for (const { b, bearing, pitch } of buttons) {
+      const p = viewer.project(bearing, pitch);
+      b.hidden = !p || viewer.busy;
+      if (p) { b.style.left = p.x + 'px'; b.style.top = p.y + 'px'; }
+    }
+  }
+  viewer.onView = place;
+  async function go(to) {
+    for (const x of buttons) x.b.hidden = true;
+    const r = await viewer.goTo(to, { force: document.getElementById('forceFade').checked ? 'fade' : undefined });
+    if (r) document.getElementById('stats').textContent = `${r.mode} · ${r.fps.toFixed(1)} fps · ${r.frames} fr · ${r.ms.toFixed(0)} ms · yaw drift ${r.yawDriftDeg.toFixed(3)}° / ${r.arrivalDriftDeg.toFixed(3)}°`;
+    renderRoom();
+  }
+  demo.go = go;
+  if (q.get('force') === 'fade') document.getElementById('forceFade').checked = true;
+  const first = viewer.scenes[q.get('room')] ? q.get('room') : 'living';
+  // start facing the kitchen door (the demo's first move), so the parallax reads
+  const kh = viewer.scenes[first].hotspots.find((h) => h.to === 'kitchen');
+  await viewer.show(first, { yaw: kh ? (kh.u - 0.5) * 360 : 0, pitch: -5 });
+  renderRoom();
+  demo.renderRoom = renderRoom;
+  demo.ready = true;
+} catch (e) {
+  demo.error = String(e.message || e);
+  const d = document.createElement('div'); d.className = 't360-err'; d.textContent = demo.error; document.body.appendChild(d);
+}
+</script>
+</body>
+</html>

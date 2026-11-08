@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffcf9">
+<title>Habait · Projects</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f5c8f'/%3E%3Cpath d='M8 24 Q16 6 24 24' fill='none' stroke='%23f2a900' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/home.css">
+<script>
+  // Gate 1 preview only (platform-ui-ux card 11): ?theme=dark|light sets the theme for this view. Read from the URL, never stored.
+  (function () { var t = new URLSearchParams(location.search).get('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; })();
+</script>
+</head>
+<body class="hb-base page-home">
+<header class="home-header">
+  <div class="hb-container home-header__in">
+    <a class="home-brand" href="./" aria-label="Habait"><span class="home-brand__mark" aria-hidden="true"></span><span class="home-brand__name">Habait</span></a>
+    <button class="hb-btn hb-btn--ghost hb-btn--sm" id="langToggle" type="button" aria-label="English">EN</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="home-hero" aria-labelledby="heroTitle">
+    <div class="home-hero__media" id="heroMedia"></div>
+    <div class="hb-container home-hero__text">
+      <h1 class="hb-display" id="heroTitle" data-i18n="home.hero">סיור בבניין, לפני שהוא קם.</h1>
+      <p class="home-hero__sub" data-i18n="home.heroSub">טיסה סביב הפרויקט, בחירת דירה מתוך הטיסה, וכניסה פנימה.</p>
+      <p class="home-hero__cta"><a class="hb-btn hb-btn--primary" id="heroCta" href="#projects" hidden></a></p>
+    </div>
+  </section>
+
+  <section class="hb-container home-gallery" aria-labelledby="galleryTitle">
+    <h2 class="hb-h1" id="galleryTitle" data-i18n="home.projects">הפרויקטים</h2>
+    <ul class="home-grid" id="projects" aria-busy="true"><li class="home-skeleton" aria-hidden="true"></li></ul>
+    <div class="hb-empty" id="projectsEmpty" hidden>
+      <div class="hb-empty__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-7h6v7"/></svg></div>
+      <p class="hb-empty__title" data-i18n="home.emptyTitle">עוד אין פרויקטים להצגה</p>
+      <p class="hb-empty__text" data-i18n="home.emptyText"></p>
+      <button class="hb-btn hb-btn--secondary" type="button" id="retryBtn" data-i18n="home.emptyCta">לנסות שוב</button>
+    </div>
+  </section>
+</main>
+
+<footer class="home-foot">
+  <div class="hb-container home-foot__in">
+    <p class="hb-small" data-i18n="home.foot">Habait</p>
+    <!-- accessibility-statement link SLOT (root CLAUDE.md §6): its text and target are Eliran's. Empty for buyers until he writes them. -->
+    <p class="home-foot__a11y" id="a11ySlot"></p>
+    <p class="hb-small index-foot" data-i18n="index.foot">Habait · v0</p>
+  </div>
+</footer>
+
+<script type="module">
+  import { loadProjects, loadProjectMeta } from './js/config.js';
+  import { getLang, setLang, pick, applyI18n, t } from './js/i18n.js';
+  import { capture } from './js/analytics.js';
+  import { DEV } from './js/dev.js';
+  import { projectHref, extUrl } from './js/target.js';
+
+  const grid = document.getElementById('projects');
+  const empty = document.getElementById('projectsEmpty');
+  const toggle = document.getElementById('langToggle');
+  let projects = [];
+  // Development artefacts (fixture badge, backup-flow link, the v0 footer, the a11y TODO) show only on the laptop or with ?dev=1 (js/dev.js).
+  if (!DEV) document.querySelector('.index-foot')?.setAttribute('hidden', '');
+  if (DEV) document.getElementById('a11ySlot').innerHTML = '<span class="home-todo">TODO (dev only): accessibility-statement link — text and target are Eliran\'s (§6)</span>';
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const AI_BADGE = '<span class="hb-ai-badge">הדמיה · <bdi>AI-generated</bdi></span>';
+
+  // the card's target: js/target.js (shared with the landing's play button), unchanged from the v0 page
+  function targetOf(p) {
+    const ext = p.meta.exterior;
+    return { href: projectHref(p), alt: DEV && ext && ext.alt ? { href: extUrl(p, ext.alt), label: pick(ext.alt.label) } : null };
+  }
+  // status summary computed from the project's own units.json: total and "for-sale" (never hard-coded)
+  async function unitCounts(p) {
+    try {
+      const r = await fetch(`${p.dir}/${p.meta.units || 'units.json'}`, { cache: 'no-cache' });
+      const u = (await r.json()).units || [];
+      return { total: u.length, available: u.filter((x) => x.status === 'for-sale').length };
+    } catch { return null; }
+  }
+
+  function renderHero() {
+    const first = projects.find((p) => p.meta.cover);
+    const box = document.getElementById('heroMedia');
+    box.innerHTML = first ? `<img src="${esc(`${first.dir}/${first.meta.cover}`)}" alt="" fetchpriority="high">${AI_BADGE}` : '';
+    const cta = document.getElementById('heroCta');
+    cta.hidden = !projects.length;
+    if (projects.length === 1) { cta.href = targetOf(projects[0]).href; cta.textContent = t('home.cta'); cta.onclick = () => capture('project_open', { project: projects[0].id, from: 'index-hero' }); }
+    else { cta.href = '#projects'; cta.textContent = t('home.projects'); cta.onclick = null; }
+  }
+  function render() {
+    applyI18n(document);
+    document.querySelector('.hb-empty__text').textContent = t('home.emptyText');
+    toggle.textContent = getLang() === 'he' ? 'EN' : 'עב';
+    toggle.setAttribute('aria-label', getLang() === 'he' ? 'English' : 'עברית');
+    grid.innerHTML = projects.map((p) => {
+      const { href, alt } = targetOf(p);
+      const cover = p.meta.cover ? `${p.dir}/${p.meta.cover}` : '';
+      const c = p.counts;
+      const count = (key, n) => (n === 1 ? t(`${key}1`) : t(key, { n: `<bdi>${n}</bdi>` }));
+      const summary = c && c.total ? `${count('home.units', c.total)} · ${count('home.available', c.available)}` : '';
+      return `<li><article class="hb-media-card home-card" style="--media-ratio: 16 / 10">
+        <div class="hb-media-card__media">${cover ? `<img src="${esc(cover)}" alt="" loading="lazy">` : ''}<span class="hb-media-card__badge">${AI_BADGE}</span>
+          ${p.meta.brand?.logo ? `<span class="hb-media-card__mark"><img src="${esc(`${p.dir}/${p.meta.brand.logo}`)}" alt="${esc(pick(p.meta.developer) || '')}"></span>` : ''}</div>
+        <div class="hb-media-card__body">
+          <h3 class="hb-media-card__title"><a class="home-card__link" href="${esc(href)}" data-project="${esc(p.id)}"><bdi>${esc(pick(p.meta.name))}</bdi></a></h3>
+          <p class="hb-media-card__meta">${esc(pick(p.meta.tagline) || '')}</p>
+          ${summary ? `<p class="home-card__status">${summary}</p>` : ''}
+          <div class="home-card__foot"><span class="hb-btn hb-btn--primary" aria-hidden="true">${t('home.cta')}</span>
+            ${alt ? `<a class="home-card__alt hb-link" href="${esc(alt.href)}">${esc(alt.label)}</a>` : ''}
+            ${DEV && p.meta.fixture ? `<span class="hb-chip hb-chip--reserved">${t('index.fixture')}</span>` : ''}</div>
+        </div></article></li>`;
+    }).join('');
+    renderHero();
+    grid.querySelectorAll('.home-card__link').forEach((a) => a.addEventListener('click', () => capture('project_open', { project: a.dataset.project, from: 'index' })));
+    grid.hidden = !projects.length; empty.hidden = projects.length > 0;
+    grid.setAttribute('aria-busy', 'false');
+  }
+
+  async function load() {
+    try {
+      const list = await loadProjects();
+      projects = await Promise.all(list.map(async (p) => { const meta = await loadProjectMeta(p.dir); const q = { ...p, meta }; q.counts = await unitCounts(q); return q; }));
+    } catch (e) {
+      console.error(e); projects = [];
+    }
+    renderHero(); render();
+  }
+  toggle.addEventListener('click', () => { setLang(getLang() === 'he' ? 'en' : 'he'); render(); });
+  document.getElementById('retryBtn').addEventListener('click', load);
+  setLang(getLang());
+  load();
+</script>
+</body>
+</html>

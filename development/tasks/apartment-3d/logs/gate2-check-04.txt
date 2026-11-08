@@ -1,0 +1,52 @@
+card 04 check 2026-11-03T14:59:11.420Z
+PASS 47 · FAIL 0
+
+ok   iphone13: ?tab=3d#tour opens 3d
+ok   iphone13: 3D frame 115..576 above the bar at 598
+ok   iphone13: no sideways scroll (390 vs 390)
+ok   iphone13: full legal short text unchanged inside the 3D
+ok   iphone13: "view in 360" switches to the tour tab
+ok   iphone13: the tour opened at room=living (http://127.0.0.1:8848/?scope=apartment&room=living&floor=parquet&video=0&return=http%3A%2F…)
+ok   iphone13: "back to 3D" is visible
+ok   iphone13: the tour reports scene living
+ok   iphone13: back returns to the 3D tab
+ok   iphone13: the 3D kept its selection
+ok   iphone13: loaded tour went to kitchen by habait:goto ({"s":"kitchen","g":1})
+ok   iphone13: #3d opens 3d
+ok   iphone13: fixture badge shown on 127.0.0.1
+ok   iphone13: fixture badge hidden on a public host
+ok   iphone13: fixture badge shown with ?dev=1
+ok   iphone13: no page errors 
+ok   pixel7: ?tab=3d#tour opens 3d
+ok   pixel7: 3D frame 115..751 above the bar at 773
+ok   pixel7: no sideways scroll (412 vs 412)
+ok   pixel7: full legal short text unchanged inside the 3D
+ok   pixel7: "view in 360" switches to the tour tab
+ok   pixel7: the tour opened at room=living (http://127.0.0.1:8848/?scope=apartment&room=living&floor=parquet&video=0&return=http%3A%2F…)
+ok   pixel7: "back to 3D" is visible
+ok   pixel7: the tour reports scene living
+ok   pixel7: back returns to the 3D tab
+ok   pixel7: the 3D kept its selection
+ok   pixel7: loaded tour went to kitchen by habait:goto ({"s":"kitchen","g":1})
+ok   pixel7: #3d opens 3d
+ok   pixel7: fixture badge shown on 127.0.0.1
+ok   pixel7: fixture badge hidden on a public host
+ok   pixel7: fixture badge shown with ?dev=1
+ok   pixel7: no page errors 
+ok   desktop: ?tab=3d#tour opens 3d
+ok   desktop: no sideways scroll (1440 vs 1440)
+ok   desktop: full legal short text unchanged inside the 3D
+ok   desktop: "view in 360" switches to the tour tab
+ok   desktop: the tour opened at room=living (http://127.0.0.1:8848/?scope=apartment&room=living&floor=parquet&video=0&return=http%3A%2F…)
+ok   desktop: "back to 3D" is visible
+ok   desktop: the tour reports scene living
+ok   desktop: back returns to the 3D tab
+ok   desktop: the 3D kept its selection
+ok   desktop: loaded tour went to kitchen by habait:goto ({"s":"kitchen","g":1})
+ok   desktop: #3d opens 3d
+ok   desktop: fixture badge shown on 127.0.0.1
+ok   desktop: fixture badge hidden on a public host
+ok   desktop: fixture badge shown with ?dev=1
+ok   desktop: no page errors 
+
+EXIT 0

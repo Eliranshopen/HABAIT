@@ -1,0 +1,8 @@
+ok   desktop R1 close+reopen during dive: tour stays living, layer still open (no stale enter-room): {"scene":"living","hidden":false,"op":"","inert":15,"load":true}
+ok   desktop R1b a new dive after the reopen still enters the room: {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop R1 errs: 
+ok   desktop R2a plain enter-room while open: goes + closes: {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop R2b enter-room while closed: ignored: {"scene":"kitchen","hidden":true,"op":"","inert":0,"load":true}
+ok   desktop R3 apartment-style embed (no 3d-hide ever): enter-room posted, dove false: ["habait:3d-ready::undefined","habait:enter-room:kitchen:false"]
+ok   desktop R3b after a 3d-hide, a LATER click still posts enter-room: ["habait:enter-room:kitchen:false"]
+ok   desktop R4 Esc in frame during dive (<=2 presses): closed and no ghost navigation: {"scene":"living","hidden":true,"op":"","inert":0,"load":true} closedWithin2=true

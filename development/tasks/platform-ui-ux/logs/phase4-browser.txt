@@ -1,0 +1,27 @@
+ok   index lists the rainbow project in Hebrew RTL
+ok   language toggle flips to English LTR
+ok   start overlay shows the project, start tap begins the approach video
+ok   time-based hotspot: 846 appears on approach only after t=5
+ok   segments chain approach -> orbit (still) -> hold-facade (loop)
+ok   drag rotates the view and markers follow
+ok   click 846 -> card with price/status/facts and WhatsApp link
+ok   lead form submits (stubbed, no webhook) and fires lead events
+ok   continue -> descend-846 (video) -> enter-846 (still) -> hand-off overlay
+ok   no page errors during the flow
+ok   desktop English: drawer lists 12 units by floor, picking one opens its card
+ok   invented unit falls back to the placeholder descend and still reaches hand-off
+ok   no page errors (desktop)
+ok   picker (cross-origin, phone): 12 pills from units.json, :8850 CSS applied, visible=false hides one
+ok   picker chrome: title, status legend, hint, units button, legal line (Hebrew RTL)
+ok   picker: hover sends unit_hover once; select('846') highlights the pill and opens the card
+ok   picker: apartment page link fires unit_click {channel: apartment_page}; lead form goes through the passed analytics
+ok   picker: "continue" fires onEnter(846) + unit_enter and closes the card
+ok   picker: drawer grouped by floor, a row selects (card opens) without calling onEnter
+ok   picker (card 24): a drawer pick on another floor sends floor_switch {floor, prev}
+ok   picker (card 24): favorite toggle (on/off, kept on the device); WhatsApp has no viewed: line by default
+ok   picker: setLang('en') relabels pills, card, drawer and chrome and flips dir
+ok   picker: close() closes card + drawer; destroy() removes its DOM
+ok   picker (habait-98 fix): three desktop pills 120 px apart stay compact across frames (no compact/full flicker)
+ok   no page errors (picker standalone)
+
+all green; screenshots in C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/6683ba3a-fb19-404a-b004-9f31015522b3/scratchpad/gate2/shots-br2

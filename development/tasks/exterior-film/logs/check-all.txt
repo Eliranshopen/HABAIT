@@ -1,0 +1,78 @@
+desktop   PASS  A1 platform link leads to /hold/
+desktop   PASS  B1 button shown at the hold after the clip
+desktop   PASS  B2 label + ≥44 px + on top + in view
+desktop   PASS  C1 overlay opens: no tour iframe, same URL, the film for this width
+desktop   PASS  C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)
+desktop   PASS  C3 AI badge "הדמיה · AI-generated" + the approved legal text (= #clipLegal, byte-equal) visible on the film
+desktop   PASS  C4 ✕ visible, on top, ≥44 px, in view; the button hidden
+desktop   PASS  C5 at the end: enter 846 / again / back, each ≥44 px and in view
+desktop   PASS  C6 "צפייה חוזרת" restarts the film
+desktop   PASS  C7 "חזרה לבחירת דירה" closes the film
+desktop   PASS  D1 ✕ → film hidden + paused, button back + focused, hold loop running
+desktop   PASS  D2 Esc closes
+desktop   PASS  D3 open/close ×3 leaves the film closed, button back, no iframe
+desktop   PASS  E1 button hidden during the descent clip
+desktop   PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+desktop   PASS  E3 button not over the apartment tour
+desktop   PASS  F1 "כניסה לדירה 846" → the apartment tour (scope=apartment)
+desktop   PASS  Z1 zero page errors
+desktop   PASS  Z2 zero 4xx/5xx
+iphone13  PASS  A1 platform link leads to /hold/
+iphone13  PASS  B1 button shown at the hold after the clip
+iphone13  PASS  B2 label + ≥44 px + on top + in view
+iphone13  PASS  C1 overlay opens: no tour iframe, same URL, the film for this width
+iphone13  PASS  C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)
+iphone13  PASS  C3 AI badge "הדמיה · AI-generated" + the approved legal text (= #clipLegal, byte-equal) visible on the film
+iphone13  PASS  C4 ✕ visible, on top, ≥44 px, in view; the button hidden
+iphone13  PASS  C5 at the end: enter 846 / again / back, each ≥44 px and in view
+iphone13  PASS  C6 "צפייה חוזרת" restarts the film
+iphone13  PASS  C7 "חזרה לבחירת דירה" closes the film
+iphone13  PASS  D1 ✕ → film hidden + paused, button back + focused, hold loop running
+iphone13  PASS  D2 Esc closes
+iphone13  PASS  D3 open/close ×3 leaves the film closed, button back, no iframe
+iphone13  PASS  E1 button hidden during the descent clip
+iphone13  PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+iphone13  PASS  E3 button not over the apartment tour
+iphone13  FAIL  Z run completed  "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#buildingBtn')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"buildingBtn\">הדמיית הבניין והסביבה</button>\u001b[22"
+iphone13  PASS  Z1 zero page errors
+iphone13  PASS  Z2 zero 4xx/5xx
+pixel7    PASS  A1 platform link leads to /hold/
+pixel7    PASS  B1 button shown at the hold after the clip
+pixel7    PASS  B2 label + ≥44 px + on top + in view
+pixel7    PASS  C1 overlay opens: no tour iframe, same URL, the film for this width
+pixel7    PASS  C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)
+pixel7    PASS  C3 AI badge "הדמיה · AI-generated" + the approved legal text (= #clipLegal, byte-equal) visible on the film
+pixel7    PASS  C4 ✕ visible, on top, ≥44 px, in view; the button hidden
+pixel7    PASS  C5 at the end: enter 846 / again / back, each ≥44 px and in view
+pixel7    PASS  C6 "צפייה חוזרת" restarts the film
+pixel7    PASS  C7 "חזרה לבחירת דירה" closes the film
+pixel7    PASS  D1 ✕ → film hidden + paused, button back + focused, hold loop running
+pixel7    PASS  D2 Esc closes
+pixel7    PASS  D3 open/close ×3 leaves the film closed, button back, no iframe
+pixel7    PASS  E1 button hidden during the descent clip
+pixel7    PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+pixel7    PASS  E3 button not over the apartment tour
+pixel7    PASS  F1 "כניסה לדירה 846" → the apartment tour (scope=apartment)
+pixel7    PASS  Z1 zero page errors
+pixel7    PASS  Z2 zero 4xx/5xx
+tablet    PASS  A1 platform link leads to /hold/
+tablet    PASS  B1 button shown at the hold after the clip
+tablet    PASS  B2 label + ≥44 px + on top + in view
+tablet    PASS  C1 overlay opens: no tour iframe, same URL, the film for this width
+tablet    PASS  C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)
+tablet    PASS  C3 AI badge "הדמיה · AI-generated" + the approved legal text (= #clipLegal, byte-equal) visible on the film
+tablet    PASS  C4 ✕ visible, on top, ≥44 px, in view; the button hidden
+tablet    PASS  C5 at the end: enter 846 / again / back, each ≥44 px and in view
+tablet    PASS  C6 "צפייה חוזרת" restarts the film
+tablet    PASS  C7 "חזרה לבחירת דירה" closes the film
+tablet    PASS  D1 ✕ → film hidden + paused, button back + focused, hold loop running
+tablet    PASS  D2 Esc closes
+tablet    PASS  D3 open/close ×3 leaves the film closed, button back, no iframe
+tablet    PASS  E1 button hidden during the descent clip
+tablet    PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+tablet    PASS  E3 button not over the apartment tour
+tablet    PASS  F1 "כניסה לדירה 846" → the apartment tour (scope=apartment)
+tablet    PASS  Z1 zero page errors
+tablet    PASS  Z2 zero 4xx/5xx
+
+75/76 PASS · 1 FAIL · base http://127.0.0.1:8858

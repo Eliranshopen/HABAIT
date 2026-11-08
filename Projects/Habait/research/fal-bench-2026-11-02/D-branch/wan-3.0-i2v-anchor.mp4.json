@@ -1,0 +1,30 @@
+{
+ "endpoint": "alibaba/wan-3.0/image-to-video",
+ "args": {
+  "start_image_url": "https://v3b.fal.media/files/b/0ab0d46c/bTfUNCrQPIGoN8eXzOWu7_D_anchor_f193.png",
+  "end_image_url": "https://v3b.fal.media/files/b/0ab0d46d/1KX6rn5WG1lFJ7-npxM39_D_end_f409.png",
+  "prompt": "One continuous shot: from a terrace on the 16th floor of a modern tower in Tel Aviv the camera glides forward through the open glass slider into a bright living room (pale oak parquet, cream boucle sofa, travertine table, jute rug, sand-grey kitchen, cream flush doors) and moves across the room toward the door. Steady smooth camera, photoreal, morning light, no cuts, no people, no text.",
+  "resolution": "720p",
+  "duration": 10,
+  "audio": false,
+  "enable_prompt_expansion": false,
+  "aspect_ratio": "16:9"
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0d488/85iw7CnlrkYFGt7doRdaK_yrSSOMqE.mp4",
+   "content_type": "video/mp4",
+   "file_name": "85iw7CnlrkYFGt7doRdaK_yrSSOMqE.mp4",
+   "file_size": 12095648,
+   "width": 1280,
+   "height": 720,
+   "fps": 30.0,
+   "duration": 10.0,
+   "num_frames": 300
+  },
+  "seed": 508031082,
+  "duration": 10.0,
+  "actual_prompt": null
+ },
+ "secs": 272
+}

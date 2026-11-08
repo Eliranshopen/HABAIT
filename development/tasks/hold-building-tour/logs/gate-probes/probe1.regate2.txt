@@ -1,0 +1,12 @@
+base 6 {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS P1 dblclick -> exactly one frame, open {"frames":1,"btn":"none","close":"block","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS P1b close -> one frame gone, loop rate same as before (no double loop) {"r0":6,"r1":6,"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}}
+PASS P1c errors []
+PASS P2 open+close same tick: no frame, loop alive, btn shown {"s":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"r0":5,"r1":7}
+PASS P2b open, 50ms, close: loop alive {"s2":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"r2":25}
+FAIL P2c close from inside the load event: single loop {"r0":5,"r3":36,"s3":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}}
+sound before {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS P3a open: ambience paused {"frames":1,"btn":"none","close":"block","ambPaused":true,"vol":0,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS P3b close: ambience back as before {"s0":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"},"sBack":{"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}}
+PASS P3c close within the 600ms fade: ambience still playing, icon consistent {"frames":0,"btn":"block","close":"none","ambPaused":false,"vol":0.6,"sound":"{\"on\":true,\"blocked\":false}","icon":"🔊"}
+PASS P3d muted by user stays muted after open/close {"sOff":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"},"sOff2":{"frames":0,"btn":"block","close":"none","ambPaused":true,"vol":0.6,"sound":"{\"on\":false,\"blocked\":false,\"userOff\":true}","icon":"🔇"}}

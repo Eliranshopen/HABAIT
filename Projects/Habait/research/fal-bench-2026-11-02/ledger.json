@@ -1,0 +1,165 @@
+[
+ {
+  "at": "2026-11-02T15:37:02",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 3.3,
+  "note": "habait-ab orbit v2v, Eliran approved $4 13:30",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/flyover/orbit/orbit_real.mp4",
+  "secs": 251
+ },
+ {
+  "at": "2026-11-02T19:12:17",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 0.0,
+  "note": "habait-ba hold arc v2v 7 s (Eliran approved up to $5, 20:50)",
+  "out": "flyover3d/data/holdarc/arc_real.mp4",
+  "error": "fal generation_timeout (job died on fal's side after >75 min; no output). Failed requests are not billed by fal — the $1.50 estimate removed; verify on the fal balance page before the next spend",
+  "secs": 1801
+ },
+ {
+  "at": "2026-11-03T05:45:10",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 1.5,
+  "note": "habait-ba hold arc v2v 7 s, RETRY after fal generation_timeout (Eliran approved up to $5)",
+  "out": "flyover3d/data/holdarc/arc_real.mp4",
+  "secs": 97
+ },
+ {
+  "at": "2026-11-03T07:18:26",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 1.97,
+  "note": "habait-ba hold arc v2v 7 s at 1080p for large screens (within Eliran's $5 approval: 1.50 spent + 1.97)",
+  "out": "flyover3d/data/holdarc/arc_real_1080.mp4",
+  "secs": 164
+ },
+ {
+  "at": "2026-11-03T08:07:36",
+  "endpoint": "bytedance/seedream/v5/pro/text-to-image",
+  "usd": 0.07,
+  "note": "habait-ba guided-tour presenter portrait (Eliran 3.11: yes to a talking figure; one-room test first)",
+  "out": "../../habait-walkaround/Habait/tour360/apartments/apt846/guide/presenter/presenter.png",
+  "secs": 27
+ },
+ {
+  "at": "2026-11-03T08:13:26",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 0.0,
+  "note": "habait-ba talking presenter, ONE-ROOM TEST (living, Hebrew narration; Eliran 3.11 'כן דמות מדברת')",
+  "out": "../../habait-walkaround/Habait/tour360/apartments/apt846/guide/he/04-living.mp4",
+  "error": "validation error (resolution must be '768P'), rejected before generation — not billed",
+  "secs": 1
+ },
+ {
+  "at": "2026-11-03T08:15:28",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 1.8,
+  "note": "habait-ba talking presenter, ONE-ROOM TEST (living, Hebrew narration 18.8 s, 768P; Eliran 3.11 'כן דמות מדברת')",
+  "out": "../../habait-walkaround/Habait/tour360/apartments/apt846/guide/he/04-living.mp4",
+  "secs": 64
+ },
+ {
+  "at": "2026-11-03T08:35:38",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 1.32,
+  "note": "habait-ba hold PAN 360 v2v 7 s 720p (Eliran 3.11: rotation + zoom-out must stay on the same rendering; within the $5 Kling approval)",
+  "out": "flyover3d/data/holdpan/pan_real.mp4",
+  "secs": 103
+ },
+ {
+  "at": "2026-11-03T08:54:03",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 2.65,
+  "note": "habait-ba talking presenter 01-entrance (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/01-entrance.mp4",
+  "secs": 72
+ },
+ {
+  "at": "2026-11-03T08:54:41",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 1.05,
+  "note": "habait-ba talking presenter 02-kitchen (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/02-kitchen.mp4",
+  "secs": 30
+ },
+ {
+  "at": "2026-11-03T09:27:37",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 0.0,
+  "note": "habait-ba talking presenter 03-dining (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/03-dining.mp4",
+  "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing. — not billed (account locked before generation)",
+  "secs": 1
+ },
+ {
+  "at": "2026-11-03T09:29:13",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 1.93,
+  "note": "habait-ba talking presenter 05-terrace-living (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/05-terrace-living.mp4",
+  "secs": 84
+ },
+ {
+  "at": "2026-11-03T09:29:45",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 0.94,
+  "note": "habait-ba talking presenter 06-terrace-bedroom (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/06-terrace-bedroom.mp4",
+  "secs": 22
+ },
+ {
+  "at": "2026-11-03T09:29:59",
+  "endpoint": "kling/v4/video-to-video/edit",
+  "usd": 1.88,
+  "note": "habait-ba hold RING: full 360 orbit v2v 10 s 720p (Eliran approved 3.11 12:30, ≈$2)",
+  "out": "flyover3d/data/holdring/ring_real.mp4",
+  "secs": 130
+ },
+ {
+  "at": "2026-11-03T09:30:13",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 1.01,
+  "note": "habait-ba talking presenter 07-bedroom-main (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/07-bedroom-main.mp4",
+  "secs": 22
+ },
+ {
+  "at": "2026-11-03T09:30:36",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 0.78,
+  "note": "habait-ba talking presenter 08-wardrobe (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/08-wardrobe.mp4",
+  "secs": 18
+ },
+ {
+  "at": "2026-11-03T09:31:04",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 0.88,
+  "note": "habait-ba talking presenter 09-bath-main (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/09-bath-main.mp4",
+  "secs": 22
+ },
+ {
+  "at": "2026-11-03T09:31:27",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 0.68,
+  "note": "habait-ba talking presenter 10-bedroom-2 (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/10-bedroom-2.mp4",
+  "secs": 18
+ },
+ {
+  "at": "2026-11-03T09:32:36",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 1.62,
+  "note": "habait-ba talking presenter 11-bath-guest (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/11-bath-guest.mp4",
+  "secs": 63
+ },
+ {
+  "at": "2026-11-03T09:34:43",
+  "endpoint": "minimax/h3-max/lip-sync/image-to-video",
+  "usd": 0.98,
+  "note": "habait-ba talking presenter 03-dining (all rooms, Eliran 3.11 approved ≈$14)",
+  "out": "C:/RnD/Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/guide/he/03-dining.mp4",
+  "secs": 26
+ }
+]

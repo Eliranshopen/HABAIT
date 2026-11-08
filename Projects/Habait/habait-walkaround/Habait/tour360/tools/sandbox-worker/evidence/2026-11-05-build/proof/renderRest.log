@@ -1,0 +1,58 @@
+render_tour.mjs v0.1.0  tour=360walkaround/tours/pbuild846  mode=draft 1024x512@16spp  wrap-pad=512  points=8
+          golden depth fixture: golden: 32/32 pixels match; unknown-encoding refused: true | OK
+          scene: CLEAN — plan.json + the style lock + the material board + the generator scripts hash the same as the scene report (built 2026-11-05T13:08:23+00:00, checks 196/196)
+
+=== chunk 1/1: 8 point(s) ====================
+render_tour.mjs v0.1.0  tour=360walkaround/tours/pbuild846  mode=draft 1024x512@16spp  wrap-pad=512  points=8
+          golden depth fixture: golden: 32/32 pixels match; unknown-encoding refused: true | OK
+          scene: CLEAN — plan.json + the style lock + the material board + the generator scripts hash the same as the scene report (built 2026-11-05T13:08:23+00:00, checks 196/196)
+
+=== chunk 1/1: 8 point(s) ====================
+          === [1/8] cp-living =======================================
+          SKIP      cp-living: manifest input_key matches and outputs exist
+          === [2/8] cp-terraceLiving ================================
+          SKIP      cp-terraceLiving: manifest input_key matches and outputs exist
+          === [3/8] cp-terraceBedroom ===============================
+          SKIP      cp-terraceBedroom: manifest input_key matches and outputs exist
+          === [4/8] cp-bedroomMain ==================================
+          SKIP      cp-bedroomMain: manifest input_key matches and outputs exist
+          === [5/8] cp-wardrobe =====================================
+          SKIP      cp-wardrobe: manifest input_key matches and outputs exist
+          === [6/8] cp-bathMain =====================================
+          [render_pano] point      : cp-bathMain  plan (285.1,1255.8,160) yaw 164
+          [render_pano] wrap pad   : 512 px each side  -> rendered 2048x512 over -360.0000..360.0000 deg, cropped back
+          [render_pano] render 1/1: 120.634 s wall  (cycles 120.17s, device peak 1025.03 MB, host peak 1235.57 MB)
+          [render_pano] depth      : depth.png 58,962 B  valid 524,288 / 524,288  sky 0  range 0.413..2.281 m  (0.087 s)
+          [render_pano] depth check: 2/3 within 2.0 cm, worst 2.00 cm  [report]
+          [render_pano] pano       : pano.webp 1024x512 11,204 B  zenith mean 187.5/255 (3 colours) · nadir mean 135.5/255 (15 colours) · no_hole=True
+          REPORT    1 depth check(s) outside 2.0 cm: ['nadir (floor)']  (--check-mode report: not a failure)
+          OK
+          === [7/8] cp-bedroom2 =====================================
+          [render_pano] point      : cp-bedroom2  plan (633.6,424.7,160) yaw 38
+          [render_pano] wrap pad   : 512 px each side  -> rendered 2048x512 over -360.0000..360.0000 deg, cropped back
+          [render_pano] render 1/1: 88.899 s wall  (cycles 88.65s, device peak 1025.03 MB, host peak 1235.57 MB)
+          [render_pano] depth      : depth.png 67,888 B  valid 524,288 / 524,288  sky 0  range 0.365..3.495 m  (0.074 s)
+          [render_pano] depth check: 2/3 within 2.0 cm, worst 2.00 cm  [report]
+          [render_pano] pano       : pano.webp 1024x512 16,576 B  zenith mean 166.3/255 (5 colours) · nadir mean 163.7/255 (48 colours) · no_hole=True
+          REPORT    1 depth check(s) outside 2.0 cm: ['nadir (floor)']  (--check-mode report: not a failure)
+          OK
+          === [8/8] cp-bathGuest ====================================
+          [render_pano] point      : cp-bathGuest  plan (427,572.3,160) yaw 140
+          [render_pano] wrap pad   : 512 px each side  -> rendered 2048x512 over -360.0000..360.0000 deg, cropped back
+          [render_pano] render 1/1: 96.450 s wall  (cycles 96.22s, device peak 1025.03 MB, host peak 1235.57 MB)
+          [render_pano] depth      : depth.png 67,310 B  valid 524,288 / 524,288  sky 0  range 0.502..2.384 m  (0.072 s)
+          [render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+          [render_pano] pano       : pano.webp 1024x512 14,778 B  zenith mean 191.5/255 (5 colours) · nadir mean 184.6/255 (9 colours) · no_hole=True
+          OK
+
+=== summary =================================================
+  OK   cp-living           SKIPPED  nadir 1.6 m (0 cm)  valid 100.00%  21 KB
+  OK   cp-terraceLiving    SKIPPED  nadir 1.6 m (0 cm)  valid 86.37%  33 KB
+  OK   cp-terraceBedroom    SKIPPED  nadir 1.6 m (0 cm)  valid 63.73%  15 KB
+  OK   cp-bedroomMain      SKIPPED  nadir 1.6 m (0 cm)  valid 99.56%  14 KB
+  OK   cp-wardrobe         SKIPPED  nadir 1.6 m (0 cm)  valid 99.76%  15 KB
+  OK   cp-bathMain         120.6 s  nadir 1.58 m (-2 cm)  valid 100.00%  11 KB
+  OK   cp-bedroom2          88.9 s  nadir 1.58 m (-2 cm)  valid 100.00%  16 KB
+  OK   cp-bathGuest         96.5 s  nadir 1.6 m (0 cm)  valid 100.00%  14 KB
+  total 312.1 s · 3 rendered, 5 skipped · $0.00 · verdict PASS
+OK

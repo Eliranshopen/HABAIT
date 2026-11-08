@@ -1,0 +1,39 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Tuesday, November 3, 2026 12:14:48 PM
+   Source : C:\Habait\
+     Dest : C:\RnD\Projects\Habait\
+
+    Files : *.*
+	    
+Exc Files : *.pyc
+	    
+ Exc Dirs : node_modules
+	    __pycache__
+	    .cache
+	    worktrees
+	    C:\Habait\tools\habait-venv
+	    C:\Habait\tools\ghidra_12.1.4_PUBLIC
+	    C:\Habait\tools\downloads\blender
+	    
+  Options : *.* /NDL /NFL /S /E /DCOPY:DAT /COPY:DAT /NP /XJ /R:2 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :      1965      1881        84         0         0         0
+   Files :     29552     29552         0         0         0         0
+   Bytes :  30.401 g  30.401 g         0         0         0         0
+   Times :   0:04:25   0:04:19                       0:00:00   0:00:06
+
+
+   Speed :           125,967,451 Bytes/sec.
+   Speed :             7,207.916 MegaBytes/min.
+   Ended : Tuesday, November 3, 2026 12:19:13 PM
+

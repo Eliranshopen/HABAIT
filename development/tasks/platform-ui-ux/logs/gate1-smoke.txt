@@ -1,0 +1,22 @@
+ok   fixture rainbow validates
+ok   schema rejects a bad status / missing field / unknown next
+ok   cross-check catches a dangling reference
+ok   lead: WhatsApp link pattern
+[lead] no webhook configured; lead = {
+  unit: '846',
+  units_viewed: [],
+  src: 'direct',
+  session_id: '787b8d88-4577-4509-b6f9-d9ad02dd265a',
+  ts: '2026-11-03T15:36:56.000Z'
+}
+ok   lead: submit with no webhook is a stub; with webhook POSTs JSON
+ok   analytics: capture without a key logs and buffers
+ok   picker: module loads in node and exports createPicker
+ok   server: index, flow, three.js module, json
+ok   server: CORS * on .js/.css/.json (habait-89 imports js/picker.js from another origin)
+ok   server: Range -> 206 with Content-Range
+ok   server: 404 and traversal
+ok   server: events sink mounted (card 24): announced, Origin required, empty batch writes nothing
+
+all green
+EXIT 0

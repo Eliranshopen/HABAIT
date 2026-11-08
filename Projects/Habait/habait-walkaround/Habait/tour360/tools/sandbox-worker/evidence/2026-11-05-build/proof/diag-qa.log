@@ -1,0 +1,5 @@
+PASS  1440 /p/pbuild846/landing.html?project=pbuild846
+PASS  390  /p/pbuild846/landing.html?project=pbuild846
+FAIL  1440 /p/pbuild846/tour/?room=living  — overflow button.t-card «כניסה אל חדר רחצה הורים» (a control cut by the edge) -110..40 (viewport 0..1440)
+FAIL  390  /p/pbuild846/tour/?room=living  — overflow button.t-card «כניסה אל מטבח» (a control cut by the edge) 383..495 (viewport 0..390) | overflow button.t-card «כניסה אל מרפסת · קצה החדרים» (a control cut by the edge) -105..7 (viewport 0..390)
+run-project: qa: the responsive gate failed — not published. 1440 tour/?room=living: overflow button.t-card «כניסה אל חדר רחצה הורים» (a control cut by the edge) -110..40 (viewport 0..1440) ;; 390 tour/?room=living: overflow button.t-card «כניסה אל מטבח» (a control cut by the edge) 383..495 (viewport 0..390) | overflow button.t-card «כניסה אל מרפסת · קצה החדרים» (a control cut by the edge) -105..7 (viewport 0..390)

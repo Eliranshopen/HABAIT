@@ -1,0 +1,22 @@
+{
+ "endpoint": "kling/v4/video-to-video/edit",
+ "args": {
+  "video_url": "https://v3b.fal.media/files/b/0ab0f165/UMhk_MvnqAjlOL_BNY4TP_arc_clay.mp4",
+  "image_urls": [
+   "https://v3b.fal.media/files/b/0ab0f165/zrmmiodeK1VR51eaGTS_R_orbit_last.png",
+   "https://v3b.fal.media/files/b/0ab0f166/KfmdjWkS9kM1WE-AS1Fwk_ref_node-b-tower.jpg"
+  ],
+  "prompt": "@Video1 is a plain grey 3D clay render of ONE continuous, slow drone shot, 7.5 seconds: the camera glides sideways in a gentle arc around the front of the Rainbow tower (a 39-floor residential tower wrapped in white undulating curved balcony slabs with planters and slim dark glazing) on the Tel Aviv seafront at Sde Dov, at mid height, always facing the tower; the middle of the shot is exactly the view in @Image1. Re-render the SAME footage as photoreal video: keep every frame's camera motion, perspective, horizon, building proportions and geometry exactly as in @Video1; only replace the clay materials with real ones. @Image1 is the real look of this exact view (sea, beach, the Reading power-station chimney on the right, low white buildings, sand lot, trees, roads, the tower's white curved balconies with planters and dark reflective glass): match its colours, light and materials precisely so the middle frame looks identical to @Image1. @Image2 is the real look of the tower up close. Add subtle life: a few people on the promenade and the beach, cars on the roads, birds crossing the sky, a sailboat on the sea, foliage moving slightly. Bright clear MORNING daylight, sun high and to the left of the tower, neutral white light, blue sky with a few small clouds, NO sunset or golden-hour tones. Smooth, continuous, no cuts, no text, no watermark, no camera shake.",
+  "resolution": "1080p",
+  "duration": 7
+ },
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab0f176/0A2RP-POcTWpG5pa3YkDE_output.mp4",
+   "content_type": "video/mp4",
+   "file_name": "output.mp4",
+   "file_size": 21852825
+  }
+ },
+ "secs": 164
+}

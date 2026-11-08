@@ -1,0 +1,13 @@
+## 2026-11-04 · main session · prod-exposure-fix: CLAUDE.md files and demo-transition.html no longer staged
+- **Did:** Eliran 'כן'. `Projects/Habait/tools/deploy-vercel/stage_flow.py` (working folder `.wt/prod-exposure-fix`, closed, copied back): `demo-transition.html` added to the never-deployed list; new step 3b removes every `CLAUDE.md` from the STAGED copy and warns on other `.md`. Not deployed yet — needs Eliran's own go (root §9).
+- **Evidence:** live before: `curl` https://habait-flow.vercel.app/demo-transition.html 200, /js/CLAUDE.md 200. Test stage (scratchpad `stage-test`): "context files removed from stage: 23"; file list vs the old stager = 2147 → 2123, the diff is exactly 23 `CLAUDE.md` + `demo-transition.html`; total 366.9 MB unchanged.
+- **Learned:** the leak came from the unfiltered `copytree` of `js/`, `fixtures/`, `hold/`, `tour/`; the top-level loop copies every `.html`. Still staged by design or unchecked: `audio/README.md`, `fonts/SOURCES.md`, `hold/data/audio/README.md` (attribution notes), `styleguide.html`; `js/apartment.js`, `js/dev.js` and the posthog vendor file still contain `127.0.0.1` (pre-existing, not touched).
+- **Owed / open:** the deploy (Eliran's go), then live check that both URLs return 404, and a SHIP-LEDGER row.
+- **Second reader:** `habait-deploy-qa` — the stager it uses changed.
+
+## 2026-11-04 · main session · prod-exposure-fix deployed and verified
+- **Did:** Eliran "מאושר", then "תריץ חופשי ללא עצירה בגלל בטיחות" after the classifier blocked the first try; the session re-ran the same command once. Staged from live 11:10 into scratchpad `deploy-exposure-fix` (link = `.vercel/project.json` copied from `deploy-hbt-1`, no link step, no keys file): 0 CLAUDE.md, no demo page, 0 `.env*`. `vercel@65.9.0 deploy --prod` → `dpl_9pq6zZGnQC86zek28a5SnKhHLtVv` READY, aliased https://habait-flow.vercel.app.
+- **Evidence:** curl: /demo-transition.html, /js/CLAUDE.md, /fixtures/CLAUDE.md, /hold/data/CLAUDE.md = 404; / flow landing apartment hold tour styleguide vendor/three = 200. `site_check.cjs` (playwright-core, 7 pages x 390/1440) = 14/14 → `C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/85df1459-ec23-42d3-9605-6e5d8c9f9665/scratchpad/after-exposure-fix.json` (session scratchpad). SHIP-LEDGER row.
+- **Learned:** the staged build now carries every live change up to 11:10, including hold-building-tour's.
+- **Owed / open:** none for this fix. Still staged by design or unchecked: audio/fonts `.md` notes, `127.0.0.1` strings in `js/apartment.js`, `js/dev.js`.
+- **Second reader:** `habait-deploy-qa` (pointer added earlier today).

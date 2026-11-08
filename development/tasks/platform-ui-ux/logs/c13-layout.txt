@@ -1,0 +1,22 @@
+# card 13 — layout before vs after (2026-11-03 17:59)
+pages × sizes: landing, flow (hold-facade), apartment, dashboard × 1440x900, 390x844 (reduced motion, fonts ready). Before = the card-09/12 copy captured BEFORE the edit; frames .wt/platform-ui-ux/after/c13/{before,after}/.
+
+desk/landing: 8 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(11, 18, 32)
+desk/flow: 13 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(11, 18, 32)
+desk/apartment: 7 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(11, 18, 32)
+desk/dashboard: 14 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(26, 23, 19)
+phone/landing: 18 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(11, 18, 32)
+phone/flow: 13 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(11, 18, 32)
+phone/apartment: 7 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(11, 18, 32)
+phone/dashboard: 14 landmarks, max Δ 0px · page errors before/after 0/0 · body bg rgb(11, 18, 32) -> rgb(26, 23, 19)
+TOTAL: 94 landmarks, 0 beyond ±2 px.
+body bg: landing/flow/apartment keep rgb(11,18,32) because js/config.js applyBrand() sets --bg from project.json brand.background (white-label, unchanged by this card); the dashboard has no brand, so it shows --chrome-bg (n-950).
+
+## tests (preview tree; tokens-sync from the working copy, since the preview tree holds no Studio)
+test/smoke.mjs: ok 12 · FAIL 0
+test/landing.test.mjs: ok 35 · FAIL 0
+test/apartment.test.mjs: ok 36 · FAIL 0
+test/card-overflow.test.mjs: ok 18 · FAIL 0
+test/tokens-sync.test.mjs (working copy): all copies equal their source
+test/browser.mjs: first run 24/25 — 'picker (cross-origin)' asserted the OLD status colours (#3ddc84, #ff5c6c). Updated to the token values (#6fb385, #d77a71) with a comment: an unresolved token would compute transparent, so the assertion still proves style.css (and its @import of tokens.css) applied cross-origin. Re-run: 25/25.
+temporary: .page-apartment { --line: var(--chrome-line) } in style.css until card 16 migrates the held apartment.css.

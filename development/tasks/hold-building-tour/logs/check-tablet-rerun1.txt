@@ -1,0 +1,22 @@
+tablet    PASS  A1 platform link leads to /hold/
+tablet    PASS  B1 button shown at the hold after the clip
+tablet    PASS  B2 label + ≥44 px + on top + in view + rtl
+tablet    PASS  B3 button covers no pill / picker button / sound button
+tablet    PASS  C1 frame opens, project scope (no scope=apartment), from=hold, same page URL
+tablet    PASS  C2 tour opens on aerial
+tablet    PASS  C3 auto chain reaches the tower (hold node)
+tablet    PASS  C4 ✕ visible, button hidden, frame opaque
+tablet    PASS  C4b ✕ hides no tour control (at the tower)
+tablet    PASS  C5 tap 846 → descent → a room of the apartment inside the frame
+tablet    PASS  C6 ✕ is on top of the tour (clickable)
+tablet    PASS  C7 ✕ hides no tour control (in the room)
+tablet    PASS  D1 ✕ → frame removed, button back + focused, hold loop running
+tablet    PASS  D2 Esc (focus on the page) closes
+tablet    PASS  D3 open/close ×3 leaves no frame, button back
+tablet    PASS  E1 button hidden during the descent clip
+tablet    PASS  E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment
+tablet    PASS  E3 button not over the apartment tour
+tablet    PASS  Z1 zero page errors
+tablet    PASS  Z2 zero 4xx/5xx
+
+20/20 PASS · 0 FAIL · base http://127.0.0.1:8853

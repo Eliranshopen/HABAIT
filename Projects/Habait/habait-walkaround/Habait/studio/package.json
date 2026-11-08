@@ -1,0 +1,15 @@
+{
+  "name": "@habait/studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Habait Studio: upload a developer's sales plan + images, an LLM reads them, a fixed pipeline turns them into per-room visualization videos with an exterior flyover.",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node test/run.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest",
+    "zod": "^3.25.0"
+  }
+}

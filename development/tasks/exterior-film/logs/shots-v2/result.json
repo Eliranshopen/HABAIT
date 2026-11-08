@@ -1,0 +1,642 @@
+{
+ "desktop": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "onTop": true,
+    "inView": true
+   }
+  },
+  {
+   "id": "C1 overlay opens: no tour iframe, same URL, the film for this width",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/hold/data/video/building-film-1080.mp4",
+    "iframes": 0,
+    "box": "block",
+    "op": "1",
+    "iw": 1440,
+    "wantHd": true
+   }
+  },
+  {
+   "id": "C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)",
+   "pass": true,
+   "info": {
+    "t": 1.0664,
+    "w": 1920,
+    "h": 1080
+   }
+  },
+  {
+   "id": "C3 AI badge \"הדמיה · AI-generated\" + the approved legal text (= #clipLegal, byte-equal) visible on the film",
+   "pass": true,
+   "info": {
+    "badge": "הדמיה · AI-generated",
+    "badgeVis": true,
+    "legalSame": true,
+    "legalVis": true
+   }
+  },
+  {
+   "id": "C4 ✕ visible, on top, ≥44 px, in view; the button hidden",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "onTop": true,
+    "w": 44,
+    "btn": "none",
+    "inView": true
+   }
+  },
+  {
+   "id": "C5 at the end: enter 846 / again / back, each ≥44 px and in view",
+   "pass": true,
+   "info": [
+    {
+     "id": "buildingEnter",
+     "t": "כניסה לדירה 846 (הדמיית 360)",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingAgain",
+     "t": "צפייה חוזרת",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingBack",
+     "t": "חזרה לבחירת דירה",
+     "h": 48,
+     "vis": true
+    }
+   ]
+  },
+  {
+   "id": "C6 \"צפייה חוזרת\" restarts the film",
+   "pass": true,
+   "info": 0.4181
+  },
+  {
+   "id": "C7 \"חזרה לבחירת דירה\" closes the film",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "paused": true
+   }
+  },
+  {
+   "id": "D1 ✕ → film hidden + paused, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "focus": "buildingBtn",
+    "paused": true,
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc closes",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves the film closed, button back, no iframe",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "iframes": 0
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true
+  },
+  {
+   "id": "F1 \"כניסה לדירה 846\" → the apartment tour (scope=apartment)",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&return=http%3A%2F%2F127.0.0.1%3A8858"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ],
+ "iphone13": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "onTop": true,
+    "inView": true
+   }
+  },
+  {
+   "id": "C1 overlay opens: no tour iframe, same URL, the film for this width",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/hold/data/video/building-film-720.mp4",
+    "iframes": 0,
+    "box": "block",
+    "op": "1",
+    "iw": 390,
+    "wantHd": false
+   }
+  },
+  {
+   "id": "C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)",
+   "pass": true,
+   "info": {
+    "t": 1.2068,
+    "w": 1280,
+    "h": 720
+   }
+  },
+  {
+   "id": "C3 AI badge \"הדמיה · AI-generated\" + the approved legal text (= #clipLegal, byte-equal) visible on the film",
+   "pass": true,
+   "info": {
+    "badge": "הדמיה · AI-generated",
+    "badgeVis": true,
+    "legalSame": true,
+    "legalVis": true
+   }
+  },
+  {
+   "id": "C4 ✕ visible, on top, ≥44 px, in view; the button hidden",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "onTop": true,
+    "w": 44,
+    "btn": "none",
+    "inView": true
+   }
+  },
+  {
+   "id": "C5 at the end: enter 846 / again / back, each ≥44 px and in view",
+   "pass": true,
+   "info": [
+    {
+     "id": "buildingEnter",
+     "t": "כניסה לדירה 846 (הדמיית 360)",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingAgain",
+     "t": "צפייה חוזרת",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingBack",
+     "t": "חזרה לבחירת דירה",
+     "h": 48,
+     "vis": true
+    }
+   ]
+  },
+  {
+   "id": "C6 \"צפייה חוזרת\" restarts the film",
+   "pass": true,
+   "info": 0.5039
+  },
+  {
+   "id": "C7 \"חזרה לבחירת דירה\" closes the film",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "paused": true
+   }
+  },
+  {
+   "id": "D1 ✕ → film hidden + paused, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "focus": "buildingBtn",
+    "paused": true,
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc closes",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves the film closed, button back, no iframe",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "iframes": 0
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true
+  },
+  {
+   "id": "F1 \"כניסה לדירה 846\" → the apartment tour (scope=apartment)",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&return=http%3A%2F%2F127.0.0.1%3A8858"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ],
+ "pixel7": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "onTop": true,
+    "inView": true
+   }
+  },
+  {
+   "id": "C1 overlay opens: no tour iframe, same URL, the film for this width",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/hold/data/video/building-film-720.mp4",
+    "iframes": 0,
+    "box": "block",
+    "op": "1",
+    "iw": 412,
+    "wantHd": false
+   }
+  },
+  {
+   "id": "C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)",
+   "pass": true,
+   "info": {
+    "t": 1.2145,
+    "w": 1280,
+    "h": 720
+   }
+  },
+  {
+   "id": "C3 AI badge \"הדמיה · AI-generated\" + the approved legal text (= #clipLegal, byte-equal) visible on the film",
+   "pass": true,
+   "info": {
+    "badge": "הדמיה · AI-generated",
+    "badgeVis": true,
+    "legalSame": true,
+    "legalVis": true
+   }
+  },
+  {
+   "id": "C4 ✕ visible, on top, ≥44 px, in view; the button hidden",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "onTop": true,
+    "w": 44,
+    "btn": "none",
+    "inView": true
+   }
+  },
+  {
+   "id": "C5 at the end: enter 846 / again / back, each ≥44 px and in view",
+   "pass": true,
+   "info": [
+    {
+     "id": "buildingEnter",
+     "t": "כניסה לדירה 846 (הדמיית 360)",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingAgain",
+     "t": "צפייה חוזרת",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingBack",
+     "t": "חזרה לבחירת דירה",
+     "h": 48,
+     "vis": true
+    }
+   ]
+  },
+  {
+   "id": "C6 \"צפייה חוזרת\" restarts the film",
+   "pass": true,
+   "info": 0.503
+  },
+  {
+   "id": "C7 \"חזרה לבחירת דירה\" closes the film",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "paused": true
+   }
+  },
+  {
+   "id": "D1 ✕ → film hidden + paused, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "focus": "buildingBtn",
+    "paused": true,
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc closes",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves the film closed, button back, no iframe",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "iframes": 0
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true
+  },
+  {
+   "id": "F1 \"כניסה לדירה 846\" → the apartment tour (scope=apartment)",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&return=http%3A%2F%2F127.0.0.1%3A8858"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ],
+ "tablet": [
+  {
+   "id": "A1 platform link leads to /hold/",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=r"
+  },
+  {
+   "id": "B1 button shown at the hold after the clip",
+   "pass": true
+  },
+  {
+   "id": "B2 label + ≥44 px + on top + in view",
+   "pass": true,
+   "info": {
+    "text": "הדמיית הבניין והסביבה",
+    "h": 44,
+    "onTop": true,
+    "inView": true
+   }
+  },
+  {
+   "id": "C1 overlay opens: no tour iframe, same URL, the film for this width",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/hold/data/video/building-film-720.mp4",
+    "iframes": 0,
+    "box": "block",
+    "op": "1",
+    "iw": 820,
+    "wantHd": false
+   }
+  },
+  {
+   "id": "C2 the film plays (time advances), decoded size matches (1920×1080 / 1280×720)",
+   "pass": true,
+   "info": {
+    "t": 1.2804,
+    "w": 1280,
+    "h": 720
+   }
+  },
+  {
+   "id": "C3 AI badge \"הדמיה · AI-generated\" + the approved legal text (= #clipLegal, byte-equal) visible on the film",
+   "pass": true,
+   "info": {
+    "badge": "הדמיה · AI-generated",
+    "badgeVis": true,
+    "legalSame": true,
+    "legalVis": true
+   }
+  },
+  {
+   "id": "C4 ✕ visible, on top, ≥44 px, in view; the button hidden",
+   "pass": true,
+   "info": {
+    "close": "block",
+    "onTop": true,
+    "w": 44,
+    "btn": "none",
+    "inView": true
+   }
+  },
+  {
+   "id": "C5 at the end: enter 846 / again / back, each ≥44 px and in view",
+   "pass": true,
+   "info": [
+    {
+     "id": "buildingEnter",
+     "t": "כניסה לדירה 846 (הדמיית 360)",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingAgain",
+     "t": "צפייה חוזרת",
+     "h": 48,
+     "vis": true
+    },
+    {
+     "id": "buildingBack",
+     "t": "חזרה לבחירת דירה",
+     "h": 48,
+     "vis": true
+    }
+   ]
+  },
+  {
+   "id": "C6 \"צפייה חוזרת\" restarts the film",
+   "pass": true,
+   "info": 0.4618
+  },
+  {
+   "id": "C7 \"חזרה לבחירת דירה\" closes the film",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "paused": true
+   }
+  },
+  {
+   "id": "D1 ✕ → film hidden + paused, button back + focused, hold loop running",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "focus": "buildingBtn",
+    "paused": true,
+    "loop": true
+   }
+  },
+  {
+   "id": "D2 Esc closes",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block"
+   }
+  },
+  {
+   "id": "D3 open/close ×3 leaves the film closed, button back, no iframe",
+   "pass": true,
+   "info": {
+    "box": "none",
+    "btn": "block",
+    "iframes": 0
+   }
+  },
+  {
+   "id": "E1 button hidden during the descent clip",
+   "pass": true
+  },
+  {
+   "id": "E2 existing hand-off unchanged: #tourFrame scope=apartment, lands in the apartment",
+   "pass": true,
+   "info": {
+    "src": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=",
+    "scene": "terraceLiving"
+   }
+  },
+  {
+   "id": "E3 button not over the apartment tour",
+   "pass": true
+  },
+  {
+   "id": "F1 \"כניסה לדירה 846\" → the apartment tour (scope=apartment)",
+   "pass": true,
+   "info": "http://127.0.0.1:8858/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&return=http%3A%2F%2F127.0.0.1%3A8858"
+  },
+  {
+   "id": "Z1 zero page errors",
+   "pass": true,
+   "info": []
+  },
+  {
+   "id": "Z2 zero 4xx/5xx",
+   "pass": true,
+   "info": []
+  }
+ ]
+}

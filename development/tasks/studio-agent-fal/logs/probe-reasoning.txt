@@ -1,0 +1,19 @@
+(node:36356) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{
+ "ok": true,
+ "usd": 0.000228,
+ "model": "anthropic/claude-sonnet-5.5",
+ "text_len": 20,
+ "text_head": "{\"ok\": true, \"n\": 3}",
+ "usage": {
+  "prompt_tokens": 39,
+  "completion_tokens": 15,
+  "total_tokens": 54,
+  "cost": 0.000228,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0
+  }
+ }
+}

@@ -1,0 +1,97 @@
+# card 05 — contrast of css/tokens.css (2026-11-03 16:52, main session as platform-dev)
+command: timeout 60 node tools/contrast.mjs --project <live>/Habait/platform/fixtures/rainbow/project.json   (run in the working-copy platform/; the fixture is held by apartment-3d, read-only live copy)
+first run: 3 theme pairs failed (light reserved mark 2.97:1; dark running mark #005d83 2.21:1; dark white glyph on available 2.48:1) + 1 brand pair; fixed by --status-reserved #b4782a, a --progress token (= --brand-ink in dark), an --on-status glyph token (dark text in dark theme).
+
+
+== theme: light ==
+PASS  text 15.67:1 (min 4.5)  --text #24211e on --surface #fffcf9  · body text on page
+PASS  text 16.01:1 (min 4.5)  --text #24211e on --surface-raised #ffffff  · body text on card
+PASS  text 13.77:1 (min 4.5)  --text #24211e on --surface-sunken #f2ede8  · text on well/input
+PASS  text  5.89:1 (min 4.5)  --text-muted #67625e on --surface #fffcf9  · muted text on page
+PASS  text  6.03:1 (min 4.5)  --text-muted #67625e on --surface-raised #ffffff  · muted text on card
+PASS  text  5.18:1 (min 4.5)  --text-muted #67625e on --surface-sunken #f2ede8  · muted text on well (drop zone types)
+PASS  text  7.10:1 (min 4.5)  --brand-ink #005d83 on --surface #fffcf9  · link on page
+PASS  text  7.26:1 (min 4.5)  --brand-ink #005d83 on --surface-raised #ffffff  · link on card
+PASS  text  6.24:1 (min 4.5)  --brand-ink #005d83 on --surface-sunken #f2ede8  · ghost button on hover well
+PASS  text  5.45:1 (min 4.5)  --accent-ink #945b1a on --surface #fffcf9  · eyebrow on page
+PASS  text  5.57:1 (min 4.5)  --accent-ink #945b1a on --surface-raised #ffffff  · eyebrow on card
+PASS  text  7.26:1 (min 4.5)  --brand-on-primary #ffffff on --brand-primary #005d83  · primary button label
+PASS  text  8.79:1 (min 4.5)  --brand-on-accent #1a1713 on --brand-accent #eea927  · label on accent fill
+PASS  text  6.02:1 (min 4.5)  --on-whatsapp #ffffff on --whatsapp #277044  · WhatsApp button label
+PASS  text  5.98:1 (min 4.5)  --status-available-ink #2e6640 on --status-available-bg #e6f4e9  · chip: available
+PASS  text  5.27:1 (min 4.5)  --status-reserved-ink #895925 on --status-reserved-bg #fcefde  · chip: reserved
+PASS  text  5.89:1 (min 4.5)  --status-sold-ink #9a3f3a on --status-sold-bg #feedeb  · chip: sold
+PASS  text  6.20:1 (min 4.5)  --status-info-ink #005d83 on --status-info-bg #e3eff6  · chip: info / role chip
+PASS  text  6.79:1 (min 4.5)  --status-available-ink #2e6640 on --surface-raised #ffffff  · step state: done
+PASS  text  5.97:1 (min 4.5)  --status-reserved-ink #895925 on --surface-raised #ffffff  · step state: needs you
+PASS  text  6.75:1 (min 4.5)  --danger-ink #a33531 on --surface-raised #ffffff  · error text on card / step failed
+PASS  text 14.87:1 (min 4.5)  --text-on-inverse #f9f6f3 on --surface-inverse #24211e  · inverse text
+PASS  text  6.20:1 (min 4.5)  --status-info-ink #005d83 on --status-info-bg #e3eff6  · drop zone hover text
+PASS  UI    4.09:1 (min 3)  --line-strong #807b77 on --surface #fffcf9  · input / outline button border on page
+PASS  UI    4.19:1 (min 3)  --line-strong #807b77 on --surface-raised #ffffff  · border on card
+PASS  UI    3.60:1 (min 3)  --line-strong #807b77 on --surface-sunken #f2ede8  · drop zone border on well
+PASS  UI    7.10:1 (min 3)  --focus #005d83 on --surface #fffcf9  · focus ring on page
+PASS  UI    7.26:1 (min 3)  --focus #005d83 on --surface-raised #ffffff  · focus ring on card
+PASS  UI    5.15:1 (min 3)  --status-available #3a7a4e on --surface-raised #ffffff  · step mark: done
+PASS  UI    3.71:1 (min 3)  --status-reserved #b4782a on --surface-raised #ffffff  · step mark: needs you
+PASS  UI    5.58:1 (min 3)  --danger #b83d38 on --surface-raised #ffffff  · step mark: failed / error border
+PASS  UI    7.26:1 (min 3)  --progress #005d83 on --surface-raised #ffffff  · step mark: running / progress bar
+PASS  UI    6.24:1 (min 3)  --progress #005d83 on --surface-sunken #f2ede8  · progress bar on its track
+PASS  UI    5.98:1 (min 3)  --status-available-ink #2e6640 on --status-available-bg #e6f4e9  · chip dot: available
+PASS  UI    5.27:1 (min 3)  --status-reserved-ink #895925 on --status-reserved-bg #fcefde  · chip dot: reserved
+PASS  UI    5.89:1 (min 3)  --status-sold-ink #9a3f3a on --status-sold-bg #feedeb  · chip dot: sold
+PASS  UI    5.15:1 (min 3)  --on-status #ffffff on --status-available #3a7a4e  · done mark glyph
+PASS  UI    5.58:1 (min 3)  --on-status #ffffff on --danger #b83d38  · failed mark glyph
+
+== theme: dark ==
+PASS  text 16.59:1 (min 4.5)  --text #f9f6f3 on --surface #1a1713  · body text on page
+PASS  text 14.87:1 (min 4.5)  --text #f9f6f3 on --surface-raised #24211e  · body text on card
+PASS  text 17.77:1 (min 4.5)  --text #f9f6f3 on --surface-sunken #110f0c  · text on well/input
+PASS  text  9.35:1 (min 4.5)  --text-muted #bfbbb6 on --surface #1a1713  · muted text on page
+PASS  text  8.39:1 (min 4.5)  --text-muted #bfbbb6 on --surface-raised #24211e  · muted text on card
+PASS  text 10.02:1 (min 4.5)  --text-muted #bfbbb6 on --surface-sunken #110f0c  · muted text on well (drop zone types)
+PASS  text  8.81:1 (min 4.5)  --brand-ink #80bee0 on --surface #1a1713  · link on page
+PASS  text  7.90:1 (min 4.5)  --brand-ink #80bee0 on --surface-raised #24211e  · link on card
+PASS  text  9.44:1 (min 4.5)  --brand-ink #80bee0 on --surface-sunken #110f0c  · ghost button on hover well
+PASS  text  8.79:1 (min 4.5)  --accent-ink #eea927 on --surface #1a1713  · eyebrow on page
+PASS  text  7.89:1 (min 4.5)  --accent-ink #eea927 on --surface-raised #24211e  · eyebrow on card
+PASS  text  7.26:1 (min 4.5)  --brand-on-primary #ffffff on --brand-primary #005d83  · primary button label
+PASS  text  8.79:1 (min 4.5)  --brand-on-accent #1a1713 on --brand-accent #eea927  · label on accent fill
+PASS  text  6.02:1 (min 4.5)  --on-whatsapp #ffffff on --whatsapp #277044  · WhatsApp button label
+PASS  text  6.86:1 (min 4.5)  --status-available-ink #91cfa0 on --status-available-bg #25392a  · chip: available
+PASS  text  7.21:1 (min 4.5)  --status-reserved-ink #f4bd6a on --status-reserved-bg #423221  · chip: reserved
+PASS  text  6.06:1 (min 4.5)  --status-sold-ink #f3a198 on --status-sold-bg #492e2b  · chip: sold
+PASS  text  7.00:1 (min 4.5)  --status-info-ink #80bee0 on --status-info-bg #1b2d38  · chip: info / role chip
+PASS  text  8.87:1 (min 4.5)  --status-available-ink #91cfa0 on --surface-raised #24211e  · step state: done
+PASS  text  9.41:1 (min 4.5)  --status-reserved-ink #f4bd6a on --surface-raised #24211e  · step state: needs you
+PASS  text  7.86:1 (min 4.5)  --danger-ink #f89e93 on --surface-raised #24211e  · error text on card / step failed
+PASS  text 14.87:1 (min 4.5)  --text-on-inverse #24211e on --surface-inverse #f9f6f3  · inverse text
+PASS  text  7.00:1 (min 4.5)  --status-info-ink #80bee0 on --status-info-bg #1b2d38  · drop zone hover text
+PASS  UI    4.27:1 (min 3)  --line-strong #807b77 on --surface #1a1713  · input / outline button border on page
+PASS  UI    3.83:1 (min 3)  --line-strong #807b77 on --surface-raised #24211e  · border on card
+PASS  UI    4.57:1 (min 3)  --line-strong #807b77 on --surface-sunken #110f0c  · drop zone border on well
+PASS  UI    8.81:1 (min 3)  --focus #80bee0 on --surface #1a1713  · focus ring on page
+PASS  UI    7.90:1 (min 3)  --focus #80bee0 on --surface-raised #24211e  · focus ring on card
+PASS  UI    6.45:1 (min 3)  --status-available #6fb385 on --surface-raised #24211e  · step mark: done
+PASS  UI    7.20:1 (min 3)  --status-reserved #e0a24c on --surface-raised #24211e  · step mark: needs you
+PASS  UI    4.83:1 (min 3)  --danger #e2675f on --surface-raised #24211e  · step mark: failed / error border
+PASS  UI    7.90:1 (min 3)  --progress #80bee0 on --surface-raised #24211e  · step mark: running / progress bar
+PASS  UI    9.44:1 (min 3)  --progress #80bee0 on --surface-sunken #110f0c  · progress bar on its track
+PASS  UI    6.86:1 (min 3)  --status-available-ink #91cfa0 on --status-available-bg #25392a  · chip dot: available
+PASS  UI    7.21:1 (min 3)  --status-reserved-ink #f4bd6a on --status-reserved-bg #423221  · chip dot: reserved
+PASS  UI    6.06:1 (min 3)  --status-sold-ink #f3a198 on --status-sold-bg #492e2b  · chip dot: sold
+PASS  UI    7.20:1 (min 3)  --on-status #1a1713 on --status-available #6fb385  · done mark glyph
+PASS  UI    5.39:1 (min 3)  --on-status #1a1713 on --danger #e2675f  · failed mark glyph
+
+== brand (white-label) ==
+project: C:\RnD\Projects\Habait\habait-walkaround\Habait\platform\fixtures\rainbow\project.json · brand.primary #0f5c8f · brand.accent #f2a900 (brand.background is not a token; ignored)
+PASS  light  7.12:1 (min 4.5)  --brand-on-primary #ffffff on --brand-primary #0f5c8f  · primary button label
+PASS  light  8.89:1 (min 4.5)  --brand-on-accent #1a1713 on --brand-accent #f2a900  · label on accent fill
+PASS  light  6.97:1 (min 4.5)  --brand-ink #0f5c8f on --surface #fffcf9  · brand-coloured link on page (light: --brand-ink = --brand-primary)
+PASS  light  7.12:1 (min 3)  --progress #0f5c8f on --surface-raised #ffffff  · progress bar / running mark (--progress = --brand-primary)
+PASS  dark   7.12:1 (min 4.5)  --brand-on-primary #ffffff on --brand-primary #0f5c8f  · primary button label
+PASS  dark   8.89:1 (min 4.5)  --brand-on-accent #1a1713 on --brand-accent #f2a900  · label on accent fill
+PASS  dark   7.90:1 (min 3)  --progress #80bee0 on --surface-raised #24211e  · progress bar / running mark (--progress = --brand-ink, Habait-fixed)
+
+summary: 0 theme pair(s) failing · 0 brand pair(s) needing their fallback rule
+exit 0

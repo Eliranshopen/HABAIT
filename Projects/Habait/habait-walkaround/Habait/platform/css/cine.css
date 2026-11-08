@@ -1,0 +1,49 @@
+/* card 36 (2026-11-03): the cinematic flight of flow.html (js/cine.js). Loaded by js/flow.js only in that mode, after
+   css/flow-real.css (the caption band, the tour iframe, the unit card fixes), so css/style.css (also loaded by habait-98's :8899)
+   is untouched. Layers inside #stage: the paused 360 viewer (hand-off bridge only) < .cine-layer (clips, the hold canvas, birds,
+   the opening title) < #hotspots (the pills) < the HUD; the caption band (flow-real.css) stays on top of everything. */
+.cine-layer { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: #000; }
+.cine-layer.bridging { background: transparent; }            /* the 360 viewer shows through while the last frame fades */
+.cine-video { position: absolute; opacity: 0; z-index: 1; pointer-events: none; display: block; background: transparent; }
+.cine-hold {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: none;
+  touch-action: none; cursor: grab; pointer-events: auto; -webkit-user-select: none; user-select: none;
+}
+.cine-hold.dragging { cursor: grabbing; }
+.cine-birds { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; }
+
+/* the project's name over the orbit's opening seconds (HTML, never burnt into the frames; no developer branding) */
+.cine-title {
+  position: absolute; z-index: 5; inset-inline: 6vw; top: calc(var(--safe-top) + 76px);
+  color: #fff; text-shadow: 0 2px 18px rgba(0, 0, 0, .55); text-align: start; pointer-events: none;
+  opacity: 0; transition: opacity 1.2s ease;
+}
+.cine-title.on { opacity: 1; }
+.cine-title .t1 { font-weight: 800; font-size: clamp(30px, 7.4vw, 64px); line-height: 1.08; letter-spacing: .01em; }
+.cine-title .t2 { font-weight: 400; font-size: clamp(14px, 3.4vw, 22px); line-height: 1.4; opacity: .92; margin-top: 6px; }
+
+/* the drag affordance at the hold: a quiet chip 1.5 s after arrival, gone on the first drag or after 9 s (habait-flow v6) */
+.cine-drag-hint {
+  position: fixed; z-index: 7; left: 50%; top: calc(var(--safe-top) + 64px); transform: translateX(-50%);
+  background: rgba(10, 16, 30, .5); color: #fff; border: 1px solid rgba(255, 255, 255, .28); border-radius: 999px;
+  padding: 9px 16px; font-weight: 500; font-size: 14px; white-space: nowrap; pointer-events: none;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; transition: opacity .6s;
+}
+.cine-drag-hint.on { opacity: 1; }
+
+/* HUD: the flat clips carry no drag/gyro hint; the sound toggle sits with the other HUD buttons */
+.cine-flight .hud-hint:empty { display: none; }
+.cine-flight #gyroBtn { display: none !important; }
+.cine-sound { font-size: 16px; }
+/* the pills' status colours at the hold (style.css .picker-legend look), in the bottom row next to the hint */
+.cine-legend { display: flex; gap: 12px; font-size: 12px; color: var(--fg); text-shadow: 0 1px 4px rgba(0, 0, 0, .8); }
+.cine-legend[hidden] { display: none; }
+.cine-flight .hud-row { flex-wrap: wrap; row-gap: 4px; }
+
+/* the legal overlay (short_project / short) over a flat clip sits low, as on card 34; at the hold the apartments occupy the lower
+   half of a portrait phone (floors 14-19 are below the camera), so there the overlay moves up into the sky, under the HUD */
+@media (max-width: 640px) and (orientation: portrait) {
+  .cine-flight.cine-at-hold .legal-overlay { top: calc(var(--safe-top) + 108px); bottom: auto; }
+  .cine-flight.cine-at-hold .cine-drag-hint { top: calc(var(--safe-top) + 64px); }
+}
+@media (prefers-reduced-motion: reduce) { .cine-title, .cine-drag-hint { transition: none; } }

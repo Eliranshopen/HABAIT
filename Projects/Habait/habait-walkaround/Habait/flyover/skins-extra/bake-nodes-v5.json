@@ -1,0 +1,134 @@
+{
+ "schema": "habait-flyover/bake-nodes.v1",
+ "note": "bake_skins.py --nodes list, v5 (4 v4 + 5 ring-A orbit + 7 ring-B)",
+ "nodes": [
+  {
+   "id": "node-a-aerial",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-a-aerial/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-a-aerial.seam.png"
+  },
+  {
+   "id": "node-b-tower",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-b-tower/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-b-tower.seam.png"
+  },
+  {
+   "id": "node-c-facade",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-c-facade/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-c-facade.v2.seam.png"
+  },
+  {
+   "id": "node-d-terrace",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-d-terrace/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext-parquet/node-d-terrace.v2.seam.png"
+  },
+  {
+   "id": "node-o1-orbit",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-o1-orbit/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-o1-orbit.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-o2-orbit",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-o2-orbit/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-o2-orbit.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-o3-orbit",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-o3-orbit/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-o3-orbit.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-o4-orbit",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-o4-orbit/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-o4-orbit.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-o5-orbit",
+   "faces": "C:/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/clay-nodes-ortho/node-o5-orbit/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-ext/node-o5-orbit.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-rb045",
+   "faces": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-nodes/node-rb045/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/node-rb045.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-rb090",
+   "faces": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-nodes/node-rb090/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/node-rb090.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-rb135",
+   "faces": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-nodes/node-rb135/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/node-rb135.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-rb180",
+   "faces": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-nodes/node-rb180/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/node-rb180.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-rb225",
+   "faces": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-nodes/node-rb225/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/node-rb225.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-rb270",
+   "faces": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-nodes/node-rb270/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/node-rb270.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  },
+  {
+   "id": "node-rb315",
+   "faces": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/clay-nodes/node-rb315/faces.json",
+   "skin": "C:/Habait/habait-walkaround/Habait/flyover/skins-extra/node-rb315.seam.png",
+   "skip_groups": [
+    "ground_far"
+   ],
+   "no_gain": true
+  }
+ ]
+}

@@ -1,0 +1,111 @@
+{
+ "encoding": "rgb24-be",
+ "scale": 100,
+ "invalid": 0,
+ "decode": "(R<<16 | G<<8 | B) / 100 => metres (radial distance from the camera origin)",
+ "note": "radial per-ray distance, NOT planar depth (ENV.md §4.1). Through glazing the value is the distance to the PANE, which is what a ruler should measure.",
+ "frame": "u = 0.5 + yaw/360 (yaw 0 = the panorama centre = the scene's opening view), v = 0.5 - pitch/180; radial distance along the ray",
+ "source": "360walkaround/tours/apt846-furnished/renders/<cp>/depth.png (render_pano.py 0.3.0, Cycles Z pass of the plan-true furnished scene), nearest-neighbour downscale 2048x1024 -> 1024x512",
+ "scenes": {
+  "entrance": {
+   "file": "01-entrance.png",
+   "cp": "cp-entrance",
+   "plan_cm": [
+    305.3,
+    768.4,
+    160
+   ],
+   "yaw_deg": 105.9
+  },
+  "kitchen": {
+   "file": "02-kitchen.png",
+   "cp": "cp-kitchen",
+   "plan_cm": [
+    837.8,
+    532.4,
+    160
+   ],
+   "yaw_deg": 125.5
+  },
+  "dining": {
+   "file": "03-dining.png",
+   "cp": "cp-dining",
+   "plan_cm": [
+    925.8,
+    787.1,
+    160
+   ],
+   "yaw_deg": 56.8
+  },
+  "living": {
+   "file": "04-living.png",
+   "cp": "cp-living",
+   "plan_cm": [
+    685.3,
+    935.1,
+    160
+   ],
+   "yaw_deg": 111.3
+  },
+  "terraceLiving": {
+   "file": "05-terrace-living.png",
+   "cp": "cp-terraceLiving",
+   "plan_cm": [
+    1244.4,
+    955.6,
+    160
+   ],
+   "yaw_deg": 355.9
+  },
+  "terraceBedroom": {
+   "file": "06-terrace-bedroom.png",
+   "cp": "cp-terraceBedroom",
+   "plan_cm": [
+    1000,
+    1370.2,
+    160
+   ],
+   "yaw_deg": 16.3
+  },
+  "bedroomMain": {
+   "file": "07-bedroom-main.png",
+   "cp": "cp-bedroomMain",
+   "plan_cm": [
+    840,
+    1444.9,
+    160
+   ],
+   "yaw_deg": 344.9
+  },
+  "bathMain": {
+   "file": "09-bath-main.png",
+   "cp": "cp-bathMain",
+   "plan_cm": [
+    305.3,
+    1296.4,
+    160
+   ],
+   "yaw_deg": 36.8
+  },
+  "bedroom2": {
+   "file": "10-bedroom-2.png",
+   "cp": "cp-bedroom2",
+   "plan_cm": [
+    641.8,
+    437.8,
+    160
+   ],
+   "yaw_deg": 35.2
+  },
+  "bathguest": {
+   "file": "11-bath-guest.png",
+   "cp": "cp-bathguest",
+   "plan_cm": [
+    463.1,
+    564.9,
+    160
+   ],
+   "yaw_deg": 15.7
+  }
+ }
+}

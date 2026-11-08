@@ -1,0 +1,40 @@
+# gate2 literal grep (card 13 command, working copy)
+## platform/css/style.css
+27:  font-family: var(--font);
+249:.picker-chrome { position: absolute; inset: 0; z-index: 6; pointer-events: none; font-family: var(--font); color: var(--fg); }
+count: 2
+## platform/css/landing.css
+18:.landing-top .brand-name { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); }
+count: 1
+## platform/css/apartment.css
+27:.apt-brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); min-height: 36px; min-width: 0; color: var(--text); }
+41:.apt-hero-head h1 { margin: 0; font-family: var(--font-display); font-size: var(--fs-h1); font-weight: var(--fw-bold); line-height: var(--lh-heading); }
+count: 2
+## platform/css/dashboard.css
+10:html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); line-height: 1.45; }
+count: 1
+## studio/dashboard/style.css
+15:.brand__name { font-family: var(--font-display); font-size: 1.25rem; }
+16:.brand__name span { font-family: var(--font-text); font-weight: var(--fw-regular); color: var(--text-muted); font-size: var(--fs-body); }
+40:.pcard__ph { inline-size: 100%; block-size: 100%; display: grid; place-items: center; font-family: var(--font-display); font-size: 3rem; color: var(--text-muted); background: linear-gradient(160deg, var(--surface-sunken), var(--line)); }
+count: 3
+
+## hits that are NOT font-family: var(--
+(end)
+## font-size literals (rem/px) in the 5 files:
+platform/css/style.css:34
+platform/css/landing.css:2
+platform/css/apartment.css:4
+platform/css/dashboard.css:11
+studio/dashboard/style.css:6
+## box-shadow literals
+platform/css/style.css:116:.hotspot .dot { width: 10px; height: 10px; border-radius: var(--r-full); background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent); }
+platform/css/style.css:117:.hotspot.status-reserved .dot { background: var(--warn); box-shadow: 0 0 0 3px color-mix(in srgb, var(--warn) 25%, transparent); }
+platform/css/style.css:118:.hotspot.status-sold .dot { background: var(--sold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sold) 25%, transparent); }
+platform/css/style.css:120:.hotspot.status-unknown .dot { background: var(--chrome-unknown); box-shadow: 0 0 0 3px color-mix(in srgb, var(--chrome-unknown) 25%, transparent); }
+platform/css/style.css:125:.hotspot.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--chrome-shadow-sm); }
+platform/css/dashboard.css:37:tr[data-heat="hot"] td:first-child { box-shadow: inset -3px 0 0 var(--hot); }
+platform/css/dashboard.css:38:[dir="ltr"] tr[data-heat="hot"] td:first-child { box-shadow: inset 3px 0 0 var(--hot); }
+studio/dashboard/style.css:19:.topbar__link[aria-current] { color: var(--text); box-shadow: inset 0 -2px 0 var(--brand-primary); }
+studio/dashboard/style.css:101:.review__row.is-flagged { background: color-mix(in srgb, var(--status-reserved-bg) 55%, var(--surface-raised)); box-shadow: inset -3px 0 0 var(--status-reserved); }
+studio/dashboard/style.css:102:[dir="ltr"] .review__row.is-flagged { box-shadow: inset 3px 0 0 var(--status-reserved); }

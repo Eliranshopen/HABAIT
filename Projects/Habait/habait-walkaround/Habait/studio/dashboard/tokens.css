@@ -1,0 +1,169 @@
+/* generated from Habait/platform/css/tokens.css by platform/tools/sync-tokens.mjs — do not edit */
+/* Habait design tokens — one source for colour, type, space, radius, shadow and motion.
+ * Board platform-ui-ux, card 05 (2026-11-03). Plan: C:\RnD\development\plans\2026-11-03-platform-ui-ux.md, Phase 1.
+ *
+ * Themes: [data-theme="light"] is the default (light editorial); [data-theme="dark"] is the refined dark.
+ *   Gate 1 (card 12, 2026-11-03): LIGHT stays the default (Eliran: "תעשה מה שצריך…", the card's default if silent); dark is kept
+ *   for the media viewers and can become the default by moving these comments' word — nothing else changes.
+ * White-label: a project's project.json may override ONLY the --brand-* tokens (brand.primary → --brand-primary,
+ *   brand.accent → --brand-accent). Every other token is Habait's. tools/contrast.mjs checks the brand pairs.
+ * Hebrew: body line-height 1.6, no letter-spacing on Hebrew text (letter-spacing tokens apply to Latin labels only).
+ * RTL: components use logical properties only (inline/block), never left/right.
+ *
+ * Colour source — CIE LCH (D65), converted by .wt/platform-ui-ux/tools/lch_ramp.py:
+ *   neutral ramp: hue 75 (warm stone), chroma 3 (1.8 at the two lightest steps)
+ *     n-0 lch(99 1.8 75) · n-50 lch(97 1.8 75) · n-100 lch(94 3 75) · n-150 lch(90.5 3 75) · n-200 lch(86 3 75)
+ *     n-300 lch(76 3 75) · n-400 lch(64 3 75) · n-500 lch(52 3 75) · n-600 lch(42 3 75) · n-700 lch(33 3 75)
+ *     n-800 lch(24 3 75) · n-850 lch(18 3 75) · n-900 lch(13 3 75) · n-950 lch(8 3 75)
+ *   brand primary lch(36 32 245) · its dark-theme ink lch(74 26 245) · accent lch(74 72 78) · accent ink lch(44 48 68)
+ *   status: available h150 · reserved h68–80 · sold h30 (each: a mark, an ink for text, a chip background, per theme)
+ */
+
+/* ---------- fonts: self-hosted, OFL (fonts/OFL-*.txt, fonts/SOURCES.md); no runtime call to Google Fonts ---------- */
+@font-face { font-family: 'Heebo'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(../fonts/heebo-hebrew-wght-normal.woff2) format('woff2-variations'), url(../fonts/heebo-hebrew-wght-normal.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'Heebo'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(../fonts/heebo-latin-wght-normal.woff2) format('woff2-variations'), url(../fonts/heebo-latin-wght-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Heebo'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(../fonts/heebo-latin-ext-wght-normal.woff2) format('woff2-variations'), url(../fonts/heebo-latin-ext-wght-normal.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Frank Ruhl Libre'; font-style: normal; font-weight: 500; font-display: swap;
+  src: url(../fonts/frank-ruhl-libre-hebrew-500-normal.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'Frank Ruhl Libre'; font-style: normal; font-weight: 700; font-display: swap;
+  src: url(../fonts/frank-ruhl-libre-hebrew-700-normal.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'Frank Ruhl Libre'; font-style: normal; font-weight: 500; font-display: swap;
+  src: url(../fonts/frank-ruhl-libre-latin-500-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Frank Ruhl Libre'; font-style: normal; font-weight: 700; font-display: swap;
+  src: url(../fonts/frank-ruhl-libre-latin-700-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+/* ---------- theme-independent scales ---------- */
+:root {
+  /* neutral ramp (LCH-derived, see header) */
+  --n-0: #fffcf9; --n-50: #f9f6f3; --n-100: #f2ede8; --n-150: #e8e3de; --n-200: #dbd6d2; --n-300: #bfbbb6; --n-400: #9f9a96;
+  --n-500: #807b77; --n-600: #67625e; --n-700: #514d49; --n-800: #3c3935; --n-850: #2f2b28; --n-900: #24211e; --n-950: #1a1713;
+
+  /* brand — the ONLY tokens project.json may override (white-label) */
+  --brand-primary: #005d83;
+  --brand-on-primary: #ffffff;
+  --brand-accent: #eea927;
+  --brand-on-accent: #1a1713;
+
+  /* type: display = Frank Ruhl Libre, text = Heebo; six steps */
+  --font-text: 'Heebo', system-ui, 'Segoe UI', Arial, sans-serif;
+  --font-display: 'Frank Ruhl Libre', 'Heebo', Georgia, serif;
+  --fs-display: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem);  /* 36 → 56 px */
+  --fs-h1: clamp(1.75rem, 1.45rem + 1.2vw, 2.25rem);     /* 28 → 36 px */
+  --fs-h2: 1.375rem;                                      /* 22 px */
+  --fs-lead: 1.125rem;                                    /* 18 px */
+  --fs-body: 1rem;                                        /* 16 px */
+  --fs-small: 0.875rem;                                   /* 14 px (labels, meta; never body copy) */
+  --lh-display: 1.15;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;                                         /* Hebrew body */
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+  --tracking-latin-caps: 0.06em;                          /* Latin uppercase labels only; never on Hebrew */
+
+  /* space: 4 px grid */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px; --sp-16: 64px; --sp-24: 96px;
+  --gutter: var(--sp-4);
+  --content-max: 1200px;
+  --tap-min: 44px;                                        /* WCAG 2.5.5 target size for primary actions */
+
+  /* three radii */
+  --r-sm: 6px; --r-md: 12px; --r-full: 999px;
+
+  /* motion: three durations, one ease; zeroed under prefers-reduced-motion (below) */
+  --dur-fast: 150ms; --dur-base: 250ms; --dur-slow: 400ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* chrome over the media (card 13): the HUD, unit card, pills, legend and caption that sit on the flight, the hold and the tour.
+     Dark in BOTH themes (research §3: light outside, dark only inside the media), so they do not follow [data-theme].
+     Values from the dark ramp + the dark status set; css/style.css maps its legacy names (--panel, --fg, --ok…) onto these. */
+  --chrome-bg: var(--n-950);
+  --chrome-fg: var(--n-50);
+  --chrome-muted: color-mix(in srgb, var(--n-50) 68%, transparent);
+  --chrome-panel: color-mix(in srgb, var(--n-950) 84%, transparent);
+  --chrome-panel-hover: color-mix(in srgb, var(--n-900) 96%, transparent);
+  --chrome-panel-solid: var(--n-900);
+  --chrome-line: color-mix(in srgb, var(--n-50) 14%, transparent);
+  --chrome-line-strong: color-mix(in srgb, var(--n-50) 22%, transparent);
+  --chrome-well: color-mix(in srgb, var(--n-50) 6%, transparent);
+  --chrome-track: color-mix(in srgb, var(--n-50) 18%, transparent);
+  --chrome-shade: rgb(0 0 0 / 0.55);
+  --chrome-scrim: rgb(26 23 19 / 0.8);
+  --chrome-text-shadow: 0 1px 4px rgb(0 0 0 / 0.8);
+  --chrome-shadow: 0 10px 40px rgb(0 0 0 / 0.45);
+  --chrome-shadow-sm: 0 4px 16px rgb(0 0 0 / 0.4);
+  --chrome-ok: #6fb385; --chrome-warn: #e0a24c; --chrome-sold: #d77a71; --chrome-unknown: var(--n-400);
+  --chrome-on-light: var(--n-950);   /* text on a light fill (accent buttons, heat chips) */
+  /* the dev analytics dashboard's heat scale (dashboard.html, never deployed) */
+  --heat-hot: #e8734a; --heat-warm: #e0a24c; --heat-cold: #6aa8d8;
+}
+@media (min-width: 720px) { :root { --gutter: var(--sp-8); } }
+@media (prefers-reduced-motion: reduce) { :root { --dur-fast: 0ms; --dur-base: 0ms; --dur-slow: 0ms; } }
+
+/* ---------- light editorial (default) ---------- */
+:root, [data-theme="light"] {
+  color-scheme: light;
+  --surface: var(--n-0);            /* page */
+  --surface-raised: #ffffff;        /* cards */
+  --surface-sunken: var(--n-100);   /* wells, inputs, skeletons */
+  --surface-inverse: var(--n-900);
+  --line: var(--n-200);             /* decorative dividers */
+  --line-strong: var(--n-500);      /* UI boundaries (inputs, outline buttons): ≥ 3:1 */
+  --text: var(--n-900);
+  --text-muted: var(--n-600);
+  --text-on-inverse: var(--n-50);
+  --brand-ink: var(--brand-primary);   /* brand-coloured text/links on surface */
+  --accent-ink: #945b1a;               /* accent-coloured text on light (the fill accent is too light for text) */
+  --focus: var(--brand-primary);
+  --shadow-1: 0 1px 2px rgb(36 33 30 / 0.06), 0 2px 8px rgb(36 33 30 / 0.06);
+  --shadow-2: 0 4px 12px rgb(36 33 30 / 0.08), 0 16px 40px rgb(36 33 30 / 0.12);
+  --scrim: rgb(26 23 19 / 0.55);
+
+  --status-available: #3a7a4e; --status-available-ink: #2e6640; --status-available-bg: #e6f4e9;
+  --status-reserved: #b4782a;  --status-reserved-ink: #895925;  --status-reserved-bg: #fcefde;
+  --status-sold: #ab4944;      --status-sold-ink: #9a3f3a;      --status-sold-bg: #feedeb;
+  --status-info-ink: var(--brand-primary); --status-info-bg: #e3eff6;
+  --danger: #b83d38; --danger-ink: #a33531;
+  --whatsapp: #277044; --on-whatsapp: #ffffff;
+  --progress: var(--brand-primary);   /* running mark, progress bars */
+  --on-status: #ffffff;               /* glyph on a filled status mark (done, failed) */
+}
+
+/* ---------- refined dark ---------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: var(--n-950);
+  --surface-raised: var(--n-900);
+  --surface-sunken: #110f0c;
+  --surface-inverse: var(--n-50);
+  --line: var(--n-800);
+  --line-strong: var(--n-500);
+  --text: var(--n-50);
+  --text-muted: var(--n-300);
+  --text-on-inverse: var(--n-900);
+  --brand-ink: #80bee0;
+  --accent-ink: var(--brand-accent);
+  --focus: #80bee0;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3);
+  --shadow-2: 0 4px 12px rgb(0 0 0 / 0.4), 0 16px 40px rgb(0 0 0 / 0.5);
+  --scrim: rgb(0 0 0 / 0.65);
+
+  --status-available: #6fb385; --status-available-ink: #91cfa0; --status-available-bg: #25392a;
+  --status-reserved: #e0a24c;  --status-reserved-ink: #f4bd6a; --status-reserved-bg: #423221;
+  --status-sold: #d77a71;      --status-sold-ink: #f3a198;     --status-sold-bg: #492e2b;
+  --status-info-ink: #80bee0; --status-info-bg: #1b2d38;
+  --danger: #e2675f; --danger-ink: #f89e93;
+  --whatsapp: #277044; --on-whatsapp: #ffffff;
+  --progress: var(--brand-ink);       /* the brand fill is too dark on dark surfaces */
+  --on-status: var(--n-950);
+}
+/* tokens.css defines tokens and @font-face only, no element styles, so linking it never restyles a page by itself.
+   The base (body, focus ring) lives in components.css under .hb-base. */

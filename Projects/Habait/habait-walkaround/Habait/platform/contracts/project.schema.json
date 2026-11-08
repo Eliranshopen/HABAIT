@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "habait/platform/project.v0",
+  "title": "project.json v0 - the project card (name, brand, exterior, leads, disclaimer). Card 24 adds the optional analytics block; every other field stays open (additionalProperties) so nothing existing is reshaped.",
+  "type": "object",
+  "required": [
+    "id"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "leads": {
+      "type": "object",
+      "properties": {
+        "whatsapp_number": {
+          "type": "string",
+          "description": "international digits, no + and no leading 0 (972XXXXXXXXX); js/lead.js keeps the digits only"
+        },
+        "webhook_url": {
+          "type": "string",
+          "description": "the Apps Script /exec URL (apps-script/README-he.md); empty = the lead stays on the device; js/lead.js accepts only https:// or a local http test URL"
+        },
+        "sheet_endpoint": {
+          "type": "string",
+          "description": "alias of webhook_url (card 24)"
+        }
+      }
+    },
+    "analytics": {
+      "type": "object",
+      "description": "card 24 (D2). Absent or empty posthog_key = no third-party request at all (events stay in the first-party JSONL sink).",
+      "additionalProperties": false,
+      "properties": {
+        "posthog_key": {
+          "type": "string",
+          "pattern": "^(phc_[A-Za-z0-9_-]{10,})?$",
+          "description": "PostHog PROJECT key (public, phc_...). Never a personal key (phx_...)."
+        },
+        "posthog_host": {
+          "type": "string",
+          "pattern": "^https://[a-z0-9.-]+(:[0-9]+)?/?$",
+          "description": "e.g. https://us.i.posthog.com or https://eu.i.posthog.com"
+        },
+        "posthog_transport": {
+          "type": "string",
+          "enum": [
+            "sdk",
+            "http"
+          ]
+        },
+        "whatsapp_viewed_line": {
+          "type": "boolean",
+          "description": "add 'viewed:<units>' to the buyer's WhatsApp text. Product decision for Eliran (T2); default false = the message is unchanged"
+        },
+        "lead_secret": {
+          "type": "string",
+          "pattern": "^([A-Za-z0-9_.-]{16,120})?$",
+          "description": "shared value sent as k with each form lead; the Apps Script refuses leads without it when LEAD_SECRET is set in its Script Properties. It sits in the page, so it filters bots and stray posts, not a determined attacker"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

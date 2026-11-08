@@ -1,0 +1,42 @@
+# PRODUCTION deploy 1 — 2026-11-04 (main session; the deploy itself run by Eliran)
+go: Eliran 2026-11-04 "מאשר", in answer to "go לייצור" (root §9: its own explicit go).
+target: Vercel project habait-flow -> https://habait-flow.vercel.app (the platform's canonical URL, deploy-vercel/README.md).
+  NOT habait.ai: habait.ai ("Habait — the AI platform for real estate"), www.habait.ai (308 -> habait.ai) and app.habait.ai (307 -> /login)
+  are other projects, untouched. The earlier "אעלה ל-habait.ai" wording to Eliran was wrong; corrected in chat before the deploy.
+staged: python -X utf8 -I Projects/Habait/tools/deploy-vercel/stage_flow.py scratchpad/deploy-prod-1 (310.5 MB, from LIVE ~07:25,
+  includes the 2026-11-04 apartment.css 3D fix; does NOT include board transition-rise, closed afterwards by rnd-fd).
+local check (http.server :8857, buyer.test host, killed by PID; scratchpad/site_check.cjs, 7 pages x 390/1440): 10/14 clean; the 4 others are
+  landing v=b and flow.html: 3 optional /_local/segments/rainbow-cine/* 404s (never staged) + 2 cine.js console errors from them (out of scope).
+production BEFORE (same check, prodcheck/before.json): 4/14 — 404 _local/dist apartment.json, dev text visible, apartment.js TypeError.
+link: npx vercel@65.9.0 link --yes --project habait-flow; the .env.local it writes was deleted unread.
+deploy: the auto-mode classifier blocked the main session's `vercel deploy --prod` (root §8.2); Eliran sent the command himself:
+  cd scratchpad/deploy-prod-1 && npx --yes vercel@65.9.0 deploy --prod --yes
+result: https://habait-flow-pk8nlq0xo-eliran-5390.vercel.app · dpl_9RL6FWDqKuhqLbDrsPPgUPAP1Pak · READY · target production · aliased https://habait-flow.vercel.app
+production AFTER (prodcheck/after2.json): 10/14, same as local (first run had 3 transient network timeouts; the re-run was clean of them).
+card 22: habait-deploy-qa (fresh reviewer) -> logs/qa-deployed-report.md
+
+## card 22 result + fix (2026-11-04)
+card 22 (habait-deploy-qa): FAIL on 2 lines, one cause — landing arm B (~50% of landing loads) and flow.html paint a black stage on production:
+  stage_flow.py never stages _local/segments/rainbow-cine/ (orbit.mp4, orbit.first.jpg, hold-arc/camera.json -> 404). Pre-existing (prod before
+  this deploy also 404'd the flight data); the earlier "the flight falls back" note in preview-deploy-2.txt was WRONG: it does not fall back visibly.
+  Report: logs/qa-deployed-report.md · frames logs/qa-deployed/g-landing-vb-*.png
+fix (js/landing.js, reopened in .wt/platform-ui-ux, closed): flightReady(ctx) HEADs the cine start segment's poster; when it is missing,
+  arm B becomes arm A (registered 'a', via 'fallback'). Preview tree with clips: v=b -> b (frame); clips removed: v=b -> a/fallback, split -> a.
+  landing.test 35/35, analytics.test green, npm test green (preview and LIVE).
+NOT deployed yet: rides on the next habait-flow deploy (rnd-fd's transition-rise restage), which needs Eliran's run. flow.html stays black on
+  Vercel until the cine clips are staged (61 MB) — Eliran's call.
+
+## cine clips staged (2026-11-04; Eliran: "Upload the clips (Recommended)")
+stage_flow.py step 1c (reopened in .wt/platform-ui-ux, closed): stages ONLY the _local/segments/ paths flow.cine.json references (a referenced
+  folder copied whole, minus CLAUDE.md): 352 files / 56.3 MB; never dev/ or manifest.dev.json. Staged total 366.9 MB.
+local check (scratchpad/stage-cine-test, http.server :8857, buyer.test): 14/14 clean — flow.html and landing v=b play the flight (frame cinecheck/local-390-2.png).
+  Note: an earlier run hit two stale python servers of mine still on :8857 (killed the wrapper shell, not python); killed by PID 6092/24096 and re-run.
+deploy: by rnd-fd's restage (fresh folder, carries transition-rise + landing.js fallback + the clips), run by Eliran. Card 22 re-run after it.
+
+## deploy 3 — OWED-024 rulings (2026-11-04 ~10:55; Eliran: "go לייצור", ran the command himself)
+staged: scratchpad/deploy-prod-6 from live ~10:41 (after rnd-fd rebuilt tour dist 3d/dollhouse.html with the name; before rnd-1f's hold copy-back ~10:50).
+  0 files with "השם מוסתר"; "ישראל קנדה" in fixtures/rainbow/project.json, _local/dist/rainbow/846/apartment.json, tour/3d/dollhouse.html.
+local check (:8857 --directory, killed, port free after): site_check 14/14.
+result: dpl_D4nm8aEBUjWP858u4YKZ3jSHiRsG · habait-flow-dbi8rhkzr-eliran-5390.vercel.app · READY · production · aliased https://habait-flow.vercel.app
+live check: site_check 14/14 on the alias; landing v=b legal summary "מידע משפטי", 0 visible landing captions; apartment about tab shows "ישראל קנדה", no "השם מוסתר".
+next: rnd-1f (board hold-building-tour) stages from live and deploys once; its stage = this one + hold/index.html + hold/app.js.

@@ -1,0 +1,162 @@
+// QA3 scope B: the store's functions (live code), temp folders only. node store.mjs <outfile>
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { createHash } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
+const E = (f) => pathToFileURL(`C:/RnD/Projects/3Dengine/engine/${f}`).href;
+const R = await import(E('readings.mjs'));
+const J = await import(E('jobs.mjs'));
+const T = await import(E('trace.mjs'));
+const { findReading, keepReading, readerOf, supersededCount, isRecord, readingCost } = R;
+const sha = (b) => createHash('sha256').update(b).digest('hex');
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'q3store-')).replace(/\\/g, '/');
+const pipe = `${root}/pipeline`;
+for (const f of ['Habait/tour360/tools/auto-trace.mjs', 'Habait/tour360/server/handler.mjs']) { fs.mkdirSync(path.dirname(`${pipe}/${f}`), { recursive: true }); fs.writeFileSync(`${pipe}/${f}`, `// stand-in ${f}\n`); }
+const config = { readingsDir: `${root}/readings`, pipelineRoot: pipe };
+const MARK = 'ZZQAMARKER sentence about the drawing, secret room name';
+const out = []; let n = 0; let fails = 0;
+const ck = (name, ok, extra = '') => { n++; if (!ok) fails++; out.push(`${ok ? 'ok  ' : 'FAIL'} ${name}${extra ? ' | ' + extra : ''}`); };
+let seq = 0;
+const newPdf = () => sha(`pdf-${++seq}-${Math.random()}`);
+const readingFile = (doc, name = `r${++seq}.json`) => { const f = `${root}/in/${name}`; fs.mkdirSync(`${root}/in`, { recursive: true }); fs.writeFileSync(f, typeof doc === 'string' ? doc : JSON.stringify(doc)); return f; };
+const GOODDOC = (extra = {}) => ({ rooms: [{ name: MARK, label: MARK }], fixtures: [{ label: MARK }], ...extra });
+const keep = (pdf, doc, o = {}) => keepReading(config, { pdfSha256: pdf, readingFile: typeof doc === 'string' && doc.endsWith('.json') && fs.existsSync(doc) ? doc : readingFile(doc), source: 'paid', costUsd: 0.01, ...o }, o.deps);
+const dir = (pdf) => `${config.readingsDir}/${pdf}`;
+const status = (pdf) => { try { return findReading(config, pdf).status; } catch (e) { return 'throws:' + e.code; } };
+const noMark = (v) => !JSON.stringify(v ?? '').includes('ZZQAMARKER');
+const allErrText = [];
+const tryk = (f) => { try { return { r: f() }; } catch (e) { allErrText.push(String(e.message) + '|' + String(e.code)); return { e }; } };
+
+// ---- 1. valid keep, found, no text returned
+{
+  const p = newPdf(); const k = keep(p, GOODDOC({ _meta: { at: '2026-11-18T10:00:00Z', model: 'google/gemini-2.5-pro', usd: 0.0123 } }));
+  ck('keep -> kept true, superseded null', k.kept === true && k.superseded === null);
+  const f = findReading(config, p); ck('found after keep', f.status === 'found');
+  ck('no marker text in keep result / find result', noMark(k) && noMark(f), JSON.stringify(f.record));
+  ck('plan_date = day of _meta.at', f.record.date === '2026-11-18', f.record.date);
+}
+// ---- 2. same again / another reading / superseded numbering
+{
+  const p = newPdf(); const f1 = readingFile(GOODDOC({ n: 1 })); keep(p, f1);
+  const m1 = fs.statSync(`${dir(p)}/record.json`).mtimeMs;
+  const again = keep(p, f1); ck('same bytes same reader again -> kept:false', again.kept === false);
+  ck('  nothing superseded, record untouched', supersededCount(config, p) === 0 && fs.statSync(`${dir(p)}/record.json`).mtimeMs === m1);
+  for (let i = 2; i <= 6; i++) keep(p, readingFile(GOODDOC({ n: i })));
+  ck('five more different readings -> superseded count 5', supersededCount(config, p) === 5, String(supersededCount(config, p)));
+  const names = fs.readdirSync(`${dir(p)}/superseded`).sort(); ck('  numbered 1..5, each a whole pair', names.join() === '1,2,3,4,5' && names.every((x) => fs.existsSync(`${dir(p)}/superseded/${x}/record.json`) && fs.existsSync(`${dir(p)}/superseded/${x}/reading.json`)));
+  // weird entries in superseded: numbering continues from the max valid
+  fs.mkdirSync(`${dir(p)}/superseded/0`); fs.mkdirSync(`${dir(p)}/superseded/01`); fs.mkdirSync(`${dir(p)}/superseded/-1`); fs.writeFileSync(`${dir(p)}/superseded/junk.txt`, ''); fs.mkdirSync(`${dir(p)}/superseded/99999999999`);
+  const k = keep(p, readingFile(GOODDOC({ n: 7 }))); ck('weird names in superseded ignored; next is 6', k.superseded === 6, String(k.superseded));
+  fs.mkdirSync(`${dir(p)}/superseded/999999999`);
+  const k9 = tryk(() => keep(p, readingFile(GOODDOC({ n: 8 })))); ck('number 999999999 present (9 digits): next = 1000000000 -> still readable?', true, k9.r ? 'superseded=' + k9.r.superseded + ' count=' + supersededCount(config, p) : 'error ' + k9.e.message);
+}
+// ---- 3. reader changes
+{
+  const p = newPdf(); keep(p, GOODDOC());
+  const tool = `${pipe}/Habait/tour360/tools/auto-trace.mjs`; const model = `${pipe}/Habait/tour360/server/handler.mjs`;
+  const t0 = fs.readFileSync(tool); const m0 = fs.readFileSync(model);
+  fs.writeFileSync(tool, Buffer.concat([t0, Buffer.from(' ')])); ck('one byte added to tool copy -> stale', status(p) === 'stale');
+  fs.writeFileSync(tool, t0); ck('restored -> found', status(p) === 'found');
+  fs.writeFileSync(model, Buffer.concat([m0, Buffer.from('\n')])); ck('one byte added to model file copy -> stale', status(p) === 'stale');
+  const st = findReading(config, p); ck('  stale result has no reading text', noMark(st));
+  // keep while stale: supersedes, new found
+  const k = keep(p, readingFile(GOODDOC())); ck('keep of same bytes by NEW reader -> kept true + superseded 1', k.kept === true && k.superseded === 1, JSON.stringify([k.kept, k.superseded]));
+  ck('  found again under the new reader', status(p) === 'found');
+  fs.writeFileSync(model, m0);
+  fs.rmSync(tool); const r = tryk(() => findReading(config, p)); ck('tool missing -> TOOLCHAIN_MISSING thrown', r.e?.code === 'TOOLCHAIN_MISSING');
+  const none = tryk(() => findReading(config, newPdf())); ck('no folder + tool missing -> none (no throw)', none.r?.status === 'none');
+  fs.mkdirSync(tool); ck('tool is a FOLDER -> TOOLCHAIN_MISSING', tryk(() => findReading(config, p)).e?.code === 'TOOLCHAIN_MISSING'); fs.rmdirSync(tool); fs.writeFileSync(tool, t0);
+  ck('keep with tool missing throws, writes nothing', (() => { fs.rmSync(tool); const q = newPdf(); const e = tryk(() => keep(q, GOODDOC())).e; fs.writeFileSync(tool, t0); return e?.code === 'TOOLCHAIN_MISSING' && !fs.existsSync(dir(q)); })());
+  ck('stale record: reader of other kind (deleted key) -> bad not found', (() => { const q = newPdf(); keep(q, GOODDOC()); const rec = JSON.parse(fs.readFileSync(`${dir(q)}/record.json`)); delete rec.reader.tool_sha256; fs.writeFileSync(`${dir(q)}/record.json`, JSON.stringify(rec)); return status(q) === 'bad'; })());
+}
+// ---- 4. forged records
+const base = () => { const p = newPdf(); keep(p, GOODDOC({ u: ++seq, _meta: { at: '2026-11-18T10:00:00Z', model: 'm/x', usd: 0.01 } })); return { p, rec: JSON.parse(fs.readFileSync(`${dir(p)}/record.json`, 'utf8')) }; };
+const KEYS = Object.keys(base().rec);
+let forged = 0; let forgedFound = [];
+const writeRec = (p, rec, raw) => fs.writeFileSync(`${dir(p)}/record.json`, raw ?? JSON.stringify(rec, null, 2));
+for (const k of KEYS) { const { p, rec } = base(); const r2 = { ...rec }; delete r2[k]; writeRec(p, r2); forged++; if (status(p) === 'found') forgedFound.push('missing ' + k); }
+{ const { p, rec } = base(); writeRec(p, { ...rec, extra: 1 }); forged++; if (status(p) === 'found') forgedFound.push('extra key'); }
+const WRONG = [null, 'x', '', 0, -1, 1.5, [], {}, true, false];
+for (const k of KEYS) for (const v of WRONG) {
+  if (JSON.stringify(v) === JSON.stringify(base().rec[k])) continue;
+  const { p, rec } = base(); const r2 = { ...rec, [k]: v }; writeRec(p, r2); forged++;
+  const s = status(p); const legit = (k === 'model' && (v === null || v === 'x')) || (k === 'cost_usd' && (v === null || v === 0 || v === 1.5 || v === -1 && false));
+  if (s === 'found' && !legit) forgedFound.push(`${k}=${JSON.stringify(v)}`);
+}
+const specials = {
+  plan_date: ['2026-02-31', '2026-13-01', '2026-00-10', 'tomorrow', '2026-1-1', '2026-11-19T00:00', '2026-11-19 ', ' 2026-11-19', '2026-11-19\n', '٢٠٢٦-١١-١٩', '2026-11-19\u0000', '--help', '-1-11-19', '0000-00-00'],
+  read_at: ['2026-11-19T24:00:00Z', '2026-02-31T10:00:00Z', '2026-11-19T10:00:00+09:00', '2026-11-19T10:00:00.1234567Z', 'a sentence', '2026-11-19T10:00:00Z\n', '2026-11-19T10:60:00Z', '2026-11-19T25:00:00Z'],
+  saved_at: ['2026-11-19T24:00:00Z', 'x'],
+  model: ['a sentence with spaces', '', 'x'.repeat(81), '-leading', '/etc', 'C:\\Windows', 'a\nb', 'é'],
+  engine_version: ['1.4', '1.4.0-beta', 'v1.4.0', ' 1.4.0', '1.4.0\n', '01.4.0x'],
+  schema: ['habait/reading.v2', 'habait/reading.v1 ', ''],
+  source: ['Paid', 'other', 'paid '],
+  cost_usd: [-0.1, 1000.01, '1', '0.5', 1e21],
+  reading_bytes: [0, -5, 1e9, '10', 10.5],
+  reading_sha256: ['A'.repeat(64), 'a'.repeat(63), 'g'.repeat(64)],
+  pdf_sha256: ['A'.repeat(64)],
+};
+for (const [k, vals] of Object.entries(specials)) for (const v of vals) { const { p, rec } = base(); writeRec(p, { ...rec, [k]: v }); forged++; if (status(p) === 'found') forgedFound.push(`${k}=${JSON.stringify(v)}`); }
+{ const { p, rec } = base(); writeRec(p, rec, JSON.stringify(rec).replace(/"cost_usd":0.01/, '"cost_usd":1e999')); forged++; if (status(p) === 'found') forgedFound.push('cost 1e999'); }
+{ const { p, rec } = base(); writeRec(p, rec, '\uFEFF' + JSON.stringify(rec)); forged++; if (status(p) === 'found') forgedFound.push('record with BOM'); }
+{ const { p, rec } = base(); writeRec(p, rec, JSON.stringify(rec).replace('"schema"', '"schema":"habait/reading.v1","schema"')); forged++; /* duplicate key: last wins -> fine either way, just no crash */ }
+for (const v of [{ ...{}, reader: { tool_sha256: 'a'.repeat(64), model_file_sha256: 'b'.repeat(64) } }, { reader: { tool_sha256: 'a'.repeat(64) } }, { reader: ['x'] }]) { const { p, rec } = base(); writeRec(p, { ...rec, ...v }); forged++; const s = status(p); if (s === 'found') forgedFound.push('reader ' + JSON.stringify(v)); }
+ck(`forged records: ${forged} variants, none found`, forgedFound.length === 0, forgedFound.join('; '));
+// legit variants must be found
+for (const [k, v] of [['model', null], ['cost_usd', null], ['cost_usd', 0], ['cost_usd', 1000], ['plan_date', '2026-02-28'], ['read_at', '2026-11-19T10:00:00.123456Z']]) { const { p, rec } = base(); writeRec(p, { ...rec, [k]: v }); ck(`valid variant ${k}=${JSON.stringify(v)} is found`, status(p) === 'found'); }
+// record for another PDF copied in; reading swapped; two PDFs
+{ const a = base(); const b = base(); fs.copyFileSync(`${dir(b.p)}/record.json`, `${dir(a.p)}/record.json`); ck('record of another PDF copied in -> bad', status(a.p) === 'bad');
+  const c = base(); fs.copyFileSync(`${dir(b.p)}/reading.json`, `${dir(c.p)}/reading.json`); ck('reading swapped under an old record -> bad', status(c.p) === 'bad');
+  const d = base(); fs.writeFileSync(`${dir(d.p)}/reading.json`, fs.readFileSync(`${dir(d.p)}/reading.json`, 'utf8') + ' '); ck('reading with one trailing space -> bad', status(d.p) === 'bad');
+  const e = base(); fs.writeFileSync(`${dir(e.p)}/reading.json`, JSON.stringify({ rooms: 'x' })); ck('reading rooms not a list -> bad', status(e.p) === 'bad'); }
+// layouts
+{ const a = base(); fs.rmSync(`${dir(a.p)}/reading.json`); ck('record only -> bad', status(a.p) === 'bad');
+  const b = base(); fs.rmSync(`${dir(b.p)}/record.json`); ck('reading only -> bad', status(b.p) === 'bad');
+  const c = base(); fs.rmSync(`${dir(c.p)}/record.json`); fs.rmSync(`${dir(c.p)}/reading.json`); ck('neither (folder only) -> none', status(c.p) === 'none');
+  const d = base(); fs.rmSync(`${dir(d.p)}/reading.json`); fs.mkdirSync(`${dir(d.p)}/reading.json`); ck('reading.json is a FOLDER -> bad', status(d.p) === 'bad');
+  const e = base(); fs.rmSync(`${dir(e.p)}/record.json`); fs.mkdirSync(`${dir(e.p)}/record.json`); ck('record.json is a FOLDER -> bad', status(e.p) === 'bad');
+  const f = newPdf(); fs.mkdirSync(config.readingsDir, { recursive: true }); fs.writeFileSync(dir(f), 'x'); ck('a FILE where the PDF folder belongs -> bad', status(f) === 'bad'); const kf = tryk(() => keep(f, GOODDOC())); ck('  keep over it refuses (STORE), the file untouched', kf.e?.code === 'STORE' && fs.readFileSync(dir(f), 'utf8') === 'x', kf.e?.message);
+  const g = base(); const h = base(); fs.rmSync(dir(g.p), { recursive: true }); fs.symlinkSync(dir(h.p), dir(g.p), 'junction'); ck('PDF folder is a junction to ANOTHER PDF\'s pair -> bad (record names other PDF)', status(g.p) === 'bad');
+  const i = base(); const i2 = `${root}/elsewhere-${seq}`; fs.cpSync(dir(i.p), i2, { recursive: true }); fs.rmSync(dir(i.p), { recursive: true }); fs.symlinkSync(i2, dir(i.p), 'junction'); ck('junction to its own pair elsewhere -> found (observation: junctions followed)', status(i.p) === 'found');
+  const j = base(); fs.writeFileSync(`${dir(j.p)}/reading.json.4242.abcd1234.tmp`, 'half'); fs.writeFileSync(`${dir(j.p)}/record.json.4242.abcd1234.tmp`, '{'); ck('temp files of a keep that died left in folder -> still found', status(j.p) === 'found');
+  const j2 = tryk(() => keep(j.p, GOODDOC({ z: 1 }))); ck('  next keep works and leftovers are not mistaken for a pair', j2.r?.kept === true && status(j.p) === 'found');
+  const k = base(); fs.writeFileSync(`${dir(k.p)}/superseded`, 'file'); const kk = tryk(() => keep(k.p, GOODDOC({ y: 1 }))); const old = fs.readFileSync(`${dir(k.p)}/reading.json`, 'utf8'); ck('superseded is a FILE: keep fails by name, old pair stays', kk.e && status(k.p) === 'found', kk.e ? String(kk.e.code || kk.e.message).slice(0, 80) : 'no error: ' + JSON.stringify(kk.r));
+  out.push('   leftover temp files after that failed keep: ' + fs.readdirSync(dir(k.p)).filter((x) => x.endsWith('.tmp')).length);
+  const l = base(); fs.mkdirSync(`${dir(l.p)}/store.lock`); fs.writeFileSync(`${dir(l.p)}/store.lock/h.${2147000}.${Date.now()}.abcdef01`, ''); ck('planted dead holder of store.lock: keep proceeds', tryk(() => keep(l.p, GOODDOC({ w: 1 }))).r?.kept === true);
+  const m = base(); fs.mkdirSync(`${dir(m.p)}/store.lock`); fs.writeFileSync(`${dir(m.p)}/store.lock/foreign`, ''); const t0 = Date.now(); const mm = tryk(() => keep(m.p, GOODDOC({ v: 1 }), { deps: { lockWaitMs: 300 } })); ck('foreign folder as store.lock: keep says lock busy by label, no text', /readings store: lock busy$/.test(mm.e?.message || ''), mm.e?.message); }
+// ---- 5. keep input validation
+{ const p = newPdf(); const bad = [];
+  const tryBad = (name, f) => { const r = tryk(f); if (!r.e) bad.push(name); };
+  tryBad('cost -1', () => keep(p, GOODDOC(), { costUsd: -1 })); tryBad('cost 1001', () => keep(p, GOODDOC(), { costUsd: 1001 })); tryBad('cost "3"', () => keep(p, GOODDOC(), { costUsd: '3' })); tryBad('cost NaN', () => keep(p, GOODDOC(), { costUsd: NaN })); tryBad('cost Infinity', () => keep(p, GOODDOC(), { costUsd: Infinity }));
+  tryBad('source x', () => keep(p, GOODDOC(), { source: 'x' })); tryBad('planDate feb31', () => keep(p, GOODDOC(), { planDate: '2026-02-31' })); tryBad('pdf upper', () => keepReading(config, { pdfSha256: p.toUpperCase(), readingFile: readingFile(GOODDOC()), source: 'paid' }));
+  tryBad('pdf path traversal', () => keepReading(config, { pdfSha256: '../../x', readingFile: readingFile(GOODDOC()), source: 'paid' }));
+  tryBad('missing file', () => keep(p, `${root}/in/nope.json`.replace('.json', '.json'))); tryBad('dir as file', () => keepReading(config, { pdfSha256: p, readingFile: `${root}/in`, source: 'paid' }));
+  tryBad('not json', () => keep(p, '{ ' + MARK)); tryBad('BOM json', () => keep(p, '\uFEFF{"rooms":[]}')); tryBad('rooms not list', () => keep(p, { rooms: {} })); tryBad('array', () => keep(p, [])); tryBad('null', () => keep(p, 'null'));
+  ck('keep refuses bad inputs (cost, source, date, pdf, files, non-readings)', bad.length === 0, 'accepted: ' + bad.join(', ')); ck('  none of them left a folder', !fs.existsSync(dir(p)) || fs.readdirSync(dir(p)).length === 0, fs.existsSync(dir(p)) ? fs.readdirSync(dir(p)).join() : '');
+  ck('empty rooms list [] is a reading and is kept', tryk(() => keep(p, { rooms: [] })).r?.kept === true); }
+// ---- 6. _meta hostility
+{ for (const [name, meta, wantDate, wantModel] of [
+  ['_meta is a string', 'x', 'today', null], ['_meta is array', [1], 'today', null], ['_meta null', null, 'today', null],
+  ['_meta.at sentence', { at: MARK }, 'today', null], ['_meta.at 24:00', { at: '2026-11-18T24:00:00Z' }, 'today', null], ['_meta.at feb31', { at: '2026-02-31T10:00:00Z' }, 'today', null],
+  ['_meta.at far future 9999', { at: '9999-12-31T23:59:59Z' }, '9999-12-31', null], ['_meta.at fine but plan_date from it', { at: '2026-11-18T10:00:00.5Z' }, '2026-11-18', null],
+  ['_meta.model sentence', { model: MARK }, 'today', null], ['_meta.model one word marker', { model: 'ZZQAMARKER' }, 'today', 'ZZQAMARKER'], ['_meta.model huge', { model: 'a'.repeat(500) }, 'today', null],
+  ['_meta.usd -1', { usd: -1 }, 'today', null], ['_meta.usd huge', { usd: 1e30 }, 'today', null]]) {
+    const p = newPdf(); const k = tryk(() => keep(p, GOODDOC({ _meta: meta }), { costUsd: null }));
+    const rec = k.r ? findReading(config, p) : null; const today = new Date().toISOString().slice(0, 10);
+    const okDate = rec && (wantDate === 'today' ? rec.record.date === today : rec.record.date === wantDate); const okModel = rec && rec.record.model === wantModel;
+    ck(`_meta hostile: ${name}`, k.r && okDate && okModel && (name.includes('one word') || noMark(rec)), k.e ? 'error ' + k.e.message : `date=${rec?.record.date} model=${rec?.record.model}`);
+    if (name.startsWith('_meta.usd')) { const f = readingFile(GOODDOC({ _meta: meta })); ck(`  readingCost(${name}) is null`, readingCost(f) === null); }
+  } }
+// ---- 7. import / dates / drawingId
+{ const id1 = J.drawingId('a'.repeat(64), 'p1'); const id2 = J.drawingId('a'.repeat(64), 'p1'); ck('drawingId deterministic, 16 hex, no leading hyphen', id1 === id2 && /^[0-9a-f]{16}$/.test(id1)); ck('drawingId differs by pdf and apartment', J.drawingId('b'.repeat(64), 'p1') !== id1 && J.drawingId('a'.repeat(64), 'p2') !== id1);
+  const bad = ['2026-02-31', '', null, undefined, 20261119, '--help', '-1-01-01', '2026-11-19T00:00:00Z', '2026-11-19\n', '+2026-11-19', '2026-11-1', '٢٠٢٦-١١-١٩'];
+  ck('isDate refuses sentences/impossible days', bad.every((v) => !T.isDate(v)) && T.isDate('2026-11-19') && T.isDate('2024-02-29') && !T.isDate('2025-02-29'));
+  ck('isInstant refuses 24:00:00, feb 31, zones', ['2026-11-19T24:00:00Z', '2026-02-31T10:00:00Z', '2026-11-19T10:00:00+09:00', 'x', '2026-11-19T10:00:00'].every((v) => !T.isInstant(v)) && T.isInstant('2026-11-19T10:00:00Z') && T.isInstant('2026-11-19T10:00:00.123Z'));
+  const tu = ['2026-02-31', '--help', 'x', 5, '2026-11-19' + String.fromCharCode(10), '2026-11-19T00:00:00Z']; const accepted = [];
+  for (const v of tu) { try { await T.runTrace({ pipelineRoot: pipe, trace: {}, jobsDir: root }, { pdf: root + '/nope.pdf', outDir: root + '/o' + (++seq), traceDate: v }); accepted.push(String(v)); } catch (e) { if (e.code !== 'TRACE_USAGE' || !/real day/.test(e.message)) accepted.push(String(v) + ' (other error: ' + e.message.slice(0, 50) + ')'); } }
+  ck('runTrace refuses every bad traceDate by name before anything starts', accepted.length === 0, accepted.join('|')); }
+fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/q3/errtext.txt', allErrText.join('\n'));
+ck('error messages of every refused keep contain no marker text', allErrText.every((t) => !t.includes('ZZQAMARKER')), `${allErrText.length} error texts`);
+out.push(`${n} checks, ${fails} failed`);
+fs.writeFileSync(process.argv[2], out.join('\n') + '\n'); fs.rmSync(root, { recursive: true, force: true }); console.log(out.join('\n'));

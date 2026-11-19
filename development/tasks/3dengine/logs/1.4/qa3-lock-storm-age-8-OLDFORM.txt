@@ -1,0 +1,10 @@
+run 0 age N=8: allWaiting=true ok=0/8 TWO=7 LOST=1 logOverlap=0 entered=8 killedInside=0 other=[TWO|TWO|TWO|TWO|TWO|TWO|TWO|LOST-HOLD] BAD
+   timeline (ms from holder-in): holder-woke=1813; takers inside: T7[807-1118]
+   left beside: []
+run 1 age N=8: allWaiting=true ok=0/8 TWO=7 LOST=1 logOverlap=0 entered=8 killedInside=0 other=[TWO|TWO|TWO|TWO|TWO|TWO|TWO|LOST-HOLD] BAD
+   timeline (ms from holder-in): holder-woke=1809; takers inside: T7[813-1126]
+   left beside: []
+run 2 age N=8: allWaiting=true ok=0/8 TWO=7 LOST=1 logOverlap=0 entered=8 killedInside=0 other=[TWO|TWO|TWO|TWO|TWO|TWO|LOST-HOLD|TWO] BAD
+   timeline (ms from holder-in): holder-woke=1819; takers inside: T6[817-1133]
+   left beside: []
+SUMMARY age N=8 runs=3 processes=27 bad=3

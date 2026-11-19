@@ -1,0 +1,31 @@
+// node real.mjs <step> <outfile>   steps: a (kept reading + --go, no judge), b (planted plan_date), c (--fresh --go), d (kept + --go, judge ON)
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { createHash } from 'node:crypto';
+import { makeHome, cli, scripted, requests, FIX, PDF, PDF_SHA } from './home.mjs';
+import { pathToFileURL } from 'node:url';
+const R = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/readings.mjs').href); const J = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/jobs.mjs').href);
+const step = process.argv[2]; const outfile = process.argv[3]; const sha = (b) => createHash('sha256').update(b).digest('hex');
+const state = path.join(os.tmpdir(), 'q3-real-state.json').split(String.fromCharCode(92)).join('/');
+let h; if (step === 'a') { h = await makeHome('real'); fs.writeFileSync(state, JSON.stringify({ home: h.home, port: h.port })); } else { const s = JSON.parse(fs.readFileSync(state, 'utf8')); h = { home: s.home, port: s.port, jobs: `${s.home}/jobs-temp` }; const { loadConfig } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/config.mjs').href); h.config = loadConfig({ env: { ENGINE_HOME: h.home } }); }
+const out = []; const say = (s) => { out.push(s); console.log(s); };
+const DRAWING = J.drawingId(PDF_SHA, 'p1'); const pinned = JSON.parse(fs.readFileSync(`${FIX}/apt846/expected-trace.json`, 'utf8')).sha256['plan.general.json'];
+if (step === 'a') { const r = cli(h, ['reading', 'import', PDF, `${FIX}/apt846/saved-reading.json`, '--go']); say('import: exit ' + r.status + ' ' + r.out.trim()); }
+const runDir = `${h.home}/run-${step}`; const scr = scripted(h.home, `${FIX}/apt846/saved-reading.json`);
+const before = requests(h.home);
+if (step === 'b') { const f = `${h.config.readingsDir}/${PDF_SHA}/record.json`; const rec = JSON.parse(fs.readFileSync(f, 'utf8')); rec.plan_date = '2031-12-31'; fs.writeFileSync(f, JSON.stringify(rec, null, 2) + '\n'); say('record plan_date planted: 2031-12-31 (a valid hostile future day)'); }
+const args = { a: ['--no-judge', '--budget', '0.5', '--go'], b: ['--no-judge', '--budget', '0.5', '--go'], c: ['--fresh', '--no-judge', '--budget', '0.5', '--go'], d: ['--budget', '0.5', '--go'] }[step];
+const t0 = Date.now(); const r = cli(h, ['trace', PDF, '--out', runDir, '--id', DRAWING, ...args, '--json'], { env: scr, timeout: 520000 }); const secs = Math.round((Date.now() - t0) / 1000);
+say(`step ${step}: exit ${r.status} in ${secs} s${r.error ? ' ERROR ' + r.error : ''}; stderr: ${r.err.trim().slice(0, 200)}`);
+const names = new Set(); const walkN = (v, key) => { if (typeof v === 'string') { if (/name|label/.test(key) && v.trim().length >= 3) names.add(v.trim()); } else if (Array.isArray(v)) v.forEach((x) => walkN(x, key)); else if (v && typeof v === 'object' && key !== '_meta') for (const [k, x] of Object.entries(v)) walkN(x, k); };
+walkN(JSON.parse(fs.readFileSync(`${FIX}/apt846/saved-reading.json`, 'utf8')), '');
+const leaked = [...names].filter((nm) => (r.out + r.err).includes(nm)); say(`names of rooms/labels of the reading checked in stdout+stderr: ${names.size}; found in the answer: ${leaked.length}`);
+let a = null; try { a = JSON.parse(r.out); } catch { say('stdout not JSON: ' + r.out.slice(0, 300)); }
+const reqs = requests(h.home) - before; say(`requests to the (scripted) model in this run: ${reqs}`);
+if (a) {
+  say(`outcome=${a.outcome} paid=${a.paid} spentUsd=${a.result?.spentUsd ?? a.spentUsd} reading=${JSON.stringify(a.reading)}`);
+  const plan = `${runDir}/plan-1/plan.general.json`;
+  if (fs.existsSync(plan)) { const b = fs.readFileSync(plan); const doc = JSON.parse(b.toString('utf8')); say(`plan.general.json sha256=${sha(b)} pinned=${pinned} equal=${sha(b) === pinned}; trace_date=${doc.plan_meta?.trace_date}; apartment_id=${doc.apartment_id}; drawing id=${DRAWING}`); fs.writeFileSync(`${h.home}/plan-${step}.json`, b); }
+  const ledgerF = `${runDir}/ledger.json`; if (fs.existsSync(ledgerF)) say('run ledger rows: ' + JSON.stringify(JSON.parse(fs.readFileSync(ledgerF, 'utf8')).rows.map((x) => [x.op, x.settled_usd, x.status])));
+}
+const st = R.findReading(h.config, PDF_SHA); say(`store now: ${st.status}, source=${st.record?.source} cost=${st.record?.costUsd} date=${st.record?.date} superseded=${R.supersededCount(h.config, PDF_SHA)}`);
+if (step === 'b') { const A = JSON.parse(fs.readFileSync(`${h.home}/plan-a.json`, 'utf8')); const B = JSON.parse(fs.readFileSync(`${h.home}/plan-b.json`, 'utf8')); const diffs = []; const walk = (x, y, p) => { if (typeof x !== typeof y) return diffs.push(p); if (x && typeof x === 'object') { for (const k of new Set([...Object.keys(x), ...Object.keys(y)])) walk(x[k], y[k], p + '/' + k); } else if (x !== y) diffs.push(p); }; walk(A, B, ''); say('plan a vs plan b (only the date changed in the record): differing fields: ' + JSON.stringify(diffs)); }
+fs.writeFileSync(outfile, out.join('\n') + '\n');

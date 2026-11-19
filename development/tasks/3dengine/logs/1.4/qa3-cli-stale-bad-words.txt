@@ -1,0 +1,16 @@
+STALE:
+outcome: DRY
+nothing was started and nothing was booked
+a paid run would call the vision model: 1 reading(s) and up to 0 run(s) of the judge, about $0.02 in all
+to pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap
+the engine keeps a reading of this PDF made by another reader (the reading tool or the model changed since): it is not used
+keys (by name): FAL_KEY: missing, OPENROUTER_API_KEY: present
+
+BAD:
+outcome: DRY
+nothing was started and nothing was booked
+a paid run would call the vision model: 1 reading(s) and up to 0 run(s) of the judge, about $0.02 in all
+to pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap
+what the engine's store holds for this PDF does not add up: it is not used
+keys (by name): FAL_KEY: missing, OPENROUTER_API_KEY: present
+

@@ -1,0 +1,41 @@
+// node keeps.mjs <N> <kills> <runs> <outfile>   real keep processes (repo's tests/helpers/lock-child.mjs, read-only use)
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { spawn } from 'node:child_process'; import { createHash } from 'node:crypto'; import { pathToFileURL } from 'node:url';
+const [, , Nr, Kr, Rr, outfile] = process.argv; const N = +Nr, KILLS = +Kr, RUNS = +Rr;
+const { findReading, keepReading } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/readings.mjs').href);
+const sha = (b) => createHash('sha256').update(b).digest('hex'); const nap = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const lines = []; let procs = 0, bad = 0, keptTotal = 0;
+for (let run = 0; run < RUNS; run++) {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'q3keeps-')).split(String.fromCharCode(92)).join('/'); const pipe = home + '/pipeline';
+  for (const f of ['Habait/tour360/tools/auto-trace.mjs', 'Habait/tour360/server/handler.mjs']) { fs.mkdirSync(path.dirname(`${pipe}/${f}`), { recursive: true }); fs.writeFileSync(`${pipe}/${f}`, 's'); }
+  const config = { readingsDir: home + '/.runtime/readings', pipelineRoot: pipe }; const pdf = sha('pdf' + run + Math.random());
+  const files = []; for (let i = 0; i < N; i++) { const f = `${home}/in${i}.json`; fs.writeFileSync(f, JSON.stringify({ rooms: [{ name: 'room ' + i + ' ' + 'x'.repeat(20000) }], i })); files.push(f); }
+  const shas = files.map((f) => sha(fs.readFileSync(f)));
+  const kids = files.map((f, i) => { procs++; const p = spawn(process.execPath, ['C:/RnD/Projects/3Dengine/tests/helpers/lock-child.mjs', 'keep', home, pdf, f, '0.01'], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true }); const h = { out: '', killed: false, p }; p.stdout.on('data', (d) => h.out += d); p.stderr.on('data', (d) => h.out += ' ERR'); h.done = new Promise((res) => p.on('exit', res)); return h; });
+  // kill the HOLDER of the store lock (whoever it is) at a random moment inside its hold, KILLS times, while the others wait
+  let left = KILLS; const t0 = Date.now(); const lockDir = `${config.readingsDir}/${pdf}/store.lock`;
+  while (left > 0 && Date.now() - t0 < 20000 && kids.some((k) => k.p.exitCode === null && !k.killed)) {
+    let names = []; try { names = fs.readdirSync(lockDir); } catch {}
+    const m = names.map((n) => /^h\.(\d+)\./.exec(n)).filter(Boolean)[0];
+    const v = m && kids.find((k) => k.p.pid === Number(m[1]) && !k.killed && k.p.exitCode === null);
+    if (v) { nap(Math.floor(Math.random() * 12)); try { process.kill(v.p.pid, 'SIGKILL'); v.killed = true; left--; } catch {} nap(2); } else nap(1);
+  }
+  await Promise.all(kids.map((k) => k.done));
+  const survivors = kids.filter((k) => !k.killed || k.out.startsWith('kept')); const keptOuts = kids.filter((k) => k.out.startsWith('kept'));
+  const dir = `${config.readingsDir}/${pdf}`; const where = new Map(); const problems = []; let records = 0, splits = 0;
+  const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p); else if (e.name === 'reading.json') { const rec = `${d}/record.json`; const rs = sha(fs.readFileSync(p)); if (!where.has(rs)) where.set(rs, []); where.get(rs).push(p.slice(dir.length)); if (fs.existsSync(rec)) { records++; const R = JSON.parse(fs.readFileSync(rec, 'utf8')); if (R.reading_sha256 !== rs) problems.push('record does not match reading in ' + d.slice(dir.length)); } else splits++; } else if (e.name === 'record.json' && !fs.existsSync(`${d}/reading.json`)) splits++; } };
+  walk(dir);
+  const lost = kids.map((k, i) => ({ k, i })).filter(({ k, i }) => k.out.startsWith('kept') && !where.has(shas[i])).length;
+  const nums = fs.existsSync(`${dir}/superseded`) ? fs.readdirSync(`${dir}/superseded`).map(Number).sort((a, b) => a - b) : []; const gap = nums.some((n, i) => n !== i + 1);
+  const dupFiles = [...where.values()].filter((v) => v.length > 1).length;
+  const st1 = findReading(config, pdf).status;
+  // liveness: a clean keep after the storm
+  let after = 'ok'; try { keepReading(config, { pdfSha256: pdf, readingFile: files[0], source: 'paid', costUsd: 0.01 }, { lockWaitMs: 20000 }); } catch (e) { after = 'FAILS ' + (e.code || e.message); }
+  const st2 = findReading(config, pdf).status; const tmps = fs.readdirSync(dir).filter((x) => x.endsWith('.tmp')).length;
+  keptTotal += keptOuts.length;
+  const healthy = problems.length === 0 && lost === 0 && !gap && after === 'ok' && st2 === 'found' && kids.filter((k) => !k.killed).every((k) => k.out.startsWith('kept')) && nums.length >= keptOuts.length - 1 - 0;
+  if (!healthy) bad++;
+  lines.push(`run ${run}: N=${N} killed=${kids.filter((k) => k.killed).length} said-kept=${keptOuts.length} (of ${kids.filter((k) => !k.killed).length} unkilled) superseded-folders=${nums.length} gap=${gap} distinct-readings-on-disk=${where.size} lost-kept=${lost} split-pairs=${splits} mismatched-records=${problems.length} dup=${dupFiles} status-after-storm=${st1} clean-keep-after=${after} status-final=${st2} leftover-tmp=${tmps} ${healthy ? 'HEALTHY' : 'BAD ' + problems.join(';')}`);
+  fs.rmSync(home, { recursive: true, force: true });
+}
+lines.push(`SUMMARY N=${N} kills=${KILLS} runs=${RUNS} processes=${procs} kept-said=${keptTotal} bad=${bad}`);
+fs.writeFileSync(outfile, lines.join('\n') + '\n'); console.log(lines.join('\n'));

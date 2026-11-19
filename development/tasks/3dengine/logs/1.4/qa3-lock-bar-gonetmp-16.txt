@@ -1,0 +1,6 @@
+run 0 gonetmp N=16 cycles=4: counter=64/64 outs=ok HEALTHY left=["x.lock.1.abc123.gone.tmp"]
+run 1 gonetmp N=16 cycles=4: counter=64/64 outs=ok HEALTHY left=["x.lock.1.abc123.gone.tmp"]
+run 2 gonetmp N=16 cycles=4: counter=64/64 outs=ok HEALTHY left=["x.lock.1.abc123.gone.tmp"]
+run 3 gonetmp N=16 cycles=4: counter=64/64 outs=ok HEALTHY left=["x.lock.1.abc123.gone.tmp"]
+run 4 gonetmp N=16 cycles=4: counter=64/64 outs=ok HEALTHY left=["x.lock.1.abc123.gone.tmp"]
+SUMMARY gonetmp N=16 cycles=4 runs=5 processes=80 holds=320 bad=0

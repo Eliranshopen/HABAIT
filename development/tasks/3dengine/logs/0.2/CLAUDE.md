@@ -1,11 +1,11 @@
 # 0.2/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of milestone 0.2: the gate outputs of the three repos (`gate-*.txt`), the registration in Pi (`live-install-global.txt`, `live-pi-mcp-list.txt`), the fresh reviewer's report (`qa-live.md`), the browser checks (`shots/`, `e2e/`).
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 12 files here · 3 subfolders · 34 files / 8.7 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

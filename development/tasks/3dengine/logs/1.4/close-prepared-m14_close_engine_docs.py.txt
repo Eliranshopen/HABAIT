@@ -1,0 +1,88 @@
+# Milestone 1.4 closed: the engine home's own context files and the contract's record of the last review (the BRANCH).
+# PREPARED before the verdict; run only after the reviewer's PASS:
+#   python m14_close_engine_docs.py <date YYYY-MM-DD> "<rounds word, e.g. three>" "<English sentence(s) for contract section 10 about the last review>"
+# Safe to run twice.
+import io
+import sys
+
+DATE, ROUNDS_WORD, QA_LINE = sys.argv[1], sys.argv[2], sys.argv[3]
+ROOT = 'C:/RnD/.wt/3dengine/Projects/3Dengine/'
+
+
+def patch(name, pairs):
+    p = ROOT + name
+    raw = io.open(p, encoding='utf-8', newline='').read()
+    nl = '\r\n' if '\r\n' in raw else '\n'
+    t = raw.replace('\r\n', '\n')
+    for a, b in pairs:
+        if b in t:
+            continue
+        if t.count(a) != 1:
+            sys.exit('%s: found %d times: %s' % (name, t.count(a), a[:80]))
+        t = t.replace(a, b)
+    if name.endswith('CLAUDE.md'):
+        for i, line in enumerate(t.split('\n'), 1):
+            if len(line) > 600:
+                sys.exit('%s line %d is %d characters' % (name, i, len(line)))
+    io.open(p, 'w', encoding='utf-8', newline='').write(t.replace('\n', nl))
+    print('patched', name)
+
+
+def line_of(name, start):
+    t = io.open(ROOT + name, encoding='utf-8', newline='').read().replace('\r\n', '\n')
+    hits = [ln for ln in t.split('\n') if ln.startswith(start)]
+    if len(hits) != 1:
+        sys.exit('%s: %d lines start with %r' % (name, len(hits), start[:60]))
+    return hits[0]
+
+
+def line_or(name, start, new):
+    t = io.open(ROOT + name, encoding='utf-8', newline='').read().replace('\r\n', '\n')
+    if new in t:
+        return new
+    return line_of(name, start)
+
+
+STATE = ("**State %s:** milestones 0.1 to 1.4 are closed (0.3 after eight QA rounds, 1.1 after five, 1.2 and 1.3 after one, 1.4 after %s). The first look and the intake are real, the engine starts the reading tool "
+         "(`node engine/cli.mjs trace`), the reading is the first REAL stage of a job of mode `real`, and the engine keeps the reading it paid for: the model reads a PDF once. Every stage after the reading is still a stub, "
+         "and the real home's jobs are still `stub`. Next: 2.1, the render as an engine stage." % (DATE, ROUNDS_WORD))
+SINCE = ("Since 1.3 also: in a job of mode `real`, `stages/tracing/attempt-<n>/` (everything the reading tool wrote in that attempt, its own log too). Since 1.4: `.runtime/readings/<sha256 of a PDF>/` "
+         "(`reading.json` as the tool wrote it, `record.json`, and `superseded/<n>/` for a replaced pair: the engine never deletes a reading), and a lock is a FOLDER (`job.lock`, the heavy lock's guard, `store.lock`) "
+         "that is there only while it is held.")
+STAGES_CMD = ("npm run test:stages                     # the closing tests that run a real pipeline tool (1.2 on; five files side by side since 1.4). It does NOT end inside timeout 540 any more:\n"
+              "node --test tests/stages/m1.4.test.mjs  # ... so run this after it, once: it goes on from the checkpoint the first run left (the tier's time is owed to milestone 2.1)")
+
+patch('CLAUDE.md', [
+    (line_or('CLAUDE.md', '**State 2026-11-18:**', STATE), STATE),
+    ("from the saved reading the engine holds for that PDF (`.runtime/readings/<sha256>.json`).", "from the kept reading the engine holds for that PDF (since 1.4: `.runtime/readings/<sha256>/`)."),
+    ("- **0.3, a job on the disk:**",
+     "- **1.4, a kept reading (closed %s):** the engine keeps the model's reading of every PDF (`engine/readings.mjs`: the reading as the tool wrote it, and a record that is checked against it). A second run of the same PDF "
+     "calls no model, pays nothing and gives the same `plan.general.json` byte for byte. A kept reading is valid until the reading tool or the model changes (Eliran), not until the engine version does. "
+     "Commands `reading show` / `reading import`. The file lock was replaced on the way (two reviews; contract 1.4 §11). Contract: `contracts/CONTRACT-1.4.md`.\n"
+     "- **0.3, a job on the disk:**" % DATE),
+    (line_or('CLAUDE.md', 'Since 1.3 also: `.runtime/readings/', SINCE), SINCE),
+    ("node engine/cli.mjs trace <pdf> --out <dir> [--id <id>] [--vlm-file <file>] [--no-judge] [--budget <usd> --go]   # read a drawing into a measured plan; free unless --budget and --go",
+     "node engine/cli.mjs trace <pdf> --out <dir> [--id <id>] [--vlm-file <file>] [--fresh] [--no-judge] [--budget <usd> --go]   # read a drawing into a measured plan; asks the kept reading first (1.4); free unless --budget and --go\n"
+     "node engine/cli.mjs reading show <pdf>            # (1.4) what is kept for this PDF, and whether it is still valid (exit 0 only when it is)\n"
+     "node engine/cli.mjs reading import <pdf> <file> [--go]   # (1.4) keep a reading by hand; nothing is written without --go"),
+    ("npm test                                # the whole suite + the 80 % coverage bar (about 105 s quiet, 215 to 280 s on a saturated machine; give it timeout 300)",
+     "npm test                                # the whole suite + the 80 % coverage bar (434 tests since 1.4: about 150 s quiet, up to 280 s on a saturated machine; give it timeout 300)"),
+    ("npm run test:stages                     # the closing tests that run a real pipeline tool (1.2 on; four files side by side since 1.3): 425 s at 100 % load; give it timeout 540", STAGES_CMD),
+])
+
+patch('tests/CLAUDE.md', [
+    ("npm run test:stages # the closing tests that run a real pipeline tool (1.2 on); minutes, give it timeout 540",
+     "npm run test:stages # the closing tests that run a real pipeline tool (1.2 on); timeout 540 cuts it since 1.4: then `node --test tests/stages/m1.4.test.mjs` once, which goes on from its checkpoint"),
+    ("- `npm test` takes about 105 s on a quiet machine (410 tests since 1.3) and 215 to 280 s", "- `npm test` takes about 150 s on a quiet machine (434 tests since 1.4) and 215 to 280 s"),
+])
+
+busy = line_of('tests/stages/CLAUDE.md', '- **On a machine other sessions hold at 100 %**')
+patch('tests/stages/CLAUDE.md', [
+    (busy, busy + "\n- **Since 1.4 the tier does not end inside 540 s, on a quiet machine either** (the second review of 1.4, O-3): five files run side by side and the 1.4 file makes two real readings one after the other "
+     "(about 300 s and 220 s). The first invocation stops inside that file's second reading, after its checkpoint is written; `timeout 540 node --test tests/stages/m1.4.test.mjs` then goes on from it. Owed to milestone 2.1: one invocation."),
+])
+
+patch('contracts/CONTRACT-1.4.md', [
+    ("- **The date is the reading's, not a constant.**", "- " + QA_LINE + "\n- **The date is the reading's, not a constant.**"),
+])
+print('done')

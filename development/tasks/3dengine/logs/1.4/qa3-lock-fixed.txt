@@ -1,0 +1,47 @@
+ok   free path | expected run got run in 10 ms
+ok   free: path gone after
+ok   empty folder | expected run got run in 12 ms
+ok   left *.new.tmp beside path | expected run got run in 8 ms
+ok     left tmp not mistaken for holder
+ok   left *.gone.tmp file | expected run got run in 8 ms
+ok   dead holder entry | expected run got run in 11 ms
+ok     dead taken fast | 11 ms
+ok   live fresh holder (self pid) -> busy | expected busy got busy in 410 ms
+ok     holder entry untouched
+ok   live holder older than staleMs -> broken then run | expected run got run in 10 ms
+ok   live holder, time 60 s in future -> broken (abs rule) | expected run got run in 9 ms
+FAIL time 16 digits huge | expected run got busy in 614 ms
+ok   two entries (both dead) -> foreign busy | expected busy got busy in 404 ms
+ok     entries left alone
+ok   foreign file in folder -> busy | expected busy got busy in 402 ms
+ok   sub-folder in lock folder -> busy | expected busy got busy in 404 ms
+ok   entry that is a FOLDER (dead pid) | expected run got run in 12 ms
+ok   entry with a malformed name -> busy | expected busy got busy in 417 ms
+ok   pid 0 entry, 2 s old (empty rule 1 s) | expected run got run in 11 ms
+ok   pid 9999999999 (10 digits) entry | expected run got run in 11 ms
+ok   pid 4 (System, other user -> EPERM = alive) fresh -> busy | expected busy got busy in 412 ms
+ok   old lock file live fresh | expected busy got busy in 404 ms
+ok   old lock file dead pid | expected run got run in 32 ms
+ok   old lock file empty fresh | expected busy got busy in 401 ms
+ok   old lock file empty 2 s | expected run got run in 19 ms
+ok   old lock file garbage 2 s | expected run got run in 13 ms
+ok   old lock file live 6 s | expected run got run in 15 ms
+ok   junction to empty folder | expected run got run in 11 ms
+ok     junction target survives
+ok   junction to a live held lock -> busy | expected busy got busy in 412 ms
+ok   dangling junction at path | expected busy got busy in 602 ms
+ok   Hebrew + spaces path | expected run got run in 7 ms
+ok   long path (~294 chars) | expected run got run in 8 ms
+ok   missing parents | expected run got run in 8 ms
+ok   read-only parent (deny create) | expected error:EPERM got error:EPERM in 2 ms
+ok   fn throws -> same error passed on
+ok     lock released after throw
+ok   return value passed on
+ok   nested same lock same process within waitMs < staleMs -> busy | C:\Users\elira\AppData\Local\Temp\q3fixed-B74xDZ\nested\x.lock: lock busy
+ok   nested same lock with staleMs 1 s: inner runs after own hold broken (observation: self-deadlock lasts staleMs) | 1024 ms; lock state after: free
+ok   alive-a (self pid: alive hook not used; stale by age) | swapped=false
+ok   alive hook: old hold ended, folder removed, nobody took -> taker takes free | got run survived=true alive-calls=1 8 ms
+ok   alive hook: old hold ended, NEW live holder took (fresh, other pid of mine) -> taker must NOT break it | got busy survived=true alive-calls=1 510 ms
+ok   alive hook: old entry replaced by EMPTY folder | got run survived=true alive-calls=1 8 ms
+ok   alive hook: old entry replaced by foreign file | got busy survived=true alive-calls=1 516 ms
+46 checks, 1 failed

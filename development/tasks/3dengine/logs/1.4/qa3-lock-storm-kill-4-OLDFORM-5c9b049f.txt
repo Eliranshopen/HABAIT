@@ -1,0 +1,9 @@
+run 0 kill N=4: allWaiting=true ok=0/4 TWO=1 LOST=3 logOverlap=2 entered=4 killedInside=0 other=[LOST-HOLD|LOST-HOLD|LOST-HOLD|TWO] BAD
+   left beside: []
+run 1 kill N=4: allWaiting=true ok=1/4 TWO=1 LOST=2 logOverlap=2 entered=4 killedInside=0 other=[LOST-HOLD|TWO|LOST-HOLD] BAD
+   left beside: []
+run 2 kill N=4: allWaiting=true ok=1/4 TWO=1 LOST=2 logOverlap=2 entered=4 killedInside=0 other=[TWO|LOST-HOLD|LOST-HOLD] BAD
+   left beside: []
+run 3 kill N=4: allWaiting=true ok=1/4 TWO=1 LOST=2 logOverlap=2 entered=4 killedInside=0 other=[LOST-HOLD|LOST-HOLD|TWO] BAD
+   left beside: []
+SUMMARY kill N=4 runs=4 processes=20 bad=4

@@ -1,0 +1,65 @@
+// QA3 child: one short-lived process for the lock storms. Prints one word.
+import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
+const { withFileLock } = await import((process.env.QA3_ATOMIC || pathToFileURL('C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs').href));
+const { pidAlive } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/lib/proc.mjs').href);
+const [, , mode, dir, id, a, b] = process.argv;
+const nap = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const lock = `${dir}/x.lock`;
+const log = (s) => fs.appendFileSync(`${dir}/log.txt`, `${Date.now()} ${id} ${process.pid} ${s}\n`);
+// marker: a second live holder inside at the same moment is TWO. A marker of a dead process is a killed holder's leftover.
+function enterMarker() {
+  for (;;) {
+    try { fs.writeFileSync(`${dir}/inside`, `${process.pid}`, { flag: 'wx' }); return true; } catch {
+      let other = NaN; try { other = Number(fs.readFileSync(`${dir}/inside`, 'utf8')); } catch { continue; }
+      if (other && pidAlive(other) && other !== process.pid) return false;
+      try { fs.rmSync(`${dir}/inside`, { force: true }); } catch {}
+    }
+  }
+}
+let out = 'ok';
+if (mode === 'holder') {            // a: 'die' (wait for sig/die then exit inside), 'exit' same, 'sleep:<ms>' then release late
+  withFileLock(lock, () => {
+    log('holder-in');
+    fs.writeFileSync(`${dir}/sig/holder-in`, String(process.pid));
+    if (a.startsWith('sleep:')) { nap(Number(a.slice(6))); log('holder-woke'); out = 'released'; return; }
+    enterMarker();
+    while (!fs.existsSync(`${dir}/sig/die`)) nap(2);
+    process.exit(0);
+  }, { waitMs: 120000 });
+} else if (mode === 'taker') {     // a: fnMs, b: staleMs
+  fs.writeFileSync(`${dir}/sig/wait.${id}`, String(process.pid));
+  try {
+    let ran = 0;
+    withFileLock(lock, () => {
+      ran++;
+      log('enter');
+      const got = enterMarker();
+      if (!got) { out = 'TWO'; log('TWO'); return; }
+      fs.writeFileSync(`${dir}/sig/in.${id}`, String(process.pid));
+      nap(Number(a));
+      // is my entry still the one in the lock folder?
+      let names = []; try { names = fs.readdirSync(lock); } catch {}
+      if (!names.some((n) => n.startsWith(`h.${process.pid}.`))) { out = 'LOST-HOLD'; log('LOST-HOLD'); }
+      try { fs.rmSync(`${dir}/inside`, { force: true }); } catch {}
+      log('exit');
+    }, { waitMs: 120000, staleMs: Number(b) });
+    if (ran !== 1) out = `RAN-${ran}`;
+  } catch (e) { out = /lock busy$/.test(String(e.message)) ? 'busy' : `error ${e.code || e.message}`; }
+}
+if (mode === 'bar') {          // a: cycles. all start at the same moment (sig/go), take-release `a` times, counter read-modify-write
+  fs.writeFileSync(`${dir}/sig/ready.${id}`, '');
+  while (!fs.existsSync(`${dir}/sig/go`)) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 1);
+  try {
+    for (let c = 0; c < Number(a); c++) {
+      withFileLock(lock, () => {
+        if (!enterMarker()) { out = 'TWO'; return; }
+        let v = 0; try { v = Number(fs.readFileSync(`${dir}/counter`, 'utf8')); } catch {}
+        nap(Number(b) || 0);
+        fs.writeFileSync(`${dir}/counter`, String(v + 1));
+        fs.rmSync(`${dir}/inside`, { force: true });
+      }, { waitMs: 60000 });
+    }
+  } catch (e) { out = `error ${e.code || e.message}`; }
+}
+process.stdout.write(out);

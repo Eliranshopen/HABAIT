@@ -1,0 +1,23 @@
+// node bar.mjs <preset> <N> <cycles> <runs> <outfile>; preset: free | emptyfolder | deadentry | newtmp | gonetmp
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { spawn } from 'node:child_process';
+const [, , preset, Nr, Cr, Rr, outfile] = process.argv; const N = +Nr, C = +Cr, RUNS = +Rr; const lines = []; let procs = 0, bad = 0, holds = 0;
+const nap = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+for (let r = 0; r < RUNS; r++) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'q3bar-')).split(String.fromCharCode(92)).join('/'); fs.mkdirSync(`${dir}/sig`); const lock = `${dir}/x.lock`;
+  if (preset === 'emptyfolder') fs.mkdirSync(lock);
+  if (preset === 'deadentry') { fs.mkdirSync(lock); fs.writeFileSync(`${lock}/h.2147000.${Date.now()}.abcdef01`, ''); }
+  if (preset === 'newtmp') { fs.mkdirSync(`${lock}.1.abc123.new.tmp`); fs.writeFileSync(`${lock}.1.abc123.new.tmp/h.2147000.${Date.now()}.abcdef01`, ''); }
+  if (preset === 'gonetmp') fs.writeFileSync(`${lock}.1.abc123.gone.tmp`, '');
+  const kids = []; for (let i = 0; i < N; i++) { procs++; const p = spawn(process.execPath, ['C:/Users/elira/AppData/Local/Temp/q3/child.mjs', 'bar', dir, 'B' + i, String(C), '2'], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true }); const h = { out: '' }; p.stdout.on('data', (d) => h.out += d); p.stderr.on('data', (d) => h.out += ' ERR ' + String(d).slice(0, 100)); h.done = new Promise((res) => p.on('exit', res)); kids.push(h); }
+  const t = Date.now(); while (fs.readdirSync(`${dir}/sig`).filter((f) => f.startsWith('ready.')).length < N && Date.now() - t < 30000) nap(5);
+  nap(200); fs.writeFileSync(`${dir}/sig/go`, '');
+  await Promise.all(kids.map((k) => k.done));
+  const outs = kids.map((k) => k.out.trim()); const counter = Number(fs.readFileSync(`${dir}/counter`, 'utf8'));
+  const ok = outs.every((o) => o === '') && counter === N * C; // child prints '' ... it prints 'ok'
+  const okAll = outs.every((o) => o === 'ok'); holds += counter;
+  const healthy = okAll && counter === N * C; if (!healthy) bad++;
+  lines.push(`run ${r} ${preset} N=${N} cycles=${C}: counter=${counter}/${N * C} outs=${[...new Set(outs)].join('|')} ${healthy ? 'HEALTHY' : 'BAD'} left=${JSON.stringify(fs.readdirSync(dir).filter((f) => f.includes('x.lock')))}`);
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+lines.push(`SUMMARY ${preset} N=${N} cycles=${C} runs=${RUNS} processes=${procs} holds=${holds} bad=${bad}`);
+fs.writeFileSync(outfile, lines.join('\n') + '\n'); console.log(lines.join('\n'));

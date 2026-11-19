@@ -1,11 +1,11 @@
 # 1.3/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of milestone 1.3 (the trace gate), one QA round. `dev-*.txt` = runs during the build; `gate-*.txt` = the gate in the working folder, the runs that were cut by the limit and the soak's first run included (`gate-soak-1-dump.txt` = the files the soak dumped: the mark was on the disk before the send); `live-*.txt` = the live home after the merge; `qa-live.md` and `qa-*` = the fresh reviewer's report and its own evidence (one token value its dump had printed was removed before the commit). Start at `gate-summary.txt`: it lists every run, also the ones that did not pass, with the reason.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 46 files here · 0 subfolders · 46 files / 586.0 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

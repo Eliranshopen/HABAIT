@@ -1,0 +1,26 @@
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { spawn } from 'node:child_process'; import { pathToFileURL } from 'node:url';
+const { withFileLock, lockState } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs').href);
+const nap = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'q3imm-')).split(String.fromCharCode(92)).join('/'); const out = [];
+const holdFile = (p, ms) => { const c = spawn('powershell', ['-NoProfile', '-File', 'C:/Users/elira/AppData/Local/Temp/q3/hold.ps1', p, String(ms)], { stdio: 'ignore', windowsHide: true }); return c; };
+const waitHeld = (p) => { const t = Date.now(); for (;;) { try { fs.renameSync(p, p + '.probe'); fs.renameSync(p + '.probe', p); } catch (e) { return e.code; } if (Date.now() - t > 15000) return 'never'; nap(50); } };
+// 1. breaker meets an entry that cannot be moved (dead holder, entry open by a process with no share)
+{ const lock = `${root}/a/x.lock`; fs.mkdirSync(lock, { recursive: true }); const e = `${lock}/h.2147000.${Date.now()}.abcdef01`; fs.writeFileSync(e, '');
+  const c = holdFile(e, 4000); out.push('1. entry locked by a process; probe says: ' + waitHeld(e));
+  let t = Date.now(); let r = 'run'; try { withFileLock(lock, () => {}, { waitMs: 1500 }); } catch (er) { r = er.message.replace(root, '<root>'); }
+  out.push(`1a. taker waitMs 1500 on immovable dead entry -> ${r} after ${Date.now() - t} ms (lock busy at waitMs expected)`);
+  t = Date.now(); r = 'run'; try { withFileLock(lock, () => {}, { waitMs: 9000 }); } catch (er) { r = er.message; }
+  out.push(`1b. taker waitMs 9000: -> ${r} after ${Date.now() - t} ms (handle freed at ~4 s: should run soon after)`);
+  c.kill(); }
+// 2. release meets an entry that cannot be moved
+{ const lock = `${root}/b/x.lock`; let ran = 0; let r = 'returned'; let err = null; const t = Date.now(); let c;
+  try { r = withFileLock(lock, () => { ran++; const names = fs.readdirSync(lock); c = holdFile(`${lock}/${names[0]}`, 2500); waitHeld(`${lock}/${names[0]}`); return 'VALUE'; }, { waitMs: 1000, staleMs: 60000 }); } catch (e) { err = e; }
+  out.push(`2a. fn returned VALUE but release could not move its entry: result=${err ? 'THROWS ' + (err.code || '') + ' ' + String(err.message).replace(root, '<root>').slice(0, 90) : r}, fn ran ${ran}, after ${Date.now() - t} ms`);
+  out.push('2b. lock state right after: ' + JSON.stringify(lockState(lock)).replace(/\d{10,}/g, 'T'));
+  c?.kill(); }
+// 3. fn throws AND release fails: which error wins?
+{ const lock = `${root}/c/x.lock`; let err = null; let c;
+  try { withFileLock(lock, () => { const names = fs.readdirSync(lock); c = holdFile(`${lock}/${names[0]}`, 2500); waitHeld(`${lock}/${names[0]}`); throw Object.assign(new Error('FN-ERROR'), { code: 'EFN' }); }, { waitMs: 1000, staleMs: 60000 }); } catch (e) { err = e; }
+  out.push(`3. fn threw FN-ERROR and release failed: the caller sees ${err?.code} / ${String(err?.message).slice(0, 40).replace(root, '<root>')}  (FN-ERROR masked if not EFN)`); c?.kill(); }
+fs.writeFileSync(process.argv[2], out.join('\n') + '\n'); console.log(out.join('\n'));
+fs.rmSync(root, { recursive: true, force: true, maxRetries: 10, retryDelay: 300 });

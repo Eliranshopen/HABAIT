@@ -102,3 +102,6 @@
 
 ## 2026-11-19 · qa-reviewer → second-reader pointer
 - qa-reviewer 2026-11-19: milestone 1.4 round 3 PASS, no defects (lock, store, four real runs); observations O-1 to O-9 in logs/1.4/qa-live-r3.md; nearest: a failed supersede leaves none. → `memory/agents/qa-reviewer.md`
+
+## 2026-11-19 · main session → second-reader pointer
+- 3dengine milestone 1.4 (a saved reading) CLOSED 2026-11-19, 7 of 27: kept readings per PDF, a second run pays nothing and gives the same plan bytes; three reviews, the file lock replaced (a rename is not exclusive on its source; only a folder renamed onto a path is) -> runs/2026-11-16-3dengine-milestones.md → `memory/runs/2026-11-16-3dengine-milestones.md`

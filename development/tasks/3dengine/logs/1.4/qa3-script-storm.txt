@@ -1,0 +1,69 @@
+// QA3 storm orchestrator. node storm.mjs <scenario> <N> <runs> <outfile>
+// scenarios: kill (holder killed, SIGKILL = TerminateProcess), exit (holder exits inside its body), age (live holder silent past staleMs, late release),
+//            gens (holder killed, then the first 3 takers to enter are each killed inside), taskkill (like kill, through taskkill /F)
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawn, spawnSync } from 'node:child_process';
+const [, , scenario, Nraw, runsRaw, outfile] = process.argv;
+const N = Number(Nraw); const RUNS = Number(runsRaw);
+const CHILD = 'C:/Users/elira/AppData/Local/Temp/q3/child.mjs';
+const nap = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const lines = []; let procs = 0; let bad = 0;
+function until(cond, ms) { const t = Date.now(); while (!cond()) { if (Date.now() - t > ms) return false; nap(5); } return true; }
+function start(dir, args) {
+  procs++;
+  const p = spawn(process.execPath, [CHILD, ...args], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
+  const h = { p, out: '', exited: false };
+  p.stdout.on('data', (d) => { h.out += d; }); p.stderr.on('data', (d) => { h.out += ' STDERR:' + String(d).slice(0, 120); });
+  h.done = new Promise((r) => p.on('exit', () => { h.exited = true; r(); }));
+  return h;
+}
+for (let run = 0; run < RUNS; run++) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'q3storm-')).replace(/\\/g, '/'); fs.mkdirSync(`${dir}/sig`);
+  const staleMs = scenario === 'age' ? 800 : 10000;
+  const fnMs = scenario === 'age' ? 300 : 40;
+  const hold = start(dir, ['holder', dir, 'H', scenario === 'age' ? 'sleep:1800' : 'die']);
+  if (!until(() => fs.existsSync(`${dir}/sig/holder-in`), 15000)) { lines.push(`run ${run}: holder never entered`); bad++; hold.p.kill(); continue; }
+  const takers = []; for (let i = 0; i < N; i++) takers.push(start(dir, ['taker', dir, `T${i}`, String(fnMs), String(staleMs)]));
+  const allWaiting = until(() => fs.readdirSync(`${dir}/sig`).filter((f) => f.startsWith('wait.')).length === N, 20000);
+  nap(400); // every taker is inside its wait loop
+  const killedInside = [];
+  if (scenario === 'kill') process.kill(Number(fs.readFileSync(`${dir}/sig/holder-in`, 'utf8')), 'SIGKILL');
+  else if (scenario === 'taskkill') spawnSync('taskkill', ['/F', '/PID', fs.readFileSync(`${dir}/sig/holder-in`, 'utf8')], { stdio: 'ignore' });
+  else if (scenario === 'exit') fs.writeFileSync(`${dir}/sig/die`, '');
+  else if (scenario === 'gens') {
+    process.kill(Number(fs.readFileSync(`${dir}/sig/holder-in`, 'utf8')), 'SIGKILL');
+    for (let g = 0; g < 3 && g < N - 1; g++) {   // kill the next three that get in
+      const t = Date.now(); let pid = null;
+      until(() => { try { const ins = fs.readdirSync(`${dir}/sig`).filter((f) => f.startsWith('in.')); const fresh = ins.map((f) => Number(fs.readFileSync(`${dir}/sig/${f}`, 'utf8'))).filter((pp) => !killedInside.includes(pp)); if (fresh.length) { pid = fresh[0]; return true; } } catch {} return false; }, 20000);
+      if (pid) { try { process.kill(pid, 'SIGKILL'); killedInside.push(pid); } catch {} }
+    }
+  }
+  const limit = Date.now() + 60000;
+  const hardKill = setTimeout(() => { for (const t of takers) try { t.p.kill(); } catch {} try { hold.p.kill(); } catch {} }, 60000);
+  await Promise.all([hold.done, ...takers.map((t) => t.done)]);
+  clearTimeout(hardKill);
+  const outs = takers.map((t) => t.out.trim());
+  const killedPids = new Set(killedInside);
+  const okCount = outs.filter((o) => o === 'ok').length;
+  const twos = outs.filter((o) => o === 'TWO').length; const lost = outs.filter((o) => o === 'LOST-HOLD').length;
+  const other = takers.filter((t, i) => !(t.out.trim() === 'ok') && !killedPids.has(t.p.pid)).map((t) => t.out.trim());
+  // overlap by log: for survivors, intervals enter..exit must not overlap
+  const rows = fs.readFileSync(`${dir}/log.txt`, 'utf8').trim().split('\n').map((l) => l.split(' '));
+  const iv = {}; for (const [t, id, pid, ev] of rows) { if (id === 'H') continue; (iv[id] ||= {})[ev] = Number(t); }
+  const spans = Object.entries(iv).filter(([, v]) => v.enter && v.exit).map(([id, v]) => [v.enter, v.exit, id]).sort((x, y) => x[0] - y[0]);
+  let overlap = 0; for (let i = 1; i < spans.length; i++) if (spans[i][0] < spans[i - 1][1]) overlap++;
+  const entered = Object.values(iv).filter((v) => v.enter).length;
+  const expOk = N - killedInside.length;
+  const healthy = allWaiting && twos === 0 && lost === 0 && overlap === 0 && okCount === expOk && other.length === 0;
+  if (!healthy) bad++;
+  lines.push(`run ${run} ${scenario} N=${N}: allWaiting=${allWaiting} ok=${okCount}/${expOk} TWO=${twos} LOST=${lost} logOverlap=${overlap} entered=${entered} killedInside=${killedInside.length} other=[${other.join('|')}] ${healthy ? 'HEALTHY' : 'BAD'}`);
+  if (scenario === 'age') { const t0 = Number(rows[0][0]); const woke = rows.find((r) => r[1] === 'H' && r[3] === 'holder-woke'); lines.push(`   timeline (ms from holder-in): holder-woke=${woke ? Number(woke[0]) - t0 : 'never'}; takers inside: ` + spans.map(([a, b, id]) => `${id}[${a - t0}-${b - t0}]`).join(' ')); }
+  const left = fs.readdirSync(dir).filter((f) => f.includes('x.lock'));
+  lines.push(`   left beside: ${JSON.stringify(left)}`);
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+lines.push(`SUMMARY ${scenario} N=${N} runs=${RUNS} processes=${procs} bad=${bad}`);
+fs.writeFileSync(outfile, lines.join('\n') + '\n');
+console.log(lines.join('\n'));

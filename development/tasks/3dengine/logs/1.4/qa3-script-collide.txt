@@ -1,0 +1,16 @@
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { createHash } from 'node:crypto'; import { pathToFileURL } from 'node:url';
+const { keepReading } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/readings.mjs').href);
+const sha = (b) => createHash('sha256').update(b).digest('hex');
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'q3col-')).split(String.fromCharCode(92)).join('/'); const pipe = root + '/pipeline';
+for (const f of ['Habait/tour360/tools/auto-trace.mjs', 'Habait/tour360/server/handler.mjs']) { fs.mkdirSync(path.dirname(`${pipe}/${f}`), { recursive: true }); fs.writeFileSync(`${pipe}/${f}`, 's'); }
+const config = { readingsDir: root + '/r', pipelineRoot: pipe }; const pdf = sha('p'); const out = [];
+const mk = (i) => { const f = `${root}/in${i}.json`; fs.writeFileSync(f, JSON.stringify({ rooms: [], i })); return f; };
+keepReading(config, { pdfSha256: pdf, readingFile: mk(1), source: 'paid', costUsd: 1 });
+fs.mkdirSync(`${config.readingsDir}/${pdf}/superseded/999999999`, { recursive: true });
+const shas = new Set([sha(fs.readFileSync(mk(1)))]);
+for (let i = 2; i <= 5; i++) { const f = mk(i); shas.add(sha(fs.readFileSync(f))); const k = keepReading(config, { pdfSha256: pdf, readingFile: f, source: 'paid', costUsd: 1 }); out.push(`keep ${i}: superseded=${k.superseded}`); }
+const found = new Set(); const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p); else if (e.name === 'reading.json') found.add(sha(fs.readFileSync(p))); } }; walk(`${config.readingsDir}/${pdf}`);
+const lost = [...shas].filter((s) => !found.has(s)).length;
+out.push(`readings kept: 5, distinct readings still on disk: ${found.size}, lost: ${lost} (a lost reading = destroyed by a numbering collision after a forged superseded/999999999)`);
+out.push('folders: ' + fs.readdirSync(`${config.readingsDir}/${pdf}/superseded`).join(','));
+fs.writeFileSync(process.argv[2], out.join('\n') + '\n'); console.log(out.join('\n')); fs.rmSync(root, { recursive: true, force: true });

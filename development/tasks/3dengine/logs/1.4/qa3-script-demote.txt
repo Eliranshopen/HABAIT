@@ -1,0 +1,14 @@
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { createHash } from 'node:crypto'; import { pathToFileURL } from 'node:url';
+const { keepReading, findReading } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/readings.mjs').href);
+const sha = (b) => createHash('sha256').update(b).digest('hex');
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'q3dem-')).split(String.fromCharCode(92)).join('/'); const pipe = root + '/pipeline';
+for (const f of ['Habait/tour360/tools/auto-trace.mjs', 'Habait/tour360/server/handler.mjs']) { fs.mkdirSync(path.dirname(`${pipe}/${f}`), { recursive: true }); fs.writeFileSync(`${pipe}/${f}`, 's'); }
+const config = { readingsDir: root + '/r', pipelineRoot: pipe }; const pdf = sha('p'); const out = [];
+const f1 = root + '/a.json', f2 = root + '/b.json'; fs.writeFileSync(f1, '{"rooms":[],"v":1}'); fs.writeFileSync(f2, '{"rooms":[],"v":2}');
+keepReading(config, { pdfSha256: pdf, readingFile: f1, source: 'paid', costUsd: 1 });
+out.push('before: ' + findReading(config, pdf).status);
+// fail the rename of the NEW reading into place (the first renameSync after the superseded moves: the 3rd rename call)
+let renames = 0; const fsx = { ...fs, renameSync: (a, b) => { renames++; if (renames === 3) throw Object.assign(new Error('boom'), { code: 'EIO' }); return fs.renameSync(a, b); } };
+try { keepReading(config, { pdfSha256: pdf, readingFile: f2, source: 'paid', costUsd: 1 }, { fs: fsx }); } catch (e) { out.push('keep of a 2nd reading failed at the rename of the new reading: ' + e.code); }
+out.push('status after the failed keep: ' + findReading(config, pdf).status + ' (the first reading is in superseded/1: ' + fs.existsSync(config.readingsDir + '/' + pdf + '/superseded/1/reading.json') + ')');
+fs.writeFileSync(process.argv[2], out.join('\n') + '\n'); console.log(out.join('\n')); fs.rmSync(root, { recursive: true, force: true });

@@ -1,11 +1,11 @@
 # 1.1/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of milestone 1.1 (intake and a first look at the PDF), five QA rounds. `gate-*.txt`, `live-*.txt` = the first gate; `r2-*` … `r5-*` = the gate after each round (`r5-*` = the closing code `b7790fd`, run at 100 % machine load: `r5-gate-summary.txt` lists the runs, also the ones that failed on waits); `qa-live.md`, `qa-live-r2.md` … `qa-live-r5.md` = the five fresh reviewers' reports (the fifth: PASS); `qa-*`, `qa2-*` … `qa5-*` = their scripts and outputs; `e2e/` = the end-to-end evidence of the first gate.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 206 files here · 1 subfolders · 217 files / 5.0 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

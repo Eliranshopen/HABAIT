@@ -1,0 +1,16 @@
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { spawn } from 'node:child_process';
+const [, , target, Nr, Rr, outfile] = process.argv; const N = +Nr, R = +Rr; const lines = []; const hist = {}; let procs = 0;
+const nap = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+for (let r = 0; r < R; r++) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'q3ren-')).split(String.fromCharCode(92)).join('/'); fs.mkdirSync(`${dir}/sig`);
+  if (target === 'emptydir') fs.mkdirSync(`${dir}/target`);
+  if (target === 'fulldir') { fs.mkdirSync(`${dir}/target`); fs.writeFileSync(`${dir}/target/h.x`, ''); }
+  const kids = []; for (let i = 0; i < N; i++) { procs++; const p = spawn(process.execPath, ['C:/Users/elira/AppData/Local/Temp/q3/ren-child.mjs', dir, String(i)], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true }); const h = { out: '' }; p.stdout.on('data', (d) => h.out += d); h.done = new Promise((res) => p.on('exit', res)); kids.push(h); }
+  const t = Date.now(); while (fs.readdirSync(`${dir}/sig`).length < N && Date.now() - t < 30000) nap(5);
+  nap(200); fs.writeFileSync(`${dir}/sig/go`, ''); await Promise.all(kids.map((k) => k.done));
+  const won = kids.filter((k) => k.out === 'WON').length; hist[won] = (hist[won] || 0) + 1;
+  lines.push(`round ${r} target=${target}: winners=${won} others=${[...new Set(kids.map((k) => k.out).filter((o) => o !== 'WON'))].join(',')}`);
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+lines.push(`SUMMARY target=${target} N=${N} rounds=${R} processes=${procs} winners-histogram=${JSON.stringify(hist)}`);
+fs.writeFileSync(outfile, lines.join('\n') + '\n'); console.log(lines.slice(-2).join('\n'));

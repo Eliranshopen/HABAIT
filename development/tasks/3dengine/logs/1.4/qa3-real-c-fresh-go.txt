@@ -1,0 +1,7 @@
+step c: exit 0 in 236 s; stderr: 
+names of rooms/labels of the reading checked in stdout+stderr: 28; found in the answer: 0
+requests to the (scripted) model in this run: 1
+outcome=PASS paid=true spentUsd=0.0123 reading={"from":"model","store":"found","readAt":"2026-11-19T07:22:16.561Z","kept":true,"superseded":1,"notKept":null}
+plan.general.json sha256=97c9f0c9e0e590aee5e2a6c24cffe2192614c54aa71dead68bbd4181c76ef012 pinned=5e03e678741e3162e4d486c0ce2c0cc9b9132402deb99da61d79d7b83827cb25 equal=false; trace_date=2026-11-19; apartment_id=6c70d7885ca31965; drawing id=6c70d7885ca31965
+run ledger rows: [["auto-trace-read",0.0123,"done"]]
+store now: found, source=paid cost=0.0123 date=2026-11-19 superseded=1

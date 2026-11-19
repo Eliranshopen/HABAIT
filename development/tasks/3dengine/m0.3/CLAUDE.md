@@ -1,11 +1,11 @@
 # m0.3/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The task cards of milestone 0.3 (a job on the disk), written by plan-to-tasks for that one milestone. `README.md` = the five tasks, the waves and the state.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 6 files here · 0 subfolders · 6 files / 33.5 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

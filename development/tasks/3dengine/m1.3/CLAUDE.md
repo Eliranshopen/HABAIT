@@ -1,11 +1,11 @@
 # m1.3/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The task cards of milestone 1.3 (the trace gate: the reading of the drawing becomes the first real stage of a job, and a reading that fails its own check hands the job to a person), written by plan-to-tasks for that one milestone. `README.md` = the eight tasks, the decisions, the waves and the state; the contract is `Projects/3Dengine/contracts/CONTRACT-1.3.md`. No task of it pays.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 9 files here · 0 subfolders · 9 files / 41.7 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

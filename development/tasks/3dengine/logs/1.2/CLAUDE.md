@@ -1,11 +1,11 @@
 # 1.2/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of milestone 1.2 (reading the 846 plan inside the engine), one QA round. `dev-*.txt` = runs during the build (two of them cut at 540 s with the coverage tool on); `gate-*.txt` = the gate in the working folder; `live-*.txt` = the live home after the merge; `close-*.txt` = the fast suite after the test change of the close; `gate-summary.txt` lists every run and what was not measured; `qa-live.md` = the fresh reviewer's report (PASS), `qa-*` = its outputs and scripts; `fresh/` = the one paid reading.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 50 files here · 1 subfolders · 59 files / 441.2 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

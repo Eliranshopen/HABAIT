@@ -1,0 +1,63 @@
+// QA3: a full disk at each file operation of keepReading (deps.fs stand-in). node diskfull.mjs <outfile>
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { createHash } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
+const { keepReading, findReading } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/readings.mjs').href);
+const sha = (b) => createHash('sha256').update(b).digest('hex');
+const MARK = 'ZZQAMARKER';
+const out = []; let n = 0; let fails = 0;
+const ck = (name, ok, extra = '') => { n++; if (!ok) fails++; out.push(`${ok ? 'ok  ' : 'FAIL'} ${name}${extra ? ' | ' + extra : ''}`); };
+const OPS = ['writeFileSync', 'renameSync', 'mkdirSync', 'rmSync', 'readFileSync', 'statSync', 'existsSync', 'readdirSync'];
+function stand(failAt, mode, counter) { // mode: 'once' | 'stay' (disk stays full from op k on: only writes/mkdir/rename fail)
+  const proxy = {}; for (const k of Object.keys(fs)) proxy[k] = fs[k];
+  for (const op of OPS) proxy[op] = (...a) => { const i = counter.n++; const W = ['writeFileSync', 'renameSync', 'mkdirSync', 'rmSync'].includes(op); if (failAt !== null && W && (mode === 'once' ? i === failAt : i >= failAt)) { counter.failedOp = op; throw Object.assign(new Error(`no space left (${op})`), { code: 'ENOSPC' }); } return fs[op](...a); };
+  return proxy;
+}
+let scenarios = 0;
+for (const scen of ['first', 'replace', 'replace-bad-pair']) for (const mode of ['once', 'stay']) {
+  // count ops with a clean run
+  const setup = (tag) => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'q3df-')).replace(/\\/g, '/'); const pipe = `${root}/pipeline`;
+    for (const f of ['Habait/tour360/tools/auto-trace.mjs', 'Habait/tour360/server/handler.mjs']) { fs.mkdirSync(path.dirname(`${pipe}/${f}`), { recursive: true }); fs.writeFileSync(`${pipe}/${f}`, `// stand-in\n`); }
+    const config = { readingsDir: `${root}/readings`, pipelineRoot: pipe }; const pdf = sha('pdf' + tag + Math.random());
+    const oldF = `${root}/old.json`; const newF = `${root}/new.json`;
+    fs.writeFileSync(oldF, JSON.stringify({ rooms: [{ name: MARK + 'OLD' }], v: 'old' })); fs.writeFileSync(newF, JSON.stringify({ rooms: [{ name: MARK + 'NEW' }], v: 'new' }));
+    if (scen !== 'first') keepReading(config, { pdfSha256: pdf, readingFile: oldF, source: 'paid', costUsd: 0.5 });
+    if (scen === 'replace-bad-pair') fs.rmSync(`${config.readingsDir}/${pdf}/record.json`);   // a lone reading.json is there: it must be moved aside too
+    return { root, config, pdf, oldF, newF };
+  };
+  const c0 = { n: 0 }; const s0 = setup('count'); keepReading(s0.config, { pdfSha256: s0.pdf, readingFile: s0.newF, source: 'paid', costUsd: 1 }, { fs: stand(null, mode, c0) }); const total = c0.n; fs.rmSync(s0.root, { recursive: true, force: true });
+  let bad = []; let lastOk = 0;
+  for (let k = 0; k < total; k++) {
+    scenarios++;
+    const s = setup('k' + k); const c = { n: 0 }; const oldBytes = fs.existsSync(`${s.config.readingsDir}/${s.pdf}/reading.json`) ? fs.readFileSync(`${s.config.readingsDir}/${s.pdf}/reading.json`) : null;
+    let err = null; let res = null;
+    try { res = keepReading(s.config, { pdfSha256: s.pdf, readingFile: s.newF, source: 'paid', costUsd: 1 }, { fs: stand(k, mode, c) }); } catch (e) { err = e; }
+    const dir = `${s.config.readingsDir}/${s.pdf}`;
+    // all reading.json bytes anywhere in the folder
+    const all = []; const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p); else if (e.name === 'reading.json') all.push(sha(fs.readFileSync(p))); } };
+    if (fs.existsSync(dir)) walk(dir);
+    const problems = [];
+    if (oldBytes && !all.includes(sha(oldBytes))) problems.push('OLD READING DESTROYED');
+    if (!fs.existsSync(s.newF)) problems.push('source file gone');
+    if (err && !String(err.message + err.code).length) problems.push('empty error');
+    if (err && String(err.message).includes(MARK)) problems.push('text of reading in error');
+    if (fs.existsSync(`${dir}/store.lock`)) problems.push('lock left held after error');
+    let st; try { st = findReading(s.config, s.pdf).status; } catch (e) { st = 'throws'; }
+    if (!['found', 'bad', 'none'].includes(st)) problems.push('status ' + st);
+    // the paid new reading must be somewhere: in the store, or its source (always true here)
+    // liveness: a clean keep afterwards works and leaves found
+    let after; try { after = keepReading(s.config, { pdfSha256: s.pdf, readingFile: s.newF, source: 'paid', costUsd: 1 }); } catch (e) { problems.push('next keep fails: ' + e.message); }
+    let st2; try { st2 = findReading(s.config, s.pdf).status; } catch { st2 = 'throws'; }
+    if (st2 !== 'found') problems.push('after a clean keep status ' + st2);
+    if (oldBytes) { const all2 = []; const walk2 = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk2(p); else if (e.name === 'reading.json') all2.push(sha(fs.readFileSync(p))); } }; walk2(dir); if (!all2.includes(sha(oldBytes))) problems.push('old reading missing after the clean keep'); }
+    if (problems.length) bad.push(`op#${k} (${c.failedOp}${err ? '' : ', no error?'}): ${problems.join('; ')}; status after failure=${st}`);
+    fs.rmSync(s.root, { recursive: true, force: true });
+  }
+  ck(`${scen}/${mode}: failing at each of ${total} operations`, bad.length === 0, bad.length ? bad.slice(0, 6).join(' || ') : '');
+}
+out.push(`${scenarios} fault scenarios`);
+out.push(`${n} checks, ${fails} failed`);
+fs.writeFileSync(process.argv[2], out.join('\n') + '\n'); console.log(out.join('\n'));

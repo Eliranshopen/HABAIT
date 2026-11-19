@@ -1,0 +1,72 @@
+ok   keep -> kept true, superseded null
+ok   found after keep
+ok   no marker text in keep result / find result | {"readAt":"2026-11-18T10:00:00Z","date":"2026-11-18","savedAt":"2026-11-19T07:09:18.269Z","source":"paid","costUsd":0.01,"model":"google/gemini-2.5-pro","engineVersion":"1.4.0","readingSha256":"2ef7d243f20c6cc637179d1a441e2ccb9aa70d45f6fd079221a66bc7a2f915d2"}
+ok   plan_date = day of _meta.at | 2026-11-18
+ok   same bytes same reader again -> kept:false
+ok     nothing superseded, record untouched
+ok   five more different readings -> superseded count 5 | 5
+ok     numbered 1..5, each a whole pair
+ok   weird names in superseded ignored; next is 6 | 6
+ok   number 999999999 present (9 digits): next = 1000000000 -> still readable? | superseded=1000000000 count=7
+ok   one byte added to tool copy -> stale
+ok   restored -> found
+ok   one byte added to model file copy -> stale
+ok     stale result has no reading text
+ok   keep of same bytes by NEW reader -> kept true + superseded 1 | [true,1]
+ok     found again under the new reader
+ok   tool missing -> TOOLCHAIN_MISSING thrown
+ok   no folder + tool missing -> none (no throw)
+ok   tool is a FOLDER -> TOOLCHAIN_MISSING
+ok   keep with tool missing throws, writes nothing
+ok   stale record: reader of other kind (deleted key) -> bad not found
+ok   forged records: 197 variants, none found
+ok   valid variant model=null is found
+ok   valid variant cost_usd=null is found
+ok   valid variant cost_usd=0 is found
+ok   valid variant cost_usd=1000 is found
+ok   valid variant plan_date="2026-02-28" is found
+ok   valid variant read_at="2026-11-19T10:00:00.123456Z" is found
+ok   record of another PDF copied in -> bad
+ok   reading swapped under an old record -> bad
+ok   reading with one trailing space -> bad
+ok   reading rooms not a list -> bad
+ok   record only -> bad
+ok   reading only -> bad
+ok   neither (folder only) -> none
+ok   reading.json is a FOLDER -> bad
+ok   record.json is a FOLDER -> bad
+ok   a FILE where the PDF folder belongs -> bad
+ok     keep over it refuses (STORE), the file untouched | the store holds something that is not a folder where this PDF's readings belong; it is never overwritten
+ok   PDF folder is a junction to ANOTHER PDF's pair -> bad (record names other PDF)
+ok   junction to its own pair elsewhere -> found (observation: junctions followed)
+ok   temp files of a keep that died left in folder -> still found
+ok     next keep works and leftovers are not mistaken for a pair
+ok   superseded is a FILE: keep fails by name, old pair stays | ENOTDIR
+   leftover temp files after that failed keep: 2
+ok   planted dead holder of store.lock: keep proceeds
+ok   foreign folder as store.lock: keep says lock busy by label, no text | the readings store: lock busy
+ok   keep refuses bad inputs (cost, source, date, pdf, files, non-readings) | accepted: 
+ok     none of them left a folder
+ok   empty rooms list [] is a reading and is kept
+ok   _meta hostile: _meta is a string | date=2026-11-19 model=null
+ok   _meta hostile: _meta is array | date=2026-11-19 model=null
+ok   _meta hostile: _meta null | date=2026-11-19 model=null
+ok   _meta hostile: _meta.at sentence | date=2026-11-19 model=null
+ok   _meta hostile: _meta.at 24:00 | date=2026-11-19 model=null
+ok   _meta hostile: _meta.at feb31 | date=2026-11-19 model=null
+ok   _meta hostile: _meta.at far future 9999 | date=9999-12-31 model=null
+ok   _meta hostile: _meta.at fine but plan_date from it | date=2026-11-18 model=null
+ok   _meta hostile: _meta.model sentence | date=2026-11-19 model=null
+ok   _meta hostile: _meta.model one word marker | date=2026-11-19 model=ZZQAMARKER
+ok   _meta hostile: _meta.model huge | date=2026-11-19 model=null
+ok   _meta hostile: _meta.usd -1 | date=2026-11-19 model=null
+ok     readingCost(_meta.usd -1) is null
+ok   _meta hostile: _meta.usd huge | date=2026-11-19 model=null
+ok     readingCost(_meta.usd huge) is null
+ok   drawingId deterministic, 16 hex, no leading hyphen
+ok   drawingId differs by pdf and apartment
+ok   isDate refuses sentences/impossible days
+ok   isInstant refuses 24:00:00, feb 31, zones
+ok   runTrace refuses every bad traceDate by name before anything starts
+ok   error messages of every refused keep contain no marker text | 22 error texts
+70 checks, 0 failed

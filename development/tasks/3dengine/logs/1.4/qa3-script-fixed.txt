@@ -1,0 +1,94 @@
+// QA3 fixed sequences for withFileLock (live code imported, temp folders only). Output: one line per case.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const ATOMIC = pathToFileURL('C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs').href;
+const { withFileLock, lockState } = await import(ATOMIC);
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'q3fixed-'));
+const results = [];
+let n = 0;
+const T = (name, ok, extra = '') => { n++; results.push(`${ok ? 'ok  ' : 'FAIL'} ${name}${extra ? ' | ' + extra : ''}`); };
+const fresh = (name) => { const d = path.join(root, name); fs.mkdirSync(d, { recursive: true }); return d; };
+const entry = (pid, at, nonce = 'abcdef01') => `h.${pid}.${at}.${nonce}`;
+const plantHeld = (lock, pid, at, nonce) => { fs.mkdirSync(lock, { recursive: true }); fs.writeFileSync(`${lock}/${entry(pid, at, nonce)}`, ''); };
+const DEAD = 2147000; // unlikely pid
+async function run(name, fn, expect) { // expect: 'run' | 'busy'
+  const t = Date.now(); let ran = 0; let err = null;
+  try { fn(() => { ran++; }); } catch (e) { err = e; }
+  const ms = Date.now() - t;
+  const got = err ? (/lock busy$/.test(err.message) ? 'busy' : 'error:' + (err.code || err.message)) : (ran === 1 ? 'run' : 'ran' + ran);
+  T(name, got === expect, `expected ${expect} got ${got} in ${ms} ms`);
+  return { got, ms };
+}
+const lk = (d) => path.join(d, 'x.lock');
+const opt = { waitMs: 1500, staleMs: 5000 };
+
+// states
+{ const d = fresh('free'); await run('free path', (f) => withFileLock(lk(d), f, opt), 'run'); T('free: path gone after', lockState(lk(d)).kind === 'free'); }
+{ const d = fresh('empty'); fs.mkdirSync(lk(d)); await run('empty folder', (f) => withFileLock(lk(d), f, opt), 'run'); }
+{ const d = fresh('newtmp'); fs.mkdirSync(`${lk(d)}.9999.abc123.new.tmp`); fs.writeFileSync(`${lk(d)}.9999.abc123.new.tmp/${entry(DEAD, Date.now())}`, ''); await run('left *.new.tmp beside path', (f) => withFileLock(lk(d), f, opt), 'run'); T('  left tmp not mistaken for holder', fs.existsSync(`${lk(d)}.9999.abc123.new.tmp`)); }
+{ const d = fresh('gonetmp'); fs.writeFileSync(`${lk(d)}.9999.abc123.gone.tmp`, ''); await run('left *.gone.tmp file', (f) => withFileLock(lk(d), f, opt), 'run'); }
+{ const d = fresh('dead'); plantHeld(lk(d), DEAD, Date.now()); const r = await run('dead holder entry', (f) => withFileLock(lk(d), f, opt), 'run'); T('  dead taken fast', r.ms < 400, r.ms + ' ms'); }
+{ const d = fresh('live-fresh'); plantHeld(lk(d), process.pid, Date.now()); await run('live fresh holder (self pid) -> busy', (f) => withFileLock(lk(d), f, { waitMs: 400, staleMs: 5000 }), 'busy'); T('  holder entry untouched', fs.readdirSync(lk(d)).length === 1); }
+{ const d = fresh('live-old'); plantHeld(lk(d), process.pid, Date.now() - 6000); await run('live holder older than staleMs -> broken then run', (f) => withFileLock(lk(d), f, opt), 'run'); }
+{ const d = fresh('future'); plantHeld(lk(d), process.pid, Date.now() + 60000); await run('live holder, time 60 s in future -> broken (abs rule)', (f) => withFileLock(lk(d), f, opt), 'run'); }
+{ const d = fresh('future-huge'); plantHeld(lk(d), process.pid, 9999999999999999, 'abcdef01'); await run('time 16 digits huge', (f) => withFileLock(lk(d), f, { waitMs: 600, staleMs: 5000 }), 'run'); }
+{ const d = fresh('two'); fs.mkdirSync(lk(d)); fs.writeFileSync(`${lk(d)}/${entry(DEAD, Date.now())}`, ''); fs.writeFileSync(`${lk(d)}/${entry(DEAD + 1, Date.now())}`, ''); await run('two entries (both dead) -> foreign busy', (f) => withFileLock(lk(d), f, { waitMs: 400 }), 'busy'); T('  entries left alone', fs.readdirSync(lk(d)).length === 2); }
+{ const d = fresh('foreignfile'); fs.mkdirSync(lk(d)); fs.writeFileSync(`${lk(d)}/readme.txt`, 'x'); await run('foreign file in folder -> busy', (f) => withFileLock(lk(d), f, { waitMs: 400 }), 'busy'); }
+{ const d = fresh('subfolder'); fs.mkdirSync(`${lk(d)}/sub`, { recursive: true }); await run('sub-folder in lock folder -> busy', (f) => withFileLock(lk(d), f, { waitMs: 400 }), 'busy'); }
+{ const d = fresh('entry-is-folder'); fs.mkdirSync(`${lk(d)}/${entry(DEAD, Date.now())}`, { recursive: true }); await run('entry that is a FOLDER (dead pid)', (f) => withFileLock(lk(d), f, { waitMs: 600 }), 'run'); }
+{ const d = fresh('badname'); fs.mkdirSync(lk(d)); fs.writeFileSync(`${lk(d)}/h.${DEAD}.123.zz`, ''); await run('entry with a malformed name -> busy', (f) => withFileLock(lk(d), f, { waitMs: 400 }), 'busy'); }
+{ const d = fresh('pid0'); plantHeld(lk(d), 0, Date.now() - 2000); await run('pid 0 entry, 2 s old (empty rule 1 s)', (f) => withFileLock(lk(d), f, { waitMs: 600 }), 'run'); }
+{ const d = fresh('pidbig'); plantHeld(lk(d), 9999999999, Date.now()); await run('pid 9999999999 (10 digits) entry', (f) => withFileLock(lk(d), f, { waitMs: 600 }), 'run'); }
+{ const d = fresh('pidsys'); plantHeld(lk(d), 4, Date.now()); await run('pid 4 (System, other user -> EPERM = alive) fresh -> busy', (f) => withFileLock(lk(d), f, { waitMs: 400 }), 'busy'); }
+// old lock FILE
+for (const [name, text, ageMs, exp] of [['file live fresh', String(process.pid), 0, 'busy'], ['file dead pid', String(DEAD), 0, 'run'], ['file empty fresh', '', 0, 'busy'], ['file empty 2 s', '', 2000, 'run'], ['file garbage 2 s', 'zzz', 2000, 'run'], ['file live 6 s', String(process.pid), 6000, 'run']]) {
+  const d = fresh(name.replace(/ /g, '-')); fs.writeFileSync(lk(d), text); if (ageMs) { const t = new Date(Date.now() - ageMs); fs.utimesSync(lk(d), t, t); }
+  await run('old lock ' + name, (f) => withFileLock(lk(d), f, { waitMs: exp === 'busy' ? 400 : 1500, staleMs: 5000 }), exp);
+}
+// junctions
+{ const d = fresh('junc-empty'); const tgt = fresh('junc-empty-target'); fs.symlinkSync(tgt, lk(d), 'junction'); await run('junction to empty folder', (f) => withFileLock(lk(d), f, opt), 'run'); T('  junction target survives', fs.existsSync(tgt)); }
+{ const d = fresh('junc-held'); const tgt = fresh('junc-held-target'); plantHeld(tgt + '/x', process.pid, Date.now()); fs.symlinkSync(tgt + '/x', lk(d), 'junction'); await run('junction to a live held lock -> busy', (f) => withFileLock(lk(d), f, { waitMs: 400 }), 'busy'); }
+{ const d = fresh('junc-dangling'); const tgt = path.join(root, 'nowhere'); fs.mkdirSync(tgt); fs.symlinkSync(tgt, lk(d), 'junction'); fs.rmdirSync(tgt); const r = await run('dangling junction at path', (f) => withFileLock(lk(d), f, { waitMs: 600 }), 'busy'); }
+// paths
+{ const d = fresh('שלום עולם dir with spaces'); await run('Hebrew + spaces path', (f) => withFileLock(lk(d), f, opt), 'run'); }
+{ let d = root; for (let i = 0; i < 6; i++) d = path.join(d, 'p'.repeat(40)); fs.mkdirSync(d, { recursive: true }); await run('long path (~' + d.length + ' chars)', (f) => withFileLock(lk(d), f, opt), 'run'); }
+{ const d = path.join(root, 'missing', 'parents', 'deep'); await run('missing parents', (f) => withFileLock(lk(d), f, opt), 'run'); }
+{ const d = fresh('ro'); const lockp = lk(d); try { fs.chmodSync(d, 0o555); } catch {} const { execSync } = await import('node:child_process'); try { execSync(`icacls "${d}" /deny "${os.userInfo().username}:(WD,AD)"`, { stdio: 'ignore' }); } catch {} await run('read-only parent (deny create)', (f) => withFileLock(lockp, f, { waitMs: 500 }), 'error:EPERM'); try { execSync(`icacls "${d}" /remove:d "${os.userInfo().username}"`, { stdio: 'ignore' }); } catch {} }
+// fn semantics
+{ const d = fresh('throw'); let err; try { withFileLock(lk(d), () => { throw Object.assign(new Error('boom'), { code: 'EBOOM' }); }, opt); } catch (e) { err = e; } T('fn throws -> same error passed on', err?.code === 'EBOOM'); T('  lock released after throw', lockState(lk(d)).kind === 'free'); }
+{ const d = fresh('retval'); T('return value passed on', withFileLock(lk(d), () => 42, opt) === 42); }
+{ const d = fresh('nested'); const t = Date.now(); let inner = 0; withFileLock(lk(d), () => { try { withFileLock(lk(d), () => { inner++; }, { waitMs: 300, staleMs: 5000 }); } catch (e) { inner = e.message; } }, opt); T('nested same lock same process within waitMs < staleMs -> busy', String(inner).endsWith('lock busy'), String(inner)); }
+{ const d = fresh('nested2'); let inner = 0; const t = Date.now(); withFileLock(lk(d), () => { withFileLock(lk(d), () => { inner++; }, { waitMs: 3000, staleMs: 1000 }); }, { waitMs: 500, staleMs: 1000 }); T('nested same lock with staleMs 1 s: inner runs after own hold broken (observation: self-deadlock lasts staleMs)', inner === 1, (Date.now() - t) + ' ms; lock state after: ' + lockState(lk(d)).kind); }
+// alive hook between look and act
+{ // (a) holder released and ANOTHER process-like holder took (same pid) between look and act
+  const d = fresh('alive-a'); const E1 = entry(process.pid, Date.now() - 6000, 'aaaaaa01'); fs.mkdirSync(lk(d)); fs.writeFileSync(`${lk(d)}/${E1}`, '');
+  let swapped = false; let E2 = entry(process.pid, Date.now(), 'bbbbbb02');
+  let insideSaw = null; let ran = 0;
+  withFileLock(lk(d), () => { ran++; insideSaw = fs.readdirSync(lk(d)); }, { waitMs: 2000, staleMs: 5000, alive: (p) => { if (!swapped) { swapped = true; fs.rmSync(`${lk(d)}/${E1}`); fs.rmdirSync(lk(d)); fs.mkdirSync(lk(d)); fs.writeFileSync(`${lk(d)}/${E2}`, ''); } return true; } });
+  // here taker sees E1 stale by age (self pid alive). alive called only if holder !== self ... self pid skips alive => hook not called
+  T('alive-a (self pid: alive hook not used; stale by age)', ran === 1, 'swapped=' + swapped);
+}
+for (const [name, mutate, expectRun] of [
+  ['alive hook: old hold ended, folder removed, nobody took -> taker takes free', (lock, E1) => { fs.rmSync(`${lock}/${E1}`); fs.rmdirSync(lock); }, true],
+  ['alive hook: old hold ended, NEW live holder took (fresh, other pid of mine) -> taker must NOT break it', (lock, E1, ctx) => { fs.rmSync(`${lock}/${E1}`); fs.rmdirSync(lock); fs.mkdirSync(lock); fs.writeFileSync(`${lock}/${ctx.E2}`, ''); }, 'busy'],
+  ['alive hook: old entry replaced by EMPTY folder', (lock, E1) => { fs.rmSync(`${lock}/${E1}`); }, true],
+  ['alive hook: old entry replaced by foreign file', (lock, E1) => { fs.rmSync(`${lock}/${E1}`); fs.writeFileSync(`${lock}/foreign`, 'x'); }, 'busy'],
+]) {
+  const d = fresh('alive-' + n); const DEADPID = DEAD + 7; const E1 = entry(DEADPID, Date.now() - 100, 'aaaaaa01'); const ctx = { E2: entry(process.pid, Date.now(), 'bbbbbb02') };
+  fs.mkdirSync(lk(d)); fs.writeFileSync(`${lk(d)}/${E1}`, '');
+  let called = 0;
+  const alive = (p) => { called++; if (called === 1) mutate(lk(d), E1, ctx); return false; };
+  let ran = 0; let err = null; const t = Date.now();
+  try { withFileLock(lk(d), () => { ran++; }, { waitMs: 500, staleMs: 5000, alive }); } catch (e) { err = e; }
+  const got = err ? (/busy$/.test(err.message) ? 'busy' : 'error:' + err.message) : 'run';
+  const exp = expectRun === true ? 'run' : expectRun;
+  const survived = name.includes('NEW live holder') ? fs.existsSync(`${lk(d)}/${ctx.E2}`) : true;
+  T(name, got === exp && survived, `got ${got} survived=${survived} alive-calls=${called} ${Date.now() - t} ms`);
+}
+// release fails to move (entry cannot be moved): cannot do from node; covered by q3-hold.ps1 separately
+fs.writeFileSync(process.argv[2] || path.join(root, 'out.txt'), results.join('\n') + `\n${n} checks, ${results.filter((r) => r.startsWith('FAIL')).length} failed\n`);
+fs.rmSync(root, { recursive: true, force: true });
+console.log(results.join('\n'));
+console.log(`${n} checks, ${results.filter((r) => r.startsWith('FAIL')).length} failed`);

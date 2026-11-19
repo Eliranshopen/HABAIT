@@ -1,0 +1,40 @@
+// QA3: every numeric field of engine.config.json, every non-number value. node config.mjs <outfile>
+import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
+const { loadConfig } = await import(pathToFileURL('C:/RnD/Projects/3Dengine/engine/config.mjs').href);
+const HOME = 'C:/RnD/Projects/3Dengine';
+const base = JSON.parse(fs.readFileSync(`${HOME}/engine.config.json`, 'utf8'));
+const leaves = []; const walk = (o, p) => { for (const [k, v] of Object.entries(o)) { const q = [...p, k]; if (typeof v === 'number') leaves.push(q); else if (v && typeof v === 'object') walk(v, q); } };
+walk(base, []);
+const load = (raw) => loadConfig({ home: HOME, env: {}, readFile: (f) => (f.endsWith('engine.config.json') ? raw : fs.readFileSync(f, 'utf8')), exists: (f) => (f.endsWith('local.json') ? false : fs.existsSync(f)) });
+const setPath = (o, p, v) => { const c = JSON.parse(JSON.stringify(o)); let t = c; for (const k of p.slice(0, -1)) t = t[k]; t[p.at(-1)] = v; return c; };
+const out = []; let n = 0; const accepted = [];
+out.push(`numeric leaves in engine.config.json: ${leaves.map((l) => l.join('.')).join(', ')}`);
+// base loads
+try { load(JSON.stringify(base)); out.push('base loads'); } catch (e) { out.push('BASE FAILS ' + e.message); }
+const BAD = [['true', true], ['[4]', [4]], ['"0x3"', '0x3'], ['"3"', '3'], ['" 3"', ' 3'], ['"1e1"', '1e1'], ['null', null], ['""', ''], ['{}', {}], ['false', false], ['"NaN"', 'NaN']];
+for (const leaf of leaves) {
+  for (const [label, v] of BAD) {
+    n++;
+    try { load(JSON.stringify(setPath(base, leaf, v))); accepted.push(`${leaf.join('.')}=${label}`); } catch (e) { const last = leaf.at(-1); if (!e.message.includes(last)) accepted.push(`${leaf.join('.')}=${label} refused WITHOUT NAME: ${e.message.slice(0, 80)}`); }
+  }
+  // raw text variants a JSON.stringify cannot make: 1e999, huge
+  for (const text of ['1e999', '-1e999', '99999999999999999999']) {
+    n++;
+    const s = JSON.stringify(setPath(base, leaf, 987654321)).replace('987654321', text);
+    try { load(s); accepted.push(`${leaf.join('.')}=raw ${text}`); } catch (e) { if (!e.message.includes(leaf.at(-1))) accepted.push(`${leaf.join('.')}=raw ${text} refused WITHOUT NAME: ${e.message.slice(0, 80)}`); }
+  }
+}
+out.push(`${n} variants of numeric settings; accepted or unnamed refusal: ${accepted.length}`);
+for (const a of accepted) out.push('  ' + a);
+// readingsDir not text
+const rd = [['number 5', 5], ['true', true], ['[]', []], ['{}', {}], ['""', ''], ['"  "', '  '], ['array of text', ['x']]];
+let rdAcc = 0; for (const [label, v] of rd) { n++; try { load(JSON.stringify({ ...base, readingsDir: v })); rdAcc++; out.push('  readingsDir accepted: ' + label); } catch (e) { if (!e.message.includes('readingsDir')) out.push(`  readingsDir=${label} refused without name: ${e.message}`); } }
+out.push(`readingsDir non-text accepted: ${rdAcc} of ${rd.length}`);
+// ok cases
+for (const v of [null, undefined]) { n++; const raw = { ...base }; if (v === null) raw.readingsDir = null; else delete raw.readingsDir; try { const c = load(JSON.stringify(raw)); out.push(`readingsDir ${v === null ? 'null' : 'absent'} -> ${c.readingsDir.replace(/.*3Dengine/, '<home>')}`); } catch (e) { out.push('FAIL default readingsDir: ' + e.message); } }
+// env overrides plain digits
+const envs = [['ENGINE_SERVE_PORT', ['0x1F90', '8931.5', ' 8931', '8931 ', '1e4', '-1', '70000', '', '٨٩٣١', '0'], '8931'], ['ENGINE_STUB_STEP_MS', ['0x10', '1.5', '1e3', '-5', '0', '99999999999', '12 '], '50']];
+for (const [name, vals] of envs) for (const v of vals) { n++; try { const c = loadConfig({ home: HOME, env: { [name]: v } }); out.push(`  env ${name}=${JSON.stringify(v)} ACCEPTED -> ${name === 'ENGINE_SERVE_PORT' ? c.serve.port : c.stub.stepMs}`); } catch (e) { /* refused */ } }
+out.push(`${n} checks in all`);
+fs.writeFileSync(process.argv[2], out.join('\n') + '\n'); console.log(out.join('\n'));

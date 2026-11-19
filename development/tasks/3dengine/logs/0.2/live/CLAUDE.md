@@ -1,11 +1,11 @@
 # live/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of the ONE real conversation through Pi's model (task 08, on Eliran's approval, cap $1): `live-report.json` (steps, the model's tool calls, the agent's texts, the final job file), four screenshots at 1440, the bridge log with the pairing code removed. The ledger row and the summary are in `../live.md`.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 6 files here · 0 subfolders · 6 files / 2.8 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

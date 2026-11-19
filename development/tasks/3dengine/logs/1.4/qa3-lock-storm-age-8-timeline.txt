@@ -1,0 +1,10 @@
+run 0 age N=8: allWaiting=true ok=8/8 TWO=0 LOST=0 logOverlap=0 entered=8 killedInside=0 other=[] HEALTHY
+   timeline (ms from holder-in): holder-woke=1816; takers inside: T2[829-1152] T0[1321-1632] T1[1653-1974] T4[2145-2456] T6[2476-2784] T5[2804-3123] T3[3143-3451] T7[3469-3778]
+   left beside: []
+run 1 age N=8: allWaiting=true ok=8/8 TWO=0 LOST=0 logOverlap=0 entered=8 killedInside=0 other=[] HEALTHY
+   timeline (ms from holder-in): holder-woke=1808; takers inside: T7[828-1149] T0[1172-1495] T2[1659-1969] T4[1990-2312] T1[2332-2640] T6[2659-2966] T5[3125-3438] T3[3456-3763]
+   left beside: []
+run 2 age N=8: allWaiting=true ok=8/8 TWO=0 LOST=0 logOverlap=0 entered=8 killedInside=0 other=[] HEALTHY
+   timeline (ms from holder-in): holder-woke=1815; takers inside: T5[829-1152] T1[1182-1491] T2[1513-1831] T7[1857-2176] T4[2196-2506] T0[2525-2847] T6[2865-3173] T3[3191-3506]
+   left beside: []
+SUMMARY age N=8 runs=3 processes=27 bad=0

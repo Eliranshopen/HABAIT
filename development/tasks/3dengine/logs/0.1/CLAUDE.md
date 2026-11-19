@@ -1,11 +1,11 @@
 # 0.1/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of milestone 0.1: the closing test and the whole suite (`gate-*.txt`), the catalog verification with the Blender import test (`fetch-*.txt`, `fetch.report.*.json`), the set-up of the live engine home (`live-*.txt`), the fresh reviewer's report (`qa-live.md`).
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 10 files here · 0 subfolders · 10 files / 214.1 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

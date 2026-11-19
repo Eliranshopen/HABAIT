@@ -1,11 +1,11 @@
 # e2e/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The end-to-end test's evidence of milestone 1.1's first gate (2026-11-17, `E2E_LOG_DIR` pointed here): screenshots at 1440 and 390 px of the quote, the approval and the done card, `report.json`, the bridge log and `pi mcp list`. The later rounds' end-to-end runs wrote to a temp folder; their outputs are `../r2-gate-e2e.txt` … `../r5-gate-e2e-2.txt`.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 11 files here · 0 subfolders · 11 files / 3.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

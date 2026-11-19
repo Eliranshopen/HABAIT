@@ -1,11 +1,11 @@
 # m1.1/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The task cards of milestone 1.1 (intake and a first look at the PDF), written by plan-to-tasks for that one milestone. `README.md` = the eight tasks, the waves and the state; the contract is `Projects/3Dengine/contracts/CONTRACT-1.1.md`.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 9 files here · 0 subfolders · 9 files / 43.5 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

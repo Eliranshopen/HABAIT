@@ -1,0 +1,37 @@
+ok   usage: no verb -> exit 2 | exit 2
+ok   usage: unknown verb -> exit 2 | exit 2
+ok   usage: show without pdf -> exit 2 | exit 2
+ok   usage: show with extra arg -> exit 2 | exit 2
+ok   usage: import without file -> exit 2 | exit 2
+ok   usage: import with 2 extra -> exit 2 | exit 2
+ok   show of a missing PDF -> exit 2, "not a file" | exit 2
+ok   show of a FOLDER as the PDF -> exit 2 | exit 2
+ok   show with an empty store: exit 1, says none | pdf sha256: 0c74ab308917dd177aa9d307a2c7877ef0c9a1801849b85ad1b1b3eb542c0f0a / kept reading: none / superseded readings: 0 / 
+ok   import dry-run: exit 0, writes nothing, no marker | dry run: would keep that file (3269 bytes, 9 rooms) as the reading of the PDF 0c74ab308917…, source imported, cost $0
+ok   import --go keeps (exit 0), no marker text in output | kept: the reading of the PDF 0c74ab308917… (read 2026-11-06)
+ok   same import again: already kept | already kept: the same reading by today's reader (read 2026-11-06, source imported)
+ok   show after import: exit 0, source imported, cost $0.0000, no marker | pdf sha256: 0c74ab308917dd177aa9d307a2c7877ef0c9a1801849b85ad1b1b3eb542c0f0a / kept reading: kept, and made by today's reader /   read: 2026-11-06 · source: imported · cost: $0.0000 · model: not named · kept by engine 1.4.0 / superseded readings: 0 / 
+ok   a different reading supersedes, never overwrites | kept: the reading of the PDF 0c74ab308917… (read 2026-11-06); the one before it is in superseded/1
+ok     show: superseded readings: 1
+ok   import of not JSON with marker: exit 1, fixed sentence, no marker | exit 1: reading: the file is not a reading (JSON with a list of rooms)
+ok   import of JSON without rooms: exit 1, fixed sentence, no marker | exit 1: reading: the file is not a reading (JSON with a list of rooms)
+ok   import of rooms is an object: exit 1, fixed sentence, no marker | exit 1: reading: the file is not a reading (JSON with a list of rooms)
+ok   import of BOM + JSON: exit 1, fixed sentence, no marker | exit 1: reading: the file is not a reading (JSON with a list of rooms)
+ok   import of an array: exit 1, fixed sentence, no marker | exit 1: reading: the file is not a reading (JSON with a list of rooms)
+ok   import of a missing file: exit 1 not a reading
+ok   import of a folder: exit 1 not a reading
+ok   trace with a kept reading, free, judge ON: DRY (judge only), not PASS | exit 0
+   outcome: DRY / nothing was started and nothing was booked / a paid run would call the vision model: 0 reading(s) and up to 3 run(s) of the judge, about $0.06 in all / to pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap / the reading: from the engine's store (read 2026-11-06); a run would make no reading call / keys (by name): FAL_KEY: missing, OPENROUTER_API_KEY: present / 
+ok   trace --fresh without --go: DRY, nothing started | exit 0
+ok   trace --fresh with --vlm-file: usage mistake, exit 2 | exit 2: trace: --fresh asks the model for a new reading; it cannot go with --vlm-file
+ok   trace --fresh --go without --budget: not paid | exit 2: trace: a paid run needs a cap (--budget <usd>) together with --go / 
+ok   trace --vlm-file of a missing file: exit 2 | exit 2: trace: the saved reading is not a file
+ok   trace --vlm-file of a corrupt file with marker: no marker in answer | exit 2: trace: the saved reading is not a JSON object / 
+ok   trace --id with a flag-like value refused (no tool start) | exit 1: trace: --id needs a value / 
+ok   stale: show exit 1 and says another reader | kept reading: kept, but made by another reader (the reading tool or the model changed since): not used
+FAIL stale + free trace: DRY, says stale | exit 0
+   outcome: DRY / nothing was started and nothing was booked / a paid run would call the vision model: 1 reading(s) and up to 0 run(s) of the judge, about $0.02 in all / to pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap / the engine keep
+ok   bad (record is not JSON): show exit 1, does not add up
+ok   bad + free trace: not used, says bad | exit 0
+   outcome: DRY / nothing was started and nothing was booked / a paid run would call the vision model: 1 reading(s) and up to 0 run(s) of the judge, about $0.02 in all / to pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap / what the engine
+33 checks, 1 failed

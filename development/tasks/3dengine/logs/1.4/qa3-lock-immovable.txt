@@ -1,0 +1,6 @@
+1. entry locked by a process; probe says: EBUSY
+1a. taker waitMs 1500 on immovable dead entry -> <root>/a/x.lock: lock busy after 1513 ms (lock busy at waitMs expected)
+1b. taker waitMs 9000: -> run after 2658 ms (handle freed at ~4 s: should run soon after)
+2a. fn returned VALUE but release could not move its entry: result=THROWS EBUSY EBUSY: resource busy or locked, rename 'C:\Users\elira\AppData\Local\Temp\q3imm-y3XVoe\b\x, fn ran 1, after 1561 ms
+2b. lock state right after: {"kind":"held","entry":"h.46296.T.49242804f3f8","pid":46296,"takenAt":T}
+3. fn threw FN-ERROR and release failed: the caller sees EBUSY / EBUSY: resource busy or locked, rename '  (FN-ERROR masked if not EFN)

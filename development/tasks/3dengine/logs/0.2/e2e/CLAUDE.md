@@ -1,11 +1,11 @@
 # e2e/ — context file
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence written by the end-to-end test (`npm run test:e2e` in the engine home): `report.json` (every assertion), seven screenshots at 1440 and 390, the output of `pi mcp list` on the temp Pi folder, the bridge log with the pairing code removed. Rewritten on every run.
 
-## What's here (2026-11-18)
+## What's here (2026-11-19)
 10 files here · 0 subfolders · 10 files / 3.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

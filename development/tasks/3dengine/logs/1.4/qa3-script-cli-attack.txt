@@ -1,0 +1,53 @@
+import fs from 'node:fs';
+import { makeHome, cli, FIX, PDF, PDF_SHA } from './home.mjs';
+const out = [];
+let n = 0;
+let fails = 0;
+const ck = (name, ok, extra = '') => { n++; if (!ok) fails++; out.push(`${ok ? 'ok  ' : 'FAIL'} ${name}${extra ? ' | ' + extra : ''}`); };
+const h = await makeHome('cli');
+const MARK = 'ZZQAMARKER';
+const mk = (doc) => { const f = `${h.home}/in-${Math.random().toString(16).slice(2, 8)}.json`; fs.writeFileSync(f, typeof doc === 'string' ? doc : JSON.stringify(doc)); return f; };
+const noMark = (r) => !(r.out + r.err).includes(MARK);
+for (const [name, args] of [['no verb', ['reading']], ['unknown verb', ['reading', 'delete', PDF]], ['show without pdf', ['reading', 'show']], ['show with extra arg', ['reading', 'show', PDF, 'x']], ['import without file', ['reading', 'import', PDF]], ['import with 2 extra', ['reading', 'import', PDF, 'a', 'b']]]) {
+  const r = cli(h, args);
+  ck(`usage: ${name} -> exit 2`, r.status === 2, `exit ${r.status}`);
+}
+{ const r = cli(h, ['reading', 'show', `${h.home}/nope.pdf`]); ck('show of a missing PDF -> exit 2, "not a file"', r.status === 2 && /not a file/.test(r.err), `exit ${r.status}`); }
+{ const r = cli(h, ['reading', 'show', FIX]); ck('show of a FOLDER as the PDF -> exit 2', r.status === 2, `exit ${r.status}`); }
+{ const r = cli(h, ['reading', 'show', PDF]); ck('show with an empty store: exit 1, says none', r.status === 1 && /none/.test(r.out), r.out.replace(/\n/g, ' / ')); }
+const DOC = JSON.parse(fs.readFileSync(`${FIX}/apt846/saved-reading.json`, 'utf8'));
+const marked = JSON.parse(JSON.stringify(DOC));
+marked.rooms.forEach((r, i) => { for (const k of Object.keys(r)) if (typeof r[k] === 'string') r[k] = `${MARK} ${k} ${i}`; });
+marked._meta = { ...(marked._meta || {}), note: `${MARK} note`, model: `${MARK} a sentence` };
+const fm = mk(marked);
+{ const r = cli(h, ['reading', 'import', PDF, fm]); ck('import dry-run: exit 0, writes nothing, no marker', r.status === 0 && !fs.existsSync(h.config.readingsDir) && /dry run/.test(r.out) && noMark(r), r.out.split('\n')[0]); }
+{ const r = cli(h, ['reading', 'import', PDF, fm, '--go']); ck('import --go keeps (exit 0), no marker text in output', r.status === 0 && /kept:/.test(r.out) && noMark(r), r.out.trim()); }
+{ const r = cli(h, ['reading', 'import', PDF, fm, '--go']); ck('same import again: already kept', r.status === 0 && /already kept/.test(r.out), r.out.trim()); }
+{ const r = cli(h, ['reading', 'show', PDF]); ck('show after import: exit 0, source imported, cost $0.0000, no marker', r.status === 0 && /source: imported/.test(r.out) && /\$0\.0000/.test(r.out) && noMark(r), r.out.replace(/\n/g, ' / ')); }
+{ const r = cli(h, ['reading', 'import', PDF, mk(DOC), '--go']); ck('a different reading supersedes, never overwrites', r.status === 0 && /superseded\/1/.test(r.out), r.out.trim()); const s = cli(h, ['reading', 'show', PDF]); ck('  show: superseded readings: 1', /superseded readings: 1/.test(s.out)); }
+for (const [name, content] of [['not JSON with marker', `{ ${MARK} sentence`], ['JSON without rooms', JSON.stringify({ a: MARK })], ['rooms is an object', JSON.stringify({ rooms: { a: MARK } })], ['BOM + JSON', `﻿${JSON.stringify(DOC)}`], ['an array', '[]']]) {
+  const r = cli(h, ['reading', 'import', PDF, mk(content), '--go']);
+  ck(`import of ${name}: exit 1, fixed sentence, no marker`, r.status === 1 && /not a reading/.test(r.err) && noMark(r), `exit ${r.status}: ${r.err.trim().slice(0, 90)}`);
+}
+{ const r = cli(h, ['reading', 'import', PDF, `${h.home}/nope.json`, '--go']); ck('import of a missing file: exit 1 not a reading', r.status === 1 && /not a reading/.test(r.err)); }
+{ const r = cli(h, ['reading', 'import', PDF, h.home, '--go']); ck('import of a folder: exit 1 not a reading', r.status === 1 && /not a reading/.test(r.err)); }
+const T = (extra, o = {}) => cli(h, ['trace', PDF, '--out', `${h.home}/out-${Math.random().toString(16).slice(2, 7)}`, ...extra], o);
+{ const r = T([]); ck('trace with a kept reading, free, judge ON: DRY (judge only), not PASS', /DRY/.test(r.out) && !/PASS/.test(r.out), `exit ${r.status}`); out.push('   ' + r.out.replace(/\n/g, ' / ').slice(0, 500)); }
+{ const r = T(['--fresh']); ck('trace --fresh without --go: DRY, nothing started', /DRY/.test(r.out) && !/PASS/.test(r.out), `exit ${r.status}`); }
+{ const r = T(['--fresh', '--vlm-file', fm]); ck('trace --fresh with --vlm-file: usage mistake, exit 2', r.status === 2, `exit ${r.status}: ${r.err.trim()}`); }
+{ const r = T(['--fresh', '--go', '--no-judge']); ck('trace --fresh --go without --budget: not paid', r.status !== 0 || /DRY/.test(r.out), `exit ${r.status}: ${(r.out + r.err).replace(/\n/g, ' / ').slice(0, 200)}`); }
+{ const r = T(['--vlm-file', `${h.home}/nope.json`, '--no-judge']); ck('trace --vlm-file of a missing file: exit 2', r.status === 2, `exit ${r.status}: ${r.err.trim().slice(0, 100)}`); }
+{ const r = T(['--vlm-file', mk(`{ ${MARK}`), '--no-judge']); ck('trace --vlm-file of a corrupt file with marker: no marker in answer', noMark(r), `exit ${r.status}: ${(r.out + r.err).replace(/\n/g, ' / ').slice(0, 160)}`); }
+{ const r = T(['--no-judge', '--id', '--help']); ck('trace --id with a flag-like value refused (no tool start)', r.status === 2 || r.status === 1, `exit ${r.status}: ${(r.out + r.err).replace(/\n/g, ' / ').slice(0, 140)}`); }
+const dir = `${h.config.readingsDir}/${PDF_SHA}`;
+const rec = JSON.parse(fs.readFileSync(`${dir}/record.json`, 'utf8'));
+fs.writeFileSync(`${dir}/record.json`, JSON.stringify({ ...rec, reader: { tool_sha256: 'a'.repeat(64), model_file_sha256: rec.reader.model_file_sha256 } }));
+{ const r = cli(h, ['reading', 'show', PDF]); ck('stale: show exit 1 and says another reader', r.status === 1 && /another reader/.test(r.out), r.out.split('\n')[1]); }
+{ const r = T(['--no-judge']); ck('stale + free trace: DRY, says stale', /DRY/.test(r.out) && /stale/i.test(r.out + r.err), `exit ${r.status}`); out.push('   ' + r.out.replace(/\n/g, ' / ').slice(0, 300)); }
+fs.writeFileSync(`${dir}/record.json`, '{');
+{ const r = cli(h, ['reading', 'show', PDF]); ck('bad (record is not JSON): show exit 1, does not add up', r.status === 1 && /does not add up/.test(r.out)); }
+{ const r = T(['--no-judge']); ck('bad + free trace: not used, says bad', /bad|does not add up/i.test(r.out + r.err), `exit ${r.status}`); out.push('   ' + r.out.replace(/\n/g, ' / ').slice(0, 300)); }
+out.push(`${n} checks, ${fails} failed`);
+fs.writeFileSync(process.argv[2], out.join('\n') + '\n');
+console.log(out.join('\n'));
+fs.rmSync(h.home, { recursive: true, force: true });

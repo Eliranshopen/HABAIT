@@ -1,0 +1,7 @@
+record plan_date planted: 2031-12-31 (a valid hostile future day)
+step b: exit 0 in 217 s; stderr: 
+requests to the (scripted) model in this run: 0
+outcome=PASS paid=true spentUsd=0 reading={"from":"store","store":"found","readAt":"2026-11-06T10:09:31.897Z","kept":false,"superseded":null,"notKept":null}
+plan.general.json sha256=ae43caf411682d3cfd81071d1dbbfff586bd7ba21a129241bb779dd7664514d4 pinned=5e03e678741e3162e4d486c0ce2c0cc9b9132402deb99da61d79d7b83827cb25 equal=false; trace_date=2031-12-31; apartment_id=6c70d7885ca31965; drawing id=6c70d7885ca31965
+store now: found, source=imported cost=0 date=2031-12-31 superseded=0
+plan a vs plan b (only the date changed in the record): differing fields: ["/plan_meta/trace_date"]

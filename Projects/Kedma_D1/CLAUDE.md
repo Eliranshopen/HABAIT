@@ -20,13 +20,8 @@ engine tools under `Projects/3Dengine/pipeline/`, the apartment's working canvas
 | `plan/` | the plan of record (copy of `development/plans/2026-11-17-kedma-d1-true-geometry-redo.md`) |
 
 ## Continuing on another computer (2026-11-19)
-**This folder is complete (9.1 GB): copy the whole `Kedma_D1` folder to the other computer** (drive or cloud), to `C:\RnD\Projects\Kedma_D1`.
-`worktree/` holds everything of the session's working folder, media included: the apartment (canvases, answers, gates, ledger:
-`worktree/Projects/3Dengine/pipeline/Habait/tour360/apartments/kedma-d1/`), the renders and Blender scene
-(`.../360walkaround/tours/kedma-d1/`), and the 8 engine tools this job changed + `PORT-CHANGES.md`. To resume there: create the
-worktree (`git -C C:/RnD worktree add C:/RnD/.wt/kedma-d1 kedma-d1`, or a new branch off main) and copy `worktree/Projects/` over
-`.wt/kedma-d1/Projects/`, and `job/` to `.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/`. GitHub (HABAIT) has only the code and text.
-The keys file `C:\RnD\.env` is in no copy: bring it by hand. Resume point: last section of `memory/project/2026-11-16-kedma-d1-simulation.md`.
+Everything is on GitHub (Eliranshopen/HABAIT, public; Eliran ruled media included on 2026-11-19): clone it and this folder is whole
+(the backups and per-view answers stay on the first computer only). Steps: [RESTORE.md](RESTORE.md). The keys file is never in the repo.
 
 ## Facts
 - Money: $45.79 of a $48 ceiling (Eliran raised it from $45 on 2026-11-19 for the balcony); ledger in the worktree `_local/ledger.json`.

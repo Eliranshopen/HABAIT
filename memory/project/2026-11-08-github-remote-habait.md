@@ -56,3 +56,10 @@
 - **Learned:** The record of a layer always trails the layer by one (the record is written after the push). One company address (office@) is in a note; it was already public in five files of the mirror.
 - **Owed / open:** The mirror still holds no history, no media and no render assets: for a true continuation on another computer the carry pack is the way (see the handoff file). The branch blender-walk is in no snapshot.
 - **Second reader:** none
+
+## 2026-11-19 · main session (Kedma D/1) · RULING: media allowed on HABAIT for Kedma D/1
+- **Did:** Eliran: «אני רוצה להגיע למצב שאני מוריד הכל מהריפו בגיטהאב בלי תלות במחשב הזה»; asked in a dialog whether the 2.2 GB of media (incl. crops of Pesel Yazamot's sales plan and pictures of the apartment) go to a new private repo (recommended), to the public HABAIT, or HABAIT without the developer's material, he chose «ל-HABAIT הציבורי». Pushed in 4 layers of ≤700 MB (GitHub refuses a push over 2 GB), adds only, on the remote head.
+- **Evidence:** `Projects/Kedma_D1/RESTORE.md`
+- **Learned:** This replaces the 2026-11-08 «media-free snapshots» rule for the Kedma D/1 package; whether other projects' media may follow is not ruled - ask. Keys files never.
+- **Owed / open:** none.
+- **Second reader:** `habait-deploy-qa`

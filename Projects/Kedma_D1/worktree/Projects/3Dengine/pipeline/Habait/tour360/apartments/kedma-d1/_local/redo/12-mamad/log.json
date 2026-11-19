@@ -1,0 +1,230 @@
+[
+ {
+  "step": "init",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-mamad/pano.webp"
+ },
+ {
+  "step": "carry-over",
+  "target": "12-mamad",
+  "cam": "cp-mamad",
+  "sources": [
+   {
+    "source": "06-corridor:cp-corridor",
+    "carried_pct": 0.33
+   },
+   {
+    "source": "05-family:cp-family",
+    "carried_pct": 0.0
+   },
+   {
+    "source": "04-dining:cp-dining",
+    "carried_pct": 0.0
+   }
+  ],
+  "carried_pct": 0.33,
+  "painted_pct": 0.3,
+  "max_ratio": 1.6,
+  "edge_px": 6
+ },
+ {
+  "step": "accept",
+  "tag": "b000",
+  "view": [
+   0.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-dfc496f232d6.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 8.07,
+   "after": 8.07,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/12-mamad-r-b000/answer-dfc496f232d6.reg.png",
+   "used": false
+  },
+  "new_px": 5718460,
+  "painted_pct": 16.6,
+  "seam_tone_gain": null
+ },
+ {
+  "step": "accept",
+  "tag": "b090",
+  "view": [
+   90.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-52d3e82f03a6.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 2.07,
+   "after": 2.07,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/12-mamad-r-b090/answer-52d3e82f03a6.reg.png",
+   "used": false
+  },
+  "new_px": 4867508,
+  "painted_pct": 30.4,
+  "seam_tone_gain": [
+   0.796,
+   1.255
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b180",
+  "view": [
+   180.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-b3e89ec148d1.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 5.03,
+   "after": 5.03,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/12-mamad-r-b180/answer-b3e89ec148d1.reg.png",
+   "used": false
+  },
+  "new_px": 4966280,
+  "painted_pct": 44.5,
+  "seam_tone_gain": [
+   0.795,
+   1.089
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b270b",
+  "view": [
+   270.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-c4880745726b.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 2.26,
+   "after": 2.26,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/12-mamad-r-b270b/answer-c4880745726b.reg.png",
+   "used": false
+  },
+  "new_px": 4214100,
+  "painted_pct": 56.4,
+  "seam_tone_gain": [
+   0.796,
+   1.122
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t295",
+  "view": [
+   295.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-ef36c82decfe.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 6.25,
+   "after": 6.25,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/12-mamad-r-t295/answer-ef36c82decfe.reg.png",
+   "used": false
+  },
+  "new_px": 5674638,
+  "painted_pct": 72.4,
+  "seam_tone_gain": [
+   0.796,
+   1.147
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t045",
+  "view": [
+   45.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-01d7f2b801e3.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 5.57,
+   "after": 5.57,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/12-mamad-r-t045/answer-01d7f2b801e3.reg.png",
+   "used": false
+  },
+  "new_px": 1847140,
+  "painted_pct": 77.2,
+  "seam_tone_gain": [
+   0.796,
+   1.256
+  ]
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   1530.0,
+   1081.7,
+   160.0,
+   175.0
+  ],
+  "floor_share_pct": 23.75,
+  "taken_pct": 23.69,
+  "unpainted_floor_px": 317117,
+  "behind_piece_px": 13095,
+  "joint_px": 73888,
+  "joints_on_grid_pct": 100.0,
+  "floor_colour_bgr": [
+   128.0,
+   152.0,
+   175.0
+  ],
+  "p0": -32.0,
+  "p1": -44.0
+ },
+ {
+  "step": "cap-fill",
+  "filled_pct": 21.82
+ },
+ {
+  "step": "wall-fill",
+  "plane": "z=290",
+  "span": "0,1",
+  "src_plane": "z=290",
+  "src_span": "0,1",
+  "target_pct": 30.384,
+  "source_px": 10105598,
+  "colour_bgr": [
+   155.0,
+   174.0,
+   192.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "no-skirting",
+  "cam": "cp-mamad",
+  "changed_pct": 0.851,
+  "columns": 4183,
+  "top_cm": 16.0
+ }
+]

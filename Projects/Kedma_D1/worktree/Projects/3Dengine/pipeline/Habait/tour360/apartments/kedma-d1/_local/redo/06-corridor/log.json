@@ -1,0 +1,307 @@
+[
+ {
+  "step": "init",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-corridor/pano.webp"
+ },
+ {
+  "step": "carry-over",
+  "target": "06-corridor",
+  "cam": "cp-corridor",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 4.38
+   },
+   {
+    "source": "03-living:cp-living",
+    "carried_pct": 31.39
+   },
+   {
+    "source": "04-dining:cp-dining",
+    "carried_pct": 2.58
+   },
+   {
+    "source": "05-family:cp-family",
+    "carried_pct": 0.0
+   }
+  ],
+  "carried_pct": 32.95,
+  "painted_pct": 31.9,
+  "max_ratio": 1.6,
+  "edge_px": 6
+ },
+ {
+  "step": "accept",
+  "tag": "b000",
+  "view": [
+   0.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-c563af6aef0c.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 4.2,
+   "after": 4.2,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/06-corridor-r-b000/answer-c563af6aef0c.reg.png",
+   "used": false
+  },
+  "new_px": 5462187,
+  "painted_pct": 47.6,
+  "seam_tone_gain": [
+   0.932,
+   1.255
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b090",
+  "view": [
+   90.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-eac53cec54a3.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 5.97,
+   "after": 5.97,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/06-corridor-r-b090/answer-eac53cec54a3.reg.png",
+   "used": false
+  },
+  "new_px": 777589,
+  "painted_pct": 49.8,
+  "seam_tone_gain": [
+   0.797,
+   1.256
+  ]
+ },
+ {
+  "step": "wall-fill",
+  "plane": "y=1025",
+  "span": "878,1063",
+  "src_plane": "y=1025",
+  "src_span": "878,1063",
+  "target_pct": 24.397,
+  "source_px": 1188787,
+  "colour_bgr": [
+   155.0,
+   174.0,
+   194.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "accept",
+  "tag": "c175",
+  "view": [
+   175.0,
+   -3.0,
+   76.0
+  ],
+  "answer": "answer-bde233e6a6c0.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 2,
+   "dy": -2,
+   "before": 3.65,
+   "after": 3.65,
+   "box": "0.000,0.001,0.999,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/06-corridor-r-c175/answer-bde233e6a6c0.reg.png",
+   "used": false
+  },
+  "new_px": 2119270,
+  "painted_pct": 76.5,
+  "seam_tone_gain": [
+   0.853,
+   1.253
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t034",
+  "view": [
+   34.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-6669621974dd.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 6.19,
+   "after": 6.19,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/06-corridor-r-t034/answer-6669621974dd.reg.png",
+   "used": false
+  },
+  "new_px": 1790465,
+  "painted_pct": 81.5,
+  "seam_tone_gain": [
+   0.9,
+   1.092
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t149",
+  "view": [
+   149.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-17fc3ee9f667.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 7.14,
+   "after": 7.14,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/06-corridor-r-t149/answer-17fc3ee9f667.reg.png",
+   "used": false
+  },
+  "new_px": 1043851,
+  "painted_pct": 84.3,
+  "seam_tone_gain": [
+   0.851,
+   1.129
+  ]
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   955.2,
+   973.1,
+   160.0,
+   264.0
+  ],
+  "floor_share_pct": 22.84,
+  "taken_pct": 20.39,
+  "unpainted_floor_px": 98,
+  "behind_piece_px": 0,
+  "joint_px": 63924,
+  "joints_on_grid_pct": 93.6,
+  "floor_colour_bgr": [
+   178.0,
+   192.0,
+   207.0
+  ],
+  "p0": -32.0,
+  "p1": -44.0
+ },
+ {
+  "step": "cap-fill",
+  "filled_pct": 15.69
+ },
+ {
+  "step": "wall-fill",
+  "plane": "z=290",
+  "span": "0,1",
+  "src_plane": "z=290",
+  "src_span": "0,1",
+  "target_pct": 28.331,
+  "source_px": 9378686,
+  "colour_bgr": [
+   158.0,
+   175.0,
+   195.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "no-skirting",
+  "cam": "cp-corridor",
+  "changed_pct": 1.033,
+  "columns": 6213,
+  "top_cm": 16.0
+ },
+ {
+  "step": "wall-fill",
+  "plane": "x=889",
+  "span": "880,940",
+  "src_plane": "y=1025",
+  "src_span": "880,1060",
+  "target_pct": 1.827,
+  "source_px": 7947517,
+  "colour_bgr": [
+   173.0,
+   194.0,
+   216.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   955.2,
+   973.1,
+   160.0,
+   264.0
+  ],
+  "floor_share_pct": 22.84,
+  "taken_pct": 21.97,
+  "unpainted_floor_px": 0,
+  "behind_piece_px": 0,
+  "joint_px": 63924,
+  "joints_on_grid_pct": 93.6,
+  "floor_colour_bgr": [
+   180.0,
+   193.0,
+   207.0
+  ],
+  "p0": -16.0,
+  "p1": -26.0
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   955.2,
+   973.1,
+   160.0,
+   264.0
+  ],
+  "floor_share_pct": 22.84,
+  "taken_pct": 22.36,
+  "unpainted_floor_px": 0,
+  "behind_piece_px": 0,
+  "joint_px": 63924,
+  "joints_on_grid_pct": 93.6,
+  "floor_colour_bgr": [
+   181.0,
+   194.0,
+   209.0
+  ],
+  "p0": -32.0,
+  "p1": -44.0
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   955.2,
+   973.1,
+   160.0,
+   264.0
+  ],
+  "floor_share_pct": 23.72,
+  "taken_pct": 23.11,
+  "unpainted_floor_px": 0,
+  "behind_piece_px": 0,
+  "joint_px": 80223,
+  "joints_on_grid_pct": 92.5,
+  "floor_colour_bgr": [
+   178.0,
+   191.0,
+   206.0
+  ],
+  "p0": -32.0,
+  "p1": -44.0
+ }
+]

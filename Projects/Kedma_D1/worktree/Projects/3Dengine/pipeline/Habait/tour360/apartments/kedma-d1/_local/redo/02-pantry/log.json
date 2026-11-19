@@ -1,0 +1,677 @@
+[
+ {
+  "step": "init",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-pantry/pano.webp"
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 16.01
+   }
+  ],
+  "carried_pct": 15.91,
+  "painted_pct": 15.4,
+  "max_ratio": 1.6,
+  "edge_px": 6
+ },
+ {
+  "step": "accept",
+  "tag": "b000",
+  "view": [
+   0.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-97971fd84cdf.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 3.84,
+   "after": 3.84,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-b000/answer-97971fd84cdf.reg.png",
+   "used": false
+  },
+  "new_px": 3229801,
+  "painted_pct": 24.6,
+  "seam_tone_gain": [
+   0.883,
+   1.254
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b090",
+  "view": [
+   90.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-cc02ad8c38d9.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 3.71,
+   "after": 3.71,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-b090/answer-cc02ad8c38d9.reg.png",
+   "used": false
+  },
+  "new_px": 4964188,
+  "painted_pct": 38.7,
+  "seam_tone_gain": [
+   0.938,
+   1.073
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b180",
+  "view": [
+   180.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-dfb05444c0a7.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 4.17,
+   "after": 4.17,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-b180/answer-dfb05444c0a7.reg.png",
+   "used": false
+  },
+  "new_px": 4966280,
+  "painted_pct": 52.8,
+  "seam_tone_gain": [
+   0.953,
+   1.198
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b270",
+  "view": [
+   270.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-67ee5941149e.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 8.32,
+   "after": 8.32,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-b270/answer-67ee5941149e.reg.png",
+   "used": false
+  },
+  "new_px": 4214100,
+  "painted_pct": 64.6,
+  "seam_tone_gain": [
+   0.932,
+   1.256
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t060",
+  "view": [
+   60.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-834a2cc87563.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 4.24,
+   "after": 4.24,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-t060/answer-834a2cc87563.reg.png",
+   "used": false
+  },
+  "new_px": 3782979,
+  "painted_pct": 75.2,
+  "seam_tone_gain": [
+   0.968,
+   1.258
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t180",
+  "view": [
+   180.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-a19f02986bb5.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 2.87,
+   "after": 2.87,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-t180/answer-a19f02986bb5.reg.png",
+   "used": false
+  },
+  "new_px": 1822970,
+  "painted_pct": 80.0,
+  "seam_tone_gain": [
+   0.796,
+   1.255
+  ]
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   1151.4,
+   365.2,
+   160.0,
+   243.0
+  ],
+  "floor_share_pct": 16.02,
+  "taken_pct": 14.84,
+  "unpainted_floor_px": 187,
+  "behind_piece_px": 0,
+  "joint_px": 44988,
+  "joints_on_grid_pct": 99.3,
+  "floor_colour_bgr": [
+   179.0,
+   191.0,
+   206.0
+  ],
+  "p0": -32.0,
+  "p1": -44.0
+ },
+ {
+  "step": "cap-fill",
+  "filled_pct": 20.03
+ },
+ {
+  "step": "plaster-patch",
+  "cam": "cp-pantry",
+  "box": "1076,328,1092.6,346,0,300",
+  "src_box": "1092.6,251,1098,328,0,300",
+  "corner": [
+   1093.8,
+   336.1
+  ],
+  "corner_col": 5320.3,
+  "face_pct": 0.811,
+  "patched_pct": 0.627,
+  "face_not_patched_px": 61502
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 0.29
+   }
+  ],
+  "carried_pct": 0.28,
+  "painted_pct": 100.0,
+  "max_ratio": 3.0,
+  "edge_px": 6,
+  "boxes": [
+   "985,253,1078,326,0,222"
+  ]
+ },
+ {
+  "step": "plaster-patch",
+  "cam": "cp-pantry",
+  "box": "1076,339,1094.6,347,0,300",
+  "src_box": "1092.6,251,1098,339,0,300",
+  "corner": [
+   1093.8,
+   341.1
+  ],
+  "corner_col": 5227.1,
+  "face_pct": 1.274,
+  "patched_pct": 0.601,
+  "face_not_patched_px": 226070
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 0.29
+   }
+  ],
+  "carried_pct": 0.28,
+  "painted_pct": 100.0,
+  "max_ratio": 3.0,
+  "edge_px": 6,
+  "boxes": [
+   "985,253,1078,326,0,222"
+  ]
+ },
+ {
+  "step": "plaster-patch",
+  "cam": "cp-pantry",
+  "box": "1076,339,1094.6,347,0,300",
+  "src_box": "1092.6,251,1098,334,0,300",
+  "corner": [
+   1093.8,
+   341.1
+  ],
+  "corner_col": 5227.1,
+  "face_pct": 1.274,
+  "patched_pct": 0.446,
+  "face_not_patched_px": 278151
+ },
+ {
+  "step": "plaster-patch",
+  "cam": "cp-pantry",
+  "box": "1092.6,326,1098,339,0,300",
+  "src_box": "1076,339,1094.6,347,0,300",
+  "corner": [
+   1093.8,
+   341.1
+  ],
+  "corner_col": 5227.1,
+  "face_pct": 2.009,
+  "patched_pct": 0.51,
+  "face_not_patched_px": 502884
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 0.29
+   }
+  ],
+  "carried_pct": 0.28,
+  "painted_pct": 100.0,
+  "max_ratio": 3.0,
+  "edge_px": 6,
+  "boxes": [
+   "985,253,1078,326,0,222"
+  ]
+ },
+ {
+  "step": "jamb-fill",
+  "why": "the wall end beside the opening was painted as a white frame with a glassy strip; filled from the plaster around it, the render's shading",
+  "mask_px": 727946
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 0.29
+   }
+  ],
+  "carried_pct": 0.28,
+  "painted_pct": 100.0,
+  "max_ratio": 3.0,
+  "edge_px": 6,
+  "boxes": [
+   "985,253,1078,326,0,222"
+  ]
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 0.29
+   }
+  ],
+  "carried_pct": 0.28,
+  "painted_pct": 100.0,
+  "max_ratio": 3.0,
+  "edge_px": 6,
+  "boxes": [
+   "985,253,1078,326,0,222"
+  ]
+ },
+ {
+  "step": "regraft",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-pantry/pano.webp",
+  "boxes": [
+   "1076,330,1099,348,0,300"
+  ],
+  "reset_pct": 4.62,
+  "painted_pct": 95.2
+ },
+ {
+  "step": "accept",
+  "tag": "j048",
+  "view": [
+   48.0,
+   0.0,
+   80.0
+  ],
+  "answer": "answer-0f938864eac9.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 6.53,
+   "after": 6.53,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-j048/answer-0f938864eac9.reg.png",
+   "used": false
+  },
+  "new_px": 948914,
+  "painted_pct": 97.8,
+  "seam_tone_gain": [
+   0.881,
+   1.153
+  ]
+ },
+ {
+  "step": "regraft",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-pantry/pano.webp",
+  "boxes": [
+   "985,253,1079,327,0,222",
+   "1092,420,1194,434,0,300"
+  ],
+  "reset_pct": 18.86,
+  "painted_pct": 78.8
+ },
+ {
+  "step": "accept",
+  "tag": "s295",
+  "view": [
+   -65.0,
+   0.0,
+   104.0
+  ],
+  "answer": "answer-28fdac50b301.png",
+  "registration": {
+   "scale": 0.996,
+   "dx": 0,
+   "dy": 0,
+   "before": 10.74,
+   "after": 10.7,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-s295/answer-28fdac50b301.reg.png",
+   "used": false
+  },
+  "new_px": 4338676,
+  "painted_pct": 91.2,
+  "seam_tone_gain": [
+   0.796,
+   1.092
+  ]
+ },
+ {
+  "step": "reject",
+  "tag": "s295",
+  "why": "the answer invented an opening, a counter and a skirting board on the plain south wall; canvas restored from canvas.before-s295.png (kept as canvas.rejected-s295.png)"
+ },
+ {
+  "step": "accept",
+  "tag": "f040",
+  "view": [
+   40.0,
+   0.0,
+   70.0
+  ],
+  "answer": "answer-6fa5edfe0189.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 6.18,
+   "after": 6.18,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-f040/answer-6fa5edfe0189.reg.png",
+   "used": false
+  },
+  "new_px": 258774,
+  "painted_pct": 79.4,
+  "seam_tone_gain": [
+   0.867,
+   1.074
+  ]
+ },
+ {
+  "step": "cap-fill",
+  "filled_pct": 20.58
+ },
+ {
+  "step": "wall-fill",
+  "plane": "y=428",
+  "span": "1092,1249",
+  "src_plane": "x=1093.8",
+  "src_span": "251,336",
+  "target_pct": 15.989,
+  "source_px": 1294226,
+  "colour_bgr": [
+   161.0,
+   175.0,
+   191.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   1151.4,
+   365.2,
+   160.0,
+   243.0
+  ],
+  "floor_share_pct": 16.02,
+  "taken_pct": 14.85,
+  "unpainted_floor_px": 247095,
+  "behind_piece_px": 0,
+  "joint_px": 43877,
+  "joints_on_grid_pct": 99.3,
+  "floor_colour_bgr": [
+   178.0,
+   191.0,
+   205.0
+  ],
+  "p0": -32.0,
+  "p1": -44.0
+ },
+ {
+  "step": "cap-fill",
+  "filled_pct": 3.85
+ },
+ {
+  "step": "wall-fill",
+  "plane": "y=428",
+  "span": "1092,1249",
+  "src_plane": "x=1093.8",
+  "src_span": "251,336",
+  "target_pct": 15.989,
+  "source_px": 1510949,
+  "colour_bgr": [
+   160.0,
+   174.0,
+   191.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "wall-fill",
+  "plane": "y=428",
+  "span": "1090,1195",
+  "src_plane": "x=1093.8",
+  "src_span": "251,336",
+  "target_pct": 15.943,
+  "source_px": 1521238,
+  "colour_bgr": [
+   160.0,
+   174.0,
+   191.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "regraft",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-pantry/pano.webp",
+  "boxes": [
+   "985,253,1079,327,0,290",
+   "1076,330,1099,348,0,300"
+  ],
+  "reset_pct": 4.62,
+  "painted_pct": 95.2
+ },
+ {
+  "step": "accept",
+  "tag": "ju045",
+  "view": [
+   45.0,
+   28.0,
+   95.0
+  ],
+  "answer": "answer-36bc2ae9fc22.png",
+  "registration": {
+   "scale": 0.876,
+   "dx": 28,
+   "dy": -104,
+   "before": 15.59,
+   "after": 15.26,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/02-pantry-r-ju045/answer-36bc2ae9fc22.reg.png",
+   "used": false
+  },
+  "new_px": 1050023,
+  "painted_pct": 98.1,
+  "seam_tone_gain": [
+   0.796,
+   1.258
+  ]
+ },
+ {
+  "step": "reject",
+  "tag": "ju045",
+  "why": "the upward view's answer re-framed the picture (scale 0.876) and invented kitchen shelves; canvas restored to the v3 state before its regraft"
+ },
+ {
+  "step": "wall-fill",
+  "plane": "y=341",
+  "span": "1079,1093.5",
+  "src_plane": "x=1093.8",
+  "src_span": "251,336",
+  "target_pct": 0.899,
+  "source_px": 1526244,
+  "colour_bgr": [
+   160.0,
+   174.0,
+   191.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 0.42
+   }
+  ],
+  "carried_pct": 0.38,
+  "painted_pct": 100.0,
+  "max_ratio": 6.0,
+  "edge_px": 2,
+  "boxes": [
+   "985,253,1079,327,0,290"
+  ]
+ },
+ {
+  "step": "wall-fill",
+  "plane": "x=1093.8",
+  "span": "300,341.5",
+  "src_plane": "x=1093.8",
+  "src_span": "255,298",
+  "target_pct": 4.973,
+  "source_px": 279605,
+  "colour_bgr": [
+   58.0,
+   81.0,
+   108.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "wall-fill",
+  "plane": "y=341",
+  "span": "1079,1093.5",
+  "src_plane": "x=1093.8",
+  "src_span": "310,336",
+  "target_pct": 0.899,
+  "source_px": 1043942,
+  "colour_bgr": [
+   167.0,
+   180.0,
+   195.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 0.42
+   }
+  ],
+  "carried_pct": 0.38,
+  "painted_pct": 100.0,
+  "max_ratio": 6.0,
+  "edge_px": 2,
+  "boxes": [
+   "985,253,1079,327,0,290"
+  ]
+ },
+ {
+  "step": "wall-fill",
+  "plane": "y=341",
+  "span": "1079,1093.5",
+  "src_plane": "x=1093.8",
+  "src_span": "310,336",
+  "target_pct": 0.899,
+  "source_px": 1043942,
+  "colour_bgr": [
+   167.0,
+   180.0,
+   195.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "fridge-extend",
+  "why": "the fridge front above and below the painted band of view f040 continued from that band, per column, with the render's light",
+  "filled_px": 56966
+ },
+ {
+  "step": "fridge-matte",
+  "why": "the fridge sliver seen from the pantry: matte brushed steel on the render's light, its painted detail kept (the bright reflective steel read as far in the gate's depth model)"
+ }
+]

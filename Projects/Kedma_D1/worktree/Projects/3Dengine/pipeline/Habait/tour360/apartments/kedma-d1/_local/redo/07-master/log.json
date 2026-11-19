@@ -1,0 +1,259 @@
+[
+ {
+  "step": "init",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-master/pano.webp"
+ },
+ {
+  "step": "carry-over",
+  "target": "07-master",
+  "cam": "cp-master",
+  "sources": [
+   {
+    "source": "03-living:cp-living",
+    "carried_pct": 0.0
+   },
+   {
+    "source": "06-corridor:cp-corridor",
+    "carried_pct": 0.09
+   }
+  ],
+  "carried_pct": 0.08,
+  "painted_pct": 0.1,
+  "max_ratio": 1.6,
+  "edge_px": 6
+ },
+ {
+  "step": "accept",
+  "tag": "b090",
+  "view": [
+   90.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-a81c40a7a9d1.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 1.18,
+   "after": 1.18,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/07-master-r-b090/answer-a81c40a7a9d1.reg.png",
+   "used": false
+  },
+  "new_px": 5718460,
+  "painted_pct": 16.4,
+  "seam_tone_gain": null
+ },
+ {
+  "step": "accept",
+  "tag": "b000",
+  "view": [
+   0.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-acc20fd217b1.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 6.9,
+   "after": 6.9,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/07-master-r-b000/answer-acc20fd217b1.reg.png",
+   "used": false
+  },
+  "new_px": 4966280,
+  "painted_pct": 30.5,
+  "seam_tone_gain": [
+   0.798,
+   1.213
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b180",
+  "view": [
+   180.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-b719d9cbee5d.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 5.61,
+   "after": 5.61,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/07-master-r-b180/answer-b719d9cbee5d.reg.png",
+   "used": false
+  },
+  "new_px": 4945213,
+  "painted_pct": 44.5,
+  "seam_tone_gain": [
+   0.898,
+   1.223
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "b270",
+  "view": [
+   270.0,
+   0.0,
+   112.0
+  ],
+  "answer": "answer-f836abaece4d.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 3.39,
+   "after": 3.39,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/07-master-r-b270/answer-f836abaece4d.reg.png",
+   "used": false
+  },
+  "new_px": 4214100,
+  "painted_pct": 56.4,
+  "seam_tone_gain": [
+   0.879,
+   1.082
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t240",
+  "view": [
+   -120.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-bea04101454b.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 5.39,
+   "after": 5.39,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/07-master-r-t240/answer-bea04101454b.reg.png",
+   "used": false
+  },
+  "new_px": 5685405,
+  "painted_pct": 72.5,
+  "seam_tone_gain": [
+   0.796,
+   1.257
+  ]
+ },
+ {
+  "step": "accept",
+  "tag": "t340",
+  "view": [
+   -20.0,
+   -48.0,
+   108.0
+  ],
+  "answer": "answer-2640a075236b.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 6.91,
+   "after": 6.91,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/07-master-r-t340/answer-2640a075236b.reg.png",
+   "used": false
+  },
+  "new_px": 1663487,
+  "painted_pct": 76.8,
+  "seam_tone_gain": [
+   0.997,
+   1.256
+  ]
+ },
+ {
+  "step": "near-floor",
+  "camera": [
+   543.4,
+   975.9,
+   160.0,
+   248.0
+  ],
+  "floor_share_pct": 18.59,
+  "taken_pct": 18.05,
+  "unpainted_floor_px": 70415,
+  "behind_piece_px": 11531,
+  "joint_px": 57310,
+  "joints_on_grid_pct": 99.9,
+  "floor_colour_bgr": [
+   153.0,
+   166.0,
+   181.0
+  ],
+  "p0": -32.0,
+  "p1": -44.0
+ },
+ {
+  "step": "cap-fill",
+  "filled_pct": 23.03
+ },
+ {
+  "step": "wall-fill",
+  "plane": "z=290",
+  "span": "0,1",
+  "src_plane": "z=290",
+  "src_span": "0,1",
+  "target_pct": 28.313,
+  "source_px": 9401523,
+  "colour_bgr": [
+   156.0,
+   175.0,
+   193.0
+  ],
+  "grain_block": false
+ },
+ {
+  "step": "no-skirting",
+  "cam": "cp-master",
+  "changed_pct": 0.63,
+  "columns": 3259,
+  "top_cm": 16.0
+ },
+ {
+  "step": "accept",
+  "tag": "t130",
+  "view": [
+   130.0,
+   -52.0,
+   64.0
+  ],
+  "answer": "answer-051c672f4973.png",
+  "registration": {
+   "scale": 1.0,
+   "dx": 0,
+   "dy": 0,
+   "before": 6.4,
+   "after": 6.4,
+   "box": "0.000,0.000,1.000,1.000",
+   "out": "Habait/tour360/apartments/kedma-d1/_local/flatfix/07-master-r-t130/answer-051c672f4973.reg.png",
+   "used": false
+  },
+  "new_px": 489774,
+  "painted_pct": 78.2,
+  "seam_tone_gain": [
+   0.796,
+   1.052
+  ]
+ },
+ {
+  "step": "no-skirting",
+  "cam": "cp-master",
+  "changed_pct": 0.63,
+  "columns": 3259,
+  "top_cm": 16.0
+ }
+]

@@ -1,0 +1,51 @@
+<claude-code-hint v="1" type="plugin" value="vercel@claude-plugins-official" />
+Vercel CLI 65.9.0 (Node.js 24.22.1)
+
+  Directory       C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\Habait\tour360\dist\kedma-d1
+
+
+✓ Linked          eliran-5390/kedma-d1
+  Inspect         https://vercel.com/eliran-5390/kedma-d1/4a8kWhWpeypzsNWL1YdgRcEJBqQs
+  Production      https://kedma-d1-kecpkac1n-eliran-5390.vercel.app
+▲ Aliased         https://kedma-d1.vercel.app
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_4a8kWhWpeypzsNWL1YdgRcEJBqQs",
+    "url": "https://kedma-d1-kecpkac1n-eliran-5390.vercel.app",
+    "productionUrl": "https://kedma-d1.vercel.app",
+    "inspectorUrl": "https://vercel.com/eliran-5390/kedma-d1/4a8kWhWpeypzsNWL1YdgRcEJBqQs",
+    "readyState": "READY",
+    "target": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_4a8kWhWpeypzsNWL1YdgRcEJBqQs",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "message": "Deployment kedma-d1-kecpkac1n-eliran-5390.vercel.app ready. Production URL: https://kedma-d1.vercel.app",
+  "next": [
+    {
+      "command": "vercel git connect",
+      "when": "Automatically deploy changes on every push"
+    },
+    {
+      "command": "vercel curl https://kedma-d1.vercel.app",
+      "when": "Verify deployment, including when Deployment Protection is enabled"
+    },
+    {
+      "command": "vercel inspect kedma-d1-kecpkac1n-eliran-5390.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}

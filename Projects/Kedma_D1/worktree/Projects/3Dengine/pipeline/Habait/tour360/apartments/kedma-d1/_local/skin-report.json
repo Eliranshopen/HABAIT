@@ -1,0 +1,255 @@
+{
+ "$schema": "tour360/skin-report.v1",
+ "apartment": "kedma-d1",
+ "started": "2026-11-17T09:26:58.046Z",
+ "rule": {
+  "max_deviation_pct": 1,
+  "max_attempts": 1
+ },
+ "model": "gpt25",
+ "caps": {
+  "soft": 1,
+  "hard": 2
+ },
+ "scenes": {
+  "03-living": {
+   "camera": "living",
+   "attempts": [
+    {
+     "attempt": "kept",
+     "gate": {
+      "verdict": "FAIL",
+      "deviation_pct": 14.47
+     },
+     "pick": "03-living__flat__c.png"
+    },
+    {
+     "attempt": 1,
+     "generated": "03-living__gpt25__s7__6e12cc3b51c9.png",
+     "seam": {
+      "wrap": 3.74,
+      "base": 7.06,
+      "closed": false
+     },
+     "gate": {
+      "mirror_exempted": [],
+      "verdict": "FAIL",
+      "deviation_pct": 14.47,
+      "resolution_pct": 1,
+      "findings": 1,
+      "cg_pct": 14.47,
+      "dims": {
+       "rows": [],
+       "niche": null,
+       "unchecked": [],
+       "max_pct": null
+      },
+      "evidence": "_local\\fidelity\\03-living__picks__83384d689f67.gate.jpg"
+     },
+     "pick": "03-living__gpt25__s7__6e12cc3b51c9.png"
+    }
+   ],
+   "verdict": "FAIL",
+   "deviation_pct": 14.47,
+   "pick": "03-living__gpt25__s7__6e12cc3b51c9.png"
+  },
+  "01-kitchen": {
+   "camera": "kitchen",
+   "attempts": [
+    {
+     "attempt": "kept",
+     "gate": {
+      "verdict": "PASS",
+      "deviation_pct": 0.51
+     },
+     "pick": "01-kitchen__redo__v2.png"
+    }
+   ],
+   "verdict": "PASS",
+   "deviation_pct": 0.51,
+   "pick": "01-kitchen__redo__v2.png"
+  },
+  "04-dining": {
+   "camera": "dining",
+   "attempts": [
+    {
+     "attempt": "kept",
+     "gate": {
+      "verdict": "PASS",
+      "deviation_pct": 0.62
+     },
+     "pick": "04-dining__gpt25__s7__69f62155db73.png"
+    }
+   ],
+   "verdict": "PASS",
+   "deviation_pct": 0.62,
+   "pick": "04-dining__gpt25__s7__69f62155db73.png"
+  },
+  "02-pantry": {
+   "camera": "pantry",
+   "attempts": [
+    {
+     "attempt": "kept",
+     "gate": {
+      "verdict": "PASS",
+      "deviation_pct": 0.45
+     },
+     "pick": "02-pantry__flat__shelves.png"
+    }
+   ],
+   "verdict": "PASS",
+   "deviation_pct": 0.45,
+   "pick": "02-pantry__flat__shelves.png"
+  },
+  "05-family": {
+   "camera": "family",
+   "attempts": [
+    {
+     "attempt": "kept",
+     "gate": {
+      "verdict": "PASS",
+      "deviation_pct": 0.47
+     },
+     "pick": "05-family__flat__win3.png"
+    }
+   ],
+   "verdict": "PASS",
+   "deviation_pct": 0.47,
+   "pick": "05-family__flat__win3.png"
+  },
+  "06-corridor": {
+   "camera": "corridor",
+   "attempts": [
+    {
+     "attempt": "kept",
+     "gate": {
+      "verdict": "FAIL",
+      "deviation_pct": 2.31
+     },
+     "pick": "06-corridor__gpt25__s7__ed7c44971b0e.png"
+    }
+   ]
+  }
+ },
+ "consistency": null,
+ "finishes": {},
+ "spend_usd": 0.62,
+ "verdict": "SOFT-CHECKPOINT",
+ "sight_lines": [
+  {
+   "group": "kitchen",
+   "home": "01-kitchen",
+   "viewers": [
+    "01-kitchen",
+    "02-pantry",
+    "03-living",
+    "04-dining",
+    "06-corridor"
+   ]
+  },
+  {
+   "group": "living",
+   "home": "03-living",
+   "viewers": [
+    "01-kitchen",
+    "02-pantry",
+    "03-living",
+    "04-dining",
+    "05-family",
+    "06-corridor"
+   ]
+  },
+  {
+   "group": "dining",
+   "home": "04-dining",
+   "viewers": [
+    "01-kitchen",
+    "03-living",
+    "04-dining",
+    "06-corridor"
+   ]
+  },
+  {
+   "group": "family",
+   "home": "05-family",
+   "viewers": [
+    "03-living",
+    "04-dining",
+    "05-family"
+   ]
+  },
+  {
+   "group": "pantry",
+   "home": "02-pantry",
+   "viewers": [
+    "01-kitchen",
+    "02-pantry",
+    "03-living"
+   ]
+  },
+  {
+   "group": "door-o-11",
+   "home": null,
+   "viewers": [
+    "03-living",
+    "04-dining",
+    "06-corridor",
+    "13-balcony"
+   ]
+  },
+  {
+   "group": "door-o-13",
+   "home": null,
+   "viewers": [
+    "01-kitchen",
+    "03-living",
+    "04-dining",
+    "06-corridor"
+   ]
+  },
+  {
+   "group": "door-o-14",
+   "home": null,
+   "viewers": [
+    "06-corridor",
+    "12-mamad"
+   ]
+  },
+  {
+   "group": "door-o-15",
+   "home": null,
+   "viewers": [
+    "06-corridor",
+    "07-master"
+   ]
+  },
+  {
+   "group": "door-o-16",
+   "home": null,
+   "viewers": [
+    "03-living",
+    "06-corridor",
+    "09-bed1"
+   ]
+  },
+  {
+   "group": "door-o-17",
+   "home": null,
+   "viewers": [
+    "06-corridor",
+    "10-bed2"
+   ]
+  },
+  {
+   "group": "door-w-kitchen",
+   "home": null,
+   "viewers": [
+    "01-kitchen",
+    "02-pantry",
+    "04-dining",
+    "13-balcony"
+   ]
+  }
+ ],
+ "stopped": "soft checkpoint: the job has spent $0.62 of the $1 soft cap; 06-corridor skin seed 7 not sent. Re-run with --past-soft to continue (cached answers cost $0)"
+}

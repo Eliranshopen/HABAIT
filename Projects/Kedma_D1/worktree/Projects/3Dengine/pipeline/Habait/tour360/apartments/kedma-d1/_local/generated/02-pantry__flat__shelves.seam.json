@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "kind": "object-paste",
+ "parent": "02-pantry__gpt25__s8__e12770d73799.png",
+ "object_paste": {
+  "from": "_local/flatfix/02-pantry-shelves/answer-323eb65ba6e8.png",
+  "tool": "jobs/kedma-d1/hand/flatfix.py",
+  "args": "view yaw 95.0 pitch 0.0 hfov 108.0 size 1024, inset 20, feather 60, box 0,0,1,1",
+  "box": [
+   1265,
+   212,
+   598,
+   599
+  ],
+  "why": "the image model drew near things straight in the panorama, so they were bent in the viewer; the view was redrawn on the CG render's geometry and projected back"
+ },
+ "band": {
+  "u": 0.7639,
+  "deg": 108.0,
+  "rows": [
+   0.207,
+   0.792
+  ]
+ },
+ "cuts": [],
+ "note": "no band cut: a straight-line view of the same camera, feathered; checked by eye"
+}

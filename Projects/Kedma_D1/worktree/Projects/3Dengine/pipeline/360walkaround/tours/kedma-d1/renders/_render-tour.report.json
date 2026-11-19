@@ -1,0 +1,197 @@
+{
+  "generator": {
+    "script": "pipeline/render_tour.mjs",
+    "version": "0.1.0",
+    "started_utc": "2026-11-17T19:12:50+00:00",
+    "finished_utc": "2026-11-17T19:28:46+00:00",
+    "seconds": 955.51
+  },
+  "settings": {
+    "mode": "draft",
+    "resolution": [
+      3072,
+      1536
+    ],
+    "samples": 20,
+    "wrap_pad": 512,
+    "scene": "scene-full.blend",
+    "chunk": 4,
+    "blender": "C:/Program Files/Blender Foundation/Blender 4.5/blender.exe",
+    "px_per_m": 80
+  },
+  "scene": {
+    "clean": true,
+    "why": "plan.json + the style lock + the material board + the generator scripts hash the same as the scene report",
+    "planHash": "dc6967de0d075e633c86ef4c3b759c58e4a76957eee78a72bca6e24ce9b141b1",
+    "scripts": [
+      {
+        "file": "build_scene.py",
+        "sha256": "57495c186ba20c67e7dcfa141c8016d68c9ccdced8d3870ff434df00a5ead8b5"
+      },
+      {
+        "file": "materials_kit.py",
+        "sha256": "7018a8bc12c75ae39bffe9e3769cd53c21d5177af1f6fc0d4d0dd3c5b4253a88"
+      },
+      {
+        "file": "place_cameras.py",
+        "sha256": "ee60c15636fb4920c50b1bc39e15f9e3f8567e8cff234cb70a7688e9ea1caa80"
+      },
+      {
+        "file": "placement_templates.py",
+        "sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161"
+      },
+      {
+        "file": "plan_general.py",
+        "sha256": "9616d913b2889dded3d7a1758c4466ea782f463cdf6e5ee4997071cf6e35dc47"
+      },
+      {
+        "file": "general_furnish.py",
+        "sha256": "51e0317cecb5ef26efc09de0bd8a2a7a60653dda1b47d2e22ac7e1bf06039664"
+      }
+    ],
+    "styleHash": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+    "built_utc": "2026-11-17T18:40:37+00:00",
+    "checks": "112/112"
+  },
+  "points_requested": [
+    "cp-bed2",
+    "cp-bath",
+    "cp-mamad",
+    "cp-balcony"
+  ],
+  "forced": [],
+  "runs": [
+    {
+      "points": [
+        "cp-bed2",
+        "cp-bath",
+        "cp-mamad",
+        "cp-balcony"
+      ],
+      "skip_if_clean": true,
+      "exit": 0,
+      "seconds": 952.3,
+      "skipped": [],
+      "rendered": [
+        "cp-bed2",
+        "cp-bath",
+        "cp-mamad",
+        "cp-balcony"
+      ],
+      "log": "renders/_logs/render-cp-bed2-x4.log"
+    }
+  ],
+  "skipped_this_run": [],
+  "rendered_this_run": [
+    "cp-bed2",
+    "cp-bath",
+    "cp-mamad",
+    "cp-balcony"
+  ],
+  "point_checks": [
+    {
+      "id": "cp-bed2",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 3072,
+        "h": 1536,
+        "nadir_m": 1.6,
+        "camera_z_m": 1.6,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.3,
+        "expected_zenith_m": 1.3,
+        "open_sky": false,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 62148,
+      "depth_bytes": 281133,
+      "seconds": 258.667,
+      "device_peak_mb": 818.71,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "3b08b64bcdb4cc1aa91a4099e22bd9957bf501e0cae28a4c7e9bbdae97991c88",
+      "skipped_this_run": false
+    },
+    {
+      "id": "cp-bath",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 3072,
+        "h": 1536,
+        "nadir_m": 1.6,
+        "camera_z_m": 1.6,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.3,
+        "expected_zenith_m": 1.3,
+        "open_sky": false,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 68678,
+      "depth_bytes": 306260,
+      "seconds": 282.98,
+      "device_peak_mb": 818.71,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "b1ad18128dfedeb00f34adb43bef23296ca510f759811ce5450b1df89344188a",
+      "skipped_this_run": false
+    },
+    {
+      "id": "cp-mamad",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 3072,
+        "h": 1536,
+        "nadir_m": 1.6,
+        "camera_z_m": 1.6,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.3,
+        "expected_zenith_m": 1.3,
+        "open_sky": false,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 61302,
+      "depth_bytes": 262106,
+      "seconds": 215.203,
+      "device_peak_mb": 818.71,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "6751796005914c9899ec6d5d87e840fd0ec0018243cf5019272a1204b9ad4760",
+      "skipped_this_run": false
+    },
+    {
+      "id": "cp-balcony",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 3072,
+        "h": 1536,
+        "nadir_m": 1.6,
+        "camera_z_m": 1.6,
+        "nadir_error_cm": 0,
+        "zenith_m": null,
+        "expected_zenith_m": 1.3,
+        "open_sky": true,
+        "valid_fraction": 0.623853,
+        "invalid_pixels": 1774886
+      },
+      "pano_bytes": 97942,
+      "depth_bytes": 251120,
+      "seconds": 180.091,
+      "device_peak_mb": 818.71,
+      "depth_checks_failed": 1,
+      "depth_check_worst_cm": 130,
+      "input_key": "19b0e0fc9deda4e6a567492226c70b7ee21d30669ab50da2b40452aedd0672bd",
+      "skipped_this_run": false
+    }
+  ],
+  "top_view": null,
+  "cost_usd": 0,
+  "machine": "local — RTX A2000 Laptop 4 GB (ENV.md §1); $0, see pipeline/RENDER-LEDGER.md",
+  "verdict": "PASS"
+}

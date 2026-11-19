@@ -1,0 +1,477 @@
+{
+ "schema": "habait.furnish-from-plan/0.1/report",
+ "plan": {
+  "path": "c:/RnD/.wt/kedma-d1/Projects/3Dengine/pipeline/360walkaround/tours/kedma-d1/plan.base.json",
+  "sha256": "67029a75ce9daa2424cbf1290369841b5fdddd6d0d60fc6859c5afae881f30e9"
+ },
+ "style": {
+  "path": "c:/RnD/.wt/kedma-d1/Projects/3Dengine/pipeline/360walkaround/catalog/style-habait-modern.json",
+  "sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0"
+ },
+ "generator": {
+  "name": "furnish_from_plan.py",
+  "version": "0.1.0",
+  "sha256": "4e8a2696f8f535acfa429df4d17d44d51c893d8dafbba3cbf633dffa6fe72cab",
+  "general_furnish": "0.1.1",
+  "plan_general": "0.2.0"
+ },
+ "bars_cm": {
+  "probe_out": 9.0,
+  "template_camera": 40.0,
+  "virtual_zone": 60.0,
+  "audit_depth": 60.0,
+  "passage_min": 80.0,
+  "wall_tol": 1.5,
+  "wall_tol_area_cm2": 4.0,
+  "walkway": 50.0
+ },
+ "rooms": {
+  "r-kitchen": {
+   "role": "kitchen",
+   "area_m2": 11.28,
+   "items": 20,
+   "plan": 20,
+   "template": 0,
+   "coverage_pct": 42.1,
+   "walk": {
+    "reachable": 2,
+    "of": 2,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-pantry": {
+   "role": "storage",
+   "area_m2": 2.45,
+   "items": 2,
+   "plan": 2,
+   "template": 0,
+   "coverage_pct": 48.3,
+   "walk": {
+    "reachable": 1,
+    "of": 1,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-living": {
+   "role": "living",
+   "area_m2": 17.02,
+   "items": 9,
+   "plan": 8,
+   "template": 1,
+   "coverage_pct": 22.2,
+   "walk": {
+    "reachable": 4,
+    "of": 4,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-dining": {
+   "role": "entrance",
+   "area_m2": 11.26,
+   "items": 9,
+   "plan": 9,
+   "template": 0,
+   "coverage_pct": 22.8,
+   "walk": {
+    "reachable": 4,
+    "of": 4,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-family": {
+   "role": "living",
+   "area_m2": 9.44,
+   "items": 5,
+   "plan": 4,
+   "template": 1,
+   "coverage_pct": 38.0,
+   "walk": {
+    "reachable": 1,
+    "of": 1,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-wc": {
+   "role": "toilet",
+   "area_m2": 1.43,
+   "items": 1,
+   "plan": 1,
+   "template": 0,
+   "coverage_pct": 15.9,
+   "walk": null
+  },
+  "r-corridor": {
+   "role": "corridor",
+   "area_m2": 7.84,
+   "items": 0,
+   "plan": 0,
+   "template": 0,
+   "coverage_pct": 0.0,
+   "walk": {
+    "reachable": 6,
+    "of": 6,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-master": {
+   "role": "bedroom",
+   "area_m2": 12.21,
+   "items": 4,
+   "plan": 4,
+   "template": 0,
+   "coverage_pct": 42.3,
+   "walk": {
+    "reachable": 2,
+    "of": 2,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-shower": {
+   "role": "bathroom",
+   "area_m2": 3.65,
+   "items": 5,
+   "plan": 5,
+   "template": 0,
+   "coverage_pct": 44.0,
+   "walk": {
+    "reachable": 1,
+    "of": 1,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-bed1": {
+   "role": "bedroom",
+   "area_m2": 8.91,
+   "items": 4,
+   "plan": 4,
+   "template": 0,
+   "coverage_pct": 35.2,
+   "walk": {
+    "reachable": 1,
+    "of": 1,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-bed2": {
+   "role": "bedroom",
+   "area_m2": 8.89,
+   "items": 4,
+   "plan": 4,
+   "template": 0,
+   "coverage_pct": 34.9,
+   "walk": {
+    "reachable": 1,
+    "of": 1,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-bath": {
+   "role": "bathroom",
+   "area_m2": 6.62,
+   "items": 7,
+   "plan": 7,
+   "template": 0,
+   "coverage_pct": 36.3,
+   "walk": {
+    "reachable": 1,
+    "of": 1,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-mamad": {
+   "role": "safe_room",
+   "area_m2": 11.0,
+   "items": 4,
+   "plan": 4,
+   "template": 0,
+   "coverage_pct": 28.0,
+   "walk": {
+    "reachable": 1,
+    "of": 1,
+    "unreached": [],
+    "camera_free": true
+   }
+  },
+  "r-balcony": {
+   "role": "terrace",
+   "area_m2": 21.41,
+   "items": 13,
+   "plan": 13,
+   "template": 0,
+   "coverage_pct": 24.2,
+   "walk": null
+  },
+  "r-laundry": {
+   "role": "service",
+   "area_m2": 2.94,
+   "items": 2,
+   "plan": 2,
+   "template": 0,
+   "coverage_pct": 18.6,
+   "walk": null
+  }
+ },
+ "rooms_furnished": [
+  "r-kitchen",
+  "r-pantry",
+  "r-living",
+  "r-dining",
+  "r-family",
+  "r-wc",
+  "r-master",
+  "r-shower",
+  "r-bed1",
+  "r-bed2",
+  "r-bath",
+  "r-mamad",
+  "r-balcony",
+  "r-laundry"
+ ],
+ "items_total": 89,
+ "items_by_origin": {
+  "plan_fixture": 61,
+  "plan_derived": 26,
+  "template": 2,
+  "template_derived": 0
+ },
+ "openings_blocked": [],
+ "wall_hits": [],
+ "outside_room": [],
+ "size_violations": [],
+ "floor_coverage_pct": 30.9,
+ "dropped": [],
+ "openings": [
+  {
+   "id": "o-1",
+   "kind": "opening",
+   "rooms": [
+    "r-kitchen",
+    "r-pantry"
+   ],
+   "width_cm": 81.3,
+   "virtual": true,
+   "need_cm": 77.3,
+   "free_cm": 80.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-2",
+   "kind": "opening",
+   "rooms": [
+    "r-kitchen",
+    "r-living"
+   ],
+   "width_cm": 165.8,
+   "virtual": true,
+   "need_cm": 80.0,
+   "free_cm": 164.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-4",
+   "kind": "opening",
+   "rooms": [
+    "r-dining",
+    "r-living"
+   ],
+   "width_cm": 422.7,
+   "virtual": true,
+   "need_cm": 80.0,
+   "free_cm": 206.0,
+   "in_zone": [
+    "d-table",
+    "d-table-chair-1",
+    "d-table-chair-4"
+   ],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-5",
+   "kind": "opening",
+   "rooms": [
+    "r-dining",
+    "r-family"
+   ],
+   "width_cm": 101.8,
+   "virtual": true,
+   "need_cm": 80.0,
+   "free_cm": 100.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-6",
+   "kind": "door",
+   "rooms": [
+    "r-dining",
+    "r-wc"
+   ],
+   "width_cm": 72.4,
+   "virtual": false,
+   "need_cm": 68.4,
+   "free_cm": 72.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-7",
+   "kind": "opening",
+   "rooms": [
+    "r-corridor",
+    "r-living"
+   ],
+   "width_cm": 144.0,
+   "virtual": true,
+   "need_cm": 80.0,
+   "free_cm": 144.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-8",
+   "kind": "door",
+   "rooms": [
+    "r-master",
+    "r-shower"
+   ],
+   "width_cm": 73.3,
+   "virtual": false,
+   "need_cm": 69.3,
+   "free_cm": 72.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-9",
+   "kind": "door",
+   "rooms": [
+    "r-bath",
+    "r-corridor"
+   ],
+   "width_cm": 82.7,
+   "virtual": false,
+   "need_cm": 78.7,
+   "free_cm": 82.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-11",
+   "kind": "sliding_door",
+   "rooms": [
+    "r-balcony",
+    "r-living"
+   ],
+   "width_cm": 266.2,
+   "virtual": false,
+   "need_cm": 80.0,
+   "free_cm": 144.0,
+   "in_zone": [
+    "l-armchair",
+    "l-plant"
+   ],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-13",
+   "kind": "entrance_door",
+   "rooms": [
+    "r-dining",
+    "outside"
+   ],
+   "width_cm": 93.8,
+   "virtual": false,
+   "need_cm": 80.0,
+   "free_cm": 92.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-14",
+   "kind": "door",
+   "rooms": [
+    "r-corridor",
+    "r-mamad"
+   ],
+   "width_cm": 70.7,
+   "virtual": false,
+   "need_cm": 66.7,
+   "free_cm": 70.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-15",
+   "kind": "door",
+   "rooms": [
+    "r-master",
+    "r-corridor"
+   ],
+   "width_cm": 79.1,
+   "virtual": false,
+   "need_cm": 75.1,
+   "free_cm": 78.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-16",
+   "kind": "door",
+   "rooms": [
+    "r-bed1",
+    "r-corridor"
+   ],
+   "width_cm": 79.1,
+   "virtual": false,
+   "need_cm": 75.1,
+   "free_cm": 78.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  },
+  {
+   "id": "o-17",
+   "kind": "door",
+   "rooms": [
+    "r-bed2",
+    "r-corridor"
+   ],
+   "width_cm": 79.6,
+   "virtual": false,
+   "need_cm": 75.6,
+   "free_cm": 78.0,
+   "in_zone": [],
+   "swing_hit": null,
+   "blocked": false
+  }
+ ],
+ "warnings": [
+  "l-coffee-2: kept (plan truth) but overlaps l-coffee by 15.0 cm",
+  "k-uppers: kept (plan truth) but overlaps k-counter-m1 by 35.0 cm"
+ ]
+}

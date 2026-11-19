@@ -1,0 +1,24 @@
+
+=== [1/1] cp-living =======================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-living  plan (937.6,779,160) yaw 50
+[render_pano] camera     : (9.376, -7.79, 1.6) m  euler (90.0, 0.0, -50.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 3072x1536 @ 20 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 4096x1536 over -240.0000..240.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-living
+[render_pano] input_key  : 965c90c4af375f84…
+[render_pano] render 1/1: 430.204 s wall  (cycles 428.93s, device peak 818.71 MB, host peak 1543.24 MB)
+[render_pano] depth      : depth.png 279,430 B  valid 4,718,592 / 4,718,592  sky 0  range 1.251..6.364 m  (0.414 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-living floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-living ceiling z=290 cm]
+              SKIP  room r-living is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 3072x1536 83,740 B  zenith mean 169.9/255 (3 colours) · nadir mean 184.1/255 (4 colours) · no_hole=True
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-living\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-living')
+OK
+Saved: 'C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-living\pano-depth-0001'
+Saved: 'C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-living\pano-pano-0001'
+

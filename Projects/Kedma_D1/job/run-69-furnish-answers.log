@@ -1,0 +1,43 @@
+furnish_from_plan.py v0.1.0 (general_furnish v0.1.1)
+plan  c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\plan.base.json
+style c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\catalog\style-habait-modern.json
+out   c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\_furnish
+roles      r-kitchen=kitchen, r-pantry=storage, r-living=living, r-dining=entrance, r-family=living, r-wc=toilet, r-corridor=corridor, r-master=bedroom, r-shower=bathroom, r-bed1=bedroom, r-bed2=bedroom, r-bath=bathroom, r-mamad=safe_room, r-balcony=terrace, r-laundry=service
+phase 1    template fixtures for rooms whose role lacks a drawn one
+  island k-island -> counter (front 0.0)
+  (none: every room's role is covered by the plan's own fixtures)
+phase 1b   fit: re-seat any built fixture that cuts a wall (dense 1 cm samples)
+  (none)
+phase 2    fixture hints (sink, hob, uppers)
+  hint k-counter    {"uppers": "flush", "sink_at_cm": [787.07, 285.57], "drawn": ["sink_at_cm"]} (back probes: 7/7 in a wall, 0/7 within 25 cm of glass; uppers: closed flush cabinets (the plan's cue); sink: the drawing's symbol (the double sink drawn on the north run (hand/zoom-A.png)))
+  hint k-counter-2  {"uppers": false, "hob_at_cm": [654.86, 374.51], "drawn": ["hob_at_cm"]} (back probes: 1/7 in a wall, 0/7 within 25 cm of glass; hob: the drawing's symbol (the four-burner hob drawn on the west leg under the window (hand/zoom-A.png)))
+  hint k-island     {"uppers": false, "front_deg": 0.0} (back probes: 7/7 in a wall, 0/7 within 25 cm of glass)
+phase 3    template pieces per room role
+  piece ffp-living-rug                 rug         at (783,777) yaw 0 - 240x170 under the coffee table, along the sofa
+  piece ffp-living-lamp                not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-dining-doormat             not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-family-rug                 not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-family-plant               plant       at (1672,633) yaw 0 - a free wall corner, farthest from the openings
+  piece ffp-shower-mat                 not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-balcony-plant-1            not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+Traceback (most recent call last):
+  File "c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\pipeline\furnish_from_plan.py", line 1851, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\pipeline\furnish_from_plan.py", line 1842, in main
+    _plan, _plan1, block, _added, res, aud, pngs = run_one(plan_path, style_path, out_dir, print)
+                                                   ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\pipeline\furnish_from_plan.py", line 1691, in run_one
+    pngs = write_outputs(plan_path, style_path, plan, plan1, block, added, translated, roles, res, aud, out_dir, log)
+  File "c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\pipeline\furnish_from_plan.py", line 1642, in write_outputs
+    pngs = draw_previews(plan1, res, aud, out_dir)
+  File "c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\pipeline\furnish_from_plan.py", line 1601, in draw_previews
+    render(f"preview-{rid}.png", bb, {rid}, title)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\pipeline\furnish_from_plan.py", line 1566, in render
+    dr.polygon(pts, fill=col, outline=(40, 40, 40))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\RnD\Projects\3Dengine\.venv\Lib\site-packages\PIL\ImageDraw.py", line 353, in polygon
+    self.draw.draw_polygon(xy, fill_ink, 1)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: coordinate list must contain at least 2 coordinates

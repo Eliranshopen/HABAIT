@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "kind": "object-paste",
+ "parent": "01-kitchen__flat__island.png",
+ "object_paste": {
+  "from": "_local/flatfix/01-kitchen-level2/answer-dc1f1a543433.png",
+  "tool": "jobs/kedma-d1/hand/flatfix.py",
+  "args": "view yaw -25.0 pitch 0.0 hfov 112.0 size 1024, inset 20, feather 60",
+  "box": [
+   571,
+   201,
+   621,
+   621
+  ],
+  "why": "the image model drew near things straight in the panorama, so they were bent in the viewer; the view was redrawn on the CG render's geometry and projected back"
+ },
+ "band": {
+  "u": 0.4306,
+  "deg": 112.0,
+  "rows": [
+   0.1963,
+   0.8027
+  ]
+ },
+ "cuts": [],
+ "note": "no band cut: a straight-line view of the same camera, feathered; checked by eye"
+}

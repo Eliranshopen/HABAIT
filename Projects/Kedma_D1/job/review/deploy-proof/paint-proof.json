@@ -1,0 +1,1483 @@
+{
+  "schema": "tour360/paint-proof.v1",
+  "board": "habait-tour360",
+  "task": "T05b",
+  "actor": "habait-deploy-qa",
+  "url": "https://kedma-d1.vercel.app",
+  "startedAt": "2026-11-18T09:11:43.696Z",
+  "finishedAt": "2026-11-18T09:13:33.177Z",
+  "durationMs": 109479,
+  "verdict": "6/6 FAIL",
+  "partial": false,
+  "host": {
+    "platform": "win32",
+    "node": "v24.22.1",
+    "chrome": "158.0.8127.18",
+    "chromeExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "webgl": {
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x0000A7A0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "maxTextureSize": 16384
+    }
+  },
+  "thresholds": {
+    "readyMaxMs": 60000,
+    "badgeMinPx": 12,
+    "paintBandOfFrame": {
+      "x0": 0.15,
+      "x1": 0.85,
+      "y0": 0.4,
+      "y1": 0.66
+    },
+    "paintMin": {
+      "stdLuma": 6,
+      "uniqueColours": 500,
+      "modalShareMax": 0.6
+    },
+    "frameChangedMin": 4,
+    "panoMinBytes": 100000
+  },
+  "chromeProcesses": {
+    "before": null,
+    "after": null,
+    "newSinceStart": null,
+    "browserCloseError": "timeout 20000 ms: browser.close"
+  },
+  "screenshotsNote": "Captured as PNG by this script; converted to lossless WebP by qa-evidence/_tools/webp-lossless.mjs --verify (pixels byte-identical); only the converted PNGs are removed.",
+  "cells": [
+    {
+      "cell": "phone-he",
+      "ok": false,
+      "kind": "phone",
+      "lang": "he",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "isMobile": true,
+      "hasTouch": true,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 2744,
+          "paint": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 71.8,
+            "stdLuma": 7.1,
+            "uniqueColours": 2155,
+            "modalShare": 0.297
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "סיור 360° · דירה 1 · בניין ד · קומה א׳ · קדמא עץ אפרים (הדמיה)",
+          "canvas": {
+            "w": 390,
+            "h": 844,
+            "cw": 780,
+            "ch": 1688
+          },
+          "firstScene": "living"
+        },
+        "c": {
+          "ok": false,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיה",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              309,
+              30,
+              365,
+              56
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיה על בסיס תכנית המכר. המידות תואמות לתכנית בסטייה של עד 1%. הריהוט והגימורים להמחשה בלבד.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 4,
+            "insideViewport": true,
+            "coveredSamples": 12,
+            "coveredBy": [
+              "div#t-coach-card.t-coach-card.no-glide.is-gate",
+              "div#t-coach-card.t-coach-card.no-glide.is-gate",
+              "div#t-coach-card.t-coach-card.no-glide.is-gate"
+            ],
+            "bbox": [
+              25,
+              91,
+              365,
+              131
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "תמונות שנוצרו בבינה מלאכותית · לא צילום של הנכס",
+            "permanent": "true",
+            "fontPx": 12.5,
+            "fontPxBox": 12.5,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              53,
+              784,
+              337,
+              801
+            ]
+          },
+          "htmlLang": "he",
+          "htmlDir": "rtl",
+          "tourLang": "he",
+          "languageButtons": [
+            "he:true",
+            "en:false",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": false,
+          "reason": "no tappable hotspot found",
+          "hotspotsTotal": 4,
+          "turnedViaHook": {
+            "yaw": -173.46,
+            "pitch": -28.44
+          }
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "03-living.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": 140618
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "no hotspot was tappable in the first view; the view was turned to one through the page hook (window.__tour.viewer.lookAt)"
+      ],
+      "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Mobile Safari/537.36",
+      "document": {
+        "requested": "https://kedma-d1.vercel.app/?lang=he",
+        "finalUrl": "https://kedma-d1.vercel.app/?room=living",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": "Vercel",
+        "vercelId": "fra1::wl6gg-1794993126469-aca85890400d",
+        "vercelCache": "HIT",
+        "loadEventMs": 2665
+      },
+      "readyMs": 2744,
+      "bytesBeforeReady": 465775,
+      "screenshot": {
+        "file": "phone-he.webp",
+        "capturedAs": "phone-he.png",
+        "pngSha256": "eef3f1a744d756eb",
+        "size": [
+          780,
+          1688
+        ]
+      },
+      "firstView": {
+        "room": "חדר דיור",
+        "zone": "מרחב מגורים",
+        "hotspotsTotal": 4,
+        "hotspotsInView": 0
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 6,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 2,
+          "statuses": [
+            200
+          ]
+        },
+        "api": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 8219
+    },
+    {
+      "cell": "phone-en",
+      "ok": false,
+      "kind": "phone",
+      "lang": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "isMobile": true,
+      "hasTouch": true,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 3403,
+          "paint": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 71.8,
+            "stdLuma": 6.8,
+            "uniqueColours": 1958,
+            "modalShare": 0.294
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "360° tour · Apartment 1 · building D · floor 1 · Kedma, Etz Efraim (concept)",
+          "canvas": {
+            "w": 390,
+            "h": 844,
+            "cw": 780,
+            "ch": 1688
+          },
+          "firstScene": "living"
+        },
+        "c": {
+          "ok": false,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Rendering",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              25,
+              34,
+              105,
+              60
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Visualization based on the sales plan. Dimensions match the plan within 1%. Furniture and finishes are for illustration only.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 3,
+            "insideViewport": true,
+            "coveredSamples": 9,
+            "coveredBy": [
+              "p#t-coach-text.t-coach-text",
+              "p#t-coach-text.t-coach-text",
+              "p#t-coach-text.t-coach-text"
+            ],
+            "bbox": [
+              25,
+              118,
+              365,
+              179
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "AI-generated images · not photographs of the property",
+            "permanent": "true",
+            "fontPx": 12.5,
+            "fontPxBox": 12.5,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              37,
+              784,
+              353,
+              801
+            ]
+          },
+          "htmlLang": "en",
+          "htmlDir": "ltr",
+          "tourLang": "en",
+          "languageButtons": [
+            "he:false",
+            "en:true",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": false,
+          "reason": "no tappable hotspot found",
+          "hotspotsTotal": 4,
+          "turnedViaHook": {
+            "yaw": -173.46,
+            "pitch": -28.44
+          }
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "03-living.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": 140618
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "no hotspot was tappable in the first view; the view was turned to one through the page hook (window.__tour.viewer.lookAt)"
+      ],
+      "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Mobile Safari/537.36",
+      "document": {
+        "requested": "https://kedma-d1.vercel.app/?lang=en",
+        "finalUrl": "https://kedma-d1.vercel.app/?lang=en&room=living",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": "Vercel",
+        "vercelId": "fra1::4rq2n-1794993136127-71c632d4419b",
+        "vercelCache": "HIT",
+        "loadEventMs": 3339
+      },
+      "readyMs": 3403,
+      "bytesBeforeReady": 453987,
+      "screenshot": {
+        "file": "phone-en.webp",
+        "capturedAs": "phone-en.png",
+        "pngSha256": "4c5d84e9b714427a",
+        "size": [
+          780,
+          1688
+        ]
+      },
+      "firstView": {
+        "room": "Living room",
+        "zone": "Living",
+        "hotspotsTotal": 4,
+        "hotspotsInView": 0
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 6,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "api": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 7085
+    },
+    {
+      "cell": "phone-fr",
+      "ok": false,
+      "kind": "phone",
+      "lang": "fr",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "isMobile": true,
+      "hasTouch": true,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 1237,
+          "paint": {
+            "image": [
+              780,
+              1688
+            ],
+            "band": [
+              117,
+              675,
+              663,
+              1114
+            ],
+            "pixels": 239694,
+            "meanLuma": 71.8,
+            "stdLuma": 6.8,
+            "uniqueColours": 1958,
+            "modalShare": 0.294
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "Visite 360° · Appartement 1 · bâtiment D · étage 1 · Kedma, Etz Efraim (concept)",
+          "canvas": {
+            "w": 390,
+            "h": 844,
+            "cw": 780,
+            "ch": 1688
+          },
+          "firstScene": "living"
+        },
+        "c": {
+          "ok": false,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Simulation",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              25,
+              30,
+              108,
+              56
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Visualisation d’après le plan de vente. Les dimensions correspondent au plan à 1 % près. Mobilier et finitions à titre indicatif.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 3,
+            "insideViewport": true,
+            "coveredSamples": 9,
+            "coveredBy": [
+              "div#t-coach-card.t-coach-card.no-glide.is-gate",
+              "div#t-coach-card.t-coach-card.no-glide.is-gate",
+              "div#t-coach-card.t-coach-card.no-glide.is-gate"
+            ],
+            "bbox": [
+              25,
+              109,
+              365,
+              170
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "Images générées par IA · pas des photographies du bien",
+            "permanent": "true",
+            "fontPx": 12.5,
+            "fontPxBox": 12.5,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              32,
+              784,
+              358,
+              801
+            ]
+          },
+          "htmlLang": "fr",
+          "htmlDir": "ltr",
+          "tourLang": "fr",
+          "languageButtons": [
+            "he:false",
+            "en:false",
+            "fr:true"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": false,
+          "reason": "no tappable hotspot found",
+          "hotspotsTotal": 4,
+          "turnedViaHook": {
+            "yaw": -173.46,
+            "pitch": -28.44
+          }
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 390,
+            "bodyScrollWidth": 390,
+            "innerWidth": 390,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "03-living.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": 140618
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "no hotspot was tappable in the first view; the view was turned to one through the page hook (window.__tour.viewer.lookAt)"
+      ],
+      "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Mobile Safari/537.36",
+      "document": {
+        "requested": "https://kedma-d1.vercel.app/?lang=fr",
+        "finalUrl": "https://kedma-d1.vercel.app/?lang=fr&room=living",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": "Vercel",
+        "vercelId": "fra1::zw5mg-1794993141455-770465fb0258",
+        "vercelCache": "HIT",
+        "loadEventMs": 1157
+      },
+      "readyMs": 1237,
+      "bytesBeforeReady": 453987,
+      "screenshot": {
+        "file": "phone-fr.webp",
+        "capturedAs": "phone-fr.png",
+        "pngSha256": "3f5a527837d221bf",
+        "size": [
+          780,
+          1688
+        ]
+      },
+      "firstView": {
+        "room": "Séjour",
+        "zone": "Séjour",
+        "hotspotsTotal": 4,
+        "hotspotsInView": 0
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 2,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "api": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 4852
+    },
+    {
+      "cell": "desktop-he",
+      "ok": false,
+      "kind": "desktop",
+      "lang": "he",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 2852,
+          "paint": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 73.3,
+            "stdLuma": 10.2,
+            "uniqueColours": 5403,
+            "modalShare": 0.419
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "סיור 360° · דירה 1 · בניין ד · קומה א׳ · קדמא עץ אפרים (הדמיה)",
+          "canvas": {
+            "w": 1440,
+            "h": 900,
+            "cw": 1440,
+            "ch": 900
+          },
+          "firstScene": "living"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיה",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              1077,
+              29,
+              1133,
+              55
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "הדמיה על בסיס תכנית המכר. המידות תואמות לתכנית בסטייה של עד 1%. הריהוט והגימורים להמחשה בלבד.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 4,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              1077,
+              151,
+              1403,
+              202
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "תמונות שנוצרו בבינה מלאכותית · לא צילום של הנכס",
+            "permanent": "true",
+            "fontPx": 12.5,
+            "fontPxBox": 12.5,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              578,
+              857,
+              862,
+              874
+            ]
+          },
+          "htmlLang": "he",
+          "htmlDir": "rtl",
+          "tourLang": "he",
+          "languageButtons": [
+            "he:true",
+            "en:false",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": false,
+          "reason": "no tappable hotspot found",
+          "hotspotsTotal": 4,
+          "turnedViaHook": {
+            "yaw": -173.46,
+            "pitch": -28.44
+          }
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "03-living.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": 1619380
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "no hotspot was tappable in the first view; the view was turned to one through the page hook (window.__tour.viewer.lookAt)"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+      "document": {
+        "requested": "https://kedma-d1.vercel.app/?lang=he",
+        "finalUrl": "https://kedma-d1.vercel.app/?lang=he",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": "Vercel",
+        "vercelId": "fra1::k7gg5-1794993146371-b1e7a75cd4e9",
+        "vercelCache": "HIT",
+        "loadEventMs": 1010
+      },
+      "readyMs": 2852,
+      "bytesBeforeReady": 3528533,
+      "screenshot": {
+        "file": "desktop-he.webp",
+        "capturedAs": "desktop-he.png",
+        "pngSha256": "683261cfd79e6f7b",
+        "size": [
+          1440,
+          900
+        ]
+      },
+      "firstView": {
+        "room": "חדר דיור",
+        "zone": "מרחב מגורים",
+        "hotspotsTotal": 4,
+        "hotspotsInView": 1
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 6,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 2,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "api": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 9,
+          "statuses": [
+            200
+          ]
+        },
+        "panos-full": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 10602
+    },
+    {
+      "cell": "desktop-en",
+      "ok": false,
+      "kind": "desktop",
+      "lang": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 2629,
+          "paint": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 73.3,
+            "stdLuma": 10.2,
+            "uniqueColours": 5403,
+            "modalShare": 0.419
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "360° tour · Apartment 1 · building D · floor 1 · Kedma, Etz Efraim (concept)",
+          "canvas": {
+            "w": 1440,
+            "h": 900,
+            "cw": 1440,
+            "ch": 900
+          },
+          "firstScene": "living"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Rendering",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              283,
+              29,
+              363,
+              55
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Visualization based on the sales plan. Dimensions match the plan within 1%. Furniture and finishes are for illustration only.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 3,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              37,
+              171,
+              363,
+              242
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "AI-generated images · not photographs of the property",
+            "permanent": "true",
+            "fontPx": 12.5,
+            "fontPxBox": 12.5,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              562,
+              857,
+              878,
+              874
+            ]
+          },
+          "htmlLang": "en",
+          "htmlDir": "ltr",
+          "tourLang": "en",
+          "languageButtons": [
+            "he:false",
+            "en:true",
+            "fr:false"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": false,
+          "reason": "no tappable hotspot found",
+          "hotspotsTotal": 4,
+          "turnedViaHook": {
+            "yaw": -173.46,
+            "pitch": -28.44
+          }
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "03-living.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": 1619380
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "no hotspot was tappable in the first view; the view was turned to one through the page hook (window.__tour.viewer.lookAt)"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+      "document": {
+        "requested": "https://kedma-d1.vercel.app/?lang=en",
+        "finalUrl": "https://kedma-d1.vercel.app/?lang=en",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": "Vercel",
+        "vercelId": "fra1::7td2d-1794993157292-55cbef8d361d",
+        "vercelCache": "HIT",
+        "loadEventMs": 1330
+      },
+      "readyMs": 2629,
+      "bytesBeforeReady": 3528533,
+      "screenshot": {
+        "file": "desktop-en.webp",
+        "capturedAs": "desktop-en.png",
+        "pngSha256": "4b713e267c15673c",
+        "size": [
+          1440,
+          900
+        ]
+      },
+      "firstView": {
+        "room": "Living room",
+        "zone": "Living",
+        "hotspotsTotal": 4,
+        "hotspotsInView": 1
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 6,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 2,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos-full": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 9,
+          "statuses": [
+            200
+          ]
+        },
+        "api": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 8901
+    },
+    {
+      "cell": "desktop-fr",
+      "ok": false,
+      "kind": "desktop",
+      "lang": "fr",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "checks": {
+        "a": {
+          "ok": true,
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "contentType": "text/html; charset=utf-8"
+        },
+        "b": {
+          "ok": true,
+          "readyMs": 4149,
+          "paint": {
+            "image": [
+              1440,
+              900
+            ],
+            "band": [
+              216,
+              360,
+              1224,
+              594
+            ],
+            "pixels": 235872,
+            "meanLuma": 73.3,
+            "stdLuma": 10.2,
+            "uniqueColours": 5403,
+            "modalShare": 0.419
+          },
+          "painted": true,
+          "loadingOverlayGone": true,
+          "errorOverlayShown": false,
+          "pannellumError": false,
+          "titleOk": true,
+          "title": "Visite 360° · Appartement 1 · bâtiment D · étage 1 · Kedma, Etz Efraim (concept)",
+          "canvas": {
+            "w": 1440,
+            "h": 900,
+            "cw": 1440,
+            "ch": 900
+          },
+          "firstScene": "living"
+        },
+        "c": {
+          "ok": true,
+          "badge": {
+            "present": true,
+            "textOk": true,
+            "text": "Simulation",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              280,
+              29,
+              363,
+              55
+            ]
+          },
+          "concept": {
+            "present": true,
+            "textOk": true,
+            "text": "Visualisation d’après le plan de vente. Les dimensions correspondent au plan à 1 % près. Mobilier et finitions à titre indicatif.",
+            "permanent": "true",
+            "fontPx": 13,
+            "fontPxBox": 13,
+            "opacity": 1,
+            "lineBoxes": 3,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              37,
+              171,
+              363,
+              242
+            ]
+          },
+          "aiNote": {
+            "present": true,
+            "textOk": true,
+            "text": "Images générées par IA · pas des photographies du bien",
+            "permanent": "true",
+            "fontPx": 12.5,
+            "fontPxBox": 12.5,
+            "opacity": 1,
+            "lineBoxes": 1,
+            "insideViewport": true,
+            "coveredSamples": 0,
+            "coveredBy": [],
+            "bbox": [
+              557,
+              857,
+              883,
+              874
+            ]
+          },
+          "htmlLang": "fr",
+          "htmlDir": "ltr",
+          "tourLang": "fr",
+          "languageButtons": [
+            "he:false",
+            "en:false",
+            "fr:true"
+          ],
+          "badgeMinPx": 12
+        },
+        "d": {
+          "ok": false,
+          "reason": "no tappable hotspot found",
+          "hotspotsTotal": 4,
+          "turnedViaHook": {
+            "yaw": -173.46,
+            "pitch": -28.44
+          }
+        },
+        "e": {
+          "ok": true,
+          "firstPaint": {
+            "docScrollWidth": 1440,
+            "bodyScrollWidth": 1440,
+            "innerWidth": 1440,
+            "scrollXAfterScrollTo300": 0,
+            "visualViewportScale": 1
+          }
+        },
+        "f": {
+          "ok": true,
+          "consoleErrors": [],
+          "pageErrors": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "panoResponses": [
+            {
+              "file": "03-living.webp",
+              "status": 200,
+              "contentType": "image/webp",
+              "bytes": 1619380
+            }
+          ],
+          "badPano": 0,
+          "tileResponses": 0,
+          "badTile": 0,
+          "badTileSample": []
+        }
+      },
+      "notes": [
+        "no hotspot was tappable in the first view; the view was turned to one through the page hook (window.__tour.viewer.lookAt)"
+      ],
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+      "document": {
+        "requested": "https://kedma-d1.vercel.app/?lang=fr",
+        "finalUrl": "https://kedma-d1.vercel.app/?lang=fr",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "xRobotsTag": "noindex, nofollow",
+        "redirectedFrom": null,
+        "server": "Vercel",
+        "vercelId": "fra1::fmpw5-1794993166451-60a45c842897",
+        "vercelCache": "HIT",
+        "loadEventMs": 2816
+      },
+      "readyMs": 4149,
+      "bytesBeforeReady": 3528533,
+      "screenshot": {
+        "file": "desktop-fr.webp",
+        "capturedAs": "desktop-fr.png",
+        "pngSha256": "22c466ce4cef370a",
+        "size": [
+          1440,
+          900
+        ]
+      },
+      "firstView": {
+        "room": "Séjour",
+        "zone": "Séjour",
+        "hotspotsTotal": 4,
+        "hotspotsInView": 1
+      },
+      "requestsByFolder": {
+        "(doc)": {
+          "n": 2,
+          "statuses": [
+            200
+          ]
+        },
+        "fonts": {
+          "n": 2,
+          "statuses": [
+            200
+          ]
+        },
+        "plan": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "panos-full": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "thumbs": {
+          "n": 9,
+          "statuses": [
+            200
+          ]
+        },
+        "api": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        },
+        "3d": {
+          "n": 1,
+          "statuses": [
+            200
+          ]
+        }
+      },
+      "totalMs": 7926
+    }
+  ]
+}

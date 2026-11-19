@@ -1,0 +1,1683 @@
+{
+ "status": "FAIL",
+ "n_checks": 139,
+ "n_failed": 23,
+ "checks": [
+  {
+   "check": "label_has_room",
+   "room": "r-balcony",
+   "name": "מרפסת",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-guest-toilet",
+   "name": "שירותים",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-family-room",
+   "name": "חדר משפחה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bedroom-2",
+   "name": "חדר שינה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bathroom",
+   "name": "חדר אמבטיה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-safe-room-bedroom",
+   "name": "ממ\"ד חדר שינה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-laundry-balcony",
+   "name": "מסתור כביסה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-balcony",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מרפסת",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-kitchen",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מטבח",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-pantry",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מזווה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-entrance",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "כניסה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-living-room",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר דיור",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-dining-area",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "פינת אוכל",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-guest-toilet",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "שירותים",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-family-room",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר משפחה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-master-bedroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה הורים",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-master-bathroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר רחצה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bedroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bedroom-2",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bathroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר אמבטיה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-safe-room-bedroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "ממ\"ד חדר שינה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-laundry-balcony",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מסתור כביסה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-lobby-1",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "door-split lobby",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-lobby-2",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "door-split lobby",
+   "pass": true
+  },
+  {
+   "check": "room_count",
+   "expected": 17,
+   "got": 17,
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 1,
+   "hinge_cm": [
+    982,
+    213
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-1",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 2,
+   "hinge_cm": [
+    1121,
+    742
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-2",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 3,
+   "hinge_cm": [
+    429,
+    675
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-7",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 4,
+   "hinge_cm": [
+    1029,
+    768
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-13",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 5,
+   "hinge_cm": [
+    620,
+    766
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-5",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 6,
+   "hinge_cm": [
+    877,
+    770
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-12",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 7,
+   "hinge_cm": [
+    972,
+    534
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-9",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 8,
+   "hinge_cm": [
+    179,
+    972
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 11,
+   "hinge_cm": [
+    168,
+    831
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-15",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 12,
+   "hinge_cm": [
+    737,
+    991
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-17",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 13,
+   "hinge_cm": [
+    1062,
+    955
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-21",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 14,
+   "hinge_cm": [
+    268,
+    451
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 16,
+   "hinge_cm": [
+    329,
+    187
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-5",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 17,
+   "hinge_cm": [
+    268,
+    154
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-5",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 18,
+   "hinge_cm": [
+    761,
+    1010
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-17",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 19,
+   "hinge_cm": [
+    268,
+    485
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 20,
+   "hinge_cm": [
+    1096,
+    972
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-21",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 21,
+   "hinge_cm": [
+    731,
+    1024
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-17",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 24,
+   "hinge_cm": [
+    297,
+    114
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-5",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 25,
+   "hinge_cm": [
+    268,
+    395
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 26,
+   "hinge_cm": [
+    149,
+    794
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 27,
+   "hinge_cm": [
+    287,
+    428
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 29,
+   "hinge_cm": [
+    1069,
+    985
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-21",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 30,
+   "hinge_cm": [
+    131,
+    839
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 31,
+   "hinge_cm": [
+    278,
+    334
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 32,
+   "hinge_cm": [
+    104,
+    282
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-32",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 33,
+   "hinge_cm": [
+    1222,
+    944
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-33",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 34,
+   "hinge_cm": [
+    295,
+    499
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 35,
+   "hinge_cm": [
+    1083,
+    1039
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-35",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 36,
+   "hinge_cm": [
+    86,
+    209
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-32",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 37,
+   "hinge_cm": [
+    541,
+    1033
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-18",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 38,
+   "hinge_cm": [
+    311,
+    156
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-5",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 41,
+   "hinge_cm": [
+    297,
+    463
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 42,
+   "hinge_cm": [
+    110,
+    408
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-42",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 44,
+   "hinge_cm": [
+    1380,
+    425
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 47,
+   "hinge_cm": [
+    90,
+    155
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-47",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 48,
+   "hinge_cm": [
+    358,
+    177
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-adj-5",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 50,
+   "hinge_cm": [
+    371,
+    97
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 51,
+   "hinge_cm": [
+    1136,
+    1161
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-35",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 52,
+   "hinge_cm": [
+    110,
+    356
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-32",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 53,
+   "hinge_cm": [
+    1322,
+    935
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 56,
+   "hinge_cm": [
+    297,
+    376
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 58,
+   "hinge_cm": [
+    120,
+    785
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 59,
+   "hinge_cm": [
+    318,
+    428
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 60,
+   "hinge_cm": [
+    1122,
+    994
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-35",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 61,
+   "hinge_cm": [
+    1088,
+    1009
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-35",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 62,
+   "hinge_cm": [
+    311,
+    324
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 63,
+   "hinge_cm": [
+    83,
+    431
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-42",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 64,
+   "hinge_cm": [
+    445,
+    70
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "entrance",
+   "expected": "an opening on the building edge next to the entrance label",
+   "got": {
+    "opening": "o-arc-1",
+    "dist_to_label_cm": 50.5
+   },
+   "pass": true
+  },
+  {
+   "check": "windows_traced",
+   "expected": "glazing on the plan traced as panes",
+   "got": 0,
+   "pass": false
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": [
+    "counter",
+    "hob",
+    "island",
+    "sink",
+    "tall_unit"
+   ],
+   "got": [
+    "island",
+    "sink"
+   ],
+   "pass": true
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-guest-toilet",
+   "name": "שירותים",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [
+    "wc"
+   ],
+   "pass": true
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "pass": true
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-bathroom",
+   "name": "חדר אמבטיה",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [
+    "bathtub",
+    "wc"
+   ],
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-balcony",
+   "name": "מרפסת",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-balcony",
+   "name": "מרפסת",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "667 cm away",
+   "pass": false
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "1 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "397 cm away",
+   "pass": false
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "87 cm away",
+   "pass": false
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-guest-toilet",
+   "name": "שירותים",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-guest-toilet",
+   "name": "שירותים",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-guest-toilet",
+   "name": "שירותים",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-guest-toilet",
+   "name": "שירותים",
+   "expected": ">= 1.5 m²",
+   "got": 1.27,
+   "pass": false
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-family-room",
+   "name": "חדר משפחה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-family-room",
+   "name": "חדר משפחה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-family-room",
+   "name": "חדר משפחה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה",
+   "expected": ">= 1.5 m²",
+   "got": 4.88,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bedroom-2",
+   "name": "חדר שינה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-bedroom-2",
+   "name": "חדר שינה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bedroom-2",
+   "name": "חדר שינה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bathroom",
+   "name": "חדר אמבטיה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-bathroom",
+   "name": "חדר אמבטיה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bathroom",
+   "name": "חדר אמבטיה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-bathroom",
+   "name": "חדר אמבטיה",
+   "expected": ">= 1.5 m²",
+   "got": 4.57,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-safe-room-bedroom",
+   "name": "ממ\"ד חדר שינה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-safe-room-bedroom",
+   "name": "ממ\"ד חדר שינה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-safe-room-bedroom",
+   "name": "ממ\"ד חדר שינה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-laundry-balcony",
+   "name": "מסתור כביסה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-laundry-balcony",
+   "name": "מסתור כביסה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-laundry-balcony",
+   "name": "מסתור כביסה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-lobby-1",
+   "name": null,
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-lobby-1",
+   "name": null,
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-lobby-2",
+   "name": null,
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-lobby-2",
+   "name": null,
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  }
+ ],
+ "failures": [
+  {
+   "check": "door_arc",
+   "arc": 8,
+   "hinge_cm": [
+    179,
+    972
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 14,
+   "hinge_cm": [
+    268,
+    451
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 19,
+   "hinge_cm": [
+    268,
+    485
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 25,
+   "hinge_cm": [
+    268,
+    395
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 26,
+   "hinge_cm": [
+    149,
+    794
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 27,
+   "hinge_cm": [
+    287,
+    428
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 30,
+   "hinge_cm": [
+    131,
+    839
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 31,
+   "hinge_cm": [
+    278,
+    334
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 34,
+   "hinge_cm": [
+    295,
+    499
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 41,
+   "hinge_cm": [
+    297,
+    463
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 44,
+   "hinge_cm": [
+    1380,
+    425
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 50,
+   "hinge_cm": [
+    371,
+    97
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 53,
+   "hinge_cm": [
+    1322,
+    935
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 56,
+   "hinge_cm": [
+    297,
+    376
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 58,
+   "hinge_cm": [
+    120,
+    785
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 59,
+   "hinge_cm": [
+    318,
+    428
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 62,
+   "hinge_cm": [
+    311,
+    324
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "door_arc",
+   "arc": 64,
+   "hinge_cm": [
+    445,
+    70
+   ],
+   "expected": "an opening between two rooms",
+   "got": "both sides of the door lie in the same traced room (a wrong split or a missing room)",
+   "pass": false
+  },
+  {
+   "check": "windows_traced",
+   "expected": "glazing on the plan traced as panes",
+   "got": 0,
+   "pass": false
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-balcony",
+   "name": "מרפסת",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "667 cm away",
+   "pass": false
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "397 cm away",
+   "pass": false
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "87 cm away",
+   "pass": false
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-guest-toilet",
+   "name": "שירותים",
+   "expected": ">= 1.5 m²",
+   "got": 1.27,
+   "pass": false
+  }
+ ],
+ "corrections": {
+  "force_rect": []
+ },
+ "round": 1,
+ "judge": {
+  "model": "google/gemini-3.7-flash",
+  "role": "report (not a gate until stable)",
+  "runs": 2,
+  "per_run": [
+   [
+    {
+     "room": null,
+     "issue": "Traced area 1 is a phantom room traced outside the exterior wall at the bottom of the plan."
+    },
+    {
+     "room": "חדר דיור",
+     "issue": "The living room is largely untraced, and traced room 2 arbitrarily cuts across the kitchen and living room seating area."
+    },
+    {
+     "room": "חדר דיור",
+     "issue": "Missing door/window marking (green line or blue bar) for the large opening between the living room and balcony (מרפסת)."
+    },
+    {
+     "room": "כניסה",
+     "issue": "The entrance foyer and central circulation corridor leading to the bedrooms and bathrooms are untraced."
+    },
+    {
+     "room": "חדר שינה הורים",
+     "issue": "Traced room 10 (en-suite bathroom) spills into the master bedroom over the bed, and an erroneous green line is drawn across the bed."
+    },
+    {
+     "room": "חדר שינה",
+     "issue": "The wardrobe area of the middle-left bedroom is incorrectly partitioned into a separate room (17)."
+    },
+    {
+     "room": "חדר שינה",
+     "issue": "The middle-right bedroom is improperly split in half by an erroneous green line, leaving the left half (with the bed) untraced."
+    },
+    {
+     "room": "ממ\"ד חדר שינה",
+     "issue": "Missing window marking (blue bar) on the exterior bottom wall."
+    },
+    {
+     "room": "מזווה",
+     "issue": "The pocket/sliding door to the pantry is missing a green line."
+    }
+   ],
+   [
+    {
+     "room": null,
+     "issue": "Area 1 is traced outside the exterior wall of the building and is not a room."
+    },
+    {
+     "room": "חדר דיור",
+     "issue": "The main living room area is largely untraced, while room 2 arbitrarily cuts across the kitchen and living room."
+    },
+    {
+     "room": "כניסה",
+     "issue": "The entrance foyer is completely untraced."
+    },
+    {
+     "room": null,
+     "issue": "The hallway between the family room, bathroom, and safe room (ממ\"ד) is untraced."
+    },
+    {
+     "room": "חדר רחצה",
+     "issue": "Traced room 10 spills past its wall into master bedroom 9."
+    },
+    {
+     "room": "חדר שינה",
+     "issue": "Traced room 12 is cut in half by an erroneous green line and misses the left half of the room."
+    },
+    {
+     "room": "חדר שינה",
+     "issue": "The built-in closet of bedroom 11 is erroneously traced as a separate room (17)."
+    },
+    {
+     "room": "מרפסת",
+     "issue": "Missing window/sliding door opening between the living room and the balcony (מרפסת)."
+    },
+    {
+     "room": "חדר שינה הורים",
+     "issue": "Missing window trace on the left exterior wall."
+    },
+    {
+     "room": "חדר משפחה",
+     "issue": "Missing window trace on the right exterior wall."
+    },
+    {
+     "room": "ממ\"ד חדר שינה",
+     "issue": "Missing window trace on the bottom exterior wall."
+    }
+   ]
+  ],
+  "agreed_2of3": [
+   {
+    "key": "-|other",
+    "runs": [
+     1,
+     2
+    ],
+    "issue": "Traced area 1 is a phantom room traced outside the exterior wall at the bottom of the plan.",
+    "room": null
+   },
+   {
+    "key": "חדר דיור|other",
+    "runs": [
+     1,
+     2
+    ],
+    "issue": "The living room is largely untraced, and traced room 2 arbitrarily cuts across the kitchen and living room seating area.",
+    "room": "חדר דיור"
+   },
+   {
+    "key": "כניסה|door",
+    "runs": [
+     1,
+     2
+    ],
+    "issue": "The entrance foyer and central circulation corridor leading to the bedrooms and bathrooms are untraced.",
+    "room": "כניסה"
+   },
+   {
+    "key": "חדר שינה|fixture",
+    "runs": [
+     1,
+     2
+    ],
+    "issue": "The wardrobe area of the middle-left bedroom is incorrectly partitioned into a separate room (17).",
+    "room": "חדר שינה"
+   },
+   {
+    "key": "ממ\"ד חדר שינה|window",
+    "runs": [
+     1,
+     2
+    ],
+    "issue": "Missing window marking (blue bar) on the exterior bottom wall.",
+    "room": "ממ\"ד חדר שינה"
+   }
+  ],
+  "mismatches": [
+   {
+    "room": null,
+    "issue": "Traced area 1 is a phantom room traced outside the exterior wall at the bottom of the plan."
+   },
+   {
+    "room": "חדר דיור",
+    "issue": "The living room is largely untraced, and traced room 2 arbitrarily cuts across the kitchen and living room seating area."
+   },
+   {
+    "room": "כניסה",
+    "issue": "The entrance foyer and central circulation corridor leading to the bedrooms and bathrooms are untraced."
+   },
+   {
+    "room": "חדר שינה",
+    "issue": "The wardrobe area of the middle-left bedroom is incorrectly partitioned into a separate room (17)."
+   },
+   {
+    "room": "ממ\"ד חדר שינה",
+    "issue": "Missing window marking (blue bar) on the exterior bottom wall."
+   }
+  ],
+  "agreement_rate": 0.36,
+  "usd": 0.03961
+ }
+}

@@ -1,0 +1,10 @@
+{"camera": [955.2, 973.1, 160.0, 264.0], "floor_share_pct": 22.84, "taken_pct": 20.39, "unpainted_floor_px": 98, "behind_piece_px": 0, "joint_px": 63924, "joints_on_grid_pct": 93.6, "floor_colour_bgr": [178.0, 192.0, 207.0], "p0": -32.0, "p1": -44.0}
+{"step": "cap-fill", "filled_pct": 15.69}
+{"step": "wall-fill", "plane": "z=290", "span": "0,1", "src_plane": "z=290", "src_span": "0,1", "target_pct": 28.331, "source_px": 9378686, "colour_bgr": [158.0, 175.0, 195.0], "grain_block": false}
+{"step": "no-skirting", "cam": "cp-corridor", "changed_pct": 1.033, "columns": 6213, "top_cm": 16.0}
+{"out": "06-corridor__redo__v1.png", "painted_pct": 100.0, "picked": true}
+run-project kedma-d1: scenes done in 26 s
+view {'tiltDeg': 10, 'pannini': 1} ; headings changed: [('kitchen', 0, 18), ('pantry', 0, 104), ('living', 0, -165), ('dining', -149, -140), ('shower', 0, -22), ('bath', 0, 5)]
+7 viewpoints marked as old pictures; redone: ['corridor', 'dining', 'family', 'kitchen', 'living', 'pantry']
+06-corridor          PASS      deviation 0.51% (bar 1%, resolves 1.00%; CG vs plan p90 3.6 cm (median 0.7) = 0.51%)  (calibration 829/882) → _local\fidelity\06-corridor__picks__af81d40e2c18.gate.jpg
+wrote ../jobs/kedma-d1/review/flat/corridor-v1.jpg

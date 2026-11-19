@@ -1,0 +1,10 @@
+{"camera": [543.4, 975.9, 160.0, 248.0], "floor_share_pct": 18.59, "taken_pct": 18.05, "unpainted_floor_px": 70415, "behind_piece_px": 11531, "joint_px": 57310, "joints_on_grid_pct": 99.9, "floor_colour_bgr": [153.0, 166.0, 181.0], "p0": -32.0, "p1": -44.0}
+{"step": "cap-fill", "filled_pct": 23.03}
+{"step": "wall-fill", "plane": "z=290", "span": "0,1", "src_plane": "z=290", "src_span": "0,1", "target_pct": 28.313, "source_px": 9401523, "colour_bgr": [156.0, 175.0, 193.0], "grain_block": false}
+{"step": "no-skirting", "cam": "cp-master", "changed_pct": 0.63, "columns": 3259, "top_cm": 16.0}
+{"out": "07-master__redo__v1.png", "painted_pct": 100.0, "picked": true}
+run-project kedma-d1: scenes done in 5 s
+view {'tiltDeg': 10, 'pannini': 1} ; headings changed: [('kitchen', 0, 18), ('pantry', 0, 104), ('living', 0, -165), ('dining', -149, -140), ('shower', 0, -22), ('bath', 0, 5)]
+6 viewpoints marked as old pictures; redone: ['corridor', 'dining', 'family', 'kitchen', 'living', 'master', 'pantry']
+07-master            PASS      deviation 0.67% (bar 1%, resolves 1.00%; CG vs plan p90 2.6 cm (median 0.5) = 0.67%)  (calibration 1030/1168) → _local\fidelity\07-master__picks__0ed9b9679a1f.gate.jpg
+wrote ../jobs/kedma-d1/review/flat/master-v1.jpg

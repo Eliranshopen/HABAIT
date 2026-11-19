@@ -1,0 +1,695 @@
+{
+ "status": "FAIL",
+ "n_checks": 78,
+ "n_failed": 5,
+ "checks": [
+  {
+   "check": "label_has_room",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-living",
+   "name": "חדר דיור",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-dining",
+   "name": "כניסה ופינת אוכל",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-family",
+   "name": "חדר משפחה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-wc",
+   "name": "שירותים",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-corridor",
+   "name": "מסדרון",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-master",
+   "name": "חדר שינה הורים",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-shower",
+   "name": "חדר רחצה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bed1",
+   "name": "חדר שינה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bed2",
+   "name": "חדר שינה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-mamad",
+   "name": "ממ\"ד חדר שינה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-balcony",
+   "name": "מרפסת",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-laundry",
+   "name": "מסתור כביסה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-kitchen",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מטבח",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-pantry",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מזווה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-living",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר דיור",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-dining",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "כניסה ופינת אוכל",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-family",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר משפחה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-wc",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "שירותים",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-corridor",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מסדרון",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-master",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה הורים",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-shower",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר רחצה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bed1",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bed2",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bath",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר אמבטיה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-mamad",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "ממ\"ד חדר שינה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-balcony",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מרפסת",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-laundry",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מסתור כביסה",
+   "pass": true
+  },
+  {
+   "check": "room_count",
+   "expected": 15,
+   "got": 15,
+   "pass": true
+  },
+  {
+   "check": "entrance",
+   "expected": "an opening on the building edge next to the entrance label",
+   "got": {
+    "opening": "o-13",
+    "centre_cm": [
+     1249.8,
+     505.6
+    ],
+    "width_cm": 93.8,
+    "room": "r-dining"
+   },
+   "pass": true
+  },
+  {
+   "check": "windows_traced",
+   "expected": "glazing on the plan traced as panes",
+   "got": 2,
+   "pass": true
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": [
+    "counter",
+    "hob",
+    "island",
+    "sink",
+    "tall_unit"
+   ],
+   "got": [],
+   "pass": false
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-shower",
+   "name": "חדר רחצה",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [],
+   "pass": false
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [],
+   "pass": false
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.97,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.786,
+   "pass": false
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-living",
+   "name": "חדר דיור",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-living",
+   "name": "חדר דיור",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-dining",
+   "name": "כניסה ופינת אוכל",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.1]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-dining",
+   "name": "כניסה ופינת אוכל",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-family",
+   "name": "חדר משפחה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.973,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-family",
+   "name": "חדר משפחה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-family",
+   "name": "חדר משפחה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-wc",
+   "name": "שירותים",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.944,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-wc",
+   "name": "שירותים",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-wc",
+   "name": "שירותים",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-corridor",
+   "name": "מסדרון",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-corridor",
+   "name": "מסדרון",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-master",
+   "name": "חדר שינה הורים",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.864,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-master",
+   "name": "חדר שינה הורים",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [89.9]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-master",
+   "name": "חדר שינה הורים",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-shower",
+   "name": "חדר רחצה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.909,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-shower",
+   "name": "חדר רחצה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-shower",
+   "name": "חדר רחצה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-shower",
+   "name": "חדר רחצה",
+   "expected": ">= 1.5 m²",
+   "got": 3.65,
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-bed1",
+   "name": "חדר שינה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.979,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bed1",
+   "name": "חדר שינה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bed1",
+   "name": "חדר שינה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-bed2",
+   "name": "חדר שינה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.98,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bed2",
+   "name": "חדר שינה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bed2",
+   "name": "חדר שינה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.601,
+   "pass": false
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": ">= 1.5 m²",
+   "got": 6.62,
+   "pass": true
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-mamad",
+   "name": "ממ\"ד חדר שינה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.98,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-mamad",
+   "name": "ממ\"ד חדר שינה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-mamad",
+   "name": "ממ\"ד חדר שינה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-balcony",
+   "name": "מרפסת",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-balcony",
+   "name": "מרפסת",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-laundry",
+   "name": "מסתור כביסה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [0.0]°, plan axis 0°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-laundry",
+   "name": "מסתור כביסה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  }
+ ],
+ "failures": [
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": [
+    "counter",
+    "hob",
+    "island",
+    "sink",
+    "tall_unit"
+   ],
+   "got": [],
+   "pass": false
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-shower",
+   "name": "חדר רחצה",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [],
+   "pass": false
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [],
+   "pass": false
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-pantry",
+   "name": "מזווה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.786,
+   "pass": false
+  },
+  {
+   "check": "shape_iou",
+   "room": "r-bath",
+   "name": "חדר אמבטיה",
+   "expected": ">= 0.85 with the printed rectangle",
+   "got": 0.601,
+   "pass": false
+  }
+ ],
+ "corrections": {
+  "force_rect": []
+ }
+}

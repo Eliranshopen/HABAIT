@@ -1,0 +1,59 @@
+furnish_from_plan.py v0.1.0 (general_furnish v0.1.1)
+plan  c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\plan.base.json
+style c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\catalog\style-habait-modern.json
+out   c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\_furnish
+roles      r-kitchen=kitchen, r-pantry=storage, r-living=living, r-dining=entrance, r-family=living, r-wc=toilet, r-corridor=corridor, r-master=bedroom, r-shower=bathroom, r-bed1=bedroom, r-bed2=bedroom, r-bath=bathroom, r-mamad=safe_room, r-balcony=terrace, r-laundry=service
+phase 1    template fixtures for rooms whose role lacks a drawn one
+  island k-island -> counter (front 0.0)
+  (none: every room's role is covered by the plan's own fixtures)
+phase 1b   fit: re-seat any built fixture that cuts a wall (dense 1 cm samples)
+  (none)
+phase 2    fixture hints (sink, hob, uppers)
+  hint k-counter    {"uppers": true, "sink_at_cm": [787.07, 285.57], "drawn": ["sink_at_cm"]} (back probes: 7/7 in a wall, 0/7 within 25 cm of glass; sink: the drawing's symbol (the double sink drawn on the north run (hand/zoom-A.png)))
+  hint k-counter-2  {"uppers": false, "hob_at_cm": [654.86, 374.51], "drawn": ["hob_at_cm"]} (back probes: 1/7 in a wall, 0/7 within 25 cm of glass; hob: the drawing's symbol (the four-burner hob drawn on the west leg under the window (hand/zoom-A.png)))
+  hint k-island     {"uppers": false, "front_deg": 0.0} (back probes: 7/7 in a wall, 0/7 within 25 cm of glass)
+phase 3    template pieces per room role
+  piece ffp-living-rug                 rug         at (783,777) yaw 0 - 240x170 under the coffee table, along the sofa
+  piece ffp-living-lamp                not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-dining-doormat             not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-family-rug                 not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-family-plant               plant       at (1672,633) yaw 0 - a free wall corner, farthest from the openings
+  piece ffp-shower-mat                 not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  piece ffp-balcony-plant-1            not placed: plan.furnish_cues.template_skip (the sheet does not draw it)
+  r-kitchen          kitchen    11.28 m2  items  20 (plan 20, template  0)  floor  42.1%  walk 2/2
+  r-pantry           storage     2.45 m2  items   2 (plan  2, template  0)  floor  48.3%  walk 1/1
+  r-living           living     17.02 m2  items   9 (plan  8, template  1)  floor  22.2%  walk 4/4
+  r-dining           entrance   11.26 m2  items   9 (plan  9, template  0)  floor  22.8%  walk 4/4
+  r-family           living      9.44 m2  items   5 (plan  4, template  1)  floor  38.0%  walk 1/1
+  r-wc               toilet      1.43 m2  items   1 (plan  1, template  0)  floor  15.9%  walk -
+  r-corridor         corridor    7.84 m2  items   0 (plan  0, template  0)  floor   0.0%  walk 6/6
+  r-master           bedroom    12.21 m2  items   4 (plan  4, template  0)  floor  42.3%  walk 2/2
+  r-shower           bathroom    3.65 m2  items   5 (plan  5, template  0)  floor  44.0%  walk 1/1
+  r-bed1             bedroom     8.91 m2  items   4 (plan  4, template  0)  floor  35.2%  walk 1/1
+  r-bed2             bedroom     8.89 m2  items   4 (plan  4, template  0)  floor  34.9%  walk 1/1
+  r-bath             bathroom    6.62 m2  items   7 (plan  7, template  0)  floor  36.3%  walk 1/1
+  r-mamad            safe_room  11.00 m2  items   4 (plan  4, template  0)  floor  28.0%  walk 1/1
+  r-balcony          terrace    21.41 m2  items  13 (plan 13, template  0)  floor  24.2%  walk -
+  r-laundry          service     2.94 m2  items   2 (plan  2, template  0)  floor  18.6%  walk -
+  opening o-1   opening         81.3 cm  free   80.0 / need  77.3  swing -           ok  zone: -
+  opening o-2   opening        165.8 cm  free  164.0 / need  80.0  swing -           ok  zone: -
+  opening o-4   opening        422.7 cm  free  206.0 / need  80.0  swing -           ok  zone: d-table,d-table-chair-1,d-table-chair-4
+  opening o-5   opening        101.8 cm  free  100.0 / need  80.0  swing -           ok  zone: -
+  opening o-6   door            72.4 cm  free   72.0 / need  68.4  swing clear       ok  zone: -
+  opening o-7   opening        144.0 cm  free  144.0 / need  80.0  swing -           ok  zone: -
+  opening o-8   door            73.3 cm  free   72.0 / need  69.3  swing clear       ok  zone: -
+  opening o-9   door            82.7 cm  free   82.0 / need  78.7  swing clear       ok  zone: -
+  opening o-11  sliding_door   266.2 cm  free  144.0 / need  80.0  swing -           ok  zone: l-armchair,l-plant
+  opening o-13  entrance_door   93.8 cm  free   92.0 / need  80.0  swing -           ok  zone: -
+  opening o-14  door            70.7 cm  free   70.0 / need  66.7  swing clear       ok  zone: -
+  opening o-15  door            79.1 cm  free   78.0 / need  75.1  swing clear       ok  zone: -
+  opening o-16  door            79.1 cm  free   78.0 / need  75.1  swing clear       ok  zone: -
+  opening o-17  door            79.6 cm  free   78.0 / need  75.6  swing clear       ok  zone: -
+rooms furnished: 14 of 15
+items placed: 89 (from plan: 87 = 61 fixtures + 26 derived; from template: 2 = 2 + 0 derived)
+openings blocked: 0 of 14
+items intersecting walls: 0
+items outside their room: 0
+size violations: 0
+floor coverage: 30.9% of the indoor floor
+previews: 16 written

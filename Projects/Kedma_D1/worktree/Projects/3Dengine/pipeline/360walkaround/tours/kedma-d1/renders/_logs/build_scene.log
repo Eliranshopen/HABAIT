@@ -1,0 +1,611 @@
+================================================================================================
+build_scene.py v1.5.0   (board 360-v2 T06 - whole-apartment builder)
+blender   4.5.10 LTS   python 3.11.11
+================================================================================================
+plan      c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\plan.json
+schema    0.2.0-draft   apartment kedma-d1
+geometry  GENERAL (D-WQ-28): polygon walls, oriented openings, panes[] - plan_general.py v0.2.0 decides, this file builds
+mode      ALL ROOMS (v1)
+rooms     15 to build (13 indoor)
+ceiling   290.0 cm  <- plan_meta.ceiling_height_cm  [ASSUMED, see assumptions[]]
+  ASSUMPTION  ceiling 290 cm, door heads 215 cm, window sills/heads by the house defaults (the sheet has no section)
+  ASSUMPTION  the balcony is roofed by the balcony above (the dashed 'line of the balcony above' marks only a corner notch)
+  ASSUMPTION  the kitchen|living partition is full height
+  ASSUMPTION  the two light-grey boxes behind the toilets are concealed-cistern build-outs, not structure
+  ASSUMPTION  the printed 298 of the shower room is the structural width (to the wall face of the bedroom above it); the drawn room is narrower by the cistern build-out
+  ASSUMPTION  window sills 100 cm and heads 215 cm (kitchen sill 105, shower-room sill 150, safe room head 200): the sheet has no elevation
+  ASSUMPTION  the balcony door is a sliding glass door with a 220 cm head
+style     'Habait Modern' v1.3.0 (style-habait-modern.json) - 44 model(s), 37 class(es), 15 palette material(s)
+  OQ-V2-3 DEFAULT IN PLAY — 'Habait Modern' is V2-PLAN §9's proposed default name/direction and is NOT yet Slava-ruled. A rename or a redirection is a NEW VERSION FILE (style-<slug>-v2.json / a new style_slug), never an edit of this one: root CLAUDE.md §2 makes a style change a release.
+floor     TILE GRID from the material board habait-tel-aviv-luxury-v1 v1.3.0 (Habait/tour360/apartments/kedma-d1/material-board.json): 6 mm joints, turned -0.03 deg (plan frame) about the plan origin - length-weighted mode of the room-loop edges mod 90, open zone bars excluded
+floor       floor          120 x 120 cm  STATED   <- surfaces.floor  [r-kitchen, r-pantry, r-living, r-dining, r-family, r-corridor, r-master, r-bed1, r-bed2, r-mamad]
+floor       floor_wet      60 x 60 cm  ASSUMED  <- no size stated in surfaces.bathrooms (room_surfaces.bathroom); the default 60 x 60 cm  [r-wc, r-shower, r-bath]
+floor       floor_outdoor  60 x 60 cm  ASSUMED  <- no size stated in the board; the default 60 x 60 cm  [r-balcony, r-laundry]
+kit       materials_kit v0.3.0: ceiling, fabric, floor, floor_outdoor, floor_wet, frame, glass, skirting, terrain, wall
+style     15 palette material(s): art_panel, ceramic_white, fabric_dark, fabric_rug, fabric_rug_border, fabric_warm, fabric_white, glass_clear, lamp_shade, metal_black, metal_brushed, mirror_glass, plant_green, wood_oak, wood_walnut
+built     FLOOR_r-kitchen        + CEIL_r-kitchen          (13-gon)
+built     FLOOR_r-pantry         + CEIL_r-pantry           (12-gon)
+built     FLOOR_r-living         + CEIL_r-living           (13-gon)
+built     FLOOR_r-dining         + CEIL_r-dining           (27-gon)
+built     FLOOR_r-family         + CEIL_r-family           (9-gon)
+built     FLOOR_r-wc             + CEIL_r-wc               (6-gon)
+built     FLOOR_r-corridor       + CEIL_r-corridor         (27-gon)
+built     FLOOR_r-master         + CEIL_r-master           (11-gon)
+built     FLOOR_r-shower         + CEIL_r-shower           (13-gon)
+built     FLOOR_r-bed1           + CEIL_r-bed1             (10-gon)
+built     FLOOR_r-bed2           + CEIL_r-bed2             (10-gon)
+built     FLOOR_r-bath           + CEIL_r-bath             (23-gon)
+built     FLOOR_r-mamad          + CEIL_r-mamad            (13-gon)
+built     FLOOR_r-balcony         (11-gon, floor only - outdoor, open to the sky above the parapet)
+built     FLOOR_r-laundry        + CEIL_r-laundry          (9-gon)  roofed outdoor: the deck above
+built     WALL_w-1                    33-gon prism    35007.1 cm2 x 290.0 cm  interior
+built     WALL_w-2                     9-gon prism     4525.4 cm2 x 290.0 cm  interior
+built     WALL_w-3                     9-gon prism    17499.2 cm2 x 290.0 cm  interior
+built     WALL_w-4                    41-gon prism    39302.1 cm2 x 290.0 cm  interior
+built     WALL_w-5                    23-gon prism    16522.9 cm2 x 290.0 cm  interior
+built     WALL_w-6                    29-gon prism    15985.8 cm2 x 290.0 cm  interior
+built     WALL_w-7                    23-gon prism    15312.1 cm2 x 290.0 cm  interior
+built     WALL_w-8                    13-gon prism     8193.0 cm2 x 290.0 cm  interior
+built     WALL_w-9                    21-gon prism    10037.0 cm2 x 290.0 cm  interior
+built     WALL_w-10                   11-gon prism    10821.4 cm2 x 290.0 cm  interior
+built     150 facing(s) at the traced faces (band to the wall 0.0-5.7 cm, buried 2 cm into the wall; no facing where the band exceeds 12 cm)
+          r-kitchen              926.8 of  1144.4 cm of 'wall' edges faced ( 81.0 %)
+          r-pantry               593.4 of   594.0 cm of 'wall' edges faced ( 99.9 %)
+          r-living               681.6 of   685.3 cm of 'wall' edges faced ( 99.5 %)
+          r-dining              1103.7 of  1104.1 cm of 'wall' edges faced (100.0 %)
+          r-family              1029.4 of  1127.3 cm of 'wall' edges faced ( 91.3 %)
+          r-wc                   419.6 of   489.1 cm of 'wall' edges faced ( 85.8 %)
+          r-corridor            1089.7 of  1175.0 cm of 'wall' edges faced ( 92.7 %)
+          r-master               973.7 of  1043.9 cm of 'wall' edges faced ( 93.3 %)
+          r-shower               721.4 of   791.2 cm of 'wall' edges faced ( 91.2 %)
+          r-bed1                1008.0 of  1008.5 cm of 'wall' edges faced (100.0 %)
+          r-bed2                1006.2 of  1067.9 cm of 'wall' edges faced ( 94.2 %)
+          r-bath                1103.0 of  1106.7 cm of 'wall' edges faced ( 99.7 %)
+          r-mamad               1190.2 of  1190.7 cm of 'wall' edges faced (100.0 %)
+          r-balcony              737.8 of   737.8 cm of 'wall' edges faced (100.0 %)
+          r-laundry              314.3 of   314.8 cm of 'wall' edges faced ( 99.8 %)
+built     138 skirting board(s) along the facings of 13 indoor room(s), 7.0 x 1.6 cm (only where a facing stands)
+built     GLASS_railing-1             11-gon glass    0.0-110.0 cm  railing
+built     GLASS_railing-laundry        4-gon glass    0.0-110.0 cm  railing
+built     3 frame post(s) closing pane joints the trace left open (0.36-2.70 cm): railing-1_end0->w-1, railing-1_end1->w-5, railing-laundry_end0->w-9
+skipped   opening o-1 (opening, head 290 = ceiling, rooms ['r-kitchen', 'r-pantry']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-2 (opening, head 290 = ceiling, rooms ['r-kitchen', 'r-living']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-4 (opening, head 290 = ceiling, rooms ['r-dining', 'r-living']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-5 (opening, head 290 = ceiling, rooms ['r-dining', 'r-family']): a virtual boundary - nothing cut, nothing built
+skipped   opening o-7 (opening, head 290 = ceiling, rooms ['r-corridor', 'r-living']): a virtual boundary - nothing cut, nothing built
+cut       o-6      door             72.4 cm at    0.00 deg, 0-215 cm, through 14 object(s): WALL_w-4, FACING_r-dining_e10_r0, FACING_r-dining_e11_r0, FACING_r-dining_e13_r0, FACING_r-dining_e14_r0, FACING_r-wc_e0_r0, FACING_r-wc_e4_r0, SKIRT_r-dining_e10_r0, SKIRT_r-dining_e11_r0, SKIRT_r-dining_e13_r0, SKIRT_r-dining_e14_r0, SKIRT_r-wc_e0_r0, SKIRT_r-wc_e4_r0, INFILL_o-6
+cut       o-8      door             73.3 cm at    0.00 deg, 0-215 cm, through 15 object(s): WALL_w-7, WALL_w-10, FACING_r-master_e6_r0, FACING_r-master_e7_r0, FACING_r-master_e8_r0, FACING_r-shower_e0_r0, FACING_r-shower_e10_r0, FACING_r-shower_e11_r0, SKIRT_r-master_e6_r0, SKIRT_r-master_e7_r0, SKIRT_r-master_e8_r0, SKIRT_r-shower_e0_r0, SKIRT_r-shower_e10_r0, SKIRT_r-shower_e11_r0, INFILL_o-8
+cut       o-9      door             82.7 cm at    0.00 deg, 0-215 cm, through 18 object(s): WALL_w-4, WALL_w-6, WALL_w-9, FACING_r-corridor_e4_r0, FACING_r-corridor_e5_r0, FACING_r-corridor_e7_r0, FACING_r-corridor_e8_r0, FACING_r-bath_e1_r0, FACING_r-bath_e2_r0, FACING_r-bath_e20_r0, SKIRT_r-corridor_e4_r0, SKIRT_r-corridor_e5_r0, SKIRT_r-corridor_e7_r0, SKIRT_r-corridor_e8_r0, SKIRT_r-bath_e1_r0, SKIRT_r-bath_e2_r0, SKIRT_r-bath_e20_r0, INFILL_o-9
+cut       o-11     sliding_door    266.2 cm at   90.00 deg, 0-220 cm, through 7 object(s): FACING_r-living_e6_r0, FACING_r-living_e8_r0, FACING_r-balcony_e2_r0, FACING_r-balcony_e4_r0, SKIRT_r-living_e6_r0, SKIRT_r-living_e8_r0, INFILL_o-11
+cut       o-13     entrance_door    93.8 cm at   91.10 deg, 0-215 cm, through 3 object(s): WALL_w-1, WALL_w-3, INFILL_o-13
+cut       o-14     door             70.7 cm at   88.90 deg, 0-215 cm, through 11 object(s): WALL_w-4, WALL_w-6, FACING_r-mamad_e7_r0, FACING_r-mamad_e8_r0, FACING_r-mamad_e10_r0, FACING_r-mamad_e11_r0, SKIRT_r-mamad_e7_r0, SKIRT_r-mamad_e8_r0, SKIRT_r-mamad_e10_r0, SKIRT_r-mamad_e11_r0, INFILL_o-14
+cut       o-15     door             79.1 cm at   90.30 deg, 0-215 cm, through 7 object(s): WALL_w-5, WALL_w-7, FACING_r-corridor_e15_r0, FACING_r-corridor_e19_r0, SKIRT_r-corridor_e15_r0, SKIRT_r-corridor_e19_r0, INFILL_o-15
+cut       o-16     door             79.1 cm at    0.60 deg, 0-215 cm, through 12 object(s): WALL_w-5, WALL_w-7, WALL_w-8, FACING_r-corridor_e12_r0, FACING_r-corridor_e13_r0, FACING_r-corridor_e14_r0, FACING_r-bed1_e8_r0, SKIRT_r-corridor_e12_r0, SKIRT_r-corridor_e13_r0, SKIRT_r-corridor_e14_r0, SKIRT_r-bed1_e8_r0, INFILL_o-16
+cut       o-17     door             79.6 cm at   -0.60 deg, 0-215 cm, through 12 object(s): WALL_w-4, WALL_w-8, WALL_w-9, FACING_r-corridor_e8_r0, FACING_r-corridor_e9_r0, FACING_r-corridor_e11_r0, FACING_r-corridor_e12_r0, SKIRT_r-corridor_e8_r0, SKIRT_r-corridor_e9_r0, SKIRT_r-corridor_e11_r0, SKIRT_r-corridor_e12_r0, INFILL_o-17
+cut       w-kitchen window          137.6 cm at   90.00 deg, 105-215 cm, through 6 object(s): WALL_w-1, WALL_w-2, FACING_r-kitchen_e7_r0, FACING_r-kitchen_e8_r0, FACING_r-kitchen_e10_r0, INFILL_w-kitchen
+cut       w-family window          117.9 cm at   90.00 deg, 100-215 cm, through 4 object(s): WALL_w-4, FACING_r-family_e2_r0, FACING_r-family_e4_r0, INFILL_w-family
+cut       w-master window          137.6 cm at   90.00 deg, 100-215 cm, through 1 object(s): INFILL_w-master
+cut       w-shower window           58.8 cm at    0.00 deg, 150-215 cm, through 4 object(s): WALL_w-7, FACING_r-shower_e5_r0, FACING_r-shower_e7_r0, INFILL_w-shower
+cut       w-bed1   window          117.9 cm at    0.00 deg, 100-215 cm, through 4 object(s): WALL_w-7, FACING_r-bed1_e3_r0, FACING_r-bed1_e5_r0, INFILL_w-bed1
+cut       w-bed2   window          117.6 cm at    0.00 deg, 100-215 cm, through 4 object(s): WALL_w-8, FACING_r-bed2_e3_r0, FACING_r-bed2_e5_r0, INFILL_w-bed2
+cut       w-mamad  window           97.9 cm at    0.00 deg, 100-200 cm, through 3 object(s): WALL_w-4, FACING_r-mamad_e3_r0, INFILL_w-mamad
+cut       w-utility window          177.0 cm at    0.00 deg, 100-215 cm, through 10 object(s): WALL_w-4, WALL_w-6, WALL_w-9, FACING_r-bath_e10_r0, FACING_r-bath_e11_r0, FACING_r-bath_e13_r0, FACING_r-laundry_e1_r0, FACING_r-laundry_e2_r0, FACING_r-laundry_e7_r0, INFILL_w-utility
+dropped   SKIRT_r-dining_e11_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-dining_e13_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-corridor_e5_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-corridor_e7_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-corridor_e11_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-master_e7_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-shower_e11_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-bath_e1_r0 (consumed whole by a cutter)
+dropped   SKIRT_r-mamad_e10_r0 (consumed whole by a cutter)
+fixtures  54 plan fixture(s) are FURNISHED with catalog models and procedural assemblies below - no placeholder mass is built
+built     floor/ceiling fill at 1 cm: 1,567,623 cells (0 in enclosed holes - bays, niche, thresholds), closing 6 cells; floor quads {'floor': 178, 'floor_outdoor': 71, 'floor_wet': 97}, ceiling quads 20 (212,710 sky cells over the outdoor rooms); the fill sits 0.25 cm under the floors and 0.25 cm over the ceilings - never coplanar with a room slab
+built     TERRAIN_ground       200 x 200 m at z=-320 cm  <- plan_meta.ground_offset_cm (the unit's own height above the street); camera clip 250 m
+world     HDRI slug qwantani_noon_puresky (qwantani_noon_puresky_4k.hdr) sha256 5156af85a70bd151... exterior_class non-locating strength 1.0 rot_z 38.9 deg
+light     L_sun  azimuth 165.0 deg (plan bearing), elevation 52.0 deg, 4.0 W/m2
+light     daylight panels SKIPPED - general plan: the rule keys on window/sliding_door openings in rect walls; the facade panes light the rooms directly
+light     L_ceil_r-kitchen        AREA/DISK  107.7 W facing DOWN at plan (  889.1,   374.5,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-pantry         AREA/DISK   54.7 W facing DOWN at plan ( 1145.9,   304.1,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-living         AREA/DISK  142.1 W facing DOWN at plan (  819.1,   707.5,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-dining         AREA/DISK  107.6 W facing DOWN at plan ( 1140.4,   592.2,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-family         AREA/DISK   96.6 W facing DOWN at plan ( 1531.9,   734.5,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-wc             AREA/DISK   48.6 W facing DOWN at plan ( 1272.8,   838.2,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-corridor       AREA/DISK   87.0 W facing DOWN at plan ( 1112.7,   966.1,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-master         AREA/DISK  113.2 W facing DOWN at plan (  451.9,  1000.8,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-shower         AREA/DISK   61.9 W facing DOWN at plan (  517.4,  1310.6,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-bed1           AREA/DISK   93.5 W facing DOWN at plan (  756.1,  1231.7,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-bed2           AREA/DISK   93.3 W facing DOWN at plan ( 1027.2,  1238.1,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-bath           AREA/DISK   79.7 W facing DOWN at plan ( 1327.8,  1114.9,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+light     L_ceil_r-mamad          AREA/DISK  106.0 W facing DOWN at plan ( 1556.5,  1135.6,  288.0) cm  [T12: flush, so the ceiling cannot clip]
+catalog   19/19 locked model(s) hash-verified against style-habait-modern.json
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m1 at (898, 284) cm, facing 180 deg, on_top, fixture:k-counter
+20:39:39 | INFO: Data are loaded, start creating Blender stuff
+20:39:39 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:39:39 | INFO: Blender create Mesh node Mesh door
+20:39:39 | INFO: glTF import finished in 0.05s
+      imported 2 mesh object(s) from glb: door, kitchenCabinet(Clone)
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m2 at (844, 284) cm, facing 180 deg, on_top, fixture:k-counter
+20:39:39 | INFO: Data are loaded, start creating Blender stuff
+20:39:39 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:39:39 | INFO: Blender create Mesh node Mesh door
+20:39:39 | INFO: glTF import finished in 0.06s
+      imported 2 mesh object(s) from glb: door.001, kitchenCabinet(Clone).001
+furniture kenney-furniture-kit-kitchenSink             -> r-kitchen/k-counter-m3 at (787, 284) cm, facing 180 deg, on_top, fixture:k-counter
+20:39:39 | INFO: Data are loaded, start creating Blender stuff
+20:39:39 | INFO: Blender create Mesh node Mesh kitchenSink
+20:39:39 | INFO: Blender create Mesh node Mesh door
+20:39:39 | INFO: glTF import finished in 0.07s
+      imported 2 mesh object(s) from glb: door.002, kitchenSink(Clone)
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m4 at (724, 284) cm, facing 180 deg, on_top, fixture:k-counter
+20:39:39 | INFO: Data are loaded, start creating Blender stuff
+20:39:39 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:39:39 | INFO: Blender create Mesh node Mesh door
+20:39:40 | INFO: glTF import finished in 0.13s
+      imported 2 mesh object(s) from glb: door.003, kitchenCabinet(Clone).002
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-m5 at (659, 284) cm, facing 180 deg, on_top, fixture:k-counter
+20:39:40 | INFO: Data are loaded, start creating Blender stuff
+20:39:40 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:39:40 | INFO: Blender create Mesh node Mesh door
+20:39:40 | INFO: glTF import finished in 0.40s
+      imported 2 mesh object(s) from glb: door.004, kitchenCabinet(Clone).003
+furniture kenney-furniture-kit-kitchenCabinetUpper     -> r-kitchen/k-counter-u1 at (898, 271) cm, facing 180 deg, wall, derived:k-counter
+20:39:41 | INFO: Data are loaded, start creating Blender stuff
+20:39:41 | INFO: Blender create Mesh node Mesh kitchenCabinetUpper
+20:39:41 | INFO: Blender create Mesh node Mesh door
+20:39:41 | INFO: glTF import finished in 0.33s
+      imported 2 mesh object(s) from glb: door.005, kitchenCabinetUpper(Clone)
+furniture kenney-furniture-kit-kitchenCabinetUpper     -> r-kitchen/k-counter-u2 at (844, 271) cm, facing 180 deg, wall, derived:k-counter
+20:39:41 | INFO: Data are loaded, start creating Blender stuff
+20:39:41 | INFO: Blender create Mesh node Mesh kitchenCabinetUpper
+20:39:41 | INFO: Blender create Mesh node Mesh door
+20:39:42 | INFO: glTF import finished in 0.41s
+      imported 2 mesh object(s) from glb: door.006, kitchenCabinetUpper(Clone).001
+furniture kenney-furniture-kit-kitchenCabinetUpper     -> r-kitchen/k-counter-u3 at (787, 271) cm, facing 180 deg, wall, derived:k-counter
+20:39:42 | INFO: Data are loaded, start creating Blender stuff
+20:39:42 | INFO: Blender create Mesh node Mesh kitchenCabinetUpper
+20:39:42 | INFO: Blender create Mesh node Mesh door
+20:39:43 | INFO: glTF import finished in 0.35s
+      imported 2 mesh object(s) from glb: door.007, kitchenCabinetUpper(Clone).002
+furniture kenney-furniture-kit-kitchenCabinetUpper     -> r-kitchen/k-counter-u4 at (724, 271) cm, facing 180 deg, wall, derived:k-counter
+20:39:43 | INFO: Data are loaded, start creating Blender stuff
+20:39:43 | INFO: Blender create Mesh node Mesh kitchenCabinetUpper
+20:39:43 | INFO: Blender create Mesh node Mesh door
+20:39:44 | INFO: glTF import finished in 0.61s
+      imported 2 mesh object(s) from glb: door.008, kitchenCabinetUpper(Clone).003
+furniture kenney-furniture-kit-kitchenCabinetUpper     -> r-kitchen/k-counter-u5 at (659, 271) cm, facing 180 deg, wall, derived:k-counter
+20:39:44 | INFO: Data are loaded, start creating Blender stuff
+20:39:44 | INFO: Blender create Mesh node Mesh kitchenCabinetUpper
+20:39:44 | INFO: Blender create Mesh node Mesh door
+20:39:45 | INFO: glTF import finished in 0.56s
+      imported 2 mesh object(s) from glb: door.009, kitchenCabinetUpper(Clone).004
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-2-m1 at (655, 331) cm, facing 90 deg, on_top, fixture:k-counter-2
+20:39:45 | INFO: Data are loaded, start creating Blender stuff
+20:39:45 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:39:45 | INFO: Blender create Mesh node Mesh door
+20:39:46 | INFO: glTF import finished in 0.70s
+      imported 2 mesh object(s) from glb: door.010, kitchenCabinet(Clone).004
+furniture kenney-furniture-kit-kitchenStoveElectric    -> r-kitchen/k-counter-2-m2 at (655, 375) cm, facing 90 deg, on_top, fixture:k-counter-2
+20:39:46 | INFO: Data are loaded, start creating Blender stuff
+20:39:46 | INFO: Blender create Mesh node Mesh kitchenStoveElectric
+20:39:48 | INFO: glTF import finished in 1.16s
+      imported 1 mesh object(s) from glb: kitchenStoveElectric(Clone)
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-counter-2-m3 at (655, 448) cm, facing 90 deg, on_top, fixture:k-counter-2
+20:39:49 | INFO: Data are loaded, start creating Blender stuff
+20:39:49 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:39:50 | INFO: Blender create Mesh node Mesh door
+20:39:50 | INFO: glTF import finished in 0.93s
+      imported 2 mesh object(s) from glb: door.011, kitchenCabinet(Clone).005
+furniture kenney-furniture-kit-loungeDesignSofa        -> r-living/l-sofa at (783, 860) cm, facing 0 deg, floor, fixture:l-sofa
+20:39:50 | INFO: Data are loaded, start creating Blender stuff
+20:39:50 | INFO: Blender create Mesh node Mesh loungeDesignSofa
+20:39:51 | INFO: glTF import finished in 0.03s
+      imported 1 mesh object(s) from glb: loungeDesignSofa(Clone)
+furniture polyhaven-modern_arm_chair_01                -> r-living/l-armchair at (672, 742) cm, facing 90 deg, floor, fixture:l-armchair
+      appended 1 mesh object(s): modern_arm_chair_01
+furniture kenney-furniture-kit-cabinetTelevision       -> r-living/l-tv-1 at (785, 522) cm, facing 180 deg, floor, fixture:l-tv
+20:39:51 | INFO: Data are loaded, start creating Blender stuff
+20:39:51 | INFO: Blender create Mesh node Mesh cabinetTelevision
+20:39:51 | INFO: glTF import finished in 0.40s
+      imported 1 mesh object(s) from glb: cabinetTelevision(Clone)
+furniture kenney-furniture-kit-televisionModern        -> r-living/l-tv-tv at (785, 522) cm, facing 180 deg, on_top, derived:l-tv
+20:39:52 | INFO: Data are loaded, start creating Blender stuff
+20:39:52 | INFO: Blender create Mesh node Mesh televisionModern
+20:39:52 | INFO: glTF import finished in 0.28s
+      imported 1 mesh object(s) from glb: televisionModern(Clone)
+furniture kenney-furniture-kit-table                   -> r-dining/d-table at (1126, 780) cm, facing 180 deg, floor, fixture:d-table
+20:39:52 | INFO: Data are loaded, start creating Blender stuff
+20:39:52 | INFO: Blender create Mesh node Mesh table
+20:39:52 | INFO: glTF import finished in 0.19s
+      imported 1 mesh object(s) from glb: table(Clone)
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-1 at (1069, 834) cm, facing 0 deg, floor, derived:d-table
+20:39:53 | INFO: Data are loaded, start creating Blender stuff
+20:39:53 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:39:53 | INFO: glTF import finished in 0.25s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone)
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-2 at (1126, 834) cm, facing 0 deg, floor, derived:d-table
+20:39:54 | INFO: Data are loaded, start creating Blender stuff
+20:39:54 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:39:54 | INFO: glTF import finished in 0.46s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).001
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-3 at (1183, 834) cm, facing 0 deg, floor, derived:d-table
+20:39:54 | INFO: Data are loaded, start creating Blender stuff
+20:39:54 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:39:54 | INFO: glTF import finished in 0.23s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).002
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-4 at (1069, 727) cm, facing 180 deg, floor, derived:d-table
+20:39:55 | INFO: Data are loaded, start creating Blender stuff
+20:39:55 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:39:55 | INFO: glTF import finished in 0.31s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).003
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-5 at (1126, 727) cm, facing 180 deg, floor, derived:d-table
+20:39:55 | INFO: Data are loaded, start creating Blender stuff
+20:39:55 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:39:56 | INFO: glTF import finished in 0.31s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).004
+furniture kenney-furniture-kit-chairModernCushion      -> r-dining/d-table-chair-6 at (1183, 727) cm, facing 180 deg, floor, derived:d-table
+20:39:56 | INFO: Data are loaded, start creating Blender stuff
+20:39:56 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:39:56 | INFO: glTF import finished in 0.28s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).005
+furniture kenney-furniture-kit-loungeDesignSofa        -> r-family/f-sofa at (1551, 830) cm, facing 0 deg, floor, fixture:f-sofa
+20:39:56 | INFO: Data are loaded, start creating Blender stuff
+20:39:56 | INFO: Blender create Mesh node Mesh loungeDesignSofa
+20:39:57 | INFO: glTF import finished in 0.28s
+      imported 1 mesh object(s) from glb: loungeDesignSofa(Clone).001
+furniture kenney-furniture-kit-cabinetTelevision       -> r-family/f-tv-1 at (1552, 612) cm, facing 180 deg, floor, fixture:f-tv
+20:39:57 | INFO: Data are loaded, start creating Blender stuff
+20:39:57 | INFO: Blender create Mesh node Mesh cabinetTelevision
+20:39:57 | INFO: glTF import finished in 0.34s
+      imported 1 mesh object(s) from glb: cabinetTelevision(Clone).001
+furniture kenney-furniture-kit-televisionModern        -> r-family/f-tv-tv at (1552, 612) cm, facing 180 deg, on_top, derived:f-tv
+20:39:58 | INFO: Data are loaded, start creating Blender stuff
+20:39:58 | INFO: Blender create Mesh node Mesh televisionModern
+20:39:58 | INFO: glTF import finished in 0.23s
+      imported 1 mesh object(s) from glb: televisionModern(Clone).001
+furniture kenney-furniture-kit-bedDouble               -> r-master/m-bed at (399, 1077) cm, facing 90 deg, floor, fixture:m-bed
+20:39:58 | INFO: Data are loaded, start creating Blender stuff
+20:39:58 | INFO: Blender create Mesh node Mesh bedDouble
+20:39:58 | INFO: Blender create Mesh node Mesh cover
+20:39:58 | INFO: Blender create Mesh node Mesh pillowLeft
+20:39:58 | INFO: glTF import finished in 0.26s
+      imported 4 mesh object(s) from glb: bedDouble(Clone), cover, pillowLeft, pillowRight
+furniture kenney-furniture-kit-cabinetTelevision       -> r-master/m-tv-1 at (581, 1128) cm, facing 270 deg, floor, fixture:m-tv
+20:39:59 | INFO: Data are loaded, start creating Blender stuff
+20:39:59 | INFO: Blender create Mesh node Mesh cabinetTelevision
+20:39:59 | INFO: glTF import finished in 0.23s
+      imported 1 mesh object(s) from glb: cabinetTelevision(Clone).002
+furniture kenney-furniture-kit-televisionModern        -> r-master/m-tv-tv at (584, 1128) cm, facing 270 deg, on_top, derived:m-tv
+20:39:59 | INFO: Data are loaded, start creating Blender stuff
+20:39:59 | INFO: Blender create Mesh node Mesh televisionModern
+20:39:59 | INFO: glTF import finished in 0.31s
+      imported 1 mesh object(s) from glb: televisionModern(Clone).002
+furniture kenney-furniture-kit-bedSingle               -> r-bed1/b1-bed at (669, 1278) cm, facing 0 deg, floor, fixture:b1-bed
+20:40:00 | INFO: Data are loaded, start creating Blender stuff
+20:40:00 | INFO: Blender create Mesh node Mesh bedSingle
+20:40:00 | INFO: Blender create Mesh node Mesh cover
+20:40:00 | INFO: Blender create Mesh node Mesh pillowLeft
+20:40:00 | INFO: glTF import finished in 0.23s
+      imported 3 mesh object(s) from glb: bedSingle(Clone), cover.001, pillow
+furniture kenney-furniture-kit-table                   -> r-bed1/b1-desk at (854, 1309) cm, facing 270 deg, floor, fixture:b1-desk
+20:40:00 | INFO: Data are loaded, start creating Blender stuff
+20:40:00 | INFO: Blender create Mesh node Mesh table
+20:40:00 | INFO: glTF import finished in 0.22s
+      imported 1 mesh object(s) from glb: table(Clone).001
+furniture kenney-furniture-kit-chairModernCushion      -> r-bed1/b1-desk-chair-1 at (828, 1309) cm, facing 90 deg, floor, derived:b1-desk
+20:40:01 | INFO: Data are loaded, start creating Blender stuff
+20:40:01 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:01 | INFO: glTF import finished in 0.30s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).006
+furniture kenney-furniture-kit-bedSingle               -> r-bed2/b2-bed at (939, 1278) cm, facing 0 deg, floor, fixture:b2-bed
+20:40:01 | INFO: Data are loaded, start creating Blender stuff
+20:40:01 | INFO: Blender create Mesh node Mesh bedSingle
+20:40:01 | INFO: Blender create Mesh node Mesh cover
+20:40:01 | INFO: Blender create Mesh node Mesh pillowLeft
+20:40:02 | INFO: glTF import finished in 0.31s
+      imported 3 mesh object(s) from glb: bedSingle(Clone).001, cover.002, pillow.001
+furniture kenney-furniture-kit-table                   -> r-bed2/b2-desk at (1126, 1309) cm, facing 270 deg, floor, fixture:b2-desk
+20:40:02 | INFO: Data are loaded, start creating Blender stuff
+20:40:02 | INFO: Blender create Mesh node Mesh table
+20:40:02 | INFO: glTF import finished in 0.18s
+      imported 1 mesh object(s) from glb: table(Clone).002
+furniture kenney-furniture-kit-chairModernCushion      -> r-bed2/b2-desk-chair-1 at (1100, 1309) cm, facing 90 deg, floor, derived:b2-desk
+20:40:02 | INFO: Data are loaded, start creating Blender stuff
+20:40:02 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:03 | INFO: glTF import finished in 0.24s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).007
+furniture kenney-furniture-kit-bedSingle               -> r-mamad/s-bed at (1662, 1175) cm, facing 0 deg, floor, fixture:s-bed
+20:40:03 | INFO: Data are loaded, start creating Blender stuff
+20:40:03 | INFO: Blender create Mesh node Mesh bedSingle
+20:40:03 | INFO: Blender create Mesh node Mesh cover
+20:40:03 | INFO: Blender create Mesh node Mesh pillowLeft
+20:40:03 | INFO: glTF import finished in 0.36s
+      imported 3 mesh object(s) from glb: bedSingle(Clone).002, cover.003, pillow.002
+furniture kenney-furniture-kit-table                   -> r-mamad/s-desk at (1443, 1208) cm, facing 270 deg, floor, fixture:s-desk
+20:40:04 | INFO: Data are loaded, start creating Blender stuff
+20:40:04 | INFO: Blender create Mesh node Mesh table
+20:40:04 | INFO: glTF import finished in 0.36s
+      imported 1 mesh object(s) from glb: table(Clone).003
+furniture kenney-furniture-kit-chairModernCushion      -> r-mamad/s-desk-chair-1 at (1469, 1208) cm, facing 270 deg, floor, derived:s-desk
+20:40:04 | INFO: Data are loaded, start creating Blender stuff
+20:40:04 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:04 | INFO: glTF import finished in 0.21s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).008
+furniture kenney-furniture-kit-toilet                  -> r-wc/wc-wc at (1336, 839) cm, facing 270 deg, floor, fixture:wc-wc
+20:40:05 | INFO: Data are loaded, start creating Blender stuff
+20:40:05 | INFO: Blender create Mesh node Mesh toilet
+20:40:05 | INFO: Blender create Mesh node Mesh cover
+20:40:05 | INFO: glTF import finished in 0.27s
+      imported 2 mesh object(s) from glb: cover.004, toilet(Clone)
+furniture kenney-furniture-kit-bathroomSinkSquare      -> r-dining/wc-vanity at (1353, 748) cm, facing 270 deg, floor, fixture:wc-vanity
+20:40:05 | INFO: Data are loaded, start creating Blender stuff
+20:40:05 | INFO: Blender create Mesh node Mesh bathroomSinkSquare
+20:40:05 | INFO: glTF import finished in 0.27s
+      imported 1 mesh object(s) from glb: bathroomSinkSquare(Clone)
+furniture kenney-furniture-kit-bathroomMirror          -> r-dining/wc-vanity-mirror at (1373, 748) cm, facing 270 deg, wall, derived:wc-vanity
+20:40:06 | INFO: Data are loaded, start creating Blender stuff
+20:40:06 | INFO: Blender create Mesh node Mesh bathroomMirror
+20:40:06 | INFO: glTF import finished in 0.37s
+      imported 1 mesh object(s) from glb: bathroomMirror(Clone)
+furniture kenney-furniture-kit-toilet                  -> r-shower/sh-wc at (538, 1291) cm, facing 270 deg, floor, fixture:sh-wc
+20:40:06 | INFO: Data are loaded, start creating Blender stuff
+20:40:06 | INFO: Blender create Mesh node Mesh toilet
+20:40:06 | INFO: Blender create Mesh node Mesh cover
+20:40:07 | INFO: glTF import finished in 0.42s
+      imported 2 mesh object(s) from glb: cover.005, toilet(Clone).001
+furniture kenney-furniture-kit-bathroomSinkSquare      -> r-shower/sh-vanity at (451, 1349) cm, facing 0 deg, floor, fixture:sh-vanity
+20:40:08 | INFO: Data are loaded, start creating Blender stuff
+20:40:08 | INFO: Blender create Mesh node Mesh bathroomSinkSquare
+20:40:08 | INFO: glTF import finished in 0.08s
+      imported 1 mesh object(s) from glb: bathroomSinkSquare(Clone).001
+furniture kenney-furniture-kit-bathroomMirror          -> r-shower/sh-vanity-mirror at (451, 1368) cm, facing 0 deg, wall, derived:sh-vanity
+20:40:08 | INFO: Data are loaded, start creating Blender stuff
+20:40:08 | INFO: Blender create Mesh node Mesh bathroomMirror
+20:40:08 | INFO: glTF import finished in 0.37s
+      imported 1 mesh object(s) from glb: bathroomMirror(Clone).001
+furniture kenney-furniture-kit-bathroomSinkSquare      -> r-bath/ba-vanity at (1191, 1081) cm, facing 90 deg, floor, fixture:ba-vanity
+20:40:09 | INFO: Data are loaded, start creating Blender stuff
+20:40:09 | INFO: Blender create Mesh node Mesh bathroomSinkSquare
+20:40:09 | INFO: glTF import finished in 0.43s
+      imported 1 mesh object(s) from glb: bathroomSinkSquare(Clone).002
+furniture kenney-furniture-kit-bathroomMirror          -> r-bath/ba-vanity-mirror at (1171, 1081) cm, facing 90 deg, wall, derived:ba-vanity
+20:40:09 | INFO: Data are loaded, start creating Blender stuff
+20:40:09 | INFO: Blender create Mesh node Mesh bathroomMirror
+20:40:10 | INFO: glTF import finished in 0.24s
+      imported 1 mesh object(s) from glb: bathroomMirror(Clone).002
+furniture kenney-furniture-kit-toilet                  -> r-bath/ba-wc at (1213, 1184) cm, facing 90 deg, floor, fixture:ba-wc
+20:40:10 | INFO: Data are loaded, start creating Blender stuff
+20:40:10 | INFO: Blender create Mesh node Mesh toilet
+20:40:10 | INFO: Blender create Mesh node Mesh cover
+20:40:10 | INFO: glTF import finished in 0.44s
+      imported 2 mesh object(s) from glb: cover.006, toilet(Clone).002
+furniture kenney-furniture-kit-bathtub                 -> r-bath/ba-tub at (1357, 1135) cm, facing 270 deg, floor, fixture:ba-tub
+20:40:11 | INFO: Data are loaded, start creating Blender stuff
+20:40:11 | INFO: Blender create Mesh node Mesh bathtub
+20:40:11 | INFO: glTF import finished in 0.33s
+      imported 1 mesh object(s) from glb: bathtub(Clone)
+furniture kenney-furniture-kit-table                   -> r-balcony/t-table at (453, 673) cm, facing 270 deg, floor, fixture:t-table
+20:40:12 | INFO: Data are loaded, start creating Blender stuff
+20:40:12 | INFO: Blender create Mesh node Mesh table
+20:40:12 | INFO: glTF import finished in 0.34s
+      imported 1 mesh object(s) from glb: table(Clone).004
+furniture kenney-furniture-kit-chairModernCushion      -> r-balcony/t-table-chair-1 at (387, 615) cm, facing 90 deg, floor, derived:t-table
+20:40:12 | INFO: Data are loaded, start creating Blender stuff
+20:40:12 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:13 | INFO: glTF import finished in 0.50s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).009
+furniture kenney-furniture-kit-chairModernCushion      -> r-balcony/t-table-chair-2 at (387, 673) cm, facing 90 deg, floor, derived:t-table
+20:40:13 | INFO: Data are loaded, start creating Blender stuff
+20:40:13 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:13 | INFO: glTF import finished in 0.20s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).010
+furniture kenney-furniture-kit-chairModernCushion      -> r-balcony/t-table-chair-3 at (387, 731) cm, facing 90 deg, floor, derived:t-table
+20:40:14 | INFO: Data are loaded, start creating Blender stuff
+20:40:14 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:14 | INFO: glTF import finished in 0.56s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).011
+furniture kenney-furniture-kit-chairModernCushion      -> r-balcony/t-table-chair-4 at (520, 615) cm, facing 270 deg, floor, derived:t-table
+20:40:15 | INFO: Data are loaded, start creating Blender stuff
+20:40:15 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:16 | INFO: glTF import finished in 0.79s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).012
+furniture kenney-furniture-kit-chairModernCushion      -> r-balcony/t-table-chair-5 at (520, 673) cm, facing 270 deg, floor, derived:t-table
+20:40:17 | INFO: Data are loaded, start creating Blender stuff
+20:40:17 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:18 | INFO: glTF import finished in 1.05s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).013
+furniture kenney-furniture-kit-chairModernCushion      -> r-balcony/t-table-chair-6 at (520, 731) cm, facing 270 deg, floor, derived:t-table
+20:40:18 | INFO: Data are loaded, start creating Blender stuff
+20:40:18 | INFO: Blender create Mesh node Mesh chairModernCushion
+20:40:19 | INFO: glTF import finished in 0.51s
+      imported 1 mesh object(s) from glb: chairModernCushion(Clone).014
+furniture kenney-furniture-kit-bookcaseOpen            -> r-pantry/p-shelf-n at (1144, 280) cm, facing 180 deg, floor, fixture:p-shelf-n
+20:40:19 | INFO: Data are loaded, start creating Blender stuff
+20:40:19 | INFO: Blender create Mesh node Mesh bookcaseOpen
+20:40:20 | INFO: glTF import finished in 0.79s
+      imported 1 mesh object(s) from glb: bookcaseOpen(Clone)
+furniture kenney-furniture-kit-bookcaseOpen            -> r-pantry/p-shelf-e at (1222, 369) cm, facing 270 deg, floor, fixture:p-shelf-e
+20:40:21 | INFO: Data are loaded, start creating Blender stuff
+20:40:21 | INFO: Blender create Mesh node Mesh bookcaseOpen
+20:40:22 | INFO: glTF import finished in 0.81s
+      imported 1 mesh object(s) from glb: bookcaseOpen(Clone).001
+furniture polyhaven-potted_plant_02                    -> r-living/l-plant at (665, 537) cm, facing 90 deg, floor, fixture:l-plant
+      appended 3 mesh object(s): potted_plant_02_dirt, potted_plant_02_leaves, potted_plant_02_pot
+furniture polyhaven-potted_plant_02                    -> r-balcony/t-palm at (272, 282) cm, facing 90 deg, floor, fixture:t-palm
+      appended 3 mesh object(s): potted_plant_02_dirt.001, potted_plant_02_leaves.001, potted_plant_02_pot.001
+furniture polyhaven-potted_plant_02                    -> r-balcony/t-plant-1 at (278, 755) cm, facing 90 deg, floor, fixture:t-plant-1
+      appended 3 mesh object(s): potted_plant_02_dirt.002, potted_plant_02_leaves.002, potted_plant_02_pot.002
+furniture polyhaven-potted_plant_02                    -> r-balcony/t-plant-2 at (268, 806) cm, facing 90 deg, floor, fixture:t-plant-2
+      appended 3 mesh object(s): potted_plant_02_dirt.003, potted_plant_02_leaves.003, potted_plant_02_pot.003
+furniture polyhaven-potted_plant_02                    -> r-balcony/t-plant-3 at (319, 810) cm, facing 270 deg, floor, fixture:t-plant-3
+      appended 3 mesh object(s): potted_plant_02_dirt.004, potted_plant_02_leaves.004, potted_plant_02_pot.004
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-island-m1 at (765, 463) cm, facing 0 deg, on_top, fixture:k-island
+20:40:27 | INFO: Data are loaded, start creating Blender stuff
+20:40:27 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:40:27 | INFO: Blender create Mesh node Mesh door
+20:40:28 | INFO: glTF import finished in 0.14s
+      imported 2 mesh object(s) from glb: door.012, kitchenCabinet(Clone).006
+furniture kenney-furniture-kit-kitchenCabinet          -> r-kitchen/k-island-m2 at (827, 463) cm, facing 0 deg, on_top, fixture:k-island
+20:40:28 | INFO: Data are loaded, start creating Blender stuff
+20:40:28 | INFO: Blender create Mesh node Mesh kitchenCabinet
+20:40:28 | INFO: Blender create Mesh node Mesh door
+20:40:28 | INFO: glTF import finished in 0.31s
+      imported 2 mesh object(s) from glb: door.013, kitchenCabinet(Clone).007
+furniture kenney-furniture-kit-rugRectangle            -> r-living/ffp-living-rug at (783, 777) cm, facing 0 deg, rug, furnishing:ffp-living-rug
+20:40:28 | INFO: Data are loaded, start creating Blender stuff
+20:40:28 | INFO: Blender create Mesh node Mesh rugRectangle
+20:40:28 | INFO: glTF import finished in 0.19s
+      imported 1 mesh object(s) from glb: rugRectangle(Clone)
+furniture polyhaven-potted_plant_02                    -> r-family/ffp-family-plant at (1672, 633) cm, facing 0 deg, floor, furnishing:ffp-family-plant
+      appended 3 mesh object(s): potted_plant_02_dirt.005, potted_plant_02_leaves.005, potted_plant_02_pot.005
+door      o-6    leaf 67.8 x 211.7 cm into r-dining, hinge -u, open 0 deg (closed: no camera sees the doorway), 16 parts
+door      o-8    leaf 68.7 x 211.7 cm into r-master, hinge -u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-9    leaf 78.1 x 211.7 cm into r-bath, hinge -u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-14   leaf 66.1 x 211.7 cm into r-corridor, hinge +u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-15   leaf 74.5 x 211.7 cm into r-master, hinge -u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-16   leaf 74.5 x 211.7 cm into r-bed1, hinge +u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-17   leaf 75.0 x 211.7 cm into r-bed2, hinge +u, open 30 deg (open 30 deg: the walk goes through it (both rooms hold a camera) and the leaf swept to 30 deg is clear), 16 parts
+door      o-13   entrance leaf LEAF_o-13 -> wood_walnut, hinge -u, 12 parts
+NOTE      furnishing l-coffee-2: kept (plan truth) but overlaps l-coffee by 15.0 cm
+NOTE      furnishing k-uppers: kept (plan truth) but overlaps k-counter-m1 by 35.0 cm
+furnished 67 catalog placement(s) of 19 distinct model(s), 22 procedural assemblies (126 parts), 7 interior door(s) (124 parts) - general_furnish v0.1.1
+camera    CAM_cp-living (default) at plan (937.6, 779, 160) cm, yaw 50 deg -> world (9.376, -7.79, 1.6), euler_z -50 deg  [camera.panorama_type (4.3+)]  -- render_pano.py re-points this ONE object per camera_points[] entry at render time
+render    CYCLES/GPU seed 0, 4096x2048 draft, view_transform AgX look AgX - Punchy
+
+GEOMETRY CHECKS  (general plan: 10 wall pieces, 150 facings, 2 panes, 17 cut openings, 15 rooms; tolerance 1.000 mm)
+  [PASS] wall w-1 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-1].height_cm
+  [PASS] wall w-1 polygon extruded (top face area)                  measured    35007.08 cm2 expected    35007.09 cm2 eq.  0.00004 mm   <- walls[w-1].polygon_cm (shoelace)
+  [PASS] wall w-1 plan vertices on the extruded top                 33 / 33   <- walls[w-1].polygon_cm
+  [PASS] wall w-2 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-2].height_cm
+  [PASS] wall w-2 polygon extruded (top face area)                  measured     4525.37 cm2 expected     4525.36 cm2 eq.  0.00016 mm   <- walls[w-2].polygon_cm (shoelace)
+  [PASS] wall w-2 plan vertices on the extruded top                 9 / 9   <- walls[w-2].polygon_cm
+  [PASS] wall w-3 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-3].height_cm
+  [PASS] wall w-3 polygon extruded (top face area)                  measured    17499.24 cm2 expected    17499.24 cm2 eq.  0.00007 mm   <- walls[w-3].polygon_cm (shoelace)
+  [PASS] wall w-3 plan vertices on the extruded top                 9 / 9   <- walls[w-3].polygon_cm
+  [PASS] wall w-4 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-4].height_cm
+  [PASS] wall w-4 polygon extruded (top face area)                  measured    39302.12 cm2 expected    39302.13 cm2 eq.  0.00002 mm   <- walls[w-4].polygon_cm (shoelace)
+  [PASS] wall w-4 plan vertices on the extruded top                 41 / 41   <- walls[w-4].polygon_cm
+  [PASS] wall w-5 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-5].height_cm
+  [PASS] wall w-5 polygon extruded (top face area)                  measured    16522.88 cm2 expected    16522.94 cm2 eq.  0.00031 mm   <- walls[w-5].polygon_cm (shoelace)
+  [PASS] wall w-5 plan vertices on the extruded top                 23 / 23   <- walls[w-5].polygon_cm
+  [PASS] wall w-6 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-6].height_cm
+  [PASS] wall w-6 polygon extruded (top face area)                  measured    15985.81 cm2 expected    15985.85 cm2 eq.  0.00019 mm   <- walls[w-6].polygon_cm (shoelace)
+  [PASS] wall w-6 plan vertices on the extruded top                 29 / 29   <- walls[w-6].polygon_cm
+  [PASS] wall w-7 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-7].height_cm
+  [PASS] wall w-7 polygon extruded (top face area)                  measured    15312.12 cm2 expected    15312.09 cm2 eq.  0.00021 mm   <- walls[w-7].polygon_cm (shoelace)
+  [PASS] wall w-7 plan vertices on the extruded top                 23 / 23   <- walls[w-7].polygon_cm
+  [PASS] wall w-8 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-8].height_cm
+  [PASS] wall w-8 polygon extruded (top face area)                  measured     8193.06 cm2 expected     8193.05 cm2 eq.  0.00010 mm   <- walls[w-8].polygon_cm (shoelace)
+  [PASS] wall w-8 plan vertices on the extruded top                 13 / 13   <- walls[w-8].polygon_cm
+  [PASS] wall w-9 height                                            measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-9].height_cm
+  [PASS] wall w-9 polygon extruded (top face area)                  measured    10037.04 cm2 expected    10037.04 cm2 eq.  0.00000 mm   <- walls[w-9].polygon_cm (shoelace)
+  [PASS] wall w-9 plan vertices on the extruded top                 21 / 21   <- walls[w-9].polygon_cm
+  [PASS] wall w-10 height                                           measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- walls[w-10].height_cm
+  [PASS] wall w-10 polygon extruded (top face area)                 measured    10821.44 cm2 expected    10821.43 cm2 eq.  0.00007 mm   <- walls[w-10].polygon_cm (shoelace)
+  [PASS] wall w-10 plan vertices on the extruded top                11 / 11   <- walls[w-10].polygon_cm
+  [PASS] room r-kitchen clear width (floor bbox, x)                 measured    474.2000 cm  expected    474.2000 cm  err  0.00037 mm   <- rooms[r-kitchen].clear_dims_cm[0]
+  [PASS] room r-kitchen clear depth (floor bbox, y)                 measured    244.4000 cm  expected    244.4000 cm  err  0.00024 mm   <- rooms[r-kitchen].clear_dims_cm[1]
+  [PASS] room r-kitchen floor triangulation area (13-gon)           measured   112818.47 cm2 expected   112818.47 cm2 eq.  0.00004 mm   <- rooms[r-kitchen].loop (shoelace)
+  [PASS] room r-kitchen floor-to-ceiling height                     measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-pantry clear width (floor bbox, x)                  measured    160.0000 cm  expected    160.0000 cm  err  0.00038 mm   <- rooms[r-pantry].clear_dims_cm[0]
+  [PASS] room r-pantry clear depth (floor bbox, y)                  measured    176.4000 cm  expected    176.4000 cm  err  0.00018 mm   <- rooms[r-pantry].clear_dims_cm[1]
+  [PASS] room r-pantry floor triangulation area (12-gon)            measured    24510.09 cm2 expected    24510.08 cm2 eq.  0.00011 mm   <- rooms[r-pantry].loop (shoelace)
+  [PASS] room r-pantry floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-living clear width (floor bbox, x)                  measured    417.7000 cm  expected    417.7000 cm  err  0.00005 mm   <- rooms[r-living].clear_dims_cm[0]
+  [PASS] room r-living clear depth (floor bbox, y)                  measured    418.2000 cm  expected    418.2000 cm  err  0.00016 mm   <- rooms[r-living].clear_dims_cm[1]
+  [PASS] room r-living floor triangulation area (13-gon)            measured   170224.29 cm2 expected   170224.27 cm2 eq.  0.00012 mm   <- rooms[r-living].loop (shoelace)
+  [PASS] room r-living floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-dining clear width (floor bbox, x)                  measured    348.0000 cm  expected    348.0000 cm  err  0.00046 mm   <- rooms[r-dining].clear_dims_cm[0]
+  [PASS] room r-dining clear depth (floor bbox, y)                  measured    483.5000 cm  expected    483.5000 cm  err  0.00004 mm   <- rooms[r-dining].clear_dims_cm[1]
+  [PASS] room r-dining floor triangulation area (27-gon)            measured   112604.61 cm2 expected   112604.62 cm2 eq.  0.00007 mm   <- rooms[r-dining].loop (shoelace)
+  [PASS] room r-dining floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-family clear width (floor bbox, x)                  measured    339.6000 cm  expected    339.6000 cm  err  0.00009 mm   <- rooms[r-family].clear_dims_cm[0]
+  [PASS] room r-family clear depth (floor bbox, y)                  measured    285.8000 cm  expected    285.8000 cm  err  0.00020 mm   <- rooms[r-family].clear_dims_cm[1]
+  [PASS] room r-family floor triangulation area (9-gon)             measured    94385.27 cm2 expected    94385.27 cm2 eq.  0.00001 mm   <- rooms[r-family].loop (shoelace)
+  [PASS] room r-family floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-wc clear width (floor bbox, x)                      measured    152.0000 cm  expected    152.0000 cm  err  0.00050 mm   <- rooms[r-wc].clear_dims_cm[0]
+  [PASS] room r-wc clear depth (floor bbox, y)                      measured     96.4000 cm  expected     96.4000 cm  err  0.00023 mm   <- rooms[r-wc].clear_dims_cm[1]
+  [PASS] room r-wc floor triangulation area (6-gon)                 measured    14299.12 cm2 expected    14299.12 cm2 eq.  0.00002 mm   <- rooms[r-wc].loop (shoelace)
+  [PASS] room r-wc floor-to-ceiling height                          measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-corridor clear width (floor bbox, x)                measured    705.8000 cm  expected    705.8000 cm  err  0.00009 mm   <- rooms[r-corridor].clear_dims_cm[0]
+  [PASS] room r-corridor clear depth (floor bbox, y)                measured    125.2999 cm  expected    125.3000 cm  err  0.00069 mm   <- rooms[r-corridor].clear_dims_cm[1]
+  [PASS] room r-corridor floor triangulation area (27-gon)          measured    78358.90 cm2 expected    78358.94 cm2 eq.  0.00022 mm   <- rooms[r-corridor].loop (shoelace)
+  [PASS] room r-corridor floor-to-ceiling height                    measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-master clear width (floor bbox, x)                  measured    378.3000 cm  expected    378.3000 cm  err  0.00023 mm   <- rooms[r-master].clear_dims_cm[0]
+  [PASS] room r-master clear depth (floor bbox, y)                  measured    386.3000 cm  expected    386.3000 cm  err  0.00008 mm   <- rooms[r-master].clear_dims_cm[1]
+  [PASS] room r-master floor triangulation area (11-gon)            measured   122053.98 cm2 expected   122053.98 cm2 eq.  0.00000 mm   <- rooms[r-master].loop (shoelace)
+  [PASS] room r-master floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-shower clear width (floor bbox, x)                  measured    284.0000 cm  expected    284.0000 cm  err  0.00009 mm   <- rooms[r-shower].clear_dims_cm[0]
+  [PASS] room r-shower clear depth (floor bbox, y)                  measured    140.0001 cm  expected    140.0000 cm  err  0.00057 mm   <- rooms[r-shower].clear_dims_cm[1]
+  [PASS] room r-shower floor triangulation area (13-gon)            measured    36484.50 cm2 expected    36484.50 cm2 eq.  0.00006 mm   <- rooms[r-shower].loop (shoelace)
+  [PASS] room r-shower floor-to-ceiling height                      measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-bed1 clear width (floor bbox, x)                    measured    260.4000 cm  expected    260.4000 cm  err  0.00009 mm   <- rooms[r-bed1].clear_dims_cm[0]
+  [PASS] room r-bed1 clear depth (floor bbox, y)                    measured    348.9000 cm  expected    348.9000 cm  err  0.00032 mm   <- rooms[r-bed1].clear_dims_cm[1]
+  [PASS] room r-bed1 floor triangulation area (10-gon)              measured    89126.05 cm2 expected    89126.05 cm2 eq.  0.00000 mm   <- rooms[r-bed1].loop (shoelace)
+  [PASS] room r-bed1 floor-to-ceiling height                        measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-bed2 clear width (floor bbox, x)                    measured    260.4000 cm  expected    260.4000 cm  err  0.00009 mm   <- rooms[r-bed2].clear_dims_cm[0]
+  [PASS] room r-bed2 clear depth (floor bbox, y)                    measured    347.5000 cm  expected    347.5000 cm  err  0.00038 mm   <- rooms[r-bed2].clear_dims_cm[1]
+  [PASS] room r-bed2 floor triangulation area (10-gon)              measured    88871.45 cm2 expected    88871.45 cm2 eq.  0.00000 mm   <- rooms[r-bed2].loop (shoelace)
+  [PASS] room r-bed2 floor-to-ceiling height                        measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-bath clear width (floor bbox, x)                    measured    226.7000 cm  expected    226.7000 cm  err  0.00020 mm   <- rooms[r-bath].clear_dims_cm[0]
+  [PASS] room r-bath clear depth (floor bbox, y)                    measured    308.5000 cm  expected    308.5000 cm  err  0.00004 mm   <- rooms[r-bath].clear_dims_cm[1]
+  [PASS] room r-bath floor triangulation area (23-gon)              measured    66201.66 cm2 expected    66201.65 cm2 eq.  0.00011 mm   <- rooms[r-bath].loop (shoelace)
+  [PASS] room r-bath floor-to-ceiling height                        measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-mamad clear width (floor bbox, x)                   measured    304.4000 cm  expected    304.4000 cm  err  0.00033 mm   <- rooms[r-mamad].clear_dims_cm[0]
+  [PASS] room r-mamad clear depth (floor bbox, y)                   measured    375.6000 cm  expected    375.6000 cm  err  0.00043 mm   <- rooms[r-mamad].clear_dims_cm[1]
+  [PASS] room r-mamad floor triangulation area (13-gon)             measured   110027.01 cm2 expected   110027.02 cm2 eq.  0.00013 mm   <- rooms[r-mamad].loop (shoelace)
+  [PASS] room r-mamad floor-to-ceiling height                       measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] room r-balcony clear width (floor bbox, x)                 measured    370.7000 cm  expected    370.7000 cm  err  0.00002 mm   <- rooms[r-balcony].clear_dims_cm[0]
+  [PASS] room r-balcony clear depth (floor bbox, y)                 measured    600.4000 cm  expected    600.4000 cm  err  0.00029 mm   <- rooms[r-balcony].clear_dims_cm[1]
+  [PASS] room r-balcony floor triangulation area (11-gon)           measured   214111.56 cm2 expected   214111.54 cm2 eq.  0.00010 mm   <- rooms[r-balcony].loop (shoelace)
+  [PASS] room r-laundry clear width (floor bbox, x)                 measured    216.0001 cm  expected    216.0000 cm  err  0.00080 mm   <- rooms[r-laundry].clear_dims_cm[0]
+  [PASS] room r-laundry clear depth (floor bbox, y)                 measured    137.7999 cm  expected    137.8000 cm  err  0.00069 mm   <- rooms[r-laundry].clear_dims_cm[1]
+  [PASS] room r-laundry floor triangulation area (9-gon)            measured    29376.62 cm2 expected    29376.62 cm2 eq.  0.00003 mm   <- rooms[r-laundry].loop (shoelace)
+  [PASS] room r-laundry floor-to-ceiling height                     measured    290.0000 cm  expected    290.0000 cm  err  0.00010 mm   <- plan_meta.ceiling_height_cm [ASSUMED]
+  [PASS] pane railing-1 height                                      measured    110.0000 cm  expected    110.0000 cm  err  0.00002 mm   <- panes[railing-1].sill_cm/head_cm
+  [PASS] pane railing-1 polygon extruded (top face area)            measured      338.35 cm2 expected      338.35 cm2 eq.  0.00001 mm   <- panes[railing-1].polygon_cm (shoelace)
+  [PASS] pane railing-laundry height                                measured    110.0000 cm  expected    110.0000 cm  err  0.00002 mm   <- panes[railing-laundry].sill_cm/head_cm
+  [PASS] pane railing-laundry polygon extruded (top face area)      measured      388.37 cm2 expected      388.38 cm2 eq.  0.00005 mm   <- panes[railing-laundry].polygon_cm (shoelace)
+  [PASS] facings reaching their wall's height (top face)            150 / 150   <- plan_general.facings() -> the wall each band reached
+  [PASS] pane joint posts at their pane's height                    3 / 3   <- plan_general.pane_joints() -> panes[].sill_cm/head_cm
+
+OPENING CHECKS  (rays across each cut opening: clear between sill and head, blocked just above the head)
+  [PASS] opening o-6    through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-6']
+  [PASS] opening o-8    through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-8']
+  [PASS] opening o-9    through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-9']
+  [PASS] opening o-11   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-11']
+  [PASS] opening o-13   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-13']
+  [PASS] opening o-14   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-14']
+  [PASS] opening o-15   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-15']
+  [PASS] opening o-16   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-16']
+  [PASS] opening o-17   through 9/9 clear, above the head 3/3 blocked by ['INFILL_o-17']
+  [PASS] opening w-kitchen through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-kitchen']
+  [PASS] opening w-family through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-family']
+  [PASS] opening w-master through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-master']
+  [PASS] opening w-shower through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-shower']
+  [PASS] opening w-bed1 through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-bed1']
+  [PASS] opening w-bed2 through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-bed2']
+  [PASS] opening w-mamad through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-mamad']
+  [PASS] opening w-utility through 9/9 clear, above the head 3/3 blocked by ['INFILL_w-utility']
+
+CAMERA CLEARANCE  (bar 40 cm from any architectural mesh, measured on the built mesh; general plan: REPORTED - the points are authored and taken as given)
+  [PASS] camera cp-kitchen         room r-kitchen          clearance   80.63 cm from FRIDGE_k-tall-2_door_r
+  [PASS] camera cp-pantry          room r-pantry           clearance   48.21 cm from bookcaseOpen(Clone).001
+  [PASS] camera cp-living          room r-living           clearance  125.01 cm from loungeDesignSofa(Clone)
+  [PASS] camera cp-dining          room r-dining           clearance   90.64 cm from chairModernCushion(Clone).004
+  [PASS] camera cp-family          room r-family           clearance   74.57 cm from televisionModern(Clone).001
+  [PASS] camera cp-corridor        room r-corridor         clearance   52.20 cm from WALL_w-8
+  [PASS] camera cp-master          room r-master           clearance   64.75 cm from CLOSET_m-closet_door2
+  [PASS] camera cp-shower          room r-shower           clearance   53.27 cm from DOOR_o-8_casing_p_m
+  [PASS] camera cp-bed1            room r-bed1             clearance   84.40 cm from CLOSET_b1-closet_door1
+  [PASS] camera cp-bed2            room r-bed2             clearance   86.80 cm from CLOSET_b2-closet_door1
+  [PASS] camera cp-bath            room r-bath             clearance   70.45 cm from DOOR_o-9_leaf
+  [PASS] camera cp-mamad           room r-mamad            clearance  116.70 cm from FACING_r-mamad_e7_r0
+  [PASS] camera cp-balcony         room r-balcony          clearance   79.81 cm from FACING_r-balcony_e0_r0
+Info: Saved as "scene-full.blend"
+saved     c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend  (8,878,963 bytes)
+report    c:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.report.json
+CHECKS    112/112 geometry passed (tol 1 mm), 13/13 camera clearance passed (bar 40 cm)
+OK
+Blender 4.5.10 LTS (hash 6dc0b208d1b5 built 2026-05-19 01:33:42)
+

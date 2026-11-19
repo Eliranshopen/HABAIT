@@ -1,0 +1,78 @@
+{
+ "$schema": "tour360/apartment.v1",
+ "id": "kedma-d1",
+ "status": "concept",
+ "title": {
+  "he": "דירה 1 · בניין ד · קומה א׳ · קדמא עץ אפרים (הדמיה)",
+  "en": "Apartment 1 · building D · floor 1 · Kedma, Etz Efraim (concept)",
+  "fr": "Appartement 1 · bâtiment D · étage 1 · Kedma, Etz Efraim (concept)"
+ },
+ "project": null,
+ "projectNote": "built by tools/run-project.mjs steps from the hand trace jobs/kedma-d1/hand/plan.final.json; the designed look by tools/skin-project.mjs, 13 scenes gated",
+ "plan": {
+  "image": "plan/floorplan.webp",
+  "imageSize": [
+   1765,
+   1538
+  ],
+  "viewBox": [
+   173,
+   182,
+   1419,
+   1192
+  ],
+  "labelsLanguage": "he",
+  "northDeg": null,
+  "northSource": "the portal reading of the sales plan (spec.json drawing.north_deg_clockwise_from_up)"
+ },
+ "sets": {
+  "balanced": {
+   "dir": "panos/balanced",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true
+  },
+  "thumb": {
+   "dir": "panos/thumb",
+   "width": 640,
+   "height": 320,
+   "format": "webp",
+   "tracked": true
+  },
+  "original": {
+   "dir": "panos/original",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true,
+   "note": "the plain CG render of each camera (360walkaround/tours/<id>/renders/cp-*/pano.webp)"
+  },
+  "full": {
+   "dir": "_local/full",
+   "width": 8192,
+   "height": 4096,
+   "format": "webp",
+   "tracked": false,
+   "note": "2026-11-17: the redone viewpoints are painted at 2K per view and assembled 8192 wide (Eliran: double resolution); a viewpoint not yet redone is its 2048 picture enlarged"
+  }
+ },
+ "defaultScene": "living",
+ "returnUrl": "../landing.html?project=kedma-d1",
+ "disclosure": {
+  "badgeKey": "badge",
+  "conceptLineKey": "conceptLine",
+  "aiNoteKey": "aiNote",
+  "copyPack": "../../copy/tour360-copy.json",
+  "permanent": true
+ },
+ "provenance": {
+  "generation": "the sales plan traced by hand, built in Blender (Cycles 2048x1024, 16 spp, furniture by rule) and skinned by openai/gpt-image-2.5 through fal.ai; every room picture is AI-generated and passed the sales-plan fidelity gate at 1 % (2026-11-16)",
+  "enhancement": "none"
+ },
+ "view": {
+  "tiltDeg": 10,
+  "pannini": 1,
+  "note": "pannini 1 = the wide architectural projection (no stretch at the edges, verticals stay vertical); the look stays within 10 deg of eye level (tour.js tiltBounds); the first look is the template's wide one (85 deg tall, at most 118 across) - Eliran 2026-11-17: eye level, zoomed out"
+ }
+}

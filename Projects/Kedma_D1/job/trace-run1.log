@@ -1,0 +1,20 @@
+[auto-trace 8s] plan 1: 4862×3995 (page 1)
+[auto-trace 9s] auto_prep: sheet mode (saturated 0.00 %), unchanged
+[auto-trace 10s] auto_walls_pdf --dims-only: 0 dimension segments, 0 door paths (walls stay raster)
+[auto-trace 40s] read: $0.0353
+[auto-trace 40s] scale 3.351 px/cm (guessed from 12 room boxes vs printed dims, then fitted); 15 seeds, 17 fixtures read
+[auto-trace 63s] r1 auto_split: 16 seeds, 22 boundary lines, wall angle 0.0, 3 notes
+[auto-trace 63s] r1 note: envelope closing 300 cm (99 % of the walls' hull)
+[auto-trace 63s] r1 note: envelope: 154.9 m� closed footprint, 2 gap line(s) on its outline
+[auto-trace 63s] r1 note: hall-auto-14: 8.2 m� of open space carried no label; made a hall
+[auto-trace 178s] r1 PLAN written C:\RnD\.wt\kedma-d1\Projects\3Dengine\jobs\kedma-d1\trace\plan-1\plan.general.json: 16 rooms, 130 wall pieces, 2 openings, 0 panes, 16 cameras, 0 fixtures
+[auto-trace 189s] r1 auto_rooms: 7 free strip(s) inside the envelope but not enclosed by walls -> outside
+auto_rooms: 17 rooms (axis 0.0 deg), 10 printed rectangles, 10 snapped; 24 notes
+[auto-trace 203s] r1 auto_finalize: 17 rooms, 17 fixtures, wall angle 88.5 deg, scale 3.3277 px/cm (fit x0.9931), 20 notes, overlay C:\RnD\.wt\kedma-d1\Projects\3Dengine\jobs\kedma-d1\trace\plan-1\overlay.png
+[auto-trace 204s] r1 trace_check: FAIL � 116/139 checks pass; corrections: force_rect []
+[auto-trace 204s] r1 no further correction applies
+[auto-trace 227s] the judge answer was not JSON ($0.0260 billed):  { "mismatches": [ { "room": "חדר דיור", "issue": "Most of the living room (seating area with the sofa, armchair, and coffee table) is untrace
+[auto-trace 241s] judge: $0.0180
+[auto-trace 263s] judge: $0.0216
+[auto-trace 263s] plan 1: FAIL after 1 round(s) — 23 mechanical failure(s), judge 5 mismatch(es)
+[auto-trace 263s] done: FAIL — plan-1 FAIL; $0.1009 → C:\RnD\.wt\kedma-d1\Projects\3Dengine\jobs\kedma-d1\trace\index.json

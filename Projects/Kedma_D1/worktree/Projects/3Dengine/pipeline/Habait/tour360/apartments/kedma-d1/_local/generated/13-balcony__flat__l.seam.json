@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "kind": "object-paste",
+ "parent": "13-balcony__gpt25__s7__2954086e8574.png",
+ "object_paste": {
+  "from": "_local/flatfix/13-balcony-l/answer-78ac74f90506.reg.png",
+  "tool": "jobs/kedma-d1/hand/flatfix.py",
+  "args": "view yaw 30.0 pitch -15.0 hfov 112.0 size 1024, inset 20, feather 60, box 0,0.027,1,1",
+  "box": [
+   814,
+   295,
+   760,
+   613
+  ],
+  "why": "the image model drew near things straight in the panorama, so they were bent in the viewer; the view was redrawn on the CG render's geometry and projected back"
+ },
+ "band": {
+  "u": 0.5833,
+  "deg": 112.0,
+  "rows": [
+   0.2881,
+   0.8867
+  ]
+ },
+ "cuts": [],
+ "note": "no band cut: a straight-line view of the same camera, feathered; checked by eye"
+}

@@ -1,0 +1,116 @@
+
+=== [1/5] cp-kitchen ======================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-kitchen  plan (916.6,393,160) yaw 282
+[render_pano] camera     : (9.166, -3.93, 1.6) m  euler (90.0, 0.0, -282.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 2048x1024 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-kitchen
+[render_pano] input_key  : 3d35ef6bf01f683f…
+[render_pano] render 1/1: 102.019 s wall  (cycles 101.36s, device peak 1104.15 MB, host peak 1455.7 MB)
+[render_pano] depth      : depth.png 160,815 B  valid 2,097,152 / 2,097,152  sky 0  range 0.821..10.116 m  (0.19 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-kitchen floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-kitchen ceiling z=290 cm]
+              SKIP  room r-kitchen is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 2048x1024 45,304 B  zenith mean 169.1/255 (5 colours) · nadir mean 187.3/255 (2 colours) · no_hole=True
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-kitchen\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-kitchen')
+OK
+
+=== [2/5] cp-pantry =======================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-pantry  plan (1155.4,362.6,160) yaw 267
+[render_pano] camera     : (11.554, -3.626, 1.6) m  euler (90.0, 0.0, -267.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 2048x1024 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-pantry
+[render_pano] input_key  : 57aaef4d7bb3d685…
+[render_pano] render 1/1: 97.678 s wall  (cycles 96.85s, device peak 1104.15 MB, host peak 1455.71 MB)
+[render_pano] depth      : depth.png 175,267 B  valid 2,097,152 / 2,097,152  sky 0  range 0.653..7.027 m  (0.359 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-pantry floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-pantry ceiling z=290 cm]
+              SKIP  room r-pantry is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 2048x1024 27,524 B  zenith mean 192.4/255 (4 colours) · nadir mean 180.8/255 (6 colours) · no_hole=True
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-pantry\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-pantry')
+OK
+
+=== [3/5] cp-dining =======================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-dining  plan (1126.9,652.7,160) yaw 44
+[render_pano] camera     : (11.269, -6.527, 1.6) m  euler (90.0, 0.0, -44.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 2048x1024 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-dining
+[render_pano] input_key  : 03456c8fc449cc56…
+[render_pano] render 1/1: 75.843 s wall  (cycles 75.21s, device peak 1104.15 MB, host peak 1455.71 MB)
+[render_pano] depth      : depth.png 164,664 B  valid 2,097,152 / 2,097,152  sky 0  range 0.911..8.803 m  (0.168 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-dining floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-dining ceiling z=290 cm]
+              SKIP  room r-dining is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 2048x1024 46,372 B  zenith mean 171.7/255 (3 colours) · nadir mean 185.2/255 (6 colours) · no_hole=True
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-dining\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-dining')
+OK
+
+=== [4/5] cp-family =======================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-family  plan (1463.4,681,160) yaw 98
+[render_pano] camera     : (14.634, -6.81, 1.6) m  euler (90.0, 0.0, -98.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 2048x1024 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-family
+[render_pano] input_key  : eb17ccb72123bcdc…
+[render_pano] render 1/1: 73.511 s wall  (cycles 73.05s, device peak 1104.15 MB, host peak 1455.71 MB)
+[render_pano] depth      : depth.png 170,622 B  valid 2,097,152 / 2,097,152  sky 0  range 0.760..9.250 m  (0.16 s)
+[render_pano] depth check: 2/3 within 2.0 cm, worst 2.00 cm  [report]
+              FAIL  nadir (floor)                                expected 1.6000 m  decoded 1.5800 m  err -2.00 cm   [r-family floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-family ceiling z=290 cm]
+              SKIP  room r-family is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 2048x1024 44,120 B  zenith mean 174.0/255 (4 colours) · nadir mean 176.0/255 (12 colours) · no_hole=True
+REPORT    1 depth check(s) outside 2.0 cm: ['nadir (floor)']  (--check-mode report: not a failure)
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-family\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-family')
+OK
+
+=== [5/5] cp-corridor =====================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-corridor  plan (957.2,974.6,160) yaw 264
+[render_pano] camera     : (9.572, -9.746, 1.6) m  euler (90.0, 0.0, -264.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 2048x1024 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-corridor
+[render_pano] input_key  : a09da2a3abca8a50…
+[render_pano] render 1/1: 76.404 s wall  (cycles 75.9s, device peak 1104.15 MB, host peak 1455.71 MB)
+[render_pano] depth      : depth.png 199,685 B  valid 2,097,152 / 2,097,152  sky 0  range 0.507..7.557 m  (0.191 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-corridor floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-corridor ceiling z=290 cm]
+              SKIP  room r-corridor is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 2048x1024 41,420 B  zenith mean 166.9/255 (8 colours) · nadir mean 177.4/255 (9 colours) · no_hole=True
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-corridor\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-corridor')
+OK
+
+[render_pano] batch summary
+              rendered  cp-kitchen       102.02 s
+              rendered  cp-pantry        97.68 s
+              rendered  cp-dining        75.84 s
+              rendered  cp-family        73.51 s
+              rendered  cp-corridor      76.40 s
+Saved: 'C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-corridor\pano-pano-0001'
+Saved: 'C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-corridor\pano-depth-0001'
+

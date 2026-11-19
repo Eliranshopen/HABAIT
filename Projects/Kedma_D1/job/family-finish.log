@@ -1,0 +1,10 @@
+{"camera": [1464.4, 679.6, 160.0, 98.0], "floor_share_pct": 21.19, "taken_pct": 20.02, "unpainted_floor_px": 113169, "behind_piece_px": 59803, "joint_px": 58063, "joints_on_grid_pct": 99.4, "floor_colour_bgr": [182.0, 192.0, 203.0], "p0": -32.0, "p1": -44.0}
+{"step": "cap-fill", "filled_pct": 21.68}
+{"step": "wall-fill", "plane": "z=290", "span": "0,1", "src_plane": "z=290", "src_span": "0,1", "target_pct": 28.917, "source_px": 9598834, "colour_bgr": [160.0, 177.0, 194.0], "grain_block": false}
+{"step": "no-skirting", "cam": "cp-family", "changed_pct": 0.792, "columns": 4130, "top_cm": 16.0}
+{"out": "05-family__redo__v1.png", "painted_pct": 100.0, "picked": true}
+run-project kedma-d1: scenes done in 9 s
+view {'tiltDeg': 10, 'pannini': 1} ; headings changed: [('kitchen', 0, 18), ('pantry', 0, 104), ('living', 0, -165), ('dining', -149, -140), ('shower', 0, -22), ('bath', 0, 5)]
+8 viewpoints marked as old pictures; redone: ['dining', 'family', 'kitchen', 'living', 'pantry']
+05-family            PASS      deviation 0.50% (bar 1%, resolves 1.00%; CG vs plan p90 1.7 cm (median 0.7) = 0.50%)  (calibration 1145/1158) → _local\fidelity\05-family__picks__09e68ecdcbc2.gate.jpg
+wrote ../jobs/kedma-d1/review/flat/family-v1.jpg

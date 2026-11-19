@@ -1,0 +1,545 @@
+{
+ "open_radius_px": 5,
+ "simplify_cm": 3,
+ "door_dilate_px": 5,
+ "cut_px": 8,
+ "near_wall_px": 16,
+ "dimension_min_cm": 100,
+ "straight_density_max": 4.5,
+ "opening_min_cm": 60,
+ "apartment_id": "kedma-d1",
+ "cameras_json": "C:\\RnD\\.wt\\kedma-d1\\Projects\\3Dengine\\jobs\\kedma-d1\\trace\\plan-1\\cameras.json",
+ "eye_cm": 160,
+ "ceiling_height_cm": 290,
+ "floor_height_cm": 0,
+ "floor_height_note": "unknown: the sales plan has no section",
+ "ground_offset_cm": -300,
+ "ground_offset_note": "ground 300 cm below the floor (floor unknown; never in the floor plane)",
+ "roofed_outdoor": false,
+ "fixtures": [],
+ "source_file": "bldg-d-apt-1.pdf page 1",
+ "trace_date": "2026-11-16",
+ "scale_basis": "3.351 px/cm: guessed from 12 room boxes vs printed dims, then fitted",
+ "rights_state": "developer-uploaded",
+ "rights_note": "uploaded by the developer through the Habait Studio portal",
+ "assumptions": [
+  "ceiling 290 cm, door heads 215 cm (no section on the sales plan)",
+  "outdoor rooms unroofed unless the plan shows a floor-above line (follow the sales plan)",
+  "open-plan zone boundaries: auto-trace geodesic split between the printed room labels"
+ ],
+ "stroke_ignore_boxes": [
+  [
+   912.066248880931,
+   390.65428230378996,
+   1212.066248880931,
+   690.65428230379
+  ],
+  [
+   129.30020889286783,
+   897.3313936138466,
+   429.30020889286783,
+   1197.3313936138466
+  ],
+  [
+   848.2262011339899,
+   706.58236347359,
+   1148.22620113399,
+   1006.58236347359
+  ]
+ ],
+ "double_ignore_boxes": [
+  [
+   912.066248880931,
+   390.65428230378996,
+   1212.066248880931,
+   690.65428230379
+  ],
+  [
+   129.30020889286783,
+   897.3313936138466,
+   429.30020889286783,
+   1197.3313936138466
+  ],
+  [
+   848.2262011339899,
+   706.58236347359,
+   1148.22620113399,
+   1006.58236347359
+  ]
+ ],
+ "cameras": [
+  {
+   "id": "balcony",
+   "room_id": "r-balcony",
+   "name_he": "מרפסת",
+   "name_en": "balcony",
+   "type": "balcony",
+   "is_outdoor": true,
+   "at_cm": [
+    196.59832885705757,
+    281.35481945687854
+   ],
+   "links": [
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ]
+  },
+  {
+   "id": "kitchen",
+   "room_id": "r-kitchen",
+   "name_he": "מטבח",
+   "name_en": "kitchen",
+   "type": "kitchen",
+   "is_outdoor": false,
+   "at_cm": [
+    594.1477170993734,
+    116.23769024171888
+   ],
+   "links": [
+    "balcony",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    460,
+    240
+   ]
+  },
+  {
+   "id": "pantry",
+   "room_id": "r-pantry",
+   "name_he": "מזווה",
+   "name_en": "pantry",
+   "type": "storage",
+   "is_outdoor": false,
+   "at_cm": [
+    885.0552074007758,
+    160.94449418084156
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    155,
+    175
+   ]
+  },
+  {
+   "id": "entrance",
+   "room_id": "r-entrance",
+   "name_he": "כניסה",
+   "name_en": "entrance",
+   "type": "hall",
+   "is_outdoor": false,
+   "at_cm": [
+    1027.96985974336,
+    248.56982990152193
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ]
+  },
+  {
+   "id": "living-room",
+   "room_id": "r-living-room",
+   "name_he": "חדר דיור",
+   "name_en": "living room",
+   "type": "living",
+   "is_outdoor": false,
+   "at_cm": [
+    531.0331244404655,
+    322.4850790808714
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    410,
+    590
+   ]
+  },
+  {
+   "id": "dining-area",
+   "room_id": "r-dining-area",
+   "name_he": "פינת אוכל",
+   "name_en": "dining area",
+   "type": "hall",
+   "is_outdoor": false,
+   "at_cm": [
+    860.3897344076395,
+    599.0711727842436
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    335,
+    590
+   ]
+  },
+  {
+   "id": "guest-toilet",
+   "room_id": "r-guest-toilet",
+   "name_he": "שירותים",
+   "name_en": "guest toilet",
+   "type": "bathroom",
+   "is_outdoor": false,
+   "at_cm": [
+    1062.066248880931,
+    540.65428230379
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "hull": true,
+   "printed_dims_cm": [
+    150,
+    90
+   ]
+  },
+  {
+   "id": "family-room",
+   "room_id": "r-family-room",
+   "name_he": "חדר משפחה",
+   "name_en": "family room",
+   "type": "living",
+   "is_outdoor": false,
+   "at_cm": [
+    1188.2954341987468,
+    464.35467024768724
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    325,
+    285
+   ]
+  },
+  {
+   "id": "master-bedroom",
+   "room_id": "r-master-bedroom",
+   "name_he": "חדר שינה הורים",
+   "name_en": "master bedroom",
+   "type": "bedroom",
+   "is_outdoor": false,
+   "at_cm": [
+    199.50014920919128,
+    667.02551477171
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    383,
+    298
+   ]
+  },
+  {
+   "id": "master-bathroom",
+   "room_id": "r-master-bathroom",
+   "name_he": "חדר רחצה",
+   "name_en": "master bathroom",
+   "type": "bathroom",
+   "is_outdoor": false,
+   "at_cm": [
+    279.30020889286783,
+    1047.3313936138466
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "hull": true,
+   "printed_dims_cm": [
+    298,
+    125
+   ]
+  },
+  {
+   "id": "bedroom",
+   "room_id": "r-bedroom",
+   "name_he": "חדר שינה",
+   "name_en": "bedroom",
+   "type": "bedroom",
+   "is_outdoor": false,
+   "at_cm": [
+    497.6621903909281,
+    864.9276335422262
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    338,
+    260
+   ]
+  },
+  {
+   "id": "bedroom-2",
+   "room_id": "r-bedroom-2",
+   "name_he": "חדר שינה",
+   "name_en": "bedroom",
+   "type": "bedroom",
+   "is_outdoor": false,
+   "at_cm": [
+    777.6878543718293,
+    864.9276335422262
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    338,
+    260
+   ]
+  },
+  {
+   "id": "bathroom",
+   "room_id": "r-bathroom",
+   "name_he": "חדר אמבטיה",
+   "name_en": "bathroom",
+   "type": "bathroom",
+   "is_outdoor": false,
+   "at_cm": [
+    998.2262011339899,
+    856.58236347359
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ],
+   "hull": true,
+   "printed_dims_cm": [
+    225,
+    185
+   ]
+  },
+  {
+   "id": "safe-room-bedroom",
+   "room_id": "r-safe-room-bedroom",
+   "name_he": "ממ\"ד חדר שינה",
+   "name_en": "safe room / bedroom",
+   "type": "safe_room",
+   "is_outdoor": false,
+   "at_cm": [
+    1283.330050731125,
+    784.4553864518055
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "laundry-balcony"
+   ],
+   "printed_dims_cm": [
+    370,
+    295
+   ]
+  },
+  {
+   "id": "laundry-balcony",
+   "room_id": "r-laundry-balcony",
+   "name_he": "מסתור כביסה",
+   "name_en": "laundry balcony",
+   "type": "storage",
+   "is_outdoor": false,
+   "at_cm": [
+    1033.7735004476276,
+    1141.5137272455981
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom"
+   ]
+  }
+ ],
+ "dump_barrier_png": "C:\\RnD\\.wt\\kedma-d1\\Projects\\3Dengine\\jobs\\kedma-d1\\trace\\plan-1\\barrier.png",
+ "dump_barrier_only": true
+}

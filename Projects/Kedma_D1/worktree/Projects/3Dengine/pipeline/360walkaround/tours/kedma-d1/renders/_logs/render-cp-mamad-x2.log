@@ -1,0 +1,49 @@
+
+=== [1/2] cp-mamad ========================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-mamad  plan (1530,1081.1,160) yaw 175
+[render_pano] camera     : (15.3, -10.811, 1.6) m  euler (90.0, 0.0, -175.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 2048x1024 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-mamad
+[render_pano] input_key  : 0fdd8cad4a386c80…
+[render_pano] render 1/1: 63.881 s wall  (cycles 63.25s, device peak 1104.15 MB, host peak 1455.7 MB)
+[render_pano] depth      : depth.png 152,398 B  valid 2,097,152 / 2,097,152  sky 0  range 1.016..3.260 m  (0.189 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-mamad floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-mamad ceiling z=290 cm]
+              SKIP  room r-mamad is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 2048x1024 39,036 B  zenith mean 173.0/255 (11 colours) · nadir mean 180.2/255 (10 colours) · no_hole=True
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-mamad\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-mamad')
+OK
+
+=== [2/2] cp-balcony ======================================
+[render_pano] v0.3.0  blender 4.5.10 LTS
+[render_pano] blend      : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\scene-full.blend
+[render_pano] point      : cp-balcony  plan (315.3,425.7,160) yaw 211
+[render_pano] camera     : (3.153, -4.257, 1.6) m  euler (90.0, 0.0, -211.0) deg  [camera.panorama_type (4.3+)]
+[render_pano] device     : CPU (no GPU backend available -- fell back to CPU) []
+[render_pano] settings   : 2048x1024 @ 16 spp  adaptive=on(0.01) denoise=on/cpu  tile=2048 texlimit=OFF seed=0
+[render_pano] wrap pad   : 512 px each side  -> rendered 3072x1024 over -270.0000..270.0000 deg, cropped back
+[render_pano] out        : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-balcony
+[render_pano] input_key  : 7459d08dee86f641…
+[render_pano] render 1/1: 59.201 s wall  (cycles 58.72s, device peak 1104.15 MB, host peak 1455.71 MB)
+[render_pano] depth      : depth.png 122,249 B  valid 1,849,929 / 2,097,152  sky 247,223  range 0.931..136.083 m  (0.138 s)
+[render_pano] depth check: 3/3 within 2.0 cm, worst 0.00 cm  [report]
+              PASS  nadir (floor)                                expected 1.6000 m  decoded 1.6000 m  err -0.00 cm   [r-balcony floor z=0]
+              PASS  zenith (ceiling)                             expected 1.3000 m  decoded 1.3000 m  err -0.00 cm   [r-balcony ceiling z=290 cm]
+              SKIP  room r-balcony is not rectangular — the 4 wall checks are SKIPPED
+[render_pano] pano       : pano.webp 2048x1024 59,376 B  zenith mean 126.2/255 (8 colours) · nadir mean 106.3/255 (15 colours) · no_hole=True
+[render_pano] sidecar    : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-balcony\pano.render.json
+[render_pano] manifest   : C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\manifest.json (key 'cp-balcony')
+OK
+
+[render_pano] batch summary
+              rendered  cp-mamad         63.88 s
+              rendered  cp-balcony       59.20 s
+Saved: 'C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-balcony\pano-depth-0001'
+Saved: 'C:\RnD\.wt\kedma-d1\Projects\3Dengine\pipeline\360walkaround\tours\kedma-d1\renders\cp-balcony\pano-pano-0001'
+

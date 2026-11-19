@@ -1,0 +1,10 @@
+{"camera": [317.3, 326.6, 160.0, 199.0], "floor_share_pct": 24.54, "taken_pct": 18.55, "unpainted_floor_px": 0, "behind_piece_px": 8678, "joint_px": 105854, "joints_on_grid_pct": 47.1, "floor_colour_bgr": [114.0, 132.0, 137.0], "p0": -32.0, "p1": -44.0}
+{"step": "cap-fill", "filled_pct": 22.29}
+{"step": "no-skirting", "cam": "cp-balcony", "changed_pct": 0.919, "columns": 5867, "top_cm": 16.0}
+{"out": "13-balcony__redo__v1.png", "painted_pct": 100.0, "picked": true}
+run-project kedma-d1: scenes done in 28 s
+view {'tiltDeg': 10, 'pannini': 1} ; headings changed: [('kitchen', 0, 18), ('pantry', 0, 104), ('living', 0, -165), ('dining', -149, -140), ('shower', 0, -22), ('bath', 0, 5)]
+0 viewpoints marked as old pictures; redone: ['balcony', 'bath', 'bed1', 'bed2', 'corridor', 'dining', 'family', 'kitchen', 'living', 'mamad', 'master', 'pantry', 'shower']
+13-balcony           FAIL      deviation 2.46% (bar 1%, resolves 1.00%; CG vs plan p90 0.9 cm (median 0.4) = 0.15%)  316–324° 8.1° 14.8cm gap 41 | 331–334° 3.2° 5cm gap 33  (calibration 535/800) → _local\fidelity\13-balcony__picks__45f4b9bb62e7.gate.jpg
+wrote ../jobs/kedma-d1/review/flat/balcony-v1.jpg
+wrote ../jobs/kedma-d1/review/flat/balcony-v1-down.jpg

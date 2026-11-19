@@ -1,0 +1,1015 @@
+{
+ "note": "kedma-d1 (Kedma, Etz Efraim, building D apartment 1): the hand trace config; cm in the clean-sheet frame (clean px / 2.25); built by hand/build_clean.py from hand/geometry.json",
+ "apartment_id": "kedma-d1",
+ "source_file": "jobs/kedma-d1/hand/clean.png: the wall fill of the sales-plan sheet 'bldg-d-apt-1.pdf' (sha256 d90f50bf...) redrawn clean at 2.25 px/cm",
+ "trace_date": "2026-11-16",
+ "scale_basis": "fitted through the origin over 24 printed room dimensions against wall faces in the wall mask; 24/24 within max(2 %, 5 cm), 21/24 within 1 %; native 3.3506 px/cm, clean sheet 2.25 px/cm",
+ "rights_state": "partner-supplied",
+ "rights_note": "the developer's sales plan (Pesel Yazamot), handed to Eliran; nothing is published without his word",
+ "ceiling_height_cm": 290,
+ "eye_cm": 160,
+ "floor_height_cm": 320,
+ "floor_height_note": "floor 1 (the sheet says 'קומה א') at about 3.2 m floor to floor: an assumption, the sheet carries no section",
+ "roofed_outdoor": true,
+ "roofed_note": "assumption: the balcony sits under the balcony above (the sheet marks only a corner notch as 'the line of the balcony above')",
+ "assumptions": [
+  "ceiling 290 cm, door heads 215 cm, window sills/heads by the house defaults (the sheet has no section)",
+  "the balcony is roofed by the balcony above (the dashed 'line of the balcony above' marks only a corner notch)",
+  "the kitchen|living partition is full height",
+  "the two light-grey boxes behind the toilets are concealed-cistern build-outs, not structure",
+  "the printed 298 of the shower room is the structural width (to the wall face of the bedroom above it); the drawn room is narrower by the cistern build-out"
+ ],
+ "open_radius_px": 5,
+ "simplify_cm": 3,
+ "door_dilate_px": 5,
+ "cut_px": 8,
+ "near_wall_px": 16,
+ "dimension_min_cm": 100,
+ "opening_min_cm": 55,
+ "door_gap_cm": [
+  55,
+  140
+ ],
+ "double_count_min": 24,
+ "double_note": "24, not 32: the last two pixels of a drawn double line at a wall face count 24 and 28 in the 11x11 box; at 32 they stay single, are cut near the wall and leave a 1 px leak (run 1: living, balcony and laundry leaked)",
+ "front_door_gap": "gap-2",
+ "skip_auto_bars": [
+  "gap-3",
+  "gap-5",
+  "gap-8"
+ ],
+ "export_plan": "C:/RnD/.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/hand/plan.general.json",
+ "walls_extracted": "C:/RnD/.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/hand/walls-extracted.json",
+ "walls_recompute": true,
+ "cameras_json": "C:/RnD/.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/hand/cameras.stub.json",
+ "dump_barrier_png": "C:/RnD/.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/hand/barrier.png",
+ "bars": [
+  {
+   "name": "kitchen|living+dining #1",
+   "a": [
+    865.3,
+    498.1
+   ],
+   "b": [
+    1087.6,
+    498.1
+   ]
+  },
+  {
+   "name": "kitchen|living+dining #2",
+   "a": [
+    1087.6,
+    498.1
+   ],
+   "b": [
+    1087.6,
+    443.2
+   ]
+  },
+  {
+   "name": "living|dining",
+   "a": [
+    1030.9,
+    498.1
+   ],
+   "b": [
+    1030.9,
+    919.8
+   ]
+  },
+  {
+   "name": "living|corridor",
+   "a": [
+    886.5,
+    919.8
+   ],
+   "b": [
+    1050.3,
+    919.8
+   ]
+  },
+  {
+   "name": "kitchen|pantry",
+   "a": [
+    1086.7,
+    338.7
+   ],
+   "b": [
+    1086.7,
+    422.3
+   ]
+  },
+  {
+   "name": "dining|family",
+   "a": [
+    1382.5,
+    588.8
+   ],
+   "b": [
+    1382.5,
+    693.0
+   ]
+  },
+  {
+   "name": "door d-front",
+   "a": [
+    1264.9,
+    456.3
+   ],
+   "b": [
+    1264.9,
+    554.8
+   ]
+  },
+  {
+   "name": "door d-master",
+   "a": [
+    688.3,
+    935.3
+   ],
+   "b": [
+    688.3,
+    1018.3
+   ]
+  },
+  {
+   "name": "door d-shower",
+   "a": [
+    411.9,
+    1241.5
+   ],
+   "b": [
+    486.2,
+    1241.5
+   ]
+  },
+  {
+   "name": "door d-bed1",
+   "a": [
+    793.3,
+    1030.8
+   ],
+   "b": [
+    876.9,
+    1030.8
+   ]
+  },
+  {
+   "name": "door d-bed2",
+   "a": [
+    1064.3,
+    1030.8
+   ],
+   "b": [
+    1148.5,
+    1030.8
+   ]
+  },
+  {
+   "name": "door d-bath",
+   "a": [
+    1219.2,
+    1030.5
+   ],
+   "b": [
+    1303.1,
+    1030.5
+   ]
+  },
+  {
+   "name": "door d-mamad",
+   "a": [
+    1402.3,
+    939.2
+   ],
+   "b": [
+    1402.3,
+    1013.8
+   ]
+  },
+  {
+   "name": "door d-wc",
+   "a": [
+    1232.1,
+    789.1
+   ],
+   "b": [
+    1305.8,
+    789.1
+   ]
+  },
+  {
+   "name": "window w-kitchen",
+   "a": [
+    609.8,
+    320.2
+   ],
+   "b": [
+    609.8,
+    462.6
+   ]
+  },
+  {
+   "name": "window w-family",
+   "a": [
+    1725.6,
+    660.4
+   ],
+   "b": [
+    1725.6,
+    783.1
+   ]
+  },
+  {
+   "name": "window w-master",
+   "a": [
+    294.0,
+    1014.1
+   ],
+   "b": [
+    294.0,
+    1156.5
+   ]
+  },
+  {
+   "name": "window w-shower",
+   "a": [
+    501.8,
+    1385.1
+   ],
+   "b": [
+    565.3,
+    1385.1
+   ]
+  },
+  {
+   "name": "window w-bed1",
+   "a": [
+    704.4,
+    1385.1
+   ],
+   "b": [
+    827.1,
+    1385.1
+   ]
+  },
+  {
+   "name": "window w-bed2",
+   "a": [
+    941.7,
+    1385.1
+   ],
+   "b": [
+    1064.0,
+    1385.1
+   ]
+  },
+  {
+   "name": "window w-mamad",
+   "a": [
+    1499.5,
+    1280.3
+   ],
+   "b": [
+    1602.2,
+    1280.3
+   ]
+  },
+  {
+   "name": "window w-utility",
+   "a": [
+    1193.3,
+    1342.5
+   ],
+   "b": [
+    1375.0,
+    1342.5
+   ]
+  },
+  {
+   "name": "seal w-living",
+   "a": [
+    609.8,
+    534.8
+   ],
+   "b": [
+    609.8,
+    805.8
+   ]
+  },
+  {
+   "name": "seal rail-balcony-left",
+   "a": [
+    235.5,
+    224.7
+   ],
+   "b": [
+    235.5,
+    849.4
+   ]
+  },
+  {
+   "name": "seal rail-balcony-bottom",
+   "a": [
+    234.9,
+    848.8
+   ],
+   "b": [
+    288.1,
+    848.8
+   ]
+  },
+  {
+   "name": "seal rail-laundry",
+   "a": [
+    1174.5,
+    1483.9
+   ],
+   "b": [
+    1396.2,
+    1483.9
+   ]
+  }
+ ],
+ "cameras": [
+  {
+   "id": "kitchen",
+   "room_id": "r-kitchen",
+   "name_he": "מטבח",
+   "name_en": "Kitchen",
+   "type": "kitchen",
+   "at_cm": [
+    878.7,
+    392.4
+   ]
+  },
+  {
+   "id": "pantry",
+   "room_id": "r-pantry",
+   "name_he": "מזווה",
+   "name_en": "Pantry",
+   "type": "storage",
+   "at_cm": [
+    1162.2,
+    362.6
+   ]
+  },
+  {
+   "id": "living",
+   "room_id": "r-living",
+   "name_he": "חדר דיור",
+   "name_en": "Living room",
+   "type": "living",
+   "at_cm": [
+    759.3,
+    690.9
+   ]
+  },
+  {
+   "id": "dining",
+   "room_id": "r-dining",
+   "name_he": "כניסה ופינת אוכל",
+   "name_en": "Entrance and dining",
+   "type": "hall",
+   "at_cm": [
+    1132.4,
+    750.6
+   ]
+  },
+  {
+   "id": "family",
+   "room_id": "r-family",
+   "name_he": "חדר משפחה",
+   "name_en": "Family room",
+   "type": "living",
+   "at_cm": [
+    1550.2,
+    735.6
+   ]
+  },
+  {
+   "id": "wc",
+   "room_id": "r-wc",
+   "name_he": "שירותים",
+   "name_en": "Guest toilet",
+   "type": "toilet",
+   "at_cm": [
+    1311.5,
+    840.1
+   ]
+  },
+  {
+   "id": "corridor",
+   "room_id": "r-corridor",
+   "name_he": "מסדרון",
+   "name_en": "Corridor",
+   "type": "corridor",
+   "at_cm": [
+    1072.7,
+    974.4
+   ]
+  },
+  {
+   "id": "master",
+   "room_id": "r-master",
+   "name_he": "חדר שינה הורים",
+   "name_en": "Main bedroom",
+   "type": "bedroom",
+   "at_cm": [
+    445.9,
+    1049.0
+   ]
+  },
+  {
+   "id": "shower",
+   "room_id": "r-shower",
+   "name_he": "חדר רחצה",
+   "name_en": "Shower room",
+   "type": "bathroom",
+   "at_cm": [
+    386.3,
+    1317.6
+   ]
+  },
+  {
+   "id": "bed1",
+   "room_id": "r-bed1",
+   "name_he": "חדר שינה",
+   "name_en": "Bedroom",
+   "type": "bedroom",
+   "at_cm": [
+    753.3,
+    1213.2
+   ]
+  },
+  {
+   "id": "bed2",
+   "room_id": "r-bed2",
+   "name_he": "חדר שינה",
+   "name_en": "Bedroom 2",
+   "type": "bedroom",
+   "at_cm": [
+    1024.9,
+    1213.2
+   ]
+  },
+  {
+   "id": "bath",
+   "room_id": "r-bath",
+   "name_he": "חדר אמבטיה",
+   "name_en": "Bathroom",
+   "type": "bathroom",
+   "at_cm": [
+    1281.6,
+    1123.6
+   ]
+  },
+  {
+   "id": "mamad",
+   "room_id": "r-mamad",
+   "name_he": "ממ\"ד חדר שינה",
+   "name_en": "Safe room bedroom",
+   "type": "safe_room",
+   "at_cm": [
+    1559.2,
+    1093.8
+   ]
+  },
+  {
+   "id": "balcony",
+   "room_id": "r-balcony",
+   "name_he": "מרפסת",
+   "name_en": "Balcony",
+   "type": "balcony",
+   "at_cm": [
+    422.1,
+    541.6
+   ],
+   "is_outdoor": true
+  },
+  {
+   "id": "laundry",
+   "room_id": "r-laundry",
+   "name_he": "מסתור כביסה",
+   "name_en": "Laundry hideaway",
+   "type": "service_balcony",
+   "at_cm": [
+    1281.6,
+    1422.1
+   ],
+   "is_outdoor": true
+  }
+ ],
+ "fixtures": [
+  {
+   "id": "k-counter",
+   "room": "kitchen",
+   "kind": "counter",
+   "centre_cm": [
+    758.9,
+    283.0
+   ],
+   "length_cm": 264.7,
+   "depth_cm": 58.8,
+   "angle_deg": 0,
+   "height_cm": 90,
+   "note": "the run on the north wall: the double sink"
+  },
+  {
+   "id": "k-counter-2",
+   "room": "kitchen",
+   "kind": "counter",
+   "centre_cm": [
+    655.2,
+    403.9
+   ],
+   "length_cm": 173.4,
+   "depth_cm": 57.3,
+   "angle_deg": 90,
+   "height_cm": 90,
+   "note": "the leg on the west wall under the window: the hob"
+  },
+  {
+   "id": "k-tall-1",
+   "room": "kitchen",
+   "kind": "tall_unit",
+   "centre_cm": [
+    924.2,
+    282.3
+   ],
+   "length_cm": 57.3,
+   "depth_cm": 56.4,
+   "angle_deg": 90,
+   "height_cm": 220,
+   "note": "the crossed square beside the fridge: a full-height unit (its content is not drawn)",
+   "tall_type": "pantry"
+  },
+  {
+   "id": "k-tall-2",
+   "room": "kitchen",
+   "kind": "tall_unit",
+   "centre_cm": [
+    1001.7,
+    288.3
+   ],
+   "length_cm": 84.8,
+   "depth_cm": 69.2,
+   "angle_deg": 0,
+   "height_cm": 220,
+   "note": "the grey appliance with two handles: the fridge",
+   "tall_type": "fridge"
+  },
+  {
+   "id": "k-island",
+   "room": "kitchen",
+   "kind": "island",
+   "centre_cm": [
+    765.6,
+    463.6
+   ],
+   "length_cm": 120.0,
+   "depth_cm": 54.0,
+   "angle_deg": 0,
+   "height_cm": 90,
+   "note": "the island against the partition, two stools on its north side"
+  },
+  {
+   "id": "l-sofa",
+   "room": "living",
+   "kind": "sofa",
+   "centre_cm": [
+    782.6,
+    859.9
+   ],
+   "length_cm": 197.0,
+   "depth_cm": 76.1,
+   "angle_deg": 0,
+   "height_cm": 75
+  },
+  {
+   "id": "l-armchair",
+   "room": "living",
+   "kind": "sofa",
+   "centre_cm": [
+    672.2,
+    742.4
+   ],
+   "length_cm": 73.7,
+   "depth_cm": 66.3,
+   "angle_deg": 90,
+   "height_cm": 75
+  },
+  {
+   "id": "l-coffee",
+   "room": "living",
+   "kind": "table",
+   "centre_cm": [
+    780.2,
+    743.6
+   ],
+   "length_cm": 97.3,
+   "depth_cm": 66.6,
+   "angle_deg": 0,
+   "height_cm": 40
+  },
+  {
+   "id": "l-tv",
+   "room": "living",
+   "kind": "tv_unit",
+   "centre_cm": [
+    785.0,
+    522.2
+   ],
+   "length_cm": 135.5,
+   "depth_cm": 32.2,
+   "angle_deg": 0,
+   "height_cm": 50,
+   "note": "on the partition wall"
+  },
+  {
+   "id": "d-table",
+   "room": "dining",
+   "kind": "table",
+   "centre_cm": [
+    1125.8,
+    780.4
+   ],
+   "length_cm": 170.7,
+   "depth_cm": 68.6,
+   "angle_deg": 0,
+   "height_cm": 75,
+   "note": "six chairs"
+  },
+  {
+   "id": "f-sofa",
+   "room": "family",
+   "kind": "sofa",
+   "centre_cm": [
+    1551.0,
+    830.3
+   ],
+   "length_cm": 256.4,
+   "depth_cm": 83.0,
+   "angle_deg": 0,
+   "height_cm": 75
+  },
+  {
+   "id": "f-tv",
+   "room": "family",
+   "kind": "tv_unit",
+   "centre_cm": [
+    1552.2,
+    611.8
+   ],
+   "length_cm": 135.2,
+   "depth_cm": 31.0,
+   "angle_deg": 0,
+   "height_cm": 50
+  },
+  {
+   "id": "f-coffee",
+   "room": "family",
+   "kind": "table",
+   "centre_cm": [
+    1555.7,
+    719.8
+   ],
+   "length_cm": 71.3,
+   "depth_cm": 66.3,
+   "angle_deg": 0,
+   "height_cm": 40
+  },
+  {
+   "id": "m-bed",
+   "room": "master",
+   "kind": "bed",
+   "centre_cm": [
+    398.9,
+    1076.9
+   ],
+   "length_cm": 183.5,
+   "depth_cm": 162.1,
+   "angle_deg": 0,
+   "height_cm": 55,
+   "note": "the head on the west wall"
+  },
+  {
+   "id": "m-closet",
+   "room": "master",
+   "kind": "wardrobe",
+   "centre_cm": [
+    453.6,
+    883.7
+   ],
+   "length_cm": 292.8,
+   "depth_cm": 54.9,
+   "angle_deg": 0,
+   "height_cm": 240
+  },
+  {
+   "id": "m-tv",
+   "room": "master",
+   "kind": "tv_unit",
+   "centre_cm": [
+    581.0,
+    1127.7
+   ],
+   "length_cm": 160.3,
+   "depth_cm": 36.1,
+   "angle_deg": 90,
+   "height_cm": 50
+  },
+  {
+   "id": "b1-closet",
+   "room": "bed1",
+   "kind": "wardrobe",
+   "centre_cm": [
+    703.5,
+    1066.8
+   ],
+   "length_cm": 153.4,
+   "depth_cm": 54.6,
+   "angle_deg": 0,
+   "height_cm": 240
+  },
+  {
+   "id": "b1-bed",
+   "room": "bed1",
+   "kind": "bed",
+   "centre_cm": [
+    668.7,
+    1277.6
+   ],
+   "length_cm": 183.3,
+   "depth_cm": 84.5,
+   "angle_deg": 90,
+   "height_cm": 55
+  },
+  {
+   "id": "b1-desk",
+   "room": "bed1",
+   "kind": "table",
+   "centre_cm": [
+    854.5,
+    1308.7
+   ],
+   "length_cm": 121.2,
+   "depth_cm": 53.7,
+   "angle_deg": 90,
+   "height_cm": 75
+  },
+  {
+   "id": "b2-closet",
+   "room": "bed2",
+   "kind": "wardrobe",
+   "centre_cm": [
+    974.7,
+    1067.4
+   ],
+   "length_cm": 153.7,
+   "depth_cm": 55.2,
+   "angle_deg": 0,
+   "height_cm": 240
+  },
+  {
+   "id": "b2-bed",
+   "room": "bed2",
+   "kind": "bed",
+   "centre_cm": [
+    938.8,
+    1277.6
+   ],
+   "length_cm": 183.8,
+   "depth_cm": 82.1,
+   "angle_deg": 90,
+   "height_cm": 55
+  },
+  {
+   "id": "b2-desk",
+   "room": "bed2",
+   "kind": "table",
+   "centre_cm": [
+    1126.1,
+    1308.7
+   ],
+   "length_cm": 121.8,
+   "depth_cm": 53.1,
+   "angle_deg": 90,
+   "height_cm": 75
+  },
+  {
+   "id": "s-closet",
+   "room": "mamad",
+   "kind": "wardrobe",
+   "centre_cm": [
+    1629.3,
+    933.2
+   ],
+   "length_cm": 152.8,
+   "depth_cm": 53.1,
+   "angle_deg": 0,
+   "height_cm": 240
+  },
+  {
+   "id": "s-bed",
+   "room": "mamad",
+   "kind": "bed",
+   "centre_cm": [
+    1662.1,
+    1174.7
+   ],
+   "length_cm": 179.7,
+   "depth_cm": 85.4,
+   "angle_deg": 90,
+   "height_cm": 55
+  },
+  {
+   "id": "s-desk",
+   "room": "mamad",
+   "kind": "table",
+   "centre_cm": [
+    1443.4,
+    1207.5
+   ],
+   "length_cm": 121.2,
+   "depth_cm": 52.5,
+   "angle_deg": 90,
+   "height_cm": 75
+  },
+  {
+   "id": "wc-wc",
+   "room": "wc",
+   "kind": "wc",
+   "centre_cm": [
+    1336.1,
+    838.6
+   ],
+   "length_cm": 59.4,
+   "depth_cm": 38.2,
+   "angle_deg": 0,
+   "height_cm": 45
+  },
+  {
+   "id": "wc-vanity",
+   "room": "dining",
+   "kind": "vanity",
+   "centre_cm": [
+    1353.2,
+    748.3
+   ],
+   "length_cm": 61.8,
+   "depth_cm": 43.0,
+   "angle_deg": 90,
+   "height_cm": 85,
+   "note": "the hand basin in the niche outside the guest toilet"
+  },
+  {
+   "id": "sh-shower",
+   "room": "shower",
+   "kind": "shower",
+   "centre_cm": [
+    345.7,
+    1309.6
+   ],
+   "length_cm": 119.4,
+   "depth_cm": 77.0,
+   "angle_deg": 90,
+   "height_cm": 10
+  },
+  {
+   "id": "sh-wc",
+   "room": "shower",
+   "kind": "wc",
+   "centre_cm": [
+    537.6,
+    1290.9
+   ],
+   "length_cm": 51.9,
+   "depth_cm": 39.7,
+   "angle_deg": 0,
+   "height_cm": 45
+  },
+  {
+   "id": "sh-vanity",
+   "room": "shower",
+   "kind": "vanity",
+   "centre_cm": [
+    451.3,
+    1348.7
+   ],
+   "length_cm": 57.3,
+   "depth_cm": 41.2,
+   "angle_deg": 0,
+   "height_cm": 85
+  },
+  {
+   "id": "ba-vanity",
+   "room": "bath",
+   "kind": "vanity",
+   "centre_cm": [
+    1191.3,
+    1081.3
+   ],
+   "length_cm": 78.8,
+   "depth_cm": 44.5,
+   "angle_deg": 90,
+   "height_cm": 85
+  },
+  {
+   "id": "ba-wc",
+   "room": "bath",
+   "kind": "wc",
+   "centre_cm": [
+    1212.7,
+    1184.2
+   ],
+   "length_cm": 53.1,
+   "depth_cm": 53.1,
+   "angle_deg": 0,
+   "height_cm": 45
+  },
+  {
+   "id": "ba-tub",
+   "room": "bath",
+   "kind": "washer",
+   "centre_cm": [
+    1357.0,
+    1135.0
+   ],
+   "length_cm": 168.9,
+   "depth_cm": 64.8,
+   "angle_deg": 90,
+   "height_cm": 55,
+   "note": "the BATHTUB of the sheet: the tools have no bathtub kind (apartment 846 had showers only), so it is carried as a plain box with its own words",
+   "words_en": "a white built-in bathtub with a tiled apron"
+  },
+  {
+   "id": "ba-washer",
+   "room": "bath",
+   "kind": "washer",
+   "centre_cm": [
+    1194.5,
+    1285.1
+   ],
+   "length_cm": 53.1,
+   "depth_cm": 50.7,
+   "angle_deg": 90,
+   "height_cm": 85,
+   "words_en": "a white front-loading washing machine"
+  },
+  {
+   "id": "ba-dryer",
+   "room": "bath",
+   "kind": "washer",
+   "centre_cm": [
+    1361.7,
+    1285.1
+   ],
+   "length_cm": 53.1,
+   "depth_cm": 51.0,
+   "angle_deg": 90,
+   "height_cm": 85,
+   "words_en": "a white tumble dryer"
+  },
+  {
+   "id": "t-table",
+   "room": "balcony",
+   "kind": "table",
+   "centre_cm": [
+    453.4,
+    673.0
+   ],
+   "length_cm": 174.3,
+   "depth_cm": 93.7,
+   "angle_deg": 90,
+   "height_cm": 75,
+   "note": "the outdoor dining table, six chairs"
+  },
+  {
+   "id": "t-lounger-1",
+   "room": "balcony",
+   "kind": "lounger",
+   "centre_cm": [
+    456.4,
+    355.1
+   ],
+   "length_cm": 171.3,
+   "depth_cm": 105.7,
+   "angle_deg": 0,
+   "height_cm": 40
+  },
+  {
+   "id": "t-lounger-2",
+   "room": "balcony",
+   "kind": "lounger",
+   "centre_cm": [
+    484.7,
+    422.3
+   ],
+   "length_cm": 156.4,
+   "depth_cm": 102.7,
+   "angle_deg": 0,
+   "height_cm": 40
+  }
+ ]
+}

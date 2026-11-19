@@ -1,0 +1,788 @@
+{
+ "$schema": "tour360/consistency.v1",
+ "rows": [
+  {
+   "at": "2026-11-16T16:18:09.408Z",
+   "group": "kitchen",
+   "set": "picks",
+   "cg_tour": "kedma-d1",
+   "render_context": true,
+   "misplaced": [],
+   "runs": [
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": [
+       {
+        "view": 2,
+        "asset": "04-dining",
+        "pair": "hob-sink",
+        "got_cm": 93,
+        "plan_cm": 132,
+        "off_cm": -39,
+        "tol_cm": 93
+       }
+      ]
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.017406
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": [
+       {
+        "view": 2,
+        "asset": "04-dining",
+        "pair": "hob-sink",
+        "got_cm": 95,
+        "plan_cm": 132,
+        "off_cm": -37,
+        "tol_cm": 94
+       }
+      ]
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.0125694
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": [
+       {
+        "view": 2,
+        "asset": "04-dining",
+        "pair": "hob-sink",
+        "got_cm": 84,
+        "plan_cm": 132,
+        "off_cm": -49,
+        "tol_cm": 93
+       }
+      ]
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.0394644
+    }
+   ],
+   "views": [
+    {
+     "asset": "01-kitchen",
+     "bearing": 283,
+     "dist": 215,
+     "hfov": 120,
+     "picture": "_local\\generated\\01-kitchen__cg__0.png"
+    },
+    {
+     "asset": "04-dining",
+     "bearing": 306,
+     "dist": 521,
+     "hfov": 70.13895073832623,
+     "picture": "_local\\generated\\04-dining__cg__0.png"
+    }
+   ],
+   "sheet": "_local\\fidelity\\consistency__kitchen__picks__46116cebe2c3.jpg",
+   "verdict": "PASS",
+   "judge": {
+    "same": true,
+    "differences": [],
+    "per_view": [
+     {
+      "view": 1,
+      "visible": true,
+      "material": "laminate with black composite worktop",
+      "colour": "beige and black",
+      "shape": "l-shaped with island",
+      "position_note": "along back and right walls with small island block",
+      "hob_x": 485,
+      "sink_x": 650,
+      "tall_x": null,
+      "checklist": {
+       "upper_cabinets": "no",
+       "shelves_open": "yes",
+       "shelves_shape": "straight",
+       "backsplash": "stainless",
+       "tall_type": "not_visible",
+       "tall_front": "not_visible",
+       "oven_visible": "yes",
+       "oven_where": "under_hob",
+       "sink_fridge_gap_units": null
+      },
+      "tall_is": "not_visible",
+      "hob_bearing": 280,
+      "hob_plan_bearing": 274,
+      "hob_off_deg": 6,
+      "hob_along_off_cm": "grazing",
+      "sink_bearing": 310,
+      "sink_plan_bearing": 310,
+      "sink_off_deg": 1,
+      "sink_along_off_cm": -4
+     },
+     {
+      "view": 2,
+      "visible": true,
+      "material": "laminate with black composite worktop",
+      "colour": "beige and black",
+      "shape": "l-shaped with island",
+      "position_note": "along rear kitchen walls with freestanding fridge on right",
+      "hob_x": 455,
+      "sink_x": 635,
+      "tall_x": 874,
+      "checklist": {
+       "upper_cabinets": "no",
+       "shelves_open": "yes",
+       "shelves_shape": "straight",
+       "backsplash": "stainless",
+       "tall_type": "fridge",
+       "tall_front": "stainless",
+       "oven_visible": "yes",
+       "oven_where": "under_hob",
+       "sink_fridge_gap_units": 1
+      },
+      "tall_is": "fridge",
+      "hob_bearing": 302,
+      "hob_plan_bearing": 301,
+      "hob_off_deg": 2,
+      "hob_along_off_cm": -33,
+      "sink_bearing": 317,
+      "sink_plan_bearing": 317,
+      "sink_off_deg": 0,
+      "sink_along_off_cm": 6,
+      "hob_sink_gap_cm": 93
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-11-16T16:18:53.535Z",
+   "group": "living",
+   "set": "picks",
+   "cg_tour": "kedma-d1",
+   "render_context": true,
+   "misplaced": [],
+   "runs": [
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.0131235
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.029586
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.00867945
+    }
+   ],
+   "views": [
+    {
+     "asset": "01-kitchen",
+     "bearing": 207,
+     "dist": 362,
+     "hfov": 91.84865749252208,
+     "picture": "_local\\generated\\01-kitchen__cg__0.png"
+    },
+    {
+     "asset": "04-dining",
+     "bearing": 260,
+     "dist": 377,
+     "hfov": 99.90730739469609,
+     "picture": "_local\\generated\\04-dining__cg__0.png"
+    }
+   ],
+   "sheet": "_local\\fidelity\\consistency__living__picks__b502ac18d9a7.jpg",
+   "verdict": "PASS",
+   "judge": {
+    "same": true,
+    "differences": [],
+    "per_view": [
+     {
+      "view": 1,
+      "visible": true,
+      "material": "fabric and wood",
+      "colour": "grey and light wood",
+      "shape": "rectilinear sofa and rectangular coffee table",
+      "position_note": "living room area visible through opening",
+      "checklist": {
+       "colour_family": "grey",
+       "material": "fabric"
+      }
+     },
+     {
+      "view": 2,
+      "visible": true,
+      "material": "fabric, leather, and wood",
+      "colour": "grey, black, and light wood",
+      "shape": "sofa, armchair, coffee table, and tv unit ensemble",
+      "position_note": "center and sides of living room area",
+      "checklist": {
+       "colour_family": "grey",
+       "material": "fabric"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-11-16T16:19:28.241Z",
+   "group": "dining",
+   "set": "picks",
+   "cg_tour": "kedma-d1",
+   "render_context": true,
+   "misplaced": [],
+   "runs": [
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.012924
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.018579
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.0110175
+    }
+   ],
+   "views": [
+    {
+     "asset": "01-kitchen",
+     "bearing": 139,
+     "dist": 492,
+     "hfov": 73.26916999227342,
+     "picture": "_local\\generated\\01-kitchen__cg__0.png"
+    },
+    {
+     "asset": "04-dining",
+     "bearing": 135,
+     "dist": 159,
+     "hfov": 120,
+     "picture": "_local\\generated\\04-dining__cg__0.png"
+    }
+   ],
+   "sheet": "_local\\fidelity\\consistency__dining__picks__c6051569cc6d.jpg",
+   "verdict": "PASS",
+   "judge": {
+    "same": true,
+    "differences": [],
+    "per_view": [
+     {
+      "view": 1,
+      "visible": true,
+      "material": "wood",
+      "colour": "light wood",
+      "shape": "rectangular",
+      "position_note": "dining table in dining space, with vanity sink visible in opening to the left",
+      "checklist": {
+       "colour_family": "light_wood",
+       "material": "wood"
+      }
+     },
+     {
+      "view": 2,
+      "visible": true,
+      "material": "wood",
+      "colour": "light wood",
+      "shape": "rectangular",
+      "position_note": "dining table in right foreground, with vanity visible down hallway to the left",
+      "checklist": {
+       "colour_family": "light_wood",
+       "material": "wood"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-11-16T16:19:56.456Z",
+   "group": "door-o-13",
+   "set": "picks",
+   "cg_tour": "kedma-d1",
+   "render_context": true,
+   "misplaced": [],
+   "runs": [
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.012285
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.014505
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.0105381
+    }
+   ],
+   "views": [
+    {
+     "asset": "01-kitchen",
+     "bearing": 109,
+     "dist": 352,
+     "hfov": 70,
+     "picture": "_local\\generated\\01-kitchen__cg__0.png"
+    },
+    {
+     "asset": "04-dining",
+     "bearing": 40,
+     "dist": 192,
+     "hfov": 70,
+     "picture": "_local\\generated\\04-dining__cg__0.png"
+    }
+   ],
+   "sheet": "_local\\fidelity\\consistency__door-o-13__picks__cc0a7b1a3ef2.jpg",
+   "verdict": "PASS",
+   "judge": {
+    "same": true,
+    "differences": [],
+    "per_view": [
+     {
+      "view": 1,
+      "visible": true,
+      "material": "lacquer",
+      "colour": "taupe / beige-brown",
+      "shape": "rectangular single hinged door with black horizontal lever handle",
+      "position_note": "set in entryway wall opening facing the hallway",
+      "checklist": {
+       "colour_family": "sand_grey",
+       "material": "lacquer"
+      }
+     },
+     {
+      "view": 2,
+      "visible": true,
+      "material": "lacquer",
+      "colour": "taupe / beige-brown",
+      "shape": "rectangular single hinged door with black horizontal lever handle",
+      "position_note": "close-up view of the same door in the entryway",
+      "checklist": {
+       "colour_family": "sand_grey",
+       "material": "lacquer"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-11-16T16:20:51.780Z",
+   "group": "door-w-kitchen",
+   "set": "picks",
+   "cg_tour": "kedma-d1",
+   "render_context": true,
+   "misplaced": [],
+   "runs": [
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.021894
+    },
+    {
+     "verdict": "FAIL",
+     "checklist_fails": [
+      "colour_family differs between views: 01-kitchen black, 04-dining grey"
+     ],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.0125625
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": true,
+     "differences": [],
+     "usd": 0.025239
+    }
+   ],
+   "views": [
+    {
+     "asset": "01-kitchen",
+     "bearing": 270,
+     "dist": 307,
+     "hfov": 70,
+     "picture": "_local\\generated\\01-kitchen__cg__0.png"
+    },
+    {
+     "asset": "04-dining",
+     "bearing": 297,
+     "dist": 579,
+     "hfov": 70,
+     "picture": "_local\\generated\\04-dining__cg__0.png"
+    }
+   ],
+   "sheet": "_local\\fidelity\\consistency__door-w-kitchen__picks__8521c012b751.jpg",
+   "verdict": "PASS",
+   "judge": {
+    "same": true,
+    "differences": [],
+    "per_view": [
+     {
+      "view": 1,
+      "visible": true,
+      "material": "glass",
+      "colour": "black frame with clear glass",
+      "shape": "rectangular",
+      "position_note": "above kitchen counter on exterior wall",
+      "checklist": {
+       "colour_family": "black",
+       "material": "glass"
+      }
+     },
+     {
+      "view": 2,
+      "visible": true,
+      "material": "glass",
+      "colour": "black frame with clear glass",
+      "shape": "rectangular",
+      "position_note": "on kitchen exterior wall",
+      "checklist": {
+       "colour_family": "black",
+       "material": "glass"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-11-16T16:29:14.943Z",
+   "group": "kitchen",
+   "set": "picks",
+   "cg_tour": "kedma-d1",
+   "render_context": true,
+   "misplaced": [],
+   "runs": [
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": false,
+     "differences": [
+      "Kitchen island unit present in photo 1 is missing in photo 2",
+      "Second sink and faucet under the window in photo 1 are not present in photo 2"
+     ],
+     "usd": 0.0178869
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": false,
+     "differences": [
+      "A kitchen island counter unit is present in photo 1 but missing in photo 2.",
+      "Photo 1 shows an extra sink under the window, which is not present in photo 2."
+     ],
+     "usd": 0.0222219
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": false,
+     "differences": [
+      "Kitchen island unit present in photo 1 is missing in photo 2",
+      "Second sink with faucet under the window in photo 1 is absent in photo 2"
+     ],
+     "usd": 0.02083935
+    }
+   ],
+   "views": [
+    {
+     "asset": "01-kitchen",
+     "bearing": 283,
+     "dist": 215,
+     "hfov": 120,
+     "picture": "_local\\generated\\01-kitchen__gpt25__s7__c05dac57ef00.png"
+    },
+    {
+     "asset": "04-dining",
+     "bearing": 306,
+     "dist": 521,
+     "hfov": 70.13895073832623,
+     "picture": "_local\\generated\\04-dining__gpt25__s7__69f62155db73.png"
+    }
+   ],
+   "sheet": "_local\\fidelity\\consistency__kitchen__picks__40dfe22f48f2.jpg",
+   "verdict": "PASS",
+   "judge": {
+    "same": false,
+    "differences": [
+     "Kitchen island unit present in photo 1 is missing in photo 2",
+     "Second sink and faucet under the window in photo 1 are not present in photo 2"
+    ],
+    "per_view": [
+     {
+      "view": 1,
+      "visible": true,
+      "material": "stainless steel worktop, backsplash and shelves, taupe lacquered base cabinets",
+      "colour": "taupe, stainless steel",
+      "shape": "U-shaped with freestanding island",
+      "position_note": "along right wall, far window wall, and freestanding island in foreground",
+      "hob_x": null,
+      "sink_x": 677,
+      "tall_x": null,
+      "checklist": {
+       "upper_cabinets": "no",
+       "shelves_open": "yes",
+       "shelves_shape": "straight",
+       "backsplash": "stainless",
+       "tall_type": "not_visible",
+       "tall_front": "not_visible",
+       "oven_visible": "yes",
+       "oven_where": "elsewhere",
+       "sink_fridge_gap_units": null
+      },
+      "tall_is": "not_visible",
+      "sink_bearing": 315,
+      "sink_plan_bearing": 310,
+      "sink_off_deg": 5,
+      "sink_along_off_cm": -20
+     },
+     {
+      "view": 2,
+      "visible": true,
+      "material": "stainless steel worktop, backsplash and shelves, taupe lacquered cabinets",
+      "colour": "taupe, stainless steel",
+      "shape": "L-shaped kitchen run with tall cabinetry",
+      "position_note": "seen through opening from dining room along right and far wall",
+      "hob_x": null,
+      "sink_x": 590,
+      "tall_x": 870,
+      "checklist": {
+       "upper_cabinets": "no",
+       "shelves_open": "yes",
+       "shelves_shape": "straight",
+       "backsplash": "stainless",
+       "tall_type": "fridge",
+       "tall_front": "same_as_run",
+       "oven_visible": "yes",
+       "oven_where": "elsewhere",
+       "sink_fridge_gap_units": 1
+      },
+      "tall_is": "fridge",
+      "sink_bearing": 313,
+      "sink_plan_bearing": 317,
+      "sink_off_deg": 4,
+      "sink_along_off_cm": 51
+     }
+    ]
+   }
+  },
+  {
+   "at": "2026-11-16T16:30:44.281Z",
+   "group": "living",
+   "set": "picks",
+   "cg_tour": "kedma-d1",
+   "render_context": true,
+   "misplaced": [],
+   "runs": [
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": false,
+     "differences": [
+      "In photo 1, the TV, TV unit, and textured accent wall are on the wall next to the hallway door, where the sofa is placed in photo 2.",
+      "In photo 2, the TV and TV unit are on the opposite wall (adjacent to the kitchen), and the sofa sits against the hallway wall."
+     ],
+     "usd": 0.0280785
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": false,
+     "differences": [
+      "Living room layout is reversed: TV and media console are placed on the corridor wall in view 1, but on the opposite kitchen wall in view 2",
+      "Sofa faces the corridor wall in view 1, but is placed against it in view 2",
+      "Coffee table is round in view 1 but elongated/capsule-shaped in view 2"
+     ],
+     "usd": 0.028701
+    },
+    {
+     "verdict": "PASS",
+     "checklist_fails": [],
+     "checklist_missing": 0,
+     "spacing": {
+      "fails": [],
+      "rows": []
+     },
+     "same": false,
+     "differences": [
+      "Living room layout reversed: photo 1 places the TV, TV unit, and accent wall on the hallway wall, whereas photo 2 places the sofa there and TV opposite."
+     ],
+     "usd": 0.02556195
+    }
+   ],
+   "views": [
+    {
+     "asset": "01-kitchen",
+     "bearing": 207,
+     "dist": 362,
+     "hfov": 91.84865749252208,
+     "picture": "_local\\generated\\01-kitchen__gpt25__s7__c05dac57ef00.png"
+    },
+    {
+     "asset": "04-dining",
+     "bearing": 260,
+     "dist": 377,
+     "hfov": 99.90730739469609,
+     "picture": "_local\\generated\\04-dining__gpt25__s7__69f62155db73.png"
+    }
+   ],
+   "sheet": "_local\\fidelity\\consistency__living__picks__74c8fd1f4f49.jpg",
+   "verdict": "PASS",
+   "judge": {
+    "same": false,
+    "differences": [
+     "In photo 1, the TV, TV unit, and textured accent wall are on the wall next to the hallway door, where the sofa is placed in photo 2.",
+     "In photo 2, the TV and TV unit are on the opposite wall (adjacent to the kitchen), and the sofa sits against the hallway wall."
+    ],
+    "per_view": [
+     {
+      "view": 1,
+      "visible": true,
+      "material": "fabric",
+      "colour": "cream",
+      "shape": "modular rectangular sofa facing TV wall",
+      "position_note": "Floating in room facing the hallway-adjacent wall",
+      "checklist": {
+       "colour_family": "cream_beige",
+       "material": "fabric"
+      }
+     },
+     {
+      "view": 2,
+      "visible": true,
+      "material": "fabric",
+      "colour": "cream",
+      "shape": "rectangular three-seater sofa",
+      "position_note": "Placed against the wall next to the hallway door",
+      "checklist": {
+       "colour_family": "cream_beige",
+       "material": "fabric"
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+02-pantry            PASS      deviation 0.51% (bar 1%, resolves 1.00%; CG vs plan p90 0.9 cm (median 0.4) = 0.51%)  (calibration 892/1234) → _local\fidelity\02-pantry__balanced__40be6086a994.gate.jpg
+03-living            PASS      deviation 0.24% (bar 1%, resolves 1.00%; CG vs plan p90 1 cm (median 0.5) = 0.24%)  (calibration 865/950) → _local\fidelity\03-living__balanced__541266df49bc.gate.jpg
+04-dining            PASS      deviation 0.19% (bar 1%, resolves 1.00%; CG vs plan p90 0.9 cm (median 0.4) = 0.19%)  (calibration 936/946) → _local\fidelity\04-dining__balanced__0bccf99bc5f5.gate.jpg
+05-family            PASS      deviation 0.50% (bar 1%, resolves 1.00%; CG vs plan p90 1.7 cm (median 0.7) = 0.50%)  (calibration 1144/1158) → _local\fidelity\05-family__balanced__67bb3a8e1d28.gate.jpg
+06-corridor          PASS      deviation 0.51% (bar 1%, resolves 1.00%; CG vs plan p90 3.6 cm (median 0.7) = 0.51%)  (calibration 845/882) → _local\fidelity\06-corridor__balanced__2619157de002.gate.jpg
+07-master            PASS      deviation 0.67% (bar 1%, resolves 1.00%; CG vs plan p90 2.6 cm (median 0.5) = 0.67%)  (calibration 1043/1168) → _local\fidelity\07-master__balanced__da9a9b57e1e1.gate.jpg
+08-shower            PASS      deviation 0.21% (bar 1%, resolves 1.00%; CG vs plan p90 0.6 cm (median 0.3) = 0.21%)  (calibration 636/1118) → _local\fidelity\08-shower__balanced__76c92633a6f5.gate.jpg
+09-bed1              PASS      deviation 0.34% (bar 1%, resolves 1.00%; CG vs plan p90 1.2 cm (median 0.6) = 0.34%)  (calibration 777/1008) → _local\fidelity\09-bed1__balanced__21549a4ab20b.gate.jpg
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+[TypeError: fetch failed] {
+  [cause]: Error: read ECONNRESET
+      at TLSWrap.onStreamRead (node:internal/stream_base_commons:221:20) {
+    errno: -4077,
+    code: 'ECONNRESET',
+    syscall: 'read'
+  }
+}
+
+Node.js v24.22.1

@@ -1,0 +1,475 @@
+{
+ "$schema": "tour360/hotspots-check.v1",
+ "at": "2026-11-19T08:26:58.919Z",
+ "renders": "c:\\RnD\\.wt\\kedma-d1\\Projects\\3Dengine\\pipeline\\360walkaround\\tours\\kedma-d1\\renders",
+ "rows": [
+  {
+   "scene": "kitchen",
+   "asset": "01-kitchen",
+   "to": "pantry",
+   "u": 0.034,
+   "v": 0.68,
+   "bearing": 102,
+   "pitch": -14.8,
+   "depth_cm": 143,
+   "height_cm": 123,
+   "hit_cm": [
+    1082,
+    423
+   ],
+   "what": "opening o-1",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE p-shelf-e (CG depth) to opening o-1"
+  },
+  {
+   "scene": "kitchen",
+   "asset": "01-kitchen",
+   "to": "living",
+   "u": 0.247,
+   "v": 0.74,
+   "bearing": 179,
+   "pitch": -16.9,
+   "depth_cm": 550,
+   "height_cm": 0,
+   "hit_cm": [
+    957,
+    920
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE b2-closet (within 2° of the marker) (CG depth) to floor"
+  },
+  {
+   "scene": "kitchen",
+   "asset": "01-kitchen",
+   "to": "dining",
+   "u": 0.093,
+   "v": 0.72,
+   "bearing": 123,
+   "pitch": -16.2,
+   "depth_cm": 572,
+   "height_cm": 0,
+   "hit_cm": [
+    1405,
+    697
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE wc-vanity (CG depth) to floor"
+  },
+  {
+   "scene": "pantry",
+   "asset": "02-pantry",
+   "to": "kitchen",
+   "u": 0.54,
+   "v": 0.84,
+   "bearing": 257,
+   "pitch": -34.5,
+   "depth_cm": 282,
+   "height_cm": 0,
+   "hit_cm": [
+    925,
+    416
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE k-island (CG depth) to floor"
+  },
+  {
+   "scene": "living",
+   "asset": "03-living",
+   "to": "kitchen",
+   "u": 0.368,
+   "v": 0.78,
+   "bearing": 2,
+   "pitch": -23.7,
+   "depth_cm": 398,
+   "height_cm": 0,
+   "hit_cm": [
+    953,
+    415
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE k-tall-1 (CG depth) to floor"
+  },
+  {
+   "scene": "living",
+   "asset": "03-living",
+   "to": "dining",
+   "u": 0.509,
+   "v": 0.68,
+   "bearing": 53,
+   "pitch": -14.8,
+   "depth_cm": 399,
+   "height_cm": 58,
+   "hit_cm": [
+    1247,
+    548
+   ],
+   "what": "opening o-13",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "living",
+   "asset": "03-living",
+   "to": "corridor",
+   "u": 0.837,
+   "v": 0.86,
+   "bearing": 171,
+   "pitch": -38.1,
+   "depth_cm": 259,
+   "height_cm": 0,
+   "hit_cm": [
+    968,
+    981
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE b2-closet (CG depth) to floor"
+  },
+  {
+   "scene": "living",
+   "asset": "03-living",
+   "to": "balcony",
+   "u": 0.165,
+   "v": 0.68,
+   "bearing": -71,
+   "pitch": -14.8,
+   "depth_cm": 359,
+   "height_cm": 68,
+   "hit_cm": [
+    610,
+    664
+   ],
+   "what": "opening o-11",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE l-armchair (the ray skims it) (within 2° of the marker) (CG depth) to opening o-11"
+  },
+  {
+   "scene": "dining",
+   "asset": "04-dining",
+   "to": "living",
+   "u": 0.047,
+   "v": 0.83,
+   "bearing": -119,
+   "pitch": -32.7,
+   "depth_cm": 296,
+   "height_cm": 0,
+   "hit_cm": [
+    909,
+    774
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE l-sofa (CG depth) to floor"
+  },
+  {
+   "scene": "dining",
+   "asset": "04-dining",
+   "to": "family",
+   "u": 0.62,
+   "v": 0.81,
+   "bearing": 87,
+   "pitch": -29.1,
+   "depth_cm": 329,
+   "height_cm": 0,
+   "hit_cm": [
+    1414,
+    639
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to floor"
+  },
+  {
+   "scene": "dining",
+   "asset": "04-dining",
+   "to": "kitchen",
+   "u": 0.328,
+   "v": 0.82,
+   "bearing": -18,
+   "pitch": -30.9,
+   "depth_cm": 311,
+   "height_cm": 0,
+   "hit_cm": [
+    1045,
+    399
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE k-tall-2 (CG depth) to floor"
+  },
+  {
+   "scene": "family",
+   "asset": "05-family",
+   "to": "dining",
+   "u": 0.031,
+   "v": 0.75,
+   "bearing": -71,
+   "pitch": -18.3,
+   "depth_cm": 508,
+   "height_cm": 1,
+   "hit_cm": [
+    1009,
+    521
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to floor"
+  },
+  {
+   "scene": "corridor",
+   "asset": "06-corridor",
+   "to": "living",
+   "u": 0.78,
+   "v": 0.78,
+   "bearing": 365,
+   "pitch": -23.7,
+   "depth_cm": 398,
+   "height_cm": 0,
+   "hit_cm": [
+    985,
+    610
+   ],
+   "what": "floor",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE k-tall-2 (within 2° of the marker) (CG depth) to floor"
+  },
+  {
+   "scene": "corridor",
+   "asset": "06-corridor",
+   "to": "bath",
+   "u": 0.041,
+   "v": 0.68,
+   "bearing": 99,
+   "pitch": -14.8,
+   "depth_cm": 362,
+   "height_cm": 68,
+   "hit_cm": [
+    1301,
+    1026
+   ],
+   "what": "opening o-9",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE ba-vanity (CG depth) to opening o-9"
+  },
+  {
+   "scene": "corridor",
+   "asset": "06-corridor",
+   "to": "mamad",
+   "u": 0.018,
+   "v": 0.68,
+   "bearing": 90,
+   "pitch": -14.8,
+   "depth_cm": 442,
+   "height_cm": 47,
+   "hit_cm": [
+    1383,
+    976
+   ],
+   "what": "opening o-14",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "corridor",
+   "asset": "06-corridor",
+   "to": "master",
+   "u": 0.515,
+   "v": 0.68,
+   "bearing": 269,
+   "pitch": -14.8,
+   "depth_cm": 296,
+   "height_cm": 84,
+   "hit_cm": [
+    669,
+    977
+   ],
+   "what": "opening o-15",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "corridor",
+   "asset": "06-corridor",
+   "to": "bed1",
+   "u": 0.507,
+   "v": 0.68,
+   "bearing": 266,
+   "pitch": -14.8,
+   "depth_cm": 305,
+   "height_cm": 82,
+   "hit_cm": [
+    661,
+    992
+   ],
+   "what": "opening o-15",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off FIXTURE b1-closet (CG depth) to opening o-15"
+  },
+  {
+   "scene": "corridor",
+   "asset": "06-corridor",
+   "to": "bed2",
+   "u": 0.078,
+   "v": 0.68,
+   "bearing": 112,
+   "pitch": -14.8,
+   "depth_cm": 187,
+   "height_cm": 112,
+   "hit_cm": [
+    1123,
+    1041
+   ],
+   "what": "opening o-17",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "master",
+   "asset": "07-master",
+   "to": "shower",
+   "u": 0.369,
+   "v": 0.67,
+   "bearing": 201,
+   "pitch": -14.5,
+   "depth_cm": 269,
+   "height_cm": 93,
+   "hit_cm": [
+    451,
+    1219
+   ],
+   "what": "opening o-8",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off wall (within 2° of the marker) (CG depth) to opening o-8"
+  },
+  {
+   "scene": "master",
+   "asset": "07-master",
+   "to": "corridor",
+   "u": 0.062,
+   "v": 0.68,
+   "bearing": 90,
+   "pitch": -14.8,
+   "depth_cm": 125,
+   "height_cm": 128,
+   "hit_cm": [
+    664,
+    977
+   ],
+   "what": "opening o-15",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "shower",
+   "asset": "08-shower",
+   "to": "master",
+   "u": 0.186,
+   "v": 0.68,
+   "bearing": 2,
+   "pitch": -14.8,
+   "depth_cm": 69,
+   "height_cm": 142,
+   "hit_cm": [
+    449,
+    1224
+   ],
+   "what": "opening o-8",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "bed1",
+   "asset": "09-bed1",
+   "to": "corridor",
+   "u": 0.037,
+   "v": 0.68,
+   "bearing": 18,
+   "pitch": -14.8,
+   "depth_cm": 131,
+   "height_cm": 127,
+   "hit_cm": [
+    827,
+    1058
+   ],
+   "what": "opening o-16",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "bed2",
+   "asset": "10-bed2",
+   "to": "corridor",
+   "u": 0.015,
+   "v": 0.68,
+   "bearing": 18,
+   "pitch": -14.8,
+   "depth_cm": 133,
+   "height_cm": 126,
+   "hit_cm": [
+    1098,
+    1060
+   ],
+   "what": "opening o-17",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "bath",
+   "asset": "11-bath",
+   "to": "corridor",
+   "u": 0.022,
+   "v": 0.68,
+   "bearing": -5,
+   "pitch": -14.8,
+   "depth_cm": 86,
+   "height_cm": 138,
+   "hit_cm": [
+    1264,
+    1057
+   ],
+   "what": "opening o-9",
+   "ok": true,
+   "source": "plan-bearing via the opening"
+  },
+  {
+   "scene": "mamad",
+   "asset": "12-mamad",
+   "to": "corridor",
+   "u": 0.868,
+   "v": 0.68,
+   "bearing": 307,
+   "pitch": -14.8,
+   "depth_cm": 193,
+   "height_cm": 111,
+   "hit_cm": [
+    1382,
+    968
+   ],
+   "what": "opening o-14",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off wall (within 2° of the marker) (CG depth) to opening o-14"
+  },
+  {
+   "scene": "balcony",
+   "asset": "13-balcony",
+   "to": "living",
+   "u": 0.329,
+   "v": 0.68,
+   "bearing": 137,
+   "pitch": -14.8,
+   "depth_cm": 448,
+   "height_cm": 46,
+   "hit_cm": [
+    610,
+    646
+   ],
+   "what": "opening o-11",
+   "ok": true,
+   "source": "plan-bearing via the opening; R23b moved off wall (within 2° of the marker) (CG depth) to opening o-11"
+  }
+ ]
+}

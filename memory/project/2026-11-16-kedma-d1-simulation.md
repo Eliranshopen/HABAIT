@@ -117,3 +117,24 @@
 - **Learned:** Never --force a "re-framed" refusal (b090b bath, b080 balcony): the shifted answer lands at the wrong height and doubles objects. The balcony render's flat pale-green ground plane beyond the glass railing reads as floor: nano-banana invented a second terrace or a deck through the glass 6 times, also with a haze in its place; far-view transplants ($0: outside_fill.py, outside_from.py, haze_fill.py) looked mirrored or wrong. build-tour takes the LATEST gate row for a picture's bytes: re-gating the old balcony picture against the corrected plan wrote FAIL 22.71 %, so the build refuses to package until the balcony is redone (correct; never delete the row).
 - **Owed / open:** Eliran's call on the balcony (more budget / another model / other); then build + redeploy on his go; day/night; leftovers (bath white block at vanity edge, silver tub tap; dining ghost chairs; etc.). Balcony canvas = b270 + b000c accepted (b000c has wood walls and deck, to be replaced).
 - **Second reader:** none
+
+## 2026-11-19 · main session · kedma-d1: 13 of 13 PASS, built; the balcony solved with GPT Image 2.5; RESUME POINT
+- **Did:** Eliran raised the ceiling to $48 (question dialog). Balcony: GPT Image 2.5 (gpt25-high, square 2048 views through jobs/kedma-d1/flatfix-call.mjs, booked $0.60) painted b000g/b090g/b180g with the true far view and no invented terrace where nano-banana failed 6 times; nano for one seam strip and tilted floor views; the wall face y=246.2 refilled with its own plaster (wall_fill --whole) to clear a gate FAIL 2.46 % -> PASS 0.15 %; deck remnants re-painted (t221). All 13 PASS on the balanced set; build-tour packaged dist/kedma-d1 (13 scenes); local probe: desktop and phone move rooms. Ledger 45.79 of 47.9 (ledger cap_usd set to 47.9, copy jobs/kedma-d1/ledger.before-cap48.json; paint-view.sh cap 47.9).
+- **Evidence:** `.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/run-1119-build3.log`
+- **Learned:** For an outdoor view past a glass railing, GPT Image 2.5 keeps geometry and draws the real distance; nano-banana reads the render's flat ground plane as more terrace. near_floor flattens a good painted floor (balcony: stone texture lost) - skip it when tilted views already cover the floor; inpaint only the small unpainted rest.
+- **Owed / open:** deploy only on Eliran's go (link kedma-d1.vercel.app); leftovers: faint wood at the balcony wall foot by the loungers, a narrow tile ledge seen through the glass, bath white block + silver tub tap, dining ghost chairs, shower door blocks, bed1 throw, corridor floor marks, living lamp disc, kitchen handles; day/night (living proof first); RAINBOW baseline rows; cost/time report.
+- **Second reader:** none
+
+## 2026-11-19 · main session · kedma-d1: deployed 13 of 13 on Eliran's go
+- **Did:** On Eliran's explicit go (question dialog, 2026-11-19) the session ran vercel deploy --prod from dist/kedma-d1: dpl_4a8kWhWpeypzsNWL1YdgRcEJBqQs READY, https://kedma-d1.vercel.app (200, 504 KB). Live probe: desktop and phone move rooms; all 13 thumbnails new.
+- **Evidence:** `.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/deploy-vercel-1119.log`
+- **Learned:** nothing new.
+- **Owed / open:** day/night (living proof first, his three rulings in the plan); leftovers listed in the entry above; free-text design needs provider keys in the Vercel project (not set); RAINBOW baseline rows; cost/time report. Next deploy needs its own go.
+- **Second reader:** none
+
+## 2026-11-19 · main session · kedma-d1: deliverables copied to Projects/Kedma_D1
+- **Did:** On Eliran's choice (question dialog: a project folder with the deliverables, not a move, not a merge) the session copied into C:\RnD\Projects\Kedma_D1: dist/ (the built tour as deployed), panoramas/ (13 final 8192x4096 PNG by viewpoint), job/ (jobs/kedma-d1), plan/ (plan copy); hand-written CLAUDE.md + 23 generated context files; row in Projects/CLAUDE.md. The work still runs in .wt/kedma-d1; nothing moved or deleted there.
+- **Evidence:** `Projects/Kedma_D1/CLAUDE.md`
+- **Learned:** generate-cards.py --root <folder> also writes docs/context-map.generated.md under that folder (moved out); name a built-tour copy dist/ so the generator skips it (root §8.6).
+- **Owed / open:** re-copy after later changes (day/night, leftovers); the root docs/context-map.generated.md gets the new rows at the next /sync-context.
+- **Second reader:** none

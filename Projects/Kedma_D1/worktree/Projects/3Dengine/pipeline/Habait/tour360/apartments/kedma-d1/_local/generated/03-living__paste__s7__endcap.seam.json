@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "kind": "object-paste",
+ "parent": "03-living__seam3__s7__02d02d3d4f28.png",
+ "object_paste": {
+  "from": "Habait/tour360/apartments/kedma-d1/_local/generated/03-living__seam3__s7__02d02d3d4f28.png",
+  "tool": "Habait/tour360/tools/transplant.py",
+  "args": "397 409 226 828 --dx -10 --dy 0 --feather 2.0",
+  "box": [
+   397,
+   226,
+   12,
+   602
+  ],
+  "why": "the TV-wall partition's end was drawn about 8 px (4 cm) past the plan's end (gate 1.03 %, 325-326 deg): the 12 px beyond the plan's end are replaced by the kitchen strip right beside them (the picture's own pixels, 10 px over), so the wall stops where the CG render has it; a first try that moved an 84 px strip doubled the kitchen tap and was dropped"
+ },
+ "band": {
+  "u": 0.1968,
+  "deg": 2.11,
+  "rows": [
+   0.2207,
+   0.8086
+  ]
+ },
+ "cuts": [],
+ "note": "no band cut: a box from the same camera (render or self), colour-matched; checked by eye"
+}

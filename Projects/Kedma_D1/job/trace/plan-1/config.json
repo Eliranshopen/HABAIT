@@ -1,0 +1,1767 @@
+{
+ "open_radius_px": 5,
+ "simplify_cm": 3,
+ "door_dilate_px": 5,
+ "cut_px": 8,
+ "near_wall_px": 16,
+ "dimension_min_cm": 100,
+ "straight_density_max": 4.5,
+ "opening_min_cm": 60,
+ "apartment_id": "kedma-d1",
+ "cameras_json": "C:\\RnD\\.wt\\kedma-d1\\Projects\\3Dengine\\jobs\\kedma-d1\\trace\\plan-1\\cameras.json",
+ "eye_cm": 160,
+ "ceiling_height_cm": 290,
+ "floor_height_cm": 0,
+ "floor_height_note": "unknown: the sales plan has no section",
+ "ground_offset_cm": -300,
+ "ground_offset_note": "ground 300 cm below the floor (floor unknown; never in the floor plane)",
+ "roofed_outdoor": false,
+ "fixtures": [],
+ "source_file": "bldg-d-apt-1.pdf page 1",
+ "trace_date": "2026-11-16",
+ "scale_basis": "3.351 px/cm: guessed from 12 room boxes vs printed dims, then fitted",
+ "rights_state": "developer-uploaded",
+ "rights_note": "uploaded by the developer through the Habait Studio portal",
+ "assumptions": [
+  "ceiling 290 cm, door heads 215 cm (no section on the sales plan)",
+  "outdoor rooms unroofed unless the plan shows a floor-above line (follow the sales plan)",
+  "open-plan zone boundaries: auto-trace geodesic split between the printed room labels"
+ ],
+ "stroke_ignore_boxes": [
+  [
+   912.066248880931,
+   390.65428230378996,
+   1212.066248880931,
+   690.65428230379
+  ],
+  [
+   129.30020889286783,
+   897.3313936138466,
+   429.30020889286783,
+   1197.3313936138466
+  ],
+  [
+   848.2262011339899,
+   706.58236347359,
+   1148.22620113399,
+   1006.58236347359
+  ]
+ ],
+ "double_ignore_boxes": [
+  [
+   912.066248880931,
+   390.65428230378996,
+   1212.066248880931,
+   690.65428230379
+  ],
+  [
+   129.30020889286783,
+   897.3313936138466,
+   429.30020889286783,
+   1197.3313936138466
+  ],
+  [
+   848.2262011339899,
+   706.58236347359,
+   1148.22620113399,
+   1006.58236347359
+  ]
+ ],
+ "cameras": [
+  {
+   "id": "balcony",
+   "room_id": "r-balcony",
+   "name_he": "מרפסת",
+   "name_en": "balcony",
+   "type": "balcony",
+   "is_outdoor": true,
+   "at_cm": [
+    196.95613249776187,
+    281.1101163831692
+   ],
+   "links": [
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ]
+  },
+  {
+   "id": "kitchen",
+   "room_id": "r-kitchen",
+   "name_he": "מטבח",
+   "name_en": "kitchen",
+   "type": "kitchen",
+   "is_outdoor": false,
+   "at_cm": [
+    691.1369740376007,
+    17.009847806624887
+   ],
+   "links": [
+    "balcony",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    460,
+    240
+   ]
+  },
+  {
+   "id": "pantry",
+   "room_id": "r-pantry",
+   "name_he": "מזווה",
+   "name_en": "pantry",
+   "type": "storage",
+   "is_outdoor": false,
+   "at_cm": [
+    861.2354521038496,
+    117.27842435094001
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    155,
+    175
+   ]
+  },
+  {
+   "id": "entrance",
+   "room_id": "r-entrance",
+   "name_he": "כניסה",
+   "name_en": "entrance",
+   "type": "hall",
+   "is_outdoor": false,
+   "at_cm": [
+    1010.7430617726052,
+    262.30975828111013
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ]
+  },
+  {
+   "id": "living-room",
+   "room_id": "r-living-room",
+   "name_he": "חדר דיור",
+   "name_en": "living room",
+   "type": "living",
+   "is_outdoor": false,
+   "at_cm": [
+    718.8898836168308,
+    251.56669650850492
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    410,
+    590
+   ]
+  },
+  {
+   "id": "dining-area",
+   "room_id": "r-dining-area",
+   "name_he": "פינת אוכל",
+   "name_en": "dining area",
+   "type": "hall",
+   "is_outdoor": false,
+   "at_cm": [
+    702.7752909579231,
+    532.6768128916741
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    335,
+    590
+   ]
+  },
+  {
+   "id": "guest-toilet",
+   "room_id": "r-guest-toilet",
+   "name_he": "שירותים",
+   "name_en": "guest toilet",
+   "type": "bathroom",
+   "is_outdoor": false,
+   "at_cm": [
+    996.4189794091316,
+    570.2775290957923
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "hull": true,
+   "printed_dims_cm": [
+    150,
+    90
+   ]
+  },
+  {
+   "id": "family-room",
+   "room_id": "r-family-room",
+   "name_he": "חדר משפחה",
+   "name_en": "family room",
+   "type": "living",
+   "is_outdoor": false,
+   "at_cm": [
+    1188.003581020591,
+    464.6374216651746
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    325,
+    285
+   ]
+  },
+  {
+   "id": "master-bedroom",
+   "room_id": "r-master-bedroom",
+   "name_he": "חדר שינה הורים",
+   "name_en": "master bedroom",
+   "type": "bedroom",
+   "is_outdoor": false,
+   "at_cm": [
+    260.5192479856759,
+    857.6544315129812
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    383,
+    298
+   ]
+  },
+  {
+   "id": "master-bathroom",
+   "room_id": "r-master-bathroom",
+   "name_he": "חדר רחצה",
+   "name_en": "master bathroom",
+   "type": "bathroom",
+   "is_outdoor": false,
+   "at_cm": [
+    279.319606087735,
+    1047.4485228290064
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "hull": true,
+   "printed_dims_cm": [
+    298,
+    125
+   ]
+  },
+  {
+   "id": "bedroom",
+   "room_id": "r-bedroom",
+   "name_he": "חדר שינה",
+   "name_en": "bedroom",
+   "type": "bedroom",
+   "is_outdoor": false,
+   "at_cm": [
+    497.76186213070724,
+    864.816472694718
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    338,
+    260
+   ]
+  },
+  {
+   "id": "bedroom-2",
+   "room_id": "r-bedroom-2",
+   "name_he": "חדר שינה",
+   "name_en": "bedroom",
+   "type": "bedroom",
+   "is_outdoor": false,
+   "at_cm": [
+    777.9767233661594,
+    864.816472694718
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    338,
+    260
+   ]
+  },
+  {
+   "id": "bathroom",
+   "room_id": "r-bathroom",
+   "name_he": "חדר אמבטיה",
+   "name_en": "bathroom",
+   "type": "bathroom",
+   "is_outdoor": false,
+   "at_cm": [
+    998.2094897045658,
+    856.7591763652641
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "safe-room-bedroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "hull": true,
+   "printed_dims_cm": [
+    225,
+    185
+   ]
+  },
+  {
+   "id": "safe-room-bedroom",
+   "room_id": "r-safe-room-bedroom",
+   "name_he": "ממ\"ד חדר שינה",
+   "name_en": "safe room / bedroom",
+   "type": "safe_room",
+   "is_outdoor": false,
+   "at_cm": [
+    1282.9006266786034,
+    784.243509400179
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "laundry-balcony",
+    "hall-auto-14"
+   ],
+   "printed_dims_cm": [
+    370,
+    295
+   ]
+  },
+  {
+   "id": "laundry-balcony",
+   "room_id": "r-laundry-balcony",
+   "name_he": "מסתור כביסה",
+   "name_en": "laundry balcony",
+   "type": "storage",
+   "is_outdoor": false,
+   "at_cm": [
+    1035.8102059086839,
+    1111.0116383169204
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "hall-auto-14"
+   ]
+  },
+  {
+   "id": "hall-auto-14",
+   "room_id": "r-hall-auto-14",
+   "name_he": "מבואה",
+   "name_en": "Hall",
+   "type": "hall",
+   "is_outdoor": false,
+   "at_cm": [
+    688.4512085944494,
+    686.6606982990153
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "pantry",
+    "entrance",
+    "living-room",
+    "dining-area",
+    "guest-toilet",
+    "family-room",
+    "master-bedroom",
+    "master-bathroom",
+    "bedroom",
+    "bedroom-2",
+    "bathroom",
+    "safe-room-bedroom",
+    "laundry-balcony"
+   ]
+  }
+ ],
+ "lines": [
+  {
+   "name": "auto pantry|living-room",
+   "points": [
+    [
+     838.9,
+     5.4
+    ],
+    [
+     837.1,
+     5.4
+    ],
+    [
+     825.4,
+     17
+    ],
+    [
+     825.4,
+     18.8
+    ],
+    [
+     827.2,
+     18.8
+    ],
+    [
+     838.9,
+     7.2
+    ],
+    [
+     838.9,
+     5.4
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 19
+  },
+  {
+   "name": "auto pantry|living-room",
+   "points": [
+    [
+     812,
+     30.4
+    ],
+    [
+     782.5,
+     60
+    ],
+    [
+     782.5,
+     107.4
+    ],
+    [
+     837.1,
+     162
+    ],
+    [
+     838.9,
+     162
+    ],
+    [
+     838.9,
+     159.4
+    ],
+    [
+     784.2,
+     104.7
+    ],
+    [
+     784.2,
+     61.8
+    ],
+    [
+     813.8,
+     32.2
+    ],
+    [
+     813.8,
+     30.4
+    ],
+    [
+     812,
+     30.4
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 143.2
+  },
+  {
+   "name": "auto pantry|hall-auto-14",
+   "points": [
+    [
+     905.1,
+     26
+    ],
+    [
+     903.3,
+     26
+    ],
+    [
+     903.3,
+     159.4
+    ],
+    [
+     838,
+     160.3
+    ],
+    [
+     838,
+     162
+    ],
+    [
+     905.1,
+     162
+    ],
+    [
+     905.1,
+     26
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 151.7
+  },
+  {
+   "name": "auto living-room|dining-area",
+   "points": [
+    [
+     838.9,
+     289.2
+    ],
+    [
+     837.1,
+     289.2
+    ],
+    [
+     684.9,
+     441.4
+    ],
+    [
+     581,
+     441.4
+    ],
+    [
+     435.1,
+     295.4
+    ],
+    [
+     433.3,
+     295.4
+    ],
+    [
+     433.3,
+     298.1
+    ],
+    [
+     578.3,
+     443.2
+    ],
+    [
+     686.7,
+     443.2
+    ],
+    [
+     838.9,
+     291
+    ],
+    [
+     838.9,
+     289.2
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 433.8
+  },
+  {
+   "name": "auto living-room|hall-auto-14",
+   "points": [
+    [
+     426.1,
+     5.4
+    ],
+    [
+     426.1,
+     96.7
+    ],
+    [
+     427.9,
+     96.7
+    ],
+    [
+     427.9,
+     5.4
+    ],
+    [
+     426.1,
+     5.4
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 91.3
+  },
+  {
+   "name": "auto living-room|hall-auto-14",
+   "points": [
+    [
+     426.1,
+     149.5
+    ],
+    [
+     426.1,
+     237.2
+    ],
+    [
+     427.9,
+     237.2
+    ],
+    [
+     427.9,
+     149.5
+    ],
+    [
+     426.1,
+     149.5
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 87.8
+  },
+  {
+   "name": "auto living-room|hall-auto-14",
+   "points": [
+    [
+     837.1,
+     161.1
+    ],
+    [
+     837.1,
+     175.5
+    ],
+    [
+     838.9,
+     175.5
+    ],
+    [
+     838.9,
+     161.1
+    ],
+    [
+     837.1,
+     161.1
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 14.4
+  },
+  {
+   "name": "auto living-room|hall-auto-14",
+   "points": [
+    [
+     837.1,
+     194.3
+    ],
+    [
+     837.1,
+     291
+    ],
+    [
+     838.9,
+     291
+    ],
+    [
+     838.9,
+     194.3
+    ],
+    [
+     837.1,
+     194.3
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 96.7
+  },
+  {
+   "name": "auto living-room|hall-auto-14",
+   "points": [
+    [
+     426.1,
+     246.2
+    ],
+    [
+     426.1,
+     253.4
+    ],
+    [
+     427.9,
+     253.4
+    ],
+    [
+     427.9,
+     246.2
+    ],
+    [
+     426.1,
+     246.2
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 7.4
+  },
+  {
+   "name": "auto living-room|hall-auto-14",
+   "points": [
+    [
+     426.1,
+     260.5
+    ],
+    [
+     426.1,
+     265.9
+    ],
+    [
+     427.9,
+     265.9
+    ],
+    [
+     427.9,
+     260.5
+    ],
+    [
+     426.1,
+     260.5
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 5.7
+  },
+  {
+   "name": "auto dining-area|hall-auto-14",
+   "points": [
+    [
+     390.3,
+     289.2
+    ],
+    [
+     349.1,
+     290.1
+    ],
+    [
+     349.1,
+     530
+    ],
+    [
+     350.9,
+     530
+    ],
+    [
+     350.9,
+     291.9
+    ],
+    [
+     390.3,
+     291
+    ],
+    [
+     390.3,
+     289.2
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 244.3
+  },
+  {
+   "name": "auto dining-area|hall-auto-14",
+   "points": [
+    [
+     400.2,
+     289.2
+    ],
+    [
+     400.2,
+     291
+    ],
+    [
+     411.8,
+     291
+    ],
+    [
+     411.8,
+     289.2
+    ],
+    [
+     400.2,
+     289.2
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 11.8
+  },
+  {
+   "name": "auto dining-area|hall-auto-14",
+   "points": [
+    [
+     838,
+     289.2
+    ],
+    [
+     838,
+     291
+    ],
+    [
+     940,
+     291.9
+    ],
+    [
+     940,
+     615
+    ],
+    [
+     941.8,
+     615
+    ],
+    [
+     941.8,
+     289.2
+    ],
+    [
+     838,
+     289.2
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 342
+  },
+  {
+   "name": "auto dining-area|hall-auto-14",
+   "points": [
+    [
+     374.2,
+     624.9
+    ],
+    [
+     374.2,
+     626.7
+    ],
+    [
+     781.6,
+     626.7
+    ],
+    [
+     781.6,
+     624.9
+    ],
+    [
+     374.2,
+     624.9
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 407.3
+  },
+  {
+   "name": "auto guest-toilet|hall-auto-14",
+   "points": [
+    [
+     960.6,
+     524.6
+    ],
+    [
+     960.6,
+     526.4
+    ],
+    [
+     1023.3,
+     526.4
+    ],
+    [
+     1023.3,
+     524.6
+    ],
+    [
+     960.6,
+     524.6
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 62.7
+  },
+  {
+   "name": "auto master-bathroom|outside",
+   "points": [
+    [
+     312.4,
+     1091.3
+    ],
+    [
+     287.4,
+     1093.1
+    ],
+    [
+     265,
+     1092.2
+    ],
+    [
+     265,
+     1094
+    ],
+    [
+     309.8,
+     1094
+    ],
+    [
+     312.4,
+     1093.1
+    ],
+    [
+     312.4,
+     1091.3
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 47.6
+  },
+  {
+   "name": "auto bedroom|outside",
+   "points": [
+    [
+     582.8,
+     1079.7
+    ],
+    [
+     561.3,
+     1072.5
+    ],
+    [
+     545.2,
+     1069.8
+    ],
+    [
+     529.1,
+     1070.7
+    ],
+    [
+     521,
+     1073.4
+    ],
+    [
+     512.1,
+     1078.8
+    ],
+    [
+     496,
+     1071.6
+    ],
+    [
+     474.5,
+     1070.7
+    ],
+    [
+     449.4,
+     1077.9
+    ],
+    [
+     440.5,
+     1078.8
+    ],
+    [
+     438.7,
+     1082.4
+    ],
+    [
+     476.3,
+     1072.5
+    ],
+    [
+     488.8,
+     1072.5
+    ],
+    [
+     496.9,
+     1074.3
+    ],
+    [
+     510.3,
+     1081.5
+    ],
+    [
+     513,
+     1081.5
+    ],
+    [
+     522.8,
+     1075.2
+    ],
+    [
+     535.4,
+     1071.6
+    ],
+    [
+     558.6,
+     1074.3
+    ],
+    [
+     567.6,
+     1077.9
+    ],
+    [
+     572.1,
+     1077.9
+    ],
+    [
+     581,
+     1082.4
+    ],
+    [
+     582.8,
+     1082.4
+    ],
+    [
+     582.8,
+     1079.7
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 144.7
+  },
+  {
+   "name": "auto bedroom-2|outside",
+   "points": [
+    [
+     695.6,
+     1067.1
+    ],
+    [
+     695.6,
+     1068.9
+    ],
+    [
+     697.4,
+     1068.9
+    ],
+    [
+     705.5,
+     1064.5
+    ],
+    [
+     710.8,
+     1065.4
+    ],
+    [
+     731.4,
+     1074.3
+    ],
+    [
+     737.7,
+     1079.7
+    ],
+    [
+     749.3,
+     1076.1
+    ],
+    [
+     762.8,
+     1075.2
+    ],
+    [
+     779.8,
+     1077
+    ],
+    [
+     790.5,
+     1081.5
+    ],
+    [
+     791.4,
+     1083.3
+    ],
+    [
+     795.9,
+     1083.3
+    ],
+    [
+     795.9,
+     1081.5
+    ],
+    [
+     792.3,
+     1080.6
+    ],
+    [
+     791.4,
+     1078.8
+    ],
+    [
+     778,
+     1074.3
+    ],
+    [
+     754.7,
+     1073.4
+    ],
+    [
+     743.1,
+     1075.2
+    ],
+    [
+     739.5,
+     1077
+    ],
+    [
+     726.9,
+     1068.9
+    ],
+    [
+     708.1,
+     1062.7
+    ],
+    [
+     703.7,
+     1062.7
+    ],
+    [
+     695.6,
+     1067.1
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 102.4
+  },
+  {
+   "name": "auto bedroom-2|outside",
+   "points": [
+    [
+     668.8,
+     1068.9
+    ],
+    [
+     663.4,
+     1068.9
+    ],
+    [
+     653.5,
+     1076.1
+    ],
+    [
+     650.9,
+     1082.4
+    ],
+    [
+     652.6,
+     1082.4
+    ],
+    [
+     655.3,
+     1077.9
+    ],
+    [
+     663.4,
+     1071.6
+    ],
+    [
+     668.8,
+     1071.6
+    ],
+    [
+     668.8,
+     1068.9
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 22.4
+  },
+  {
+   "name": "auto laundry-balcony|outside",
+   "points": [
+    [
+     904.2,
+     1096.7
+    ],
+    [
+     904.2,
+     1098.5
+    ],
+    [
+     907.8,
+     1100.3
+    ],
+    [
+     913.2,
+     1106.5
+    ],
+    [
+     931.1,
+     1110.1
+    ],
+    [
+     936.4,
+     1112.8
+    ],
+    [
+     954.3,
+     1117.3
+    ],
+    [
+     963.3,
+     1121.8
+    ],
+    [
+     974,
+     1129.8
+    ],
+    [
+     985.7,
+     1144.1
+    ],
+    [
+     1013.4,
+     1162.9
+    ],
+    [
+     1030.4,
+     1166.5
+    ],
+    [
+     1037.6,
+     1166.5
+    ],
+    [
+     1046.6,
+     1163.8
+    ],
+    [
+     1052.8,
+     1163.8
+    ],
+    [
+     1063.6,
+     1160.3
+    ],
+    [
+     1107.4,
+     1160.3
+    ],
+    [
+     1112.8,
+     1158.5
+    ],
+    [
+     1112.8,
+     1156.7
+    ],
+    [
+     1105.6,
+     1158.5
+    ],
+    [
+     1061.8,
+     1158.5
+    ],
+    [
+     1051,
+     1162
+    ],
+    [
+     1044.8,
+     1162
+    ],
+    [
+     1035.8,
+     1164.7
+    ],
+    [
+     1016.1,
+     1161.1
+    ],
+    [
+     988.4,
+     1142.3
+    ],
+    [
+     983,
+     1137
+    ],
+    [
+     978.5,
+     1129.8
+    ],
+    [
+     966,
+     1120
+    ],
+    [
+     957,
+     1115.5
+    ],
+    [
+     939.1,
+     1111
+    ],
+    [
+     933.8,
+     1108.3
+    ],
+    [
+     920.3,
+     1106.5
+    ],
+    [
+     915.8,
+     1104.7
+    ],
+    [
+     910.5,
+     1098.5
+    ],
+    [
+     904.2,
+     1096.7
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": 220
+  },
+  {
+   "name": "auto envelope",
+   "points": [
+    [
+     1001.8,
+     0
+    ],
+    [
+     1002.7,
+     22.4
+    ],
+    [
+     1005.4,
+     34
+    ],
+    [
+     1005.4,
+     162.9
+    ],
+    [
+     1010.7,
+     193.4
+    ],
+    [
+     1017.9,
+     213.1
+    ],
+    [
+     1032.2,
+     238.1
+    ],
+    [
+     1041.2,
+     249.8
+    ],
+    [
+     1056.4,
+     265
+    ],
+    [
+     1071.6,
+     276.6
+    ],
+    [
+     1101.2,
+     291.9
+    ],
+    [
+     1118.2,
+     297.2
+    ],
+    [
+     1138.8,
+     300.8
+    ],
+    [
+     1449.4,
+     302.6
+    ],
+    [
+     1449.4,
+     300.8
+    ],
+    [
+     1445.8,
+     299.9
+    ],
+    [
+     1141.5,
+     299
+    ],
+    [
+     1120.9,
+     295.4
+    ],
+    [
+     1103.8,
+     290.1
+    ],
+    [
+     1074.3,
+     274.8
+    ],
+    [
+     1059.1,
+     263.2
+    ],
+    [
+     1043,
+     247.1
+    ],
+    [
+     1034,
+     235.5
+    ],
+    [
+     1019.7,
+     210.4
+    ],
+    [
+     1012.5,
+     190.7
+    ],
+    [
+     1007.2,
+     160.3
+    ],
+    [
+     1007.2,
+     31.3
+    ],
+    [
+     1004.5,
+     19.7
+    ],
+    [
+     1003.6,
+     0
+    ],
+    [
+     1001.8,
+     0
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": null
+  },
+  {
+   "name": "auto envelope",
+   "points": [
+    [
+     1449.4,
+     1020.6
+    ],
+    [
+     1312.4,
+     1021.5
+    ],
+    [
+     1299,
+     1018.8
+    ],
+    [
+     1265,
+     1018.8
+    ],
+    [
+     1238.1,
+     1024.2
+    ],
+    [
+     1222.9,
+     1029.5
+    ],
+    [
+     1205,
+     1038.5
+    ],
+    [
+     1188,
+     1050.1
+    ],
+    [
+     1167.4,
+     1069.8
+    ],
+    [
+     1153.1,
+     1089.5
+    ],
+    [
+     1144.1,
+     1106.5
+    ],
+    [
+     1137,
+     1126.2
+    ],
+    [
+     1132.5,
+     1147.7
+    ],
+    [
+     1131.6,
+     1190.7
+    ],
+    [
+     1133.4,
+     1190.7
+    ],
+    [
+     1133.4,
+     1159.4
+    ],
+    [
+     1136.1,
+     1139.7
+    ],
+    [
+     1142.3,
+     1118.2
+    ],
+    [
+     1151.3,
+     1098.5
+    ],
+    [
+     1169.2,
+     1072.5
+    ],
+    [
+     1185.3,
+     1056.4
+    ],
+    [
+     1207.7,
+     1040.3
+    ],
+    [
+     1225.6,
+     1031.3
+    ],
+    [
+     1240.8,
+     1026
+    ],
+    [
+     1267.7,
+     1020.6
+    ],
+    [
+     1296.3,
+     1020.6
+    ],
+    [
+     1309.8,
+     1023.3
+    ],
+    [
+     1446.7,
+     1023.3
+    ],
+    [
+     1449.4,
+     1022.4
+    ],
+    [
+     1449.4,
+     1020.6
+    ]
+   ],
+   "width_px": 2,
+   "span_cm": null
+  }
+ ],
+ "fallback_labels_png": "C:\\RnD\\.wt\\kedma-d1\\Projects\\3Dengine\\jobs\\kedma-d1\\trace\\plan-1\\labels.png",
+ "export_plan": "C:\\RnD\\.wt\\kedma-d1\\Projects\\3Dengine\\jobs\\kedma-d1\\trace\\plan-1\\plan.general.json",
+ "walls_extracted": "C:\\RnD\\.wt\\kedma-d1\\Projects\\3Dengine\\jobs\\kedma-d1\\trace\\plan-1\\walls.json",
+ "walls_recompute": true
+}

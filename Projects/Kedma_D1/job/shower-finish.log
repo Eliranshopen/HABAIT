@@ -1,0 +1,10 @@
+{"camera": [447.0, 1291.0, 160.0, 115.0], "floor_share_pct": 14.61, "taken_pct": 14.76, "unpainted_floor_px": 4509, "behind_piece_px": 110109, "joint_px": 83714, "joints_on_grid_pct": 46.4, "floor_colour_bgr": [174.0, 186.0, 201.0], "p0": -32.0, "p1": -44.0}
+{"step": "cap-fill", "filled_pct": 0.83}
+{"step": "wall-fill", "plane": "z=290", "span": "0,1", "src_plane": "z=290", "src_span": "0,1", "target_pct": 21.094, "source_px": 6954458, "colour_bgr": [166.0, 178.0, 193.0], "grain_block": false}
+{"step": "no-skirting", "cam": "cp-shower", "changed_pct": 0.675, "columns": 3690, "top_cm": 16.0}
+{"out": "08-shower__redo__v1.png", "painted_pct": 100.0, "picked": true}
+run-project kedma-d1: scenes done in 16 s
+view {'tiltDeg': 10, 'pannini': 1} ; headings changed: [('kitchen', 0, 18), ('pantry', 0, 104), ('living', 0, -165), ('dining', -149, -140), ('shower', 0, -22), ('bath', 0, 5)]
+5 viewpoints marked as old pictures; redone: ['corridor', 'dining', 'family', 'kitchen', 'living', 'master', 'pantry', 'shower']
+08-shower            PASS      deviation 0.21% (bar 1%, resolves 1.00%; CG vs plan p90 0.6 cm (median 0.3) = 0.21%)  (calibration 798/1118) → _local\fidelity\08-shower__picks__8af101167edb.gate.jpg
+wrote ../jobs/kedma-d1/review/flat/shower-v1.jpg

@@ -1,0 +1,84 @@
+{
+ "rows": [
+  {
+   "at": "2026-11-16T16:26:34.742Z",
+   "asset": "04-dining",
+   "picture": "04-dining__seam3__s7__9bc83a692cbc.png",
+   "class": "transplant",
+   "against": "04-dining__gpt25__s7__69f62155db73.png",
+   "object": "the largest piece of furniture or built-in element in the middle of the image",
+   "band": {
+    "u0": 0.1113,
+    "u1": 0.3447,
+    "deg": 84
+   },
+   "cg_tour": "kedma-d1",
+   "verdict": "PASS",
+   "ratio": 1.094,
+   "tolerance": 0.1,
+   "why": "apparent width 1.094x the picture before the repair (transplant, tolerance +-10%)",
+   "judge": {
+    "photo": {
+     "found": true,
+     "box": [
+      502,
+      284,
+      721,
+      423
+     ]
+    },
+    "render": {
+     "found": true,
+     "box": [
+      176,
+      363,
+      598,
+      490
+     ]
+    },
+    "note": "The kitchen island in the photograph corresponds to the central partition wall and media unit in the earlier version."
+   },
+   "sheet": "_local\\fidelity\\ref-scale__04-dining__d0ccbc427379.jpg"
+  },
+  {
+   "at": "2026-11-16T16:27:15.826Z",
+   "asset": "04-dining",
+   "picture": "04-dining__seam3__s7__9bc83a692cbc.png",
+   "class": "transplant",
+   "against": "04-dining__gpt25__s7__69f62155db73.png",
+   "object": "the largest piece of furniture or built-in element in the middle of the image",
+   "band": {
+    "u0": 0.1001,
+    "u1": 0.3618,
+    "deg": 94.2
+   },
+   "cg_tour": "kedma-d1",
+   "verdict": "FAIL",
+   "ratio": null,
+   "tolerance": 0.1,
+   "why": "the object is only in the render",
+   "judge": {
+    "photo": {
+     "found": false,
+     "box": [
+      174,
+      368,
+      598,
+      483
+     ]
+    },
+    "render": {
+     "found": true,
+     "box": [
+      174,
+      368,
+      598,
+      483
+     ]
+    },
+    "note": "The partition wall and media unit in the middle of the room in the render was removed in the photo to create an open-plan kitchen."
+   },
+   "sheet": "_local\\fidelity\\ref-scale__04-dining__5af362bdfb40.jpg"
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+cameras: no point fits in r-laundry
+  kitchen          01-kitchen           yaw 282  clear 102 cm  links pantry,living,dining
+  pantry           02-pantry            yaw 267  clear 65 cm  links kitchen
+  living           03-living            yaw  75  clear 92 cm  links kitchen,dining,corridor,balcony
+  dining           04-dining            yaw  44  clear 94 cm  links living,family,kitchen
+  family           05-family            yaw  98  clear 77 cm  links dining
+  corridor         06-corridor          yaw 264  clear 52 cm  links living,bath,mamad,master,bed1,bed2
+  master           07-master            yaw 248  clear 76 cm  links shower,corridor
+  shower           08-shower            yaw 115  clear 39 cm  links master
+  bed1             09-bed1              yaw 185  clear 96 cm  links corridor
+  bed2             10-bed2              yaw 193  clear 97 cm  links corridor
+  bath             11-bath              yaw 167  clear 56 cm  links corridor
+  mamad            12-mamad             yaw 175  clear 109 cm  links corridor
+  balcony          13-balcony           yaw 211  clear 78 cm  links living
+run-project kedma-d1: cameras done in 0 s
+run-project kedma-d1: prompts done in 0 s
+run-project kedma-d1: furnish done in 2 s

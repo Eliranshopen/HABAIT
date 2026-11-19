@@ -1,0 +1,1507 @@
+{
+ "rooms": [
+  {
+   "room": "r-kitchen",
+   "name_he": "מטבח",
+   "area_m2": 11.267,
+   "printed_cm": [
+    460,
+    240
+   ],
+   "model_span_cm": [
+    472.1,
+    241.8
+   ],
+   "dims": [
+    {
+     "printed_cm": 460,
+     "model_cm": 462.2,
+     "diff_cm": 2.2,
+     "diff_pct": 0.48,
+     "lines_pct": 17.2
+    },
+    {
+     "printed_cm": 240,
+     "model_cm": 241.3,
+     "diff_cm": 1.3,
+     "diff_pct": 0.54,
+     "lines_pct": 63.2
+    }
+   ],
+   "pieces": [
+    {
+     "id": "k-counter-m1",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      54,
+      61
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-counter-m2",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      54,
+      61
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-counter-m3",
+     "class": "kitchen_sink",
+     "from": "sheet",
+     "size_cm": [
+      60,
+      61
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-counter-m4",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      65,
+      61
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-counter-m5",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      65,
+      61
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-counter-2-m1",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      27,
+      57
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-counter-2-m2",
+     "class": "stove",
+     "from": "sheet",
+     "size_cm": [
+      60,
+      57
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-counter-2-m3",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      86,
+      57
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-island-m1",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      62,
+      59
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-island-m2",
+     "class": "kitchen_cabinet",
+     "from": "sheet",
+     "size_cm": [
+      62,
+      59
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "k-tall-1",
+     "class": "kitchen_tall",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "k-tall-2",
+     "class": "fridge",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "k-counter-shelves",
+     "class": "kitchen_shelves",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "k-stool-1",
+     "class": "bar_stool",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "k-stool-2",
+     "class": "bar_stool",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-1",
+     "kind": "opening",
+     "width_cm": 81,
+     "to": [
+      "r-pantry"
+     ]
+    },
+    {
+     "id": "o-2",
+     "kind": "opening",
+     "width_cm": 166,
+     "to": [
+      "r-living"
+     ]
+    },
+    {
+     "id": "w-kitchen",
+     "kind": "window",
+     "width_cm": 138,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-kitchen.jpg"
+  },
+  {
+   "room": "r-pantry",
+   "name_he": "מזווה",
+   "area_m2": 2.462,
+   "printed_cm": [
+    155,
+    175
+   ],
+   "model_span_cm": [
+    160.5,
+    176.6
+   ],
+   "dims": [
+    {
+     "printed_cm": 155,
+     "model_cm": 155.1,
+     "diff_cm": 0.1,
+     "diff_pct": 0.06,
+     "lines_pct": 11.3
+    },
+    {
+     "printed_cm": 175,
+     "model_cm": 176.6,
+     "diff_cm": 1.6,
+     "diff_pct": 0.91,
+     "lines_pct": 29.8
+    }
+   ],
+   "pieces": [
+    {
+     "id": "p-shelf-n",
+     "class": "bookcase",
+     "from": "sheet",
+     "size_cm": [
+      101,
+      56
+     ],
+     "height_cm": 220
+    },
+    {
+     "id": "p-shelf-e",
+     "class": "bookcase",
+     "from": "sheet",
+     "size_cm": [
+      116,
+      54
+     ],
+     "height_cm": 220
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-1",
+     "kind": "opening",
+     "width_cm": 81,
+     "to": [
+      "r-kitchen"
+     ]
+    }
+   ],
+   "picture": "room-r-pantry.jpg"
+  },
+  {
+   "room": "r-living",
+   "name_he": "חדר דיור",
+   "area_m2": 17.046,
+   "printed_cm": [
+    null,
+    410
+   ],
+   "model_span_cm": [
+    417.7,
+    418.2
+   ],
+   "dims": [
+    {
+     "printed_cm": 410,
+     "model_cm": 408.9,
+     "diff_cm": -1.1,
+     "diff_pct": -0.27,
+     "lines_pct": 80.6
+    }
+   ],
+   "pieces": [
+    {
+     "id": "ffp-living-rug",
+     "class": "rug",
+     "from": "rule",
+     "size_cm": [
+      240,
+      170
+     ],
+     "height_cm": 2
+    },
+    {
+     "id": "l-sofa",
+     "class": "sofa",
+     "from": "sheet",
+     "size_cm": [
+      197,
+      76
+     ],
+     "height_cm": 71
+    },
+    {
+     "id": "l-armchair",
+     "class": "armchair",
+     "from": "sheet",
+     "size_cm": [
+      74,
+      66
+     ],
+     "height_cm": 102
+    },
+    {
+     "id": "l-tv-1",
+     "class": "tv_unit",
+     "from": "sheet",
+     "size_cm": [
+      135,
+      32
+     ],
+     "height_cm": 50
+    },
+    {
+     "id": "l-tv-tv",
+     "class": "tv",
+     "from": "rule",
+     "size_cm": [
+      122,
+      23
+     ],
+     "height_cm": 81
+    },
+    {
+     "id": "l-plant",
+     "class": "plant",
+     "from": "sheet",
+     "size_cm": [
+      50,
+      50
+     ],
+     "height_cm": 70
+    },
+    {
+     "id": "l-coffee",
+     "class": "round_table",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "l-pouf",
+     "class": "pouf",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "l-coffee-2",
+     "class": "round_table",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-2",
+     "kind": "opening",
+     "width_cm": 166,
+     "to": [
+      "r-kitchen"
+     ]
+    },
+    {
+     "id": "o-4",
+     "kind": "opening",
+     "width_cm": 423,
+     "to": [
+      "r-dining"
+     ]
+    },
+    {
+     "id": "o-7",
+     "kind": "opening",
+     "width_cm": 144,
+     "to": [
+      "r-corridor"
+     ]
+    },
+    {
+     "id": "o-11",
+     "kind": "sliding_door",
+     "width_cm": 266,
+     "to": [
+      "r-balcony"
+     ]
+    }
+   ],
+   "picture": "room-r-living.jpg"
+  },
+  {
+   "room": "r-dining",
+   "name_he": "כניסה ופינת אוכל",
+   "area_m2": 11.282,
+   "printed_cm": [
+    null,
+    335
+   ],
+   "model_span_cm": [
+    348.0,
+    438.2
+   ],
+   "dims": [
+    {
+     "printed_cm": 335,
+     "model_cm": 335.0,
+     "diff_cm": 0.0,
+     "diff_pct": 0.01,
+     "lines_pct": 2.0
+    }
+   ],
+   "pieces": [
+    {
+     "id": "d-table",
+     "class": "dining_table",
+     "from": "sheet",
+     "size_cm": [
+      171,
+      69
+     ],
+     "height_cm": 75
+    },
+    {
+     "id": "d-table-chair-1",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "d-table-chair-2",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "d-table-chair-3",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "d-table-chair-4",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "d-table-chair-5",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "d-table-chair-6",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "wc-vanity",
+     "class": "bathroom_sink",
+     "from": "sheet",
+     "size_cm": [
+      62,
+      43
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "wc-vanity-mirror",
+     "class": "mirror",
+     "from": "rule",
+     "size_cm": [
+      60,
+      5
+     ],
+     "height_cm": 80
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-4",
+     "kind": "opening",
+     "width_cm": 423,
+     "to": [
+      "r-living"
+     ]
+    },
+    {
+     "id": "o-5",
+     "kind": "opening",
+     "width_cm": 102,
+     "to": [
+      "r-family"
+     ]
+    },
+    {
+     "id": "o-6",
+     "kind": "door",
+     "width_cm": 72,
+     "to": [
+      "r-wc"
+     ]
+    },
+    {
+     "id": "o-13",
+     "kind": "entrance_door",
+     "width_cm": 94,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-dining.jpg"
+  },
+  {
+   "room": "r-family",
+   "name_he": "חדר משפחה",
+   "area_m2": 9.441,
+   "printed_cm": [
+    325,
+    285
+   ],
+   "model_span_cm": [
+    335.6,
+    286.6
+   ],
+   "dims": [
+    {
+     "printed_cm": 325,
+     "model_cm": 325.0,
+     "diff_cm": -0.0,
+     "diff_pct": -0.01,
+     "lines_pct": 26.8
+    },
+    {
+     "printed_cm": 285,
+     "model_cm": 286.6,
+     "diff_cm": 1.6,
+     "diff_pct": 0.56,
+     "lines_pct": 51.8
+    }
+   ],
+   "pieces": [
+    {
+     "id": "f-sofa",
+     "class": "sofa",
+     "from": "sheet",
+     "size_cm": [
+      256,
+      83
+     ],
+     "height_cm": 71
+    },
+    {
+     "id": "f-tv-1",
+     "class": "tv_unit",
+     "from": "sheet",
+     "size_cm": [
+      135,
+      31
+     ],
+     "height_cm": 50
+    },
+    {
+     "id": "f-tv-tv",
+     "class": "tv",
+     "from": "rule",
+     "size_cm": [
+      122,
+      23
+     ],
+     "height_cm": 81
+    },
+    {
+     "id": "ffp-family-plant",
+     "class": "plant",
+     "from": "rule",
+     "size_cm": [
+      73,
+      76
+     ],
+     "height_cm": 63
+    },
+    {
+     "id": "f-coffee",
+     "class": "round_table",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-5",
+     "kind": "opening",
+     "width_cm": 102,
+     "to": [
+      "r-dining"
+     ]
+    },
+    {
+     "id": "w-family",
+     "kind": "window",
+     "width_cm": 118,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-family.jpg"
+  },
+  {
+   "room": "r-wc",
+   "name_he": "שירותים",
+   "area_m2": 1.419,
+   "printed_cm": [
+    150,
+    90
+   ],
+   "model_span_cm": [
+    152.2,
+    93.9
+   ],
+   "dims": [
+    {
+     "printed_cm": 150,
+     "model_cm": 152.2,
+     "diff_cm": 2.2,
+     "diff_pct": 1.5,
+     "lines_pct": 37.1
+    },
+    {
+     "printed_cm": 90,
+     "model_cm": 92.3,
+     "diff_cm": 2.3,
+     "diff_pct": 2.6,
+     "lines_pct": 0.0
+    }
+   ],
+   "pieces": [
+    {
+     "id": "wc-wc",
+     "class": "toilet",
+     "from": "sheet",
+     "size_cm": [
+      38,
+      59
+     ],
+     "height_cm": 78
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-6",
+     "kind": "door",
+     "width_cm": 72,
+     "to": [
+      "r-dining"
+     ]
+    }
+   ],
+   "picture": "room-r-wc.jpg"
+  },
+  {
+   "room": "r-corridor",
+   "name_he": "מסדרון",
+   "area_m2": 7.844,
+   "printed_cm": null,
+   "model_span_cm": [
+    704.2,
+    125.8
+   ],
+   "dims": null,
+   "pieces": [],
+   "openings": [
+    {
+     "id": "o-7",
+     "kind": "opening",
+     "width_cm": 144,
+     "to": [
+      "r-living"
+     ]
+    },
+    {
+     "id": "o-9",
+     "kind": "door",
+     "width_cm": 83,
+     "to": [
+      "r-bath"
+     ]
+    },
+    {
+     "id": "o-14",
+     "kind": "door",
+     "width_cm": 71,
+     "to": [
+      "r-mamad"
+     ]
+    },
+    {
+     "id": "o-15",
+     "kind": "door",
+     "width_cm": 79,
+     "to": [
+      "r-master"
+     ]
+    },
+    {
+     "id": "o-16",
+     "kind": "door",
+     "width_cm": 79,
+     "to": [
+      "r-bed1"
+     ]
+    },
+    {
+     "id": "o-17",
+     "kind": "door",
+     "width_cm": 80,
+     "to": [
+      "r-bed2"
+     ]
+    }
+   ],
+   "picture": "room-r-corridor.jpg"
+  },
+  {
+   "room": "r-master",
+   "name_he": "חדר שינה הורים",
+   "area_m2": 12.218,
+   "printed_cm": [
+    298,
+    383
+   ],
+   "model_span_cm": [
+    377.9,
+    385.3
+   ],
+   "dims": [
+    {
+     "printed_cm": 298,
+     "model_cm": 298.2,
+     "diff_cm": 0.2,
+     "diff_pct": 0.08,
+     "lines_pct": 37.2
+    },
+    {
+     "printed_cm": 383,
+     "model_cm": 383.2,
+     "diff_cm": 0.2,
+     "diff_pct": 0.06,
+     "lines_pct": 51.8
+    }
+   ],
+   "pieces": [
+    {
+     "id": "m-bed",
+     "class": "bed_double",
+     "from": "sheet",
+     "size_cm": [
+      162,
+      184
+     ],
+     "height_cm": 55
+    },
+    {
+     "id": "m-tv-1",
+     "class": "tv_unit",
+     "from": "sheet",
+     "size_cm": [
+      160,
+      36
+     ],
+     "height_cm": 50
+    },
+    {
+     "id": "m-tv-tv",
+     "class": "tv",
+     "from": "rule",
+     "size_cm": [
+      122,
+      23
+     ],
+     "height_cm": 81
+    },
+    {
+     "id": "m-closet",
+     "class": "closet",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-8",
+     "kind": "door",
+     "width_cm": 73,
+     "to": [
+      "r-shower"
+     ]
+    },
+    {
+     "id": "o-15",
+     "kind": "door",
+     "width_cm": 79,
+     "to": [
+      "r-corridor"
+     ]
+    },
+    {
+     "id": "w-master",
+     "kind": "window",
+     "width_cm": 138,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-master.jpg"
+  },
+  {
+   "room": "r-shower",
+   "name_he": "חדר רחצה",
+   "area_m2": 3.66,
+   "printed_cm": [
+    298,
+    125
+   ],
+   "model_span_cm": [
+    284.9,
+    135.6
+   ],
+   "dims": [
+    {
+     "printed_cm": 298,
+     "model_cm": 284.9,
+     "diff_cm": -13.1,
+     "diff_pct": -4.4,
+     "lines_pct": 0.0
+    },
+    {
+     "printed_cm": 125,
+     "model_cm": 125.3,
+     "diff_cm": 0.3,
+     "diff_pct": 0.24,
+     "lines_pct": 34.1
+    }
+   ],
+   "pieces": [
+    {
+     "id": "sh-wc",
+     "class": "toilet",
+     "from": "sheet",
+     "size_cm": [
+      40,
+      52
+     ],
+     "height_cm": 78
+    },
+    {
+     "id": "sh-vanity",
+     "class": "bathroom_sink",
+     "from": "sheet",
+     "size_cm": [
+      57,
+      41
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "sh-vanity-mirror",
+     "class": "mirror",
+     "from": "rule",
+     "size_cm": [
+      57,
+      5
+     ],
+     "height_cm": 80
+    },
+    {
+     "id": "shower-cistern",
+     "class": "closet",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "sh-shower",
+     "class": "shower",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-8",
+     "kind": "door",
+     "width_cm": 73,
+     "to": [
+      "r-master"
+     ]
+    },
+    {
+     "id": "w-shower",
+     "kind": "window",
+     "width_cm": 59,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-shower.jpg"
+  },
+  {
+   "room": "r-bed1",
+   "name_he": "חדר שינה",
+   "area_m2": 8.932,
+   "printed_cm": [
+    260,
+    338
+   ],
+   "model_span_cm": [
+    261.3,
+    346.9
+   ],
+   "dims": [
+    {
+     "printed_cm": 260,
+     "model_cm": 261.3,
+     "diff_cm": 1.3,
+     "diff_pct": 0.5,
+     "lines_pct": 55.4
+    },
+    {
+     "printed_cm": 338,
+     "model_cm": 338.0,
+     "diff_cm": 0.0,
+     "diff_pct": 0.0,
+     "lines_pct": 23.6
+    }
+   ],
+   "pieces": [
+    {
+     "id": "b1-bed",
+     "class": "bed_single",
+     "from": "sheet",
+     "size_cm": [
+      84,
+      183
+     ],
+     "height_cm": 50
+    },
+    {
+     "id": "b1-desk",
+     "class": "dining_table",
+     "from": "sheet",
+     "size_cm": [
+      121,
+      54
+     ],
+     "height_cm": 75
+    },
+    {
+     "id": "b1-desk-chair-1",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "b1-closet",
+     "class": "closet",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-16",
+     "kind": "door",
+     "width_cm": 79,
+     "to": [
+      "r-corridor"
+     ]
+    },
+    {
+     "id": "w-bed1",
+     "kind": "window",
+     "width_cm": 118,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-bed1.jpg"
+  },
+  {
+   "room": "r-bed2",
+   "name_he": "חדר שינה",
+   "area_m2": 8.919,
+   "printed_cm": [
+    260,
+    338
+   ],
+   "model_span_cm": [
+    261.4,
+    346.5
+   ],
+   "dims": [
+    {
+     "printed_cm": 260,
+     "model_cm": 261.4,
+     "diff_cm": 1.4,
+     "diff_pct": 0.54,
+     "lines_pct": 55.1
+    },
+    {
+     "printed_cm": 338,
+     "model_cm": 337.6,
+     "diff_cm": -0.4,
+     "diff_pct": -0.11,
+     "lines_pct": 23.6
+    }
+   ],
+   "pieces": [
+    {
+     "id": "b2-bed",
+     "class": "bed_single",
+     "from": "sheet",
+     "size_cm": [
+      82,
+      184
+     ],
+     "height_cm": 50
+    },
+    {
+     "id": "b2-desk",
+     "class": "dining_table",
+     "from": "sheet",
+     "size_cm": [
+      122,
+      53
+     ],
+     "height_cm": 75
+    },
+    {
+     "id": "b2-desk-chair-1",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "b2-closet",
+     "class": "closet",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-17",
+     "kind": "door",
+     "width_cm": 80,
+     "to": [
+      "r-corridor"
+     ]
+    },
+    {
+     "id": "w-bed2",
+     "kind": "window",
+     "width_cm": 118,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-bed2.jpg"
+  },
+  {
+   "room": "r-bath",
+   "name_he": "חדר אמבטיה",
+   "area_m2": 6.644,
+   "printed_cm": [
+    225,
+    185
+   ],
+   "model_span_cm": [
+    226.6,
+    308.5
+   ],
+   "dims": [
+    {
+     "printed_cm": 225,
+     "model_cm": 226.6,
+     "diff_cm": 1.6,
+     "diff_pct": 0.71,
+     "lines_pct": 39.9
+    },
+    {
+     "printed_cm": 185,
+     "model_cm": 186.2,
+     "diff_cm": 1.2,
+     "diff_pct": 0.65,
+     "lines_pct": 8.2
+    }
+   ],
+   "pieces": [
+    {
+     "id": "ba-vanity",
+     "class": "bathroom_sink",
+     "from": "sheet",
+     "size_cm": [
+      79,
+      44
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "ba-vanity-mirror",
+     "class": "mirror",
+     "from": "rule",
+     "size_cm": [
+      60,
+      5
+     ],
+     "height_cm": 80
+    },
+    {
+     "id": "ba-wc",
+     "class": "toilet",
+     "from": "sheet",
+     "size_cm": [
+      53,
+      53
+     ],
+     "height_cm": 78
+    },
+    {
+     "id": "ba-tub",
+     "class": "bathtub",
+     "from": "sheet",
+     "size_cm": [
+      169,
+      65
+     ],
+     "height_cm": 55
+    },
+    {
+     "id": "bath-cistern",
+     "class": "closet",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "ba-washer",
+     "class": "washing_machine",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "ba-dryer",
+     "class": "washing_machine",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-9",
+     "kind": "door",
+     "width_cm": 83,
+     "to": [
+      "r-corridor"
+     ]
+    },
+    {
+     "id": "w-utility",
+     "kind": "window",
+     "width_cm": 177,
+     "to": [
+      "r-laundry"
+     ]
+    }
+   ],
+   "picture": "room-r-bath.jpg"
+  },
+  {
+   "room": "r-mamad",
+   "name_he": "ממ\"ד חדר שינה",
+   "area_m2": 11.027,
+   "printed_cm": [
+    295,
+    370
+   ],
+   "model_span_cm": [
+    295.5,
+    376.0
+   ],
+   "dims": [
+    {
+     "printed_cm": 295,
+     "model_cm": 295.5,
+     "diff_cm": 0.5,
+     "diff_pct": 0.17,
+     "lines_pct": 43.8
+    },
+    {
+     "printed_cm": 370,
+     "model_cm": 368.4,
+     "diff_cm": -1.6,
+     "diff_pct": -0.43,
+     "lines_pct": 43.5
+    }
+   ],
+   "pieces": [
+    {
+     "id": "s-bed",
+     "class": "bed_single",
+     "from": "sheet",
+     "size_cm": [
+      85,
+      180
+     ],
+     "height_cm": 50
+    },
+    {
+     "id": "s-desk",
+     "class": "dining_table",
+     "from": "sheet",
+     "size_cm": [
+      121,
+      52
+     ],
+     "height_cm": 75
+    },
+    {
+     "id": "s-desk-chair-1",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "s-closet",
+     "class": "closet",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-14",
+     "kind": "door",
+     "width_cm": 71,
+     "to": [
+      "r-corridor"
+     ]
+    },
+    {
+     "id": "w-mamad",
+     "kind": "window",
+     "width_cm": 98,
+     "to": [
+      "outside"
+     ]
+    }
+   ],
+   "picture": "room-r-mamad.jpg"
+  },
+  {
+   "room": "r-balcony",
+   "name_he": "מרפסת",
+   "area_m2": 21.435,
+   "printed_cm": null,
+   "model_span_cm": [
+    370.7,
+    586.7
+   ],
+   "dims": null,
+   "pieces": [
+    {
+     "id": "t-table",
+     "class": "dining_table",
+     "from": "sheet",
+     "size_cm": [
+      174,
+      94
+     ],
+     "height_cm": 75
+    },
+    {
+     "id": "t-table-chair-1",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "t-table-chair-2",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "t-table-chair-3",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "t-table-chair-4",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "t-table-chair-5",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "t-table-chair-6",
+     "class": "dining_chair",
+     "from": "rule",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 85
+    },
+    {
+     "id": "t-palm",
+     "class": "plant",
+     "from": "sheet",
+     "size_cm": [
+      50,
+      50
+     ],
+     "height_cm": 180
+    },
+    {
+     "id": "t-plant-1",
+     "class": "plant",
+     "from": "sheet",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 100
+    },
+    {
+     "id": "t-plant-2",
+     "class": "plant",
+     "from": "sheet",
+     "size_cm": [
+      45,
+      45
+     ],
+     "height_cm": 90
+    },
+    {
+     "id": "t-plant-3",
+     "class": "plant",
+     "from": "sheet",
+     "size_cm": [
+      35,
+      35
+     ],
+     "height_cm": 60
+    },
+    {
+     "id": "t-lounger-1",
+     "class": "sun_lounger",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "t-lounger-2",
+     "class": "sun_lounger",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "o-11",
+     "kind": "sliding_door",
+     "width_cm": 266,
+     "to": [
+      "r-living"
+     ]
+    }
+   ],
+   "picture": "room-r-balcony.jpg"
+  },
+  {
+   "room": "r-laundry",
+   "name_he": "מסתור כביסה",
+   "area_m2": 2.952,
+   "printed_cm": null,
+   "model_span_cm": [
+    217.1,
+    137.8
+   ],
+   "dims": null,
+   "pieces": [
+    {
+     "id": "la-condenser",
+     "class": "ac_condenser",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    },
+    {
+     "id": "la-boiler",
+     "class": "water_heater",
+     "from": "sheet",
+     "size_cm": null,
+     "height_cm": null
+    }
+   ],
+   "openings": [
+    {
+     "id": "w-utility",
+     "kind": "window",
+     "width_cm": 177,
+     "to": [
+      "r-bath"
+     ]
+    }
+   ],
+   "picture": "room-r-laundry.jpg"
+  }
+ ]
+}

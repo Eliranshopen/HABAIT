@@ -1,0 +1,398 @@
+{
+ "rooms": 17,
+ "fixtures": 17,
+ "scale_px_per_cm": 3.3277,
+ "scale_fit_factor": 0.9931,
+ "scale_fitted": true,
+ "dims": [
+  {
+   "room": "r-balcony",
+   "name_he": "מרפסת",
+   "measured_cm": [
+    892,
+    270
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-kitchen",
+   "name_he": "מטבח",
+   "measured_cm": [
+    461,
+    241
+   ],
+   "printed_cm": [
+    460,
+    240
+   ],
+   "ratio": [
+    0.996304347826087,
+    0.9958333333333333
+   ],
+   "delta_pct": [
+    0.2,
+    0.4
+   ]
+  },
+  {
+   "room": "r-pantry",
+   "name_he": "מזווה",
+   "measured_cm": [
+    175,
+    155
+   ],
+   "printed_cm": [
+    155,
+    175
+   ],
+   "ratio": [
+    0.9925714285714289,
+    0.9935483870967742
+   ],
+   "delta_pct": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "room": "r-entrance",
+   "name_he": "כניסה",
+   "measured_cm": [
+    752,
+    587
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-living-room",
+   "name_he": "חדר דיור",
+   "measured_cm": [
+    232,
+    182
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-dining-area",
+   "name_he": "פינת אוכל",
+   "measured_cm": [
+    690,
+    412
+   ],
+   "printed_cm": [
+    335,
+    590
+   ],
+   "ratio": [
+    1.1606779661016948,
+    1.221194029850746
+   ],
+   "delta_pct": [
+    16.9,
+    23.0
+   ]
+  },
+  {
+   "room": "r-guest-toilet",
+   "name_he": "שירותים",
+   "measured_cm": [
+    145,
+    88
+   ],
+   "printed_cm": [
+    150,
+    90
+   ],
+   "ratio": [
+    0.9606666666666668,
+    0.9644444444444452
+   ],
+   "delta_pct": [
+    -3.3,
+    -2.2
+   ]
+  },
+  {
+   "room": "r-family-room",
+   "name_he": "חדר משפחה",
+   "measured_cm": [
+    322,
+    276
+   ],
+   "printed_cm": [
+    325,
+    285
+   ],
+   "ratio": [
+    0.9861538461538462,
+    0.9614035087719298
+   ],
+   "delta_pct": [
+    -0.9,
+    -3.2
+   ]
+  },
+  {
+   "room": "r-master-bedroom",
+   "name_he": "חדר שינה הורים",
+   "measured_cm": [
+    927,
+    365
+   ],
+   "printed_cm": [
+    383,
+    298
+   ],
+   "ratio": [
+    2.4052219321148827,
+    1.2137583892617447
+   ],
+   "delta_pct": [
+    142.0,
+    22.5
+   ]
+  },
+  {
+   "room": "r-master-bathroom",
+   "name_he": "חדר רחצה",
+   "measured_cm": [
+    298,
+    228
+   ],
+   "printed_cm": [
+    298,
+    125
+   ],
+   "ratio": [
+    0.9946308724832214,
+    1.812
+   ],
+   "delta_pct": [
+    0.0,
+    82.4
+   ]
+  },
+  {
+   "room": "r-bedroom",
+   "name_he": "חדר שינה",
+   "measured_cm": [
+    261,
+    252
+   ],
+   "printed_cm": [
+    338,
+    260
+   ],
+   "ratio": [
+    0.7653846153846152,
+    0.9607692307692306
+   ],
+   "delta_pct": [
+    -22.8,
+    -3.1
+   ]
+  },
+  {
+   "room": "r-bedroom-2",
+   "name_he": "חדר שינה",
+   "measured_cm": [
+    298,
+    173
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-bathroom",
+   "name_he": "חדר אמבטיה",
+   "measured_cm": [
+    225,
+    218
+   ],
+   "printed_cm": [
+    225,
+    185
+   ],
+   "ratio": [
+    0.9924444444444442,
+    1.1659459459459462
+   ],
+   "delta_pct": [
+    0.0,
+    17.8
+   ]
+  },
+  {
+   "room": "r-safe-room-bedroom",
+   "name_he": "ממ\"ד חדר שינה",
+   "measured_cm": [
+    355,
+    285
+   ],
+   "printed_cm": [
+    370,
+    295
+   ],
+   "ratio": [
+    0.9532432432432427,
+    0.9589830508474579
+   ],
+   "delta_pct": [
+    -4.1,
+    -3.4
+   ]
+  },
+  {
+   "room": "r-laundry-balcony",
+   "name_he": "מסתור כביסה",
+   "measured_cm": [
+    245,
+    219
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-lobby-1",
+   "name_he": null,
+   "measured_cm": [
+    266,
+    98
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-lobby-2",
+   "name_he": null,
+   "measured_cm": [
+    252,
+    58
+   ],
+   "printed_cm": null
+  }
+ ],
+ "could_not_read": [
+  "room 'מבואה' (r-hall-auto-14): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'מעבר' (r-corridor-3): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'מעבר' (r-corridor-70): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'מעבר' (r-corridor-79): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'מעבר' (r-corridor-82): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'מרפסת' (r-balcony): no printed dimensions were read; its size comes from the drawing only",
+  "room 'כניסה' (r-entrance): no printed dimensions were read; its size comes from the drawing only",
+  "room 'חדר דיור' (r-living-room): no printed dimensions were read; its size comes from the drawing only",
+  "room 'פינת אוכל' (r-dining-area): traced [690, 412] cm vs printed [335, 590] cm ([16.9, 23.0] %) — check the trace or the reading",
+  "room 'שירותים' (r-guest-toilet): traced [145, 88] cm vs printed [150, 90] cm ([-3.3, -2.2] %) — check the trace or the reading",
+  "room 'חדר משפחה' (r-family-room): traced [322, 276] cm vs printed [325, 285] cm ([-0.9, -3.2] %) — check the trace or the reading",
+  "room 'חדר שינה הורים' (r-master-bedroom): traced [927, 365] cm vs printed [383, 298] cm ([142.0, 22.5] %) — check the trace or the reading",
+  "room 'חדר רחצה' (r-master-bathroom): traced [298, 228] cm vs printed [298, 125] cm ([0.0, 82.4] %) — check the trace or the reading",
+  "room 'חדר שינה' (r-bedroom): traced [261, 252] cm vs printed [338, 260] cm ([-22.8, -3.1] %) — check the trace or the reading",
+  "room 'חדר שינה' (r-bedroom-2): no printed dimensions were read; its size comes from the drawing only",
+  "room 'חדר אמבטיה' (r-bathroom): traced [225, 218] cm vs printed [225, 185] cm ([0.0, 17.8] %) — check the trace or the reading",
+  "room 'ממ\"ד חדר שינה' (r-safe-room-bedroom): traced [355, 285] cm vs printed [370, 295] cm ([-4.1, -3.4] %) — check the trace or the reading",
+  "room 'מסתור כביסה' (r-laundry-balcony): no printed dimensions were read; its size comes from the drawing only",
+  "room 'None' (r-lobby-1): no printed dimensions were read; its size comes from the drawing only",
+  "room 'None' (r-lobby-2): no printed dimensions were read; its size comes from the drawing only"
+ ],
+ "legend": [
+  {
+   "n": 1,
+   "id": "r-balcony",
+   "name_he": "מרפסת",
+   "area_m2": 9.397
+  },
+  {
+   "n": 2,
+   "id": "r-kitchen",
+   "name_he": "מטבח",
+   "area_m2": 10.648
+  },
+  {
+   "n": 3,
+   "id": "r-pantry",
+   "name_he": "מזווה",
+   "area_m2": 2.578
+  },
+  {
+   "n": 4,
+   "id": "r-entrance",
+   "name_he": "כניסה",
+   "area_m2": 23.843
+  },
+  {
+   "n": 5,
+   "id": "r-living-room",
+   "name_he": "חדר דיור",
+   "area_m2": 3.831
+  },
+  {
+   "n": 6,
+   "id": "r-dining-area",
+   "name_he": "פינת אוכל",
+   "area_m2": 13.931
+  },
+  {
+   "n": 7,
+   "id": "r-guest-toilet",
+   "name_he": "שירותים",
+   "area_m2": 1.269
+  },
+  {
+   "n": 8,
+   "id": "r-family-room",
+   "name_he": "חדר משפחה",
+   "area_m2": 8.64
+  },
+  {
+   "n": 9,
+   "id": "r-master-bedroom",
+   "name_he": "חדר שינה הורים",
+   "area_m2": 15.673
+  },
+  {
+   "n": 10,
+   "id": "r-master-bathroom",
+   "name_he": "חדר רחצה",
+   "area_m2": 4.874
+  },
+  {
+   "n": 11,
+   "id": "r-bedroom",
+   "name_he": "חדר שינה",
+   "area_m2": 6.489
+  },
+  {
+   "n": 12,
+   "id": "r-bedroom-2",
+   "name_he": "חדר שינה",
+   "area_m2": 4.597
+  },
+  {
+   "n": 13,
+   "id": "r-bathroom",
+   "name_he": "חדר אמבטיה",
+   "area_m2": 4.573
+  },
+  {
+   "n": 14,
+   "id": "r-safe-room-bedroom",
+   "name_he": "ממ\"ד חדר שינה",
+   "area_m2": 10.038
+  },
+  {
+   "n": 15,
+   "id": "r-laundry-balcony",
+   "name_he": "מסתור כביסה",
+   "area_m2": 4.263
+  },
+  {
+   "n": 16,
+   "id": "r-lobby-1",
+   "name_he": null,
+   "area_m2": 2.504
+  },
+  {
+   "n": 17,
+   "id": "r-lobby-2",
+   "name_he": null,
+   "area_m2": 1.281
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{"camera": [787.1, 1178.2, 160.0, 185.0], "floor_share_pct": 20.74, "taken_pct": 20.69, "unpainted_floor_px": 424671, "behind_piece_px": 445, "joint_px": 61925, "joints_on_grid_pct": 99.9, "floor_colour_bgr": [135.0, 148.0, 163.0], "p0": -32.0, "p1": -44.0}
+{"step": "cap-fill", "filled_pct": 22.14}
+{"step": "wall-fill", "plane": "z=290", "span": "0,1", "src_plane": "z=290", "src_span": "0,1", "target_pct": 28.294, "source_px": 9404667, "colour_bgr": [167.0, 182.0, 198.0], "grain_block": false}
+{"step": "no-skirting", "cam": "cp-bed1", "changed_pct": 0.713, "columns": 3492, "top_cm": 16.0}
+{"out": "09-bed1__redo__v1.png", "painted_pct": 100.0, "picked": true}
+run-project kedma-d1: scenes done in 6 s
+view {'tiltDeg': 10, 'pannini': 1} ; headings changed: [('kitchen', 0, 18), ('pantry', 0, 104), ('living', 0, -165), ('dining', -149, -140), ('shower', 0, -22), ('bath', 0, 5)]
+4 viewpoints marked as old pictures; redone: ['bed1', 'corridor', 'dining', 'family', 'kitchen', 'living', 'master', 'pantry', 'shower']
+09-bed1              PASS      deviation 0.34% (bar 1%, resolves 1.00%; CG vs plan p90 1.2 cm (median 0.6) = 0.34%)  (calibration 778/1008) → _local\fidelity\09-bed1__picks__5d6dafdddbcf.gate.jpg
+wrote ../jobs/kedma-d1/review/flat/bed1-v1.jpg

@@ -1,5 +1,5 @@
 # Projects/ — the product projects
-<!-- last-updated: 2026-11-18 -->
+<!-- last-updated: 2026-11-19 -->
 
 ## What's here
 Each product project in its own folder, with its own `CLAUDE.md`, memory and (when it has one) `.claude/` layer. The root contract (`C:\RnD\CLAUDE.md` §0–§12) applies above every project; a project's own card wins inside it on anything it states.
@@ -9,6 +9,7 @@ Each product project in its own folder, with its own `CLAUDE.md`, memory and (wh
 | Habait — developer sales plan → 360 tour / flyover / clickable building | `Habait/` | [`Habait/CLAUDE.md`](Habait/CLAUDE.md) (Hebrew, the project's own) | **copied 2026-11-03 12:19** from `C:\Habait` by board `development/tasks/copy-habait-2026-11-03/` — 29,552 files, 30.4 GB, verified 5/5; paths re-pointed (`Habait/REPOINTED.md`). cut over 2026-11-03: `C:\Habait` is archived as `C:\Habait-archive-2026-11-03`; this folder is the only live copy |
 | 3Dengine — the engine: sales-plan PDF → full 360 tour, driven by the agent through MCP | `3Dengine/` | [`3Dengine/CLAUDE.md`](3Dengine/CLAUDE.md) | **2026-11-18:** built on Eliran's word, one milestone at a time (board `development/tasks/3dengine/`, plan `development/plans/2026-11-16-pdf-to-360-engine-mcp.md`). 7 of 27 milestones closed: 0.1 the engine home, 0.2 a stub engine behind the agent, 0.3 a job on the disk, 1.1 intake and a first look, 1.2 the reading tool in the engine, 1.3 the reading as a job's stage, 1.4 a kept reading. The readiness command prints READY |
 | Pesel_yazamot — the developer's source files for Kedma, Etz Efraim (sales-plan sheets, price list, exterior renders) | `Pesel_yazamot/` | [`Pesel_yazamot/CLAUDE.md`](Pesel_yazamot/CLAUDE.md) | **2026-11-16:** put here by Eliran as the input of apartment simulations; originals, read-only. First job: building ד apartment 1, worktree `.wt/kedma-d1` → `memory/project/2026-11-16-kedma-d1-simulation.md` |
+| Kedma_D1 — Kedma, Etz Efraim, building ד apt 1: the 360 tour (look B) | `Kedma_D1/` | [`Kedma_D1/CLAUDE.md`](Kedma_D1/CLAUDE.md) | **2026-11-19:** 13 of 13 viewpoints PASS, live at kedma-d1.vercel.app; this folder is a COPY of the deliverables (dist = the built tour, 13 panoramas, job, plan) on Eliran's word; the work runs in `.wt/kedma-d1` |
 | Harey_zahav_Naama — the developer's source files for Harei Zahav, Moshav Na'ama (sales plan, brochure, interior renders) | `Harey_zahav_Naama/` | [`Harey_zahav_Naama/CLAUDE.md`](Harey_zahav_Naama/CLAUDE.md) | **2026-11-17:** model Hatzav (3 rooms, 80 m²) built as an interactive 3D walkaround in `.wt/harei-zahav-naama`. QA PASS, $0, not committed |
 
 **2026-11-16:** `Habait/` was off the disk from about 13:22 and is BACK since that evening (`git restore -- Projects/Habait` on Eliran's word: the 2,719 tracked files; what git does not track — `tools/`, `_local/`, the old secrets file — is still not there) → `memory/project/2026-11-16-projects-habait-off-disk.md`.
@@ -23,6 +24,7 @@ Each product project in its own folder, with its own `CLAUDE.md`, memory and (wh
 ## Subfolders
 | Folder | Card | Purpose |
 |---|---|---|
+| `Kedma_D1/` | [`Kedma_D1/CLAUDE.md`](Kedma_D1/CLAUDE.md) | Kedma D/1 deliverables (copy): dist (the tour), panoramas, job, plan |
 | `3Dengine/` | [`3Dengine/CLAUDE.md`](3Dengine/CLAUDE.md) | the engine home: settings file, readiness command, set-up scripts, the brought-in pipeline, tests |
 | `Habait/` | [`Habait/CLAUDE.md`](Habait/CLAUDE.md) | the project root: instructions, memory protocol, repo layout, commands (Hebrew-first) |
 | `Habait/.claude/agents/` | [`Habait/.claude/agents/CLAUDE.md`](Habait/.claude/agents/CLAUDE.md) | the project's 7 agents (engine-builder, platform-dev, blender-scene, genai-look, cloud-render, qa-reviewer, corpus-and-docs) |

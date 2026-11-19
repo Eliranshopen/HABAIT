@@ -1,0 +1,27 @@
+{
+ "version": 3,
+ "kind": "object-paste",
+ "parent": "03-living__flat__a.png",
+ "object_paste": {
+  "from": "_local/flatfix/03-living-b/answer-5b790c7f97d9.reg.png",
+  "tool": "jobs/kedma-d1/hand/flatfix.py",
+  "args": "view yaw 250.0 pitch 0.0 hfov 112.0 size 1024, inset 0, feather 36, box 0.138,0.035,0.994,1.000",
+  "box": [
+   132,
+   205,
+   581,
+   624
+  ],
+  "why": "the image model drew near things straight in the panorama, so they were bent in the viewer; the view was redrawn on the CG render's geometry and projected back"
+ },
+ "band": {
+  "u": 1.1944,
+  "deg": 112.0,
+  "rows": [
+   0.2002,
+   0.8096
+  ]
+ },
+ "cuts": [],
+ "note": "no band cut: a straight-line view of the same camera, feathered; checked by eye"
+}

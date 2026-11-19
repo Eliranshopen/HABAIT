@@ -1,0 +1,61 @@
+DOUBLE-line pixels 10177, kept as barriers 10177
+STROKES 0 components (cut at walls); touching 0; kept 0; auto-dropped straight >= 100 cm 0; blacklisted 0
+LINES 5 far-from-wall black components >= 60 cm; kept 0
+  ln-1   diag   598 cm  px   5739  bbox [234,254,276,850]
+  ln-2   diag   252 cm  px   1134  bbox [608,544,609,796]
+  ln-3   diag   252 cm  px   1134  bbox [611,544,611,796]
+  ln-4   diag   202 cm  px    910  bbox [1183,1483,1384,1483]
+  ln-5   diag   202 cm  px    910  bbox [1183,1485,1384,1485]
+AUTO gap-1    138 cm  598,322 -> 597,460
+AUTO gap-2     94 cm  1251,459 -> 1249,552
+AUTO gap-3    102 cm  1250,592 -> 1222,690  (skipped)
+AUTO gap-4     71 cm  1396,941 -> 1398,1012
+AUTO gap-5    122 cm  1216,903 -> 1216,1025  (skipped)
+AUTO gap-6     79 cm  683,937 -> 683,1016
+AUTO gap-7    139 cm  304,1016 -> 304,1155
+AUTO gap-8     79 cm  1310,1232 -> 1231,1232  (skipped)
+AUTO gap-9     79 cm  796,1032 -> 875,1033
+AUTO gap-10    59 cm  563,1396 -> 504,1396
+AUTO gap-11    80 cm  1067,1035 -> 1146,1034
+BARRIER written C:/RnD/.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/hand/barrier.png
+ROOM kitchen          region   573060 px  area 11.28 m²  verts 13
+ROOM pantry           region   124786 px  area 2.45 m²  verts 12
+ROOM living: LEAKED
+ROOM dining           region   571118 px  area 11.26 m²  verts 27
+ROOM family           region   478989 px  area 9.44 m²  verts 9
+ROOM wc               region    72762 px  area 1.43 m²  verts 6
+ROOM corridor         region   397586 px  area 7.84 m²  verts 27
+ROOM master           region   617151 px  area 12.21 m²  verts 11
+ROOM shower           region   186142 px  area 3.65 m²  verts 13
+ROOM bed1             region   452086 px  area 8.91 m²  verts 10
+ROOM bed2             region   451105 px  area 8.89 m²  verts 10
+ROOM bath             region   336481 px  area 6.62 m²  verts 23
+ROOM mamad            region   558498 px  area 11.00 m²  verts 13
+ROOM balcony: LEAKED
+ROOM laundry: LEAKED
+DOOR kitchen|pantry                 width   81 cm  centre 1087,380  angle 90°  px 552
+DOOR dining|kitchen                 width   77 cm  centre 1073,486  angle -39°  px 732
+DOOR dining|family                  width  102 cm  centre 1383,641  angle 90°  px 690
+DOOR dining|wc                      width   72 cm  centre 1269,789  angle 0°  px 492
+DOOR corridor|dining                width   17 cm  centre 1039,920  angle 0°  px 120
+DOOR master|shower                  width   73 cm  centre 449,1241  angle 0°  px 498
+DOOR bath|corridor                  width   83 cm  centre 1261,1031  angle 0°  px 561
+GLAZING 5 double-line networks -> 0 panes
+DOOR o-corridor-dining: 17.3 cm, dropped
+GAP gap-1: outside|kitchen is not a door (an outdoor passage), skipped
+DOOR dining|outside                 width   94 cm  from the wall gap gap-2
+GAP gap-3: both sides dining, skipped
+DOOR corridor|mamad                 width   71 cm  from the wall gap gap-4
+GAP gap-5: both sides corridor, skipped
+DOOR master|corridor                width   79 cm  from the wall gap gap-6
+GAP gap-7: outside|master is not a door (an outdoor passage), skipped
+GAP gap-8: both sides bath, skipped
+DOOR bed1|corridor                  width   79 cm  from the wall gap gap-9
+GAP gap-10: shower|outside is not a door (an outdoor passage), skipped
+DOOR bed2|corridor                  width   80 cm  from the wall gap gap-11
+WALLS 10 components after closing
+WALLS extracted from the grey fill: 10 pieces
+DOOR o-dining-kitchen: an end is 74 cm from any wall edge (check the gap)
+DOORS kept at their traced centres (11 real openings), ends checked against the wall edges
+PLAN written C:/RnD/.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/hand/plan.general.json: 12 rooms, 10 wall pieces, 11 openings, 0 panes, 0 cameras, 0 fixtures
+overlay C:/RnD/.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/hand/trace-overlay.png

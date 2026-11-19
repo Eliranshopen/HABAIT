@@ -1,0 +1,11 @@
+file:///c:/RnD/.wt/kedma-d1/Projects/3Dengine/pipeline/Habait/tour360/tools/fidelity-gate.mjs:144
+  if (!res.ok || !j.image?.url) { ledger.settle(row, res.ok ? EST_USD : 0, { status: `http-${res.status}`, note: JSON.stringify(j).slice(0, 160) }); throw new Error(`depth call failed: HTTP ${res.status} ${JSON.stringify(j).slice(0, 200)}`); }
+                                                                                                                                                           ^
+
+Error: depth call failed: HTTP 403 {"detail":"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."}
+    at depthOf (file:///c:/RnD/.wt/kedma-d1/Projects/3Dengine/pipeline/Habait/tour360/tools/fidelity-gate.mjs:144:156)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async depthMap (file:///c:/RnD/.wt/kedma-d1/Projects/3Dengine/pipeline/Habait/tour360/tools/fidelity-gate.mjs:194:14)
+    at async file:///c:/RnD/.wt/kedma-d1/Projects/3Dengine/pipeline/Habait/tour360/tools/fidelity-gate.mjs:218:15
+
+Node.js v24.22.1

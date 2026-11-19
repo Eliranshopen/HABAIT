@@ -1,0 +1,6 @@
+libpng error: Read Error
+Traceback (most recent call last):
+  File "c:\RnD\.wt\kedma-d1\Projects\3Dengine\jobs\kedma-d1\hand\near_floor.py", line 43, in <module>
+    C = cv2.imread(P("canvas.png"), cv2.IMREAD_COLOR).astype(np.float32)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'astype'

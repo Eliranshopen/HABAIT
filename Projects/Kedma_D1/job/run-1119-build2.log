@@ -1,0 +1,36 @@
+01-kitchen           ← 01-kitchen__redo__v3.png 8192x4096 → balanced 127 KB · thumb 14 KB · full 1568 KB
+02-pantry            ← 02-pantry__redo__v7.png 8192x4096 → balanced 197 KB · thumb 20 KB · full 1915 KB
+03-living            ← 03-living__redo__v3.png 8192x4096 → balanced 137 KB · thumb 14 KB · full 1581 KB
+04-dining            ← 04-dining__redo__v3.png 8192x4096 → balanced 139 KB · thumb 16 KB · full 1622 KB
+05-family            ← 05-family__redo__v1.png 8192x4096 → balanced 97 KB · thumb 7 KB · full 1281 KB
+06-corridor          ← 06-corridor__redo__v2.png 8192x4096 → balanced 129 KB · thumb 8 KB · full 1365 KB
+07-master            ← 07-master__redo__v2.png 8192x4096 → balanced 146 KB · thumb 11 KB · full 2141 KB
+08-shower            ← 08-shower__redo__v1.png 8192x4096 → balanced 149 KB · thumb 7 KB · full 1547 KB
+09-bed1              ← 09-bed1__redo__v1.png 8192x4096 → balanced 114 KB · thumb 5 KB · full 1594 KB
+10-bed2              ← 10-bed2__redo__v2.png 8192x4096 → balanced 111 KB · thumb 6 KB · full 2109 KB
+11-bath              ← 11-bath__redo__v2.png 8192x4096 → balanced 100 KB · thumb 7 KB · full 1861 KB
+12-mamad             ← 12-mamad__redo__v1.png 8192x4096 → balanced 87 KB · thumb 6 KB · full 1570 KB
+13-balcony           ← 13-balcony__redo__v3.png 8192x4096 → balanced 274 KB · thumb 21 KB · full 2475 KB
+make-sets: 13 of 13 scenes written
+01-kitchen           ← original 360walkaround\tours\kedma-d1\renders\cp-kitchen\pano.webp → 58 KB
+02-pantry            ← original 360walkaround\tours\kedma-d1\renders\cp-pantry\pano.webp → 56 KB
+03-living            ← original 360walkaround\tours\kedma-d1\renders\cp-living\pano.webp → 54 KB
+04-dining            ← original 360walkaround\tours\kedma-d1\renders\cp-dining\pano.webp → 55 KB
+05-family            ← original 360walkaround\tours\kedma-d1\renders\cp-family\pano.webp → 42 KB
+06-corridor          ← original 360walkaround\tours\kedma-d1\renders\cp-corridor\pano.webp → 48 KB
+07-master            ← original 360walkaround\tours\kedma-d1\renders\cp-master\pano.webp → 45 KB
+08-shower            ← original 360walkaround\tours\kedma-d1\renders\cp-shower\pano.webp → 52 KB
+09-bed1              ← original 360walkaround\tours\kedma-d1\renders\cp-bed1\pano.webp → 41 KB
+10-bed2              ← original 360walkaround\tours\kedma-d1\renders\cp-bed2\pano.webp → 41 KB
+11-bath              ← original 360walkaround\tours\kedma-d1\renders\cp-bath\pano.webp → 45 KB
+12-mamad             ← original 360walkaround\tours\kedma-d1\renders\cp-mamad\pano.webp → 40 KB
+13-balcony           ← original 360walkaround\tours\kedma-d1\renders\cp-balcony\pano.webp → 60 KB
+make-sets: original set 13 of 13 written to panos/original
+== scan
+scan-pieces: the ledger's cap of $44.9 would be passed (at $45.761)
+== gate
+11-bath              PASS      deviation 0.32% (bar 1%, resolves 1.00%; CG vs plan p90 1 cm (median 0.6) = 0.32%)  (calibration 702/864) → _local\fidelity\11-bath__balanced__4e96ab12feab.gate.jpg
+12-mamad             PASS      deviation 0.27% (bar 1%, resolves 1.00%; CG vs plan p90 1 cm (median 0.5) = 0.27%)  (calibration 935/1194) → _local\fidelity\12-mamad__balanced__2346c0e5b9f5.gate.jpg
+13-balcony           PASS      deviation 0.15% (bar 1%, resolves 1.00%; CG vs plan p90 0.9 cm (median 0.4) = 0.15%)  (calibration 617/800) → _local\fidelity\13-balcony__balanced__82b793ddef2c.gate.jpg
+== build
+build-tour: the panorama of balcony changed since its scan — rerun the scan (scan-pieces kedma-d1 --scenes balcony --force)

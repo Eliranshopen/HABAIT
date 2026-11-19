@@ -1,0 +1,584 @@
+{
+ "$schema": "tour360/cameras.v1",
+ "apartment": "kedma-d1",
+ "note": "written by tools/run-project.mjs (rule, no hand placement): coordinates are plan-crop pixels (= cm × scale_px_per_cm)",
+ "plan": {
+  "crop": "_local/plan/plan-crop.png",
+  "width": 4413,
+  "height": 3845,
+  "pxPerCm": 2.25,
+  "planScale": 0.4,
+  "sheet": "plan/floorplan.webp"
+ },
+ "refWindowPx": 1700,
+ "eye_m": 1.6,
+ "names": {
+  "kitchen": {
+   "he": "מטבח",
+   "en": "Kitchen",
+   "fr": "Cuisine"
+  },
+  "pantry": {
+   "he": "מזווה",
+   "en": "Pantry",
+   "fr": "Dressing"
+  },
+  "living": {
+   "he": "חדר דיור",
+   "en": "Living room",
+   "fr": "Séjour"
+  },
+  "dining": {
+   "he": "כניסה ופינת אוכל",
+   "en": "Entrance and dining",
+   "fr": "Entrée"
+  },
+  "family": {
+   "he": "חדר משפחה",
+   "en": "Family room",
+   "fr": "Séjour"
+  },
+  "corridor": {
+   "he": "מסדרון",
+   "en": "Corridor",
+   "fr": "Couloir"
+  },
+  "master": {
+   "he": "חדר שינה הורים",
+   "en": "Main bedroom",
+   "fr": "Chambre"
+  },
+  "shower": {
+   "he": "חדר רחצה",
+   "en": "Shower room",
+   "fr": "Salle de bain"
+  },
+  "bed1": {
+   "he": "חדר שינה",
+   "en": "Bedroom",
+   "fr": "Chambre"
+  },
+  "bed2": {
+   "he": "חדר שינה",
+   "en": "Bedroom 2",
+   "fr": "Chambre"
+  },
+  "bath": {
+   "he": "חדר אמבטיה",
+   "en": "Bathroom",
+   "fr": "Salle de bain"
+  },
+  "mamad": {
+   "he": "ממ\"ד חדר שינה",
+   "en": "Safe room bedroom",
+   "fr": "Safe room bedroom"
+  },
+  "balcony": {
+   "he": "מרפסת",
+   "en": "Balcony",
+   "fr": "Terrasse"
+  }
+ },
+ "zones": {
+  "living": {
+   "he": "מרחב מגורים",
+   "en": "Living",
+   "fr": "Séjour"
+  },
+  "terrace": {
+   "he": "המרפסת",
+   "en": "The terrace",
+   "fr": "La terrasse"
+  },
+  "bedrooms": {
+   "he": "אגף החדרים",
+   "en": "Bedrooms",
+   "fr": "Chambres"
+  }
+ },
+ "scenes": [
+  {
+   "id": "kitchen",
+   "asset": "01-kitchen",
+   "room": "r-kitchen",
+   "type": "kitchen",
+   "at": [
+    2062,
+    884
+   ],
+   "lookAt": [
+    1182,
+    697
+   ],
+   "zone": "living",
+   "links": [
+    {
+     "to": "pantry",
+     "via": [
+      2445,
+      855
+     ]
+    },
+    {
+     "to": "living",
+     "via": [
+      2135,
+      1121
+     ]
+    },
+    {
+     "to": "dining",
+     "via": [
+      2443,
+      1117
+     ],
+     "open_boundary_cm": 110
+    }
+   ],
+   "_rule": {
+    "clear_cm": 102,
+    "sight_cm": 1500,
+    "yaw_deg": 282,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "pantry",
+   "asset": "02-pantry",
+   "room": "r-pantry",
+   "type": "storage",
+   "at": [
+    2600,
+    816
+   ],
+   "lookAt": [
+    1701,
+    863
+   ],
+   "zone": "bedrooms",
+   "links": [
+    {
+     "to": "kitchen",
+     "via": [
+      2445,
+      855
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 65,
+    "sight_cm": 930,
+    "yaw_deg": 267,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "living",
+   "asset": "03-living",
+   "room": "r-living",
+   "type": "living",
+   "at": [
+    2110,
+    1332
+   ],
+   "lookAt": [
+    2979,
+    1099
+   ],
+   "zone": "living",
+   "links": [
+    {
+     "to": "kitchen",
+     "via": [
+      2135,
+      1121
+     ]
+    },
+    {
+     "to": "dining",
+     "via": [
+      2320,
+      1595
+     ]
+    },
+    {
+     "to": "corridor",
+     "via": [
+      2159,
+      2070
+     ]
+    },
+    {
+     "to": "balcony",
+     "via": [
+      1372,
+      1508
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 92,
+    "sight_cm": 1500,
+    "yaw_deg": 75,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "dining",
+   "asset": "04-dining",
+   "room": "r-dining",
+   "type": "hall",
+   "at": [
+    2536,
+    1469
+   ],
+   "lookAt": [
+    3161,
+    821
+   ],
+   "zone": "living",
+   "links": [
+    {
+     "to": "living",
+     "via": [
+      2320,
+      1595
+     ]
+    },
+    {
+     "to": "family",
+     "via": [
+      3111,
+      1442
+     ]
+    },
+    {
+     "to": "kitchen",
+     "via": [
+      2443,
+      1117
+     ],
+     "open_boundary_cm": 110
+    }
+   ],
+   "_rule": {
+    "clear_cm": 94,
+    "sight_cm": 1500,
+    "yaw_deg": 44,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "family",
+   "asset": "05-family",
+   "room": "r-family",
+   "type": "living",
+   "at": [
+    3293,
+    1532
+   ],
+   "lookAt": [
+    4184,
+    1658
+   ],
+   "zone": "living",
+   "links": [
+    {
+     "to": "dining",
+     "via": [
+      3111,
+      1442
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 77,
+    "sight_cm": 1500,
+    "yaw_deg": 98,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "corridor",
+   "asset": "06-corridor",
+   "room": "r-corridor",
+   "type": "corridor",
+   "at": [
+    2154,
+    2193
+   ],
+   "lookAt": [
+    1259,
+    2287
+   ],
+   "zone": "living",
+   "links": [
+    {
+     "to": "living",
+     "via": [
+      2159,
+      2070
+     ]
+    },
+    {
+     "to": "bath",
+     "via": [
+      2838,
+      2319
+     ]
+    },
+    {
+     "to": "mamad",
+     "via": [
+      3143,
+      2196
+     ]
+    },
+    {
+     "to": "master",
+     "via": [
+      1537,
+      2197
+     ]
+    },
+    {
+     "to": "bed1",
+     "via": [
+      1879,
+      2324
+     ]
+    },
+    {
+     "to": "bed2",
+     "via": [
+      2489,
+      2327
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 52,
+    "sight_cm": 1500,
+    "yaw_deg": 264,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "master",
+   "asset": "07-master",
+   "room": "r-master",
+   "type": "bedroom",
+   "at": [
+    1223,
+    2197
+   ],
+   "lookAt": [
+    388,
+    2534
+   ],
+   "zone": "bedrooms",
+   "links": [
+    {
+     "to": "shower",
+     "via": [
+      1010,
+      2793
+     ]
+    },
+    {
+     "to": "corridor",
+     "via": [
+      1537,
+      2197
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 76,
+    "sight_cm": 1500,
+    "yaw_deg": 248,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "shower",
+   "asset": "08-shower",
+   "room": "r-shower",
+   "type": "bathroom",
+   "at": [
+    909,
+    2979
+   ],
+   "lookAt": [
+    1724,
+    3360
+   ],
+   "zone": "bedrooms",
+   "links": [
+    {
+     "to": "master",
+     "via": [
+      1010,
+      2793
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 39,
+    "sight_cm": 1500,
+    "yaw_deg": 115,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "bed1",
+   "asset": "09-bed1",
+   "room": "r-bed1",
+   "type": "bedroom",
+   "at": [
+    1772,
+    2651
+   ],
+   "lookAt": [
+    1694,
+    3548
+   ],
+   "zone": "bedrooms",
+   "links": [
+    {
+     "to": "corridor",
+     "via": [
+      1879,
+      2324
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 96,
+    "sight_cm": 1500,
+    "yaw_deg": 185,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "bed2",
+   "asset": "10-bed2",
+   "room": "r-bed2",
+   "type": "bedroom",
+   "at": [
+    2380,
+    2659
+   ],
+   "lookAt": [
+    2177,
+    3536
+   ],
+   "zone": "bedrooms",
+   "links": [
+    {
+     "to": "corridor",
+     "via": [
+      2489,
+      2327
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 97,
+    "sight_cm": 1500,
+    "yaw_deg": 193,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "bath",
+   "asset": "11-bath",
+   "room": "r-bath",
+   "type": "bathroom",
+   "at": [
+    2860,
+    2564
+   ],
+   "lookAt": [
+    3063,
+    3441
+   ],
+   "zone": "bedrooms",
+   "links": [
+    {
+     "to": "corridor",
+     "via": [
+      2838,
+      2319
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 56,
+    "sight_cm": 363,
+    "yaw_deg": 167,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "mamad",
+   "asset": "12-mamad",
+   "room": "r-mamad",
+   "type": "safe_room",
+   "at": [
+    3443,
+    2432
+   ],
+   "lookAt": [
+    3521,
+    3329
+   ],
+   "zone": "living",
+   "links": [
+    {
+     "to": "corridor",
+     "via": [
+      3143,
+      2196
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 109,
+    "sight_cm": 1500,
+    "yaw_deg": 175,
+    "aim": "sightline"
+   }
+  },
+  {
+   "id": "balcony",
+   "asset": "13-balcony",
+   "room": "r-balcony",
+   "type": "balcony",
+   "at": [
+    709,
+    958
+   ],
+   "lookAt": [
+    246,
+    1729
+   ],
+   "zone": "terrace",
+   "links": [
+    {
+     "to": "living",
+     "via": [
+      1372,
+      1508
+     ]
+    }
+   ],
+   "_rule": {
+    "clear_cm": 78,
+    "sight_cm": 1500,
+    "yaw_deg": 211,
+    "aim": "glass 2575 cm"
+   }
+  }
+ ]
+}

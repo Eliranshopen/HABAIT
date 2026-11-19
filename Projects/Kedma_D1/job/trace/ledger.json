@@ -1,0 +1,51 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 3,
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "ts": "2026-11-16T15:05:21.048Z",
+   "op": "auto-trace-read",
+   "apartment": "kedma-d1",
+   "model": "google/gemini-3.7-flash",
+   "images": 1,
+   "reserved_usd": 0.02,
+   "settled_usd": 0.0352545,
+   "status": "done"
+  },
+  {
+   "seq": 2,
+   "ts": "2026-11-16T15:08:34.673Z",
+   "op": "auto-trace-judge",
+   "apartment": "kedma-d1",
+   "model": "google/gemini-3.7-flash",
+   "images": 2,
+   "reserved_usd": 0.02,
+   "settled_usd": 0.026031,
+   "status": "done"
+  },
+  {
+   "seq": 3,
+   "ts": "2026-11-16T15:08:57.232Z",
+   "op": "auto-trace-judge",
+   "apartment": "kedma-d1",
+   "model": "google/gemini-3.7-flash",
+   "images": 2,
+   "reserved_usd": 0.02,
+   "settled_usd": 0.018036,
+   "status": "done"
+  },
+  {
+   "seq": 4,
+   "ts": "2026-11-16T15:09:11.473Z",
+   "op": "auto-trace-judge",
+   "apartment": "kedma-d1",
+   "model": "google/gemini-3.7-flash",
+   "images": 2,
+   "reserved_usd": 0.02,
+   "settled_usd": 0.021576,
+   "status": "done"
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+[
+ {
+  "step": "init",
+  "cg": "360walkaround/tours/kedma-d1/renders/cp-pantry/pano.webp"
+ },
+ {
+  "step": "carry-over",
+  "target": "02-pantry",
+  "cam": "cp-pantry",
+  "sources": [
+   {
+    "source": "01-kitchen:cp-kitchen",
+    "carried_pct": 16.0
+   }
+  ],
+  "carried_pct": 15.94,
+  "painted_pct": 15.6,
+  "max_ratio": 1.6,
+  "edge_px": 6
+ }
+]

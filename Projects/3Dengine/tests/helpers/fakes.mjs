@@ -37,6 +37,8 @@ export function fakeConfig(over = {}) {
     pythonLibs: { numpy: 'numpy', PIL: 'pillow' },
     serve: { host: '127.0.0.1', port: 8891 },
     trace: { timeoutSeconds: 1500, maxBudgetUsd: 1, judgeRuns: 3, rounds: 3 },
+    build: { timeoutSeconds: 600 },
+    render: { res: '2048x1024', samples: 32, timeoutSeconds: 1800, points: null, lockPollSeconds: 5 },
     readingsDir: `${h}/.runtime/readings`,
     ...over,
   };

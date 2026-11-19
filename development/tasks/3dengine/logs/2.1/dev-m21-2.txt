@@ -1,0 +1,5 @@
+milestone 2.1, during the build: the closing test tests/stages/m2.1.test.mjs alone, second run (the first, dev-m21-1.txt, showed the stages working and a mistake of the TEST: it waited for the runner to end while the job waits for the approval, where a live runner is right). One bounded run of up to 25 minutes in the background.
+started: 2026-11-19T11:32:41+02:00
+machine load before: 34 %
+
+STOPPED by the main session at 2026-11-19T11:38:01+02:00, on Eliran's word (he stops the work here and goes on from another computer). The run had passed the reading and the build and was rendering its first room. Not a result: no part of the test ended. What it left was removed: five processes (the test's MCP server, the runner, the tool, render_tour, Blender), the machine's Blender lock in the dead runner's name (by the engine's own rule), the job's three junction names in the pipeline tree, the temp home.

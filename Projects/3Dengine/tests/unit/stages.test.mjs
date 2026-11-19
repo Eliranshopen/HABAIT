@@ -30,9 +30,11 @@ test('the registry has one module per stage, in the runner order, each with a st
     assert.equal(REGISTRY[s].stub.paid, PAID_STAGES.includes(s));
   }
   assert.throws(() => implFor('nope', 'stub'), /no stage "nope"/);
-  // (1.3) the reading is the first stage with a real implementation; the others still have only the stub
-  assert.equal(implFor('tracing', 'real'), REGISTRY.tracing.real);
-  for (const s of STAGES.filter((x) => x !== 'tracing')) assert.throws(() => implFor(s, 'real'), /has no "real" implementation/, s);
+  // (1.3) the reading is the first stage with a real implementation; (2.1) the build and the render are too; the
+  // others still have only the stub
+  const REAL = ['tracing', 'building', 'rendering'];
+  for (const s of REAL) assert.equal(implFor(s, 'real'), REGISTRY[s].real);
+  for (const s of STAGES.filter((x) => !REAL.includes(x))) assert.throws(() => implFor(s, 'real'), /has no "real" implementation/, s);
 });
 
 test('the stub: waits in slices checking for a cancel, then writes stub.json as its one output, the same bytes at every attempt', async () => {

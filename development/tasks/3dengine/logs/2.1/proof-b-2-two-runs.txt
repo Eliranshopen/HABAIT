@@ -1,0 +1,13 @@
+milestone 2.1, task 01, the proof: the same input twice, from nothing each time, at the smallest picture the chain renders (1024x512; a first try at 512x256 was refused: the wrap pad of 512 px must be at most half the width: proof-b-1-two-runs.txt), 8 samples: which files are the same bytes? 2026-11-19T10:47:32+02:00, load 45 %
+=== run b1
+cleaned
+exit 0 in 15.4 s
+exit 0 in 58.3 s
+  step render: ok, 58 s
+65 files; junctions: true, true, true; render: CPU, 8 spp, 27.976 s
+=== run b2
+cleaned
+exit 0 in 20.5 s
+exit 0 in 69.8 s
+  step render: ok, 69 s
+65 files; junctions: true, true, true; render: CPU, 8 spp, 31.296 s

@@ -203,6 +203,32 @@ test('cancel in the middle of a stage: no row for it, heavy lock released, exits
   assert.match(logs.join('\n'), /rendering: interrupted \(the job is now "cancelled"\); no manifest row/);
 });
 
+test('(2.1) a stage says what it waits for, while it is still the job\'s stage: the job file carries it, and stops carrying it', async () => {
+  const config = setup('rendering');
+  const seen = [];
+  const reg = registry({ rendering: { run: async (ctx) => {
+    const look = () => seen.push(readJob(config.jobsDir, ID).waiting_for ?? null);
+    look();
+    ctx.waiting('blender-lock');
+    look();
+    ctx.waiting('blender-lock');           // said again: nothing is written
+    const at = readJob(config.jobsDir, ID).updated_at;
+    ctx.waiting(null);
+    look();
+    ctx.waiting(null);                     // nothing to take away
+    assert.equal(readJob(config.jobsDir, ID).updated_at, at, 'a second «no longer waiting» writes nothing');
+    ctx.waiting('blender-lock');
+    updateJob(config.jobsDir, ID, (j) => setState(j, 'cancelled', j.updated_at));
+    ctx.waiting('blender-lock');           // the job left the stage: its file is not touched
+    ctx.waiting(null);
+    look();
+    ctx.checkCancelled();
+    return { outputs: [] };
+  } } });
+  assert.equal(await runRunner(base(config, { registry: reg }).opts), 'cancelled');
+  assert.deepEqual(seen, [null, 'blender-lock', null, 'blender-lock'], 'the last look: what a job that left the stage says is not this stage\'s to change');
+});
+
 test('a stage that throws: STAGE_FAILED for an Error, its own code for an EngineError; no row; lock released', async () => {
   let config = setup('rendering');
   let { opts } = base(config, { registry: registry({ rendering: { run: async () => { throw new Error('blender crashed'); } } }) });

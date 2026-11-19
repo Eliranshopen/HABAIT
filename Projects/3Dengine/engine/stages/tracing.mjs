@@ -19,6 +19,10 @@ export const stub = stubStage(name);
 
 export const POLL_MS = 500;            // how often the stage asks the runner whether it must stop
 export const PLAN_FILES = Object.freeze(['plan.general.json', 'overlay.png', 'report.json', 'trace-check.json', 'vlm.json']);
+// (2.1, contract 2.1 §3) what the build takes from the same folder of the tool: the picture of the drawing, always;
+// its vector lines, when the PDF has them. Both are the same bytes in every reading of the same PDF.
+export const DRAWING_FILE = 'crop.png';
+export const VECTORS_FILE = 'pdf-vectors.json';
 
 // The fixed sentences of the stage. Nothing a job says about a reading is text taken from the PDF.
 export const NEEDS_READING = 'a reading of this drawing has to be paid for, and the engine does not pay for one inside a job yet: put a saved reading of this PDF in the readings folder, or pay for one with the trace command';
@@ -95,7 +99,8 @@ export function realStage(deps = {}) {
         const p = plans[0];
         ctx.log(`the reading passed: ${count(p.rooms)} rooms, ${count(p.checks.total)} checks, ${p.dims.count} printed dimensions (the largest ${count(p.dims.maxPct)} %), ${count(r.seconds)} s`);
         return {
-          outputs: PLAN_FILES.map((f) => ({ path: `${rel}/plan-${p.k}/${f}` })),
+          outputs: [...PLAN_FILES, DRAWING_FILE, ...(d.fs.existsSync(`${ctx.jobDir}/${rel}/plan-${p.k}/${VECTORS_FILE}`) ? [VECTORS_FILE] : [])]
+            .map((f) => ({ path: `${rel}/plan-${p.k}/${f}` })),
           detail: { rooms: p.rooms, fixtures: p.fixtures, checks: p.checks.total, dims_checked: p.dims.count, dims_max_pct: p.dims.maxPct,
             could_not_read: p.couldNotRead, rounds: p.rounds, seconds: r.seconds },
         };

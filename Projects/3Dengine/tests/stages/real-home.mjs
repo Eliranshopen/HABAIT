@@ -67,6 +67,11 @@ export async function quietHome(home) {
 // → the home and what a test needs to drive it. `readings` = { <sha256 of a PDF>: <file of a reading to keep for it> }.
 // `home` names a folder to use (made when it is not there; a test that goes on from an earlier invocation hands
 // its own); without it a new temp folder is made.
+// (2.1) Since the build and the render are real stages, a real job no longer stops at the build. These tests are
+// about the reading: their home tells the render to render a point no plan has, so the job ends at the start of
+// `rendering`, before any tool or lock of the render (contract 2.1 §4), with the build done for real on the way.
+export const NO_RENDER = Object.freeze({ render: Object.freeze({ points: Object.freeze(['cp-none']) }) });
+
 export async function startRealHome({ prefix, home: named = null, readings = {}, settings = {}, env: extraEnv = {} }) {
   const REAL = loadConfig({ env: {} });
   const BASE = JSON.parse(fs.readFileSync(`${ENGINE}/engine.config.json`, 'utf8'));

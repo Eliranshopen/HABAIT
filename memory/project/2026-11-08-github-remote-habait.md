@@ -38,7 +38,7 @@
 - **Owed / open:** None for this session. Not on the mirror by rule: media (1520 files of main), env files, ignored folders. The branch blender-walk (8 commits, 2026-11-12) is in no snapshot: Eliran's call.
 - **Second reader:** none
 
-## 2026-11-19 · main session (Hatzav) · layer on 7b1ea0d3: the Hatzav stop point (Eliran: «לעצור את העבודה לעדכן את הגיטהאב ולהמשיך … ממחשב אחר»)
+## 2026-11-19 · main session (Hatzav) · layer 804a91bf on 9f0dd63c (first try on 7b1ea0d3 rejected, rebuilt, never forced): the Hatzav stop point (Eliran: «לעצור את העבודה לעדכן את הגיטהאב ולהמשיך … ממחשב אחר»)
 - **Did:** layered on the mirror head 7b1ea0d3 only the job's own changes: `out/harei-zahav-naama/3-rooms/scripts/27_pano_realism.mjs` (the --no-blender demo flag), `work/pano360/ledger.json` ($101.69 of $102), the handoff file with a "continue on another computer" section, this entry and one INDEX line. Adds and updates only, no media, no env, never forced; secret scan 0.
 - **Learned:** the worktree's copy of `tour360/` (35 files) is OLDER than the mirror's (other sessions updated tour360 on main); a layer taken from the worktree tree would have reverted them. Layer only the paths the session itself changed.
 - **Second reader:** none

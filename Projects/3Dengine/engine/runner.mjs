@@ -358,6 +358,17 @@ export async function runRunner({
       checkOwner() {
         guard();
       },
+      // (2.1) What the stage waits for, while it is still the job's stage (contract 2.1 §5: the machine's Blender
+      // lock); null = it waits for nothing any more.
+      waiting(what) {
+        update((j) => {
+          if (j.state !== stage) return null;
+          if (what ? j.waiting_for === what : !('waiting_for' in j)) return null;
+          if (what) j.waiting_for = what;
+          else delete j.waiting_for;
+          return j;
+        });
+      },
       paidCall: createPaidCall({ jobsDir, jobId, stage, attempt, now, sleep, log, guard, clock,
         beforeSend: () => freezeAt(`${stage}:reserved`), afterSend: () => freezeAt(`${stage}:sent`),
         pauseAfterReserveMs: hooks.pauseAfterReserveMs || 0, pauseAfterCacheMs: hooks.pauseAfterCacheMs || 0,

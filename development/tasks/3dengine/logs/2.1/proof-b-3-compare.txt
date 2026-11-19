@@ -1,0 +1,105 @@
+milestone 2.1, task 01, the proof: run b1 against run b2 (the same input, each from nothing, 1024x512, 8 samples), file by file. 2026-11-19T10:50:30+02:00
+the SAME bytes in both runs: 54
+  = apartment/_local/plan/pdf-vectors.json
+  = apartment/_local/plan/plan-crop.png
+  = apartment/_local/plan/trace-plan.json
+  = apartment/apartment.json
+  = apartment/cameras.json
+  = apartment/material-board.json
+  = apartment/plan.general.json
+  = tour/_furnish/placements.json
+  = tour/_furnish/plan.furnished.json
+  = tour/_furnish/preview-r-bathroom.png
+  = tour/_furnish/preview-r-bedroom.png
+  = tour/_furnish/report.json
+  = tour/plan.base.json
+  = tour/plan.json
+  = tour/renders/cp-livingRoom/depth.png
+  = tour/renders/cp-livingRoom/pano.webp
+  = out/casework.log
+  = out/furnish.log
+  = trace/barrier.png
+  = trace/beam-strip.png
+  = trace/cameras.json
+  = trace/config-mask.json
+  = trace/config.json
+  = trace/crop.png
+  = trace/doors.json
+  = trace/envelope.png
+  = trace/glazing-pen.png
+  = trace/glazing.json
+  = trace/labels.png
+  = trace/lines.json
+  = trace/overlay.png
+  = trace/pdf-vectors.json
+  = trace/plan-grey.png
+  = trace/plan.general.json
+  = trace/prep.json
+  = trace/raster.json
+  = trace/report.json
+  = trace/report.md
+  = trace/rooms-debug.png
+  = trace/rooms.json
+  = trace/seeds.json
+  = trace/sheet.png
+  = trace/split.json
+  = trace/split.png
+  = trace/strokes.png
+  = trace/trace-check.json
+  = trace/trace-debug.png
+  = trace/trace.json
+  = trace/trace.log
+  = trace/vlm.json
+  = trace/walls-only.png
+  = trace/walls.json
+  = trace/windows-glass.png
+  = trace/windows-vector.png
+DIFFERENT bytes: 11
+  x tour/manifest.json  (6552 / 6553 bytes)
+  x tour/renders/_logs/build_scene.log  (46859 / 46859 bytes)
+  x tour/renders/_logs/render-cp-livingRoom-x1.log  (2221 / 2222 bytes)
+  x tour/renders/_render-tour.report.json  (2871 / 2870 bytes)
+  x tour/renders/cp-livingRoom/pano.render.json  (10164 / 10165 bytes)
+  x tour/renders/cp-livingRoom/pano.render.log  (44753 / 45798 bytes)
+  x tour/scene-full.blend  (5109624 / 5111105 bytes)
+  x tour/scene-full.report.json  (294440 / 294440 bytes)
+  x out/job.json  (940 / 940 bytes)
+  x out/package/package.json  (1118 / 1118 bytes)
+  x out/render.log  (1586 / 1587 bytes)
+in one run only: 0
+depth, packed pixels: the same · input key: DIFFERENT
+
+the colour picture, pixel by pixel (b1 against b2):
+1024x512, 3 channels: 0 of 1572864 values differ (0.0000 %); largest difference 0 of 255; mean of all 0.00000
+  by 1: 0 · by 2: 0 · by 3 or 4: 0 · by 5 or more: 0
+the depth picture, pixel by pixel (b1 against b2):
+1024x512, 3 channels: 0 of 1572864 values differ (0.0000 %); largest difference 0 of 255; mean of all 0.00000
+  by 1: 0 · by 2: 0 · by 3 or 4: 0 · by 5 or more: 0
+
+the build files of the full-quality run against run b1 (the build does not depend on the picture's size):
+the SAME bytes in both runs: 52
+  = apartment/_local/plan/pdf-vectors.json
+  = apartment/_local/plan/plan-crop.png
+  = apartment/_local/plan/trace-plan.json
+  = apartment/apartment.json
+  = apartment/cameras.json
+  = apartment/material-board.json
+  = apartment/plan.general.json
+  = tour/_furnish/placements.json
+  = tour/_furnish/plan.furnished.json
+  = tour/_furnish/preview-r-bathroom.png
+  = tour/_furnish/preview-r-bedroom.png
+  = tour/_furnish/report.json
+  = tour/plan.base.json
+  = tour/plan.json
+  = out/casework.log
+  = out/furnish.log
+DIFFERENT bytes: 13
+  x tour/manifest.json  (6561 / 6552 bytes)
+  x tour/scene-full.blend  (5109671 / 5109624 bytes)
+  x tour/scene-full.report.json  (294440 / 294440 bytes)
+  x out/job.json  (942 / 940 bytes)
+  x out/package/package.json  (1122 / 1118 bytes)
+  x out/render.log  (1599 / 1586 bytes)
+in one run only: 0
+depth, packed pixels: DIFFERENT · input key: DIFFERENT

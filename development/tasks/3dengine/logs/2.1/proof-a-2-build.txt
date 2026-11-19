@@ -1,0 +1,12 @@
+milestone 2.1, task 01, the proof: the build steps (apartment, casework, cameras, furnish) of the unchanged chain, with the three tool folders as JUNCTIONS into the work folder. 2026-11-19T10:35:28+02:00, load 19 %
+command: node run-project.mjs proof21a --plan <work>/trace/plan-1/plan.general.json --crop <work>/trace/plan-1/crop.png --steps apartment,casework,cameras,furnish 
+writes : c:/RnD/.wt/3dengine/Projects/3Dengine/pipeline/Habait/tour360/apartments/proof21a · c:/RnD/.wt/3dengine/Projects/3Dengine/pipeline/360walkaround/tours/proof21a · c:/RnD/.wt/3dengine/Projects/3Dengine/pipeline/Habait/tour360/out/proof21a  (junctions into <work>)
+log    : c:/RnD/.wt/3dengine/Projects/3Dengine/.runtime/proofs/2.1/proof21a/build.log
+Blender lock before: free
+exit 0 in 16.5 s
+Blender lock after : free
+  step apartment: ok, 0 s
+  step casework: ok, 2 s
+  step cameras: ok, 2 s
+  step furnish: ok, 13 s
+exit code: 0

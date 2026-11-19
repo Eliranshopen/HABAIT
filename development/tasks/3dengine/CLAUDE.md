@@ -6,11 +6,11 @@
 Board 3dengine (2026-11-16, EXECUTING): the build of the engine «sales-plan PDF → full 360 tour» in `Projects/3Dengine`, one card per milestone of plan §7.1. `README.md` = the order, the gate and the resume point; `task-NN-*.md` = the 30 cards; `m<id>/` = the task cards of one milestone; `logs/` = evidence.
 
 ## What's here (2026-11-19)
-32 files here · 8 subfolders · 827 files / 17.8 MB in the whole tree (vendor and build output excluded)
+32 files here · 9 subfolders · 837 files / 17.8 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `README.md` | 32.7 KB | 2026-11-19 |
+| `README.md` | 32.8 KB | 2026-11-19 |
 | `run-tasks.md` | 3.8 KB | 2026-11-18 |
 | `task-01-m0-1-engine-home.md` | 5.3 KB | 2026-11-16 |
 | `task-02-m0-2-stub-engine-agent.md` | 5.5 KB | 2026-11-16 |
@@ -19,7 +19,7 @@ Board 3dengine (2026-11-16, EXECUTING): the build of the engine «sales-plan PDF
 | `task-05-m1-2-trace-846.md` | 6.2 KB | 2026-11-18 |
 | `task-06-m1-3-trace-gate.md` | 5.6 KB | 2026-11-18 |
 | `task-07-m1-4-saved-reading.md` | 5.6 KB | 2026-11-19 |
-| `task-08-m2-1-one-room-render.md` | 6.6 KB | 2026-11-17 |
+| `task-08-m2-1-one-room-render.md` | 7.2 KB | 2026-11-19 |
 | `task-09-m2-2-apartment-render.md` | 4.8 KB | 2026-11-17 |
 | `task-10-m2-3-render-stage.md` | 4.9 KB | 2026-11-17 |
 | `task-11-m3-1-cg-vs-plan.md` | 4.8 KB | 2026-11-17 |
@@ -54,6 +54,7 @@ Board 3dengine (2026-11-16, EXECUTING): the build of the engine «sales-plan PDF
 | `m1.2/` | [`m1.2/CLAUDE.md`](m1.2/CLAUDE.md) | 9 (45.3 KB) |
 | `m1.3/` | [`m1.3/CLAUDE.md`](m1.3/CLAUDE.md) | 9 (41.7 KB) |
 | `m1.4/` | [`m1.4/CLAUDE.md`](m1.4/CLAUDE.md) | 10 (47.9 KB) |
+| `m2.1/` | [`m2.1/CLAUDE.md`](m2.1/CLAUDE.md) | 10 (47.1 KB) |
 
 ## Gotchas
 _none recorded_

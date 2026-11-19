@@ -6,7 +6,7 @@ import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {
-  realStage, real, stub, name, OUTCOMES, PLAN_FILES, POLL_MS, NEEDS_READING, BAD_READING, BAD_OUT_PATH, STALE_READING,
+  realStage, real, stub, name, OUTCOMES, PLAN_FILES, DRAWING_FILE, VECTORS_FILE, POLL_MS, NEEDS_READING, BAD_READING, BAD_OUT_PATH, STALE_READING,
 } from '../../engine/stages/tracing.mjs';
 import { TraceUsageError } from '../../engine/trace.mjs';
 import { EngineError } from '../../engine/inbox.mjs';
@@ -109,13 +109,18 @@ test('what the stage gives the reading: the job\'s own copy, a folder of this at
 });
 
 // ---------------------------------------------------------------- the table
-test('PASS: the five files of the plan as outputs relative to the job folder; numbers in the detail and the log', async () => {
+test('PASS: the files of the plan as outputs relative to the job folder (2.1: also the picture of the drawing, and its vectors when there are any); numbers in the detail and the log', async () => {
   const t = setup();
   const { s } = stage(answer('PASS'));
   const r = await s.run(t.ctx());
-  assert.deepEqual(r.outputs, PLAN_FILES.map((f) => ({ path: `${t.rel}/plan-1/${f}` })));
+  assert.deepEqual([DRAWING_FILE, VECTORS_FILE], ['crop.png', 'pdf-vectors.json']);
+  assert.deepEqual(r.outputs, [...PLAN_FILES, DRAWING_FILE].map((f) => ({ path: `${t.rel}/plan-1/${f}` })), 'a drawing with no vector lines: six files');
   assert.deepEqual(r.detail, { rooms: 10, fixtures: 18, checks: 82, dims_checked: 18, dims_max_pct: 0.82, could_not_read: 10, rounds: 1, seconds: 71.3 });
   assert.deepEqual(t.logs, ['the reading passed: 10 rooms, 82 checks, 18 printed dimensions (the largest 0.82 %), 71.3 s']);
+  // the reading wrote the drawing's vector lines: a seventh output, last
+  const withVectors = { ...fs, existsSync: (f) => String(f).endsWith(`/plan-1/${VECTORS_FILE}`) || fs.existsSync(f) };
+  const r7 = await stage(answer('PASS'), { fs: withVectors }).s.run(t.ctx());
+  assert.deepEqual(r7.outputs, [...PLAN_FILES, DRAWING_FILE, VECTORS_FILE].map((f) => ({ path: `${t.rel}/plan-1/${f}` })));
   // a job reads ONE drawing
   for (const plans of [[], [plan(), plan({ k: 2 })]]) {
     const e = await thrown(stage(answer('PASS', plans)).s.run(t.ctx()));
@@ -231,7 +236,7 @@ test('a passing file error of the question is not a stop; a stop that arrives as
     assert.equal(options.signal.aborted, false);
     return answer('PASS');
   });
-  assert.equal((await going.s.run(busy)).outputs.length, 5);
+  assert.equal((await going.s.run(busy)).outputs.length, 6);
   assert.equal(asks, 3, 'two ticks and the last look');
   // the job left the stage in the instant the tool ended: the last look catches it, no outputs are returned
   const late = new Error('the job left the stage');

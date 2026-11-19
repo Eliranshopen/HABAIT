@@ -1,0 +1,14 @@
+milestone 2.1, task 01, the proof: the render of ONE point (cp-livingRoom) by the unchanged chain, through junctions. 2026-11-19T10:36:05+02:00, load 6 %
+command: node run-project.mjs proof21a --plan <work>/trace/plan-1/plan.general.json --crop <work>/trace/plan-1/crop.png --steps render --render-points cp-livingRoom
+writes : c:/RnD/.wt/3dengine/Projects/3Dengine/pipeline/Habait/tour360/apartments/proof21a · c:/RnD/.wt/3dengine/Projects/3Dengine/pipeline/360walkaround/tours/proof21a · c:/RnD/.wt/3dengine/Projects/3Dengine/pipeline/Habait/tour360/out/proof21a  (junctions into <work>)
+log    : c:/RnD/.wt/3dengine/Projects/3Dengine/.runtime/proofs/2.1/proof21a/render.log
+Blender lock before: free
+exit 0 in 478.8 s
+Blender lock after : free
+  step apartment: ok, 0 s
+  step casework: ok, 2 s
+  step cameras: ok, 2 s
+  step furnish: ok, 13 s
+  step render: ok, 479 s
+exit code: 0
+load after: 15 %

@@ -5,7 +5,7 @@
 **Runs as:** the main session, in the `engine-builder` role; the scene and render chain is the `blender-scene` role's ground, named here as the second role of one card (the project agents do not load in a session started at `C:\RnD`; definitions: `Projects/Habait/.claude/agents/engine-builder.md` and `blender-scene.md` in the working folder).
 **Stage:** 2 · Blender: בנייה ורינדור · **Kind:** לכתוב (new code), with a proof of the existing chain on one room first · **Closes in build phase:** E3 · **Cost:** $0
 **Depends on:** card 07 (milestone 1.4) is closed.
-**State:** `PLANNED`
+**State:** `EXECUTING` — since 2026-11-19: task cards in `m2.1/` (nine tasks); the contract will be `Projects/3Dengine/contracts/CONTRACT-2.1.md`.
 
 **Merged card.** Eliran, 2026-11-17: he asked whether rendering apartment 846 is needed while the goal is to build the engine («זה יגזול ממך זמן ומשאבים»), proposed one room instead of the whole apartment, and answered «כן» to making the three render milestones one. This card is what cards 08 (one room rendered), 09 (the whole apartment) and 10 (render as an engine stage) were. The hand run of the whole apartment is dropped; what it measured (11 rooms, the furnishing audit, the time against 859 s) is measured at card 11 (milestone 3.1), where the engine renders the apartment itself. The file name keeps its first slug so that older pointers still land here.
 
@@ -20,6 +20,8 @@ In the working folder `C:\RnD\.wt\3dengine\`, under `Projects/3Dengine/` (expect
 - `engine/proofs/render-one-room.mjs` — the one-room check of the existing chain
 - `engine/stages/scene.mjs`, `engine/stages/render.mjs` — the stage
 - `tests/unit/render.*.test.mjs`, `tests/milestones/m2.1.test.mjs`
+
+**Changed when the work started (2026-11-19, main session; reasons in `m2.1/README.md`):** the closing test is `tests/stages/m2.1.test.mjs` (the stage tier: it runs real Blender), not `tests/milestones/m2.1.test.mjs`; the stage files are the existing `engine/stages/building.mjs` and `rendering.mjs` (not `scene.mjs` / `render.mjs`), with the wrappers `engine/build.mjs`, `engine/render.mjs`, `engine/workspace.mjs` and `engine/blender-lock.mjs`; the Check below is the gate of `m2.1/task-07-gate.md`.
 
 ## Instructions
 First run the EXISTING chain, unchanged, inside the engine home on ONE room of apartment 846, and keep the proof script and its evidence: this is the check that the new home renders at all. Then write the engine's own stage around the ported tools (wrap them, never fork them): one Blender at a time, a manifest row per room with the hash of its inputs, resume from the next room. Test the stage on TWO rooms: one that finished and one that was killed. Do not render the whole apartment in this card. Change a ported file only if the proof fails: every such change is listed in `pipeline/PORT-CHANGES.md`. CLI entry points follow the script contract (root §5).

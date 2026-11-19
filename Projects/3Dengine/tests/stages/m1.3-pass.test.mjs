@@ -9,8 +9,11 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createHash } from 'node:crypto';
-import { startRealHome, textsOf, FIXTURES, GOLDEN, GOLDEN_SHA } from './real-home.mjs';
-import { PLAN_FILES } from '../../engine/stages/tracing.mjs';
+import { startRealHome, textsOf, FIXTURES, GOLDEN, GOLDEN_SHA, NO_RENDER } from './real-home.mjs';
+import { PLAN_FILES, DRAWING_FILE, VECTORS_FILE } from '../../engine/stages/tracing.mjs';
+import { UNKNOWN_POINT } from '../../engine/stages/rendering.mjs';
+import { BUILD_OUTPUTS } from '../../engine/build.mjs';
+import { workspaceOf } from '../../engine/workspace.mjs';
 import { drawingId } from '../../engine/jobs.mjs';
 import { findReading } from '../../engine/readings.mjs';
 import { HASHED } from '../fixtures/make-expected-trace.mjs';
@@ -21,14 +24,14 @@ const PLAN_PCT = 0.83;                 // the plan's line: «מידות מודפ
 const LIMIT_MS = 1700 * 1000;          // above the engine's own limit for a reading (trace.timeoutSeconds = 1500)
 const ENDED = ['done', 'review', 'failed', 'cancelled', 'awaiting_approval'];
 const ATTEMPT = 'stages/tracing/attempt-1';
-const AFTER_BUILD = /runner \d+ (rendering|skinning|gating|finishing|packaging|qa):/;   // a line of the runner about a stage after the build
+const AFTER_RENDER = /runner \d+ (skinning|gating|finishing|packaging|qa):/;   // a line of the runner about a stage after the render
 
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 let h;
 let jobId = null;
 
 before(async () => {
-  h = await startRealHome({ prefix: 'm13p-home-', readings: { [GOLDEN_SHA]: READING } });
+  h = await startRealHome({ prefix: 'm13p-home-', readings: { [GOLDEN_SHA]: READING }, settings: NO_RENDER });
 });
 after(async () => {
   if (h) await h.stop();
@@ -55,19 +58,21 @@ test('4. the 846 PDF with its true saved reading: the reading passes, its five f
   const { job, seen } = await h.follow(id, ENDED, LIMIT_MS - 60000);
   await h.runnersGone();
 
-  // (a) the reading passed and the job went on; it stops at the build, which is not real yet
+  // (a) the reading passed and the job went on: (2.1) the build ran for real, and the job stops where this home
+  // tells it to, at the start of the render
   assert.equal(job.state, 'failed', `the job ended ${job.state} (${job.reason?.code}: ${job.reason?.message}); it was seen in ${seen.join(' → ')}`);
-  assert.deepEqual(job.reason, { code: 'STAGE_FAILED', message: 'building: stage "building" has no "real" implementation' });
+  assert.deepEqual(job.reason, { code: 'STAGE_FAILED', message: UNKNOWN_POINT });
   assert.equal(job.review ?? null, null);
-  assert.deepEqual(h.readJson(`${dir}/job.json`).attempts, { tracing: 1, building: 1 });
-  for (const state of ['rendering', 'awaiting_approval', 'skinning', 'done']) assert.equal(seen.includes(state), false, `the job was seen in ${state}`);
+  assert.deepEqual(h.readJson(`${dir}/job.json`).attempts, { tracing: 1, building: 1, rendering: 1 });
+  for (const state of ['awaiting_approval', 'skinning', 'done']) assert.equal(seen.includes(state), false, `the job was seen in ${state}`);
 
   // (b) ONE manifest row, the reading's: its five outputs are on the disk with the hashes the row states
   const rows = rowsOf(`${dir}/manifest.json`);
   assert.equal(rows.length, 1, 'one row: the reading; the build has none');
   const row = rows[0];
   assert.deepEqual([row.stage, row.attempt, row.status, row.cost_usd], ['tracing', 1, 'done', 0]);
-  assert.deepEqual(row.outputs.map((o) => o.path), PLAN_FILES.map((f) => `${ATTEMPT}/plan-1/${f}`));
+  // (2.1) the build takes two more files of the reading: the picture of the drawing and its vector lines
+  assert.deepEqual(row.outputs.map((o) => o.path), [...PLAN_FILES, DRAWING_FILE, VECTORS_FILE].map((f) => `${ATTEMPT}/plan-1/${f}`));
   assert.deepEqual(PLAN_FILES, ['plan.general.json', 'overlay.png', 'report.json', 'trace-check.json', 'vlm.json']);
   for (const o of row.outputs) {
     const bytes = fs.readFileSync(`${dir}/${o.path}`);
@@ -95,15 +100,22 @@ test('4. the 846 PDF with its true saved reading: the reading passes, its five f
   assert.notEqual(plan.apartment_id, id, 'not the id of the job');
   assert.equal(h.readJson(`${dir}/${ATTEMPT}/index.json`).id, drawingId(GOLDEN_SHA, 'p1'), 'the reading is of this job\'s drawing');
 
-  // (d) the build did not run: its folder is empty, and nothing after it has one
-  assert.deepEqual(fs.readdirSync(`${dir}/stages`).sort(), ['building', 'tracing']);
-  assert.deepEqual(fs.readdirSync(`${dir}/stages/building`), [], 'the build wrote nothing');
+  // (d) (2.1) the build ran: its files are in the job's workspace, its row has the twelve of them, and no name of
+  // the job is left in the pipeline tree; the render started nothing
+  assert.deepEqual(fs.readdirSync(`${dir}/stages`).sort(), ['building', 'rendering', 'tracing']);
+  assert.deepEqual(fs.readdirSync(`${dir}/stages/rendering`), [], 'the render wrote nothing');
+  const built = rowsOf(`${dir}/manifest.json`).find((r) => r.stage === 'building');
+  assert.deepEqual(built.outputs.map((o) => o.path), BUILD_OUTPUTS.map((f) => `work/${f}`));
+  assert.equal(built.cost_usd, 0);
+  const ws = workspaceOf(h.config, dir, id);
+  for (const link of Object.values(ws.links)) assert.equal(fs.existsSync(link), false, `left in the pipeline tree: ${link}`);
   const log = fs.readFileSync(`${dir}/runner.log`, 'utf8');
   assert.match(log, /tracing: the reading passed: 10 rooms, \d+ checks, 18 printed dimensions \(the largest [\d.]+ %\), [\d.]+ s/);
   assert.match(log, /tracing: done \(attempt 1, \$0\)/);
-  assert.match(log, /building: failed STAGE_FAILED/);
+  assert.match(log, /building: built: 10 rooms \(\d+ of type other\), 10 camera points, 12 files, [\d.]+ s/);
+  assert.match(log, /rendering: failed STAGE_FAILED/);
   assert.match(log, /stopped: failed/);
-  assert.equal(AFTER_BUILD.test(log), false, 'the runner\'s log has no line of a stage after the build');
+  assert.equal(AFTER_RENDER.test(log), false, 'the runner\'s log has no line of a stage after the render');
 
   // (e) nothing was billed
   assert.deepEqual(rowsOf(`${dir}/ledger.json`), [], 'no ledger row');

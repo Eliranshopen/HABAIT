@@ -105,3 +105,6 @@
 
 ## 2026-11-19 · main session → second-reader pointer
 - 3dengine milestone 1.4 (a saved reading) CLOSED 2026-11-19, 7 of 27: kept readings per PDF, a second run pays nothing and gives the same plan bytes; three reviews, the file lock replaced (a rename is not exclusive on its source; only a folder renamed onto a path is) -> runs/2026-11-16-3dengine-milestones.md → `memory/runs/2026-11-16-3dengine-milestones.md`
+
+## 2026-11-19 · main session (3dengine) → second-reader pointer
+- 2026-11-19 engine build STOPPED mid-2.1 to continue on another computer: WIP on branch 3dengine f4c89609 + a GitHub layer; the mirror is code and text only: 274 engine media files incl. the test PDFs, assets, Python env, Blender, keys and Claude's own memory must be brought by hand → `memory/project/2026-11-19-engine-handoff-other-computer.md`

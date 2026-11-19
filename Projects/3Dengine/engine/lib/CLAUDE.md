@@ -13,6 +13,7 @@
 | `files.mjs` | list the files of a folder, recursively |
 | `main.mjs` | `isMain(argv1, moduleUrl)`: a module runs its main only when executed directly |
 | `proc.mjs` | `pidAlive(pid)`, `spawnDetached(script, args, {logFile, env, cwd})` (node, detached, output to a log file, never to the parent's stdout), `sleepSync(ms)` |
+| `tool.mjs` | (2.1) what every wrapper of a pipeline tool shares: `startAndWait(cmd, logFile, { timeoutMs, signal })` (the tool's output into a log file; its end, the time limit or the signal), `killTree(pid)` (a tool is stopped with everything it started), `processesNaming(mark)` / `stopNaming(mark)` (the processes whose command line carries a job's mark `j<job id>`, and their stop) |
 
 ## Conventions / gotchas
 - No helper reads the environment or the clock on its own: callers pass what they need, so the tests stay deterministic.

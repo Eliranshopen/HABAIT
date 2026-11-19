@@ -1,0 +1,15 @@
+milestone 2.1, task 01, the proof: the same input twice, from nothing each time, at a small picture (512x256, 8 samples): which files are the same bytes? 2026-11-19T10:45:14+02:00, load 17 %
+=== run b1
+cleaned
+exit 0 in 15.7 s
+exit 1 in 38.2 s
+60 files; junctions: true, true, true; render: none
+cp: cannot stat '.runtime/proofs/2.1/proof21a/tour/renders/cp-livingRoom/pano.webp': No such file or directory
+cp: cannot stat '.runtime/proofs/2.1/proof21a/tour/renders/cp-livingRoom/depth.png': No such file or directory
+=== run b2
+cleaned
+exit 0 in 15.4 s
+exit 1 in 29.6 s
+60 files; junctions: true, true, true; render: none
+cp: cannot stat '.runtime/proofs/2.1/proof21a/tour/renders/cp-livingRoom/pano.webp': No such file or directory
+cp: cannot stat '.runtime/proofs/2.1/proof21a/tour/renders/cp-livingRoom/depth.png': No such file or directory

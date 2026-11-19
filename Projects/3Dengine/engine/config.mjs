@@ -141,6 +141,42 @@ function traceBlock(raw) {
   };
 }
 
+export const BUILD_DEFAULTS = Object.freeze({ timeoutSeconds: 600 });
+export const RENDER_DEFAULTS = Object.freeze({ res: '2048x1024', samples: 32, timeoutSeconds: 1800, points: null, lockPollSeconds: 5 });
+export const RENDER_MIN_WIDTH = 1024;        // the render tool's wrap pad of 512 px must be at most half the width
+const RENDER_POINT_RE = /^cp-[A-Za-z0-9]{1,60}$/;
+
+// The build block milestone 2.1 adds (contract 2.1 §9): how long the four build steps may take.
+function buildBlock(raw) {
+  const r = { ...BUILD_DEFAULTS, ...(raw.build || {}) };
+  return { timeoutSeconds: numberFrom(r.timeoutSeconds, 'build.timeoutSeconds', 0.1, 7200) };
+}
+
+// The render block milestone 2.1 adds (contract 2.1 §9): the picture's size (width x height, the height half the
+// width, the width at least 1024), the samples, the time one room may take, which camera points are rendered
+// (absent or null: all), and how often a job that waits for the machine's Blender lock looks again.
+function renderBlock(raw) {
+  const r = { ...RENDER_DEFAULTS, ...(raw.render || {}) };
+  const m = typeof r.res === 'string' ? /^([1-9]\d{2,4})x([1-9]\d{2,4})$/.exec(r.res) : null;
+  if (!m || Number(m[1]) !== 2 * Number(m[2]) || Number(m[1]) < RENDER_MIN_WIDTH || Number(m[1]) > 16384) {
+    throw new Error('engine config: "render.res" must be "<width>x<height>", the height half the width, the width from 1024 to 16384');
+  }
+  let points = null;
+  if (r.points !== null && r.points !== undefined) {
+    if (!Array.isArray(r.points) || r.points.length === 0 || r.points.some((p) => typeof p !== 'string' || !RENDER_POINT_RE.test(p)) || new Set(r.points).size !== r.points.length) {
+      throw new Error('engine config: "render.points" must be null or a list of different camera point names (cp- and letters or digits)');
+    }
+    points = [...r.points];
+  }
+  return {
+    res: r.res,
+    samples: intFrom(r.samples, 'render.samples', 1, 4096),
+    timeoutSeconds: numberFrom(r.timeoutSeconds, 'render.timeoutSeconds', 0.1, 86400),
+    points,
+    lockPollSeconds: numberFrom(r.lockPollSeconds, 'render.lockPollSeconds', 0.01, 600),
+  };
+}
+
 // The mode of a NEW job (contract 1.3 §1): `stub` unless the settings say `real`.
 function modeFrom(raw) {
   if (raw.mode === undefined || raw.mode === null) return 'stub';
@@ -186,6 +222,8 @@ export function loadConfig({
   cfg.runner = runnerBlock(raw, home);
   cfg.inspect = inspectBlock(raw);
   cfg.trace = traceBlock(raw);
+  cfg.build = buildBlock(raw);
+  cfg.render = renderBlock(raw);
   cfg.mode = modeFrom(raw);
   // (1.3) where the engine looks for a saved reading of a PDF: <readingsDir>/<sha256 of the PDF>.json
   if (raw.readingsDir !== undefined && raw.readingsDir !== null && (typeof raw.readingsDir !== 'string' || raw.readingsDir.trim() === '')) {

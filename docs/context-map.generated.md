@@ -1,4 +1,4 @@
-# Context map — every CLAUDE.md on disk (1237 cards)
+# Context map — every CLAUDE.md on disk (1238 cards)
 <!-- last-updated: 2026-11-19 -->
 <!-- generated-by: generate-cards.py · do not hand-edit; the root CLAUDE.md Context map lists the areas, this file lists every card -->
 
@@ -1154,7 +1154,7 @@
 | `development/tasks/3dengine/logs/1.2/fresh/attempt-1/` | [context file](../development/tasks/3dengine/logs/1.2/fresh/attempt-1/CLAUDE.md) | generated | Attempt 1 of the paid reading (2026-11-18): refused by the provider, HTTP 401, 11 s into the run, before any reading; billed 0. The command's printed answer (wi |
 | `development/tasks/3dengine/logs/1.2/fresh/attempt-2/` | [context file](../development/tasks/3dengine/logs/1.2/fresh/attempt-2/CLAUDE.md) | generated | Attempt 2 of the paid reading (2026-11-18), after the one-line change of the tool: PASS, 10 of 10 rooms, 82 checks, printed dimensions 0.82 % at most, 0.0403605 |
 | `development/tasks/3dengine/logs/1.3/` | [context file](../development/tasks/3dengine/logs/1.3/CLAUDE.md) | generated | Evidence of milestone 1.3 (the trace gate), one QA round. `dev-*.txt` = runs during the build; `gate-*.txt` = the gate in the working folder, the runs that were |
-| `development/tasks/3dengine/logs/1.4/` | [context file](../development/tasks/3dengine/logs/1.4/CLAUDE.md) | generated | (purpose not written yet) |
+| `development/tasks/3dengine/logs/1.4/` | [context file](../development/tasks/3dengine/logs/1.4/CLAUDE.md) | generated | Evidence of milestone 1.4 (a saved reading), three QA rounds. `gate-summary.txt` reads all of it: the first gate, the gate after the first review (`gate2-*`), t |
 | `development/tasks/3dengine/m0.1/` | [context file](../development/tasks/3dengine/m0.1/CLAUDE.md) | generated | The task cards of milestone 0.1 (the engine home), written by plan-to-tasks for that one milestone. `README.md` = the eight tasks, the waves and the two finding |
 | `development/tasks/3dengine/m0.2/` | [context file](../development/tasks/3dengine/m0.2/CLAUDE.md) | generated | The task cards of milestone 0.2 (a stub engine connected to the agent), written by plan-to-tasks for that one milestone. `README.md` = the ten tasks, the waves, |
 | `development/tasks/3dengine/m0.3/` | [context file](../development/tasks/3dengine/m0.3/CLAUDE.md) | generated | The task cards of milestone 0.3 (a job on the disk), written by plan-to-tasks for that one milestone. `README.md` = the five tasks, the waves and the state. |
@@ -1162,6 +1162,7 @@
 | `development/tasks/3dengine/m1.2/` | [context file](../development/tasks/3dengine/m1.2/CLAUDE.md) | generated | The task cards of milestone 1.2 (reading the 846 plan inside the engine), written by plan-to-tasks for that one milestone. `README.md` = the eight tasks, the wa |
 | `development/tasks/3dengine/m1.3/` | [context file](../development/tasks/3dengine/m1.3/CLAUDE.md) | generated | The task cards of milestone 1.3 (the trace gate: the reading of the drawing becomes the first real stage of a job, and a reading that fails its own check hands  |
 | `development/tasks/3dengine/m1.4/` | [context file](../development/tasks/3dengine/m1.4/CLAUDE.md) | generated | The task cards of milestone 1.4 (a saved reading: the engine keeps the reading it paid for, so a second run of the same PDF pays nothing and gives the identical |
+| `development/tasks/3dengine/m2.1/` | [context file](../development/tasks/3dengine/m2.1/CLAUDE.md) | generated | (purpose not written yet) |
 | `development/tasks/apartment-3d/` | [context file](../development/tasks/apartment-3d/CLAUDE.md) | hand-written | apartment-3d/ — context file |
 | `development/tasks/apartment-3d/logs/` | [context file](../development/tasks/apartment-3d/logs/CLAUDE.md) | generated | (purpose not written yet) |
 | `development/tasks/apartment-3d/logs/gate1-zip/` | [context file](../development/tasks/apartment-3d/logs/gate1-zip/CLAUDE.md) | generated | (purpose not written yet) |

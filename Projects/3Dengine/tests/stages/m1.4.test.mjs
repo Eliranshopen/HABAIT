@@ -24,7 +24,8 @@ import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
-import { startRealHome, quietHome, textsOf, ENGINE, FIXTURES, GOLDEN, GOLDEN_SHA } from './real-home.mjs';
+import { startRealHome, quietHome, textsOf, ENGINE, FIXTURES, GOLDEN, GOLDEN_SHA, NO_RENDER } from './real-home.mjs';
+import { UNKNOWN_POINT } from '../../engine/stages/rendering.mjs';
 import { findReading, readerOf, sameReader, readingFile, recordFile } from '../../engine/readings.mjs';
 import { drawingId } from '../../engine/jobs.mjs';
 import { loadConfig, ENGINE_VERSION } from '../../engine/config.mjs';
@@ -89,7 +90,7 @@ before(async () => {
   if (!resumed) fs.rmSync(HOME, { recursive: true, force: true, maxRetries: 8, retryDelay: 150 });
   scripted = { NODE_OPTIONS: `--import ${pathToFileURL(`${ENGINE}/tests/stages/scripted-vision.mjs`).href}`, SCRIPTED_VISION_FILE: RECORD,
     SCRIPTED_VISION_ANSWER: ANSWER, SCRIPTED_VISION_COST: String(COST), RECORD_EXPECT_BEARER: OR, HABAIT_FAL_BASE: '' };
-  h = await startRealHome({ home: HOME, readings: {}, env: scripted });
+  h = await startRealHome({ home: HOME, readings: {}, env: scripted, settings: NO_RENDER });
 });
 after(async () => {
   // Kept for the next invocation unless everything passed: a cut run is then followed by one that goes on.
@@ -172,12 +173,12 @@ test('2. the SECOND run, a real job of the same PDF: it reads from the store, bo
   const { job, seen } = await h.follow(jobId, ENDED, LIMIT_MS - 60000);
   await h.runnersGone();
 
-  // (a) the reading passed (the job then stops at the build, which is not real yet: contract 1.3)
+  // (a) the reading passed ((2.1) the job then builds for real and stops at the start of the render, where this home tells it to)
   assert.equal(job.state, 'failed', `the job ended ${job.state} (${job.reason?.code}: ${job.reason?.message}); it was seen in ${seen.join(' → ')}`);
   assert.equal(job.reason.code, 'STAGE_FAILED');
-  assert.match(job.reason.message, /^building: /, 'the reading itself did not fail (on a machine where this run was cut by its time limit, the cut stops the tool: run the file again, it goes on from the first run)');
+  assert.equal(job.reason.message, UNKNOWN_POINT, 'the reading itself did not fail (on a machine where this run was cut by its time limit, the cut stops the tool: run the file again, it goes on from the first run)');
   const rows = h.readJson(`${dir}/manifest.json`).rows;
-  assert.deepEqual(rows.map((x) => [x.stage, x.attempt, x.status, x.cost_usd]), [['tracing', 1, 'done', 0]]);
+  assert.deepEqual(rows.map((x) => [x.stage, x.attempt, x.status, x.cost_usd]), [['tracing', 1, 'done', 0], ['building', 1, 'done', 0]]);
 
   // (b) $0: the job's ledger is empty, the tool booked nothing, and NO request was made after the first run's one
   const ledger = h.readJson(`${dir}/ledger.json`);

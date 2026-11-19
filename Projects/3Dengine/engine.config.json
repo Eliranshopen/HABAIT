@@ -64,5 +64,15 @@
     "judgeRuns": 3,
     "rounds": 3
   },
+  "build": {
+    "timeoutSeconds": 600
+  },
+  "render": {
+    "res": "2048x1024",
+    "samples": 32,
+    "timeoutSeconds": 1800,
+    "points": null,
+    "lockPollSeconds": 5
+  },
   "mode": "stub"
 }

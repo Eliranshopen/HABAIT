@@ -245,10 +245,11 @@
       }
     },
     "waiting_for": {
-      "description": "(0.3) present only while the runner waits, in the state before a heavy stage, for the heavy lock",
+      "description": "(0.3) present only while the runner waits, in the state before a heavy stage, for the heavy lock; (2.1) or while the render stage waits for the machine's Blender lock",
       "type": "string",
       "enum": [
-        "heavy-lock"
+        "heavy-lock",
+        "blender-lock"
       ]
     },
     "runner": {

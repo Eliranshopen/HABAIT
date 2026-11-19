@@ -11,8 +11,13 @@
 //      and paths the engine put together itself.
 import fs from 'node:fs';
 import path from 'node:path';
-import { spawn as nodeSpawn, spawnSync } from 'node:child_process';
+import { spawn as nodeSpawn } from 'node:child_process';
 import { pipelineEnv } from './config.mjs';
+import { KILL_WAIT_MS, killTree, startAndWait } from './lib/tool.mjs';
+
+// Stopping a tool's whole tree is the same for every wrapper (lib/tool.mjs); the names stay here for the callers
+// and tests that learned them from this module.
+export { KILL_WAIT_MS, killTree };
 
 export class TraceUsageError extends Error {
   constructor(message, what = null) {
@@ -35,7 +40,6 @@ export const FREE_RUN_NAME = 'FAL_KEY';
 const NOT_ASCII = /[^\x20-\x7E]/;       // a character outside printable ASCII
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z$/;
-export const KILL_WAIT_MS = 15000;
 
 // The tool's exit codes (its own header), by the name the engine gives each.
 export const EXIT_OUTCOMES = Object.freeze({ 0: 'PASS', 5: 'FAIL', 3: 'NO_PLAN_FOUND', 4: 'BUDGET_REACHED', 2: 'USAGE' });
@@ -146,68 +150,6 @@ export function traceCommand(config, o, baseEnv = process.env) {
     env[FREE_RUN_NAME] = FREE_RUN_WORD;
   }
   return { command: process.execPath, args, cwd: fwd(config.pipelineRoot), env };
-}
-
-// Stop a process and everything it started.
-export function killTree(pid, { platform = process.platform, run = spawnSync, kill = process.kill.bind(process) } = {}) {
-  if (!Number.isInteger(pid) || pid <= 0) return;
-  if (platform === 'win32') {
-    run('taskkill', ['/PID', String(pid), '/T', '/F'], { windowsHide: true, timeout: KILL_WAIT_MS, stdio: 'ignore' });
-    return;
-  }
-  try {
-    kill(-pid, 'SIGKILL');       // the process group (the tool is started detached there)
-  } catch {
-    try {
-      kill(pid, 'SIGKILL');
-    } catch { /* it has ended already */ }
-  }
-}
-
-// Start the command with its output in the log file, and wait for its end, the time limit or the signal.
-// → { why: 'exit' | 'not-started' | 'timeout' | 'cancelled', code }
-function startAndWait(cmd, logFile, { timeoutMs, signal, killWaitMs }, d) {
-  return new Promise((resolve) => {
-    let fd = null;
-    let child = null;
-    let why = null;
-    let timer = null;
-    let lastWait = null;
-    let done = false;
-    const finish = (answer) => {
-      if (done) return;
-      done = true;
-      clearTimeout(timer);
-      clearTimeout(lastWait);
-      signal?.removeEventListener?.('abort', onAbort);
-      if (fd !== null) {
-        try {
-          d.fs.closeSync(fd);
-        } catch { /* closed already */ }
-      }
-      resolve(answer);
-    };
-    const stop = (reason) => {
-      if (why || done) return;
-      why = reason;
-      d.killTree(child.pid);
-      lastWait = setTimeout(() => finish({ why, code: null }), killWaitMs);   // it did not end: answer anyway
-    };
-    function onAbort() {
-      stop('cancelled');
-    }
-    try {
-      fd = d.fs.openSync(logFile, 'a');
-      child = d.spawn(cmd.command, cmd.args, { cwd: cmd.cwd, env: cmd.env, stdio: ['ignore', fd, fd], windowsHide: true, detached: process.platform !== 'win32' });
-    } catch {
-      finish({ why: 'not-started', code: null });
-      return;
-    }
-    child.once('error', () => finish({ why: why || 'not-started', code: null }));
-    child.once('exit', (code) => finish({ why: why || 'exit', code: typeof code === 'number' ? code : null }));
-    timer = setTimeout(() => stop('timeout'), timeoutMs);
-    signal?.addEventListener?.('abort', onAbort, { once: true });
-  });
 }
 
 // One plan of a result, field by field: numbers, fixed words and paths the engine builds. Nothing is copied

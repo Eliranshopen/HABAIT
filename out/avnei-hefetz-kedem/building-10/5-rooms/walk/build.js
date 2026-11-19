@@ -293,10 +293,13 @@ function fixtures(G, H) {
     cyl(x0 + 0.03, (y0 + y1) / 2, CNT + TOP, CNT + TOP + 0.32, 0.014, MAT.blackmetal, 12);
     box(x0 + 0.03, (y0 + y1) / 2 - 0.012, CNT + TOP + 0.3, x0 + 0.2, (y0 + y1) / 2 + 0.012, CNT + TOP + 0.325, MAT.blackmetal);
   }
-  // the tall unit by the kitchen: in his pictures a light-stone column carrying the TV toward the living room
+  // the sales plan's refrigerator (Eliran 2026-11-19: «חסר המקרר … טלויזיה על הקיר»; the stone TV column from his picture is gone):
+  // a tall white unit, stainless double doors on its kitchen (north) face, a cabinet above
   [x0, y0, x1, y1] = F(G, 'k-fridge');
-  box(x0, y0, 0, x1, y1, H, MAT.stone);
-  { const cy = (y0 + y1) / 2, w = Math.min(0.78, y1 - y0 - 0.04) / 2; box(x1, cy - w, 1.02, x1 + 0.03, cy + w, 1.02 + w * 2 * 0.5625 + 0.02, MAT.black_glass); }
+  { box(x0, y0, 0, x1, y1 - 0.02, H - 0.005, MAT.front); const xa = x0 + 0.05, xb = x1 - 0.05, mid = (xa + xb) / 2, FT = 1.9;
+    box(xa, y1 - 0.02, 0.06, mid - 0.004, y1 + 0.01, FT, MAT.steel); box(mid + 0.004, y1 - 0.02, 0.06, xb, y1 + 0.01, FT, MAT.steel);
+    for (const x of [mid - 0.05, mid + 0.04]) box(x, y1 + 0.01, 0.85, x + 0.012, y1 + 0.035, 1.55, MAT.blackmetal);
+    box(xa, y1 - 0.02, FT + 0.02, xb, y1 + 0.005, H - 0.02, MAT.front); }
   // toilets: wall-hung pans on a concealed-cistern panel (the brochure's spec)
   for (const [id, fr] of [['pb-wc', 'S'], ['b-wc', 'S'], ['wc-wc', 'W']]) {
     [x0, y0, x1, y1] = F(G, id); const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;

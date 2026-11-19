@@ -149,7 +149,7 @@ const me = { x: (700 - OX) / S / 100, y: (OY - 1800) / S / 100, yaw: THREE.MathU
 if (!ok(me.x, me.y)) { const start = CAMS.panoramas.find((c) => c.id === 'pano_living'); me.x = start.x; me.y = start.y; }
 // yaw: 0 looks north (plan +y), positive turns left
 const keys = new Set();
-addEventListener('keydown', (e) => { if (e.target && e.target.tagName === 'INPUT') return; if (studio && studio.mode === 'doll') return; const k = e.key.length === 1 ? e.key.toLowerCase() : e.key; if (PANO_MODE && !(k === 'ArrowLeft' || k === 'ArrowRight')) return; if (k.startsWith('Arrow') || 'wasd'.includes(k)) { keys.add(k); me.goal = null; me.path = null; fly = null; e.preventDefault(); } });
+addEventListener('keydown', (e) => { if (e.target && e.target.tagName === 'INPUT') return; if (studio && studio.mode === 'doll') return; const k = e.key.length === 1 ? e.key.toLowerCase() : e.key; if (PANO_MODE && (k === 'ArrowUp' || k === 'w')) { e.preventDefault(); if (!e.repeat && studio && !(PANO && PANO.moving)) studio.forward(); return; } if (PANO_MODE && !(k === 'ArrowLeft' || k === 'ArrowRight')) return; if (k.startsWith('Arrow') || 'wasd'.includes(k)) { keys.add(k); me.goal = null; me.path = null; fly = null; e.preventDefault(); } });
 addEventListener('keyup', (e) => keys.delete(e.key.length === 1 ? e.key.toLowerCase() : e.key)); addEventListener('blur', () => keys.clear());
 const cv = renderer.domElement; let drag = null;
 const ray = new THREE.Raycaster(), floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);

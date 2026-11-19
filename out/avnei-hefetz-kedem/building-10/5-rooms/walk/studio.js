@@ -302,7 +302,7 @@ export async function initStudio(ctx) {
   // a label for every room you can walk to, standing on its floor (RAINBOW: the floor arrows «כניסה אל …»)
   const navs = ctx.STOPS.map((s) => {
     const b = el('button', 'nl'); b.type = 'button'; b.innerHTML = '<svg viewBox="0 0 44 24" aria-hidden="true"><path d="M22 2 L40 20 L30 20 L22 12 L14 20 L4 20 Z" fill="rgba(255,255,255,.88)"/></svg><span></span>';
-    b.onclick = (e) => { e.stopPropagation(); go(s); }; layer.appendChild(b);
+    b.onclick = (e) => { e.stopPropagation(); go(s, true); }; layer.appendChild(b);
     const [x, y] = s.at; return { s, b, p: new THREE.Vector3(x, 0.05, -y), route: anchorsOf(s) };
   });
   const occluders = []; scene.traverse((o) => { if (o.isMesh && o.material && o.material.name === 'wall') occluders.push(o); });
@@ -340,8 +340,14 @@ export async function initStudio(ctx) {
     placed.sort((a, b) => b.y - a.y);
     for (let i = 0; i < placed.length; i++) for (let j = 0; j < i; j++) if (Math.abs(placed[i].x - placed[j].x) < 130 && Math.abs(placed[i].y - placed[j].y) < 40) placed[i].y = placed[j].y - 40;
     for (const q of placed) q.n.b.style.transform = `translate(${q.x}px, ${q.y}px) scale(${q.k})`;
+    if (ctx.pano && doOcc && ctx.pano.want) ctx.pano.want(placed.map((q) => q.n.s.at));   // get those rooms ready for a smooth move
   }
 
+  // 360: ↑ / W walks to the room whose arrow is straight ahead (the shown arrow nearest the middle of the view, within ~a third of it)
+  function forward() {
+    let best = null; for (const n of navs) { if (n.b.style.display === 'none' || !n.at) continue; v.copy(n.at).project(camera); if (v.z >= 1) continue; const dx = Math.abs(v.x); if (dx < 0.35 && (!best || dx < best.dx)) best = { n, dx }; }
+    if (best) { go(best.n.s, true); return true; } return false;
+  }
   // ---------------------------------------------------------------- toolbar, rail, pager, room cards
   const toastEl = el('div', 'toast'); document.body.appendChild(toastEl); let toastT = 0;
   const toast = (s, ms = 2600) => { toastEl.textContent = s; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('on'), ms); };
@@ -402,7 +408,7 @@ export async function initStudio(ctx) {
   pl.onclick = () => document.body.classList.toggle('strip-open');   // phone: the room cards open from the room name
   const idx = () => Math.max(0, ctx.STOPS.findIndex((s) => s.room === S.room));
   pNext.onclick = () => go(ctx.STOPS[(idx() + 1) % ctx.STOPS.length]); pPrev.onclick = () => go(ctx.STOPS[(idx() - 1 + ctx.STOPS.length) % ctx.STOPS.length]);
-  function go(s) { closePick(); if (S.mode === 'doll') setMode('walk'); flyTo(s.at[0], s.at[1], s.at[2]); }
+  function go(s, walk = false) { closePick(); if (S.mode === 'doll') setMode('walk'); if (walk && ctx.pano && ctx.pano.walkTo) return ctx.pano.walkTo(s.at[0], s.at[1]); flyTo(s.at[0], s.at[1], s.at[2]); }   // walk: an arrow — look where you walk
   function onRoom(r) {
     S.room = r; $('room').textContent = roomLabel(r);
     const area = G.rooms.find((q) => q.id === r)?.area_m2; $('eyebrow').textContent = area ? `${L().area} ${area.toFixed(1)} ${L().sqm}` : (r === 'balcony' ? `${L().area} 8.8 ${L().sqm}` : '');
@@ -643,7 +649,7 @@ export async function initStudio(ctx) {
   setTimeout(() => toast(L().ringHint, 4200), 2500);
 
   return {
-    get mode() { return S.mode; }, setMode, update, orbit, zoom, tap, onRoom,
+    get mode() { return S.mode; }, setMode, update, orbit, zoom, tap, onRoom, forward,
     wheel: (dy) => zoom(dy > 0 ? 1.08 : 1 / 1.08),
     frame(now, dt) { if (S.spin && S.mode === 'walk' && !me.goal) me.yaw += dt * 0.12; overlay(now); placeLabel(); },
     roomLabel, typed, get ops() { return S.ops; }, get ver() { return S.ver || 0; }, targets, shareUrl, openPick, openDesign, replay: () => run(replay), idle: () => S.busy,

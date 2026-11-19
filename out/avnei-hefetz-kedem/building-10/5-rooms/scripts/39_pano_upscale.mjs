@@ -10,7 +10,7 @@ import { loadEnv } from 'file:///C:/RnD/Projects/3Dengine/pipeline/Habait/tour36
 
 const args = process.argv.slice(2);
 const [ROOT, ids] = args.filter((a) => !a.startsWith('--')); const GO = args.includes('--go');
-const CAP = 55, USD = 0.03, EP = 'fal-ai/seedvr/upscale/image';   // fal page: «$0.001 per megapixel» × 29.5 MP output
+const CAP = 65, USD = 0.03, EP = 'fal-ai/seedvr/upscale/image';   // fal page: «$0.001 per megapixel» × 29.5 MP output
 const SRCD = args.includes('--src') ? args[args.indexOf('--src') + 1] : 'gpt25b';   // step 38 (gpt25b) or step 40 (realB)
 const dir = path.join(ROOT, 'work/pano'), out = path.join(dir, args.includes('--out') ? args[args.indexOf('--out') + 1] : 'up'); fs.mkdirSync(out, { recursive: true });
 const LP = path.join(dir, 'ledger.json'); const L = JSON.parse(fs.readFileSync(LP, 'utf8'));

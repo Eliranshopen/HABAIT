@@ -10,7 +10,7 @@ import { loadEnv } from 'file:///C:/RnD/Projects/3Dengine/pipeline/Habait/tour36
 
 const args = process.argv.slice(2);
 const [ROOT, ids] = args.filter((a) => !a.startsWith('--')); const GO = args.includes('--go');
-const CAP = 55, USD = 1.20, EP = 'openai/gpt-image-2.5/sunburst/edit';
+const CAP = 65, USD = 1.20, EP = 'openai/gpt-image-2.5/sunburst/edit';
 const REF = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(ROOT, 'work/pano/polish_manifest.json'), 'utf8')).map((v) => [v.name.split('_')[0], v.ref]));   // step 32's room → picture
 REF.corridor ??= REF.living;   // the corridor (2026-11-19, no picture of its own): the living-room picture, same walls and floor
 const VAR = args.includes('--variant') ? args[args.indexOf('--variant') + 1] : 'A';
@@ -36,6 +36,8 @@ const PROMPT = [...COMMON_START, ...(VAR === 'A' ? [
   'throw on the sofa, layered bedding, a soft rug, framed art, books, ceramics, a few plants, warm lamps - never blocking a door or window.',
   'True-to-life exposure, warm natural daylight with soft directional shadows, contact shadows, real reflections on the polished floor, fine detail.',
 ]), ...COMMON_END].join(' ');
+const FRIDGE = new Set(['kitchen', 'living', 'dining', 'entrance']);   // Eliran 2026-11-19: the plan's refrigerator, never a TV wall
+const NOTE = ' The tall unit at the end of the kitchen counter is the built-in refrigerator from the sales plan: on its kitchen side the stainless steel double-door fridge with a white cabinet above, its other sides plain white panels. Keep it exactly so: no TV, no screen, no art, no shelf and nothing hung on it.';
 const dir = path.join(ROOT, 'work/pano'), out = path.join(dir, 'real' + VAR); fs.mkdirSync(out, { recursive: true });
 const LP = path.join(dir, 'ledger.json'); const L = JSON.parse(fs.readFileSync(LP, 'utf8')); L.cap_usd = 55;
 const save = () => fs.writeFileSync(LP, JSON.stringify(L, null, 1));
@@ -49,8 +51,9 @@ for (const id of ids.split(',')) {
   if (!fs.existsSync(jp)) execFileSync('python', ['-c', `from PIL import Image; Image.open(r'''${path.join(dir, 'gpt25b', id + '.png')}''').convert('RGB').save(r'''${jp}''', quality=92)`]);
   const A = fs.readFileSync(jp), B = fs.readFileSync(path.join(dir, refs.find((f) => f.includes(`_-_${REF[id]}_`))));
   const o = path.join(out, `${id}.png`);
-  const body = { prompt: PROMPT, image_urls: [`data:image/jpeg;base64,${A.toString('base64')}`, `data:image/jpeg;base64,${B.toString('base64')}`], image_size: { width: 4096, height: 2048 }, quality: 'high', num_images: 1, output_format: 'png' };
-  const hash = crypto.createHash('sha256').update(EP).update(PROMPT).update(A).update(B).digest('hex');
+  const PR = PROMPT + (FRIDGE.has(id) ? NOTE : '');
+  const body = { prompt: PR, image_urls: [`data:image/jpeg;base64,${A.toString('base64')}`, `data:image/jpeg;base64,${B.toString('base64')}`], image_size: { width: 4096, height: 2048 }, quality: 'high', num_images: 1, output_format: 'png' };
+  const hash = crypto.createHash('sha256').update(EP).update(PR).update(A).update(B).digest('hex');
   if (L.rows.find((r) => r.inputs_hash === hash && r.status === 'settled' && fs.existsSync(r.out))) { console.log('CACHED', id); continue; }
   if (spent() + USD > CAP + 1e-9) { console.error('REFUSED: over the cap at', id, spent().toFixed(2)); process.exit(2); }
   if (!GO) { console.log('DRY', id, USD, 'spent', spent().toFixed(2)); continue; }

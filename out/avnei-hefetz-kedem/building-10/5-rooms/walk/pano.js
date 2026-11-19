@@ -13,7 +13,7 @@ export async function initPano({ scene, camera, renderer, me, model = [] }) {
   // a room's picture is decoded off the main thread (createImageBitmap) and uploaded to the GPU before it is shown, without
   // mipmaps (an 8K picture across 360° is about one texel per screen pixel): a jump froze the screen ~1.5 s while an 8K JPEG
   // was decoded, uploaded and mipmapped on the first frame (Eliran 2026-11-19 «האיטיות שההדמייה זזה»)
-  const load = async (u) => {
+  const load = async (u, opt = {}) => {
     let t;
     try {
       const blob = await (await fetch(u)).blob();
@@ -21,7 +21,7 @@ export async function initPano({ scene, camera, renderer, me, model = [] }) {
     } catch { t = await new THREE.TextureLoader().loadAsync(u); }   // an older browser without the bitmap options
     t.generateMipmaps = false; t.generateMipmaps = false; t.minFilter = THREE.LinearFilter; t.magFilter = THREE.LinearFilter;
     t.colorSpace = THREE.SRGBColorSpace; t.mapping = THREE.EquirectangularReflectionMapping; t.needsUpdate = true;
-    renderer.initTexture(t); return t;
+    if (!opt.defer) renderer.initTexture(t); return t;
   };
   const url = (p) => `./pano/${big ? p.file : p.file.replace('.jpg', '_4k.jpg')}`;
   // 8K panoramas where the GPU takes them (desktop), the 4K copy on phones (max texture 4096); P.has4k says the copies exist
@@ -29,7 +29,7 @@ export async function initPano({ scene, camera, renderer, me, model = [] }) {
   const tex = (p) => {
     if (!cache.has(p.id)) cache.set(p.id, load(url(p)));
     const v = cache.get(p.id); cache.delete(p.id); cache.set(p.id, v);   // most recent last
-    while (cache.size > 2) { const [k, old] = cache.entries().next().value; cache.delete(k); old.then((t) => { if (sky.material.map !== t) { t.dispose(); t.image && t.image.close && t.image.close(); } }).catch(() => {}); }   // GPU holds 2 rooms (an 8K pano = 134 MB)
+    while (cache.size > (big ? 2 : 5)) { const [k, old] = cache.entries().next().value; cache.delete(k); old.then((t) => { if (sky.material.map !== t) { t.dispose(); t.image && t.image.close && t.image.close(); } }).catch(() => {}); }   // GPU holds 2 rooms (an 8K pano = 134 MB)
     return v;
   };
   // the model stays in the scene for the circles, the measure tool and the plan (raycasts ignore .visible), hidden while you stand
@@ -43,22 +43,129 @@ export async function initPano({ scene, camera, renderer, me, model = [] }) {
   const sky = new THREE.Mesh(new THREE.SphereGeometry(50, 128, 64), new THREE.MeshBasicMaterial({ side: THREE.BackSide, depthWrite: false, depthTest: false, toneMapped: false }));
   sky.name = 'pano-sky'; sky.renderOrder = -10; sky.frustumCulled = false; sky.scale.set(-1, 1, 1); scene.add(sky);
   scene.background = new THREE.Color(0x24211e);
+  // the sharp 8K picture over the 4K one, in 8 vertical strips uploaded one per idle moment (one 8K upload froze the screen ~0.5 s
+  // right after arriving); each strip is cut from the file off the main thread (createImageBitmap with a crop)
+  const N8 = 8, sky8 = new THREE.Group(); sky8.name = 'pano-sky8'; sky8.scale.set(-1, 1, 1); sky8.visible = false; scene.add(sky8);
+  for (let k = 0; k < N8; k++) { const m = new THREE.Mesh(new THREE.SphereGeometry(49, 24, 64, (k * 2 * Math.PI) / N8, (2 * Math.PI) / N8), new THREE.MeshBasicMaterial({ side: THREE.BackSide, depthWrite: false, depthTest: false, toneMapped: false })); m.renderOrder = -9; m.frustumCulled = false; sky8.add(m); }
+  let sharpFor = null;
+  const dropSharp = () => { sharpFor = null; sky8.visible = false; for (const m of sky8.children) { const t = m.material.map; if (t) { t.dispose(); t.image && t.image.close && t.image.close(); m.material.map = null; m.material.needsUpdate = true; } } };
   const S = { cur: null, patches: new Map(), busy: false };
   const patchGroup = new THREE.Group(); patchGroup.name = 'pano-patches'; scene.add(patchGroup);
-  const KEEP = new Set(['pano-sky', 'pano-patches', 'measure', 'marker']);   // the only scene objects drawn over a panorama
+  const KEEP = new Set(['pano-sky', 'pano-sky8', 'pano-patches', 'measure', 'marker']);   // the only scene objects drawn over a panorama
   const offset = THREE.MathUtils.degToRad(P.yaw_offset_deg || 0), sign = P.yaw_sign || 1;
 
-  async function show(p, keepYaw = true) {
-    const t = await tex(p);
+  // ---------------------------------------------------------------- moving between standpoints (Eliran 2026-11-19 «כשאני זז אני רוצה
+  // שזה יראה התקדמות … זה באמת יתקדם לחדר»): the eye travels from A to B through the 3D model, with both panoramas projected onto
+  // the model from their own points (a depth cube per point decides what each one really saw), cross-fading on the way
+  const rotOf = (p) => sign * THREE.MathUtils.degToRad(p.yaw_deg) + offset + Math.PI;
+  const invOf = (p) => { const o = new THREE.Object3D(); o.rotation.set(0, rotOf(p), 0); o.scale.set(-1, 1, 1); o.updateMatrixWorld(); return new THREE.Matrix3().setFromMatrix4(o.matrixWorld).invert(); };
+  const posOf = (p) => new THREE.Vector3(p.x, P.eye_m || 1.6, -p.y);
+  const DIST = new THREE.ShaderMaterial({ uniforms: { src: { value: new THREE.Vector3() } }, side: THREE.DoubleSide,
+    vertexShader: 'varying vec3 vW; void main(){ vec4 w = modelMatrix * vec4(position,1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }',
+    fragmentShader: 'uniform vec3 src; varying vec3 vW; void main(){ gl_FragColor = vec4(length(vW - src), 0.0, 0.0, 1.0); }' });
+  // ready BEFORE a move (Eliran 2026-11-19 «עדיין המעברים … לא חלקים»: the move waited ~0.5 s for an 8K picture and two depth cubes):
+  // per standpoint a depth cube and a 4K picture, made in idle time for the standpoints around you; the 8K comes after arriving
+  const cubeRT = new Map(), mtex = new Map(), MT = big ? 8 : 4;   // rooms kept ready (4K: 33 MB each)
+  const murl = (p) => `./pano/${P.has4k ? p.file.replace('.jpg', '_4k.jpg') : p.file}`;
+  const moveTex = (p, defer = false) => {
+    if (!big) { if (!cache.has(p.id)) cache.set(p.id, load(url(p), { defer })); return tex(p); }
+    if (!mtex.has(p.id)) mtex.set(p.id, load(murl(p), { defer }));
+    const v = mtex.get(p.id); mtex.delete(p.id); mtex.set(p.id, v);
+    while (mtex.size > MT) { const [k, old] = mtex.entries().next().value; mtex.delete(k); old.then((t) => { if (sky.material.map !== t) { t.dispose(); t.image && t.image.close && t.image.close(); } }).catch(() => {}); }
+    return v;
+  };
+  const PROJ = new THREE.ShaderMaterial({
+    uniforms: { tA: { value: null }, tB: { value: null }, dA: { value: null }, dB: { value: null }, pA: { value: new THREE.Vector3() }, pB: { value: new THREE.Vector3() },
+      iA: { value: new THREE.Matrix3() }, iB: { value: new THREE.Matrix3() }, mixv: { value: 0 }, flip: { value: 1 } },
+    vertexShader: 'varying vec3 vW; void main(){ vec4 w = modelMatrix * vec4(position,1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }',
+    fragmentShader: `uniform sampler2D tA, tB; uniform samplerCube dA, dB; uniform vec3 pA, pB; uniform mat3 iA, iB; uniform float mixv, flip; varying vec3 vW;
+      const float PI = 3.14159265;
+      vec3 eq(sampler2D t, mat3 inv, vec3 d){ vec3 n = normalize(inv * d); float th = acos(clamp(n.y, -1.0, 1.0)); float ph = atan(n.z, -n.x); float u = ph / (2.0 * PI); if (u < 0.0) u += 1.0; return texture2D(t, vec2(u, 1.0 - th / PI)).rgb; }
+      float seen(samplerCube c, vec3 d){ float l = length(d); float z = textureCube(c, vec3(flip * d.x, d.yz)).r; return l < z + 0.06 + 0.02 * l ? 1.0 : 0.0; }
+      void main(){ vec3 a = vW - pA, b = vW - pB; float wa = (1.0 - mixv) * (0.02 + seen(dA, a)), wb = mixv * (0.02 + seen(dB, b));
+        vec3 c = (eq(tA, iA, a) * wa + eq(tB, iB, b) * wb) / max(wa + wb, 1e-4); gl_FragColor = vec4(c, 1.0);
+        #include <colorspace_fragment>
+      }`,
+    side: THREE.DoubleSide, toneMapped: false });
+  let move = null; window.__panoProj = PROJ;
+  const modelMeshes = () => { const l = []; for (const o of scene.children) if ((o.isMesh || o.isGroup) && !KEEP.has(o.name)) o.traverse((m) => { if (m.isMesh) l.push(m); }); return l; };
+  function depthCube(p) {   // distance from p to the model, all around (the model drawn with DIST, nothing else); kept per standpoint
+    if (cubeRT.has(p.id)) return cubeRT.get(p.id).texture;
+    const rt = new THREE.WebGLCubeRenderTarget(512, { type: THREE.HalfFloatType, generateMipmaps: false, minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter });
+    const cam = new THREE.CubeCamera(0.05, 60, rt); cubeRT.set(p.id, rt);
+    const ms = modelMeshes(), keep = ms.map((m) => [m, m.material, m.visible]), roots = scene.children.filter((o) => (o.isMesh || o.isGroup) && !KEEP.has(o.name)), rv = roots.map((o) => o.visible);
+    for (const o of roots) o.visible = true; for (const m of ms) { m.material = DIST; m.visible = true; } const s8 = sky8.visible; sky.visible = false; sky8.visible = false; patchGroup.visible = false;
+    DIST.uniforms.src.value.copy(posOf(p)); cam.position.copy(posOf(p)); const bg = scene.background; scene.background = new THREE.Color(1000, 0, 0);
+    cam.update(renderer, scene);
+    scene.background = bg; for (const [m, mat, v] of keep) { m.material = mat; m.visible = v; } roots.forEach((o, k) => (o.visible = rv[k])); sky.visible = true; sky8.visible = s8; patchGroup.visible = true;
+    return rt.texture;
+  }
+  const idle = () => new Promise((ok) => (window.requestIdleCallback ? requestIdleCallback(ok, { timeout: 400 }) : setTimeout(ok, 60)));
+  // uploads (a GPU stall of 50-150 ms each) only while the picture stands still: no move, no drag, no key for 350 ms — a stall of a
+  // still picture is invisible
+  let lastInput = 0; const touch = () => { lastInput = performance.now(); };
+  addEventListener('pointerdown', touch, true); addEventListener('keydown', touch, true); addEventListener('wheel', touch, { capture: true, passive: true });
+  addEventListener('pointermove', (e) => { if (e.buttons || e.pointerType === 'touch') touch(); }, true);
+  const quiet = async () => { for (;;) { await idle(); if (!move && !window.__panoBusy && performance.now() - lastInput > 350) return; } };
+  let prepFor = null, wantIds = [];
+  async function sharpen(p) {
+    if (!big) return; dropSharp(); sharpFor = p;
+    try {
+      const blob = await (await fetch(url(p))).blob(); const W = 8192, H = 4096, w = W / N8;
+      for (let k = 0; k < N8; k++) {
+        const bmp = await createImageBitmap(blob, k * w, 0, w, H, { imageOrientation: 'flipY', premultiplyAlpha: 'none', colorSpaceConversion: 'none' });
+        await quiet(); if (sharpFor !== p) { bmp.close(); return; }
+        const t = new THREE.Texture(bmp); t.flipY = false; t.generateMipmaps = false; t.minFilter = t.magFilter = THREE.LinearFilter; t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true;
+        renderer.initTexture(t); const m = sky8.children[k]; m.material.map = t; m.material.needsUpdate = true;
+      }
+      if (sharpFor === p && !move) { sky8.rotation.set(0, rotOf(p), 0); sky8.visible = true; }
+    } catch (e) { console.warn('sharpen', e); }
+  }
+  async function prepAround(p) {   // the rooms whose arrows you see first, then the nearest: their depth cube and 4K picture, in still moments
+    const tok = {}; prepFor = tok;
+    const near = P.points.filter((q) => q !== p).sort((a, b) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y));
+    const order = [...new Set([...wantIds.map((id) => P.points.find((q) => q.id === id)).filter((q) => q && q !== p), ...near])].slice(0, MT - 1);
+    await quiet(); if (prepFor !== tok) return; depthCube(p);
+    for (const q of order) {
+      await quiet(); if (prepFor !== tok) return; depthCube(q);
+      const t = await moveTex(q, true).catch(() => null); if (!t) continue; await quiet(); if (prepFor !== tok) return; renderer.initTexture(t);
+    }
+  }
+  function want(list) {   // studio: the standpoints the arrows on screen lead to
+    const ids = list.map(([x, y]) => nearest(x, y).id); if (ids.join() === wantIds.join()) return; wantIds = ids; if (S.cur && !move) prepAround(S.cur);
+  }
+  let upgrade = 0;
+  async function show(p, keepYaw = true, animate = true, face = false) {
+    const A = S.cur;
+    if (animate && A && A !== p && !inDoll) {
+      prepFor = null; clearTimeout(upgrade); dropSharp(); touch();
+      const ta = sky.material.map, tb = await moveTex(p);   // ready if prepared; otherwise a 4K picture, about a third of the wait
+      PROJ.uniforms.tA.value = ta; PROJ.uniforms.tB.value = tb; PROJ.uniforms.dA.value = depthCube(A); PROJ.uniforms.dB.value = depthCube(p);
+      PROJ.uniforms.pA.value.copy(posOf(A)); PROJ.uniforms.pB.value.copy(posOf(p)); PROJ.uniforms.iA.value.copy(invOf(A)); PROJ.uniforms.iB.value.copy(invOf(p)); PROJ.uniforms.mixv.value = 0;
+      const ms = modelMeshes(); const keep = ms.map((m) => [m, m.material]); for (const m of ms) m.material = PROJ;
+      const d = Math.hypot(p.x - A.x, p.y - A.y), y0 = me.yaw;
+      const wrap = (v) => ((((v + Math.PI) % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)) - Math.PI, travel = Math.atan2(-(p.x - A.x), p.y - A.y);
+      const want = face ? travel : keepYaw ? (Math.abs(wrap(travel - y0)) > 0.9 ? travel : y0) : THREE.MathUtils.degToRad(p.yaw_deg);   // an arrow: look where you walk; a room off to the side: turn toward it
+      const y1 = y0 + wrap(want - y0);   // the short way round
+      patchGroup.visible = false;
+      await new Promise((done) => { move = { A, p, t0: performance.now(), dur: THREE.MathUtils.clamp(d / 3.2, 0.75, 1.5) * 1000, y0, y1, done, keep }; });
+      for (const [m, mat] of move.keep) m.material = mat; move = null; patchGroup.visible = true; setModel(false);
+      sky.material.map = tb; sky.material.needsUpdate = true; sky.rotation.set(0, rotOf(p), 0);
+      me.x = p.x; me.y = p.y; S.cur = p; drawPatches(); prepAround(p);
+      upgrade = setTimeout(() => { if (S.cur === p && !move) sharpen(p); }, 700);   // the sharp 8K once you stand
+      return;
+    }
+    dropSharp(); const t = await moveTex(p);
     sky.material.map = t; sky.material.needsUpdate = true;
-    sky.rotation.set(0, sign * THREE.MathUtils.degToRad(p.yaw_deg) + offset + Math.PI, 0);
+    sky.rotation.set(0, rotOf(p), 0); sharpen(p);
     me.x = p.x; me.y = p.y; if (!keepYaw) me.yaw = THREE.MathUtils.degToRad(p.yaw_deg);
-    S.cur = p; drawPatches();
+    S.cur = p; drawPatches(); prepAround(p);
     for (const q of P.points) if (q !== p && !warmed.has(q.id)) { warmed.add(q.id); fetch(url(q)).catch(() => {}); }   // prefetch the files only (HTTP cache), not GPU textures
   }
   const nearest = (x, y, notCur) => P.points.filter((q) => !notCur || q !== S.cur).reduce((b, q) => (Math.hypot(q.x - x, q.y - y) < Math.hypot(b.x - x, b.y - y) ? q : b));
-  function goNear(x, y) { const p = nearest(x, y); return show(p, false); }   // a room button: that room's panorama, facing its composed view
-  function tapFloor(x, y) { const p = nearest(x, y, true); if (p) show(p); }
+  function goNear(x, y) { if (move) return; const p = nearest(x, y); return show(p, false); }   // a room button: that room's panorama, facing its composed view
+  function walkTo(x, y) { if (move) return; const p = nearest(x, y); if (p !== S.cur) return show(p, true, true, true); }
+  function tapFloor(x, y) { if (move) return; const p = nearest(x, y, true); if (p) show(p); }
 
   // ---------------------------------------------------------------- a change, projected from the camera that saw it
   const VERT = 'varying vec3 vW; void main(){ vec4 w = modelMatrix * vec4(position,1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }';
@@ -76,8 +183,18 @@ export async function initPano({ scene, camera, renderer, me, model = [] }) {
   }
   let inDoll = false;
   function frame() {
+    if (move) {
+      const k = window.__panoHold != null ? window.__panoHold : Math.min(1, (performance.now() - move.t0) / move.dur), e = k * k * (3 - 2 * k);   // __panoHold: test hook (freeze a move)
+      me.x = move.A.x + (move.p.x - move.A.x) * e; me.y = move.A.y + (move.p.y - move.A.y) * e; me.yaw = move.y0 + (move.y1 - move.y0) * e;
+      camera.position.set(me.x, P.eye_m || 1.6, -me.y); camera.updateMatrixWorld();
+      PROJ.uniforms.mixv.value = THREE.MathUtils.smoothstep(k, 0.25, 0.8);
+      for (const o of scene.children) if ((o.isMesh || o.isGroup) && !KEEP.has(o.name)) o.visible = true;
+      scene.traverse((o) => { if (o.isMesh && o.material === PROJ) o.visible = true; });
+      if (k >= 1) move.done();
+      sky.position.copy(camera.position); sky8.position.copy(camera.position); return;
+    }
     for (const m of patchGroup.children) m.position.copy(camera.position);
-    sky.position.copy(camera.position);
+    sky.position.copy(camera.position); sky8.position.copy(camera.position);
     // pieces that finish loading after start (accessories, swapped models) are added to the scene later: keep them hidden too
     if (!inDoll) for (const o of scene.children) if ((o.isMesh || o.isGroup) && o.visible && !KEEP.has(o.name)) o.visible = false;
   }
@@ -89,9 +206,9 @@ export async function initPano({ scene, camera, renderer, me, model = [] }) {
       for (const o of vis) o.visible = true;
       if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera);
       if (!inDoll) for (const o of vis) o.visible = false;
+      { const ts = new THREE.Scene(), g = new THREE.BoxGeometry(0.01, 0.01, 0.01); ts.add(new THREE.Mesh(g, PROJ), new THREE.Mesh(g, DIST)); renderer.compile(ts, camera); }   // the move's shaders, ready before the first move
       const tex = new Set(); scene.traverse((o) => { if (!o.isMesh) return; for (const m of [].concat(o.material || [])) for (const k of ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'aoMap', 'emissiveMap', 'lightMap']) if (m[k] && m[k].isTexture) tex.add(m[k]); });
-      const idle = () => new Promise((ok) => (window.requestIdleCallback ? requestIdleCallback(ok, { timeout: 200 }) : setTimeout(ok, 30)));
-      for (const t of tex) { await idle(); renderer.initTexture(t); }
+      for (const t of tex) { await quiet(); renderer.initTexture(t); }   // never during a move or a drag
     } catch (e) { console.warn('pano warm', e); }
   }
 
@@ -140,11 +257,11 @@ export async function initPano({ scene, camera, renderer, me, model = [] }) {
 
   function doll(on) {   // the dollhouse: the model, no panorama
     inDoll = on;
-    if (on) { scene.background = new THREE.Color(0x24211e); sky.visible = false; patchGroup.visible = false; for (const o of scene.children) if ((o.isMesh || o.isGroup) && !KEEP.has(o.name)) o.visible = true; scene.traverse((o) => { if (o.isMesh && o.material && (o.material.name === 'ceiling' || o.material.name === 'slab')) o.visible = false; }); }   // the lids stay off, as in the studio's dollhouse
-    else { sky.visible = true; patchGroup.visible = true; scene.traverse((o) => { if (o.isMesh && o.material && (o.material.name === 'ceiling' || o.material.name === 'slab')) o.visible = true; }); setModel(false); }
+    if (on) { scene.background = new THREE.Color(0x24211e); sky.visible = false; sky8.visible = false; patchGroup.visible = false; for (const o of scene.children) if ((o.isMesh || o.isGroup) && !KEEP.has(o.name)) o.visible = true; scene.traverse((o) => { if (o.isMesh && o.material && (o.material.name === 'ceiling' || o.material.name === 'slab')) o.visible = false; }); }   // the lids stay off, as in the studio's dollhouse
+    else { sky.visible = true; if (sharpFor && sky8.children.every((m) => m.material.map)) sky8.visible = true; patchGroup.visible = true; scene.traverse((o) => { if (o.isMesh && o.material && (o.material.name === 'ceiling' || o.material.name === 'slab')) o.visible = true; }); setModel(false); }
   }
   const start = P.points.find((q) => q.id === 'living') || P.points[0];
   await show(start, false);
   setTimeout(warm, 1500);
-  return { points: P.points, show, doll, goNear, tapFloor, frame, edit, undo, reset, toggleOrig, changes, get busy() { return S.busy; }, get cur() { return S.cur; }, get original() { return !!S.orig; } };
+  return { get moving() { return !!move; }, want, walkTo, points: P.points, show, doll, goNear, tapFloor, frame, edit, undo, reset, toggleOrig, changes, get busy() { return S.busy; }, get cur() { return S.cur; }, get original() { return !!S.orig; } };
 }

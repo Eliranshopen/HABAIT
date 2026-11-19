@@ -30,7 +30,19 @@ const M = {
   flux2pro: { ep: 'fal-ai/flux-2-pro/edit', usd: 0.25, body: { image_size: SIZE, output_format: 'png' } },
 }[MODEL];
 if (!M) { console.error('unknown --model', MODEL); process.exit(1); }
-const PROMPT = [
+// --no-blender (Eliran 2026-11-19 «אם הייתי בונה את ההדמייה הזאת ללא בלנדר מה הייתי מקבל? … דוגמא», $1.20 approved): image 1 is the
+// SALES PLAN, not a Blender panorama - the demo of what the model makes with no 3D model under it. Same model, same look reference.
+const NO_BLENDER = args.includes('--no-blender');
+const PROMPT_NO_BLENDER = [
+  'Image 1 is the sales floor plan of a small house (dimensions in cm). Image 2 is the designer\'s photoreal render of its kitchen.',
+  'Create an equirectangular 360-degree panorama (2:1, full sphere, seamless left and right edges, horizon in the middle) of the open',
+  'kitchen-living-dining space, as seen by a person standing in the kitchen at eye level (about 1.6 m) between the kitchen counters and',
+  'the dining table, following the plan: the kitchen along the left wall and the bottom wall with the sink under the window, the dining table',
+  'of six in the middle, the L-shaped sofa and the TV unit beyond, the glass sliding doors to the wooden deck. Use the look of image 2: soft',
+  'warm daylight, limewash plaster walls, natural oak cabinets, stone floor, rattan pendant lights. No skirting boards. Photoreal,',
+  'professional real-estate 360 photograph. No people, no text, no logo, no watermark.',
+].join(' ');
+const PROMPT = NO_BLENDER ? PROMPT_NO_BLENDER : [
   'Image 1 is an equirectangular 360-degree panorama (2:1, full sphere) of an apartment interior, rendered from an exact 3D model of the sales plan.',
   'Turn it into a real, high-end professional 360-degree interior photograph.',
   'Image 2 is the designer\'s photoreal render of this apartment: use it ONLY as the reference for the look - the soft warm daylight, the limewash',
@@ -71,7 +83,7 @@ const env = loadEnv('C:/RnD');
 if (!env.FAL_KEY) { console.error('FAL_KEY missing (by name)'); process.exit(3); }
 const H = { Authorization: `Key ${env.FAL_KEY}`, 'Content-Type': 'application/json' };
 const save = () => fs.writeFileSync(LP, JSON.stringify(L, null, 1));
-if (!row) { row = { seq: L.rows.length + 1, at: new Date().toISOString(), op: 'pano-realism', model: M.ep, room: path.basename(pano, '.png'), reserved_usd: M.usd, status: 'reserved', inputs_hash: hash, out: path.resolve(out) }; L.rows.push(row); save(); }
+if (!row) { row = { seq: L.rows.length + 1, at: new Date().toISOString(), op: NO_BLENDER ? 'pano-no-blender-demo' : 'pano-realism', model: M.ep, room: path.basename(pano, '.png'), reserved_usd: M.usd, status: 'reserved', inputs_hash: hash, out: path.resolve(out) }; L.rows.push(row); save(); }
 const t0 = Date.now();
 try {
   if (!row.queue) {

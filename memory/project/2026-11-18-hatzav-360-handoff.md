@@ -39,3 +39,13 @@ Hebrew always — replies, question dialogs, tool descriptions. Short. Status ag
 - **DEPLOYED 2026-11-18 ~22:20 on Eliran's go** (dialog: «להעלות עכשיו»): `dpl_APgUQRgeWTMkKsApDdswu7kJcWYQ`, alias https://hatzav-360.vercel.app. Staged in scratchpad `deploy360b/hatzav-360`.
 - Live check passed: /api/edit returns configured:true and open:true. Skipping the intro with «דלג» and tapping a door moves living → dining at both 1440 and 390. The live kitchen pano matches the build's hash (6cacfb48).
 - Owed: the end-of-project cost and time report (feedback-cost-time-report).
+- **2026-11-19, the no-Blender demo** (Eliran asked: «אם הייתי בונה … ללא בלנדר מה הייתי מקבל? … דוגמא»; $1.20 approved). `27_pano_realism.mjs --no-blender` sent the sales plan and his kitchen render to GPT Image 2.5, with no Blender panorama. Output: `work/pano360/demo/kitchen-no-blender.png`.
+- What the model invented: a kitchen island with bar stools, a loft about twice the real size, a corridor with a front door, a bookcase wall, and a slatted TV wall. Proof that Blender is what holds the result to the plan.
+- Page: https://claude.ai/artifact/VfLesvg7mq253ca85eNZxz
+- Spend: **$101.69 of $102**.
+
+## 2026-11-19 — stopped here to continue on ANOTHER computer (Eliran: «לעצור את העבודה לעדכן את הגיטהאב ולהמשיך … ממחשב אחר»)
+- State: the 360 is DONE and LIVE (https://hatzav-360.vercel.app). The walkaround stays STOPPED. Spend $101.69 of $102 — no paid call is left inside the ceiling.
+- What the GitHub mirror (Eliranshopen/HABAIT, public) carries: the code and text of this job — the JOB `scripts/`, `work/pano360/ledger.json`, the tour's json/mjs, this file. It does NOT carry media (Blender `.blend`, panoramas png/jpg, tour pictures, audio, fonts), the `.env` keys file, or the scratchpad deploy folder. Media of the developer's plan and renders never go to the public mirror.
+- On the new computer: clone the mirror → read `memory/HOT.md`, then this file. To rebuild or redeploy there you need the media copied by hand (Eliran's act: USB / private cloud) — at least `JOB/scene/`, `JOB/work/pano360/real/`, `JOB/work/pano360/*.png` and the tour folder `apartments/hatzav/` — plus the `C:\RnD\.env` file (FAL_KEY) and Blender 4.5. Without them the new computer can read and plan, not render.
+- Owed (unchanged): the end-of-project cost and time report per tool and model; merging branch `harei-zahav-naama` into local main when the main checkout is clean.

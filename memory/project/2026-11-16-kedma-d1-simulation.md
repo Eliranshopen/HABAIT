@@ -138,3 +138,10 @@
 - **Learned:** generate-cards.py --root <folder> also writes docs/context-map.generated.md under that folder (moved out); name a built-tour copy dist/ so the generator skips it (root §8.6).
 - **Owed / open:** re-copy after later changes (day/night, leftovers); the root docs/context-map.generated.md gets the new rows at the next /sync-context.
 - **Second reader:** none
+
+## 2026-11-19 · main session · kedma-d1 synced to the HABAIT mirror on Eliran's word (to continue on another computer)
+- **Did:** Eliran: «לעצור את העבודה לעדכן את הגיטהאב ולהמשיך את העבודה ממחשב אחר». Layer 235cf725 on mirror head 86a96145: 645 added, 3 updated, 0 removed (code and text only: Projects/Kedma_D1 job + dist html/js + CLAUDE files; the worktree's 8 changed engine tools + PORT-CHANGES + apartment/tour config under Projects/Kedma_D1/worktree/; memory, INDEX, plan, Projects/CLAUDE.md after a superset check). 1335 media files and every .env left out; secret scan 0 hits. Local main and index untouched (temp GIT_INDEX_FILE).
+- **Evidence:** `git ls-remote github main` = 235cf725 (then the small memory layer on top)
+- **Learned:** nothing new beyond the 2026-11-19 mirror rules (build on the remote head, adds only).
+- **Owed / open:** the MEDIA needed to keep painting are NOT on GitHub (by rule): canvases and answers under the worktree's apartments/kedma-d1/_local (8.4 GB), renders + depth under tours/kedma-d1/renders, the 13 final panoramas, the Blender scene. On the other computer: clone HABAIT, then bring the media by hand (drive/disk) to the same paths, or restart from the 13 panoramas for day/night. Keys file C:\RnD\.env is never in the repo.
+- **Second reader:** none

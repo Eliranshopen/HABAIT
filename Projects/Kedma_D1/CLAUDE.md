@@ -18,6 +18,12 @@ engine tools under `Projects/3Dengine/pipeline/`, the apartment's working canvas
 | `job/` | the job folder: hand tools (`hand/`), prompts, review pictures, logs, deploy logs, ledger copy |
 | `plan/` | the plan of record (copy of `development/plans/2026-11-17-kedma-d1-true-geometry-redo.md`) |
 
+## Continuing on another computer (2026-11-19)
+GitHub (Eliranshopen/HABAIT) holds the code and text of this folder, and the worktree's changes under `worktree/` (copy them back to
+`.wt/kedma-d1/Projects/3Dengine/` at the same paths). It holds NO media: the 13 panoramas, the built tour's images and the working
+canvases (8.4 GB, worktree `apartments/kedma-d1/_local/`) and renders (`tours/kedma-d1/renders/`) must be brought by hand.
+The keys file `C:\RnD\.env` is never in the repo. Resume point: last section of `memory/project/2026-11-16-kedma-d1-simulation.md`.
+
 ## Facts
 - Money: $45.79 of a $48 ceiling (Eliran raised it from $45 on 2026-11-19 for the balcony); ledger in the worktree `_local/ledger.json`.
 - The balcony was painted with GPT Image 2.5 after nano-banana invented a second terrace six times.

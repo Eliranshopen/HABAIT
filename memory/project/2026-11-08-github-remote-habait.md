@@ -42,3 +42,10 @@
 - **Did:** layered on the mirror head 7b1ea0d3 only the job's own changes: `out/harei-zahav-naama/3-rooms/scripts/27_pano_realism.mjs` (the --no-blender demo flag), `work/pano360/ledger.json` ($101.69 of $102), the handoff file with a "continue on another computer" section, this entry and one INDEX line. Adds and updates only, no media, no env, never forced; secret scan 0.
 - **Learned:** the worktree's copy of `tour360/` (35 files) is OLDER than the mirror's (other sessions updated tour360 on main); a layer taken from the worktree tree would have reverted them. Layer only the paths the session itself changed.
 - **Second reader:** none
+
+## 2026-11-19 · main session (3dengine) · HABAIT layer 14f2e544: the engine's work in progress of milestone 2.1, from the branch 3dengine, for a move to another computer
+- **Did:** On Eliran's word (stop, update GitHub, go on from another computer). A layer on the mirror head 804a91bf (the head had moved twice while the layer was being built: two other sessions pushed their own stop points): 68 files, 38 added and 26 taken from the branch 3dengine at 7b6a7837 (Projects/3Dengine and development/tasks/3dengine as they are on the branch: milestone 2.1 in progress, not merged into main, not gated), 4 shared record files from the working tree. The mirror went from 7489 to 7527 files, nothing removed, no media. The scan of the 68 files found nothing that is a real key (20 patterns).
+- **Evidence:** `memory/project/2026-11-19-engine-handoff-other-computer.md` · `.git/config`
+- **Learned:** A layer may come from a BRANCH for paths that are one session's alone (the engine home and its board): the mirror then holds work that local main does not. When the head moves between the fetch and the push, fetch and build again; it moved twice in five minutes.
+- **Owed / open:** None. What the mirror does not hold for another computer is in the handoff entry of 2026-11-19 (the first evidence file of this entry).
+- **Second reader:** none

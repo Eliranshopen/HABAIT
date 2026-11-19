@@ -1,5 +1,69 @@
 milestone 2.1, during the build: the closing test tests/stages/m2.1.test.mjs alone, second run (the first, dev-m21-1.txt, showed the stages working and a mistake of the TEST: it waited for the runner to end while the job waits for the approval, where a live runner is right). One bounded run of up to 25 minutes in the background.
 started: 2026-11-19T11:32:41+02:00
 machine load before: 34 %
+✖ 1. two rooms, the runner killed in the middle of the second, a resume: the first room is not rendered again, the second is; nothing of the job is left running or locked (1449509.1191ms)
+✖ 2. a second run on the same input starts no tool (7.5207ms)
+✖ 3. the same room rendered again is the same picture: the depth bit for bit, the colour picture within the tolerance (2.2099ms)
+✖ 4. no answer of a tool, no job record, no room's row and no line of the runner's log holds a name the reading took from the drawing (2.7246ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1452430.8796
 
-STOPPED by the main session at 2026-11-19T11:38:01+02:00, on Eliran's word (he stops the work here and goes on from another computer). The run had passed the reading and the build and was rendering its first room. Not a result: no part of the test ended. What it left was removed: five processes (the test's MCP server, the runner, the tool, render_tour, Blender), the machine's Blender lock in the dead runner's name (by the engine's own rule), the job's three junction names in the pipeline tree, the temp home.
+✖ failing tests:
+
+test at tests\stages\m2.1.test.mjs:75:1
+✖ 1. two rooms, the runner killed in the middle of the second, a resume: the first room is not rendered again, the second is; nothing of the job is left running or locked (1449509.1191ms)
+  Error: waited too long for the first room's row (the reading, the build, the machine's Blender lock, the scene, one render); the job is in undefined
+      at until (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m2.1.test.mjs:54:33)
+      at async TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m2.1.test.mjs:92:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests\stages\m2.1.test.mjs:148:1
+✖ 2. a second run on the same input starts no tool (7.5207ms)
+  Error: ENOENT: no such file or directory, stat 'C:\Users\elira\AppData\Local\Temp\m21-home-SkTn6D\jobs-temp\eaa9f325bfb6c022\work\logs\render-room-03.log'
+      at Object.statSync (node:fs:1794:25)
+      at file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m2.1.test.mjs:150:70
+      at Array.map (<anonymous>)
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m2.1.test.mjs:150:56)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'stat',
+    path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\m21-home-SkTn6D\\jobs-temp\\eaa9f325bfb6c022\\work\\logs\\render-room-03.log'
+  }
+
+test at tests\stages\m2.1.test.mjs:164:1
+✖ 3. the same room rendered again is the same picture: the depth bit for bit, the colour picture within the tolerance (2.2099ms)
+  Error: ENOENT: no such file or directory, mkdir 'C:\Users\elira\AppData\Local\Temp\m21-home-SkTn6D\first-render'
+      at Object.mkdirSync (node:fs:1410:26)
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m2.1.test.mjs:167:6)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'mkdir',
+    path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\m21-home-SkTn6D\\first-render'
+  }
+
+test at tests\stages\m2.1.test.mjs:209:1
+✖ 4. no answer of a tool, no job record, no room's row and no line of the runner's log holds a name the reading took from the drawing (2.7246ms)
+  Error: ENOENT: no such file or directory, open 'C:\Users\elira\AppData\Local\Temp\m21-home-SkTn6D\jobs-temp\eaa9f325bfb6c022\job.json'
+      at Object.readFileSync (node:fs:483:20)
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m2.1.test.mjs:218:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\m21-home-SkTn6D\\jobs-temp\\eaa9f325bfb6c022\\job.json'
+  }

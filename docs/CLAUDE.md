@@ -18,6 +18,7 @@ The documents that agents and skills cite by path: the inherited rulings, the ag
 | Folder | Card | Purpose |
 |---|---|---|
 | `governance/` | [`governance/CLAUDE.md`](governance/CLAUDE.md) | the registers: `SECRETS-LEDGER`, `OWED` and `SHIP-LEDGER` (since 2026-11-04) live; `WORKTREES` frozen until re-pointed to the product git worktrees |
+| `claude-memory-export/` | [`claude-memory-export/CLAUDE.md`](claude-memory-export/CLAUDE.md) | a COPY (2026-11-19) of Claude Code's own notes about Eliran and this project, put in the repo on his word so that they reach the GitHub mirror and another computer; not the live memory, not kept up to date |
 
 ## Conventions / gotchas
 - A document cited by an agent that is **not** here was not transferred from the previous harness (`harness-upgrade-plan.md`, `skill-taxonomy.md` §-numbers of the old one, `CARD-LOG`, `CONTEXT-FILE-STANDARD.md`): the agent says so and continues with root `CLAUDE.md`.

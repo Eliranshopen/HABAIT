@@ -108,3 +108,6 @@
 
 ## 2026-11-19 · main session (3dengine) → second-reader pointer
 - 2026-11-19 engine build STOPPED mid-2.1 to continue on another computer: WIP on branch 3dengine f4c89609 + a GitHub layer; the mirror is code and text only: 274 engine media files incl. the test PDFs, assets, Python env, Blender, keys and Claude's own memory must be brought by hand → `memory/project/2026-11-19-engine-handoff-other-computer.md`
+
+## 2026-11-19 · main session (3dengine) → second-reader pointer
+- 2026-11-19 engine handoff completed: 2.1 work in progress MERGED into main 83a0a1a9 on his word (not gated); a carry pack at C:/RnD-carry-2026-11-19 (repository bundle 780 MB + assets + notes + Hebrew steps); Claude's notes exported to docs/claude-memory-export for the mirror → `memory/project/2026-11-19-engine-handoff-other-computer.md`

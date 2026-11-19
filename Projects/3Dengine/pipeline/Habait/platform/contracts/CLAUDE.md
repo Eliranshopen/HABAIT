@@ -1,11 +1,11 @@
 # contracts/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 JSON schemas for the flow, project and units contracts, and validate.mjs.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 4 files here · 0 subfolders · 4 files / 22.4 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

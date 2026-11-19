@@ -1,11 +1,11 @@
 # copy-habait-2026-11-03/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Board `copy-habait-2026-11-03` (CLOSED 2026-11-03): `README.md` is the card table and execution order, `task-NN-*.md` one card per agent task, `run-tasks.md` how it was meant to run, `exclude.txt` and `inventory.md` the copy manifest.
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 13 files here · 1 subfolders · 44 files / 163.6 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

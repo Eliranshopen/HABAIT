@@ -1,19 +1,19 @@
 # fixtures/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-10)
-4 files here · 0 subfolders · 4 files / 811.2 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+4 files here · 0 subfolders · 4 files / 811.5 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `apt846.dims.json` | 6.0 KB | 2026-11-02 |
-| `apt846.dims.json.bak-99` | 6.3 KB | 2026-11-02 |
-| `bad-facade.png` | 711.5 KB | 2026-11-02 |
-| `bad-plan.json` | 87.4 KB | 2026-11-02 |
+| `apt846.dims.json` | 6.3 KB | 2026-11-16 |
+| `apt846.dims.json.bak-99` | 6.3 KB | 2026-11-16 |
+| `bad-facade.png` | 711.5 KB | 2026-11-16 |
+| `bad-plan.json` | 87.4 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

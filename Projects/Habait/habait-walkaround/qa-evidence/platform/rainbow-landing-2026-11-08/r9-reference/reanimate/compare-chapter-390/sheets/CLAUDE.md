@@ -1,18 +1,12 @@
 # sheets/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent context file's row for this folder is the description._
 
-## What's here (2026-11-10)
-3 files here · 0 subfolders · 3 files / 6.5 MB in the whole tree (vendor and build output excluded)
-
-| File | Size | Modified |
-|---|---|---|
-| `compare-01.png` | 2.3 MB | 2026-11-09 |
-| `compare-02.png` | 3.2 MB | 2026-11-09 |
-| `compare-03.png` | 1.0 MB | 2026-11-09 |
+## What's here (2026-11-18)
+0 files here · 0 subfolders · 0 files / 0 B in the whole tree (vendor and build output excluded)
 
 ## Gotchas
 _none recorded_

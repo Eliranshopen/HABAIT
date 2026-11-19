@@ -158,3 +158,24 @@
 
 ## 2026-11-18 · main session → second-reader pointer
 - Eliran 2026-11-18: engine stage tests (npm run test:stages) on a loaded machine may run ONCE bounded at 25 minutes in the background (timeout 1500); root section 12 limits stay for everything else. → `memory/project/2026-11-18-engine-stage-tests-long-run.md`
+
+## 2026-11-18 · qa-reviewer · QA live 1.4 (a saved reading): FAIL on D-1, the lock
+- **Did:** Fresh review of milestone 1.4 on the local main; the report is qa-live.md in the logs 1.4 folder of the 3dengine board (working folder). Gate: stages 13 of 13, npm test 424 of 428 (4 time failures at full load, pass when quiet), doctor READY. Store, command and settings checks held; the lock test failed.
+- **Evidence:** `development/tasks/3dengine/logs/1.4/gate-summary.txt`
+- **Learned:** The lock helper in engine/lib/atomic.mjs is not exclusive between short-lived processes (4 of 15 runs of 8 saw two holders); concurrent keeps can lose a record or fail.
+- **Owed / open:** A fix of the lock helper, a test with 8 processes, then a re-review of the lock line only.
+- **Second reader:** `platform-dev`
+
+## 2026-11-19 · qa-reviewer · QA round 2 of 1.4 (the new lock): FAIL on D-1, several takers of a killed holder
+- **Did:** Fresh second review of 1.4 on main c647cdd8. Gate: stages passed (1.4 file needed a resume after the 540 s cut), npm test 432 of 432, doctor READY. First-round race does not reproduce (512 holders, 0 overlaps) but 4 waiting takers of a KILLED holder all enter at once (10 of 10 minimal runs). Report: qa-live-r2.md in the 3dengine working folder logs/1.4, qa2-* beside it. Cut by a network error; scope B own attacks not run.
+- **Evidence:** `development/tasks/3dengine/logs/1.4/gate-summary.txt`
+- **Learned:** On Windows a rename by name is not a compare-and-swap: four renames of one source entry all report done, so the folder-lock take-over is not exclusive when takers poll in step. A quiet race of staggered takers hides it; test with a killed holder and waiting takers.
+- **Owed / open:** Author: replace take-over by something exclusive (create-exclusive file or mkdir of a fresh name per generation) and add a test with 4 waiting takers and a killed holder; then re-review lock plus scope B attacks 1 to 5 (not run).
+- **Second reader:** `platform-dev`
+
+## 2026-11-19 · qa-reviewer · 1.4 QA round 3 PASS lock and store
+- **Did:** Third review of milestone 1.4 on the local main. Report: logs/1.4/qa-live-r3.md under .wt/3dengine/development/tasks/3dengine, evidence files qa3-*. PASS, no defects, nine observations (O-2: a failed supersede leaves none).
+- **Evidence:** `development/tasks/3dengine/logs/1.4/gate-summary.txt`
+- **Learned:** A clean race proves little: plant waiters inside their wait, then kill the holder; keep a copy of the old form to prove the harness can fail. Heredocs eat backslashes and quotes: use Write.
+- **Owed / open:** Main session decides O-2 and O-3 before milestone 2.1
+- **Second reader:** `platform-dev`

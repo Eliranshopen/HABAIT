@@ -1,24 +1,24 @@
 # compare-intro-1440/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent context file's row for this folder is the description._
 
-## What's here (2026-11-10)
-2 files here · 3 subfolders · 111 files / 20.5 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+2 files here · 3 subfolders · 2 files / 17.8 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `report.json` | 8.0 KB | 2026-11-09 |
-| `report.md` | 9.8 KB | 2026-11-09 |
+| `report.json` | 8.0 KB | 2026-11-16 |
+| `report.md` | 9.8 KB | 2026-11-16 |
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `.clone-scaled/` | [`.clone-scaled/CLAUDE.md`](.clone-scaled/CLAUDE.md) | 54 (15.4 MB) |
-| `diff/` | [`diff/CLAUDE.md`](diff/CLAUDE.md) | 53 (4.1 MB) |
-| `sheets/` | [`sheets/CLAUDE.md`](sheets/CLAUDE.md) | 2 (1.0 MB) |
+| `.clone-scaled/` | [`.clone-scaled/CLAUDE.md`](.clone-scaled/CLAUDE.md) | 0 (0 B) |
+| `diff/` | [`diff/CLAUDE.md`](diff/CLAUDE.md) | 0 (0 B) |
+| `sheets/` | [`sheets/CLAUDE.md`](sheets/CLAUDE.md) | 0 (0 B) |
 
 ## Gotchas
 _none recorded_

@@ -1,0 +1,128 @@
+{
+ "checks": [
+  {
+   "name": "16:00 is the 50/50 mix of 15 and 17",
+   "pass": true,
+   "mean_abs_err_255": 0.248,
+   "fitted_weight_of_later": 0.501,
+   "keyframes_differ_by": 20.0
+  },
+  {
+   "name": "keyframes 15 and 17 differ visibly",
+   "pass": true,
+   "mean_abs_diff_255": 20.0
+  },
+  {
+   "name": "20:00 is the 50/50 mix of 18.5 and 21.5",
+   "pass": true,
+   "mean_abs_err_255": 0.253,
+   "fitted_weight_of_later": 0.502,
+   "keyframes_differ_by": 32.48
+  },
+  {
+   "name": "keyframes 18.5 and 21.5 differ visibly",
+   "pass": true,
+   "mean_abs_diff_255": 32.48
+  },
+  {
+   "name": "desk_h14.png painted (not blank)",
+   "pass": true,
+   "std": 32.0,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "desk_h16.png painted (not blank)",
+   "pass": true,
+   "std": 45.1,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "desk_h21.png painted (not blank)",
+   "pass": true,
+   "std": 45.1,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "phone_h17.png painted (not blank)",
+   "pass": true,
+   "std": 47.4,
+   "size": [
+    390,
+    844
+   ]
+  },
+  {
+   "name": "phone_h21.png painted (not blank)",
+   "pass": true,
+   "std": 33.9,
+   "size": [
+    390,
+    844
+   ]
+  },
+  {
+   "name": "raw_h15.png painted (not blank)",
+   "pass": true,
+   "std": 34.6,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "raw_h16.png painted (not blank)",
+   "pass": true,
+   "std": 32.0,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "raw_h17.png painted (not blank)",
+   "pass": true,
+   "std": 33.1,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "raw_h18.5.png painted (not blank)",
+   "pass": true,
+   "std": 39.6,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "raw_h20.png painted (not blank)",
+   "pass": true,
+   "std": 38.2,
+   "size": [
+    1440,
+    900
+   ]
+  },
+  {
+   "name": "raw_h21.5.png painted (not blank)",
+   "pass": true,
+   "std": 37.9,
+   "size": [
+    1440,
+    900
+   ]
+  }
+ ],
+ "pass": true
+}

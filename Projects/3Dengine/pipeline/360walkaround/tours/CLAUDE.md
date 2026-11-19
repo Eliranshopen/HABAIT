@@ -1,11 +1,11 @@
 # tours/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 One folder per rendered tour (apt846, apt846-furnished, pilot-karnei), each with its plan.json, manifest and render reports.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 0 files here · 6 subfolders · 99 files / 3.9 MB in the whole tree (vendor and build output excluded)
 
 ## Subfolders

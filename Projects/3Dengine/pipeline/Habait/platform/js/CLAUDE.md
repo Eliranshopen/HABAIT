@@ -1,11 +1,11 @@
 # js/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The platform's browser modules: flow, cine, apartment, dashboard, landing, analytics, lead capture, i18n and config.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 21 files here · 1 subfolders · 32 files / 816.8 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

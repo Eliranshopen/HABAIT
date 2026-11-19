@@ -1,17 +1,12 @@
 # raw/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-10)
-0 files here · 1 subfolders · 72 files / 100.7 MB in the whole tree (vendor and build output excluded)
-
-## Subfolders
-| Folder | Card | Files in tree |
-|---|---|---|
-| `_local/` | [`_local/CLAUDE.md`](_local/CLAUDE.md) | 72 (100.7 MB) |
+## What's here (2026-11-18)
+0 files here · 0 subfolders · 0 files / 0 B in the whole tree (vendor and build output excluded)
 
 ## Gotchas
 _none recorded_

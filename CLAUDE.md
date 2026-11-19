@@ -74,6 +74,7 @@ Every script under `scripts/` or a track's `toolkit/`: dry-run by default; the p
    Plan mode, plan-vs-working-folder and the plan-of-record files: `development/plans/CLAUDE.md`, section "Rule §8.8 detail" (moved from here 2026-11-04).
 9. **Every board ends with QA cards (Eliran, 2026-11-03: "אני רוצה שהTASKS האחרונים יהיו TASK של QA … שכל פעם שיש פירוק תכנית למשימות אז יהיה בסוף גם משימות של QA").** Every board that `/plan-to-tasks` writes ends with QA cards, and nothing but QA comes after the last build or copy-back card:
    The four QA-card requirements: `development/tasks/CLAUDE.md`, section "Rule §8.9 — the QA cards" (moved from here 2026-11-04). In short: QA on the live result, then QA on the deployed site (blocked on Eliran's own deploy go); the board is `CLOSED` only when its last QA card passes.
+10. **RAINBOW is the baseline of every project (Eliran, 2026-11-17: "שכל הפיצ'רים שקיימים בפרוייקט RAINBOW יהיו כבסיס בכל פרויקט שאנחנו מכינים").** Every apartment/project visualization we build — 360 tour or 3D walkaround — ships with every user-facing feature of the RAINBOW tour (`Projects/Habait`) as its starting point: e.g. the circle hotspots that swap furniture and accessories, the free-text design line, and the rest of the list. The checklist is `docs/rainbow-baseline-features.md`; a project's QA cards check it row by row, and a feature left out is named with its reason, never dropped silently. Paid steps inside a feature (generation) still follow §7 and the "he supplies the images" ruling. **Interface and features only, never RAINBOW's furniture, items or catalog pictures** (Eliran, 2026-11-17: «לא … הריהוט והפריטים מRAINBOW אלא רק את עיצוב הממשק»).
 
 ## §9 Standing rails (verbatim — these lines are grep targets, do not reflow)
 > **Standing rule reinforced: every prod deploy needs its OWN explicit go (a bug report ≠ deploy authorization — the auto-mode classifier correctly blocked a push made without asking).**
@@ -114,7 +115,7 @@ Every folder has a context file (§8.6). This table lists the **areas** — the 
 | Root | `/` | [`CLAUDE.md`](CLAUDE.md) | the contract every session and sub-agent inherits (this file) |
 | Harness | `.claude/` | [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | the Claude Code configuration tree: agents, skills, local settings, hooks |
 | Harness | `.claude/agents/` | [`.claude/agents/CLAUDE.md`](.claude/agents/CLAUDE.md) | the 10 sub-agent definitions, the header standard and its lints |
-| Harness | `.claude/skills/` | [`.claude/skills/CLAUDE.md`](.claude/skills/CLAUDE.md) | the 47 skills by group, the frontmatter standard |
+| Harness | `.claude/skills/` | [`.claude/skills/CLAUDE.md`](.claude/skills/CLAUDE.md) | the 49 skills by group, the frontmatter standard |
 | Harness | `.claude/hooks/` | [`.claude/hooks/CLAUDE.md`](.claude/hooks/CLAUDE.md) | guard hooks, not installed |
 | Docs | `docs/` | [`docs/CLAUDE.md`](docs/CLAUDE.md) | the department's reference documents: inherited decisions, roster, skill register, owner paste |
 | Docs | `docs/governance/` | [`docs/governance/CLAUDE.md`](docs/governance/CLAUDE.md) | the registers: secrets, owed and ships live; worktrees frozen |
@@ -127,6 +128,7 @@ Every folder has a context file (§8.6). This table lists the **areas** — the 
 | Projects | `Projects/Habait/.claude/agents/` | [`Projects/Habait/.claude/agents/CLAUDE.md`](Projects/Habait/.claude/agents/CLAUDE.md) | the project's 7 agents |
 | Projects | `…/habait-walkaround/360walkaround/pipeline/` | [context file](Projects/Habait/habait-walkaround/360walkaround/pipeline/CLAUDE.md) | the deterministic Blender plan → pano pipeline |
 | Projects | `…/habait-walkaround/Habait/tour360/` | [context file](Projects/Habait/habait-walkaround/Habait/tour360/CLAUDE.md) | the 360° apartment-tour system |
+| Video | `video/` | [`video/CLAUDE.md`](video/CLAUDE.md) | the Video Division (created 2026-11-10): film projects only; the toolkit is not on disk |
 | Archive | `archive/` | [`archive/CLAUDE.md`](archive/CLAUDE.md) | out-of-scope agents and skills, moved not deleted; restore = move back |
 | Scripts | `scripts/` | [`scripts/CLAUDE.md`](scripts/CLAUDE.md) | `wt.py` and `mem_entry.py`, the harness procedures as commands |
 | Worktrees | `.wt/` | [`.wt/CLAUDE.md`](.wt/CLAUDE.md) | one working folder per project change Eliran opens (§8.7), never for harness work; a new feature = a git worktree of `C:\RnD` |

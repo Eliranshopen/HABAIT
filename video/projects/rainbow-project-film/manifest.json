@@ -1,0 +1,358 @@
+{
+ "schema": "habait.media-manifest.v0",
+ "project": "rainbow-project-film",
+ "status": "DRAFT — not approved, not published",
+ "skill": ".claude/skills/project-film/SKILL.md",
+ "tool": "ffmpeg + headless Chrome (overlays)",
+ "output": "video/projects/rainbow-project-film/out/rainbow-project-film-draft-16x9.mp4",
+ "output_sha256": "c9477646d18af7e2f328cbb5b3acb7b09df8b0843204d696c12854c63de5a6ff",
+ "bytes": 31024897,
+ "seconds": 66.208,
+ "cost_usd_total": 0,
+ "music": {
+  "input": "Projects/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/audio/track-a.mp3",
+  "input_sha256": "fb1b1c90aa01f7e8d2e675d9912f538aac1ec5956e0e1378601f24f32f815c5b",
+  "cost_usd": 0,
+  "note": "existing track, looped x3 with 2 s crossfades"
+ },
+ "at": "2026-11-10T13:44:20",
+ "rows": [
+  {
+   "shot": "01-hero-open",
+   "in": 0.0,
+   "seconds": 4.5,
+   "kind": "video",
+   "input": "Projects/Habait/habait-walkaround/Habait/platform/fixtures/rainbow/landing/hero-1080.mp4",
+   "input_sha256": "90acbace9bf5e70ef832ea7fec2b4591fec5a62d71d9b4a4cf4eeb4925104b6d",
+   "params": {
+    "ss": 0.5
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "תל אביב, מול הים",
+    "מגדל מגורים על קו הים"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "02-location",
+   "in": 4.5,
+   "seconds": 5.0,
+   "kind": "still",
+   "input": "screenshots/THE-1.jpg",
+   "input_sha256": "7687a3dd76ff2c9d7cecf0c5eb740595de8200fc571e270e6e82b837f0afe331",
+   "params": {
+    "z": [
+     1.0,
+     1.14
+    ],
+    "x": [
+     0.5,
+     0.62
+    ],
+    "y": [
+     0.5,
+     0.62
+    ]
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה",
+   "captions": [
+    "נמל תל אביב, פארק רידינג,",
+    "המרינה וחוף הים"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "03-street",
+   "in": 9.5,
+   "seconds": 3.5,
+   "kind": "still",
+   "input": "screenshots/THE-3.png",
+   "input_sha256": "c842b3eaa3b61b553530fb2dc6de536eda92c35705dcf9096db0aaeb6c2d956d",
+   "params": {
+    "z": [
+     1.16,
+     1.16
+    ],
+    "x": [
+     0.0,
+     1.0
+    ],
+    "y": [
+     0.5,
+     0.5
+    ]
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה",
+   "captions": [
+    "כולם מסביב לבית"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "04-dusk",
+   "in": 13.0,
+   "seconds": 3.5,
+   "kind": "still",
+   "input": "screenshots/THE-2.jpg",
+   "input_sha256": "f74f530e986b95a896715d02333d9e3d7f4c28ceb83c01876886dafbae77e8af",
+   "params": {
+    "z": [
+     1.18,
+     1.18
+    ],
+    "x": [
+     0.75,
+     0.75
+    ],
+    "y": [
+     1.0,
+     0.1
+    ]
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה",
+   "captions": [
+    "Rainbow תל אביב"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "05-pool",
+   "in": 16.5,
+   "seconds": 3.0,
+   "kind": "still",
+   "input": "screenshots/THE-6.jpg",
+   "input_sha256": "038f46d69dc63fe7443d55fe695d6e15322ba12ff75c1c319babfdae165f6462",
+   "params": {
+    "z": [
+     1.0,
+     1.12
+    ],
+    "x": [
+     0.5,
+     0.5
+    ],
+    "y": [
+     0.5,
+     0.7
+    ]
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה",
+   "captions": [],
+   "cost_usd": 0
+  },
+  {
+   "shot": "06-orbit",
+   "in": 19.5,
+   "seconds": 4.0,
+   "kind": "video",
+   "input": "Projects/Habait/habait-walkaround/Habait/platform/fixtures/rainbow/orbit_real.mp4",
+   "input_sha256": "ab1848fba23480fc50108f583e5ba3759e4cab37f145584bf69a03f75f02c2da",
+   "params": {
+    "ss": 5.0
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "ובתוכו, דירה אחת"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "07-descend",
+   "in": 23.5,
+   "seconds": 4.4,
+   "kind": "video",
+   "input": "Projects/Habait/habait-walkaround/Habait/platform/_local/segments/rainbow-cine/descend-846.mp4",
+   "input_sha256": "7d09edf612896e672fd9012d749e6e6e4c63023446ec03feab2604ecc3f95fdd",
+   "params": {
+    "ss": 0.0
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "קומה 16"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "08-enter",
+   "in": 27.917,
+   "seconds": 8.6,
+   "kind": "video",
+   "input": "Projects/Habait/habait-walkaround/Habait/platform/_local/segments/rainbow-cine/enter-846.mp4",
+   "input_sha256": "7fdc8016c2aee4a1454fb1b40f5ab3e278356a611f6a73ed253b234c0470c216",
+   "params": {
+    "ss": 0.0
+   },
+   "subject": "unit",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "3 חדרים,",
+    "106.72 מ״ר,",
+    "ומרפסת שמש של 26.15 מ״ר"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "09-living",
+   "in": 36.5,
+   "seconds": 4.0,
+   "kind": "pano",
+   "input": "Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-parquet/04-living.webp",
+   "input_sha256": "7f0086204d12a69552d221e95f16e87717db54d64850d5608ebdd37b71cead15",
+   "params": {
+    "yaw": [
+     -60,
+     5
+    ],
+    "pitch": -4
+   },
+   "subject": "unit",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "הסלון,"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "10-kitchen",
+   "in": 40.5,
+   "seconds": 3.5,
+   "kind": "pano",
+   "input": "Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-parquet/02-kitchen.webp",
+   "input_sha256": "44383b77c7fc926a6d300f928e284e9d79d433bd01d837ddfd8a7d86e7710ac9",
+   "params": {
+    "yaw": [
+     -105,
+     -30
+    ],
+    "pitch": -5
+   },
+   "subject": "unit",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "המטבח ופינת האוכל,"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "11-bedroom",
+   "in": 44.0,
+   "seconds": 3.0,
+   "kind": "pano",
+   "input": "Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-parquet/07-bedroom-main.webp",
+   "input_sha256": "8386e3312fa80af3e7669894fb01529d6a70baa44f67945d1b6f3a93df7f31b5",
+   "params": {
+    "yaw": [
+     -150,
+     -112
+    ],
+    "pitch": -5
+   },
+   "subject": "unit",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "חדר השינה,"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "12-bath",
+   "in": 47.0,
+   "seconds": 2.5,
+   "kind": "pano",
+   "input": "Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-parquet/09-bath-main.webp",
+   "input_sha256": "3e38d7d8b4b39e3ad25718c40c04602684bbced1ce841da2c9dcde86f34fe351",
+   "params": {
+    "yaw": [
+     -32,
+     -6
+    ],
+    "pitch": -4
+   },
+   "subject": "unit",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "חדר הרחצה,"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "13-terrace",
+   "in": 49.5,
+   "seconds": 6.0,
+   "kind": "pano",
+   "input": "Projects/Habait/habait-walkaround/Habait/tour360/apartments/apt846/_local/panos-parquet/05-terrace-living.webp",
+   "input_sha256": "56e49ff91b0dbbdae653af45ee316b7d1a7930fa8da653ff79e57114ef8491d6",
+   "params": {
+    "yaw": [
+     -5,
+     68
+    ],
+    "pitch": -6
+   },
+   "subject": "unit",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "והמרפסת.",
+    "לא רק לראות דירה,",
+    "להיכנס אליה."
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "14-hero-close",
+   "in": 55.5,
+   "seconds": 4.5,
+   "kind": "video",
+   "input": "Projects/Habait/habait-walkaround/Habait/platform/fixtures/rainbow/landing/hero-1080.mp4",
+   "input_sha256": "90acbace9bf5e70ef832ea7fec2b4591fec5a62d71d9b4a4cf4eeb4925104b6d",
+   "params": {
+    "ss": 8.0
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "תל אביב, מול הים,",
+    "Rainbow תל אביב"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "15-developer",
+   "in": 60.0,
+   "seconds": 4.0,
+   "kind": "video",
+   "input": "Projects/Habait/habait-walkaround/Habait/engine/_local/apt846-project/video/hold-ring/real.mp4",
+   "input_sha256": "e058885af436d75eed17f7bddb611bc61954e4c583b45621711a14575fd89fd6",
+   "params": {
+    "ss": 2.0
+   },
+   "subject": "property",
+   "disclosure": "badge: הדמיה · AI-generated",
+   "captions": [
+    "פרויקט של ישראל קנדה"
+   ],
+   "cost_usd": 0
+  },
+  {
+   "shot": "16-card",
+   "in": 64.0,
+   "seconds": 2.2,
+   "kind": "card",
+   "input": "Projects/Habait/habait-walkaround/Habait/platform/fixtures/rainbow/logo.svg",
+   "input_sha256": "12a207ada38fd8ecbbd0eb124192516b6fc9191b67a58c8779e1800f82add7d9",
+   "params": {},
+   "subject": "brand",
+   "disclosure": "none (logo card)",
+   "captions": [],
+   "cost_usd": 0
+  }
+ ]
+}

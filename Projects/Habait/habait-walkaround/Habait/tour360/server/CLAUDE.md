@@ -1,18 +1,18 @@
 # server/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Server handlers for the tour (handler.mjs, vercel-edit.mjs).
 
-## What's here (2026-11-10)
-3 files here · 0 subfolders · 3 files / 61.3 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+3 files here · 0 subfolders · 3 files / 73.6 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `chat-transport.mjs` | 3.8 KB | 2026-11-04 |
-| `handler.mjs` | 54.5 KB | 2026-11-04 |
-| `vercel-edit.mjs` | 3.0 KB | 2026-11-04 |
+| `chat-transport.mjs` | 3.8 KB | 2026-11-16 |
+| `handler.mjs` | 66.8 KB | 2026-11-16 |
+| `vercel-edit.mjs` | 3.0 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

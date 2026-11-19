@@ -1,26 +1,25 @@
 # clone-hero-1440/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent context file's row for this folder is the description._
 
-## What's here (2026-11-10)
-5 files here · 2 subfolders · 85 files / 49.9 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+4 files here · 2 subfolders · 4 files / 59.2 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `capture.json` | 808 B | 2026-11-09 |
-| `final.png` | 605.9 KB | 2026-11-09 |
-| `frames.json` | 402 B | 2026-11-09 |
-| `inspect.json` | 19.1 KB | 2026-11-09 |
-| `track.json` | 39.0 KB | 2026-11-09 |
+| `capture.json` | 808 B | 2026-11-16 |
+| `frames.json` | 402 B | 2026-11-16 |
+| `inspect.json` | 19.1 KB | 2026-11-16 |
+| `track.json` | 39.0 KB | 2026-11-16 |
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
 | `.video/` | [`.video/CLAUDE.md`](.video/CLAUDE.md) | 0 (0 B) |
-| `frames/` | [`frames/CLAUDE.md`](frames/CLAUDE.md) | 80 (49.2 MB) |
+| `frames/` | [`frames/CLAUDE.md`](frames/CLAUDE.md) | 0 (0 B) |
 
 ## Gotchas
 _none recorded_

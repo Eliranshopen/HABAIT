@@ -1,11 +1,11 @@
 # pilot-karnei/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The pilot-karnei tour: plan, tour.json, manifest, camera-placement and scene reports, with GROUND-TRUTH.md.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 7 files here · 1 subfolders · 24 files / 628.2 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

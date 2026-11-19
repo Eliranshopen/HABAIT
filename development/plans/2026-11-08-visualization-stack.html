@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}*,*::before,*::after{box-sizing:border-box}</style>
+<title>סטאק ההדמיות של Habait</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: side rail of three tabs; each tab = one sentence → one diagram → choice cards (chosen · instead of · why it fits us).
+   Colour = meaning: blue = Next.js / TypeScript, amber = Python / GPU, green = AI providers, stone = data */
+:root {
+  --bg: #fbfaf7; --surface: #f3f1ec; --line: #ddd9d0; --fg: #23211d; --muted: #6b675f;
+  --ts: #2f4a73; --ts-soft: #e6ecf5; --py: #b07714; --py-soft: #fbf0d9; --ai: #2f6b45; --ai-soft: #e3f0e7;
+  --data: #6b5f4f; --data-soft: #efeae1;
+  --display: "Frank Ruhl Libre", "David", "Times New Roman", serif;
+  --body: "Heebo", "Segoe UI", "Arial", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171614; --surface: #211f1c; --line: #3a3732; --fg: #ece9e3; --muted: #a39e94;
+    --ts: #9fb6dc; --ts-soft: #23304a; --py: #e3a83f; --py-soft: #3a2d14; --ai: #8fcaa2; --ai-soft: #1d3326;
+    --data: #c9bba5; --data-soft: #2c2823; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171614; --surface: #211f1c; --line: #3a3732; --fg: #ece9e3; --muted: #a39e94;
+  --ts: #9fb6dc; --ts-soft: #23304a; --py: #e3a83f; --py-soft: #3a2d14; --ai: #8fcaa2; --ai-soft: #1d3326;
+  --data: #c9bba5; --data-soft: #2c2823; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.65; }
+.shell { direction: rtl; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 80px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; text-wrap: balance; line-height: 1.25; margin: 0; }
+p { margin: 0; }
+code { font-family: var(--mono); font-size: 0.85em; direction: ltr; unicode-bidi: isolate; }
+.en { direction: ltr; unicode-bidi: isolate; }
+
+/* without JavaScript (e.g. a phone preview): hide the tab rail, show all three sections stacked */
+.no-js .tabs { display: none; }
+.no-js .panel + .panel { border-top: 2px solid var(--line); padding-top: 40px; margin-top: 40px; }
+
+/* rail */
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; display: flex; flex-direction: column; gap: 18px; }
+.brand b { display: block; font-family: var(--display); font-size: 1.3rem; line-height: 1.2; }
+.brand span { font-size: 0.8rem; color: var(--muted); }
+.tabs { display: flex; flex-direction: column; gap: 4px; }
+.tab { display: block; padding: 10px 14px; border-radius: 10px; text-decoration: none; color: var(--fg); border-inline-start: 3px solid transparent; font-weight: 500; }
+.tab:hover { background: var(--surface); }
+.tab[aria-current="page"] { background: var(--surface); border-inline-start-color: var(--ts); font-weight: 700; }
+.tab:focus-visible { outline: 2px solid var(--py); outline-offset: 2px; }
+.legend { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-inline-end: 8px; vertical-align: -1px; }
+
+/* panel */
+.panel { display: flex; flex-direction: column; gap: 36px; min-width: 0; max-width: 900px; }
+.head { display: flex; flex-direction: column; gap: 10px; }
+.eyebrow { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+.head h1 { font-size: clamp(1.8rem, 4.2vw, 2.5rem); }
+.thesis { font-size: 1.18rem; max-width: 62ch; }
+.thesis b { font-weight: 700; }
+.c-ts { color: var(--ts); } .c-py { color: var(--py); }
+h2 { font-size: 1.35rem; }
+.section { display: flex; flex-direction: column; gap: 16px; }
+
+/* diagram */
+.diagram { background: var(--surface); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; }
+.tier { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.node { border-radius: 10px; padding: 11px 14px; background: var(--bg); border: 1.5px solid var(--line); display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1 1 150px; max-width: 260px; text-align: center; }
+.node b { font-weight: 700; font-size: 0.98rem; }
+.node span { font-size: 0.82rem; color: var(--muted); }
+.node.ts { border-color: var(--ts); background: var(--ts-soft); }
+.node.py { border-color: var(--py); background: var(--py-soft); }
+.node.ai { border-color: var(--ai); background: var(--ai-soft); }
+.node.data { border-color: var(--data); background: var(--data-soft); }
+.group { border: 2px solid var(--ts); border-radius: 14px; padding: 12px; background: var(--bg); display: flex; flex-direction: column; gap: 10px; }
+.group.py { border-color: var(--py); }
+.group-title { text-align: center; font-weight: 700; color: var(--ts); font-size: 0.92rem; }
+.group.py .group-title { color: var(--py); }
+.group .node { max-width: none; flex: none; }
+.link { display: flex; flex-direction: column; align-items: center; padding-block: 6px; color: var(--muted); font-size: 0.8rem; }
+.link::before { content: ""; width: 2px; height: 16px; background: var(--line); }
+.link::after { content: "▼"; font-size: 0.68rem; line-height: 1; }
+.link span { padding: 2px 10px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); margin-block: 4px; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: center; }
+.exchange { display: flex; flex-direction: column; gap: 10px; max-width: 170px; }
+.ex { padding: 8px 12px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); text-align: center; display: flex; flex-direction: column; gap: 2px; }
+.ex b { font-size: 0.84rem; white-space: nowrap; }
+.ex small { font-size: 0.76rem; color: var(--muted); line-height: 1.4; }
+.ex .ar { font-style: normal; color: var(--muted); }
+.pipe { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 8px; }
+.pipe li { display: flex; align-items: center; gap: 8px; }
+.step { border-radius: 10px; padding: 9px 12px; border: 1.5px solid; display: flex; flex-direction: column; min-width: 100px; }
+.step b { font-size: 0.9rem; }
+.step span { font-size: 0.74rem; color: var(--muted); }
+.step.ts { border-color: var(--ts); background: var(--ts-soft); }
+.step.py { border-color: var(--py); background: var(--py-soft); }
+.step.ai { border-color: var(--ai); background: var(--ai-soft); }
+.step.wait { border-style: dashed; border-color: var(--ts); background: var(--bg); }
+.arrow { color: var(--muted); }
+
+/* backend choice table */
+.arch { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.arch-row { display: grid; grid-template-columns: 120px 190px 1fr; gap: 14px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid var(--line); border-inline-start: 4px solid var(--line); }
+.arch-row:last-child { border-bottom: 0; }
+.arch-row.ts { border-inline-start-color: var(--ts); } .arch-row.py { border-inline-start-color: var(--py); }
+.arch-row.data { border-inline-start-color: var(--data); } .arch-row.ai { border-inline-start-color: var(--ai); }
+.arch-part { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+.arch-tool { font-weight: 700; }
+.arch-what { font-size: 0.94rem; }
+@media (max-width: 640px) { .arch-row { grid-template-columns: 1fr; gap: 2px; } }
+
+/* question → choice cards */
+.dec-q { font-size: 0.95rem; font-weight: 500; color: var(--muted); }
+.choice { border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; background: var(--surface); }
+.choice-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; color: var(--muted); }
+.choice b { font-family: var(--display); font-size: 1.22rem; line-height: 1.3; }
+.dec.ts .choice { background: var(--ts-soft); } .dec.ts .choice b { color: var(--ts); }
+.dec.py .choice { background: var(--py-soft); } .dec.py .choice b { color: var(--py); }
+.dec.ai .choice { background: var(--ai-soft); } .dec.ai .choice b { color: var(--ai); }
+.dec.data .choice { background: var(--data-soft); } .dec.data .choice b { color: var(--data); }
+
+/* choice cards */
+.decs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.dec { border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; border-top: 3px solid var(--line); }
+.dec.ts { border-top-color: var(--ts); } .dec.py { border-top-color: var(--py); } .dec.ai { border-top-color: var(--ai); } .dec.data { border-top-color: var(--data); }
+.dec-area { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+.dec h3 { font-size: 1.15rem; }
+.alt { font-size: 0.88rem; color: var(--muted); }
+.alt s { text-decoration-color: var(--muted); }
+.why { font-size: 0.95rem; }
+.k { font-weight: 700; }
+.more { font-size: 0.86rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block-start: 0; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+  .rail { top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 10px; gap: 8px;
+    margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .brand span, .legend { display: none; }
+  .brand b { font-size: 1.02rem; }
+  .tabs { flex-direction: row; gap: 6px; }
+  .tab { flex: 1; text-align: center; padding: 8px 6px; border-inline-start: 0; border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0; }
+  .tab[aria-current="page"] { border-bottom-color: var(--ts); }
+}
+@media (max-width: 760px) {
+  .split { grid-template-columns: minmax(0, 1fr); }
+  .exchange { flex-direction: row; justify-content: center; flex-wrap: wrap; max-width: none; }
+  .ex { flex: 1 1 140px; }
+  .ex .ar { display: none; }
+  .exchange .ex:first-child b::after { content: " ↓"; }
+  .exchange .ex:last-child b::after { content: " ↑"; }
+}
+@media (max-width: 640px) {
+  .decs { grid-template-columns: 1fr; }
+  .diagram { padding: 16px; }
+  .node { flex-basis: 100%; max-width: none; }
+  .pipe { flex-direction: column; }
+  .pipe li { flex-direction: column; align-items: stretch; }
+  .pipe .arrow { text-align: center; transform: rotate(-90deg); }
+}
+</style>
+</head>
+<body>
+<div class="shell no-js" lang="he">
+
+<aside class="rail">
+  <div class="brand"><b>Habait · ארכיטקטורה</b><span>מחקר ותכנון · 8.11.2026</span></div>
+  <nav class="tabs" aria-label="חלקי המסמך">
+    <a class="tab" href="#overview" data-tab="overview" aria-current="page">כללי</a>
+    <a class="tab" href="#backend" data-tab="backend">Backend</a>
+    <a class="tab" href="#frontend" data-tab="frontend">Frontend</a>
+  </nav>
+  <div class="legend" aria-label="מקרא צבעים">
+    <span><i style="background:var(--ts)"></i>Next.js</span>
+    <span><i style="background:var(--py)"></i>Python · GPU</span>
+    <span><i style="background:var(--ai)"></i>ספקי AI</span>
+    <span><i style="background:var(--data)"></i>נתונים</span>
+  </div>
+</aside>
+
+<main>
+
+<!-- ================= OVERVIEW ================= -->
+<div class="panel" id="overview" data-panel>
+  <header class="head">
+    <span class="eyebrow">כללי · ארכיטקטורה מאפס · להיקף של 10–100 פרויקטים בחודש</span>
+    <h1>סטאק ההדמיות של Habait</h1>
+    <p class="thesis"><b>Frontend ו-Backend, שבנויים עם Framework אחד: <span class="c-ts">Next.js</span>.</b> רק העיבוד הכבד ב-Backend, כלומר מדידת הקירות מה-PDF ו-Blender, כתוב ב-<b class="c-py">Python</b>.</p>
+  </header>
+
+  <div class="diagram" role="img" aria-label="הקונה והיזם מדברים עם Next.js. Next.js שולח עבודה כבדה ל-Python ומקבל בחזרה קובץ">
+    <div class="tier">
+      <div class="node"><b>קונה</b><span>סיור בטלפון</span></div>
+      <div class="node"><b>יזם</b><span>פורטל</span></div>
+    </div>
+    <div class="link"></div>
+    <div class="split">
+      <div class="group">
+        <div class="group-title">Next.js</div>
+        <div class="node ts"><b>Frontend</b><span>מה שרואים ולוחצים</span></div>
+        <div class="node ts"><b>Backend</b><span>מה שעונה בשניות</span></div>
+      </div>
+      <div class="exchange">
+        <div class="ex"><b>Next.js מבקש <i class="ar">←</i></b><small>"תבנה את דירה 846", וקובץ ה-PDF</small></div>
+        <div class="ex"><b><i class="ar">→</i> Python מחזיר</b><small>פנורמות 360 מוכנות של הדירה</small></div>
+      </div>
+      <div class="group py">
+        <div class="group-title">Python · Backend כבד</div>
+        <div class="node py"><b>מדידת קירות</b><span>מתוך ה-PDF</span></div>
+        <div class="node py"><b>Blender</b><span>בונה ומרנדר, 10–40 דק'</span></div>
+      </div>
+    </div>
+    <div class="link"></div>
+    <div class="tier">
+      <div class="node data"><b>נתונים</b><span>Postgres · קבצים</span></div>
+      <div class="node ai"><b>מודלי AI</b><span>fal · Claude · Gemini</span></div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>השאלות, והבחירה שלי בכל אחת</h2>
+    <div class="decs">
+      <article class="dec ts">
+        <span class="dec-q">באיזה כלי בונים את האתר?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Next.js</bdi></b></div>
+        <p class="why">הוא בונה בפרויקט אחד גם את העמודים לקונה, שנפתחים מהר מקישור בוואטסאפ, וגם את הפורטל ליזם עם התחברות.</p>
+      </article>
+      <article class="dec py">
+        <span class="dec-q">באיזו שפה כותבים את העיבוד הכבד?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Python</bdi></b></div>
+        <p class="why">את <bdi>Blender</bdi>, התוכנה שבונה את הדירה בתלת־ממד, אפשר להפעיל רק דרך <bdi>Python</bdi>. גם הכלים שמודדים קירות מתוך <bdi>PDF</bdi> קיימים רק בה.</p>
+      </article>
+      <article class="dec data">
+        <span class="dec-q">איפה שומרים את המידע?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Postgres</bdi> על <bdi>Supabase</bdi></b></div>
+        <p class="why">המידע שלנו מקושר: יזם, פרויקט, בניין, דירה וסיור. <bdi>Postgres</bdi> בנוי בדיוק לזה. <bdi>Supabase</bdi> נותן גם אחסון קבצים וגם הפרדה, כך שכל יזם רואה רק את שלו.</p>
+      </article>
+      <article class="dec ts">
+        <span class="dec-q">מי מנהל את שלבי הבנייה של דירה?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Vercel Workflow</bdi></b></div>
+        <p class="why">בניית דירה נמשכת זמן רב ונעצרת פעמיים לאישור היזם. <bdi>Workflow</bdi> זוכר איפה כל דירה עומדת, ממשיך אחרי האישור ולא מאבד עבודות.</p>
+      </article>
+      <article class="dec py">
+        <span class="dec-q">על איזה מחשב מרנדרים?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>כרטיס גרפי בשכירות, לפי דקות</b></div>
+        <p class="why">רינדור איכותי צריך כרטיס גרפי <bdi>(GPU)</bdi>. משלמים רק כשבונים דירה, בהערכה <bdi>$50–300</bdi> לחודש, במקום שרת שעולה כסף גם כשאין עבודה.</p>
+      </article>
+      <article class="dec ts">
+        <span class="dec-q">איפה האתר רץ?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Vercel</bdi>, בחבילת <bdi>Pro</bdi></b></div>
+        <p class="why"><bdi>Next.js</bdi> עובד שם הכי טוב, בלי שנצטרך לתחזק שרתים. חבילת <bdi>Pro</bdi>, כי החבילה החינמית אסורה לשימוש מסחרי.</p>
+      </article>
+    </div>
+  </section>
+
+  <p class="more">הפירוט המלא, העלויות והמקורות: <code>development/plans/2026-11-08-visualization-stack-architecture.md</code></p>
+</div>
+
+<!-- ================= BACKEND ================= -->
+<div class="panel" id="backend" data-panel>
+  <header class="head">
+    <span class="eyebrow">Backend · המלצה</span>
+    <h1>מה קורה מאחורי הקלעים</h1>
+    <p class="thesis">Next.js מנהל את התהליך ואת כל הקריאות בתשלום. Python מבצע את העבודה הכבדה.</p>
+  </header>
+
+  <section class="section">
+    <h2>מה בחרתי ל-Backend</h2>
+    <div class="arch">
+      <div class="arch-row ts"><div class="arch-part">שרת האתר</div><div class="arch-tool"><bdi>Next.js</bdi></div><div class="arch-what">מקבל כל בקשה מהאתר ומהפורטל: התחברות, שמירת נתונים, אישורים, הפעלת עבודות ופניות למודלי <bdi>AI</bdi>.</div></div>
+      <div class="arch-row py"><div class="arch-part">עיבוד כבד</div><div class="arch-tool"><bdi>Python</bdi> על <bdi>GPU</bdi></div><div class="arch-what">מודד את הקירות מתוך ה-<bdi>PDF</bdi>, ובונה ומרנדר את הדירה ב-<bdi>Blender</bdi>.</div></div>
+      <div class="arch-row data"><div class="arch-part">שירותים</div><div class="arch-tool"><bdi>Postgres</bdi> · <bdi>Clerk</bdi> · <bdi>Workflow</bdi></div><div class="arch-what">שמירת המידע, התחברות היזמים, וניהול שלבי העבודה על כל דירה.</div></div>
+      <div class="arch-row ai"><div class="arch-part">מודלי <bdi>AI</bdi></div><div class="arch-tool"><bdi>fal</bdi> · <bdi>Claude</bdi> · <bdi>Gemini</bdi></div><div class="arch-what">עיצוב התמונות דרך <bdi>fal</bdi>, וקריאת תוכנית המכר באמצעות <bdi>Claude</bdi> ו-<bdi>Gemini</bdi>.</div></div>
+    </div>
+  </section>
+
+  <h2>המסלול של דירה אחת</h2>
+  <div class="diagram" role="img" aria-label="המסלול של דירה אחת, מהעלאת PDF ועד פרסום">
+    <ol class="pipe">
+      <li><div class="step ts"><b>העלאת PDF</b><span>Next.js</span></div><span class="arrow">←</span></li>
+      <li><div class="step ai"><b>זיהוי חדרים</b><span>AI (Claude)</span></div><span class="arrow">←</span></li>
+      <li><div class="step wait"><b>אישור יזם</b><span>עוצר ומחכה</span></div><span class="arrow">←</span></li>
+      <li><div class="step py"><b>מדידת קירות</b><span>Python</span></div><span class="arrow">←</span></li>
+      <li><div class="step wait"><b>אישור יזם</b><span>עוצר ומחכה</span></div><span class="arrow">←</span></li>
+      <li><div class="step py"><b>רינדור</b><span>Blender · GPU</span></div><span class="arrow">←</span></li>
+      <li><div class="step ai"><b>עיצוב AI</b><span>fal</span></div><span class="arrow">←</span></li>
+      <li><div class="step py"><b>בדיקת התאמה</b><span>עד 2% לחדר</span></div><span class="arrow">←</span></li>
+      <li><div class="step ts"><b>פרסום</b><span>Next.js</span></div></li>
+    </ol>
+  </div>
+
+  <section class="section">
+    <h2>השאלות, והבחירה שלי בכל אחת</h2>
+    <div class="decs">
+      <article class="dec ts">
+        <span class="dec-q">איפה נמצא השרת של האתר?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>בתוך <bdi>Next.js</bdi>, באותו פרויקט</b></div>
+        <p class="why">כשהאתר צריך מידע, למשל את רשימת הפרויקטים של יזם, הוא פונה לשרת שנבנה יחד איתו. אין שרת נפרד לתחזק, וגם <bdi>Python</bdi> יכול לפנות אליו בשיטה המקובלת <bdi>(REST)</bdi>.</p>
+      </article>
+      <article class="dec ai">
+        <span class="dec-q">איך קונים גישה למודלי <bdi>AI</bdi>?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>תמונות דרך <bdi>fal</bdi>, טקסט ישירות מהיצרנים</b></div>
+        <p class="why"><bdi>fal</bdi> נותן את כל מודלי התמונה והווידאו בחשבון אחד. את <bdi>Claude</bdi> ו-<bdi>Gemini</bdi> קונים ישירות, בלי מתווך שמייקר ונחסם כשנגמר אצלו הקרדיט, כמו שקרה ב-5.11.</p>
+      </article>
+      <article class="dec ai">
+        <span class="dec-q">איך מונעים חיוב כפול?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>כל פעולה בתשלום נרשמת לפני שהיא נשלחת</b></div>
+        <p class="why">אם בקשה נשלחת פעמיים בטעות, הספק יחייב פעמיים. הרישום מראש מונע את זה, ומראה בכל רגע כמה הוצאנו.</p>
+      </article>
+      <article class="dec py">
+        <span class="dec-q">איך מוודאים שה-<bdi>AI</bdi> לא משנה את הדירה?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>הקירות חוזרים מהרינדור המקורי</b></div>
+        <p class="why">ההדמיה חייבת להתאים לתוכנית המכר, עם סטייה של עד 2% לחדר. ה-<bdi>AI</bdi> מוסיף רק עיצוב, והקירות מודבקים בחזרה מהרינדור המדויק.</p>
+      </article>
+      <article class="dec data">
+        <span class="dec-q">איך שומרים את הקבצים?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>שלושה אזורים: מקור, ביניים ופרסום</b></div>
+        <p class="why">ה-<bdi>PDF</bdi> של היזם לא משתנה לעולם, וסיור שפורסם נשאר כמו שהוא. קבצי הביניים נמחקים לבד, כדי שלא נשלם עליהם.</p>
+      </article>
+      <article class="dec ts">
+        <span class="dec-q">איך יזמים מתחברים?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Clerk</bdi></b></div>
+        <p class="why">כל יזם הוא חברה עם כמה עובדים. <bdi>Clerk</bdi> נותן התחברות בעברית וחשבון חברה מוכנים, ועובד עם <bdi>Supabase</bdi> כך שכל יזם רואה רק את שלו. הקונה לא צריך חשבון.</p>
+      </article>
+    </div>
+  </section>
+
+  <p class="more">הפירוט המלא: <code>development/plans/2026-11-08-backend-plan.md</code></p>
+</div>
+
+<!-- ================= FRONTEND ================= -->
+<div class="panel" id="frontend" data-panel>
+  <header class="head">
+    <span class="eyebrow">Frontend · המלצה</span>
+    <h1>מה הקונה והיזם רואים</h1>
+    <p class="thesis">אפליקציית Next.js אחת לקונה וליזם. הסיור 360 הוא רכיב נפרד שנטען בתוכה.</p>
+  </header>
+
+  <section class="section">
+    <h2>מה בחרתי ל-Frontend</h2>
+    <div class="arch">
+      <div class="arch-row ts"><div class="arch-part">בסיס האתר</div><div class="arch-tool"><bdi>Next.js</bdi></div><div class="arch-what">בונה את כל המסכים: עמודי הפרויקט והדירה לקונה, והפורטל ליזם.</div></div>
+      <div class="arch-row ts"><div class="arch-part">הסיור ב-360 מעלות</div><div class="arch-tool"><bdi>Photo Sphere Viewer</bdi></div><div class="arch-what">מציג את הסיור בדירה. בנוי כרכיב נפרד שנטען בתוך העמודים.</div></div>
+      <div class="arch-row py"><div class="arch-part">טעינה בטלפון</div><div class="arch-tool">טעינה בשלבים</div><div class="arch-what">קודם תמונה קלה שנפתחת מיד, ואחר כך פרטים חדים רק במקום שמסתכלים עליו.</div></div>
+      <div class="arch-row data"><div class="arch-part">עיצוב</div><div class="arch-tool"><bdi>Tailwind</bdi> · <bdi>shadcn</bdi></div><div class="arch-what">כפתורים, טפסים וחלונות מוכנים, בעברית מימין לשמאל.</div></div>
+      <div class="arch-row ts"><div class="arch-part">שפות</div><div class="arch-tool"><bdi>next-intl</bdi></div><div class="arch-what">עברית ואנגלית, עם כתובת נפרדת לכל שפה.</div></div>
+    </div>
+  </section>
+
+  <h2>איך זה בנוי</h2>
+  <div class="diagram" role="img" aria-label="אפליקציה אחת עם אזור קונה ואזור יזם, ומתחתיה רכיבים משותפים">
+    <div class="group">
+      <div class="group-title">אפליקציית Next.js אחת</div>
+      <div class="tier">
+        <div class="node ts"><b>אזור הקונה</b><span>פרויקט · דירה · סיור</span></div>
+        <div class="node ts"><b>אזור היזם</b><span>העלאה · אישור · פרסום</span></div>
+      </div>
+    </div>
+    <div class="link"><span>משתמשים ב-</span></div>
+    <div class="tier">
+      <div class="node ts"><b>רכיב הסיור 360</b><span>Photo Sphere Viewer</span></div>
+      <div class="node data"><b>עיצוב משותף</b><span>צבעים, גופנים, RTL</span></div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>השאלות, והבחירה שלי בכל אחת</h2>
+    <div class="decs">
+      <article class="dec ts">
+        <span class="dec-q">איך מציגים את הסיור ב-360 מעלות?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Photo Sphere Viewer</bdi></b></div>
+        <p class="why">ספרייה מוכנה ומתוחזקת להצגת תמונות 360, על אותה טכנולוגיה כמו התלת־ממד של הדירה. היא בנויה כרכיב נפרד, כדי שאותו סיור ירוץ בעמוד הקונה, בפורטל ובאתרים של יזמים.</p>
+      </article>
+      <article class="dec py">
+        <span class="dec-q">איך הסיור נטען מהר בטלפון?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>קודם תמונה קלה, אחר כך פרטים חדים</b></div>
+        <p class="why">תמונת 360 גדולה מקריסה אייפון, וקטנה מטושטשת בהגדלה. לכן מציגים קודם תמונה קלה, ומוסיפים חדות רק במקום שמסתכלים עליו.</p>
+      </article>
+      <article class="dec ts">
+        <span class="dec-q">איך עמוד הפרויקט נפתח מיד?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>העמוד מוכן מראש</b></div>
+        <p class="why">כשלוחצים על קישור בוואטסאפ, העמוד כבר מוכן ונפתח מיד. כשדירה נמכרת, מתעדכנת רק השורה שלה.</p>
+      </article>
+      <article class="dec data">
+        <span class="dec-q">במה בונים את העיצוב?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>Tailwind</bdi> ו-<bdi>shadcn</bdi></b></div>
+        <p class="why"><bdi>shadcn</bdi> נותן כפתורים, טפסים וחלונות מוכנים, בעברית מימין לשמאל. <bdi>Tailwind</bdi> שומר שכל המסכים ייראו אחיד.</p>
+      </article>
+      <article class="dec ts">
+        <span class="dec-q">איך מנהלים עברית ואנגלית?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b><bdi>next-intl</bdi></b></div>
+        <p class="why">העברית ראשונה והאנגלית שנייה. לכל שפה כתובת משלה, כך שקישור ששולחים נפתח בשפה הנכונה.</p>
+      </article>
+      <article class="dec ai">
+        <span class="dec-q">איך עומדים בחוק הנגישות ושומרים על פרטיות?</span>
+        <div class="choice"><span class="choice-label">הבחירה</span><b>נגישות בתוך הקוד, סטטיסטיקה בלי <bdi>cookies</bdi></b></div>
+        <p class="why">לפי החוק בישראל, תוסף נגישות חיצוני לא מספיק. הקונה אנונימי, ובלי <bdi>cookies</bdi> כנראה לא צריך באנר הסכמה. זה עוד דורש בדיקה משפטית.</p>
+      </article>
+    </div>
+  </section>
+
+  <p class="more">הפירוט המלא: <code>development/plans/2026-11-08-frontend-plan.md</code></p>
+</div>
+
+</main>
+</div>
+
+<script>
+(function () {
+  document.querySelector(".shell").classList.remove("no-js");
+  var ids = ["overview", "backend", "frontend"];
+  var panels = document.querySelectorAll("[data-panel]");
+  var tabs = document.querySelectorAll("[data-tab]");
+  function show(id, scroll) {
+    if (ids.indexOf(id) < 0) id = "overview";
+    panels.forEach(function (p) { p.hidden = p.id !== id; });
+    tabs.forEach(function (t) {
+      if (t.getAttribute("data-tab") === id) t.setAttribute("aria-current", "page");
+      else t.removeAttribute("aria-current");
+    });
+    if (scroll) window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", function () { show(location.hash.slice(1), true); });
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>

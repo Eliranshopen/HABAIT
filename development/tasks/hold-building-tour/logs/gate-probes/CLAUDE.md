@@ -1,11 +1,11 @@
 # gate-probes/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The reviewers' own probes (gate, re-gate, live QA, deployed paint proof) and their outputs.
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 18 files here · 0 subfolders · 18 files / 46.7 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

@@ -1,17 +1,17 @@
 # fixtures/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Two project fixtures for the engine, demo-simple and rainbow-846 (.project.json).
 
-## What's here (2026-11-10)
-2 files here · 0 subfolders · 2 files / 9.1 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+2 files here · 0 subfolders · 2 files / 9.3 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `demo-simple.project.json` | 2.8 KB | 2026-11-02 |
-| `rainbow-846.project.json` | 6.3 KB | 2026-11-03 |
+| `demo-simple.project.json` | 2.9 KB | 2026-11-16 |
+| `rainbow-846.project.json` | 6.4 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

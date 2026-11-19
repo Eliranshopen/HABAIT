@@ -1,11 +1,11 @@
 # responsive-design/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `responsive-design` (auto, from `wshobson/agents` plugin `ui-design`, MIT, installed 2026-11-04 on Eliran's ask) — modern responsive layout technique: mobile-first breakpoints, container queries, fluid type and spacing with `clamp()`, CSS Grid. Guidance only, no scripts. The contract is `SKILL.md` (44 lines); depth in `references/`.
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 1 files here · 1 subfolders · 5 files / 45.1 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

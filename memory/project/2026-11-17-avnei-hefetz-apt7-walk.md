@@ -1,0 +1,112 @@
+# Avnei Hefetz Kedem apt 7 (דגם יורד, bldg 1–2, floor א׳, 4 rooms 94 m²): 3D walkaround built, imagery stopped for Eliran's pictures
+- **Date:** 2026-11-17, 14:33–17:45, main session
+- **Source:** the single sheet in `C:\RnD\Projects\Avney_Hefets_Kedem_4` since 15:01. Eliran swapped the folder content and then waived the "Building 4 only" rule («תתעלם מההוראה המקורית…»).
+- **Work:**
+  - Folder: worktree `.wt/avnei-hefetz-kedem-4` (branch `avnei-hefetz-kedem-4`, nothing committed), project folder `Projects/Avney_Hefets_Kedem_4/`.
+  - Tools in `tools/`: `trace_walls.py` (grey-fill grid, IoU 0.987), `make_plan.py` (cm plan; 13/14 printed dimensions within 1 %, 14/14 within 2 %), `build_scene.py`, `render.py`, `walk3d_bake.py` (Rainbow copy), `walk_grid.py`, `walk/` page, `walk_check.mjs`, `enhance.mjs`.
+- **Eliran's rulings in this session:**
+  - He wants an interactive 3D walk, not 360 panoramas.
+  - No AI generation: stop at that stage, he supplies the pictures.
+  - Drive upload is impossible here (the connector is not authorized).
+- **Output:** `out/avnei-hefetz-kedem/buildings-1-2/4-rooms/` (`README.md`, `walk3d/`, `model/`, `qa/`).
+- **Spend:** fal $0.12, one nano-banana-2 test made before his no-generation ruling.
+- **Lessons:**
+  - A light inside its fixture disc is blocked (rooms rendered black).
+  - Stacked wall strips show as bake stripes: merge walls and weld floors.
+  - A material named "*glass*" is skipped by the bake.
+  - Under parallel sessions' Blender jobs, a 2048-px bake group takes about 4.5 min.
+- **Open:**
+  - **17:50, Eliran chose option 1:** his pictures are inspiration and the look of record. Materials and colours are taken from them into the 3D model, then re-baked; no AI. He has no pictures yet and will write when he does.
+  - When they arrive: set the materials in `tools/build_scene.py`, re-run prep, bake the 6 groups (about 30 min), export, `build_walk_site.py`, `walk_check.mjs`.
+  - The bathtub fix is in the builder; it shows in the walk only after that re-bake.
+  - Still to do: re-render the 8 stale stills; an offline three.js copy (an install, his call); deployment = his go.
+  - A local server: `node tools/serve.mjs out/avnei-hefetz-kedem/buildings-1-2/4-rooms/walk3d 8931`.
+- **Evening, the design layer (Eliran: «כל הפיצ'רים … של RAINBOW … עיגול … שורת טקסט חופשי»):**
+  - Built at $0 with no generation, in `out/…/walk3d-design/`. Served by `node tools/serve.mjs out/avnei-hefetz-kedem/buildings-1-2/4-rooms/walk3d-design 8931`.
+  - **Features:** rings per piece per room (model, colour, accessories); the free-text bar (Hebrew/English, read in the page; structure refused); styles; floors; walls; kitchen; undo; before/after; a `#d=` link; the plan; a view from above; a tape measure.
+  - **How:** re-baked as light + colour atlases with a part id per face (`walk3d_bake.py --pass light|albedo`, `--design`); swap-ins come from `walk_variants.py`.
+  - **QA:** `qa/walk3d-design/design-check.json` PASS (desktop + phone); walking unchanged. Plan: `development/plans/2026-11-17-avnei-hefetz-walk-design-layer.md`.
+  - **Lessons:**
+    - An interpolated per-vertex id must be ROUNDED in the shader (floor alone speckles).
+    - Wall art must avoid openings (the first placement covered a window).
+    - The light-only bake renders ~10 % darker than the full bake through the same transform; it was recalibrated (EV −1.28).
+  - **His pictures later:** colours and floors now change live from `design.json`, with no re-bake.
+- **Late evening → 01:00 (his pictures arrived 22:09, the balcony 22:51; «זה נראה כמו משחק מחשב … תהפוך את הכל למשהו ריאליסטי ויוקרתי»):**
+  - **The model, $0:**
+    - It now follows his 10 pictures: oak planks everywhere, travertine baths, a sage kitchen with brass, a bouclé sofa on oak, a travertine coffee table, a wingback bed, a fluted wardrobe, recessed spots.
+    - Removed because the pictures don't have them: the armchair, the upper cabinets, the backsplash, the pendant, the glass balcony rail (now a solid parapet).
+    - Re-baked into `work/walk3d4`.
+  - **Site and UI:** the site is `out/…/walk3d-v2` (served on 8931), with the tour's UI tokens: dark glass, Heebo, menus, a thumbnail strip, a catalog bar.
+  - **Time of day:** the day-night-keyframes skill in mode B, 4 keys, the light-only atlas per key (`tools/daynight/`).
+  - **Catalog:** 10 generated items (`tools/catalog/`, fal: nano-banana-pro → Hunyuan 3D v3.1 pro), $6.75.
+  - **QA:** `qa/walk3d-v2/check/v2-check.json`, all PASS except one phone ring step (no piece in frame at the test yaw).
+- **BLOCKED:** fal is locked, «Exhausted balance». Not done:
+  - his base furniture as AI models from his pictures (crops ready, `tools/catalog/base.json`, ~$4.05)
+  - the 2 catalog chairs
+  The refused calls are marked unbilled in the ledgers.
+- **Lessons:**
+  - Hunyuan GLBs carry the photo's contact shadow as a floating sheet; drop by "flat part with a gap below" or "starts above 1.3× the design height". Never drop thin skins: they left holes in a cushion.
+  - three.js decodes the GLB sRGB maps itself, so a second pow 2.2 made the cognac sofa black-red.
+  - An equirect background CanvasTexture is cached: make a new texture per change.
+- **Still open:**
+  - the flutes bake as harsh stripes (needs shallower flutes plus a re-bake)
+  - a dark baked smudge stays on the wall where the original sofa stood when a taller sofa is swapped in
+  - total realism is capped by the diffuse bake and the procedural furniture until fal is topped up
+- **2026-11-18:**
+  - **Generation:** his base furniture was generated from his pictures after the fal top-up: sofa, coffee table, dining table, chair, double bed, nightstand ($4.05). Two catalog chairs were generated too; the black cane chair came out defective and is excluded.
+  - **Live pieces:** the generated pieces are LIVE. They are baked into the room's shadows, but not baked themselves; they are drawn with their own textures (`work/walk3d6`, `walk3d-v4`).
+  - **Research:** `docs/fal-3d-model-research-2026-11-18.md`. Eliran chose «Upgrade the current walk»: every item in his pictures from 4 views (Hunyuan multi-view), materials from his pictures (fal Patina), reflections. About $20, NOT STARTED yet.
+  - **DEPLOYED on his word** («תעלה לי את זה לVERCEL»): https://avnei-hefetz-apt7-walk.vercel.app, a new Vercel project, noindex, `dpl_9Us4J9RTrXW8kBnZ1JfFKrgdvEry`. Checked in Chrome at 1440 and 390, no errors.
+  - **Known:** on the phone the rail overlaps the place card and the pill name wraps. Noon only (the day/night keys are not re-baked for walk3d6).
+- **2026-11-18, later:**
+  - **GitHub:** PUBLIC repo `Eliranshopen/avnei-hefetz-apt7-walk`, on the user's word («Just upload it to public in my github»). Code and docs only. Excluded: his renders and crops, the developer's brochure image, the internal analysis docs. Other clients' names were scrubbed from code comments. Commit 90bb2a1, built from a staged copy, not from the C:\RnD repo.
+  - **Vercel:** redeployed on his word, `walk3d-v5` with all 4 times of day, `dpl_9gKFCoxJCYtMKzuGSCtkykn2LLn7`. Live check in Chrome: hours 7.5 / 17.5 / 21.5 apply, the free-text swap works, no errors at 1440 or 390.
+  - **His 3D model:** he dropped «בניין 1 קומה א דירה 7 - מודל 3D.glb», a coarse box model (235 meshes, 5,336 faces, no textures). It is used only as a layout cross-check.
+  - **Upgrade in progress:** the multi-view batch is running (`tools/catalog/base.json` mv, ledger cap 26).
+- **Second reader:** the Hatzav session (`.wt/harei-zahav-naama`, plan `2026-11-17-hatzav-realism-and-rainbow-features.md`) builds the same Rainbow features. The light/colour split bake and the part UV here are reusable there.
+- **Evidence:** `out/…/qa/walk3d/walk-check.json`, `docs/source-evidence.md`.
+  - **2026-11-18, phone fix (v6), his report** «בטלפון כל הכפתורים מופיעים על המסך ואין יכולת של תזוזה אולי צריך להוסיף חיצים … התזוזה לא יציבה זה קופץ»:
+    - Changes in `tools/walk/index.html` and `walk3d.js`:
+      - the phone place card is one line (room plus badge)
+      - the room strip opens when the room name is tapped, and the clock moved into «כלי עזר → שעה ביום»
+      - the side rail is hidden on the phone
+      - an arrow pad, held to walk or turn, with a knob for analog speed (his own words, so the 2026-11-11 no-arrows ruling does not hold for this walk)
+      - a finger drag only looks around
+      - speed is smoothed and there is no head bob on the phone
+    - Built as `walk3d-v6` (v5 plus the 2 files). Checked at 390 with `tools/phone_shot.mjs`: holding the arrow moved 1.2 m in 2 s, no errors.
+    - The preview `avnei-hefetz-apt7-walk-czed00hyn` sits behind Vercel login. Production waits for his go.
+  - **2026-11-18, 360 tour living sample:**
+    - Enhancing per view (`tools/pano_views.py` and `tools/enhance_views.mjs`, $0.75) kept the geometry in front and back (edge score about 0.7).
+    - Right, left and down were reframed or invented (score 0.07 / 0.5 / 0.01), so they are not usable as they are.
+  - **2026-11-18, v6 is in PRODUCTION on his go** (the dialog answer «כן, להעלות»):
+    - Deployment `dpl_8n4rLomVaKwnJ8Y2yhgSFuimQwgT`, staged from scratchpad `avnei-hefetz-apt7-walk.v6`, which is the v5 stage plus the 2 page files and the manifest.
+    - Live check at 390: the pad is visible, holding it walked 1.27 m, no errors, noindex header present.
+  - **2026-11-18, 360 model bake-off on fal (his word: «תבחר את המודל הטוב ביותר מFAL»):**
+    - Scored by edge alignment against the source view, on the living views y000 and y180 (`work/pano-ai/living_v8`).
+    - Editors given his picture as a reference all REFRAME and copy his photo's composition (score 0.03–0.35): nano-banana-pro/edit, flux-pro/kontext max multi, qwen-image-edit-plus, seedream v4 edit, gemini-2.5-flash edit.
+    - kontext with no reference also failed (0.35 / 0.04).
+    - flux/dev image-to-image at strength 0.35 scored 0.90 / 0.96, but it changed the balcony furniture.
+    - flux-general image-to-image with a controlnet-union TILE lock on the render (InstantX, cond 0.6, end 0.8) scored 0.95, kept every item, and gained little realism.
+    - A looser lock (cond 0.35, end 0.5, strength 0.8) invented a sea view, a side table, a vase, a beam and a picture: rejected under the add-only rule.
+    - DECISION: the 360 realism comes from the Cycles render, plus at most the strict tile pass.
+    - Pano ledger about $4.1 of $10. Scripts: `tools/pano_views.py` (cut / score / stitch with a 0.55 gate), `tools/enhance_views.mjs`, `tools/bakeoff_views.mjs`, `tools/flux_tile_test.mjs`.
+  - 2026-11-18 Eliran approved the 360 realism pass up to $20 (dialog «מאשר עד $20»), GPT Image 2.5 whole-pano edit, $1.20/room; living sample 0.83 edge score, looks like a real photo; window views kept plain by prompt.
+  - **2026-11-18 RESUME POINT:**
+    - The full state and the next steps are in `development/plans/2026-11-18-avnei-hefetz-two-versions.md` § «RESUME POINT».
+    - The walk is frozen on his word.
+    - 360: 9 of 11 rendered, 8 of 11 through GPT Image 2.5.
+    - Next: bedroom GPT; balcony and bath render plus GPT; seam; viewer on the RAINBOW tour360 interface; QA; deploy.
+  - **2026-11-18, 360 tour on the RAINBOW tour360 viewer, built and checked locally ($0, not deployed):**
+    - Apartment folder `tour360/apartments/ahk-apt7/` in the worktree project: 11 scenes, living first, 26 door markers taken from plan.json openings, a crop of the sales sheet as the plan, 15 swap rings in 5 scenes, a catalog of 8 items, the Cycles renders as the original set, and ray-cast depth for the ruler.
+    - Prep script: `tools/tour360/make_apartment.py`. Seam cross-fade on all 11 (before 2.5–8.6, after 0).
+    - Build: `out/.../4-rooms/tour360-v1/`, made by `tools/tour360/build-tour.mjs`, an adapted copy that reads RAINBOW read-only. Pannellum, because RAINBOW has no built engine bundle. The fidelity gate was NOT run (it is a paid step).
+    - QA: `tools/tour360/qa.mjs` passed at 1440 and 390 (`tour360-v1/qa/`). `BASELINE.md` gives each row of the checklist.
+    - Stage: in the scratchpad, `stage/avnei-hefetz-apt7-tour360` (includes `api/edit`). No Vercel command was run.
+    - Open: the «עד 1%» concept line is unmeasured for this apartment; the deploy and its keys wait for his go.
+  - **2026-11-18, the 360 version is LIVE** on his go (the two-versions ask): https://avnei-hefetz-apt7-360.vercel.app, deployment `dpl_kaJ6yuAeCvxNHNmmbPAhjEiVhjvp`, new Vercel project `avnei-hefetz-apt7-360`.
+    - Built on the RAINBOW tour360 interface, built read-only into `tour360-v1`; an agent did the build.
+    - Content: 11 GPT Image 2.5 panoramas with the seams closed; the disclosure line set to «עד 2%» in `tools/tour360/build-tour.mjs`.
+    - Function keys FAL_KEY, OPENROUTER_API_KEY and TOUR_EDIT_OPEN=1 were set by name. The live edits have a $5/day cap per instance.
+    - `.vercelignore` excludes `.env*`; `/.env.local` returns 404.
+    - Live Chrome check at 1440 and 390: it paints, the badge shows, the 2% line shows, no errors, the noindex header is present.
+    - Open: the children's rooms' single beds look like mattresses.

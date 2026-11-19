@@ -1,11 +1,11 @@
 # mobile-responsive/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `mobile-responsive` (auto, from `AsadSumbul/mobile-responsive`, MIT, installed 2026-11-04 on Eliran's ask) — mobile-first web UI from 320px to desktop: no horizontal overflow, ~44px touch targets, reflow instead of shrink, and match the project's existing tokens and breakpoints. The contract is `SKILL.md`; this context file only routes (root `CLAUDE.md` §8.4).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 4 files here · 3 subfolders · 15 files / 685.4 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

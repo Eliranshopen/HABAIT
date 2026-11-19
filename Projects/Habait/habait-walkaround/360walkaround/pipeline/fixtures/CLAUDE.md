@@ -1,19 +1,19 @@
 # fixtures/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Depth-golden test fixture (8x4 PNG and JSON) with the script that makes it and the script that checks the pipeline's depth output against it.
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 4 files here · 0 subfolders · 4 files / 15.3 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `check-depth-golden.mjs` | 7.5 KB | 2026-11-01 |
-| `depth-golden-8x4.json` | 3.0 KB | 2026-11-01 |
-| `depth-golden-8x4.png` | 135 B | 2026-11-01 |
-| `make-depth-golden.py` | 4.7 KB | 2026-11-01 |
+| `check-depth-golden.mjs` | 7.5 KB | 2026-11-16 |
+| `depth-golden-8x4.json` | 3.0 KB | 2026-11-16 |
+| `depth-golden-8x4.png` | 135 B | 2026-11-16 |
+| `make-depth-golden.py` | 4.7 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

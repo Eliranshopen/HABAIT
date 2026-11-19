@@ -112,7 +112,7 @@ built = '''**מה נבנה ב-1.4** (חוזה: `Projects/3Dengine/contracts/CONT
 - **קריאה ששולמה לא נמחקת לעולם:** קריאה שמוחלפת עוברת לתיקיית `superseded`. נשמרת רק קריאה שהריצה שלה עברה את הבדיקה.
 - **פקודות חדשות:** `reading show` (מה שמור ל-PDF, ואם עדיין תקף) ו-`reading import` (שמירה ביד; בלי `--go` לא נכתב כלום).
 - **הערת הסקירה של 1.3 נסגרה:** מספר בקובץ ההגדרות חייב להיות מספר JSON אמיתי.
-- **הסקירה הראשונה מצאה פגם אחד, והוא תוקן:** מנעול הקבצים של המנוע (נכתב ב-0.3) איפשר לשני תהליכים קצרים להחזיק בו באותו רגע, כך ששמירות בו-זמניות של אותו PDF יכלו לאבד רשומה של קריאה. המנעול הוחלף: תיקייה עם רשומה אחת על שם המחזיק, וכל החלפת מחזיק היא שינוי שם אחד (חוזה §11). אותו מנעול שומר גם על קובצי העבודה ועל המנעול הכבד.
+- **שתי סקירות נכשלו, כל אחת על פגם אחד במנעול הקבצים של המנוע, ושניהם תוקנו** (חוזה §11). הראשונה: המנעול מ-0.3 איפשר לשני תהליכים קצרים להחזיק בו באותו רגע, כך ששמירות בו-זמניות של אותו PDF יכלו לאבד רשומה של קריאה; המנעול הוחלף בתיקייה עם רשומה אחת על שם המחזיק. השנייה: כשמחזיק נהרג וכמה תהליכים המתינו, כולם השתלטו יחד, כי ב-Windows שינוי שם של קובץ אחד מצליח לכמה תהליכים בבת אחת. עכשיו אחיזה שהתיישנה נשברת, והמנעול נלקח רק בצעד האחד שמערכת הקבצים מבטיחה שרק אחד מצליח בו. אותו מנעול שומר גם על קובצי העבודה ועל המנעול הכבד.
 - **שתי החלטות תהליך של אלירן תוך כדי השער:** כל שכבת בדיקות רצה פעם אחת; ובמכונה עמוסה מותרת למבחני השלב של המנוע ריצה אחת חסומה של עד 25 דקות ברקע.
 - **גרסת המנוע** `1.4.0`. **עלות:** $0 (ה«תשלום» במבחן הוא מול מודל מתוסרט).
 - **מה לא ב-1.4** (חוזה §9): תשלום על קריאה בתוך עבודה (4.2, 4.3); שמירת תשובות השופט; חוברת של כמה דירות; ניקוי המחסן; שמירת הפענוח עצמו (ריצה שנייה עדיין מריצה את הכלי, כדקה).
@@ -127,10 +127,10 @@ patch(MD, [
 
 # ---------------------------------------------------------------- the plans table and the projects table
 patch('development/plans/CLAUDE.md', [
-    ("**6 of 27 CLOSED** (0.1, 0.2, 0.3, 1.1, 1.2, 1.3 on 2026-11-18); 1.4 is next.", "**7 of 27 CLOSED** (0.1 to 1.4; stage 1, reading the PDF, is complete since %s); 2.1 is next." % DATE),
+    ("**6 of 27 CLOSED** (0.1, 0.2, 0.3, 1.1, 1.2, 1.3 on 2026-11-18); 1.4 is next.", "**7 of 27 CLOSED** (0.1 to 1.4 on %s; stage 1 complete); 2.1 is next." % DATE),
 ], limit=600)
 patch('Projects/CLAUDE.md', [
     ("6 of 27 milestones closed: 0.1 the engine home, 0.2 a stub engine behind the agent, 0.3 a job on the disk, 1.1 intake and a real first look, 1.2 the reading tool run by the engine, 1.3 the reading as a job's first real stage.",
-     "7 of 27 milestones closed: 0.1 the engine home, 0.2 a stub engine behind the agent, 0.3 a job on the disk, 1.1 intake and a real first look, 1.2 the reading tool run by the engine, 1.3 the reading as a job's first real stage, 1.4 a kept reading (the same PDF is read once)."),
+     "7 of 27 milestones closed: 0.1 the engine home, 0.2 a stub engine behind the agent, 0.3 a job on the disk, 1.1 intake and a first look, 1.2 the reading tool in the engine, 1.3 the reading as a job's stage, 1.4 a kept reading."),
 ], limit=600)
 print('done: now the plan page, the engine home context file (branch), memory, HOT, auto-memory, and the sync-context pass')

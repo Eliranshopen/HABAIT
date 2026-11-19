@@ -1,12 +1,12 @@
 # project/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Facts about the product, the stack and the decisions that outlive any task (root `CLAUDE.md` §0.1). Written by the main session and `codebase-cartographer` the moment a fact is proven.
 
-## What's here (2026-11-10)
-42 files here · 0 subfolders · 42 files / 137.4 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+68 files here · 0 subfolders · 68 files / 332.9 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
@@ -48,9 +48,9 @@ Facts about the product, the stack and the decisions that outlive any task (root
 | `2026-11-08-visualization-stack-research.md` | 1.5 KB | 2026-11-08 |
 | `2026-11-09-inspiration-not-copy.md` | 1.9 KB | 2026-11-09 |
 | `2026-11-09-ui-skills-installed.md` | 3.2 KB | 2026-11-09 |
-| `2026-11-10-env-single-source.md` | 1.7 KB | 2026-11-10 |
-| `2026-11-10-fal-budget-25.md` | 2.6 KB | 2026-11-10 |
-| … and 2 more | | |
+| `2026-11-10-bird-flight-entry.md` | 7.9 KB | 2026-11-10 |
+| `2026-11-10-demo-mark-off-pills.md` | 1.3 KB | 2026-11-10 |
+| … and 28 more | | |
 
 ## Gotchas
 _none recorded_

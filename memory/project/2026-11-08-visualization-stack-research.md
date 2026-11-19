@@ -1,0 +1,15 @@
+## 2026-11-08 · main session · visualization stack and architecture research
+- **Did:** On Eliran's ask, researched the stack for a visualization product like Habait, covering both the target architecture and the migration path. Recommendation, not a decision:
+  - two planes: TypeScript control (Next.js 16 + Clerk + Supabase Postgres/RLS on Vercel) and Python compute (Blender 4.5 in Docker on GPU via RunPod/Modal);
+  - a JSON Schema contract with codegen to zod and pydantic;
+  - Vercel Workflow for jobs, with Trigger.dev as the fallback;
+  - the viewer as a `<habait-tour>` web component on PSV 5;
+  - phases P0–P7.
+- **Evidence:** `development/plans/2026-11-08-visualization-stack-architecture.md` (sources inside); plan `development/plans/2026-11-08-visualization-stack-research.md`; page https://claude.ai/artifact/6mZtm2ofVc91JKTQCkb4Wt.
+- **Learned:**
+  - Vercel Hobby is non-commercial only (vercel.com/docs/plans/hobby, 2026-09-14), so Pro is needed before the first paying developer.
+  - Pannellum 2.5.7 (2026-02-18) fixes a hotspot XSS; we inline 2.5.6.
+  - Vercel Sandbox has no GPU (unverified).
+  - Many prices and versions in the doc are marked unverified, because the research ran mostly on snippets.
+- **Owed / open:** six calls are for Eliran: Vercel Pro timing, Supabase Pro, GPU vendor plus a $1–5 benchmark, Workflow vs Trigger.dev, hiring stack, splats. P0 (Pannellum 2.5.7, one three.js version, OWED-020) is $0 and waits for his go and a board.
+- **Second reader:** none (research, no decision yet).

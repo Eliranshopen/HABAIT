@@ -1,20 +1,20 @@
 # lib/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Studio shared libraries: env.mjs, llm.mjs and projects.mjs.
 
-## What's here (2026-11-10)
-5 files here · 0 subfolders · 5 files / 31.5 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+5 files here · 0 subfolders · 5 files / 32.0 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `chat.mjs` | 5.9 KB | 2026-11-03 |
-| `env.mjs` | 4.3 KB | 2026-11-03 |
-| `fal-llm.mjs` | 3.5 KB | 2026-11-03 |
-| `llm.mjs` | 12.3 KB | 2026-11-03 |
-| `projects.mjs` | 5.5 KB | 2026-11-01 |
+| `chat.mjs` | 6.0 KB | 2026-11-16 |
+| `env.mjs` | 4.4 KB | 2026-11-16 |
+| `fal-llm.mjs` | 3.5 KB | 2026-11-16 |
+| `llm.mjs` | 12.5 KB | 2026-11-16 |
+| `projects.mjs` | 5.6 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

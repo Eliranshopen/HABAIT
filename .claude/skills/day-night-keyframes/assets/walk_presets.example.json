@@ -1,0 +1,135 @@
+{
+ "_doc": "Four lighting keyframes for the Hatzav walk (2026-11-17 PoC). Bearings are plan bearings (0 = plan up = world +Y, clockwise); plan up = north is ASSUMED (the house's north was not read). The scene had no sun lamp (daylight came from its HDRI); relight.py adds one and replaces the HDRI with a Nishita sky (day) or a dark colour (night). Exposure is applied at export from the linear EXR bakes, so it can be retuned without re-baking (--export-only). Evening/night (round 2): ceiling spots off at sunset and at 12% at night, warm lamp colour, the pendants and table/floor lamps carry the light.",
+ "keyframes": [
+  {
+   "name": "morning",
+   "label": "בוקר",
+   "hour": 7.5,
+   "sun": {
+    "az": 100,
+    "el": 14,
+    "energy": 3.0,
+    "color": [
+     1.0,
+     0.84,
+     0.68
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 14,
+    "az": 100,
+    "strength": 1.0,
+    "dust": 2.0
+   },
+   "interior": 0.0,
+   "exposure": 0.4
+  },
+  {
+   "name": "noon",
+   "label": "צהריים",
+   "hour": 12.5,
+   "sun": {
+    "az": 185,
+    "el": 55,
+    "energy": 4.5,
+    "color": [
+     1.0,
+     0.97,
+     0.93
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 55,
+    "az": 185,
+    "strength": 1.0,
+    "dust": 1.0
+   },
+   "interior": 0.0,
+   "exposure": 1.0
+  },
+  {
+   "name": "golden",
+   "label": "שקיעה",
+   "hour": 17.5,
+   "sun": {
+    "az": 262,
+    "el": 7,
+    "energy": 6.0,
+    "color": [
+     1.0,
+     0.62,
+     0.36
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 7,
+    "az": 262,
+    "strength": 1.0,
+    "dust": 3.0
+   },
+   "interior": 0.6,
+   "exposure": -1.1,
+   "lamp_color": [
+    1.0,
+    0.6,
+    0.34
+   ],
+   "lights": [
+    {
+     "match": "Spot_",
+     "factor": 0.0
+    }
+   ]
+  },
+  {
+   "name": "night",
+   "label": "לילה",
+   "hour": 21.5,
+   "sun": null,
+   "sky": {
+    "type": "color",
+    "color": [
+     0.006,
+     0.01,
+     0.022
+    ],
+    "strength": 1.0
+   },
+   "interior": 1.0,
+   "exposure": -1.5,
+   "lamp_color": [
+    1.0,
+    0.56,
+    0.3
+   ],
+   "lights": [
+    {
+     "match": "Spot_",
+     "factor": 0.12
+    },
+    {
+     "match": "K_pendant",
+     "factor": 1.6
+    },
+    {
+     "match": "D_rattan",
+     "factor": 1.4
+    },
+    {
+     "match": "L_",
+     "factor": 2.5
+    },
+    {
+     "match": "B_lamp",
+     "factor": 2.5
+    }
+   ]
+  }
+ ]
+}

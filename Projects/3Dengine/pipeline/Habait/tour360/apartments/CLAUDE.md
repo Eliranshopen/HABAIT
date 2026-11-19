@@ -1,11 +1,11 @@
 # apartments/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 One folder per apartment tour (apt846, demo-01), each with its plan, prompts, cameras and panoramas.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 0 files here · 3 subfolders · 235 files / 90.1 MB in the whole tree (vendor and build output excluded)
 
 ## Subfolders

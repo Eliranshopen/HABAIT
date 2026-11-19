@@ -1,0 +1,137 @@
+{
+  "_doc": "Day/Night keyframes for one viewpoint. Bearings are plan bearings (0 = plan up = world +Y, clockwise), the same convention as build_scene.py SUN_AZIMUTH_PLAN_DEG. ASSUMPTION for the PoC: plan up = north (the Kedma north arrow was not read); production takes north from the sales plan. Sun lamp rotation = (90-el, 0, 180-az) — verified against build_scene.py (az 165, el 52 -> rot 38,0,15). Nishita sun_rotation = bearing (out/sky-calibration.json). The living room's only exterior opening (o-11, sliding door, 266 cm) faces west (bearing ~270), so direct sun enters only in the afternoon. Day keyframes: lamps OFF, exposure lifted (archviz practice: the interior is exposed, the window may bloom); evening keyframes: lamps ON.",
+  "keyframes": [
+    {
+      "name": "morning",
+      "label": "בוקר",
+      "hour": 7.5,
+      "sun": {
+        "az": 110,
+        "el": 14,
+        "energy": 3.0,
+        "color": [
+          1.0,
+          0.84,
+          0.68
+        ],
+        "angle_deg": 0.53
+      },
+      "sky": {
+        "type": "nishita",
+        "el": 14,
+        "az": 110,
+        "strength": 1.0,
+        "dust": 2.0
+      },
+      "interior": 0.0,
+      "exposure": 2.4
+    },
+    {
+      "name": "noon",
+      "label": "צהריים",
+      "hour": 12.5,
+      "sun": {
+        "az": 185,
+        "el": 45,
+        "energy": 4.5,
+        "color": [
+          1.0,
+          0.98,
+          0.95
+        ],
+        "angle_deg": 0.53
+      },
+      "sky": {
+        "type": "nishita",
+        "el": 45,
+        "az": 185,
+        "strength": 1.0,
+        "dust": 1.0
+      },
+      "interior": 0.0,
+      "exposure": 2.2
+    },
+    {
+      "name": "afternoon",
+      "label": "אחר הצהריים",
+      "hour": 15.0,
+      "sun": {
+        "az": 252,
+        "el": 17,
+        "energy": 6.0,
+        "color": [
+          1.0,
+          0.93,
+          0.84
+        ],
+        "angle_deg": 0.53
+      },
+      "sky": {
+        "type": "nishita",
+        "el": 17,
+        "az": 252,
+        "strength": 1.0,
+        "dust": 1.5
+      },
+      "interior": 0.0,
+      "exposure": 1.8
+    },
+    {
+      "name": "golden",
+      "label": "שקיעה",
+      "hour": 17.0,
+      "sun": {
+        "az": 262,
+        "el": 9,
+        "energy": 6.5,
+        "color": [
+          1.0,
+          0.58,
+          0.32
+        ],
+        "angle_deg": 0.53
+      },
+      "sky": {
+        "type": "nishita",
+        "el": 9,
+        "az": 262,
+        "strength": 1.0,
+        "dust": 3.0
+      },
+      "interior": 0.35,
+      "exposure": 1.5
+    },
+    {
+      "name": "dusk",
+      "label": "דמדומים",
+      "hour": 18.5,
+      "sun": null,
+      "sky": {
+        "type": "nishita",
+        "el": -2.5,
+        "az": 256,
+        "strength": 4.0,
+        "dust": 1.0
+      },
+      "interior": 0.7,
+      "exposure": -0.4
+    },
+    {
+      "name": "night",
+      "label": "לילה",
+      "hour": 21.5,
+      "sun": null,
+      "sky": {
+        "type": "color",
+        "color": [
+          0.006,
+          0.01,
+          0.022
+        ],
+        "strength": 1.0
+      },
+      "interior": 0.55,
+      "exposure": -0.9
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 # agents/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Sub-agent definition(s) bundled with skill `shadcn`; not part of the harness roster in `.claude/agents/` and not counted in `docs/agent-team-org-chart.md`.
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 1 files here · 0 subfolders · 1 files / 243 B in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

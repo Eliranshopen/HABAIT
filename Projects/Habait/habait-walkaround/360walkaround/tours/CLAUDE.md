@@ -1,19 +1,21 @@
 # tours/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 One folder per rendered tour (apt846, apt846-furnished, pilot-karnei), each with its plan.json, manifest and render reports.
 
-## What's here (2026-11-10)
-0 files here · 4 subfolders · 144 files / 16.7 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+0 files here · 6 subfolders · 99 files / 3.9 MB in the whole tree (vendor and build output excluded)
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `apt846/` | [`apt846/CLAUDE.md`](apt846/CLAUDE.md) | 37 (2.8 MB) |
+| `apt846/` | [`apt846/CLAUDE.md`](apt846/CLAUDE.md) | 15 (485.0 KB) |
 | `apt846-auto/` | [`apt846-auto/CLAUDE.md`](apt846-auto/CLAUDE.md) | 31 (1.5 MB) |
-| `apt846-furnished/` | [`apt846-furnished/CLAUDE.md`](apt846-furnished/CLAUDE.md) | 52 (11.8 MB) |
+| `apt846-furnished/` | [`apt846-furnished/CLAUDE.md`](apt846-furnished/CLAUDE.md) | 28 (1.3 MB) |
+| `apt846-hall-probe/` | [`apt846-hall-probe/CLAUDE.md`](apt846-hall-probe/CLAUDE.md) | 0 (0 B) |
+| `apt846-walk-proof/` | [`apt846-walk-proof/CLAUDE.md`](apt846-walk-proof/CLAUDE.md) | 1 (97.5 KB) |
 | `pilot-karnei/` | [`pilot-karnei/CLAUDE.md`](pilot-karnei/CLAUDE.md) | 24 (628.2 KB) |
 
 ## Gotchas

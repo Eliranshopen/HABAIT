@@ -1,11 +1,11 @@
 # intake/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Intake step of the engine: turns PDF, DWG, IFC and raster inputs into plan data (intake_*.py, tracer_cv.py, vlm.py with prompts, layer maps and a Hebrew lexicon).
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 12 files here · 2 subfolders · 18 files / 446.9 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
@@ -28,6 +28,8 @@ Intake step of the engine: turns PDF, DWG, IFC and raster inputs into plan data 
 |---|---|---|
 | `fixtures/` | [`fixtures/CLAUDE.md`](fixtures/CLAUDE.md) | 5 (219.4 KB) |
 | `layer_maps/` | [`layer_maps/CLAUDE.md`](layer_maps/CLAUDE.md) | 1 (2.2 KB) |
+
+Vendor / build output here (no card by rule): `__pycache__/`
 
 ## Gotchas
 _none recorded_

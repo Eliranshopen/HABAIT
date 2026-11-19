@@ -1,21 +1,21 @@
 # pipeline/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The Studio pipeline entry (index.mjs) and its stage modules in stages/.
 
-## What's here (2026-11-10)
-1 files here · 1 subfolders · 10 files / 92.1 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+1 files here · 1 subfolders · 10 files / 92.8 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `index.mjs` | 5.7 KB | 2026-11-01 |
+| `index.mjs` | 5.8 KB | 2026-11-16 |
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `stages/` | [`stages/CLAUDE.md`](stages/CLAUDE.md) | 9 (86.4 KB) |
+| `stages/` | [`stages/CLAUDE.md`](stages/CLAUDE.md) | 9 (87.0 KB) |
 
 ## Gotchas
 _none recorded_

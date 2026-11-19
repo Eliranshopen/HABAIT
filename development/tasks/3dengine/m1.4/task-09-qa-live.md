@@ -4,7 +4,7 @@
 **Agent:** qa-reviewer · **Model:** sonnet · **Ruling tier:** T0
 **Runs as:** a FRESH `general-purpose` spawn pinned to `sonnet`, carrying the `qa-reviewer` definition; never an author of this milestone; prompted to refute.
 **Wave:** 6 · **Depends on:** task 08
-**State:** `PLANNED`
+**State:** `DONE` — 2026-11-19: a fresh reviewer's PASS in the third round (the first two failed, each on one defect of the engine's file lock, both fixed) (`../logs/1.4/qa-live-r3.md`, on `2f249804`).
 
 ## Files it creates or changes
 - `development/tasks/3dengine/logs/1.4/qa-live.md` (the report, its first line `VERDICT: PASS` or `VERDICT: FAIL`) and its evidence files `qa-*`

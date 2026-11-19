@@ -1,11 +1,11 @@
 # codebase-design/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `codebase-design` (auto, from `mattpocock/skills`) — Shared vocabulary for designing deep modules: module, interface, depth, seam, adapter, leverage, locality; `DEEPENING.md` and `DESIGN-IT-TWICE.md` go deeper. The contract is `SKILL.md`; this card only routes (root `CLAUDE.md` §8.4).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 3 files here · 1 subfolders · 4 files / 11.7 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

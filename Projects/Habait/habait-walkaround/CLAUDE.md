@@ -1,30 +1,29 @@
 # habait-walkaround/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Root of the habait-walkaround code repo (cut from the lab repo, see PROVENANCE.json): holds Habait/ (the product lanes), 360walkaround/, docs/, scripts/ and the 846 sales-plan PDF.
 
-## What's here (2026-11-10)
-6 files here · 7 subfolders · 25243 files / 30.0 GB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+5 files here · 7 subfolders · 1888 files / 232.7 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `.env` | 293 B | 2026-11-05 |
-| `.gitattributes` | 1.8 KB | 2026-11-01 |
-| `.gitignore` | 1.9 KB | 2026-11-05 |
-| `.gitleaks.toml` | 1.3 KB | 2026-11-01 |
-| `PROVENANCE.json` | 76.7 KB | 2026-11-01 |
-| `דירה 846- 16.pdf` | 178.9 KB | 2026-11-01 |
+| `.gitattributes` | 1.8 KB | 2026-11-16 |
+| `.gitignore` | 1.9 KB | 2026-11-16 |
+| `.gitleaks.toml` | 1.3 KB | 2026-11-16 |
+| `PROVENANCE.json` | 76.7 KB | 2026-11-16 |
+| `דירה 846- 16.pdf` | 178.9 KB | 2026-11-16 |
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
 | `.claude/` | [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | 0 (0 B) |
-| `360walkaround/` | [`360walkaround/CLAUDE.md`](360walkaround/CLAUDE.md) | 341 (460.2 MB) |
-| `Habait/` | [`Habait/CLAUDE.md`](Habait/CLAUDE.md) | 21927 (28.1 GB) |
-| `docs/` | [`docs/CLAUDE.md`](docs/CLAUDE.md) | 5 (540.8 KB) |
-| `qa-evidence/` | [`qa-evidence/CLAUDE.md`](qa-evidence/CLAUDE.md) | 2962 (1.5 GB) |
+| `360walkaround/` | [`360walkaround/CLAUDE.md`](360walkaround/CLAUDE.md) | 151 (6.8 MB) |
+| `Habait/` | [`Habait/CLAUDE.md`](Habait/CLAUDE.md) | 1378 (214.7 MB) |
+| `docs/` | [`docs/CLAUDE.md`](docs/CLAUDE.md) | 5 (541.2 KB) |
+| `qa-evidence/` | [`qa-evidence/CLAUDE.md`](qa-evidence/CLAUDE.md) | 347 (10.4 MB) |
 | `research_tmp/` | [`research_tmp/CLAUDE.md`](research_tmp/CLAUDE.md) | 0 (0 B) |
 | `scripts/` | [`scripts/CLAUDE.md`](scripts/CLAUDE.md) | 2 (22.9 KB) |
 

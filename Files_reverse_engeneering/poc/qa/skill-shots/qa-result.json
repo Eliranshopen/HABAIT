@@ -1,0 +1,77 @@
+{
+ "checks": [
+  {
+   "name": "raw_h10 = 50/50 of raw_h7.5 and raw_h12.5",
+   "pass": true,
+   "err_255": 0.251,
+   "weight": 0.501
+  },
+  {
+   "name": "raw_h7.5 and raw_h12.5 differ",
+   "pass": true,
+   "diff_255": 21.13
+  },
+  {
+   "name": "raw_h20 = 50/50 of raw_h18.5 and raw_h21.5",
+   "pass": true,
+   "err_255": 0.249,
+   "weight": 0.503
+  },
+  {
+   "name": "raw_h18.5 and raw_h21.5 differ",
+   "pass": true,
+   "diff_255": 31.0
+  },
+  {
+   "name": "desk_last.png painted",
+   "pass": true,
+   "std": 33.6
+  },
+  {
+   "name": "desk_mid.png painted",
+   "pass": true,
+   "std": 34.5
+  },
+  {
+   "name": "phone_last.png painted",
+   "pass": true,
+   "std": 33.9
+  },
+  {
+   "name": "phone_mid.png painted",
+   "pass": true,
+   "std": 32.6
+  },
+  {
+   "name": "raw_h10.png painted",
+   "pass": true,
+   "std": 33.5
+  },
+  {
+   "name": "raw_h12.5.png painted",
+   "pass": true,
+   "std": 29.7
+  },
+  {
+   "name": "raw_h18.5.png painted",
+   "pass": true,
+   "std": 33.8
+  },
+  {
+   "name": "raw_h20.png painted",
+   "pass": true,
+   "std": 33.0
+  },
+  {
+   "name": "raw_h21.5.png painted",
+   "pass": true,
+   "std": 32.2
+  },
+  {
+   "name": "raw_h7.5.png painted",
+   "pass": true,
+   "std": 43.3
+  }
+ ],
+ "pass": true
+}

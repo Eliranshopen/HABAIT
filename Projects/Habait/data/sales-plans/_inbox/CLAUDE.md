@@ -1,11 +1,11 @@
 # _inbox/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Drop folder for incoming sales plans; empty apart from this card (purpose inferred from the name and the parent README, not stated in it).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 0 files here · 0 subfolders · 0 files / 0 B in the whole tree (vendor and build output excluded)
 
 ## Gotchas

@@ -1,11 +1,11 @@
 # engine/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Lane A, the engine and cli.py: takes a project's files (sales-plan PDF, later DXF/IFC) and produces plan.json, units.json, clay scene and panoramas that the other lanes consume.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 5 files here · 11 subfolders · 81 files / 2.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

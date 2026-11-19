@@ -197,3 +197,7 @@
 
 ## 2026-11-10 · sub-agent units-demo-marker → second-reader pointer
 - runs/2026-11-10-units-demo-marker.md — main 51471bf (NOT deployed): units.json carries `source` per unit (846 sales-plan, 11 demo); «נתוני הדגמה» badge on every render of a demo unit's numbers (hold pill/card/drawer via js/picker.js, apartment, landing). Deployed QA: run test/units-demo-marker.shots.mjs + no-price.check against prod after any habait-flow deploy; 846 must stay badge-free.
+
+## 2026-11-16 · main session → second-reader pointer
+- 2026-11-16 Projects/Habait is OFF the disk (since about 13:22; 2,719 tracked files show as deleted, uncommitted; no moved copy found); Projects/3Dengine created empty; code survives in git a63494a + the .wt worktrees; untracked assets, keys and _local records have no confirmed source; Pi wrapper + bridge paths dangle → `memory/project/2026-11-16-projects-habait-off-disk.md`
+- 2026-11-18 (pointer, tour360 sub-agent): Hatzav 360 tour staged-ready — tour360/dist/hatzav (realistic set, --ungated-ok), stage with tools/stage-tour.mjs; needs FAL_KEY/OPENROUTER_API_KEY/TOUR_EDIT_CODE names on its Vercel project → project/2026-11-18-hatzav-realism-items.md

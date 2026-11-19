@@ -14,7 +14,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { loadCopy, catalogFile } from './apartment-overrides.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const id = process.argv[2];
@@ -52,7 +51,7 @@ let apartment, scenesDoc, copy;
 try {
   apartment = readJson(path.join(APT, 'apartment.json'));
   scenesDoc = readJson(path.join(APT, 'scenes.json'));
-  copy = loadCopy(ROOT, APT); // 2026-11-18: the apartment's own copy.json over the pack, as build-tour reads it
+  copy = readJson(path.join(ROOT, 'copy', 'tour360-copy.json'));
 } catch (e) {
   console.error('smoke: FAIL — data does not parse: ' + e.message);
   process.exit(1);
@@ -136,7 +135,7 @@ const CATALOG_KEYS = ['catalogTitle', 'catalogReplaceWith', 'catalogSee', 'catal
 for (const key of CATALOG_KEYS) check(LANGS.every((l) => copy.ui[key] && copy.ui[key][l]), `copy pack lacks ui.${key} in a language`);
 let nCatalog = 0, nMarkers = 0, nMarkerScenes = 0;
 if (withCatalog) {
-  const doc = readJson(catalogFile(ROOT, APT));
+  const doc = readJson(path.join(ROOT, 'catalog', 'items.json'));
   for (const it of doc.items) {
     nCatalog += 1;
     const f = path.join(OUT, 'catalog', it.image);
@@ -180,13 +179,13 @@ if (check(fs.existsSync(pagePath), 'dist index.html missing — run build-tour.m
       }
       check(!/\bid="t-catalog"/.test(html), 'the change sheet still carries the catalog strip (T16c: the catalog lives behind a ring only)');
     }
-    if (withCatalog) check(Array.isArray(data.catalog) && data.catalog.length === nCatalog && data.catalog.every((x) => x.id && x.name && (x.ai || (x.price && x.url)) && fs.existsSync(path.join(OUT, x.image))), 'embedded catalog rows differ from items.json or a photo is missing');
+    if (withCatalog) check(Array.isArray(data.catalog) && data.catalog.length === nCatalog && data.catalog.every((x) => x.id && x.name && x.price && x.url && fs.existsSync(path.join(OUT, x.image))), 'embedded catalog rows differ from items.json or a photo is missing');
     else check(data.catalog === undefined, 'a plain build must embed no catalog');
     // 4b. the markers (T16a): with --catalog every scene carries its list, each marker a direction, a catalog category, outlines; a set its members
     if (withCatalog) {
       const mf = path.join(APT, 'markers.json');
       if (check(fs.existsSync(mf), 'markers.json missing — run scan-pieces first')) {
-        const cats = new Set(readJson(catalogFile(ROOT, APT)).items.map((x) => x.category));
+        const cats = new Set(readJson(path.join(ROOT, 'catalog', 'items.json')).items.map((x) => x.category));
         for (const s of data.scenes) {
           if (!check(Array.isArray(s.markers), `embedded scene ${s.id} carries no markers array`)) continue;
           if (s.markers.length) nMarkerScenes += 1;

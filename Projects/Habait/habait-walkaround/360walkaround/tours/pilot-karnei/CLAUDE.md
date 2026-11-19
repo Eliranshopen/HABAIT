@@ -1,22 +1,22 @@
 # pilot-karnei/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The pilot-karnei tour: plan, tour.json, manifest, camera-placement and scene reports, with GROUND-TRUTH.md.
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 7 files here · 1 subfolders · 24 files / 628.2 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `GROUND-TRUTH.md` | 12.1 KB | 2026-11-01 |
-| `manifest.json` | 64.3 KB | 2026-11-01 |
-| `place-cameras.report.json` | 1.5 KB | 2026-11-01 |
-| `plan.json` | 33.2 KB | 2026-11-01 |
-| `scene-full.report.json` | 227.1 KB | 2026-11-01 |
-| `scene-probe.report.json` | 16.0 KB | 2026-11-01 |
-| `tour.json` | 92.9 KB | 2026-11-01 |
+| `GROUND-TRUTH.md` | 12.1 KB | 2026-11-16 |
+| `manifest.json` | 64.3 KB | 2026-11-16 |
+| `place-cameras.report.json` | 1.5 KB | 2026-11-16 |
+| `plan.json` | 33.2 KB | 2026-11-16 |
+| `scene-full.report.json` | 227.1 KB | 2026-11-16 |
+| `scene-probe.report.json` | 16.0 KB | 2026-11-16 |
+| `tour.json` | 92.9 KB | 2026-11-16 |
 
 ## Subfolders
 | Folder | Card | Files in tree |

@@ -1,18 +1,18 @@
 # deploy/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 3 files here · 0 subfolders · 3 files / 11.9 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `.gitattributes` | 137 B | 2026-11-01 |
-| `README.md` | 3.2 KB | 2026-11-01 |
-| `deploy-tour.sh` | 8.6 KB | 2026-11-01 |
+| `.gitattributes` | 137 B | 2026-11-16 |
+| `README.md` | 3.2 KB | 2026-11-16 |
+| `deploy-tour.sh` | 8.6 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

@@ -11,6 +11,7 @@ The documents that agents and skills cite by path: the inherited rulings, the ag
 | `agent-team-org-chart.md` | the roster: one row per sub-agent from its frontmatter (track, status, model, tools, charter) + counts | **generated** from `.claude/agents/*.md` — regenerate, don't hand-edit the table |
 | `skill-taxonomy.md` | the skill register: group, invocation mode, lines, trigger sentence; §3 what the harness-ops skills need; §4 precedence; §5 pins | **generated** from `.claude/skills/*/SKILL.md` |
 | `OWNER-PASTE.md` | the MCP servers, hooks and plugin updates only Eliran installs — agents write the command here and stop | agents append; Eliran executes |
+| `rainbow-baseline-features.md` | the RAINBOW feature checklist every visualization project starts from and QA checks row by row (root §8.10, Eliran 2026-11-17) | main session; re-surveyed when RAINBOW gains a feature |
 | `context-map.generated.md` | every `CLAUDE.md` on disk, one row each (folder, kind, purpose) — the full list behind the root Context map (root §8.6) | **generated** by `.claude/skills/sync-context/generate-cards.py --apply` |
 
 ## Subfolders

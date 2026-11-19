@@ -93,3 +93,12 @@
 
 ## 2026-11-18 · qa-reviewer → second-reader pointer
 - qa-reviewer 2026-11-18: engine 1.3 trace gate QA PASS, 0 defects, 6 observations; report in worktree logs/1.3/qa-live.md; room type unchecked by tool check (building milestone). → `memory/agents/qa-reviewer.md`
+
+## 2026-11-18 · qa-reviewer → second-reader pointer
+- qa-reviewer 2026-11-18: QA live 1.4 = FAIL, D-1 lock helper not exclusive across short-lived processes (a keep can lose a record); the rest held; report qa-live.md in logs 1.4 → `memory/agents/qa-reviewer.md`
+
+## 2026-11-19 · qa-reviewer → second-reader pointer
+- qa-reviewer 2026-11-19: QA r2 of engine 1.4 FAIL, D-1 lock take-over lets several waiting takers of a killed holder in at once (Windows rename not CAS); report logs/1.4/qa-live-r2.md; scope B attacks owed → `memory/agents/qa-reviewer.md`
+
+## 2026-11-19 · qa-reviewer → second-reader pointer
+- qa-reviewer 2026-11-19: milestone 1.4 round 3 PASS, no defects (lock, store, four real runs); observations O-1 to O-9 in logs/1.4/qa-live-r3.md; nearest: a failed supersede leaves none. → `memory/agents/qa-reviewer.md`

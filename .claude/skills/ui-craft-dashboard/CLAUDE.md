@@ -1,11 +1,11 @@
 # ui-craft-dashboard/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `ui-craft-dashboard` — Dense-dashboard craft for data-heavy internal tools: tables, metric cards, charts, empty and first-run states, forms, AI-chat panels, plus a completeness checklist per screen archetype and a scored heuristic critique. Use when building or reviewing a dashboard, admin or data-table screen. The contract is `SKILL.md`; this card only routes (root `CLAUDE.md` §8.4).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 2 files here · 1 subfolders · 17 files / 216.2 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

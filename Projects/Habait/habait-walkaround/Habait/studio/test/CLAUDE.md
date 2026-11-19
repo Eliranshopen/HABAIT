@@ -1,17 +1,17 @@
 # test/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Studio test runner (run.mjs).
 
-## What's here (2026-11-10)
-2 files here · 0 subfolders · 2 files / 18.1 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+2 files here · 0 subfolders · 2 files / 18.2 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `llm-fal.test.mjs` | 9.5 KB | 2026-11-03 |
-| `run.mjs` | 8.5 KB | 2026-11-01 |
+| `llm-fal.test.mjs` | 9.7 KB | 2026-11-16 |
+| `run.mjs` | 8.5 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

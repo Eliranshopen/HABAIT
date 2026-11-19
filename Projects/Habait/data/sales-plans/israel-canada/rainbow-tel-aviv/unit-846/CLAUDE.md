@@ -1,19 +1,19 @@
 # unit-846/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 4 files here · 1 subfolders · 6 files / 1.9 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `corrections.json` | 853 B | 2026-11-02 |
-| `meta.json` | 4.4 KB | 2026-11-02 |
-| `plan.json` | 79.8 KB | 2026-11-02 |
-| `source.pdf` | 178.9 KB | 2026-11-02 |
+| `corrections.json` | 864 B | 2026-11-16 |
+| `meta.json` | 4.4 KB | 2026-11-16 |
+| `plan.json` | 87.3 KB | 2026-11-16 |
+| `source.pdf` | 178.9 KB | 2026-11-16 |
 
 ## Subfolders
 | Folder | Card | Files in tree |

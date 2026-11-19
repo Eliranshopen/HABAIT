@@ -1,24 +1,19 @@
 # _relocated-first-pass/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent context file's row for this folder is the description._
 
-## What's here (2026-11-10)
-2 files here · 3 subfolders · 75 files / 78.4 MB in the whole tree (vendor and build output excluded)
-
-| File | Size | Modified |
-|---|---|---|
-| `sbs3-1440.png` | 2.4 MB | 2026-11-09 |
-| `sbs3-390.png` | 2.0 MB | 2026-11-09 |
+## What's here (2026-11-18)
+0 files here · 3 subfolders · 2 files / 9.8 KB in the whole tree (vendor and build output excluded)
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `check/` | [`check/CLAUDE.md`](check/CLAUDE.md) | 25 (37.3 MB) |
-| `motion/` | [`motion/CLAUDE.md`](motion/CLAUDE.md) | 27 (21.8 MB) |
-| `shots/` | [`shots/CLAUDE.md`](shots/CLAUDE.md) | 21 (14.9 MB) |
+| `check/` | [`check/CLAUDE.md`](check/CLAUDE.md) | 1 (8.6 KB) |
+| `motion/` | [`motion/CLAUDE.md`](motion/CLAUDE.md) | 1 (1.2 KB) |
+| `shots/` | [`shots/CLAUDE.md`](shots/CLAUDE.md) | 0 (0 B) |
 
 ## Gotchas
 _none recorded_

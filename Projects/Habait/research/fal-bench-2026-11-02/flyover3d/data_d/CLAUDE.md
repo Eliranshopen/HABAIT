@@ -1,18 +1,16 @@
 # data_d/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-10)
-3 files here · 0 subfolders · 3 files / 1.3 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+1 files here · 0 subfolders · 1 files / 594 B in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `node-d-terrace.depth.png` | 694.0 KB | 2026-11-02 |
-| `node-d-terrace.jpg` | 598.7 KB | 2026-11-02 |
-| `nodes.json` | 594 B | 2026-11-02 |
+| `nodes.json` | 594 B | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

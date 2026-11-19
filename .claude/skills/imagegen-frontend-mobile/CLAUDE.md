@@ -1,11 +1,11 @@
 # imagegen-frontend-mobile/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `imagegen-frontend-mobile` (auto, from `Leonxlnx/imagegen-skills`, installed 2026-11-04 on Eliran's ask) — art direction for generated images of premium mobile app screens and multi-screen flows inside a phone mockup. Images only, no code, no scripts. The contract is `SKILL.md`; this context file only routes (root `CLAUDE.md` §8.4).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 1 files here · 0 subfolders · 1 files / 39.7 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

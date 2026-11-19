@@ -32,7 +32,7 @@ The root `CLAUDE.md` `## Context map` lists the **areas** (the hand-written cont
 ## The checks — report-only signals, every line printed every pass
 | # | Check | How | Result |
 |---|---|---|---|
-| 0 | context-file staleness | a folder's newest file mtime vs. its file's `last-updated` | flags for review, never an auto-rewrite; `lint-bom` / `evidence-index`: SKIP (no `.claude/hooks/`, no `qa-evidence/`) |
+| 0 | context-file staleness | a folder's newest file mtime vs. its file's `last-updated` | flags for review, never an auto-rewrite; `lint-bom` / `evidence-index`: SKIP (no `.claude/hooks/lint-bom.ps1`, no `qa-evidence/`) |
 | 1 | marker lint | `check-context.mjs` [1]: exactly one `last-updated` marker, line 2 | PASS / FAIL |
 | 2 | ship-ledger currency | newest date in `docs/governance/SHIP-LEDGER.md` vs. the newest `memory/runs/*` ship/deploy entry | IN SYNC / GAP |
 | 3 | OWED owners and age | `docs/governance/OWED.md`: no blank/TBD owner; open rows by age | list |

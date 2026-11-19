@@ -14,8 +14,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const FILE = path.join(ROOT, 'catalog', 'items.json');
 const LOCAL = path.join(ROOT, 'catalog', '_local');
 /** Where a row's photo lives: an AI row (source "ai-generated", plan 2026-11-04-apt-furniture-swap) in the tracked catalog/ai/, a retailer row in the gitignored _local/. */
-// 2026-11-18 (Hatzav): `file` names another catalog (an apartment's own, tools/apartment-overrides.mjs); its AI photos sit beside it
-export const photoPath = (it, file = FILE) => (it.source === 'ai-generated' ? path.join(path.dirname(file), String(it.image || '')) : path.join(LOCAL, String(it.image || '')));
+export const photoPath = (it) => (it.source === 'ai-generated' ? path.join(ROOT, 'catalog', String(it.image || '')) : path.join(LOCAL, String(it.image || '')));
 export const isAi = (it) => it.source === 'ai-generated';
 const WRITE = process.argv.includes('--write');
 export const CATEGORIES = ['sofa', 'armchair', 'coffee_table', 'dining_table', 'chair', 'lamp', 'rug', 'bed', 'shelf'];
@@ -38,11 +37,11 @@ export function jpegSize(buf) {
   return null;
 }
 
-export function checkCatalog({ write = false , only = null, file = FILE } = {}) {
+export function checkCatalog({ write = false , only = null } = {}) {
   const problems = [];
   const bad = (id, msg) => problems.push(`${id}: ${msg}`);
-  if (!fs.existsSync(file)) return { ok: false, problems: [path.relative(ROOT, file) + ' is missing'], rows: [] };
-  const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (!fs.existsSync(FILE)) return { ok: false, problems: ['catalog/items.json is missing'], rows: [] };
+  const doc = JSON.parse(fs.readFileSync(FILE, 'utf8'));
   if (doc.$schema !== 'tour360/catalog.v1') bad('catalog', 'unknown $schema ' + doc.$schema);
   for (const k of ['retailer', 'site', 'read_on', 'licence']) if (!doc.source?.[k]) bad('catalog', 'source.' + k + ' missing');
   if (!Array.isArray(doc.items) || doc.items.length === 0) bad('catalog', 'no items');
@@ -61,7 +60,7 @@ export function checkCatalog({ write = false , only = null, file = FILE } = {}) 
     if (!isAi(it) && !/^\d{4}-\d{2}-\d{2}$/.test(it.price?.read_on || '')) bad(id, 'price.read_on is not a date');
     if ((it.description_en || '').trim().length < LIMITS.descriptionMin) bad(id, 'description_en under ' + LIMITS.descriptionMin + ' chars');
     const row = { id, category: it.category, view: it.view, px: '-', bytes: 0, sha: '-' };
-    const img = photoPath(it, file);
+    const img = photoPath(it);
     if (!it.image || !fs.existsSync(img)) { bad(id, 'photo missing: ' + path.relative(ROOT, img).replace(/\\/g, '/')); rows.push(row); continue; }
     const buf = fs.readFileSync(img);
     const size = jpegSize(buf);
@@ -78,7 +77,7 @@ export function checkCatalog({ write = false , only = null, file = FILE } = {}) 
     if (write) it.image_sha256 = sha; else if (!it.image_sha256) bad(id, 'image_sha256 missing (run with --write)');
     rows.push(row);
   }
-  if (write && problems.every((p) => !/missing|not a JPEG|duplicate|unknown|no items/.test(p))) fs.writeFileSync(file, JSON.stringify(doc, null, 2) + '\n');
+  if (write && problems.every((p) => !/missing|not a JPEG|duplicate|unknown|no items/.test(p))) fs.writeFileSync(FILE, JSON.stringify(doc, null, 2) + '\n');
   return { ok: problems.length === 0, problems, rows, count: (doc.items || []).length };
 }
 

@@ -1,0 +1,12 @@
+## 2026-11-08 · main session · Eliran's answers that frame the architecture plans
+- **Did:** Recorded Eliran's answers (AskUserQuestion, 2026-11-08) to the four questions that could change the stack recommendation.
+  - **Existing code:** "אני רוצה ארכיטקטורה מאפס שאתה יודע לתת אותה על סמך מה שאתה מכיר ממטרת הפרויקט שלנו". The target is greenfield, so the existing code is reference only.
+  - **Scale:** 10–100 projects per month in a year.
+  - **Vercel lock-in:** "לא רלוונטי".
+  - **Team:** "לא רלוונטי כרגע".
+  - **What changed:** the reasons on the stack page and in the three plan files now argue from first principles, not from the existing code. The migration paths P/B/F are reference only, and a greenfield build order was added. Vercel Workflow stays; Trigger.dev is no longer needed as a lock-in hedge.
+  - **Unchanged:** the decisions themselves.
+- **Evidence:** this chat ruling. Edited: `development/plans/2026-11-08-visualization-stack-architecture.md`, `2026-11-08-backend-plan.md`, `2026-11-08-frontend-plan.md`. Page https://claude.ai/artifact/6mZtm2ofVc91JKTQCkb4Wt (v12).
+- **Learned:** Eliran wants the target architecture argued from the product's goal, not constrained by today's plain-JS code. His confidence question: Next.js + Python core signed (high); Workflow, GPU vendor and PSV are medium until 3 small proofs (one GPU pano render, the PSV tour on a real iPhone, one end-to-end Workflow run).
+- **Owed / open:** none (planning phase).
+- **Second reader:** none.

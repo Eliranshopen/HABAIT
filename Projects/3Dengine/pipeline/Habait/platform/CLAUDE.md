@@ -1,11 +1,11 @@
 # platform/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Lane D v0: the static buyer-facing flow (landing, flight around the building, apartment card, hand-off to the 360 tour) in vanilla JS plus three.js.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 16 files here · 12 subfolders · 174 files / 81.3 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

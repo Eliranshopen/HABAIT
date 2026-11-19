@@ -1,11 +1,11 @@
 # shots/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Screenshots from check-building.cjs on the test build (desktop, iPhone 13, Pixel 7, tablet; hold → tower → room → back → hand-off).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 21 files here · 0 subfolders · 21 files / 34.6 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

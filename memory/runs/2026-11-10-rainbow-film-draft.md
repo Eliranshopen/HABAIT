@@ -1,0 +1,7 @@
+
+## 2026-11-10 · main session · Rainbow project film: first draft, built at zero cost
+- **Did:** Eliran asked for a film from the material already in the project, at no cost, with the project-film skill. Built video/projects/rainbow-project-film: 66.2 s, 1280x720, 16 shots (existing orbit, descend and enter clips, the four THE renders with slow moves, pans inside the live parquet panoramas of apt 846, logo card), Hebrew captions and the badge on every shot, existing music track looped. One script, build.py (dry-run by default, about 1 min with go). Checks: 1589 frames, audio 66.1 s at -16.3 LUFS, no black or frozen frame before the card, one colour space across all clips, contact sheet read.
+- **Evidence:** `video/projects/rainbow-project-film`
+- **Learned:** Zero cost covers beats 3, 6, 7, 8, 9, 10 of the skill; the transformation hook, lifestyle shots, map pills and a voice need footage or paid generation. ffmpeg: v360 yaw commands accumulate unless the reset_rot option is on; a concat copy of clips with mixed pixel formats or colour tags breaks downstream filters; 23 full-frame overlays in one pass ran over 8 minutes, per-shot overlays take under a minute. mem_entry flags any 40-character path as a secret: keep file names short.
+- **Owed / open:** Eliran: watch the draft and rule on it (copy, music, the developer name on screen, the placeholder logo). Nobody listened to the music loop. No 9:16 or 1:1 export yet. video-qa agent not run. Draft only: not approved, not published.
+- **Second reader:** none

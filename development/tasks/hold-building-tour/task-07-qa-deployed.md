@@ -5,7 +5,7 @@
 - **Model:** sonnet
 - **Ruling tier:** T0
 - **Depends on:** 06 + Eliran's own deploy go
-- **State:** WAITING — deploy go given 2026-11-04; runs after Eliran runs the deploy
+- **State:** DONE — PASS on prod (logs/qa-deployed.md)
 - **Memory:** standing (main session → `memory/runs/` at close; reviewers → `memory/agents/qa-reviewer.md`, `habait-deploy-qa` → its own file)
 
 ## Work

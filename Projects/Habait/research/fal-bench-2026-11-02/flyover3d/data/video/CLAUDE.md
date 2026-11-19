@@ -1,19 +1,12 @@
 # video/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-10)
-4 files here · 0 subfolders · 4 files / 41.3 MB in the whole tree (vendor and build output excluded)
-
-| File | Size | Modified |
-|---|---|---|
-| `building-film-1080.mp4` | 27.2 MB | 2026-11-04 |
-| `building-film-720.mp4` | 11.4 MB | 2026-11-04 |
-| `building-film-poster.jpg` | 137.5 KB | 2026-11-04 |
-| `descent-846.mp4` | 2.5 MB | 2026-11-02 |
+## What's here (2026-11-18)
+0 files here · 0 subfolders · 0 files / 0 B in the whole tree (vendor and build output excluded)
 
 ## Gotchas
 _none recorded_

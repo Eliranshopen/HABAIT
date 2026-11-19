@@ -1,0 +1,30 @@
+{
+  "when": "2026-11-16T15:52:54.955Z",
+  "api": "https://habait-flow.vercel.app/tour/api/edit",
+  "calls": [
+    {
+      "turn": "first",
+      "http": 200,
+      "seconds": 6.7,
+      "ok": true,
+      "model": "fal-ai/flux-2/klein/9b/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.038,
+      "ms_text": 3554,
+      "ms_edit": 1621,
+      "follow_token": true
+    },
+    {
+      "turn": "follow",
+      "http": 200,
+      "seconds": 11.7,
+      "ok": true,
+      "model": "fal-ai/nano-banana-2/edit",
+      "follow_turn": true,
+      "usd": 0.08,
+      "ms_edit": 10364
+    }
+  ],
+  "usd": 0.118
+}

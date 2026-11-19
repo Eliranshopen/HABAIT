@@ -1,0 +1,25 @@
+{
+  "_doc": "PoC scene: Kedma D/1 living room (cp-living), 6 Cycles keyframes from ../out/final (same .blend, camera, seed; depth hash identical). Yaw is relative to the camera's forward (plan bearing 50); hours drive the cross-fade.",
+  "hours": [6, 22],
+  "start": { "node": "living", "hour": 14 },
+  "nodes": [
+    {
+      "id": "living", "label": "סלון · Living", "yaw": -20, "pitch": -4, "fov": 100,
+      "keyframes": [
+        { "name": "morning",   "label": "בוקר",        "hour": 7.5,  "src": "media/living-morning.webp" },
+        { "name": "noon",      "label": "צהריים",      "hour": 12.5, "src": "media/living-noon.webp" },
+        { "name": "afternoon", "label": "אחה״צ",       "hour": 15.0, "src": "media/living-afternoon.webp" },
+        { "name": "golden",    "label": "שקיעה",       "hour": 17.0, "src": "media/living-golden.webp" },
+        { "name": "dusk",      "label": "דמדומים",     "hour": 18.5, "src": "media/living-dusk.webp" },
+        { "name": "night",     "label": "לילה",        "hour": 21.5, "src": "media/living-night.webp" }
+      ],
+      "views": [
+        { "label": "סלון", "yaw": -20, "pitch": -4 },
+        { "label": "יציאה למרפסת", "yaw": -124, "pitch": -2 },
+        { "label": "פינת אוכל", "yaw": 36, "pitch": -10 },
+        { "label": "מטבח", "yaw": -54, "pitch": -4 }
+      ],
+      "hotspots": []
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 # logs/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of the board: robocopy dry-run/copy/re-sync logs, the two verifier reports, the re-point tables, the toolchain report, the scripts that produced them (`repoint.py`, `verify_walk.py`, `toolchain.sh`).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 31 files here · 0 subfolders · 31 files / 125.6 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

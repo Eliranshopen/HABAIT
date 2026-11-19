@@ -1,0 +1,545 @@
+{
+  "live": "https://habait-flow.vercel.app/tour/",
+  "size": "1440x900",
+  "room": "kitchen",
+  "look": [
+    -14,
+    -5,
+    80
+  ],
+  "text": "להוסיף שני אנשים ליד שולחן האוכל",
+  "apartment": "apt846",
+  "pxPerCm": 0.9,
+  "scenes": [
+    "aerial",
+    "orbit1",
+    "orbit2",
+    "orbit3",
+    "orbit4",
+    "orbit5",
+    "tower",
+    "approach45",
+    "approach25",
+    "facade",
+    "terraceOut",
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "wardrobe",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "depth": [
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "as_is": true,
+  "page_vs_checkout_lines": {
+    "tour.js": 2,
+    "edit-live.js": 0
+  },
+  "served_vs_head_lines": {
+    "tour.js": 2,
+    "edit-live.js": 0
+  },
+  "when": "2026-11-16T15:52:00.550Z",
+  "failed": [],
+  "round1": {
+    "ms_first_picture": 1772,
+    "ms_follow_after": 4232,
+    "turn": {
+      "text": "להוסיף שני אנשים ליד שולחן האוכל",
+      "attempts": [
+        {
+          "attempt": 1,
+          "model": "stub",
+          "reach": "object",
+          "living": true,
+          "ring": 0,
+          "ring_band": "ring",
+          "ring_n": 40640,
+          "ring_total": 40640,
+          "fraction": 0.06,
+          "judge": null,
+          "held": true,
+          "ms": 500,
+          "ms_text": 150,
+          "ms_edit": 350
+        }
+      ],
+      "error": null,
+      "ms_total": 1745,
+      "follow": {
+        "rooms": [
+          {
+            "room": "dining",
+            "ok": true,
+            "attempts": [
+              {
+                "attempt": 1,
+                "model": "stub",
+                "ring": 0,
+                "fraction": 0.06,
+                "judge": null,
+                "held": true,
+                "ms": 1200
+              }
+            ],
+            "ms": 2219
+          },
+          {
+            "room": "living",
+            "ok": true,
+            "attempts": [
+              {
+                "attempt": 1,
+                "model": "stub",
+                "ring": 0,
+                "fraction": 0.06,
+                "judge": null,
+                "held": true,
+                "ms": 1200
+              }
+            ],
+            "ms": 2421
+          }
+        ],
+        "skip": null,
+        "ms": 4165,
+        "spot": {
+          "x": 10.53,
+          "y": 6.36,
+          "z": -0.63,
+          "w": 0.71,
+          "h": 1.07,
+          "dist": 2.22
+        },
+        "targets": [
+          {
+            "room": "dining",
+            "yaw": -16.59,
+            "pitch": -17.7,
+            "hfov": 100,
+            "dist": 2.07
+          },
+          {
+            "room": "living",
+            "yaw": -60.49,
+            "pitch": -7.56,
+            "hfov": 60,
+            "dist": 4.78
+          }
+        ]
+      }
+    },
+    "calls": [
+      {
+        "op": "edit",
+        "scene": "kitchen",
+        "attempt": 1,
+        "view": {
+          "yaw": -5,
+          "pitch": -14,
+          "hfov": 88
+        },
+        "instruction": "להוסיף שני אנשים ליד שולחן האוכל",
+        "token": null,
+        "reference": null,
+        "from": null,
+        "t": 1794844300056,
+        "done": 1794844300560
+      },
+      {
+        "op": "follow",
+        "scene": "dining",
+        "attempt": 1,
+        "view": {
+          "yaw": -16.59,
+          "pitch": -17.7,
+          "hfov": 100
+        },
+        "instruction": null,
+        "token": "stub-token.stub-signature",
+        "reference": "74264 bytes",
+        "from": "kitchen",
+        "t": 1794844303060,
+        "done": 1794844304268
+      },
+      {
+        "op": "follow",
+        "scene": "living",
+        "attempt": 1,
+        "view": {
+          "yaw": -60.49,
+          "pitch": -7.56,
+          "hfov": 60
+        },
+        "instruction": null,
+        "token": "stub-token.stub-signature",
+        "reference": "74264 bytes",
+        "from": "kitchen",
+        "t": 1794844303060,
+        "done": 1794844304269
+      }
+    ],
+    "stacks": {
+      "kitchen": [
+        {
+          "follow": false,
+          "linked_to": null,
+          "linked": [
+            "dining",
+            "living"
+          ],
+          "fraction": 0.06
+        }
+      ],
+      "dining": [
+        {
+          "follow": true,
+          "linked_to": "kitchen",
+          "linked": null,
+          "fraction": 0.06
+        }
+      ],
+      "living": [
+        {
+          "follow": true,
+          "linked_to": "kitchen",
+          "linked": null,
+          "fraction": 0.06
+        }
+      ]
+    }
+  },
+  "round2": {
+    "turn": {
+      "text": "להוסיף שני אנשים ליד שולחן האוכל",
+      "attempts": [
+        {
+          "attempt": 1,
+          "model": "stub",
+          "reach": "object",
+          "living": true,
+          "ring": 0,
+          "ring_band": "ring",
+          "ring_n": 40640,
+          "ring_total": 40640,
+          "fraction": 0.06,
+          "judge": null,
+          "held": true,
+          "ms": 500,
+          "ms_text": 150,
+          "ms_edit": 350
+        }
+      ],
+      "error": null,
+      "ms_total": 1471,
+      "follow": {
+        "rooms": [
+          {
+            "room": "living",
+            "ok": false,
+            "reason": "cap",
+            "attempts": [],
+            "ms": 1205
+          },
+          {
+            "room": "dining",
+            "ok": false,
+            "reason": "not_in_view",
+            "attempts": [
+              {
+                "attempt": 1,
+                "model": "stub",
+                "ring": 0,
+                "fraction": 0,
+                "judge": null,
+                "held": true,
+                "ms": 1200
+              }
+            ],
+            "ms": 1404
+          }
+        ],
+        "skip": null,
+        "ms": 2279,
+        "spot": {
+          "x": 10.53,
+          "y": 6.36,
+          "z": -0.63,
+          "w": 0.71,
+          "h": 1.07,
+          "dist": 2.22
+        },
+        "targets": [
+          {
+            "room": "dining",
+            "yaw": -16.59,
+            "pitch": -17.7,
+            "hfov": 100,
+            "dist": 2.07
+          },
+          {
+            "room": "living",
+            "yaw": -60.49,
+            "pitch": -7.56,
+            "hfov": 60,
+            "dist": 4.78
+          }
+        ]
+      }
+    },
+    "calls": [
+      {
+        "op": "edit",
+        "scene": "kitchen",
+        "attempt": 1,
+        "view": {
+          "yaw": -5,
+          "pitch": -14,
+          "hfov": 88
+        },
+        "instruction": "להוסיף שני אנשים ליד שולחן האוכל",
+        "token": null,
+        "reference": null,
+        "from": null,
+        "t": 1794844310551,
+        "done": 1794844311051
+      },
+      {
+        "op": "follow",
+        "scene": "dining",
+        "attempt": 1,
+        "view": {
+          "yaw": -16.59,
+          "pitch": -17.7,
+          "hfov": 100
+        },
+        "instruction": null,
+        "token": "stub-token.stub-signature",
+        "reference": "74264 bytes",
+        "from": "kitchen",
+        "t": 1794844312601,
+        "done": 1794844313804
+      },
+      {
+        "op": "follow",
+        "scene": "living",
+        "attempt": 1,
+        "view": {
+          "yaw": -60.49,
+          "pitch": -7.56,
+          "hfov": 60
+        },
+        "instruction": null,
+        "token": "stub-token.stub-signature",
+        "reference": "74264 bytes",
+        "from": "kitchen",
+        "t": 1794844312602,
+        "done": 1794844313805
+      }
+    ]
+  },
+  "round3": {
+    "turn": {
+      "text": "להוסיף שני אנשים ליד שולחן האוכל",
+      "attempts": [
+        {
+          "attempt": 1,
+          "model": "stub",
+          "reach": "object",
+          "living": true,
+          "ring": 0,
+          "ring_band": "ring",
+          "ring_n": 40640,
+          "ring_total": 40640,
+          "fraction": 0.06,
+          "judge": null,
+          "held": true,
+          "ms": 500,
+          "ms_text": 150,
+          "ms_edit": 350
+        }
+      ],
+      "error": null,
+      "ms_total": 1126,
+      "follow": {
+        "rooms": [
+          {
+            "room": "living",
+            "ok": true,
+            "attempts": [
+              {
+                "attempt": 1,
+                "model": "stub",
+                "ring": 0,
+                "fraction": 0.06,
+                "judge": null,
+                "held": true,
+                "ms": 1200
+              }
+            ],
+            "ms": 1943
+          },
+          {
+            "room": "dining",
+            "ok": false,
+            "reason": "redrawn",
+            "attempts": [
+              {
+                "attempt": 1,
+                "model": "stub",
+                "ring": 0,
+                "fraction": 0.249,
+                "judge": {
+                  "held": false,
+                  "iou": 0,
+                  "ratio": 0,
+                  "object": "stub"
+                },
+                "held": false,
+                "ms": 1200
+              },
+              {
+                "attempt": 2,
+                "model": "stub",
+                "ring": 0,
+                "fraction": 0.249,
+                "judge": {
+                  "held": false,
+                  "iou": 0,
+                  "ratio": 0,
+                  "object": "stub"
+                },
+                "held": false,
+                "ms": 1200
+              }
+            ],
+            "ms": 3431
+          }
+        ],
+        "skip": null,
+        "ms": 4023,
+        "spot": {
+          "x": 10.53,
+          "y": 6.36,
+          "z": -0.63,
+          "w": 0.71,
+          "h": 1.07,
+          "dist": 2.22
+        },
+        "targets": [
+          {
+            "room": "dining",
+            "yaw": -16.59,
+            "pitch": -17.7,
+            "hfov": 100,
+            "dist": 2.07
+          },
+          {
+            "room": "living",
+            "yaw": -60.49,
+            "pitch": -7.56,
+            "hfov": 60,
+            "dist": 4.78
+          }
+        ]
+      }
+    },
+    "calls": [
+      {
+        "op": "edit",
+        "scene": "kitchen",
+        "attempt": 1,
+        "view": {
+          "yaw": -5,
+          "pitch": -14,
+          "hfov": 88
+        },
+        "instruction": "להוסיף שני אנשים ליד שולחן האוכל",
+        "token": null,
+        "reference": null,
+        "from": null,
+        "t": 1794844315239,
+        "done": 1794844315751
+      },
+      {
+        "op": "follow",
+        "scene": "dining",
+        "attempt": 1,
+        "view": {
+          "yaw": -16.59,
+          "pitch": -17.7,
+          "hfov": 100
+        },
+        "instruction": null,
+        "token": "stub-token.stub-signature",
+        "reference": "74264 bytes",
+        "from": "kitchen",
+        "t": 1794844316773,
+        "done": 1794844317981
+      },
+      {
+        "op": "follow",
+        "scene": "living",
+        "attempt": 1,
+        "view": {
+          "yaw": -60.49,
+          "pitch": -7.56,
+          "hfov": 60
+        },
+        "instruction": null,
+        "token": "stub-token.stub-signature",
+        "reference": "74264 bytes",
+        "from": "kitchen",
+        "t": 1794844316774,
+        "done": 1794844317982
+      },
+      {
+        "op": "judge",
+        "scene": "dining",
+        "anchor": true,
+        "t": 1794844318382,
+        "reference": null
+      },
+      {
+        "op": "follow",
+        "scene": "dining",
+        "attempt": 2,
+        "view": {
+          "yaw": -16.59,
+          "pitch": -17.7,
+          "hfov": 100
+        },
+        "instruction": null,
+        "token": "stub-token.stub-signature",
+        "reference": "74264 bytes",
+        "from": "kitchen",
+        "t": 1794844318682,
+        "done": 1794844319884
+      },
+      {
+        "op": "judge",
+        "scene": "dining",
+        "anchor": true,
+        "t": 1794844320201,
+        "reference": null
+      }
+    ]
+  },
+  "errors": []
+}

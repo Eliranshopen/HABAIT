@@ -5,7 +5,7 @@
 - **Model:** sonnet
 - **Ruling tier:** T0
 - **Depends on:** 05
-- **State:** IN-PROGRESS
+- **State:** DONE — PASS (logs/qa-live.md)
 - **Memory:** standing (main session → `memory/runs/` at close; reviewers → `memory/agents/qa-reviewer.md`, `habait-deploy-qa` → its own file)
 
 ## Work

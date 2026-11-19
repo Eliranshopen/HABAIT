@@ -5,7 +5,7 @@
 **Runs as:** the main session, in the `engine-builder` role (the project agents do not load in a session started at `C:\RnD`; definition: `Projects/Habait/.claude/agents/engine-builder.md` in the working folder).
 **Stage:** 1 · פענוח ה-PDF · **Kind:** לכתוב (new code) · **Closes in build phase:** E3 · **Cost:** $0
 **Depends on:** card 06 (milestone 1.3) is closed.
-**State:** `EXECUTING` — since 2026-11-18: task cards in `m1.4/` (nine tasks), contract `Projects/3Dengine/contracts/CONTRACT-1.4.md`.
+**State:** `DONE` — closed 2026-11-19 on `2f249804`: the closing test on real processes at $0 (a first run paid against a scripted model keeps its reading; a second run, a real job of the same PDF, makes no request, books $0 and gives the plan byte for byte), `npm test` 434 of 434 at 99.81 % of lines, the stage tier 14 of 14, end to end 51 of 51, the soak with 0 violations, a fresh reviewer's PASS in the third round (the first two failed, each on one defect of the engine's file lock, both fixed), sync-context run. Task cards and findings: `m1.4/README.md`; contract: `Projects/3Dengine/contracts/CONTRACT-1.4.md` §9, §10; evidence: `logs/1.4/`.
 
 ## The milestone (plan §7.1, word for word)
 - **אבן דרך:** קריאה שמורה

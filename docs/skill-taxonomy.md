@@ -34,6 +34,8 @@ Groups are a taxonomy, not folders (map: `.claude/skills/CLAUDE.md`). Invocation
 | `prototype` | F · motion | explicit | 92 | Build multiple genuinely different versions of a UI piece you describe, rendered behind a visual picker so you can flip through them live an |
 | `review-animations` | F · motion | explicit | 113 | Reviews animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy. Default to flagging;  |
 | `video-division` | V · video | auto | 130 | Front door of the Habait Video Division (video/): routes any ask to plan, make or edit a video, reel, film, promo, screen recording, caption |
+| `project-film` | V · video | auto | 120 | Plan and build a 60–75 s developer project film (סרטון פרויקט): site transformation, location map, lifestyle, building, interiors, logo, wit |
+| `day-night-keyframes` | ungrouped (in-house 2026-11-17, Eliran's word; proven once) | explicit | 81 | Render pixel-aligned Day/Night lighting keyframes (360 panoramas, or a free 3D walk since 2026-11-17) from a pipeline .blend and show them with a clock slider that cros |
 | `grilling` | — ungrouped | auto | 29 | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trig |
 | `codebase-design` | — ungrouped | auto | 115 | Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunitie |
 | `domain-modeling` | — ungrouped | auto | 75 | Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or edit |

@@ -1,11 +1,11 @@
 # catalog/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 CC0 furniture catalog research (RESEARCH.md), its 57-row manifest, the fetch script and the downloaded models used by the Blender pipeline.
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 6 files here · 1 subfolders · 118 files / 274.0 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
@@ -13,7 +13,7 @@ CC0 furniture catalog research (RESEARCH.md), its 57-row manifest, the fetch scr
 | `RESEARCH.md` | 21.8 KB | 2026-11-16 |
 | `catalog.manifest.json` | 73.4 KB | 2026-11-16 |
 | `fetch.mjs` | 24.2 KB | 2026-11-16 |
-| `fetch.report.json` | 52.6 KB | 2026-11-16 |
+| `fetch.report.json` | 52.6 KB | 2026-11-18 |
 | `import_test.py` | 8.4 KB | 2026-11-16 |
 | `style-habait-modern.json` | 68.7 KB | 2026-11-16 |
 

@@ -1,11 +1,11 @@
 # marketing-psychology/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `marketing-psychology` — Apply psychological principles and mental models to marketing — why people buy, ethical influence, pricing perception, growth loops. Reach for it on psychology, mental models, cognitive bias, persuasion, behavioural science, social proof, scarcity, loss aversion, framing, anchoring or nudge. The contract is `SKILL.md`; this card only routes (root `CLAUDE.md` §8.4).
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 1 files here · 2 subfolders · 8 files / 31.8 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

@@ -1,21 +1,21 @@
 # adapters/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-10)
-6 files here · 0 subfolders · 6 files / 9.9 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-18)
+6 files here · 0 subfolders · 6 files / 10.1 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `__init__.py` | 546 B | 2026-11-02 |
-| `base.py` | 3.1 KB | 2026-11-02 |
-| `flux_pro_depth.py` | 2.5 KB | 2026-11-02 |
-| `gpt_image_25.py` | 833 B | 2026-11-02 |
-| `nano_banana_2.py` | 822 B | 2026-11-02 |
-| `qwen_edit_2511.py` | 2.0 KB | 2026-11-03 |
+| `__init__.py` | 559 B | 2026-11-16 |
+| `base.py` | 3.2 KB | 2026-11-16 |
+| `flux_pro_depth.py` | 2.6 KB | 2026-11-16 |
+| `gpt_image_25.py` | 855 B | 2026-11-16 |
+| `nano_banana_2.py` | 842 B | 2026-11-16 |
+| `qwen_edit_2511.py` | 2.1 KB | 2026-11-16 |
 
 ## Gotchas
 _none recorded_

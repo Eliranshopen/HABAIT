@@ -1,11 +1,11 @@
 # tools/ — context file
-<!-- last-updated: 2026-11-16 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Tour360 build and QA scripts (build-tour, catalog checks, seam and coverage probes, pano editing, deploy).
 
-## What's here (2026-11-16)
+## What's here (2026-11-18)
 91 files here · 6 subfolders · 230 files / 7.3 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
@@ -13,7 +13,7 @@ Tour360 build and QA scripts (build-tour, catalog checks, seam and coverage prob
 | `app-require.mjs` | 944 B | 2026-11-16 |
 | `apply-brand-to-dist.py` | 3.4 KB | 2026-11-16 |
 | `approve-build.mjs` | 4.4 KB | 2026-11-16 |
-| `auto-trace.mjs` | 35.8 KB | 2026-11-16 |
+| `auto-trace.mjs` | 36.1 KB | 2026-11-18 |
 | `auto_doors.py` | 5.3 KB | 2026-11-16 |
 | `auto_finalize.py` | 109.7 KB | 2026-11-16 |
 | `auto_pages.py` | 4.0 KB | 2026-11-16 |
@@ -61,6 +61,8 @@ Tour360 build and QA scripts (build-tour, catalog checks, seam and coverage prob
 | `seam-park/` | [`seam-park/CLAUDE.md`](seam-park/CLAUDE.md) | 3 (9.7 KB) |
 | `ship/` | [`ship/CLAUDE.md`](ship/CLAUDE.md) | 2 (3.6 KB) |
 | `walk/` | [`walk/CLAUDE.md`](walk/CLAUDE.md) | 3 (21.1 KB) |
+
+Vendor / build output here (no card by rule): `__pycache__/`
 
 ## Gotchas
 _none recorded_

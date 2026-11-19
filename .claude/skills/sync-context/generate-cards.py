@@ -42,8 +42,14 @@ def human(n):
 # delegation, 2026-11-04 — after --apply wrote ~522 cards into Projects/Habait-backup-2026-11-04 mid-copy).
 SKIP_RE = re.compile(r"-(backup|archive)-\d{4}-\d{2}-\d{2}$", re.I)
 
+# Run output of the engine (Projects/3Dengine/jobs/<job_id>/): one folder per job, named by 16 hex characters, not in git and
+# unbounded in number. Never a card, never descended into; the parent `jobs/` folder keeps its own card (main session on
+# Eliran's delegation of harness calls, 2026-11-16 — after a pass wrote cards into a job folder and its `input/`).
+SKIP_RUN_RE = re.compile(r"^[0-9a-f]{16}$")
+
 def skip_dir(name):
-    return name in SKIP_NAMES or name.startswith(SKIP_PREFIXES) or bool(SKIP_RE.search(name))
+    return (name in SKIP_NAMES or name.startswith(SKIP_PREFIXES) or bool(SKIP_RE.search(name))
+            or bool(SKIP_RUN_RE.match(name)))
 
 def folders():
     out = []

@@ -1,5 +1,5 @@
 # .claude/ — the Claude Code configuration tree
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-17 -->
 
 ## What's here
 Everything Claude Code reads to run this department: the sub-agent definitions, the skills, and the local settings. No product code lives here. The root `CLAUDE.md` (one level up) is the contract; this folder is the machinery that executes it.
@@ -14,7 +14,7 @@ Everything Claude Code reads to run this department: the sub-agent definitions, 
 | Folder | Card | Purpose |
 |---|---|---|
 | `agents/` | [`agents/CLAUDE.md`](agents/CLAUDE.md) | 10 sub-agent definitions, all live (18 archived to `../archive/agents/` 2026-11-03), the nine-key header standard, the lints |
-| `skills/` | [`skills/CLAUDE.md`](skills/CLAUDE.md) | 47 skills, each its own `SKILL.md`; 15 explicit-only, 32 auto-trigger (`imagegen-frontend-mobile`, `mobile-responsive`, `responsive-design` installed 2026-11-04; the 11 web-motion / copy / reengineering skills of group W installed 2026-11-09 on Eliran's word, `npx skills add … --copy`) (22 archived to `../archive/skills/` 2026-11-03, `frontend-design` 2026-11-04 — the plugin copy wins) |
+| `skills/` | [`skills/CLAUDE.md`](skills/CLAUDE.md) | 49 skills, each its own `SKILL.md`; 16 explicit-only, 33 auto-trigger (`day-night-keyframes` written 2026-11-17 from the Day/Night reverse engineering, explicit-only; `project-film` written 2026-11-10 from a reference-film teardown; `imagegen-frontend-mobile`, `mobile-responsive`, `responsive-design` installed 2026-11-04; the 11 web-motion / copy / reengineering skills of group W installed 2026-11-09 on Eliran's word, `npx skills add … --copy`) (22 archived to `../archive/skills/` 2026-11-03, `frontend-design` 2026-11-04 — the plugin copy wins) |
 | `hooks/` | [`hooks/CLAUDE.md`](hooks/CLAUDE.md) | the guard hooks `subagent-context.ps1`, `test-guard.ps1`, `agent-model-guard.ps1` — authored 2026-11-04, **not installed** until Eliran pastes `docs/OWNER-PASTE.md` §b (OWED-003) |
 
 ## Conventions / gotchas

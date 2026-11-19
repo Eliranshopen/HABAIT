@@ -1,0 +1,140 @@
+{
+ "base": "http://127.0.0.1:8773",
+ "at": "2026-11-17T21:08:19.164Z",
+ "sizes": {
+  "desktop": {
+   "ui": true,
+   "load_s": 6.566,
+   "errors": [],
+   "failed": [],
+   "shots": [
+    "desktop-ui-h14.png",
+    "desktop-ui-h21.png"
+   ],
+   "overflow": [],
+   "walked_m": 1.6906499999999953,
+   "on_free_floor": true,
+   "mix_at_21": {
+    "hour": 21,
+    "a": "golden",
+    "b": "night",
+    "t": 0.875,
+    "ready": true
+   }
+  },
+  "desktop-raw": {
+   "ui": false,
+   "load_s": 16.842,
+   "errors": [],
+   "failed": [],
+   "shots": [
+    "raw-living-h7.5.png",
+    "raw-living-h10.png",
+    "raw-living-h12.5.png",
+    "raw-living-h17.5.png",
+    "raw-living-h19.5.png",
+    "raw-living-h21.5.png",
+    "raw-kitchen-h7.5.png",
+    "raw-kitchen-h10.png",
+    "raw-kitchen-h12.5.png",
+    "raw-kitchen-h17.5.png",
+    "raw-kitchen-h19.5.png",
+    "raw-kitchen-h21.5.png",
+    "raw-dining-h7.5.png",
+    "raw-dining-h10.png",
+    "raw-dining-h12.5.png",
+    "raw-dining-h17.5.png",
+    "raw-dining-h19.5.png",
+    "raw-dining-h21.5.png"
+   ]
+  },
+  "phone": {
+   "ui": true,
+   "load_s": 5.151,
+   "errors": [],
+   "failed": [],
+   "shots": [
+    "phone-ui-h14.png",
+    "phone-ui-h21.png"
+   ],
+   "overflow": [],
+   "walked_m": 1.9714499999999857,
+   "on_free_floor": true,
+   "mix_at_21": {
+    "hour": 21,
+    "a": "golden",
+    "b": "night",
+    "t": 0.875,
+    "ready": true
+   }
+  }
+ },
+ "pairs": [
+  {
+   "place": "living",
+   "a": "raw-living-h7.5.png",
+   "mid": "raw-living-h10.png",
+   "b": "raw-living-h12.5.png",
+   "hours": [
+    7.5,
+    10,
+    12.5
+   ]
+  },
+  {
+   "place": "living",
+   "a": "raw-living-h17.5.png",
+   "mid": "raw-living-h19.5.png",
+   "b": "raw-living-h21.5.png",
+   "hours": [
+    17.5,
+    19.5,
+    21.5
+   ]
+  },
+  {
+   "place": "kitchen",
+   "a": "raw-kitchen-h7.5.png",
+   "mid": "raw-kitchen-h10.png",
+   "b": "raw-kitchen-h12.5.png",
+   "hours": [
+    7.5,
+    10,
+    12.5
+   ]
+  },
+  {
+   "place": "kitchen",
+   "a": "raw-kitchen-h17.5.png",
+   "mid": "raw-kitchen-h19.5.png",
+   "b": "raw-kitchen-h21.5.png",
+   "hours": [
+    17.5,
+    19.5,
+    21.5
+   ]
+  },
+  {
+   "place": "dining",
+   "a": "raw-dining-h7.5.png",
+   "mid": "raw-dining-h10.png",
+   "b": "raw-dining-h12.5.png",
+   "hours": [
+    7.5,
+    10,
+    12.5
+   ]
+  },
+  {
+   "place": "dining",
+   "a": "raw-dining-h17.5.png",
+   "mid": "raw-dining-h19.5.png",
+   "b": "raw-dining-h21.5.png",
+   "hours": [
+    17.5,
+    19.5,
+    21.5
+   ]
+  }
+ ]
+}

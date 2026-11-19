@@ -32,11 +32,21 @@ answer('| 1.3, QA (O-3) | ',
        '| 1.3, QA (O-3) — ANSWERED in 1.4 (`%s`): a number of the settings file must be a JSON number and is refused by its name otherwise (contract 1.4 §6) | ' % CODE)
 
 NEW_ROWS = [
-    '| 1.4, QA round 1 (D-1) — ANSWERED in 1.4 (`%s`) | The file mutex of 0.3 (`withFileLock`) was not exclusive between short-lived processes: two holders at one moment in about a third of the runs of eight processes, '
-    'so keeps of one PDF at once could lose a record. The lock is now a folder with one entry named after its holder; take, release and take-over are each one atomic rename. It is the lock of a job\'s files and of the heavy lock\'s guard too '
-    '| done in 1.4 | contract 1.4 §11 (it replaces contract 0.3 §10 rule 4) · `logs/1.4/qa-live.md` · `Projects/3Dengine/tests/unit/lock-race.test.mjs` |' % CODE,
+    '| 1.4, QA rounds 1 and 2 (each its D-1) — ANSWERED in 1.4 (`%s`) | The file mutex of 0.3 (`withFileLock`) was not exclusive between short-lived processes (two holders at one moment, so keeps of one PDF at once could lose a record). '
+    'Its first replacement handed a stale entry over by a rename, and a rename is not exclusive on its SOURCE: several takers of one killed holder all took over. The lock is now a folder with one entry named after its holder; '
+    'every hold begins with one exclusive step (a prepared folder renamed onto the path) and a stale hold is broken, never handed over. It is the lock of a job\'s files and of the heavy lock\'s guard too '
+    '| done in 1.4 | contract 1.4 §11 (it replaces contract 0.3 §10 rule 4) · `logs/1.4/qa-live.md`, `qa-live-r2.md`, `gate3-rename-facts.txt` · `Projects/3Dengine/tests/unit/lock-race.test.mjs` |' % CODE,
     '| 1.4, QA round 1 (O-6) | In `npm test` at 100 % machine load four older tests (fixed waits of the 0.2 tests) failed and passed when run alone: the same family as the row of 1.1 above (the suite\'s waits were set on a quiet machine) '
     '| card 08 (milestone 2.1), with that row: the gate must hold while the engine itself renders | `logs/1.4/qa-live.md` (Part A, O-6) |',
+    '| 1.4, QA round 2 (O-3) | The stage tier (`npm run test:stages`) no longer ends surely inside 540 s, on a quiet machine either: five files run side by side and the 1.4 file makes two real readings one after the other. '
+    'Cut at 537 s twice (the second review, the third gate), ended in 482 s once (the third review). When it is cut, a second invocation of the 1.4 file goes on from its checkpoint '
+    '| card 08 (milestone 2.1), with the gate on a saturated machine: the tier ends inside its limit in ONE invocation (fewer readings side by side, or the limit) '
+    '| `logs/1.4/qa-live-r2.md` (O-3) · `logs/1.4/qa-live-r3.md` (O-9) · `logs/1.4/gate-summary.txt` (the third gate) |',
+    '| 1.4, QA round 3 (O-2, O-4) | A keep is not ONE switch: after the old pair is moved into `superseded/<n>` and before the new files are renamed into place, a kill or a failed rename leaves the PDF with no kept reading (`none`); '
+    'the old reading is safe in `superseded/`, but the next paid run would pay again. A keeper killed between the two moves leaves a pair split across `superseded/<n>` and `<n+1>`; nothing is lost '
+    '| card 15 (milestone 4.2), the first that pays for a reading inside a job: a keep is one switch, or it puts the old pair back | contract 1.4 §10 · `logs/1.4/qa-live-r3.md` (O-2, O-4) · `logs/1.4/qa3-store-demote-window.txt` |',
+    '| 1.4, QA round 3 (O-3) | A release of the lock that cannot move its entry out (something holds the file for more than a second) throws AFTER `fn` ran: the result of `fn` is lost, its own error is masked, and the lock stays until it is stale '
+    '| card 08 (milestone 2.1), where the engine holds the machine itself: the result or the error of `fn` stays the caller\'s, and a release that failed is said apart | `logs/1.4/qa-live-r3.md` (O-3) · `logs/1.4/qa3-lock-immovable.txt` |',
 ]
 anchor = one('| 1.3, the review\'s evidence | ')
 for row in NEW_ROWS:
@@ -46,7 +56,10 @@ for row in NEW_ROWS:
 
 LIMITS = ('Seen in 1.4 and owed by no card (limits, written in contract 1.4 §9 to §11): after an update of the engine no process of the older version may still run on the same home (a lock FILE of the engine before 1.4 '
           'and the lock folder do not exclude each other); superseded readings are kept and nothing cleans the store; a record\'s `model` is copied from the reading when it is shaped like a model id, and one Latin word is (QA round 1, O-1); '
-          'the id of the `trace` command is the caller\'s, so its plan differs from a job\'s unless it is handed the drawing\'s id (O-3); the trace itself is not kept: a second job runs the reading tool again from the kept reading (about a minute).')
+          'the id of the `trace` command is the caller\'s, so its plan differs from a job\'s unless it is handed the drawing\'s id (O-3); the trace itself is not kept: a second job runs the reading tool again from the kept reading (about a minute). '
+          'From the third review (`logs/1.4/qa-live-r3.md`): a folder `superseded/<a number of ten digits or more>` made by hand makes later keeps overwrite earlier pairs (O-1); `stub.callUsd: null` is read as absent (O-5); '
+          'a reading dated far in the future sets the plan\'s day to that day (O-6); a killed taker or keeper leaves `*.new.tmp` folders and `reading.json.*.tmp` files that nothing removes, the latter holding the reading\'s text (O-7); '
+          'a live holder loses its hold when the clock moves further than `staleMs`, and a second take of one lock inside one process waits `staleMs` and then runs inside (O-8).')
 if not any(l.startswith('Seen in 1.4 and owed by no card') for l in lines):
     i = one('Seen in 1.1 and owed by no card')
     lines.insert(i + 1, '')

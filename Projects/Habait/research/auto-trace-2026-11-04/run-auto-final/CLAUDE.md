@@ -1,21 +1,17 @@
 # run-auto-final/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent context file's row for this folder is the description._
 
-## What's here (2026-11-10)
-1 files here · 1 subfolders · 22 files / 5.8 MB in the whole tree (vendor and build output excluded)
-
-| File | Size | Modified |
-|---|---|---|
-| `index.json` | 2.1 KB | 2026-11-04 |
+## What's here (2026-11-18)
+0 files here · 1 subfolders · 0 files / 0 B in the whole tree (vendor and build output excluded)
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `plan-1/` | [`plan-1/CLAUDE.md`](plan-1/CLAUDE.md) | 21 (5.8 MB) |
+| `plan-1/` | [`plan-1/CLAUDE.md`](plan-1/CLAUDE.md) | 0 (0 B) |
 
 ## Gotchas
 _none recorded_

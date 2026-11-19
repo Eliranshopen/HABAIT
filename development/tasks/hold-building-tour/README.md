@@ -2,7 +2,7 @@
 <!-- created: 2026-11-04 · plan: development/plans/2026-11-04-hold-building-tour.md · coordinator: main session rnd-1f · owner: Eliran Shopen -->
 
 **Goal:** a "הדמיית הבניין והסביבה" button on the hold (`/hold/`, after the clip) opens the tour's exterior chain (aerial → orbit1…5 → tower → descent → facade) as an overlay at the same URL, continuing into the apartment; ✕ / Esc back to the hold. `/tour/` unchanged. $0, no deploy.
-**State:** `EXECUTING` (copied back; deploy go given) (Eliran: "כן", 2026-11-04).
+**State:** `CLOSED` 2026-11-04 ~11:15 — in prod (dpl_3avVrzv8zeGVMjMifW2bYbz9KQsZ), deployed-site QA PASS (Eliran: "כן", 2026-11-04).
 
 ## Key state
 - Files changed: `Projects/Habait/research/fal-bench-2026-11-02/flyover3d/index.html`, `app.js` only. `tour.js` is in another session's open `.wt/tour-exterior-floors` (hides the floor buttons on exterior scenes) — not touched here.
@@ -12,7 +12,8 @@
 - 09:4x card 01: `.wt/hold-building-tour` opened (index.html eb913224…, app.js def31396…); test build `stage_flow.py` → scratchpad `hb-run`, served :8853; `logs/rebuild-run.py` = stage_flow's URL rewrite, byte-equal to its output (a5f42a3e… / 4e5c4184…). `qa_chain.cjs` is stale (waits for `a.project-card`, gone since the platform redesign) → the check starts from `#heroCta`.
 - card 02/03: button + overlay + ✕ + Esc + descent guard; `logs/check-building.cjs` **80/80** on desktop, iPhone 13, Pixel 7, tablet 820 (`logs/check-all.txt`, `logs/shots/`). Found on the way and fixed: ✕ over the tour's FR button (desktop) → top-centre; over the guide button (phones) → row below on < 900 px; button tappable during the descent ease (tablet) → `building.leaving`. Decisions: `logs/decisions.md`.
 - card 04 gate (fresh Sonnet, `logs/gate-report.md`): **FAIL D1** — ✕ within ~600 ms of opening left the ambience paused at volume 0 with the icon on (the open's fade kept running). Card 02 reopened in the same folder: `fadeGen` cancels a running fade on close. Gate probe Q1 now PASS (`gate-probes/probe2.after-fix.txt`); Check 79/80 once (tablet C3: auto chain at orbit4 at 60 s, software GL) → tablet re-run twice 20/20. Re-gate (fresh Sonnet, `logs/regate-report.md`): **PASS**, 0 defects (close at 0–1500 ms, fast cycles, mute kept, descent fade intact); tablet C3 timing again (orbit5 at 60 s, rerun 20/20) → C3 wait raised to 90 s.
-- card 05 (Eliran: "כן תעלה לאוויר" = copy back + deploy go): `wt.py close --go` 10:5x, 2 files, live == approved (cmp). Stage from live `scratchpad/deploy-hbt-1` (367.0 MB); vs prod stage deploy-prod-6 (rnd-23's OWED-024 deploy dpl_D4nm8a…, Eliran's go) = exactly hold/app.js + hold/index.html. rnd-fd (deploy-prod-5, tour-exterior-floors) and rnd-23 confirmed: nothing else pending, one deploy from this stage. Card 06 running on it.
+- card 05 (Eliran: "כן תעלה לאוויר" = copy back + deploy go): `wt.py close --go` 10:5x, 2 files, live == approved (cmp). Stage from live `scratchpad/deploy-hbt-1` (367.0 MB); vs prod stage deploy-prod-6 (rnd-23's OWED-024 deploy dpl_D4nm8a…, Eliran's go) = exactly hold/app.js + hold/index.html. rnd-fd (deploy-prod-5, tour-exterior-floors) and rnd-23 confirmed: nothing else pending, one deploy from this stage. Card 06 (fresh Sonnet, `logs/qa-live.md`): **PASS** — live = approved = manifest close hashes, stage vs prod-6 = the 2 files only, Check 80/80, probe ✕@200 ms sound ok + old hand-off ok. Deploy: Eliran said run it yourself (root §8.2 reworded on his "כן") → the main session deployed 10:59, dpl_3avVrzv8zeGVMjMifW2bYbz9KQsZ, aliased habait-flow.vercel.app; served hold files = approved hashes.
+- card 07 (`habait-deploy-qa`, `logs/qa-deployed.md`): **PASS** — Check 80/80 on prod, paint proof desktop + 390 px (aerial pano 200, canvas painted), `/` `/tour/` `/hold/` 0 errors 0 4xx.
 
 ## Cards (execution order)
 | # | File | Card | Agent · model · tier | State |
@@ -22,8 +23,8 @@
 | 03 | `task-03-checks.md` | Acceptance check + regression | main session · opus · T0 | DONE — 80/80 |
 | 04 | `task-04-gate.md` | Gate: fresh reviewer, refute | fresh Sonnet sub-agent · sonnet · T0 | DONE — FAIL D1 → fixed → re-gate PASS |
 | 05 | `task-05-copy-back.md` | Copy back on Eliran's word | main session · opus · T1 | DONE — copied back |
-| 06 | `task-06-qa-live.md` | QA on the live files | fresh Sonnet sub-agent · sonnet · T0 | TODO |
-| 07 | `task-07-qa-deployed.md` | QA on the deployed site | `habait-deploy-qa` (live, habait) · sonnet · T0 | BLOCKED (deploy go) |
+| 06 | `task-06-qa-live.md` | QA on the live files | fresh Sonnet sub-agent · sonnet · T0 | DONE — PASS |
+| 07 | `task-07-qa-deployed.md` | QA on the deployed site | `habait-deploy-qa` (live, habait) · sonnet · T0 | DONE — PASS on prod |
 
 ## Waves
 Sequential, one worker at a time (≤ 5 per burst never reached). One session.

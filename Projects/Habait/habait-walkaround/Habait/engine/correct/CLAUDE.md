@@ -1,20 +1,20 @@
 # correct/ — context file
-<!-- last-updated: 2026-11-10 -->
+<!-- last-updated: 2026-11-18 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The local plan-correction screen (index.html, correct.js, serve.mjs) that overlays rooms, doors and windows on the sales plan so they can be fixed by hand.
 
-## What's here (2026-11-10)
+## What's here (2026-11-18)
 5 files here · 1 subfolders · 10 files / 206.7 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `README-he.md` | 9.4 KB | 2026-11-03 |
-| `correct.css` | 7.7 KB | 2026-11-02 |
-| `correct.js` | 46.1 KB | 2026-11-02 |
-| `index.html` | 2.3 KB | 2026-11-02 |
-| `serve.mjs` | 18.0 KB | 2026-11-03 |
+| `README-he.md` | 9.4 KB | 2026-11-16 |
+| `correct.css` | 7.7 KB | 2026-11-16 |
+| `correct.js` | 46.1 KB | 2026-11-16 |
+| `index.html` | 2.3 KB | 2026-11-16 |
+| `serve.mjs` | 18.0 KB | 2026-11-16 |
 
 ## Subfolders
 | Folder | Card | Files in tree |

@@ -63,3 +63,8 @@
 - **Learned:** This replaces the 2026-11-08 «media-free snapshots» rule for the Kedma D/1 package; whether other projects' media may follow is not ruled - ask. Keys files never.
 - **Owed / open:** none.
 - **Second reader:** `habait-deploy-qa`
+
+## 2026-11-19 · main session (Hatzav) · RULING + layer 43d2fd32: Hatzav media on HABAIT through Git LFS
+- **Did:** Eliran: «אני רוצה להגיע למצב שאני מוריד הכל מהריפו בגיטהאב בלי תלות במחשב הזה»; dialog → «אני רוצה את זה בריפו הציבורי הקיים» + «רק מה שצריך להמשיך». 330 files / 744 MB as LFS pointers (the .blend is 317 MB, over GitHub's 100 MB file limit) layered on 242d0d7a; `.gitattributes` created with LFS lines scoped to `out/harei-zahav-naama/**`, `Projects/Harey_zahav_Naama/**`, `…/tour360/**`; nothing removed, never forced. Verified: the API serves hatzav_v2.blend from media.githubusercontent.com at 317549636 bytes.
+- **Learned:** extends the Kedma D/1 media ruling to Hatzav only; other projects still: ask. LFS storage counts against his GitHub quota.
+- **Second reader:** `habait-deploy-qa`

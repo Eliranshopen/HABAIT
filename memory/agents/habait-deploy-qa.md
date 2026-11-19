@@ -201,3 +201,12 @@
 ## 2026-11-16 · main session → second-reader pointer
 - 2026-11-16 Projects/Habait is OFF the disk (since about 13:22; 2,719 tracked files show as deleted, uncommitted; no moved copy found); Projects/3Dengine created empty; code survives in git a63494a + the .wt worktrees; untracked assets, keys and _local records have no confirmed source; Pi wrapper + bridge paths dangle → `memory/project/2026-11-16-projects-habait-off-disk.md`
 - 2026-11-18 (pointer, tour360 sub-agent): Hatzav 360 tour staged-ready — tour360/dist/hatzav (realistic set, --ungated-ok), stage with tools/stage-tour.mjs; needs FAL_KEY/OPENROUTER_API_KEY/TOUR_EDIT_CODE names on its Vercel project → project/2026-11-18-hatzav-realism-items.md
+
+## 2026-11-19 · main session → second-reader pointer
+- FULL public repo Eliranshopen/RnD on Eliran's ruling (everything incl. .wt, public, LFS cost accepted): snapshot a92107db in C:/RnD-full.git, 195,313 files, 18,231 LFS objects 49 GB, history as a bundle; scans 0 real keys; tools scripts/snap_*.py; upload running → `memory/project/2026-11-19-full-public-repo-rnd.md`
+
+## 2026-11-19 · main session → second-reader pointer
+- RnD repo changed ruling: everything WITHOUT media; public Eliranshopen/RnD main a195535f, 116,261 files, clone verified byte for byte; media upload stopped at about 18 GB: those LFS objects are public by hash and billed until Eliran deletes + the session recreates the repo; full LFS snapshot a92107db kept local → `memory/project/2026-11-19-full-public-repo-rnd.md`
+
+## 2026-11-19 · main session (3dengine) → second-reader pointer
+- 2026-11-19 engine restore = ONE download: release engine-restore-2026-11-19 of the public repo Eliranshopen/RnD (RnD-engine-restore.zip 1.5 GB + agent-side.zip, source only), RESTORE.cmd proven 3 times on scratch folders; tools and steps in scripts/restore/; keys file by hand → `memory/project/2026-11-19-engine-handoff-other-computer.md`

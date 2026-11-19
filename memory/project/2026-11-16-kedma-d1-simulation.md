@@ -145,3 +145,10 @@
 - **Learned:** nothing new beyond the 2026-11-19 mirror rules (build on the remote head, adds only).
 - **Owed / open:** the MEDIA needed to keep painting are NOT on GitHub (by rule): canvases and answers under the worktree's apartments/kedma-d1/_local (8.4 GB), renders + depth under tours/kedma-d1/renders, the 13 final panoramas, the Blender scene. On the other computer: clone HABAIT, then bring the media by hand (drive/disk) to the same paths, or restart from the 13 panoramas for day/night. Keys file C:\RnD\.env is never in the repo.
 - **Second reader:** none
+
+## 2026-11-19 · main session · kedma-d1: the whole session folder, media included, in Projects/Kedma_D1
+- **Did:** Eliran: «תעביר אתה כדי שיהיה לי תיקייה של הסשן הזה תחת C:\RnD\Projects». Copied (not moved) the worktree's apartments/kedma-d1 (8.4 GB) and tours/kedma-d1 (renders, scene-full.blend) and the 8 changed tools + PORT-CHANGES into Projects/Kedma_D1/worktree/Projects/3Dengine/... (2292 of 2292 files); folder now 9.1 GB; 236 generated context files; CLAUDE.md says how to resume on another computer.
+- **Evidence:** `Projects/Kedma_D1/CLAUDE.md`
+- **Learned:** the HABAIT mirror never carries media, so "continue on another computer" = carry the Projects/Kedma_D1 folder by drive or cloud; say that plainly.
+- **Owed / open:** Eliran carries the folder and the keys file; the live work stays in .wt/kedma-d1 on this computer.
+- **Second reader:** none

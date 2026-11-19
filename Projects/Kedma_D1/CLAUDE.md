@@ -16,13 +16,17 @@ engine tools under `Projects/3Dengine/pipeline/`, the apartment's working canvas
 | `dist/` | the built tour as deployed (`build-tour.mjs --catalog=ai --dollhouse --full`); build output, so no context files inside (root §8.6); open `dist/index.html` through a local server |
 | `panoramas/` | the 13 final panoramas, 8192×4096 PNG, named by viewpoint (from `_local/picks.json`) |
 | `job/` | the job folder: hand tools (`hand/`), prompts, review pictures, logs, deploy logs, ledger copy |
+| `worktree/` | the session's working folder copied whole (media included, 8.5 GB), same paths as under `.wt/kedma-d1/` |
 | `plan/` | the plan of record (copy of `development/plans/2026-11-17-kedma-d1-true-geometry-redo.md`) |
 
 ## Continuing on another computer (2026-11-19)
-GitHub (Eliranshopen/HABAIT) holds the code and text of this folder, and the worktree's changes under `worktree/` (copy them back to
-`.wt/kedma-d1/Projects/3Dengine/` at the same paths). It holds NO media: the 13 panoramas, the built tour's images and the working
-canvases (8.4 GB, worktree `apartments/kedma-d1/_local/`) and renders (`tours/kedma-d1/renders/`) must be brought by hand.
-The keys file `C:\RnD\.env` is never in the repo. Resume point: last section of `memory/project/2026-11-16-kedma-d1-simulation.md`.
+**This folder is complete (9.1 GB): copy the whole `Kedma_D1` folder to the other computer** (drive or cloud), to `C:\RnD\Projects\Kedma_D1`.
+`worktree/` holds everything of the session's working folder, media included: the apartment (canvases, answers, gates, ledger:
+`worktree/Projects/3Dengine/pipeline/Habait/tour360/apartments/kedma-d1/`), the renders and Blender scene
+(`.../360walkaround/tours/kedma-d1/`), and the 8 engine tools this job changed + `PORT-CHANGES.md`. To resume there: create the
+worktree (`git -C C:/RnD worktree add C:/RnD/.wt/kedma-d1 kedma-d1`, or a new branch off main) and copy `worktree/Projects/` over
+`.wt/kedma-d1/Projects/`, and `job/` to `.wt/kedma-d1/Projects/3Dengine/jobs/kedma-d1/`. GitHub (HABAIT) has only the code and text.
+The keys file `C:\RnD\.env` is in no copy: bring it by hand. Resume point: last section of `memory/project/2026-11-16-kedma-d1-simulation.md`.
 
 ## Facts
 - Money: $45.79 of a $48 ceiling (Eliran raised it from $45 on 2026-11-19 for the balcony); ledger in the worktree `_local/ledger.json`.

@@ -59,6 +59,7 @@
 ## listings
 
 ## project
+- 2026-11-19 · main session (3dengine) · 2026-11-19 HABAIT layer 14f2e544 = the engine's WIP of milestone 2.1 from branch 3dengine 7b6a7837 (68 files) on 804a91bf, for a move to another computer; the scan found no real key → `project/2026-11-08-github-remote-habait.md`
 - 2026-11-19 · main session (3dengine) · 2026-11-19 engine build STOPPED mid-2.1 to continue on another computer: WIP on branch 3dengine f4c89609 + a GitHub layer; the mirror is code and text only: 274 engine media files incl. the test PDFs, assets, Python env, Blender, keys and Claude's own memory must be brought by hand → `project/2026-11-19-engine-handoff-other-computer.md`
 - 2026-11-19 · main session (3dengine) · 2026-11-19 HABAIT layer 7b1ea0d3 = close of engine milestone 1.4 (110 files: 80 added, 23 from main, 7 shared files from the working tree) on 2a8e190c; a main-only snapshot was rejected (other sessions had pushed), nothing forced; scan 0 real hits → `project/2026-11-08-github-remote-habait.md`
 - 2026-11-18 · main session · Eliran 2026-11-18: engine stage tests (npm run test:stages) on a loaded machine may run ONCE bounded at 25 minutes in the background (timeout 1500); root section 12 limits stay for everything else. → `project/2026-11-18-engine-stage-tests-long-run.md`
@@ -66,6 +67,7 @@
 - 2026-11-18 · main session · Eliran 2026-11-18: engine gate = each test tier ONCE (npm test, test:stages), repeated only when failed or cut; live home after a merge = doctor only. QA, sync-context, plan-to-tasks per milestone stay. → `project/2026-11-18-engine-gate-tests-once.md`
 - 2026-11-18 · main session · 2026-11-18 Hatzav: Vercel hatzav-walk.vercel.app + public repo github.com/Eliranshopen/hatzav-walk (no developer renders); first deploy r5cr5rmrm to remove → `project/2026-11-18-hatzav-realism-items.md`
 - 2026-11-18 · main session · 2026-11-18 Hatzav walk upgrade: fal 3D items from his renders (19 + 24 alternatives), RAINBOW UI, hours, garden, photo skin; ceiling 36 USD → `project/2026-11-18-hatzav-realism-items.md`
+- 2026-11-19 · main session · Kedma D/1 WHOLE session folder (media incl., 9.1 GB) copied to Projects/Kedma_D1 for the other computer; carry it + the keys file by hand → `project/2026-11-16-kedma-d1-simulation.md`
 - 2026-11-19 · main session · Kedma D/1 synced to HABAIT (235cf725, code+text, no media) to continue on another computer; media (8.4 GB canvases, renders, panoramas) must be carried by hand → `project/2026-11-16-kedma-d1-simulation.md`
 - 2026-11-19 · main session · Kedma D/1 deliverables COPIED to Projects/Kedma_D1 (dist, 13 panoramas, job, plan; Eliran's choice); work still runs in .wt/kedma-d1, re-copy after changes → `project/2026-11-16-kedma-d1-simulation.md`
 - 2026-11-19 · main session · Kedma D/1 DEPLOYED 13/13 on Eliran's go: kedma-d1.vercel.app (dpl_4a8kWhWp…), live probe desktop+phone OK; ledger 45.79/47.9; next = day/night, leftovers → `project/2026-11-16-kedma-d1-simulation.md`

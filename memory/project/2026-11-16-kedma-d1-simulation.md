@@ -152,3 +152,10 @@
 - **Learned:** the HABAIT mirror never carries media, so "continue on another computer" = carry the Projects/Kedma_D1 folder by drive or cloud; say that plainly.
 - **Owed / open:** Eliran carries the folder and the keys file; the live work stays in .wt/kedma-d1 on this computer.
 - **Second reader:** none
+
+## 2026-11-19 · main session · kedma-d1: handover package in OneDrive (Eliran «תעשה אתה כל מה שצריך»)
+- **Did:** OneDrive runs on this computer, so the media go through it: C:\Users\elira\OneDrive\Kedma_D1-2026-11-19.zip (2.2 GB, 1932 files, testzip OK: 13 panoramas, 16 canvases, the Blender scene, the built tour, job, worktree config; no .env). Left out: *.before-* backups (4.4 GB), _local/flatfix answers (2 GB), non-chosen generated panoramas - all still on this computer. Steps in Projects/Kedma_D1/RESTORE.md (pushed to HABAIT 366c5cfd).
+- **Evidence:** `Projects/Kedma_D1/RESTORE.md`
+- **Learned:** for "continue on another computer" the user's own OneDrive is the carrier for media (the public mirror never takes media); never put the keys file there.
+- **Owed / open:** OneDrive must finish uploading (his OneDrive icon); the keys file must be brought by hand; on the other computer: clone HABAIT, unzip into C:\RnD\Projects, «תמשיך את קדמה».
+- **Second reader:** none

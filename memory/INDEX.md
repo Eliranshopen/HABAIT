@@ -59,6 +59,7 @@
 ## listings
 
 ## project
+- 2026-11-19 · main session · FULL public repo Eliranshopen/RnD on Eliran's ruling (everything incl. .wt, public, LFS cost accepted): snapshot a92107db in C:/RnD-full.git, 195,313 files, 18,231 LFS objects 49 GB, history as a bundle; scans 0 real keys; tools scripts/snap_*.py; upload running → `project/2026-11-19-full-public-repo-rnd.md`
 - 2026-11-19 · main session (3dengine) · 2026-11-19 GitHub HABAIT layer 216665e6 on 788b8455: Claude's own notes (docs/claude-memory-export, 52 files) + the engine's handoff records; 62 files, adds and updates only, media-free, scan 0 hits → `project/2026-11-08-github-remote-habait.md`
 - 2026-11-19 · main session (3dengine) · 2026-11-19 engine handoff completed: 2.1 work in progress MERGED into main 83a0a1a9 on his word (not gated); a carry pack at C:/RnD-carry-2026-11-19 (repository bundle 780 MB + assets + notes + Hebrew steps); Claude's notes exported to docs/claude-memory-export for the mirror → `project/2026-11-19-engine-handoff-other-computer.md`
 - 2026-11-19 · main session (3dengine) · 2026-11-19 HABAIT layer 14f2e544 = the engine's WIP of milestone 2.1 from branch 3dengine 7b6a7837 (68 files) on 804a91bf, for a move to another computer; the scan found no real key → `project/2026-11-08-github-remote-habait.md`
@@ -69,6 +70,7 @@
 - 2026-11-18 · main session · Eliran 2026-11-18: engine gate = each test tier ONCE (npm test, test:stages), repeated only when failed or cut; live home after a merge = doctor only. QA, sync-context, plan-to-tasks per milestone stay. → `project/2026-11-18-engine-gate-tests-once.md`
 - 2026-11-18 · main session · 2026-11-18 Hatzav: Vercel hatzav-walk.vercel.app + public repo github.com/Eliranshopen/hatzav-walk (no developer renders); first deploy r5cr5rmrm to remove → `project/2026-11-18-hatzav-realism-items.md`
 - 2026-11-18 · main session · 2026-11-18 Hatzav walk upgrade: fal 3D items from his renders (19 + 24 alternatives), RAINBOW UI, hours, garden, photo skin; ceiling 36 USD → `project/2026-11-18-hatzav-realism-items.md`
+- 2026-11-19 · main session · Kedma D/1 handover: OneDrive\Kedma_D1-2026-11-19.zip (2.2 GB, media) + HABAIT (code/text) + Projects/Kedma_D1/RESTORE.md; keys file by hand → `project/2026-11-16-kedma-d1-simulation.md`
 - 2026-11-19 · main session · Kedma D/1 WHOLE session folder (media incl., 9.1 GB) copied to Projects/Kedma_D1 for the other computer; carry it + the keys file by hand → `project/2026-11-16-kedma-d1-simulation.md`
 - 2026-11-19 · main session · Kedma D/1 synced to HABAIT (235cf725, code+text, no media) to continue on another computer; media (8.4 GB canvases, renders, panoramas) must be carried by hand → `project/2026-11-16-kedma-d1-simulation.md`
 - 2026-11-19 · main session · Kedma D/1 deliverables COPIED to Projects/Kedma_D1 (dist, 13 panoramas, job, plan; Eliran's choice); work still runs in .wt/kedma-d1, re-copy after changes → `project/2026-11-16-kedma-d1-simulation.md`

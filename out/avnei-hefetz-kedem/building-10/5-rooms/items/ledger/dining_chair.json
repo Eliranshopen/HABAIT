@@ -1,0 +1,77 @@
+{
+ "cap_usd": 15,
+ "item": "dining_chair",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:00.323Z",
+   "item": "dining_chair",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "94798920bbd6a8b30e46ca076bd5ae384d949f7bf257eb291e0048cb32c011c4",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 4.035
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:50:16.029Z",
+   "item": "dining_chair",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "94798920bbd6a8b30e46ca076bd5ae384d949f7bf257eb291e0048cb32c011c4",
+   "queue": {
+    "request_id": "01a1ee10-71b4-74c2-a5c2-108220fa4c2b",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1ee10-71b4-74c2-a5c2-108220fa4c2b/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1ee10-71b4-74c2-a5c2-108220fa4c2b"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1ee10-71b4-74c2-a5c2-108220fa4c2b",
+   "seconds": 13.57,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\dining_chair.json"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T09:50:29.641Z",
+   "item": "dining_chair",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "a17bcc927aafd0613b4a6908b720a39690470a8c7937d3e0f53d8060ca7253d9",
+   "queue": {
+    "request_id": "01a1ee10-a570-7861-90dc-97181808e827",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee10-a570-7861-90dc-97181808e827/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee10-a570-7861-90dc-97181808e827"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ee10-a570-7861-90dc-97181808e827",
+   "seconds": 32.761,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\dining_chair.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T09:51:03.455Z",
+   "item": "dining_chair",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "05b9540da8e3353cd1ac63de24017bee1a0ca25594b8de2656a04e49ee8f080c",
+   "queue": {
+    "request_id": "01a1ee11-3baf-7da1-a7d5-12fae1fbb8a3",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee11-3baf-7da1-a7d5-12fae1fbb8a3/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee11-3baf-7da1-a7d5-12fae1fbb8a3"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ee11-3baf-7da1-a7d5-12fae1fbb8a3",
+   "seconds": 241.462,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\dining_chair__hunyuan.glb"
+  }
+ ]
+}

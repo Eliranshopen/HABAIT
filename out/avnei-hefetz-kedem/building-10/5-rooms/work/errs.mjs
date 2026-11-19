@@ -1,0 +1,11 @@
+import { createRequire } from 'module';
+const require = createRequire('C:/RnD/Projects/3Dengine/appdeps/package.json');
+const { chromium } = require('playwright-core');
+const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist'] });
+const p = await b.newPage();
+p.on('pageerror', (e) => console.log('PAGEERROR', e.message, e.stack?.split('\n')[1]));
+p.on('console', (m) => console.log('CONSOLE', m.type(), m.text().slice(0, 300)));
+p.on('requestfailed', (r) => console.log('FAILED', r.url()));
+await p.goto(process.argv[2]); await p.waitForTimeout(25000);
+console.log('ready', await p.evaluate(() => !!(window.__walk && window.__walk.ready)));
+await b.close();

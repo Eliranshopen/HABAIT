@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>אבני חפץ · קדם — בניין 10 דירה 3 · סיור 360°</title>
+<link rel="stylesheet" href="vendor/pannellum-2.5.6.css">
+<style>
+  :root { --ink:#f4f1ea; --bg:#111; --chip:rgba(20,20,20,.62); --accent:#d9c7a3; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font-family: system-ui, "Segoe UI", Arial, sans-serif; }
+  #pano { position:fixed; inset:0; }
+  header { position:fixed; top:0; inset-inline:0; padding:12px 16px; display:flex; gap:12px; align-items:center; justify-content:space-between;
+           background:linear-gradient(rgba(0,0,0,.55), transparent); z-index:5; pointer-events:none; }
+  header h1 { font-size:15px; font-weight:600; margin:0; }
+  header small { opacity:.8; font-size:12px; display:block; }
+  .badge { pointer-events:auto; background:var(--chip); border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:5px 11px; font-size:12px; white-space:nowrap; }
+  nav { position:fixed; bottom:max(14px, env(safe-area-inset-bottom)); inset-inline:0; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+        padding:0 16px; z-index:5; }
+  nav button { background:var(--chip); color:var(--ink); border:1px solid rgba(255,255,255,.22); border-radius:999px; min-height:44px; padding:0 16px;
+               font-size:14px; cursor:pointer; backdrop-filter:blur(6px); }
+  nav button[aria-current="true"] { background:var(--accent); color:#1b1b1b; border-color:var(--accent); }
+  .note { position:fixed; bottom:calc(max(14px, env(safe-area-inset-bottom)) + 56px); inset-inline:0; text-align:center; font-size:11px; opacity:.75; z-index:5; padding:0 16px; }
+  .pnlm-load-box { direction:ltr; }
+</style>
+</head>
+<body>
+<div id="pano"></div>
+<header>
+  <div><h1>אבני חפץ · קדם — בניין 10, קומה 1, דירה 3</h1><small>5 חדרים · 108 מ"ר · מרפסת 8.8 מ"ר</small></div>
+  <span class="badge" id="badge">הדמיה · CG render</span>
+</header>
+<div class="note">הדמיה על בסיס תכנית המכר. הריהוט והגימור להמחשה בלבד. גובה תקרה, אדני חלונות והנוף מחוץ לחלונות — הנחה.</div>
+<nav id="nav"></nav>
+<script src="vendor/pannellum-2.5.6.js"></script>
+<script src="panos.js"></script>
+<script>
+// Eliran's viewer rules: eye level (the view's centre stays within TILT degrees of the horizon), opens wide (zoomed out).
+const TILT = 10, FIRST_HFOV = 118;
+const scenes = {};
+for (const p of PANOS) scenes[p.id] = { type: 'equirectangular', panorama: p.file, title: p.he, yaw: p.yaw || 0, pitch: 0,
+  hfov: FIRST_HFOV, minHfov: 40, maxHfov: 120, autoLoad: true, showControls: false, hotSpots: [] };
+const viewer = pannellum.viewer('pano', { default: { firstScene: PANOS[0].id, sceneFadeDuration: 600, compass: false }, scenes });
+(function clamp() {   // keep the look at eye level: a look tilted down reads as a security camera
+  try { const p = viewer.getPitch(); if (p > TILT) viewer.setPitch(TILT, false); else if (p < -TILT) viewer.setPitch(-TILT, false); } catch (e) {}
+  requestAnimationFrame(clamp);
+})();
+const nav = document.getElementById('nav');
+for (const p of PANOS) {
+  const b = document.createElement('button'); b.textContent = p.he; b.dataset.id = p.id;
+  b.onclick = () => viewer.loadScene(p.id, 0, p.yaw || 0, FIRST_HFOV);
+  nav.appendChild(b);
+}
+const mark = () => { const id = viewer.getScene(); for (const b of nav.children) b.setAttribute('aria-current', b.dataset.id === id);
+  const p = PANOS.find(q => q.id === id); document.getElementById('badge').textContent = p && p.ai ? 'הדמיה · AI-generated' : 'הדמיה · CG render'; };
+viewer.on('scenechange', () => setTimeout(mark, 0)); viewer.on('load', mark); mark();
+// desktop arrows turn the view
+addEventListener('keydown', e => { if (e.key === 'ArrowLeft') viewer.setYaw(viewer.getYaw() - 10); if (e.key === 'ArrowRight') viewer.setYaw(viewer.getYaw() + 10); });
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+ "cap_usd": 15,
+ "item": "balcony_chair",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:04.705Z",
+   "item": "balcony_chair",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "1ca1730903da3dc22f45ec43bf39ca6969c1676344ece4768b436f42b5a78e12",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.445
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:55:05.877Z",
+   "item": "balcony_chair",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "1ca1730903da3dc22f45ec43bf39ca6969c1676344ece4768b436f42b5a78e12",
+   "queue": {
+    "request_id": "01a1ee14-de8c-7403-8a3a-18fd3b2743a8",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1ee14-de8c-7403-8a3a-18fd3b2743a8/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1ee14-de8c-7403-8a3a-18fd3b2743a8"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1ee14-de8c-7403-8a3a-18fd3b2743a8",
+   "seconds": 13.334,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\balcony_chair.json"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T09:55:19.273Z",
+   "item": "balcony_chair",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "2e5a8fa65e3549b412d98fa58af0ad5d4050bb6b9a63e3fee81d8b17f625608a",
+   "queue": {
+    "request_id": "01a1ee15-118c-7081-8953-0ce304aa28b5",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee15-118c-7081-8953-0ce304aa28b5/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee15-118c-7081-8953-0ce304aa28b5"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ee15-118c-7081-8953-0ce304aa28b5",
+   "seconds": 34.582,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\balcony_chair.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T09:55:54.547Z",
+   "item": "balcony_chair",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "fd70782e728ee9888c0313593c152069f786b5ee3460b36867a6c770a4352123",
+   "queue": {
+    "request_id": "01a1ee15-aee4-7a60-b22a-36211e6f1b30",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee15-aee4-7a60-b22a-36211e6f1b30/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee15-aee4-7a60-b22a-36211e6f1b30"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ee15-aee4-7a60-b22a-36211e6f1b30",
+   "seconds": 409.832,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\balcony_chair__hunyuan.glb"
+  }
+ ]
+}

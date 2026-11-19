@@ -1,0 +1,64 @@
+{
+ "cap_usd": 15,
+ "item": "nightstand",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:10:35.037Z",
+   "item": "nightstand",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "50a35d8064e3262e688ec891ae77f4d21d4c6548d62c61042a3a70f6c2d34d41",
+   "queue": {
+    "request_id": "01a1edec-21c3-7eb0-9772-2a010f7d8cb5",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1edec-21c3-7eb0-9772-2a010f7d8cb5/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1edec-21c3-7eb0-9772-2a010f7d8cb5"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1edec-21c3-7eb0-9772-2a010f7d8cb5",
+   "seconds": 14.434,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\nightstand.json"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:10:49.503Z",
+   "item": "nightstand",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "d63429ecd2759fa8839c2bc361a1ef5a6e0add23606107741d1536865d8f185b",
+   "queue": {
+    "request_id": "01a1edec-53ed-7c22-9154-335db15b076f",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edec-53ed-7c22-9154-335db15b076f/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edec-53ed-7c22-9154-335db15b076f"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1edec-53ed-7c22-9154-335db15b076f",
+   "seconds": 38.352,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\nightstand.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T09:11:28.253Z",
+   "item": "nightstand",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "c238e5189cb6fdf0a6c9dc0ee1f3ac7db11ca3755febbae1cbe811f20ded819a",
+   "queue": {
+    "request_id": "01a1edec-fdd5-7f50-be5a-0675fef7f00d",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edec-fdd5-7f50-be5a-0675fef7f00d/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edec-fdd5-7f50-be5a-0675fef7f00d"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1edec-fdd5-7f50-be5a-0675fef7f00d",
+   "seconds": 309.957,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\nightstand__hunyuan.glb"
+  }
+ ]
+}

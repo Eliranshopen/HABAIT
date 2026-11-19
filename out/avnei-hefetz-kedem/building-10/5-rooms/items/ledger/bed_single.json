@@ -1,0 +1,64 @@
+{
+ "cap_usd": 15,
+ "item": "bed_single",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:04:10.226Z",
+   "item": "bed_single",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "e9692ca8cb76f25f75ba9785db923fe0b698f53e1db5a62ae3fd42c476c23f65",
+   "queue": {
+    "request_id": "01a1ede6-42a6-7300-8a6c-f7d03d53db5c",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1ede6-42a6-7300-8a6c-f7d03d53db5c/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1ede6-42a6-7300-8a6c-f7d03d53db5c"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1ede6-42a6-7300-8a6c-f7d03d53db5c",
+   "seconds": 14.437,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\bed_single.json"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:04:24.709Z",
+   "item": "bed_single",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "dff37a9dec25e84effd86a3064e32d4b788fcb206f46fa3bb507245f02494da6",
+   "queue": {
+    "request_id": "01a1ede6-7763-79e3-8f18-da84af458982",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ede6-7763-79e3-8f18-da84af458982/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ede6-7763-79e3-8f18-da84af458982"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ede6-7763-79e3-8f18-da84af458982",
+   "seconds": 41.289,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\bed_single.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T09:05:06.545Z",
+   "item": "bed_single",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "c2f8c9ad6f0e7642d55adcd23b322dc78d12a9cb74e01e518b6a5209df37ac0a",
+   "queue": {
+    "request_id": "01a1ede7-53a7-77c2-9f34-db0b1abbeaef",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ede7-53a7-77c2-9f34-db0b1abbeaef/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ede7-53a7-77c2-9f34-db0b1abbeaef"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ede7-53a7-77c2-9f34-db0b1abbeaef",
+   "seconds": 326.625,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\bed_single__hunyuan.glb"
+  }
+ ]
+}

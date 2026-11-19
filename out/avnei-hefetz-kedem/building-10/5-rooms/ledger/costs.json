@@ -1,0 +1,13 @@
+{
+ "currency": "USD",
+ "cap_note": "root §7: $10 soft / $15 hard per render batch; no paid call without Eliran's word on the option",
+ "rows": [
+  {"tool": "Claude Code session (this conversation)", "kind": "LLM", "usd": null, "note": "billed on Eliran's Claude plan; the session cannot read its own token bill, see the final report"},
+  {"tool": "PyMuPDF, OpenCV, numpy, shapely (local)", "kind": "local", "usd": 0},
+  {"tool": "Blender 4.5 Cycles on the CPU (local)", "kind": "local", "usd": 0},
+  {"tool": "Poly Haven assets (CC0, api.polyhaven.com)", "kind": "download", "usd": 0, "note": "141 MB fetched + 318 MB reused from the sibling job's cache"},
+  {"tool": "Pannellum 2.5.6 (vendored, MIT)", "kind": "local", "usd": 0},
+  {"tool": "fal.ai", "kind": "paid API", "usd": 0, "calls": 0},
+  {"tool": "OpenRouter", "kind": "paid API", "usd": 0, "calls": 0}
+ ]
+}

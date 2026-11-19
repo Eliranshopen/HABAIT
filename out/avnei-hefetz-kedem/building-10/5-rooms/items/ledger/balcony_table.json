@@ -1,0 +1,77 @@
+{
+ "cap_usd": 15,
+ "item": "balcony_table",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:07.346Z",
+   "item": "balcony_table",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "865d88f900d3d614867ef298d0bb257afe9aec883ef75a894a831e5738dec1fe",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.02
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T10:02:45.435Z",
+   "item": "balcony_table",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "865d88f900d3d614867ef298d0bb257afe9aec883ef75a894a831e5738dec1fe",
+   "queue": {
+    "request_id": "01a1ee1b-e4f1-76f0-a005-73356ce4516c",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1ee1b-e4f1-76f0-a005-73356ce4516c/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1ee1b-e4f1-76f0-a005-73356ce4516c"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1ee1b-e4f1-76f0-a005-73356ce4516c",
+   "seconds": 14.23,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\balcony_table.json"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T10:02:59.705Z",
+   "item": "balcony_table",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "09b87268804dabe7f6dfac9b2735ac20d1734af2d354a3c139e22a5819b5bbc0",
+   "queue": {
+    "request_id": "01a1ee1c-1697-76e2-aaaf-d77cec1dc525",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee1c-1697-76e2-aaaf-d77cec1dc525/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee1c-1697-76e2-aaaf-d77cec1dc525"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ee1c-1697-76e2-aaaf-d77cec1dc525",
+   "seconds": 41.107,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\balcony_table.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T10:03:41.913Z",
+   "item": "balcony_table",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "58b00b2eda5f5ff1de5317609b29c4892c671d23147f56f7c9764a0c6c0b016f",
+   "queue": {
+    "request_id": "01a1ee1c-d189-7773-bddf-8479354e0f13",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee1c-d189-7773-bddf-8479354e0f13/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee1c-d189-7773-bddf-8479354e0f13"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ee1c-d189-7773-bddf-8479354e0f13",
+   "seconds": 255.196,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\balcony_table__hunyuan.glb"
+  }
+ ]
+}

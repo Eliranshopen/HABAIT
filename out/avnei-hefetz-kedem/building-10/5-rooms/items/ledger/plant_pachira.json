@@ -1,0 +1,77 @@
+{
+ "cap_usd": 15,
+ "item": "plant_pachira",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:12.813Z",
+   "item": "plant_pachira",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "5be541293c73b5867fbaed8ecc4a8585cca099b310a4b12029c60e29ac4517c3",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.18
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T10:13:58.232Z",
+   "item": "plant_pachira",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "5be541293c73b5867fbaed8ecc4a8585cca099b310a4b12029c60e29ac4517c3",
+   "queue": {
+    "request_id": "01a1ee26-264e-7963-827e-e60981fc10d7",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1ee26-264e-7963-827e-e60981fc10d7/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1ee26-264e-7963-827e-e60981fc10d7"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1ee26-264e-7963-827e-e60981fc10d7",
+   "seconds": 13.587,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\plant_pachira.json"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T10:14:12.164Z",
+   "item": "plant_pachira",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "664e72d71a93e061f076682ce0b686de8a573070fe2e30b3b3b600295a362869",
+   "queue": {
+    "request_id": "01a1ee26-59cb-79a2-afbd-4e7d373731b7",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee26-59cb-79a2-afbd-4e7d373731b7/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee26-59cb-79a2-afbd-4e7d373731b7"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ee26-59cb-79a2-afbd-4e7d373731b7",
+   "seconds": 46.035,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\plant_pachira.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T10:14:58.759Z",
+   "item": "plant_pachira",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "64aaea6c0fdc9c0cb0c4503dffc99bb397f27b793f84b6e8a1b83548cf401b7e",
+   "queue": {
+    "request_id": "01a1ee27-2ed0-7580-b634-bf4e6bcc8d2e",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee27-2ed0-7580-b634-bf4e6bcc8d2e/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee27-2ed0-7580-b634-bf4e6bcc8d2e"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ee27-2ed0-7580-b634-bf4e6bcc8d2e",
+   "seconds": 284.77,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\plant_pachira__hunyuan.glb"
+  }
+ ]
+}

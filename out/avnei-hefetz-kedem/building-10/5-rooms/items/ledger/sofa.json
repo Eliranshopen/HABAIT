@@ -1,0 +1,64 @@
+{
+ "cap_usd": 15,
+ "item": "sofa",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:23:01.144Z",
+   "item": "sofa",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "1c2232484ad0332b39bd6aa6fe888da7604ff38849e48f3cf75a9caeec3729e8",
+   "queue": {
+    "request_id": "01a1edf7-8409-7a70-a063-3600e6883f54",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1edf7-8409-7a70-a063-3600e6883f54/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1edf7-8409-7a70-a063-3600e6883f54"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1edf7-8409-7a70-a063-3600e6883f54",
+   "seconds": 14.434,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\sofa.json"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:23:15.659Z",
+   "item": "sofa",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "dccef78bbbf79a76046e1209bd33a6afd4d41df8fbb2c3546e1350b0067e8054",
+   "queue": {
+    "request_id": "01a1edf7-b7e8-7d02-ae67-22b34fdd1b0b",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edf7-b7e8-7d02-ae67-22b34fdd1b0b/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edf7-b7e8-7d02-ae67-22b34fdd1b0b"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1edf7-b7e8-7d02-ae67-22b34fdd1b0b",
+   "seconds": 36.257,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\sofa.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T09:23:52.326Z",
+   "item": "sofa",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "f731923fdc898a8714c2455e226059873fe154275d5bda8c65a2f52679e868e0",
+   "queue": {
+    "request_id": "01a1edf8-566c-7f50-ae60-a99fe75415d7",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edf8-566c-7f50-ae60-a99fe75415d7/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edf8-566c-7f50-ae60-a99fe75415d7"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1edf8-566c-7f50-ae60-a99fe75415d7",
+   "seconds": 328.65,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\sofa__hunyuan.glb"
+  }
+ ]
+}

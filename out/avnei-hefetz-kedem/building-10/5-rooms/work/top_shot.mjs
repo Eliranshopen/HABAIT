@@ -1,0 +1,10 @@
+import { createRequire } from 'module';
+const require = createRequire('C:/RnD/Projects/3Dengine/appdeps/package.json');
+const { chromium } = require('playwright-core');
+const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', args: ['--use-angle=d3d11'] });
+const p = await (await b.newContext({ viewport: { width: 900, height: 700 } })).newPage();
+await p.goto(process.argv[2], { timeout: 240000 }); await p.waitForFunction(() => window.__walk && window.__walk.ready, null, { timeout: 300000, polling: 1000 });
+await p.addStyleTag({ content: 'body > *:not(canvas){visibility:hidden!important}' });
+await p.evaluate(() => { const w = window.__walk; w.studio.setMode('doll'); });
+await p.evaluate(() => { const w = window.__walk; w.studio.orbit(0, 400); w.studio.zoom(0.55); });
+await p.waitForTimeout(3000); await p.screenshot({ path: process.argv[3] }); await b.close();

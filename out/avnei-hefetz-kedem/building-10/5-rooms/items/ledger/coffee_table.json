@@ -1,0 +1,64 @@
+{
+ "cap_usd": 15,
+ "item": "coffee_table",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:29:25.081Z",
+   "item": "coffee_table",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "a5b0a0c5e6c95e6eaedfc73389ef4aa2c35375c90bf071de7ec371bb9b665b2b",
+   "queue": {
+    "request_id": "01a1edfd-5cb4-7c50-b13b-a385dcc4b575",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1edfd-5cb4-7c50-b13b-a385dcc4b575/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1edfd-5cb4-7c50-b13b-a385dcc4b575"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1edfd-5cb4-7c50-b13b-a385dcc4b575",
+   "seconds": 13.949,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\coffee_table.json"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:29:39.083Z",
+   "item": "coffee_table",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "1c78f408979ac6a70e800cf151ea02ebca6de3503f0d98f01db34b2852765104",
+   "queue": {
+    "request_id": "01a1edfd-9058-7343-81c6-5b094e91d85b",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edfd-9058-7343-81c6-5b094e91d85b/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edfd-9058-7343-81c6-5b094e91d85b"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1edfd-9058-7343-81c6-5b094e91d85b",
+   "seconds": 37.839,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\coffee_table.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T09:30:17.282Z",
+   "item": "coffee_table",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "223ddbd5895ae90d72f568322b424fbddb72c33017ee3e28fe2be5614d12d226",
+   "queue": {
+    "request_id": "01a1edfe-3ed3-7133-95fb-ab163006b725",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edfe-3ed3-7133-95fb-ab163006b725/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edfe-3ed3-7133-95fb-ab163006b725"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1edfe-3ed3-7133-95fb-ab163006b725",
+   "seconds": 315.678,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\coffee_table__hunyuan.glb"
+  }
+ ]
+}

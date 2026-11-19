@@ -1,0 +1,1917 @@
+{
+ "cap_usd": 55,
+ "note": "360 panorama polish (Eliran 2026-11-18, cap $12) | cap raised to $21 by Eliran 2026-11-18 (dialog: GPT Image 2.5 for the whole apartment) | cap $55, Eliran dialog 2026-11-18 (variant B on all rooms + 8K)",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T11:38:02.723Z",
+   "view": "living_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "560ac4cd6252367ec274e0d6e33bbb941f18acd0fbee16538255a1f6a7a18fe6",
+   "out": "work\\pano\\polished\\living_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee73-20e8-7e33-b1fa-3c6714c8d8cf/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee73-20e8-7e33-b1fa-3c6714c8d8cf",
+    "request_id": "01a1ee73-20e8-7e33-b1fa-3c6714c8d8cf"
+   },
+   "settled_usd": 0.15,
+   "seconds": 35.354
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T11:38:38.189Z",
+   "view": "living_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "93e307f9cbf7b34a2c9246cce826eac8de97d16ba3b63b2c7c3863cf844555bf",
+   "out": "work\\pano\\polished\\living_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee73-ab0f-72e0-967b-4cb6561af84a/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee73-ab0f-72e0-967b-4cb6561af84a",
+    "request_id": "01a1ee73-ab0f-72e0-967b-4cb6561af84a"
+   },
+   "settled_usd": 0.15,
+   "seconds": 42.723
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T11:39:20.934Z",
+   "view": "living_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "2eb3d4ebb75e0b5707ad661c8c1b493c69658f28e02e7e634156623fbfc3bdd9",
+   "out": "work\\pano\\polished\\living_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee74-51de-7a72-83c0-fc58810bef56/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee74-51de-7a72-83c0-fc58810bef56",
+    "request_id": "01a1ee74-51de-7a72-83c0-fc58810bef56"
+   },
+   "settled_usd": 0.15,
+   "seconds": 41.202
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T11:40:02.143Z",
+   "view": "living_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "f70f31d089916cf26f089f85c8a40edf97688a9a2d674942713d5a39d0f25e5e",
+   "out": "work\\pano\\polished\\living_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee74-f25b-7e63-95cb-928fef2a6705/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee74-f25b-7e63-95cb-928fef2a6705",
+    "request_id": "01a1ee74-f25b-7e63-95cb-928fef2a6705"
+   },
+   "settled_usd": 0.15,
+   "seconds": 77.818
+  },
+  {
+   "seq": 5,
+   "at": "2026-11-18T11:41:19.966Z",
+   "view": "living_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "104f479456cee370b6b7c476dc1eaf4fb77d9c1d9980e144639f0fb52fa8e8d4",
+   "out": "work\\pano\\polished\\living_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee76-2303-7910-a7c1-39b8df5c0ffb/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee76-2303-7910-a7c1-39b8df5c0ffb",
+    "request_id": "01a1ee76-2303-7910-a7c1-39b8df5c0ffb"
+   },
+   "settled_usd": 0.15,
+   "seconds": 36.706
+  },
+  {
+   "seq": 6,
+   "at": "2026-11-18T11:41:56.678Z",
+   "view": "parents_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "e90f9b0fe2849c6484a2768a0cae95346bcc4900e4f202d37e48f934781aa473",
+   "out": "work\\pano\\polished\\parents_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee76-b232-7303-b8b1-0891c1e9620d/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee76-b232-7303-b8b1-0891c1e9620d",
+    "request_id": "01a1ee76-b232-7303-b8b1-0891c1e9620d"
+   },
+   "settled_usd": 0.15,
+   "seconds": 37.966
+  },
+  {
+   "seq": 7,
+   "at": "2026-11-18T11:42:34.649Z",
+   "view": "parents_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "ca1e3e1502baf700fc66b83a5491fc2a1a1c6884015c158f93eece2c00add567",
+   "out": "work\\pano\\polished\\parents_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee77-46cc-7260-a96f-6d385c0e4369/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee77-46cc-7260-a96f-6d385c0e4369",
+    "request_id": "01a1ee77-46cc-7260-a96f-6d385c0e4369"
+   },
+   "settled_usd": 0.15,
+   "seconds": 101.606
+  },
+  {
+   "seq": 8,
+   "at": "2026-11-18T11:44:16.288Z",
+   "view": "parents_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "130dc67a41eb52d84a2829881928523764aeb995d135689a0da9383864082373",
+   "out": "work\\pano\\polished\\parents_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee78-d2be-7493-8bbf-cb693dafda41/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee78-d2be-7493-8bbf-cb693dafda41",
+    "request_id": "01a1ee78-d2be-7493-8bbf-cb693dafda41"
+   },
+   "settled_usd": 0.15,
+   "seconds": 47.386
+  },
+  {
+   "seq": 9,
+   "at": "2026-11-18T11:45:03.749Z",
+   "view": "parents_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "b732cafdc3744f8864a30ba113ad9b22c111d3e1a7663342d2849fce654fcfc4",
+   "out": "work\\pano\\polished\\parents_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee79-8b88-72d1-a785-1c4d5d36d5f0/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee79-8b88-72d1-a785-1c4d5d36d5f0",
+    "request_id": "01a1ee79-8b88-72d1-a785-1c4d5d36d5f0"
+   },
+   "settled_usd": 0.15,
+   "seconds": 37.304
+  },
+  {
+   "seq": 10,
+   "at": "2026-11-18T11:45:41.060Z",
+   "view": "parents_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "9f31a7b658fb39c064082ba4a7e9c745d867d43321df00c8d3f6da9f7f0d9462",
+   "out": "work\\pano\\polished\\parents_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7a-1f58-7fa1-9c0b-07a35fa30da6/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7a-1f58-7fa1-9c0b-07a35fa30da6",
+    "request_id": "01a1ee7a-1f58-7fa1-9c0b-07a35fa30da6"
+   },
+   "settled_usd": 0.15,
+   "seconds": 36.407
+  },
+  {
+   "seq": 11,
+   "at": "2026-11-18T11:46:17.476Z",
+   "view": "kitchen_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "1b4e43d2892984445e14a3f35ef5a885b0eed326b53d9a801f421b38c6669432",
+   "out": "work\\pano\\polished\\kitchen_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7a-acc5-7ed1-973e-11f95614397d/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7a-acc5-7ed1-973e-11f95614397d",
+    "request_id": "01a1ee7a-acc5-7ed1-973e-11f95614397d"
+   },
+   "settled_usd": 0.15,
+   "seconds": 35.794
+  },
+  {
+   "seq": 12,
+   "at": "2026-11-18T11:46:53.276Z",
+   "view": "kitchen_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "8ec6d37c52841eba4ee92569485a8f695d98134694ed2741985b3ab7a48944d1",
+   "out": "work\\pano\\polished\\kitchen_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7b-3818-7ac0-9b45-ec06212b998a/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7b-3818-7ac0-9b45-ec06212b998a",
+    "request_id": "01a1ee7b-3818-7ac0-9b45-ec06212b998a"
+   },
+   "settled_usd": 0.15,
+   "seconds": 34.75
+  },
+  {
+   "seq": 13,
+   "at": "2026-11-18T11:47:33.100Z",
+   "view": "kitchen_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "b750dd773bd75d7139ec31a5eb45ad85e298dd0e142eec31bf00ed7a38e5ae05",
+   "out": "work\\pano\\polished\\kitchen_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7b-d448-7f73-a105-9b30303323eb/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7b-d448-7f73-a105-9b30303323eb",
+    "request_id": "01a1ee7b-d448-7f73-a105-9b30303323eb"
+   },
+   "settled_usd": 0.15,
+   "seconds": 42.989
+  },
+  {
+   "seq": 14,
+   "at": "2026-11-18T11:48:16.097Z",
+   "view": "kitchen_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "1043d1325455ac5ff89c07142b7cfe16ae1e029a010070073979ae54d6169ba0",
+   "out": "work\\pano\\polished\\kitchen_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7c-7bc8-7832-98f2-32f0d970b2bc/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7c-7bc8-7832-98f2-32f0d970b2bc",
+    "request_id": "01a1ee7c-7bc8-7832-98f2-32f0d970b2bc"
+   },
+   "settled_usd": 0.15,
+   "seconds": 41.481
+  },
+  {
+   "seq": 15,
+   "at": "2026-11-18T11:48:57.587Z",
+   "view": "kitchen_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "9e59338468c5f540411c72e11564b1820594146c2acb8756727fe0a83d750f56",
+   "out": "work\\pano\\polished\\kitchen_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7d-1f1b-78c0-aa41-d3cb6c86e907/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7d-1f1b-78c0-aa41-d3cb6c86e907",
+    "request_id": "01a1ee7d-1f1b-78c0-aa41-d3cb6c86e907"
+   },
+   "settled_usd": 0.15,
+   "seconds": 36.758
+  },
+  {
+   "seq": 16,
+   "at": "2026-11-18T11:49:34.377Z",
+   "view": "mamad_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "eb4fdc87074ab5d584d02bdee1418eab3934cce8697b2ea1dcc6cd2aeaa36fd8",
+   "out": "work\\pano\\polished\\mamad_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7d-ad9d-72d1-9a59-eda0d005329f/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7d-ad9d-72d1-9a59-eda0d005329f",
+    "request_id": "01a1ee7d-ad9d-72d1-9a59-eda0d005329f"
+   },
+   "settled_usd": 0.15,
+   "seconds": 40.429
+  },
+  {
+   "seq": 17,
+   "at": "2026-11-18T11:50:14.859Z",
+   "view": "mamad_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "32cc82ee855c4730ccbea5e0aef8c6aa950a62cc41e44aa0ef2963c9033d111b",
+   "out": "work\\pano\\polished\\mamad_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7e-4c56-7b00-9403-f25bf7f7e124/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7e-4c56-7b00-9403-f25bf7f7e124",
+    "request_id": "01a1ee7e-4c56-7b00-9403-f25bf7f7e124"
+   },
+   "settled_usd": 0.15,
+   "seconds": 38.694
+  },
+  {
+   "seq": 18,
+   "at": "2026-11-18T11:50:53.591Z",
+   "view": "mamad_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "ee199be0d1cfff61d8db8e87f27384dc6ed75f721ca095704bd6fe556a2157a1",
+   "out": "work\\pano\\polished\\mamad_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7e-e59f-7d52-812a-17fe4495527c/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7e-e59f-7d52-812a-17fe4495527c",
+    "request_id": "01a1ee7e-e59f-7d52-812a-17fe4495527c"
+   },
+   "settled_usd": 0.15,
+   "seconds": 44.242
+  },
+  {
+   "seq": 19,
+   "at": "2026-11-18T11:51:37.969Z",
+   "view": "mamad_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "09b11fa9b8ae68a8f0d2ccb9f1908944b6eea50b921dcc2715f35ae8c3204700",
+   "out": "work\\pano\\polished\\mamad_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7f-9363-7ff1-8a1f-07112bd3c3fb/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee7f-9363-7ff1-8a1f-07112bd3c3fb",
+    "request_id": "01a1ee7f-9363-7ff1-8a1f-07112bd3c3fb"
+   },
+   "settled_usd": 0.15,
+   "seconds": 40.204
+  },
+  {
+   "seq": 20,
+   "at": "2026-11-18T11:52:18.231Z",
+   "view": "mamad_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "bfe7fe39775316f249a431286c946f97cc39e2dff980d3261c7d4383ea5b7ca0",
+   "out": "work\\pano\\polished\\mamad_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee80-305b-7db2-bfe1-25749bbaca28/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee80-305b-7db2-bfe1-25749bbaca28",
+    "request_id": "01a1ee80-305b-7db2-bfe1-25749bbaca28"
+   },
+   "settled_usd": 0.15,
+   "seconds": 37.228
+  },
+  {
+   "seq": 21,
+   "at": "2026-11-18T11:52:55.467Z",
+   "view": "bedA_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "e161130d0a8e5f0c5e6d303fbff76c1ca9d6bac384ffe16e8625279cabbac46d",
+   "out": "work\\pano\\polished\\bedA_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee80-bf6f-7930-aab9-ae3880b6bf4f/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee80-bf6f-7930-aab9-ae3880b6bf4f",
+    "request_id": "01a1ee80-bf6f-7930-aab9-ae3880b6bf4f"
+   },
+   "settled_usd": 0.15,
+   "seconds": 37.707
+  },
+  {
+   "seq": 22,
+   "at": "2026-11-18T11:53:33.180Z",
+   "view": "bedA_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "dc12d71490e6a8172a84297e00b1789b499bdf137ca9cebc0665c93978f402cc",
+   "out": "work\\pano\\polished\\bedA_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee81-523b-72f3-b984-d871ce7ef108/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee81-523b-72f3-b984-d871ce7ef108",
+    "request_id": "01a1ee81-523b-72f3-b984-d871ce7ef108"
+   },
+   "settled_usd": 0.15,
+   "seconds": 39.342
+  },
+  {
+   "seq": 23,
+   "at": "2026-11-18T11:54:12.529Z",
+   "view": "bedA_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "feb3284ed461d97e35fd45b669785fd4a41301caa7bd8a084857a6c80113225f",
+   "out": "work\\pano\\polished\\bedA_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee81-ee05-7f12-adee-1c7f4caa5fc9/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee81-ee05-7f12-adee-1c7f4caa5fc9",
+    "request_id": "01a1ee81-ee05-7f12-adee-1c7f4caa5fc9"
+   },
+   "settled_usd": 0.15,
+   "seconds": 44.828
+  },
+  {
+   "seq": 24,
+   "at": "2026-11-18T11:54:57.386Z",
+   "view": "bedA_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "e40b111143529296fcf3945aae4b1737a15c3f97e4261bdf2b7567fd2f0e6dda",
+   "out": "work\\pano\\polished\\bedA_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee82-9c5e-7623-bf48-e472ca5643fd/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee82-9c5e-7623-bf48-e472ca5643fd",
+    "request_id": "01a1ee82-9c5e-7623-bf48-e472ca5643fd"
+   },
+   "settled_usd": 0.15,
+   "seconds": 33.151
+  },
+  {
+   "seq": 25,
+   "at": "2026-11-18T11:55:30.544Z",
+   "view": "bedA_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "5229d4b7809a4a644ac962a5084f10041f1f9ad2a1e95f89921387b9bb820a8a",
+   "out": "work\\pano\\polished\\bedA_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee83-1f2c-7880-b4f4-f3ce9c947dd8/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee83-1f2c-7880-b4f4-f3ce9c947dd8",
+    "request_id": "01a1ee83-1f2c-7880-b4f4-f3ce9c947dd8"
+   },
+   "settled_usd": 0.15,
+   "seconds": 38.044
+  },
+  {
+   "seq": 26,
+   "at": "2026-11-18T11:56:08.595Z",
+   "view": "bedB_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "b707334cb2ac044f24034fea75a5977b15a6a8b295ca81c6856b43823b5a4af9",
+   "out": "work\\pano\\polished\\bedB_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee83-b15b-7351-8e48-137798eac296/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee83-b15b-7351-8e48-137798eac296",
+    "request_id": "01a1ee83-b15b-7351-8e48-137798eac296"
+   },
+   "settled_usd": 0.15,
+   "seconds": 39.833
+  },
+  {
+   "seq": 27,
+   "at": "2026-11-18T11:56:48.523Z",
+   "view": "bedB_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "ac7eab71b6925631725d57e057aa40eb7d99d754777084bd8aa134d1d0c289a7",
+   "out": "work\\pano\\polished\\bedB_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee84-4d24-7851-8c9c-3cf91aebf0fc/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee84-4d24-7851-8c9c-3cf91aebf0fc",
+    "request_id": "01a1ee84-4d24-7851-8c9c-3cf91aebf0fc"
+   },
+   "settled_usd": 0.15,
+   "seconds": 42.58
+  },
+  {
+   "seq": 28,
+   "at": "2026-11-18T11:57:31.126Z",
+   "view": "bedB_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "8f7e808d71c71fe79ba25b067a339956f66a9a914ca637910976dc5cd8586dc3",
+   "out": "work\\pano\\polished\\bedB_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee84-f5b0-7fa1-88d1-088deffeefff/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee84-f5b0-7fa1-88d1-088deffeefff",
+    "request_id": "01a1ee84-f5b0-7fa1-88d1-088deffeefff"
+   },
+   "settled_usd": 0.15,
+   "seconds": 38.965
+  },
+  {
+   "seq": 29,
+   "at": "2026-11-18T11:58:10.099Z",
+   "view": "bedB_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "b9e66225dc0ffe0a8796ebb7267d56a67c2e8fff1230e39cfe39ad7c0995dc9a",
+   "out": "work\\pano\\polished\\bedB_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee85-8c81-7fa2-9dba-d370ca7c94d8/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee85-8c81-7fa2-9dba-d370ca7c94d8",
+    "request_id": "01a1ee85-8c81-7fa2-9dba-d370ca7c94d8"
+   },
+   "settled_usd": 0.15,
+   "seconds": 42.712
+  },
+  {
+   "seq": 30,
+   "at": "2026-11-18T11:58:52.818Z",
+   "view": "bedB_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "e6ab28edb16c2dbc1aa7a7d9c516033032edf48b37fa52f0611114b9a6b4315d",
+   "out": "work\\pano\\polished\\bedB_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee86-341e-7bb3-b182-93643a657a02/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee86-341e-7bb3-b182-93643a657a02",
+    "request_id": "01a1ee86-341e-7bb3-b182-93643a657a02"
+   },
+   "settled_usd": 0.15,
+   "seconds": 42.505
+  },
+  {
+   "seq": 31,
+   "at": "2026-11-18T11:59:35.331Z",
+   "view": "bath_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "83fdda4ddacedd2ae4ad38619258811acea8cf4b85cc7111b892a47cd6aec720",
+   "out": "work\\pano\\polished\\bath_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee86-dc89-79a0-9f2b-46b3986634e2/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee86-dc89-79a0-9f2b-46b3986634e2",
+    "request_id": "01a1ee86-dc89-79a0-9f2b-46b3986634e2"
+   },
+   "settled_usd": 0.15,
+   "seconds": 48.947
+  },
+  {
+   "seq": 32,
+   "at": "2026-11-18T12:00:24.286Z",
+   "view": "bath_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "aa0a3499f890e67531ac4add8672519aeadd30d1c29722a8e5e519b217c3c8c0",
+   "out": "work\\pano\\polished\\bath_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee87-97ca-7f50-afbc-88f45d5eb65d/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee87-97ca-7f50-afbc-88f45d5eb65d",
+    "request_id": "01a1ee87-97ca-7f50-afbc-88f45d5eb65d"
+   },
+   "settled_usd": 0.15,
+   "seconds": 47.9
+  },
+  {
+   "seq": 33,
+   "at": "2026-11-18T12:01:12.193Z",
+   "view": "bath_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "f7db340ee277c7bb8e3046251a3c6344625e9d708f8b1b6a973befe077a251ea",
+   "out": "work\\pano\\polished\\bath_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee88-5312-7763-ac01-e3c514d13c19/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee88-5312-7763-ac01-e3c514d13c19",
+    "request_id": "01a1ee88-5312-7763-ac01-e3c514d13c19"
+   },
+   "settled_usd": 0.15,
+   "seconds": 37.338
+  },
+  {
+   "seq": 34,
+   "at": "2026-11-18T12:01:49.537Z",
+   "view": "bath_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "c1698a8ced5d7ab2cb51b5ff304ce59c30febb3dfca1b23c892377809947aeaa",
+   "out": "work\\pano\\polished\\bath_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee88-e3fa-7850-a5c9-e7a6f6031241/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee88-e3fa-7850-a5c9-e7a6f6031241",
+    "request_id": "01a1ee88-e3fa-7850-a5c9-e7a6f6031241"
+   },
+   "settled_usd": 0.15,
+   "seconds": 36.382
+  },
+  {
+   "seq": 35,
+   "at": "2026-11-18T12:02:25.925Z",
+   "view": "bath_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "e7a754e80901070bb8b75a4c39c58faba4789bb1e5ca6456b54acdcacbcad64c",
+   "out": "work\\pano\\polished\\bath_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee89-7edd-75b3-8b38-c7081e164f58/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee89-7edd-75b3-8b38-c7081e164f58",
+    "request_id": "01a1ee89-7edd-75b3-8b38-c7081e164f58"
+   },
+   "settled_usd": 0.15,
+   "seconds": 42.726
+  },
+  {
+   "seq": 36,
+   "at": "2026-11-18T12:03:08.659Z",
+   "view": "balcony_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "f0f93324582bc4fa09028bc09e2d825b890cd90543038010fcfaa80f6584a8ad",
+   "out": "work\\pano\\polished\\balcony_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8a-1a41-71b0-810f-8288adccede3/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8a-1a41-71b0-810f-8288adccede3",
+    "request_id": "01a1ee8a-1a41-71b0-810f-8288adccede3"
+   },
+   "settled_usd": 0.15,
+   "seconds": 40.947
+  },
+  {
+   "seq": 37,
+   "at": "2026-11-18T12:03:49.615Z",
+   "view": "balcony_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "826b54721bb20cd103d3f23f9cf1c43b6be56ef81e3a36ed31e55058b33e765d",
+   "out": "work\\pano\\polished\\balcony_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8a-ba23-7e52-a55b-49182a9a1fbb/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8a-ba23-7e52-a55b-49182a9a1fbb",
+    "request_id": "01a1ee8a-ba23-7e52-a55b-49182a9a1fbb"
+   },
+   "settled_usd": 0.15,
+   "seconds": 39.806
+  },
+  {
+   "seq": 38,
+   "at": "2026-11-18T12:04:29.429Z",
+   "view": "balcony_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "e76c88d930b7299f975d57ab163ffbbcbe78d70249eebd111c19757af4fc0e74",
+   "out": "work\\pano\\polished\\balcony_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8b-569b-7151-8882-0a417f80ed11/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8b-569b-7151-8882-0a417f80ed11",
+    "request_id": "01a1ee8b-569b-7151-8882-0a417f80ed11"
+   },
+   "settled_usd": 0.15,
+   "seconds": 43.037
+  },
+  {
+   "seq": 39,
+   "at": "2026-11-18T12:05:12.483Z",
+   "view": "balcony_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "15a3a98a51b2cfae3cbf2270741a7277a34540ad896df41bc7175a5659f3b797",
+   "out": "work\\pano\\polished\\balcony_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8b-ff6b-7310-914b-fc0801877f31/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8b-ff6b-7310-914b-fc0801877f31",
+    "request_id": "01a1ee8b-ff6b-7310-914b-fc0801877f31"
+   },
+   "settled_usd": 0.15,
+   "seconds": 38.656
+  },
+  {
+   "seq": 40,
+   "at": "2026-11-18T12:05:51.151Z",
+   "view": "balcony_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "67cc082af9815a51353849466b3ca13f6c2c356b30d3e250544b6f0db15bbef0",
+   "out": "work\\pano\\polished\\balcony_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8c-9659-75b1-8fd4-07c7b0686cd7/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8c-9659-75b1-8fd4-07c7b0686cd7",
+    "request_id": "01a1ee8c-9659-75b1-8fd4-07c7b0686cd7"
+   },
+   "settled_usd": 0.15,
+   "seconds": 46.579
+  },
+  {
+   "seq": 41,
+   "at": "2026-11-18T12:06:37.737Z",
+   "view": "entrance_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "7b6fc2f07903d1357513cf78e272d26f76138b21fb8b5dc3a470a6a4c95e848b",
+   "out": "work\\pano\\polished\\entrance_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8d-4b45-7a11-967b-ec9752deefc3/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8d-4b45-7a11-967b-ec9752deefc3",
+    "request_id": "01a1ee8d-4b45-7a11-967b-ec9752deefc3"
+   },
+   "settled_usd": 0.15,
+   "seconds": 43.881
+  },
+  {
+   "seq": 42,
+   "at": "2026-11-18T12:07:21.625Z",
+   "view": "entrance_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "7c4c5e92c20838e27c83228a70c389971fe079680e0444a3641cc99b96f3df12",
+   "out": "work\\pano\\polished\\entrance_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8d-f54f-7581-8ad3-7e601afb7245/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8d-f54f-7581-8ad3-7e601afb7245",
+    "request_id": "01a1ee8d-f54f-7581-8ad3-7e601afb7245"
+   },
+   "settled_usd": 0.15,
+   "seconds": 36.923
+  },
+  {
+   "seq": 43,
+   "at": "2026-11-18T12:07:58.555Z",
+   "view": "entrance_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "f921027fb96fb8cc0ad9a855dff66655c4c6bc01727cee378b2df16fd1c6da9b",
+   "out": "work\\pano\\polished\\entrance_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8e-85a9-7c60-b15b-b92740a49d4d/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8e-85a9-7c60-b15b-b92740a49d4d",
+    "request_id": "01a1ee8e-85a9-7c60-b15b-b92740a49d4d"
+   },
+   "settled_usd": 0.15,
+   "seconds": 41.143
+  },
+  {
+   "seq": 44,
+   "at": "2026-11-18T12:08:39.711Z",
+   "view": "entrance_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "1059f01dddc7f19708a12e457f37d435b8c7c08bd3938363ab99ca94b9e609db",
+   "out": "work\\pano\\polished\\entrance_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8f-2671-7c11-9b14-c7ef1f2dad43/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8f-2671-7c11-9b14-c7ef1f2dad43",
+    "request_id": "01a1ee8f-2671-7c11-9b14-c7ef1f2dad43"
+   },
+   "settled_usd": 0.15,
+   "seconds": 39.193
+  },
+  {
+   "seq": 45,
+   "at": "2026-11-18T12:09:18.915Z",
+   "view": "entrance_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "1f5b63b9036b9deb9a58eb80ef75a579615825d55fa119da72a69e5b4f0dc5b4",
+   "out": "work\\pano\\polished\\entrance_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8f-c170-7b02-a822-0ca8714e92e9/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8f-c170-7b02-a822-0ca8714e92e9",
+    "request_id": "01a1ee8f-c170-7b02-a822-0ca8714e92e9"
+   },
+   "settled_usd": 0.15,
+   "seconds": 40.32
+  },
+  {
+   "seq": 46,
+   "at": "2026-11-18T12:09:59.250Z",
+   "view": "dining_front",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "756b7f366841a6673b7f5b9b92ca4319375a0ab2988e07bd8572cdc2bd8915de",
+   "out": "work\\pano\\polished\\dining_front_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee90-5f50-7913-8e8e-1da00f5c87bb/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee90-5f50-7913-8e8e-1da00f5c87bb",
+    "request_id": "01a1ee90-5f50-7913-8e8e-1da00f5c87bb"
+   },
+   "settled_usd": 0.15,
+   "seconds": 42.826
+  },
+  {
+   "seq": 47,
+   "at": "2026-11-18T12:10:42.089Z",
+   "view": "dining_left",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "f716cbe55ed69d7a844df485faf5fd6fcc029f5926fe0a6b416c9d4bd8d949d9",
+   "out": "work\\pano\\polished\\dining_left_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee91-0580-7a82-a707-31ee6808ca5b/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee91-0580-7a82-a707-31ee6808ca5b",
+    "request_id": "01a1ee91-0580-7a82-a707-31ee6808ca5b"
+   },
+   "settled_usd": 0.15,
+   "seconds": 37.994
+  },
+  {
+   "seq": 48,
+   "at": "2026-11-18T12:11:20.089Z",
+   "view": "dining_back",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "26d152daaf12e00280bdd1f76fa9292797fb5f348ca81d2291ef7bcf69166930",
+   "out": "work\\pano\\polished\\dining_back_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee91-9a97-7d93-9d7b-7eebba6b5f46/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee91-9a97-7d93-9d7b-7eebba6b5f46",
+    "request_id": "01a1ee91-9a97-7d93-9d7b-7eebba6b5f46"
+   },
+   "settled_usd": 0.15,
+   "seconds": 37.765
+  },
+  {
+   "seq": 49,
+   "at": "2026-11-18T12:11:57.864Z",
+   "view": "dining_right",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "0e5c8d697b2b2da3ea5f335e463202f324498f3c6c9ceaa07c63dac30b8d12b7",
+   "out": "work\\pano\\polished\\dining_right_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee92-2d28-7111-b834-5faee2a192bb/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee92-2d28-7111-b834-5faee2a192bb",
+    "request_id": "01a1ee92-2d28-7111-b834-5faee2a192bb"
+   },
+   "settled_usd": 0.15,
+   "seconds": 38.067
+  },
+  {
+   "seq": 50,
+   "at": "2026-11-18T12:12:35.950Z",
+   "view": "dining_down",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "5b38b86400531c66e42bac18fbcff69526882de2cd07c15fe88c5fea9515989a",
+   "out": "work\\pano\\polished\\dining_down_real.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee92-c37b-7e43-842b-81fd4719b435/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee92-c37b-7e43-842b-81fd4719b435",
+    "request_id": "01a1ee92-c37b-7e43-842b-81fd4719b435"
+   },
+   "settled_usd": 0.15,
+   "seconds": 48.666
+  },
+  {
+   "seq": 51,
+   "at": "2026-11-18T11:45:21.153186Z",
+   "view": "bakeoff:living_front",
+   "model": "fal-ai/flux-2-pro/edit",
+   "reserved_usd": 0.08,
+   "settled_usd": 0.08,
+   "status": "settled",
+   "out": "work/pano/bakeoff/living_front__flux2pro.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 52,
+   "at": "2026-11-18T11:45:16.032071Z",
+   "view": "bakeoff:living_front",
+   "model": "fal-ai/gpt-image-1.5/edit",
+   "reserved_usd": 0.25,
+   "settled_usd": 0.25,
+   "status": "settled",
+   "out": "work/pano/bakeoff/living_front__gptimg15.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 53,
+   "at": "2026-11-18T11:46:26.483071Z",
+   "view": "bakeoff:living_front",
+   "model": "fal-ai/qwen-image-edit-2509",
+   "reserved_usd": 0.05,
+   "settled_usd": 0.05,
+   "status": "settled",
+   "out": "work/pano/bakeoff/living_front__qwen2509.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 54,
+   "at": "2026-11-18T11:45:28.673468Z",
+   "view": "bakeoff:living_front",
+   "model": "fal-ai/bytedance/seedream/v4.5/edit",
+   "reserved_usd": 0.05,
+   "settled_usd": 0.05,
+   "status": "settled",
+   "out": "work/pano/bakeoff/living_front__seedream45.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 55,
+   "at": "2026-11-18T11:45:24.645890Z",
+   "view": "bakeoff:parents_front",
+   "model": "fal-ai/flux-2-pro/edit",
+   "reserved_usd": 0.08,
+   "settled_usd": 0.08,
+   "status": "settled",
+   "out": "work/pano/bakeoff/parents_front__flux2pro.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 56,
+   "at": "2026-11-18T11:45:16.805058Z",
+   "view": "bakeoff:parents_front",
+   "model": "fal-ai/gpt-image-1.5/edit",
+   "reserved_usd": 0.25,
+   "settled_usd": 0.25,
+   "status": "settled",
+   "out": "work/pano/bakeoff/parents_front__gptimg15.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 57,
+   "at": "2026-11-18T11:46:33.010572Z",
+   "view": "bakeoff:parents_front",
+   "model": "fal-ai/qwen-image-edit-2509",
+   "reserved_usd": 0.05,
+   "settled_usd": 0.05,
+   "status": "settled",
+   "out": "work/pano/bakeoff/parents_front__qwen2509.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 58,
+   "at": "2026-11-18T11:45:27.726796Z",
+   "view": "bakeoff:parents_front",
+   "model": "fal-ai/bytedance/seedream/v4.5/edit",
+   "reserved_usd": 0.05,
+   "settled_usd": 0.05,
+   "status": "settled",
+   "out": "work/pano/bakeoff/parents_front__seedream45.png",
+   "note": "row restored 2026-11-18 from the output on disk: the first step-32 run, stopped but still alive, rewrote the ledger after step 33 wrote it; price = the reserve (fal list price not read)"
+  },
+  {
+   "seq": 59,
+   "at": "2026-11-18T12:21:30.799Z",
+   "view": "gpt25:parents",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "148b831cb4497f52432b6895890bf3cc50aa23c36c5bac24c5fb3c179efaf51a",
+   "out": "work\\pano\\gpt25\\parents.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee9a-ef4b-72b2-b5ca-e4063c79cbca/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee9a-ef4b-72b2-b5ca-e4063c79cbca",
+    "request_id": "01a1ee9a-ef4b-72b2-b5ca-e4063c79cbca"
+   },
+   "settled_usd": 1.2,
+   "seconds": 64.59
+  },
+  {
+   "seq": 60,
+   "at": "2026-11-18T12:31:41.249Z",
+   "view": "gpt25:living",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "df4af4430ba5282ee607bd89c2ed402e244bcc478df86e66efe9ffa54b4164be",
+   "out": "work\\pano\\gpt25\\living.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea4-3cb8-7230-8d77-e0f31a33c560/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea4-3cb8-7230-8d77-e0f31a33c560",
+    "request_id": "01a1eea4-3cb8-7230-8d77-e0f31a33c560"
+   },
+   "settled_usd": 1.2,
+   "seconds": 67.12
+  },
+  {
+   "seq": 61,
+   "at": "2026-11-18T12:32:48.386Z",
+   "view": "gpt25:kitchen",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "6dc8105c361b804ad0a3648b182ed7ced1b0a0d5e169dc369266cbc23addc9fa",
+   "out": "work\\pano\\gpt25\\kitchen.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea5-41c3-78b3-b624-503f3205cd5f/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea5-41c3-78b3-b624-503f3205cd5f",
+    "request_id": "01a1eea5-41c3-78b3-b624-503f3205cd5f"
+   },
+   "settled_usd": 1.2,
+   "seconds": 68.967
+  },
+  {
+   "seq": 62,
+   "at": "2026-11-18T12:33:57.369Z",
+   "view": "gpt25:dining",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "a619db50f49cc6aa78b88924296c7254ac983a5c2cbd9003fe51dffef256dea4",
+   "out": "work\\pano\\gpt25\\dining.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea6-4f95-7873-81dd-8cfa0947c242/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea6-4f95-7873-81dd-8cfa0947c242",
+    "request_id": "01a1eea6-4f95-7873-81dd-8cfa0947c242"
+   },
+   "settled_usd": 1.2,
+   "seconds": 52.127
+  },
+  {
+   "seq": 63,
+   "at": "2026-11-18T12:34:49.524Z",
+   "view": "gpt25:mamad",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "11d3f97ba489e98fe0332066b87a11c77b120e508725f5a48baff5c25fd72e94",
+   "out": "work\\pano\\gpt25\\mamad.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea7-1ac2-7f90-9896-436ae6950443/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea7-1ac2-7f90-9896-436ae6950443",
+    "request_id": "01a1eea7-1ac2-7f90-9896-436ae6950443"
+   },
+   "settled_usd": 1.2,
+   "seconds": 63.143
+  },
+  {
+   "seq": 64,
+   "at": "2026-11-18T12:35:52.698Z",
+   "view": "gpt25:bedA",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "8c2aaa432258cd061f8fe251e3363d6300c24d90d0c92edc6b7d8e9a72547db8",
+   "out": "work\\pano\\gpt25\\bedA.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea8-11ae-7831-885f-669b78e612ba/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea8-11ae-7831-885f-669b78e612ba",
+    "request_id": "01a1eea8-11ae-7831-885f-669b78e612ba"
+   },
+   "settled_usd": 1.2,
+   "seconds": 61.882
+  },
+  {
+   "seq": 65,
+   "at": "2026-11-18T12:36:54.622Z",
+   "view": "gpt25:bedB",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "bf5fadf0d65f597a9f829d521d45f017bee46610e51a45dbec711eae0d840908",
+   "out": "work\\pano\\gpt25\\bedB.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea9-0398-70c3-8443-a0ee4444976f/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea9-0398-70c3-8443-a0ee4444976f",
+    "request_id": "01a1eea9-0398-70c3-8443-a0ee4444976f"
+   },
+   "settled_usd": 1.2,
+   "seconds": 57.65
+  },
+  {
+   "seq": 66,
+   "at": "2026-11-18T12:37:52.296Z",
+   "view": "gpt25:bath",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "f6033e595e390325ba91e22485e17839df20d7f35ad420a66467ded7f4e5ea87",
+   "out": "work\\pano\\gpt25\\bath.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea9-e4db-7162-bc06-0d722f52da8b/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea9-e4db-7162-bc06-0d722f52da8b",
+    "request_id": "01a1eea9-e4db-7162-bc06-0d722f52da8b"
+   },
+   "settled_usd": 1.2,
+   "seconds": 59.138
+  },
+  {
+   "seq": 67,
+   "at": "2026-11-18T12:38:51.457Z",
+   "view": "gpt25:entrance",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "bcd8caffc7777a9d57896362de5719fdfeb3bd5bc2fd9981144f8488438cd2fe",
+   "out": "work\\pano\\gpt25\\entrance.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeaa-cb46-7520-acc3-1bae64999ff2/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeaa-cb46-7520-acc3-1bae64999ff2",
+    "request_id": "01a1eeaa-cb46-7520-acc3-1bae64999ff2"
+   },
+   "settled_usd": 1.2,
+   "seconds": 57.181
+  },
+  {
+   "seq": 68,
+   "at": "2026-11-18T12:39:48.662Z",
+   "view": "gpt25:balcony",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "f790251b7137e0d3959f01e40d1aeb6cc976e0941f496502fcdce6b53ac20632",
+   "out": "work\\pano\\gpt25\\balcony.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeab-ac34-7d62-920c-20e06e412b6f/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeab-ac34-7d62-920c-20e06e412b6f",
+    "request_id": "01a1eeab-ac34-7d62-920c-20e06e412b6f"
+   },
+   "settled_usd": 1.2,
+   "seconds": 68.528
+  },
+  {
+   "seq": 69,
+   "at": "2026-11-18T12:51:11.334918+00:00",
+   "view": "live canary: sofa fabric change via /api/edit",
+   "model": "fal-ai/nano-banana/edit",
+   "reserved_usd": 0.04,
+   "status": "settled",
+   "settled_usd": 0.04,
+   "result": "api 200, 11.5 s, change applied (work/pano/live/canary-after.png)"
+  },
+  {
+   "seq": 70,
+   "at": "2026-11-18T13:33:56.354Z",
+   "view": "gpt25b:living",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "0dd96b95354adad65488a7950accdb0f3da6c30468977eb0b7b1ff53c65f5fa6",
+   "out": "work\\pano\\gpt25b\\living.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eedd-3be9-7a22-a1a4-f0196a1a84e7/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eedd-3be9-7a22-a1a4-f0196a1a84e7",
+    "request_id": "01a1eedd-3be9-7a22-a1a4-f0196a1a84e7"
+   },
+   "settled_usd": 1.2,
+   "seconds": 60.364
+  },
+  {
+   "seq": 71,
+   "at": "2026-11-18T13:34:56.790Z",
+   "view": "gpt25b:parents",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "4e72f5403df390d450062b6ef78462bb90e640c84b611a18358867f34c68b0ab",
+   "out": "work\\pano\\gpt25b\\parents.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eede-26ce-7ac0-aa4b-035d4bb4977e/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eede-26ce-7ac0-aa4b-035d4bb4977e",
+    "request_id": "01a1eede-26ce-7ac0-aa4b-035d4bb4977e"
+   },
+   "settled_usd": 1.2,
+   "seconds": 56.629
+  },
+  {
+   "seq": 72,
+   "at": "2026-11-18T13:35:53.449Z",
+   "view": "gpt25b:kitchen",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "67d872b8ce67388381ed8736e6205bb568399026b5edd5919e50402c4f89e617",
+   "out": "work\\pano\\gpt25b\\kitchen.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eedf-027d-7e91-9e5f-c4ccb31122c3/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eedf-027d-7e91-9e5f-c4ccb31122c3",
+    "request_id": "01a1eedf-027d-7e91-9e5f-c4ccb31122c3"
+   },
+   "settled_usd": 1.2,
+   "seconds": 80.812
+  },
+  {
+   "seq": 73,
+   "at": "2026-11-18T13:37:14.297Z",
+   "view": "gpt25b:dining",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "849793c7262c186557688d9ee035ca33e3ed808d0b1280eae1f4329e4c480f55",
+   "out": "work\\pano\\gpt25b\\dining.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee0-4315-7192-8cf2-998f5f7ecc88/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee0-4315-7192-8cf2-998f5f7ecc88",
+    "request_id": "01a1eee0-4315-7192-8cf2-998f5f7ecc88"
+   },
+   "settled_usd": 1.2,
+   "seconds": 52.534
+  },
+  {
+   "seq": 74,
+   "at": "2026-11-18T13:38:06.863Z",
+   "view": "gpt25b:mamad",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "a9aa2262686da14326ca2b29ad247681ae7c687aa9fa6d9e536b3241b0e2abc9",
+   "out": "work\\pano\\gpt25b\\mamad.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee1-0c6b-7f43-b0bd-e6f4516f7c3d/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee1-0c6b-7f43-b0bd-e6f4516f7c3d",
+    "request_id": "01a1eee1-0c6b-7f43-b0bd-e6f4516f7c3d"
+   },
+   "settled_usd": 1.2,
+   "seconds": 55.977
+  },
+  {
+   "seq": 75,
+   "at": "2026-11-18T13:39:02.885Z",
+   "view": "gpt25b:bedA",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "dd25e57bb82c96146870d190e3ba4a006db19ad91d71cc03cbdabad526ac02ba",
+   "out": "work\\pano\\gpt25b\\bedA.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee1-e723-7bf3-9bff-ef4dc5ba2242/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee1-e723-7bf3-9bff-ef4dc5ba2242",
+    "request_id": "01a1eee1-e723-7bf3-9bff-ef4dc5ba2242"
+   },
+   "settled_usd": 1.2,
+   "seconds": 75.357
+  },
+  {
+   "seq": 76,
+   "at": "2026-11-18T13:40:18.260Z",
+   "view": "gpt25b:bedB",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "0716f8c0cac3cb726d3591d7b0c184b446819126938a023f96cfd6583410fafd",
+   "out": "work\\pano\\gpt25b\\bedB.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee3-0d85-7be2-8086-6c9845b54025/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee3-0d85-7be2-8086-6c9845b54025",
+    "request_id": "01a1eee3-0d85-7be2-8086-6c9845b54025"
+   },
+   "settled_usd": 1.2,
+   "seconds": 57.748
+  },
+  {
+   "seq": 77,
+   "at": "2026-11-18T13:41:16.025Z",
+   "view": "gpt25b:bath",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "0bc25e7a368f1437d7eb4e20e662f7503c0c20bfecf4008bf2e5a0fa4d12551d",
+   "out": "work\\pano\\gpt25b\\bath.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee3-ee80-7f73-8a28-08522e899b98/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee3-ee80-7f73-8a28-08522e899b98",
+    "request_id": "01a1eee3-ee80-7f73-8a28-08522e899b98"
+   },
+   "settled_usd": 1.2,
+   "note": "collected from the queue after a dropped connection (not re-sent)"
+  },
+  {
+   "seq": 78,
+   "at": "2026-11-18T13:42:54.815Z",
+   "view": "gpt25b:entrance",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "475879fc250eeabb5f9295db6a6c0ecaa5aac5f2c9f649b171c4fa00f8be15e4",
+   "out": "work\\pano\\gpt25b\\entrance.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee5-7e40-77d1-8fd3-8715c9c5e316/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee5-7e40-77d1-8fd3-8715c9c5e316",
+    "request_id": "01a1eee5-7e40-77d1-8fd3-8715c9c5e316"
+   },
+   "settled_usd": 1.2,
+   "seconds": 71.806
+  },
+  {
+   "seq": 79,
+   "at": "2026-11-18T13:44:06.658Z",
+   "view": "gpt25b:balcony",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "dbd5eceecea24e97c5e81eff0c529e147cf0c17437d86d53141bcbf45b61c1d9",
+   "out": "work\\pano\\gpt25b\\balcony.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee6-90fa-7e72-b073-9f8bce9c47c5/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eee6-90fa-7e72-b073-9f8bce9c47c5",
+    "request_id": "01a1eee6-90fa-7e72-b073-9f8bce9c47c5"
+   },
+   "settled_usd": 1.2,
+   "seconds": 78.229
+  },
+  {
+   "seq": 80,
+   "at": "2026-11-18T13:47:41.357Z",
+   "view": "upscale:living",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "3e347e0fde7225dcca56eacd5711557e741ddb4cefc25401420093733adbaaf4",
+   "out": "work\\pano\\up\\living.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eee9-d53a-7272-aa7f-1a28e51a0c88/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eee9-d53a-7272-aa7f-1a28e51a0c88",
+    "request_id": "01a1eee9-d53a-7272-aa7f-1a28e51a0c88"
+   },
+   "settled_usd": 0.03,
+   "seconds": 43.928,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 81,
+   "at": "2026-11-18T13:48:52.152Z",
+   "view": "upscale:parents",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "cf1620294cf28f2d0df6db103b51b391b3036ef775aa1007775e37a8bab352dd",
+   "out": "work\\pano\\up\\parents.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-7e28-7403-ab7b-7e304a082b6c/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-7e28-7403-ab7b-7e304a082b6c",
+    "request_id": "01a1eeeb-7e28-7403-ab7b-7e304a082b6c"
+   },
+   "settled_usd": 0.03,
+   "seconds": 79.127,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 82,
+   "at": "2026-11-18T13:48:56.784Z",
+   "view": "upscale:kitchen",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "1b8b1e10d6f07783e99449d21e4bf41f33edc2865631612460ef49330b3e01b4",
+   "out": "work\\pano\\up\\kitchen.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8bfa-7450-8ed1-a7d42b8583f8/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8bfa-7450-8ed1-a7d42b8583f8",
+    "request_id": "01a1eeeb-8bfa-7450-8ed1-a7d42b8583f8"
+   },
+   "settled_usd": 0.03,
+   "seconds": 80.578,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 83,
+   "at": "2026-11-18T13:49:01.400Z",
+   "view": "upscale:dining",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "c622b5e65e3825a27096348609e5ded03b0e476e2c50abdb9e3151fe567fb916",
+   "out": "work\\pano\\up\\dining.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8085-7661-8b1a-338d9b5d4c5c/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8085-7661-8b1a-338d9b5d4c5c",
+    "request_id": "01a1eeeb-8085-7661-8b1a-338d9b5d4c5c"
+   },
+   "settled_usd": 0.03,
+   "seconds": 70.577,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 84,
+   "at": "2026-11-18T13:49:05.922Z",
+   "view": "upscale:mamad",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "b329fdacf8db67801780866f9a8562a16d11d4bf65f9996357af3db192855f1f",
+   "out": "work\\pano\\up\\mamad.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8801-77a1-9bf6-8da6c0423508/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8801-77a1-9bf6-8da6c0423508",
+    "request_id": "01a1eeeb-8801-77a1-9bf6-8da6c0423508"
+   },
+   "settled_usd": 0.03,
+   "seconds": 69.958,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 85,
+   "at": "2026-11-18T13:49:10.548Z",
+   "view": "upscale:bedA",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "50e6bfbae0c1e31bf4ad61ef8bee44b317c20dfd83e27a47ca01b407d63001db",
+   "out": "work\\pano\\up\\bedA.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-9d7a-7260-9888-f1be43b323b3/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-9d7a-7260-9888-f1be43b323b3",
+    "request_id": "01a1eeeb-9d7a-7260-9888-f1be43b323b3"
+   },
+   "settled_usd": 0.03,
+   "seconds": 81.814,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 86,
+   "at": "2026-11-18T13:49:14.908Z",
+   "view": "upscale:bedB",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "f7b288be605f5ca9cd10437b5a305f2f816749b5e3b609bf92bcaeb80808f7f4",
+   "out": "work\\pano\\up\\bedB.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8a01-76b2-8e80-94a65164a198/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-8a01-76b2-8e80-94a65164a198",
+    "request_id": "01a1eeeb-8a01-76b2-8e80-94a65164a198"
+   },
+   "settled_usd": 0.03,
+   "seconds": 60.417,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 87,
+   "at": "2026-11-18T13:49:19.266Z",
+   "view": "upscale:bath",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "502e8a7c8e9d6ddba65a747ea91fcb780e82bc4d13ed8ce564bc0a01a5e231b4",
+   "out": "work\\pano\\up\\bath.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-7d41-7523-ba20-d81effaaf2b7/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-7d41-7523-ba20-d81effaaf2b7",
+    "request_id": "01a1eeeb-7d41-7523-ba20-d81effaaf2b7"
+   },
+   "settled_usd": 0.03,
+   "seconds": 52.34,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 88,
+   "at": "2026-11-18T13:49:22.727Z",
+   "view": "upscale:entrance",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "5f723100864d84ec2d6b240cf609c1b19702f46283bf5595e6e29ee6ebc6716c",
+   "out": "work\\pano\\up\\entrance.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-93d4-7ce1-87a3-d10ed128e76a/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-93d4-7ce1-87a3-d10ed128e76a",
+    "request_id": "01a1eeeb-93d4-7ce1-87a3-d10ed128e76a"
+   },
+   "settled_usd": 0.03,
+   "seconds": 55.836,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 89,
+   "at": "2026-11-18T13:49:27.055Z",
+   "view": "upscale:balcony",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "8b45215ef0b5fbde248c04eab3712bf08b9da4a090030eb66aa22edc1421db29",
+   "out": "work\\pano\\up\\balcony.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-841b-78d3-950f-8a2ee9a72af3/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1eeeb-841b-78d3-950f-8a2ee9a72af3",
+    "request_id": "01a1eeeb-841b-78d3-950f-8a2ee9a72af3"
+   },
+   "settled_usd": 0.03,
+   "seconds": 48.741,
+   "note": "price per fal model page «$0.001 per megapixel» × 29.5 MP output (read 2026-11-18); reserve was $0.30"
+  },
+  {
+   "seq": 90,
+   "at": "2026-11-18T14:01:28.468Z",
+   "view": "realA:living",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "2a96b3daae3b34488d42bc2bd9318e4ad16fe68a21aae6538f6ea1225082095c",
+   "out": "work\\pano\\realA\\living.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eef6-77ea-7a43-bc05-b24b8bfd8caf/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eef6-77ea-7a43-bc05-b24b8bfd8caf",
+    "request_id": "01a1eef6-77ea-7a43-bc05-b24b8bfd8caf"
+   },
+   "settled_usd": 1.2,
+   "seconds": 60.087
+  },
+  {
+   "seq": 91,
+   "at": "2026-11-18T14:02:34.994Z",
+   "view": "realB:living",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "21f9aba0670322c6e9c36b05131e9afacd9e51e082755f9ff32621ad08489601",
+   "out": "work\\pano\\realB\\living.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eef7-78f8-7493-b054-38a1d5315606/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eef7-78f8-7493-b054-38a1d5315606",
+    "request_id": "01a1eef7-78f8-7493-b054-38a1d5315606"
+   },
+   "settled_usd": 1.2,
+   "seconds": 76.781
+  },
+  {
+   "seq": 92,
+   "at": "2026-11-18T14:09:00.819Z",
+   "view": "realB:parents",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "f856ef870327517919b05688fe6d6cc9e0bca58b623fd3cdc2e7282d3f163d61",
+   "out": "work\\pano\\realB\\parents.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eefd-5c53-72a0-a82a-931cae83cae7/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eefd-5c53-72a0-a82a-931cae83cae7",
+    "request_id": "01a1eefd-5c53-72a0-a82a-931cae83cae7"
+   },
+   "settled_usd": 1.2,
+   "seconds": 62.741
+  },
+  {
+   "seq": 93,
+   "at": "2026-11-18T14:10:08.748Z",
+   "view": "realB:kitchen",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "ede15436b93ec524e4bb50c0c977036402aa479031034cef0b41f2b64237f258",
+   "out": "work\\pano\\realB\\kitchen.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eefe-6362-7183-9019-19a42d2edf4b/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eefe-6362-7183-9019-19a42d2edf4b",
+    "request_id": "01a1eefe-6362-7183-9019-19a42d2edf4b"
+   },
+   "settled_usd": 1.2,
+   "seconds": 96.724
+  },
+  {
+   "seq": 94,
+   "at": "2026-11-18T14:11:59.474Z",
+   "view": "realB:dining",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "failed",
+   "inputs_hash": "f4dd00ecae1fb7843bdc890e17cc737f3045cd46833207bd610d53a2fd1e469d",
+   "out": "work\\pano\\realB\\dining.png",
+   "error": "The operation was aborted due to timeout"
+  },
+  {
+   "seq": 95,
+   "at": "2026-11-18T18:13:07.372Z",
+   "view": "realB:mamad",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "failed",
+   "inputs_hash": "8648a91436476a1ad22e4ed96e9567458ebd29dca2c78b07900eeeeb3bd94393",
+   "out": "work\\pano\\realB\\mamad.png",
+   "error": "fetch failed"
+  },
+  {
+   "seq": 96,
+   "at": "2026-11-18T18:13:12.791Z",
+   "view": "realB:bedA",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "461ac723ed48c45e6e7c4089d1916a6dd1138a0614531c0273ac8d633bd4eeb3",
+   "out": "work\\pano\\realB\\bedA.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efdc-e6cb-78a0-ba71-972c03230586/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efdc-e6cb-78a0-ba71-972c03230586",
+    "request_id": "01a1efdc-e6cb-78a0-ba71-972c03230586"
+   },
+   "settled_usd": 1.2,
+   "seconds": 126.279
+  },
+  {
+   "seq": 97,
+   "at": "2026-11-18T18:15:22.778Z",
+   "view": "realB:bedB",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "reserved",
+   "inputs_hash": "e48af55b0060e85a426ebca1cbc1fe90ed3f2feee7498c43c908642dadc7d97b",
+   "out": "work\\pano\\realB\\bedB.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efde-e220-7140-be4f-627dd3884327/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efde-e220-7140-be4f-627dd3884327",
+    "request_id": "01a1efde-e220-7140-be4f-627dd3884327"
+   }
+  },
+  {
+   "seq": 98,
+   "at": "2026-11-18T18:15:30.411Z",
+   "view": "realB:dining",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "f4dd00ecae1fb7843bdc890e17cc737f3045cd46833207bd610d53a2fd1e469d",
+   "out": "work\\pano\\realB\\dining.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efdf-0195-7062-b6f9-1d36e3f5ddd6/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efdf-0195-7062-b6f9-1d36e3f5ddd6",
+    "request_id": "01a1efdf-0195-7062-b6f9-1d36e3f5ddd6"
+   },
+   "settled_usd": 1.2,
+   "seconds": 84.446
+  },
+  {
+   "seq": 99,
+   "at": "2026-11-18T18:16:55.134Z",
+   "view": "realB:mamad",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "8648a91436476a1ad22e4ed96e9567458ebd29dca2c78b07900eeeeb3bd94393",
+   "out": "work\\pano\\realB\\mamad.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe0-4b4f-7df1-92f4-34463e65f36c/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe0-4b4f-7df1-92f4-34463e65f36c",
+    "request_id": "01a1efe0-4b4f-7df1-92f4-34463e65f36c"
+   },
+   "settled_usd": 1.2,
+   "seconds": 133.823
+  },
+  {
+   "seq": 100,
+   "at": "2026-11-18T18:19:08.979Z",
+   "view": "realB:bedB",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "e48af55b0060e85a426ebca1cbc1fe90ed3f2feee7498c43c908642dadc7d97b",
+   "out": "work\\pano\\realB\\bedB.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe2-55de-7c02-8772-e336d01854fe/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe2-55de-7c02-8772-e336d01854fe",
+    "request_id": "01a1efe2-55de-7c02-8772-e336d01854fe"
+   },
+   "settled_usd": 1.2,
+   "seconds": 115.665
+  },
+  {
+   "seq": 101,
+   "at": "2026-11-18T18:21:04.716Z",
+   "view": "realB:bath",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "65827db75d0af52813731256c3c0c16e2bc837ae49f7e1388e13e667f0888e4d",
+   "out": "work\\pano\\realB\\bath.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe4-19cb-7e93-a7ab-de4ae9488b2c/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe4-19cb-7e93-a7ab-de4ae9488b2c",
+    "request_id": "01a1efe4-19cb-7e93-a7ab-de4ae9488b2c"
+   },
+   "settled_usd": 1.2,
+   "seconds": 83.888
+  },
+  {
+   "seq": 102,
+   "at": "2026-11-18T18:22:28.636Z",
+   "view": "realB:entrance",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "751801b2573cc05b2c66d3c39a4101c62c1656c3214892a7fb6fb42d6139bc10",
+   "out": "work\\pano\\realB\\entrance.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe5-628c-72f2-bb0b-981f2d08dda8/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe5-628c-72f2-bb0b-981f2d08dda8",
+    "request_id": "01a1efe5-628c-72f2-bb0b-981f2d08dda8"
+   },
+   "settled_usd": 1.2,
+   "seconds": 128.038
+  },
+  {
+   "seq": 103,
+   "at": "2026-11-18T18:24:36.830Z",
+   "view": "realB:balcony",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "reserved",
+   "inputs_hash": "54e16539c80506a2a3f227fe1007ed624f7bbc6b64c05a1dbe68ba2f9aaad246",
+   "out": "work\\pano\\realB\\balcony.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe7-5778-7163-948e-2bd65e2a7ae9/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efe7-5778-7163-948e-2bd65e2a7ae9",
+    "request_id": "01a1efe7-5778-7163-948e-2bd65e2a7ae9"
+   }
+  },
+  {
+   "seq": 104,
+   "at": "2026-11-18T18:25:06.514Z",
+   "view": "upscale:living",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "10be0be8da74ab8d4206ba52945410a2630c0a26f33d6e4abdf110bc17ae8d1e",
+   "out": "work\\pano\\upB\\living.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-883e-7d41-bb4d-b41eb64bf8b5/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-883e-7d41-bb4d-b41eb64bf8b5",
+    "request_id": "01a1efe8-883e-7d41-bb4d-b41eb64bf8b5"
+   },
+   "settled_usd": 0.03,
+   "seconds": 92.63
+  },
+  {
+   "seq": 105,
+   "at": "2026-11-18T18:25:12.603Z",
+   "view": "upscale:parents",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "1c96c249bcc9e97a4eb81f1d8e250f4c3559dd12f30ee0498342ebc3665a26f8",
+   "out": "work\\pano\\upB\\parents.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8893-7ba2-811e-d3ff473706fb/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8893-7ba2-811e-d3ff473706fb",
+    "request_id": "01a1efe8-8893-7ba2-811e-d3ff473706fb"
+   },
+   "settled_usd": 0.03,
+   "seconds": 86.676
+  },
+  {
+   "seq": 106,
+   "at": "2026-11-18T18:25:19.000Z",
+   "view": "upscale:kitchen",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "65ae96e82de57e676643c3997a68bb8add906a9ff86528ae04dc6d93dd908068",
+   "out": "work\\pano\\upB\\kitchen.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-876a-7b32-b9a8-b1630fb8339d/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-876a-7b32-b9a8-b1630fb8339d",
+    "request_id": "01a1efe8-876a-7b32-b9a8-b1630fb8339d"
+   },
+   "settled_usd": 0.03,
+   "seconds": 79.4
+  },
+  {
+   "seq": 107,
+   "at": "2026-11-18T18:25:24.426Z",
+   "view": "upscale:dining",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "ebe05225d8e7f7a5e5271bde5856db0299514c63722b735e50ef58f575098e30",
+   "out": "work\\pano\\upB\\dining.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8913-7883-a14c-59345a7d4f2d/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8913-7883-a14c-59345a7d4f2d",
+    "request_id": "01a1efe8-8913-7883-a14c-59345a7d4f2d"
+   },
+   "settled_usd": 0.03,
+   "seconds": 75.153
+  },
+  {
+   "seq": 108,
+   "at": "2026-11-18T18:25:28.542Z",
+   "view": "upscale:mamad",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "1f2cecf96c54bec3ed22c1bbda442a8f0872be01188bf228004e84baeb8178fc",
+   "out": "work\\pano\\upB\\mamad.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-89e8-71e3-b68a-c2fdbcbb3707/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-89e8-71e3-b68a-c2fdbcbb3707",
+    "request_id": "01a1efe8-89e8-71e3-b68a-c2fdbcbb3707"
+   },
+   "settled_usd": 0.03,
+   "seconds": 71.456
+  },
+  {
+   "seq": 109,
+   "at": "2026-11-18T18:25:32.306Z",
+   "view": "upscale:bedA",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "dbf92e8a144281195cb54bd7328070972fdf719f4d22c984bafd3aa992fe7f54",
+   "out": "work\\pano\\upB\\bedA.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8ae2-7cc1-a05f-34d6777b7e28/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8ae2-7cc1-a05f-34d6777b7e28",
+    "request_id": "01a1efe8-8ae2-7cc1-a05f-34d6777b7e28"
+   },
+   "settled_usd": 0.03,
+   "seconds": 67.218
+  },
+  {
+   "seq": 110,
+   "at": "2026-11-18T18:25:37.358Z",
+   "view": "upscale:bedB",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "d90113e67ca0451652969cebcfc37649e360cd464284543be0ad74a83a75c090",
+   "out": "work\\pano\\upB\\bedB.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8ab7-72a2-a82b-c32662770da6/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8ab7-72a2-a82b-c32662770da6",
+    "request_id": "01a1efe8-8ab7-72a2-a82b-c32662770da6"
+   },
+   "settled_usd": 0.03,
+   "note": "download timed out; collected from the queue (not re-sent)"
+  },
+  {
+   "seq": 111,
+   "at": "2026-11-18T18:25:43.552Z",
+   "view": "upscale:bath",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "657542760dbce8803e6cfd4a428fe56fc78e29f359ad3aad93c341a6b9978c0b",
+   "out": "work\\pano\\upB\\bath.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8a82-7120-bba1-b6c670b1626d/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8a82-7120-bba1-b6c670b1626d",
+    "request_id": "01a1efe8-8a82-7120-bba1-b6c670b1626d"
+   },
+   "settled_usd": 0.03,
+   "seconds": 56.074
+  },
+  {
+   "seq": 112,
+   "at": "2026-11-18T18:25:49.347Z",
+   "view": "upscale:entrance",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "c494624d1db7275d002908482c37bc1e32ba5cdfc939b5f001aa04d16fae8773",
+   "out": "work\\pano\\upB\\entrance.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8cca-7b23-af4c-a79ff3bff2df/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8cca-7b23-af4c-a79ff3bff2df",
+    "request_id": "01a1efe8-8cca-7b23-af4c-a79ff3bff2df"
+   },
+   "settled_usd": 0.03,
+   "seconds": 50.104
+  },
+  {
+   "seq": 113,
+   "at": "2026-11-18T18:25:54.158Z",
+   "view": "upscale:balcony",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "5d9c94c68e9d9cb539d154a12e059b582c29d8085f1c0b849c9abc861ef91ca0",
+   "out": "work\\pano\\upB\\balcony.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8d4c-7c30-ba23-4a43ce8778a3/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1efe8-8d4c-7c30-ba23-4a43ce8778a3",
+    "request_id": "01a1efe8-8d4c-7c30-ba23-4a43ce8778a3"
+   },
+   "settled_usd": 0.03,
+   "seconds": 48.531
+  },
+  {
+   "seq": 114,
+   "at": "2026-11-19T07:33:10.341Z",
+   "view": "gpt25b:corridor",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "2532e2c1b1ea4da9d768a066b8e853b9f12cf1f8e80fd174229a62bd6a5f8aaf",
+   "out": "work\\pano\\gpt25b\\corridor.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f2b9-4bee-7c23-bc10-050c2ff5815f/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f2b9-4bee-7c23-bc10-050c2ff5815f",
+    "request_id": "01a1f2b9-4bee-7c23-bc10-050c2ff5815f"
+   },
+   "settled_usd": 1.2,
+   "seconds": 52.41
+  },
+  {
+   "seq": 115,
+   "at": "2026-11-19T07:34:09.628Z",
+   "view": "realB:corridor",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "b5086b965b539d2a413a42e56b31beba63dac84a443d032f460bcf86fcfaa557",
+   "out": "work\\pano\\realB\\corridor.png",
+   "queue": {
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f2ba-32ac-7cf3-a779-baa862866208/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f2ba-32ac-7cf3-a779-baa862866208",
+    "request_id": "01a1f2ba-32ac-7cf3-a779-baa862866208"
+   },
+   "settled_usd": 1.2,
+   "seconds": 52.807
+  },
+  {
+   "seq": 116,
+   "at": "2026-11-19T07:35:23.462Z",
+   "view": "upscale:corridor",
+   "model": "fal-ai/seedvr/upscale/image",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "5b6fd6d040f702b7198d659447976b3d3211b6eba9cfb0bc04237f8a71c7f1cf",
+   "out": "work\\pano\\upB\\corridor.jpg",
+   "queue": {
+    "status_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1f2bb-53d1-7303-a4b7-099f462ae9b6/status",
+    "response_url": "https://queue.fal.run/fal-ai/seedvr/requests/01a1f2bb-53d1-7303-a4b7-099f462ae9b6",
+    "request_id": "01a1f2bb-53d1-7303-a4b7-099f462ae9b6"
+   },
+   "settled_usd": 0.03,
+   "seconds": 44.059
+  }
+ ]
+}

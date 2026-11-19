@@ -1,0 +1,135 @@
+{
+ "_doc": "Avnei Hefetz Kedem B10 apt3 (2026-11-18): copied from the skill example (Hatzav); bearings = plan bearings, plan up = north ASSUMED (the same as walk/daynight.js). 2026-11-18: interior lamps on by day too (his pictures show the spots lit; rooms on the light well came out black).",
+ "keyframes": [
+  {
+   "name": "morning",
+   "label": "בוקר",
+   "hour": 7.5,
+   "sun": {
+    "az": 100,
+    "el": 14,
+    "energy": 3.0,
+    "color": [
+     1.0,
+     0.84,
+     0.68
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 14,
+    "az": 100,
+    "strength": 1.0,
+    "dust": 2.0
+   },
+   "interior": 0.5,
+   "exposure": -1.8
+  },
+  {
+   "name": "noon",
+   "label": "צהריים",
+   "hour": 12.5,
+   "sun": {
+    "az": 185,
+    "el": 55,
+    "energy": 4.5,
+    "color": [
+     1.0,
+     0.97,
+     0.93
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 55,
+    "az": 185,
+    "strength": 1.0,
+    "dust": 1.0
+   },
+   "interior": 0.5,
+   "exposure": -1.4
+  },
+  {
+   "name": "golden",
+   "label": "שקיעה",
+   "hour": 17.5,
+   "sun": {
+    "az": 262,
+    "el": 7,
+    "energy": 6.0,
+    "color": [
+     1.0,
+     0.62,
+     0.36
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 7,
+    "az": 262,
+    "strength": 1.0,
+    "dust": 3.0
+   },
+   "interior": 0.8,
+   "exposure": -2.4,
+   "lamp_color": [
+    1.0,
+    0.6,
+    0.34
+   ],
+   "lights": [
+    {
+     "match": "Spot_",
+     "factor": 0.0
+    }
+   ]
+  },
+  {
+   "name": "night",
+   "label": "לילה",
+   "hour": 21.5,
+   "sun": null,
+   "sky": {
+    "type": "color",
+    "color": [
+     0.006,
+     0.01,
+     0.022
+    ],
+    "strength": 1.0
+   },
+   "interior": 1.0,
+   "exposure": -2.7,
+   "lamp_color": [
+    1.0,
+    0.56,
+    0.3
+   ],
+   "lights": [
+    {
+     "match": "Spot_",
+     "factor": 0.12
+    },
+    {
+     "match": "K_pendant",
+     "factor": 1.6
+    },
+    {
+     "match": "D_rattan",
+     "factor": 1.4
+    },
+    {
+     "match": "L_",
+     "factor": 2.5
+    },
+    {
+     "match": "B_lamp",
+     "factor": 2.5
+    }
+   ]
+  }
+ ]
+}

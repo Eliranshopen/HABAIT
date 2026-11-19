@@ -1,0 +1,64 @@
+{
+ "cap_usd": 15,
+ "item": "mushroom_lamp",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:16:38.817Z",
+   "item": "mushroom_lamp",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "e12ea8aae9266f9333938d65a65cc91f035a36d1155c45977e699a8b508351de",
+   "queue": {
+    "request_id": "01a1edf1-a99e-7fd3-a4d7-19f710292e86",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1edf1-a99e-7fd3-a4d7-19f710292e86/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1edf1-a99e-7fd3-a4d7-19f710292e86"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1edf1-a99e-7fd3-a4d7-19f710292e86",
+   "seconds": 13.446,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\mushroom_lamp.json"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:16:52.788Z",
+   "item": "mushroom_lamp",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "df7cbb5cfbe51032ceb8ff804c2a912730b2b2522b3dacead9d47147e4e7ad11",
+   "queue": {
+    "request_id": "01a1edf1-dd72-7042-9b04-b9271fcd3c33",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edf1-dd72-7042-9b04-b9271fcd3c33/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edf1-dd72-7042-9b04-b9271fcd3c33"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1edf1-dd72-7042-9b04-b9271fcd3c33",
+   "seconds": 36.074,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\mushroom_lamp.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T09:17:29.449Z",
+   "item": "mushroom_lamp",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "67909e5046ac05a3cdd29ac3e0fdff8e8e3e47a3381f65fd84aba0e0015071a3",
+   "queue": {
+    "request_id": "01a1edf2-7eb5-7ac3-b679-92ad297e64b7",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edf2-7eb5-7ac3-b679-92ad297e64b7/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edf2-7eb5-7ac3-b679-92ad297e64b7"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1edf2-7eb5-7ac3-b679-92ad297e64b7",
+   "seconds": 325.484,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\mushroom_lamp__hunyuan.glb"
+  }
+ ]
+}

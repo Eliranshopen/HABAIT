@@ -1,0 +1,179 @@
+{
+ "currency": "USD",
+ "rows": [
+  {
+   "piece": "bed_parents",
+   "endpoint": "fal-ai/trellis",
+   "usd": 0.02,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 05 חדר שינה הורים.png",
+   "box_preview": [
+    170,
+    255,
+    740,
+    614
+   ],
+   "at": "2026-11-18T06:26:09+00:00",
+   "seconds": 48.0,
+   "bytes": 1367212
+  },
+  {
+   "piece": "bed_parents",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "failed",
+   "source": "בניין 10 קומה 1 דירה 3 - 05 חדר שינה הורים.png",
+   "box_preview": [
+    170,
+    255,
+    740,
+    614
+   ],
+   "at": "2026-11-18T06:29:47+00:00",
+   "error": "HTTP 422: {\"detail\":[{\"loc\":[\"body\"],\"msg\":\"Failed to download the file. Please check if the URL is accessible and try again.\",\"type\":\"file_download_error\",\"input\":\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2w"
+  },
+  {
+   "piece": "bed_parents",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 05 חדר שינה הורים.png",
+   "box_preview": [
+    170,
+    255,
+    740,
+    614
+   ],
+   "at": "2026-11-18T06:31:09+00:00",
+   "seconds": 123.5,
+   "bytes": 19549404
+  },
+  {
+   "piece": "bed_single",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 07 חדר שינה ממד.png",
+   "box_preview": [
+    570,
+    315,
+    895,
+    555
+   ],
+   "at": "2026-11-18T06:34:29+00:00",
+   "seconds": 99.8,
+   "bytes": 14941048
+  },
+  {
+   "piece": "sofa",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 01 סלון.png",
+   "box_preview": [
+    825,
+    300,
+    1100,
+    614
+   ],
+   "at": "2026-11-18T06:36:11+00:00",
+   "seconds": 96.7,
+   "bytes": 18854664
+  },
+  {
+   "piece": "dining_chair",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 03 פינת אוכל.png",
+   "box_preview": [
+    295,
+    335,
+    395,
+    480
+   ],
+   "at": "2026-11-18T06:37:49+00:00",
+   "seconds": 91.0,
+   "bytes": 19049140
+  },
+  {
+   "piece": "coffee_table",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 03 פינת אוכל.png",
+   "box_preview": [
+    0,
+    495,
+    290,
+    614
+   ],
+   "at": "2026-11-18T06:39:22+00:00",
+   "seconds": 91.9,
+   "bytes": 15939280
+  },
+  {
+   "piece": "nightstand_lamp",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "unknown",
+   "source": "בניין 10 קומה 1 דירה 3 - 05 חדר שינה הורים.png",
+   "box_preview": [
+    10,
+    390,
+    245,
+    600
+   ],
+   "at": "2026-11-18T06:40:56+00:00",
+   "error": "connection reset by fal mid-request (WinError 10054); may have been billed — counted against the cap"
+  },
+  {
+   "piece": "nightstand_lamp",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 05 חדר שינה הורים.png",
+   "box_preview": [
+    10,
+    390,
+    245,
+    600
+   ],
+   "at": "2026-11-18T06:42:52+00:00",
+   "seconds": 122.2,
+   "bytes": 18321020
+  },
+  {
+   "piece": "balcony_chair",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 12 מרפסת.png",
+   "box_preview": [
+    565,
+    470,
+    870,
+    614
+   ],
+   "at": "2026-11-18T06:45:00+00:00",
+   "seconds": 131.3,
+   "bytes": 23848024
+  },
+  {
+   "piece": "balcony_table",
+   "endpoint": "tripo3d/tripo/v2.5/image-to-3d",
+   "usd": 0.4,
+   "state": "settled",
+   "source": "בניין 10 קומה 1 דירה 3 - 12 מרפסת.png",
+   "box_preview": [
+    580,
+    385,
+    720,
+    545
+   ],
+   "at": "2026-11-18T06:47:14+00:00",
+   "seconds": 127.6,
+   "bytes": 20016244
+  }
+ ]
+}

@@ -1,0 +1,77 @@
+{
+ "cap_usd": 15,
+ "item": "planter_agave",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:09.940Z",
+   "item": "planter_agave",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "f06463f08e88f244b1aad1f50b98630ceb24ad4d8bae882367c2ed7dbb38cfb7",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.037
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T10:07:58.275Z",
+   "item": "planter_agave",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "f06463f08e88f244b1aad1f50b98630ceb24ad4d8bae882367c2ed7dbb38cfb7",
+   "queue": {
+    "request_id": "01a1ee20-a6f4-7441-bf8e-8d732b65fef0",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1ee20-a6f4-7441-bf8e-8d732b65fef0/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1ee20-a6f4-7441-bf8e-8d732b65fef0"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1ee20-a6f4-7441-bf8e-8d732b65fef0",
+   "seconds": 13.413,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\specs\\planter_agave.json"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T10:08:11.732Z",
+   "item": "planter_agave",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "99a81e4fd18b28d64acfcafbc62e3751a664c6253b1383beb4216b92ac73fa03",
+   "queue": {
+    "request_id": "01a1ee20-e34d-70c1-b49d-549d6ec164d7",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee20-e34d-70c1-b49d-549d6ec164d7/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee20-e34d-70c1-b49d-549d6ec164d7"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ee20-e34d-70c1-b49d-549d6ec164d7",
+   "seconds": 37.383,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\studio\\planter_agave.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T10:08:51.960Z",
+   "item": "planter_agave",
+   "op": "mesh:hunyuan",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "a6c72607c1bbc5189cd522a68cc6e162d592fb9ecf3481054f899e635ab40e94",
+   "queue": {
+    "request_id": "01a1ee21-99d8-7b33-ad99-4fca85699b7a",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee21-99d8-7b33-ad99-4fca85699b7a/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ee21-99d8-7b33-ad99-4fca85699b7a"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ee21-99d8-7b33-ad99-4fca85699b7a",
+   "seconds": 305.104,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-5\\out\\avnei-hefetz-kedem\\building-10\\5-rooms\\items\\glb\\planter_agave__hunyuan.glb"
+  }
+ ]
+}

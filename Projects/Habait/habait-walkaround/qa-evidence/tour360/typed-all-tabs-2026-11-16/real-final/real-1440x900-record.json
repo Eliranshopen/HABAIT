@@ -1,0 +1,227 @@
+{
+  "live": "https://habait-flow.vercel.app/tour/",
+  "size": "1440x900",
+  "room": "kitchen",
+  "look": [
+    -14,
+    -5,
+    80
+  ],
+  "text": "להוסיף זוג שיושב ליד שולחן האוכל ושותה קפה",
+  "apartment": "apt846",
+  "pxPerCm": 0.9,
+  "scenes": [
+    "aerial",
+    "orbit1",
+    "orbit2",
+    "orbit3",
+    "orbit4",
+    "orbit5",
+    "tower",
+    "approach45",
+    "approach25",
+    "facade",
+    "terraceOut",
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "wardrobe",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "depth": [
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "served_vs_head_lines": {
+    "tour.js": 13,
+    "edit-live.js": 171
+  },
+  "real": true,
+  "when": "2026-11-16T14:40:31.362Z",
+  "cap": 0.9,
+  "booked": 0.206,
+  "ms_first_picture": 16633,
+  "turn": {
+    "text": "להוסיף זוג שיושב ליד שולחן האוכל ושותה קפה",
+    "attempts": [
+      {
+        "attempt": 1,
+        "model": "fal-ai/flux-2/klein/9b/edit",
+        "reach": "object",
+        "living": true,
+        "ring": 0.092,
+        "ring_band": "ring",
+        "ring_n": 40640,
+        "ring_total": 40640,
+        "fraction": 0.35,
+        "judge": {
+          "held": true,
+          "iou": 0.97,
+          "ratio": 0.97,
+          "object": "dining table"
+        },
+        "held": true,
+        "ms": 7880,
+        "ms_text": 4313,
+        "ms_edit": 3567
+      }
+    ],
+    "error": null,
+    "ms_total": 16626,
+    "follow": {
+      "rooms": [
+        {
+          "room": "living",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.058,
+              "judge": null,
+              "held": true,
+              "ms": 11247
+            }
+          ],
+          "ms": 11460
+        },
+        {
+          "room": "dining",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0.049,
+              "fraction": 0.253,
+              "judge": {
+                "held": true,
+                "iou": 1,
+                "ratio": 1,
+                "object": "dining table"
+              },
+              "held": true,
+              "ms": 10357
+            }
+          ],
+          "ms": 19344
+        }
+      ],
+      "skip": null,
+      "ms": 19859,
+      "spot": {
+        "x": 10.19,
+        "y": 6.29,
+        "z": -0.54,
+        "w": 4.16,
+        "h": 2.11,
+        "dist": 2.23
+      },
+      "targets": [
+        {
+          "room": "dining",
+          "yaw": -26.28,
+          "pitch": -16.54,
+          "hfov": 100,
+          "dist": 1.91
+        },
+        {
+          "room": "living",
+          "yaw": -63.94,
+          "pitch": -6.85,
+          "hfov": 100,
+          "dist": 4.56
+        }
+      ]
+    }
+  },
+  "calls": [
+    {
+      "n": 1,
+      "kind": "edit",
+      "scene": "kitchen",
+      "attempt": 1,
+      "t": 1794839992759,
+      "ok": true,
+      "ms": 7884,
+      "model": "fal-ai/flux-2/klein/9b/edit",
+      "reach": "object",
+      "living": true,
+      "usd": 0.038,
+      "ms_text": 4313,
+      "ms_edit": 3567,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. Add a couple sitting on the chairs at the dining table, casually dressed, enjoying a cup of coffee. Place two coffee mugs on the table in front of them. Render them photorealistic, matching the room's lighting, perspective and scale, with natural and relaxed expressions, not looking directly at the came"
+    },
+    {
+      "n": 2,
+      "kind": "judge",
+      "scene": "kitchen",
+      "attempt": 1,
+      "t": 1794840000857,
+      "ok": true,
+      "ms": 8201,
+      "usd": 0.004,
+      "held": true
+    },
+    {
+      "n": 3,
+      "kind": "follow",
+      "scene": "dining",
+      "attempt": 1,
+      "t": 1794840009705,
+      "ok": true,
+      "ms": 10361,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": true,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 10357,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add a couple sitting on the chairs at the dining table, casually dressed, enjoying a cup of coffee. Place two coffee mugs on the table in front of them. Render them photorealistic, matching the room"
+    },
+    {
+      "n": 4,
+      "kind": "follow",
+      "scene": "living",
+      "attempt": 1,
+      "t": 1794840009711,
+      "ok": true,
+      "ms": 11248,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": true,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 11247,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add a couple sitting on the chairs at the dining table, casually dressed, enjoying a cup of coffee. Place two coffee mugs on the table in front of them. Render them photorealistic, matching the room"
+    },
+    {
+      "n": 5,
+      "kind": "judge",
+      "scene": "dining",
+      "attempt": 1,
+      "t": 1794840020308,
+      "ok": true,
+      "ms": 8662,
+      "usd": 0.004,
+      "held": true
+    }
+  ],
+  "failed": [],
+  "errors": []
+}

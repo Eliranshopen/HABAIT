@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+const T = 'C:/Users/elira/AppData/Local/Temp/qa2';
+const lib = process.argv[3] || 'file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs';
+if (process.argv[2] === 'w') {
+  const { withFileLock } = await import(lib);
+  const [, , , , dir, name] = process.argv;
+  const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+  withFileLock(`${dir}/x.lock`, () => { fs.appendFileSync(`${dir}/log.txt`, `${name} enter ${Date.now()}\n`); sleep(60); fs.appendFileSync(`${dir}/log.txt`, `${name} exit ${Date.now()}\n`); }, { waitMs: 60000, staleMs: 10000 });
+  process.exit(0);
+}
+let bad = 0, runs = 0;
+for (let r = 0; r < 10; r++) {
+  const dir = fs.mkdtempSync(`${T}/t-`);
+  const s = spawn(process.execPath, ['-e', 'setTimeout(()=>{},120000)']);
+  fs.mkdirSync(`${dir}/x.lock`); fs.writeFileSync(`${dir}/x.lock/h.${s.pid}.${Date.now()}.abcdef01`, '');
+  const ws = [1, 2, 3, 4].map((i) => { const c = spawn(process.execPath, [`${T}/trans.mjs`, 'w', lib, dir, 'T' + i]); return new Promise((res) => c.on('close', res)); });
+  await new Promise((r2) => setTimeout(r2, 500));
+  spawnSync('taskkill', ['/F', '/PID', String(s.pid)], { stdio: 'ignore' });
+  await Promise.all(ws);
+  const ev = fs.readFileSync(`${dir}/log.txt`, 'utf8').trim().split('\n').map((l) => l.split(' ')).map(([n, k, t]) => ({ n, k, t: Number(t) })).sort((a, b) => a.t - b.t);
+  let depth = 0, over = false; for (const e of ev) { depth += e.k === 'enter' ? 1 : -1; if (depth > 1) over = true; }
+  runs++; if (over) { bad++; console.log('OVERLAP', JSON.stringify(ev.map((e) => e.n + e.k[0] + (e.t % 100000)))); }
+  if (over && fs.existsSync(`${dir}/dbg.txt`)) { fs.copyFileSync(`${dir}/dbg.txt`, `${T}/dbg-out.txt`); }
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+console.log(JSON.stringify({ runs, overlapRuns: bad }));

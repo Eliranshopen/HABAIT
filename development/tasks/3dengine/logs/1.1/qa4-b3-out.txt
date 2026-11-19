@@ -1,0 +1,47 @@
+.runtime=file :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=TOOLCHAIN_MISSING start_simulation=TOOLCHAIN_MISSING
+.runtime/inspect=file :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=TOOLCHAIN_MISSING start_simulation=TOOLCHAIN_MISSING
+inspect/<sha>=file :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794922916148-3 EPERM
+inspect/<sha>/inspect.json=dir :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794922924057-4 EPERM
+inspect/<sha>/pages.json=dir (inspect.json valid) :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794922949536-5 EPERM
+inspect=readonly(acl) :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=TOOLCHAIN_MISSING start_simulation=TOOLCHAIN_MISSING
+runtime=readonly(acl) :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=TOOLCHAIN_MISSING start_simulation=TOOLCHAIN_MISSING
+doctor.json=dir :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794922972488-8 EPERM
+heavy.lock=dir :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794922987809-9 EPERM
+jobsDir=file :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=TOOLCHAIN_MISSING inspect_plan=ok start_simulation=TOOLCHAIN_MISSING
+jobsDir=readonly(acl) :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=TOOLCHAIN_MISSING inspect_plan=ok start_simulation=TOOLCHAIN_MISSING
+jobs/<id>=file :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=NOT_A_PDF
+jobs/<id>=readonly(acl) :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=TOOLCHAIN_MISSING
+job/input=file :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job/input/source.pdf=dir :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job/input/source.pdf=gone :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job/input/source.pdf.<pid>.tmp=dir (pre-job) :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794923022431-17 EPERM
+job/job.json=dir :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=JOB_NOT_FOUND
+job/job.json=readonly :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=TOOLCHAIN_MISSING list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794923038440-19 EPERM
+job/manifest.json=dir :: get_job=JOB_NOT_FOUND get_result=JOB_NOT_FOUND approve_paid_stage=JOB_NOT_FOUND cancel_job=JOB_NOT_FOUND list_jobs=ok inspect_plan=ok start_simulation=JOB_NOT_FOUND
+job/manifest.json=readonly :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794923046740-21 EPERM
+job/ledger.json=dir :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job/ledger.json=garbage :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job/runner.pid=dir :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job/runner.log=dir :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job/job.lock=dir :: get_job=ok get_result=NOT_DONE approve_paid_stage=RPC-32603:internal error in approve_paid_stage: job 04762ca47a173685: lock busy cancel_job=RPC-32603:internal error in cancel_job: job 04762ca47a173685: lock busy list_jobs=ok inspect_plan=ok start_simulation=RPC-32603:internal error in start_simulation: job 04762ca47a173685: lock busy
+job/job.lock=garbage file :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794923069383-27 EPERM
+job/cache=file :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-20008-1794923077720-28 EPERM
+job/stages=file :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+job folder=readonly(acl) :: get_job=TOOLCHAIN_MISSING get_result=TOOLCHAIN_MISSING approve_paid_stage=TOOLCHAIN_MISSING cancel_job=TOOLCHAIN_MISSING list_jobs=ok inspect_plan=ok start_simulation=TOOLCHAIN_MISSING
+job/input=readonly(acl) :: get_job=ok get_result=NOT_DONE approve_paid_stage=NOT_AWAITING_APPROVAL cancel_job=ok list_jobs=ok inspect_plan=ok start_simulation=ok
+engine_status .runtime=file: ok
+engine_status .runtime=file: ok
+engine_status doctor.json=dir: ok
+engine_status doctor.json=dir: ok
+PLANTS 31, TOOL CALLS 221, JSON-RPC errors 3, path leaks 0 {"JOB_NOT_FOUND":66,"TOOLCHAIN_MISSING":19,"NOT_A_PDF":1,"NOT_DONE":14,"NOT_AWAITING_APPROVAL":13}
+new runner pids to kill: 

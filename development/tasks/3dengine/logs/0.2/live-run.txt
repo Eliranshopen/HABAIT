@@ -1,0 +1,31 @@
+PASS  prerequisite: bridge config C:/HABAIT-Agent-UI/bridge/config.json readable
+PASS  prerequisite: bridge config pi.cwd = C:/RnD/Projects/3Dengine  — pi.cwd = C:/RnD/Projects/3Dengine
+PASS  prerequisite: bridge config has engine.jobsDir  — C:/RnD/Projects/3Dengine/jobs
+PASS  prerequisite: bridge writes its pairing token to HABAIT_BRIDGE_TOKEN_FILE (test tooling)
+PASS  prerequisite: bridge agentDir has the web extension (C:/pi-main/habait)
+PASS  prerequisite: Pi wrapper guard at C:/pi-main/habait
+PASS  prerequisite: app has node_modules/vite
+PASS  prerequisite: Pi CLI installed  — Pi 1.5.2
+PASS  prerequisite: Chrome at C:/Program Files/Google/Chrome/Application/chrome.exe
+PASS  prerequisite: playwright-core loads (engine appdeps)
+PASS  prerequisite: fixture tests/fixtures/sample.pdf
+PASS  prerequisite: port 8787 is free
+PASS  prerequisite: port 4173 is free
+PASS  prerequisite: port 8891 is free
+PASS  prerequisite: `pi mcp list` shows "habait-engine: connected, 8 tools"
+PASS  [1.6 s] app built (needed (dist older than src))
+PASS  [2.1 s] app served by vite preview on 4173
+PASS  [2.9 s] bridge started Pi in RPC mode
+PASS  [3.0 s] a fresh Pi session (POST /session/new)  — status 200
+PASS  [3.8 s] app paired with the bridge
+PASS  [5.3 s] PDF uploaded (unique for this run)
+PASS  [5.4 s] message sent  — הכינו לי בבקשה הדמיה 360 מהתכנית שהעליתי, דירה 846.
+PASS  [49.9 s] job card with «שחזור הדגמה»  — db4d76d9d9c2deb2
+PASS  [74.1 s] quote and «אשרו תקציב עד $60»  — הערכת עלות: $48 · טווח $40–$60 · 11 חדרים
+PASS  [101.2 s] approve button clicked (the one extra message)
+PASS  [109.3 s] guard card before any approval in the job file  — שלב בתשלום: אישור תקציב לעבודה db4d76d9d9c2deb2; state awaiting_approval, approval null
+PASS  [109.5 s] job file approval.cap_usd = 60  — {"cap_usd":60,"at":"2026-11-16T15:21:00.199Z"}
+PASS  [148.6 s] 100 % and «פתחו את הסיור»  — 100% · http://127.0.0.1:8891/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0
+PASS  [148.9 s] GET of the link = 200 with the 846 tour (<title> holds «דירה 846»)  — 200 «סיור 360° · דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)»
+
+LIVE PASS in 160 s; tools: project_open, mcp__habait_engine__inspect_plan, mcp__habait_engine__start_simulation, project_record, mcp__habait_engine__approve_paid_stage, project_record; report C:/RnD/development/tasks/3dengine/logs/0.2/live/live-report.json

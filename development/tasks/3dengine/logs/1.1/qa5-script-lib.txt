@@ -1,0 +1,74 @@
+// QA helper (scratch, outside the repo): a temp engine home like m1.1.test.mjs builds, and a stdio client.
+import fs from 'node:fs';
+import net from 'node:net';
+import path from 'node:path';
+import { spawn, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+const R = 'C:/RnD/Projects/3Dengine';
+export const E = (p) => import(`file:///${R}/${p}`);
+export const sha = (b) => createHash('sha256').update(b).digest('hex');
+export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+export const SCR = 'C:/Users/elira/AppData/Local/Temp/qa-m11-r5-s';
+export const GOLDEN = `${R}/tests/fixtures/apt846/source.pdf`;
+export const freePort = () => new Promise((res, rej) => { const s = net.createServer(); s.once('error', rej); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
+
+let n = 0;
+export async function makeHome({ pipelineRoot, timeout = 120, stepMs = '40', extra = {} } = {}) {
+  const { loadConfig } = await E('engine/config.mjs');
+  const REAL = loadConfig({ env: {} });
+  const BASE = JSON.parse(fs.readFileSync(`${R}/engine.config.json`, 'utf8'));
+  const home = `C:/Users/elira/AppData/Local/Temp/qa5-home-${process.pid}-${Date.now()}-${++n}`;
+  const inbox = `${home}/uploads`;
+  const jobsDir = `${home}/jobs-temp`;
+  fs.mkdirSync(inbox, { recursive: true });
+  fs.mkdirSync(`${home}/site/tour`, { recursive: true });
+  fs.writeFileSync(`${home}/site/tour/index.html`, '<!doctype html><title>x</title>');
+  fs.writeFileSync(`${home}/engine.config.json`, JSON.stringify({ ...BASE, python: REAL.python, pipelineRoot: pipelineRoot || REAL.pipelineRoot,
+    inbox: [inbox], stub: { ...BASE.stub, siteRoot: `${home}/site` }, runner: { ...BASE.runner, heartbeatSeconds: 0.2 },
+    inspect: { ...BASE.inspect, timeoutSeconds: timeout }, ...extra }));
+  const port = await freePort();
+  const env = { ENGINE_HOME: home, ENGINE_JOBS_DIR: jobsDir, ENGINE_SERVE_PORT: String(port), ENGINE_STUB_STEP_MS: stepMs };
+  const config = loadConfig({ env, home });
+  return { home, inbox, jobsDir, port, env, config };
+}
+
+export async function engineOf(h, deps = {}) {
+  const { createStubEngine } = await E('mcp/stub-engine.mjs');
+  return createStubEngine(h.config, { spawnRunner: () => {}, ensureServe: async () => {}, ...deps });
+}
+
+// real server over stdio
+export function startServer(h) {
+  const proc = spawn(process.execPath, [`${R}/mcp/server.mjs`], { env: { ...process.env, ...h.env }, stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });
+  const waiting = new Map(); const lines = []; let err = ''; let id = 1; let buf = '';
+  proc.stdout.setEncoding('utf8');
+  proc.stdout.on('data', (d) => { buf += d; let i; while ((i = buf.indexOf('\n')) >= 0) { const l = buf.slice(0, i); buf = buf.slice(i + 1); lines.push(l); try { const m = JSON.parse(l); const cb = waiting.get(m.id); if (cb) { waiting.delete(m.id); cb(m, l); } } catch {} } });
+  proc.stderr.setEncoding('utf8'); proc.stderr.on('data', (d) => { err += d; });
+  const request = (method, params) => new Promise((resolve, reject) => { const i = id++; const t = setTimeout(() => reject(new Error('timeout ' + method)), 130000); waiting.set(i, (m, l) => { clearTimeout(t); resolve({ m, l }); }); proc.stdin.write(JSON.stringify({ jsonrpc: '2.0', id: i, method, ...(params === undefined ? {} : { params }) }) + '\n'); });
+  const api = {
+    proc, lines, get stderr() { return err; },
+    async init() { await request('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'qa', version: '0' } }); proc.stdin.write(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' }) + '\n'); },
+    async call(name, args) { const { m, l } = await request('tools/call', { name, arguments: args }); return { m, l, err: m.result?.isError ? m.result.structuredContent?.error : null, out: m.result?.structuredContent }; },
+    async stop() { try { proc.stdin.end(); } catch {} await Promise.race([new Promise((r) => proc.once('exit', r)), sleep(4000)]); if (proc.exitCode === null) proc.kill(); },
+  };
+  return api;
+}
+
+export function runRunner(h, id, timeout = 40000) {
+  const r = spawnSync(process.execPath, [`${R}/engine/runner.mjs`, id], { env: { ...process.env, ...h.env }, encoding: 'utf8', timeout, windowsHide: true });
+  return { status: r.status, log: (r.stderr || '') + (r.stdout || '') };
+}
+
+export function snapshot(dir, skip = () => false) {
+  const out = {};
+  if (!fs.existsSync(dir)) return out;
+  const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p); else if (!skip(p)) out[p.slice(dir.length + 1)] = sha(fs.readFileSync(p)); } };
+  walk(dir);
+  return out;
+}
+export const diffSnap = (a, b) => [...new Set([...Object.keys(a), ...Object.keys(b)])].filter((k) => a[k] !== b[k]);
+
+export function pidAlive(p) { try { process.kill(p, 0); return true; } catch { return false; } }
+export function killPid(p) { try { process.kill(p); } catch {} }
+export function cleanup(h) { try { fs.rmSync(h.home, { recursive: true, force: true }); } catch (e) { console.log('cleanup failed', h.home, e.code); } }
+export const runnerPid = (h, id) => { try { return Number(fs.readFileSync(`${h.jobsDir}/${id}/runner.pid`, 'utf8').trim()) || null; } catch { return null; } };

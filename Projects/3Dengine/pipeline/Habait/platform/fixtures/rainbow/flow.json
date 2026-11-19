@@ -1,0 +1,66 @@
+{
+  "$schema": "../../contracts/flow.schema.json",
+  "project": "rainbow",
+  "start": "approach",
+  "defaults": {
+    "descend": "descend-846",
+    "enter": "enter-846"
+  },
+  "segments": [
+    {
+      "id": "approach",
+      "kind": "video",
+      "role": "approach",
+      "src": "approach.mp4",
+      "poster": "node-a-aerial.png",
+      "duration_s": 8,
+      "title": { "he": "מעל שדה דב, אל המגדל", "en": "Over Sde Dov, towards the tower" },
+      "hotspots": [
+        { "id": "skip", "t_start": 0, "t_end": 8, "yaw_deg": 0, "pitch_deg": -30,
+          "label": { "he": "דלג אל החזית", "en": "Skip to the facade" },
+          "action": { "type": "goto", "segment": "hold-facade" } }
+      ],
+      "next": "orbit"
+    },
+    {
+      "id": "orbit",
+      "kind": "still",
+      "role": "orbit",
+      "src": "node-b-tower.png",
+      "duration_s": 3,
+      "title": { "he": "סביב המגדל (placeholder: סטיל)", "en": "Around the tower (placeholder: still)" },
+      "next": "hold-facade"
+    },
+    {
+      "id": "hold-facade",
+      "kind": "still",
+      "role": "hold",
+      "src": "node-c-facade.png",
+      "duration_s": 6,
+      "loop": true,
+      "title": { "he": "מול החזית · בחרו דירה", "en": "At the facade · choose an apartment" },
+      "next": null
+    },
+    {
+      "id": "descend-846",
+      "kind": "video",
+      "role": "descend",
+      "unit": "846",
+      "src": "descend-846.mp4",
+      "poster": "node-c-facade.png",
+      "duration_s": 4,
+      "title": { "he": "ירידה אל המרפסת", "en": "Descending to the terrace" },
+      "next": "enter-846"
+    },
+    {
+      "id": "enter-846",
+      "kind": "still",
+      "role": "enter",
+      "unit": "846",
+      "src": "node-d-terrace.png",
+      "duration_s": 3,
+      "title": { "he": "על המרפסת · נכנסים", "en": "On the terrace · going in" },
+      "next": "handoff"
+    }
+  ]
+}

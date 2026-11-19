@@ -1,0 +1,51 @@
+[1 done] start created=true id=true
+[1 done] awaiting_approval, quote 48
+[1 done] approve ok
+[1 done] counts {"mrows":8,"mdone":8,"lrows":3} cost {"spent_usd":0,"cap_usd":100}
+[1 done] get_result ok
+[1 done] wrong cost read: shown 0 disk after 0
+[1 done] counts after repair {"mrows":8,"mdone":8,"lrows":3} same
+[1 done] cli job exit 0
+[1 done] cli ledger exit 0
+[1 done] cli job repairs copy: 0
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-20168-1794942294170-1 EPERM
+[2 kill/start_simulation] start created=true id=true
+[2 kill/start_simulation] awaiting_approval, quote 48
+[2 kill/start_simulation] approve ok
+[2 kill/start_simulation] killing runner 26300 state skinning
+[2 kill/start_simulation] done; counts {"mrows":8,"mdone":8,"lrows":3}; ledger states [null,null,null]; spent 0
+   live rows per stage ["tracing","building","rendering","skinning","gating","finishing","packaging","qa"] no dup
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-20168-1794942324676-2 EPERM
+[2 kill/cli resume] start created=true id=true
+[2 kill/cli resume] awaiting_approval, quote 48
+[2 kill/cli resume] approve ok
+[2 kill/cli resume] killing runner 29372 state skinning
+  cli resume exit 0
+[2 kill/cli resume] done; counts {"mrows":8,"mdone":8,"lrows":3}; ledger states [null,null,null]; spent 0
+   live rows per stage ["tracing","building","rendering","skinning","gating","finishing","packaging","qa"] no dup
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-20168-1794942359763-3 EPERM
+[3 cancel/start_simulation] start created=true id=true
+[3 cancel/start_simulation] awaiting_approval, quote 48
+[3 cancel/start_simulation] approve ok
+  cancel cancelled
+  restart via start created=false resumed=true state=skinning
+[3 cancel/start_simulation] after restart state done counts before {"mrows":3,"mdone":3,"lrows":0} after {"mrows":8,"mdone":8,"lrows":3}
+[3 cancel/start_simulation] done {"mrows":8,"mdone":8,"lrows":3} spent 0
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-20168-1794942397224-4 EPERM
+[3 cancel/cli resume] start created=true id=true
+[3 cancel/cli resume] awaiting_approval, quote 48
+[3 cancel/cli resume] approve ok
+  cancel cancelled
+  cli resume exit 0
+[3 cancel/cli resume] after restart state done counts before {"mrows":3,"mdone":3,"lrows":0} after {"mrows":8,"mdone":8,"lrows":3}
+[3 cancel/cli resume] done {"mrows":8,"mdone":8,"lrows":3} spent 0
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-20168-1794942419057-5 EPERM
+[4 two jobs] starts true true true true
+[4 two jobs] 04762ca47a173685 {"mrows":8,"mdone":8,"lrows":3}
+[4 two jobs] ff4f6eff6d04d583 {"mrows":8,"mdone":8,"lrows":3}
+[4 two jobs] list 2
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-20168-1794942442000-6 EPERM
+[5 three procs] created flags [false,true,false] job folders 1
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-20168-1794942449509-7 EPERM
+runner pids I started: 23004,26300,38112,29372,46212,25548,41740,17500,46784,35376,47028 still alive: none
+exit=0

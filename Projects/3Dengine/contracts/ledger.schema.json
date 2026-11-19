@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://habait.ai/schemas/habait/ledger.v1.json",
+  "title": "Ledger",
+  "description": "jobs/<job_id>/ledger.json (contract 0.3 §3): every paid call, reserved before it is sent and settled after. An orphaned row (reserved by a runner that died before the settle) is never hidden and counts toward the cap.",
+  "type": "object",
+  "required": [
+    "schema",
+    "job_id",
+    "cap_usd",
+    "rows"
+  ],
+  "properties": {
+    "schema": {
+      "const": "habait/ledger.v1"
+    },
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "cap_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "seq",
+          "call_key",
+          "stage",
+          "provider",
+          "what",
+          "reserved_usd",
+          "reserved_at",
+          "status",
+          "settled_usd",
+          "settled_at",
+          "answer_sha256",
+          "attempt"
+        ],
+        "properties": {
+          "seq": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "call_key": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "stage": {
+            "type": "string",
+            "enum": [
+              "tracing",
+              "building",
+              "rendering",
+              "skinning",
+              "gating",
+              "finishing",
+              "packaging",
+              "qa"
+            ]
+          },
+          "provider": {
+            "type": "string",
+            "minLength": 1
+          },
+          "what": {
+            "type": "string"
+          },
+          "reserved_usd": {
+            "type": "number",
+            "minimum": 0
+          },
+          "reserved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "reserved",
+              "settled",
+              "failed",
+              "orphaned"
+            ]
+          },
+          "settled_usd": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "settled_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "answer_sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "attempt": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "orphaned_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recovered": {
+            "type": "boolean",
+            "description": "true when the row was settled from the answer cache after a runner died between the cache write and the settle (contract 0.3 §10.1)"
+          },
+          "late": {
+            "type": "boolean",
+            "description": "true when the call came back and was settled after another runner had presumed its reservation lost (the row had been marked orphaned)"
+          },
+          "not_sent": {
+            "type": "boolean",
+            "description": "true on a failed row whose call was reserved and never sent: its runner found, just before the send, that another runner had taken the job over"
+          },
+          "sending_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "set under the job lock just before the call is sent; a reserved row without it was never sent"
+          },
+          "resend_of": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "seq of the settled row of the same call whose cached answer was gone, so the call was made again"
+          },
+          "answer_not_kept": {
+            "type": "boolean",
+            "description": "true on a settled row whose answer JSON could not hold: the call was paid, its answer was given to the stage and not cached"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

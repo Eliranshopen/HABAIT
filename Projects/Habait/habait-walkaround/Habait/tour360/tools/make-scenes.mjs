@@ -48,7 +48,9 @@ function walkableVia(scene, link) {
   const ops = c1 ? PG.openings.filter((o) => o.rooms?.includes(c0.room_id) && o.rooms?.includes(c1.room_id)) : [];
   const onOps = ops.flatMap((o) => { const n = Math.max(2, Math.round(Math.hypot(o.b_cm[0] - o.a_cm[0], o.b_cm[1] - o.a_cm[1]) / 10)); return Array.from({ length: n + 1 }, (_, i) => [o.a_cm[0] + (o.b_cm[0] - o.a_cm[0]) * i / n, o.a_cm[1] + (o.b_cm[1] - o.a_cm[1]) * i / n]); });
   let P = near(onOps), how = 'the visible part of the opening (the hand via is hidden from this camera)';
-  if (!P && c1) {
+  // 2026-11-11 (Eliran: living's «חדר שינה הורים» stood on the terrace glass): the straight way is a way only when the target camera is
+  // in sight — the bedroom camera lies behind a wall, and the line to it pointed the visitor at the terrace, 82° from the door
+  if (!P && c1 && sees(C, [c1.x, c1.y])) {
     const T = [c1.x, c1.y], d = Math.hypot(T[0] - C[0], T[1] - C[1]);
     P = near(Array.from({ length: 23 }, (_, i) => 80 + i * 10).filter((r) => r < d).map((r) => [C[0] + (T[0] - C[0]) * r / d, C[1] + (T[1] - C[1]) * r / d]));
     how = 'the visible floor toward the target camera (the hand via and its opening are hidden)';
@@ -114,7 +116,7 @@ if (RENDERS) { const sharp = appRequire(REPO)('sharp'); for (const s of cams.sce
 else console.warn(`R23b: no CG depth for ${cgTour}: markers keep the plan placement (hotspot-check.mjs will refuse)`);
 const camOfId = (sid) => PG && PG.camera_points.find((c) => c.id.toLowerCase() === `cp-${sid}`.toLowerCase());
 
-const scenes = cams.scenes.map((s) => {
+let scenes = cams.scenes.map((s) => {
   const centre = bearingDeg(s.at, s.lookAt);
   const hotspots = (s.links || []).map((l) => {
     if (!ids.has(l.to)) throw new Error(`${s.id}: link to unknown scene ${l.to}`);
@@ -143,6 +145,37 @@ const scenes = cams.scenes.map((s) => {
     hotspots,
   };
 });
+
+// HAND PLACEMENTS (2026-11-11): apartments/<id>/hotspot-pins.json — where a button was checked against the room PICTURE and the rule
+// above cannot know better (a doorway the picture shows elsewhere than the plan's line of sight; one button per door; a door that leads
+// through another viewpoint). { scenes: { <room>: { remove: [<to>…], set: [{ to, yaw, as?, why }…] } } }: `remove` drops a link the
+// rule made, `set` moves it (or adds it) to `yaw` degrees from the picture's centre (`v` optional, the height on the picture; `exact`: keep
+// it there even if the depth model would move it); `as` names the button after another room (the
+// suite's door leads to the wardrobe corner and is called «חדר שינה הורים»). Applied last, so a regeneration never undoes them.
+const pinsPath = path.join(APT, 'hotspot-pins.json');
+if (fs.existsSync(pinsPath)) {
+  const pins = JSON.parse(fs.readFileSync(pinsPath, 'utf8'));
+  for (const [room, pin] of Object.entries(pins.scenes || {})) {
+    const sc = scenes.find((x) => x.id === room); if (!sc) throw new Error(`hotspot-pins.json: unknown scene ${room}`);
+    for (const to of pin.remove || []) sc.hotspots = sc.hotspots.filter((h) => h.to !== to);
+    for (const p of pin.set || []) {
+      if (!ids.has(p.to) || (p.as && !ids.has(p.as))) throw new Error(`hotspot-pins.json: ${room} → ${p.to}${p.as ? ' as ' + p.as : ''}: unknown scene`);
+      let u = 0.5 + Number(p.yaw) / 360; u = Number((((u % 1) + 1) % 1).toFixed(3));
+      const row = { to: p.to, ...(p.as ? { as: p.as } : {}), u, v: Number.isFinite(p.v) ? p.v : V_FLOOR, source: 'hotspot-pins.json: ' + p.why };
+      // a pin is an eye's placement on the picture; the button is DRAWN a few degrees lower than the eye aimed, so it can still sit on
+      // the cabinet beside the door or on the door leaf. The same depth model that hotspot-check.mjs verifies with moves it to the
+      // nearest floor / opening / glass (R23b), unless the pin says `exact`.
+      const M = models[room];
+      if (M?.m && !p.exact) {
+        const tc = camOfId(p.to); const q = placeOff(M.m, sc.centreBearingDeg, row.u, row.v, [M.cp.x, M.cp.y], tc ? [tc.x, tc.y] : null);
+        if (q.unresolved) console.warn(`pins: ${room} → ${p.to}: no position within ±25° lands on floor / an opening / glass (${q.row.what}); kept as pinned`);
+        else if (q.moved) { row.u = q.u; row.v = q.v; row.source += `; moved off ${q.was.what} (CG depth) to ${q.row.what}`; }
+      }
+      const i = sc.hotspots.findIndex((h) => h.to === p.to);
+      if (i >= 0) sc.hotspots[i] = row; else sc.hotspots.push(row);
+    }
+  }
+}
 
 // the exterior 360 nodes (2026-11-02, Eliran: the flyover is a chain of 360 scenes, not a clip): apartments/<id>/exterior.json
 // lists them with hand-placed hotspots (u/v on the equirect) and no plan position; they go first, the bird's-eye node opens the tour.
@@ -177,6 +210,7 @@ const doc = {
   },
   scenes,
 };
-fs.writeFileSync(path.join(APT, 'scenes.json'), JSON.stringify(doc, null, 1) + '\n');
+const outAt = process.argv.indexOf('--out');   // --out <file>: a look at what a regeneration gives, scenes.json untouched
+fs.writeFileSync(outAt > 0 && process.argv[outAt + 1] ? path.resolve(process.argv[outAt + 1]) : path.join(APT, 'scenes.json'), JSON.stringify(doc, null, 1) + '\n');
 console.log(`scenes.json: ${scenes.length} scenes, ${scenes.reduce((n, s) => n + s.hotspots.length, 0)} links`);
 for (const s of scenes) console.log(`  ${s.id.padEnd(15)} centre ${String(s.centreBearingDeg).padStart(5)}°  ` + s.hotspots.map((h) => `${h.to}@u${h.u}`).join('  '));

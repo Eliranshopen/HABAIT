@@ -1,0 +1,32 @@
+# engine/stages/ — the stages a job's runner walks
+<!-- last-updated: 2026-11-18 -->
+
+## What's here
+One module per stage of contract 0.3 §1, in the runner's order: `tracing`, `building`, `rendering`, then the wait `awaiting_approval` (not a stage), `skinning`, `gating`, `finishing`, `packaging`, `qa`. Each module exports its implementations by mode: `stub` for every stage and, since milestone 1.3, `real` for `tracing`. Milestones 1.x–7.x add a real implementation beside the stub, one stage at a time, without changing the runner.
+
+| File | Purpose |
+|---|---|
+| `index.mjs` | `REGISTRY` (stage → module) and `implFor(stage, mode)`, which throws when a stage has no implementation for the job's mode (the runner turns that into `STAGE_FAILED`) |
+| `stub.mjs` | `stubStage(stage)`: waits `stub.stepMs` in 100 ms slices calling `ctx.checkCancelled()` after each; the three paid stages (`PAID_STAGES`: skinning, gating, finishing) make ONE `ctx.paidCall` with `stub.callUsd` and the key `stub-call:<inputs_sha256>`; asks `ctx.checkOwner()`, then writes `stages/<stage>/stub.json` (stage, job id, inputs hash, mode: the same bytes at every attempt) as its one output |
+| `building.mjs` … `qa.mjs` | `export const name`, `export const stub = stubStage(name)` |
+| `tracing.mjs` | the stub, and (1.3) `real`: the reading of the drawing. The reading tool, through `../trace.mjs`, on the job's own copy of the PDF, free, from the reading the engine KEEPS for that PDF (`../readings.mjs`; since 1.4 with the plan's day and the DRAWING's id), into `stages/tracing/attempt-<n>/`. ONE table (`OUTCOMES`): `PASS` → the five plan files as outputs; `FAIL` → `ReviewNeeded` (`TRACE_GATE_FAIL`); no kept reading, or a stale one → `BUDGET_CAP`, nothing starts. It asks `ctx.checkCancelled()` twice a second and stops the tool's process tree. `realStage(deps)`: for tests |
+| `intake.mjs` | (1.1) NOT a runner stage and not in `index.mjs`: the plan's stage 1 runs inside `start_simulation`, before a runner exists. `intakePdf(jobsDir, id, source, sha256)`: the upload is read once and hashed, then written to a temp file, renamed to `input/source.pdf` and marked read-only (two steps: a failed read is the upload's `NOT_A_PDF`, a failed write is the job folder's); safe to repeat; never over another file. `verifyInput(jobsDir, job)` = `{ ok }` or `{ ok: false, why }`, asked by the runner at every start and before every stage attempt |
+
+## The implementation contract
+`async run(ctx)` → `{ outputs: [{ path }], detail }`, `path` relative to the job folder. `ctx` = `job`, `config`, `jobDir`, `stageDir` (`jobs/<id>/stages/<stage>/`), `attempt`, `inputsSha256`, `paidCall(spec, fn)`, `checkCancelled()`, `checkOwner()`, `log(line)`, `sleep(ms)`.
+- Write outputs inside `stageDir`; the runner re-hashes them from the disk for the manifest row, so a claimed hash is never trusted.
+- **Outputs are byte-stable** (contract 0.3 §11.3): the same inputs give the same bytes at every attempt, so no attempt number, time or random value goes into an output. A stage that runs again then reproduces its output and the stages after it are not repeated. A stage that cannot do this makes every later paid stage pay again after a re-run: say so in its milestone, it is a cost decision.
+- Every paid call goes through `ctx.paidCall({ key, provider, what, estimate_usd }, fn)`; `fn` resolves to `{ answer, usd }`. The `key` must be stable across attempts (derive it from `inputsSha256`), or a re-run would bill again. `estimate_usd` and `usd` are amounts: numbers from 0 to 1,000,000 (an estimate that is not one fails the stage; a `usd` that is not one is recorded as the estimate). The `answer` must be something JSON can hold: one that is not (a BigInt, a circular value, a function) is settled and NOT kept, so a re-run pays again.
+- Call `checkCancelled()` often; it throws when the job left the stage, when another runner took the job over, or (in a heavy stage) when the heavy lock was lost, and the runner then writes no row. Never catch what it throws: stop the stage's child processes and let it go up.
+- **The key IS the call** (contract 0.3 §13.1). Two `paidCall`s with the same key at the same moment, in one stage attempt, are one call: the second waits for the first and gets its answer or its error; one send. Calls with different keys run side by side.
+- **Before an output is written after a paid call, call `checkOwner()`.** It throws only when another runner took the job over (contract 0.3 §10 rule 9). `checkCancelled()` is wrong there: what was paid must be recorded even when the job was cancelled meanwhile (rule 6).
+- **A real stage should write each attempt into a folder of its own** (`stageDir/attempt-<n>/`, the row's `outputs` pointing there): a tool that a replaced runner started may write for a moment longer, and it must never land on the files of the runner that owns the job. The stub writes one small file and relies on `checkOwner()`.
+- Throw `EngineError(code, …)` for a reason code of the contract; any other error becomes `STAGE_FAILED`.
+- **A stage whose own gate refused throws `ReviewNeeded(code, message, files)`** (`../jobs.mjs`, contract 1.3 §4): the job ends in `review`, with no row for the attempt and no later stage. `files` may name `report` and `overlay`, as paths inside this attempt's folder. The message is a fixed sentence with numbers, never text of the PDF.
+- **In mode `real` there is no falling back** (contract 1.3 §1): a stage with no `real` implementation ends the job `failed` / `STAGE_FAILED`. A milestone that makes a stage real adds `export const real` beside the stub and changes nothing in the runner.
+
+- **Never block the event loop.** The heartbeat and the refresh of the heavy lock run on it. A stage that calls `spawnSync` (or any long synchronous work) for longer than `runner.staleSeconds` looks dead: the job shows as stalled and another job may take the heavy lock. Start long tools with an asynchronous spawn and await them.
+- The stub appends one line to `stages/<stage>/sends.log` for every paid call that is REALLY sent; the kill tests count them.
+
+## Links
+Parent: [../CLAUDE.md](../CLAUDE.md) · Runner: [../runner.mjs](../runner.mjs) · Contracts: [../../contracts/CONTRACT-0.3.md](../../contracts/CONTRACT-0.3.md), [../../contracts/CONTRACT-1.3.md](../../contracts/CONTRACT-1.3.md), [../../contracts/CONTRACT-1.4.md](../../contracts/CONTRACT-1.4.md)

@@ -1,11 +1,11 @@
 # inputs/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Shared bench inputs: clay renders, keyframes and source images (A_, B_, C_, D_ prefixed) fed to every model.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 58 files here · 1 subfolders · 61 files / 80.2 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

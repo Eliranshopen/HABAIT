@@ -1,0 +1,17 @@
+milestone 1.4 dev run: tests/stages/m1.4.test.mjs alone (two real readings, one after the other; a scripted model, no network)
+started: 2026-11-18T13:36:05+02:00
+machine load before: 97 %
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (259730.7824ms)
+✔ 2. the SECOND run, a real job of the same PDF: it reads from the store, books $0, makes NO request, and its plan is the first run's, byte for byte (95120.2395ms)
+✔ 3. `reading show`: what is kept, in numbers and fixed words; and no room name of the reading in any answer, job file, record or log (172.9877ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 355306.1594
+exit code: 0
+seconds: 357
+machine load after:  %

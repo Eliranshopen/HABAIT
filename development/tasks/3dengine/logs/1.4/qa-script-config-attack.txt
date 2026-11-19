@@ -1,0 +1,29 @@
+// QA: every numeric field of engine.config.json refuses a non-number, by name. Reads the real settings file text only (no env file).
+import fs from 'node:fs';
+const { loadConfig } = await import('file:///C:/RnD/Projects/3Dengine/engine/config.mjs');
+const base = JSON.parse(fs.readFileSync('C:/RnD/Projects/3Dengine/engine.config.json', 'utf8'));
+const num = [];
+const walk = (o, p) => { for (const [k, v] of Object.entries(o)) { const q = [...p, k]; if (typeof v === 'number') num.push(q); else if (v && typeof v === 'object' && !Array.isArray(v)) walk(v, q); else if (Array.isArray(v) && v.every((x) => typeof x === 'number')) v.forEach((_, i) => num.push([...q, i])); } };
+walk(base, []);
+const out = []; let n = 0, bad = 0;
+const load = (raw) => loadConfig({ home: 'C:/RnD/Projects/3Dengine', env: {}, readFile: (p) => (p.endsWith('engine.config.json') ? JSON.stringify(raw) : '{}'), exists: () => false });
+try { load(base); out.push('ok   base loads'); } catch (e) { out.push('FAIL base does not load: ' + e.message); bad++; }
+const present = base.trace ? Object.keys(base.trace) : [];
+out.push('numeric fields found: ' + num.map((p) => p.join('.')).join(', '));
+// fields that may be absent but are numbers when present
+const extra = [['trace', 'rounds'], ['trace', 'judgeRuns'], ['trace', 'maxBudgetUsd'], ['trace', 'timeoutSeconds'], ['stub', 'callUsd']];
+const all = [...num, ...extra.filter((p) => !num.some((q) => q.join('.') === p.join('.')))];
+for (const p of all) for (const [label, bad_] of [['true', true], ['array [4]', [4]], ['"3"', '3'], ['"0x3"', '0x3'], ['null', null], ['object', { a: 1 }], ['string 1e1', '1e1']]) {
+  const raw = JSON.parse(JSON.stringify(base)); let o = raw; for (const k of p.slice(0, -1)) o = (o[k] ??= {}); o[p[p.length - 1]] = bad_;
+  n++; let err = null; try { load(raw); } catch (e) { err = e; }
+  const name = p.filter((x) => typeof x === 'string').slice(-1)[0];
+  const refused = Boolean(err) && String(err.message).includes(name);
+  const nullOk = bad_ === null && !err;     // an absent-like null may mean "default": noted, not a failure
+  if (!refused && !nullOk) { bad++; out.push(`FAIL ${p.join('.')} = ${label}: ${err ? 'refused without the name: ' + err.message : 'ACCEPTED'}`); } else out.push(`ok   ${p.join('.')} = ${label}${nullOk ? ' (null taken as default)' : ''}`);
+}
+// the environment overrides: text of digits only
+for (const [k, v, okExpected] of [['ENGINE_SERVE_PORT', '9001', true], ['ENGINE_SERVE_PORT', '0x2329', false], ['ENGINE_SERVE_PORT', '90 01', false], ['ENGINE_SERVE_PORT', '1e3', false], ['ENGINE_SERVE_PORT', ' 9001', false], ['ENGINE_SERVE_PORT', '-1', false], ['ENGINE_STUB_STEP_MS', '5', true], ['ENGINE_STUB_STEP_MS', 'true', false], ['ENGINE_STUB_STEP_MS', '5.5', false]]) {
+  n++; let err = null; try { loadConfig({ home: 'C:/RnD/Projects/3Dengine', env: { [k]: v }, readFile: (p) => (p.endsWith('engine.config.json') ? JSON.stringify(base) : '{}'), exists: () => false }); } catch (e) { err = e; }
+  if (okExpected === !err) out.push(`ok   env ${k}=${JSON.stringify(v)} ${okExpected ? 'accepted' : 'refused'}`); else { bad++; out.push(`FAIL env ${k}=${JSON.stringify(v)} expected ${okExpected ? 'accept' : 'refuse'}`); }
+}
+fs.writeFileSync(process.argv[2], out.join('\n') + `\n\nchecks: ${n}  failed: ${bad}\n`); console.log(`checks ${n} failed ${bad}`);

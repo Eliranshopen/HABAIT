@@ -1,11 +1,11 @@
 # archive/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Superseded bench files (gpt-image-2.5 baseline and its kfcheck outputs).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 5 files here · 0 subfolders · 5 files / 7.9 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

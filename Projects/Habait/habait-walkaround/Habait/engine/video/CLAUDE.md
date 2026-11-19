@@ -1,11 +1,11 @@
 # video/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Engine video-stage code: spec, camera map, Kling v2v call, media and manifest helpers, rest anchor.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 7 files here · 0 subfolders · 7 files / 46.1 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

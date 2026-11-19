@@ -1,0 +1,16 @@
+✔ initialize handshake, ping, tools/list = the eight tools with both schemas (134.8842ms)
+✔ engine_status answers in time with a stub-site check (386.5539ms)
+✔ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (834.5924ms)
+✔ the same PDF again → created: false and the same job (3.2472ms)
+✔ cancel_job on a fresh job: cancelled, the runner stops (40.8028ms)
+✔ every stub reason code (122.9516ms)
+✔ protocol errors: -32601, -32602, -32700 (3.8083ms)
+✔ stdout held JSON-RPC lines only; every tools/call answered under 2 s (1.0409ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6664.6513

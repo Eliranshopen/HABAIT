@@ -1,0 +1,23 @@
+{
+  "name": "@habait/walkaround-engine",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Board habait-walkaround: the 360 engine on Photo Sphere Viewer. v0.1 = a Pannellum-compatible adapter so today's tour runs unchanged (D-T360-46, step 1).",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "node test/run.mjs"
+  },
+  "dependencies": {
+    "@photo-sphere-viewer/core": "5.15.1",
+    "@photo-sphere-viewer/cubemap-adapter": "5.15.1",
+    "@photo-sphere-viewer/cubemap-tiles-adapter": "5.15.1",
+    "@photo-sphere-viewer/markers-plugin": "5.15.1",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "vite": "5.4.10"
+  }
+}

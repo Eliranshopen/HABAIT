@@ -1,0 +1,30 @@
+# The engine's Python environment, locked: every package the install produces, at one exact version.
+# Source of the pins: the environment that produced apartment 846 (habait-venv, Python 3.13.5),
+# read from its 2026-11-04 backup copy on 2026-11-16.
+# Install: node engine/cli.mjs setup-env --go
+
+# the six libraries the pipeline imports
+numpy==2.5.4
+shapely==2.2.0
+opencv-python==5.0.0.93
+pillow==13.0.0
+scikit-image==0.26.0
+pymupdf==2.0
+
+# what scikit-image brings
+scipy==1.18.1
+networkx==3.7
+imageio==2.38.1
+tifffile==2026.10.15
+lazy-loader==0.6
+packaging==26.3
+
+# what pymupdf 2.0 brings
+pymupdf4llm==2.0
+pymupdf-layout==2.0
+onnxruntime==1.31.1
+flatbuffers==25.12.19
+protobuf==7.36.2
+psutil==7.2.2
+pyyaml==6.0.3
+tabulate==0.10.0

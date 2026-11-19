@@ -1,0 +1,134 @@
+{
+  "when": "2026-11-16T14:37:28.947Z",
+  "system": "You compare two photos of the same room taken by the same camera. Image 1 is the original. Image 2 is an edited version in which\nsomething was added or changed: usually people, sometimes an object. In image 2, find the piece of furniture the added or changed\nthing is AT: the table the people sit at, the sofa they sit on, the surface the object stands on. Call it the anchor. Then find the\nsame anchor in image 1. Box the WHOLE anchor in each image (for a table: the table top and its legs or base; never the people, the\nchairs or the dishes). Keep the answer short.\nReturn ONLY a JSON object: {\"anchor\": \"short name\", \"box1\": [ymin, xmin, ymax, xmax], \"box2\": [ymin, xmin, ymax, xmax], \"found_in_1\": true or false}\nwith box1 in image 1 and box2 in image 2, each normalized to 0-1000 of its own image.",
+  "rule": {
+    "iou": 0.5,
+    "minArea": 0.6,
+    "maxArea": 1.6
+  },
+  "booked_usd": 0.048,
+  "right": 12,
+  "total": 12,
+  "rows": [
+    {
+      "label": "GOOD",
+      "run": "real",
+      "room": "living",
+      "att": "a1",
+      "r": 1,
+      "verdict": "HELD",
+      "detail": "dining table: iou 1.00 area x1.00",
+      "s": 6
+    },
+    {
+      "label": "GOOD",
+      "run": "real",
+      "room": "living",
+      "att": "a1",
+      "r": 2,
+      "verdict": "HELD",
+      "detail": "dining table: iou 0.98 area x0.98",
+      "s": 8.7
+    },
+    {
+      "label": "GOOD",
+      "run": "real",
+      "room": "dining",
+      "att": "a2",
+      "r": 1,
+      "verdict": "HELD",
+      "detail": "dining table: iou 1.00 area x1.00",
+      "s": 15.9
+    },
+    {
+      "label": "GOOD",
+      "run": "real",
+      "room": "dining",
+      "att": "a2",
+      "r": 2,
+      "verdict": "HELD",
+      "detail": "dining table: iou 1.00 area x1.00",
+      "s": 22.4
+    },
+    {
+      "label": "GOOD",
+      "run": "real-fast",
+      "room": "dining",
+      "att": "a1",
+      "r": 1,
+      "verdict": "HELD",
+      "detail": "table: iou 0.73 area x0.74",
+      "s": 12.1
+    },
+    {
+      "label": "GOOD",
+      "run": "real-fast",
+      "room": "dining",
+      "att": "a1",
+      "r": 2,
+      "verdict": "HELD",
+      "detail": "dining table: iou 0.73 area x0.74",
+      "s": 11.7
+    },
+    {
+      "label": "GOOD",
+      "run": "real-fast-2",
+      "room": "living",
+      "att": "a2",
+      "r": 1,
+      "verdict": "HELD",
+      "detail": "dining table: iou 0.96 area x0.96",
+      "s": 7.9
+    },
+    {
+      "label": "GOOD",
+      "run": "real-fast-2",
+      "room": "living",
+      "att": "a2",
+      "r": 2,
+      "verdict": "HELD",
+      "detail": "dining table: iou 1.00 area x1.00",
+      "s": 6.7
+    },
+    {
+      "label": "BAD too large",
+      "run": "real-fast",
+      "room": "living",
+      "att": "a1",
+      "r": 1,
+      "verdict": "NOT held",
+      "detail": "dining table: not found in the original",
+      "s": 22.5
+    },
+    {
+      "label": "BAD too large",
+      "run": "real-fast",
+      "room": "living",
+      "att": "a1",
+      "r": 2,
+      "verdict": "NOT held",
+      "detail": "dining table: not found in the original",
+      "s": 24.1
+    },
+    {
+      "label": "BAD table redrawn",
+      "run": "real-fast-2",
+      "room": "dining",
+      "att": "a2",
+      "r": 1,
+      "verdict": "NOT held",
+      "detail": "dining table: not found in the original",
+      "s": 25.8
+    },
+    {
+      "label": "BAD table redrawn",
+      "run": "real-fast-2",
+      "room": "dining",
+      "att": "a2",
+      "r": 2,
+      "verdict": "NOT held",
+      "detail": "dining table: not found in the original",
+      "s": 27.6
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+// qa-r3 t.mjs: takeovers. usage: node t.mjs <scenario> <seed> <n>
+import fs from 'node:fs';
+import { mkEnv, rng, inv, overlaps, setEnv, clearEnv, finish, resume, sleep, pidAlive, takeover, frozenJob, STAGES, PAID, settledSum, usd } from './q.mjs';
+const [scn, seedS, nS] = process.argv.slice(2);
+const seed = Number(seedS || 1); const N = Number(nS || 3);
+const R = rng(seed);
+const E = await mkEnv({ prefix: `qa3t-${scn}-`, callUsd: scn === 'cap' ? 25 : 0.6, stepMs: 300, heartbeat: 0.1, staleSeconds: 1 });
+let takeovers = 0; let kills = 0; const viol = []; let lateSeen = 0; let sendsMax = 0;
+const v = (a) => { for (const x of a) { viol.push(x); console.log('VIOLATION', x); } };
+const led = (id) => E.ledger(id);
+const wakeLeave = async (r) => { r.wake(); await E.waitFor(`old ${r.oldPid} gone`, () => !pidAlive(r.oldPid), 25000, 20); };
+const killRun = async (id) => { await E.kill(id); kills++; };
+const waitRow = (id, f, ms = 15000) => E.waitFor('row', () => led(id).rows.find(f), ms, 5);
+
+async function one(i) {
+  const tag = `[${scn} ${i}]`;
+  const pt = R.pick(['skinning:sent', 'gating:sent', 'finishing:sent', 'skinning:reserved', 'gating:reserved']);
+  const stage = pt.split(':')[0];
+  const sentPoint = pt.endsWith(':sent');
+  const name = `${scn}${seed}-${i}.pdf`;
+  let info = '';
+  if (scn === 'latekill') {
+    // second runner killed at a chosen window, third runner, first woken at a chosen instant
+    const win = R.pick(['AFTER_RESERVE', 'AFTER_CACHE', 'AFTER_SETTLE']);
+    const wakeAt = R.pick(['beforeThird', 'duringThird', 'afterDone']);
+    const r = await takeover(E, { name, point: pt, secondEnv: { [`ENGINE_TEST_PAUSE_${win}_MS`]: 20000 } }); takeovers++;
+    info = `${pt} kill2@${win} wake@${wakeAt}`;
+    // wait for the second runner to be in its pause window
+    await E.waitFor('second in window', () => {
+      const rows = led(r.id).rows.filter((x) => x.stage === stage && x.attempt >= 1 && x.seq > 1 || x.stage === stage);
+      const mine = led(r.id).rows.filter((x) => x.stage === stage);
+      if (win === 'AFTER_RESERVE') return mine.length >= 2 && mine.at(-1).status === 'reserved';
+      if (win === 'AFTER_CACHE') return mine.some((x) => x.status === 'reserved' && fs.existsSync(E.jobPath(r.id, `cache/${x.call_key}.json`)));
+      return mine.some((x) => x.status === 'settled' && !x.late);
+    }, 30000, 5);
+    if (wakeAt === 'beforeThird') await wakeLeave(r);
+    await killRun(r.id);
+    v(inv(E, r.id, { quiet: false, tag: `${tag} after kill2` }));
+    clearEnv();
+    await resume(E, r.pdf); takeovers++;
+    if (wakeAt === 'duringThird') { await sleep(R.int(0, 500)); await wakeLeave(r); }
+    await finish(E, r.id, 90000);
+    if (wakeAt === 'afterDone') await wakeLeave(r);
+    await E.waitFor('quiet', () => E.runnerPid(r.id) === null && !pidAlive(r.oldPid), 25000, 20);
+    v(inv(E, r.id, { quiet: true, expectDone: true, tag: `${tag} ${info}` }));
+    const l = led(r.id).rows;
+    lateSeen += l.filter((x) => x.late).length;
+    sendsMax = Math.max(sendsMax, E.sends(r.id, stage));
+    console.log(`${tag} ${info} sends(${stage})=${E.sends(r.id, stage)} rows=${l.filter((x) => x.stage === stage).map((x) => x.status + (x.late ? '/late' : '') + (x.not_sent ? '/ns' : '') + (x.recovered ? '/rec' : '')).join(',')} spent=${E.job(r.id).cost.spent_usd}`);
+    return;
+  }
+  if (scn === 'wakewin') {
+    // wake the blocked first runner at chosen instants of the second runner's three pause windows
+    const win = R.pick(['AFTER_RESERVE', 'AFTER_CACHE', 'AFTER_SETTLE']);
+    const r = await takeover(E, { name, point: pt, secondEnv: { [`ENGINE_TEST_PAUSE_${win}_MS`]: 1200 } }); takeovers++;
+    info = `${pt} wake@${win}`;
+    await E.waitFor('second in window', () => {
+      const mine = led(r.id).rows.filter((x) => x.stage === stage);
+      if (win === 'AFTER_RESERVE') return mine.length >= 2 && mine.at(-1).status === 'reserved';
+      if (win === 'AFTER_CACHE') return mine.some((x) => x.status === 'reserved' && fs.existsSync(E.jobPath(r.id, `cache/${x.call_key}.json`)));
+      return mine.some((x) => x.status === 'settled' && !x.late);
+    }, 30000, 2);
+    await sleep(R.int(0, 150));
+    await wakeLeave(r);
+    await finish(E, r.id, 90000);
+    await E.waitFor('quiet', () => E.runnerPid(r.id) === null, 25000, 20);
+    v(inv(E, r.id, { quiet: true, expectDone: true, tag: `${tag} ${info}` }));
+    const l = led(r.id).rows; lateSeen += l.filter((x) => x.late).length; sendsMax = Math.max(sendsMax, E.sends(r.id, stage));
+    console.log(`${tag} ${info} sends=${E.sends(r.id, stage)} rows=${l.filter((x) => x.stage === stage).map((x) => x.status + (x.late ? '/late' : '') + (x.not_sent ? '/ns' : '')).join(',')} spent=${E.job(r.id).cost.spent_usd}`);
+    return;
+  }
+  if (scn === 'spentrace') {
+    // wake the replaced runner at a random moment while the owner is working; spent must equal the settled sum at the end
+    const r = await takeover(E, { name, point: pt }); takeovers++;
+    await sleep(R.int(0, 1500));
+    r.wake();
+    await finish(E, r.id, 90000);
+    await E.waitFor('both gone', () => E.runnerPid(r.id) === null && !pidAlive(r.oldPid), 25000, 20);
+    v(inv(E, r.id, { quiet: true, expectDone: true, tag: `${tag} ${pt}` }));
+    const l = led(r.id).rows; lateSeen += l.filter((x) => x.late).length; sendsMax = Math.max(sendsMax, E.sends(r.id, stage));
+    console.log(`${tag} ${pt} spent=${E.job(r.id).cost.spent_usd} settled=${settledSum(led(r.id))} late=${l.filter((x) => x.late).length}`);
+    return;
+  }
+  if (scn === 'cancel') {
+    const r = await takeover(E, { name, point: pt }); takeovers++;
+    // cancel while the second works (random point), wake the first at a random time around it
+    await sleep(R.int(100, 1200));
+    const wk = R();
+    if (wk < 0.4) r.wake();
+    try { E.h.cancel_job({ job_id: r.id }); } catch (e) { console.log(tag, 'cancel threw', e.message); }
+    if (wk >= 0.4 && wk < 0.8) await sleep(R.int(0, 300));
+    r.wake();
+    await E.waitFor('both gone', () => E.runnerPid(r.id) === null && !pidAlive(r.oldPid), 25000, 20);
+    const st = E.job(r.id).state;
+    const nrows = E.rows(r.id).length;
+    await sleep(600);
+    if (E.job(r.id).state !== st && st === 'cancelled') viol.push(`${tag} state moved after cancel ${st} -> ${E.job(r.id).state}`);
+    if (E.rows(r.id).length !== nrows) viol.push(`${tag} manifest grew after cancel`);
+    v(inv(E, r.id, { quiet: true, tag: `${tag} after cancel` }));
+    if (st === 'cancelled') { await resume(E, r.pdf); takeovers++; await finish(E, r.id, 90000); await E.waitFor('quiet', () => E.runnerPid(r.id) === null, 25000, 20); v(inv(E, r.id, { quiet: true, expectDone: true, tag: `${tag} after restart` })); }
+    const l = led(r.id).rows; lateSeen += l.filter((x) => x.late).length;
+    console.log(`${tag} ${pt} cancel state=${st} final=${E.job(r.id).state} late=${l.filter((x) => x.late).length} sends=${PAID.map((p) => E.sends(r.id, p))}`);
+    return;
+  }
+  if (scn === 'cap') {
+    // callUsd 25, cap 60: takeover + late answer + the cap; approve bigger caps until done
+    const r = await takeover(E, { name, point: 'skinning:' + (R() < 0.6 ? 'sent' : 'reserved') }); takeovers++;
+    await sleep(R.int(0, 1500));
+    if (R() < 0.5) r.wake();
+    let capStops = 0;
+    await E.waitFor('done', () => {
+      const j = E.job(r.id);
+      if (j.state === 'failed') throw new Error('failed ' + JSON.stringify(j.reason));
+      if (j.state === 'awaiting_approval' && !j.approval) { if (j.reason?.code === 'BUDGET_CAP') capStops++; try { E.h.approve_paid_stage({ job_id: r.id, cap_usd: Math.max(60, Math.ceil((j.quote.estimate_usd + 1) / 10) * 10) }); } catch (e) { if (!/lock busy|NOT_AWAIT/.test(e.message + e.code)) throw e; } }
+      return j.state === 'done';
+    }, 90000, 20);
+    r.wake();
+    await E.waitFor('both gone', () => E.runnerPid(r.id) === null && !pidAlive(r.oldPid), 25000, 20);
+    v(inv(E, r.id, { quiet: true, expectDone: true, tag: `${tag} cap` }));
+    const l = led(r.id).rows; lateSeen += l.filter((x) => x.late).length; sendsMax = Math.max(sendsMax, E.sends(r.id, 'skinning'));
+    console.log(`${tag} cap stops=${capStops} spent=${E.job(r.id).cost.spent_usd} settled=${settledSum(led(r.id))} rows=${l.map((x) => x.stage[0] + ':' + x.status + (x.late ? '/late' : '') + (x.not_sent ? '/ns' : '')).join(' ')}`);
+    return;
+  }
+  if (scn === 'heavy3') {
+    // three jobs, one heavy lock: A frozen holding it, B takes it over, C waits; wake A at random; sometimes kill B's runner
+    clearEnv();
+    const A = await frozenJob(E, { name: name.replace('.pdf', 'A.pdf'), point: 'rendering' });
+    if (E.heavy()?.pid !== A.pid) throw new Error('A does not hold the heavy lock');
+    const pb = E.pdf(name.replace('.pdf', 'B.pdf'), 'B' + i); const pc = E.pdf(name.replace('.pdf', 'C.pdf'), 'C' + i);
+    const B = E.h.start_simulation({ pdf_path: pb }).job_id; const C = E.h.start_simulation({ pdf_path: pc }).job_id;
+    takeovers++;
+    const mode = R.pick(['wakeDuringB', 'killHolder', 'wakeLate', 'wakeEarly']);
+    if (mode === 'wakeEarly') { await sleep(R.int(0, 400)); A.wake(); }
+    await E.waitFor('someone else holds the lock', () => { const h = E.heavy(); return h && h.pid !== A.pid; }, 30000, 3);
+    if (mode === 'wakeDuringB') { await sleep(R.int(0, 250)); A.wake(); }
+    if (mode === 'killHolder') {
+      const h = E.heavy();
+      if (h && pidAlive(h.pid) && h.pid !== process.pid) { process.kill(h.pid); for (let k = 0; k < 200 && pidAlive(h.pid); k++) await sleep(5); kills++; }
+      A.wake();
+      for (const jid of [B, C]) { const p = E.runnerPid(jid); if (!p || !pidAlive(p)) { try { await resume(E, jid === B ? pb : pc); } catch (e) { console.log('resume', e.message); } } }
+    }
+    if (mode === 'wakeLate') { await E.waitFor('B and C past rendering', () => [B, C].every((j) => E.rows(j).some((x) => x.stage === 'rendering')), 40000, 10); A.wake(); }
+    for (const [jid, p] of [[A.id, A.pdf], [B, pb], [C, pc]]) {
+      await E.waitFor(`${jid} past rendering or runner`, () => { const j = E.job(jid); if (j.state === 'awaiting_approval' || j.state === 'done') return true; const pid = E.runnerPid(jid); return !pid || !pidAlive(pid) ? (resume(E, p).catch(() => 0), false) : false; }, 60000, 50);
+    }
+    A.wake();
+    for (const jid of [A.id, B, C]) { await finish(E, jid, 90000); }
+    await E.waitFor('all gone', () => [A.id, B, C].every((j) => E.runnerPid(j) === null) && !pidAlive(A.pid), 30000, 30);
+    for (const jid of [A.id, B, C]) v(inv(E, jid, { quiet: true, expectDone: true, tag: `${tag} ${mode} ${jid.slice(0, 4)}` }));
+    v(overlaps(E, [A.id, B, C]));
+    console.log(`${tag} ${mode} rendering rows: ${[A.id, B, C].map((j) => E.rows(j).filter((x) => x.stage === 'rendering').map((x) => '#' + x.attempt + (x.superseded ? 's' : '')).join('')).join(' | ')} heavyfile=${fs.existsSync(E.config.runner.heavyLock)}`);
+    if (fs.existsSync(E.config.runner.heavyLock)) viol.push(`${tag} heavy lock file left behind`);
+    return;
+  }
+  throw new Error('unknown scenario ' + scn);
+}
+for (let i = 0; i < N; i++) {
+  try { await one(i); } catch (e) { viol.push(`[${scn} ${i}] EXC ${e.stack?.split('\n').slice(0, 3).join(' | ')}`); console.log('EXC', i, e.message); }
+  clearEnv();
+}
+console.log(`SUMMARY scn=${scn} seed=${seed} n=${N} takeovers=${takeovers} kills=${kills} late_rows=${lateSeen} maxsends=${sendsMax} violations=${viol.length}`);
+for (const x of viol) console.log(' -', x);
+await E.cleanup();
+console.log('leftover pids:', JSON.stringify(E.leftover));
+process.exit(viol.length ? 1 : 0);

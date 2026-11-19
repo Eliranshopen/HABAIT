@@ -2,19 +2,20 @@
   "$schema": "../../contracts/units.schema.json",
   "project": "rainbow",
   "currency": "ILS",
-  "price_note": "FIXTURE: every price and every unit except 846's geometry is invented for testing the flow; 846 = TOWER-RED type L floor 16 (the only real unit, concept status)",
+  "price_note": "FIXTURE: every price and every unit except 846's geometry is invented for testing the flow; 846 = TOWER-RED type L floor 16 (the only real unit, concept status). Eliran 2026-11-10: the other units stay as demo numbers, marked — per-unit `source`: sales-plan (846 only) | demo; the pages show «נתוני הדגמה» when source is demo",
   "units": [
     {
       "id": "846",
+      "source": "sales-plan",
       "floor": 16,
       "type": "L",
-      "rooms": 4,
-      "area_m2": 118,
-      "outdoor_m2": 22,
+      "rooms": 3,
+      "area_m2": 106.72,
+      "outdoor_m2": 26.15,
       "price": 7950000,
       "status": "for-sale",
       "tour_url": "http://127.0.0.1:8848/?scope=apartment&room=terraceLiving&floor=parquet&video=0&return=http://127.0.0.1:8899/?from=platform%26project=rainbow",
-      "note": "the real apartment of the pitch (sales plan DBLK 15.10.2025); descend-846 / enter-846 exist in flow.json",
+      "note": "the real apartment of the pitch (sales plan DBLK 15.10.2025: 3 rooms, apartment 106.72 m², sun terrace 26.15 m² — Eliran 2026-11-08 «כן, לפי תוכנית המכר»); descend-846 / enter-846 exist in flow.json",
       "hotspots": [
         {
           "segment": "approach",
@@ -52,6 +53,7 @@
     },
     {
       "id": "845",
+      "source": "demo",
       "floor": 16,
       "type": "K",
       "rooms": 3,
@@ -72,6 +74,7 @@
     },
     {
       "id": "847",
+      "source": "demo",
       "floor": 16,
       "type": "M",
       "rooms": 5,
@@ -92,6 +95,7 @@
     },
     {
       "id": "856",
+      "source": "demo",
       "floor": 17,
       "type": "L",
       "rooms": 4,
@@ -112,6 +116,7 @@
     },
     {
       "id": "855",
+      "source": "demo",
       "floor": 17,
       "type": "K",
       "rooms": 3,
@@ -132,6 +137,7 @@
     },
     {
       "id": "857",
+      "source": "demo",
       "floor": 17,
       "type": "M",
       "rooms": 5,
@@ -152,6 +158,7 @@
     },
     {
       "id": "836",
+      "source": "demo",
       "floor": 15,
       "type": "L",
       "rooms": 4,
@@ -172,6 +179,7 @@
     },
     {
       "id": "835",
+      "source": "demo",
       "floor": 15,
       "type": "K",
       "rooms": 3,
@@ -192,6 +200,7 @@
     },
     {
       "id": "837",
+      "source": "demo",
       "floor": 15,
       "type": "M",
       "rooms": 5,
@@ -212,6 +221,7 @@
     },
     {
       "id": "866",
+      "source": "demo",
       "floor": 18,
       "type": "L",
       "rooms": 4,
@@ -232,6 +242,7 @@
     },
     {
       "id": "826",
+      "source": "demo",
       "floor": 14,
       "type": "L",
       "rooms": 4,
@@ -252,6 +263,7 @@
     },
     {
       "id": "876",
+      "source": "demo",
       "floor": 19,
       "type": "PH",
       "rooms": 6,

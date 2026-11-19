@@ -1,11 +1,11 @@
 # product-research-2026-11-02/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Product research of 2026-11-02 (habait-ab): HABAIT-RESEARCH report, Hebrew summary and workplan, four raw-N reports, and the script that builds the report.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 13 files here · 0 subfolders · 13 files / 5.0 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

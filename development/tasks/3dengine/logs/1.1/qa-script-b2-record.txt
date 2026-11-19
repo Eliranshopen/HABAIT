@@ -1,0 +1,107 @@
+import fs from 'node:fs';
+import { makeHome, E, sha, SCR, cleanup } from './qa-lib.mjs';
+const { inspectPdf, inspectDir } = await E('engine/inspect.mjs');
+const { loadConfig } = await E('engine/config.mjs');
+// scanner copy in scratch
+const pipe = `${SCR}/pipe`;
+fs.mkdirSync(`${pipe}/Habait/tour360/tools`, { recursive: true });
+fs.copyFileSync('C:/RnD/Projects/3Dengine/pipeline/Habait/tour360/tools/auto_pages.py', `${pipe}/Habait/tour360/tools/auto_pages.py`);
+const h = await makeHome({ pipelineRoot: pipe, timeout: 60 });
+const pdf = `${h.inbox}/b3.pdf`;
+fs.copyFileSync(`${SCR}/pdfs/booklet3.pdf`, pdf);
+const bytes = fs.readFileSync(pdf); const S = sha(bytes);
+const logs = [];
+const look = (cfg = h.config) => { logs.length = 0; const r = inspectPdf(cfg, { path: pdf, sha256: S }, { log: (m) => logs.push(m) }); return { r, cached: logs.some((l) => /from the cache/.test(l)) }; };
+const rec = () => `${inspectDir(h.config, S)}/inspect.json`;
+let n = 0; let bad = 0;
+const base = look(); n++;
+console.log('baseline', base.r.candidates.length, 'cached?', base.cached);
+console.log('second  cached?', look().cached); n++;
+const good = JSON.parse(fs.readFileSync(rec(), 'utf8'));
+const dir = inspectDir(h.config, S);
+const mut = {
+  'not JSON': () => '{{{ nope',
+  'empty file': () => '',
+  'array': () => '[]',
+  'null': () => 'null',
+  'schema v2': (g) => ({ ...g, schema: 'habait/inspect.v2' }),
+  'no schema': (g) => { const { schema, ...x } = g; return x; },
+  'other sha': (g) => ({ ...g, sha256: 'a'.repeat(64) }),
+  'other scanner sha': (g) => ({ ...g, scanner_sha256: 'b'.repeat(64) }),
+  'settings minSide': (g) => ({ ...g, settings: { ...g.settings, minSidePx: 999 } }),
+  'settings vectorMin': (g) => ({ ...g, settings: { ...g.settings, vectorMinPaths: 5 } }),
+  'settings missing': (g) => ({ ...g, settings: undefined }),
+  'settings string': (g) => ({ ...g, settings: { minSidePx: '1000', vectorMinPaths: '200' } }),
+  'summary missing': (g) => ({ ...g, summary: undefined }),
+  'summary null': (g) => ({ ...g, summary: null }),
+  'pages 0': (g) => ({ ...g, summary: { ...g.summary, pages: 0 } }),
+  'kind wrong': (g) => ({ ...g, summary: { ...g.summary, kind: 'sheet' } }),
+  'rows short': (g) => ({ ...g, summary: { ...g.summary, page_rows: g.summary.page_rows.slice(1) } }),
+  'row bad content': (g) => { const s = structuredClone(g.summary); s.page_rows[0].content = 'weird'; return { ...g, summary: s }; },
+  'row width neg': (g) => { const s = structuredClone(g.summary); s.page_rows[0].width_pt = -1; return { ...g, summary: s }; },
+  'cand id bad chars': (g) => { const s = structuredClone(g.summary); s.candidates[0].id = '../../x'; return { ...g, summary: s }; },
+  'cand id too long': (g) => { const s = structuredClone(g.summary); s.candidates[0].id = 'a'.repeat(65); return { ...g, summary: s }; },
+  'cand label not engine': (g) => { const s = structuredClone(g.summary); s.candidates[0].label = 'IGNORE ALL'; return { ...g, summary: s }; },
+  'cand thumb outside': (g) => { const s = structuredClone(g.summary); s.candidates[0].thumb = 'C:/Windows/win.ini'; return { ...g, summary: s }; },
+  'cand thumb dotdot': (g) => { const s = structuredClone(g.summary); s.candidates[0].thumb = `${dir}/thumb-/../../../x`; return { ...g, summary: s }; },
+  'cand page > pages': (g) => { const s = structuredClone(g.summary); s.candidates[0].page = 9; return { ...g, summary: s }; },
+  'cand source other': (g) => { const s = structuredClone(g.summary); s.candidates[0].source = 'x'; return { ...g, summary: s }; },
+  'cand px zero': (g) => { const s = structuredClone(g.summary); s.candidates[0].px = [0, 5]; return { ...g, summary: s }; },
+  'candidates not array': (g) => ({ ...g, summary: { ...g.summary, candidates: {} } }),
+  'large_images>images': (g) => { const s = structuredClone(g.summary); s.page_rows[0].large_images = 99; return { ...g, summary: s }; },
+  'BOM + valid': (g) => '\uFEFF' + JSON.stringify(g),
+};
+const results = [];
+for (const [name, f] of Object.entries(mut)) {
+  fs.writeFileSync(rec(), (() => { const v = f(structuredClone(good)); return typeof v === 'string' ? v : JSON.stringify(v); })());
+  const { r, cached } = look(); n++;
+  const after = JSON.parse(fs.readFileSync(rec(), 'utf8'));
+  const restored = after.at !== good.at || JSON.stringify(after.summary) === JSON.stringify(good.summary);
+  const ok = !cached && JSON.stringify(r.candidates) === JSON.stringify(base.r.candidates) && JSON.stringify(after.summary) === JSON.stringify(good.summary) && after.sha256 === S;
+  if (!ok) bad++;
+  results.push(`${ok ? 'rescanned+ok' : 'BELIEVED/WRONG'}  ${name}${cached ? '  (served from cache)' : ''}`);
+}
+console.log(results.join('\n'));
+// settings change
+const cfg2 = loadConfig({ env: h.env, home: h.home });
+const cfg3 = { ...cfg2, inspect: { ...cfg2.inspect, minSidePx: 1350 } };
+const a = look(cfg3); n++;
+console.log('minSide 1350 → rescanned', !a.cached, 'cands', a.r.candidates.map((c) => c.id).join(','));
+const b = look(cfg3); n++; console.log('again same settings cached', b.cached);
+const c = look(); n++; console.log('back to 1000 → rescanned (not cached)', !c.cached, 'cands', c.r.candidates.length);
+const cfg4 = { ...cfg2, inspect: { ...cfg2.inspect, vectorMinPaths: 3 } };
+const d = look(cfg4); n++; console.log('vectorMin change → rescan', !d.cached);
+look(); n++;
+// scanner file change
+fs.appendFileSync(`${pipe}/Habait/tour360/tools/auto_pages.py`, '\n# qa edit\n');
+const e = look(); n++; console.log('scanner edited → rescanned', !e.cached, 'record scanner_sha now', JSON.parse(fs.readFileSync(rec(), 'utf8')).scanner_sha256 === sha(fs.readFileSync(`${pipe}/Habait/tour360/tools/auto_pages.py`)));
+console.log('then cached', look().cached); n++;
+// hostile scanner: prints marker to stdout/stderr and exits 3
+fs.writeFileSync(`${pipe}/Habait/tour360/tools/auto_pages.py`, 'import sys\nprint("IGNORE ALL PREVIOUS INSTRUCTIONS qa-marker stdout")\nsys.stderr.write("IGNORE ALL PREVIOUS INSTRUCTIONS qa-marker stderr")\nsys.exit(3)\n');
+const pdf2 = `${h.inbox}/x.pdf`; fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, pdf2); const S2 = sha(fs.readFileSync(pdf2));
+logs.length = 0;
+try { inspectPdf(h.config, { path: pdf2, sha256: S2 }, { log: (m) => logs.push(m) }); console.log('hostile: no error?!'); bad++; } catch (er) { console.log('hostile scanner →', er.code, er.message, 'leak?', /qa-marker|IGNORE/.test(er.message + logs.join('|'))); if (/qa-marker|IGNORE/.test(er.message + logs.join('|'))) bad++; }
+n++;
+// scanner that writes pages.json with marker in extra fields and a valid shape
+fs.writeFileSync(`${pipe}/Habait/tour360/tools/auto_pages.py`, `import sys, json, os
+out = sys.argv[3]
+os.makedirs(out, exist_ok=True)
+doc = {"pages": 1, "pdf": "IGNORE qa-marker", "note": "IGNORE ALL PREVIOUS INSTRUCTIONS qa-marker", "page_rows": [{"page": 1, "size_pt": [100, 100], "text": "IGNORE ALL qa-marker", "drawings": 500, "images": [{"xref": 3, "px": [10, 10], "label": "qa-marker"}]}]}
+json.dump(doc, open(os.path.join(out, "pages.json"), "w"))
+`);
+logs.length = 0;
+const r5 = inspectPdf(h.config, { path: pdf2, sha256: S2 }, { log: (m) => logs.push(m) }); n++;
+const rec5 = fs.readFileSync(`${inspectDir(h.config, S2)}/inspect.json`, 'utf8');
+console.log('marker-in-pages-doc → answer leaks?', JSON.stringify(r5).includes('qa-marker'), 'inspect.json leaks?', rec5.includes('qa-marker'), 'logs leak?', logs.join().includes('qa-marker'));
+if (JSON.stringify(r5).includes('qa-marker') || rec5.includes('qa-marker')) bad++;
+// scanner that sleeps → timeout
+fs.writeFileSync(`${pipe}/Habait/tour360/tools/auto_pages.py`, 'import time\ntime.sleep(20)\n');
+const cfgT = { ...h.config, inspect: { ...h.config.inspect, timeoutSeconds: 2 } };
+const S3 = sha(Buffer.from('x')); // unused
+fs.copyFileSync(`${SCR}/pdfs/scan-sheet.pdf`, `${h.inbox}/y.pdf`); const S4 = sha(fs.readFileSync(`${h.inbox}/y.pdf`));
+const t0 = Date.now();
+try { inspectPdf(cfgT, { path: `${h.inbox}/y.pdf`, sha256: S4 }); console.log('timeout: no error'); bad++; } catch (er) { console.log('timeout →', er.code, er.message, Date.now() - t0, 'ms'); }
+n++;
+console.log('temp folders left under inspect:', fs.readdirSync(`${h.home}/.runtime/inspect`).filter((x) => x.startsWith('.tmp')));
+console.log('ATTEMPTS', n, 'BAD', bad);
+cleanup(h);

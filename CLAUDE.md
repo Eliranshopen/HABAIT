@@ -1,5 +1,5 @@
 # C:\RnD — the Habait R&D harness
-<!-- last-updated: 2026-11-04 -->
+<!-- last-updated: 2026-11-10 -->
 
 **Owner and single authority: Eliran Shopen, head of R&D.** Every go, ruling, paid call, deletion, deploy and install in this repo is Eliran's act. The harness (inherited as 28 sub-agents and 54 skills, focused on 2026-11-03 to 10 agents and 33 skills for habait-walkaround + Video — `development/plans/2026-11-03-harness-focus.md`; the context files and lints) was inherited from
 the previous CTO's setup on 2026-11-03, re-attributed to Eliran and started clean: no product code, no memory, no boards yet. The rulings that were baked into the prompts are collected once in `docs/INHERITED-DECISIONS.md` — they stay in force until Eliran changes them.
@@ -69,7 +69,7 @@ Every script under `scripts/` or a track's `toolkit/`: dry-run by default; the p
    **Nothing else gets a folder** (Eliran, 2026-11-03: "i dont need wt for code only wt for changes or updates i do for the peoject"). Harness work (this file, `.claude/`, `docs/`, scripts, context files, `/sync-context`), questions, reads, reviews and checks are done straight in the live files with no `.wt\` folder. If it is unclear whether a request changes the project, ask Eliran; don't open a folder by default.
    **One folder per task, not per fix** (Eliran, 2026-11-03): fixes and follow-ups go into the task's own folder, never a sibling — detail in `.wt/CLAUDE.md`.
    Procedure (use `scripts/wt.py`, Open, Close, memory and register rows, VS Code): `.wt/CLAUDE.md`, section "Rule §8.7 procedure" (moved from here 2026-11-04, word for word).
-   **Local git on `main` (Eliran, 2026-11-04; replaces the 2026-11-03 "no git").** Identity set (§11). **One repo**, `Projects/Habait` included (`de560da`). **A new feature = a git worktree off `main`** (Eliran: "כל מה שרציתי זה שתהיה האפשרות לWORKTREE ככה שאוכל לעבוד על פיצרים בנפרד ולא על הMAIN"): `git -C C:/RnD worktree add C:/RnD/.wt/<feature> -b <feature>`, merged into `main` when done. Never push. Procedure, `.gitignore`, the older plain-copy folders and what stays suspended: `.wt/CLAUDE.md`.
+   **Local git on `main` (Eliran, 2026-11-04; replaces the 2026-11-03 "no git").** Identity set (§11). **One repo**, `Projects/Habait` included (`de560da`). **A new feature = a git worktree off `main`** (Eliran: "כל מה שרציתי זה שתהיה האפשרות לWORKTREE ככה שאוכל לעבוד על פיצרים בנפרד ולא על הMAIN"): `git -C C:/RnD worktree add C:/RnD/.wt/<feature> -b <feature>`, merged into `main` when done. Never push `main` (mirror: §11). Procedure, `.gitignore`, the older plain-copy folders and what stays suspended: `.wt/CLAUDE.md`.
 8. **Every plan lives in `C:\RnD\development\plans\` (Eliran, 2026-11-03: "every plan that we are creating has to be in the plans folder in the development folder").** Every new plan — written by the main session, a sub-agent or a skill, for the harness or for any project under `Projects\` — is a file `development/plans/YYYY-MM-DD-<slug>.md`, and its row is added to the table in `development/plans/CLAUDE.md` in the same change. A plan that exists only in a chat, in Claude Code's private plan file (`~/.claude/plans/`), in a project folder or in a working folder does not count as written.
    Plan mode, plan-vs-working-folder and the plan-of-record files: `development/plans/CLAUDE.md`, section "Rule §8.8 detail" (moved from here 2026-11-04).
 9. **Every board ends with QA cards (Eliran, 2026-11-03: "אני רוצה שהTASKS האחרונים יהיו TASK של QA … שכל פעם שיש פירוק תכנית למשימות אז יהיה בסוף גם משימות של QA").** Every board that `/plan-to-tasks` writes ends with QA cards, and nothing but QA comes after the last build or copy-back card:
@@ -94,14 +94,14 @@ Inherited 2026-07-10 / 07-13 / 07-15, now Eliran's. A new rail is added here as 
 | Item | Value today | Used by |
 |---|---|---|
 | Pinned git identity — author AND committer, GitHub noreply form with the numeric id | **`Eliran Shopen <eliran@habait.ai>`** — repo-local (`git config`, not global), set on Eliran's word 2026-11-04; first commit `8237f16`. A GitHub noreply form is decided only when a remote is named | `/ship`, `/worktree-ops`, `habait-deploy-qa`, `check-context.mjs` (`RND_GIT_IDENTITY`) — all suspended |
-| `<github-org>/<harness-repo>` | **none** — local only by Eliran's word (2026-11-04: "כרגע אני עובד רק מקומי"); no remote, no push | `check-versions.mjs`, `habait-deploy-qa` |
+| `<github-org>/<harness-repo>` | **`Eliranshopen/HABAIT`** (public, 2026-11-08): media-free snapshots on his word → `memory/project/2026-11-08-github-remote-habait.md` | `check-versions.mjs`, `habait-deploy-qa` |
 | `<github-org>/<app-repo>` | **none** — no remote yet | `/ship`, `/run-eval`, `/worktree-ops`, `/close-board` |
 | `<github-org>/habait-walkaround` | **none** — one repo since 2026-11-04 (`de560da`); the old product `.git` is archived at `C:\Habait-git-archive-2026-11-04` (`.wt/CLAUDE.md`) | `walkaround-porter` |
 | Vercel project and the four host aliases | `habait.ai` · `www.habait.ai` · `app.habait.ai` · `<project>.vercel.app` | `habait-deploy-qa`, `/ship` |
 | MCP servers (21st, refero, HeyGen, fal) | **opentakeoff** (`npx -y opentakeoff-mcp`, local config, Eliran 2026-11-04 — plan PDF takeoff: scale, `measure_polygon`, counts); 21st, refero, HeyGen, fal: none registered | `docs/OWNER-PASTE.md` |
 | Hooks (`subagent-context.ps1`, `test-guard`, `agent-model-guard.ps1`) | not installed | `docs/OWNER-PASTE.md` |
 
-The remote rows stay "none" until Eliran names a remote (git is local-only since 2026-11-04, §8.7). Until any other row is filled, the skill that depends on it reports the gap by name and stops; nothing guesses.
+Other remote rows stay "none" until Eliran names a remote (§8.7). Until any other row is filled, the skill that depends on it reports the gap by name and stops; nothing guesses.
 
 ## §12 Machine resource rules
 Every test, build, server, browser or render command runs in Git Bash as `timeout N <cmd>` (tests 300 s, build/typecheck 540, servers/sweeps/renders 540 per chunk, 1800 once `BASH_MAX_TIMEOUT_MS` is raised) with the tool timeout above N; one heavy run at a time; foreground only; kill what you start by PID; never sleep-poll a backgrounded run — stop it, kill its tree, re-run bounded once. Backed by the `test-guard` hook once installed; until then this line is the only rule.
@@ -114,7 +114,7 @@ Every folder has a context file (§8.6). This table lists the **areas** — the 
 | Root | `/` | [`CLAUDE.md`](CLAUDE.md) | the contract every session and sub-agent inherits (this file) |
 | Harness | `.claude/` | [`.claude/CLAUDE.md`](.claude/CLAUDE.md) | the Claude Code configuration tree: agents, skills, local settings, hooks |
 | Harness | `.claude/agents/` | [`.claude/agents/CLAUDE.md`](.claude/agents/CLAUDE.md) | the 10 sub-agent definitions, the header standard and its lints |
-| Harness | `.claude/skills/` | [`.claude/skills/CLAUDE.md`](.claude/skills/CLAUDE.md) | the 36 skills by group, the frontmatter standard |
+| Harness | `.claude/skills/` | [`.claude/skills/CLAUDE.md`](.claude/skills/CLAUDE.md) | the 47 skills by group, the frontmatter standard |
 | Harness | `.claude/hooks/` | [`.claude/hooks/CLAUDE.md`](.claude/hooks/CLAUDE.md) | guard hooks, not installed |
 | Docs | `docs/` | [`docs/CLAUDE.md`](docs/CLAUDE.md) | the department's reference documents: inherited decisions, roster, skill register, owner paste |
 | Docs | `docs/governance/` | [`docs/governance/CLAUDE.md`](docs/governance/CLAUDE.md) | the registers: secrets, owed and ships live; worktrees frozen |

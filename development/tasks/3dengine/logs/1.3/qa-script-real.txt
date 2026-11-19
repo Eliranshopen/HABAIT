@@ -1,0 +1,82 @@
+// QA scratch (qa-reviewer, milestone 1.3): real-tool attempts in a temp engine home. Never pays: no keys in the home.
+import fs from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const ENG = 'C:/RnD/Projects/3Dengine';
+const { startRealHome, FIXTURES, GOLDEN, GOLDEN_SHA } = await import(pathToFileURL(`${ENG}/tests/stages/real-home.mjs`).href);
+const MARK = 'QAMARK-Zebra-Quartz-7731';
+const scenario = process.argv[2];
+const truth = JSON.parse(fs.readFileSync(`${FIXTURES}/apt846/saved-reading.json`, 'utf8'));
+const clone = () => structuredClone(truth);
+const stampStrings = (v) => { if (typeof v === 'string') return v; if (Array.isArray(v)) return v.map(stampStrings); if (v && typeof v === 'object') { const o = {}; for (const [k, x] of Object.entries(v)) o[k] = (typeof x === 'string' && k !== 'type' && k !== 'kind') ? `${MARK} ${k}` : stampStrings(x); return o; } return v; };
+const muts = {
+  marked_dim: () => { const r = stampStrings(clone()); r.rooms.find((x) => x.type === 'master_bedroom').dims_cm[0] += 100; const i = r.printed_dims_cm.indexOf(348); if (i >= 0) r.printed_dims_cm[i] = 448; return r; },
+  dim_kitchen: () => { const r = clone(); const k = r.rooms.find((x) => x.type === 'bedroom' && Array.isArray(x.dims_cm)); k.dims_cm = [k.dims_cm[0] + 80, k.dims_cm[1]]; return r; },
+  no_room: () => { const r = clone(); r.rooms.splice(r.rooms.findIndex((x) => x.type === 'wardrobe'), 1); return r; },
+  renamed_type: () => { const r = clone(); r.rooms[0].type = 'zzz_not_a_type'; return r; },
+  true: () => clone(),
+};
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const out = [];
+const say = (...a) => { const s = a.join(' '); out.push(s); console.log(s); };
+const readJ = (f) => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return null; } };
+function walk(dir, skip) { const res = []; for (const n of fs.readdirSync(dir)) { const p = `${dir}/${n}`; if (skip(p)) continue; const st = fs.statSync(p); if (st.isDirectory()) res.push(...walk(p, skip)); else res.push(p); } return res; }
+function leak(h, ids) {
+  const hits = [];
+  if (h.lines.join('\n').includes(MARK)) hits.push('tool answers');
+  for (const id of ids) {
+    const d = h.jobDir(id);
+    for (const f of walk(d, (p) => /\/stages\/tracing\/attempt-\d+$/.test(p) || /\/input$/.test(p))) {
+      const buf = fs.readFileSync(f); if (buf.includes(MARK)) hits.push(f.replace(d, ''));
+    }
+  }
+  return hits;
+}
+const ENDED = ['done', 'review', 'failed', 'cancelled', 'awaiting_approval'];
+let RD = null;
+function setReading(h, m) { const d = RD || h.readingsDir; fs.mkdirSync(d, { recursive: true }); fs.writeFileSync(`${d}/${GOLDEN_SHA}.json`, JSON.stringify(muts[m]())); }
+async function runOne(h, label, id) {
+  const t0 = Date.now();
+  const { job, seen } = await h.follow(id, ENDED, 480000);
+  await h.runnersGone();
+  const d = h.jobDir(id);
+  const man = readJ(`${d}/manifest.json`); const led = readJ(`${d}/ledger.json`);
+  const j = readJ(`${d}/job.json`);
+  say(`[${label}] state=${job.state} reason=${job.reason?.code} | ${job.reason?.message} | review=${JSON.stringify(j.review ?? null)} attempts=${JSON.stringify(j.attempts)} manifestRows=${man?.rows?.length} ledgerRows=${led?.rows?.length} spent=${job.cost?.spent_usd} stagesDir=${JSON.stringify(fs.readdirSync(`${d}/stages`))} tracingDirs=${JSON.stringify(fs.readdirSync(`${d}/stages/tracing`))} seen=${seen.join('>')} secs=${Math.round((Date.now() - t0) / 1000)}`);
+  return job;
+}
+async function main() {
+  const first = { fail_chain: 'marked_dim', other: 'dim_kitchen' }[scenario];
+  if (scenario === 'other') RD = `${process.env.TEMP.split(String.fromCharCode(92)).join('/')}/qa13-קריאות-${process.pid}`;
+  const h = await startRealHome({ prefix: `qa13-${scenario}-`, readings: scenario === 'other' ? {} : { [GOLDEN_SHA]: `${FIXTURES}/apt846/saved-reading.json` }, settings: scenario === 'other' ? { readingsDir: RD } : {} });
+  try {
+    const pdf = `${h.inbox}/rainbow-846.pdf`; fs.copyFileSync(GOLDEN, pdf);
+    const ids = [];
+    const chain = scenario === 'fail_chain' ? ['marked_dim', 'marked_dim', 'no_room'] : scenario === 'other' ? ['dim_kitchen'] : [];
+    let id = null;
+    for (let i = 0; i < chain.length; i++) {
+      setReading(h, chain[i]);
+      const s = await h.ok('start_simulation', { pdf_path: pdf });
+      say(`start #${i + 1} reading=${chain[i]} created=${s.created} state=${s.job.state}`);
+      id = s.job_id; if (!ids.includes(id)) ids.push(id);
+      await runOne(h, `${i + 1}:${chain[i]}`, id);
+      say('  leak:', JSON.stringify(leak(h, ids)));
+    }
+    // one more via the command (engine resume), same reading
+    if (scenario === 'fail_chain') {
+      const { spawnSync } = await import('node:child_process');
+      setReading(h, 'marked_dim');
+      const env = { ...process.env, ENGINE_HOME: h.home, ENGINE_JOBS_DIR: h.jobsDir }; for (const k of Object.keys(env)) if (/^(fal_key|openrouter_api_key)$/i.test(k)) delete env[k];
+      const r = spawnSync(process.execPath, [`${ENG}/engine/cli.mjs`, 'resume', id], { env, encoding: 'utf8', cwd: ENG, timeout: 60000 });
+      say('resume exit', r.status, (r.stdout || '').slice(0, 300).replace(/\n/g, ' | '));
+      await runOne(h, '4:resume-cli', id);
+      const j = readJ(`${h.jobDir(id)}/job.json`);
+      say('  review record now:', JSON.stringify(j.review));
+      say('  leak:', JSON.stringify(leak(h, ids)));
+      for (const n of fs.readdirSync(`${h.jobDir(id)}/stages/tracing`)) say(`  ${n}:`, fs.readdirSync(`${h.jobDir(id)}/stages/tracing/${n}`).join(','));
+    }
+    say('tool answers kept:', h.lines.length);
+  } finally { await h.stop(); if (RD) fs.rmSync(RD, { recursive: true, force: true }); }
+}
+try { await main(); } catch (e) { say('ERROR', e.stack); process.exitCode = 1; }
+fs.writeFileSync(`C:/RnD/.wt/3dengine/development/tasks/3dengine/logs/1.3/qa-real-${scenario}.txt`, out.join('\n') + '\n');

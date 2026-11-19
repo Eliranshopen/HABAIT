@@ -1,0 +1,12 @@
+short outside file: C:\Users\elira\AppData\Local\Temp\QA-M11~1\OUTSID~1\LONG-F~1.PDF
+short inbox file: C:\Users\elira\AppData\Local\Temp\QA-M11~1\uploads\LONG-F~1.PDF
+short outside dir: C:\Users\elira\AppData\Local\Temp\QA-M11~1\OUTSID~1
+Hardlink created for C:\Users\elira\AppD
+inspect_plan short outside file PATH_NOT_ALLOWED
+start_simulation short outside file PATH_NOT_ALLOWED
+inspect_plan short outside dir + file PATH_NOT_ALLOWED
+start_simulation short outside dir + file PATH_NOT_ALLOWED
+inspect_plan short inbox file (legit) OK C:/Users/elira/AppData/Local/Temp/qa-m11-home-28636-1794907531941-1/uploads/long-file-name-here.pdf
+start_simulation short inbox file (legit) OK LONG-F~1.PDF
+inspect_plan hardlink in inbox to outside file OK C:/Users/elira/AppData/Local/Temp/qa-m11-home-28636-1794907531941-1/uploads/hard.pdf
+start_simulation hardlink in inbox to outside file OK LONG-F~1.PDF

@@ -1,0 +1,34 @@
+scenario marker  work C:/Users/elira/AppData/Local/Temp/qa12-marker-G05gqe load 100
+=== marker
+{
+ "code": 1,
+ "secs": "18.3",
+ "outcome": "STEP_FAILED",
+ "markerInStdout": false,
+ "markerInStderr": false,
+ "markerInHuman": false,
+ "hebrewInJsonOutsidePaths": false,
+ "hebrewInHumanOutsidePaths": false,
+ "markerInLogFile": false,
+ "stderr": "",
+ "outcomeDetail": {
+  "exit": 1,
+  "paid": false,
+  "rooms": null
+ }
+}
+outcome: STEP_FAILED
+seconds: 17.7
+paid run: no
+tool exit code: 1
+output folder: C:/Users/elira/AppData/Local/Temp/qa12-marker-G05gqe/פלט עם רווח/run 1
+the tool's own output: C:/Users/elira/AppData/Local/Temp/qa12-marker-G05gqe/פלט עם רווח/run 1/auto-trace.log
+ledger exists: false
+procs at end [
+  '14640 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '1308 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '47068 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 540 node qa12-b2.mjs marker',
+  '21452 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 540 node qa12-b2.mjs marker',
+  '31624 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs marker'
+]
+exit 0

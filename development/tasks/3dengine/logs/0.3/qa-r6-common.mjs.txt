@@ -1,0 +1,127 @@
+// qa-r6 common: invariant checker computed from the files only, counters, helpers.
+import fs from 'node:fs';
+import { execFileSync, spawn } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
+
+const R = 'C:/RnD/Projects/3Dengine';
+const imp = (p) => import(pathToFileURL(`${R}/${p}`).href);
+export const lib = await imp('tests/soak/lib.mjs');
+export const ledgerMod = await imp('engine/ledger.mjs');
+export const control = await imp('engine/control.mjs');
+export const jobsMod = await imp('engine/jobs.mjs');
+export const proc = await imp('engine/lib/proc.mjs');
+export const atomic = await imp('engine/lib/atomic.mjs');
+export const stubEngine = await imp('mcp/stub-engine.mjs');
+export const manifestMod = await imp('engine/manifest.mjs');
+export const { mkEnv, frozenJob, frozenThenReplaced, toDone, wakeAndLeave, sleep, gone, lockFree } = lib;
+export const { pidAlive } = proc;
+export const ROOT = R;
+export const OUT = 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r6';
+export const stats = { kills: 0, takeovers: 0, scenarios: 0, violations: [] };
+export const say = (...a) => { const l = a.join(' '); console.log(l); fs.appendFileSync(`${OUT}/results.txt`, l + '\n'); };
+
+const rj = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
+export function readStable(f) {
+  const until = Date.now() + 3000;
+  for (;;) {
+    try { return fs.readFileSync(f, 'utf8'); } catch (e) {
+      if (e.code === 'ENOENT') return null;
+      if (Date.now() > until) throw e;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10);
+    }
+  }
+}
+const pj = (f) => { const t = readStable(f); return t === null ? null : JSON.parse(t); };
+
+// Check a job from its files. opts.quiet = no runner of this job is alive. Returns list of violation strings.
+export function check(E, id, { quiet = true, capNow = undefined } = {}) {
+  const v = [];
+  const dir = `${E.config.jobsDir}/${id}`;
+  let job, led, man;
+  try { job = pj(`${dir}/job.json`); led = pj(`${dir}/ledger.json`) || { rows: [] }; man = pj(`${dir}/manifest.json`) || { rows: [] }; }
+  catch (e) { return [`parse: ${e.message}`]; }
+  const rows = led.rows;
+  const settled = rows.filter((r) => r.status === 'settled');
+  const sum = Math.round(settled.reduce((n, r) => n + (Number(r.settled_usd) || 0), 0) * 1e6) / 1e6;
+  const held = Math.round(rows.filter((r) => r.status === 'reserved' || r.status === 'orphaned').reduce((n, r) => n + (Number(r.reserved_usd) || 0), 0) * 1e6) / 1e6;
+  if (job.state === 'done' && rows.some((r) => r.status === 'reserved')) v.push('reserved row at done');
+  if (quiet && rows.some((r) => r.status === 'reserved') && ['done'].includes(job.state)) v.push('reserved quiet');
+  for (const r of rows) {
+    if (r.status === 'orphaned' && !r.sending_at) v.push(`orphaned w/o sending_at #${r.seq}`);
+    if (r.not_sent && r.sending_at) v.push(`not_sent with sending_at #${r.seq}`);
+    if (r.status === 'settled' && !r.sending_at) v.push(`settled w/o sending_at #${r.seq}`);
+  }
+  const byKey = {};
+  for (const r of rows) (byKey[r.call_key] ||= []).push(r);
+  for (const [k, rs] of Object.entries(byKey)) {
+    const plain = rs.filter((r) => r.status === 'settled' && !r.late && !r.resend_of);
+    if (plain.length > 1) v.push(`two plain settled rows for ${k.slice(0, 8)}`);
+    const marked = rs.filter((r) => r.sending_at).length;
+    const stage = rs[0].stage;
+    const sends = E.sends(id, stage);
+    const allMarked = rows.filter((r) => r.stage === stage && r.sending_at).length;
+    if (sends > allMarked) v.push(`${stage}: sends ${sends} > marked rows ${allMarked}`);
+  }
+  if (quiet && job.cost.spent_usd !== sum) v.push(`copy ${job.cost.spent_usd} != settled ${sum} (job.json raw)`);
+  const cap = capNow === undefined ? job.cost.cap_usd : capNow;
+  if (typeof cap === 'number' && sum + held > cap + 1e-9 && job.approval) v.push(`counted ${sum + held} > cap ${cap}`);
+  // manifest: one valid (not superseded, done) row per stage
+  const live = man.rows.filter((r) => r.status === 'done' && !r.superseded);
+  const per = {};
+  for (const r of live) per[r.stage] = (per[r.stage] || 0) + 1;
+  for (const [s, n] of Object.entries(per)) if (n > 1) v.push(`stage ${s} has ${n} valid rows`);
+  const rend = man.rows.filter((r) => r.stage === 'rendering');
+  const log = fs.existsSync(`${dir}/runner.log`) ? (readStable(`${dir}/runner.log`) || '') : '';
+  if (/runner \d+ error:/.test(log)) v.push('runner crash line');
+  if (job.state === 'done') {
+    for (const s of ['tracing', 'building', 'rendering', 'skinning', 'gating', 'finishing', 'packaging', 'qa']) if (!per[s]) v.push(`done without a valid row of ${s}`);
+  }
+  return v;
+}
+export function overlaps(E, ids) {
+  const rs = [];
+  for (const id of ids) for (const r of E.rows(id)) if (r.stage === 'rendering') rs.push({ id, a: Date.parse(r.started_at), b: Date.parse(r.finished_at) });
+  const out = [];
+  for (let i = 0; i < rs.length; i++) for (let j = i + 1; j < rs.length; j++) {
+    if (rs[i].id === rs[j].id) continue;
+    if (rs[i].a < rs[j].b && rs[j].a < rs[i].b) out.push([rs[i], rs[j]]);
+  }
+  return out;
+}
+export const ledgerSum = (E, id) => {
+  const doc = JSON.parse(readStable(`${E.config.jobsDir}/${id}/ledger.json`));
+  return ledgerMod.ledgerTotals(doc).settled_usd;
+};
+// What every tool and both CLI commands REPORT about the job, as a map name -> spent_usd.
+export function reported(E, id, { cliEnv } = {}) {
+  const out = {};
+  const grab = (n, f) => { try { out[n] = f(); } catch (e) { out[n] = `ERR ${e.code || ''} ${e.message}`; } };
+  grab('get_job', () => E.h.get_job({ job_id: id }).job.cost.spent_usd);
+  grab('list_jobs', () => E.h.list_jobs({ limit: 50 }).jobs.find((j) => j.job_id === id)?.cost.spent_usd);
+  return out;
+}
+export function cli(E, args) {
+  const env = { ...process.env, ...control.configEnv(E.config) };
+  return execFileSync(process.execPath, [`${ROOT}/engine/cli.mjs`, ...args], { env, encoding: 'utf8', timeout: 30000, windowsHide: true });
+}
+export function cliSpent(E, id) {
+  const o = {};
+  try { o.cli_job = JSON.parse(cli(E, ['job', id, '--json'])).cost.spent_usd; } catch (e) { o.cli_job = `ERR ${e.message.split('\n')[0]}`; }
+  try { o.cli_jobs = JSON.parse(cli(E, ['jobs', '--json'])).jobs.find((j) => j.job_id === id)?.cost.spent_usd; } catch (e) { o.cli_jobs = `ERR ${e.message.split('\n')[0]}`; }
+  return o;
+}
+export const rnd = (seed) => { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; };
+// hold job.lock of a job from a separate live process for ms (optionally refreshing its mtime)
+export function holdLock(lockFile, ms, { refresh = false } = {}) {
+  const code = `
+    const fs=require('fs');const lock=process.argv[1];const ms=Number(process.argv[2]);const refresh=process.argv[3]==='1';
+    const tmp=lock+'.h'+process.pid;fs.writeFileSync(tmp,String(process.pid));
+    for(;;){try{fs.linkSync(tmp,lock);break}catch(e){Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,5)}}
+    fs.rmSync(tmp,{force:true});process.stdout.write('held\\n');
+    const end=Date.now()+ms;
+    const t=setInterval(()=>{ if(refresh){try{const n=new Date();fs.utimesSync(lock,n,n)}catch{}} if(Date.now()>end){clearInterval(t);try{if(fs.readFileSync(lock,'utf8')===String(process.pid))fs.rmSync(lock,{force:true})}catch{}process.exit(0)}},50);
+  `;
+  const p = spawn(process.execPath, ['-e', code, lockFile, String(ms), refresh ? '1' : '0'], { stdio: ['ignore', 'pipe', 'inherit'], windowsHide: true });
+  return new Promise((res) => { p.stdout.once('data', () => res(p)); });
+}
+export function killPid(pid) { try { process.kill(pid); } catch { /* gone */ } }

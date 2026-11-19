@@ -45,16 +45,17 @@ async function newPage(viewport) {
 {
   const page = await newPage({ width: 1280, height: 760 });
   await page.goto(base + '/');
-  await step('index lists the rainbow project in Hebrew RTL', async () => {
-    // platform-ui-ux card 11 redesigned the home page: the project card is .home-card, its title .hb-media-card__title (h3)
-    await page.waitForSelector('.home-card');
+  await step('index is the Rainbow landing page in Hebrew RTL', async () => {
+    // 2026-11-08 (plan 2026-11-08-rainbow-landing): the root is the dedicated Rainbow landing page (was the card 11 projects grid)
+    await page.waitForSelector('#heroTitle');
     assert.equal(await page.getAttribute('html', 'dir'), 'rtl');
-    assert.match(await page.textContent('.home-card .hb-media-card__title'), /Rainbow/);
+    assert.match(await page.textContent('#heroTitle'), /RAINBOW/);
+    await page.waitForFunction(() => /orbit|hold/.test(document.getElementById('heroCta').href));   // the route comes from project.json
   });
   await step('language toggle flips to English LTR', async () => {
     await page.click('#langToggle');
     assert.equal(await page.getAttribute('html', 'dir'), 'ltr');
-    assert.match(await page.textContent('#galleryTitle'), /Projects/);   // card 11: the gallery heading replaced .index-title
+    assert.match(await page.textContent('#heroCta'), /Tour the project/);
     await page.click('#langToggle'); // back to Hebrew for the flow
   });
   await page.screenshot({ path: join(shots, 'index.png') });
@@ -202,7 +203,7 @@ async function newPage(viewport) {
     });
     assert.equal(st.shown, 11); assert.equal(st.hidden876, 'none');
     assert.equal(st.pos, 'absolute', 'style.css from :8850 not applied'); assert.equal(st.radius, '999px');
-    assert.equal(st.sub, 'קומה 16 · 4 חדרים');
+    assert.equal(st.sub, 'קומה 16 · 3 חדרים');   // the sales plan, DBLK 15.10.2025 (Eliran 2026-11-08)
     assert.match(st.cls, /\bhotspot\b/); assert.match(st.cls, /\bstatus-for-sale\b/);
     // platform-ui-ux card 13: the status colours come from tokens.css (--chrome-ok #6fb385, --chrome-sold #d77a71), which style.css
     // @imports; a cross-origin host that failed to get them would compute a transparent dot, so this still proves the CSS applied.

@@ -450,26 +450,39 @@
     {
      "to": "living",
      "u": 0.506,
-     "v": 0.8,
-     "source": "plan-bearing via the opening; R23b moved off FIXTURE l-sofa (floor 25 cm from it) (CG depth) to floor"
-    },
-    {
-     "to": "kitchen",
-     "u": 0.397,
-     "v": 0.86,
-     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off FIXTURE k-tall (known deviation of 01-entrance) (CG depth) to floor"
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw 2.2) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -27° down: hidden under the controls at the level view on desktop and phone)"
     },
     {
      "to": "bathguest",
-     "u": 0.243,
-     "v": 1,
-     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off wall (CG depth) to floor"
+     "u": 0.331,
+     "v": 0.64,
+     "source": "hotspot-pins.json: the room picture and the 3D model, 2026-11-11: the mouth of the passage between the wall and the tall cabinet, the near (bath) side (exact height: the depth model put it at the visitor's feet, 65 degrees down, where nobody sees it) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -45° down: hidden under the controls at the level view on desktop and phone) | phone check: spread from the bedroom-2 button (yaw -61, v 0.64)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.417,
+     "v": 0.594,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the floor right of the tall cabinet | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -38° down: hidden under the controls at the level view on desktop and phone)"
     },
     {
      "to": "bedroom2",
-     "u": 0.369,
-     "v": 0.85,
-     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off wall (CG depth) to floor"
+     "u": 0.375,
+     "v": 0.55,
+     "source": "hotspot-pins.json: the room picture and the 3D model, 2026-11-11: the mouth of the same passage, the far (bedroom) side | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -36° down: hidden under the controls at the level view on desktop and phone) | phone check: spread from the guest-bath button (yaw -45, v 0.55)"
+    },
+    {
+     "to": "wardrobe",
+     "as": "bedroomMain",
+     "u": 0.675,
+     "v": 0.68,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11 (Eliran: from the entrance there was no way to the room seen in the picture): the master suite's door, right of the TV wall, seen across the living room; it opens on the wardrobe corner (exact: the depth model has this door about 10 degrees to the left, as from the living room, and moved the button onto the TV unit)"
+    },
+    {
+     "to": "dining",
+     "u": 0.452,
+     "v": 0.552,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.01% of the picture, 7.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
     }
    ]
   },
@@ -503,14 +516,14 @@
     {
      "to": "living",
      "u": 0.711,
-     "v": 0.83,
-     "source": "the visible part of the opening (the hand via is hidden from this camera); R23b moved off FIXTURE l-coffee (CG depth) to floor"
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw 76.0) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -33° down: hidden under the controls at the level view on desktop and phone)"
     },
     {
      "to": "entrance",
-     "u": 0.796,
+     "u": 0.797,
      "v": 0.68,
-     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off FIXTURE k-tall (CG depth) to floor"
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the floor toward the front door, past the armchair (the entrance camera is not in sight, so the rule drops this way)"
     }
    ]
   },
@@ -538,20 +551,26 @@
     {
      "to": "kitchen",
      "u": 0.285,
-     "v": 0.83,
-     "source": "plan-bearing via the opening; R23b moved off FIXTURE k-counter (CG depth) to floor"
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw -77.4) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -33° down: hidden under the controls at the level view on desktop and phone)"
     },
     {
      "to": "living",
-     "u": 0.102,
-     "v": 0.68,
-     "source": "the visible part of the opening (the hand via is hidden from this camera)"
+     "u": 0.07,
+     "v": 0.75,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the floor beside the armchair, toward the sofa (the rule put it toward the front door); moved off FIXTURE l-sofa (the ray skims it) (within 2° of the marker) (CG depth) to floor"
     },
     {
      "to": "terraceLiving",
      "u": 0.801,
      "v": 0.68,
      "source": "plan-bearing via the opening"
+    },
+    {
+     "to": "entrance",
+     "u": 0.094,
+     "v": 0.558,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.96% of the picture, 6.9 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
     }
    ]
   },
@@ -584,15 +603,15 @@
     },
     {
      "to": "dining",
-     "u": 0.381,
+     "u": 0.339,
      "v": 0.68,
-     "source": "the visible part of the opening (the hand via is hidden from this camera); R23b moved off FIXTURE d-table (CG depth) to glass facade-1"
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: over the dining table, seen above the sofa back (exact: from this camera every lower point is the sofa, and the depth rule would send the button to the terrace glass; hotspot-check reports this one on the table)"
     },
     {
      "to": "kitchen",
      "u": 0.249,
-     "v": 0.77,
-     "source": "plan-bearing via the opening; R23b moved off FIXTURE k-counter-2 (floor 0 cm from it) (CG depth) to floor"
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw -90.4) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -22° down: hidden under the controls at the level view on desktop and phone)"
     },
     {
      "to": "entrance",
@@ -601,10 +620,17 @@
      "source": "plan-bearing via the opening"
     },
     {
-     "to": "bedroomMain",
-     "u": 0.563,
+     "to": "wardrobe",
+     "as": "bedroomMain",
+     "u": 0.869,
      "v": 0.68,
-     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off wall (CG depth) to opening o-5"
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the door in the recess right of the TV wall; it opens on the wardrobe corner, the suite's way in (exact: the 3D model has this door about 10 degrees to the left, at 124, and a closet here — the picture and the model differ at this spot; hotspot-check reports this one on the closet)"
+    },
+    {
+     "to": "bathguest",
+     "u": 0.088,
+     "v": 0.581,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.55% of the picture, 4.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — its door, seen past the entrance"
     }
    ]
   },
@@ -675,6 +701,24 @@
      "u": 0.496,
      "v": 0.68,
      "source": "plan-bearing via the opening"
+    },
+    {
+     "to": "bedroomMain",
+     "u": 0.222,
+     "v": 0.594,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (19.25% of the picture, 2.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — through its terrace door (o-13) | 2026-11-12 browser check: moved down to the floor by the bed (yaw -100, v 0.78), clear of the wardrobe button | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -24° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "wardrobe",
+     "u": 0.256,
+     "v": 0.53,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.28% of the picture, 6.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the bedroom, so above its button | 2026-11-12 browser check: moved up onto the far door (yaw -88, v 0.53) — at the first place it covered the bedroom button"
+    },
+    {
+     "to": "living",
+     "u": 0.352,
+     "v": 0.573,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.74% of the picture, 6.1 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
     }
    ]
   },
@@ -700,16 +744,28 @@
    "centreBearingDeg": 344.9,
    "hotspots": [
     {
-     "to": "living",
-     "u": 0.353,
-     "v": 0.68,
-     "source": "plan-bearing via the opening; R23b moved off wall (within 2° of the marker) (CG depth) to opening o-6"
-    },
-    {
      "to": "wardrobe",
      "u": 0.334,
      "v": 0.68,
      "source": "the visible part of the opening (the hand via is hidden from this camera); R23b moved off wall (CG depth) to opening o-6"
+    },
+    {
+     "to": "terraceBedroom",
+     "u": 0.827,
+     "v": 0.696,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (8.03% of the picture, 2.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — its terrace door (o-13)"
+    },
+    {
+     "to": "living",
+     "u": 0.367,
+     "v": 0.548,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.67% of the picture, 4.6 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the wardrobe corner; moved 3.5 degrees right and up off the wardrobe button"
+    },
+    {
+     "to": "terraceLiving",
+     "u": 0.761,
+     "v": 0.593,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.32% of the picture, 3.7 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
     }
    ]
   },
@@ -737,14 +793,26 @@
     {
      "to": "bedroomMain",
      "u": 0.632,
-     "v": 0.89,
-     "source": "the visible part of the opening (the hand via is hidden from this camera); R23b moved off FIXTURE bm-bed (CG depth) to floor"
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw 47.5) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -44° down: hidden under the controls at the level view on desktop and phone)"
     },
     {
      "to": "bathMain",
      "u": 0.859,
      "v": 0.68,
      "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to opening o-9"
+    },
+    {
+     "to": "living",
+     "u": 0.092,
+     "v": 0.68,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the open door to the living room; moved off wall (CG depth) to opening o-6"
+    },
+    {
+     "to": "terraceBedroom",
+     "u": 0.517,
+     "v": 0.563,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.62% of the picture, 6.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the bedroom, so above its button"
     }
    ]
   },
@@ -798,12 +866,6 @@
    "northOffset": 0,
    "centreBearingDeg": 35.2,
    "hotspots": [
-    {
-     "to": "kitchen",
-     "u": 0.922,
-     "v": 0.68,
-     "source": "plan-bearing via the opening"
-    },
     {
      "to": "entrance",
      "u": 0.985,

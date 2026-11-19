@@ -1,0 +1,79 @@
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { withFileLock } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs';
+const T = 'C:/Users/elira/AppData/Local/Temp/qa2';
+const mode = process.argv[2];
+const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+if (mode === 'w') {
+  // worker: w <dir> <name> <holdMs> <staleMs> <waitMs>   marker file per name; prints ok|TWO|busy
+  const [, , , dir, name, holdMs, staleMs, waitMs] = process.argv;
+  let out = 'ok';
+  try {
+    withFileLock(`${dir}/x.lock`, () => {
+      const mk = `${dir}/in.${name}`;
+      const others = fs.readdirSync(dir).filter((n) => n.startsWith('in.') && n !== 'in.H');
+      fs.appendFileSync(`${dir}/log.txt`, `${name} enter ${Date.now()}
+`);
+      if (others.length) out = 'TWO:' + others.join(',');
+      fs.writeFileSync(mk, '');
+      fs.writeFileSync(`${dir}/ready.${name}`, String(process.pid));
+      sleep(Number(holdMs));
+      fs.rmSync(mk, { force: true });
+      fs.appendFileSync(`${dir}/log.txt`, `${name} exit ${Date.now()}
+`);
+    }, { waitMs: Number(waitMs), staleMs: Number(staleMs) });
+  } catch (e) { out = / lock busy$/.test(e.message) ? 'busy' : 'err ' + e.message; }
+  process.stdout.write(out);
+  process.exit(0);
+}
+const run = (args) => new Promise((res) => { let o = ''; const c = spawn(process.execPath, [`${T}/kill.mjs`, 'w', ...args]); c.stdout.on('data', (d) => (o += d)); c.on('close', () => res(o)); return c; });
+const spawnW = (args) => { const c = spawn(process.execPath, [`${T}/kill.mjs`, 'w', ...args]); let o = ''; c.stdout.on('data', (d) => (o += d)); const done = new Promise((r) => c.on('close', () => r(o))); return { c, done }; };
+const waitFile = async (f, ms = 15000) => { const t = Date.now(); while (!fs.existsSync(f)) { if (Date.now() - t > ms) throw new Error('wait ' + f); await new Promise((r) => setTimeout(r, 20)); } };
+const summary = { killRuns: 0, killProcs: 0, killBad: 0, sleeperRuns: 0, sleeperBad: 0, deadRaceRuns: 0, deadRaceProcs: 0, deadRaceBad: 0 };
+// K: killed holder, 4 takers waiting
+for (let r = 0; r < 8; r++) {
+  const dir = fs.mkdtempSync(`${T}/k-`);
+  const h = spawnW([dir, 'H', '60000', '10000', '1000']); // holder
+  await waitFile(`${dir}/ready.H`);
+  const takers = [1, 2, 3, 4].map((i) => spawnW([dir, 'T' + i, '60', '10000', '60000']));
+  await new Promise((r2) => setTimeout(r2, 200));
+  spawnSync('taskkill', ['/F', '/PID', String(h.c.pid)], { stdio: 'ignore' });
+  const outs = await Promise.all(takers.map((t) => t.done));
+  await h.done;
+  summary.killRuns++; summary.killProcs += 5;
+  const bad = outs.filter((o) => o !== 'ok');
+  if (bad.length) { summary.killBad++; console.log('K bad', outs.join('|')); }
+  fs.copyFileSync(`${dir}/log.txt`, `${T}/klog-${r}.txt`);
+  const left = fs.readdirSync(dir).filter((n) => n.startsWith('in.') && n !== 'in.H');
+  if (left.length) { summary.killBad++; console.log('K left', left); }
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+// S: a holder silent past staleMs wakes while its taker holds; a third waits with a long staleMs
+for (let r = 0; r < 5; r++) {
+  const dir = fs.mkdtempSync(`${T}/s-`);
+  const a = spawnW([dir, 'A', '1500', '300', '60000']);        // holds 1.5 s, stale after 0.3 s
+  await waitFile(`${dir}/ready.A`);
+  const b = spawnW([dir, 'B', '1500', '300', '60000']);        // takes over after 0.3 s, holds 1.5 s from then
+  await waitFile(`${dir}/ready.B`);
+  fs.rmSync(`${dir}/in.A`, { force: true });                   // A and B overlapped by design (stale hold); drop A's marker so only B vs C is judged
+  await new Promise((r2) => setTimeout(r2, 1300));             // A has woken and released by now (1.5 s) ; B still holds (till ~1.8 s)
+  const c = spawnW([dir, 'C', '50', '60000', '60000']);
+  const outs = await Promise.all([a.done, b.done, c.done]);
+  summary.sleeperRuns++;
+  // A and B may report TWO (they overlap by design); C must be 'ok' and must not see B's marker.
+  if (outs[2] !== 'ok') { summary.sleeperBad++; console.log('S bad C', outs.join('|')); }
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+// D: eight takers on one planted dead holder
+const dead = spawnSync(process.execPath, ['-e', '0']).pid;
+for (let r = 0; r < 20; r++) {
+  const dir = fs.mkdtempSync(`${T}/d-`);
+  fs.mkdirSync(`${dir}/x.lock`);
+  fs.writeFileSync(`${dir}/x.lock/h.${dead}.${Date.now()}.abcdef01`, '');
+  const ws = Array.from({ length: 8 }, (_, i) => spawnW([dir, 'D' + i, '15', '10000', '60000']));
+  const outs = await Promise.all(ws.map((w) => w.done));
+  summary.deadRaceRuns++; summary.deadRaceProcs += 8;
+  if (outs.some((o) => o !== 'ok')) { summary.deadRaceBad++; console.log('D bad', outs.join('|')); }
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+console.log(JSON.stringify(summary));

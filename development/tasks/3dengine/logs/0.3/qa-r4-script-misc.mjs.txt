@@ -1,0 +1,251 @@
+// node misc.mjs <key|edit|ended|heavy> [n] [seed]
+import fs from 'node:fs';
+import { spawnRunnerDefault } from 'file:///C:/RnD/Projects/3Dengine/engine/control.mjs';
+import { createPaidCall, readLedger } from 'file:///C:/RnD/Projects/3Dengine/engine/ledger.mjs';
+import { mkEnv, sleep, inv, rng, Chain, PAID, STAGES, lockGone, pidAlive, readText } from './h.mjs';
+const OUT = 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r4/results.jsonl';
+const mode = process.argv[2];
+const n = Number(process.argv[3] || 1);
+const seed = Number(process.argv[4] || 1);
+const emit = (o) => { const s = JSON.stringify(o); console.log(s); fs.appendFileSync(OUT, s + '\n'); };
+const rowsStr = (E, id) => E.ledger(id).rows.map((r) => `${r.stage[0]}${r.seq}:${r.status}${r.late ? '/late' : ''}${r.recovered ? '/rec' : ''}${r.not_sent ? '/ns' : ''}${r.resend_of ? '/rs' + r.resend_of : ''}${r.sending_at ? '' : '/nomark'}`).join(' ');
+const waitGone = async (pid, ms = 20000) => { const u = Date.now() + ms; while (pidAlive(pid) && Date.now() < u) await sleep(20); return !pidAlive(pid); };
+
+// A dead job at `packaging` (three paid stages done) = the base of the edit attacks.
+async function deadAtPackaging(E, name) {
+  const c = new Chain(E, name);
+  const r = await c.start({ freeze: 'packaging' });
+  await c.reach(r, 30000);
+  await c.kill(r);
+  return c;
+}
+
+async function keyScenario(i, slowMs) {
+  const E = await mkEnv({ prefix: 'qr4k-', staleSeconds: 1, stepMs: 200 });
+  const c = new Chain(E, `key-${i}.pdf`);
+  const r = await c.start({ freeze: 'tracing' });
+  await c.reach(r, 20000); await c.kill(r);
+  const f = E.jobPath(c.id, 'job.json');
+  const j = JSON.parse(readText(f));
+  j.approval = { cap_usd: 60, approved_at: new Date().toISOString() }; j.cost.cap_usd = 60;
+  fs.writeFileSync(f, JSON.stringify(j, null, 2));
+  let sent = 0;
+  const pc = createPaidCall({ jobsDir: E.config.jobsDir, jobId: c.id, stage: 'skinning', attempt: 1 });
+  const spec = { key: 'same', provider: 'stub', what: 'x', estimate_usd: 0.6 };
+  const fn = async () => { sent++; await sleep(slowMs); return { answer: { n: sent }, usd: 0.6 }; };
+  const res = await Promise.allSettled([pc(spec, fn), pc(spec, fn)]);
+  const rows = rowsStr(E, c.id);
+  const out = { mode, desc: `key slow=${slowMs}`, sent, results: res.map((x) => x.status + (x.reason ? ':' + x.reason.message.slice(0, 60) : '')), rows };
+  const v = [];
+  if (sent > 1) v.push(`item 5: two calls with the same key at once => ${sent} sends`);
+  emit({ ...out, viol: v, kills: c.kills, takeovers: 0, home: E.home });
+  await E.cleanup();
+}
+
+const cacheFiles = (E, id) => fs.readdirSync(E.jobPath(id, 'cache')).map((f) => E.jobPath(id, `cache/${f}`));
+const keyOfStage = (E, id, stage) => E.ledger(id).rows.find((r) => r.stage === stage).call_key;
+
+async function editScenario(i, variant, stage) {
+  const E = await mkEnv({ prefix: 'qr4e-', staleSeconds: 1, stepMs: 200 });
+  const c = await deadAtPackaging(E, `edit-${i}.pdf`);
+  const id = c.id;
+  const key = keyOfStage(E, id, stage);
+  const cf = E.jobPath(id, `cache/${key}.json`);
+  const orig = fs.readFileSync(cf, 'utf8');
+  const parsed = JSON.parse(orig);
+  const before = E.ledger(id).rows.length;
+  const act = {
+    control: () => {},
+    delete: () => fs.rmSync(cf),
+    garbage: () => fs.writeFileSync(cf, '{{{ not json'),
+    empty: () => fs.writeFileSync(cf, ''),
+    seq99: () => fs.writeFileSync(cf, JSON.stringify({ ...parsed, seq: 99 })),
+    noseq: () => fs.writeFileSync(cf, JSON.stringify({ answer: parsed.answer, settled_usd: parsed.settled_usd })),
+    usd: () => fs.writeFileSync(cf, JSON.stringify({ ...parsed, settled_usd: 9 })),
+    ws: () => fs.writeFileSync(cf, JSON.stringify(parsed, null, 1)),
+    seqnull: () => fs.writeFileSync(cf, JSON.stringify({ ...parsed, seq: null })),
+    seqstr: () => fs.writeFileSync(cf, JSON.stringify({ ...parsed, seq: String(parsed.seq) })),
+    noanswer: () => fs.writeFileSync(cf, JSON.stringify({ settled_usd: 0.6, seq: parsed.seq })),
+    answernull: () => fs.writeFileSync(cf, JSON.stringify({ answer: null, settled_usd: 0.6, seq: parsed.seq })),
+  }[variant];
+  act();
+  // force the stage to run again: delete its output (and for 'control' too)
+  fs.rmSync(E.jobPath(id, `stages/${stage}/stub.json`));
+  await c.start({});
+  await c.finish(rng(seed + i));
+  await lockGone(E, id);
+  const v = [...inv(E, id, { quiet: true, expectDone: true, damaged: true }), ...c.sink];
+  const after = E.ledger(id).rows.length;
+  const sends = E.sends(id, stage);
+  const expectResend = !['control'].includes(variant);
+  const resent = after > before;
+  if (variant === 'control' && resent) v.push('control: ledger grew');
+  if (expectResend && !resent) v.push(`${variant}: answer accepted from an edited cache (ledger did not grow)`);
+  emit({ mode, desc: `edit ${variant} ${stage}`, rows: rowsStr(E, id), sends, spent: E.job(id).cost.spent_usd, viol: v, kills: c.kills, takeovers: 0, home: v.length ? E.home : undefined });
+  await E.cleanup();
+}
+
+// Cache by hand in the states of the rows: runner 2 is killed with a reserved row (marked or not), a hand cache is written, runner 3 finishes.
+async function stateScenario(i, point, hand, stage = 'skinning') {
+  const E = await mkEnv({ prefix: 'qr4s-', staleSeconds: 1, stepMs: 200 });
+  const c = new Chain(E, `state-${i}.pdf`);
+  const r1 = await c.start({ freeze: point });
+  await c.reach(r1, 30000);
+  await c.kill(r1);
+  const id = c.id;
+  const rows = E.ledger(id).rows;
+  const mine = rows.find((r) => r.stage === stage);
+  const key = mine.call_key;
+  const answer = { stage, stub: true };
+  const files = {
+    none: null,
+    seq1: { answer, settled_usd: 0.6, seq: mine.seq },
+    noseq: { answer, settled_usd: 0.6 },
+    seq77: { answer, settled_usd: 0.6, seq: 77 },
+    usd0: { answer, settled_usd: 0, seq: mine.seq },
+    usdbig: { answer, settled_usd: 50, seq: mine.seq },
+  };
+  const body = files[hand];
+  if (body) { fs.mkdirSync(E.jobPath(id, 'cache'), { recursive: true }); fs.writeFileSync(E.jobPath(id, `cache/${key}.json`), JSON.stringify(body)); }
+  await c.start({});
+  await c.finish(rng(seed + i));
+  await lockGone(E, id);
+  const v = [...inv(E, id, { quiet: true, expectDone: true }), ...c.sink];
+  const sends = E.sends(id, stage);
+  const settledSk = E.ledger(id).rows.filter((r) => r.stage === stage && r.status === 'settled');
+  // a settled row that was never sent and has no hand cache to blame
+  if (hand === 'none' && settledSk.some((r) => r.recovered)) v.push('recovered without any cache file');
+  emit({ mode, desc: `state ${point} hand=${hand}`, rows: rowsStr(E, id), sends, spent: E.job(id).cost.spent_usd, viol: v, kills: c.kills, takeovers: 0, home: v.length ? E.home : undefined });
+  await E.cleanup();
+}
+
+// Hand-started runners for a job that has ended / is being finished.
+async function endedScenario(i, kind) {
+  const E = await mkEnv({ prefix: 'qr4n-', staleSeconds: 1, stepMs: 200 });
+  const c = new Chain(E, `ended-${i}.pdf`);
+  const v = [];
+  const spawnHand = () => { const pid = spawnRunnerDefault(E.config, c.id); E.spawned.add(pid); return pid; };
+  const snap = () => ['job.json', 'ledger.json', 'manifest.json'].map((f) => { try { return readText(E.jobPath(c.id, f)); } catch { return ''; } });
+  if (kind === 'done' || kind === 'while') {
+    const r = await c.start({});
+    if (kind === 'while') {
+      // start extra runners by hand while the job is running and during its last stages
+      const extra = [];
+      for (let k = 0; k < 6; k++) {
+        await sleep(150 + k * 120);
+        const s = E.job(c.id).state;
+        if (s === 'done') break;
+        if (s === 'awaiting_approval' && !E.job(c.id).approval) c.approve();
+        extra.push(spawnHand());
+      }
+      await c.finish(rng(seed + i));
+      const t0 = Date.now();
+      for (const p of extra) await waitGone(p, 8000);
+      c.t(`extras gone after ${Date.now() - t0} ms`);
+      for (const p of extra) if (pidAlive(p)) v.push(`hand runner ${p} still alive 8s after done`);
+    } else {
+      await c.finish(rng(seed + i));
+    }
+    await lockGone(E, c.id);
+    const before = snap();
+    const t0 = Date.now();
+    const ps = [spawnHand(), spawnHand(), spawnHand()];
+    // watch runner.pid for a taken pid file
+    let tookPid = false;
+    const u = Date.now() + 4000;
+    while (Date.now() < u && ps.some(pidAlive)) { if (fs.existsSync(E.jobPath(c.id, 'runner.pid'))) tookPid = true; await sleep(5); }
+    const left = ps.filter(pidAlive);
+    if (left.length) v.push(`runners for a done job still alive after 4 s: ${left}`);
+    if (tookPid) v.push('a runner started for a done job created runner.pid');
+    if (fs.existsSync(E.jobPath(c.id, 'runner.pid'))) v.push('runner.pid exists after hand runners for a done job');
+    if (JSON.stringify(snap()) !== JSON.stringify(before)) v.push('job/ledger/manifest changed by a runner started for a done job');
+    c.t(`hand runners left after ${Date.now() - t0} ms`);
+  } else {
+    // cancelled / failed: kill the first runner at paid stage, cancel, start hand runners
+    const r = await c.start({ freeze: 'gating:reserved' });
+    await c.reach(r, 30000);
+    if (kind === 'cancelled') E.h.cancel_job({ job_id: c.id });
+    await c.kill(r);
+    if (kind === 'failed') { const f = E.jobPath(c.id, 'job.json'); const j = JSON.parse(readText(f)); j.state = 'failed'; j.reason = { code: 'STAGE_FAILED', message: 'qa hand' }; fs.writeFileSync(f, JSON.stringify(j, null, 2)); }
+    const before = snap();
+    const pidBefore = E.runnerPid(c.id);
+    const ps = [spawnHand(), spawnHand()];
+    let tookPid = false;
+    const u = Date.now() + 4000;
+    while (Date.now() < u && ps.some(pidAlive)) { if (E.runnerPid(c.id) !== pidBefore) tookPid = true; await sleep(5); }
+    if (ps.some(pidAlive)) v.push('runner for a cancelled/failed job still alive');
+    if (tookPid) v.push('runner.pid created for an ended job');
+    if (JSON.stringify(snap()) !== JSON.stringify(before)) v.push('files changed by a runner started for an ended job');
+  }
+  v.push(...c.sink);
+  emit({ mode, desc: `ended ${kind}`, viol: v, kills: c.kills, takeovers: 0, trace: c.trace, home: v.length ? E.home : undefined });
+  await E.cleanup();
+}
+
+// 3 jobs, one heavy lock: random freezes at rendering, kills of holders, wakes in random order.
+async function heavyScenario(i) {
+  const rand = rng(seed * 100 + i);
+  const E = await mkEnv({ prefix: 'qr4h-', staleSeconds: 1, stepMs: 250, callUsd: 0 });
+  const chains = [0, 1, 2].map((k) => new Chain(E, `heavy-${i}-${k}.pdf`));
+  const v = [];
+  let kills = 0; let take = 0;
+  const first = [];
+  for (const c of chains) {
+    const opt = rand() < 0.6 ? { freeze: rand.pick(['rendering', 'building', 'tracing']) } : {};
+    const r = await c.start(opt);
+    first.push(r);
+    await sleep(rand.int(300));
+  }
+  await sleep(1500 + rand.int(1500));
+  // kill or replace some runners
+  for (let k = 0; k < 3; k++) {
+    const c = chains[k]; const r = first[k];
+    const roll = rand();
+    if (roll < 0.35 && pidAlive(r.pid)) { await c.kill(r); await c.start({}); kills++; }
+    else if (roll < 0.6 && r.freeze && pidAlive(r.pid) && !r.woke) { take++; c.takeovers++; await c.start({}); }
+  }
+  await sleep(rand.int(1200));
+  for (const c of chains) {
+    // wake the frozen ones in random order, then finish
+    const fr = c.runners.filter((r) => r.freeze && !r.woke && !r.killed && pidAlive(r.pid));
+    for (const r of fr) { await sleep(rand.int(400)); c.wake(r); }
+  }
+  for (const c of chains) {
+    c.capUsd = 60;
+    const u = Date.now() + 70000;
+    while (Date.now() < u) { c.approve(); const j = E.job(c.id); if (j.state === 'done' || j.state === 'failed') break;
+      const alive = E.runnerPid(c.id) && pidAlive(E.runnerPid(c.id));
+      let ea = true; try { ea = E.h.get_job({ job_id: c.id }).job.runner.alive; } catch { /* */ }
+      if (!alive && j.state !== 'awaiting_approval') { await sleep(800); if (!E.runnerPid(c.id) || !pidAlive(E.runnerPid(c.id))) await c.start({}); }
+      await sleep(60); }
+  }
+  for (const c of chains) {
+    for (const r of c.runners) if (!r.killed && pidAlive(r.pid)) { await waitGone(r.pid, 15000); if (pidAlive(r.pid)) { v.push(`runner ${r.pid} did not leave`); await c.kill(r); } }
+  }
+  const allKills = chains.reduce((s, c) => s + c.kills, 0);
+  const rend = [];
+  for (const c of chains) {
+    v.push(...inv(E, c.id, { quiet: true, expectDone: true, damaged: true }), ...c.sink);
+    for (const r of E.rows(c.id).filter((x) => x.stage === 'rendering')) rend.push({ id: c.id, s: Date.parse(r.started_at), f: Date.parse(r.finished_at), status: r.status, a: r.attempt });
+  }
+  for (let a = 0; a < rend.length; a++) for (let b = a + 1; b < rend.length; b++) {
+    if (rend[a].id !== rend[b].id && rend[a].s < rend[b].f && rend[b].s < rend[a].f) v.push(`rendering rows overlap: ${JSON.stringify(rend[a])} ${JSON.stringify(rend[b])}`);
+  }
+  if (fs.existsSync(E.config.runner.heavyLock)) v.push('heavy.lock left');
+  emit({ mode, desc: `heavy ${i}`, viol: v, kills: allKills, takeovers: chains.reduce((s, c) => s + c.takeovers, 0), trace: v.length ? chains.map((c) => c.trace) : undefined, home: v.length ? E.home : undefined });
+  await E.cleanup();
+}
+
+const cases = [];
+if (mode === 'key') { for (const ms of [50, 300, 800]) cases.push(() => keyScenario(ms, ms)); for (const ms of [50, 300]) cases.push(() => keyScenario(ms + 1, ms)); }
+if (mode === 'edit') {
+  let i = 0;
+  for (const variant of ['control', 'delete', 'garbage', 'empty', 'seq99', 'noseq', 'usd', 'ws', 'seqnull', 'seqstr', 'noanswer', 'answernull']) for (const stage of ['skinning', 'finishing']) { i++; cases.push(() => editScenario(i, variant, stage)); }
+}
+if (mode === 'state') {
+  let i = 0;
+  for (const point of ['skinning:reserved', 'skinning:sent']) for (const hand of ['none', 'seq1', 'noseq', 'seq77', 'usd0', 'usdbig']) { i++; cases.push(() => stateScenario(i, point, hand)); }
+}
+if (mode === 'ended') { let i = 0; for (const k of ['cancelled', 'failed', 'cancelled', 'failed']) { i++; cases.push(() => endedScenario(i, k)); } }
+if (mode === 'heavy') for (let i = 1; i <= n; i++) cases.push(() => heavyScenario(i));
+for (const c of cases) { try { await c(); } catch (e) { emit({ mode, viol: [`EXC ${e.stack.split('\n').slice(0, 3).join(' | ')}`] }); } }

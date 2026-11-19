@@ -1,0 +1,21 @@
+ok  S1 queued + flip one byte (same size) (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+ok  S1 queued + replace with other PDF, same size (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+ok  S1 queued + append bytes (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+ok  S1 queued + truncate to 0 (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+ok  S1 queued + replace with another real PDF (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+ok  S1 queued + delete (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+ok  S1 queued + replace by directory (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+ok  S1 queued + swap + atomic rename (keeps read-only) (runner exit 0): state=failed reason=STAGE_FAILED manifestRows=0 ledgerRows=0 spent=0
+   S1b hash rewritten (engine_version kept): runner exit 1; get_job JOB_NOT_FOUND; state=queued; manifestRows=0; ledger=0; log:  runner 7952 stopped: unreadable
+   S1b hash rewritten + engine_version=other: runner exit 1; get_job JOB_NOT_FOUND; state=queued; manifestRows=0; ledger=0; log:  runner 25188 stopped: unreadable
+   S1b engine_version removed + hash rewritten (a pre-1.1 file): runner exit null; get_job answered; state=awaiting_approval; manifestRows=3; ledger=0; log:  runner 38728 rendering: done (attempt 1, $0)
+   S1b apartment rewritten: runner exit 1; get_job JOB_NOT_FOUND; state=queued; manifestRows=0; ledger=0; log:  runner 27640 stopped: unreadable
+   S1b mode rewritten: runner exit 1; get_job JOB_NOT_FOUND; state=queued; manifestRows=0; ledger=0; log:  runner 23220 stopped: unreadable
+   S1b engine_version rewritten only: runner exit 1; get_job JOB_NOT_FOUND; state=queued; manifestRows=0; ledger=0; log:  runner 21224 stopped: unreadable
+ok  S2 changed between stages (rows when changed 1, rows at end 2): state=failed reason=STAGE_FAILED
+ok  S3/4 awaiting_approval: state=failed reason=STAGE_FAILED rows at wait 3 → 3; ledgerRows=0 spent=0
+ok  S3/4 after_approval: state=failed reason=STAGE_FAILED rows at wait 3 → 3; ledgerRows=0 spent=0
+ok  S5 engine resume after kill + swapped copy: cli exit 0; state=failed reason=STAGE_FAILED rows=1
+   S6 cancelled job, copy changed, start_simulation again: created=false resumed=true
+BAD S6 restart after cancel → state=tracing reason=undefined manifestRows=0 ledger=0
+ATTEMPTS 39 BAD ["S6"]

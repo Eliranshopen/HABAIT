@@ -1,0 +1,141 @@
+# s3 O-J: a cache file next to a reserved row WITH sending_at; the amount in the file
+  rep1 amount=-5         sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep1 amount=text abc   sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep1 amount=text "5"   sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep1 amount=null       sends=0 err=null rows=1:settled/rec=0 settled_total=0 copy=0
+  rep1 amount=missing    sends=0 err=null rows=1:settled/rec=0 settled_total=0 copy=0
+  rep1 amount=huge 1e308 sends=0 err=null rows=1:settled/rec=null settled_total=0 copy=0
+  rep1 amount=huge 1e300 sends=0 err=null rows=1:settled/rec=1e+300 settled_total=1e+300 copy=1e+300
+  rep1 amount=zero       sends=0 err=null rows=1:settled/rec=0 settled_total=0 copy=0
+  rep1 amount=50         sends=0 err=null rows=1:settled/rec=50 settled_total=50 copy=50
+  rep1 amount=0.6        sends=0 err=null rows=1:settled/rec=0.6 settled_total=0.6 copy=0.6
+  rep1 amount=true       sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep1 amount=array      sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep2 amount=-5         sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep2 amount=text abc   sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep2 amount=text "5"   sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep2 amount=null       sends=0 err=null rows=1:settled/rec=0 settled_total=0 copy=0
+  rep2 amount=missing    sends=0 err=null rows=1:settled/rec=0 settled_total=0 copy=0
+  rep2 amount=huge 1e308 sends=0 err=null rows=1:settled/rec=null settled_total=0 copy=0
+  rep2 amount=huge 1e300 sends=0 err=null rows=1:settled/rec=1e+300 settled_total=1e+300 copy=1e+300
+  rep2 amount=zero       sends=0 err=null rows=1:settled/rec=0 settled_total=0 copy=0
+  rep2 amount=50         sends=0 err=null rows=1:settled/rec=50 settled_total=50 copy=50
+  rep2 amount=0.6        sends=0 err=null rows=1:settled/rec=0.6 settled_total=0.6 copy=0.6
+  rep2 amount=true       sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+  rep2 amount=array      sends=1 err=null rows=1:orphaned=null 2:settled=0.6 settled_total=0.6 copy=0.6
+# s3 O-J-b: settled row (recorded hash), cache file rewritten with other amounts
+  untouched cache: sends=0 (expect 0) for -5
+  untouched cache: sends=0 (expect 0) for null
+  untouched cache: sends=0 (expect 0) for missing
+# s4 reader storm: writes=15000 go {"reads":102800,"ledger_empty":0,"ledger_err":{},"man_empty":0,"man_err":{},"job_null":0,"job_err":{},"spent_wrong":0}
+# s3 O-L: the send FAILS while the job lock is busy
+  busy 1s refresh=false: caller got "provider said no" after 1129ms; sends=1 rows=1:failed/marked; retry-log-lines=0
+  busy 5s refresh=false: caller got "provider said no" after 5126ms; sends=1 rows=1:failed/marked; retry-log-lines=2
+     log: skinning: the close of seq 1 waits (job 0000000000000002: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000002: lock busy); the answer stays in hand
+  busy 12s refresh=false: caller got "provider said no" after 10082ms; sends=1 rows=1:failed/marked; retry-log-lines=4
+     log: skinning: the close of seq 1 waits (job 0000000000000003: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000003: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000003: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000003: lock busy); the answer stays in hand
+  busy 40s refresh=true: caller got "provider said no" after 33631ms; sends=1 rows=1:reserved/marked; retry-log-lines=14
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: the close of seq 1 waits (job 0000000000000004: lock busy); the answer stays in hand
+     log: skinning: seq 1 could not be closed as failed (job 0000000000000004: lock busy); it stays reserved and the next attempt marks it orphaned
+     next attempt: sends=1 rows=1:orphaned 2:settled held=0.6
+# s2 home=C:/Users/elira/AppData/Local/Temp/qar6-s2-H90QJu job=02bba5995e79bac1 ledger settled=1.8
+# s2 matrix: asks=252 violations=0
+  lock held 4000ms refresh=false done: get_job=1.8 (2008ms) list_jobs=1.8 (2011ms) get_result=1.8 copy-during=1.8
+  lock held 5000ms refresh=true skinning: get_job=1.8 (2013ms) list_jobs=1.8 (2012ms) get_result=n/a copy-during=99
+  lock held 3000ms refresh=false cancelled: get_job=1.8 (2011ms) list_jobs=1.8 (1046ms) get_result=n/a copy-during=1.8
+  ledger deleted: {"get_job":0,"list_jobs":0,"get_result":0,"cli_job_json":0,"cli_job_human":"ok","cli_ledger":"ok"} copy-after=0
+  ledger truncated: {"get_job":1.2,"list_jobs":1.2,"get_result":1.2,"cli_job_json":1.2,"cli_job_human":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs job 02bba5995e79bac1","cli_ledger":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs ledger 02bba5995e79bac1"} copy-after=1.2
+  ledger empty: {"get_job":1.2,"list_jobs":1.2,"get_result":1.2,"cli_job_json":1.2,"cli_job_human":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs job 02bba5995e79bac1","cli_ledger":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs ledger 02bba5995e79bac1"} copy-after=1.2
+  ledger array: {"get_job":1.2,"list_jobs":1.2,"get_result":1.2,"cli_job_json":1.2,"cli_job_human":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs job 02bba5995e79bac1","cli_ledger":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs ledger 02bba5995e79bac1"} copy-after=1.2
+  ledger rowsNull: {"get_job":1.2,"list_jobs":1.2,"get_result":1.2,"cli_job_json":1.2,"cli_job_human":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs job 02bba5995e79bac1","cli_ledger":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs ledger 02bba5995e79bac1"} copy-after=1.2
+  ledger garbage: {"get_job":1.2,"list_jobs":1.2,"get_result":1.2,"cli_job_json":1.2,"cli_job_human":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs job 02bba5995e79bac1","cli_ledger":"ERR Command failed: C:\\Program Files\\nodejs\\node.exe C:/RnD/Projects/3Dengine/engine/cli.mjs ledger 02bba5995e79bac1"} copy-after=1.2
+# s2 done violations=0 leftover=[]
+# s1 seed=6001 n=12 home=C:/Users/elira/AppData/Local/Temp/qar6-s1-3378uv
+  #0 gating random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:settled sends=2 4914ms
+  #1 finishing random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=3:settled/late 4:settled sends=2 4721ms
+  #2 skinning pause-cache killed=19036 rawcopy=1.8 ledger=1.8 late=0 rows=1:orphaned 2:settled sends=2 4755ms
+  #3 skinning random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=1:settled/late 2:settled sends=2 4668ms
+  #4 gating random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:settled sends=2 4651ms
+  #5 skinning random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=1:settled/late 2:settled sends=2 4635ms
+  #6 gating random killed=27684 rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:settled sends=2 4670ms
+  #7 finishing pause-cache killed=39536 rawcopy=1.8 ledger=1.8 late=0 rows=3:orphaned 4:settled sends=2 20741ms
+  chain 8 gating: runners 28636,42772,38440
+  #8 gating chain killed=null rawcopy=3 ledger=3 late=2 rows=2:settled/late 3:settled/late 4:settled sends=3 14032ms
+  #9 skinning random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=1:settled/late 2:settled sends=2 4689ms
+  #10 finishing random killed=29708 rawcopy=1.8 ledger=1.8 late=0 rows=3:orphaned 4:settled sends=2 4735ms
+  #11 finishing random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=3:settled/late 4:settled sends=2 4728ms
+# s1 done seed=6001 scenarios=12 kills=4 takeovers=13 violations=0 leftover=[]
+# s1 seed=6002 n=26 home=C:/Users/elira/AppData/Local/Temp/qar6-s1-QrPdcv
+  chain 0 gating: runners 15112,18892,43672
+  #0 gating chain killed=18892 rawcopy=3 ledger=3 late=2 rows=2:settled/late 3:settled/late 4:settled sends=3 6236ms
+  chain 1 gating: runners 22732,26444,33008
+  #1 gating chain killed=null rawcopy=3 ledger=3 late=2 rows=2:settled/late 3:settled/late 4:settled sends=3 14068ms
+  #2 gating pause-settle killed=26516 rawcopy=1.8 ledger=1.8 late=0 rows=2:orphaned 3:settled sends=2 12614ms
+  #3 gating pause-cache killed=20660 rawcopy=1.8 ledger=1.8 late=0 rows=2:orphaned 3:settled sends=2 12686ms
+  #4 gating random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:settled sends=2 4671ms
+  #5 gating pause-settle killed=17184 rawcopy=1.8 ledger=1.8 late=0 rows=2:orphaned 3:settled sends=2 12655ms
+  #6 gating pause-settle killed=37132 rawcopy=1.8 ledger=1.8 late=0 rows=2:orphaned 3:settled sends=2 12722ms
+  #7 skinning pause-settle killed=39648 rawcopy=2.4 ledger=2.4 late=1 rows=1:settled/late 2:settled sends=2 4718ms
+  #8 finishing pause-settle killed=31152 rawcopy=1.8 ledger=1.8 late=0 rows=3:orphaned 4:settled sends=2 20717ms
+  chain 9 finishing: runners 3092,38172,23872
+  #9 finishing chain killed=38172 rawcopy=3 ledger=3 late=2 rows=3:settled/late 4:settled/late 5:settled sends=3 6067ms
+  chain 10 gating: runners 35436,20080,26160
+  #10 gating chain killed=20080 rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:orphaned 4:settled sends=3 6071ms
+  chain 11 gating: runners 19304,41544,22716
+  #11 gating chain killed=41544 rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:orphaned 4:settled sends=3 6045ms
+  chain 12 gating: runners 42944,28484,34400
+  #12 gating chain killed=28484 rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:orphaned 4:settled sends=3 6035ms
+  chain 13 gating: runners 5948,29116,38144
+  #13 gating chain killed=5948 rawcopy=2.4 ledger=2.4 late=1 rows=2:orphaned 3:settled/late 4:settled sends=3 6086ms
+  #14 skinning pause-cache killed=21176 rawcopy=1.8 ledger=1.8 late=0 rows=1:orphaned 2:settled sends=2 4715ms
+  #15 skinning random killed=null rawcopy=2.4 ledger=2.4 late=1 rows=1:settled/late 2:settled sends=2 4648ms
+  #16 gating pause-settle killed=43232 rawcopy=1.8 ledger=1.8 late=0 rows=2:orphaned 3:settled sends=2 12607ms
+  chain 17 gating: runners 38088,36452,23468
+  #17 gating chain killed=36452 rawcopy=2.4 ledger=2.4 late=1 rows=2:settled/late 3:orphaned 4:settled sends=3 6061ms
+  #18 finishing random killed=14072 rawcopy=1.8 ledger=1.8 late=0 rows=3:orphaned 4:settled sends=2 4763ms
+  chain 19 gating: runners 2120,41816,36260
+  #19 gating chain killed=2120 rawcopy=2.4 ledger=2.4 late=1 rows=2:orphaned 3:settled/late 4:settled sends=3 14066ms
+  chain 20 finishing: runners 2028,15396,11328
+  #20 finishing chain killed=15396 rawcopy=2.4 ledger=2.4 late=1 rows=3:settled/late 4:orphaned 5:settled sends=3 6257ms
+  chain 21 finishing: runners 20192,28960,43404
+  #21 finishing chain killed=28960 rawcopy=2.4 ledger=2.4 late=1 rows=3:settled/late 4:orphaned 5:settled sends=3 6115ms
+  #22 finishing pause-settle killed=16828 rawcopy=1.8 ledger=1.8 late=0 rows=3:orphaned 4:settled sends=2 20742ms
+  #23 finishing pause-cache killed=42308 rawcopy=1.8 ledger=1.8 late=0 rows=3:orphaned 4:settled sends=2 20768ms
+  #24 skinning pause-settle killed=520 rawcopy=2.4 ledger=2.4 late=1 rows=1:settled/late 2:settled sends=2 4717ms
+  #25 gating random killed=23660 rawcopy=1.8 ledger=1.8 late=0 rows=2:orphaned 3:settled sends=2 4836ms
+# s1 done seed=6002 scenarios=26 kills=23 takeovers=37 violations=0 leftover=[]
+# s5 seed=7001 heavy=6 chaos=8 home=C:/Users/elira/AppData/Local/Temp/qar6-s5-RadYF7
+  heavy#0 kill-A: A=17172 B=23060 attempts A={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} B={"tracing":1,"building":1,"rendering":1,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} overlaps=0
+  heavy#1 kill-B-then-wake: A=25236 B=2636 attempts A={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} B={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} overlaps=0
+  heavy#2 kill-B-then-wake: A=11928 B=34496 attempts A={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} B={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} overlaps=0
+  heavy#3 kill-A: A=20392 B=42076 attempts A={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} B={"tracing":1,"building":1,"rendering":1,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} overlaps=0
+  heavy#4 kill-B-then-wake: A=25152 B=34964 attempts A={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} B={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} overlaps=0
+  heavy#5 kill-B-then-wake: A=18416 B=13928 attempts A={"tracing":1,"building":1,"rendering":2,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} B={"tracing":1,"building":1,"rendering":1,"skinning":1,"gating":1,"finishing":1,"packaging":1,"qa":1} overlaps=0
+  chaos#0 ops=[approve,kill,start,start2,approve,kill+start,kill+start] hooks={} superseded=0 ledger=sss spent=1.8/1.8
+  chaos#1 ops=[cancel,kill+start,kill+start,kill,approve] hooks={"ENGINE_TEST_PAUSE_AFTER_CACHE_MS":600} superseded=0 ledger=sss spent=1.8/1.8
+  chaos#2 ops=[kill,cancel,cancel,cancel,kill+start,approve,start,approve] hooks={} superseded=0 ledger=sss spent=1.8/1.8
+  chaos#3 ops=[kill,approve,kill,kill,kill+start,start2,cancel,cancel] hooks={} superseded=0 ledger=sss spent=1.8/1.8
+  chaos#4 ops=[kill,kill,start2,start2,start,approve,kill,kill,kill+start] hooks={"ENGINE_TEST_PAUSE_AFTER_RESERVE_MS":600} superseded=0 ledger=sss spent=1.8/1.8
+  chaos#5 ops=[start2,kill,kill+start,start,kill] hooks={"ENGINE_TEST_PAUSE_AFTER_CACHE_MS":600} superseded=0 ledger=sss spent=1.8/1.8
+  chaos#6 ops=[start,kill+start,kill,cancel,start,kill,cancel,kill,approve] hooks={} superseded=0 ledger=sss spent=1.8/1.8
+  chaos#7 ops=[start2,cancel,start,kill] hooks={"ENGINE_TEST_PAUSE_AFTER_CACHE_MS":600} superseded=0 ledger=sss spent=1.8/1.8
+# s5 done seed=7001 kills=20 takeovers=6 violations=0 leftover=[]
+# s6 heartbeat: alive before=true; during a busy job.lock: true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false; start_simulation during it: null
+  after the lock is free: runner alive=true pid same=true log has "heartbeat skipped": true
+# s6 cap: state=done stops=1 trace=approve 60 | approve 75 (quote) spent=75 ledgerSum=75 violations=[]

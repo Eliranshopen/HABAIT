@@ -13,7 +13,32 @@ export async function createArcHold({ canvas, base = './data/holdarc', panBase =
   const loading = new Set();
   const ctx = canvas.getContext('2d', { alpha: false });
   let vw = 0, vh = 0, dpr = 1;
-  let drawn = null, drawnZoom = 1, drawnOver = 0;
+  let drawn = null, drawnZoom = 1, drawnOver = 0, drawnSettle = 0, drawnLift = 0;
+  // the portrait framing's state (see fit() below); here because openTrack() and the first draw() run before those function bodies
+  const COL = 72, MARGIN = 8, MIN_FLOOR_PX = 33, FLOOR_FRAC = 0.0636;   // FLOOR_FRAC: one floor (3.2 m) as a share of the frame height at the hold pose (846's anchor ± 1.6 m through holdarc/camera.json frame 91)
+  let settle = 0, settleAnim = null, arcBox = null, lift = 0, liftTarget = 0;   // lift: px the framed picture rises while a phone card is open
+  const portrait = () => innerWidth / innerHeight < 0.8;
+  const feather = document.createElement('canvas'), fctx = feather.getContext('2d');
+  // 2026-11-10 (Eliran, iPhone Safari: dragging at the stop showed a larger translucent copy of the tower over the sharp one): the air
+  // around the portrait framing was the same picture at cover scale through ctx.filter blur — Safari has no ctx.filter, so it was a
+  // SHARP scaled duplicate, seen through the frame's feathered edges. Now the air holds no picture at all: a vertical gradient from the
+  // page's navy to the average colour of the frame's own top / bottom edge (measured once per frame image), into which the sharp
+  // frame's edges dissolve. The same on every browser; no blur API.
+  const AIR = [8, 19, 30];                                                       // the page's navy (#08131e)
+  const edgeCache = new WeakMap(), edgeCanvas = document.createElement('canvas'); edgeCanvas.width = 8; edgeCanvas.height = 2;
+  const ectx = edgeCanvas.getContext('2d', { willReadFrequently: true });
+  function edges(im) {                                                           // the mean colour of the frame's top and bottom 8 %
+    let e = edgeCache.get(im); if (e) return e;
+    try {
+      const w = im.naturalWidth || im.width, h = im.naturalHeight || im.height, band = Math.max(1, Math.round(h * 0.08));
+      ectx.clearRect(0, 0, 8, 2); ectx.drawImage(im, 0, 0, w, band, 0, 0, 8, 1); ectx.drawImage(im, 0, h - band, w, band, 0, 1, 8, 1);
+      const d = ectx.getImageData(0, 0, 8, 2).data, avg = (row) => [0, 1, 2].map((c) => { let t = 0; for (let i = 0; i < 8; i++) t += d[(row * 8 + i) * 4 + c]; return Math.round(t / 8); });
+      e = { top: avg(0), bot: avg(1) };
+    } catch (err) { e = { top: AIR, bot: AIR }; }
+    edgeCache.set(im, e); return e;
+  }
+  const mix = (a, b, k) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
+  const rgb = (c) => `rgb(${c[0]},${c[1]},${c[2]})`;
   const bigScreen = innerWidth * Math.min(devicePixelRatio || 1, 2) > 1500;
 
   async function openTrack(name, b, required) {
@@ -28,7 +53,8 @@ export async function createArcHold({ canvas, base = './data/holdarc', panBase =
       if (man.lo && man.lo.dir) tiers.push({ dir: man.lo.dir, pattern: man.lo.pattern || man.pattern || 'frame_%04d.jpg', imgs: new Array(N).fill(null) });
       if (man.hi && man.hi.dir && bigScreen) tiers.push({ dir: man.hi.dir, pattern: man.hi.pattern || man.pattern || 'frame_%04d.jpg', imgs: new Array(N).fill(null) });
       else tiers.push({ dir: man.dir, pattern: man.pattern || 'frame_%04d.jpg', imgs: new Array(N).fill(null) });
-      const t = { name, base: b, N, centre, W, H, pillsNear: Number.isFinite(man.pills_near) ? man.pills_near : null, fx: lens / (sensor / 2), inv: cam.frames.map((f) => invert4(f.matrix_world)), tiers, hi: tiers[tiers.length - 1], loop: Boolean(cam.loop || man.loop), loaded: 0, scale: 1, ox: 0, oy: 0 };
+      const box = (cam.frames[centre] || {}).tower_ndc_box || null; if (name === 'arc') arcBox = box;
+      const t = { name, base: b, N, centre, W, H, box, pillsNear: Number.isFinite(man.pills_near) ? man.pills_near : null, fx: lens / (sensor / 2), inv: cam.frames.map((f) => invert4(f.matrix_world)), tiers, hi: tiers[tiers.length - 1], loop: Boolean(cam.loop || man.loop), loaded: 0, scale: 1, ox: 0, oy: 0 };
       fit(t); return t;                                                                                // cover-fit now: a track opened after resize() must not draw letterboxed
     } catch (e) { if (required) throw e; console.warn('hold track unavailable:', name, e.message); return null; }
   }
@@ -63,7 +89,30 @@ export async function createArcHold({ canvas, base = './data/holdarc', panBase =
     for (let d = 1; d < t.N; d++) for (const tier of t.tiers) { const a = t.loop ? (i - d + t.N) % t.N : i - d, b = t.loop ? (i + d) % t.N : i + d; if (tier.imgs[a]) return tier.imgs[a]; if (tier.imgs[b]) return tier.imgs[b]; }
     return null;
   }
-  function fit(t) { t.scale = Math.max(innerWidth / t.W, innerHeight / t.H); t.ox = (innerWidth - t.W * t.scale) / 2; t.oy = (innerHeight - t.H * t.scale) / 2; }   // object-fit: cover, centred (same as the <video>)
+  // ---- the framing (2026-11-09, hold-phone; Eliran: the phone stop «לא נראה טוב»). Wide screens: cover, centred (same as the <video>).
+  // Portrait screens: the 16:9 frame cover-cropped to a 26 % slice cut the tower and read as a random close-up. There the frame is framed
+  // FROM THE TOWER'S OWN PROJECTED BOUNDS (camera.json tower_ndc_box of the hold pose): the tower's width fills the screen minus the
+  // right-edge control column (72 px), so the column stands on the sea and sky beside the tower, never on the facade; vertically centred
+  // a little high. Around it: the same frame, blurred and darkened (cover), with the sharp frame's top and bottom feathered into it.
+  // settle (0 → 1) eases from the cover framing (the orbit film's last frame) into it, so the hand-off from the film never jumps.
+  // Pills, the floor glow and the drag all go through geom(): drawing and projection share one transform.
+  function coverFit(t) { const s = Math.max(innerWidth / t.W, innerHeight / t.H); return { s, ox: (innerWidth - t.W * s) / 2, oy: (innerHeight - t.H * s) / 2 }; }
+  function portraitFit(t) {
+    const b = arcBox || t.box; if (!b || !portrait()) return coverFit(t);
+    const x0 = (b[0] + 1) / 2, x1 = (b[1] + 1) / 2;
+    // the tower's width in the space left of the column — but never a floor under MIN_FLOOR_PX on screen (19 px pills one floor apart
+    // must keep clean 44 px hit areas). When the floor rule wins, the tower's RIGHT edge stays at the column (the pills are on that side)
+    // and only its left flank, which carries no pills, runs off the screen.
+    const s = Math.max((innerWidth - COL - 2 * MARGIN) / ((x1 - x0) * t.W), MIN_FLOOR_PX / (FLOOR_FRAC * t.H));
+    return { s, ox: innerWidth - COL - MARGIN - x1 * t.W * s, oy: Math.round((innerHeight - t.H * s) * 0.44) };
+  }
+  function fit(t) { t.c = coverFit(t); t.p = portraitFit(t); t.scale = t.c.s; t.ox = t.c.ox; t.oy = t.c.oy; }
+  function geom(t) {   // the frame's on-screen box for the frame shown now: settle blends cover -> portrait; zoom about the frame's centre
+    const k = portrait() ? settle : 0, c = t.c || coverFit(t), q = t.p || c;
+    const s = c.s + (q.s - c.s) * k, ox = c.ox + (q.ox - c.ox) * k, oy = c.oy + (q.oy - c.oy) * k, S = s * st.zoom;
+    return { S, OX: ox - (t.W * S - t.W * s) / 2 + st.over, OY: oy - (t.H * S - t.H * s) / 2 - lift * k, k, c };
+  }
+
   function resize() {
     dpr = Math.min(devicePixelRatio || 1, 2); vw = innerWidth; vh = innerHeight; canvas.width = Math.round(vw * dpr); canvas.height = Math.round(vh * dpr); canvas.style.width = vw + 'px'; canvas.style.height = vh + 'px';
     for (const t of Object.values(tracks)) if (t) fit(t);
@@ -72,9 +121,25 @@ export async function createArcHold({ canvas, base = './data/holdarc', panBase =
   function wrap(t, i) { return t.loop ? ((i % t.N) + t.N) % t.N : Math.max(0, Math.min(t.N - 1, i)); }   // hoisted: draw() runs before this line during init
   function draw() {
     const t = cur(); const i = Math.round(wrap(t, st.index)) % t.N; const im = nearestLoaded(t, i); if (!im) return;
-    if (im === drawn && st.zoom === drawnZoom && st.over === drawnOver) return; drawn = im; drawnZoom = st.zoom; drawnOver = st.over;
-    const S = t.scale * st.zoom, OX = (vw - t.W * S) / 2 + st.over, OY = (vh - t.H * S) / 2;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingQuality = 'high'; if (st.over || st.zoom !== 1) ctx.fillRect(0, 0, vw, vh); ctx.drawImage(im, OX, OY, t.W * S, t.H * S);
+    if (im === drawn && st.zoom === drawnZoom && st.over === drawnOver && settle === drawnSettle && lift === drawnLift) return; drawn = im; drawnZoom = st.zoom; drawnOver = st.over; drawnSettle = settle; drawnLift = lift;
+    const { S, OX, OY, k, c } = geom(t);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingQuality = 'high';
+    if (k <= 0.001) { if (st.over || st.zoom !== 1) ctx.fillRect(0, 0, vw, vh); ctx.drawImage(im, OX, OY, t.W * S, t.H * S); return; }
+    // portrait: the air above and below the framed tower — a gradient, never a copy of the picture (see AIR above). While settling
+    // (k < 1) the frame still covers most of the screen, so the gradient is all that shows round it.
+    const ed = edges(im), top = mix(AIR, ed.top, 0.55), bot = mix(AIR, ed.bot, 0.5), fy0 = OY + t.H * S * 0.16, fy1 = OY + t.H * S * 0.9;
+    const air = ctx.createLinearGradient(0, 0, 0, vh);
+    air.addColorStop(0, rgb(AIR)); air.addColorStop(Math.max(0, Math.min(1, fy0 / vh)), rgb(top));
+    air.addColorStop(Math.max(0, Math.min(1, fy1 / vh)), rgb(bot)); air.addColorStop(1, rgb(AIR));
+    ctx.fillStyle = air; ctx.fillRect(0, 0, vw, vh); ctx.fillStyle = '#000';
+    // the sharp frame, its top and bottom feathered into the air (more as settle grows)
+    const w = Math.max(1, Math.round(t.W * S * dpr)), h = Math.max(1, Math.round(t.H * S * dpr));
+    if (feather.width !== w || feather.height !== h) { feather.width = w; feather.height = h; }
+    fctx.globalCompositeOperation = 'source-over'; fctx.clearRect(0, 0, w, h); fctx.imageSmoothingQuality = 'high'; fctx.drawImage(im, 0, 0, w, h);
+    const g = fctx.createLinearGradient(0, 0, 0, h), f0 = 0.16 * k, f1 = 0.1 * k;
+    g.addColorStop(0, `rgba(0,0,0,${(1 - k).toFixed(3)})`); g.addColorStop(f0, '#000'); g.addColorStop(1 - f1, '#000'); g.addColorStop(1, `rgba(0,0,0,${(1 - k).toFixed(3)})`);
+    fctx.globalCompositeOperation = 'destination-in'; fctx.fillStyle = g; fctx.fillRect(0, 0, w, h);
+    ctx.drawImage(feather, OX, OY, t.W * S, t.H * S);
   }
   // ---- the hand-offs: every switch passes through the hold pose (each track's centre), so the picture never jumps ----
   function ease(to, ms, cb) { st.goto = { from: st.index, to, t0: performance.now(), ms, cb }; st.vel = 0; st.glideV = 0; }
@@ -144,6 +209,8 @@ export async function createArcHold({ canvas, base = './data/holdarc', panBase =
         const want = PAN_FPS * st.glideDir; st.glideV += Math.max(-GLIDE_ACCEL * dt, Math.min(GLIDE_ACCEL * dt, want - st.glideV)); st.index = wrap(t, st.index + st.glideV * dt);
       }
     }
+    if (lift !== liftTarget) { lift += (liftTarget - lift) * 0.18; if (Math.abs(liftTarget - lift) < 0.5) lift = liftTarget; }
+    if (settleAnim) { const q = Math.min(1, (now - settleAnim.t0) / settleAnim.ms); settle = settleAnim.from + (1 - settleAnim.from) * (q * q * (3 - 2 * q)); if (q >= 1) settleAnim = null; }
     if (!st.dragging && st.over) { st.over *= 0.82; if (Math.abs(st.over) < 0.5) st.over = 0; drawn = null; }
     if (!st.dragging && st.zoom !== 1 && now - st.lastInput > 6000) { st.zoom += (1 - st.zoom) * 0.04; if (Math.abs(st.zoom - 1) < 0.003) st.zoom = 1; drawn = null; }
     st.prevNow = now;
@@ -157,13 +224,17 @@ export async function createArcHold({ canvas, base = './data/holdarc', panBase =
     const x = M[0][0] * p.x + M[0][1] * p.y + M[0][2] * p.z + M[0][3], y = M[1][0] * p.x + M[1][1] * p.y + M[1][2] * p.z + M[1][3], z = M[2][0] * p.x + M[2][1] * p.y + M[2][2] * p.z + M[2][3];
     if (z >= -1e-6) return { x: 0, y: 0, visible: false };
     const nx = x / -z * t.fx, ny = y / -z * t.fx * (t.W / t.H);
-    const S = t.scale * st.zoom, OX = (vw - t.W * S) / 2 + st.over, OY = (vh - t.H * S) / 2; const sx = OX + (nx + 1) / 2 * t.W * S, sy = OY + (1 - ny) / 2 * t.H * S;
+    const { S, OX, OY } = geom(t); const sx = OX + (nx + 1) / 2 * t.W * S, sy = OY + (1 - ny) / 2 * t.H * S;
     return { x: sx, y: sy, visible: sx > -20 && sx < vw + 20 && sy > -20 && sy < vh + 20 };
   }
   addEventListener('resize', () => { resize(); draw(); });
   return { get ready() { return st.ready; }, get index() { return st.index; }, get loaded() { return T.loaded; }, get interacted() { return st.interacted; }, get mode() { return st.mode; },
     get tracks() { return { pan: Boolean(tracks.pan), pull: Boolean(tracks.pull), panLoaded: tracks.pan ? tracks.pan.loaded : 0, pullLoaded: tracks.pull ? tracks.pull.loaded : 0 }; },
     N: T.N, centre: T.centre, frame, project, goCentre, resize, get pass() { return false; },
+    // the portrait framing: settle(ms) eases into it (0 = at once); get framing → { portrait, settle, S, OX, OY, W, H } for checks
+    settle(ms = 1100) { if (ms <= 0) { settle = 1; settleAnim = null; drawn = null; draw(); } else settleAnim = { t0: performance.now(), ms, from: settle }; },
+    set lift(v) { liftTarget = Math.max(0, Math.min(innerHeight * 0.4, v || 0)); }, get lift() { return lift; },
+    get framing() { const t = cur(), g = geom(t); return { portrait: portrait(), settle, S: g.S, OX: g.OX, OY: g.OY, W: t.W, H: t.H, box: arcBox }; },
     set active(v) { st.active = v; canvas.style.display = v ? 'block' : 'none'; if (v) { st.activeSince = performance.now(); st.glideV = 0; } }, get active() { return st.active; },
     set glide(v) { st.glide = v; if (v) { st.activeSince = performance.now(); st.glideV = 0; } }, get glide() { return st.glide; } };
 }

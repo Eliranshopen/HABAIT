@@ -1,0 +1,314 @@
+/* The Rainbow landing page at the site root (plan development/plans/2026-11-08-rainbow-landing.md).
+   Tokens only (css/tokens.css), components from css/components.css (hb-ai-badge, hb-legal, hb-sr), logical properties only (RTL first).
+   Light warm-stone page; dark only inside the hero media and the closing band (--chrome-* = controls over media, dark in both themes). */
+
+[hidden] { display: none !important; }
+.rl { overflow-x: clip; }
+.rl-wrap { inline-size: min(100% - 2 * var(--gutter), 1240px); margin-inline: auto; }
+.rl-skip { position: absolute; inset-inline-start: var(--sp-4); inset-block-start: -100px; z-index: 50; padding: var(--sp-3) var(--sp-4); border-radius: var(--r-sm); background: var(--surface-raised); color: var(--text); }
+.rl-skip:focus { inset-block-start: var(--sp-4); }
+[dir="ltr"] .rl-btn svg { transform: scaleX(-1); }
+
+/* ---------- header: floats over the hero, turns solid once the hero has scrolled away (js: .is-solid) ---------- */
+.rl-top { position: fixed; inset-block-start: 0; inset-inline: 0; z-index: 30; color: var(--n-0);
+  transition: background-color var(--dur-base) var(--ease), color var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease); }
+.rl-top__in { inline-size: min(100% - 2 * var(--gutter), 1240px); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4);
+  min-block-size: 68px; padding-block-start: env(safe-area-inset-top); }
+.rl-top.is-solid { background: color-mix(in srgb, var(--surface) 90%, transparent); color: var(--text); box-shadow: 0 1px 0 var(--line);
+  backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2); }
+.rl-brand { display: inline-flex; align-items: center; gap: var(--sp-3); color: inherit; text-decoration: none; min-block-size: var(--tap-min); }
+.rl-brand__mark { inline-size: 28px; block-size: 28px; border-radius: var(--r-sm); background: var(--brand-primary); position: relative; flex: none; }
+.rl-brand__mark::after { content: ''; position: absolute; inset: 7px 7px 8px; border: 2.5px solid var(--brand-accent); border-block-end: 0; border-start-start-radius: var(--r-md); border-start-end-radius: var(--r-md); }
+.rl-brand__name { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: 1.3rem; }
+.rl-top__nav { display: flex; align-items: center; gap: var(--sp-1); }
+.rl-top__link { display: none; align-items: center; min-block-size: var(--tap-min); padding-inline: var(--sp-3); color: inherit; text-decoration: none; font-weight: var(--fw-medium); border-radius: var(--r-full); }
+.rl-top__link:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+@media (min-width: 760px) { .rl-top__link { display: inline-flex; } }
+.rl-lang { display: inline-flex; align-items: center; justify-content: center; min-block-size: var(--tap-min); min-inline-size: var(--tap-min); padding-inline: var(--sp-3);
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent); border-radius: var(--r-full); background: transparent; color: inherit;
+  font: inherit; font-weight: var(--fw-semibold); font-size: var(--fs-small); cursor: pointer; }
+.rl-lang:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+.rl-top:not(.is-solid) .rl-brand, .rl-top:not(.is-solid) .rl-top__link, .rl-top:not(.is-solid) .rl-lang { text-shadow: 0 1px 10px rgb(0 0 0 / 0.35); }
+
+/* ---------- hero ---------- */
+.rl-hero { position: relative; isolation: isolate; display: grid; align-items: end; min-block-size: clamp(560px, 100svh, 980px); background: var(--n-950); color: var(--n-0); overflow: hidden; }
+.rl-hero__media { position: absolute; inset: 0; z-index: -1; }
+.rl-hero__media picture { display: contents; }
+.rl-hero__poster, .rl-hero__video { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 44% 50%; display: block; }
+.rl-hero__video { opacity: 0; transition: opacity 900ms var(--ease); }
+.rl-hero.is-playing .rl-hero__video { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .rl-hero__video { transition: none; } }
+/* scrim only where text sits: a thin band under the header, and the lower part where the title and the CTAs are */
+.rl-hero__scrim { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgb(14 12 10 / 0.42) 0, rgb(14 12 10 / 0) 150px),
+              linear-gradient(to top, rgb(14 12 10 / 0.78) 0%, rgb(14 12 10 / 0.5) 26%, rgb(14 12 10 / 0) 58%); }
+.rl-hero__body { inline-size: min(100% - 2 * var(--gutter), 1240px); margin-inline: auto; display: grid; justify-items: start; gap: var(--sp-3);
+  padding-block: 120px calc(var(--sp-16) + var(--sp-6) + env(safe-area-inset-bottom)); }
+@media (min-width: 960px) { .rl-hero__body { padding-block-end: var(--sp-24); } }
+.rl-eyebrow { margin: 0; font-size: var(--fs-small); font-weight: var(--fw-semibold); color: var(--accent-ink); }
+.rl-eyebrow--light { color: var(--brand-accent); text-shadow: 0 1px 10px rgb(0 0 0 / 0.5); font-size: 0.95rem; }
+/* the wordmark: a classical serif in wide-tracked caps, a small tracked sub-label under it (idea from the Rainbow reference film) */
+.rl-word { margin: 0; display: grid; justify-items: start; gap: var(--sp-1); font-family: var(--font-display); font-weight: var(--fw-medium); line-height: 0.95; direction: ltr; }
+[dir="rtl"] .rl-word { justify-items: end; }
+.rl-word > span:first-child { font-size: clamp(3.4rem, 1.6rem + 8.4vw, 8.25rem); letter-spacing: 0.14em; margin-inline-end: -0.14em; text-shadow: 0 2px 30px rgb(0 0 0 / 0.35); }
+.rl-word__sub { font-family: var(--font-text); font-size: clamp(0.8rem, 0.7rem + 0.4vw, 1rem); font-weight: var(--fw-semibold); letter-spacing: 0.5em; margin-inline-end: -0.5em; opacity: 0.92; padding-inline-start: 0.2em; }
+.rl-hero__promise { margin: var(--sp-2) 0 0; max-inline-size: 34ch; font-size: clamp(1.15rem, 1rem + 0.7vw, 1.5rem); line-height: 1.45; font-weight: var(--fw-regular); color: var(--n-50); text-shadow: 0 1px 14px rgb(0 0 0 / 0.5); text-wrap: balance; }
+.rl-hero__ctas { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-4); }
+.rl-hero__corner { position: absolute; inset-block-end: calc(var(--sp-5) + env(safe-area-inset-bottom)); inset-inline-end: var(--gutter); display: flex; align-items: center; gap: var(--sp-3); }
+@media (max-width: 759px) { .rl-hero__corner { inset-inline-end: auto; inset-inline-start: var(--gutter); } }
+.rl-play { display: inline-grid; place-items: center; inline-size: var(--tap-min); block-size: var(--tap-min); border-radius: 50%; border: 1px solid var(--chrome-line-strong);
+  background: var(--chrome-panel); color: var(--chrome-fg); cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.rl-play svg { inline-size: 18px; block-size: 18px; }
+.rl-play[data-state="playing"] .rl-play__play, .rl-play[data-state="paused"] .rl-play__pause { display: none; }
+.rl-play:hover { background: var(--chrome-panel-hover); }
+
+/* ---------- buttons (house radius + tokens; accent fill reads on the film, primary on the stone page) ---------- */
+.rl-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); min-block-size: 52px; padding-inline: var(--sp-6); border-radius: var(--r-full);
+  border: 1px solid transparent; font: inherit; font-weight: var(--fw-semibold); font-size: 1.02rem; line-height: 1.2; text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.rl-btn:active { transform: translateY(1px); }
+.rl-btn svg { inline-size: 18px; block-size: 18px; flex: none; }
+.rl-btn--accent { background: var(--brand-accent); color: var(--brand-on-accent); box-shadow: 0 6px 24px rgb(0 0 0 / 0.22); }
+.rl-btn--accent:hover { background: color-mix(in srgb, var(--brand-accent) 88%, #fff); }
+.rl-btn--glass { background: rgb(255 252 249 / 0.14); color: var(--n-0); border-color: rgb(255 252 249 / 0.45); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.rl-btn--glass:hover { background: rgb(255 252 249 / 0.24); }
+.rl-btn--primary { background: var(--brand-primary); color: var(--brand-on-primary); }
+.rl-btn--primary:hover { background: color-mix(in srgb, var(--brand-primary) 86%, #000); }
+.rl-btn--line { background: transparent; color: var(--text); border-color: var(--line-strong); min-block-size: var(--tap-min); padding-inline: var(--sp-5); }
+.rl-btn--line:hover { background: var(--surface-sunken); }
+
+/* ---------- sections (round 7: a scroll story in chapters; plan round 7) ----------
+   Two layers. STATIC (the default: no JS, reduced motion, or motion failed): a plain editorial page, every word and picture visible.
+   MOTION (html.rl-motion, set by js/landing-motion.js): the same markup gets pinned chapters on desktop (≥ 960 px + fine pointer),
+   and only light reveals on touch/phones (native scroll, nothing pinned). Type: Frank Ruhl Libre for Hebrew display (house token,
+   full Hebrew glyphs; the developer's own film uses a Roman wordmark), Heebo for everything else. */
+html.rl-motion { scroll-behavior: auto !important; }
+html.lenis, html.lenis body { block-size: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.rl-chapter { position: relative; scroll-margin-block-start: 68px; }
+.rl-h2 { margin: 0; font-family: var(--font-display); font-weight: var(--fw-bold); font-size: clamp(2.1rem, 1.3rem + 3vw, 4.25rem); line-height: 1.06; letter-spacing: -0.005em; text-wrap: balance; }
+.rl-h3 { margin: 0; font-family: var(--font-display); font-size: clamp(1.45rem, 1.2rem + 0.8vw, 1.9rem); font-weight: var(--fw-bold); line-height: 1.2; }
+.rl-lead { margin: 0; font-size: clamp(1.05rem, 0.98rem + 0.3vw, 1.25rem); line-height: 1.6; color: var(--text-muted); text-wrap: pretty; max-inline-size: 40ch; }
+/* the chapter index: a numeral and a label on one hairline (not an eyebrow pill) */
+.rl-index { margin: 0 0 var(--sp-5); display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-small); font-weight: var(--fw-semibold); color: var(--text-muted); }
+.rl-index::after { content: ''; flex: 1; max-inline-size: 120px; block-size: 1px; background: var(--line-strong); opacity: 0.5; }
+.rl-index__n { font-family: var(--font-display); font-size: 1rem; color: var(--accent-ink); letter-spacing: 0.06em; }
+
+/* figures: the picture fills, the badge sits top-end on every property image (root §6) */
+.rl-fig { position: relative; margin: 0; overflow: hidden; border-radius: 4px; background: var(--surface-sunken); }
+.rl-fig img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.rl-badge { position: absolute; inset-block-start: var(--sp-3); inset-inline-end: var(--sp-3); z-index: 2; }
+.rl-hero__corner .rl-badge { position: static; }
+.rl-cap { position: absolute; inset-block-end: 0; inset-inline: 0; display: flex; align-items: baseline; gap: var(--sp-3); padding: var(--sp-10) var(--sp-5) var(--sp-4);
+  color: var(--n-0); font-size: 0.95rem; font-weight: var(--fw-medium); background: linear-gradient(to top, rgb(14 12 10 / 0.62), transparent); }
+.rl-cap__n { font-family: var(--font-display); font-size: 0.9rem; color: var(--brand-accent); letter-spacing: 0.08em; }
+
+/* 2. statement: one big sentence, word by word on scroll (motion) */
+.rl-statement { padding-block: clamp(96px, 14vh, 200px); }
+.rl-statement__text { margin: 0 auto; max-inline-size: 22ch; text-align: center; font-family: var(--font-display); font-weight: var(--fw-medium);
+  font-size: clamp(2rem, 1.1rem + 4.2vw, 5rem); line-height: 1.12; color: var(--text); text-wrap: balance; }
+.rl-w { display: inline-block; }
+
+/* 3. chapter 01 · location */
+.rl-place { padding-block: 0 clamp(72px, 10vh, 140px); }
+.rl-place__grid { display: grid; }
+.rl-place__fig { aspect-ratio: 1056 / 696; border-radius: 0; }
+.rl-place__zoom { inline-size: 100%; block-size: 100%; }
+.rl-place__panel { padding: clamp(32px, 6vw, 56px) var(--gutter) 0; display: grid; align-content: start; gap: var(--sp-4); }
+.rl-places { list-style: none; margin: var(--sp-4) 0 0; padding: 0; counter-reset: pl; border-block-start: 1px solid var(--line); }
+.rl-places li { counter-increment: pl; display: flex; align-items: baseline; gap: var(--sp-4); padding-block: var(--sp-3); border-block-end: 1px solid var(--line);
+  font-family: var(--font-display); font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem); }
+.rl-places li::before { content: counter(pl, decimal-leading-zero); font-family: var(--font-text); font-size: 0.75rem; font-weight: var(--fw-semibold); color: var(--accent-ink); letter-spacing: 0.06em; min-inline-size: 2ch; }
+@media (min-width: 960px) {
+  .rl-place__grid { grid-template-columns: 5fr 7fr; align-items: center; }
+  .rl-place__panel { order: -1; padding: 0 clamp(40px, 5vw, 96px) 0 clamp(40px, 5vw, 80px); padding-inline-start: max(var(--gutter), calc((100vw - 1240px) / 2)); }
+  .rl-place__fig { aspect-ratio: auto; block-size: min(84vh, 760px); }
+}
+html.rl-motion.rl-desk .rl-place { padding-block: 0; }
+html.rl-motion.rl-desk .rl-place__grid { block-size: 100vh; }
+html.rl-motion.rl-desk .rl-place__fig { block-size: 100vh; }
+html.rl-motion.rl-desk .rl-place__zoom { transform-origin: 60% 55%; will-change: transform; }
+
+/* 4. chapter 02 · architecture */
+.rl-arch { background: var(--n-100); padding-block: clamp(72px, 10vh, 140px); }
+.rl-arch__head { margin-block-end: clamp(28px, 4vh, 48px); }
+.rl-arch__track { display: grid; gap: var(--sp-4); padding-inline: var(--gutter); }
+.rl-arch__item { aspect-ratio: 4 / 3; }
+.rl-arch__media { inline-size: 100%; block-size: 100%; }
+.rl-arch__item--a img { object-position: 72% 50%; }
+@media (min-width: 960px) {
+  .rl-arch__track { grid-template-columns: 3fr 2fr; grid-template-rows: 1fr 1fr; gap: var(--sp-5); block-size: min(760px, 62vw); inline-size: min(100% - 2 * var(--gutter), 1240px); margin-inline: auto; padding: 0; }
+  .rl-arch__item { aspect-ratio: auto; }
+  .rl-arch__item--a { grid-row: 1 / 3; }
+}
+/* motion, desktop: the section pins and the gallery travels sideways (RTL: the next picture comes in from the left) */
+html.rl-motion.rl-desk .rl-arch { padding-block: 0; }
+html.rl-motion.rl-desk .rl-arch__pin { block-size: 100vh; display: grid; grid-template-rows: auto 1fr; align-content: center; padding-block: clamp(104px, 13vh, 150px) clamp(40px, 7vh, 80px); box-sizing: border-box; }
+html.rl-motion.rl-desk .rl-arch__viewport { overflow: hidden; min-block-size: 0; }
+html.rl-motion.rl-desk .rl-arch__track { display: flex; gap: 3vw; block-size: 100%; inline-size: max-content; margin: 0; padding-inline: max(var(--gutter), calc((100vw - 1240px) / 2)); will-change: transform; }
+html.rl-motion.rl-desk .rl-arch__item { flex: none; block-size: 100%; }
+html.rl-motion.rl-desk .rl-arch__item--a { inline-size: 58vw; }
+html.rl-motion.rl-desk .rl-arch__item--b, html.rl-motion.rl-desk .rl-arch__item--c { inline-size: 42vw; }
+html.rl-motion.rl-desk .rl-arch__media { inline-size: 112%; margin-inline-start: -6%; will-change: transform; }
+
+/* 5. chapter 03 · the experience */
+.rl-steps { padding-block: clamp(72px, 10vh, 140px); }
+.rl-steps__head { display: grid; gap: var(--sp-4); margin-block-end: clamp(32px, 5vh, 64px); }
+.rl-steps__frame { display: none; }
+.rl-steps__list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(40px, 6vh, 64px); }
+.rl-step { display: grid; gap: var(--sp-3); }
+.rl-step p { margin: 0; color: var(--text-muted); line-height: 1.6; max-inline-size: 38ch; font-size: 1.05rem; }
+.rl-step__n { font-family: var(--font-display); font-size: 0.95rem; color: var(--accent-ink); letter-spacing: 0.08em; margin-block-start: var(--sp-2); }
+.rl-card__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface-sunken); border-radius: 4px; }
+.rl-card__media img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+/* step 04: the same floor in two finishes, two pictures side by side with a hairline between them */
+.rl-card__media--pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--n-0); }
+.rl-card__media--pair img { min-inline-size: 0; }
+.rl-pair__tag { position: absolute; inset-block-end: var(--sp-3); z-index: 2; padding: 2px var(--sp-2); border-radius: var(--r-sm); background: rgb(255 252 249 / 0.9); color: var(--n-900); font-size: 12px; font-weight: var(--fw-semibold); }
+.rl-pair__tag--a { inset-inline-start: var(--sp-3); }
+.rl-pair__tag--b { inset-inline-end: var(--sp-3); }
+@media (min-width: 960px) { .rl-steps__list { grid-template-columns: repeat(2, 1fr); column-gap: var(--sp-10); } }
+/* motion, desktop: a sticky frame on the inline-end side whose picture follows the step in view; the steps scroll beside it */
+html.rl-motion.rl-desk .rl-steps__grid { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(48px, 6vw, 112px); align-items: start; }
+html.rl-motion.rl-desk .rl-steps__frame { display: block; position: sticky; inset-block-start: 14vh; block-size: 72vh; order: 2; }
+html.rl-motion.rl-desk .rl-steps__layer { position: absolute; inset: 0; aspect-ratio: auto; opacity: 0; transform: scale(1.04); transition: opacity 700ms var(--ease), transform 1200ms var(--ease); }
+html.rl-motion.rl-desk .rl-steps__layer.is-on { opacity: 1; transform: none; }
+html.rl-motion.rl-desk .rl-steps__list { grid-template-columns: 1fr; gap: 0; }
+html.rl-motion.rl-desk .rl-step { min-block-size: 72vh; align-content: center; opacity: 0.32; transition: opacity 500ms var(--ease); }
+html.rl-motion.rl-desk .rl-step.is-on { opacity: 1; }
+html.rl-motion.rl-desk .rl-step__media { display: none; }
+html.rl-motion.rl-desk .rl-step .rl-h3 { font-size: clamp(2rem, 1.2rem + 1.8vw, 3rem); }
+
+/* 6. closing band: the poster opens from an inset window to full bleed (motion); statically it is simply full bleed */
+.rl-close { position: relative; isolation: isolate; color: var(--n-0); text-align: center; min-block-size: clamp(520px, 86vh, 820px); display: grid; align-items: center; overflow: hidden; background: var(--n-950); }
+.rl-close__media { position: absolute; inset: 0; z-index: -1; }
+.rl-close__media img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+.rl-close__media::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 55%, rgb(14 12 10 / 0.55), rgb(14 12 10 / 0.78)); }
+.rl-close__badge { inset-block-start: auto; inset-block-end: var(--sp-4); }
+.rl-close__in { display: grid; justify-items: center; gap: var(--sp-6); padding-block: var(--sp-16); }
+.rl-word--sm { justify-items: center !important; }
+.rl-word--sm > span:first-child { font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.6rem); text-shadow: none; color: var(--brand-accent); letter-spacing: 0.32em; margin-inline-end: -0.32em; }
+.rl-close__title { margin: 0; font-family: var(--font-display); font-weight: var(--fw-bold); font-size: clamp(2.4rem, 1.4rem + 4vw, 5.25rem); line-height: 1.05; text-wrap: balance; max-inline-size: 14ch; }
+html.rl-motion .rl-close__media { will-change: clip-path; }
+
+/* split words (motion): each word rises out of its own mask; the full sentence stays readable to assistive tech (.hb-sr copy) */
+.rl-split { display: inline; }
+.rl-m { display: inline-block; overflow: hidden; vertical-align: top; padding-block-end: 0.08em; margin-block-end: -0.08em; }
+.rl-m > span { display: inline-block; will-change: transform; }
+
+/* the Habait brand (round 9: Eliran's vector logo, brand/): the wordmark in the header, the full logo with its tagline in the footer */
+.rl-brand__logo { display: block; block-size: 30px; inline-size: auto; }
+@media (max-width: 759px) { .rl-brand__logo { block-size: 26px; } }
+.rl-brand--foot { min-block-size: 0; }
+.rl-foot__logo { display: block; block-size: 120px; inline-size: auto; }
+html[lang="en"] .rl-foot__logo { block-size: 72px; }
+/* footer */
+.rl-foot { padding-block: var(--sp-8) var(--sp-10); border-block-start: 1px solid var(--line); }
+.rl-foot__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-3) var(--sp-6); padding-block-end: var(--sp-4); }
+.rl-brand--ink { color: var(--text); }
+.rl-foot__dev { margin: 0; color: var(--text-muted); }
+.rl-foot__link { display: inline-flex; align-items: center; min-block-size: var(--tap-min); color: var(--brand-ink); text-decoration: underline; text-underline-offset: 0.2em; font-weight: var(--fw-medium); }
+.rl-foot__a11y { margin: 0; }
+.rl-foot__a11y:empty { display: none; }
+.rl-legal .hb-legal__more { display: inline-flex; align-items: center; min-block-size: var(--tap-min); }
+.home-todo { font-size: var(--fs-small); color: var(--status-reserved-ink); border: 1px dashed currentColor; border-radius: var(--r-sm); padding: var(--sp-1) var(--sp-2); }
+
+/* entrance motion: content rises in once (never on reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .rl-hero__body > * { animation: rl-rise 900ms var(--ease) both; }
+  .rl-hero__body > :nth-child(2) { animation-delay: 80ms; }
+  .rl-hero__body > :nth-child(3) { animation-delay: 160ms; }
+  .rl-hero__body > :nth-child(4) { animation-delay: 240ms; }
+  @keyframes rl-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+}
+
+/* ==========================================================================================================================
+   DIRECTION B · Midnight Sea & Bronze (round 8, Eliran's pick 2026-11-09). The landing only (body.rl-b) overrides the house surface
+   tokens: midnight #0A1A28, deep sea #10283B, sand #EDE3D3 text (13.9:1), bronze #C08E5C (6.1:1) for accents and large type only,
+   never small body text. Display = Heebo ExtraLight/Light at very large sizes (architectural); Frank Ruhl Libre only for the RAINBOW
+   wordmark. Square sand CTA. The badges keep their dark chip (legible on every picture they sit on).
+   ========================================================================================================================== */
+body.rl-b {
+  --rb-mid: #0A1A28; --rb-deep: #10283B; --rb-sand: #EDE3D3; --rb-bronze: #C08E5C; --rb-line: rgb(237 227 211 / 0.14); --rb-bline: rgb(192 142 92 / 0.42);
+  --surface: var(--rb-mid); --surface-raised: var(--rb-deep); --surface-sunken: var(--rb-deep); --text: var(--rb-sand); --text-muted: rgb(237 227 211 / 0.72);
+  --line: var(--rb-line); --line-strong: rgb(237 227 211 / 0.32); --accent-ink: var(--rb-bronze); --brand-ink: var(--rb-sand); --focus: var(--rb-sand);
+  color-scheme: dark; background: var(--rb-mid); color: var(--rb-sand);
+}
+.rl-b .rl-top, .rl-b .rl-top.is-solid { background: rgb(10 26 40 / 0.86); color: var(--rb-sand); box-shadow: 0 1px 0 var(--rb-line);
+  backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px) saturate(1.1); }
+.rl-b .rl-top:not(.is-solid) .rl-brand, .rl-b .rl-top:not(.is-solid) .rl-top__link, .rl-b .rl-top:not(.is-solid) .rl-lang { text-shadow: none; }
+.rl-b .rl-lang { border-color: var(--rb-bline); }
+
+/* hero: the film in a framed window beside a very large, light headline */
+.rl-b .rl-hero { display: grid; grid-template-columns: 1fr; align-items: end; min-block-size: 0; background: var(--rb-mid); color: var(--rb-sand); overflow: visible;
+  padding: calc(68px + env(safe-area-inset-top)) 0 clamp(40px, 7vh, 72px); gap: clamp(24px, 5vw, 40px); }
+.rl-b .rl-hero__media { position: relative; inset: auto; z-index: 0; inline-size: 100%; block-size: min(64svh, 620px); overflow: hidden; background: #08131D; }
+.rl-b .rl-hero__scrim { background: linear-gradient(to top, rgb(10 26 40 / 0.55) 0, rgb(10 26 40 / 0) 30%); }
+.rl-b .rl-hero__cap { position: absolute; inset-block-start: var(--sp-4); right: var(--sp-5); left: auto; z-index: 2; direction: ltr; color: #fff;
+  font-family: var(--font-display); font-weight: var(--fw-medium); letter-spacing: 0.34em; font-size: clamp(1.1rem, 0.8rem + 1.4vw, 2.2rem); text-shadow: 0 1px 3px rgb(10 26 40 / 0.5), 0 2px 22px rgb(10 26 40 / 0.45); }
+.rl-b .rl-hero__corner { position: absolute; inset-block-end: var(--sp-4); inset-inline-end: var(--sp-4); inset-inline-start: auto; z-index: 2; }
+.rl-b .rl-hero__body { inline-size: auto; margin: 0; padding: 0 var(--gutter); display: grid; justify-items: start; gap: clamp(14px, 2vw, 22px); }
+.rl-kick { margin: 0; display: flex; align-items: center; gap: var(--sp-3); font-size: 0.82rem; font-weight: var(--fw-medium); letter-spacing: 0.08em; color: var(--rb-bronze); }
+.rl-kick::before { content: ''; inline-size: 40px; block-size: 1px; background: var(--rb-bronze); }
+.rl-b .rl-hero__title { margin: 0; font-family: var(--font-text); font-weight: 200; font-size: clamp(2.9rem, 1.1rem + 4.2vw, 5rem); line-height: 0.98; letter-spacing: -0.01em; color: var(--rb-sand); text-wrap: balance; }
+.rl-b .rl-hero__l1, .rl-b .rl-hero__l2 { display: block; }
+.rl-b .rl-hero__l2 { color: var(--rb-bronze); font-weight: 300; }
+.rl-b .rl-hero__promise { margin: 0; max-inline-size: 34ch; color: rgb(237 227 211 / 0.78); font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem); line-height: 1.65; text-shadow: none; }
+.rl-b .rl-hero__ctas { margin-block-start: var(--sp-2); }
+@media (min-width: 960px) {
+  .rl-b .rl-hero { grid-template-columns: 5fr 7fr; align-items: center; min-block-size: 100svh; padding-inline: max(var(--gutter), calc((100vw - 1320px) / 2)); padding-block-end: clamp(40px, 7vh, 80px); }
+  .rl-b .rl-hero__body { order: -1; padding: 0 0 var(--sp-6); }
+  .rl-b .rl-hero__media { block-size: min(76svh, 780px); border-radius: 2px; }
+}
+/* no entrance keyframes on the hero text in B: SplitText reveals the headline lines (landing-motion.js); reduced motion = still */
+.rl-b .rl-hero__body > * { animation: none; }
+
+/* the square sand CTA with a bronze underline that sweeps in on hover/focus */
+.rl-b .rl-btn--accent { position: relative; overflow: hidden; border-radius: 2px; background: var(--rb-sand); color: var(--rb-mid); box-shadow: none; padding-inline: var(--sp-8); min-block-size: 54px; }
+.rl-b .rl-btn--accent::after { content: ''; position: absolute; inset-inline: 0; inset-block-end: 0; block-size: 3px; background: var(--rb-bronze); transform: scaleX(0); transform-origin: right; transition: transform 500ms var(--ease); }
+.rl-b .rl-btn--accent:hover, .rl-b .rl-btn--accent:focus-visible { background: #F6EEE2; }
+.rl-b .rl-btn--accent:hover::after, .rl-b .rl-btn--accent:focus-visible::after { transform: scaleX(1); }
+[dir="ltr"] .rl-b .rl-btn--accent::after, .rl-b[dir="ltr"] .rl-btn--accent::after { transform-origin: left; }
+
+/* type */
+.rl-b .rl-h2 { font-family: var(--font-text); font-weight: 200; font-size: clamp(2.4rem, 1.2rem + 3.6vw, 5rem); line-height: 1; letter-spacing: -0.01em; }
+.rl-b .rl-h3 { font-family: var(--font-text); font-weight: 300; }
+.rl-b .rl-index { color: var(--text-muted); font-weight: var(--fw-medium); letter-spacing: 0.06em; }
+.rl-b .rl-index::after { background: var(--rb-bline); opacity: 1; }
+.rl-b .rl-index__n, .rl-b .rl-step__n { font-family: var(--font-text); font-weight: 400; color: var(--rb-bronze); letter-spacing: 0.12em; font-variant-numeric: tabular-nums; }
+.rl-b .rl-lead { color: var(--text-muted); }
+.rl-line { padding-block-end: 0.06em; }
+
+/* statement */
+.rl-b .rl-statement { background: var(--rb-mid); padding-block: clamp(110px, 18vh, 220px); }
+.rl-b .rl-statement__text { font-family: var(--font-text); font-weight: 200; max-inline-size: 24ch; font-size: clamp(2rem, 1rem + 3.6vw, 4.6rem); line-height: 1.12; color: var(--rb-sand); }
+
+/* 01 location (deep sea band) */
+.rl-b .rl-place { background: var(--rb-deep); }
+.rl-b .rl-place__fig { background: #08131D; }
+.rl-b .rl-places { border-block-start-color: var(--rb-bline); }
+.rl-b .rl-places li { font-family: var(--font-text); font-weight: 300; border-block-end-color: var(--rb-line); }
+.rl-b .rl-places li::before { color: var(--rb-bronze); }
+@media (min-width: 960px) { .rl-b .rl-place__panel { padding-block: clamp(48px, 8vh, 96px); } }
+
+/* 02 architecture (midnight) */
+.rl-b .rl-arch { background: var(--rb-mid); }
+.rl-b .rl-fig, .rl-b .rl-card__media { border-radius: 2px; background: #08131D; }
+.rl-b .rl-cap { background: linear-gradient(to top, rgb(10 26 40 / 0.78), transparent); color: var(--rb-sand); }
+.rl-b .rl-cap__n { color: var(--rb-bronze); font-family: var(--font-text); }
+
+/* 03 experience (deep sea band) */
+.rl-b .rl-steps { background: var(--rb-deep); }
+.rl-b .rl-step p { color: var(--text-muted); }
+.rl-b .rl-card__media--pair { background: var(--rb-deep); }
+
+/* closing band: the dusk render under a midnight veil */
+.rl-b .rl-close { background: var(--rb-mid); }
+.rl-b .rl-close__media::after { background: radial-gradient(ellipse at 50% 55%, rgb(10 26 40 / 0.5), rgb(10 26 40 / 0.86)); }
+.rl-b .rl-close__title { font-family: var(--font-text); font-weight: 200; font-size: clamp(2.6rem, 1.2rem + 4.6vw, 6rem); color: var(--rb-sand); max-inline-size: 16ch; }
+.rl-b .rl-word--sm > span:first-child { color: var(--rb-bronze); }
+
+/* footer */
+.rl-b .rl-foot { background: var(--rb-mid); border-block-start-color: var(--rb-line); }
+.rl-b .rl-brand--ink { color: var(--rb-sand); }
+.rl-b .home-todo { color: var(--rb-bronze); }

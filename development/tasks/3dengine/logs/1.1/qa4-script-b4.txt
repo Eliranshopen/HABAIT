@@ -1,0 +1,106 @@
+// B4: a healthy job still works with the new write rule: real server, real runners.
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, GOLDEN, runnerPid, pidAlive, killPid } from './lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const SAMPLE = `${R}/tests/fixtures/sample.pdf`;
+const SHA = sha(fs.readFileSync(GOLDEN));
+const SSHA = sha(fs.readFileSync(SAMPLE));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const ID2 = jobId({ pdfSha256: SSHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const mine = new Set();
+const rd = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
+const cli = (h, a) => spawnSync(process.execPath, [`${R}/engine/cli.mjs`, ...a], { env: { ...process.env, ...h.env }, encoding: 'utf8', timeout: 60000, windowsHide: true });
+const track = (h, id) => { const p = runnerPid(h, id); if (p) mine.add(p); return p; };
+async function until(what, fn, ms = 60000) { const end = Date.now() + ms; for (;;) { const v = await fn(); if (v) return v; if (Date.now() > end) throw new Error('timeout ' + what); await sleep(100); } }
+const counts = (h, id) => { const m = rd(`${h.jobsDir}/${id}/manifest.json`); let l = { rows: [] }; try { l = rd(`${h.jobsDir}/${id}/ledger.json`); } catch {} return { mrows: m.rows.length, mdone: m.rows.filter((r) => r.status === 'done' && !r.superseded).length, lrows: l.rows.length }; };
+const seedRec = (h) => { for (const [s, f] of [[SHA, 'rec'], [SSHA, 'rec2']]) { if (!fs.existsSync(`${SCR}/${f}`)) continue; const d = `${h.config.runtimeDir}/inspect/${s}`; fs.mkdirSync(d, { recursive: true }); for (const x of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/${f}/${x}`, `${d}/${x}`); } };
+const out = (...a) => console.log(...a);
+
+async function full(h, srv, id, pdf, label) {
+  const r = await srv.call('start_simulation', { pdf_path: pdf });
+  out(label, 'start', r.err?.code || `created=${r.out.created} id=${r.out.job_id === id}`);
+  track(h, id);
+  const j = await until(`${label} awaiting`, async () => { const g = await srv.call('get_job', { job_id: id }); track(h, id); return g.out?.job?.state === 'awaiting_approval' ? g.out.job : null; });
+  out(label, 'awaiting_approval, quote', JSON.stringify(j.quote?.estimate_usd));
+  const a = await srv.call('approve_paid_stage', { job_id: id, cap_usd: 100 }); out(label, 'approve', a.err?.code || 'ok'); track(h, id);
+  return j;
+}
+// 1. sheet to done
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`); seedRec(h);
+  const srv = startServer(h); await srv.init();
+  await full(h, srv, ID, `${h.inbox}/s.pdf`, '[1 done]');
+  await until('done', async () => (await srv.call('get_job', { job_id: ID })).out?.job?.state === 'done');
+  const c = counts(h, ID); out('[1 done] counts', JSON.stringify(c), 'cost', JSON.stringify(rd(`${h.jobsDir}/${ID}/job.json`).cost));
+  const res = await srv.call('get_result', { job_id: ID }); out('[1 done] get_result', res.err?.code || 'ok');
+  // wrong cost copy on a healthy done job is put right by a read
+  const jf = `${h.jobsDir}/${ID}/job.json`; const j = rd(jf); j.cost.spent_usd = 3.33; fs.writeFileSync(jf, JSON.stringify(j, null, 2));
+  const g = await srv.call('get_job', { job_id: ID }); out('[1 done] wrong cost read: shown', g.out?.job?.cost?.spent_usd, 'disk after', rd(jf).cost.spent_usd);
+  const c2 = counts(h, ID); out('[1 done] counts after repair', JSON.stringify(c2), JSON.stringify(c) === JSON.stringify(c2) ? 'same' : 'CHANGED');
+  const cj = cli(h, ['job', ID]); out('[1 done] cli job exit', cj.status); const cl = cli(h, ['ledger', ID]); out('[1 done] cli ledger exit', cl.status);
+  j.cost.spent_usd = 4.44; fs.writeFileSync(jf, JSON.stringify(j, null, 2)); const cj2 = cli(h, ['job', ID]); out('[1 done] cli job repairs copy:', rd(jf).cost.spent_usd);
+  await srv.stop(); cleanup(h);
+}
+// 2. killed runner in the middle, resumed
+for (const via of ['start_simulation', 'cli resume']) {
+  const h = await makeHome({ timeout: 120, stepMs: '500' }); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`); seedRec(h);
+  const srv = startServer(h); await srv.init();
+  await full(h, srv, ID, `${h.inbox}/s.pdf`, `[2 kill/${via}]`);
+  await until('mid', async () => { const s = (await srv.call('get_job', { job_id: ID })).out?.job?.state; return ['skinning', 'gating', 'finishing', 'packaging'].includes(s); });
+  const p = track(h, ID); out(`[2 kill/${via}] killing runner`, p, 'state', rd(`${h.jobsDir}/${ID}/job.json`).state); killPid(p); await sleep(4500);
+  if (via === 'get_job') await srv.call('get_job', { job_id: ID }); if (via === 'start_simulation') await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` }); if (via === 'cli resume') out('  cli resume exit', cli(h, ['resume', ID]).status);
+  // get_job may need two calls (stalled detection)
+  await until('done after resume', async () => { await srv.call('get_job', { job_id: ID }); track(h, ID); return rd(`${h.jobsDir}/${ID}/job.json`).state === 'done'; }, 90000);
+  const c = counts(h, ID); const l = rd(`${h.jobsDir}/${ID}/ledger.json`);
+  const settled = l.rows.filter((r) => r.state === 'settled').length;
+  out(`[2 kill/${via}] done; counts ${JSON.stringify(c)}; ledger states ${JSON.stringify(l.rows.map((r) => r.state))}; spent ${rd(`${h.jobsDir}/${ID}/job.json`).cost.spent_usd}`);
+  // distinct done rows per stage
+  const m = rd(`${h.jobsDir}/${ID}/manifest.json`); const live = m.rows.filter((r) => !r.superseded).map((r) => r.stage); out('   live rows per stage', JSON.stringify(live), new Set(live).size === live.length ? 'no dup' : 'DUP STAGE');
+  await srv.stop(); cleanup(h);
+}
+// 3. cancelled -> restart
+for (const via of ['start_simulation', 'cli resume']) {
+  const h = await makeHome({ timeout: 120, stepMs: '300' }); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`); seedRec(h);
+  const srv = startServer(h); await srv.init();
+  await full(h, srv, ID, `${h.inbox}/s.pdf`, `[3 cancel/${via}]`);
+  const c = await srv.call('cancel_job', { job_id: ID }); out('  cancel', c.err?.code || c.out?.job?.state);
+  await until('cancelled', async () => { await srv.call('get_job', { job_id: ID }); return rd(`${h.jobsDir}/${ID}/job.json`).state === 'cancelled'; }, 30000);
+  await sleep(1500);
+  const before = counts(h, ID);
+  if (via === 'start_simulation') { const r = await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` }); out('  restart via start', r.err?.code || `created=${r.out.created} resumed=${r.out.resumed} state=${r.out.job.state}`); } else out('  cli resume exit', cli(h, ['resume', ID]).status);
+  track(h, ID);
+  const st = await until('restarted', async () => { await srv.call('get_job', { job_id: ID }); track(h, ID); const s = rd(`${h.jobsDir}/${ID}/job.json`).state; return s === 'awaiting_approval' || s === 'done' || s === 'failed' ? s : null; }, 60000);
+  out(`[3 cancel/${via}] after restart state`, st, 'counts before', JSON.stringify(before), 'after', JSON.stringify(counts(h, ID)));
+  await srv.call('approve_paid_stage', { job_id: ID, cap_usd: 100 }); track(h, ID);
+  await until('done2', async () => { await srv.call('get_job', { job_id: ID }); return rd(`${h.jobsDir}/${ID}/job.json`).state === 'done'; }, 60000);
+  out(`[3 cancel/${via}] done`, JSON.stringify(counts(h, ID)), 'spent', rd(`${h.jobsDir}/${ID}/job.json`).cost.spent_usd);
+  await srv.stop(); cleanup(h);
+}
+// 4. two jobs at once
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`); fs.copyFileSync(SAMPLE, `${h.inbox}/b.pdf`); seedRec(h);
+  const srv = startServer(h); await srv.init();
+  const [a, b] = await Promise.all([srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` }), srv.call('start_simulation', { pdf_path: `${h.inbox}/b.pdf` })]);
+  out('[4 two jobs] starts', a.err?.code || a.out.created, b.err?.code || b.out.created, a.out?.job_id === ID, b.out?.job_id === ID2);
+  track(h, ID); track(h, ID2);
+  for (const id of [ID, ID2]) await until('await ' + id, async () => (await srv.call('get_job', { job_id: id })).out?.job?.state === 'awaiting_approval');
+  await Promise.all([srv.call('approve_paid_stage', { job_id: ID, cap_usd: 100 }), srv.call('approve_paid_stage', { job_id: ID2, cap_usd: 100 })]);
+  for (const id of [ID, ID2]) { track(h, id); await until('done ' + id, async () => (await srv.call('get_job', { job_id: id })).out?.job?.state === 'done', 90000); out('[4 two jobs]', id, JSON.stringify(counts(h, id))); }
+  const l = await srv.call('list_jobs', {}); out('[4 two jobs] list', l.out?.jobs?.length);
+  await srv.stop(); cleanup(h);
+}
+// 5. three processes start one PDF at the same moment: exactly one created:true
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`);
+  const srvs = []; for (let i = 0; i < 3; i++) { const s = startServer(h); await s.init(); srvs.push(s); }
+  const rs = await Promise.all(srvs.map((s) => s.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` })));
+  out('[5 three procs] created flags', JSON.stringify(rs.map((r) => r.err?.code || r.out.created)), 'job folders', fs.readdirSync(h.jobsDir).length);
+  track(h, ID); await sleep(3000); track(h, ID);
+  for (const s of srvs) await s.stop(); cleanup(h);
+}
+// kill leftovers I started
+for (const p of mine) { if (pidAlive(p)) { killPid(p); } }
+await sleep(500);
+out('runner pids I started:', [...mine].join(','), 'still alive:', [...mine].filter(pidAlive).join(',') || 'none');

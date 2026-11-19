@@ -474,6 +474,202 @@
   const PAD_ABOVE = { coffee_table: 1.2, dining_table: 0.9, shelf: 0.5 };
   const PAD_ABOVE_MAX = 320;
 
+  /* ── the follow turns (2026-11-16, plan development/plans/2026-11-16-typed-change-all-tabs.md; Eliran: «להעביר את השינוי לכל
+     לשונית שרואה את הנקודה») ──────────────────────────────────────────────────────
+     A typed change lands in ONE scene's panorama; the same spot is seen from other scenes. This finds the spot on the plan (the
+     changed region's foot → a direction → the distance along it in the scene's depth map), aims every other scene that sees it,
+     and sends one FOLLOW turn per scene: that scene's view with the first scene's edited view as a second image, under the first
+     turn's signed instruction (no text step). The turns go out side by side, in the background; the visitor keeps looking. A
+     result is pasted only where it changed and only when the frame held; undoing the first change takes the others with it. */
+  const FOLLOW = { maxRooms: 3, minM: 0.6, maxM: 12, seeShare: 0.8, seeSlackM: 0.5, hfovMin: 60, hfovMax: 100, refW: 1024, refQ: 0.85, freeMs: 30000 };
+  const F_RING_SOFT = 0.15, F_RING_HARD = 0.30; // runChange's own two ring numbers, the same evidence
+  const F_FOLLOW_SMALL = 0.10;                  // a follow answer that changed under a tenth of the view is taken without the judge
+  let followOn = false;                 // the host says it answers follow turns (its GET)
+  let followLine = Promise.resolve();   // results are placed one at a time
+  const inLine = (fn) => { const p = followLine.then(fn, fn); followLine = p.catch(() => {}); return p; };
+  const sleep = (ms) => new Promise((r) => window.setTimeout(r, ms));
+  async function waitFree(ms) { const t = Date.now(); while (!hooks.canChange() && Date.now() - t < ms) await sleep(150); return hooks.canChange(); }
+  /** A scene's camera on the plan in metres (x right, y down the sheet) and the plan bearing its panorama's centre looks at. */
+  function camOf(room) { const pl = hooks.place(room), k = hooks.planPxPerM(); return pl && k ? { x: pl.x / k, y: pl.y / k, b0: pl.bearing0 } : null; }
+  /** A point seen from a scene (panorama yaw, pitch, metres along the ray) → metres on the plan, z = height over the eye. */
+  function toPlan(cam, yaw, pitch, dist) {
+    const b = ((cam.b0 + yaw) * Math.PI) / 180, p = (pitch * Math.PI) / 180, dh = dist * Math.cos(p);
+    return { x: cam.x + dh * Math.sin(b), y: cam.y - dh * Math.cos(b), z: dist * Math.sin(p) };
+  }
+  /** The same point seen from another scene: its panorama yaw, pitch and the metres to it (tour.js's `bearing`: 0 = up, clockwise). */
+  function fromPlan(cam, P) {
+    const dx = P.x - cam.x, dy = P.y - cam.y, dh = Math.hypot(dx, dy);
+    return { yaw: norm((Math.atan2(dx, -dy) * 180) / Math.PI - cam.b0), pitch: (Math.atan2(P.z, dh) * 180) / Math.PI, dist: Math.hypot(dh, P.z) };
+  }
+  /** Where a change stands: the pasted region's box on the crop, its foot read on the scene's depth map, its size in metres. */
+  async function locateChange(room, alpha, view) {
+    const cam = camOf(room);
+    const dm = cam ? await hooks.depthFor(room) : null;
+    if (!cam || !dm) return null;
+    let x0 = CROP_W, x1 = -1, y0 = CROP_H, y1 = -1;
+    for (let y = 0; y < CROP_H; y += 2) for (let x = 0; x < CROP_W; x += 2) if (alpha[y * CROP_W + x] > 127) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    if (x1 < 0) return null;
+    // the foot: where the region meets what it stands on — three columns, the lowest marked pixel of each, the middle distance
+    const feet = [];
+    for (const fx of [0.3, 0.5, 0.7]) {
+      const x = Math.round(x0 + (x1 - x0) * fx);
+      let y = y1;
+      while (y > y0 && !(alpha[y * CROP_W + x] > 127)) y -= 2;
+      const d = dirOfPixel(x, Math.max(0, y - 4), view, CROP_W, CROP_H);
+      const sp = hooks.surfacePoint(dm, pitchOf(d), yawOf(d));
+      if (sp) feet.push({ yaw: yawOf(d), pitch: pitchOf(d), dist: sp.dist });
+    }
+    if (!feet.length) return null;
+    feet.sort((a, b) => a.dist - b.dist);
+    const foot = feet[feet.length >> 1];
+    const base = toPlan(cam, foot.yaw, foot.pitch, foot.dist);
+    // its size, as a thing standing at the foot's distance: the height from the region's top, the width from its sides
+    const dh = foot.dist * Math.cos((foot.pitch * Math.PI) / 180);
+    const top = dirOfPixel((x0 + x1) / 2, y0, view, CROP_W, CROP_H), left = dirOfPixel(x0, (y0 + y1) / 2, view, CROP_W, CROP_H), right = dirOfPixel(x1, (y0 + y1) / 2, view, CROP_W, CROP_H);
+    const hM = Math.max(0.2, Math.min(2.6, dh * (Math.tan((Math.min(80, pitchOf(top)) * Math.PI) / 180) - Math.tan((foot.pitch * Math.PI) / 180))));
+    const span = Math.acos(Math.max(-1, Math.min(1, left[0] * right[0] + left[1] * right[1] + left[2] * right[2])));
+    const wM = Math.max(0.2, Math.min(6, 2 * foot.dist * Math.tan(span / 2)));
+    return { P: { x: base.x, y: base.y, z: base.z + hM / 2 }, size: { w: wM, h: hM }, foot: { yaw: foot.yaw, pitch: foot.pitch, dist: foot.dist }, box: [x0, y0, x1, y1] };
+  }
+  /** The other scenes that see a spot, nearest first: each with the view that frames it there. */
+  async function followTargets(room, spot) {
+    const out = [];
+    // only scenes of the same part of the apartment (the open living space, the bedrooms, the terrace). Found 2026-11-16 on «רמקולים
+    // ליד הטלוויזיה»: the TV wall is the main bedroom's wall too, the spot on it lies 18 cm behind the bedroom's side of that wall,
+    // and the depth test below (which must forgive a chair in the way) let the bedroom through.
+    const zone = hooks.zoneOf ? hooks.zoneOf(room) : null;
+    const ids = hooks.rooms().filter((id) => id !== room && camOf(id) && (!hooks.zoneOf || hooks.zoneOf(id) === zone));
+    const maps = await Promise.all(ids.map((id) => hooks.depthFor(id))); // side by side; the typed field's first focus already asked for them
+    for (let i = 0; i < ids.length; i++) {
+      const id = ids[i], cam = camOf(id), dm = maps[i];
+      if (!dm) continue;
+      const v = fromPlan(cam, spot.P);
+      if (v.dist < FOLLOW.minM || v.dist > FOLLOW.maxM || Math.abs(v.pitch) > 50) continue;
+      // nothing nearer may block the ray: this scene's own depth along it reaches the spot (five samples, three must agree: the
+      // maps are the plan model's and some were rendered a few decimetres from today's camera, and a door jamb is thin)
+      let seen = 0;
+      for (const [dy, dp] of [[0, 0], [3, 0], [-3, 0], [0, 3], [0, -3]]) { const sp = hooks.surfacePoint(dm, v.pitch + dp, v.yaw + dy); if (sp && sp.dist >= v.dist * FOLLOW.seeShare - FOLLOW.seeSlackM) seen++; }
+      if (seen < 3) continue;
+      const angW = (2 * Math.atan(Math.max(spot.size.w, 0.6 * spot.size.h) / (2 * v.dist)) * 180) / Math.PI, angH = (2 * Math.atan(spot.size.h / (2 * v.dist)) * 180) / Math.PI;
+      const hfov = Math.max(FOLLOW.hfovMin, Math.min(FOLLOW.hfovMax, Math.max(angW * 2.4, angH * 2.4 * (CROP_W / CROP_H))));
+      out.push({ room: id, yaw: Number(v.yaw.toFixed(2)), pitch: Number(Math.max(-55, Math.min(55, v.pitch)).toFixed(2)), hfov: Number(hfov.toFixed(1)), dist: Number(v.dist.toFixed(2)) });
+    }
+    return out.sort((a, b) => a.dist - b.dist).slice(0, FOLLOW.maxRooms);
+  }
+  /** The first scene's edited view as the editor's second image: at most FOLLOW.refW wide, a JPEG data URL. */
+  function referenceJpeg(imageData) {
+    const c = document.createElement('canvas'); c.width = imageData.width; c.height = imageData.height; c.getContext('2d').putImageData(imageData, 0, 0);
+    const k = Math.min(1, FOLLOW.refW / c.width);
+    const d = document.createElement('canvas'); d.width = Math.round(c.width * k); d.height = Math.round(c.height * k);
+    const g = d.getContext('2d'); g.imageSmoothingQuality = 'high'; g.drawImage(c, 0, 0, d.width, d.height);
+    return d.toDataURL('image/jpeg', FOLLOW.refQ);
+  }
+  /** One scene's follow turn, up to two attempts: asked, tested like any change (the ring, then the furniture judge for people that
+      touch a large share of the view), never pasted here. → { ok, A, alpha, … } or { ok: false, reason }. */
+  async function askFollow(job, ctx) {
+    const t = job.t, attempts = [];
+    for (let attempt = 1; ; attempt++) {
+      let out = null;
+      try {
+        const res = await fetch('api/edit', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code, apartment: tourData.id, scene: t.room, lang: hooks.lang(), crop: job.cropJpeg, view: { yaw: t.yaw, pitch: t.pitch, hfov: t.hfov }, attempt, follow: { token: ctx.token, reference: ctx.reference, from: ctx.room } }),
+          signal: AbortSignal.timeout(MAX_SECONDS * 1000),
+        });
+        out = await res.json().catch(() => ({ ok: false, reason: 'error' }));
+      } catch (_) { out = { ok: false, reason: 'network' }; }
+      if (!out.ok) return { ok: false, reason: out.reason || 'error', attempts };
+      const A = imageToData(await loadImg(out.image), CROP_W, CROP_H);
+      colourFit(A, job.crop, CROP_W, CROP_H, 40);
+      const rs = ringShare(A, job.crop, CROP_W, CROP_H, 40, 22, null);
+      const mask = changedMask(A, job.crop, CROP_W, CROP_H, { thr: 22, close: 8, minArea: 100, pad: 5 });
+      const { alpha, fraction } = featherAlpha(mask, CROP_W, CROP_H, 6);
+      // The ring first: a re-framed answer moves the border. A small change is then taken as it is. Every other answer, people or
+      // not, goes to the ANCHOR judge — the piece of furniture the change is at must stand in the answer where and as large as it
+      // stood. The paid proof (2026-11-16, qa-evidence/tour360/typed-all-tabs-2026-11-16) is why: two of six answers whose border held
+      // had the dining table itself redrawn, the plain furniture judge held one of them on the sofa in the foreground, no pixel
+      // measure told them from the four right ones (a height rule tried here refused a right answer), and this judge read all six.
+      let held = true, judged = null;
+      if (rs.share >= F_RING_HARD) held = false;
+      else if (rs.share < F_RING_SOFT && fraction <= F_FOLLOW_SMALL) held = true;
+      else {
+        try {
+          const jr = await fetch('api/edit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ op: 'judge', anchor: true, code, apartment: tourData.id, scene: t.room, crop: job.cropJpeg, result: toJpeg(A) }), signal: AbortSignal.timeout(90000) });
+          const j = await jr.json();
+          judged = j && j.ok ? { held: j.held === true, iou: j.iou, ratio: j.ratio, object: j.object } : { held: false, error: (j && j.reason) || 'error' };
+        } catch (_) { judged = { held: false, error: 'network' }; }
+        held = judged.held;
+      }
+      attempts.push({ attempt, model: out.model, ring: Number(rs.share.toFixed(3)), fraction: Number(fraction.toFixed(3)), judge: judged, held, ms: out.ms ?? null });
+      if (held) return fraction < 0.002 ? { ok: false, reason: 'not_in_view', attempts } : { ok: true, A, alpha, fraction, ring: rs.share, judged, out, attempt, attempts };
+      if (attempt >= 2) return { ok: false, reason: judged && judged.held === false ? 'redrawn' : 'reframed', attempts };
+    }
+  }
+  /** A held result onto its scene's stack: on screen when the visitor stands there, quietly otherwise; linked to the first change. */
+  async function placeFollow(res, job, ctx) {
+    const t = job.t;
+    if (!(await waitFree(FOLLOW.freeMs))) return { ok: false, reason: 'busy' };
+    if (!hooks.hasLive(ctx.room, ctx.entry)) return { ok: false, reason: 'undone' }; // the first change was undone meanwhile
+    const c = await hooks.currentCanvas(t.room);
+    persToEquiBlend(c, res.A, res.alpha, t.yaw, t.pitch, t.hfov);
+    const meta = { prompt: res.out.prompt, model: res.out.model, reach: 'object', living: ctx.living, attempt: res.attempt, ring: Number(res.ring.toFixed(3)), judge: res.judged, usd: res.out.usd, fraction: Number(res.fraction.toFixed(3)), follow: true, linked_to: { room: ctx.room } };
+    if (hooks.room() === t.room) await hooks.pushLive(t.room, c, ctx.text, meta);
+    else { await hooks.pushLiveQuiet(t.room, c, ctx.text, meta); if (hooks.room() === t.room) await hooks.showRoom(t.room); }
+    c.width = 0; c.height = 0;
+    ctx.entry.meta.linked = (Array.isArray(ctx.entry.meta.linked) ? ctx.entry.meta.linked : []).concat([{ room: t.room, ok: true }]);
+    hooks.renderChange();
+    return { ok: true };
+  }
+  /** The whole follow of one typed change. Never throws, never blocks the visitor; its account is `lastTurn.follow`. */
+  async function followTyped(ctx, alpha, view, turn) {
+    const rec = { rooms: [], skip: null, ms: null };
+    if (turn) turn.follow = rec;
+    const t0 = Date.now();
+    try {
+      const spot = await locateChange(ctx.room, alpha, view);
+      if (!spot) { rec.skip = 'no_spot'; return; }
+      rec.spot = { x: Number(spot.P.x.toFixed(2)), y: Number(spot.P.y.toFixed(2)), z: Number(spot.P.z.toFixed(2)), w: Number(spot.size.w.toFixed(2)), h: Number(spot.size.h.toFixed(2)), dist: Number(spot.foot.dist.toFixed(2)) };
+      const targets = await followTargets(ctx.room, spot);
+      rec.targets = targets;
+      if (!targets.length) { rec.skip = 'no_room_sees_it'; return; }
+      ctx.reference = referenceJpeg(ctx.result);
+      ctx.result = null;
+      // every scene's view is cut first, one panorama canvas at a time (a phone holds one comfortably, not four)
+      const jobs = [];
+      for (const t of targets) {
+        const c = await hooks.currentCanvas(t.room);
+        const crop = equiToPers(c, t.yaw, t.pitch, t.hfov, CROP_W, CROP_H);
+        c.width = 0; c.height = 0;
+        jobs.push({ t, crop, cropJpeg: toJpeg(crop) });
+      }
+      const names = () => jobs.filter((j) => !j.done).map((j) => hooks.roomName(j.t.room)).join(', ');
+      const tell = () => { const n = names(); if (n) hooks.note(hooks.ui('changeAlsoIn').replace('{room}', n)); };
+      void waitFree(FOLLOW.freeMs).then(tell); // the first change's own message leaves the screen first
+      const failed = [];
+      await Promise.all(jobs.map(async (job) => {
+        const ts = Date.now();
+        let r = await askFollow(job, ctx).catch((e) => ({ ok: false, reason: 'error', error: String(e && e.message || e).slice(0, 120) }));
+        const attempts = r.attempts || [];
+        if (r.ok) r = await inLine(() => placeFollow(r, job, ctx)).catch((e) => ({ ok: false, reason: 'error', error: String(e && e.message || e).slice(0, 120) }));
+        job.done = true;
+        rec.rooms.push({ room: job.t.room, ok: r.ok === true, ...(r.reason ? { reason: r.reason } : {}), ...(r.error ? { error: r.error } : {}), attempts, ms: Date.now() - ts });
+        // «לא נראה משם» and an undone change are not failures; a refused frame, the cap or a lost answer are said once, at the end
+        if (!r.ok && !['not_in_view', 'undone'].includes(r.reason)) failed.push(job.t.room);
+        tell();
+      }));
+      if (failed.length && hooks.canChange()) {
+        hooks.note(hooks.ui('changeAlsoFailed').replace('{room}', failed.map((id) => hooks.roomName(id)).join(', ')), true);
+        window.setTimeout(() => hooks.note(''), 4000);
+      } else hooks.note('');
+    } catch (e) {
+      rec.skip = 'error'; rec.error = String(e && e.message || e).slice(0, 160);
+      try { hooks.note(''); } catch (_) { /* the page is as it was */ }
+    } finally {
+      rec.ms = Date.now() - t0;
+    }
+  }
+  state.follow = { FOLLOW, locateChange, followTargets, camOf, toPlan, fromPlan, get on() { return followOn; } }; // for the QA
+
   /* ── the turn ─────────────────────────────────────────────────────────────────── */
   async function runChange(text, pick, opts = {}) {
     // T18d: `opts.room` names a room that is NOT on screen — the follow-up of a swap for the same piece seen from there; the view
@@ -628,12 +824,14 @@
           if (held) { judged = await judgeFrame(toJpeg(A)); held = judged.held; }
         } else if (tested && out.living === true && out.reach === 'object') {
           if (ring >= RING_HARD) held = false;
-          else if (out.modelKey === 'nb2' && ring < RING_SOFT && fraction <= JUDGE_OVER) held = true;
+          // 2026-11-16: the fast editor (klein) is accepted on the same two numbers. It re-renders the whole view a little, so its
+          // changed share reads HIGHER than nb2's for the same change (0.10–0.14 against 0.07 on the bench): the rule errs to the judge
+          else if (['nb2', 'klein'].includes(out.modelKey) && ring < RING_SOFT && fraction <= JUDGE_OVER) held = true;
           else { judged = await judgeFrame(toJpeg(A)); held = judged.held; }
         } else if (tested) {
           held = ring < (out.reach === 'view' ? 0.35 : RING_SOFT);
         }
-        (opts.room ? state.lastTurn.followUps[state.lastTurn.followUps.length - 1].attempts : state.lastTurn.attempts).push({ attempt, model: out.model, reach: out.reach, living: out.living === true, ring: Number(ring.toFixed(3)), ring_band: ringBand, ring_n: rs.n, ring_total: rs.total, fraction: Number(fraction.toFixed(3)), judge: judged, held });
+        (opts.room ? state.lastTurn.followUps[state.lastTurn.followUps.length - 1].attempts : state.lastTurn.attempts).push({ attempt, model: out.model, reach: out.reach, living: out.living === true, ring: Number(ring.toFixed(3)), ring_band: ringBand, ring_n: rs.n, ring_total: rs.total, fraction: Number(fraction.toFixed(3)), judge: judged, held, ms: out.ms ?? null, ms_text: out.ms_text ?? null, ms_edit: out.ms_edit ?? null });
         if (held) break;
         if (attempt >= (out.living === true ? 3 : 2)) {
           // T18l (F15, the judge's J-14): a catalog turn names what refused it — the ring, or the replace judge's own finding — and reads
@@ -687,6 +885,10 @@
       const meta = { prompt: out.prompt, model: out.model, reach: out.reach, living: out.living === true, attempt, ring: Number(ring.toFixed(3)), judge: judged, usd: out.usd, fraction: Number(fraction.toFixed(3)), ...(item ? { item: item.id, likeness } : {}), ...(piece ? { piece, region_fraction: regionFraction } : {}), ...(markerMeta ? { marker: markerMeta } : {}), ...(opts.linked_to ? { linked_to: opts.linked_to } : {}) };
       const entry = opts.room ? await hooks.pushLiveQuiet(room, canvas, text, meta) : await hooks.pushLive(room, canvas, text, meta);
       canvas.width = 0; canvas.height = 0;
+      if (!opts.room && state.lastTurn) state.lastTurn.ms_total = Date.now() - t0; // request → the picture on screen
+      // 2026-11-16: a typed change of a thing inside the view goes on to every other scene that sees the spot — in the background,
+      // under the host's signed copy of this turn's instruction (an older host sends none, and nothing follows)
+      if (!pick && !opts.room && followOn && out.follow && out.reach === 'object') void followTyped({ room, entry, text, token: out.follow, living: out.living === true, result: A }, alpha, view, state.lastTurn);
       if (pick && !opts.room) closePick();
       renderItemCard();
       // T18d (D-CAT-27): the same piece seen from other scenes — one follow-up turn per scene, onto that room's stack, quietly
@@ -758,6 +960,7 @@
     unlocked = true;
     recording = info.record === true; // T17a: only the laptop host says so
     state.recording = recording;
+    followOn = info.follow === true && typeof h.place === 'function'; // 2026-11-16: the host answers follow turns and the page can place a spot
     h.setUnlocked();
     document.addEventListener('tour:change', () => { if (state.pick && state.pick.room !== hooks.room()) closePick(); renderItemCard(); });
     document.addEventListener('tour:marker', (e) => openPick(e.detail));
@@ -769,6 +972,8 @@
     showHint();
     const submit = () => { const text = input.value.trim(); if (text.length < 2 || !hooks.canChange()) return; input.value = ''; input.blur(); runChange(text); };
     form.addEventListener('submit', (e) => { e.preventDefault(); submit(); });
+    // 2026-11-16: the depth maps a follow needs are asked for when the visitor first turns to the typed field, not at page load
+    if (followOn) input.addEventListener('focus', () => { for (const id of hooks.rooms()) if (hooks.place(id)) void hooks.depthFor(id); }, { once: true });
     state.liveReady = true;
   });
 })();

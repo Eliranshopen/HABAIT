@@ -1,0 +1,294 @@
+{
+  "live": "https://habait-flow.vercel.app/tour/",
+  "size": "1440x900",
+  "room": "living",
+  "look": [
+    -14,
+    -5,
+    80
+  ],
+  "text": "להוסיף שני רמקולים עומדים על הרצפה משני צידי הטלוויזיה",
+  "apartment": "apt846",
+  "pxPerCm": 0.9,
+  "scenes": [
+    "aerial",
+    "orbit1",
+    "orbit2",
+    "orbit3",
+    "orbit4",
+    "orbit5",
+    "tower",
+    "approach45",
+    "approach25",
+    "facade",
+    "terraceOut",
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "wardrobe",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "depth": [
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "served_vs_head_lines": {
+    "tour.js": 13,
+    "edit-live.js": 180
+  },
+  "real": true,
+  "when": "2026-11-16T14:46:56.917Z",
+  "cap": 0.7,
+  "booked": 0.366,
+  "ms_first_picture": 8272,
+  "turn": {
+    "text": "להוסיף שני רמקולים עומדים על הרצפה משני צידי הטלוויזיה",
+    "attempts": [
+      {
+        "attempt": 1,
+        "model": "fal-ai/flux-2/klein/9b/edit",
+        "reach": "object",
+        "living": false,
+        "ring": 0.043,
+        "ring_band": "ring",
+        "ring_n": 40640,
+        "ring_total": 40640,
+        "fraction": 0.349,
+        "judge": null,
+        "held": true,
+        "ms": 7639,
+        "ms_text": 3983,
+        "ms_edit": 3656
+      }
+    ],
+    "error": null,
+    "ms_total": 8139,
+    "follow": {
+      "rooms": [
+        {
+          "room": "dining",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.033,
+              "judge": null,
+              "held": true,
+              "ms": 12091
+            }
+          ],
+          "ms": 12494
+        },
+        {
+          "room": "kitchen",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.029,
+              "judge": null,
+              "held": true,
+              "ms": 13078
+            }
+          ],
+          "ms": 13312
+        },
+        {
+          "room": "bedroomMain",
+          "ok": false,
+          "reason": "redrawn",
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0.054,
+              "fraction": 0.241,
+              "judge": {
+                "held": false,
+                "iou": 0,
+                "ratio": 0,
+                "object": "TV stand"
+              },
+              "held": false,
+              "ms": 12639
+            },
+            {
+              "attempt": 2,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0.155,
+              "fraction": 0.243,
+              "judge": {
+                "held": false,
+                "iou": 0,
+                "ratio": 0,
+                "object": "TV stand"
+              },
+              "held": false,
+              "ms": 11593
+            }
+          ],
+          "ms": 43416
+        }
+      ],
+      "skip": null,
+      "ms": 44797,
+      "spot": {
+        "x": 8.63,
+        "y": 9.87,
+        "z": -0.49,
+        "w": 4.62,
+        "h": 2.2,
+        "dist": 2.44
+      },
+      "targets": [
+        {
+          "room": "dining",
+          "yaw": 140.42,
+          "pitch": -13.13,
+          "hfov": 100,
+          "dist": 2.16
+        },
+        {
+          "room": "bedroomMain",
+          "yaw": 20.05,
+          "pitch": -8.63,
+          "hfov": 100,
+          "dist": 3.27
+        },
+        {
+          "room": "kitchen",
+          "yaw": 57.12,
+          "pitch": -6.42,
+          "hfov": 100,
+          "dist": 4.38
+        }
+      ]
+    }
+  },
+  "calls": [
+    {
+      "n": 1,
+      "kind": "edit",
+      "scene": "living",
+      "attempt": 1,
+      "t": 1794840361524,
+      "ok": true,
+      "ms": 7642,
+      "model": "fal-ai/flux-2/klein/9b/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.038,
+      "ms_text": 3983,
+      "ms_edit": 3656,
+      "prompt": "Add two tall, floor-standing tower speakers positioned on the floor on either side of the TV. Choose a modern, sleek finish that matches the surrounding entertainment unit and decor. Ensure the scale, perspective, and room lighting look natural and consistent. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and s"
+    },
+    {
+      "n": 2,
+      "kind": "follow",
+      "scene": "dining",
+      "attempt": 1,
+      "t": 1794840370859,
+      "ok": true,
+      "ms": 12094,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 12091,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two tall, floor-standing tower speakers positioned on the floor on either side of the TV. Choose a modern, sleek finish that matches the surrounding entertainment unit and decor. Ensure the scal"
+    },
+    {
+      "n": 3,
+      "kind": "follow",
+      "scene": "bedroomMain",
+      "attempt": 1,
+      "t": 1794840370865,
+      "ok": true,
+      "ms": 12640,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 12639,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two tall, floor-standing tower speakers positioned on the floor on either side of the TV. Choose a modern, sleek finish that matches the surrounding entertainment unit and decor. Ensure the scal"
+    },
+    {
+      "n": 4,
+      "kind": "follow",
+      "scene": "kitchen",
+      "attempt": 1,
+      "t": 1794840370868,
+      "ok": true,
+      "ms": 13080,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 13078,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two tall, floor-standing tower speakers positioned on the floor on either side of the TV. Choose a modern, sleek finish that matches the surrounding entertainment unit and decor. Ensure the scal"
+    },
+    {
+      "n": 5,
+      "kind": "judge",
+      "scene": "bedroomMain",
+      "attempt": 1,
+      "t": 1794840383669,
+      "ok": true,
+      "ms": 10934,
+      "usd": 0.004,
+      "held": false
+    },
+    {
+      "n": 6,
+      "kind": "follow",
+      "scene": "bedroomMain",
+      "attempt": 2,
+      "t": 1794840394607,
+      "ok": true,
+      "ms": 11595,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 11593,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two tall, floor-standing tower speakers positioned on the floor on either side of the TV. Choose a modern, sleek finish that matches the surrounding entertainment unit and decor. Ensure the scal"
+    },
+    {
+      "n": 7,
+      "kind": "judge",
+      "scene": "bedroomMain",
+      "attempt": 1,
+      "t": 1794840406669,
+      "ok": true,
+      "ms": 7602,
+      "usd": 0.004,
+      "held": false
+    }
+  ],
+  "failed": [
+    "bedroomMain: the change landed there"
+  ],
+  "errors": []
+}

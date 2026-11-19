@@ -1,0 +1,29 @@
+concurrent looks (8 rounds x 3 procs): ok(thumbs 3) ok(thumbs 3) ok(thumbs 3) ok(thumbs 3) ok(thumbs 3) ok(thumbs 3) ok(thumbs 3) ok(thumbs 3) | temp folders left: []
+sweep: dead-pid temp removed true | live-pid temp kept true | non-matching name kept true
+PDF append a byte while read → OK 1 | kept under old hash: true | temp left: []
+PDF delete while read → OK 1 | kept under old hash: true | temp left: []
+PDF replace with other PDF while read → OK 1 | kept under old hash: true | temp left: []
+start with removed PDF: OK?!
+.runtime/inspect is a file → ENOTDIR | ENOTDIR: not a directory, mkdir 'C:\Users\elira\AppData\Local\Temp\qa-m11-home-43064-1794908421971-3\.runtime\inspect\.tmp-3d53e2df68b33a3b2
+.runtime is a file → ENOTDIR | ENOTDIR: not a directory, mkdir 'C:\Users\elira\AppData\Local\Temp\qa-m11-home-43064-1794908421971-3\.runtime\inspect\.tmp-3d53e2df68b33a3b2
+inspect/<sha> is a file → OK 1
+python missing → TOOLCHAIN_MISSING | the engine's Python is missing: C:/nope/python.exe
+pipelineRoot missing → TOOLCHAIN_MISSING | the scanner is missing: C:/nope/pipe/Habait/tour360/tools/auto_pages.py
+python is a directory → TOOLCHAIN_MISSING | the scanner could not be started with C:/Windows
+ATTEMPTS 35 BAD ["changed-while-read append a byte","changed-while-read delete","changed-while-read replace with other PDF","start ok?"]
+node:internal/errors:543
+      throw error;
+      ^
+
+Error: ENOENT: no such file or directory, lstat 'C:\Users\elira\AppData\Local\Temp\qa-m11-home-43064-1794908415276-2\uploads\slow2.pdf'
+    at Object.rmSync (node:fs:1281:16)
+    at Timeout._onTimeout (file:///C:/Users/elira/AppData/Local/Temp/qa-m11-s/qa-b9-look2.mjs:57:25)
+    at listOnTimeout (node:internal/timers:685:17)
+    at process.processTimers (node:internal/timers:618:7) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\qa-m11-home-43064-1794908415276-2\\uploads\\slow2.pdf'
+}
+
+Node.js v24.22.1

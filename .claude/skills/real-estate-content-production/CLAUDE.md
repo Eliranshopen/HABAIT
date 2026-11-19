@@ -1,11 +1,11 @@
 # real-estate-content-production/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `real-estate-content-production` (auto, from `calesthio/generative-media-skills`, installed 2026-11-03 on Eliran's ask) — provider-independent truthfulness, disclosure, fair-housing, privacy and QA controls for real-estate media: virtual staging, listing photos, walkthrough reels, renovation concepts, neighborhood clips. Guidance only, no scripts. The contract is `SKILL.md`; this card only routes (root `CLAUDE.md` §8.4).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 2 files here · 0 subfolders · 2 files / 54.5 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

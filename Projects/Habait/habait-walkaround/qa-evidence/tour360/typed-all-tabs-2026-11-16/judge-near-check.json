@@ -1,0 +1,81 @@
+{
+  "when": "2026-11-16T14:20:30.023Z",
+  "booked_usd": 0.024,
+  "rows": [
+    {
+      "label": "wrong-scale living (fast run)",
+      "how": "largest piece (as before)",
+      "near": null,
+      "held": true,
+      "iou": 0.99,
+      "ratio": 0.99,
+      "object": "sofa",
+      "s": "9.6"
+    },
+    {
+      "label": "wrong-scale living (fast run)",
+      "how": "piece at the change (near)",
+      "error": "judge returned no JSON: ```json {\"object\": \"dining table\", \"box1\": [530, 322, 718, 517],"
+    },
+    {
+      "how": "piece at the change (near), max_tokens 2400",
+      "label": "wrong-scale living (fast run)",
+      "run": 1,
+      "near": [
+        382,
+        195,
+        936,
+        748
+      ],
+      "error": "judge returned no JSON:  (near bottom of the man's shoes/chairs). So the masked region in image 1 WAS the dining area with the dining table and "
+    },
+    {
+      "how": "piece at the change (near), max_tokens 2400",
+      "label": "wrong-scale living (fast run)",
+      "run": 2,
+      "near": [
+        382,
+        195,
+        936,
+        748
+      ],
+      "held": true,
+      "iou": 1,
+      "ratio": 1,
+      "object": "sofa",
+      "s": 21.3
+    },
+    {
+      "how": "piece at the change (near), max_tokens 2400",
+      "label": "right-scale living (first run)",
+      "run": 1,
+      "near": [
+        408,
+        489,
+        715,
+        644
+      ],
+      "held": true,
+      "iou": 1,
+      "ratio": 1,
+      "object": "dining table",
+      "s": 7.6
+    },
+    {
+      "how": "piece at the change (near), max_tokens 2400",
+      "label": "right-scale living (first run)",
+      "run": 2,
+      "near": [
+        408,
+        489,
+        715,
+        644
+      ],
+      "held": true,
+      "iou": 1,
+      "ratio": 1,
+      "object": "dining table",
+      "s": 7.3
+    }
+  ]
+}

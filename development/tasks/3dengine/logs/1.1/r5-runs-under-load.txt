@@ -1,0 +1,50 @@
+=== whole-suite run (scratch file npm-1.txt)
+✖ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (59923.2397ms)
+✖ the same PDF again → created: false and the same job (1436.1889ms)
+✖ stdout held JSON-RPC lines only; every tools/call answered in time (under 2 s; a first look at a PDF inside the time limit of the scanner) (3.0402ms)
+✖ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (33494.2089ms)
+=== whole-suite run (scratch file npm-2.txt)
+✖ initialize handshake, ping, tools/list = the eight tools with both schemas (5244.7033ms)
+✖ engine_status answers in time with a stub-site check (368.5948ms)
+✖ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (32821.7197ms)
+✖ the same PDF again → created: false and the same job (478.5716ms)
+✖ cancel_job on a fresh job: cancelled, the runner stops (15791.0613ms)
+✖ stdout held JSON-RPC lines only; every tools/call answered in time (under 2 s; a first look at a PDF inside the time limit of the scanner) (18.8593ms)
+✖ C:\RnD\.wt\3dengine\Projects\3Dengine\tests\milestones\m0.2.test.mjs (67705.0026ms)
+✖ 13. a live runner that gives no sign of life is replaced; when it wakes it writes nothing and sends nothing (116900.6512ms)
+✖ tests\milestones\m1.1.test.mjs (291067.9692ms)
+=== whole-suite run (scratch file npm-3.txt)
+ℹ tests 367
+ℹ pass 367
+ℹ fail 0
+ℹ duration_ms 276179.0991
+=== whole-suite run (scratch file npm-4.txt)
+✖ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (56493.3196ms)
+✖ the same PDF again → created: false and the same job (2178.7634ms)
+✖ 2. resume: created false, resumed true; tracing and building untouched; rendering one row, attempt 2 (2243.3517ms)
+✖ 3. kill between reserve and settle: one orphaned and one settled row for that call_key; the job goes on (1045.2329ms)
+✖ 4. kill after the settle, before the manifest row: gating runs again (attempt 2), still ONE ledger row for its call (20288.6313ms)
+✖ 5. the end: done, one valid row per stage, spent = 3 × 0.6, the orphan reported apart, the link answers 200 (30020.7766ms)
+✖ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (48408.7197ms)
+✖ 7. restart after cancel: resumed, finishes, no stage that was done before the cancel ran again (50531.5849ms)
+✖ 8. kill after the cache write, before the settle: ONE settled recovered row, ONE send, done, spent = settled sum (67888.4971ms)
+✖ 9. a wrong spent_usd on the disk is corrected when the runner starts, and again at done (63275.5014ms)
+✖ 10. the cap is reached and it is not a dead end: back to awaiting_approval, 60 refused, 90 accepted, done with 90 (40141.0563ms)
+✖ tests\milestones\m1.1.test.mjs (417372.0942ms)
+✖ withFileLock: an empty lock left by a killed process blocks about a second, not ten (610.556ms)
+=== whole-suite run (scratch file npm-7.txt)
+✖ 10. QA round 3: an upload that another program holds is NOT_A_PDF, not an internal error; `engine job` never writes through a manifest that is not the job's (30125.8083ms)
+ℹ tests 367
+ℹ pass 366
+ℹ fail 1
+ℹ duration_ms 235297.8835
+✖ failing tests:
+✖ 10. QA round 3: an upload that another program holds is NOT_A_PDF, not an internal error; `engine job` never writes through a manifest that is not the job's (30125.8083ms)
+=== whole-suite run (scratch file npm-8.txt)
+✖ 10. QA round 3: an upload that another program holds is NOT_A_PDF, not an internal error; `engine job` never writes through a manifest that is not the job's (30138.4152ms)
+ℹ tests 367
+ℹ pass 366
+ℹ fail 1
+ℹ duration_ms 249286.6052
+✖ failing tests:
+✖ 10. QA round 3: an upload that another program holds is NOT_A_PDF, not an internal error; `engine job` never writes through a manifest that is not the job's (30138.4152ms)

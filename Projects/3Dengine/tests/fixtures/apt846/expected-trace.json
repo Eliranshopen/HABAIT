@@ -1,0 +1,168 @@
+{
+ "schema": "habait/expected-trace.v1",
+ "from": "the run of 2026-11-18 in the working folder's engine home, through the engine's command: auto-trace.mjs (with its two listed changes) on apt846/source.pdf with saved-reading.json, --no-judge, the drawing's id 6c70d7885ca31965 and the date of the reading (2026-11-06)",
+ "status": "PASS",
+ "checks": 82,
+ "failed": 0,
+ "rounds": 1,
+ "rooms": 10,
+ "fixtures": 18,
+ "scale_px_per_cm": 2.2677,
+ "room_count": {
+  "expected": 10,
+  "got": 10
+ },
+ "dims": [
+  {
+   "room": "r-master-bedroom",
+   "fixture": null,
+   "expected": 347.7,
+   "got": 347.9,
+   "pct": 0.06,
+   "pass": true
+  },
+  {
+   "room": "r-wardrobe-area",
+   "fixture": null,
+   "expected": 160,
+   "got": 160.3,
+   "pct": 0.19,
+   "pass": true
+  },
+  {
+   "room": "r-wardrobe-area",
+   "fixture": "fx-drawn-13-wardrobe",
+   "expected": 160,
+   "got": 159.1,
+   "pct": 0.58,
+   "pass": true
+  },
+  {
+   "room": "r-master-bathroom",
+   "fixture": null,
+   "expected": 210,
+   "got": 210.1,
+   "pct": 0.03,
+   "pass": true
+  },
+  {
+   "room": "r-master-bathroom",
+   "fixture": "fx-drawn-12-shower",
+   "expected": 210,
+   "got": 208.5,
+   "pct": 0.73,
+   "pass": true
+  },
+  {
+   "room": "r-master-bedroom",
+   "fixture": null,
+   "expected": 343.6,
+   "got": 343.7,
+   "pct": 0.02,
+   "pass": true
+  },
+  {
+   "room": "r-dining-area",
+   "fixture": null,
+   "expected": 744.3,
+   "got": 745.4,
+   "pct": 0.16,
+   "pass": true
+  },
+  {
+   "room": "r-living-room",
+   "fixture": null,
+   "expected": 529.5,
+   "got": 529.2,
+   "pct": 0.06,
+   "pass": true
+  },
+  {
+   "room": "r-wardrobe-area",
+   "fixture": null,
+   "expected": 185,
+   "got": 184.5,
+   "pct": 0.29,
+   "pass": true
+  },
+  {
+   "room": "r-wardrobe-area",
+   "fixture": "fx-drawn-14-wardrobe",
+   "expected": 185,
+   "got": 184,
+   "pct": 0.53,
+   "pass": true
+  },
+  {
+   "room": "r-master-bathroom",
+   "fixture": null,
+   "expected": 212.5,
+   "got": 212.8,
+   "pct": 0.13,
+   "pass": true
+  },
+  {
+   "room": "r-bedroom",
+   "fixture": null,
+   "expected": 275,
+   "got": 274.9,
+   "pct": 0.05,
+   "pass": true
+  },
+  {
+   "room": "r-bedroom",
+   "fixture": null,
+   "expected": 342.2,
+   "got": 342.3,
+   "pct": 0.03,
+   "pass": true
+  },
+  {
+   "room": "r-bathroom",
+   "fixture": null,
+   "expected": 199.1,
+   "got": 198.7,
+   "pct": 0.18,
+   "pass": true
+  },
+  {
+   "room": "r-bathroom",
+   "fixture": null,
+   "expected": 140,
+   "got": 140.1,
+   "pct": 0.07,
+   "pass": true
+  },
+  {
+   "room": "r-bathroom",
+   "fixture": "fx-drawn-11-shower",
+   "expected": 140,
+   "got": 141.1,
+   "pct": 0.82,
+   "pass": true
+  },
+  {
+   "room": "r-sun-terrace",
+   "fixture": null,
+   "expected": 474.2,
+   "got": 474.2,
+   "pct": 0.01,
+   "pass": true
+  },
+  {
+   "room": "r-sun-terrace",
+   "fixture": null,
+   "expected": 270.1,
+   "got": 270.1,
+   "pct": 0,
+   "pass": true
+  }
+ ],
+ "max_pct": 0.82,
+ "sha256": {
+  "trace-check.json": "e797aea498abcede752c9e7f1a26828f132b3865025a509b0ffbcfc11d38b659",
+  "report.json": "6ccc8546ccbaacd585831e194f68e202c79d6b854fb4bf3201570ae663736e63",
+  "rooms.json": "e63042cc783b5f03d510fd72e5ee95371dcbb13221db90a5a8b548c601f34bfa",
+  "plan.general.json": "5e03e678741e3162e4d486c0ce2c0cc9b9132402deb99da61d79d7b83827cb25"
+ }
+}

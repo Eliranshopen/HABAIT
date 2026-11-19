@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="robots" content="noindex">
+<title>הליכה בדירה — ניסוי</title>
+<style>
+  :root { --ink: #fff; --glass: rgba(18, 18, 20, .62); --line: rgba(255, 255, 255, .18); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #111; color: var(--ink); font: 15px/1.4 "Heebo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif; overflow: hidden; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+  canvas#gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; outline: none; }
+  canvas#gl.is-drag { cursor: grabbing; }
+  canvas#gl.can-go { cursor: pointer; }
+  .w-top { position: fixed; top: calc(10px + env(safe-area-inset-top)); inset-inline: 12px; display: flex; gap: 8px; align-items: center; justify-content: space-between; pointer-events: none; }
+  .w-chip { background: var(--glass); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); white-space: nowrap; }
+  .w-chip b { font-weight: 600; }
+  .w-badge { font-size: 12.5px; }
+  .w-bottom { position: fixed; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline: 12px; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none; }
+  .w-hint { max-width: 100%; white-space: normal; text-align: center; border-radius: 16px; transition: opacity .5s; }
+  .w-hint.is-off { opacity: 0; }
+  .w-say { min-height: 34px; opacity: 0; transition: opacity .25s; font-weight: 600; }
+  .w-say.is-on { opacity: 1; }
+  button.w-cmp { pointer-events: auto; font: inherit; color: var(--ink); min-height: 44px; padding: 8px 18px; cursor: pointer; }
+  button.w-cmp[hidden] { display: none; }
+  button.w-cmp.is-on { background: rgba(255, 255, 255, .92); color: #111; }
+  .w-dot { position: fixed; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; opacity: 0; border: 2px solid rgba(255, 255, 255, .85); background: rgba(255, 255, 255, .22); pointer-events: none; will-change: transform, opacity; box-shadow: 0 0 0 1px rgba(0, 0, 0, .25); }
+  .w-dot.is-node { background: rgba(255, 255, 255, .5); }
+  .w-load { position: fixed; inset: 0; display: grid; place-items: center; background: #111; transition: opacity .4s; }
+  .w-load.is-off { opacity: 0; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) { .w-hint, .w-say, .w-load { transition: none; } }
+</style>
+</head>
+<body>
+<canvas id="gl" tabindex="0" aria-label="הליכה בדירה"></canvas>
+<div class="w-top">
+  <div class="w-chip" id="w-where"><b>ניסוי הליכה</b> · דירה 846</div>
+  <div class="w-chip w-badge" id="w-badge">הדמיה · Simulation</div>
+</div>
+<div id="w-dots"></div>
+<div class="w-bottom">
+  <div class="w-chip w-say" id="w-say" role="status" aria-live="polite"></div>
+  <button class="w-chip w-cmp" id="w-cmp" type="button" hidden>השוואה לתמונת הסיור הקיים</button>
+  <div class="w-chip w-hint" id="w-hint"></div>
+</div>
+<div class="w-load" id="w-load"><div class="w-chip" id="w-load-text">טוען…</div></div>
+<script src="walk.js"></script>
+</body>
+</html>

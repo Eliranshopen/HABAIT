@@ -1,0 +1,83 @@
+{
+ "at": "2026-11-09T10:42:28.069Z",
+ "base": "http://127.0.0.1:63267",
+ "runs": 2,
+ "sizes": {
+  "390": {
+   "runs": [
+    {
+     "tNav": 1415,
+     "tFilm": 1437,
+     "tStop": 17508,
+     "tPills": 17551,
+     "tCard": 17577,
+     "clip": {
+      "src": "orbit_real.mp4",
+      "duration": 17.041995
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    },
+    {
+     "tNav": 230,
+     "tFilm": 339,
+     "tStop": 17340,
+     "tPills": 17384,
+     "tCard": 17418,
+     "clip": {
+      "src": "orbit_real.mp4",
+      "duration": 17.041995
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    }
+   ],
+   "medianCardMs": 17577
+  },
+  "1440": {
+   "runs": [
+    {
+     "tNav": 204,
+     "tFilm": 304,
+     "tStop": 17314,
+     "tPills": 17374,
+     "tCard": 17403,
+     "clip": {
+      "src": "orbit_real.mp4",
+      "duration": 17.041995
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    },
+    {
+     "tNav": 312,
+     "tFilm": 413,
+     "tStop": 17358,
+     "tPills": 17389,
+     "tCard": 17395,
+     "clip": {
+      "src": "orbit_real.mp4",
+      "duration": 17.041995
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    }
+   ],
+   "medianCardMs": 17403
+  }
+ },
+ "fails": [],
+ "pass": true
+}

@@ -1,0 +1,77 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py glassmorphism dark overlay immersive --domain style -n 4
+## UI Pro Max Search Results
+**Domain:** style | **Query:** glassmorphism dark overlay immersive
+**Source:** styles.csv | **Found:** 4 results
+
+### Result 1
+- **Style Category:** Cyberpunk UI
+- **Type:** General
+- **Keywords:** Neon, dark mode, terminal, HUD, sci-fi, glitch, dystopian, futuristic, matrix, tech noir
+- **Primary Colors:** #00FF00 (Matrix Green), #FF00FF (Magenta), #00FFFF (Cyan), #0D0D0D (Dark)
+- **Effects & Animation:** Neon glow (text-shadow), glitch animations (skew/offset), scanlines (::before overlay), terminal fonts
+- **Best For:** Gaming platforms, tech products, crypto apps, sci-fi applications, developer tools, entertainment
+- **Light Mode ✓:** ✗ No
+- **Dark Mode ✓:** ✓ Only
+- **Performance:** ⚠ Moderate
+- **Accessibility:** ⚠ Limited (dark+neon)
+- **Framework Compatibility:** Tailwind 8/10, Custom CSS 10/10
+- **Complexity:** Medium
+- **AI Prompt Keywords:** Design a cyberpunk interface. Use: neon colors on dark (#0D0D0D), terminal/HUD aesthetic, glitch effects, scanlines overlay, matrix green accents, monospace fonts, angular shapes, dystopian tech feel.
+- **CSS/Technical Keywords:** background: #0D0D0D, color: #00FF00 or #FF00FF, font-family: monospace, text-shadow: 0 0 10px neon, animation: glitch (transform skew), ::before scanlines (repeating-linear-gradient)
+- **Implementation Checklist:** ☐ Dark background only, ☐ Neon accents visible, ☐ Glitch effect subtle, ☐ Scanlines optional, ☐ Monospace font, ☐ Terminal aesthetic
+- **Design System Variables:** --bg-dark: #0D0D0D, --neon-green: #00FF00, --neon-magenta: #FF00FF, --neon-cyan: #00FFFF, --scanline-opacity: 0.1, --glitch-duration: 0.3s
+
+### Result 2
+- **Style Category:** Modern Dark (Cinema Mobile)
+- **Type:** Mobile
+- **Keywords:** dark mode, cinematic, ambient light, glassmorphism, deep black, indigo, glow, blur, atmospheric, reanimated, haptic, premium, layered, frosted glass, linear gradient
+- **Primary Colors:** Deep #020203, Base #050506, Elevated #0a0a0c, Accent #5E6AD2
+- **Effects & Animation:** Expo.out Bezier(0.16,1,0.3,1) easing; spring modals (damping:20 stiffness:90); haptic-linked press (Impact Light/Medium); animated ambient light blobs (Reanimated translateX/Y slow oscillation); BlurView glassmorphism headers/nav (intensity 20); scale press 0.97 → 1.0; avoid pure #000000 (OLED smear...
+- **Best For:** Developer tools, pro productivity apps, fintech/trading dashboards, media/streaming platforms, AI tool interfaces, high-end gaming companion apps
+- **Light Mode ✓:** ✓ Light mode only as exception
+- **Dark Mode ✓:** ✓ Dark Mode Primary
+- **Performance:** ⚠ Good (blur effects require native driver)
+- **Accessibility:** ⚠ WCAG AA (requires careful accent contrast check)
+- **Framework Compatibility:** React Native 10/10, Expo 10/10, react-native-skia 9/10, SwiftUI 8/10
+- **Complexity:** High
+- **AI Prompt Keywords:** Design a cinematic dark mobile app. Background: LinearGradient from #0a0a0f (top) to #020203 (bottom). Add 2–3 absolute animated 'blob' views: circular, blurRadius 30–50, opacity 0.08–0.12, slow Reanimated oscillation. Cards: borderRadius 16, border rgba(255,255,255,0.08) hairline, subtle top-edge s...
+- **CSS/Technical Keywords:** borderRadius: 16 (cards/buttons), background: LinearGradient #0a0a0f→#020203, border: StyleSheet.hairlineWidth rgba(255,255,255,0.08), BlurView intensity={20} tint='dark', useAnimatedStyle + withRepeat (blob oscillation), Easing.bezier(0.16,1,0.3,1), withSpring damping:20 stiffness:90, Haptics.impac...
+- **Implementation Checklist:** ☐ No pure #000000 backgrounds, ☐ LinearGradient base screen, ☐ Animated ambient blobs (Reanimated, native driver), ☐ BlurView on tab bar and headers, ☐ borderRadius 16 on all cards, ☐ Haptic feedback on every Pressable, ☐ Bezier(0.16,1,0.3,1) easing used, ☐ Accent glow behind primary button, ☐ No so...
+- **Design System Variables:** --bg-deep: #020203, --bg-base: #050506, --bg-elevated: #0a0a0c, --surface: rgba(255 255 255/0.05), --foreground: #EDEDEF, --foreground-muted: #8A8F98, --accent: #5E6AD2, --accent-glow: rgba(94 106 210/0.2), --border: rgba(255 255 255/0.08), --radius: 16px, --easing: cubic-bezier(0.16 1 0.3 1), --fon...
+
+### Result 3
+- **Style Category:** Dark Mode (OLED)
+- **Type:** General
+- **Keywords:** Dark theme, low light, high contrast, deep black, midnight blue, eye-friendly, OLED, night mode, power efficient
+- **Primary Colors:** Deep Black #000000, Dark Grey #121212, Midnight Blue #0A0E27
+- **Effects & Animation:** Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emission, high readability, visible focus
+- **Best For:** Night-mode apps, coding platforms, entertainment, eye-strain prevention, OLED devices, low-light
+- **Light Mode ✓:** ✗ No
+- **Dark Mode ✓:** ✓ Only
+- **Performance:** ⚡ Excellent
+- **Accessibility:** ✓ WCAG AAA
+- **Framework Compatibility:** Tailwind 10/10, MUI 10/10, Chakra 10/10
+- **Complexity:** Low
+- **AI Prompt Keywords:** Create an OLED-optimized dark interface with deep black (#000000), dark grey (#121212), midnight blue accents. Use minimal glow effects, vibrant neon accents (green, blue, gold, purple), high contrast text. Optimize for eye comfort and OLED power saving.
+- **CSS/Technical Keywords:** background: #000000 or #121212, color: #FFFFFF or #E0E0E0, text-shadow: 0 0 10px neon-color (sparingly), filter: brightness(0.8) if needed, color-scheme: dark
+- **Implementation Checklist:** ☐ Deep black #000000 or #121212, ☐ Vibrant neon accents used, ☐ Text contrast 7:1+, ☐ Minimal glow effects, ☐ OLED power optimization, ☐ No white (#FFFFFF) background
+- **Design System Variables:** --bg-black: #000000, --bg-dark-grey: #121212, --text-primary: #FFFFFF, --accent-neon: neon colors, --glow-effect: minimal, --oled-optimized: true
+
+### Result 4
+- **Style Category:** 3D & Hyperrealism
+- **Type:** General
+- **Keywords:** Depth, realistic textures, 3D models, spatial navigation, tactile, skeuomorphic elements, rich detail, immersive
+- **Primary Colors:** Deep Navy #001F3F, Forest Green #228B22, Burgundy #800020, Gold #FFD700, Silver #C0C0C0
+- **Effects & Animation:** WebGL/Three.js 3D, realistic shadows (layers), physics lighting, parallax (3-5 layers), smooth 3D (300-400ms)
+- **Best For:** Gaming, product showcase, immersive experiences, high-end e-commerce, architectural viz, VR/AR
+- **Light Mode ✓:** ◐ Partial
+- **Dark Mode ✓:** ◐ Partial
+- **Performance:** ❌ Poor
+- **Accessibility:** ⚠ Not accessible
+- **Framework Compatibility:** Three.js 10/10, R3F 10/10, Babylon.js 10/10
+- **Complexity:** High
+- **AI Prompt Keywords:** Build an immersive 3D interface using realistic textures, 3D models (Three.js/Babylon.js), complex shadows, realistic lighting, parallax scrolling (3-5 layers), physics-based motion. Include skeuomorphic elements with tactile detail.
+- **CSS/Technical Keywords:** transform: translate3d, perspective: 1000px, WebGL canvas, Three.js/Babylon.js library, box-shadow: complex multi-layer, background: complex gradients, filter: drop-shadow()
+- **Implementation Checklist:** ☐ WebGL/Three.js integrated, ☐ 3D models loaded, ☐ Parallax 3-5 layers, ☐ Realistic lighting verified, ☐ Complex shadows rendered, ☐ Physics animation smooth 300-400ms
+- **Design System Variables:** --perspective: 1000px, --parallax-layers: 5, --lighting-intensity: realistic, --shadow-depth: 20-40%, --animation-duration: 300-400ms
+

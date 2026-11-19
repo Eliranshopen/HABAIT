@@ -1,0 +1,27 @@
+✔ 1. the 846 PDF is one sheet with one drawing; the look is real, holds no text of a PDF, and is kept (19264.2023ms)
+✔ 2. the same PDF twice gives the same job_id; the job keeps its own read-only copy and runs on (3612.3552ms)
+✔ 3. a file outside the allowed folders is refused by both tools, and nothing is created for it (74.552ms)
+✔ 4. a PDF with no drawing: no candidate, and no job is started for it (6039.8252ms)
+✔ 5. a stored copy that was changed by hand is never used: the next runner ends the job failed, nothing runs, nothing is billed (10744.7732ms)
+✔ 5b. a stored copy changed while a LIVE runner waits for the approval: the paid stage never starts on it (10488.8442ms)
+✔ 5c. the stored copy swapped AND its hash rewritten in job.json: the file no longer adds up, and nothing runs on it (9326.9696ms)
+✔ 6. a job file that names another job, or none: a real runner stops, names the job, and changes no file of any job (11606.1585ms)
+✔ 7. a look that cannot be stored (.runtime/inspect is a file): both tools answer TOOLCHAIN_MISSING, with no path, and start nothing (37.8877ms)
+✔ 8. the upload rewritten in place with the same bytes during first looks: no answer and no record under the plan's hash is another look (49521.2495ms)
+ℹ looks during the rewrite: 5 true, 1 refused NOT_A_PDF, 0 of half-written bytes under their own hash
+✔ 9. QA round 2: a planted record is scanned again; a job folder that is a file is NOT_A_PDF; resume through a foreign manifest exits 1 (27298.9446ms)
+✖ tests\milestones\m1.1.test.mjs (280690.3181ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 11
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 280723.7629
+
+✖ failing tests:
+
+test at tests\milestones\m1.1.test.mjs:1:1
+✖ tests\milestones\m1.1.test.mjs (280690.3181ms)
+  'test failed'

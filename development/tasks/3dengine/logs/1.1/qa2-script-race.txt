@@ -1,0 +1,37 @@
+// Race: manifest.json toggles between good and bad while approve_paid_stage / cancel_job run.
+// Invariant: a call that answers with an error leaves job.json byte-identical and starts no runner.
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { E, makeHome, sha, sleep, cleanup } from './qa-lib.mjs';
+const SRC = process.argv[2];   // a jobs dir holding one awaiting_approval job (copy of the baseline)
+const ID = process.argv[3];
+const { loadConfig } = await E('engine/config.mjs');
+const { createStubEngine } = await E('mcp/stub-engine.mjs');
+const h = await makeHome({ timeout: 60 });
+const tally = {}; let viol = 0;
+for (const tool of ['approve_paid_stage', 'cancel_job']) {
+  for (let i = 0; i < 40; i++) {
+    const dir = `${h.home}/race-${tool}-${i}`;
+    fs.mkdirSync(dir); fs.cpSync(`${SRC}/${ID}`, `${dir}/${ID}`, { recursive: true });
+    fs.rmSync(`${dir}/${ID}/runner.pid`, { force: true }); fs.rmSync(`${dir}/${ID}/job.lock`, { force: true });
+    const mf = `${dir}/${ID}/manifest.json`;
+    const good = fs.readFileSync(mf, 'utf8');
+    const jobBefore = fs.readFileSync(`${dir}/${ID}/job.json`, 'utf8');
+    const env = { ...h.env, ENGINE_JOBS_DIR: dir };
+    const config = loadConfig({ env, home: h.home });
+    let spawned = 0;
+    const eng = createStubEngine(config, { spawnRunner: () => { spawned++; }, ensureServe: async () => {} });
+    const tg = spawn(process.execPath, ['-e', `const fs=require('fs');const g=${JSON.stringify(good)};let k=0;setInterval(()=>{try{fs.writeFileSync(${JSON.stringify(mf)},(k++%2)?g:'{bad')}catch(e){}},1)`], { stdio: 'ignore' });
+    await sleep(15 + (i % 7) * 3);
+    let r;
+    try { await eng.handlers[tool]({ job_id: ID, ...(tool === 'approve_paid_stage' ? { cap_usd: 5 } : {}) }); r = 'ok'; }
+    catch (e) { r = e.code || e.name; }
+    tg.kill(); await sleep(20);
+    const jobAfter = fs.readFileSync(`${dir}/${ID}/job.json`, 'utf8');
+    const k = `${tool}:${r}`; tally[k] = (tally[k] || 0) + 1;
+    if (r !== 'ok' && (jobAfter !== jobBefore || spawned)) { viol++; console.log('VIOLATION', tool, i, r, 'job changed', jobAfter !== jobBefore, 'spawned', spawned); }
+    if (r === 'ok' && jobAfter === jobBefore) console.log('note: ok but job unchanged', tool, i);
+  }
+}
+console.log(JSON.stringify({ tally, violations: viol }));
+cleanup(h);

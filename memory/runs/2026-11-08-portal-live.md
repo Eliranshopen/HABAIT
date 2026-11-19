@@ -12,3 +12,4 @@ second_reader: fork F (runner owner), fork B (trace)
 - **Owed (Eliran's acts):** delete old snapshots PkPtEh1f, MNAYvvf4, 1XgZpGdu; delete test data (plocktest846, pcloud846/b, ptrace846neg* copies); burned TOUR_EDIT_CODE rotation (OWED-027/028).
 - **Design button live dpl_A5DnDVZE (~10:40):** one «שינוי עיצוב» header button holds look / floor / typed bar (panel on desktop, sheet on phone); nothing covers the panorama; prod gate 32/32. Cleanup done on «תמחק»: 4 test snapshots + 123 test store objects + local test folders; pointer snap_WekUfQAX boot-checked.
 - **Button tour live dpl_JAvnu1ce (~11:55):** first-open coach marks on every tour (shared viewer), (?) to reopen, ?coach=0 for QA; the responsive gate presses «דלג» on a first-visit overlay before judging cover. prod gate 32/32, map→3D 6/6.
+- **Autoplay walkthrough live dpl_91aALeNh (~12:55):** the button tour now plays by itself on every open (3.5 s/step, «דלג» always), prod gate 32/32, map→3D 6/6.

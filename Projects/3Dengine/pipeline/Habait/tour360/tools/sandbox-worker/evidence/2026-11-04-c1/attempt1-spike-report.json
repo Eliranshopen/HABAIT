@@ -1,0 +1,70 @@
+{
+  "spike": "sandbox-worker C1",
+  "started_utc": "2026-11-04T16:17:18.994Z",
+  "point": "cp-kitchen",
+  "res": "1024x512",
+  "samples": 16,
+  "files": 122,
+  "upload_bytes": 293632261,
+  "file_list_sha256": "5208ecbf508be940ea079df27a6b0503ac7a3777a6b3d8bec0970d5eaefcf10d",
+  "blender": {
+    "version": "4.5.10",
+    "url": "https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz",
+    "sha256": "198a4248b38899af661aa9241cebd746394eaddbfafbeb53152440de80b118f7"
+  },
+  "price": {
+    "cpu_h": 0.128,
+    "gb_h": 0.0212,
+    "src": "https://vercel.com/docs/sandbox/pricing (Pro, iad1, read 2026-11-04)"
+  },
+  "phases": [
+    {
+      "name": "sysinfo",
+      "wall_s": 0.6,
+      "active_vcpu_s": 0.7,
+      "info": [
+        "4",
+        "               total        used        free      shared  buff/cache   available",
+        "Mem:            8404         280        8217           0          81        8123",
+        "Swap:              0           0           0",
+        "Ubuntu 26.04.1 LTS",
+        "6.18.56",
+        "Python 3.14.4",
+        "v24.22.1",
+        "CPU(s):                                  4",
+        "Model name:                              Intel(R) Xeon(R) Processor @ 2.90GHz"
+      ]
+    },
+    {
+      "name": "apt",
+      "wall_s": 9.7,
+      "active_vcpu_s": 7
+    },
+    {
+      "name": "blender_download",
+      "wall_s": 0.6,
+      "active_vcpu_s": 0,
+      "error": "download/sha256 exit 22: curl: (22) The requested URL returned error: 403\n"
+    }
+  ],
+  "vcpus": 4,
+  "sandbox": {
+    "name": "salmon-scientific-tahr-vYA73U",
+    "create_s": 1.2,
+    "timeout_ms": 2700000,
+    "memory_gb": 8,
+    "persistent": false,
+    "status_after_stop": "stopped"
+  },
+  "error": "Error: blender_download: download/sha256 exit 22: curl: (22) The requested URL returned error: 403\n\n    at phase (file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:143:20)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:184:3",
+  "session_wall_s": 13.1,
+  "cost_estimate_usd": {
+    "active_vcpu_h": 0.0021,
+    "provisioned_gb_h": 0.029,
+    "cpu": 0.0003,
+    "memory": 0.0006,
+    "total": 0.0009,
+    "basis": "https://vercel.com/docs/sandbox/pricing (Pro, iad1, read 2026-11-04)"
+  },
+  "finished_utc": "2026-11-04T16:17:33.649Z"
+}

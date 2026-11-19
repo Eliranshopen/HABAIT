@@ -1,0 +1,39 @@
+scenario cancel 6 work C:/Users/elira/AppData/Local/Temp/qa12-cancel-FnsBqw load 100
+=== cancel 6
+{
+ "eventLoopMaxGapMs": 121,
+ "eventLoopMaxGapAfterAbortMs": 90,
+ "outcome": "CANCELLED",
+ "exit": 1,
+ "secs": "8.1",
+ "result": null,
+ "alive": [
+  "25616 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "26976 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "43020 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 6",
+  "26572 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 6",
+  "21056 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs cancel 6"
+ ]
+}
+=== cancel +6s
+{
+ "alive": [
+  "25616 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "26976 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "43020 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 6",
+  "26572 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 6",
+  "21056 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs cancel 6"
+ ]
+}
+=== pre-aborted
+{
+ "outcome": "CANCELLED",
+ "outCreated": false
+}
+procs at end [
+  '25616 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '26976 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '43020 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 120 node qa12-b2.mjs cancel 6',
+  '26572 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 120 node qa12-b2.mjs cancel 6',
+  '21056 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs cancel 6'
+]

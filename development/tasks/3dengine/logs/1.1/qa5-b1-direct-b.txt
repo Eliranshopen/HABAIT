@@ -1,0 +1,16 @@
+intake  junction-in: ENG NOT_A_PDF
+   input holds []
+inspect junction-in: ENG NOT_A_PDF
+handler inspect_plan junction-in: ENG NOT_A_PDF
+handler start_simulation junction-in: ENG NOT_A_PDF
+intake  junction-out: ENG NOT_A_PDF
+   input holds []
+inspect junction-out: ENG NOT_A_PDF
+handler inspect_plan junction-out: ENG PATH_NOT_ALLOWED
+handler start_simulation junction-out: ENG PATH_NOT_ALLOWED
+intake  healthy: ok
+   input holds ["source.pdf"]
+inspect healthy: ok
+handler inspect_plan healthy: ok
+handler start_simulation healthy: ok
+TOTAL 12 calls, 0 defects

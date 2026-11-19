@@ -1,0 +1,8 @@
+kill soak: temp home C:/Users/elira/AppData/Local/Temp/killsoak-4bKGgz, port 55664, target 40 kills
+  25 kills, 2 jobs done, 0 resume retries
+freeze soak: temp home C:/Users/elira/AppData/Local/Temp/freezesoak-7REI6c, port 54139, target 15 takeovers
+  5 takeovers, 4 of them woke while the job was still running
+  10 takeovers, 8 of them woke while the job was still running
+  15 takeovers, 11 of them woke while the job was still running
+SOAK kills=42 jobs_finished=6 orphaned_rows=1 recovered_rows=0 resume_retries=0 longest_resume_ms=36 takeovers=15 never_sent_rows=3 woke_before_done=11 violations=0
+clean-up: no process of the soak remains

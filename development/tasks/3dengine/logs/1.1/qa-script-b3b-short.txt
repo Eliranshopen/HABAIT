@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { makeHome, engineOf, SCR, cleanup } from './qa-lib.mjs';
+const BS = '\\';
+const h = await makeHome({ timeout: 60 });
+const H = (await engineOf(h)).handlers;
+const outside = `${h.home}/outside-with-long-name`; fs.mkdirSync(outside);
+fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${outside}/long-file-name-here.pdf`);
+fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${h.inbox}/long-file-name-here.pdf`);
+const w = (p) => p.split('/').join(BS);
+const ps = (p) => spawnSync('powershell', ['-NoProfile', '-Command', `(New-Object -ComObject Scripting.FileSystemObject).GetFile('${w(p)}').ShortPath`], { encoding: 'utf8' }).stdout.trim();
+const psd = (p) => spawnSync('powershell', ['-NoProfile', '-Command', `(New-Object -ComObject Scripting.FileSystemObject).GetFolder('${w(p)}').ShortPath`], { encoding: 'utf8' }).stdout.trim();
+const sOut = ps(`${outside}/long-file-name-here.pdf`);
+const sIn = ps(`${h.inbox}/long-file-name-here.pdf`);
+const sDirOut = psd(outside);
+console.log('short outside file:', sOut); console.log('short inbox file:', sIn); console.log('short outside dir:', sDirOut);
+const spawnR = (a) => spawnSync('cmd', ['/c', ...a], { encoding: 'utf8' });
+console.log(spawnR(['mklink', '/H', w(`${h.inbox}/hard.pdf`), w(`${outside}/long-file-name-here.pdf`)]).stdout.trim().slice(0, 40));
+const tries = { 'short outside file': sOut, 'short outside dir + file': `${sDirOut}${BS}long-file-name-here.pdf`, 'short inbox file (legit)': sIn, 'hardlink in inbox to outside file': `${h.inbox}/hard.pdf` };
+for (const [k, p] of Object.entries(tries)) for (const t of ['inspect_plan', 'start_simulation']) { try { const r = await H[t]({ pdf_path: p }); console.log(t, k, 'OK', r.pdf_path || r.job.input.pdf_name); } catch (e) { console.log(t, k, e.code); } }
+cleanup(h);

@@ -1,0 +1,14 @@
+# double start of the static server: the engine's own ensureServe asked twice at one moment (2026-11-17, worktree 3dengine, after cc5f410)
+# command: node double_start_probe.mjs <engine home> 5   (script kept in the session scratchpad; it calls engine/serve.mjs ensureServe twice with Promise.all on a temp home and a free port)
+round 1: spawned [41168,22520] · alive [41168] · record names 22520 (DEAD) · found by home name [41168]
+         after removeHome: home exists false · still alive []
+round 2: spawned [22036,12496] · alive [22036] · record names 12496 (DEAD) · found by home name [22036]
+         after removeHome: home exists false · still alive []
+round 3: spawned [28836,39764] · alive [28836] · record names 39764 (DEAD) · found by home name [28836]
+         after removeHome: home exists false · still alive []
+round 4: spawned [37176,10136] · alive [37176] · record names 10136 (DEAD) · found by home name [37176]
+         after removeHome: home exists false · still alive []
+round 5: spawned [26728,15032] · alive [26728] · record names 15032 (DEAD) · found by home name [26728]
+         after removeHome: home exists false · still alive []
+record named a dead server while a live one served: 5 of 5 rounds
+exit=0

@@ -1,0 +1,976 @@
+=== common.mjs
+// qa-r8 common helpers (own code). Imports the engine read-only.
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import { pathToFileURL } from 'node:url';
+
+const R = 'C:/RnD/Projects/3Dengine';
+export const imp = (p) => import(pathToFileURL(`${R}/${p}`).href);
+export const lib = await imp('tests/soak/lib.mjs');
+export const ledgerMod = await imp('engine/ledger.mjs');
+export const runnerMod = await imp('engine/runner.mjs');
+export const controlMod = await imp('engine/control.mjs');
+export const jobsMod = await imp('engine/jobs.mjs');
+export const manifestMod = await imp('engine/manifest.mjs');
+export const cliMod = await imp('engine/cli.mjs');
+export const { mkEnv, sleep } = lib;
+
+export const sha = (b) => crypto.createHash('sha256').update(b).digest('hex');
+export const rnd = (seed) => {
+  let s = seed >>> 0 || 1;
+  return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
+};
+export const readRaw = (f) => { try { return fs.readFileSync(f, 'utf8'); } catch { return null; } };
+export const readJ = (f) => { const t = readRaw(f); if (t === null) return null; try { return JSON.parse(t); } catch { return undefined; } };
+
+// bytes of every ledger file (and cache dirs listing) of a jobs folder, plus folder names
+export function snapshot(E) {
+  const out = { dirs: [], ledgers: {} };
+  const jd = E.config.jobsDir;
+  if (!fs.existsSync(jd)) return out;
+  out.dirs = fs.readdirSync(jd).sort();
+  for (const d of out.dirs) {
+    const f = `${jd}/${d}/ledger.json`;
+    try { out.ledgers[d] = sha(fs.readFileSync(f)); } catch { out.ledgers[d] = null; }
+  }
+  return out;
+}
+export const diffSnap = (a, b) => {
+  const bad = [];
+  if (JSON.stringify(a.dirs) !== JSON.stringify(b.dirs)) bad.push(`dirs ${a.dirs} -> ${b.dirs}`);
+  for (const k of new Set([...Object.keys(a.ledgers), ...Object.keys(b.ledgers)])) if (a.ledgers[k] !== b.ledgers[k]) bad.push(`ledger ${k} changed`);
+  return bad;
+};
+
+// Invariants from the files only. Returns list of violation strings.
+export function check(E, id, { ended = true } = {}) {
+  const v = [];
+  const dir = `${E.config.jobsDir}/${id}`;
+  const job = readJ(`${dir}/job.json`);
+  const led = readJ(`${dir}/ledger.json`) || { rows: [] };
+  const man = readJ(`${dir}/manifest.json`) || { rows: [] };
+  if (!job) return ['no job.json'];
+  const amt = (n) => typeof n === 'number' && Number.isFinite(n) && n >= 0 && n <= 1e6;
+  let settled = 0;
+  const byKey = {};
+  led.rows.forEach((r, i) => {
+    if (r.seq !== i + 1) v.push(`seq ${r.seq} at ${i}`);
+    if (!amt(r.reserved_usd)) v.push(`bad reserved ${r.seq}`);
+    if (r.status === 'settled') { if (!amt(r.settled_usd)) v.push(`bad settled ${r.seq}`); settled += r.settled_usd || 0; }
+    if (r.status === 'orphaned' && !r.sending_at) v.push(`orphan without mark ${r.seq}`);
+    if (job.state === 'done' && r.status === 'reserved') v.push(`reserved at done ${r.seq}`);
+    (byKey[r.call_key] ||= []).push(r);
+  });
+  for (const rows of Object.values(byKey)) {
+    const s = rows.filter((r) => r.status === 'settled');
+    const plain = s.filter((r) => !r.late && r.resend_of === undefined);
+    if (plain.length > 1) v.push(`${plain.length} plain settled rows for one call: ${plain.map((r) => r.seq)}`);
+  }
+  for (const st of ['skinning', 'gating', 'finishing']) {
+    const sends = E.sends(id, st);
+    const marked = led.rows.filter((r) => r.stage === st && r.sending_at).length;
+    if (sends > marked) v.push(`${st}: ${sends} sends > ${marked} marked rows`);
+  }
+  settled = Math.round(settled * 1e6) / 1e6;
+  if (job.cost.spent_usd !== settled && ended) v.push(`spent copy ${job.cost.spent_usd} != ledger ${settled}`);
+  if (job.state === 'done') {
+    for (const st of lib.FIXTURES ? jobsMod.STAGES : []) {
+      const rows = man.rows.filter((r) => r.stage === st && r.status === 'done' && !r.superseded);
+      if (rows.length !== 1) v.push(`${st}: ${rows.length} valid rows`);
+      else if (!manifestMod.outputsIntact(dir, rows[0].outputs)) v.push(`${st}: outputs not intact`);
+    }
+  }
+  if (ended && fs.existsSync(`${dir}/job.lock`)) v.push('job.lock left');
+  return v;
+}
+
+// rows of a stage across two jobs overlapping
+export function overlap(E, ids) {
+  const iv = [];
+  for (const id of ids) for (const r of (readJ(`${E.config.jobsDir}/${id}/manifest.json`)?.rows || [])) if (r.stage === 'rendering' && r.status === 'done') iv.push([Date.parse(r.started_at), Date.parse(r.finished_at), id, r.attempt]);
+  const bad = [];
+  for (let i = 0; i < iv.length; i++) for (let j = i + 1; j < iv.length; j++) if (iv[i][0] < iv[j][1] && iv[j][0] < iv[i][1]) bad.push(`rendering overlap ${iv[i]} ${iv[j]}`);
+  return bad;
+}
+=== d5.mjs
+// D5: extra runners started at random moments around the end of a job (done | cancel | fail).
+// usage: node d5.mjs <mode done|cancel|fail> <rounds> <seed>
+import fs from 'node:fs';
+import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
+
+if (!isMainThread) {
+  const { dir, flag } = workerData;
+  const f = new Int32Array(flag);
+  const obs = [];
+  let last = '';
+  const sre = /"state":\s*"(\w+)"/;
+  const nap = new Int32Array(new SharedArrayBuffer(4));
+  while (Atomics.load(f, 0) === 0) {
+    Atomics.wait(nap, 0, 0, 1);
+    let jt = null; let pt = null;
+    try { jt = fs.readFileSync(`${dir}/job.json`, 'utf8'); } catch {}
+    try { pt = fs.readFileSync(`${dir}/runner.pid`, 'utf8').trim(); } catch {}
+    const st = jt ? (sre.exec(jt)?.[1] ?? '?') : null;
+    const key = `${st}|${pt}`;
+    if (key !== last) { last = key; obs.push([Number(process.hrtime.bigint() / 1000n), st, pt]); }
+  }
+  parentPort.postMessage(obs);
+} else {
+  const { mkEnv, sleep, rnd, runnerMod, controlMod, check, readJ } = await import('./common.mjs');
+  const [mode = 'done', rounds = '50', seed = '1'] = process.argv.slice(2);
+  const R = rnd(Number(seed));
+  const E = await mkEnv({ prefix: `qa8-d5-${mode}-`, stepMs: mode === 'done' ? 20 : 150, heartbeat: 0.05, callUsd: 0.6 });
+  let viol = 0; let amb = 0; let n = 0; const detail = [];
+  const TERM = new Set(['done', 'cancelled', 'failed']);
+  try {
+    for (let i = 0; i < Number(rounds); i++) {
+      const pdf = E.pdf(`d5-${mode}-${seed}-${i}.pdf`, `${mode} ${seed} ${i}`);
+      const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+      const dir = E.jobPath(id, '').replace(/\/$/, '');
+      const flag = new SharedArrayBuffer(4);
+      const w = new Worker(new URL(import.meta.url), { workerData: { dir, flag } });
+      const got = new Promise((res) => w.once('message', res));
+      const extras = [];
+      const spawnExtra = () => { const p = controlMod.spawnRunnerDefault(E.config, id); extras.push(p); E.spawned.add(p); };
+      const trigger = { done: 'finishing', cancel: 'gating', fail: 'finishing' }[mode];
+      let fired = false;
+      const plan = [];
+      const k = 3 + Math.floor(R() * 4);
+      const span = mode === 'done' ? 170 : 120;
+      for (let x = 0; x < k; x++) plan.push(Math.floor(R() * span));
+      const cancelAt = Math.floor(R() * 120);
+      const t0 = Date.now();
+      let cancelled = false;
+      for (;;) {
+        const j = E.job(id);
+        if (j.state === 'awaiting_approval' && !j.approval) E.approve(id);
+        if (!fired && j.state === trigger) {
+          fired = true;
+          if (mode === 'fail') fs.writeFileSync(E.jobPath(id, 'stages/packaging'), 'x');
+          const T = Date.now();
+          for (const d of plan) setTimeout(spawnExtra, d);
+          if (mode === 'cancel') setTimeout(() => { try { E.h.cancel_job({ job_id: id }); cancelled = true; } catch {} }, cancelAt);
+        }
+        if (TERM.has(j.state)) break;
+        if (Date.now() - t0 > 40000) { detail.push(`round ${i}: timeout state ${j.state}`); console.log("TIMEOUT round", i, id, j.state, JSON.stringify(E.h.get_job({ job_id: id }).job.runner), "pidfile", E.runnerPid(id)); console.log(E.log(id).split(String.fromCharCode(10)).slice(-25).join(String.fromCharCode(10))); console.log(JSON.stringify(E.job(id))); break; }
+        await sleep(2);
+      }
+      await sleep(350);
+      Atomics.store(new Int32Array(flag), 0, 1);
+      const obs = await got;
+      await w.terminate();
+      // analysis
+      const ti = obs.findIndex((o) => TERM.has(o[1]));
+      n++; console.log("round", i, "obs", obs.length, "ms", Date.now() - t0);
+      if (ti >= 0) {
+        const before = new Set(obs.slice(0, ti).map((o) => o[2]).filter(Boolean));
+        let ender = null;
+        if (mode === 'done') { const m = readJ(E.jobPath(id, 'manifest.json')); ender = String(m.rows.filter((r) => r.stage === 'qa').at(-1)?.runner_pid); before.add(ender); }
+        for (let x = ti; x < obs.length; x++) {
+          const p = obs[x][2];
+          if (!p || before.has(p)) continue;
+          if (x === ti && mode !== 'done') { amb++; detail.push(`round ${i} AMBIGUOUS ${mode} pid ${p} at terminal observation`); continue; }
+          viol++; detail.push(`round ${i} VIOLATION ${mode}: pid ${p} named after end (state ${obs[x][1]}) ender=${ender} obs=${JSON.stringify(obs.slice(Math.max(0, ti - 2)))}`);
+        }
+      } else detail.push(`round ${i}: no terminal observed`);
+      const iv = check(E, id);
+      if (iv.length) detail.push(`round ${i} invariants ${iv.join('; ')}`);
+      // no job state should have changed after end: job.json final state still terminal
+      const fin = readJ(E.jobPath(id, 'job.json')).state;
+      if (!TERM.has(fin)) detail.push(`round ${i}: final state ${fin}`);
+    }
+  } finally {
+    await E.cleanup();
+  }
+  console.log(JSON.stringify({ mode, rounds: n, seed, violations: viol, ambiguous: amb, leftover: E.leftover }));
+  detail.slice(0, 40).forEach((d) => console.log(d));
+}
+=== c6.mjs
+// C6: every way a file can parse and not be this job's ledger, x states x tools x CLI x real runner start.
+// usage: node c6.mjs [stateFilter] [variantFilter-regex]
+import fs from 'node:fs';
+import { mkEnv, sleep, lib, ledgerMod, controlMod, cliMod, snapshot, diffSnap, sha, readRaw, readJ } from './common.mjs';
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+
+const [stateF = '', varF = '.'] = process.argv.slice(2);
+const E = await mkEnv({ prefix: 'qa8-c6-', stepMs: 100, heartbeat: 0.1, callUsd: 0.6 });
+const out = [];
+const say = (s) => { out.push(s); console.log(s); };
+let fails = 0;
+const fail = (s) => { fails++; say(`FAIL ${s}`); };
+
+// my own spec of section 16.2, independent of the engine
+const AMT = (n) => typeof n === 'number' && Number.isFinite(n) && n >= 0 && n <= 1e6;
+function specReads(text, id) {
+  let d; try { d = JSON.parse(text); } catch { return false; }
+  if (!d || typeof d !== 'object' || Array.isArray(d)) return false;
+  if (d.schema !== 'habait/ledger.v1' || d.job_id !== id) return false;
+  if (!(d.cap_usd === null || (typeof d.cap_usd === 'number' && Number.isFinite(d.cap_usd) && d.cap_usd >= 0))) return false;
+  if (!Array.isArray(d.rows)) return false;
+  for (let i = 0; i < d.rows.length; i++) {
+    const r = d.rows[i];
+    if (!r || typeof r !== 'object' || Array.isArray(r)) return false;
+    if (r.seq !== i + 1) return false;
+    if (typeof r.call_key !== 'string' || !r.call_key) return false;
+    if (typeof r.stage !== 'string' || !r.stage) return false;
+    if (!['reserved', 'settled', 'failed', 'orphaned'].includes(r.status)) return false;
+    if (!AMT(r.reserved_usd)) return false;
+    if (!(AMT(r.settled_usd) || (r.settled_usd === null && r.status !== 'settled'))) return false;
+  }
+  return true;
+}
+
+async function mkState(kind, name) {
+  const pdf = E.pdf(`${name}.pdf`, name);
+  if (kind === 'awaiting') {
+    const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+    await E.waitFor('awaiting', () => E.job(id).state === 'awaiting_approval', 30000);
+    await sleep(200);
+    try { await E.kill(id); } catch {}
+    return { id, pdf };
+  }
+  if (kind === 'done') {
+    const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+    await lib.toDone(E, id, 60000);
+    await sleep(300);
+    return { id, pdf };
+  }
+  // skinning with a marked reserved row, runner killed inside the pause
+  process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS = '60000';
+  let id;
+  try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { delete process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS; }
+  await E.waitFor('skinning reserved+marked', () => {
+    const j = E.job(id);
+    if (j.state === 'awaiting_approval' && !j.approval) E.approve(id);
+    const l = readJ(E.jobPath(id, 'ledger.json'));
+    return l && l.rows && l.rows.some((r) => r.sending_at && r.status === 'reserved');
+  }, 60000);
+  await E.kill(id);
+  if (kind === 'cancelled') { E.h.cancel_job({ job_id: id }); }
+  return { id, pdf };
+}
+
+const jd = () => E.config.jobsDir;
+const stashDir = `${E.home}/stash`;
+const restore = (s) => {
+  fs.rmSync(`${jd()}/${s.id}`, { recursive: true, force: true });
+  fs.cpSync(`${stashDir}/${s.id}`, `${jd()}/${s.id}`, { recursive: true });
+};
+const stash = (s) => { fs.mkdirSync(stashDir, { recursive: true }); fs.cpSync(`${jd()}/${s.id}`, `${stashDir}/${s.id}`, { recursive: true }); };
+
+function variants(baseText, id, otherId, otherText) {
+  const base = JSON.parse(baseText);
+  const V = [];
+  const m = (name, f) => V.push([name, () => { const d = structuredClone(base); const r = f(d); return r === undefined ? JSON.stringify(d, null, 2) : r; }]);
+  const T = (name, text) => V.push([name, () => text]);
+  m('valid-as-is', () => undefined);
+  // job_id
+  m('job_id other', (d) => { d.job_id = otherId; });
+  m('job_id missing', (d) => { delete d.job_id; });
+  m('job_id null', (d) => { d.job_id = null; });
+  m('job_id number', (d) => { d.job_id = 5; });
+  m('job_id empty', (d) => { d.job_id = ''; });
+  m('job_id upper', (d) => { d.job_id = id.toUpperCase().replace(/[0-9]/g, (x) => x); if (d.job_id === id) d.job_id = id + 'A'; });
+  m('job_id trailing space', (d) => { d.job_id = id + ' '; });
+  m('job_id traversal', (d) => { d.job_id = '../evil'; });
+  m('job_id other + rows[]', (d) => { d.job_id = otherId; d.rows = []; });
+  m('job_id missing + rows[]', (d) => { delete d.job_id; d.rows = []; });
+  m('job_id other, whole other ledger', () => otherText);
+  // schema
+  m('schema missing', (d) => { delete d.schema; });
+  m('schema v2', (d) => { d.schema = 'habait/ledger.v2'; });
+  m('schema upper', (d) => { d.schema = 'HABAIT/LEDGER.V1'; });
+  m('schema number', (d) => { d.schema = 1; });
+  m('schema manifest', (d) => { d.schema = 'habait/manifest.v1'; });
+  // cap
+  m('cap missing', (d) => { delete d.cap_usd; });
+  m('cap -1', (d) => { d.cap_usd = -1; });
+  m('cap text', (d) => { d.cap_usd = '60'; });
+  m('cap true', (d) => { d.cap_usd = true; });
+  m('cap array', (d) => { d.cap_usd = []; });
+  T('cap 1e999', JSON.stringify(base, null, 2).replace(/"cap_usd": [^,\n]+/, '"cap_usd": 1e999'));
+  m('cap 0 (valid)', (d) => { d.cap_usd = 0; });
+  m('cap 60.5 (valid)', (d) => { d.cap_usd = 60.5; });
+  // rows
+  m('rows missing', (d) => { delete d.rows; });
+  m('rows null', (d) => { d.rows = null; });
+  m('rows object', (d) => { d.rows = {}; });
+  m('rows text', (d) => { d.rows = 'abc'; });
+  m('rows number', (d) => { d.rows = 5; });
+  m('rows [] (valid)', (d) => { d.rows = []; });
+  m('rows [null]', (d) => { d.rows = [null]; });
+  m('rows [1,2]', (d) => { d.rows = [1, 2]; });
+  m('rows [{}]', (d) => { d.rows = [{}]; });
+  m('rows [[]]', (d) => { d.rows = [[]]; });
+  m('rows reversed', (d) => { d.rows.reverse(); if (d.rows.length < 2) d.rows[0].seq = 2; });
+  m('rows seq0', (d) => { d.rows.forEach((r, i) => { r.seq = i; }); });
+  m('rows seq text', (d) => { d.rows[0].seq = String(d.rows[0].seq); });
+  m('rows seq float', (d) => { d.rows[0].seq = 1.5; });
+  m('rows seq null', (d) => { d.rows[0].seq = null; });
+  m('rows seq missing', (d) => { delete d.rows[0].seq; });
+  m('rows duplicated row', (d) => { d.rows.push(structuredClone(d.rows[d.rows.length - 1])); });
+  m('rows duplicated first', (d) => { d.rows.splice(1, 0, structuredClone(d.rows[0])); });
+  m('rows extra valid row (valid)', (d) => { d.rows.push({ seq: d.rows.length + 1, call_key: 'k'.repeat(64), stage: 'gating', provider: 'stub', what: 'x', reserved_usd: 0.1, status: 'failed', settled_usd: 0, attempt: 1 }); });
+  m('rows other job pasted + renumbered (valid shape)', (d) => { const o = JSON.parse(otherText).rows.map((r, i) => ({ ...r, seq: d.rows.length + i + 1 })); d.rows.push(...o); });
+  m('rows other job pasted NOT renumbered', (d) => { d.rows.push(...JSON.parse(otherText).rows); });
+  m('rows only other job rows', (d) => { d.rows = JSON.parse(otherText).rows; });
+  // row fields
+  for (const [f, vals] of [['call_key', ['', null, 5, undefined]], ['stage', ['', null, 5, undefined]], ['status', ['Settled', 'done', null, undefined, 'RESERVED', '']]]) {
+    for (const v of vals) m(`row0 ${f}=${JSON.stringify(v)}`, (d) => { if (v === undefined) delete d.rows[0][f]; else d.rows[0][f] = v; });
+  }
+  for (const v of [undefined, null, '0.6', -1, 1000000.01, true, [], {}]) m(`row0 reserved_usd=${JSON.stringify(v)}`, (d) => { if (v === undefined) delete d.rows[0].reserved_usd; else d.rows[0].reserved_usd = v; });
+  T('row0 reserved_usd=1e999', JSON.stringify(base, null, 2).replace(/"reserved_usd": [^,\n]+/, '"reserved_usd": 1e999'));
+  // a settled row (first settled one) and a non-settled one
+  const si = base.rows.findIndex((r) => r.status === 'settled');
+  const ri = base.rows.findIndex((r) => r.status !== 'settled');
+  if (si >= 0) for (const v of [undefined, null, '0.6', -1, 1000000.01, true, 'x']) m(`settled row settled_usd=${JSON.stringify(v)}`, (d) => { if (v === undefined) delete d.rows[si].settled_usd; else d.rows[si].settled_usd = v; });
+  if (si >= 0) T('settled row settled_usd=1e999', JSON.stringify(base, null, 2).replace(/"settled_usd": [0-9.]+/, '"settled_usd": 1e999'));
+  if (ri >= 0) {
+    for (const v of [undefined, '0', -1, 'x', true]) m(`non-settled row settled_usd=${JSON.stringify(v)}`, (d) => { if (v === undefined) delete d.rows[ri].settled_usd; else d.rows[ri].settled_usd = v; });
+    m('non-settled row settled_usd=0.5 (valid)', (d) => { d.rows[ri].settled_usd = 0.5; });
+  }
+  m('row0 is null', (d) => { d.rows[0] = null; });
+  m('row0 is text', (d) => { d.rows[0] = 'x'; });
+  m('row0 is array', (d) => { d.rows[0] = []; });
+  m('extra top-level field (valid)', (d) => { d.note = 'hi'; });
+  // whole-file shapes
+  T('empty file', '');
+  T('whitespace', '  \n ');
+  T('top array', '[]');
+  T('top string', '"x"');
+  T('top null', 'null');
+  T('top 0', '0');
+  T('top true', 'true');
+  T('BOM + valid', '\ufeff' + JSON.stringify(base));
+  T('valid + trailing garbage', JSON.stringify(base) + ' junk');
+  T('two docs concatenated', JSON.stringify(base) + JSON.stringify(base));
+  T('truncated', JSON.stringify(base, null, 2).slice(0, 120));
+  T('NUL bytes', '\0\0\0\0');
+  T('single quotes', JSON.stringify(base).replace(/"/g, "'"));
+  T('__proto__ doc', '{"__proto__":{"rows":[]},"schema":"habait/ledger.v1","job_id":"' + id + '","cap_usd":null}');
+  return V;
+}
+
+try {
+  // canary jobs: B (done) gives the other id and its ledger text
+  const B = await mkState('done', 'canaryB');
+  const otherText = readRaw(E.jobPath(B.id, 'ledger.json'));
+  const states = [['done', 'cDone'], ['awaiting', 'cAwait'], ['skinning', 'cSkin'], ['cancelled', 'cCanc']].filter(([k]) => k.includes(stateF));
+  let total = 0; let specMismatch = 0;
+  for (const [kind, nm] of states) {
+    const S = await mkState(kind, nm);
+    // for 'awaiting' there is no ledger: base from B's ledger rewritten to this id
+    let baseText = readRaw(E.jobPath(S.id, 'ledger.json'));
+    if (baseText === null) { const d = JSON.parse(otherText); d.job_id = S.id; baseText = JSON.stringify(d, null, 2) + '\n'; }
+    stash(S);
+    const V = variants(baseText, S.id, B.id, otherText).filter(([n]) => new RegExp(varF).test(n));
+    say(`== state ${kind} (${S.id}), ${V.length} variants`);
+    for (const [name, gen] of V) {
+      total++;
+      restore(S);
+      const text = gen();
+      fs.writeFileSync(E.jobPath(S.id, 'ledger.json'), text);
+      const reads = specReads(text, S.id);
+      const live = (() => { try { ledgerMod.readLedger(jd(), S.id); return true; } catch { return false; } })();
+      if (reads !== live) { specMismatch++; fail(`[${kind}] ${name}: spec says readable=${reads}, engine readLedger=${live}`); }
+      const ctxn = `[${kind}] ${name}`;
+      const s0 = snapshot(E);
+      const jobBytes0 = readRaw(E.jobPath(S.id, 'job.json'));
+      const man0 = readRaw(E.jobPath(S.id, 'manifest.json'));
+      // A. reads through every tool and CLI (writes nothing when unreadable)
+      const rep = {};
+      try { rep.get = E.h.get_job({ job_id: S.id }).job.cost.spent_usd; } catch (e) { fail(`${ctxn} get_job threw ${e.message}`); }
+      try { rep.list = E.h.list_jobs({ limit: 50 }).jobs.find((j) => j.job_id === S.id).cost.spent_usd; } catch (e) { fail(`${ctxn} list_jobs threw ${e.message}`); }
+      if (kind === 'done') { try { rep.res = (await E.h.get_result({ job_id: S.id })).cost.spent_usd; } catch (e) { fail(`${ctxn} get_result threw ${e.message}`); } }
+      const cliOut = {};
+      const io = (o) => ({ stdout: { write: (s) => { o.out = (o.out || '') + s; } }, stderr: { write: (s) => { o.err = (o.err || '') + s; } }, env: controlMod.configEnv(E.config) });
+      for (const argv of [['job', S.id], ['job', S.id, '--json'], ['jobs'], ['jobs', '--json'], ['ledger', S.id], ['ledger', S.id, '--json']]) {
+        const o = {}; let rc;
+        try { rc = await cliMod.main(argv, io(o)); } catch (e) { rc = `threw ${e.message}`; }
+        cliOut[argv.join(' ')] = { rc, err: (o.err || '').slice(0, 160), out: (o.out || '').slice(0, 60) };
+      }
+      const s1 = snapshot(E);
+      const copy = JSON.parse(jobBytes0).cost.spent_usd;
+      if (!reads) {
+        const d = diffSnap(s0, s1);
+        if (d.length) fail(`${ctxn} reads wrote: ${d.join('; ')}`);
+        if (readRaw(E.jobPath(S.id, 'job.json')) !== jobBytes0) fail(`${ctxn} job.json changed by reads`);
+        for (const [k, v] of Object.entries(rep)) if (v !== copy) fail(`${ctxn} ${k} reported ${v}, copy is ${copy}`);
+        for (const c of ['ledger ' + S.id, 'ledger ' + S.id + ' --json', 'job ' + S.id]) { if (cliOut[c].rc !== 1) fail(`${ctxn} CLI "${c}" rc=${cliOut[c].rc}`); else if (!cliOut[c].err.includes(S.id)) fail(`${ctxn} CLI "${c}" error does not name the job: ${cliOut[c].err}`); }
+        if (cliOut['job ' + S.id + ' --json'].rc !== 0) fail(`${ctxn} job --json rc=${cliOut['job ' + S.id + ' --json'].rc}`);
+        if (cliOut['jobs'].rc !== 0) fail(`${ctxn} jobs rc=${cliOut['jobs'].rc}`);
+      } else {
+        const tot = ledgerMod.ledgerTotals(JSON.parse(text)).settled_usd;
+        for (const [k, v] of Object.entries(rep)) if (v !== tot) fail(`${ctxn} readable: ${k} reported ${v}, ledger total ${tot}`);
+      }
+      // B. a runner started on it (real process): tool start_simulation, direct spawn, CLI resume, approve/cancel
+      if (kind !== 'done' || Math.random() < 0.15) {
+        restore(S); fs.writeFileSync(E.jobPath(S.id, 'ledger.json'), text);
+        const b0 = snapshot(E); const att0 = JSON.stringify(readJ(E.jobPath(S.id, 'job.json')).attempts || {});
+        const rows0 = (readJ(E.jobPath(S.id, 'manifest.json'))?.rows || []).length;
+        const sends0 = ['tracing', 'skinning', 'gating', 'finishing'].map((s) => E.sends(S.id, s)).join(',');
+        const how = ['start', 'spawn', 'resume', 'approve'][total % 4];
+        let pid = null; const spBefore = new Set(E.spawned);
+        const spawnR = (c, id) => { pid = controlMod.spawnRunnerDefault(c, id); E.spawned.add(pid); return pid; };
+        const t0 = Date.now();
+        try {
+          if (how === 'spawn') spawnR(E.config, S.id);
+          else if (how === 'resume') { const o = {}; await cliMod.main(['resume', S.id], io(o), { spawnRunner: spawnR }); }
+          else if (how === 'approve' && E.job(S.id).state === 'awaiting_approval') { E.h.approve_paid_stage({ job_id: S.id, cap_usd: 60 }); await sleep(100); pid = E.runnerPid(S.id); }
+          else E.h.start_simulation({ pdf_path: S.pdf });
+        } catch (e) { say(`  note ${ctxn} ${how}: ${e.message}`); }
+        if (!pid) pid = [...E.spawned].find((p) => !spBefore.has(p)) || null;
+        let exited = false;
+        if (pid) { for (let i = 0; i < 100 && !(exited = !pidAlive(pid)); i++) await sleep(60); }
+        const dt = Date.now() - t0;
+        if (!reads) {
+          if (pid && !exited) fail(`${ctxn} [${how}] runner ${pid} did not stop within 6 s on an unreadable ledger`);
+          const b1 = snapshot(E);
+          const d = diffSnap(b0, b1);
+          if (d.length) fail(`${ctxn} [${how}] runner start wrote: ${d.join('; ')}`);
+          if (JSON.stringify(readJ(E.jobPath(S.id, 'job.json')).attempts || {}) !== att0) fail(`${ctxn} [${how}] a stage was started (attempts changed)`);
+          if ((readJ(E.jobPath(S.id, 'manifest.json'))?.rows || []).length !== rows0) fail(`${ctxn} [${how}] manifest grew`);
+          if (['tracing', 'skinning', 'gating', 'finishing'].map((s) => E.sends(S.id, s)).join(',') !== sends0) fail(`${ctxn} [${how}] a send happened`);
+          if (E.runnerPid(S.id) && E.runnerPid(S.id) === pid) fail(`${ctxn} [${how}] runner.pid still names the stopped runner`);
+          if (pid && kind !== 'done' && !/cannot be read|LEDGER|error/i.test(E.log(S.id))) say(`  note ${ctxn} [${how}] no ledger error in runner.log`);
+          if (readRaw(E.jobPath(S.id, 'ledger.json')) !== text) fail(`${ctxn} [${how}] planted ledger bytes changed`);
+          say(`ok [${kind}] ${name} -> ${how} runner stopped in ${dt} ms`);
+        } else {
+          if (pid && pidAlive(pid)) { try { process.kill(pid); } catch {} await sleep(150); }
+          say(`ok [${kind}] ${name} (readable) -> ${how} runner ${exited ? 'ended' : 'ran, killed'} after ${dt} ms`);
+        }
+      } else say(`ok [${kind}] ${name}`);
+    }
+    // directory instead of a file
+    restore(S);
+    fs.rmSync(E.jobPath(S.id, 'ledger.json'), { force: true });
+    fs.mkdirSync(E.jobPath(S.id, 'ledger.json'));
+    const s0 = snapshot(E);
+    const reps = [E.h.get_job({ job_id: S.id }).job.cost.spent_usd, E.h.list_jobs({ limit: 50 }).jobs.find((j) => j.job_id === S.id).cost.spent_usd];
+    if (kind !== 'done') {
+      const pid = controlMod.spawnRunnerDefault(E.config, S.id); E.spawned.add(pid);
+      let ex = false; for (let i = 0; i < 100 && !(ex = !pidAlive(pid)); i++) await sleep(60);
+      if (!ex) { fail(`[${kind}] ledger.json as a directory: runner did not stop`); try { process.kill(pid); } catch {} }
+      if (E.job(S.id).attempts && JSON.stringify(E.job(S.id).attempts) !== JSON.stringify(readJ(`${stashDir}/${S.id}/job.json`).attempts || {})) fail(`[${kind}] dir-ledger: a stage started`);
+    }
+    say(`ok [${kind}] ledger.json is a directory: reads ${reps.join(',')}; dirs same: ${diffSnap(s0, snapshot(E)).length === 0}`);
+    restore(S);
+  }
+  say(`SUMMARY variants=${total} fails=${fails} specMismatch=${specMismatch}`);
+} finally {
+  await E.cleanup();
+  fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r8/c6-out.txt', out.join('\n') + '\n');
+  console.log('leftover', E.leftover);
+}
+=== m6.mjs
+// M6: a runner that MEETS a file that is not this job's ledger while it works (paused by a hook).
+// usage: node m6.mjs [pointFilter-regex]
+import fs from 'node:fs';
+import { mkEnv, sleep, lib, snapshot, diffSnap, readRaw, readJ } from './common.mjs';
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+
+const pf = new RegExp(process.argv[2] || '.');
+const E = await mkEnv({ prefix: 'qa8-m6-', stepMs: 100, heartbeat: 0.1, callUsd: 0.6, staleSeconds: 30 });
+const out = []; const say = (s) => { out.push(s); console.log(s); };
+let fails = 0; const fail = (s) => { fails++; say('FAIL ' + s); };
+const jd = E.config.jobsDir;
+
+// canary: another job, done; its ledger must never move
+const cpdf = E.pdf('canary.pdf', 'canary');
+const canary = E.h.start_simulation({ pdf_path: cpdf }).job_id;
+await lib.toDone(E, canary, 60000);
+await sleep(300);
+const otherText = readRaw(E.jobPath(canary, 'ledger.json'));
+
+const POINTS = [
+  { name: 'P1 pause-after-reserve', env: { ENGINE_TEST_PAUSE_AFTER_RESERVE_MS: '2500' }, marker: 'test hook: pausing 2500 ms after the reserve', stage: 'skinning' },
+  { name: 'P2 pause-after-cache', env: { ENGINE_TEST_PAUSE_AFTER_CACHE_MS: '2500' }, marker: 'after the cache write', stage: 'skinning' },
+  { name: 'P3 pause-after-settle', env: { ENGINE_TEST_PAUSE_AFTER_SETTLE_MS: '2500' }, marker: 'after the settle', stage: 'skinning' },
+  { name: 'F1 freeze skinning:reserved', freeze: 'skinning:reserved', stage: 'skinning' },
+  { name: 'F2 freeze skinning:sent', freeze: 'skinning:sent', stage: 'skinning' },
+  { name: 'F3 freeze gating start', freeze: 'gating', stage: 'gating' },
+  { name: 'F4 freeze building start (no ledger yet)', freeze: 'building', stage: 'building' },
+  { name: 'A1 awaiting approval, then approve', await: true },
+];
+
+function variantTexts(id) {
+  const live = readJ(E.jobPath(id, 'ledger.json')) || { schema: 'habait/ledger.v1', job_id: id, cap_usd: null, rows: [] };
+  const mk = (f) => { const d = structuredClone(live); f(d); return JSON.stringify(d, null, 2); };
+  const row = (d) => d.rows[0];
+  const V = [
+    ['other job id (whole other ledger)', () => otherText],
+    ['job_id other + rows []', () => mk((d) => { d.job_id = canary; d.rows = []; })],
+    ['no job_id, rows []', () => JSON.stringify({ rows: [] })],
+    ['schema v2', () => mk((d) => { d.schema = 'habait/ledger.v2'; })],
+    ['top null', () => 'null'],
+    ['empty', () => ''],
+    ['garbage', () => 'not json {{{'],
+    ['rows [{}]', () => JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: null, rows: [{}] })],
+    ['cap text', () => mk((d) => { d.cap_usd = '60'; })],
+  ];
+  if (live.rows.length) {
+    V.push(['row0 seq 2', () => mk((d) => { row(d).seq = 2; })]);
+    V.push(['row0 status Reserved', () => mk((d) => { row(d).status = 'Reserved'; })]);
+    V.push(['row0 reserved_usd text', () => mk((d) => { row(d).reserved_usd = '0.6'; })]);
+    V.push(['row0 call_key missing', () => mk((d) => { delete row(d).call_key; })]);
+    V.push(['row0 settled_usd 1e6+', () => mk((d) => { row(d).settled_usd = 1000001; })]);
+    V.push(['row0 settled with no amount', () => mk((d) => { row(d).status = 'settled'; row(d).settled_usd = null; })]);
+  } else {
+    V.push(['row seq 2 (one row)', () => JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: null, rows: [{ seq: 2, call_key: 'a', stage: 's', status: 'failed', reserved_usd: 0, settled_usd: 0 }] })]);
+    V.push(['row reserved_usd text', () => JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: null, rows: [{ seq: 1, call_key: 'a', stage: 's', status: 'failed', reserved_usd: '0', settled_usd: 0 }] })]);
+  }
+  return V;
+}
+
+let n = 0;
+for (const P of POINTS.filter((p) => pf.test(p.name))) {
+  // number of variants is fixed by the point; run all
+  let names = null;
+  for (let vi = 0; ; vi++) {
+    const pdf = E.pdf(`m6-${P.name.slice(0, 2)}-${vi}.pdf`, `${P.name} ${vi}`);
+    const wake = `${E.home}/wake-${P.name.slice(0, 2)}-${vi}`;
+    for (const [k, v] of Object.entries(P.env || {})) process.env[k] = v;
+    if (P.freeze) { process.env.ENGINE_TEST_FREEZE_MS = '60000'; process.env.ENGINE_TEST_FREEZE_AT = P.freeze; process.env.ENGINE_TEST_FREEZE_WAKE = wake; }
+    let id;
+    try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { for (const k of [...Object.keys(P.env || {}), 'ENGINE_TEST_FREEZE_MS', 'ENGINE_TEST_FREEZE_AT', 'ENGINE_TEST_FREEZE_WAKE']) delete process.env[k]; }
+    const approveIfAsked = () => { const j = E.job(id); if (j.state === 'awaiting_approval' && !j.approval && !P.await) E.approve(id); };
+    // wait for the point
+    await E.waitFor(`point ${P.name}`, () => {
+      approveIfAsked();
+      const log = E.log(id);
+      if (P.await) return E.job(id).state === 'awaiting_approval';
+      if (P.freeze) return log.includes(`thread blocked for 60000 ms at ${P.freeze}`);
+      return log.includes(P.marker);
+    }, 60000, 10);
+    const pid = E.runnerPid(id);
+    const V = variantTexts(id);
+    if (!names) names = V.length;
+    if (vi >= V.length) { // clean up this extra job
+      if (P.freeze) fs.writeFileSync(wake, 'x');
+      if (pid && pidAlive(pid)) process.kill(pid);
+      break;
+    }
+    const [vname, gen] = V[vi];
+    const text = gen();
+    const s0 = snapshot(E);
+    fs.writeFileSync(E.jobPath(id, 'ledger.json'), text);
+    const sends0 = E.sends(id, P.stage || 'skinning');
+    if (P.freeze) fs.writeFileSync(wake, 'x');
+    if (P.await) E.approve(id);
+    // outcome: runner exits, or job terminal
+    let ex = false;
+    for (let i = 0; i < 400 && !ex; i++) { ex = !pidAlive(pid); if (E.job(id).state === 'failed') { await sleep(300); ex = !pidAlive(pid) || true; } await sleep(40); }
+    const j = E.job(id);
+    const ctx = `${P.name} / ${vname}`;
+    const alive = pidAlive(pid);
+    if (alive) { fail(`${ctx}: runner ${pid} still alive, job ${j.state}`); process.kill(pid); await sleep(200); }
+    const s1 = snapshot(E);
+    const d = diffSnap(s0, s1).filter((x) => !x.startsWith(`ledger ${id}`));
+    if (d.length) fail(`${ctx}: other files moved: ${d.join('; ')}`);
+    if (readRaw(E.jobPath(id, 'ledger.json')) !== text) fail(`${ctx}: planted ledger bytes changed (runner wrote into it)`);
+    if (fs.existsSync(`${jd}/undefined`)) fail(`${ctx}: jobs/undefined exists`);
+    const cacheFiles = fs.existsSync(E.jobPath(id, 'cache')) ? fs.readdirSync(E.jobPath(id, 'cache')) : [];
+    const reasonText = JSON.stringify(j.reason);
+    say(`ok ${ctx}: job ${j.state} reason ${reasonText} sends ${sends0}->${E.sends(id, P.stage || 'skinning')} cache ${cacheFiles.length}`);
+    if (j.state === 'done') fail(`${ctx}: job reached done on a bad ledger`);
+    n++;
+    if (j.state === 'failed' && !/ledger/i.test(reasonText)) say(`  note ${ctx}: reason does not name the ledger`);
+  }
+}
+say(`SUMMARY scenarios=${n} fails=${fails}`);
+await E.cleanup();
+fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r8/m6-out.txt', out.join('\n') + '\n');
+console.log('leftover', E.leftover);
+=== p8.mjs
+// P8: paidCall directly: bad estimates x approval x in-flight; answers JSON cannot hold; amounts.
+import fs from 'node:fs';
+import { mkEnv, sleep, ledgerMod, jobsMod, readJ, readRaw, sha, snapshot, diffSnap } from './common.mjs';
+const { createPaidCall, checkLedger, readLedger } = ledgerMod;
+const E = await mkEnv({ prefix: 'qa8-p8-', stepMs: 100, heartbeat: 0.1, callUsd: 0.6 });
+const out = []; const say = (s) => { out.push(s); console.log(s); };
+let fails = 0; const fail = (s) => { fails++; say('FAIL ' + s); };
+const jd = E.config.jobsDir;
+let n = 0;
+
+// a job folder with no runner: made by the engine, runner killed at once, then set to skinning with an approval
+async function freshJob(withApproval = true) {
+  const pdf = E.pdf(`p8-${++n}.pdf`, `p8 ${n} ${Math.random()}`);
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  const pid = E.runnerPid(id) || await E.waitFor('pid', () => E.runnerPid(id), 5000);
+  process.kill(pid); await E.waitFor('dead', () => { try { process.kill(pid, 0); return false; } catch { return true; } }, 5000, 10);
+  await sleep(50);
+  fs.rmSync(E.jobPath(id, 'runner.pid'), { force: true });
+  const j = E.job(id);
+  j.state = 'skinning';
+  if (withApproval) { j.approval = { cap_usd: 5000000, at: new Date().toISOString() }; j.cost.cap_usd = 5000000; }
+  fs.writeFileSync(E.jobPath(id, 'job.json'), JSON.stringify(j, null, 2));
+  return id;
+}
+const mk = (id, over = {}) => createPaidCall({ jobsDir: jd, jobId: id, stage: 'skinning', attempt: 1, ...over });
+const errOf = async (p) => { try { await p; return null; } catch (e) { return e; } };
+const folderSig = (id) => { const o = []; const walk = (d) => { for (const f of fs.readdirSync(d).sort()) { const p = `${d}/${f}`; if (fs.statSync(p).isDirectory()) walk(p); else if (!/\.lock$|runner\.log$/.test(f)) o.push(`${p.slice(jd.length)}:${sha(fs.readFileSync(p))}`); } }; walk(`${jd}/${id}`); return o.join('|'); };
+
+// ---------- O-2 ----------
+const BAD = [['"0.6"', '0.6'], ['NaN', NaN], ['Infinity', Infinity], ['-Infinity', -Infinity], ['-1', -1], ['1e6+0.01', 1000000.01], ['1e308', 1e308], ['true', true], ['[]', []], ['[0.6]', [0.6]], ['{}', {}], ['""', ''], ['5n', 5n], ['Number obj', new Number(1)], ['Date', new Date()], ['function', () => 1], ['symbol', Symbol('x')]];
+const GOOD = [['undefined', undefined], ['null', null], ['0', 0], ['-0', -0], ['0.6', 0.6], ['1e6', 1e6], ['1e-7', 1e-7]];
+for (const approved of [true, false]) {
+  for (const flight of [false, true]) {
+    for (const [nm, v] of BAD) {
+      const id = await freshJob(approved);
+      const paid = mk(id);
+      let gate; const held = new Promise((r) => { gate = r; });
+      let first = null;
+      if (flight && approved) first = paid({ key: 'K', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => { await held; return { answer: { a: 1 }, usd: 0.6 }; });
+      if (flight && !approved) { /* an in-flight call cannot exist without an approval; the second must still be refused as a bad estimate */ }
+      await sleep(flight ? 150 : 0);
+      const sig0 = folderSig(id);
+      const e = await errOf(paid({ key: 'K', provider: 'stub', what: 'w', estimate_usd: v }, async () => { fail(`O-2 fn ran for bad estimate ${nm}`); return { answer: 1 }; }));
+      if (!e || e.code !== 'STAGE_FAILED') fail(`O-2 approved=${approved} flight=${flight} estimate=${nm}: got ${e ? e.code + ' ' + e.message : 'no error'}`);
+      if (!flight && folderSig(id) !== sig0) fail(`O-2 approved=${approved} estimate=${nm}: folder changed`);
+      if (first) { gate(); const a = await first; if (JSON.stringify(a) !== '{"a":1}') fail('O-2 first call answer wrong'); }
+    }
+    // good estimates
+    for (const [nm, v] of GOOD) {
+      const id = await freshJob(approved);
+      const paid = mk(id);
+      let ran = 0;
+      const e = await errOf(paid({ key: 'K', provider: 'stub', what: 'w', estimate_usd: v }, async () => { ran++; return { answer: 7 }; }));
+      if (approved && e) fail(`O-2 good estimate ${nm} approved: ${e.code} ${e.message}`);
+      if (!approved && (!e || e.code !== 'BUDGET_CAP')) fail(`O-2 good estimate ${nm} not approved: ${e && e.code}`);
+      if (approved && !e) { const l = readLedger(jd, id); if (l.rows[0].reserved_usd !== Math.round(Number(v ?? 0) * 1e6) / 1e6 * (Object.is(v, -0) ? 1 : 1) && !(Object.is(v, -0) && l.rows[0].reserved_usd === 0)) fail(`O-2 reserved ${l.rows[0].reserved_usd} for ${nm}`); }
+    }
+  }
+}
+say(`O-2 done, fails so far ${fails}`);
+// getter that changes between reads (time of check vs time of use)
+{
+  const id = await freshJob(true); const paid = mk(id);
+  let k = 0; const spec = { key: 'T', provider: 'stub', what: 'w', get estimate_usd() { return k++ === 0 ? 0.5 : -5; } };
+  const sig0 = folderSig(id);
+  const e = await errOf(paid(spec, async () => ({ answer: 1 })));
+  const led = readRaw(E.jobPath(id, 'ledger.json'));
+  say(`O-2 TOCTOU getter: error ${e && e.code} ${e && String(e.message).slice(0, 100)}; ledger file ${led === null ? 'absent' : 'present'}`);
+  if (led !== null) { try { checkLedger(JSON.parse(led), id); } catch (x) { fail('TOCTOU left an invalid ledger: ' + x.message); } }
+}
+
+// ---------- O-3 ----------
+const circ = {}; circ.self = circ;
+const thrower = { toJSON() { throw new Error('boom'); } };
+const evil = { get answer() { throw new Error('getter'); }, usd: 0.1 };
+const ANS = [['BigInt', () => 10n], ['circular', () => circ], ['function', () => () => 1], ['symbol', () => Symbol('s')], ['undefined', () => undefined], ['throwing toJSON', () => thrower], ['toJSON undefined', () => ({ toJSON() { return undefined; } })], ['nested BigInt', () => ({ a: [1, 2n] })], ['NaN', () => NaN], ['Infinity', () => Infinity], ['Date', () => new Date(0)], ['Map', () => new Map([[1, 2]])], ['null', () => null], ['{a:undefined}', () => ({ a: undefined })], ['object with fn', () => ({ f() {}, a: 1 })], ['big string', () => 'x'.repeat(2e6)], ['0', () => 0], ['empty string', () => '']];
+for (const [nm, mkAns] of ANS) {
+  const id = await freshJob(true);
+  let sends = 0; const given = [];
+  const run = async (attempt) => {
+    const paid = mk(id, { attempt });
+    return paid({ key: 'A', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => { sends++; return { answer: mkAns(), usd: 0.6 }; });
+  };
+  let r1; let e1 = null;
+  try { r1 = await run(1); } catch (e) { e1 = e; }
+  let led; try { led = readLedger(jd, id); } catch (e) { fail(`O-3 ${nm}: ledger unreadable after the call: ${e.message}`); continue; }
+  const row = led.rows[0]; const cacheN = fs.existsSync(E.jobPath(id, 'cache')) ? fs.readdirSync(E.jobPath(id, 'cache')).length : 0;
+  // second run = the stage runs again
+  let r2; let e2 = null;
+  try { r2 = await run(2); } catch (e) { e2 = e; }
+  const led2 = readLedger(jd, id);
+  const spent = readJ(E.jobPath(id, 'job.json')).cost.spent_usd;
+  say(`O-3 ${nm}: call1 ${e1 ? 'THREW ' + e1.message : 'ok'} row1 {status:${row.status}, not_kept:${row.answer_not_kept}, sha:${row.answer_sha256}} cache files ${cacheN}; call2 ${e2 ? 'THREW ' + e2.message : 'ok'} sends=${sends} rows=${led2.rows.map((r) => `${r.status}${r.resend_of ? '(resend_of ' + r.resend_of + ')' : ''}${r.answer_not_kept ? '(nk)' : ''}`).join(',')} spent=${spent}`);
+  const cannot = ['BigInt', 'circular', 'function', 'symbol', 'throwing toJSON', 'toJSON undefined', 'nested BigInt', 'object with fn?'].includes(nm) && nm !== 'object with fn?';
+  if (['BigInt', 'circular', 'function', 'nested BigInt', 'throwing toJSON'].includes(nm)) {
+    if (e1) fail(`O-3 ${nm}: the stage did not get its answer (${e1.message})`);
+    if (row.status !== 'settled' || row.answer_not_kept !== true || row.answer_sha256) fail(`O-3 ${nm}: row not settled with answer_not_kept and no sha: ${JSON.stringify(row)}`);
+    if (cacheN !== 0) fail(`O-3 ${nm}: something was cached`);
+    if (nm === 'BigInt' && r1 !== 10n) fail('O-3 BigInt: stage answer not the BigInt');
+    if (sends !== 2) fail(`O-3 ${nm}: sends ${sends}, expected the call to be made again`);
+    if (!led2.rows[1] || led2.rows[1].resend_of !== 1) fail(`O-3 ${nm}: second row has no resend_of 1`);
+  }
+}
+
+// ---------- amounts from fn ----------
+for (const [nm, usd] of [['0', 0], ['-0', -0], ['1e6', 1e6], ['1e6+1', 1e6 + 1], ['"0.5"', '0.5'], ['NaN', NaN], ['-1', -1], ['Infinity', Infinity], ['null', null], ['undefined', undefined], ['5e-7', 5e-7], ['4e-7', 4e-7]]) {
+  const id = await freshJob(true);
+  const r = await errOf(mk(id)({ key: 'U', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => ({ answer: 1, usd })));
+  const led = readLedger(jd, id); const c = JSON.parse(fs.readFileSync(`${E.jobPath(id, 'cache')}/${fs.readdirSync(E.jobPath(id, 'cache'))[0]}`, 'utf8'));
+  say(`usd ${nm}: settled ${led.rows[0].settled_usd}, cache ${c.settled_usd}, copy ${readJ(E.jobPath(id, 'job.json')).cost.spent_usd}`);
+  if (r) fail(`usd ${nm} threw ${r.message}`);
+  if (led.rows[0].settled_usd !== c.settled_usd) fail(`usd ${nm}: row and cache disagree`);
+}
+
+// ---------- thrown getter on the answer object: answer in hand ----------
+{
+  const id = await freshJob(true);
+  const e = await errOf(mk(id)({ key: 'G', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => evil));
+  const led = readLedger(jd, id);
+  say(`OBS getter-throwing result object: error "${e && e.message}", row ${led.rows[0].status} marked=${Boolean(led.rows[0].sending_at)}`);
+}
+say(`SUMMARY P8 fails=${fails}`);
+await E.cleanup();
+fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r8/p8-out.txt', out.join('\n') + '\n');
+console.log('leftover', E.leftover);
+=== poison.mjs
+// poison: manifest.json / job.json that name another job (or none): does a runner write into the other job / create a folder?
+import fs from 'node:fs';
+import { mkEnv, sleep, lib, snapshot, readJ, readRaw, sha, controlMod } from './common.mjs';
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+const E = await mkEnv({ prefix: 'qa8-poison-', stepMs: 100, heartbeat: 0.1 });
+const jd = E.config.jobsDir;
+const out = []; const say = (s) => { out.push(s); console.log(s); };
+const listing = () => fs.readdirSync(jd).sort().join(',');
+async function mkStalled(name) {
+  const pdf = E.pdf(`${name}.pdf`, name);
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  const pid = await E.waitFor('pid', () => E.runnerPid(id), 5000);
+  process.kill(pid); await E.waitFor('dead', () => !pidAlive(pid), 5000, 10);
+  return { id, pdf };
+}
+async function runOnce(id) {
+  const pid = controlMod.spawnRunnerDefault(E.config, id); E.spawned.add(pid);
+  for (let i = 0; i < 40 && pidAlive(pid); i++) await sleep(100);
+  if (pidAlive(pid)) process.kill(pid);
+  await sleep(200);
+}
+try {
+  const other = E.h.start_simulation({ pdf_path: E.pdf('other.pdf', 'other') }).job_id;
+  await lib.toDone(E, other, 60000); await sleep(300);
+  const otherSig = ['manifest.json', 'job.json', 'ledger.json'].map((f) => sha(fs.readFileSync(E.jobPath(other, f)))).join();
+
+  // 1. manifest.json naming no job / another job
+  for (const [nm, mf] of [['manifest without job_id', (id) => JSON.stringify({ schema: 'habait/manifest.v1', rows: [] })], ['manifest naming other job', (id) => JSON.stringify({ schema: 'habait/manifest.v1', job_id: other, rows: [] })]]) {
+    const S = await mkStalled(nm.replace(/ /g, '-'));
+    fs.writeFileSync(E.jobPath(S.id, 'manifest.json'), mf(S.id));
+    const l0 = listing();
+    await runOnce(S.id);
+    const l1 = listing();
+    const os = ['manifest.json', 'job.json', 'ledger.json'].map((f) => sha(fs.readFileSync(E.jobPath(other, f)))).join();
+    say(`${nm}: folders ${l0 === l1 ? 'unchanged' : 'CHANGED: ' + l1.replace(l0, '')}; other job's files ${os === otherSig ? 'unchanged' : 'CHANGED'}; own manifest rows ${(readJ(E.jobPath(S.id, 'manifest.json'))?.rows || []).length}; job state ${E.job(S.id).state}`);
+    if (fs.existsSync(`${jd}/undefined`)) { fs.rmSync(`${jd}/undefined`, { recursive: true, force: true }); }
+    fs.writeFileSync(E.jobPath(other, 'manifest.json'), fs.readFileSync(E.jobPath(other, 'manifest.json')));
+  }
+  // 2. job.json naming another job
+  {
+    const S = await mkStalled('jobjson-other');
+    const j = readJ(E.jobPath(S.id, 'job.json')); j.job_id = other;
+    fs.writeFileSync(E.jobPath(S.id, 'job.json'), JSON.stringify(j, null, 2));
+    const before = sha(fs.readFileSync(E.jobPath(other, 'job.json')));
+    await runOnce(S.id);
+    say(`job.json naming other job: other job.json ${sha(fs.readFileSync(E.jobPath(other, 'job.json'))) === before ? 'unchanged' : 'CHANGED (a runner wrote the other job)'}; folders ${listing()}`);
+  }
+  {
+    const S = await mkStalled('jobjson-none');
+    const j = readJ(E.jobPath(S.id, 'job.json')); delete j.job_id;
+    fs.writeFileSync(E.jobPath(S.id, 'job.json'), JSON.stringify(j, null, 2));
+    const l0 = listing();
+    await runOnce(S.id);
+    say(`job.json without job_id: folders ${l0} -> ${listing()}`);
+  }
+} finally {
+  await E.cleanup();
+  fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r8/poison-out.txt', out.join('\n') + '\n');
+  console.log('leftover', E.leftover);
+}
+=== k8.mjs
+// k8: kills and takeovers of my own design.
+// usage: node k8.mjs <susp|storm|cap|lock> <count> <seed>
+import fs from 'node:fs';
+import { spawn, execFile } from 'node:child_process';
+import { mkEnv, sleep, lib, rnd, check, overlap, readJ, readRaw, ledgerMod, controlMod, jobsMod } from './common.mjs';
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+
+const [kind = 'susp', countS = '5', seedS = '1'] = process.argv.slice(2);
+const R = rnd(Number(seedS));
+const ri = (a, b) => a + Math.floor(R() * (b - a + 1));
+const SC = 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r8';
+const E = await mkEnv({ prefix: `qa8-k-${kind}-`, stepMs: 150, heartbeat: 0.1, staleSeconds: 1, callUsd: kind === 'cap' ? 20 : 0.6 });
+const out = []; const say = (s) => { out.push(s); console.log(s); };
+const stats = { kills: 0, takeovers: 0, violations: 0, scenarios: 0, woke_replaced: 0, caps: 0 };
+const viol = (s) => { stats.violations++; say('VIOLATION ' + s); };
+
+// persistent PowerShell for NtSuspendProcess / NtResumeProcess (only pids I started)
+let ps = null; const waiters = [];
+function startPs() {
+  ps = spawn('powershell', ['-NoProfile', '-Command', '-'], { stdio: ['pipe', 'pipe', 'ignore'], windowsHide: true });
+  ps.stdout.on('data', (d) => { for (const l of String(d).split(/\r?\n/)) { const m = /^DONE (\d+)/.exec(l); if (m) { const w = waiters.findIndex((x) => x.n === Number(m[1])); if (w >= 0) waiters.splice(w, 1)[0].res(); } } });
+  ps.stdin.write(`Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class QP { [DllImport("ntdll.dll")] public static extern int NtSuspendProcess(IntPtr h); [DllImport("ntdll.dll")] public static extern int NtResumeProcess(IntPtr h); }'\n`);
+}
+let opn = 0;
+function psOp(op, pid) {
+  if (!E.spawned.has(pid)) throw new Error('refusing to touch a pid I did not start: ' + pid);
+  const n = ++opn;
+  return new Promise((res) => { waiters.push({ n, res }); ps.stdin.write(`$p=[System.Diagnostics.Process]::GetProcessById(${pid}); [QP]::Nt${op}Process($p.Handle) | Out-Null; Write-Output 'DONE ${n}'\n`); });
+}
+const suspend = (pid) => psOp('Suspend', pid);
+const resume = (pid) => psOp('Resume', pid);
+const isPidMine = (pid) => E.spawned.has(pid);
+const killedSet = new Set();
+const killMine = async (pid) => { killedSet.add(pid); if (!isPidMine(pid)) throw new Error('not mine'); try { process.kill(pid); } catch {} for (let i = 0; i < 100 && pidAlive(pid); i++) await sleep(20); stats.kills++; };
+const startAgain = (pdf) => E.h.start_simulation({ pdf_path: pdf });
+
+// counted-total vs cap sampler
+function sample(id) {
+  const l = readJ(E.jobPath(id, 'ledger.json')); const j = readJ(E.jobPath(id, 'job.json'));
+  if (!l || !l.rows || !j) return;
+  let tot = 0; for (const r of l.rows) tot += r.status === 'settled' ? r.settled_usd : (r.status === 'reserved' || r.status === 'orphaned' ? r.reserved_usd : 0);
+  const cap = j.cost?.cap_usd;
+  if (typeof cap === 'number' && tot > cap + 1e-9) viol(`${id}: counted total ${tot} above cap ${cap}`);
+}
+
+async function finish(id, pdf, capSeq = [55, 100], tmo = 90000) {
+  const until = Date.now() + tmo; let capi = 0;
+  for (;;) {
+    sample(id);
+    const j = E.job(id);
+    if (j.state === 'done') return true;
+    if (j.state === 'failed') { viol(`${id}: job failed ${JSON.stringify(j.reason)}`); return false; }
+    if (j.state === 'cancelled') { startAgain(pdf); await sleep(50); continue; }
+    if (j.state === 'awaiting_approval' && !j.approval) {
+      if (j.reason?.code === 'BUDGET_CAP') stats.caps++;
+      const cap = Math.max(capSeq[Math.min(capi, capSeq.length - 1)], j.quote?.estimate_usd || 0);
+      try { E.h.approve_paid_stage({ job_id: id, cap_usd: j.reason?.code === 'BUDGET_CAP' ? Math.max(100, j.quote.estimate_usd) : capSeq[0] }); } catch (e) { if (!/lock busy|NOT_AWAITING/.test(e.message + e.code)) throw e; }
+      if (j.reason?.code === 'BUDGET_CAP') capi++;
+    }
+    const view = E.h.get_job({ job_id: id }).job;
+    if (['queued', 'tracing', 'building', 'rendering', 'skinning', 'gating', 'finishing', 'packaging', 'qa'].includes(view.state) && view.runner.alive === false) {
+      try { startAgain(pdf); } catch (e) { if (!/lock busy/.test(e.message)) throw e; }
+    }
+    if (Date.now() > until) { viol(`${id}: not done in ${tmo} ms, state ${j.state}`); return false; }
+    await sleep(30);
+  }
+}
+
+async function verify(ids, label, cap) {
+  stats.scenarios++;
+  for (const id of ids) {
+    // replaced / suspended runners must leave by themselves
+    for (const p of E.spawned) { if (pidAlive(p)) { /* wait below */ } }
+    const v = check(E, id);
+    if (v.length) viol(`${label} ${id}: ${v.join('; ')}`);
+    // what the engine reports equals the ledger
+    const led = readJ(E.jobPath(id, 'ledger.json')) || { rows: [] };
+    const sum = Math.round(led.rows.filter((r) => r.status === 'settled').reduce((n, r) => n + r.settled_usd, 0) * 1e6) / 1e6;
+    const g = E.h.get_job({ job_id: id }).job.cost.spent_usd;
+    const l = E.h.list_jobs({ limit: 100 }).jobs.find((j) => j.job_id === id).cost.spent_usd;
+    const r = (await E.h.get_result({ job_id: id })).cost.spent_usd;
+    if (g !== sum || l !== sum || r !== sum) viol(`${label} ${id}: reports get=${g} list=${l} result=${r} ledger=${sum}`);
+  }
+  const ov = overlap(E, ids); if (ov.length) viol(`${label}: ${ov.join('; ')}`);
+}
+
+async function waitLeave(pids, label, ms = 20000) {
+  const until = Date.now() + ms;
+  while (Date.now() < until) { if (!pids.some((p) => pidAlive(p))) return; await sleep(50); }
+  const live = pids.filter((p) => pidAlive(p));
+  const recycled = live.filter((p) => killedSet.has(p)); if (recycled.length) say('NOTE pids I hard-killed that still answer as alive (pid reuse?): ' + recycled.join(','));
+  if (live.filter((p) => !killedSet.has(p)).length) { viol(`${label}: runners ${live} did not leave by themselves`); for (const p of live) { try { const r = (await import('node:child_process')).execSync(`powershell -NoProfile -Command "$p=Get-Process -Id ${p}; 'cpu='+$p.CPU+' threads='+$p.Threads.Count+' states='+(($p.Threads|%{$_.ThreadState+'/'+$_.WaitReason}) -join ',')+' start='+$p.StartTime"`).toString(); say('DIAGPROC ' + p + ' ' + r.trim()); const r2 = (await import('node:child_process')).execSync(`powershell -NoProfile -Command "(Get-CimInstance Win32_Process -Filter 'ProcessId=${p}').CommandLine"`).toString(); say('DIAGCMD ' + r2.trim()); } catch (e) { say('DIAGPROC failed ' + e.message.slice(0,100)); } } for (const d of fs.readdirSync(E.config.jobsDir)) { const lg = readRaw(E.jobPath(d, 'runner.log')) || ''; const mine = lg.split(String.fromCharCode(10)).filter((l) => live.some((p) => l.includes('runner ' + p + ' '))); say('DIAG job ' + d + ' state ' + E.job(d)?.state + ' pidfile ' + E.runnerPid(d) + ' alive-runner-lines ' + mine.length); mine.slice(-12).forEach((l) => say('DIAG   ' + l.slice(0, 260))); } for (const p of live) await killMine(p); stats.kills--; }
+}
+
+try {
+  startPs();
+  await sleep(1500);
+  const N = Number(countS);
+  for (let s = 0; s < N; s++) {
+    if (kind === 'susp' || kind === 'cap') {
+      const two = kind === 'susp' && s % 2 === 1;
+      const jobs = [];
+      for (let k = 0; k < (two ? 2 : 1); k++) { const pdf = E.pdf(`k-${kind}-${seedS}-${s}-${k}.pdf`, `${kind} ${seedS} ${s} ${k}`); jobs.push({ pdf, id: startAgain(pdf).job_id }); }
+      const A = jobs[0]; const before = Array.from(E.spawned);
+      // wait for a random time into the job, approving as asked
+      const t0 = Date.now(); const wait = ri(150, kind === 'cap' ? 2600 : 2200);
+      while (Date.now() - t0 < wait) { for (const j of jobs) { const v = E.job(j.id); if (v.state === 'awaiting_approval' && !v.approval) E.approve(j.id); } await sleep(10); }
+      const r1 = E.runnerPid(A.id);
+      if (E.job(A.id).state === 'done' || !r1 || !pidAlive(r1)) { await Promise.all(jobs.map((j) => finish(j.id, j.pdf))); await verify(jobs.map((j) => j.id), `${kind}#${s} (too late)`); continue; }
+      await suspend(r1);
+      // wait until the engine says it is not alive
+      const w0 = Date.now();
+      while (Date.now() - w0 < 6000) { if (E.h.get_job({ job_id: A.id }).job.runner.alive === false) break; await sleep(40); }
+      let r2 = null;
+      try { startAgain(A.pdf); } catch (e) { viol('start_simulation threw ' + e.message); }
+      await sleep(ri(0, 80));
+      for (let i = 0; i < 100; i++) { const p = E.runnerPid(A.id); if (p && p !== r1) { r2 = p; break; } await sleep(30); }
+      if (r2) stats.takeovers++;
+      await sleep(ri(0, 1400));
+      await resume(r1); stats.woke_replaced++;
+      // optionally kill the second runner at a random moment after the wake
+      let killed = null;
+      if (R() < 0.6 && r2) { await sleep(ri(0, 500)); if (pidAlive(r2)) { await killMine(r2); killed = r2; } }
+      // optionally a third takeover by suspending the then-owner
+      if (R() < 0.3) { const p3 = E.runnerPid(A.id); if (p3 && pidAlive(p3) && p3 !== r1 && E.job(A.id).state !== 'done') { await suspend(p3); await sleep(1300); try { startAgain(A.pdf); } catch {} await sleep(ri(100, 600)); await resume(p3); stats.takeovers++; stats.woke_replaced++; } }
+      const ok = await finish(A.id, A.pdf, [55, 100]);
+      await Promise.all(jobs.slice(1).map((j) => finish(j.id, j.pdf)));
+      // wake anything suspended that is still alive (safety) and wait for all to leave
+      await waitLeave(Array.from(E.spawned).filter((p) => !before.includes(p)), `${kind}#${s}`);
+      await verify(jobs.map((j) => j.id), `${kind}#${s}${two ? '(2 jobs)' : ''}`);
+      say(`scenario ${kind}#${s} two=${two} r1=${r1} r2=${r2} killed2=${killed} done=${ok} spent=${E.job(A.id).cost.spent_usd}`);
+    } else if (kind === 'storm') {
+      const pdf = E.pdf(`k-storm-${seedS}-${s}.pdf`, `storm ${seedS} ${s}`);
+      const id = startAgain(pdf).job_id;
+      const t0 = Date.now(); const wait = ri(100, 2400);
+      while (Date.now() - t0 < wait) { const v = E.job(id); if (v.state === 'awaiting_approval' && !v.approval) E.approve(id); await sleep(10); }
+      const r1 = E.runnerPid(id);
+      if (E.job(id).state === 'done' || !r1 || !pidAlive(r1)) { await finish(id, pdf); await verify([id], `storm#${s} (too late)`); continue; }
+      await killMine(r1);
+      // storm: handler calls and CLI resumes at slightly random times
+      const cliPids = [];
+      const calls = ri(4, 8);
+      for (let k = 0; k < calls; k++) {
+        if (R() < 0.35) { const c = execFile(process.execPath, ['C:/RnD/Projects/3Dengine/engine/cli.mjs', 'resume', id], { env: controlMod.configEnv(E.config) }, () => {}); cliPids.push(c.pid); E.spawned.add(c.pid); }
+        else { try { startAgain(pdf); } catch (e) { if (!/lock busy/.test(e.message)) viol('start threw ' + e.message); } }
+        await sleep(ri(0, 60));
+      }
+      // kill the current owner(s) once or twice at random moments
+      const kills = ri(1, 2);
+      for (let k = 0; k < kills; k++) {
+        await sleep(ri(40, 700));
+        const p = E.runnerPid(id);
+        if (p && pidAlive(p) && E.spawned.has(p) && E.job(id).state !== 'done') { await killMine(p); stats.takeovers++; }
+      }
+      const ok = await finish(id, pdf);
+      await waitLeave(Array.from(E.spawned).filter((p) => !cliPids.includes(p)), `storm#${s}`, 25000);
+      await verify([id], `storm#${s}`);
+      say(`scenario storm#${s} calls=${calls} kills=${kills + 1} done=${ok}`);
+    } else if (kind === 'lock') {
+      // a REAL process that holds job.lock is hard-killed; a resume must not be blocked for more than ~2 s
+      const pdf = E.pdf(`k-lock-${seedS}-${s}.pdf`, `lock ${seedS} ${s}`);
+      const id = startAgain(pdf).job_id;
+      await sleep(ri(300, 1500));
+      for (let i = 0; i < 100; i++) { const v = E.job(id); if (v.state === 'awaiting_approval' && !v.approval) E.approve(id); await sleep(10); if (E.runnerPid(id)) break; }
+      const r1 = E.runnerPid(id);
+      if (r1 && pidAlive(r1)) await killMine(r1);
+      const mode = s % 3;
+      const holderSrc = `${SC}/lockholder.mjs`;
+      const hp = spawn(process.execPath, [holderSrc, E.config.jobsDir, id, String(mode), E.config.runner.heavyLock], { stdio: 'ignore' });
+      E.spawned.add(hp.pid);
+      const lockFile = mode === 2 ? `${E.config.runner.heavyLock}.guard` : E.jobPath(id, 'job.lock');
+      await E.waitFor('holder has the lock', () => fs.existsSync(lockFile) && readRaw(lockFile)?.trim() === String(hp.pid), 8000, 5);
+      await killMine(hp.pid);
+      const t0 = Date.now();
+      try { startAgain(pdf); } catch (e) { viol(`lock#${s} start after dead holder threw: ${e.message}`); }
+      const tStart = Date.now() - t0;
+      let tOwn = null;
+      for (let i = 0; i < 400; i++) { const p = E.runnerPid(id); if (p && p !== r1 && pidAlive(p)) { tOwn = Date.now() - t0; break; } await sleep(10); }
+      say(`scenario lock#${s} mode=${['job.lock','job.lock+heavy?','heavy.guard'][mode]} start_simulation ${tStart} ms, new runner owns pid after ${tOwn} ms`);
+      if (tStart > 2500 || tOwn === null || tOwn > 3500) viol(`lock#${s}: resume blocked: start ${tStart} ms own ${tOwn} ms`);
+      const ok = await finish(id, pdf);
+      await waitLeave(Array.from(E.spawned).filter((p) => p !== hp.pid), `lock#${s}`);
+      await verify([id], `lock#${s}`);
+    }
+  }
+} catch (e) {
+  viol('script error ' + (e.stack || e.message));
+} finally {
+  try { ps?.stdin.end(); ps?.kill(); } catch {}
+  // resume anything I suspended that is still alive, then clean
+  await E.cleanup();
+  say(`SUMMARY ${kind} seed=${seedS} ${JSON.stringify(stats)} leftover=${JSON.stringify(E.leftover)}`);
+  fs.writeFileSync(`${SC}/k8-${kind}-${seedS}-out.txt`, out.join('\n') + '\n');
+}
+=== lockholder.mjs
+// qa-r8 lockholder: holds job.lock (mode 0/1) or the heavy lock's guard (mode 2) until it is killed.
+import { pathToFileURL } from 'node:url';
+const R = 'C:/RnD/Projects/3Dengine/engine';
+const { withJobLock } = await import(pathToFileURL(`${R}/jobs.mjs`).href);
+const { withFileLock } = await import(pathToFileURL(`${R}/lib/atomic.mjs`).href);
+const { sleepSync } = await import(pathToFileURL(`${R}/lib/proc.mjs`).href);
+const [jobsDir, id, mode, heavy] = process.argv.slice(2);
+const hold = () => { for (;;) sleepSync(200); };
+if (mode === '2') withFileLock(`${heavy}.guard`, hold, { waitMs: 5000 });
+else withJobLock(jobsDir, id, hold, { waitMs: 5000 });

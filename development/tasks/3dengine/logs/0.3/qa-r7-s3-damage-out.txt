@@ -1,0 +1,137 @@
+jobs: D=548cfa07f476d0b1 (done) A=9c4d0166498c3217 (awaiting_approval) S=2592762eb2ef44cc (skinning, rows reserved)
+[deleted/D] get_job=0 list=0 result=0 cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[deleted/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[deleted/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=0
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=false after 1118ms state=done sends=1 runner.pid present=false ledger untouched=false stray folders=no
+[truncated/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[truncated/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[truncated/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 127ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[empty/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[empty/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[empty/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 114ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[array/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[array/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[array/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 114ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[rowsNull/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[rowsNull/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[rowsNull/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 118ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[garbage/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[garbage/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[garbage/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 117ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[jsonNull/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[jsonNull/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[jsonNull/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 114ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[jsonStr/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[jsonStr/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[jsonStr/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 122ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[jsonNum/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[jsonNum/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[jsonNum/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 116ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[rows12/D] get_job=0 list=0 result=0 cli job--json=0 jobs--json=0 | job rc=0 ledger rc=1 ledger--json rc=0 jobs rc=0
+[rows12/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=1 ledger--json rc=0 jobs rc=0
+[rows12/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=1 ledger--json rc=0 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=0
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 300ms state=failed sends=0 runner.pid present=false ledger untouched=true stray folders=2592762eb2ef44cc,548cfa07f476d0b1,9c4d0166498c3217,undefined
+PROBLEM [rows12] runner wrote a ledger outside the job folder: 2592762eb2ef44cc,548cfa07f476d0b1,9c4d0166498c3217,undefined
+[rowsStr/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[rowsStr/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[rowsStr/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 127ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[emptyObj/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[emptyObj/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[emptyObj/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 113ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[rowsEmpty/D] get_job=0 list=0 result=0 cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[rowsEmpty/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[rowsEmpty/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=0
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 310ms state=failed sends=0 runner.pid present=false ledger untouched=true stray folders=2592762eb2ef44cc,548cfa07f476d0b1,9c4d0166498c3217,undefined
+PROBLEM [rowsEmpty] runner wrote a ledger outside the job folder: 2592762eb2ef44cc,548cfa07f476d0b1,9c4d0166498c3217,undefined
+[rowsObj/D] get_job=0 list=0 result=0 cli job--json=0 jobs--json=0 | job rc=0 ledger rc=1 ledger--json rc=0 jobs rc=0
+PROBLEM [rowsObj/D] job.json written by a read though ledger unreadable
+PROBLEM [rowsObj/D] CLI job exit 0, stderr names job: false ()
+PROBLEM [rowsObj/D] CLI ledger exit 1, names job: false
+PROBLEM [rowsObj/D] CLI ledger --json exit 0
+[rowsObj/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=1 ledger--json rc=0 jobs rc=0
+PROBLEM [rowsObj/A] CLI job exit 0, stderr names job: false ()
+PROBLEM [rowsObj/A] CLI ledger exit 1, names job: false
+PROBLEM [rowsObj/A] CLI ledger --json exit 0
+[rowsObj/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=1 ledger--json rc=0 jobs rc=0
+PROBLEM [rowsObj/S] CLI job exit 0, stderr names job: false ()
+PROBLEM [rowsObj/S] CLI ledger exit 1, names job: false
+PROBLEM [rowsObj/S] CLI ledger --json exit 0
+   start_simulation(D done) -> created=false resumed=false spent=0
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 305ms state=failed sends=0 runner.pid present=false ledger untouched=true stray folders=2592762eb2ef44cc,548cfa07f476d0b1,9c4d0166498c3217,undefined
+PROBLEM [rowsObj] job moved to failed
+PROBLEM [rowsObj] a stage ran: 2026-11-17T02:39:19.348Z runner 19028 skinning: attempt 2 started
+[rowsNullEl/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[rowsNullEl/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[rowsNullEl/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 125ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[otherJob/D] get_job=0 list=0 result=0 cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[otherJob/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[otherJob/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=0
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 364ms state=failed sends=0 runner.pid present=false ledger untouched=true stray folders=2592762eb2ef44cc,548cfa07f476d0b1,9c4d0166498c3217,ffffffffffffffff
+PROBLEM [otherJob] runner wrote a ledger outside the job folder: 2592762eb2ef44cc,548cfa07f476d0b1,9c4d0166498c3217,ffffffffffffffff
+[noRows/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[noRows/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[noRows/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 125ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+[rowsSettledText/D] get_job=5 list=5 result=5 cli job--json=5 jobs--json=5 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[rowsSettledText/A] get_job=5 list=5 result=undefined cli job--json=5 jobs--json=5 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[rowsSettledText/S] get_job=5 list=5 result=undefined cli job--json=5 jobs--json=5 | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=5
+   cancel_job(S) -> state=cancelled spent=5; ledger untouched=true
+   RUNNER on S: left=true after 1175ms state=done sends=1 runner.pid present=false ledger untouched=false stray folders=no
+[hugeRow/D] get_job=null list=null result=null cli job--json=null jobs--json=null | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[hugeRow/A] get_job=null list=null result=undefined cli job--json=null jobs--json=null | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+[hugeRow/S] get_job=null list=null result=undefined cli job--json=null jobs--json=null | job rc=0 ledger rc=0 ledger--json rc=0 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=Infinity
+   cancel_job(S) -> state=cancelled spent=Infinity; ledger untouched=true
+   RUNNER on S: left=false after 24934ms state=awaiting_approval sends=0 runner.pid present=true ledger untouched=true stray folders=no
+[bom/D] get_job=1.8 list=1.8 result=1.8 cli job--json=1.8 jobs--json=1.8 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[bom/A] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+[bom/S] get_job=0 list=0 result=undefined cli job--json=0 jobs--json=0 | job rc=1 ledger rc=1 ledger--json rc=1 jobs rc=0
+   start_simulation(D done) -> created=false resumed=false spent=1.8
+   cancel_job(S) -> state=cancelled spent=0; ledger untouched=true
+   RUNNER on S: left=true after 125ms state=skinning sends=0 runner.pid present=false ledger untouched=true stray folders=no
+cases 60, PROBLEMS 15

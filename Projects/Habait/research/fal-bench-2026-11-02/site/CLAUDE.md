@@ -1,11 +1,11 @@
 # site/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The static comparison site for Eliran (index.html, files.json, media/) built from the bench outputs.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 2 files here · 1 subfolders · 49 files / 34.3 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

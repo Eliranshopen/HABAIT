@@ -1,11 +1,11 @@
 # D-branch/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Track D outputs of the fal bench: anchored video branches (-anchor mp4s) per model with .json metadata.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 14 files here · 0 subfolders · 14 files / 68.9 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

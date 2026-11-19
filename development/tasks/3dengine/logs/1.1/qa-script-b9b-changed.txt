@@ -1,0 +1,38 @@
+// A scanner copy that waits 4 s; ANOTHER PROCESS changes the PDF 1.5 s into the look (the handler blocks its own event loop).
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, startServer, sleep } from './qa-lib.mjs';
+const { inspectDir } = await E('engine/inspect.mjs');
+const pipe = `${SCR}/pipe-slow`; fs.mkdirSync(`${pipe}/Habait/tour360/tools`, { recursive: true });
+const src = fs.readFileSync('C:/RnD/Projects/3Dengine/pipeline/Habait/tour360/tools/auto_pages.py', 'utf8');
+fs.writeFileSync(`${pipe}/Habait/tour360/tools/auto_pages.py`, src.replace(/def scan\(pdf, out, min_side\):\r?\n/, 'def scan(pdf, out, min_side):\n    import time; time.sleep(4)\n'));
+const h = await makeHome({ pipelineRoot: pipe, timeout: 60 });
+const H = (await engineOf(h)).handlers;
+const bad = []; let n = 0;
+const changer = (p, mode) => spawn(process.execPath, ['-e', `setTimeout(()=>{const fs=require('fs');const p=${JSON.stringify(p)};const m=${JSON.stringify(mode)};if(m==='append a byte')fs.appendFileSync(p,'%');else if(m==='delete')fs.rmSync(p);else if(m==='replace with other PDF')fs.writeFileSync(p,fs.readFileSync(${JSON.stringify(SCR + '/pdfs/scan-sheet.pdf')}));else if(m==='same bytes rewritten')fs.writeFileSync(p,fs.readFileSync(p));},1500)`], { stdio: 'ignore' });
+for (const tool of ['inspect_plan', 'start_simulation']) {
+  for (const mode of ['append a byte', 'delete', 'replace with other PDF', 'same bytes rewritten']) {
+    const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from(`\n% ${tool} ${mode}\n`)]); const p = `${h.inbox}/slow.pdf`; fs.writeFileSync(p, b); const S = sha(b);
+    const c = changer(p, mode); n++;
+    let ans; try { const r = await H[tool]({ pdf_path: p }); ans = 'OK ' + (r.candidates?.length ?? r.job_id); } catch (e) { ans = `${e.code || e.name}: ${e.message}`; }
+    await new Promise((r) => c.once('exit', r));
+    const kept = fs.existsSync(inspectDir(h.config, S)); const tmp = fs.readdirSync(`${h.home}/.runtime/inspect`).filter((x) => x.startsWith('.tmp'));
+    const jobs = fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir).length : 0;
+    console.log(`${tool.padEnd(16)} PDF ${mode.padEnd(24)} → ${ans.slice(0, 90)} | look kept under old hash: ${kept} | temp left: ${tmp.length} | jobs so far: ${jobs}`);
+    if (mode !== 'same bytes rewritten' && (kept || !/NOT_A_PDF/.test(ans))) bad.push(`${tool}/${mode}`);
+    fs.rmSync(p, { force: true });
+  }
+}
+// what the server answers when the look cannot be stored
+{
+  const h2 = await makeHome({ timeout: 30 }); fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${h2.inbox}/v.pdf`);
+  fs.mkdirSync(`${h2.home}/.runtime`, { recursive: true }); fs.writeFileSync(`${h2.home}/.runtime/inspect`, 'file');
+  const srv = startServer(h2); await srv.init();
+  const r = await srv.call('inspect_plan', { pdf_path: `${h2.inbox}/v.pdf` }); n++;
+  console.log('server, look cannot be stored: line =', r.l.slice(0, 400));
+  const s = await srv.call('start_simulation', { pdf_path: `${h2.inbox}/v.pdf` }); n++;
+  console.log('server start_simulation: ', s.l.slice(0, 300), '| jobs dir exists', fs.existsSync(h2.jobsDir));
+  await srv.stop(); await sleep(500); cleanup(h2);
+}
+console.log('ATTEMPTS', n, 'BAD', JSON.stringify(bad));
+cleanup(h);

@@ -1,0 +1,84 @@
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, sleep } from './qa-lib.mjs';
+const { inspectPdf, inspectDir } = await E('engine/inspect.mjs');
+let n = 0; const bad = [];
+// --- concurrent looks of one PDF from three processes at one moment (real scanner)
+{
+  const h = await makeHome({ timeout: 90 });
+  const res = [];
+  for (let r = 0; r < 8; r++) {
+    const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/booklet3.pdf`), Buffer.from(`\n% c${r}\n`)]); const p = `${h.inbox}/c${r}.pdf`; fs.writeFileSync(p, b); const S = sha(b);
+    const go = Date.now() + 2500;
+    const procs = [0, 1, 2].map(() => spawn(process.execPath, [`${SCR}/qa-worker.mjs`, 'inspect_plan', p, String(go)], { env: { ...process.env, ...h.env }, stdio: ['ignore', 'pipe', 'pipe'] }));
+    const outs = await Promise.all(procs.map((q) => new Promise((ok) => { let o = ''; q.stdout.on('data', (d) => { o += d; }); q.stderr.on('data', (d) => { o += d; }); q.on('exit', () => ok(o.trim().split('\n').pop())); })));
+    n += 3;
+    const parsed = outs.map((o) => { try { return JSON.parse(o); } catch { return { raw: o.slice(0, 150) }; } });
+    const allOk = parsed.every((x) => x.ok && x.cands === 3);
+    const rec = (() => { try { return JSON.parse(fs.readFileSync(`${inspectDir(h.config, S)}/inspect.json`, 'utf8')); } catch { return null; } })();
+    const thumbs = fs.existsSync(inspectDir(h.config, S)) ? fs.readdirSync(inspectDir(h.config, S)).filter((f) => f.startsWith('thumb-')).length : 0;
+    res.push(`${allOk && rec && thumbs === 3 ? 'ok' : 'BAD'}(thumbs ${thumbs})`);
+    if (!(allOk && rec && thumbs === 3)) { bad.push('concurrent ' + r); console.log(JSON.stringify(parsed)); }
+  }
+  const left = fs.readdirSync(`${h.home}/.runtime/inspect`).filter((x) => x.startsWith('.tmp'));
+  console.log('concurrent looks (8 rounds x 3 procs):', res.join(' '), '| temp folders left:', JSON.stringify(left));
+  // dead / live temp sweep
+  const S2 = sha(fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`)); fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${h.inbox}/v.pdf`);
+  const dead = `${h.home}/.runtime/inspect/.tmp-${'a'.repeat(64)}-99999991-1`; fs.mkdirSync(dead, { recursive: true }); fs.writeFileSync(`${dead}/x`, '1');
+  const live = spawn(process.execPath, ['-e', 'setTimeout(()=>{},30000)'], { stdio: 'ignore' });
+  const livedir = `${h.home}/.runtime/inspect/.tmp-${'b'.repeat(64)}-${live.pid}-1`; fs.mkdirSync(livedir, { recursive: true });
+  const odd = `${h.home}/.runtime/inspect/.tmp-notmine`; fs.mkdirSync(odd, { recursive: true });
+  const H = (await engineOf(h)).handlers; await H.inspect_plan({ pdf_path: `${h.inbox}/v.pdf` }); n++;
+  console.log('sweep: dead-pid temp removed', !fs.existsSync(dead), '| live-pid temp kept', fs.existsSync(livedir), '| non-matching name kept', fs.existsSync(odd));
+  if (fs.existsSync(dead) || !fs.existsSync(livedir)) bad.push('sweep');
+  live.kill(); cleanup(h);
+}
+// --- scanner copy that waits 3 s: the PDF changes / goes away while it reads
+{
+  const pipe = `${SCR}/pipe-slow`; fs.mkdirSync(`${pipe}/Habait/tour360/tools`, { recursive: true });
+  const src = fs.readFileSync('C:/RnD/Projects/3Dengine/pipeline/Habait/tour360/tools/auto_pages.py', 'utf8');
+  fs.writeFileSync(`${pipe}/Habait/tour360/tools/auto_pages.py`, src.replace('def scan(pdf, out, min_side):\n', 'def scan(pdf, out, min_side):\n    import time; time.sleep(3)\n'));
+  const h = await makeHome({ pipelineRoot: pipe, timeout: 60 });
+  const H = (await engineOf(h)).handlers;
+  for (const mode of ['append a byte', 'delete', 'replace with other PDF']) {
+    const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from(`\n% slow ${mode}\n`)]); const p = `${h.inbox}/slow.pdf`; fs.writeFileSync(p, b); const S = sha(b);
+    const t = setTimeout(() => { if (mode === 'append a byte') fs.appendFileSync(p, '%'); else if (mode === 'delete') fs.rmSync(p); else fs.writeFileSync(p, fs.readFileSync(`${SCR}/pdfs/scan-sheet.pdf`)); }, 1500);
+    n++;
+    let ans; try { const r = await H.inspect_plan({ pdf_path: p }); ans = 'OK ' + r.candidates.length; } catch (e) { ans = `${e.code}: ${e.message}`; }
+    clearTimeout(t);
+    const kept = fs.existsSync(inspectDir(h.config, S)); const tmp = fs.readdirSync(`${h.home}/.runtime/inspect`).filter((x) => x.startsWith('.tmp'));
+    console.log(`PDF ${mode} while read →`, ans, '| kept under old hash:', kept, '| temp left:', JSON.stringify(tmp));
+    if (kept || !/NOT_A_PDF/.test(ans)) bad.push('changed-while-read ' + mode);
+    fs.rmSync(p, { force: true });
+  }
+  // start_simulation: PDF removed while the look runs
+  {
+    const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from('\n% slow start\n')]); const p = `${h.inbox}/slow2.pdf`; fs.writeFileSync(p, b);
+    setTimeout(() => fs.rmSync(p), 1500); n++;
+    try { await H.start_simulation({ pdf_path: p }); bad.push('start ok?'); console.log('start with removed PDF: OK?!'); } catch (e) { console.log('start_simulation, PDF removed during the look →', e.code, e.message, '| job folders:', fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir).length : 0); }
+  }
+  cleanup(h);
+}
+// --- toolchain / storage failures
+{
+  const h = await makeHome({ timeout: 30 }); const H = (await engineOf(h)).handlers;
+  fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${h.inbox}/v.pdf`);
+  const tryit = async (label) => { n++; try { const r = await H.inspect_plan({ pdf_path: `${h.inbox}/v.pdf` }); console.log(label, '→ OK', r.candidates.length); } catch (e) { console.log(label, '→', e.code || e.name, '|', String(e.message).slice(0, 140)); if (!e.code) bad.push('raw error: ' + label); } };
+  // runtime/inspect is a FILE
+  fs.mkdirSync(`${h.home}/.runtime`, { recursive: true }); fs.writeFileSync(`${h.home}/.runtime/inspect`, 'i am a file');
+  await tryit('.runtime/inspect is a file');
+  fs.rmSync(`${h.home}/.runtime/inspect`); fs.rmSync(`${h.home}/.runtime`, { recursive: true }); fs.writeFileSync(`${h.home}/.runtime`, 'file');
+  await tryit('.runtime is a file');
+  fs.rmSync(`${h.home}/.runtime`);
+  // target dir is a file
+  const S = sha(fs.readFileSync(`${h.inbox}/v.pdf`)); fs.mkdirSync(`${h.home}/.runtime/inspect`, { recursive: true }); fs.writeFileSync(`${h.home}/.runtime/inspect/${S}`, 'file');
+  await tryit('inspect/<sha> is a file');
+  cleanup(h);
+  // python missing / scanner missing / python is a directory
+  for (const [label, extra] of [['python missing', { python: 'C:/nope/python.exe' }], ['pipelineRoot missing', { pipelineRoot: 'C:/nope/pipe' }], ['python is a directory', { python: 'C:/Windows' }]]) {
+    const hh = await makeHome({ timeout: 30, extra }); const HH = (await engineOf(hh)).handlers; fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${hh.inbox}/v.pdf`); n++;
+    try { await HH.inspect_plan({ pdf_path: `${hh.inbox}/v.pdf` }); console.log(label, 'OK?!'); bad.push(label); } catch (e) { console.log(label, '→', e.code || e.name, '|', String(e.message).slice(0, 110)); if (e.code !== 'TOOLCHAIN_MISSING') bad.push(label + ' ' + e.code); }
+    cleanup(hh);
+  }
+}
+console.log('ATTEMPTS', n, 'BAD', JSON.stringify(bad));

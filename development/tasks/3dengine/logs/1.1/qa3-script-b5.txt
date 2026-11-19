@@ -1,0 +1,54 @@
+// B2 (runner): a real runner on a job whose job.json / manifest.json are not its own; hash everything.
+import fs from 'node:fs';
+import { makeHome, E, sha, cleanup, snapshot, diffSnap, runRunner } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const GOLD = `${R}/tests/fixtures/apt846/source.pdf`;
+const SHA = sha(fs.readFileSync(GOLD));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const mf = (id, rows = []) => JSON.stringify({ schema: 'habait/manifest.v1', job_id: id, rows });
+const row = { stage: 'tracing', attempt: 1, status: 'done', inputs_sha256: 'a'.repeat(64), outputs: [] };
+const V = {
+  'manifest other id': (jd) => fs.writeFileSync(`${jd}/manifest.json`, mf('ffffffffffffffff')),
+  'manifest none id': (jd) => fs.writeFileSync(`${jd}/manifest.json`, JSON.stringify({ schema: 'habait/manifest.v1', rows: [] })),
+  'manifest garbage': (jd) => fs.writeFileSync(`${jd}/manifest.json`, '??'),
+  'manifest empty': (jd) => fs.writeFileSync(`${jd}/manifest.json`, ''),
+  'manifest dir': (jd) => fs.mkdirSync(`${jd}/manifest.json`),
+  'manifest BOM': (jd) => fs.writeFileSync(`${jd}/manifest.json`, '\ufeff' + mf(ID)),
+  'manifest bad stage': (jd) => fs.writeFileSync(`${jd}/manifest.json`, mf(ID, [{ ...row, stage: '../x' }])),
+  'manifest bad output path': (jd) => fs.writeFileSync(`${jd}/manifest.json`, mf(ID, [{ ...row, outputs: [{ path: '..\\..\\x', sha256: 'b'.repeat(64), bytes: 1 }] }])),
+  'manifest bad attempt': (jd) => fs.writeFileSync(`${jd}/manifest.json`, mf(ID, [{ ...row, attempt: 0 }])),
+  'job.json other id': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.job_id = '0123456789abcdef'; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json none id': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); delete j.job_id; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json garbage': (jd) => fs.writeFileSync(`${jd}/job.json`, 'zz'),
+  'job.json empty': (jd) => fs.writeFileSync(`${jd}/job.json`, ''),
+  'job.json dir': (jd) => { fs.rmSync(`${jd}/job.json`); fs.mkdirSync(`${jd}/job.json`); },
+  'job.json BOM': (jd) => fs.writeFileSync(`${jd}/job.json`, '\ufeff' + fs.readFileSync(`${jd}/job.json`, 'utf8')),
+  'job.json state weird': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.state = '../../x'; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json input hash moved': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.input.pdf_sha256 = 'c'.repeat(64); fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json apartment moved': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.input.apartment = 'p2'; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json mode moved': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.mode = 'real'; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json engine_version moved': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.engine_version = '9.9.9'; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json engine_version null': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.engine_version = null; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json engine_version removed (pre-1.1 form) + pdf swapped+hash rewritten': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); delete j.engine_version; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+};
+for (const [label, plant] of Object.entries(V)) {
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  const { createStubEngine } = await E('mcp/stub-engine.mjs');
+  const eng = createStubEngine(h.config, { spawnRunner: () => {}, ensureServe: async () => {} });
+  await eng.handlers.start_simulation({ pdf_path: `${h.inbox}/s.pdf` });
+  // a bystander job with a different apartment? use a second PDF -> second job
+  fs.copyFileSync('C:/Users/elira/AppData/Local/Temp/qa-m11-r3-s/pdfs/vec-sheet.pdf', `${h.inbox}/v.pdf`);
+  const by = await eng.handlers.start_simulation({ pdf_path: `${h.inbox}/v.pdf` });
+  const jd = `${h.jobsDir}/${ID}`;
+  plant(jd);
+  const before = snapshot(h.jobsDir, (p) => /job\.lock|\.tmp$/.test(p));
+  const r = runRunner(h, ID, 30000);
+  await new Promise((x) => setTimeout(x, 200));
+  const after = snapshot(h.jobsDir, (p) => /job\.lock|\.tmp$/.test(p));
+  const ch = diffSnap(before, after);
+  const undefinedDir = fs.existsSync(`${h.jobsDir}/undefined`);
+  console.log(`## ${label}: exit ${r.status}${ch.length ? '  CHANGED: ' + ch.join(',') : '  (no file changed)'}${undefinedDir ? '  jobs/undefined EXISTS' : ''} | ${r.log.replace(/\s+/g, ' ').slice(0, 150)}`);
+  cleanup(h);
+}

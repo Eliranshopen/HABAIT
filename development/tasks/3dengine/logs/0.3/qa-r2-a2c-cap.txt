@@ -1,0 +1,49 @@
+  cap0 skinning:reserved 3408ms done
+VIOLATION: cap1 finishing:reserved 2819ms: setup cap $60 is below the estimate $75
+VIOLATION: cap2 finishing:reserved 3773ms: setup cap $60 is below the estimate $75
+  cap3 finishing 2803ms done
+  cap4 gating:reserved 3002ms done
+{
+ "script": "a2c-cap",
+ "seed": 701,
+ "takeovers": 3,
+ "kills": 0,
+ "jobsDone": 3,
+ "checks": 237,
+ "res": {
+  "cap0 skinning:reserved 3408ms": {
+   "rows": [
+    "skinning:failed:ns",
+    "skinning:settled",
+    "gating:settled",
+    "finishing:settled"
+   ],
+   "cap": 100,
+   "appr": 2
+  },
+  "cap3 finishing 2803ms": {
+   "rows": [
+    "skinning:settled",
+    "gating:settled",
+    "finishing:settled"
+   ],
+   "cap": 75,
+   "appr": 1
+  },
+  "cap4 gating:reserved 3002ms": {
+   "rows": [
+    "skinning:settled",
+    "gating:failed:ns",
+    "gating:settled",
+    "finishing:settled"
+   ],
+   "cap": 100,
+   "appr": 2
+  }
+ },
+ "violations": [
+  "cap1 finishing:reserved 2819ms: setup cap $60 is below the estimate $75",
+  "cap2 finishing:reserved 3773ms: setup cap $60 is below the estimate $75"
+ ],
+ "leftover": []
+}

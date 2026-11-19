@@ -1,0 +1,353 @@
+{
+ "at": "2026-11-09T14:01:20.477Z",
+ "base": "http://127.0.0.1:52370",
+ "stage": "C:\\Users\\elira\\AppData\\Local\\Temp\\claude\\76e6db1160dffba0\\bf387f38-6eee-4def-a2b7-39554f497b4b\\scratchpad\\stage-wt",
+ "sizes": {
+  "390": {
+   "poster": {
+    "complete": true,
+    "w": 720,
+    "src": "hero-poster-portrait.jpg",
+    "videoOpacity": "0"
+   },
+   "video": {
+    "src": "hero-portrait.mp4",
+    "paused": false,
+    "muted": true,
+    "loop": true,
+    "playsinline": true,
+    "preload": "metadata",
+    "w": 720,
+    "h": 1080,
+    "dur": 13.666667,
+    "playingClass": true,
+    "button": "playing",
+    "label": "השהיית הסרטון",
+    "t1": 1.0038,
+    "t2": 2.5047
+   },
+   "pause": {
+    "paused": true,
+    "t": [
+     2.7405,
+     2.7405
+    ],
+    "label": "הפעלת הסרטון"
+   },
+   "resume": true,
+   "lcp": [
+    {
+     "t": 100,
+     "el": "heroPoster",
+     "url": "hero-poster-portrait.jpg",
+     "size": 123702
+    }
+   ],
+   "cls": 0,
+   "videoPausedOffscreen": true,
+   "headerSolid": true,
+   "videoResumed": true,
+   "overflow": {
+    "doc": false,
+    "els": []
+   },
+   "badges": [
+    {
+     "img": "fixtures/rainbow/landing/hero-poster-1920.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-2-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-1-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-3-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-6-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/hero-poster-960.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/facade.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/interior-entrance.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/finish-parquet.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    }
+   ],
+   "targets": [],
+   "routes": [
+    {
+     "id": "heroCta",
+     "href": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+     "status": 200
+    },
+    {
+     "id": "closeCta",
+     "href": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+     "status": 200
+    },
+    {
+     "id": "barCta",
+     "href": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/studio/",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/apartment.html?project=rainbow&unit=846",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/tour/",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/hold/",
+     "status": 200
+    }
+   ],
+   "mentions846": 0,
+   "en": {
+    "dir": "ltr",
+    "lang": "en",
+    "promise": "Fly around the tower, then straight into the apartment. All of it a visualisation.",
+    "cta": "Tour the project",
+    "badge": "Render",
+    "title": "Rainbow Tel Aviv · Habait"
+   },
+   "overflowEn": {
+    "doc": false,
+    "els": []
+   },
+   "ctaHref": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+   "ctaOpens": {
+    "status": 200,
+    "url": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+    "title": "הדמיית ריחוף אינטראקטיבית — Rainbow TLV (טיוטה)",
+    "errors": []
+   },
+   "errors": [],
+   "http": [],
+   "reduced": {
+    "paused": true,
+    "t": 0,
+    "button": "paused",
+    "label": "הפעלת הסרטון",
+    "tapPlays": true
+   }
+  },
+  "1440": {
+   "poster": {
+    "complete": true,
+    "w": 720,
+    "src": "hero-poster-960.jpg",
+    "videoOpacity": "0"
+   },
+   "video": {
+    "src": "hero-1080.mp4",
+    "paused": false,
+    "muted": true,
+    "loop": true,
+    "playsinline": true,
+    "preload": "metadata",
+    "w": 1920,
+    "h": 1080,
+    "dur": 13.666667,
+    "playingClass": true,
+    "button": "playing",
+    "label": "השהיית הסרטון",
+    "t1": 1.0045,
+    "t2": 2.5094
+   },
+   "pause": {
+    "paused": true,
+    "t": [
+     2.6591,
+     2.6591
+    ],
+    "label": "הפעלת הסרטון"
+   },
+   "resume": true,
+   "lcp": [
+    {
+     "t": 104,
+     "el": "heroPoster",
+     "url": "hero-poster-960.jpg",
+     "size": 315496
+    }
+   ],
+   "cls": 0.000029673635223765433,
+   "videoPausedOffscreen": true,
+   "headerSolid": true,
+   "videoResumed": true,
+   "overflow": {
+    "doc": false,
+    "els": []
+   },
+   "badges": [
+    {
+     "img": "fixtures/rainbow/landing/hero-poster-1920.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-2-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-1-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-3-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/renders/the-6-1056.jpg",
+     "kind": "render",
+     "text": "הדמיה",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/hero-poster-960.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/facade.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/interior-entrance.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    },
+    {
+     "img": "fixtures/rainbow/landing/finish-parquet.jpg",
+     "kind": "ai",
+     "text": "הדמיה · AI-generated",
+     "ok": true
+    }
+   ],
+   "targets": [],
+   "routes": [
+    {
+     "id": "heroCta",
+     "href": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+     "status": 200
+    },
+    {
+     "id": "closeCta",
+     "href": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+     "status": 200
+    },
+    {
+     "id": "barCta",
+     "href": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/studio/",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/apartment.html?project=rainbow&unit=846",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/tour/",
+     "status": 200
+    },
+    {
+     "id": "fixed",
+     "href": "/hold/",
+     "status": 200
+    }
+   ],
+   "mentions846": 0,
+   "en": {
+    "dir": "ltr",
+    "lang": "en",
+    "promise": "Fly around the tower, then straight into the apartment. All of it a visualisation.",
+    "cta": "Tour the project",
+    "badge": "Render",
+    "title": "Rainbow Tel Aviv · Habait"
+   },
+   "overflowEn": {
+    "doc": false,
+    "els": []
+   },
+   "ctaHref": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+   "ctaOpens": {
+    "status": 200,
+    "url": "http://127.0.0.1:52370/hold/?tour=%2Ftour%2F%3Fscope%3Dapartment%26room%3DterraceLiving%26floor%3Dparquet%26video%3D0&from=platform&project=rainbow&orbit=http%3A%2F%2F127.0.0.1%3A52370%2Ffixtures%2Frainbow%2Forbit_fast.mp4",
+    "title": "הדמיית ריחוף אינטראקטיבית — Rainbow TLV (טיוטה)",
+    "errors": []
+   },
+   "errors": [],
+   "http": [],
+   "reduced": {
+    "paused": true,
+    "t": 0,
+    "button": "paused",
+    "label": "הפעלת הסרטון",
+    "tapPlays": true
+   }
+  }
+ },
+ "fails": [],
+ "pass": true
+}

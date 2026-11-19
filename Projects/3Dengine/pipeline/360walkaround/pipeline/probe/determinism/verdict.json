@@ -1,0 +1,32 @@
+{
+  "task": "board 360-v2 T03, acceptance criterion 3",
+  "room": "all",
+  "blender": "4.5.10 LTS",
+  "objects": 355,
+  "meshes_hashed": 285,
+  "scene_data_identical": true,
+  "object_transforms_identical": true,
+  "mesh_vertex_buffers_identical": true,
+  "container_bytes_identical": false,
+  "container_note": "informational. ENV.md §4.3 measured that a Blender container is not byte-stable even with identical payload; rail 2's manifest keys on INPUT hashes and any recorded output hash must be of decoded data.",
+  "A": {
+    "blend_bytes": 1086586,
+    "blend_sha256": "745fbea167bf8ead625d99b1f7158098abd0035e08b96a27c6e4624a149cce36",
+    "dump": "C:\\Users\\Admin\\AppData\\Local\\Temp\\360v2-determinism-w25xz0n3\\dump-A.json",
+    "dump_sha256": "1e83e98aaa47510a3824a6a314a36bb7dd1f6bea934333ed31801fa4763ef469",
+    "dump_bytes": 609633
+  },
+  "B": {
+    "blend_bytes": 1086396,
+    "blend_sha256": "7e403a21615e3dd2c3351c8afbf4be36af5a739905f5bafc3e9c649dd43de940",
+    "dump": "C:\\Users\\Admin\\AppData\\Local\\Temp\\360v2-determinism-w25xz0n3\\dump-B.json",
+    "dump_sha256": "1e83e98aaa47510a3824a6a314a36bb7dd1f6bea934333ed31801fa4763ef469",
+    "dump_bytes": 609633
+  },
+  "differences": [],
+  "evidence_files": [
+    "scene-dump-A.json",
+    "verdict.json"
+  ],
+  "evidence_note": "the two dumps were byte-identical, so only A is kept; verdict.json carries both sha256s"
+}

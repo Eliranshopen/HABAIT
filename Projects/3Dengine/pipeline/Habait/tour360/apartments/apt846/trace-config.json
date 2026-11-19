@@ -1,0 +1,630 @@
+{
+  "note": "trace-rooms.mjs config for apartment 846 — cameras in cm (crop frame = cameras.json px / 2.25); bars are virtual boundaries between open-plan zones, in cm",
+  "open_radius_px": 5,
+  "simplify_cm": 3,
+  "door_dilate_px": 5,
+  "cut_px": 8,
+  "near_wall_px": 16,
+  "dimension_min_cm": 100,
+  "straight_density_max": 4.5,
+  "blacklist_strokes": [],
+  "double_ignore_boxes": [
+    [
+      405,
+      518,
+      508,
+      640
+    ],
+    [
+      160,
+      1378,
+      335,
+      1445
+    ]
+  ],
+  "double_ignore_note": "the guest shower tray and the main bath tub: dense outlines that the double-line rule would turn into barriers",
+  "opening_min_cm": 60,
+  "stroke_ignore_boxes": [
+    [
+      365,
+      415,
+      560,
+      680
+    ],
+    [
+      150,
+      1150,
+      440,
+      1470
+    ]
+  ],
+  "stroke_ignore_note": "the two bathroom interiors: fixture outlines and dimension lines away from the walls are not barriers",
+  "front_door_gap": "gap-2",
+  "pane_kind_boxes": [
+    {
+      "box": [
+        1110,
+        700,
+        1180,
+        860
+      ],
+      "kind": "facade",
+      "why": "the curve's lower end: the living's glass, the zone bar hides the adjacency"
+    },
+    {
+      "box": [
+        1050,
+        935,
+        1100,
+        1035
+      ],
+      "kind": "facade",
+      "why": "south of the column: the start of the living's south-east glazing"
+    },
+    {
+      "box": [
+        930,
+        1205,
+        1010,
+        1400
+      ],
+      "kind": "facade",
+      "why": "the main bedroom's own east facade with its terrace door in it (the builder's Q01b finding: as a railing the bedroom was open to the sky above 110 cm)"
+    }
+  ],
+  "roofed_outdoor": true,
+  "roofed_note": "the terrace on floor 16 sits under the terrace above: a roofed deck, so outdoor rooms carry a ceiling slab (rooms[].roofed = true) and their camera points render",
+  "floor_height_cm": 5120,
+  "floor_height_note": "floor 16 at about 3.2 m floor to floor (an assumption: the sales plan carries no section); the ground sits that far below the unit",
+  "export_plan": "Habait/tour360/apartments/apt846/plan.general.json",
+  "walls_extracted": "Habait/tour360/apartments/apt846/_local/plan/walls-extracted.json",
+  "cameras_json": "Habait/tour360/apartments/apt846/cameras.json",
+  "apartment_id": "apt846",
+  "source_file": "apartments/apt846/_local/plan/plan-crop.png (a 288 dpi crop of the sales plan PDF 'דירה 846- 16.pdf', 1:50, DBLK 15.10.2025)",
+  "trace_date": "2026-10-28",
+  "scale_basis": "2.25 px/cm from the 1:50 sheet at 288 dpi; checked against the printed 342×275 (bedroom) and 348×344 (main bedroom): traced 9.31 and 12.19 m² against printed 9.41 and 11.97",
+  "rights_state": "partner-supplied",
+  "rights_note": "the developer's sales plan held by Slava; a private pitch only until Israel Canada consents (D-WQ-18, OWED-658)",
+  "ceiling_height_cm": 290,
+  "eye_cm": 160,
+  "assumptions": [
+    "ceiling 290 cm (a plan drawing has no section; the 846 renders assumed 2.9 m)",
+    "door heads 215 cm, railing 110 cm, facade glazing floor to ceiling",
+    "the open-plan zone boundaries (kitchen | dining | living | hall, the terrace split, the wardrobe | bedroom) are virtual lines placed by hand",
+    "the terrace's narrow south passage beyond the column is not a room",
+    "the guest bathroom and the main bathroom floors are the convex hulls of their traced regions"
+  ],
+  "blacklist_note": "fixture outlines and dimension lines inside the two bathrooms and the hall niche, by the ids of the run before this one; re-check the ids after any threshold change",
+  "bars": [
+    {
+      "name": "kitchen|dining",
+      "a": [
+        1045,
+        340
+      ],
+      "b": [
+        840,
+        805
+      ]
+    },
+    {
+      "name": "kitchen+dining|living",
+      "a": [
+        540,
+        686
+      ],
+      "b": [
+        1112,
+        862
+      ]
+    },
+    {
+      "name": "entrance|living",
+      "a": [
+        548,
+        686
+      ],
+      "b": [
+        165,
+        1000
+      ]
+    },
+    {
+      "name": "terraceLiving|terraceBedroom",
+      "a": [
+        960,
+        1225
+      ],
+      "b": [
+        1260,
+        1300
+      ]
+    },
+    {
+      "name": "wardrobe|bedroomMain",
+      "a": [
+        566,
+        1300
+      ],
+      "b": [
+        582,
+        1128
+      ]
+    },
+    {
+      "name": "door bathguest",
+      "a": [
+        450,
+        636
+      ],
+      "b": [
+        502,
+        568
+      ]
+    },
+    {
+      "name": "door bathMain",
+      "a": [
+        405,
+        1255
+      ],
+      "b": [
+        372,
+        1345
+      ]
+    },
+    {
+      "name": "terrace south end",
+      "a": [
+        1040,
+        1470
+      ],
+      "b": [
+        1230,
+        1540
+      ]
+    }
+  ],
+  "cameras": [
+    {
+      "id": "entrance",
+      "room_id": "r-entrance",
+      "name_he": "כניסה",
+      "name_en": "Entrance",
+      "type": "hall",
+      "at_cm": [
+        305,
+        768
+      ],
+      "links": [
+        "living",
+        "kitchen",
+        "bathguest"
+      ]
+    },
+    {
+      "id": "kitchen",
+      "room_id": "r-kitchen",
+      "name_he": "מטבח",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "at_cm": [
+        838,
+        532
+      ],
+      "links": [
+        "dining",
+        "living",
+        "entrance",
+        "bedroom2"
+      ]
+    },
+    {
+      "id": "dining",
+      "room_id": "r-dining",
+      "name_he": "פינת אוכל",
+      "name_en": "Dining",
+      "type": "hall",
+      "at_cm": [
+        926,
+        787
+      ],
+      "links": [
+        "kitchen",
+        "living",
+        "terraceLiving"
+      ]
+    },
+    {
+      "id": "living",
+      "room_id": "r-living",
+      "name_he": "סלון",
+      "name_en": "Living room",
+      "type": "living",
+      "at_cm": [
+        685,
+        935
+      ],
+      "links": [
+        "terraceLiving",
+        "dining",
+        "kitchen",
+        "entrance",
+        "bedroomMain"
+      ]
+    },
+    {
+      "id": "terraceLiving",
+      "room_id": "r-terrace-living",
+      "name_he": "מרפסת שמש",
+      "name_en": "Sun terrace",
+      "type": "balcony",
+      "is_outdoor": true,
+      "at_cm": [
+        1244,
+        956
+      ],
+      "links": [
+        "living",
+        "dining",
+        "terraceBedroom"
+      ]
+    },
+    {
+      "id": "terraceBedroom",
+      "room_id": "r-terrace-bedroom",
+      "name_he": "מרפסת · קצה החדרים",
+      "name_en": "Terrace, bedroom end",
+      "type": "balcony",
+      "is_outdoor": true,
+      "at_cm": [
+        1000,
+        1370
+      ],
+      "links": [
+        "terraceLiving"
+      ]
+    },
+    {
+      "id": "bedroomMain",
+      "room_id": "r-bedroom-main",
+      "name_he": "חדר שינה הורים",
+      "name_en": "Main bedroom",
+      "type": "bedroom",
+      "at_cm": [
+        631,
+        1467
+      ],
+      "links": [
+        "living",
+        "wardrobe"
+      ]
+    },
+    {
+      "id": "wardrobe",
+      "room_id": "r-wardrobe",
+      "name_he": "פינת ארונות",
+      "name_en": "Wardrobe",
+      "type": "storage",
+      "at_cm": [
+        435,
+        1324
+      ],
+      "links": [
+        "bedroomMain",
+        "bathMain"
+      ]
+    },
+    {
+      "id": "bathMain",
+      "room_id": "r-bath-main",
+      "name_he": "חדר רחצה הורים",
+      "name_en": "Main bathroom",
+      "type": "bathroom",
+      "hull": true,
+      "at_cm": [
+        305,
+        1296
+      ],
+      "links": [
+        "wardrobe"
+      ]
+    },
+    {
+      "id": "bedroom2",
+      "room_id": "r-bedroom-2",
+      "name_he": "חדר שינה",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "at_cm": [
+        667,
+        408
+      ],
+      "links": [
+        "kitchen"
+      ]
+    },
+    {
+      "id": "bathguest",
+      "room_id": "r-bath-guest",
+      "name_he": "חדר רחצה כללי",
+      "name_en": "Guest bathroom",
+      "type": "bathroom",
+      "hull": true,
+      "at_cm": [
+        463,
+        565
+      ],
+      "links": [
+        "entrance"
+      ]
+    }
+  ],
+  "fixtures_note": "card Q02b (2026-10-28): the furniture the sales plan draws, read off the gridded sheet by hand (tools/plan-grid.mjs --plan overlay checked by eye); rotated boxes in cm: centre, length along angle_deg (from +x toward +y, i.e. clockwise on the sheet), depth across, base z_cm, height_cm; showers are low trays so the bathrooms stay open",
+  "fixtures": [
+    {
+      "id": "k-counter",
+      "room": "kitchen",
+      "kind": "counter",
+      "centre_cm": [
+        731,
+        523.5
+      ],
+      "length_cm": 360,
+      "depth_cm": 65,
+      "angle_deg": 126,
+      "height_cm": 90,
+      "note": "the long leg of the L along the partition wall: the sink run",
+      "words_en": "a fitted bulthaup-style kitchen run standing against the wall behind it (not a freestanding island): handleless fronts in matte sand-grey lacquer with a recessed grip channel, a thin brushed stainless-steel worktop with a flush integrated sink and a slim stainless tap, a brushed stainless-steel function-wall splashback with one long rail, appliances fully integrated behind flush fronts; no wood, no stone"
+    },
+    {
+      "id": "k-tall",
+      "room": "kitchen",
+      "kind": "tall_unit",
+      "centre_cm": [
+        617,
+        682
+      ],
+      "length_cm": 60,
+      "depth_cm": 65,
+      "angle_deg": 126,
+      "height_cm": 220,
+      "note": "the oven column at the end of the run"
+    },
+    {
+      "id": "k-counter-2",
+      "room": "kitchen",
+      "kind": "counter",
+      "centre_cm": [
+        895,
+        459
+      ],
+      "length_cm": 185,
+      "depth_cm": 60,
+      "angle_deg": 36,
+      "height_cm": 90,
+      "note": "the short leg of the L: the hob run toward the facade",
+      "words_en": "the second leg of the fitted bulthaup-style kitchen, against the wall behind it (not an island): handleless fronts in matte sand-grey lacquer, the thin brushed stainless-steel worktop continuing, a flush black induction hob with a slim ceiling-flush extractor above it, the stainless function-wall splashback; no wood, no stone"
+    },
+    {
+      "id": "d-table",
+      "room": "dining",
+      "kind": "table",
+      "centre_cm": [
+        978,
+        692
+      ],
+      "length_cm": 120,
+      "depth_cm": 120,
+      "angle_deg": 36,
+      "height_cm": 75,
+      "note": "the round dining table (drawn as a box)",
+      "words_en": "a round light-oak dining table about 120 cm across with six upholstered chairs in sand linen around it; it is a dining table, NOT a kitchen island and NOT a counter"
+    },
+    {
+      "id": "l-sofa",
+      "room": "living",
+      "kind": "sofa",
+      "centre_cm": [
+        808,
+        905
+      ],
+      "length_cm": 225,
+      "depth_cm": 90,
+      "angle_deg": 19.6,
+      "height_cm": 75
+    },
+    {
+      "id": "l-armchair",
+      "room": "living",
+      "kind": "sofa",
+      "centre_cm": [
+        589,
+        953
+      ],
+      "length_cm": 95,
+      "depth_cm": 95,
+      "angle_deg": 19.6,
+      "height_cm": 75,
+      "note": "the armchair",
+      "words_en": "an ivory boucle armchair"
+    },
+    {
+      "id": "l-coffee",
+      "room": "living",
+      "kind": "table",
+      "centre_cm": [
+        758,
+        1025
+      ],
+      "length_cm": 90,
+      "depth_cm": 70,
+      "angle_deg": 19.6,
+      "height_cm": 40,
+      "note": "the coffee table",
+      "words_en": "a low round travertine coffee table"
+    },
+    {
+      "id": "l-tv",
+      "room": "living",
+      "kind": "tv_unit",
+      "centre_cm": [
+        760,
+        1142
+      ],
+      "length_cm": 300,
+      "depth_cm": 45,
+      "angle_deg": 19.6,
+      "height_cm": 50,
+      "note": "the TV unit against the 530 wall"
+    },
+    {
+      "id": "bm-bed",
+      "room": "bedroomMain",
+      "kind": "bed",
+      "centre_cm": [
+        712,
+        1431
+      ],
+      "length_cm": 210,
+      "depth_cm": 180,
+      "angle_deg": 109.6,
+      "height_cm": 55
+    },
+    {
+      "id": "w-closet-1",
+      "room": "wardrobe",
+      "kind": "wardrobe",
+      "centre_cm": [
+        420,
+        1405
+      ],
+      "length_cm": 160,
+      "depth_cm": 60,
+      "angle_deg": 19.6,
+      "height_cm": 240,
+      "note": "the 160 run"
+    },
+    {
+      "id": "w-closet-2",
+      "room": "wardrobe",
+      "kind": "wardrobe",
+      "centre_cm": [
+        505,
+        1360
+      ],
+      "length_cm": 185,
+      "depth_cm": 60,
+      "angle_deg": 109.6,
+      "height_cm": 240,
+      "note": "the 185 run"
+    },
+    {
+      "id": "b2-bed",
+      "room": "bedroom2",
+      "kind": "bed",
+      "centre_cm": [
+        638,
+        281
+      ],
+      "length_cm": 200,
+      "depth_cm": 160,
+      "angle_deg": 36,
+      "height_cm": 55
+    },
+    {
+      "id": "b2-closet",
+      "room": "bedroom2",
+      "kind": "wardrobe",
+      "centre_cm": [
+        500,
+        405
+      ],
+      "length_cm": 200,
+      "depth_cm": 60,
+      "angle_deg": 36,
+      "height_cm": 240,
+      "note": "the closet run against the wall shared with the guest bath"
+    },
+    {
+      "id": "bm-shower",
+      "room": "bathMain",
+      "kind": "shower",
+      "centre_cm": [
+        255,
+        1335
+      ],
+      "length_cm": 210,
+      "depth_cm": 90,
+      "angle_deg": 19.6,
+      "height_cm": 10,
+      "note": "a low tray"
+    },
+    {
+      "id": "bm-vanity",
+      "room": "bathMain",
+      "kind": "vanity",
+      "centre_cm": [
+        344,
+        1208
+      ],
+      "length_cm": 90,
+      "depth_cm": 50,
+      "angle_deg": 19.6,
+      "height_cm": 85
+    },
+    {
+      "id": "bm-wc",
+      "room": "bathMain",
+      "kind": "wc",
+      "centre_cm": [
+        243,
+        1188
+      ],
+      "length_cm": 60,
+      "depth_cm": 40,
+      "angle_deg": 109.6,
+      "height_cm": 45
+    },
+    {
+      "id": "bg-shower",
+      "room": "bathguest",
+      "kind": "shower",
+      "centre_cm": [
+        490,
+        492
+      ],
+      "length_cm": 140,
+      "depth_cm": 90,
+      "angle_deg": 36,
+      "height_cm": 10,
+      "note": "a low tray"
+    },
+    {
+      "id": "bg-wc",
+      "room": "bathguest",
+      "kind": "wc",
+      "centre_cm": [
+        392,
+        524
+      ],
+      "length_cm": 60,
+      "depth_cm": 40,
+      "angle_deg": 126,
+      "height_cm": 45
+    },
+    {
+      "id": "bg-vanity",
+      "room": "bathguest",
+      "kind": "vanity",
+      "centre_cm": [
+        395,
+        642
+      ],
+      "length_cm": 80,
+      "depth_cm": 50,
+      "angle_deg": 36,
+      "height_cm": 85
+    }
+  ]
+}

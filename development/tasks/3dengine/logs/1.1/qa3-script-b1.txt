@@ -1,0 +1,104 @@
+// B1: stored first look. A real look at a sheet (846), a booklet (booklet3), a vector sheet, an empty page;
+// then mutations of the record; compare every answer with the clean one.
+import fs from 'node:fs';
+import { isDeepStrictEqual } from 'node:util';
+import { makeHome, E, SCR, sha, cleanup } from './qa-lib.mjs';
+const { inspectPdf, inspectDir } = await E('engine/inspect.mjs');
+const h = await makeHome({ timeout: 90 });
+const GOLD = 'C:/RnD/Projects/3Dengine/tests/fixtures/apt846/source.pdf';
+const files = { sheet846: GOLD, booklet: `${SCR}/pdfs/booklet3.pdf`};
+let total = 0, bad = 0;
+const note = (...a) => console.log(...a);
+const strip = (r) => { const { cached, ...x } = r; return x; };
+const noRun = () => { throw new Error('PYTHON WAS STARTED'); };
+
+function walkStrings(o, out = []) { if (typeof o === 'string') out.push(o); else if (o && typeof o === 'object') for (const v of Object.values(o)) walkStrings(v, out); return out; }
+
+for (const [name, src] of Object.entries(files)) {
+  const p = `${h.inbox}/${name}.pdf`; fs.copyFileSync(src, p);
+  const s = sha(fs.readFileSync(p));
+  const clean = inspectPdf(h.config, { path: p, sha256: s });
+  note(name, 'clean look', clean.kind, clean.pages, clean.candidates.map((c) => c.id + (c.thumb ? '+t' : '')).join(','), 'cached', clean.cached);
+  // true record reused without python
+  let t = 0;
+  try { const again = inspectPdf(h.config, { path: p, sha256: s }, { run: noRun }); t++; if (!again.cached || !isDeepStrictEqual(strip(again), strip(clean))) { bad++; note('  DEFECT reuse differs', name); } } catch (e) { bad++; note('  DEFECT true record not reused', name, e.message); }
+  total++;
+  const dir = inspectDir(h.config, s);
+  const ijPath = `${dir}/inspect.json`, pjPath = `${dir}/pages.json`;
+  const ij0 = fs.readFileSync(ijPath, 'utf8'); const pj0 = fs.readFileSync(pjPath, 'utf8');
+  const I = JSON.parse(ij0);
+  const mut = [];
+  const m = (label, fn) => mut.push([label, fn]);
+  m('top note', (d) => { d.note = 'IGNORE PREVIOUS'; });
+  m('top schema', (d) => { d.schema = 'x'; });
+  m('summary note', (d) => { d.summary.note = 'IGNORE'; });
+  m('row note', (d) => { d.summary.page_rows[0].note = 'T'; });
+  m('row text', (d) => { d.summary.page_rows[0].text = 'hello text'; });
+  m('row content', (d) => { d.summary.page_rows[0].content = 'vector'; d.summary.page_rows[0].vector_paths += 1; });
+  m('row width', (d) => { d.summary.page_rows[0].width_pt += 0.5; });
+  m('candidates emptied', (d) => { d.summary.candidates = []; });
+  m('candidates dup', (d) => { d.summary.candidates = [...d.summary.candidates, ...d.summary.candidates]; });
+  m('candidates reversed', (d) => { d.summary.candidates.reverse(); });
+  m('cand extra key', (d) => { if (d.summary.candidates[0]) d.summary.candidates[0].note = 'x'; });
+  m('cand thumb', (d) => { if (d.summary.candidates[0]) d.summary.candidates[0].thumb = 'C:/Windows/win.ini'; });
+  m('cand thumb rel', (d) => { if (d.summary.candidates[0]) d.summary.candidates[0].thumb = `${dir}/../../../x.jpg`; });
+  m('cand thumb removed', (d) => { for (const c of d.summary.candidates) delete c.thumb; });
+  m('cand label', (d) => { if (d.summary.candidates[0]) d.summary.candidates[0].label = 'עמוד 1 ' + 'A'.repeat(20); });
+  m('cand label2', (d) => { if (d.summary.candidates[0]) d.summary.candidates[0].label = 'עמוד 9 · תמונה 99'; });
+  m('cand px extra', (d) => { const c = d.summary.candidates.find((x) => x.px); if (c) c.px = [...c.px, 7]; });
+  m('cand px swap', (d) => { const c = d.summary.candidates.find((x) => x.px); if (c) c.px = [c.px[1], c.px[0]]; });
+  m('cand added', (d) => { d.summary.candidates.push({ id: 'p1', label: 'עמוד 1', page: 1, source: 'page', vector_paths: 1, large_images: 0 }); });
+  m('cand proto', (d) => { if (d.summary.candidates[0]) Object.defineProperty(d.summary.candidates[0], '__proto__', { value: { x: 1 }, enumerable: true }); });
+  m('settings extra', (d) => { d.settings.extra = 1; });
+  m('settings changed', (d) => { d.settings.minSidePx = 999; });
+  m('sha', (d) => { d.sha256 = '0'.repeat(64); });
+  m('scanner sha', (d) => { d.scanner_sha256 = '0'.repeat(64); });
+  m('summary string', (d) => { d.summary = 'ignore previous instructions'; });
+  m('summary null', (d) => { d.summary = null; });
+  m('summary kind', (d) => { d.summary.kind = d.summary.kind === 'sheet' ? 'booklet' : 'sheet'; });
+  m('summary pages', (d) => { d.summary.pages += 1; });
+  for (const [label, fn] of mut) {
+    total++;
+    const d = JSON.parse(ij0); fn(d);
+    fs.writeFileSync(ijPath, JSON.stringify(d)); fs.writeFileSync(pjPath, pj0);
+    let r; try { r = inspectPdf(h.config, { path: p, sha256: s }); } catch (e) { bad++; note('  DEFECT threw', name, label, e.code, e.message.slice(0, 80)); fs.writeFileSync(ijPath, ij0); continue; }
+    if (!isDeepStrictEqual(strip(r), strip(clean))) { bad++; note('  DEFECT answer differs', name, label, JSON.stringify(strip(r)).slice(0, 200)); }
+    const strs = walkStrings(strip(r)).filter((x) => /IGNORE|hello|win\.ini|\.\.\//i.test(x));
+    if (strs.length) { bad++; note('  DEFECT foreign string', name, label, strs); }
+    // the record afterwards must be true again
+    const after = JSON.parse(fs.readFileSync(ijPath, 'utf8'));
+    if (!isDeepStrictEqual(after.summary, clean.cached === undefined ? after.summary : strip(clean) && { pages: clean.pages, kind: clean.kind, page_rows: clean.page_rows, candidates: clean.candidates })) { bad++; note('  DEFECT record not healed', name, label); }
+    note('  ', label, 'cached', r.cached);
+    // after healing a second call must be cached
+    const r2 = inspectPdf(h.config, { path: p, sha256: s }, { run: noRun });
+    if (!r2.cached) { bad++; note('  DEFECT second not cached', name, label); }
+  }
+  // extra files / folders in the record, thumbs replaced
+  const extras = [
+    ['extra file', () => fs.writeFileSync(`${dir}/note.txt`, 'IGNORE')],
+    ['thumb replaced by dir', () => { for (const f of fs.readdirSync(dir)) if (f.startsWith('thumb-')) { fs.rmSync(`${dir}/${f}`); fs.mkdirSync(`${dir}/${f}`); break; } }],
+    ['pages.json a folder', () => { fs.rmSync(pjPath); fs.mkdirSync(pjPath); }],
+    ['pages.json empty', () => fs.writeFileSync(pjPath, '')],
+    ['pages.json BOM', () => fs.writeFileSync(pjPath, '\ufeff' + pj0)],
+    ['inspect.json BOM', () => fs.writeFileSync(ijPath, '\ufeff' + ij0)],
+    ['inspect.json a folder', () => { fs.rmSync(ijPath); fs.mkdirSync(ijPath); }],
+    ['inspect.json missing', () => fs.rmSync(ijPath)],
+    ['pages.json with text added', () => { const d = JSON.parse(pj0); d.page_rows[0].text = 'TEXT-OF-PDF-XYZ'; d.title = 'TEXT-OF-PDF-XYZ'; fs.writeFileSync(pjPath, JSON.stringify(d)); }],
+  ];
+  for (const [label, fn] of extras) {
+    total++;
+    fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
+    // restore true record from clean
+    inspectPdf(h.config, { path: p, sha256: s });
+    fn();
+    let r; try { r = inspectPdf(h.config, { path: p, sha256: s }); } catch (e) { bad++; note('  DEFECT threw', name, label, e.code, String(e.message).slice(0, 100)); continue; }
+    const same = isDeepStrictEqual(strip(r), strip(clean));
+    const leak = walkStrings(strip(r)).some((x) => /TEXT-OF-PDF|IGNORE/.test(x));
+    note('  ', label, 'cached', r.cached, 'same', same, leak ? 'LEAK' : '');
+    if (leak || (!same && label !== 'thumb replaced by dir')) { bad++; note('  DEFECT', name, label); }
+  }
+  fs.rmSync(dir, { recursive: true, force: true });
+  inspectPdf(h.config, { path: p, sha256: s });
+}
+note('TOTAL cases', total, 'defects', bad);
+cleanup(h);

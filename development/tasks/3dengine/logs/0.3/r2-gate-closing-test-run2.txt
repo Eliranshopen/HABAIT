@@ -1,0 +1,20 @@
+✔ 1. kill in the middle of a stage: the state stays, runner.alive false, rows for tracing and building only (1120.2961ms)
+✔ 2. resume: created false, resumed true; tracing and building untouched; rendering one row, attempt 2 (553.3225ms)
+✔ 3. kill between reserve and settle: one orphaned and one settled row for that call_key; the job goes on (4162.559ms)
+✔ 4. kill after the settle, before the manifest row: gating runs again (attempt 2), still ONE ledger row for its call (1010.8994ms)
+✔ 5. the end: done, one valid row per stage, spent = 3 × 0.6, the orphan reported apart, the link answers 200 (1570.6407ms)
+✔ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (2309.8302ms)
+✔ 7. restart after cancel: resumed, finishes, no stage that was done before the cancel ran again (4158.0879ms)
+✔ 8. kill after the cache write, before the settle: ONE settled recovered row, ONE send, done, spent = settled sum (4672.8497ms)
+✔ 9. a wrong spent_usd on the disk is corrected soon after the runner starts, and again at done (4618.01ms)
+✔ 10. the cap is reached and it is not a dead end: back to awaiting_approval, 60 refused, 90 accepted, done with 90 (2779.4821ms)
+✔ 11. an EMPTY job.lock does not block a resume (stale after 1 s); a fresh empty one delays it by about 2 s at most (4425.5748ms)
+✔ 12. a recycled pid does not look alive: runner.alive false, resumed true, a real runner takes the pid file over (1710.4914ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 33805.9805

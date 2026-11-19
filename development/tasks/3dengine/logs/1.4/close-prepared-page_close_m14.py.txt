@@ -1,0 +1,87 @@
+# The plan page after the close of milestone 1.4: 7 of 27, stage 1 complete, "now" moves to 2.1.
+# PREPARED before the verdict; run only after the reviewer's PASS. Usage: python page_close_m14.py <date dd.mm.yyyy>
+import io
+import re
+import sys
+
+DAY = sys.argv[1] if len(sys.argv) > 1 else '18.11.2026'
+P = 'C:/RnD/development/plans/2026-11-16-pdf-to-360-engine-mcp.html'
+raw = io.open(P, encoding='utf-8', newline='').read()
+nl = '\r\n' if '\r\n' in raw else '\n'
+t = raw.replace('\r\n', '\n')
+
+
+def swap(old, new, what):
+    global t
+    if new in t and old not in t:
+        return
+    if t.count(old) != 1:
+        raise SystemExit('%d matches for %s' % (t.count(old), what))
+    t = t.replace(old, new)
+
+
+def line_starting(start):
+    hits = [ln for ln in t.split('\n') if ln.lstrip().startswith(start)]
+    if len(hits) != 1:
+        raise SystemExit('%d lines start with %r' % (len(hits), start[:50]))
+    return hits[0]
+
+
+# The milestone after 2.1, as the page names it: the first milestone item after m2-1.
+m = re.search(r'<li class="m[^"]*" id="m2-1">.*?<li class="m[^"]*" id="(m\d+-\d+)">\s*<span class="m-no">([\d.]+)</span>.*?<div class="m-top"><b>(.*?)</b>', t, re.S)
+if not m:
+    raise SystemExit('the milestone after 2.1 was not found on the page')
+NEXT_NO, NEXT_NAME = m.group(2), m.group(3)
+print('the milestone after 2.1 on the page:', NEXT_NO, NEXT_NAME)
+
+# ---- the eyebrow and the strip at the top
+t = re.sub(r'מעודכן \d{2}\.\d{2}\.\d{4}</span>', 'מעודכן %s</span>' % DAY, t, count=1)
+swap('<div class="now-count"><b>6</b><span><span id="h-now">איפה אנחנו</span><br>6 מתוך 27 אבני דרך סגורות</span></div>',
+     '<div class="now-count"><b>7</b><span><span id="h-now">איפה אנחנו</span><br>7 מתוך 27 אבני דרך סגורות</span></div>', 'count')
+cur = line_starting('<div class="now-item"><span class="st cur">עכשיו</span>')
+swap(cur,
+     '    <div class="now-item"><span class="st cur">עכשיו</span><p><b><bdi>2.1</bdi> רינדור כשלב במנוע.</b> <bdi>1.4</bdi> נסגרה: המנוע שומר את קריאת המודל של כל <bdi>PDF</bdi>, '
+     'ריצה שנייה לא משלמת ונותנת תכנית זהה בית-לבית. שלב הפענוח הושלם. עכשיו <bdi>2.1</bdi> מפורקת למשימות: <bdi>Blender</bdi> מופעל לראשונה בתוך המנוע, קודם על חדר אחד.</p></div>', 'now item')
+nxt = line_starting('<div class="now-item"><span class="st new">אחריה</span>')
+swap(nxt,
+     '    <div class="now-item"><span class="st new">אחריה</span><p><b><bdi>%s</bdi> %s.</b></p></div>' % (NEXT_NO, NEXT_NAME), 'next item')
+
+# ---- stage 1 is complete: its chip goes, its cells are all closed; stage 2 gets the chip and its first cell
+swap('<b>פענוח ה-<bdi>PDF</bdi> <span class="st cur">עכשיו <bdi>1.4</bdi></span></b>', '<b>פענוח ה-<bdi>PDF</bdi></b>', 'stage 1 chip')
+swap('aria-label="4 אבני דרך: 3 סגורות, 1 בעבודה, 0 טרם התחילו"><i class="done" title="1.1 קליטה והצצה · סגורה"></i><i class="done" title="1.2 פענוח 846 במנוע · סגורה"></i><i class="done" title="1.3 שער הפענוח · סגורה"></i><i class="cur" title="1.4 קריאה שמורה · בעבודה"></i>',
+     'aria-label="4 אבני דרך: 4 סגורות, 0 בעבודה, 0 טרם התחילו"><i class="done" title="1.1 קליטה והצצה · סגורה"></i><i class="done" title="1.2 פענוח 846 במנוע · סגורה"></i><i class="done" title="1.3 שער הפענוח · סגורה"></i><i class="done" title="1.4 קריאה שמורה · סגורה"></i>',
+     'stage 1 cells')
+swap('<span class="s-name"><b>בנייה ורינדור</b>', '<span class="s-name"><b>בנייה ורינדור <span class="st cur">עכשיו <bdi>2.1</bdi></span></b>', 'stage 2 chip')
+swap('aria-label="1 אבני דרך: 0 סגורות, 0 בעבודה, 1 טרם התחילו"><i title="2.1 רינדור כשלב במנוע · טרם התחילה"></i>',
+     'aria-label="1 אבני דרך: 0 סגורות, 1 בעבודה, 0 טרם התחילו"><i class="cur" title="2.1 רינדור כשלב במנוע · בעבודה"></i>', 'stage 2 cells')
+
+# ---- the milestones
+swap('<li class="m cur" id="m1-4">', '<li class="m done" id="m1-4">', 'm1-4 class')
+swap('<div class="m-top"><b>קריאה שמורה</b><span class="st cur">בעבודה</span></div>', '<div class="m-top"><b>קריאה שמורה</b><span class="st ok">נסגרה</span></div>', 'm1-4 chip')
+swap('<li class="m" id="m2-1">', '<li class="m cur" id="m2-1">', 'm2-1 class')
+swap('<div class="m-top"><b>רינדור כשלב במנוע</b><span class="st new">קוד חדש</span></div>', '<div class="m-top"><b>רינדור כשלב במנוע</b><span class="st cur">בעבודה</span></div>', 'm2-1 chip')
+
+# ---- "today" under the stages
+today = line_starting('<p class="note"><b>היום:</b>')
+indent = today[:len(today) - len(today.lstrip())]
+swap(today,
+     indent + '<p class="note"><b>היום:</b> שלב הפענוח כולו אמיתי: ההצצה ב-<bdi>PDF</bdi> והעתקת הקובץ לעבודה (<bdi>1.1</bdi>), כלי הפענוח בתוך המנוע (<bdi>1.2</bdi>), הפענוח כשלב של עבודה (<bdi>1.3</bdi>) '
+     'ושמירת קריאת המודל (<bdi>1.4</bdi>). עבודה אמיתית נעצרת היום אחרי הפענוח; הסוכן עדיין עובד מול הדמה, שמחזירה את הסיור הקיים של 846, מסומן «שחזור הדגמה». כל אבן דרך מחליפה חלק אחד מהדמה בעבודה אמיתית.</p>', 'today')
+
+# ---- the progress paragraph
+prog = line_starting('<p class="note" id="progress">')
+indent = prog[:len(prog) - len(prog.lstrip())]
+swap(prog,
+     indent + '<p class="note" id="progress"><b>איפה אנחנו:</b> 7 מתוך 27 סגורות: <bdi>0.1</bdi>, בית המנוע, ו-<bdi>0.2</bdi>, מנוע דמה מחובר לסוכן, ב-16.11.2026; '
+     '<bdi>0.3</bdi>, עבודה על הדיסק, ו-<bdi>1.1</bdi>, קליטה והצצה, ב-17.11.2026; <bdi>1.2</bdi>, פענוח 846 במנוע, ו-<bdi>1.3</bdi>, שער הפענוח, ב-18.11.2026; <bdi>1.4</bdi>, קריאה שמורה, ב-' + DAY + '. '
+     'שלבים 0 ו-1 הושלמו. אחרי <bdi>0.3</bdi> כל עבודה נשמרת על הדיסק: מה נעשה בכל שלב, וכל קריאה בתשלום לפני שהיא יוצאת. תהליך שנופל באמצע ממשיך מאותה נקודה ולא משלם פעמיים. '
+     'אחרי <bdi>1.1</bdi> המנוע קורא את ה-<bdi>PDF</bdi> בעצמו ושומר לעבודה העתק מוגן של הקובץ. אחרי <bdi>1.2</bdi> המנוע מפעיל את כלי הפענוח הקיים: על 846 יוצאת בדיוק המדידה המקורית (10 חדרים, סטייה של 0.82% לכל היותר). '
+     'אחרי <bdi>1.3</bdi> קריאה שנכשלת בבדיקה של עצמה מעבירה את העבודה ל«לבדיקה», והבנייה לא מתחילה. '
+     'אחרי <bdi>1.4</bdi> המנוע שומר את קריאת המודל של כל <bdi>PDF</bdi>: ריצה שנייה לא קוראת למודל ולא משלמת, ואותה קריאה נותנת אותה תכנית בית-לבית. הקריאה תקפה עד שכלי הקריאה או המודל משתנים (החלטה שלך). '
+     'עבודה עוד לא משלמת על קריאה בעצמה; ריצה לא עולה כסף אלא אם אישרת תקרה. הסוכן עדיין עובד מול הדמה. '
+     'מאז 18.11, לפי החלטותיך: כל שכבת בדיקות רצה פעם אחת בשער, ובמכונה עמוסה מבחני השלב רשאים לרוץ פעם אחת עד 25 דקות ברקע. הבאה בתור: <bdi>2.1</bdi>, רינדור כשלב במנוע.</p>', 'progress')
+
+io.open(P, 'w', encoding='utf-8', newline='').write(t.replace('\n', nl))
+print('page patched;', len(t.split('\n')), 'lines')
+for needle in ['6 מתוך 27', 'עכשיו <bdi>1.4</bdi>', '<li class="m cur" id="m1-4">']:
+    print('  left of %r: %d' % (needle, t.count(needle)))

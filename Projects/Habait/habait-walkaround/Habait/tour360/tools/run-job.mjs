@@ -215,7 +215,9 @@ async function toReview(job, e, step = job.stage) {
 async function review(job, at, mismatches) {
   job.review = { at: now(), stage: at, mismatches: (mismatches || []).slice(0, 50) };
   job.needs = { type: 'habait_review', stage: at, count: job.review.mismatches.length, ...(job.check ? { check: job.check } : {}) };
-  log(job, 'השרטוט לא עבר עדיין את בדיקת ההתאמה לתכנית המכר. המערכת ממשיכה לתקן.');
+  // parity row 39 (the coordinator, 2026-11-08): only a TRACE review blames the drawing; a build-stage check (gate, qa, skin, fidelity, the
+  // furnish audit) names the simulation's check against the sales plan — the drawing had already passed and been approved
+  log(job, at === 'trace' ? 'השרטוט לא עבר עדיין את בדיקת ההתאמה לתכנית המכר. המערכת ממשיכה לתקן.' : 'הבדיקה של ההדמיה מול תכנית המכר לא עברה עדיין — המערכת ממשיכה לתקן');
   await save(job, { state: 'review', stage: 'review', engine: { version: ENGINE.version, parts: ENGINE.parts, at: now() } });   // the portal shows «ממשיכים לדייק»; the engine stamp lets the sweep retry it when the engine improves
 }
 
@@ -308,6 +310,7 @@ async function stageTrace(job, dir, correction) {
   fs.copyFileSync(plan, path.join(out, 'plan.general.json'));
   if (fs.existsSync(path.join(pdir, 'crop.png'))) fs.copyFileSync(path.join(pdir, 'crop.png'), path.join(out, 'crop.png'));
   await up('plan.general.json', 'plan.json'); await up('overlay.png'); await up('crop.png');
+  await up('pdf-vectors.json');   // parity row 38: the drawing's CAD vectors travel with the trace, so the build (often another sandbox) reads the hob, the sink and the printed dimension lines
   log(job, 'בדיקת ההתאמה של השרטוט לתכנית המכר עברה');
   const pj = readJson(plan);
   const note = `${pj.rooms?.length ?? 0} חדרים, ${pj.openings?.length ?? 0} פתחים, ${pj.panes?.length ?? 0} חלונות וקירות זכוכית. השרטוט עבר את בדיקת ההתאמה האוטומטית לתכנית המכר; עברו עליו גם אתם.`;
@@ -325,6 +328,10 @@ async function stageBuild(job, dir) {
   if (!fs.existsSync(plan)) { const b = await store.getBytes(`${pre}${tracePath}`); if (!b) throw new Error('the approved trace is not in the store'); fs.mkdirSync(path.dirname(plan), { recursive: true }); fs.writeFileSync(plan, b); }
   if (!fs.existsSync(crop)) { const b = await store.getBytes(`${pre}trace/crop.png`); if (b) fs.writeFileSync(crop, b); }
   if (!fs.existsSync(crop)) throw new Error('the plan crop (trace/crop.png) is missing: the trace step must upload it');
+  // parity row 38 (2026-11-08): the vectors beside the approved trace plan (run-project keepVectors reads <plan dir>/pdf-vectors.json); a
+  // trace without vectors (a scan, an image) keeps the casework step's explicit fallback note
+  const vecs = path.join(dir, 'trace', 'pdf-vectors.json');
+  if (!fs.existsSync(vecs)) { const b = await store.getBytes(`${pre}trace/pdf-vectors.json`); if (b) fs.writeFileSync(vecs, b); }
   const id = job.project;
   const skin = !noPaid(job) && !has('--no-skin');
   const steps = ['apartment', 'casework', 'cameras', 'prompts', 'furnish', 'render', 'scenes', 'sets', ...(skin ? ['skin'] : []), 'gate', ...(noPaid(job) ? [] : ['markers']), 'build', 'package', 'qa'];   // --no-paid: a $0 dry run (no skin, no rings)

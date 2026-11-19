@@ -1,0 +1,91 @@
+// QA: the command `trace` / `reading` through cli.main with a recording spawn (no tool starts, no network).
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { EventEmitter } from 'node:events'; import { createHash } from 'node:crypto';
+const E = 'file:///C:/RnD/Projects/3Dengine/engine/';
+const cli = await import(E + 'cli.mjs'); const T = await import(E + 'trace.mjs'); const R = await import(E + 'readings.mjs'); const J = await import(E + 'jobs.mjs'); const TS = await import(E + 'stages/tracing.mjs');
+const { fakeConfig } = await import('file:///C:/RnD/Projects/3Dengine/tests/helpers/fakes.mjs');
+const sha = (b) => createHash('sha256').update(b).digest('hex');
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'qa14c-')).replace(/\\/g, '/');
+const MARK = 'ZZSECRETSENTENCE the kitchen is next to the safe room';
+let n = 0, bad = 0; const out = [];
+const chk = (name, cond, info = '') => { n++; if (!cond) { bad++; out.push(`FAIL ${name} ${info}`); } else out.push(`ok   ${name}`); };
+const w = (p, t) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, t); };
+const home = `${tmp}/home`;
+for (const [f, t] of [['Habait/tour360/tools/auto-trace.mjs', 'tool v1\n'], ['Habait/tour360/server/handler.mjs', 'model v1\n']]) w(`${home}/pipeline/${f}`, t);
+const cfg = fakeConfig({ home, pipelineRoot: `${home}/pipeline`, readingsDir: `${home}/readings`, runtimeDir: `${home}/rt`, envRoot: `${home}/envroot` });
+const pdf = `${tmp}/a.pdf`; w(pdf, '%PDF-1.4 qa'); const PDF = sha(fs.readFileSync(pdf));
+const rdFile = `${tmp}/reading.json`; w(rdFile, JSON.stringify({ rooms: [{ name: MARK }], _meta: { at: '2026-11-06T10:00:00.000Z', usd: 0.02, model: 'm/x' } }));
+const calls = []; let keeps = 0;
+const mkSpawn = (code) => (cmd, args, opt) => { calls.push({ args, env: opt.env }); const c = new EventEmitter(); c.pid = 0; process.nextTick(() => c.emit('exit', code)); return c; };
+let spawnCode = 4;
+const run = async (argv, over = {}) => { calls.length = 0; keeps = 0; let so = '', se = '';
+  const deps = { loadConfig: () => cfg, today: () => '2030-01-01', runTrace: (c, o) => T.runTrace(c, o, { spawn: mkSpawn(spawnCode), killTree() {}, env: { FAL_KEY: 'fake-qa-planted', OPENROUTER_API_KEY: 'fake-qa-planted2', PATH: process.env.PATH } }),
+    keepReading: (...a) => { keeps++; return R.keepReading(...a); }, ...over };
+  const code = await cli.main(argv, { stdout: { write: (s) => { so += s; } }, stderr: { write: (s) => { se += s; } }, env: {} }, deps); return { code, so, se, call: calls[0] }; };
+const has = (call, f) => call?.args.includes(f); const val = (call, f) => call?.args[call.args.indexOf(f) + 1];
+const outN = (() => { let i = 0; return () => `${tmp}/out${++i}`; })();
+const noText = (r, l) => chk('no reading text in ' + l, !(r.so + r.se).includes('ZZSECRET') && !(r.so + r.se).includes('safe room'));
+
+// import
+let r = await run(['reading', 'import', pdf, rdFile]); chk('import dry: exit 0, wrote nothing', r.code === 0 && !fs.existsSync(R.readingDir(cfg, PDF))); noText(r, 'import dry');
+r = await run(['reading', 'import', pdf, rdFile, '--go']); chk('import go: exit 0', r.code === 0, r.se); noText(r, 'import go');
+r = await run(['reading', 'show', pdf]); chk('show exit 0', r.code === 0); noText(r, 'show'); out.push('show: ' + r.so.replace(/\n/g, ' | '));
+const rec = JSON.parse(fs.readFileSync(R.recordFile(cfg, PDF), 'utf8')); chk('import record: imported, cost 0, plan_date 2026-11-06', rec.source === 'imported' && rec.cost_usd === 0 && rec.plan_date === '2026-11-06');
+r = await run(['reading', 'import', pdf, rdFile, '--go']); chk('import again: already kept', /already kept/.test(r.so));
+for (const bad_ of [['reading'], ['reading', 'show'], ['reading', 'show', pdf, 'x'], ['reading', 'import', pdf], ['reading', 'frob', pdf], ['reading', 'show', `${tmp}/nofile.pdf`]]) { r = await run(bad_); chk('reading usage ' + bad_.slice(1).join(' ') + ' -> 2', r.code === 2, String(r.code)); }
+w(`${tmp}/notread.json`, '{"x":1}'); r = await run(['reading', 'import', pdf, `${tmp}/notread.json`, '--go']); chk('import non-reading -> 1', r.code === 1);
+
+// kept reading valid: every way to ask
+r = await run(['trace', pdf, '--out', outN(), '--no-judge']); chk('S1 free, kept: tool gets the kept file', val(r.call, '--vlm-file') === R.readingFile(cfg, PDF) && val(r.call, '--trace-date') === '2026-11-06' && val(r.call, '--budget') === '0', JSON.stringify(r.call?.args)); chk('S1 env: fal name = fixed word, openrouter absent', r.call.env.FAL_KEY === T.FREE_RUN_WORD && !('OPENROUTER_API_KEY' in r.call.env)); noText(r, 'S1');
+r = await run(['trace', pdf, '--out', outN()]); chk('S2 free, kept, judge on: DRY, no tool', !r.call && /DRY/.test(r.so) && r.code === 0); out.push('S2: ' + r.so.replace(/\n/g, ' | '));
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--fresh']); chk('S3 --fresh free: DRY, no tool', !r.call && /DRY/.test(r.so));
+r = await run(['trace', pdf, '--out', outN(), '--fresh', '--vlm-file', rdFile]); chk('S4 --fresh with --vlm-file: 2', r.code === 2 && !r.call);
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go']); chk('S5 paid, kept, judge off: tool gets kept file, trace-date of record, no keep', val(r.call, '--vlm-file') === R.readingFile(cfg, PDF) && val(r.call, '--trace-date') === '2026-11-06' && has(r.call, '--no-judge') && keeps === 0, JSON.stringify(r.call?.args));
+r = await run(['trace', pdf, '--out', outN(), '--budget', '1', '--go']); chk('S10 paid, kept, judge ON: kept file still handed (no reading call), judge may run', val(r.call, '--vlm-file') === R.readingFile(cfg, PDF) && !has(r.call, '--no-judge'));
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go', '--fresh']); chk('S6 paid --fresh: no vlm-file, trace-date = command day', !has(r.call, '--vlm-file') && val(r.call, '--trace-date') === '2030-01-01', JSON.stringify(r.call?.args));
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go', '--vlm-file', rdFile]); chk('S9 paid + --vlm-file: given file, no keep, date from its _meta.at', val(r.call, '--vlm-file') === rdFile.replace(/\\/g, '/') && val(r.call, '--trace-date') === '2026-11-06' && keeps === 0);
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--vlm-file', rdFile, '--budget', '1']); chk('S9b --budget without --go is free', val(r.call, '--budget') === '0');
+r = await run(['trace', pdf, '--out', outN(), '--go', '--no-judge']); chk('S9c --go without a cap -> 2', r.code === 2 && !r.call);
+for (const [nm, argv] of [['id --no-judge', ['--id', '--no-judge']], ['id --budget', ['--id', '-budget']], ['id leading hyphen', ['--id', '-x']]]) { r = await run(['trace', pdf, '--out', outN(), ...argv]); chk('S11 ' + nm + ' refused', r.code === 2 || r.code === 1 || !r.call, String(r.code)); }
+r = await run(['trace', pdf, '--out', outN(), '--budget', '0x1', '--go', '--no-judge', '--fresh']); out.push('info --budget 0x1 -> exit ' + r.code + ' budget arg ' + val(r.call, '--budget'));
+// hand a pdf path that is not a file, a directory
+r = await run(['trace', `${tmp}`, '--out', outN(), '--no-judge']); chk('pdf is a directory -> usage/err, no tool', !r.call && r.code !== 0, String(r.code));
+r = await run(['trace', `${tmp}/none.pdf`, '--out', outN(), '--no-judge']); chk('pdf missing -> 2, no tool', !r.call && r.code === 2);
+
+// stale and bad: a paid run reads fresh
+fs.appendFileSync(`${home}/pipeline/Habait/tour360/tools/auto-trace.mjs`, ' ');
+r = await run(['trace', pdf, '--out', outN(), '--no-judge']); chk('S7 stale, free: DRY (a reading must be paid)', !r.call && /DRY/.test(r.so) && /another reader/.test(r.so)); noText(r, 'S7');
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go']); chk('S7b stale, paid: fresh read, no vlm-file', !has(r.call, '--vlm-file') && val(r.call, '--trace-date') === '2030-01-01');
+r = await run(['reading', 'show', pdf]); chk('show stale exit 1', r.code === 1 && /another reader/.test(r.so)); noText(r, 'show stale');
+fs.writeFileSync(R.readingFile(cfg, PDF), 'junk'); r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go']); chk('S8 bad, paid: fresh read', !has(r.call, '--vlm-file')); r = await run(['reading', 'show', pdf]); chk('show bad exit 1', r.code === 1);
+
+// a paid fresh run that PASSES keeps; stand-in: make the spawn write a passing result? use fake runTrace
+fs.writeFileSync(`${home}/pipeline/Habait/tour360/tools/auto-trace.mjs`, 'tool v1\n'); fs.rmSync(R.readingDir(cfg, PDF), { recursive: true, force: true });
+const vlmOut = (o) => { const p = `${o.outDir}/plan-1/vlm.json`; w(p, JSON.stringify({ rooms: [{ name: MARK }], _meta: { at: '2026-11-06T10:00:00.000Z', usd: 0.0456, model: 'm/y' } })); return p; };
+const fakePass = (c, o) => { vlmOut(o); return { outcome: 'PASS', paid: o.go === true, outDir: o.outDir, seconds: 1, exit: 0, logFile: null, result: { status: 'PASS', spentUsd: 0.0456, plans: [{ k: 1, files: { dir: `${o.outDir}/plan-1`, plan: 'p', overlay: 'o', report: 'r', traceCheck: 't' }, status: 'PASS', rounds: 1, rooms: 1, fixtures: 0, checks: { total: 1, failed: 0 }, roomCount: { expected: 1, got: 1 }, dims: { count: 0, failed: 0, maxPct: null }, couldNotRead: 0, judge: { state: 'skipped', runs: null, mismatches: 0 } }] } }; };
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go'], { runTrace: fakePass });
+chk('P1 paid pass keeps', keeps === 1 && r.code === 0); const rec2 = JSON.parse(fs.readFileSync(R.recordFile(cfg, PDF), 'utf8')); chk('P1 record: paid, cost 0.0456, plan_date = the command day 2030-01-01', rec2.source === 'paid' && rec2.cost_usd === 0.0456 && rec2.plan_date === '2030-01-01', JSON.stringify([rec2.source, rec2.cost_usd, rec2.plan_date])); noText(r, 'P1');
+const before = fs.readFileSync(R.readingFile(cfg, PDF));
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go', '--fresh'], { runTrace: (c, o) => { const x = fakePass(c, o); fs.writeFileSync(`${o.outDir}/plan-1/vlm.json`, JSON.stringify({ rooms: [], _meta: { usd: 0.5 } })); return x; } });
+chk('P2 second paid --fresh pass: first reading moved to superseded, bytes intact', R.supersededCount(cfg, PDF) === 1 && fs.readFileSync(`${R.readingDir(cfg, PDF)}/superseded/1/reading.json`).equals(before));
+// a paid run whose keep fails: not destroyed, loud, exit 1
+const spAsFile = `${R.readingDir(cfg, PDF)}/superseded`; fs.rmSync(spAsFile, { recursive: true, force: true }); fs.writeFileSync(spAsFile, 'x');
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go', '--fresh'], { runTrace: fakePass }); chk('P3 keep fails -> exit 1, says NOT KEPT, names the run file, no text', r.code === 1 && /NOT KEPT/.test(r.so)); noText(r, 'P3'); out.push('P3 out: ' + r.so.split('\n').filter((l) => /reading/.test(l)).join(' | '));
+chk('P3 the old kept reading still found', R.findReading(cfg, PDF).status === 'found');
+// a failed check keeps nothing
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go', '--fresh'], { runTrace: (c, o) => ({ ...fakePass(c, o), outcome: 'FAIL', result: { status: 'FAIL', spentUsd: 0.1, plans: [{ ...fakePass(c, o).result.plans[0], status: 'FAIL' }] } }) }); chk('P4 FAIL keeps nothing', keeps === 0 && r.code === 5);
+// two plans: not kept
+r = await run(['trace', pdf, '--out', outN(), '--no-judge', '--budget', '1', '--go', '--fresh'], { runTrace: (c, o) => { const x = fakePass(c, o); x.result.plans.push(x.result.plans[0]); return x; } }); chk('P5 two plans keeps nothing', keeps === 0);
+
+// the stage: what it hands the wrapper
+fs.rmSync(R.readingDir(cfg, PDF), { recursive: true, force: true }); await run(['reading', 'import', pdf, rdFile, '--go']);
+let handed = null; const stage = TS.realStage({ runTrace: async (c, o) => { handed = o; return { outcome: 'DRY', result: null, seconds: 0 }; }, setInterval: () => 1, clearInterval() {} });
+const ctx = { job: { input: { pdf_sha256: PDF, apartment: 'A' } }, config: cfg, jobDir: `${tmp}/job`, attempt: 1, checkCancelled() {}, log() {} };
+let err = null; try { await stage.run(ctx); } catch (e) { err = e; }
+chk('stage hands: kept file, record date, drawing id, judge off; no go, no budget', handed.vlmFile === R.readingFile(cfg, PDF) && handed.traceDate === '2026-11-06' && handed.id === J.drawingId(PDF, 'A') && handed.judge === false && handed.go === undefined && handed.budgetUsd === undefined && handed.paid === undefined, JSON.stringify(handed));
+chk('stage DRY outcome -> BUDGET_CAP', err?.code === 'BUDGET_CAP');
+for (const [st, code] of [['none', 'BUDGET_CAP'], ['stale', 'BUDGET_CAP'], ['bad', 'STAGE_FAILED']]) { handed = null; const s2 = TS.realStage({ findReading: () => ({ status: st }), runTrace: async (c, o) => { handed = o; }, setInterval: () => 1, clearInterval() {} }); let e = null; try { await s2.run(ctx); } catch (x) { e = x; } chk('stage ' + st + ' -> ' + code + ', nothing started', e?.code === code && handed === null); }
+chk('tracing.mjs never imports keepReading', !/keepReading/.test(fs.readFileSync('C:/RnD/Projects/3Dengine/engine/stages/tracing.mjs', 'utf8').replace(/\/\/.*$/gm, '')));
+// and does any other module under engine/ or mcp/ call keepReading?
+const hits = []; const walk = (d) => { for (const f of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${f.name}`; if (f.isDirectory()) { if (f.name !== 'node_modules') walk(p); } else if (/\.mjs$/.test(f.name) && /keepReading\(/.test(fs.readFileSync(p, 'utf8'))) hits.push(p.replace('C:/RnD/Projects/3Dengine/', '')); } };
+walk('C:/RnD/Projects/3Dengine/engine'); walk('C:/RnD/Projects/3Dengine/mcp'); out.push('keepReading( callers: ' + hits.join(', ')); chk('keepReading callers = readings.mjs + cli.mjs only', hits.sort().join() === 'engine/cli.mjs,engine/readings.mjs');
+fs.writeFileSync(process.argv[2], out.join('\n') + `\n\nchecks: ${n}  failed: ${bad}\n`); fs.rmSync(tmp, { recursive: true, force: true }); console.log(`checks ${n} failed ${bad}`);

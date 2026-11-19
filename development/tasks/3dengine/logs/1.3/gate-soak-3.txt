@@ -1,0 +1,17 @@
+milestone 1.3 gate: npm run test:soak -- --kills 40 --freezes 12 (a longer one, because the soak's check changed)
+started: 2026-11-18T11:45:19+02:00
+machine load before: 100 %
+
+> habait-3dengine@1.3.0 test:soak
+> node tests/soak/kill-soak.mjs --kills 40 --freezes 12
+
+kill soak: temp home C:/Users/elira/AppData/Local/Temp/killsoak-Ol3dBa, port 52756, target 40 kills
+  25 kills, 1 jobs done, 0 resume retries
+freeze soak: temp home C:/Users/elira/AppData/Local/Temp/freezesoak-CVZhXG, port 62327, target 12 takeovers
+  5 takeovers, 2 second runners killed
+  10 takeovers, 3 second runners killed
+SOAK kills=41 jobs_finished=3 orphaned_rows=1 recovered_rows=3 resume_retries=0 longest_resume_ms=326 takeovers=12 second_runner_kills=4 (1 inside a pause) never_sent_rows=3 late_rows=2 woke_before_done=4 violations=0
+clean-up: no process of the soak remains
+exit code: 0
+seconds: 141
+machine load after: 100 %

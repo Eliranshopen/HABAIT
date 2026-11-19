@@ -81,6 +81,8 @@ a.hb-media-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px)
 .hb-chip--reserved { background: var(--status-reserved-bg); color: var(--status-reserved-ink); }
 .hb-chip--sold { background: var(--status-sold-bg); color: var(--status-sold-ink); }
 .hb-chip--info { background: var(--status-info-bg); color: var(--status-info-ink); }
+/* «נתוני הדגמה» (Eliran 2026-11-10): demo numbers of a unit without sales-plan data — reserved hue, dashed, compact */
+.hb-chip--demo { min-block-size: 22px; padding-inline: var(--sp-2); font-size: 11px; background: var(--status-reserved-bg); color: var(--status-reserved-ink); border: 1px dashed currentColor; white-space: nowrap; }
 /* editable role chip (upload rows): a native select dressed as a chip */
 .hb-chip-select { appearance: none; font: inherit; font-size: var(--fs-small); font-weight: var(--fw-semibold); color: var(--status-info-ink); background: var(--status-info-bg); border: 1px dashed currentColor; border-radius: var(--r-full); min-block-size: 32px; padding-inline: var(--sp-3) var(--sp-6); cursor: pointer;
   background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);

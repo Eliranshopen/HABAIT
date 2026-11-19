@@ -1,0 +1,326 @@
+[
+ {
+  "tag": "1440",
+  "name": "direct-link",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": true,
+   "invite": true,
+   "muted": false,
+   "act": false,
+   "topAct": false,
+   "blockedAtCreate": 1
+  },
+  "afterOneTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "reloadOpened": true,
+  "reloadAtOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": true,
+   "invite": true,
+   "muted": false,
+   "act": false,
+   "topAct": false,
+   "blockedAtCreate": 1
+  },
+  "reloadAfterOneTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "errors": []
+ },
+ {
+  "tag": "1440",
+  "name": "direct-link-key",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "opened": true,
+  "afterOneKey": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "errors": []
+ },
+ {
+  "tag": "1440",
+  "name": "apartment-page",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": true,
+   "invite": true,
+   "muted": false,
+   "act": false,
+   "topAct": false,
+   "blockedAtCreate": 1
+  },
+  "afterOneTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "errors": []
+ },
+ {
+  "tag": "1440",
+  "name": "hold-enter",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "entered": true,
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": false,
+   "topAct": true,
+   "blockedAtCreate": 0
+  },
+  "errors": []
+ },
+ {
+  "tag": "1440",
+  "name": "landing-to-tour",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "cta": true,
+  "at": "/hold/?tour=%2Ftour%2F%3Fscope%3Dapartme",
+  "entered": true,
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": false,
+   "topAct": true,
+   "blockedAtCreate": 0
+  },
+  "errors": []
+ },
+ {
+  "tag": "1440",
+  "name": "mute-skip-coach0",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "afterMute": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": false,
+   "invite": false,
+   "muted": true,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "reopened": true,
+  "reloadMutedAfterTap": {
+   "coach": true,
+   "state": "none",
+   "on": false,
+   "waiting": false,
+   "invite": false,
+   "muted": true,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 0
+  },
+  "skipClosed": true,
+  "reopenedAfterSkip": true,
+  "coach0Open": false,
+  "errors": []
+ },
+ {
+  "tag": "390",
+  "name": "direct-link",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": true,
+   "invite": true,
+   "muted": false,
+   "act": false,
+   "topAct": false,
+   "blockedAtCreate": 1
+  },
+  "afterOneTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "reloadOpened": true,
+  "reloadAtOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": true,
+   "invite": true,
+   "muted": false,
+   "act": false,
+   "topAct": false,
+   "blockedAtCreate": 1
+  },
+  "reloadAfterOneTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "errors": []
+ },
+ {
+  "tag": "390",
+  "name": "apartment-page",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": true,
+   "invite": true,
+   "muted": false,
+   "act": false,
+   "topAct": false,
+   "blockedAtCreate": 1
+  },
+  "afterOneTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "errors": []
+ },
+ {
+  "tag": "390",
+  "name": "hold-enter",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "entered": true,
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": false,
+   "topAct": true,
+   "blockedAtCreate": 0
+  },
+  "errors": []
+ },
+ {
+  "tag": "390",
+  "name": "landing-to-tour",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "cta": true,
+  "at": "/hold/?tour=%2Ftour%2F%3Fscope%3Dapartme",
+  "entered": true,
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "waiting": false,
+   "invite": false,
+   "muted": false,
+   "act": false,
+   "topAct": true,
+   "blockedAtCreate": 0
+  },
+  "errors": []
+ },
+ {
+  "tag": "390",
+  "name": "mute-skip-coach0",
+  "policy": "stand-in (Chromium rule: own or same-origin ancestor sticky activation)",
+  "afterMute": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "waiting": false,
+   "invite": false,
+   "muted": true,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 1
+  },
+  "reopened": true,
+  "reloadMutedAfterTap": {
+   "coach": true,
+   "state": "none",
+   "on": false,
+   "waiting": false,
+   "invite": false,
+   "muted": true,
+   "act": true,
+   "topAct": true,
+   "blockedAtCreate": 0
+  },
+  "skipClosed": true,
+  "reopenedAfterSkip": true,
+  "coach0Open": false,
+  "errors": []
+ }
+]

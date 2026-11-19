@@ -1,0 +1,237 @@
+The files the soak dumped at its violation of 2026-11-18 11:42 (gate-soak-1-checker-race.txt), one after another.
+What they show: ledger row 3 (finishing) has sending_at 09:42:33.666Z; the send's line in sends-finishing.log is 09:42:33.669Z.
+The mark was on the disk 3 ms before the send. The soak's check had read ledger.json before the mark and sends.log after the send.
+
+=============== WHY.txt
+job 1 (06d79fbb9498709e) before kill: finishing sent 1 times, only 0 row(s) marked as sending
+seed random
+
+=============== job.json
+{
+  "schema": "habait/job.v1",
+  "job_id": "06d79fbb9498709e",
+  "engine_version": "1.3.0",
+  "mode": "stub",
+  "state": "finishing",
+  "percent": 88,
+  "created_at": "2026-11-18T09:42:28.835Z",
+  "updated_at": "2026-11-18T09:42:32.967Z",
+  "heartbeat_at": "2026-11-18T09:42:33.356Z",
+  "input": {
+    "pdf_path": "C:/Users/elira/AppData/Local/Temp/killsoak-Q8Ke4c/jobs-temp/06d79fbb9498709e/input/source.pdf",
+    "pdf_name": "soak-1.pdf",
+    "pdf_sha256": "2a1b5be213e93a857b71355146a213aed46ec09c008bbe03b797a217f97e8547",
+    "pdf_bytes": 6923,
+    "apartment": "p1"
+  },
+  "quote": {
+    "estimate_usd": 48,
+    "range_usd": [
+      40,
+      60
+    ],
+    "rooms": 11,
+    "basis": "measured on apartment 846"
+  },
+  "approval": {
+    "cap_usd": 60,
+    "at": "2026-11-18T09:42:31.577Z"
+  },
+  "cost": {
+    "spent_usd": 1.2,
+    "cap_usd": 60
+  },
+  "result": null,
+  "reason": null,
+  "attempts": {
+    "tracing": 1,
+    "building": 1,
+    "rendering": 2,
+    "skinning": 2,
+    "gating": 1,
+    "finishing": 2
+  }
+}
+
+=============== ledger.json
+{
+  "schema": "habait/ledger.v1",
+  "job_id": "06d79fbb9498709e",
+  "cap_usd": 60,
+  "rows": [
+    {
+      "seq": 1,
+      "call_key": "ce101a853368abea202b3b7193d5f04e2590d5ffde741541d656b85a105605b0",
+      "stage": "skinning",
+      "provider": "stub",
+      "what": "one stub call",
+      "reserved_usd": 0.6,
+      "reserved_at": "2026-11-18T09:42:32.219Z",
+      "sending_at": "2026-11-18T09:42:32.225Z",
+      "status": "settled",
+      "settled_usd": 0.6,
+      "settled_at": "2026-11-18T09:42:32.232Z",
+      "answer_sha256": "3749b402982e5a32c821c6d67178f131c295c0c55e42cc173a93a0360379daf9",
+      "attempt": 2
+    },
+    {
+      "seq": 2,
+      "call_key": "08dbc4cf08e6eebab55f64a85287a7723a4fafd816115408ce27d8a512612d43",
+      "stage": "gating",
+      "provider": "stub",
+      "what": "one stub call",
+      "reserved_usd": 0.6,
+      "reserved_at": "2026-11-18T09:42:32.447Z",
+      "sending_at": "2026-11-18T09:42:32.451Z",
+      "status": "settled",
+      "settled_usd": 0.6,
+      "settled_at": "2026-11-18T09:42:32.458Z",
+      "answer_sha256": "5b4c72da91757b2d019f2a6de5689294b4403e31117c511935b9578068ffcf2f",
+      "attempt": 1
+    },
+    {
+      "seq": 3,
+      "call_key": "f61db8215623369ca28069a18b99c46f31625a285e30061ddaa40bf43afd2c99",
+      "stage": "finishing",
+      "provider": "stub",
+      "what": "one stub call",
+      "reserved_usd": 0.6,
+      "reserved_at": "2026-11-18T09:42:33.640Z",
+      "sending_at": "2026-11-18T09:42:33.666Z",
+      "status": "settled",
+      "settled_usd": 0.6,
+      "settled_at": "2026-11-18T09:42:33.735Z",
+      "answer_sha256": "7eb70f2270c23d34fb9aa367121a1852bd561e619b761a4714113c48a5e05e2b",
+      "attempt": 2
+    }
+  ]
+}
+
+=============== manifest.json
+{
+  "schema": "habait/manifest.v1",
+  "job_id": "06d79fbb9498709e",
+  "rows": [
+    {
+      "stage": "tracing",
+      "attempt": 1,
+      "status": "done",
+      "started_at": "2026-11-18T09:42:30.406Z",
+      "finished_at": "2026-11-18T09:42:30.679Z",
+      "seconds": 0.273,
+      "inputs_sha256": "b38ea617f40f459b94619497fbc8127de79fd2671057a494e1ac7e01c415da82",
+      "outputs": [
+        {
+          "path": "stages/tracing/stub.json",
+          "sha256": "5d6630064774a23b0eebe5b73cb4a376d342f71eaaeaad9c5d3f2660265424ea",
+          "bytes": 145
+        }
+      ],
+      "cost_usd": 0,
+      "runner_pid": 47132
+    },
+    {
+      "stage": "building",
+      "attempt": 1,
+      "status": "done",
+      "started_at": "2026-11-18T09:42:30.702Z",
+      "finished_at": "2026-11-18T09:42:30.881Z",
+      "seconds": 0.179,
+      "inputs_sha256": "6577d01af7be88747549910ec8365b468dc0b244b71fe654c0ae37326b8614b4",
+      "outputs": [
+        {
+          "path": "stages/building/stub.json",
+          "sha256": "865639978bf435efee7d618909f9603bd920c37c38b2bfa16a88f241f5bc41af",
+          "bytes": 146
+        }
+      ],
+      "cost_usd": 0,
+      "runner_pid": 47132
+    },
+    {
+      "stage": "rendering",
+      "attempt": 2,
+      "status": "done",
+      "started_at": "2026-11-18T09:42:31.318Z",
+      "finished_at": "2026-11-18T09:42:31.496Z",
+      "seconds": 0.178,
+      "inputs_sha256": "217ac59f8993380cba81f29d4648cc4244b10d4e96753521480758fe450a4061",
+      "outputs": [
+        {
+          "path": "stages/rendering/stub.json",
+          "sha256": "2693d6605652cf22e115b72b4d6d1b3bbb2c66061230b23e5aa0bee64e9355fd",
+          "bytes": 147
+        }
+      ],
+      "cost_usd": 0,
+      "runner_pid": 31888
+    },
+    {
+      "stage": "skinning",
+      "attempt": 2,
+      "status": "done",
+      "started_at": "2026-11-18T09:42:32.040Z",
+      "finished_at": "2026-11-18T09:42:32.248Z",
+      "seconds": 0.208,
+      "inputs_sha256": "53b18ebfbb9252930dc230a1d7546033b8e614c167a26e30830f511d63433efc",
+      "outputs": [
+        {
+          "path": "stages/skinning/stub.json",
+          "sha256": "ff58e207194c891a64319b75b6c42bbeeed0c1976d1c54413f9606b81a83c242",
+          "bytes": 146
+        }
+      ],
+      "cost_usd": 0.6,
+      "runner_pid": 14076
+    },
+    {
+      "stage": "gating",
+      "attempt": 1,
+      "status": "done",
+      "started_at": "2026-11-18T09:42:32.272Z",
+      "finished_at": "2026-11-18T09:42:32.510Z",
+      "seconds": 0.238,
+      "inputs_sha256": "4857e4ca711d9ebb76aafcdf0cd027e43f0c2a60a6ade8449307f6f7f3ec5e28",
+      "outputs": [
+        {
+          "path": "stages/gating/stub.json",
+          "sha256": "fd355d0ecc267809fb70ce0cee4ebacdf3660ea3280fe31bbc0fe550096771c8",
+          "bytes": 144
+        }
+      ],
+      "cost_usd": 0.6,
+      "runner_pid": 14076
+    }
+  ]
+}
+
+=============== runner.log
+2026-11-18T09:42:30.406Z runner 47132 tracing: attempt 1 started
+2026-11-18T09:42:30.676Z runner 47132 tracing: tracing: stub output written
+2026-11-18T09:42:30.685Z runner 47132 tracing: done (attempt 1, $0)
+2026-11-18T09:42:30.702Z runner 47132 building: attempt 1 started
+2026-11-18T09:42:30.878Z runner 47132 building: building: stub output written
+2026-11-18T09:42:30.886Z runner 47132 building: done (attempt 1, $0)
+2026-11-18T09:42:30.911Z runner 47132 rendering: attempt 1 started
+2026-11-18T09:42:31.308Z runner 31888 heavy lock taken over from dead pid 47132
+2026-11-18T09:42:31.318Z runner 31888 rendering: attempt 2 started
+2026-11-18T09:42:31.493Z runner 31888 rendering: rendering: stub output written
+2026-11-18T09:42:31.505Z runner 31888 rendering: done (attempt 2, $0)
+2026-11-18T09:42:31.822Z runner 3156 skinning: attempt 1 started
+2026-11-18T09:42:32.040Z runner 14076 skinning: attempt 2 started
+2026-11-18T09:42:32.245Z runner 14076 skinning: skinning: stub output written (one paid call)
+2026-11-18T09:42:32.254Z runner 14076 skinning: done (attempt 2, $0.6)
+2026-11-18T09:42:32.272Z runner 14076 gating: attempt 1 started
+2026-11-18T09:42:32.506Z runner 14076 gating: gating: stub output written (one paid call)
+2026-11-18T09:42:32.517Z runner 14076 gating: done (attempt 1, $0.6)
+2026-11-18T09:42:32.626Z runner 14076 finishing: attempt 1 started
+2026-11-18T09:42:32.971Z runner 26720 finishing: attempt 2 started
+
+=============== sends-skinning.log
+2026-11-18T09:42:32.227Z attempt 2
+
+=============== sends-gating.log
+2026-11-18T09:42:32.453Z attempt 1
+
+=============== sends-finishing.log
+2026-11-18T09:42:33.669Z attempt 2

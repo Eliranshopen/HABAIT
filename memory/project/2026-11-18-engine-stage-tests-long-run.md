@@ -1,0 +1,7 @@
+
+## 2026-11-18 · main session · Eliran: on a loaded machine the engine's stage tests may run ONCE as a bounded background run of up to 25 minutes
+- **Did:** During the gate of engine milestone 1.4 the stage tests (real readings of a drawing) could not end inside the 540 s limit of root section 12: renders of other sessions held the machine at 100 % and ONE reading took up to 558 s (71 s on a quiet machine); five tries were cut. Eliran was asked in the session's question dialog (three options: one long bounded run in the background; wait; he pauses the renders) and chose the first: for the engine's stage tests only, when the machine is loaded, ONE bounded run of up to 25 minutes in the background, instead of 9 minutes in the foreground. The other renders are not stopped.
+- **Evidence:** `development/tasks/3dengine/m1.4/README.md` · `development/tasks/3dengine/run-tasks.md`
+- **Learned:** The limit of section 12 stays for everything else. The run is still bounded (timeout 1500), still one heavy run of this session at a time, and the harness tells when it ends: no polling. A cut by the limit kills the reading tool in the middle and a test then reports a failed step: read the exit code (124) before reading the assertion.
+- **Owed / open:** Write the rule into run-tasks.md and tests/stages/CLAUDE.md at the close of 1.4. Card 08 (milestone 2.1) still owes the gate on a saturated machine in general.
+- **Second reader:** `qa-reviewer`

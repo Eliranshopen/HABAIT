@@ -1,0 +1,93 @@
+{
+ "$schema": "habait/responsive-gate.v1",
+ "at": "2026-11-05T13:40:22.590Z",
+ "rule": "Eliran 2026-11-05: desktop AND mobile, in code",
+ "sizes": [
+  {
+   "width": 1440,
+   "height": 900
+  },
+  {
+   "width": 390,
+   "height": 844
+  }
+ ],
+ "pass": false,
+ "pages": [
+  {
+   "url": "/p/pbuild846/landing.html?project=pbuild846",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "p-pbuild846-landing-html-project-pbuild846-1440.png"
+  },
+  {
+   "url": "/p/pbuild846/landing.html?project=pbuild846",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "p-pbuild846-landing-html-project-pbuild846-390.png"
+  },
+  {
+   "url": "/p/pbuild846/tour/?room=living",
+   "size": "1440",
+   "pass": false,
+   "fails": [
+    "overflow button.t-card «כניסה אל חדר רחצה הורים» (a control cut by the edge) -110..40 (viewport 0..1440)"
+   ],
+   "counts": {
+    "overflow": 1,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "p-pbuild846-tour-room-living-1440.png"
+  },
+  {
+   "url": "/p/pbuild846/tour/?room=living",
+   "size": "390",
+   "pass": false,
+   "fails": [
+    "overflow button.t-card «כניסה אל מטבח» (a control cut by the edge) 383..495 (viewport 0..390)",
+    "overflow button.t-card «כניסה אל מרפסת · קצה החדרים» (a control cut by the edge) -105..7 (viewport 0..390)"
+   ],
+   "counts": {
+    "overflow": 2,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "p-pbuild846-tour-room-living-390.png"
+  }
+ ]
+}

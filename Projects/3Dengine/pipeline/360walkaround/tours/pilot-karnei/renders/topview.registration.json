@@ -1,0 +1,956 @@
+{
+  "generator": {
+    "script": "pipeline/render_pano.py",
+    "version": "0.2.0",
+    "blender": "4.5.10 LTS",
+    "rendered_utc": "2026-09-02T06:19:11+00:00"
+  },
+  "image": {
+    "file": "topview.png",
+    "mask_file": "topview-roomids.png",
+    "depth_file": "topview-depth.png",
+    "width": 1018,
+    "height": 1166
+  },
+  "projection": {
+    "type": "orthographic",
+    "direction": "straight down (-Z); image +x = plan +x (east), image +y (downward) = plan +y (south)",
+    "camera_world_m": [
+      6.0605,
+      -6.984,
+      7.6
+    ],
+    "ortho_scale_m": 12.721,
+    "covered_m": [
+      12.721,
+      14.570418
+    ],
+    "sensor_fit": "HORIZONTAL",
+    "ceilings_hidden": [
+      "CEIL_r-bath-main",
+      "CEIL_r-wc",
+      "CEIL_r-mamad",
+      "CEIL_r-bed-2",
+      "CEIL_r-master",
+      "CEIL_r-master-lobby",
+      "CEIL_r-ensuite",
+      "CEIL_r-kitchen",
+      "CEIL_r-living",
+      "CEIL_r-corridor",
+      "CEIL_r-dining"
+    ]
+  },
+  "plan_cm": {
+    "x0": -30.0,
+    "y0": -30.120923,
+    "x1": 1242.1,
+    "y1": 1426.920923
+  },
+  "cm_per_px": {
+    "x": 1.249607073,
+    "y": 1.249607073
+  },
+  "map": {
+    "plan_to_image": "col = (x_cm - plan_cm.x0)/cm_per_px.x - 0.5 ; row = (y_cm - plan_cm.y0)/cm_per_px.y - 0.5",
+    "image_to_plan": "x_cm = plan_cm.x0 + (col + 0.5)*cm_per_px.x ; y_cm = plan_cm.y0 + (row + 0.5)*cm_per_px.y",
+    "note": "row 0 is the image's TOP scanline and the SMALLEST plan y (plan y grows downward on the drawing, SCHEMA §1) — the affine has no flip in either axis."
+  },
+  "world_m_to_plan_cm": "x_cm = 100*world_X ; y_cm = -100*world_Y (ENV.md §9)",
+  "render": {
+    "backend": "OPTIX",
+    "devices": [
+      "NVIDIA RTX A2000 Laptop GPU"
+    ],
+    "samples": 128,
+    "seconds": 19.069,
+    "device_peak_mb": 1196.57,
+    "host_peak_mb": 1075.28
+  },
+  "depth_encoding": "rgb24-be",
+  "depth_scale": 100,
+  "depth_invalid_value": 0,
+  "depth_stats": {
+    "png_bytes": 30239,
+    "pack_seconds": 0.065,
+    "pixels": 1186988,
+    "valid_pixels": 1186988,
+    "sky_pixels": 0,
+    "min_m": 5.0,
+    "max_m": 10.600000381469727,
+    "clipped_above_24bit": 0,
+    "clipped_below_1cm": 0,
+    "packed_data_sha256": "79dd91740e18ed621d053016a793636ec82d40dc8bdf958aaf44c68a896a64c7"
+  },
+  "inputs": {
+    "point": {
+      "top_view": true,
+      "px_per_m": 80.0,
+      "margin_cm": 30.0,
+      "res": [
+        1018,
+        1166
+      ]
+    },
+    "scene": {
+      "generator": {
+        "script": "pipeline/build_scene.py",
+        "version": "1.1.0",
+        "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+        "materials_kit_version": "0.2.0",
+        "place_cameras_version": "0.1.0",
+        "placement_templates_version": "1.0.0",
+        "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+        "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+        "blender": "4.5.10 LTS",
+        "generated_utc": "2026-09-01T23:11:34+00:00"
+      },
+      "inputs": {
+        "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+        "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+        "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+        "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+        "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+        "furnish_seed": 0,
+        "seed": 0,
+        "room_mode": "all",
+        "cap_virtual": "on",
+        "furniture": true
+      }
+    },
+    "settings": {
+      "res": [
+        1018,
+        1166
+      ],
+      "samples": 256,
+      "adaptive": "on",
+      "adaptive_threshold": 0.01,
+      "denoise": "on",
+      "denoise_device": "cpu",
+      "device": "AUTO",
+      "hybrid": false,
+      "tile_size": 0,
+      "texture_limit": "OFF",
+      "seed": 0,
+      "pano": "topview.png",
+      "webp_quality": 90,
+      "depth": "on",
+      "wrap_pad": 0,
+      "script": "0.2.0",
+      "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "top_view_samples": 128
+    }
+  },
+  "input_key": "9cf9599ccca74c0fcb6899fe2bc2a69b33384cfb6984835225d5cf6cc707f44f",
+  "cost_usd": 0.0,
+  "rooms": [
+    {
+      "room_id": "r-bath-main",
+      "name_en": "Main bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "area_m2": 6.074,
+      "rgb": [
+        230,
+        25,
+        75
+      ],
+      "hex": "#E6194B",
+      "mask_pixels": 38640,
+      "polygon_px": [
+        [
+          138.104,
+          44.091
+        ],
+        [
+          414.911,
+          44.091
+        ],
+        [
+          414.911,
+          184.615
+        ],
+        [
+          138.104,
+          184.615
+        ]
+      ]
+    },
+    {
+      "room_id": "r-service-balcony",
+      "name_en": "Service balcony",
+      "type": "service_balcony",
+      "is_outdoor": true,
+      "area_m2": 1.993,
+      "rgb": [
+        60,
+        180,
+        75
+      ],
+      "hex": "#3CB44B",
+      "mask_pixels": 12740,
+      "polygon_px": [
+        [
+          27.189,
+          44.091
+        ],
+        [
+          118.017,
+          44.091
+        ],
+        [
+          118.017,
+          184.615
+        ],
+        [
+          27.189,
+          184.615
+        ]
+      ]
+    },
+    {
+      "room_id": "r-wc",
+      "name_en": "Toilet",
+      "type": "toilet",
+      "is_outdoor": false,
+      "area_m2": 2.078,
+      "rgb": [
+        255,
+        225,
+        25
+      ],
+      "hex": "#FFE119",
+      "mask_pixels": 13300,
+      "polygon_px": [
+        [
+          425.314,
+          165.649
+        ],
+        [
+          525.745,
+          165.649
+        ],
+        [
+          525.745,
+          298.171
+        ],
+        [
+          425.314,
+          298.171
+        ]
+      ]
+    },
+    {
+      "room_id": "r-balcony-north",
+      "name_en": "North balcony",
+      "type": "balcony",
+      "is_outdoor": true,
+      "area_m2": 9.223,
+      "rgb": [
+        0,
+        130,
+        200
+      ],
+      "hex": "#0082C8",
+      "mask_pixels": 59104,
+      "polygon_px": [
+        [
+          435.317,
+          41.53
+        ],
+        [
+          739.573,
+          41.53
+        ],
+        [
+          739.573,
+          288.328
+        ],
+        [
+          546.952,
+          288.328
+        ],
+        [
+          546.952,
+          144.762
+        ],
+        [
+          435.317,
+          144.762
+        ]
+      ]
+    },
+    {
+      "room_id": "r-mamad",
+      "name_en": "Safe room (MAMAD)",
+      "type": "safe_room",
+      "is_outdoor": false,
+      "area_m2": 9.219,
+      "rgb": [
+        245,
+        130,
+        48
+      ],
+      "hex": "#F58230",
+      "mask_pixels": 59136,
+      "polygon_px": [
+        [
+          49.916,
+          210.783
+        ],
+        [
+          273.746,
+          210.783
+        ],
+        [
+          273.746,
+          474.546
+        ],
+        [
+          49.916,
+          474.546
+        ]
+      ]
+    },
+    {
+      "room_id": "r-bed-2",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "area_m2": 9.076,
+      "rgb": [
+        145,
+        30,
+        180
+      ],
+      "hex": "#911EB4",
+      "mask_pixels": 58065,
+      "polygon_px": [
+        [
+          44.234,
+          492.872
+        ],
+        [
+          281.909,
+          492.872
+        ],
+        [
+          281.909,
+          737.429
+        ],
+        [
+          44.234,
+          737.429
+        ]
+      ]
+    },
+    {
+      "room_id": "r-master",
+      "name_en": "Master bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "area_m2": 11.821,
+      "rgb": [
+        70,
+        240,
+        240
+      ],
+      "hex": "#46F0F0",
+      "mask_pixels": 75524,
+      "polygon_px": [
+        [
+          44.234,
+          747.352
+        ],
+        [
+          283.909,
+          747.352
+        ],
+        [
+          283.909,
+          1063.211
+        ],
+        [
+          44.234,
+          1063.211
+        ]
+      ]
+    },
+    {
+      "room_id": "r-master-lobby",
+      "name_en": "Master lobby",
+      "type": "hall",
+      "is_outdoor": false,
+      "area_m2": 2.356,
+      "rgb": [
+        240,
+        50,
+        230
+      ],
+      "hex": "#F032E6",
+      "mask_pixels": 15130,
+      "polygon_px": [
+        [
+          283.909,
+          747.352
+        ],
+        [
+          403.227,
+          747.352
+        ],
+        [
+          403.227,
+          874.672
+        ],
+        [
+          294.153,
+          874.672
+        ],
+        [
+          294.153,
+          864.509
+        ],
+        [
+          283.909,
+          864.509
+        ]
+      ]
+    },
+    {
+      "room_id": "r-ensuite",
+      "name_en": "En-suite bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "area_m2": 3.211,
+      "rgb": [
+        210,
+        245,
+        60
+      ],
+      "hex": "#D2F53C",
+      "mask_pixels": 20601,
+      "polygon_px": [
+        [
+          294.153,
+          874.672
+        ],
+        [
+          403.227,
+          874.672
+        ],
+        [
+          403.227,
+          1063.211
+        ],
+        [
+          294.153,
+          1063.211
+        ]
+      ]
+    },
+    {
+      "room_id": "r-kitchen",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "is_outdoor": false,
+      "area_m2": 10.042,
+      "rgb": [
+        250,
+        190,
+        212
+      ],
+      "hex": "#FABED4",
+      "mask_pixels": 64380,
+      "polygon_px": [
+        [
+          413.87,
+          656.523
+        ],
+        [
+          635.86,
+          656.523
+        ],
+        [
+          635.86,
+          946.214
+        ],
+        [
+          413.87,
+          946.214
+        ]
+      ]
+    },
+    {
+      "room_id": "r-living",
+      "name_en": "Living room",
+      "type": "living",
+      "is_outdoor": false,
+      "area_m2": 15.895,
+      "rgb": [
+        0,
+        128,
+        128
+      ],
+      "hex": "#008080",
+      "mask_pixels": 102168,
+      "polygon_px": [
+        [
+          667.87,
+          602.986
+        ],
+        [
+          964.443,
+          602.986
+        ],
+        [
+          964.443,
+          946.214
+        ],
+        [
+          667.87,
+          946.214
+        ]
+      ]
+    },
+    {
+      "room_id": "r-corridor",
+      "name_en": "Corridor",
+      "type": "corridor",
+      "is_outdoor": false,
+      "area_m2": 8.595,
+      "rgb": [
+        220,
+        190,
+        255
+      ],
+      "hex": "#DCBEFF",
+      "mask_pixels": 55065,
+      "polygon_px": [
+        [
+          292.072,
+          210.783
+        ],
+        [
+          395.064,
+          210.783
+        ],
+        [
+          395.064,
+          639.398
+        ],
+        [
+          403.227,
+          639.398
+        ],
+        [
+          403.227,
+          737.429
+        ],
+        [
+          292.072,
+          737.429
+        ]
+      ]
+    },
+    {
+      "room_id": "r-dining",
+      "name_en": "Entry and dining",
+      "type": "hall",
+      "is_outdoor": false,
+      "area_m2": 15.771,
+      "rgb": [
+        170,
+        110,
+        40
+      ],
+      "hex": "#AA6E28",
+      "mask_pixels": 100936,
+      "polygon_px": [
+        [
+          395.064,
+          210.783
+        ],
+        [
+          414.911,
+          210.783
+        ],
+        [
+          414.911,
+          308.654
+        ],
+        [
+          667.87,
+          308.654
+        ],
+        [
+          667.87,
+          946.214
+        ],
+        [
+          635.86,
+          946.214
+        ],
+        [
+          635.86,
+          656.523
+        ],
+        [
+          413.87,
+          656.523
+        ],
+        [
+          413.87,
+          639.398
+        ],
+        [
+          395.064,
+          639.398
+        ],
+        [
+          395.064,
+          566.015
+        ],
+        [
+          412.99,
+          566.015
+        ],
+        [
+          412.99,
+          298.571
+        ],
+        [
+          395.064,
+          298.571
+        ]
+      ]
+    },
+    {
+      "room_id": "r-balcony-south",
+      "name_en": "South balcony",
+      "type": "balcony",
+      "is_outdoor": true,
+      "area_m2": 8.172,
+      "rgb": [
+        255,
+        250,
+        200
+      ],
+      "hex": "#FFFAC8",
+      "mask_pixels": 52260,
+      "polygon_px": [
+        [
+          635.86,
+          967.181
+        ],
+        [
+          970.045,
+          967.181
+        ],
+        [
+          970.045,
+          1123.79
+        ],
+        [
+          635.86,
+          1123.79
+        ]
+      ]
+    }
+  ],
+  "mask": {
+    "file": "topview-roomids.png",
+    "bytes": 15447,
+    "background_rgb": [
+      0,
+      0,
+      0
+    ],
+    "anti_aliasing": "NONE — rasterised from plan.json's room loops at pixel centres, even-odd rule",
+    "background_means": "no room here (a wall, a threshold, or outside the flat)",
+    "decode": "match the pixel's exact RGB triple against rooms[].rgb; (0,0,0) = no room",
+    "sha256_pixels": "f49c2cc6b7d98118d172834f2cac498b5721f96715a0e436d79e19d5a39b8ab2"
+  },
+  "alignment": {
+    "oracle": "the top view's own depth pass: a straight-down ray reaches a wall top at cam_z - wall_height = 5.000 m (tolerance 5 cm)",
+    "walls_scored": {
+      "height_cm": 260.0,
+      "count": 27,
+      "of_total": 38
+    },
+    "wall_px_expected": 131313,
+    "wall_px_measured": 135779,
+    "best_shift": {
+      "dx": 0,
+      "dy": 0,
+      "iou": 0.967108
+    },
+    "zero_shift_iou": 0.967108,
+    "aligned": true,
+    "shift_scores": [
+      {
+        "dx": -3,
+        "dy": -3,
+        "iou": 0.704904
+      },
+      {
+        "dx": -2,
+        "dy": -3,
+        "iou": 0.747184
+      },
+      {
+        "dx": -1,
+        "dy": -3,
+        "iou": 0.791698
+      },
+      {
+        "dx": 0,
+        "dy": -3,
+        "iou": 0.83854
+      },
+      {
+        "dx": 1,
+        "dy": -3,
+        "iou": 0.791938
+      },
+      {
+        "dx": 2,
+        "dy": -3,
+        "iou": 0.747653
+      },
+      {
+        "dx": 3,
+        "dy": -3,
+        "iou": 0.705645
+      },
+      {
+        "dx": -3,
+        "dy": -2,
+        "iou": 0.739458
+      },
+      {
+        "dx": -2,
+        "dy": -2,
+        "iou": 0.783693
+      },
+      {
+        "dx": -1,
+        "dy": -2,
+        "iou": 0.830338
+      },
+      {
+        "dx": 0,
+        "dy": -2,
+        "iou": 0.879487
+      },
+      {
+        "dx": 1,
+        "dy": -2,
+        "iou": 0.830613
+      },
+      {
+        "dx": 2,
+        "dy": -2,
+        "iou": 0.784229
+      },
+      {
+        "dx": 3,
+        "dy": -2,
+        "iou": 0.740274
+      },
+      {
+        "dx": -3,
+        "dy": -1,
+        "iou": 0.775441
+      },
+      {
+        "dx": -2,
+        "dy": -1,
+        "iou": 0.821761
+      },
+      {
+        "dx": -1,
+        "dy": -1,
+        "iou": 0.87068
+      },
+      {
+        "dx": 0,
+        "dy": -1,
+        "iou": 0.9223
+      },
+      {
+        "dx": 1,
+        "dy": -1,
+        "iou": 0.870995
+      },
+      {
+        "dx": 2,
+        "dy": -1,
+        "iou": 0.82237
+      },
+      {
+        "dx": 3,
+        "dy": -1,
+        "iou": 0.776338
+      },
+      {
+        "dx": -3,
+        "dy": 0,
+        "iou": 0.812944
+      },
+      {
+        "dx": -2,
+        "dy": 0,
+        "iou": 0.861489
+      },
+      {
+        "dx": -1,
+        "dy": 0,
+        "iou": 0.912842
+      },
+      {
+        "dx": 0,
+        "dy": 0,
+        "iou": 0.967108
+      },
+      {
+        "dx": 1,
+        "dy": 0,
+        "iou": 0.913198
+      },
+      {
+        "dx": 2,
+        "dy": 0,
+        "iou": 0.862177
+      },
+      {
+        "dx": 3,
+        "dy": 0,
+        "iou": 0.813929
+      },
+      {
+        "dx": -3,
+        "dy": 1,
+        "iou": 0.775712
+      },
+      {
+        "dx": -2,
+        "dy": 1,
+        "iou": 0.822047
+      },
+      {
+        "dx": -1,
+        "dy": 1,
+        "iou": 0.871008
+      },
+      {
+        "dx": 0,
+        "dy": 1,
+        "iou": 0.922673
+      },
+      {
+        "dx": 1,
+        "dy": 1,
+        "iou": 0.871375
+      },
+      {
+        "dx": 2,
+        "dy": 1,
+        "iou": 0.822755
+      },
+      {
+        "dx": 3,
+        "dy": 1,
+        "iou": 0.776705
+      },
+      {
+        "dx": -3,
+        "dy": 2,
+        "iou": 0.73999
+      },
+      {
+        "dx": -2,
+        "dy": 2,
+        "iou": 0.784253
+      },
+      {
+        "dx": -1,
+        "dy": 2,
+        "iou": 0.830977
+      },
+      {
+        "dx": 0,
+        "dy": 2,
+        "iou": 0.880215
+      },
+      {
+        "dx": 1,
+        "dy": 2,
+        "iou": 0.831354
+      },
+      {
+        "dx": 2,
+        "dy": 2,
+        "iou": 0.784981
+      },
+      {
+        "dx": 3,
+        "dy": 2,
+        "iou": 0.740988
+      },
+      {
+        "dx": -3,
+        "dy": 3,
+        "iou": 0.705677
+      },
+      {
+        "dx": -2,
+        "dy": 3,
+        "iou": 0.747996
+      },
+      {
+        "dx": -1,
+        "dy": 3,
+        "iou": 0.792624
+      },
+      {
+        "dx": 0,
+        "dy": 3,
+        "iou": 0.839591
+      },
+      {
+        "dx": 1,
+        "dy": 3,
+        "iou": 0.793009
+      },
+      {
+        "dx": 2,
+        "dy": 3,
+        "iou": 0.74874
+      },
+      {
+        "dx": 3,
+        "dy": 3,
+        "iou": 0.70668
+      }
+    ]
+  },
+  "outputs": {
+    "topview": {
+      "file": "topview.png",
+      "bytes": 1250969,
+      "sha256": "8acb63350a9ded12ccde9674051c081932445b4b95594160a352bf71a934a647"
+    },
+    "roomids": {
+      "file": "topview-roomids.png",
+      "bytes": 15447,
+      "sha256": "b7b1a3c3e2e66f368dff718234e4674e783f9c54c0b9a1fc2d21b065acc653e4"
+    },
+    "topview_depth": {
+      "file": "topview-depth.png",
+      "bytes": 30239,
+      "sha256": "d663c3621b2f6d9667dad7e49d5655488321ff08c60d078bcf5422764306f11b"
+    }
+  }
+}

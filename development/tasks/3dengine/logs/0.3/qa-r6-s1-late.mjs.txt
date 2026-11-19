@@ -1,0 +1,107 @@
+// qa-r6 s1: late runner killed around its settle; chains of takeovers. usage: node s1-late.mjs <seed> <n>
+import fs from 'node:fs';
+import { mkEnv, frozenThenReplaced, toDone, sleep, pidAlive, check, ledgerSum, cliSpent, killPid, stats, say, rnd, overlaps } from './common.mjs';
+
+const seed = Number(process.argv[2] || 1);
+const N = Number(process.argv[3] || 6);
+const r = rnd(seed);
+const pick = (a) => a[Math.floor(r() * a.length)];
+const E = await mkEnv({ prefix: 'qar6-s1-', staleSeconds: 1, heartbeat: 0.1, stepMs: 250 });
+say(`# s1 seed=${seed} n=${N} home=${E.home}`);
+let n = 0;
+async function reportAll(id, tag, expectSum) {
+  const out = {};
+  out.get_job = E.h.get_job({ job_id: id }).job.cost.spent_usd;
+  out.list_jobs = E.h.list_jobs({ limit: 50 }).jobs.find((j) => j.job_id === id)?.cost.spent_usd;
+  const j = E.job(id);
+  if (j.state === 'done') {
+    try { out.get_result = (await E.h.get_result({ job_id: id })).cost.spent_usd; } catch (e) { out.get_result = `ERR ${e.message}`; }
+  }
+  Object.assign(out, cliSpent(E, id));
+  const bad = Object.entries(out).filter(([, v]) => v !== expectSum);
+  if (bad.length) { stats.violations.push(`${tag}: reported ${JSON.stringify(out)} != ledger ${expectSum}`); say(`  VIOLATION ${tag} reported ${JSON.stringify(out)} ledger ${expectSum}`); }
+  return out;
+}
+
+try {
+  for (let i = 0; i < N; i++) {
+    n++;
+    const P = pick(['skinning', 'gating', 'finishing']);
+    const mode = pick(['pause-settle', 'pause-settle', 'pause-cache', 'random', 'chain', 'chain']);
+    const name = `s1-${seed}-${i}.pdf`;
+    const t0 = Date.now();
+    const firstEnv = mode === 'pause-settle' ? { ENGINE_TEST_PAUSE_AFTER_SETTLE_MS: 8000 } : mode === 'pause-cache' ? { ENGINE_TEST_PAUSE_AFTER_CACHE_MS: 8000 } : {};
+    const point = `${P}:sent`;
+    let secondEnv = {};
+    let wake2 = null;
+    if (mode === 'chain') {
+      wake2 = `${E.home}/wake2-${i}`;
+      secondEnv = { ENGINE_TEST_FREEZE_MS: 60000, ENGINE_TEST_FREEZE_AT: point, ENGINE_TEST_FREEZE_WAKE: wake2 };
+      if (r() < 0.5) secondEnv.ENGINE_TEST_PAUSE_AFTER_SETTLE_MS = 8000;
+    }
+    let f;
+    try {
+      f = await frozenThenReplaced(E, { name, point, firstEnv, secondEnv });
+    } catch (e) { say(`  SETUP-FAIL ${i} ${P} ${mode}: ${e.message}`); stats.violations.push(`setup ${e.message}`); continue; }
+    stats.takeovers++;
+    const id = f.id;
+    let pids = [f.oldPid];
+    if (mode === 'chain') {
+      // wait until runner 2 is blocked and looks dead, then a third runner takes over
+      const blocked2 = `runner ${f.newPid} test hook: thread blocked`;
+      await E.waitFor('runner 2 blocked', () => E.log(id).includes(blocked2) && E.h.get_job({ job_id: id }).job.runner.alive === false, 30000);
+      const again = E.h.start_simulation({ pdf_path: f.pdf });
+      if (!again.resumed) { say(`  chain: third start not a resume`); stats.violations.push('chain third start'); }
+      const p3 = await E.waitFor('third runner owns pid', () => { const p = E.runnerPid(id); return p && p !== f.oldPid && p !== f.newPid ? p : null; }, 20000);
+      stats.takeovers++;
+      pids.push(f.newPid);
+      await toDone(E, id, 45000);
+      say(`  chain ${i} ${P}: runners ${f.oldPid},${f.newPid},${p3}`);
+    } else {
+      await toDone(E, id, 45000);
+    }
+    const preSum = ledgerSum(E, id);
+    // sanity: before waking, reported = ledger
+    await reportAll(id, `pre-wake ${i}`, preSum);
+    // wake in some order, kill at some moment
+    const killWho = pick(pids);
+    const logHas = (pid, s) => E.log(id).includes(`runner ${pid} ${s}`);
+    const wakeFile2 = () => wake2 && fs.writeFileSync(wake2, 'w');
+    let killed = null;
+    if (mode === 'chain') {
+      if (r() < 0.5) { f.wake(); wakeFile2(); } else { wakeFile2(); await sleep(Math.floor(r() * 80)); f.wake(); }
+    } else f.wake();
+    if (mode === 'pause-settle' || mode === 'pause-cache') {
+      const pat = mode === 'pause-settle' ? 'test hook: pausing 8000 ms after the settle' : 'test hook: pausing 8000 ms after the cache write';
+      await E.waitFor('first runner in its pause', () => logHas(f.oldPid, pat) || !pidAlive(f.oldPid), 15000, 5);
+      if (pidAlive(f.oldPid)) { killPid(f.oldPid); killed = f.oldPid; stats.kills++; }
+      if (mode === 'chain') { /* n/a */ }
+    } else {
+      const d = Math.floor(r() * 25);
+      await sleep(d);
+      const victim = mode === 'chain' ? killWho : f.oldPid;
+      if (pidAlive(victim)) { killPid(victim); killed = victim; stats.kills++; }
+    }
+    // everything else leaves by itself
+    for (const p of [...pids, f.newPid]) await E.waitFor(`pid ${p} gone`, () => !pidAlive(p), 40000, 20).catch(() => { stats.violations.push(`pid ${p} did not leave`); killPid(p); });
+    await sleep(100);
+    const sum = ledgerSum(E, id);
+    // raw copy check BEFORE any read of the engine
+    const raw = E.job(id).cost.spent_usd;
+    const rows = E.ledger(id).rows.filter((x) => x.stage === P);
+    const late = rows.filter((x) => x.late).length;
+    const betw = raw !== sum;
+    if (betw && (mode === 'pause-settle')) { stats.violations.push(`${mode}: copy ${raw} != ledger ${sum} after kill in pause (both writes were done)`); say(`  VIOLATION raw copy ${raw} ledger ${sum} ${mode} ${P}`); }
+    const rep = await reportAll(id, `post ${i} ${mode} ${P}`, sum);
+    const afterRaw = E.job(id).cost.spent_usd;
+    if (afterRaw !== sum) { stats.violations.push(`${mode}: copy still ${afterRaw} after reads (ledger ${sum})`); say(`  VIOLATION copy not put right ${afterRaw} vs ${sum}`); }
+    const v = check(E, id, { quiet: true });
+    if (v.length) { stats.violations.push(...v.map((x) => `${mode} ${P} #${i}: ${x}`)); say(`  VIOLATION ${v.join('; ')}`); }
+    say(`  #${i} ${P} ${mode} killed=${killed} rawcopy=${raw} ledger=${sum} late=${late} rows=${rows.map((x) => `${x.seq}:${x.status}${x.late ? '/late' : ''}${x.recovered ? '/rec' : ''}`).join(' ')} sends=${E.sends(id, P)} ${Date.now() - t0}ms`);
+  }
+} finally {
+  await E.cleanup();
+  say(`# s1 done seed=${seed} scenarios=${n} kills=${stats.kills} takeovers=${stats.takeovers} violations=${stats.violations.length} leftover=${JSON.stringify(E.leftover)}`);
+  for (const x of stats.violations) say(`  V: ${x}`);
+  fs.appendFileSync(`${process.argv[1].replace(/[^/\\]+$/, '')}counters.txt`, `s1 seed=${seed} kills=${stats.kills} takeovers=${stats.takeovers} violations=${stats.violations.length}\n`);
+}

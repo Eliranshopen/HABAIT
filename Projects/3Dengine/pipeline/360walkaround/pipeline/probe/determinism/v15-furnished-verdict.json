@@ -1,0 +1,25 @@
+{
+  "task": "D-WQ-36: the furnished general branch (build_scene v1.5.0 + general_furnish v0.1.0); rail 1 on both paths",
+  "date": "2026-10-29",
+  "actor": "render-pipeline-engineer",
+  "blender": "4.5.10 LTS",
+  "instrument": "pipeline/probe/dump_scene.py - decoded scene data, never .blend bytes",
+  "pilot_rectilinear_regression": {
+    "plan": "tours/pilot-karnei/plan.json",
+    "baseline_dump_sha256": "6d8f9b88d444b36eaf096db92d8eb20b035011fd806320541c58bd73920707a1",
+    "v1_5_dump_sha256": "6d8f9b88d444b36eaf096db92d8eb20b035011fd806320541c58bd73920707a1",
+    "scene_data_identical": true,
+    "checks": "166/166 geometry + 12/12 camera clearance"
+  },
+  "apt846_furnished_twice": {
+    "plan": "tours/apt846-furnished/plan.json (tours/apt846/plan.json + the furnishing extension v0.1.0)",
+    "build_A": "tours/apt846-furnished/scene-full.blend",
+    "build_B": "a scratch .blend on another drive",
+    "dump_A_sha256": "2b9f925e8d9f168687e8ec03bb7a5a521a1741012c5a6e37d0f4c436bedcc155",
+    "dump_B_sha256": "f7ac4886339c92264dc11dee79913b4cbcb1cfea681f65df17ffa042e2f01015",
+    "only_difference": "image `filepath` strings: build_scene relativises them against the OUTPUT .blend's folder, so a .blend saved elsewhere carries other paths; with those lines removed both dumps hash 76a4e7d5d70ce31d489f53a3fbdd7bc3dd95377ec2f115ddbaf37c55d862fefa",
+    "scene_data_identical": true,
+    "objects_in_dump": 886,
+    "note": "measured on the first furnished scene (before the entrance-door dressing); the dressing adds prisms only, plan order"
+  }
+}

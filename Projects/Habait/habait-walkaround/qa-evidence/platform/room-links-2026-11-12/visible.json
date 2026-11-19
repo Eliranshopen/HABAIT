@@ -1,0 +1,295 @@
+{
+ "entrance": [
+  {
+   "room": "living",
+   "share_pct": 26.28,
+   "yaw": 33.4,
+   "v": 0.69,
+   "near_m": 2.7,
+   "button": true
+  },
+  {
+   "room": "dining",
+   "share_pct": 1.01,
+   "yaw": -17.3,
+   "v": 0.552,
+   "near_m": 7.3,
+   "button": false
+  },
+  {
+   "room": "kitchen",
+   "share_pct": 0.88,
+   "yaw": -27.4,
+   "v": 0.608,
+   "near_m": 3.1,
+   "button": true
+  },
+  {
+   "room": "wardrobe",
+   "share_pct": 0.41,
+   "yaw": 56.2,
+   "v": 0.575,
+   "near_m": 5.5,
+   "button": true
+  }
+ ],
+ "kitchen": [
+  {
+   "room": "dining",
+   "share_pct": 28.2,
+   "yaw": -19.3,
+   "v": 0.702,
+   "near_m": 2.2,
+   "button": true
+  },
+  {
+   "room": "living",
+   "share_pct": 11.87,
+   "yaw": 69.4,
+   "v": 0.595,
+   "near_m": 4.3,
+   "button": true
+  },
+  {
+   "room": "entrance",
+   "share_pct": 0.02,
+   "yaw": 119.5,
+   "v": 0.417,
+   "near_m": 5.1,
+   "button": true
+  }
+ ],
+ "dining": [
+  {
+   "room": "living",
+   "share_pct": 43.49,
+   "yaw": 140.3,
+   "v": 0.745,
+   "near_m": 2.0,
+   "button": true
+  },
+  {
+   "room": "kitchen",
+   "share_pct": 17.7,
+   "yaw": -96.8,
+   "v": 0.677,
+   "near_m": 2.9,
+   "button": true
+  },
+  {
+   "room": "entrance",
+   "share_pct": 1.96,
+   "yaw": -146.3,
+   "v": 0.558,
+   "near_m": 6.9,
+   "button": false
+  }
+ ],
+ "living": [
+  {
+   "room": "kitchen",
+   "share_pct": 7.4,
+   "yaw": -98.2,
+   "v": 0.63,
+   "near_m": 3.3,
+   "button": true
+  },
+  {
+   "room": "entrance",
+   "share_pct": 6.47,
+   "yaw": -171.8,
+   "v": 0.591,
+   "near_m": 4.3,
+   "button": true
+  },
+  {
+   "room": "dining",
+   "share_pct": 5.46,
+   "yaw": -56.2,
+   "v": 0.591,
+   "near_m": 4.3,
+   "button": true
+  },
+  {
+   "room": "bathguest",
+   "share_pct": 0.55,
+   "yaw": -148.2,
+   "v": 0.581,
+   "near_m": 4.0,
+   "button": false
+  }
+ ],
+ "terraceLiving": [
+  {
+   "room": "terraceBedroom",
+   "share_pct": 1.61,
+   "yaw": -149.3,
+   "v": 0.575,
+   "near_m": 4.4,
+   "button": true
+  },
+  {
+   "room": "living",
+   "share_pct": 0.29,
+   "yaw": -125.0,
+   "v": 0.62,
+   "near_m": 3.0,
+   "button": true
+  },
+  {
+   "room": "bedroomMain",
+   "share_pct": 0.27,
+   "yaw": -138.5,
+   "v": 0.562,
+   "near_m": 5.5,
+   "button": false
+  }
+ ],
+ "terraceBedroom": [
+  {
+   "room": "bedroomMain",
+   "share_pct": 19.25,
+   "yaw": -93.7,
+   "v": 0.735,
+   "near_m": 2.0,
+   "button": false
+  },
+  {
+   "room": "terraceLiving",
+   "share_pct": 11.82,
+   "yaw": 10.7,
+   "v": 0.661,
+   "near_m": 2.5,
+   "button": true
+  },
+  {
+   "room": "wardrobe",
+   "share_pct": 1.28,
+   "yaw": -92.0,
+   "v": 0.573,
+   "near_m": 6.0,
+   "button": false
+  },
+  {
+   "room": "living",
+   "share_pct": 0.74,
+   "yaw": -53.4,
+   "v": 0.573,
+   "near_m": 6.1,
+   "button": false
+  }
+ ],
+ "bedroomMain": [
+  {
+   "room": "terraceBedroom",
+   "share_pct": 8.03,
+   "yaw": 117.6,
+   "v": 0.696,
+   "near_m": 2.3,
+   "button": false
+  },
+  {
+   "room": "wardrobe",
+   "share_pct": 3.36,
+   "yaw": -58.3,
+   "v": 0.612,
+   "near_m": 4.0,
+   "button": true
+  },
+  {
+   "room": "living",
+   "share_pct": 0.67,
+   "yaw": -51.5,
+   "v": 0.573,
+   "near_m": 4.6,
+   "button": false
+  },
+  {
+   "room": "terraceLiving",
+   "share_pct": 0.32,
+   "yaw": 93.8,
+   "v": 0.593,
+   "near_m": 3.7,
+   "button": false
+  },
+  {
+   "room": "entrance",
+   "share_pct": 0.02,
+   "yaw": -46.2,
+   "v": 0.544,
+   "near_m": 7.3,
+   "button": false
+  }
+ ],
+ "wardrobe": [
+  {
+   "room": "bedroomMain",
+   "share_pct": 24.8,
+   "yaw": 3.4,
+   "v": 0.733,
+   "near_m": 2.1,
+   "button": true
+  },
+  {
+   "room": "living",
+   "share_pct": 7.88,
+   "yaw": -170.2,
+   "v": 0.724,
+   "near_m": 1.6,
+   "button": true
+  },
+  {
+   "room": "bathMain",
+   "share_pct": 1.1,
+   "yaw": 122.6,
+   "v": 0.638,
+   "near_m": 3.1,
+   "button": true
+  },
+  {
+   "room": "entrance",
+   "share_pct": 1.01,
+   "yaw": -154.3,
+   "v": 0.575,
+   "near_m": 4.2,
+   "button": false
+  },
+  {
+   "room": "terraceBedroom",
+   "share_pct": 0.62,
+   "yaw": 6.0,
+   "v": 0.563,
+   "near_m": 6.3,
+   "button": false
+  }
+ ],
+ "bathMain": [],
+ "bedroom2": [
+  {
+   "room": "entrance",
+   "share_pct": 10.43,
+   "yaw": 178.1,
+   "v": 0.728,
+   "near_m": 1.5,
+   "button": true
+  },
+  {
+   "room": "bathguest",
+   "share_pct": 0.04,
+   "yaw": -169.9,
+   "v": 0.358,
+   "near_m": 2.6,
+   "button": false
+  }
+ ],
+ "bathguest": [
+  {
+   "room": "entrance",
+   "share_pct": 7.07,
+   "yaw": 98.1,
+   "v": 0.767,
+   "near_m": 1.5,
+   "button": true
+  }
+ ]
+}

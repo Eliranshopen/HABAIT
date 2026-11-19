@@ -1,0 +1,3472 @@
+{
+  "generator": {
+    "script": "catalog/fetch.mjs",
+    "version": "1.0.0",
+    "node": "v24.22.1",
+    "generated_utc": "2026-11-16T14:07:01+00:00",
+    "mode": "verify-only"
+  },
+  "manifest": {
+    "file": "360walkaround/catalog/catalog.manifest.json",
+    "rows": 57,
+    "fetched_rows": 57,
+    "sha256_after": "611560b7ab2ea65ca7ce2f586bc1f12d5fdac8587f22a113d1538754d74fd27b"
+  },
+  "totals": {
+    "bytes_on_disk": 12368992,
+    "bytes_downloaded_this_run": 0,
+    "files": 57,
+    "ok": 57,
+    "broken": 0
+  },
+  "packs": [
+    {
+      "source_id": "kenney-furniture-kit",
+      "error": null,
+      "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+      "bytes": 5130729,
+      "entries": 1557,
+      "sha256_matches_manifest": true
+    }
+  ],
+  "import_test": {
+    "seconds": 3.5,
+    "blender": "4.5.10 LTS",
+    "exit": 0,
+    "log": "360walkaround/catalog/.cache/import-test.log"
+  },
+  "assets": [
+    {
+      "id": "polyhaven-modern_arm_chair_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_arm_chair_01/modern_arm_chair_01_2k.blend",
+      "bytes": 355136,
+      "sha256": "c6c92b5a07be4ab37e48fbf43c7ff233b90b1e364987e2bae790aed501fe97f6",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-modern_arm_chair_01",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 8916,
+        "bbox_cm": [
+          82.034,
+          98.656,
+          102.285
+        ],
+        "bbox_min_cm": [
+          -40.681,
+          -41.111,
+          0.038
+        ],
+        "bbox_max_cm": [
+          41.354,
+          57.545,
+          102.323
+        ],
+        "materials": [
+          "modern_arm_chair_01_legs",
+          "modern_arm_chair_01_pillow"
+        ],
+        "image_textures": [
+          "modern_arm_chair_01_legs_diff.png",
+          "modern_arm_chair_01_legs_metal.png",
+          "modern_arm_chair_01_legs_nor_gl.png",
+          "modern_arm_chair_01_legs_rough.png",
+          "modern_arm_chair_01_pillow_diff.png",
+          "modern_arm_chair_01_pillow_metal.png",
+          "modern_arm_chair_01_pillow_nor_gl.png",
+          "modern_arm_chair_01_pillow_rough.png"
+        ],
+        "object_names": [
+          "modern_arm_chair_01"
+        ],
+        "tall_mass": {
+          "upper_vertices": 2041,
+          "fractions": {
+            "+X": 0.4885,
+            "-X": 0.5115,
+            "+Y": 0.6756,
+            "-Y": 0.3244
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.3512
+        }
+      }
+    },
+    {
+      "id": "polyhaven-modern_coffee_table_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_01/modern_coffee_table_01_2k.blend",
+      "bytes": 235661,
+      "sha256": "e29a5a55b2793add33473e2d641c3dfbebd2d1098e62ccb957f7e11bcd54b46d",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-modern_coffee_table_01",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 4504,
+        "bbox_cm": [
+          120.183,
+          60,
+          39
+        ],
+        "bbox_min_cm": [
+          -60.067,
+          -30,
+          -0.012
+        ],
+        "bbox_max_cm": [
+          60.116,
+          30,
+          38.988
+        ],
+        "materials": [
+          "modern_coffee_table_01"
+        ],
+        "image_textures": [
+          "modern_coffee_table_01_diff.png",
+          "modern_coffee_table_01_nor_gl.png",
+          "modern_coffee_table_01_rough.png"
+        ],
+        "object_names": [
+          "modern_coffee_table_01"
+        ],
+        "tall_mass": {
+          "upper_vertices": 1458,
+          "fractions": {
+            "+X": 0.4993,
+            "-X": 0.5007,
+            "+Y": 0.5007,
+            "-Y": 0.4993
+          },
+          "front_axis_guess": null,
+          "confidence": 0.0014
+        }
+      }
+    },
+    {
+      "id": "polyhaven-modern_coffee_table_02",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_coffee_table_02/modern_coffee_table_02_2k.blend",
+      "bytes": 554655,
+      "sha256": "238f70d31434d69333cd50f2bf50da802dad1a920c3ecc472edef553804d61f6",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-modern_coffee_table_02",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 13645,
+        "bbox_cm": [
+          119.911,
+          119.966,
+          36.925
+        ],
+        "bbox_min_cm": [
+          -59.857,
+          -60.234,
+          -0.02
+        ],
+        "bbox_max_cm": [
+          60.054,
+          59.732,
+          36.905
+        ],
+        "materials": [
+          "modern_coffee_table_02_base",
+          "modern_coffee_table_02_wood"
+        ],
+        "image_textures": [
+          "coffee_table_02_base_diff_8k_16bit",
+          "coffee_table_02_base_normal_dx_8k_16bit",
+          "coffee_table_02_base_normal_og_8k_16bit",
+          "coffee_table_02_base_roughness_8k_16bit",
+          "coffee_table_02_wood_ao_8k_16bit",
+          "coffee_table_02_wood_diff_8k_16bit",
+          "coffee_table_02_wood_normal_dx_8k_16bit",
+          "coffee_table_02_wood_normal_og_8k_16bit",
+          "coffee_table_02_wood_roughness_8k_16bit",
+          "modern_coffee_table_02_base_diff.png",
+          "modern_coffee_table_02_base_nor_gl.png.001",
+          "modern_coffee_table_02_base_rough.png",
+          "modern_coffee_table_02_wood_diff.png",
+          "modern_coffee_table_02_wood_nor_gl.png",
+          "modern_coffee_table_02_wood_rough.png"
+        ],
+        "object_names": [
+          "modern_coffee_table_02"
+        ],
+        "tall_mass": {
+          "upper_vertices": 6264,
+          "fractions": {
+            "+X": 0.2479,
+            "-X": 0.7521,
+            "+Y": 0.2466,
+            "-Y": 0.7534
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.5068
+        }
+      }
+    },
+    {
+      "id": "polyhaven-modern_wooden_cabinet",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_wooden_cabinet/modern_wooden_cabinet_2k.blend",
+      "bytes": 779583,
+      "sha256": "2a2761da5af42b498e75e2f0cfeba716ca7cd86f3b357bb9bd326d7c98a92d5f",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-modern_wooden_cabinet",
+        "ok": true,
+        "error": null,
+        "objects": 3,
+        "tris": 24976,
+        "bbox_cm": [
+          244,
+          68.443,
+          68.016
+        ],
+        "bbox_min_cm": [
+          -122,
+          -34.221,
+          0
+        ],
+        "bbox_max_cm": [
+          122,
+          34.221,
+          68.016
+        ],
+        "materials": [
+          "modern_wooden_cabinet"
+        ],
+        "image_textures": [
+          "modern_wooden_cabinet_diff.png",
+          "modern_wooden_cabinet_nor_gl.png",
+          "modern_wooden_cabinet_rough.png"
+        ],
+        "object_names": [
+          "modern_wooden_cabinet_body",
+          "modern_wooden_cabinet_door_l",
+          "modern_wooden_cabinet_door_r"
+        ],
+        "tall_mass": {
+          "upper_vertices": 5148,
+          "fractions": {
+            "+X": 0.6655,
+            "-X": 0.3345,
+            "+Y": 0.5016,
+            "-Y": 0.4984
+          },
+          "front_axis_guess": "-X",
+          "confidence": 0.331
+        }
+      }
+    },
+    {
+      "id": "polyhaven-modern_ceiling_lamp_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-modern_ceiling_lamp_01/modern_ceiling_lamp_01_2k.blend",
+      "bytes": 330321,
+      "sha256": "7eea1d3318ce550b3251593de9c1110f8b9f76af1523ea19e87c3d638e3c117d",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-modern_ceiling_lamp_01",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 5602,
+        "bbox_cm": [
+          43.165,
+          43.166,
+          95.155
+        ],
+        "bbox_min_cm": [
+          -21.58,
+          -21.733,
+          22.109
+        ],
+        "bbox_max_cm": [
+          21.585,
+          21.433,
+          117.264
+        ],
+        "materials": [
+          "modern_ceiling_globe",
+          "modern_ceiling_lamp_01",
+          "modern_ceiling_lamp_01_glass"
+        ],
+        "image_textures": [
+          "modern_ceiling_lamp_01_basecolor.png",
+          "modern_ceiling_lamp_01_gl_normal.png",
+          "modern_ceiling_lamp_01_metallic.png",
+          "modern_ceiling_lamp_01_roughness.png"
+        ],
+        "object_names": [
+          "modern_ceiling_lamp_01"
+        ],
+        "tall_mass": {
+          "upper_vertices": 530,
+          "fractions": {
+            "+X": 0.5472,
+            "-X": 0.4528,
+            "+Y": 0.6,
+            "-Y": 0.4
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.2
+        }
+      }
+    },
+    {
+      "id": "polyhaven-potted_plant_02",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-potted_plant_02/potted_plant_02_2k.blend",
+      "bytes": 8110103,
+      "sha256": "b62ded8ac23b439d2d4457916241f45e029d1455cd792f426ef3b0e5f889589c",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-potted_plant_02",
+        "ok": true,
+        "error": null,
+        "objects": 3,
+        "tris": 69806,
+        "bbox_cm": [
+          72.895,
+          75.749,
+          63.257
+        ],
+        "bbox_min_cm": [
+          -39.376,
+          -33.65,
+          -9.663
+        ],
+        "bbox_max_cm": [
+          33.519,
+          42.1,
+          53.594
+        ],
+        "materials": [
+          "potted_plant_02_leaves",
+          "potted_plant_02_pot"
+        ],
+        "image_textures": [
+          "potted_plant_02_leaves_alpha.png",
+          "potted_plant_02_leaves_diff.png",
+          "potted_plant_02_leaves_nor_gl.png",
+          "potted_plant_02_leaves_rough.png",
+          "potted_plant_02_pot_diff.png",
+          "potted_plant_02_pot_nor_gl.png",
+          "potted_plant_02_pot_rough.png"
+        ],
+        "object_names": [
+          "potted_plant_02_dirt",
+          "potted_plant_02_leaves",
+          "potted_plant_02_pot"
+        ],
+        "tall_mass": {
+          "upper_vertices": 4033,
+          "fractions": {
+            "+X": 0.362,
+            "-X": 0.638,
+            "+Y": 0.5348,
+            "-Y": 0.4652
+          },
+          "front_axis_guess": "+X",
+          "confidence": 0.276
+        }
+      }
+    },
+    {
+      "id": "polyhaven-hanging_picture_frame_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-hanging_picture_frame_01/hanging_picture_frame_01_2k.blend",
+      "bytes": 203009,
+      "sha256": "86b17dde5ebf276c92e65d56b3061cb324110f57e1382b32fabeddb50c5913f0",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-hanging_picture_frame_01",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 2586,
+        "bbox_cm": [
+          59.4,
+          1.575,
+          84.1
+        ],
+        "bbox_min_cm": [
+          -29.7,
+          -1.585,
+          -42.05
+        ],
+        "bbox_max_cm": [
+          29.7,
+          -0.011,
+          42.05
+        ],
+        "materials": [
+          "hanging_picture_frame_01",
+          "hanging_picture_frame_01_artwork",
+          "hanging_picture_frame_01_glass"
+        ],
+        "image_textures": [
+          "hanging_picture_frame_01_artwork_diff.png",
+          "hanging_picture_frame_01_artwork_nor_gl.png",
+          "hanging_picture_frame_01_artwork_roughness.png",
+          "hanging_picture_frame_01_diff.png",
+          "hanging_picture_frame_01_metallic.png",
+          "hanging_picture_frame_01_nor_gl.png",
+          "hanging_picture_frame_01_opacity.png",
+          "hanging_picture_frame_01_roughness.png"
+        ],
+        "object_names": [
+          "hanging_picture_frame_01"
+        ],
+        "tall_mass": {
+          "upper_vertices": 1020,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.9118,
+            "-Y": 0.0882
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.8236
+        }
+      }
+    },
+    {
+      "id": "polyhaven-steel_frame_shelves_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-steel_frame_shelves_01/steel_frame_shelves_01_2k.blend",
+      "bytes": 223024,
+      "sha256": "ee196ca52dd4422f77ee6b47ffa1bf270b29d4d8925e7a8f22856a29bb626d88",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-steel_frame_shelves_01",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 4348,
+        "bbox_cm": [
+          109.741,
+          50.212,
+          214.05
+        ],
+        "bbox_min_cm": [
+          -54.869,
+          -25.106,
+          -0.107
+        ],
+        "bbox_max_cm": [
+          54.873,
+          25.106,
+          213.943
+        ],
+        "materials": [
+          "steel_frame_shelves_01"
+        ],
+        "image_textures": [
+          "steel_frame_shelves_01_diff.png",
+          "steel_frame_shelves_01_metal.png",
+          "steel_frame_shelves_01_nor_gl.png",
+          "steel_frame_shelves_01_rough.png"
+        ],
+        "object_names": [
+          "steel_frame_shelves_01"
+        ],
+        "tall_mass": {
+          "upper_vertices": 1196,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "polyhaven-wooden_display_shelves_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-wooden_display_shelves_01/wooden_display_shelves_01_2k.blend",
+      "bytes": 226011,
+      "sha256": "bfd4dc80d6e684fd156bb5c76d87708970cf2d5bbf4cb1805b96a71a7747d920",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-wooden_display_shelves_01",
+        "ok": true,
+        "error": null,
+        "objects": 4,
+        "tris": 3174,
+        "bbox_cm": [
+          107.776,
+          37.151,
+          155.618
+        ],
+        "bbox_min_cm": [
+          -53.888,
+          -18.575,
+          0.044
+        ],
+        "bbox_max_cm": [
+          53.888,
+          18.575,
+          155.662
+        ],
+        "materials": [
+          "wooden_display_shelves_01"
+        ],
+        "image_textures": [
+          "wooden_display_shelves_01_diff.png",
+          "wooden_display_shelves_01_metal.png",
+          "wooden_display_shelves_01_nor_gl.png",
+          "wooden_display_shelves_01_rough.png"
+        ],
+        "object_names": [
+          "wooden_display_shelves_01",
+          "wooden_display_shelves_01_drawer_01",
+          "wooden_display_shelves_01_drawer_02",
+          "wooden_display_shelves_01_drawer_03"
+        ],
+        "tall_mass": {
+          "upper_vertices": 424,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "polyhaven-outdoor_table_chair_set_01",
+      "source_id": "polyhaven",
+      "format": "blend",
+      "file": "360walkaround/catalog/models/polyhaven-outdoor_table_chair_set_01/outdoor_table_chair_set_01_2k.blend",
+      "bytes": 427033,
+      "sha256": "e480fc1c3f76212f78d5a13a79f15886b2866c305bcd2758422cb89a775e9810",
+      "extra_files": [],
+      "action": "fetched",
+      "broken": null,
+      "api_url_matches_manifest": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "polyhaven-outdoor_table_chair_set_01",
+        "ok": true,
+        "error": null,
+        "objects": 3,
+        "tris": 9828,
+        "bbox_cm": [
+          79.254,
+          170.628,
+          85.858
+        ],
+        "bbox_min_cm": [
+          -42.551,
+          -86.406,
+          -0.594
+        ],
+        "bbox_max_cm": [
+          36.704,
+          84.222,
+          85.264
+        ],
+        "materials": [
+          "outdoor_table_chair_set_01_chair",
+          "outdoor_table_chair_set_01_table"
+        ],
+        "image_textures": [
+          "outdoor_table_chair_set_01_chair_diff.png",
+          "outdoor_table_chair_set_01_chair_metal.png",
+          "outdoor_table_chair_set_01_chair_nor_gl.png",
+          "outdoor_table_chair_set_01_chair_rough.png",
+          "outdoor_table_chair_set_01_table_diff.png",
+          "outdoor_table_chair_set_01_table_metal.png",
+          "outdoor_table_chair_set_01_table_nor_gl.png",
+          "outdoor_table_chair_set_01_table_rough.png"
+        ],
+        "object_names": [
+          "outdoor_table_chair_set_01_chair_01",
+          "outdoor_table_chair_set_01_chair_02",
+          "outdoor_table_chair_set_01_table"
+        ],
+        "tall_mass": {
+          "upper_vertices": 2184,
+          "fractions": {
+            "+X": 0.5852,
+            "-X": 0.4148,
+            "+Y": 0.4789,
+            "-Y": 0.5211
+          },
+          "front_axis_guess": "-X",
+          "confidence": 0.1704
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-loungeDesignSofa",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeDesignSofa/loungeDesignSofa.glb",
+      "bytes": 9128,
+      "sha256": "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-loungeDesignSofa",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 116,
+        "bbox_cm": [
+          112,
+          41,
+          40
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          112,
+          41,
+          40
+        ],
+        "materials": [
+          "carpetBlue",
+          "metal"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "loungeDesignSofa(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 64,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5938,
+            "-Y": 0.4062
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.1876
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-loungeSofaCorner",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeSofaCorner/loungeSofaCorner.glb",
+      "bytes": 13412,
+      "sha256": "bbdd91791e621ac71321eaf38a2432c53279792ef946707f23b216123bd52655",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-loungeSofaCorner",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 190,
+        "bbox_cm": [
+          98,
+          98,
+          46
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          98,
+          98,
+          46
+        ],
+        "materials": [
+          "carpet",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "loungeSofaCorner(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 78,
+          "fractions": {
+            "+X": 0.5385,
+            "-X": 0.4615,
+            "+Y": 0.5385,
+            "-Y": 0.4615
+          },
+          "front_axis_guess": null,
+          "confidence": 0.077
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-loungeDesignSofaCorner",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeDesignSofaCorner/loungeDesignSofaCorner.glb",
+      "bytes": 13744,
+      "sha256": "fe665d07d53fdc6bc96e9fed453874ba4202b008194e1e24100b067081c62be1",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-loungeDesignSofaCorner",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 176,
+        "bbox_cm": [
+          134.983,
+          134.983,
+          40
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          134.983,
+          134.983,
+          40
+        ],
+        "materials": [
+          "carpetBlue",
+          "metal"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "Group",
+          "loungeDesignSofaCorner(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 76,
+          "fractions": {
+            "+X": 0.5789,
+            "-X": 0.4211,
+            "+Y": 0.5789,
+            "-Y": 0.4211
+          },
+          "front_axis_guess": "-X",
+          "confidence": 0.1578
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-loungeChairRelax",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeChairRelax/loungeChairRelax.glb",
+      "bytes": 13904,
+      "sha256": "def698179e44de6cd17f4cfc2730273da54dd25458a29b079fbf4468abe5d98e",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-loungeChairRelax",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 188,
+        "bbox_cm": [
+          49,
+          67.469,
+          63
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          49,
+          67.469,
+          63
+        ],
+        "materials": [
+          "carpet",
+          "metal",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "loungeChairRelax(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 80,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.7,
+            "-Y": 0.3
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.4
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-loungeSofaOttoman",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-loungeSofaOttoman/loungeSofaOttoman.glb",
+      "bytes": 6960,
+      "sha256": "79087654136d7d69653fdc3b52a02d7833fe13e6a0a56b8dcdf652c611dbd959",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-loungeSofaOttoman",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 84,
+        "bbox_cm": [
+          43.983,
+          45,
+          23
+        ],
+        "bbox_min_cm": [
+          47,
+          -41,
+          0
+        ],
+        "bbox_max_cm": [
+          90.983,
+          4,
+          23
+        ],
+        "materials": [
+          "carpet",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "loungeSofaOttoman(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 36,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-tableCoffee",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-tableCoffee/tableCoffee.glb",
+      "bytes": 8256,
+      "sha256": "e38bea760fbd514efbb75528d09b4752c91af44677bbb97e6d4386c263525179",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-tableCoffee",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 124,
+        "bbox_cm": [
+          66.1,
+          40,
+          23
+        ],
+        "bbox_min_cm": [
+          -46.1,
+          -10,
+          0
+        ],
+        "bbox_max_cm": [
+          20,
+          30,
+          23
+        ],
+        "materials": [
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "tableCoffee(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 48,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-cabinetTelevision",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-cabinetTelevision/cabinetTelevision.glb",
+      "bytes": 10524,
+      "sha256": "811719593d676ff76f7b5904d52c845ce0396af2bc9a6a2636c4818ead320b99",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-cabinetTelevision",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 154,
+        "bbox_cm": [
+          80,
+          25,
+          31
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          80,
+          25,
+          31
+        ],
+        "materials": [
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "cabinetTelevision(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 112,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.2143,
+            "-Y": 0.7857
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.5714
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-televisionModern",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-televisionModern/televisionModern.glb",
+      "bytes": 6368,
+      "sha256": "d89519ad0a5f28b5b0dccb0d83209dccf610cda959578238dd21bbf9e219cfc6",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-televisionModern",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 72,
+        "bbox_cm": [
+          68.48,
+          12.84,
+          45.475
+        ],
+        "bbox_min_cm": [
+          -34.24,
+          -6.42,
+          0
+        ],
+        "bbox_max_cm": [
+          34.24,
+          6.42,
+          45.475
+        ],
+        "materials": [
+          "metal",
+          "metalDark"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "televisionModern(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 36,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseOpen",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bookcaseOpen/bookcaseOpen.glb",
+      "bytes": 18020,
+      "sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bookcaseOpen",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 320,
+        "bbox_cm": [
+          40,
+          25,
+          88
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          40,
+          25,
+          88
+        ],
+        "materials": [
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bookcaseOpen(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 200,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-sideTable",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-sideTable/sideTable.glb",
+      "bytes": 8800,
+      "sha256": "8227810584f7d37582e4e9ec821c56f1dc54b99c88a8dc74242ea3b7402bc472",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-sideTable",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 118,
+        "bbox_cm": [
+          53.448,
+          22,
+          38.441
+        ],
+        "bbox_min_cm": [
+          -1,
+          -1,
+          0
+        ],
+        "bbox_max_cm": [
+          52.448,
+          21,
+          38.441
+        ],
+        "materials": [
+          "_defaultMat",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "sideTable(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 78,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-lampRoundFloor",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-lampRoundFloor/lampRoundFloor.glb",
+      "bytes": 6600,
+      "sha256": "50fe1b5b588edf15bfa9cc880f71a02a4fda6036350b24733d0ef4de5cc5e908",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-lampRoundFloor",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 76,
+        "bbox_cm": [
+          15.204,
+          17.556,
+          86
+        ],
+        "bbox_min_cm": [
+          -1.602,
+          -2.778,
+          0
+        ],
+        "bbox_max_cm": [
+          13.602,
+          14.778,
+          86
+        ],
+        "materials": [
+          "lamp",
+          "metal"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "lampRoundFloor(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 84,
+          "fractions": {
+            "+X": 0.6429,
+            "-X": 0.3571,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": "-X",
+          "confidence": 0.2858
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bedDouble",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bedDouble/bedDouble.glb",
+      "bytes": 23368,
+      "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bedDouble",
+        "ok": true,
+        "error": null,
+        "objects": 4,
+        "tris": 264,
+        "bbox_cm": [
+          95.6,
+          112.5,
+          37.5
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          95.6,
+          112.5,
+          37.5
+        ],
+        "materials": [
+          "carpet",
+          "carpetWhite",
+          "metal",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bedDouble(Clone)",
+          "cover",
+          "pillowLeft",
+          "pillowRight"
+        ],
+        "tall_mass": {
+          "upper_vertices": 278,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.9065,
+            "-Y": 0.0935
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.813
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bedSingle",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bedSingle/bedSingle.glb",
+      "bytes": 18636,
+      "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bedSingle",
+        "ok": true,
+        "error": null,
+        "objects": 3,
+        "tris": 214,
+        "bbox_cm": [
+          57.1,
+          112.5,
+          37.5
+        ],
+        "bbox_min_cm": [
+          38.5,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          95.6,
+          112.5,
+          37.5
+        ],
+        "materials": [
+          "carpet",
+          "carpetWhite",
+          "metal",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bedSingle(Clone)",
+          "cover",
+          "pillow"
+        ],
+        "tall_mass": {
+          "upper_vertices": 182,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.8571,
+            "-Y": 0.1429
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.7142
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-cabinetBedDrawerTable",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-cabinetBedDrawerTable/cabinetBedDrawerTable.glb",
+      "bytes": 12200,
+      "sha256": "fec6271639df5aff9f8ac75d6679385eab2abb7c8d2f51abeba3ed689ddb6f0d",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-cabinetBedDrawerTable",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 140,
+        "bbox_cm": [
+          26.6,
+          21.73,
+          26.32
+        ],
+        "bbox_min_cm": [
+          -1,
+          -1.23,
+          0
+        ],
+        "bbox_max_cm": [
+          25.6,
+          20.5,
+          26.32
+        ],
+        "materials": [
+          "_defaultMat",
+          "metal",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "cabinetBedDrawerTable(Clone)",
+          "drawer"
+        ],
+        "tall_mass": {
+          "upper_vertices": 178,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.4607,
+            "-Y": 0.5393
+          },
+          "front_axis_guess": null,
+          "confidence": 0.0786
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseClosedWide",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bookcaseClosedWide/bookcaseClosedWide.glb",
+      "bytes": 23140,
+      "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bookcaseClosedWide",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 372,
+        "bbox_cm": [
+          80,
+          25,
+          79
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          80,
+          25,
+          79
+        ],
+        "materials": [
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bookcaseClosedWide(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 232,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5776,
+            "-Y": 0.4224
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.1552
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-lampRoundTable",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-lampRoundTable/lampRoundTable.glb",
+      "bytes": 6604,
+      "sha256": "75bb644caaa3da003b4fcad7a931722dd61cd2858aab70cf660021d5061fa1b2",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-lampRoundTable",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 76,
+        "bbox_cm": [
+          15.204,
+          17.556,
+          31.425
+        ],
+        "bbox_min_cm": [
+          -1.602,
+          -2.778,
+          0
+        ],
+        "bbox_max_cm": [
+          13.602,
+          14.778,
+          31.425
+        ],
+        "materials": [
+          "lamp",
+          "metal"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "lampRoundTable(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 48,
+          "fractions": {
+            "+X": 0.625,
+            "-X": 0.375,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": "-X",
+          "confidence": 0.25
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-rugRound",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugRound/rugRound.glb",
+      "bytes": 10164,
+      "sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-rugRound",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 188,
+        "bbox_cm": [
+          92,
+          92,
+          1
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          92,
+          92,
+          1
+        ],
+        "materials": [
+          "carpet",
+          "carpetDarker"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "rugRound(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 167,
+          "fractions": {
+            "+X": 0.5449,
+            "-X": 0.4551,
+            "+Y": 0.5389,
+            "-Y": 0.4611
+          },
+          "front_axis_guess": null,
+          "confidence": 0.0898
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-pillow",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-pillow/pillow.glb",
+      "bytes": 5044,
+      "sha256": "6fae7c190d0b676ef3efd35e5178cef21dffb5c80e1257d8b537ad424da0e5f6",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-pillow",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 50,
+        "bbox_cm": [
+          23,
+          8.848,
+          22.216
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          23,
+          8.848,
+          22.216
+        ],
+        "materials": [
+          "carpet"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "pillow(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 48,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.75,
+            "-Y": 0.25
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.5
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bedBunk",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bedBunk/bedBunk.glb",
+      "bytes": 40784,
+      "sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bedBunk",
+        "ok": true,
+        "error": null,
+        "objects": 5,
+        "tris": 580,
+        "bbox_cm": [
+          57.1,
+          109.5,
+          85
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          57.1,
+          109.5,
+          85
+        ],
+        "materials": [
+          "carpet",
+          "carpetWhite",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bedBunk(Clone)",
+          "coverBottom",
+          "coverTop",
+          "pillowBottom",
+          "pillowTop"
+        ],
+        "tall_mass": {
+          "upper_vertices": 432,
+          "fractions": {
+            "+X": 0.5278,
+            "-X": 0.4722,
+            "+Y": 0.6667,
+            "-Y": 0.3333
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.3334
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-chairDesk",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-chairDesk/chairDesk.glb",
+      "bytes": 39016,
+      "sha256": "46406619186034cbe92b19b79a5f1a8e3f442a17a70a7524ef2c0ad0f35095c6",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-chairDesk",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 588,
+        "bbox_cm": [
+          33.495,
+          31.43,
+          60.76
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          33.495,
+          31.43,
+          60.76
+        ],
+        "materials": [
+          "carpet",
+          "metalMedium"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "chair",
+          "chairDesk(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 416,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.7404,
+            "-Y": 0.2596
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.4808
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-desk",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-desk/desk.glb",
+      "bytes": 15048,
+      "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-desk",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 198,
+        "bbox_cm": [
+          73.448,
+          39.23,
+          38.441
+        ],
+        "bbox_min_cm": [
+          -1,
+          -1.23,
+          0
+        ],
+        "bbox_max_cm": [
+          72.448,
+          38,
+          38.441
+        ],
+        "materials": [
+          "metal",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "desk(Clone)",
+          "drawer"
+        ],
+        "tall_mass": {
+          "upper_vertices": 224,
+          "fractions": {
+            "+X": 0.2411,
+            "-X": 0.7589,
+            "+Y": 0.3214,
+            "-Y": 0.6786
+          },
+          "front_axis_guess": "+X",
+          "confidence": 0.5178
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bookcaseOpenLow",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bookcaseOpenLow/bookcaseOpenLow.glb",
+      "bytes": 11520,
+      "sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bookcaseOpenLow",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 184,
+        "bbox_cm": [
+          40,
+          25,
+          40
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          40,
+          25,
+          40
+        ],
+        "materials": [
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bookcaseOpenLow(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 124,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-rugSquare",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugSquare/rugSquare.glb",
+      "bytes": 3180,
+      "sha256": "18a63634e9bbdde0b309c008f4cd41df8455f7f2ffdb8fe8985fdf8c2cd06b3d",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-rugSquare",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 28,
+        "bbox_cm": [
+          90.433,
+          92,
+          1
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          90.433,
+          92,
+          1
+        ],
+        "materials": [
+          "carpet",
+          "carpetDarker"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "rugSquare(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 28,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-books",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-books/books.glb",
+      "bytes": 6864,
+      "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-books",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 62,
+        "bbox_cm": [
+          15.045,
+          9.45,
+          10.39
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          15.045,
+          9.45,
+          10.39
+        ],
+        "materials": [
+          "carpetDarker",
+          "carpetWhite",
+          "metal",
+          "plant"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "books(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 64,
+          "fractions": {
+            "+X": 0.5312,
+            "-X": 0.4688,
+            "+Y": 0.4688,
+            "-Y": 0.5312
+          },
+          "front_axis_guess": null,
+          "confidence": 0.0624
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinet",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCabinet/kitchenCabinet.glb",
+      "bytes": 10444,
+      "sha256": "7238c57778935ae25db5e57e9f7af3ba7068c71b005ff7cfbff3b6f3b1a13200",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenCabinet",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 114,
+        "bbox_cm": [
+          43,
+          45,
+          45
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          43,
+          45,
+          45
+        ],
+        "materials": [
+          "metal",
+          "wood",
+          "woodDark"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "door",
+          "kitchenCabinet(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 120,
+          "fractions": {
+            "+X": 0.625,
+            "-X": 0.375,
+            "+Y": 0.3333,
+            "-Y": 0.6667
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.3334
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinetUpper",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCabinetUpper/kitchenCabinetUpper.glb",
+      "bytes": 8168,
+      "sha256": "8f2496feed85a745ffb6e554075b8450d647f8f68b01d6a010fcac1510fc173a",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenCabinetUpper",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 80,
+        "bbox_cm": [
+          43,
+          22,
+          39
+        ],
+        "bbox_min_cm": [
+          0,
+          -1,
+          0
+        ],
+        "bbox_max_cm": [
+          43,
+          21,
+          39
+        ],
+        "materials": [
+          "metal",
+          "wood",
+          "woodDark"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "door",
+          "kitchenCabinetUpper(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 52,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.3462,
+            "-Y": 0.6538
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.3076
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCabinetCornerRound",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCabinetCornerRound/kitchenCabinetCornerRound.glb",
+      "bytes": 13656,
+      "sha256": "333ab73202cb87b76d4ff94939038dcaf315eda55285bdbeba20d255da488e97",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenCabinetCornerRound",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 194,
+        "bbox_cm": [
+          45,
+          45,
+          45
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          45,
+          45,
+          45
+        ],
+        "materials": [
+          "metal",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "kitchenCabinetCornerRound(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 162,
+          "fractions": {
+            "+X": 0.3827,
+            "-X": 0.6173,
+            "+Y": 0.3827,
+            "-Y": 0.6173
+          },
+          "front_axis_guess": "+X",
+          "confidence": 0.2346
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenSink",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenSink/kitchenSink.glb",
+      "bytes": 23480,
+      "sha256": "7b9610277d71f00dcf1bba49cf4d98d77ce5177e84bf76c7da2f8893e542f743",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenSink",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 318,
+        "bbox_cm": [
+          43,
+          45,
+          49
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          43,
+          45,
+          49
+        ],
+        "materials": [
+          "_defaultMat",
+          "metal",
+          "metalDark",
+          "metalLight",
+          "wood",
+          "woodDark"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "door",
+          "kitchenSink(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 402,
+          "fractions": {
+            "+X": 0.5448,
+            "-X": 0.4552,
+            "+Y": 0.7239,
+            "-Y": 0.2761
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.4478
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenStoveElectric",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenStoveElectric/kitchenStoveElectric.glb",
+      "bytes": 18604,
+      "sha256": "cf646b960d7dfed1fac27898ff6de1f0671cfa33beecbed06ead7d0684517392",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenStoveElectric",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 338,
+        "bbox_cm": [
+          43,
+          45,
+          45
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          43,
+          45,
+          45
+        ],
+        "materials": [
+          "carpetWhite",
+          "glass",
+          "metal",
+          "metalDark",
+          "metalMedium",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "kitchenStoveElectric(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 330,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.3455,
+            "-Y": 0.6545
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.309
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenFridge",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenFridge/kitchenFridge.glb",
+      "bytes": 20116,
+      "sha256": "8af4f4bbb1b5525ad8226e97926a5af60fa8fb20a3cb74dbda5328a9d320dbab",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenFridge",
+        "ok": true,
+        "error": null,
+        "objects": 3,
+        "tris": 250,
+        "bbox_cm": [
+          43,
+          29.193,
+          92
+        ],
+        "bbox_min_cm": [
+          0,
+          -1,
+          0
+        ],
+        "bbox_max_cm": [
+          43,
+          28.193,
+          92
+        ],
+        "materials": [
+          "glass",
+          "metal",
+          "metalDark",
+          "metalLight"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "doorFreezer",
+          "doorFridge",
+          "kitchenFridge(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 224,
+          "fractions": {
+            "+X": 0.6071,
+            "-X": 0.3929,
+            "+Y": 0.1429,
+            "-Y": 0.8571
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.7142
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-hoodModern",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-hoodModern/hoodModern.glb",
+      "bytes": 3968,
+      "sha256": "f5ac7dbadd1d98813c48315e56fa6ab2e8783870b1fb7be30825177bbf2b2afe",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-hoodModern",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 28,
+        "bbox_cm": [
+          43,
+          28.49,
+          39.953
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          -3
+        ],
+        "bbox_max_cm": [
+          43,
+          28.49,
+          36.953
+        ],
+        "materials": [
+          "_defaultMat",
+          "metalMedium"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "hoodModern(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 12,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 1,
+            "-Y": 0
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenMicrowave",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenMicrowave/kitchenMicrowave.glb",
+      "bytes": 11248,
+      "sha256": "dd6a6c919f4bebc6e2080fe419262cf97a0d6461ead3f3998aa3c9edf4d2bd27",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenMicrowave",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 152,
+        "bbox_cm": [
+          29,
+          23,
+          18
+        ],
+        "bbox_min_cm": [
+          0,
+          -1,
+          0
+        ],
+        "bbox_max_cm": [
+          29,
+          22,
+          18
+        ],
+        "materials": [
+          "carpetWhite",
+          "glass",
+          "metalDark",
+          "metalMedium"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "Group",
+          "kitchenMicrowave(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 84,
+          "fractions": {
+            "+X": 0.631,
+            "-X": 0.369,
+            "+Y": 0.2857,
+            "-Y": 0.7143
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.4286
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-kitchenCoffeeMachine",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-kitchenCoffeeMachine/kitchenCoffeeMachine.glb",
+      "bytes": 13332,
+      "sha256": "063f582c6fa0f00a9f24e3393dac2295491c4becdaf5513c893ab1a2826b6ec3",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-kitchenCoffeeMachine",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 166,
+        "bbox_cm": [
+          18.954,
+          24.017,
+          17.749
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          18.954,
+          24.017,
+          17.749
+        ],
+        "materials": [
+          "carpetWhite",
+          "metal",
+          "metalMedium"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "kitchenCoffeeMachine(Clone)",
+          "mug"
+        ],
+        "tall_mass": {
+          "upper_vertices": 90,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.2667,
+            "-Y": 0.7333
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.4666
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-toilet",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-toilet/toilet.glb",
+      "bytes": 18112,
+      "sha256": "16165cfd03c56c2cb443b800570810a22ef770f65e7a468f6761d9dc14eaaeae",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-toilet",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 230,
+        "bbox_cm": [
+          31.255,
+          47.718,
+          45.096
+        ],
+        "bbox_min_cm": [
+          0,
+          -47.718,
+          0
+        ],
+        "bbox_max_cm": [
+          31.255,
+          0,
+          45.096
+        ],
+        "materials": [
+          "_defaultMat",
+          "carpetWhite",
+          "metalDark",
+          "metalLight"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "cover",
+          "toilet(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 182,
+          "fractions": {
+            "+X": 0.3846,
+            "-X": 0.6154,
+            "+Y": 0.7802,
+            "-Y": 0.2198
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.5604
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomSink",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomSink/bathroomSink.glb",
+      "bytes": 22536,
+      "sha256": "39d4f19608cab7e0fed52303b2c689f5f51fae1bad9b6913cb53d838875e797e",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bathroomSink",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 316,
+        "bbox_cm": [
+          34,
+          29,
+          56
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          -40
+        ],
+        "bbox_max_cm": [
+          34,
+          29,
+          16
+        ],
+        "materials": [
+          "_defaultMat",
+          "carpetWhite",
+          "metalLight"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bathroomSink(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 488,
+          "fractions": {
+            "+X": 0.5164,
+            "-X": 0.4836,
+            "+Y": 0.5328,
+            "-Y": 0.4672
+          },
+          "front_axis_guess": null,
+          "confidence": 0.0656
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomSinkSquare",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomSinkSquare/bathroomSinkSquare.glb",
+      "bytes": 15108,
+      "sha256": "360853c822f268e7267c62ef20cf646f170a13d76254cc0804a1d397a4a3ea67",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bathroomSinkSquare",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 234,
+        "bbox_cm": [
+          43,
+          30,
+          58
+        ],
+        "bbox_min_cm": [
+          0,
+          15,
+          5.681
+        ],
+        "bbox_max_cm": [
+          43,
+          45,
+          63.681
+        ],
+        "materials": [
+          "carpetWhite",
+          "metalDark",
+          "metalLight"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bathroomSinkSquare(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 326,
+          "fractions": {
+            "+X": 0.5061,
+            "-X": 0.4939,
+            "+Y": 0.8528,
+            "-Y": 0.1472
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.7056
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-showerRound",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-showerRound/showerRound.glb",
+      "bytes": 72048,
+      "sha256": "1723208eaba3fb215089e02c8cdd3d7201d0980ad0c7b275319eb539f6094bfb",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-showerRound",
+        "ok": true,
+        "error": null,
+        "objects": 4,
+        "tris": 960,
+        "bbox_cm": [
+          56.179,
+          56.179,
+          109.403
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          56.179,
+          56.179,
+          109.403
+        ],
+        "materials": [
+          "_defaultMat",
+          "carpetWhite",
+          "glass",
+          "metalDark"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "doorLeft",
+          "doorRight",
+          "faucet",
+          "showerRound(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 873,
+          "fractions": {
+            "+X": 0.4559,
+            "-X": 0.5441,
+            "+Y": 0.7549,
+            "-Y": 0.2451
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.5098
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bathtub",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathtub/bathtub.glb",
+      "bytes": 35500,
+      "sha256": "54c405c7035aab63dc41e709dc3c50fc5bcfbc4cddc91ffc54188075a6d25d01",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bathtub",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 602,
+        "bbox_cm": [
+          119,
+          56,
+          42
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          119,
+          56,
+          42
+        ],
+        "materials": [
+          "carpetWhite",
+          "metalDark",
+          "metalLight"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bathtub(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 660,
+          "fractions": {
+            "+X": 0.6652,
+            "-X": 0.3348,
+            "+Y": 0.5045,
+            "-Y": 0.4955
+          },
+          "front_axis_guess": "-X",
+          "confidence": 0.3304
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomCabinet",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomCabinet/bathroomCabinet.glb",
+      "bytes": 7216,
+      "sha256": "9db540227acaaedbbadc6a085f4a00460b73944e608afaad4770e53238a3b7f8",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bathroomCabinet",
+        "ok": true,
+        "error": null,
+        "objects": 2,
+        "tris": 64,
+        "bbox_cm": [
+          23,
+          13,
+          39
+        ],
+        "bbox_min_cm": [
+          20,
+          8,
+          0
+        ],
+        "bbox_max_cm": [
+          43,
+          21,
+          39
+        ],
+        "materials": [
+          "metal",
+          "wood",
+          "woodDark"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bathroomCabinet(Clone)",
+          "door"
+        ],
+        "tall_mass": {
+          "upper_vertices": 52,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.3462,
+            "-Y": 0.6538
+          },
+          "front_axis_guess": "+Y",
+          "confidence": 0.3076
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-bathroomMirror",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-bathroomMirror/bathroomMirror.glb",
+      "bytes": 6792,
+      "sha256": "940b986894101ea59b50541554b6dc608a22b133057975849259009012984175",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-bathroomMirror",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 72,
+        "bbox_cm": [
+          30.134,
+          14.44,
+          43.463
+        ],
+        "bbox_min_cm": [
+          0,
+          -9.56,
+          0
+        ],
+        "bbox_max_cm": [
+          30.134,
+          4.88,
+          43.463
+        ],
+        "materials": [
+          "glass",
+          "metal",
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "bathroomMirror(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 48,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 1,
+            "-Y": 0
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 1
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-rugDoormat",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugDoormat/rugDoormat.glb",
+      "bytes": 13812,
+      "sha256": "bd888e41853342cdc0d34d3f09b99cedc50a144f47b514943b65cdb9a2cfd802",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-rugDoormat",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 204,
+        "bbox_cm": [
+          42.93,
+          23.701,
+          1
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          42.93,
+          23.701,
+          1
+        ],
+        "materials": [
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "rugDoormat(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 156,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-table",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-table/table.glb",
+      "bytes": 8196,
+      "sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-table",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 120,
+        "bbox_cm": [
+          84.149,
+          44.737,
+          32.673
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          84.149,
+          44.737,
+          32.673
+        ],
+        "materials": [
+          "wood"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "table(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 48,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-chairModernCushion",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-chairModernCushion/chairModernCushion.glb",
+      "bytes": 7376,
+      "sha256": "245132697e633e907e2b48c86d56f6c8543604a3440a055d1c71c06ce11d2858",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-chairModernCushion",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 92,
+        "bbox_cm": [
+          20,
+          20,
+          46
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          20,
+          20,
+          46
+        ],
+        "materials": [
+          "carpetBlue",
+          "metal"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "chairModernCushion(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 50,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.88,
+            "-Y": 0.12
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.76
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-chairModernFrameCushion",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-chairModernFrameCushion/chairModernFrameCushion.glb",
+      "bytes": 18592,
+      "sha256": "fd3351b077cafbd54224e20fa7a3a1b4a4304019cf44c25a6e7709ad71b852b8",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-chairModernFrameCushion",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 284,
+        "bbox_cm": [
+          20,
+          20,
+          46
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          20,
+          20,
+          46
+        ],
+        "materials": [
+          "carpetBlue",
+          "metal"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "chairModernFrameCushion(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 196,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.9694,
+            "-Y": 0.0306
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.9388
+        }
+      }
+    },
+    {
+      "id": "kenney-furniture-kit-rugRectangle",
+      "source_id": "kenney-furniture-kit",
+      "format": "glb (packed inside a single pack .zip)",
+      "file": "360walkaround/catalog/models/kenney-furniture-kit-rugRectangle/rugRectangle.glb",
+      "bytes": 3188,
+      "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "pack": {
+        "source_id": "kenney-furniture-kit",
+        "sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+        "bytes": 5130729,
+        "sha256_matches_manifest": true
+      },
+      "hash_state": "verified",
+      "import": {
+        "id": "kenney-furniture-kit-rugRectangle",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 28,
+        "bbox_cm": [
+          157,
+          92,
+          1
+        ],
+        "bbox_min_cm": [
+          0,
+          0,
+          0
+        ],
+        "bbox_max_cm": [
+          157,
+          92,
+          1
+        ],
+        "materials": [
+          "carpet",
+          "carpetDarker"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "rugRectangle(Clone)"
+        ],
+        "tall_mass": {
+          "upper_vertices": 28,
+          "fractions": {
+            "+X": 0.5,
+            "-X": 0.5,
+            "+Y": 0.5,
+            "-Y": 0.5
+          },
+          "front_axis_guess": null,
+          "confidence": 0
+        }
+      }
+    },
+    {
+      "id": "quaternius-X5kQPKzAWp",
+      "source_id": "quaternius-via-polypizza",
+      "format": "glb",
+      "file": "360walkaround/catalog/models/quaternius-X5kQPKzAWp/f627491f-7126-4323-8d01-0be933671078.glb",
+      "bytes": 210980,
+      "sha256": "0a81a9e0532f1ccb51a39d6a71bbc3fa2506dac22fa762b58194ed4741c2f5a0",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "quaternius-X5kQPKzAWp",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 3886,
+        "bbox_cm": [
+          400.265,
+          280.119,
+          145.243
+        ],
+        "bbox_min_cm": [
+          -202.019,
+          -215.234,
+          -1.761
+        ],
+        "bbox_max_cm": [
+          198.246,
+          64.884,
+          143.481
+        ],
+        "materials": [
+          "Legs",
+          "Sofa"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "Sofa3"
+        ],
+        "tall_mass": {
+          "upper_vertices": 2932,
+          "fractions": {
+            "+X": 0.4843,
+            "-X": 0.5157,
+            "+Y": 0.9563,
+            "-Y": 0.0437
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 0.9126
+        }
+      }
+    },
+    {
+      "id": "quaternius-1kwsjhpY84",
+      "source_id": "quaternius-via-polypizza",
+      "format": "glb",
+      "file": "360walkaround/catalog/models/quaternius-1kwsjhpY84/7cf27481-8505-42f8-9172-ce209242de09.glb",
+      "bytes": 30700,
+      "sha256": "f3b338973f1710c9d7458c8a0dd4fe53eb2ba3adffed417cb2ca8bc9a4d9deeb",
+      "extra_files": [],
+      "action": "cached",
+      "broken": null,
+      "hash_state": "verified",
+      "import": {
+        "id": "quaternius-1kwsjhpY84",
+        "ok": true,
+        "error": null,
+        "objects": 1,
+        "tris": 1423,
+        "bbox_cm": [
+          561.441,
+          432.697,
+          226.132
+        ],
+        "bbox_min_cm": [
+          -329.928,
+          -294.676,
+          -1.545
+        ],
+        "bbox_max_cm": [
+          231.512,
+          138.021,
+          224.587
+        ],
+        "materials": [
+          "Couch_Beige",
+          "Couch_BeigeDark"
+        ],
+        "image_textures": [],
+        "object_names": [
+          "Couch_L"
+        ],
+        "tall_mass": {
+          "upper_vertices": 278,
+          "fractions": {
+            "+X": 0.4964,
+            "-X": 0.5036,
+            "+Y": 1,
+            "-Y": 0
+          },
+          "front_axis_guess": "-Y",
+          "confidence": 1
+        }
+      }
+    }
+  ]
+}

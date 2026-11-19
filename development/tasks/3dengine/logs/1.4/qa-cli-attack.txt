@@ -1,0 +1,62 @@
+ok   import dry: exit 0, wrote nothing
+ok   no reading text in import dry
+ok   import go: exit 0
+ok   no reading text in import go
+ok   show exit 0
+ok   no reading text in show
+show: pdf sha256: 6ec1e701871aec990ee0f57badb56d83cf74d3b16b063e4765382751b6adda3b | kept reading: kept, and made by today's reader |   read: 2026-11-06 · source: imported · cost: $0.0000 · model: m/x · kept by engine 1.4.0 | superseded readings: 0 | 
+ok   import record: imported, cost 0, plan_date 2026-11-06
+ok   import again: already kept
+ok   reading usage  -> 2
+ok   reading usage show -> 2
+ok   reading usage show C:/Users/elira/AppData/Local/Temp/qa14c-H1CZr9/a.pdf x -> 2
+ok   reading usage import C:/Users/elira/AppData/Local/Temp/qa14c-H1CZr9/a.pdf -> 2
+ok   reading usage frob C:/Users/elira/AppData/Local/Temp/qa14c-H1CZr9/a.pdf -> 2
+ok   reading usage show C:/Users/elira/AppData/Local/Temp/qa14c-H1CZr9/nofile.pdf -> 2
+ok   import non-reading -> 1
+ok   S1 free, kept: tool gets the kept file
+ok   S1 env: fal name = fixed word, openrouter absent
+ok   no reading text in S1
+ok   S2 free, kept, judge on: DRY, no tool
+S2: outcome: DRY | nothing was started and nothing was booked | a paid run would call the vision model: 0 reading(s) and up to 3 run(s) of the judge, about $0.06 in all | to pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap | the reading: from the engine's store (read 2026-11-06); a run would make no reading call | keys (by name): FAL_KEY: missing, OPENROUTER_API_KEY: missing | 
+ok   S3 --fresh free: DRY, no tool
+ok   S4 --fresh with --vlm-file: 2
+ok   S5 paid, kept, judge off: tool gets kept file, trace-date of record, no keep
+ok   S10 paid, kept, judge ON: kept file still handed (no reading call), judge may run
+ok   S6 paid --fresh: no vlm-file, trace-date = command day
+ok   S9 paid + --vlm-file: given file, no keep, date from its _meta.at
+ok   S9b --budget without --go is free
+ok   S9c --go without a cap -> 2
+ok   S11 id --no-judge refused
+ok   S11 id --budget refused
+ok   S11 id leading hyphen refused
+info --budget 0x1 -> exit 4 budget arg 1
+ok   pdf is a directory -> usage/err, no tool
+ok   pdf missing -> 2, no tool
+ok   S7 stale, free: DRY (a reading must be paid)
+ok   no reading text in S7
+ok   S7b stale, paid: fresh read, no vlm-file
+ok   show stale exit 1
+ok   no reading text in show stale
+ok   S8 bad, paid: fresh read
+ok   show bad exit 1
+ok   P1 paid pass keeps
+ok   P1 record: paid, cost 0.0456, plan_date = the command day 2030-01-01
+ok   no reading text in P1
+ok   P2 second paid --fresh pass: first reading moved to superseded, bytes intact
+ok   P3 keep fails -> exit 1, says NOT KEPT, names the run file, no text
+ok   no reading text in P3
+P3 out: reading: from the model, NOT KEPT (the store could not be written) |   it is in this run's folder: keep it with  reading import <pdf> C:/Users/elira/AppData/Local/Temp/qa14c-H1CZr9/out22/plan-1/vlm.json --go
+ok   P3 the old kept reading still found
+ok   P4 FAIL keeps nothing
+ok   P5 two plans keeps nothing
+ok   stage hands: kept file, record date, drawing id, judge off; no go, no budget
+ok   stage DRY outcome -> BUDGET_CAP
+ok   stage none -> BUDGET_CAP, nothing started
+ok   stage stale -> BUDGET_CAP, nothing started
+ok   stage bad -> STAGE_FAILED, nothing started
+ok   tracing.mjs never imports keepReading
+keepReading( callers: engine/cli.mjs, engine/readings.mjs
+ok   keepReading callers = readings.mjs + cli.mjs only
+
+checks: 55  failed: 0

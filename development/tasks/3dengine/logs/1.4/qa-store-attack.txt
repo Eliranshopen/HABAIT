@@ -1,0 +1,230 @@
+ok   none first
+ok   kept
+ok   found
+ok   no text: found
+ok   no text: keep
+ok   same again not written
+ok   plan_date
+ok   other pdf none
+ok   pair of another pdf copied in = bad
+ok   swapped reading = bad
+ok   same-size one byte changed = bad
+ok   appended newline = bad
+ok   record extra field -> bad
+ok   no text: extra field
+ok   record missing schema -> bad
+ok   no text: missing schema
+ok   record missing pdf_sha256 -> bad
+ok   no text: missing pdf_sha256
+ok   record missing reading_sha256 -> bad
+ok   no text: missing reading_sha256
+ok   record missing reading_bytes -> bad
+ok   no text: missing reading_bytes
+ok   record missing reader -> bad
+ok   no text: missing reader
+ok   record missing read_at -> bad
+ok   no text: missing read_at
+ok   record missing plan_date -> bad
+ok   no text: missing plan_date
+ok   record missing saved_at -> bad
+ok   no text: missing saved_at
+ok   record missing source -> bad
+ok   no text: missing source
+ok   record missing cost_usd -> bad
+ok   no text: missing cost_usd
+ok   record missing model -> bad
+ok   no text: missing model
+ok   record missing engine_version -> bad
+ok   no text: missing engine_version
+ok   record plan_date sentence -> bad
+ok   no text: plan_date sentence
+ok   record plan_date 2026-02-30 -> bad
+ok   no text: plan_date 2026-02-30
+ok   record plan_date --flag -> bad
+ok   no text: plan_date --flag
+ok   record plan_date number -> bad
+ok   no text: plan_date number
+ok   record read_at sentence -> bad
+ok   no text: read_at sentence
+ok   record read_at hour 25 -> bad
+ok   no text: read_at hour 25
+ok   record saved_at null -> bad
+ok   no text: saved_at null
+ok   record source other -> bad
+ok   no text: source other
+ok   record cost negative -> bad
+ok   no text: cost negative
+ok   record cost string -> bad
+ok   no text: cost string
+ok   record cost 1e9 -> bad
+ok   no text: cost 1e9
+ok   record model sentence -> bad
+ok   no text: model sentence
+ok   record model long -> bad
+ok   no text: model long
+ok   record engine_version bad -> bad
+ok   no text: engine_version bad
+ok   record reading_bytes float -> bad
+ok   no text: reading_bytes float
+ok   record reading_bytes string -> bad
+ok   no text: reading_bytes string
+ok   record schema other -> bad
+ok   no text: schema other
+ok   record pdf other -> bad
+ok   no text: pdf other
+ok   record pdf upper-case -> bad
+ok   no text: pdf upper-case
+ok   record reader extra key -> bad
+ok   no text: reader extra key
+ok   record reader array -> bad
+ok   no text: reader array
+ok   record reader short hash -> bad
+ok   no text: reader short hash
+ok   record record is array -> bad
+ok   no text: record is array
+ok   record record is null -> bad
+ok   no text: record is null
+ok   record record not json -> bad
+ok   no text: record not json
+ok   record record empty -> bad
+ok   no text: record empty
+ok   record record BOM -> bad
+ok   no text: record BOM
+ok   record model null ok -> found
+ok   no text: model null ok
+ok   record cost null ok -> found
+ok   no text: cost null ok
+ok   record other reader = stale -> stale
+ok   no text: other reader = stale
+ok   record other model file = stale -> stale
+ok   no text: other model file = stale
+ok   file where folder belongs = bad
+ok   keep over a file where folder belongs throws STORE
+ok   that file untouched
+ok   reading only = bad
+ok   record only = bad
+ok   record.json a folder = bad
+ok   reading.json a folder = bad
+ok   keep over folder-as-file moves it aside, then found
+ok   junction to other pdf folder = bad
+ok   keep with superseded as file does not destroy
+ok   that error carries no reading text
+info superseded-as-file error: Error / ENOTDIR
+ok   new reading, no record = bad
+ok   keep over half pair -> found
+ok   the half pair was kept aside
+ok   3 superseded in order, bytes intact
+ok   current = last
+ok   every superseded has its record
+ok   tool one byte -> stale
+ok   both changed -> stale
+ok   re-keep same bytes new reader -> kept + superseded 1
+ok   model file one byte -> stale
+ok   restored -> found again
+ok   tool CRLF -> stale
+ok   tool missing -> TOOLCHAIN_MISSING
+ok   that error is text-free
+ok   other engine version still found
+ok   hostile meta array kept and found
+ok   hostile meta array plan_date is a real day
+ok   no text: hostile meta array
+ok   hostile meta array model null or id-shaped
+ok   hostile meta string kept and found
+ok   hostile meta string plan_date is a real day
+ok   no text: hostile meta string
+ok   hostile meta string model null or id-shaped
+ok   hostile no meta kept and found
+ok   hostile no meta plan_date is a real day
+ok   no text: hostile no meta
+ok   hostile no meta model null or id-shaped
+ok   hostile at sentence kept and found
+ok   hostile at sentence plan_date is a real day
+ok   no text: hostile at sentence
+ok   hostile at sentence model null or id-shaped
+ok   hostile at date only kept and found
+ok   hostile at date only plan_date is a real day
+ok   no text: hostile at date only
+ok   hostile at date only model null or id-shaped
+ok   hostile at bad day kept and found
+ok   hostile at bad day plan_date is a real day
+ok   no text: hostile at bad day
+ok   hostile at bad day model null or id-shaped
+ok   hostile at far kept and found
+ok   hostile at far plan_date is a real day
+ok   no text: hostile at far
+ok   hostile at far model null or id-shaped
+ok   hostile at 0000 kept and found
+ok   hostile at 0000 plan_date is a real day
+ok   no text: hostile at 0000
+ok   hostile at 0000 model null or id-shaped
+ok   hostile at flag kept and found
+ok   hostile at flag plan_date is a real day
+ok   no text: hostile at flag
+ok   hostile at flag model null or id-shaped
+ok   hostile usd free kept and found
+ok   hostile usd free plan_date is a real day
+ok   no text: hostile usd free
+ok   hostile usd free model null or id-shaped
+ok   hostile usd huge kept and found
+ok   hostile usd huge plan_date is a real day
+ok   no text: hostile usd huge
+ok   hostile usd huge model null or id-shaped
+ok   hostile model flag kept and found
+ok   hostile model flag plan_date is a real day
+ok   no text: hostile model flag
+ok   hostile model flag model null or id-shaped
+ok   hostile model sentence kept and found
+ok   hostile model sentence plan_date is a real day
+ok   no text: hostile model sentence
+ok   hostile model sentence model null or id-shaped
+ok   hostile model word kept and found
+ok   hostile model word plan_date is a real day
+FAIL no text: hostile model word 
+ok   hostile model word model null or id-shaped
+ok   not a reading not json
+ok   not a reading array
+ok   not a reading rooms not list
+ok   not a reading empty
+ok   not a reading BOM
+ok   keep refuses bad pdf
+ok   keep refuses bad source
+ok   keep refuses neg cost
+ok   keep refuses bad planDate
+ok   keep refuses planDate flag
+ok   nothing written by refused keeps
+ok   findReading junk 
+ok   findReading junk null
+ok   findReading junk undefine
+ok   findReading junk ../x
+ok   findReading junk A563F9A9
+ok   findReading junk a563f9a9
+ok   findReading junk 5
+ok   drawingId stable, 16 hex
+ok   drawingId varies by pdf and apartment
+ok   drawingId passes TRACE_ID_RE over 2000
+ok   isDate 2026-11-06
+ok   isDate 2024-02-29
+ok   isDate 0001-01-01
+ok   isDate 9999-12-31
+ok   isDate rejects "2026-02-29"
+ok   isDate rejects "2026-13-01"
+ok   isDate rejects "2026-11-6"
+ok   isDate rejects " 2026-11-06"
+ok   isDate rejects "2026-11-06\n"
+ok   isDate rejects "-2026-11-06"
+ok   isDate rejects "--budget"
+ok   isDate rejects 20261106
+ok   isDate rejects null
+ok   isDate rejects undefined
+ok   isDate rejects "2026-11-06T00:00:00Z"
+ok   isInstant 2026-11-06T10:00:00Z
+ok   isInstant 2026-11-06T10:00:00.123Z
+ok   isInstant rejects "2026-11-06T10:00:00"
+ok   isInstant rejects "2026-11-06T10:00:00+02:00"
+ok   isInstant rejects "2026-11-06T10:00:00.1234567Z"
+FAIL isInstant rejects "2026-11-06T24:00:00Z" 
+ok   isInstant rejects "2026-11-06T10:60:00Z"
+ok   isInstant rejects "2026-11-06T10:00:60Z"
+ok   isInstant rejects "2026-11-06T10:00:00Z\n"
+
+checks: 227  failed: 2

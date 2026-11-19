@@ -1,0 +1,18 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 3,
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "ts": "2026-11-18T05:16:22.478Z",
+   "op": "auto-trace-read",
+   "apartment": "apt846",
+   "model": "google/gemini-3.7-flash",
+   "images": 1,
+   "reserved_usd": 0.02,
+   "settled_usd": 0,
+   "status": "http 401"
+  }
+ ]
+}

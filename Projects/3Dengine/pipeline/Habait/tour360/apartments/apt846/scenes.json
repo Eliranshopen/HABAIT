@@ -1,0 +1,907 @@
+{
+ "$schema": "tour360/scenes.v1",
+ "apartment": "apt846",
+ "coordinateNotes": {
+  "u_v": "normalized position on the FULL equirectangular image: u 0→1 left→right (0.5 = image centre = yaw 0); v 0.68 on the floor line",
+  "plan": "x/y in the pixel space of plan/floorplan.webp = the plan crop (3750×3900 px, ≈2.25 px/cm, rotated as the architect drew it) × 0.4",
+  "hotspots": "u from the plan bearing to the opening the visitor walks through (cameras.json `via`), minus the bearing the panorama centre faces (`lookAt`); computed by tools/make-scenes.mjs, not calibrated by eye",
+  "heading": "the start yaw of every room is 0, the panorama centre the prompt aimed (cameras.json lookAt; centreBearingDeg is that bearing in plan image space)"
+ },
+ "scenes": [
+  {
+   "id": "aerial",
+   "name": {
+    "he": "מעוף ציפור",
+    "en": "Bird's eye",
+    "fr": "Vue aérienne"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-a-aerial",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "orbit1",
+   "autoDwellMs": 1500,
+   "hotspots": [
+    {
+     "to": "tower",
+     "u": 0.5,
+     "v": 0.621,
+     "label": {
+      "he": "אל המגדל",
+      "en": "To the tower",
+      "fr": "Vers la tour"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    }
+   ]
+  },
+  {
+   "id": "orbit1",
+   "name": {
+    "he": "סיבוב · 2",
+    "en": "Orbit · 2",
+    "fr": "Orbite · 2"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-o1-orbit",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "orbit2",
+   "autoDwellMs": 1500,
+   "hotspots": [
+    {
+     "to": "tower",
+     "u": 0.503,
+     "v": 0.62,
+     "label": {
+      "he": "אל המגדל",
+      "en": "To the tower",
+      "fr": "Vers la tour"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    }
+   ]
+  },
+  {
+   "id": "orbit2",
+   "name": {
+    "he": "סיבוב · 3",
+    "en": "Orbit · 3",
+    "fr": "Orbite · 3"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-o2-orbit",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "orbit3",
+   "autoDwellMs": 1500,
+   "hotspots": [
+    {
+     "to": "tower",
+     "u": 0.503,
+     "v": 0.617,
+     "label": {
+      "he": "אל המגדל",
+      "en": "To the tower",
+      "fr": "Vers la tour"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    }
+   ]
+  },
+  {
+   "id": "orbit3",
+   "name": {
+    "he": "סיבוב · 4",
+    "en": "Orbit · 4",
+    "fr": "Orbite · 4"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-o3-orbit",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "orbit4",
+   "autoDwellMs": 1500,
+   "hotspots": [
+    {
+     "to": "tower",
+     "u": 0.5,
+     "v": 0.616,
+     "label": {
+      "he": "אל המגדל",
+      "en": "To the tower",
+      "fr": "Vers la tour"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    }
+   ]
+  },
+  {
+   "id": "orbit4",
+   "name": {
+    "he": "סיבוב · 5",
+    "en": "Orbit · 5",
+    "fr": "Orbite · 5"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-o4-orbit",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "orbit5",
+   "autoDwellMs": 1500,
+   "hotspots": [
+    {
+     "to": "tower",
+     "u": 0.497,
+     "v": 0.617,
+     "label": {
+      "he": "אל המגדל",
+      "en": "To the tower",
+      "fr": "Vers la tour"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    }
+   ]
+  },
+  {
+   "id": "orbit5",
+   "name": {
+    "he": "סיבוב · 6",
+    "en": "Orbit · 6",
+    "fr": "Orbite · 6"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-o5-orbit",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "tower",
+   "autoDwellMs": 1500,
+   "hotspots": [
+    {
+     "to": "tower",
+     "u": 0.497,
+     "v": 0.619,
+     "label": {
+      "he": "אל המגדל",
+      "en": "To the tower",
+      "fr": "Vers la tour"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    }
+   ]
+  },
+  {
+   "id": "tower",
+   "name": {
+    "he": "מול המגדל",
+    "en": "At the tower",
+    "fr": "Devant la tour"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-b-tower",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "hold": true,
+   "hotspots": [
+    {
+     "to": "approach45",
+     "u": 0.5,
+     "v": 0.577,
+     "label": {
+      "he": "דירה 846 · קומה 16",
+      "en": "Apartment 846 · floor 16",
+      "fr": "Appartement 846 · 16e étage"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    },
+    {
+     "to": "aerial",
+     "u": 0,
+     "v": 0.6,
+     "label": {
+      "he": "חזרה למעוף",
+      "en": "Back up",
+      "fr": "Retour en vol"
+     },
+     "source": "exterior.json, placed on the equirect"
+    }
+   ]
+  },
+  {
+   "id": "approach45",
+   "name": {
+    "he": "בדרך לדירה · 45 מ'",
+    "en": "Approach · 45 m",
+    "fr": "Approche · 45 m"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-e-approach45",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "approach25",
+   "autoDwellMs": 1000,
+   "hotspots": [
+    {
+     "to": "approach25",
+     "u": 0.5,
+     "v": 0.572,
+     "label": {
+      "he": "קרוב יותר",
+      "en": "Closer",
+      "fr": "Plus près"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    },
+    {
+     "to": "tower",
+     "u": 0,
+     "v": 0.6,
+     "label": {
+      "he": "חזרה",
+      "en": "Back",
+      "fr": "Retour"
+     },
+     "source": "exterior.json, placed on the equirect"
+    }
+   ]
+  },
+  {
+   "id": "approach25",
+   "name": {
+    "he": "בדרך לדירה · 25 מ'",
+    "en": "Approach · 25 m",
+    "fr": "Approche · 25 m"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-f-approach25",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "facade",
+   "autoDwellMs": 1000,
+   "hotspots": [
+    {
+     "to": "facade",
+     "u": 0.5,
+     "v": 0.559,
+     "label": {
+      "he": "אל החזית",
+      "en": "To the facade",
+      "fr": "Vers la façade"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    },
+    {
+     "to": "approach45",
+     "u": 0,
+     "v": 0.6,
+     "label": {
+      "he": "חזרה",
+      "en": "Back",
+      "fr": "Retour"
+     },
+     "source": "exterior.json, placed on the equirect"
+    }
+   ]
+  },
+  {
+   "id": "facade",
+   "name": {
+    "he": "מול החזית · קומה 16",
+    "en": "Facade · floor 16",
+    "fr": "Façade · 16e étage"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-c-facade",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "terraceOut",
+   "autoDwellMs": 1000,
+   "hotspots": [
+    {
+     "to": "terraceOut",
+     "u": 0.5,
+     "v": 0.543,
+     "label": {
+      "he": "דירה 846",
+      "en": "Apartment 846",
+      "fr": "Appartement 846"
+     },
+     "source": "tools/world2equi.py: apartment 846 terrace point (10.325, -11.148, 1.0) projected on this node"
+    },
+    {
+     "to": "tower",
+     "u": 0,
+     "v": 0.6,
+     "label": {
+      "he": "חזרה",
+      "en": "Back",
+      "fr": "Retour"
+     },
+     "source": "exterior.json, placed on the equirect"
+    }
+   ]
+  },
+  {
+   "id": "terraceOut",
+   "name": {
+    "he": "מחוץ למרפסת",
+    "en": "Outside the terrace",
+    "fr": "Devant la terrasse"
+   },
+   "zone": {
+    "he": "מחוץ לבניין",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "node-d-terrace",
+   "exterior": true,
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": null,
+   "autoNext": "terraceLiving",
+   "autoDwellMs": 1200,
+   "autoYaw": -114,
+   "hotspots": [
+    {
+     "to": "terraceLiving",
+     "u": 0.5,
+     "v": 0.58,
+     "label": {
+      "he": "אל המרפסת",
+      "en": "Onto the terrace",
+      "fr": "Sur la terrasse"
+     },
+     "source": "exterior.json, placed on the equirect"
+    },
+    {
+     "to": "facade",
+     "u": 0,
+     "v": 0.6,
+     "label": {
+      "he": "חזרה",
+      "en": "Back",
+      "fr": "Retour"
+     },
+     "source": "exterior.json, placed on the equirect"
+    }
+   ]
+  },
+  {
+   "id": "entrance",
+   "name": {
+    "he": "כניסה",
+    "en": "Entrance",
+    "fr": "Entrée"
+   },
+   "zone": {
+    "he": "מרחב מגורים פתוח",
+    "en": "Open living",
+    "fr": "Séjour ouvert"
+   },
+   "asset": "01-entrance",
+   "plan": {
+    "x": 293,
+    "y": 692
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 105.9,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.506,
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw 2.2) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -27° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "bathguest",
+     "u": 0.331,
+     "v": 0.64,
+     "source": "hotspot-pins.json: the room picture and the 3D model, 2026-11-11: the mouth of the passage between the wall and the tall cabinet, the near (bath) side (exact height: the depth model put it at the visitor's feet, 65 degrees down, where nobody sees it) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -45° down: hidden under the controls at the level view on desktop and phone) | phone check: spread from the bedroom-2 button (yaw -61, v 0.64)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.417,
+     "v": 0.594,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the floor right of the tall cabinet | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -38° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "bedroom2",
+     "u": 0.375,
+     "v": 0.55,
+     "source": "hotspot-pins.json: the room picture and the 3D model, 2026-11-11: the mouth of the same passage, the far (bedroom) side | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -36° down: hidden under the controls at the level view on desktop and phone) | phone check: spread from the guest-bath button (yaw -45, v 0.55)"
+    },
+    {
+     "to": "wardrobe",
+     "as": "bedroomMain",
+     "u": 0.675,
+     "v": 0.68,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11 (Eliran: from the entrance there was no way to the room seen in the picture): the master suite's door, right of the TV wall, seen across the living room; it opens on the wardrobe corner (exact: the depth model has this door about 10 degrees to the left, as from the living room, and moved the button onto the TV unit)"
+    },
+    {
+     "to": "dining",
+     "u": 0.452,
+     "v": 0.552,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.01% of the picture, 7.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    }
+   ]
+  },
+  {
+   "id": "kitchen",
+   "name": {
+    "he": "מטבח",
+    "en": "Kitchen",
+    "fr": "Cuisine"
+   },
+   "zone": {
+    "he": "מרחב מגורים פתוח",
+    "en": "Open living",
+    "fr": "Séjour ouvert"
+   },
+   "asset": "02-kitchen",
+   "plan": {
+    "x": 795,
+    "y": 497
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 125.5,
+   "hotspots": [
+    {
+     "to": "dining",
+     "u": 0.592,
+     "v": 0.63,
+     "source": "the visible part of the opening (the hand via is hidden from this camera); R23b moved off FIXTURE d-table (the ray skims it) (within 2° of the marker) (CG depth) to glass facade-3"
+    },
+    {
+     "to": "living",
+     "u": 0.711,
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw 76.0) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -33° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "entrance",
+     "u": 0.797,
+     "v": 0.68,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the floor toward the front door, past the armchair (the entrance camera is not in sight, so the rule drops this way)"
+    }
+   ]
+  },
+  {
+   "id": "dining",
+   "name": {
+    "he": "פינת אוכל",
+    "en": "Dining",
+    "fr": "Salle à manger"
+   },
+   "zone": {
+    "he": "מרחב מגורים פתוח",
+    "en": "Open living",
+    "fr": "Séjour ouvert"
+   },
+   "asset": "03-dining",
+   "plan": {
+    "x": 833,
+    "y": 708
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 56.8,
+   "hotspots": [
+    {
+     "to": "kitchen",
+     "u": 0.285,
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw -77.4) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -33° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "living",
+     "u": 0.07,
+     "v": 0.75,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the floor beside the armchair, toward the sofa (the rule put it toward the front door); moved off FIXTURE l-sofa (the ray skims it) (within 2° of the marker) (CG depth) to floor"
+    },
+    {
+     "to": "terraceLiving",
+     "u": 0.801,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    },
+    {
+     "to": "entrance",
+     "u": 0.094,
+     "v": 0.558,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.96% of the picture, 6.9 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    }
+   ]
+  },
+  {
+   "id": "living",
+   "name": {
+    "he": "סלון",
+    "en": "Living room",
+    "fr": "Séjour"
+   },
+   "zone": {
+    "he": "מרחב מגורים פתוח",
+    "en": "Open living",
+    "fr": "Séjour ouvert"
+   },
+   "asset": "04-living",
+   "plan": {
+    "x": 617,
+    "y": 842
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 111.3,
+   "hotspots": [
+    {
+     "to": "terraceLiving",
+     "u": 0.511,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    },
+    {
+     "to": "dining",
+     "u": 0.339,
+     "v": 0.68,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: over the dining table, seen above the sofa back (exact: from this camera every lower point is the sofa, and the depth rule would send the button to the terrace glass; hotspot-check reports this one on the table)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.249,
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw -90.4) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -22° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "entrance",
+     "u": 0.021,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    },
+    {
+     "to": "wardrobe",
+     "as": "bedroomMain",
+     "u": 0.869,
+     "v": 0.68,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the door in the recess right of the TV wall; it opens on the wardrobe corner, the suite's way in (exact: the 3D model has this door about 10 degrees to the left, at 124, and a closet here — the picture and the model differ at this spot; hotspot-check reports this one on the closet)"
+    },
+    {
+     "to": "bathguest",
+     "u": 0.088,
+     "v": 0.581,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.55% of the picture, 4.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — its door, seen past the entrance"
+    }
+   ]
+  },
+  {
+   "id": "terraceLiving",
+   "name": {
+    "he": "מרפסת שמש",
+    "en": "Sun terrace",
+    "fr": "Terrasse"
+   },
+   "zone": {
+    "he": "מרפסת השמש",
+    "en": "The terrace",
+    "fr": "La terrasse"
+   },
+   "asset": "05-terrace-living",
+   "plan": {
+    "x": 1120,
+    "y": 860
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 355.9,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.183,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    },
+    {
+     "to": "terraceBedroom",
+     "u": 0.103,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off wall (within 2° of the marker) (CG depth) to glass facade-4"
+    },
+    {
+     "to": "terraceOut",
+     "u": 0.5,
+     "v": 0.62,
+     "source": "exterior.json backFrom"
+    }
+   ]
+  },
+  {
+   "id": "terraceBedroom",
+   "name": {
+    "he": "מרפסת · קצה החדרים",
+    "en": "Terrace · bedroom end",
+    "fr": "Terrasse · côté chambres"
+   },
+   "zone": {
+    "he": "מרפסת השמש",
+    "en": "The terrace",
+    "fr": "La terrasse"
+   },
+   "asset": "06-terrace-bedroom",
+   "plan": {
+    "x": 909,
+    "y": 1210
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 16.3,
+   "hotspots": [
+    {
+     "to": "terraceLiving",
+     "u": 0.496,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    },
+    {
+     "to": "bedroomMain",
+     "u": 0.222,
+     "v": 0.594,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (19.25% of the picture, 2.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — through its terrace door (o-13) | 2026-11-12 browser check: moved down to the floor by the bed (yaw -100, v 0.78), clear of the wardrobe button | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -24° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "wardrobe",
+     "u": 0.256,
+     "v": 0.53,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.28% of the picture, 6.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the bedroom, so above its button | 2026-11-12 browser check: moved up onto the far door (yaw -88, v 0.53) — at the first place it covered the bedroom button"
+    },
+    {
+     "to": "living",
+     "u": 0.352,
+     "v": 0.573,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.74% of the picture, 6.1 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    }
+   ]
+  },
+  {
+   "id": "bedroomMain",
+   "name": {
+    "he": "חדר שינה הורים",
+    "en": "Main bedroom",
+    "fr": "Chambre principale"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "07-bedroom-main",
+   "plan": {
+    "x": 752,
+    "y": 1178
+   },
+   "heading": -55,
+   "northOffset": 0,
+   "centreBearingDeg": 344.9,
+   "hotspots": [
+    {
+     "to": "wardrobe",
+     "u": 0.334,
+     "v": 0.68,
+     "source": "the visible part of the opening (the hand via is hidden from this camera); R23b moved off wall (CG depth) to opening o-6"
+    },
+    {
+     "to": "terraceBedroom",
+     "u": 0.827,
+     "v": 0.696,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (8.03% of the picture, 2.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — its terrace door (o-13)"
+    },
+    {
+     "to": "living",
+     "u": 0.367,
+     "v": 0.548,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.67% of the picture, 4.6 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the wardrobe corner; moved 3.5 degrees right and up off the wardrobe button"
+    },
+    {
+     "to": "terraceLiving",
+     "u": 0.761,
+     "v": 0.593,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.32% of the picture, 3.7 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    }
+   ]
+  },
+  {
+   "id": "wardrobe",
+   "name": {
+    "he": "פינת ארונות",
+    "en": "Dressing nook",
+    "fr": "Dressing"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "08-wardrobe",
+   "plan": {
+    "x": 473,
+    "y": 1060
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 106.4,
+   "hotspots": [
+    {
+     "to": "bedroomMain",
+     "u": 0.632,
+     "v": 0.594,
+     "source": "hotspot-pins.json: kept where the rule placed it (yaw 47.5) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -44° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "bathMain",
+     "u": 0.859,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to opening o-9"
+    },
+    {
+     "to": "living",
+     "u": 0.092,
+     "v": 0.68,
+     "source": "hotspot-pins.json: the room picture, 2026-11-11: the open door to the living room; moved off wall (CG depth) to opening o-6"
+    },
+    {
+     "to": "terraceBedroom",
+     "u": 0.517,
+     "v": 0.563,
+     "source": "hotspot-pins.json: seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.62% of the picture, 6.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the bedroom, so above its button"
+    }
+   ]
+  },
+  {
+   "id": "bathMain",
+   "name": {
+    "he": "חדר רחצה הורים",
+    "en": "Main bathroom",
+    "fr": "Salle de bain principale"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "09-bath-main",
+   "plan": {
+    "x": 266,
+    "y": 1135
+   },
+   "heading": 42,
+   "northOffset": 0,
+   "centreBearingDeg": 36.8,
+   "hotspots": [
+    {
+     "to": "wardrobe",
+     "u": 0.68,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  },
+  {
+   "id": "bedroom2",
+   "name": {
+    "he": "חדר שינה",
+    "en": "Second bedroom",
+    "fr": "Deuxième chambre"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "10-bedroom-2",
+   "plan": {
+    "x": 578,
+    "y": 394
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 35.2,
+   "hotspots": [
+    {
+     "to": "entrance",
+     "u": 0.985,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  },
+  {
+   "id": "bathguest",
+   "name": {
+    "he": "חדר רחצה כללי",
+    "en": "Guest bathroom",
+    "fr": "Salle de bain invités"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "11-bath-guest",
+   "plan": {
+    "x": 385,
+    "y": 513
+   },
+   "heading": 152,
+   "northOffset": 0,
+   "centreBearingDeg": 15.7,
+   "hotspots": [
+    {
+     "to": "entrance",
+     "u": 0.792,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "cap": 0.35,
+ "total": 0.278,
+ "rows": [
+  {
+   "ts": "2026-11-16T14:49:41.112Z",
+   "op": "live_edit",
+   "scene": "living",
+   "apartment": "apt846",
+   "lang": "he",
+   "instruction": "להוסיף שני רמקולים עומדים על הרצפה משני צידי הטלוויזיה",
+   "attempt": 1,
+   "reserved_usd": 0.10300000000000001,
+   "settled_usd": 0.038,
+   "status": "settled",
+   "model": "fal-ai/flux-2/klein/9b/edit",
+   "reach": "object",
+   "living": false,
+   "prompt_en": "Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the lighting of the space. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move or zoom the camera.",
+   "target": "floor-standing speakers",
+   "change": "add two floor-standing speakers on either side of the TV",
+   "seconds": 18.319,
+   "result_size": [
+    1280,
+    864
+   ],
+   "seed": 1025586308
+  },
+  {
+   "ts": "2026-11-16T14:50:02.180Z",
+   "op": "live_follow",
+   "scene": "dining",
+   "apartment": "apt846",
+   "from": "living",
+   "attempt": 1,
+   "reserved_usd": 0.1,
+   "settled_usd": 0.08,
+   "status": "settled",
+   "model": "fal-ai/nano-banana-2/edit",
+   "reach": "object",
+   "living": false,
+   "prompt_en": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the lighting of the space. Make the same change in the first image as it looks from the first image's camera: the same objects: the same design, shape, colour, material and size, standing at the same place in the room, beside the same furniture, drawn in the first image's own perspective and at the scale of the furniture around them. Use the second image only to see what was changed and where in the room it is; do not copy its camera angle, its framing or its background. If that place in the room is not visible in the first image, return the first image unchanged. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move or zoom the camera.",
+   "target": "floor-standing speakers",
+   "change": "add two floor-standing speakers on either side of the TV",
+   "seconds": 14.998,
+   "result_size": [
+    1264,
+    848
+   ],
+   "seed": null
+  },
+  {
+   "ts": "2026-11-16T14:50:02.198Z",
+   "op": "live_follow",
+   "scene": "entrance",
+   "apartment": "apt846",
+   "from": "living",
+   "attempt": 1,
+   "reserved_usd": 0.1,
+   "settled_usd": 0.08,
+   "status": "settled",
+   "model": "fal-ai/nano-banana-2/edit",
+   "reach": "object",
+   "living": false,
+   "prompt_en": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the lighting of the space. Make the same change in the first image as it looks from the first image's camera: the same objects: the same design, shape, colour, material and size, standing at the same place in the room, beside the same furniture, drawn in the first image's own perspective and at the scale of the furniture around them. Use the second image only to see what was changed and where in the room it is; do not copy its camera angle, its framing or its background. If that place in the room is not visible in the first image, return the first image unchanged. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move or zoom the camera.",
+   "target": "floor-standing speakers",
+   "change": "add two floor-standing speakers on either side of the TV",
+   "seconds": 11.992,
+   "result_size": [
+    1264,
+    848
+   ],
+   "seed": null
+  },
+  {
+   "ts": "2026-11-16T14:50:02.207Z",
+   "op": "live_follow",
+   "scene": "kitchen",
+   "apartment": "apt846",
+   "from": "living",
+   "attempt": 1,
+   "reserved_usd": 0.1,
+   "settled_usd": 0.08,
+   "status": "settled",
+   "model": "fal-ai/nano-banana-2/edit",
+   "reach": "object",
+   "living": false,
+   "prompt_en": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the lighting of the space. Make the same change in the first image as it looks from the first image's camera: the same objects: the same design, shape, colour, material and size, standing at the same place in the room, beside the same furniture, drawn in the first image's own perspective and at the scale of the furniture around them. Use the second image only to see what was changed and where in the room it is; do not copy its camera angle, its framing or its background. If that place in the room is not visible in the first image, return the first image unchanged. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move or zoom the camera.",
+   "target": "floor-standing speakers",
+   "change": "add two floor-standing speakers on either side of the TV",
+   "seconds": 14.263,
+   "result_size": [
+    1264,
+    848
+   ],
+   "seed": null
+  }
+ ]
+}

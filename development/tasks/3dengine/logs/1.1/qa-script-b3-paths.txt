@@ -1,0 +1,71 @@
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { makeHome, engineOf, SCR, cleanup } from './qa-lib.mjs';
+const h = await makeHome({ timeout: 60 });
+const eng = await engineOf(h);
+const H = eng.handlers;
+const outside = `${h.home}/outside`; fs.mkdirSync(outside);
+fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${outside}/s.pdf`);
+fs.mkdirSync(`${h.home}/uploads-evil`); fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${h.home}/uploads-evil/s.pdf`);
+fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, `${h.inbox}/a.pdf`);
+const BS = '\\';
+const w = (p) => p.split('/').join(BS);
+const O = w(outside), I = w(h.inbox), HM = w(h.home);
+const j = spawnSync('cmd', ['/c', 'mklink', '/J', w(`${h.inbox}/junc`), O], { encoding: 'utf8' });
+console.log('junction:', j.stdout.trim() || j.stderr.trim());
+const sl = spawnSync('cmd', ['/c', 'mklink', w(`${h.inbox}/sym.pdf`), w(`${outside}/s.pdf`)], { encoding: 'utf8' });
+console.log('symlink:', (sl.stdout || sl.stderr).trim());
+const hl = spawnSync('cmd', ['/c', 'mklink', '/H', w(`${h.inbox}/hard.pdf`), w(`${outside}/s.pdf`)], { encoding: 'utf8' });
+console.log('hardlink:', (hl.stdout || hl.stderr).trim());
+const dirx = spawnSync('cmd', ['/c', `for %I in ("${HM}") do @echo %~sI`], { encoding: 'utf8' }).stdout.trim();
+console.log('short home:', dirx);
+const short = (p) => p.replace(HM, dirx);
+const forms = {
+  'dotdot fwd': `${h.inbox}/../outside/s.pdf`,
+  'dotdot back': `${I}${BS}..${BS}outside${BS}s.pdf`,
+  'dotdot mixed': `${h.inbox}${BS}..//outside/s.pdf`,
+  'dotdot deep': `${h.inbox}/a/../../outside/s.pdf`,
+  'junction': `${h.inbox}/junc/s.pdf`,
+  'junction+dotdot': `${h.inbox}/junc/../outside/s.pdf`,
+  'symlink file': `${h.inbox}/sym.pdf`,
+  'prefix sibling': `${h.home}/uploads-evil/s.pdf`,
+  'prefix via dotdot': `${h.inbox}-evil/s.pdf`,
+  'extended-prefix outside': `${BS}${BS}?${BS}${O}${BS}s.pdf`,
+  'extended-prefix dotdot': `${BS}${BS}?${BS}${I}${BS}..${BS}outside${BS}s.pdf`,
+  'UNC localhost outside': `${BS}${BS}localhost${BS}${O.replace(':', '$')}${BS}s.pdf`,
+  'UNC 127 outside': `${BS}${BS}127.0.0.1${BS}${O.replace(':', '$')}${BS}s.pdf`,
+  'UNC dotdot': `${BS}${BS}localhost${BS}${I.replace(':', '$')}${BS}..${BS}outside${BS}s.pdf`,
+  'drive-relative': `C:${O.slice(2)}${BS}s.pdf`,
+  'ADS outside ::$DATA': `${outside}/s.pdf::$DATA`,
+  'ADS outside :x': `${outside}/s.pdf:x`,
+  'trailing dot outside': `${outside}/s.pdf.`,
+  'trailing space outside': `${outside}/s.pdf `,
+  'trailing dot dir': `${h.inbox}./../outside/s.pdf`,
+  'short 8.3 outside': short(`${O}${BS}s.pdf`),
+  'upper outside': `${O}${BS}S.PDF`.toUpperCase(),
+  'NUL': `${h.inbox}/a.pdf\u0000../outside/s.pdf`,
+  'NUL only': '\u0000',
+  'long path': `${h.inbox}/${'a'.repeat(300)}/../../outside/s.pdf`,
+  'very long name': `${h.inbox}/${'a'.repeat(400)}.pdf`,
+  'empty': '', 'space': '   ', 'dot': '.', 'inbox dir itself': h.inbox, 'relative to home': 'outside/s.pdf', 'relative ..': '../x.pdf',
+  'file: url': `file:///${outside}/s.pdf`, 'tilde': '~/x.pdf', 'env var': '%TEMP%/x.pdf',
+  'con device': 'CON', 'nul device': 'NUL', 'pipe': `${BS}${BS}.${BS}pipe${BS}x`, 'device path': `${BS}${BS}.${BS}${O}${BS}s.pdf`,
+};
+const before = () => [fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir).length : 0, fs.existsSync(`${h.home}/.runtime/inspect`) ? fs.readdirSync(`${h.home}/.runtime/inspect`).length : 0];
+let n = 0; let breaks = 0;
+for (const [name, p] of Object.entries(forms)) {
+  for (const tool of ['inspect_plan', 'start_simulation']) {
+    const b = before(); n++;
+    let res;
+    try { const r = await H[tool]({ pdf_path: p }); res = `OK sha=${(r.sha256 || r.job?.input?.pdf_sha256 || '').slice(0, 8)}`; } catch (e) { res = `${e.code || e.name}`; }
+    const a = before();
+    console.log(tool.padEnd(16), name.padEnd(24), res, (a[0] !== b[0] || a[1] !== b[1]) ? `CREATED jobs ${b[0]}->${a[0]} inspect ${b[1]}->${a[1]}` : '');
+    if (res.startsWith('OK')) { console.log('   ^^^ ACCEPTED', JSON.stringify(p).slice(0, 120)); breaks++; }
+  }
+}
+const legit = { 'Hebrew name': `${h.inbox}/תכנית מכר 846 דירה.pdf`, 'spaces': `${h.inbox}/a b  c.pdf`, 'mixed slashes': `${I}/a.pdf`, 'UPPER inbox': `${I.toUpperCase()}${BS}A.PDF`, 'extended inbox': `${BS}${BS}?${BS}${I}${BS}a.pdf`, 'short inbox': short(`${I}${BS}a.pdf`) };
+fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, legit['Hebrew name']); fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, legit.spaces);
+for (const [k, p] of Object.entries(legit)) { n++; try { const r = await H.inspect_plan({ pdf_path: p }); console.log('legit', k.padEnd(14), 'OK', r.pdf_path); } catch (e) { console.log('legit', k, e.code, e.message); } }
+console.log('ATTEMPTS', n, 'ACCEPTED-outside-or-odd', breaks);
+try { const r = await H.start_simulation({ pdf_path: legit['Hebrew name'] }); console.log('hebrew start pdf_name:', r.job.input.pdf_name, 'copy exists', fs.existsSync(r.job.input.pdf_path)); } catch (e) { console.log('hebrew start', e.code, e.message); }
+cleanup(h);

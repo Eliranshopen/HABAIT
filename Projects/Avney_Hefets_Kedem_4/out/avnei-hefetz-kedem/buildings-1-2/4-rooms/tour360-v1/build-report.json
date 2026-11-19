@@ -1,0 +1,40 @@
+{
+  "$schema": "ahk-tour360/build-report.v1",
+  "apartment": "ahk-apt7",
+  "built_by": "tools/tour360/build-tour.mjs (adapted copy of RAINBOW build-tour.mjs)",
+  "flags": [
+    "--apartments",
+    "tour360/apartments",
+    "--out",
+    "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/tour360-v1",
+    "--catalog",
+    "--full",
+    "--fidelity-not-run"
+  ],
+  "engine": "pannellum 2.5.6",
+  "fidelity_gate": "NOT RUN (paid depth-model step; --fidelity-not-run)",
+  "cost_usd": 0,
+  "inputs": {
+    "apartment.json": "197085c2cb04433e",
+    "scenes.json": "d976f2e35f742f25",
+    "markers.json": "59e5cb20fdcc1734",
+    "tour.js": "eb9626e7355bec98",
+    "edit-live.js": "9140e1a934226531",
+    "template.html": "2a26064361c1cc32",
+    "copy": "963652e25b2f615f",
+    "handler.mjs": "c6159e89a31999fe"
+  },
+  "outputs": {
+    "index.html": "f02e7d4c72153e05"
+  },
+  "counts": {
+    "scenes": 11,
+    "panos": 11,
+    "full": 11,
+    "original": 11,
+    "thumbs": 11,
+    "catalog": 8,
+    "markers": 15,
+    "depth": 11
+  }
+}

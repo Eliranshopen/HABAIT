@@ -1,0 +1,31 @@
+Milestone 1.1, round 2: the gate after the first QA round (FAIL on D1 and D2; report: qa-live.md).
+Run by the main session on 2026-11-17 in the worktree C:\RnD\.wt\3dengine\Projects\3Dengine, on the code that is committed as round 2.
+
+WHAT CHANGED SINCE ac717c5
+  engine/inspect.mjs         D1: the scanner reads a private copy of the bytes that were hashed; D2: every failure of the
+                             runtime folder is TOOLCHAIN_MISSING with no path; O-4: a stored candidate is checked exactly
+  engine/stages/intake.mjs   O-5: a folder at input/source.pdf, or a file at input, is NOT_A_PDF naming the job
+  engine/manifest.mjs, engine/jobs.mjs, mcp/stub-engine.mjs, engine/cli.mjs
+                             O-1: every tool that names a job reads both files; list_jobs and the CLI list leave such a job out;
+                             a FOLDER where job.json or manifest.json belongs is "not this job's file" (found by the main session)
+  contracts/CONTRACT-1.1.md  sections 1, 3, 5, 8, 9, 10
+  tests                      unit: inspect (27), intake (13), file-identity (18), jobs, manifest; closing test parts 7 and 8
+
+THE FIRST WHOLE-SUITE RUN OF THE FIX FAILED 4 TESTS OF 347 (r2-first-run.txt). None was the engine's behaviour:
+  - tests/unit/jobs.test.mjs and manifest.test.mjs expected the raw file error for a folder at a job file's path (now: not this job's file)
+  - closing test 5c: its snapshot counted job.lock, left by a runner the test kills in the middle of a heartbeat
+  - closing test 8: took a look at half-written bytes, named by their own hash, for a wrong look
+  Each is written in the contract: section 8 items 12 and 13, section 1, section 10.
+
+THE GATE ON THE FINAL CODE
+  npm test (unit + closing tests, line coverage on engine/** and mcp/**), three runs one after another:
+    run 1  347 tests  347 pass  0 fail  164.7 s  lines 99.66 %   (machine load 100 % just before the run)   r2-gate-npm-test-1.txt
+    run 2  347 tests  347 pass  0 fail  163.2 s  lines 99.66 %   (load 6 %)                                 r2-gate-npm-test-2.txt
+    run 3  347 tests  347 pass  0 fail  102.2 s  lines 99.66 %   (load 10 %)                                r2-gate-npm-test-3.txt
+  Before the last change (a test-only change: part 8 makes 6 looks, not 10) the same suite passed 3 runs of 3 as well
+  (155 s, 194 s, 184 s; part 8 alone took 74 s inside the suite, which is why it was shortened).
+  closing test alone   node --test tests/milestones/m1.1.test.mjs   11 tests, 11 pass, 25.7 s; part 8: 4 true looks, 2 refused NOT_A_PDF
+  end to end           npm run test:e2e                              51 of 51 assertions                    r2-gate-e2e.txt
+  soak                 npm run test:soak -- --kills 14 --freezes 8   17 kills, 8 takeovers, violations=0    r2-gate-soak.txt
+
+NOT RUN IN THIS ROUND: a first look on a saturated machine or during a render (contract section 9); anything paid; the network.

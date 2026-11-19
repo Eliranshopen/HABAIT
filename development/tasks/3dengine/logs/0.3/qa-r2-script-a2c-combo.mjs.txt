@@ -1,0 +1,86 @@
+// A2c: takeover combined with kill of the second runner / cancel / cap. Usage: node a2c-combo.mjs <seed> <mode: kill2|cancel|cap>
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, between, rnd, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, toDone, realKill, waitEvent, resume, approveWhen, frozenThenReplaced, settledSum, heldSum } from './q.mjs';
+const [seed, mode, count] = [Number(process.argv[2]), process.argv[3], Number(process.argv[4] || 4)];
+setSeed(seed);
+const callUsd = mode === 'cap' ? 25 : 0.6;
+const E = await mkEnv({ prefix: `qa-a2c-${mode}-`, callUsd, stepMs: 400, heartbeat: 0.1, staleSeconds: 1 });
+const res = {};
+const POINTS = [...STAGES, ...PAID.map((s) => `${s}:reserved`)];
+const sampleLoop = async (id, tag, ms, cap = 60) => { const until = Date.now() + ms; while (Date.now() < until) { inv(E, id, tag); await approveWhen(E, id, cap); await sleep(30); } };
+try {
+  for (let k = 0; k < count; k++) {
+    const point = mode === 'cap' ? ['skinning:reserved', 'gating:reserved', 'finishing:reserved', 'gating', 'finishing'][between(0, 4)] : POINTS[between(0, POINTS.length - 1)];
+    const freezeMs = between(2800, 3800);
+    const tag = `${mode}${k} ${point} ${freezeMs}ms`;
+    let r;
+    try { r = await frozenThenReplaced(E, { name: `c-${mode}-${seed}-${k}.pdf`, point, freezeMs }); } catch (e) { violate(`${tag}: setup ${e.message}`); continue; }
+    S.takeovers++;
+    inv(E, r.id, `${tag} after takeover`);
+    if (mode === 'kill2') {
+      await sleep(between(0, 900));
+      let killed = false;
+      const trig = ['delay:1', 'joblock', 'tmp', 'reserved', 'cacheUnsettled', 'heavyfile'][between(0, 5)];
+      for (let i = 0; i < 200 && !E.job(r.id).approval && E.job(r.id).state !== 'done'; i++) { await approveWhen(E, r.id, 60); if (E.job(r.id).approval) break; await sleep(25); }
+      await waitEvent(E, r.id, trig, 1500);
+      const p2 = E.runnerPid(r.id);
+      if (p2 && p2 !== r.oldPid) killed = await realKill(E, p2, tag);
+      inv(E, r.id, `${tag} after kill of second (${trig})`);
+      if (killed) {
+        if (E.job(r.id).state !== 'done') {
+          const rr = await resume(E, r.pdf, `${tag} third`);
+          if (rr && !rr.r.resumed) note(`${tag}: third start answered resumed:false (runner.alive ${E.h.get_job({ job_id: r.id }).job.runner.alive})`);
+        }
+      }
+      await sampleLoop(r.id, `${tag} sample`, freezeMs);   // the first wakes during this
+      await toDone(E, r.id, tag);
+      const t0 = Date.now(); while (pidAlive(r.oldPid) && Date.now() - t0 < freezeMs + 8000) await sleep(50);
+      if (pidAlive(r.oldPid)) violate(`${tag}: replaced runner ${r.oldPid} did not leave`);
+      finalCheck(E, r.id, tag); await spentOk(E, r.id, tag);
+      const man = E.rows(r.id); const at = STAGES.indexOf(r.stage);
+      for (const row of man) if (STAGES.indexOf(row.stage) >= at && row.runner_pid === r.oldPid) violate(`${tag}: ${row.stage} row by replaced runner`);
+      res[tag] = { trig, killed };
+    } else if (mode === 'cancel') {
+      const variant = k % 2;   // 0: cancel while the second runs; 1: cancel BEFORE the takeover is... (second already running) then wake
+      await sleep(between(100, 700));
+      for (let i = 0; i < 100 && !E.job(r.id).approval && E.job(r.id).state !== 'done'; i++) { await approveWhen(E, r.id, 60); await sleep(25); }
+      await sleep(between(0, 500));
+      const before = E.rows(r.id).map((x) => x.stage + x.attempt);
+      let cj; try { cj = E.h.cancel_job({ job_id: r.id }).job; } catch (e) { violate(`${tag}: cancel threw ${e.message}`); }
+      const cancelledAt = Date.now();
+      // sample until the replaced one is gone: state must stay cancelled, rows must stop growing (after 1 s)
+      let frozenRows = null;
+      while (pidAlive(r.oldPid) && Date.now() - cancelledAt < freezeMs + 6000) {
+        const x = inv(E, r.id, `${tag} sample`);
+        if (x && x.job.state !== 'cancelled' && x.job.state !== 'done') violate(`${tag}: state ${x.job.state} after cancel`);
+        if (Date.now() - cancelledAt > 1500) { const n = x.man.rows.length; if (frozenRows === null) frozenRows = n; else if (n !== frozenRows) violate(`${tag}: manifest grew from ${frozenRows} to ${n} >1.5 s after cancel`); }
+        await sleep(40);
+      }
+      if (pidAlive(r.oldPid)) violate(`${tag}: replaced runner still alive`);
+      const rows1 = E.rows(r.id).map((x) => x.stage + x.attempt);
+      await sleep(600);
+      const snapshot = JSON.stringify(E.rows(r.id)) + JSON.stringify(E.ledger(r.id));
+      // restart
+      const rr = await resume(E, r.pdf, `${tag} restart`);
+      if (E.job(r.id).state !== 'done' && rr && !rr.r.resumed) violate(`${tag}: restart after cancel answered resumed:false`);
+      await toDone(E, r.id, tag);
+      finalCheck(E, r.id, tag); await spentOk(E, r.id, tag);
+      // rows that existed at snapshot are unchanged (byte-for-byte)
+      const old = JSON.parse(snapshot.split('}{')[0].replace(/\]$/, ']') .length ? '[]' : '[]');
+      res[tag] = { rowsBefore: before.length, rowsAfterCancel: rows1.length, cancelledState: cj?.state };
+    } else if (mode === 'cap') {
+      await sampleLoop(r.id, `${tag} sample`, freezeMs + 500, 60);
+      // approve with the cap needed
+      await toDone(E, r.id, tag, { cap: 60 });
+      const t0 = Date.now(); while (pidAlive(r.oldPid) && Date.now() - t0 < 8000) await sleep(50);
+      finalCheck(E, r.id, tag); await spentOk(E, r.id, tag);
+      const led = E.ledger(r.id);
+      res[tag] = { rows: led.rows.map((x) => `${x.stage}:${x.status}${x.not_sent ? ':ns' : ''}${x.late ? ':late' : ''}`), cap: led.cap_usd, appr: E.job(r.id).approvals?.length };
+      for (const s of PAID) if (E.sends(r.id, s) !== 1) violate(`${tag}: ${s} sent ${E.sends(r.id, s)}x`);
+    }
+    console.log(`  ${tag} done`);
+  }
+  heavyOverlap(E, 'a2c');
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a2c-' + mode, seed, takeovers: S.takeovers, kills: S.kills, jobsDone: S.jobs, checks: S.checks, res, violations: S.violations, leftover: E.leftover }, null, 1));

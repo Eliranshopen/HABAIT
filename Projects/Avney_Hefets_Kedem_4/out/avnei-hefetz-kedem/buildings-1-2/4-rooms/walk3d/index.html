@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>הליכה בדירה · אבני חפץ קדם</title>
+<style>
+  :root { --ink: #fff; --panel: rgba(30, 26, 22, 0.62); --badge: #e9b13b; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfd9e2; font: 15px/1.4 system-ui, "Segoe UI", Arial, sans-serif; color: var(--ink); }
+  canvas { display: block; touch-action: none; }
+  .bar { position: fixed; inset-inline: 16px; top: max(12px, env(safe-area-inset-top)); display: flex; gap: 8px; align-items: center; justify-content: space-between; pointer-events: none; }
+  .pill { background: var(--panel); border-radius: 999px; padding: 6px 12px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .badge { background: var(--badge); color: #2b2622; border-radius: 999px; padding: 3px 10px; font-weight: 700; font-size: 13px; }
+  #room { font-weight: 700; }
+  .rooms { position: fixed; inset-inline: 16px; top: calc(max(12px, env(safe-area-inset-top)) + 44px); display: flex; flex-wrap: wrap; gap: 6px; }
+  .rooms button { pointer-events: auto; border: 0; min-height: 44px; padding: 0 12px; border-radius: 999px; background: var(--panel); color: #fff; font: inherit; font-size: 13px; cursor: pointer; backdrop-filter: blur(6px); }
+  .rooms button:hover { background: rgba(30, 26, 22, 0.8); }
+  .hint { position: fixed; inset-inline: 16px; bottom: max(14px, env(safe-area-inset-bottom)); text-align: center; pointer-events: none; }
+  .hint span { display: inline-block; background: var(--panel); border-radius: 12px; padding: 7px 12px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .hint small { display: block; opacity: 0.85; font-size: 12px; margin-top: 2px; }
+  #load { position: fixed; inset: 0; display: grid; place-items: center; background: #e9e4dc; color: #2b2622; font-size: 16px; text-align: center; }
+  #load b { display: block; font-size: 20px; margin-bottom: 6px; }
+  #load i { display: block; width: 220px; height: 4px; background: #d5cdc1; border-radius: 4px; margin: 10px auto 0; overflow: hidden; }
+  #load i s { display: block; height: 100%; width: 0; background: #2b2622; transition: width 200ms; }
+  .hidden { display: none !important; }
+  @media (max-width: 600px) { .rooms { top: auto; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 64px); flex-wrap: nowrap; overflow-x: auto; } .rooms button { flex: none; } }
+</style>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+</head>
+<body>
+<div id="load"><div><b>הדירה נטענת…</b>אבני חפץ · קדם · דגם יורד · דירה 7 · 4 חדרים<i><s id="prog"></s></i></div></div>
+<div class="bar"><span class="pill"><span id="room">כניסה</span></span><span class="badge">הדמיה</span></div>
+<nav class="rooms" id="rooms" aria-label="מעבר לחדר"></nav>
+<div class="hint"><span id="hint"></span></div>
+<script type="module" src="./walk3d.js"></script>
+</body>
+</html>

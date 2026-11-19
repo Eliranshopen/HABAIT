@@ -1,0 +1,130 @@
+// QA scratch (qa-reviewer, 1.3): a FAKE reading tool in a temp pipeline root; module-level attacks on trace.mjs and the stage. No network, no keys.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const ENG = 'C:/RnD/Projects/3Dengine';
+const imp = (p) => import(pathToFileURL(`${ENG}/${p}`).href);
+const { runTrace, decide, TraceUsageError } = await imp('engine/trace.mjs');
+const { realStage } = await imp('engine/stages/tracing.mjs');
+const { loadConfig } = await imp('engine/config.mjs');
+const { samplePdf } = await imp('tests/fixtures/make-sample.mjs');
+const out = [];
+const say = (...a) => { const s = a.join(' '); out.push(s); console.log(s); };
+let bad = 0;
+const expect = (label, cond, extra = '') => { if (!cond) bad++; say(`${cond ? 'ok  ' : 'FAIL'} ${label} ${extra}`); };
+
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'qa13fake-'));
+const pipe = `${tmp}/pipe`;
+fs.mkdirSync(`${pipe}/Habait/tour360/tools`, { recursive: true });
+// the fake tool: QA_MODE says what it does
+const FAKE = String.raw`
+import fs from 'node:fs'; import path from 'node:path';
+const a = process.argv.slice(2); const arg = (n) => { const i = a.indexOf(n); return i < 0 ? null : a[i + 1]; };
+const out = arg('--out'); fs.mkdirSync(out, { recursive: true });
+const mode = process.env.QA_MODE || 'pass';
+const keyish = Object.fromEntries(Object.entries(process.env).filter(([k]) => /key|token|secret|pass|auth/i.test(k)));
+fs.writeFileSync(path.join(out, 'qa-dump.json'), JSON.stringify({ args: a, keyish, cwd: process.cwd() }));
+const plan = (k, status, extra = {}) => { const d = path.join(out, 'plan-' + k); fs.mkdirSync(d, { recursive: true });
+  fs.writeFileSync(d + '/trace-check.json', JSON.stringify({ status, round: 1, n_checks: 5, n_failed: status === 'PASS' ? 0 : 2, checks: [{ check: 'dims', pass: status === 'PASS', pct: 0.5 }, { check: 'room_count', expected: 3, got: 3 }], ...extra }));
+  fs.writeFileSync(d + '/report.json', JSON.stringify({ rooms: 3, fixtures: 1, could_not_read: ['SECRETLINE'], ...(extra.report || {}) }));
+  fs.writeFileSync(d + '/plan.general.json', '{}'); fs.writeFileSync(d + '/overlay.png', 'x'); fs.writeFileSync(d + '/vlm.json', '{}'); return d; };
+const index = (status, plans, over = {}) => fs.writeFileSync(path.join(out, 'index.json'), JSON.stringify({ input: process.argv[2], id: arg('--id'), status, spent_usd: 0, plans, ...over }));
+const P = (k) => ({ dir: path.join(out, 'plan-' + k).replace(/\\/g, '/'), page: 1 });
+if (mode === 'exit4') { console.error('auto-trace: budget $0 reached'); process.exit(4); }
+if (mode === 'exit1budget') { console.error('auto-trace: budget $0 reached (log says budget, exit says 1)'); process.exit(1); }
+if (mode === 'exit1') process.exit(1);
+if (mode === 'exit3') process.exit(3);
+if (mode === 'exit2') process.exit(2);
+if (mode === 'exit7') process.exit(7);
+if (mode === 'pass') { plan(1, 'PASS'); index('PASS', [P(1)]); process.exit(0); }
+if (mode === 'pass2') { plan(1, 'PASS'); plan(2, 'PASS'); index('PASS', [P(1), P(2)]); process.exit(0); }
+if (mode === 'pass0') { index('PASS', []); process.exit(0); }
+if (mode === 'fail') { plan(1, 'FAIL'); index('FAIL', [P(1)]); process.exit(5); }
+if (mode === 'fail0') { index('FAIL', []); process.exit(5); }
+if (mode === 'passexit5') { plan(1, 'PASS'); index('PASS', [P(1)]); process.exit(5); }
+if (mode === 'failexit0') { plan(1, 'FAIL'); index('FAIL', [P(1)]); process.exit(0); }
+if (mode === 'hostile') { plan(1, 'FAIL', { n_checks: 'MARK-n', n_failed: { x: 'MARK-f' }, checks: [{ check: 'dims', pass: 'MARK-p', pct: 'MARK-pct' }, 'MARK-str', null, { check: 'room_count', expected: 'MARK-e', got: ['MARK-g'] }], judge: { unavailable: 'MARK-judge', mismatches: 'MARK-m' }, report: { rooms: 'MARK-rooms', fixtures: 'MARK-fx', could_not_read: 'MARK-cnr' } }); index('FAIL', [P(1)]); process.exit(5); }
+if (mode === 'hostile-pass') { plan(1, 'PASS', { n_checks: 'MARK-n', n_failed: 'MARK-f', round: 'MARK-round', checks: [{ check: 'dims', pass: true, pct: 'MARK-pct' }], report: { rooms: 'MARK-rooms', fixtures: 'MARK-fx' } }); index('PASS', [P(1)]); process.exit(0); }
+if (mode === 'badindex-id') { plan(1, 'PASS'); index('PASS', [P(1)], { id: 'someone-else' }); process.exit(0); }
+if (mode === 'badindex-dir') { plan(1, 'PASS'); index('PASS', [{ dir: path.join(out, '..', 'plan-1').replace(/\\/g, '/'), page: 1 }]); process.exit(0); }
+if (mode === 'planday') { plan(7, 'PASS'); index('PASS', [P(7)]); process.exit(0); }
+if (mode === 'hang') { setInterval(() => {}, 1000); }
+`;
+fs.writeFileSync(`${pipe}/Habait/tour360/tools/auto-trace.mjs`, FAKE);
+const base = loadConfig({});
+const cfg = (over = {}) => ({ ...base, pipelineRoot: pipe, readingsDir: `${tmp}/readings`, keys: [...base.keys], ...over, trace: { ...base.trace, timeoutSeconds: 8, ...(over.trace || {}) } });
+const pdf = `${tmp}/in.pdf`; fs.writeFileSync(pdf, samplePdf(), 'latin1');
+const vlm = `${tmp}/vlm.json`; fs.writeFileSync(vlm, JSON.stringify({ rooms: [{ name_en: 'x' }] }));
+let n = 0;
+const run = async (mode, opts = {}, envx = {}) => { const outDir = `${tmp}/out-${++n}`; const r = await runTrace(cfg(opts.cfg || {}), { pdf, outDir, id: 'abcdef0123456789', vlmFile: vlm, judge: false, ...(opts.o || {}) }, { env: { ...process.env, QA_MODE: mode, ...envx } }); return { r, outDir }; };
+
+// --- S1 outcomes by exit code; the log is never read
+for (const [mode, want] of [['exit4', 'NEEDS_PAID_RUN'], ['exit1budget', 'STEP_FAILED'], ['exit1', 'STEP_FAILED'], ['exit3', 'NO_PLAN_FOUND'], ['exit2', 'USAGE'], ['exit7', 'STEP_FAILED'], ['pass', 'PASS'], ['fail', 'FAIL'], ['pass0', 'RESULT_UNREADABLE'], ['passexit5', 'RESULT_UNREADABLE'], ['failexit0', 'RESULT_UNREADABLE'], ['badindex-id', 'RESULT_UNREADABLE'], ['badindex-dir', 'RESULT_UNREADABLE'], ['hang', 'TIMEOUT']]) {
+  const { r } = await run(mode);
+  expect(`runTrace ${mode} -> ${want}`, r.outcome === want, `got ${r.outcome} exit=${r.exit}`);
+}
+{ const { r } = await run('pass', { o: { judge: true } }); expect('judge:true free -> DRY (nothing started)', r.outcome === 'DRY' && !fs.existsSync(`${tmp}/out-${n}`)); }
+{ const outDir = `${tmp}/out-nov`; const r = await runTrace(cfg(), { pdf, outDir, id: 'abcdef0123456789', judge: false }, { env: { ...process.env, QA_MODE: 'pass' } }); expect('no vlm free -> DRY, nothing started', r.outcome === 'DRY' && !fs.existsSync(outDir)); }
+try { decide(cfg(), { pdf, outDir: `${tmp}/o-go`, id: 'abc', vlmFile: vlm, go: true }); expect('go without budget refused', false); } catch (e) { expect('go without budget refused', e instanceof TraceUsageError); }
+// --- environment of a free run
+const planted = { fal_key: 'FAKE-fal-lower', Fal_Key: 'FAKE-fal-mixed', OPENROUTER_API_KEY: 'FAKE-or', openrouter_api_key: 'FAKE-or-lower', MY_EXTRA_KEY: 'FAKE-extra', HABAIT_ENV_ROOT: base.envRoot };
+{
+  const { outDir } = await run('pass', { cfg: { keys: [...base.keys, 'MY_EXTRA_KEY'] } }, planted);
+  const dump = JSON.parse(fs.readFileSync(`${outDir}/qa-dump.json`, 'utf8'));
+  say('  dump keyish env:', JSON.stringify(dump.keyish));
+  say('  dump args:', JSON.stringify(dump.args.map((x) => x.replace(/\\/g, '/').replace(tmp.replace(/\\/g, '/'), '<tmp>'))));
+  const names = Object.keys(dump.keyish);
+  expect('free env: the only key-like names are FAL_KEY (any case) = free-run-no-key', names.length >= 1 && names.every((k) => /^fal_key$/i.test(k) || /^(path)$/i.test(k) === false && false) && Object.values(dump.keyish).every((v) => v === 'free-run-no-key'));
+  const bi = dump.args.indexOf('--budget'); expect('free args: --budget 0', dump.args[bi + 1] === '0');
+  expect('free args: --env-root is the out dir', dump.args[dump.args.indexOf('--env-root') + 1].replace(/\\/g, '/') === outDir.replace(/\\/g, '/'));
+  expect('free args: no --ledger/--go', !dump.args.includes('--ledger') && !dump.args.includes('--go'));
+  expect('free args: --no-judge, --rounds', dump.args.includes('--no-judge') && dump.args.includes('--rounds'));
+}
+for (const v of [0, 10, 2.5, '3', 'abc', true, [4], null, undefined, '', ' 5 ', 1e1, -1, '1e0', '0x3', 9, 1]) {
+  const tdir = fs.mkdtempSync(path.join(os.tmpdir(), 'qa13cfg-'));
+  const raw = JSON.parse(fs.readFileSync(`${ENG}/engine.config.json`, 'utf8')); raw.trace = { ...raw.trace }; if (v !== undefined) raw.trace.rounds = v;
+  fs.writeFileSync(`${tdir}/engine.config.json`, JSON.stringify(raw));
+  let res; try { const c = loadConfig({ home: tdir, env: {} }); res = `accepted rounds=${c.trace.rounds} (${typeof c.trace.rounds})`; } catch (e) { res = `refused: ${e.message.slice(0, 60)}`; }
+  say(`  rounds ${JSON.stringify(v)} -> ${res}`);
+  fs.rmSync(tdir, { recursive: true, force: true });
+}
+for (const v of ['real', 'REAL', 'Real', ' real', 'stub', '', null, 1, true, ['real'], 'stub ']) {
+  const tdir = fs.mkdtempSync(path.join(os.tmpdir(), 'qa13cfg-'));
+  const raw = JSON.parse(fs.readFileSync(`${ENG}/engine.config.json`, 'utf8')); raw.mode = v;
+  fs.writeFileSync(`${tdir}/engine.config.json`, JSON.stringify(raw));
+  let res; try { res = `accepted mode=${loadConfig({ home: tdir, env: {} }).mode}`; } catch { res = 'refused'; }
+  say(`  mode ${JSON.stringify(v)} -> ${res}`); fs.rmSync(tdir, { recursive: true, force: true });
+}
+{ const outDir = `${tmp}/פלט`; try { await runTrace(cfg(), { pdf, outDir, id: 'abc', vlmFile: vlm, judge: false }); expect('non-ascii out refused', false); } catch (e) { expect('non-ascii out refused, OUT_PATH, nothing created', e instanceof TraceUsageError && e.what === 'OUT_PATH' && !fs.existsSync(outDir)); } }
+for (const ch of ['é', '\u200b', '\u00a0', '\t', '\u007f', '\u0001']) { try { decide(cfg(), { pdf, outDir: `${tmp}/o${ch}x`, id: 'abc', vlmFile: vlm }); expect(`out path with ${JSON.stringify(ch)} refused`, false); } catch (e) { expect(`out path with ${JSON.stringify(ch)} refused (${e.what || e.message.slice(0, 30)})`, e instanceof TraceUsageError); } }
+// --- the stage, real runTrace + fake tool
+const mkctx = (over = {}) => { const jobDir = `${tmp}/job-${++n}`; fs.mkdirSync(`${jobDir}/input`, { recursive: true }); fs.copyFileSync(pdf, `${jobDir}/input/source.pdf`); const logs = []; return { jobDir, logs, job: { job_id: 'abcdef0123456789', input: { pdf_sha256: 'a'.repeat(64) } }, config: cfg({ readingsDir: `${jobDir}-readings` }), attempt: 1, checkCancelled() {}, log: (m) => logs.push(m), ...over }; };
+const seed = (c) => { fs.mkdirSync(`${c.config.readingsDir}`, { recursive: true }); fs.writeFileSync(`${c.config.readingsDir}/${'a'.repeat(64)}.json`, JSON.stringify({ rooms: [{ name_en: 'MARK-room' }] })); };
+async function stage(mode, tweak) {
+  const c = mkctx(); seed(c); if (tweak) tweak(c);
+  const st = realStage({ runTrace: (config, o) => runTrace(config, o, { env: { ...process.env, QA_MODE: mode } }) });
+  try { const r = await st.run(c); return { ok: r, c }; } catch (e) { return { e, c }; }
+}
+const show = (x) => x.ok ? `RETURN ${JSON.stringify(x.ok.outputs?.map((o) => o.path))} detail=${JSON.stringify(x.ok.detail)}` : `${x.e.constructor.name} ${x.e.code} | ${x.e.message} | files=${JSON.stringify(x.e.files ?? null)}`;
+for (const mode of ['pass', 'fail', 'fail0', 'pass2', 'pass0', 'exit3', 'exit4', 'exit1', 'exit1budget', 'exit2', 'exit7', 'hang', 'hostile', 'hostile-pass', 'planday', 'badindex-id']) {
+  const x = await stage(mode); say(`  stage ${mode}: ${show(x).slice(0, 420)}`);
+  const text = JSON.stringify([x.ok, x.e?.message, x.e?.files, x.c.logs]); expect(`stage ${mode}: no MARK/SECRETLINE text in result/error/log`, !/MARK|SECRETLINE/.test(text));
+}
+for (const [label, content] of [['not json', 'xx'], ['empty', ''], ['array', '[]'], ['rooms not list', '{"rooms":1}'], ['null', 'null']]) {
+  const x = await stage('pass', (c) => fs.writeFileSync(`${c.config.readingsDir}/${'a'.repeat(64)}.json`, content)); say(`  saved=${label}: ${show(x)}`);
+  expect(`saved reading ${label}: no tool started, STAGE_FAILED`, x.e?.code === 'STAGE_FAILED' && !fs.existsSync(`${x.c.jobDir}/stages`));
+}
+{ const x = await stage('pass', (c) => { fs.rmSync(`${c.config.readingsDir}/${'a'.repeat(64)}.json`); fs.mkdirSync(`${c.config.readingsDir}/${'a'.repeat(64)}.json`); }); expect('saved reading is a folder -> STAGE_FAILED no start', x.e?.code === 'STAGE_FAILED' && !fs.existsSync(`${x.c.jobDir}/stages`), show(x)); }
+{ const x = await stage('pass', (c) => fs.rmSync(`${c.config.readingsDir}/${'a'.repeat(64)}.json`)); expect('no saved reading -> BUDGET_CAP no start', x.e?.code === 'BUDGET_CAP' && !fs.existsSync(`${x.c.jobDir}/stages`), show(x)); }
+for (const sha of ['A'.repeat(64), '../'.repeat(10), 'a'.repeat(63), undefined]) { const x = await stage('pass', (c) => { c.job.input.pdf_sha256 = sha; }); expect(`hostile pdf_sha256 ${String(sha).slice(0, 12)} -> BUDGET_CAP none`, x.e?.code === 'BUDGET_CAP', show(x)); }
+{ const x = await stage('pass', (c) => { fs.mkdirSync(`${c.jobDir}/stages/tracing/attempt-1`, { recursive: true }); fs.writeFileSync(`${c.jobDir}/stages/tracing/attempt-1/old.txt`, 'x'); }); say('  nonempty attempt folder:', show(x)); expect('non-empty attempt folder is refused, not mixed', Boolean(x.e) && !x.ok); }
+{ const c = mkctx(); seed(c); let cancelled = false; c.checkCancelled = () => { if (cancelled) { const e = new Error('job cancelled'); e.code = 'CANCELLED_X'; throw e; } };
+  setTimeout(() => { cancelled = true; }, 1500);
+  const st = realStage({ pollMs: 200, runTrace: (config, o) => runTrace(config, o, { env: { ...process.env, QA_MODE: 'hang' } }) });
+  const t0 = Date.now(); let err; try { await st.run(c); } catch (e) { err = e; }
+  expect('cancel during reading: stage throws what the runner threw, within ~6s', err?.code === 'CANCELLED_X' && Date.now() - t0 < 6000, `${err?.code} ${Date.now() - t0}ms`);
+  expect('cancel: no index.json in the attempt folder', !fs.existsSync(`${c.jobDir}/stages/tracing/attempt-1/index.json`)); }
+fs.writeFileSync('C:/RnD/.wt/3dengine/development/tasks/3dengine/logs/1.3/qa-fake-results.txt', out.join('\n') + `\nFAILED_CHECKS=${bad}\n`);
+say('FAILED_CHECKS', bad);
+fs.rmSync(tmp, { recursive: true, force: true });

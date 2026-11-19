@@ -1,0 +1,110 @@
+// A6: double start races, cap + kill, cancel+restart at once, 2-job heavy lock loss by REAL suspension.
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, between, rnd, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, toDone, realKill, waitEvent, resume, approveWhen, createSuspender, settledSum, heldSum } from './q.mjs';
+const [seed, part] = [Number(process.argv[2]), process.argv[3]];
+setSeed(seed);
+const out = {};
+const startWith = (E, name, env = {}) => { const pdf = E.pdf(name, name); for (const [k, v] of Object.entries(env)) process.env[k] = v; let id; try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { for (const k of Object.keys(env)) delete process.env[k]; } return { pdf, id }; };
+let E;
+try {
+  if (part === 'race') {
+    E = await mkEnv({ prefix: 'qa-a6r-', callUsd: 0.6, stepMs: 300, heartbeat: 0.1, staleSeconds: 1 });
+    // (a) double / triple start right after a kill
+    for (let i = 0; i < 8; i++) {
+      const { pdf, id } = startWith(E, `a6a-${i}.pdf`);
+      const asyncApprove = (async () => { for (let j = 0; j < 600; j++) { await approveWhen(E, id, 60); await sleep(20); const x = E.job(id); if (!x || x.state === 'done') return; } })();
+      await sleep(between(0, 1500));
+      const ok = await realKill(E, E.runnerPid(id), `A${i}`);
+      inv(E, id, `A${i} after kill`);
+      if (E.job(id).state === 'done') continue;
+      const n = between(2, 3); const rs = [];
+      for (let q = 0; q < n; q++) { try { rs.push(E.h.start_simulation({ pdf_path: pdf }).resumed); } catch (e) { rs.push('ERR ' + e.message); } }
+      const before = [...E.spawned].length;
+      await sleep(500);
+      const samples = [];
+      const until = Date.now() + 4500; let maxRunners = 0;
+      while (Date.now() < until) { inv(E, id, `A${i} sample`); const alive = [...E.spawned].filter((p) => pidAlive(p) && p !== E.killed.at(-1)); maxRunners = Math.max(maxRunners, alive.length); await sleep(40); }
+      await toDone(E, id, `A${i}`); finalCheck(E, id, `A${i}`); await spentOk(E, id, `A${i}`);
+      out[`A${i}`] = `kill ${ok}, ${n} starts -> ${JSON.stringify(rs)}, max live spawned runners seen (all jobs) ${maxRunners}`;
+      for (const s of PAID) if (E.sends(id, s) > 1) violate(`A${i}: ${s} sent ${E.sends(id, s)}x after double start`);
+    }
+    // (d) cancel + immediate restart
+    for (let i = 0; i < 10; i++) {
+      const { pdf, id } = startWith(E, `a6d-${i}.pdf`);
+      const asyncApprove = (async () => { for (let j = 0; j < 800; j++) { await approveWhen(E, id, 60); await sleep(20); const x = E.job(id); if (!x || x.state === 'done') return; } })();
+      await sleep(between(100, 1800));
+      try { E.h.cancel_job({ job_id: id }); } catch { }
+      if (i % 2) await sleep(between(0, 80));
+      let r; try { r = E.h.start_simulation({ pdf_path: pdf }); } catch (e) { r = { err: e.message }; }
+      inv(E, id, `D${i} right after restart`);
+      await toDone(E, id, `D${i}`);
+      finalCheck(E, id, `D${i}`); await spentOk(E, id, `D${i}`);
+      const runnersPids = new Set(E.rows(id).map((x) => x.runner_pid));
+      out[`D${i}`] = `restart ${JSON.stringify(r.resumed ?? r.err)}, row runners ${runnersPids.size}`;
+      for (const s of PAID) if (E.sends(id, s) > 1) violate(`D${i}: ${s} sent ${E.sends(id, s)}x after cancel/restart`);
+    }
+    heavyOverlap(E, 'a6 race');
+  } else if (part === 'capkill') {
+    E = await mkEnv({ prefix: 'qa-a6c-', callUsd: 25, stepMs: 250, heartbeat: 0.05, staleSeconds: 1 });
+    for (let i = 0; i < 10; i++) {
+      const { pdf, id } = startWith(E, `a6c-${i}.pdf`);
+      for (let j = 0; j < 2000; j++) { const x = E.job(id); if (x.state === 'awaiting_approval' && !x.approval) { E.h.approve_paid_stage({ job_id: id, cap_usd: 60 }); break; } await sleep(10); }
+      // wait for the cap-reached back-transition (reason BUDGET_CAP + awaiting_approval) or a reserve
+      const trig = ['cap', 'joblock', 'tmp', 'delay:5'][i % 4];
+      let hit = false; const t0 = Date.now();
+      while (Date.now() - t0 < 12000) {
+        const x = E.job(id);
+        if (trig === 'cap') { if (x.state === 'awaiting_approval' && x.reason?.code === 'BUDGET_CAP') { hit = true; break; } }
+        else if (x.state === 'finishing' || x.state === 'awaiting_approval' && x.reason) { hit = await waitEvent(E, id, trig, 1000); break; }
+        await sleep(2);
+      }
+      if (hit || true) await realKill(E, E.runnerPid(id), `C${i}`);
+      const x1 = inv(E, id, `C${i} after kill`);
+      await resume(E, pdf, `C${i}`);
+      await sleep(500);
+      const x2 = inv(E, id, `C${i} after resume`);
+      // now the job must still be able to take a larger cap
+      let note2 = '';
+      for (let j = 0; j < 4000; j++) { const x = E.job(id); if (x.state === 'done') break; if (x.state === 'awaiting_approval' && !x.approval) { try { E.h.approve_paid_stage({ job_id: id, cap_usd: Math.max(60, x.quote.estimate_usd) }); note2 += `approved ${Math.max(60, x.quote.estimate_usd)};`; } catch (e) { note2 += `approve threw ${e.message};`; } } if (x.state === 'failed') break; await sleep(10); }
+      const jf = E.job(id);
+      if (jf.state !== 'done') violate(`C${i}: ended in ${jf.state} ${JSON.stringify(jf.reason)}`);
+      else { finalCheck(E, id, `C${i}`); await spentOk(E, id, `C${i}`); }
+      const led = E.ledger(id);
+      out[`C${i}`] = `${trig}: state at kill ${x1?.job.state}; ${note2} final ${jf.state}; cap ${led.cap_usd}; counted ${settledSum(led) + heldSum(led)}; rows ${led.rows.map((r) => r.stage[0] + r.status[0]).join('')}`;
+    }
+    heavyOverlap(E, 'a6 capkill');
+  } else if (part === 'heavysusp') {
+    E = await mkEnv({ prefix: 'qa-a6h-', callUsd: 0.6, stepMs: 500, heartbeat: 0.1, staleSeconds: 1 });
+    const SU = await createSuspender(E);
+    for (let i = 0; i < 12; i++) {
+      const A = startWith(E, `a6h-a-${i}.pdf`);
+      const trigA = ['heavyfile', 'heavyguard', 'state:rendering', 'delay:900', 'delay:1100'][i % 5];
+      const ids = [A.id];
+      let others = [];
+      await sleep(between(0, 300));
+      const B = startWith(E, `a6h-b-${i}.pdf`); ids.push(B.id);
+      if (i % 3 === 2) { const C = startWith(E, `a6h-c-${i}.pdf`); ids.push(C.id); }
+      let stop = false;
+      (async () => { while (!stop) { for (const id of ids) await approveWhen(E, id, 60); await sleep(25); } })();
+      const hit = await waitEvent(E, A.id, trigA, 8000);
+      const pA = E.runnerPid(A.id);
+      if (hit && pA && pidAlive(pA)) {
+        const dur = between(1600, 3300);
+        await SU.suspend(pA); S.takeovers++;
+        const holder = E.heavy();
+        await sleep(dur);
+        await SU.resume(pA);
+        out[`H${i}`] = `${trigA}: A suspended ${dur} ms, heavy holder at suspend ${holder ? holder.job_id === A.id ? 'A' : 'other' : 'none'}`;
+      }
+      const until = Date.now() + 60000;
+      for (;;) { for (const id of ids) inv(E, id, `H${i} sample`); heavyOverlap(E, `H${i}`); if (ids.every((id) => E.job(id).state === 'done')) break; if (Date.now() > until) { violate(`H${i}: not done`); break; } await sleep(60); }
+      stop = true;
+      for (const id of ids) { finalCheck(E, id, `H${i} ${id}`); await spentOk(E, id, `H${i}`); }
+      out[`H${i}`] += ` | rendering attempts A ${E.rows(A.id).filter((r) => r.stage === 'rendering').map((r) => r.attempt)}`;
+    }
+    SU.close();
+    heavyOverlap(E, 'a6 heavy');
+  }
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a6-' + part, seed, kills: S.kills, takeovers: S.takeovers, jobsDone: S.jobs, checks: S.checks, out, violations: S.violations, notes: S.notes, leftover: E.leftover }, null, 1));

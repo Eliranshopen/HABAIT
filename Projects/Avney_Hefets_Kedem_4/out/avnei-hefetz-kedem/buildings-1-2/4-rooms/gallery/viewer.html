@@ -1,0 +1,16 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>מודל תלת־ממדי</title>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#efeae3;font:15px Heebo,system-ui,sans-serif} canvas{display:block;touch-action:none} p{position:fixed;top:10px;inset-inline:0;text-align:center;margin:0;color:#3c3935}</style></head>
+<body><p>גררו כדי לסובב · גלגלת לזום · <b style="background:#eea927;padding:1px 8px;border-radius:99px">הדמיה</b></p>
+<script type="module">
+import * as THREE from 'three'; import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'; import { OrbitControls } from 'three/addons/controls/OrbitControls.js'; import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.setSize(innerWidth, innerHeight); r.toneMapping = THREE.AgXToneMapping; r.toneMappingExposure = 1.1; r.outputColorSpace = THREE.SRGBColorSpace; document.body.append(r.domElement);
+const sc = new THREE.Scene(); sc.background = new THREE.Color(0xefeae3); sc.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.02).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 1.2); sun.position.set(2, 4, 3); sc.add(sun);
+const cam = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.01, 100); const ctl = new OrbitControls(cam, r.domElement); ctl.autoRotate = true; ctl.autoRotateSpeed = 1.2; ctl.enableDamping = true;
+const id = (new URLSearchParams(location.search).get('m') || '').replace(/[^a-z0-9_]/g, '');
+new GLTFLoader().load('m/' + id + '.glb', (g) => { sc.add(g.scene); const b = new THREE.Box3().setFromObject(g.scene), c = b.getCenter(new THREE.Vector3()), s = b.getSize(new THREE.Vector3()).length();
+  ctl.target.copy(c); cam.position.copy(c).add(new THREE.Vector3(s * 0.9, s * 0.55, s * 1.1)); cam.near = s / 100; cam.updateProjectionMatrix(); window.__ok = true; });
+addEventListener('resize', () => { cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); r.setSize(innerWidth, innerHeight); });
+r.setAnimationLoop(() => { ctl.update(); r.render(sc, cam); });
+</script></body></html>

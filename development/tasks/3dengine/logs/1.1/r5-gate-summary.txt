@@ -1,0 +1,45 @@
+Milestone 1.1, round 5: the gate after the fourth QA round (FAIL on one low defect; report: qa-live-r4.md).
+Run by the main session on 2026-11-17 in the worktree C:\RnD\.wt\3dengine\Projects\3Dengine, on the code that is committed as round 5.
+
+WHAT CHANGED SINCE aaec50c
+  engine/stages/intake.mjs   D-1: the intake reads the upload in ONE step and writes the job's copy in ANOTHER. A failed read is
+                             the upload's (NOT_A_PDF: gone, or cannot be read at this moment), a failed write is the job folder's.
+                             Before, one copy call did both and had to guess; an upload that had become a folder was blamed on
+                             the job folder (TOOLCHAIN_MISSING).
+  contracts/CONTRACT-1.1.md  sections 1, 3, 8, 9, 10
+  tests                      unit: intake (15: the read and the write are injected apart; a folder, a held file, a gone file at
+                             the upload's path); closing test part 10: the lock holder gets up to 150 s to start
+
+THE MACHINE DURING THIS GATE
+  Other sessions rendered with Blender on this machine the whole time (blender.exe present, processor load 100 % before and after
+  every run below). The gate was first held back for about two hours waiting for a quiet machine; none came for long enough.
+
+THE GATE (all under 100 % load)
+  npm test (unit + closing tests, line coverage on engine/** and mcp/**), three runs one after another:
+    367 tests  367 pass  0 fail  229.3 s  lines 99.72 %   r5-gate-npm-test-1.txt
+    367 tests  367 pass  0 fail  214.4 s  lines 99.72 %   r5-gate-npm-test-2.txt
+    367 tests  367 pass  0 fail  225.8 s  lines 99.72 %   r5-gate-npm-test-3.txt
+  closing test alone   node --test tests/milestones/m1.1.test.mjs   13 tests, 13 pass, 124.6 s; part 8: 4 true looks, 2 refused NOT_A_PDF
+                                                                                                           r5-gate-closing-test.txt
+  end to end           npm run test:e2e   first run 50 of 51: the one that failed is the clean-up assertion (the test's own processes
+                       had not ended by themselves in time and the test stopped them); second run 51 of 51
+                                                                                                           r5-gate-e2e-1.txt, r5-gate-e2e-2.txt
+  soak                 npm run test:soak -- --kills 14 --freezes 8   30 kills, 8 takeovers, violations=0    r5-gate-soak.txt
+
+RUNS OF THE SAME CODE THAT DID NOT PASS, AND WHY (r5-runs-under-load.txt)
+  Before the three runs above, five whole-suite runs failed and one passed:
+    3 runs  killed by the 300 s limit or failed on answer times of the 0.2 and 0.3 closing tests ("answered in under 2 s",
+            "one full job" inside 60 s), with a render of another session at 100 % load
+    2 runs  366 of 367: only part 10 of the 1.1 closing test, whose lock holder (a PowerShell process) did not hold the file
+            within its 30 s wait on the saturated machine; the wait is now 150 s (a test change, no engine change)
+    1 run   367 of 367 (276 s)
+  No failure was an assertion about the engine's behaviour.
+
+IN THE LIVE HOME (C:\RnD\Projects\3Dengine, local main b7790fd), also at 100 % load
+  npm test   first run 366 of 367: part 13 of the 0.3 closing test timed out WAITING for its own set-up ("the first runner to be
+             blocked at skinning:reserved and to look dead"), not on an assertion      r5-live-npm-test-run1-one-failure.txt
+             second run 367 of 367, 177.2 s, lines 99.72 %                              r5-live-npm-test.txt
+  node engine/cli.mjs doctor   READY                                                    r5-live-doctor.txt
+  no tracked file of the engine changed by the runs
+
+NOT RUN IN THIS ROUND: a quiet-machine timing of the suite; anything paid; the network.

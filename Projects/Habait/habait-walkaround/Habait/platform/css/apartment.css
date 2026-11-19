@@ -30,6 +30,10 @@ html:has(body.page-apartment) { scroll-padding-block: calc(var(--apt-top-h) + va
 }
 .apt-brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); min-height: var(--tap-min); min-width: 0; color: var(--text); }
 .apt-brand img { height: 26px; width: auto; background: var(--n-0); border-radius: var(--r-sm); padding: 2px 6px; box-sizing: content-box; }
+.apt-brand img.apt-brand__habait { height: 28px; background: none; padding: 0; border-radius: 0; }
+.apt-brand img.apt-brand__habait + span { padding-inline-start: 12px; margin-inline-start: 4px; border-inline-start: 1px solid var(--line); font-size: var(--fs-body); font-weight: var(--fw-semibold); }
+#brandName { display: grid; line-height: 1.15; }
+.apt-brand .apt-brand__dev { font-family: var(--font-text); font-size: 12px; font-weight: var(--fw-regular); color: var(--text-muted); }
 .apt-brand span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .apt-top-actions { display: flex; gap: 8px; align-items: center; flex: none; }
 .apt-back { padding: 7px 12px; font-size: var(--fs-small); border-color: var(--line-strong); color: var(--text); }
@@ -144,7 +148,10 @@ html:has(body.page-apartment) { scroll-padding-block: calc(var(--apt-top-h) + va
 .apt-lb-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 8px; }
 
 @media (max-width: 479px) {
-  .apt-brand img:not([hidden]) + span { display: none; } /* phones: the logo alone, room for "back to the building" */
+  /* phones: the logo, then the project name and its developer in two small lines (Eliran 2026-11-09: the developer's name stays) */
+  .apt-brand img.apt-brand__habait { height: 24px; }
+  .apt-brand img.apt-brand__habait + span { padding-inline-start: 8px; margin-inline-start: 0; font-size: 13px; }
+  .apt-brand .apt-brand__dev { font-size: 11px; }
 }
 
 @media (min-width: 900px) {

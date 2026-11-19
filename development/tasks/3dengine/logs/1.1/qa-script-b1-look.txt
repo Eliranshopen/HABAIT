@@ -1,0 +1,47 @@
+import fs from 'node:fs';
+import { makeHome, startServer, SCR, cleanup, sleep } from './qa-lib.mjs';
+const h = await makeHome({ timeout: 60 });
+const srv = startServer(h);
+await srv.init();
+const MARK = 'qa-marker';
+const names = fs.readdirSync(`${SCR}/pdfs`).filter((n) => n.endsWith('.pdf'));
+let leaks = 0; let attempts = 0;
+for (const n of names) {
+  fs.copyFileSync(`${SCR}/pdfs/${n}`, `${h.inbox}/${n}`);
+  const t0 = Date.now();
+  const r = await srv.call('inspect_plan', { pdf_path: `${h.inbox}/${n}` });
+  attempts++;
+  const leak = r.l.includes(MARK) || r.l.includes('IGNORE');
+  if (leak) leaks++;
+  const o = r.out;
+  console.log(n.padEnd(20), r.err ? `ERR ${r.err.code}: ${r.err.message}` : `pages=${o.pages} kind=${o.kind} cands=${o.candidates.map((c) => c.id + (c.thumb ? '+thumb' : '')).join(',')} content=${o.page_rows.slice(0, 3).map((x) => x.content).join('/')}`, `${Date.now() - t0}ms`, leak ? 'LEAK' : '');
+  // start_simulation with marker pdf too
+  if (n.startsWith('marker')) {
+    const s = await srv.call('start_simulation', { pdf_path: `${h.inbox}/${n}`, ...(n.includes('booklet') ? {} : {}) });
+    attempts++;
+    console.log('  start:', s.err ? `ERR ${s.err.code}: ${s.err.message}` : `job ${s.out.job_id}`, (s.l.includes(MARK) ? 'LEAK' : ''));
+    if (s.l.includes(MARK)) leaks++;
+  }
+}
+// all inspect.json and everything under .runtime/inspect: marker in inspect.json?
+const root = `${h.home}/.runtime/inspect`;
+for (const d of fs.readdirSync(root)) {
+  if (!fs.existsSync(`${root}/${d}/inspect.json`)) continue;
+  const t = fs.readFileSync(`${root}/${d}/inspect.json`, 'utf8');
+  if (t.includes(MARK)) { console.log('INSPECT.JSON LEAK', d); leaks++; }
+}
+const pagesHas = fs.readdirSync(root).filter((d) => fs.existsSync(`${root}/${d}/pages.json`) && fs.readFileSync(`${root}/${d}/pages.json`, 'utf8').includes(MARK)).length;
+console.log('pages.json that carry marker (expected, on disk):', pagesHas);
+// jobs logs
+const jl = [];
+if (fs.existsSync(h.jobsDir)) for (const j of fs.readdirSync(h.jobsDir)) { const f = `${h.jobsDir}/${j}/runner.log`; if (fs.existsSync(f) && fs.readFileSync(f, 'utf8').includes(MARK)) jl.push(j); }
+console.log('runner logs with marker:', jl.length);
+console.log('server stderr has marker:', srv.stderr.includes(MARK), 'stderr bytes', srv.stderr.length);
+console.log('ATTEMPTS', attempts, 'LEAKS', leaks);
+await sleep(1500);
+await srv.stop();
+// stop runners started by the server
+const { runnerPid, killPid } = await import('./qa-lib.mjs');
+if (fs.existsSync(h.jobsDir)) for (const j of fs.readdirSync(h.jobsDir)) { const p = runnerPid(h, j); if (p) killPid(p); }
+await sleep(800);
+cleanup(h);

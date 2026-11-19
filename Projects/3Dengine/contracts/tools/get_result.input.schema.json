@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "get_result input",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$",
+      "description": "The 16-hex job id from start_simulation or list_jobs."
+    }
+  },
+  "required": [
+    "job_id"
+  ],
+  "additionalProperties": false
+}

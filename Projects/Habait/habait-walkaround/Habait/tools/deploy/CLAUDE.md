@@ -1,4 +1,5 @@
 # Habait/tools/deploy/ — the habait-flow predeploy gate
+<!-- last-updated: 2026-11-08 -->
 <!-- created: 2026-11-05 · fork F (rnd-9d), project-runner · authority: Eliran -->
 
 | File | Purpose |

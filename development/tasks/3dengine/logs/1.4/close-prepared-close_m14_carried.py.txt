@@ -1,0 +1,56 @@
+# Milestone 1.4, the close: the board's carried items. Run on main after close_m14.py.
+#   python close_m14_carried.py <the commit of the code that closed 1.4>
+# Safe to run twice.
+import io
+import sys
+
+CODE = sys.argv[1]
+P = 'C:/RnD/development/tasks/3dengine/README.md'
+raw = io.open(P, encoding='utf-8', newline='').read()
+nl = '\r\n' if '\r\n' in raw else '\n'
+lines = raw.replace('\r\n', '\n').split('\n')
+
+
+def one(start):
+    hits = [i for i, l in enumerate(lines) if l.startswith(start)]
+    if len(hits) != 1:
+        sys.exit('%d lines start with %r' % (len(hits), start[:60]))
+    return hits[0]
+
+
+def answer(start, new_start):
+    if any(l.startswith(new_start) for l in lines):
+        return
+    i = one(start)
+    lines[i] = new_start + lines[i][len(start):]
+
+
+answer('| 1.3, before its cards | ',
+       '| 1.3, before its cards — ANSWERED in 1.4 (`%s`): the day of the plan is handed to the reading tool (one more listed line of the brought-in tool) and kept in the reading\'s record, '
+       'and the id handed to it is the drawing\'s; the same reading gives the pinned plan on every day and in every job (contract 1.4 §3) | ' % CODE)
+answer('| 1.3, QA (O-3) | ',
+       '| 1.3, QA (O-3) — ANSWERED in 1.4 (`%s`): a number of the settings file must be a JSON number and is refused by its name otherwise (contract 1.4 §6) | ' % CODE)
+
+NEW_ROWS = [
+    '| 1.4, QA round 1 (D-1) — ANSWERED in 1.4 (`%s`) | The file mutex of 0.3 (`withFileLock`) was not exclusive between short-lived processes: two holders at one moment in about a third of the runs of eight processes, '
+    'so keeps of one PDF at once could lose a record. The lock is now a folder with one entry named after its holder; take, release and take-over are each one atomic rename. It is the lock of a job\'s files and of the heavy lock\'s guard too '
+    '| done in 1.4 | contract 1.4 §11 (it replaces contract 0.3 §10 rule 4) · `logs/1.4/qa-live.md` · `Projects/3Dengine/tests/unit/lock-race.test.mjs` |' % CODE,
+    '| 1.4, QA round 1 (O-6) | In `npm test` at 100 % machine load four older tests (fixed waits of the 0.2 tests) failed and passed when run alone: the same family as the row of 1.1 above (the suite\'s waits were set on a quiet machine) '
+    '| card 08 (milestone 2.1), with that row: the gate must hold while the engine itself renders | `logs/1.4/qa-live.md` (Part A, O-6) |',
+]
+anchor = one('| 1.3, the review\'s evidence | ')
+for row in NEW_ROWS:
+    if row not in lines:
+        anchor += 1
+        lines.insert(anchor, row)
+
+LIMITS = ('Seen in 1.4 and owed by no card (limits, written in contract 1.4 §9 to §11): after an update of the engine no process of the older version may still run on the same home (a lock FILE of the engine before 1.4 '
+          'and the lock folder do not exclude each other); superseded readings are kept and nothing cleans the store; a record\'s `model` is copied from the reading when it is shaped like a model id, and one Latin word is (QA round 1, O-1); '
+          'the id of the `trace` command is the caller\'s, so its plan differs from a job\'s unless it is handed the drawing\'s id (O-3); the trace itself is not kept: a second job runs the reading tool again from the kept reading (about a minute).')
+if not any(l.startswith('Seen in 1.4 and owed by no card') for l in lines):
+    i = one('Seen in 1.1 and owed by no card')
+    lines.insert(i + 1, '')
+    lines.insert(i + 2, LIMITS)
+
+io.open(P, 'w', encoding='utf-8', newline='').write(nl.join(lines))
+print('carried items: two answered, two rows added, the limits of 1.4 written')

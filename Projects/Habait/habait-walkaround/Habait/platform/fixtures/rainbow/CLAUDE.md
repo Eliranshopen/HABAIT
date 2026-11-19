@@ -1,12 +1,12 @@
 # rainbow/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-05)
-15 files here · 0 subfolders · 15 files / 51.4 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+16 files here · 1 subfolders · 43 files / 75.4 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
@@ -22,9 +22,15 @@ _Not written yet — one line on what this folder is for. Until then the parent 
 | `node-b-tower.png` | 1.3 MB | 2026-11-02 |
 | `node-c-facade.png` | 1.6 MB | 2026-11-02 |
 | `node-d-terrace.png` | 1.7 MB | 2026-11-02 |
+| `orbit_fast.mp4` | 6.7 MB | 2026-11-09 |
 | `orbit_real.mp4` | 39.3 MB | 2026-11-02 |
-| `project.json` | 3.5 KB | 2026-11-04 |
-| `units.json` | 7.3 KB | 2026-11-02 |
+| `project.json` | 4.3 KB | 2026-11-09 |
+| `units.json` | 7.5 KB | 2026-11-08 |
+
+## Subfolders
+| Folder | Card | Files in tree |
+|---|---|---|
+| `landing/` | [`landing/CLAUDE.md`](landing/CLAUDE.md) | 27 (17.4 MB) |
 
 ## Gotchas
 _none recorded_

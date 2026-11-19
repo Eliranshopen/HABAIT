@@ -1,0 +1,24 @@
+scenario sample  work C:/Users/elira/AppData/Local/Temp/qa12-sample-fGi0x3 load 97
+=== sample
+{
+ "code": 1,
+ "secs": "14.9",
+ "stdout": "outcome: STEP_FAILED\nseconds: 14.4\npaid run: no\ntool exit code: 1\noutput folder: C:/Users/elira/AppData/Local/Temp/qa12-sample-fGi0x3/out\nthe tool's own output: C:/Users/elira/AppData/Local/Temp/qa12-sample-fGi0x3/out/auto-trace.log\n",
+ "stderr": "",
+ "ledger": false,
+ "alive": [
+  "15088 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "38560 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "47644 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 300 node qa12-b2.mjs sample",
+  "12852 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 300 node qa12-b2.mjs sample",
+  "39800 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs sample"
+ ]
+}
+procs at end [
+  '15088 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '38560 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '47644 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 300 node qa12-b2.mjs sample',
+  '12852 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 300 node qa12-b2.mjs sample',
+  '39800 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs sample'
+]
+exit 0

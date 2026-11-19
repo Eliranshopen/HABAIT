@@ -1,11 +1,11 @@
 # investor-deck-2024-09/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Images extracted from the 2024-09 investor deck (contact.jpg, page12.png, page12_img0.jpeg).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 3 files here · 0 subfolders · 3 files / 1.5 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

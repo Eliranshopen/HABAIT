@@ -1,0 +1,121 @@
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, sleep, runRunner, runnerPid, killPid, pidAlive, snapshot, diffSnap } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const { ENGINE_VERSION } = await E('engine/config.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const h = await makeHome({ timeout: 60, stepMs: '40' });
+const H = (await engineOf(h)).handlers;
+const pids = new Set();
+let n = 0; const bad = []; const rows = [];
+let seq = 0;
+const mkpdf = () => { const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from(`\n% b7 ${++seq} ${Math.random()}\n`)]); const p = `${h.inbox}/b7-${seq}.pdf`; fs.writeFileSync(p, b); return p; };
+const jf = (id) => `${h.jobsDir}/${id}/job.json`;
+const rj = (id) => JSON.parse(fs.readFileSync(jf(id), 'utf8'));
+const wj = (id, fn) => { const j = rj(id); fn(j); fs.writeFileSync(jf(id), JSON.stringify(j, null, 1)); };
+const copy = (id) => `${h.jobsDir}/${id}/input/source.pdf`;
+const man = (id) => { try { return JSON.parse(fs.readFileSync(`${h.jobsDir}/${id}/manifest.json`, 'utf8')).rows.length; } catch { return 0; } };
+const ledger = (id) => { try { return JSON.parse(fs.readFileSync(`${h.jobsDir}/${id}/ledger.json`, 'utf8')).rows.length; } catch { return 0; } };
+const unlock = (id) => fs.chmodSync(copy(id), 0o666);
+const mutations = {
+  'flip one byte (same size)': (id) => { unlock(id); const b = fs.readFileSync(copy(id)); b[b.length - 5] ^= 1; fs.writeFileSync(copy(id), b); },
+  'replace with other PDF, same size': (id) => { unlock(id); const b = fs.readFileSync(copy(id)); const o = Buffer.from(b); o[10] = o[10] === 0x31 ? 0x32 : 0x31; fs.rmSync(copy(id)); fs.writeFileSync(copy(id), o); },
+  'append bytes': (id) => { unlock(id); fs.appendFileSync(copy(id), '\n%x'); },
+  'truncate to 0': (id) => { unlock(id); fs.writeFileSync(copy(id), ''); },
+  'replace with another real PDF': (id) => { unlock(id); fs.writeFileSync(copy(id), fs.readFileSync(`${SCR}/pdfs/scan-sheet.pdf`)); },
+  'delete': (id) => { unlock(id); fs.rmSync(copy(id)); },
+  'replace by directory': (id) => { unlock(id); fs.rmSync(copy(id)); fs.mkdirSync(copy(id)); },
+  'swap + atomic rename (keeps read-only)': (id) => { const t = copy(id) + '.swap'; fs.writeFileSync(t, 'EVIL'); unlock(id); fs.renameSync(t, copy(id)); fs.chmodSync(copy(id), 0o444); },
+};
+const startJob = async () => { const p = mkpdf(); const r = await H.start_simulation({ pdf_path: p }); n++; return r.job_id; };
+function check(label, id, expectFailed = true) {
+  const j = rj(id);
+  const ok = (!expectFailed) || (j.state === 'failed' && j.reason?.code === 'STAGE_FAILED' && man(id) === 0 && ledger(id) === 0 && !j.cost.spent_usd);
+  rows.push(`${ok ? 'ok ' : 'BAD'} ${label}: state=${j.state} reason=${j.reason?.code} manifestRows=${man(id)} ledgerRows=${ledger(id)} spent=${j.cost.spent_usd}`);
+  if (!ok) bad.push(label);
+}
+// S1 queued, runner started by hand, each mutation
+for (const [name, f] of Object.entries(mutations)) {
+  const id = await startJob(); f(id); n++;
+  const r = runRunner(h, id);
+  check(`S1 queued + ${name} (runner exit ${r.status})`, id);
+}
+// S1b: hash rewritten in job.json too, with and without engine_version
+for (const variant of ['hash rewritten (engine_version kept)', 'hash rewritten + engine_version=other', 'engine_version removed + hash rewritten (a pre-1.1 file)', 'apartment rewritten', 'mode rewritten', 'engine_version rewritten only']) {
+  const id = await startJob(); unlock(id); fs.writeFileSync(copy(id), 'EVIL'); const newSha = sha(Buffer.from('EVIL'));
+  const before = snapshot(h.jobsDir, (p) => p.endsWith(`${id}/runner.log`) && false);
+  wj(id, (j) => {
+    if (variant.startsWith('hash rewritten (')) j.input.pdf_sha256 = newSha;
+    if (variant.includes('=other')) { j.input.pdf_sha256 = newSha; j.engine_version = '9.9.9'; }
+    if (variant.startsWith('engine_version removed')) { j.input.pdf_sha256 = newSha; delete j.engine_version; }
+    if (variant.startsWith('apartment')) j.input.apartment = 'p2'; if (variant.startsWith('mode')) j.mode = 'real'; if (variant.startsWith('engine_version rewritten')) j.engine_version = '0.0.1';
+  });
+  const r = runRunner(h, id); n++;
+  let toolAns = ''; try { await H.get_job({ job_id: id }); toolAns = 'get_job answered'; } catch (e) { toolAns = `get_job ${e.code}`; }
+  const j = (() => { try { return rj(id); } catch { return {}; } })();
+  rows.push(`   S1b ${variant}: runner exit ${r.status}; ${toolAns}; state=${j.state}; manifestRows=${man(id)}; ledger=${ledger(id)}; log: ${r.log.trim().split('\n').pop().slice(24, 150)}`);
+  if (!variant.startsWith('engine_version removed') && (r.status === 0 && j.state !== 'failed')) bad.push('S1b ' + variant);
+  if (!variant.startsWith('engine_version removed') && toolAns === 'get_job answered' && !variant.startsWith('engine_version rewritten')) { /* tools must refuse */ bad.push('S1b tool ' + variant); }
+}
+// S2 live runner, slow stages, change the copy between stages
+{
+  const id = await startJob();
+  const env = { ...process.env, ...h.env, ENGINE_STUB_STEP_MS: '900' };
+  const p = spawn(process.execPath, [`${R}/engine/runner.mjs`, id], { env, stdio: 'ignore', windowsHide: true }); pids.add(p.pid);
+  const t0 = Date.now(); while (man(id) < 1 && Date.now() - t0 < 20000) await sleep(40);
+  const rowsAtChange = man(id); mutations['flip one byte (same size)'](id); n++;
+  await new Promise((res) => p.once('exit', res)); setTimeout(() => {}, 0);
+  const j = rj(id);
+  rows.push(`${j.state === 'failed' && man(id) <= rowsAtChange + 1 ? 'ok ' : 'BAD'} S2 changed between stages (rows when changed ${rowsAtChange}, rows at end ${man(id)}): state=${j.state} reason=${j.reason?.code}`);
+  if (j.state !== 'failed' || man(id) > rowsAtChange + 1) bad.push('S2');
+}
+// S3 awaiting approval, live runner, change, approve; S4 after approval, change mid-run
+for (const phase of ['awaiting_approval', 'after_approval']) {
+  const id = await startJob();
+  const env = { ...process.env, ...h.env, ENGINE_STUB_STEP_MS: phase === 'after_approval' ? '700' : '40' };
+  const p = spawn(process.execPath, [`${R}/engine/runner.mjs`, id], { env, stdio: 'ignore', windowsHide: true }); pids.add(p.pid);
+  const t0 = Date.now(); while (rj(id).state !== 'awaiting_approval' && Date.now() - t0 < 40000) await sleep(60);
+  const rowsAtWait = man(id);
+  if (phase === 'awaiting_approval') mutations['append bytes'](id);
+  const a = await H.approve_paid_stage({ job_id: id, cap_usd: 60 }); n++;
+  if (phase === 'after_approval') { const t1 = Date.now(); while (!['skinning', 'gating', 'finishing'].includes(rj(id).state) && Date.now() - t1 < 20000) await sleep(40); mutations['append bytes'](id); }
+  const t2 = Date.now(); while (!pidAlive(p.pid) === false && Date.now() - t2 < 40000) { if (['failed', 'done'].includes(rj(id).state)) break; await sleep(100); }
+  await sleep(500);
+  const j = rj(id);
+  const ok = j.state === 'failed' && j.reason?.code === 'STAGE_FAILED';
+  rows.push(`${ok ? 'ok ' : 'BAD'} S3/4 ${phase}: state=${j.state} reason=${j.reason?.code} rows at wait ${rowsAtWait} → ${man(id)}; ledgerRows=${ledger(id)} spent=${j.cost.spent_usd}`);
+  if (!ok) bad.push('S3/4 ' + phase);
+  if (phase === 'awaiting_approval' && (man(id) !== rowsAtWait || ledger(id) !== 0)) bad.push('S3 billed/ran');
+  killPid(p.pid);
+}
+// S5 resume through the CLI after the runner was killed, S6 cancel + restart
+{
+  const id = await startJob();
+  const env = { ...process.env, ...h.env, ENGINE_STUB_STEP_MS: '700' };
+  const p = spawn(process.execPath, [`${R}/engine/runner.mjs`, id], { env, stdio: 'ignore', windowsHide: true }); pids.add(p.pid);
+  const t0 = Date.now(); while (man(id) < 1 && Date.now() - t0 < 20000) await sleep(40);
+  killPid(p.pid); await sleep(600);
+  mutations['replace with another real PDF'](id); n++;
+  const cli = spawnSync(process.execPath, [`${R}/engine/cli.mjs`, 'resume', id], { env: { ...process.env, ...h.env }, encoding: 'utf8', timeout: 30000 });
+  // resume spawns a detached runner: wait for failed
+  const t1 = Date.now(); while (rj(id).state !== 'failed' && rj(id).state !== 'done' && Date.now() - t1 < 15000) await sleep(100);
+  const j = rj(id);
+  rows.push(`${j.state === 'failed' ? 'ok ' : 'BAD'} S5 engine resume after kill + swapped copy: cli exit ${cli.status}; state=${j.state} reason=${j.reason?.code} rows=${man(id)}`);
+  if (j.state !== 'failed') bad.push('S5');
+  // S6: cancel a job (it failed → restartable), restart with start_simulation on the same upload
+  const id6 = await startJob(); const pdf6 = rj(id6).input.pdf_name;
+  await H.cancel_job({ job_id: id6 }); await sleep(300); n++;
+  mutations['append bytes'](id6);
+  const again = await H.start_simulation({ pdf_path: `${h.inbox}/${pdf6}` }); n++;
+  rows.push(`   S6 cancelled job, copy changed, start_simulation again: created=${again.created} resumed=${again.resumed}`);
+  const t2 = Date.now(); while (!['failed', 'done'].includes(rj(id6).state) && Date.now() - t2 < 15000) await sleep(100);
+  const j6 = rj(id6); rows.push(`${j6.state === 'failed' ? 'ok ' : 'BAD'} S6 restart after cancel → state=${j6.state} reason=${j6.reason?.code} manifestRows=${man(id6)} ledger=${ledger(id6)}`);
+  if (j6.state !== 'failed') bad.push('S6');
+}
+console.log(rows.join('\n'));
+// kill everything we started
+for (const j of fs.readdirSync(h.jobsDir)) { const rp = runnerPid(h, j); if (rp) killPid(rp); }
+for (const p of pids) killPid(p);
+console.log('ATTEMPTS', n, 'BAD', JSON.stringify(bad));
+await sleep(1500);
+cleanup(h);

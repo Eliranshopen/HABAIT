@@ -1,0 +1,112 @@
+// I2: the intake after the change, direct and through real processes.
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, GOLDEN, engineOf } from './lib.mjs';
+const { intakePdf, verifyInput } = await E('engine/stages/intake.mjs');
+const { jobId } = await E('engine/jobs.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const gold = fs.readFileSync(GOLDEN); const SHA = sha(gold);
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const out = (...a) => console.log(...a);
+const desc = (fn) => { try { const r = fn(); return `ok ${JSON.stringify({ copied: r.copied, bytes: r.bytes })}`; } catch (e) { return `${e.constructor.name} ${e.code || ''} | ${String(e.message).replace(/[A-Za-z]:[\\/][^ ']*/g, '<PATH>').slice(0, 110)}`; } };
+const roBit = (f) => (fs.statSync(f).mode & 0o222) === 0;
+const mine = [];
+
+// 1. basic: copy has bytes+hash, read-only; second call copies nothing; mode restored if read-only taken off
+{
+  const h = await makeHome(); const src = `${h.inbox}/s.pdf`; fs.copyFileSync(GOLDEN, src); fs.mkdirSync(h.jobsDir, { recursive: true });
+  const f = { path: src, name: 's.pdf', bytes: gold.length };
+  out('[1a first]', desc(() => intakePdf(h.jobsDir, ID, f, SHA)));
+  const t = `${h.jobsDir}/${ID}/input/source.pdf`;
+  out('  sha equal', sha(fs.readFileSync(t)) === SHA, 'readonly', roBit(t), 'input holds', JSON.stringify(fs.readdirSync(`${h.jobsDir}/${ID}/input`)));
+  const m1 = fs.statSync(t).mtimeMs;
+  out('[1b second]', desc(() => intakePdf(h.jobsDir, ID, f, SHA)), 'mtime same', fs.statSync(t).mtimeMs === m1);
+  fs.chmodSync(t, 0o666); out('[1c writable then again]', desc(() => intakePdf(h.jobsDir, ID, f, SHA)), 'readonly again', roBit(t));
+  // second call with upload gone: copy exists -> no read of the upload at all
+  fs.rmSync(src); out('[1d upload gone, copy there]', desc(() => intakePdf(h.jobsDir, ID, f, SHA)));
+  // verifyInput
+  out('[1e verify]', JSON.stringify(verifyInput(h.jobsDir, { job_id: ID, input: { pdf_sha256: SHA } })));
+  fs.chmodSync(t, 0o666); fs.appendFileSync(t, 'x'); out('[1f verify after append]', JSON.stringify(verifyInput(h.jobsDir, { job_id: ID, input: { pdf_sha256: SHA } })));
+  fs.chmodSync(t, 0o666); cleanup(h);
+}
+// 2. different bytes than hash
+{
+  const h = await makeHome(); const src = `${h.inbox}/s.pdf`; fs.writeFileSync(src, Buffer.concat([gold, Buffer.from('x')])); fs.mkdirSync(h.jobsDir, { recursive: true });
+  out('[2 changed bytes]', desc(() => intakePdf(h.jobsDir, ID, { path: src, name: 's.pdf', bytes: 1 }, SHA)), 'input holds', JSON.stringify(fs.readdirSync(`${h.jobsDir}/${ID}/input`)));
+  cleanup(h);
+}
+// 3. foreign things
+const foreign = {
+  'other-file': (d) => { fs.mkdirSync(`${d}/input`, { recursive: true }); fs.writeFileSync(`${d}/input/source.pdf`, 'zzz'); },
+  'target-folder': (d) => { fs.mkdirSync(`${d}/input/source.pdf`, { recursive: true }); },
+  'input-file': (d) => { fs.mkdirSync(d, { recursive: true }); fs.writeFileSync(`${d}/input`, 'zzz'); },
+  'temp-folder': (d) => { fs.mkdirSync(`${d}/input/source.pdf.${process.pid}.tmp`, { recursive: true }); },
+  'temp-file-dead': (d) => { fs.mkdirSync(`${d}/input`, { recursive: true }); fs.writeFileSync(`${d}/input/source.pdf.999999.tmp`, 'stale'); },
+  'temp-file-live': (d) => { fs.mkdirSync(`${d}/input`, { recursive: true }); const p = spawn(process.execPath, ['-e', 'setTimeout(()=>{},30000)'], { stdio: 'ignore', windowsHide: true }); mine.push(p); fs.writeFileSync(`${d}/input/source.pdf.${p.pid}.tmp`, 'live'); },
+  'temp-file-samepid': (d) => { fs.mkdirSync(`${d}/input`, { recursive: true }); fs.writeFileSync(`${d}/input/source.pdf.${process.pid}.tmp`, 'mine-stale'); },
+};
+for (const [k, mk] of Object.entries(foreign)) {
+  const h = await makeHome(); const src = `${h.inbox}/s.pdf`; fs.copyFileSync(GOLDEN, src); fs.mkdirSync(h.jobsDir, { recursive: true });
+  mk(`${h.jobsDir}/${ID}`);
+  const res = desc(() => intakePdf(h.jobsDir, ID, { path: src, name: 's.pdf', bytes: gold.length }, SHA));
+  let holds; try { holds = JSON.stringify(fs.readdirSync(`${h.jobsDir}/${ID}/input`)); } catch { holds = 'input is not a folder'; }
+  out(`[3 ${k}]`, res, 'holds', holds);
+  try { fs.chmodSync(`${h.jobsDir}/${ID}/input/source.pdf`, 0o666); } catch {}
+  cleanup(h);
+}
+for (const p of mine) { try { process.kill(p.pid); } catch {} }
+// job folder is a file, through the engine
+{
+  const h = await makeHome(); const src = `${h.inbox}/s.pdf`; fs.copyFileSync(GOLDEN, src); fs.mkdirSync(h.jobsDir, { recursive: true });
+  const d = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(d, { recursive: true }); for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${d}/${f}`);
+  fs.writeFileSync(`${h.jobsDir}/${ID}`, 'file');
+  const eng = await engineOf(h);
+  try { await eng.handlers.start_simulation({ pdf_path: src }); out('[3b jobdir is file] ok?!'); } catch (e) { out('[3b jobdir is file]', e.code, String(e.message).slice(0, 100)); }
+  cleanup(h);
+}
+// 4. mirror: a job-folder write failure must be TOOLCHAIN_MISSING (not the upload's NOT_A_PDF), with a readable upload
+{
+  const h = await makeHome(); const src = `${h.inbox}/s.pdf`; fs.copyFileSync(GOLDEN, src); fs.mkdirSync(h.jobsDir, { recursive: true });
+  const d = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(d, { recursive: true }); for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${d}/${f}`);
+  const eng = await engineOf(h);
+  const USER = process.env.USERNAME;
+  fs.mkdirSync(`${h.jobsDir}/${ID}/input`, { recursive: true });
+  spawnSync('icacls', [`${h.jobsDir}/${ID}/input`, '/deny', `${USER}:(OI)(CI)(WD,AD)`], { windowsHide: true });
+  try { await eng.handlers.start_simulation({ pdf_path: src }); out('[4a input write-denied] ok?!'); } catch (e) { out('[4a input write-denied]', e.code, String(e.message).slice(0, 100)); }
+  spawnSync('icacls', [`${h.jobsDir}/${ID}/input`, '/remove:d', USER], { windowsHide: true });
+  // read-only attribute on input dir does nothing on windows; instead: jobs dir write-denied
+  fs.rmSync(`${h.jobsDir}/${ID}`, { recursive: true, force: true });
+  spawnSync('icacls', [h.jobsDir, '/deny', `${USER}:(OI)(CI)(WD,AD)`], { windowsHide: true });
+  try { await eng.handlers.start_simulation({ pdf_path: src }); out('[4b jobs dir write-denied] ok?!'); } catch (e) { out('[4b jobs dir write-denied]', e.code, String(e.message).slice(0, 100)); }
+  spawnSync('icacls', [h.jobsDir, '/remove:d', USER], { windowsHide: true });
+  // runtime folder (record absent, fresh look) not writable
+  const h2 = await makeHome(); fs.copyFileSync(GOLDEN, `${h2.inbox}/s.pdf`);
+  fs.mkdirSync(`${h2.config.runtimeDir}/inspect`, { recursive: true });
+  spawnSync('icacls', [`${h2.config.runtimeDir}/inspect`, '/deny', `${USER}:(OI)(CI)(WD,AD)`], { windowsHide: true });
+  const eng2 = await engineOf(h2);
+  for (const t of ['inspect_plan', 'start_simulation']) { try { await eng2.handlers[t]({ pdf_path: `${h2.inbox}/s.pdf` }); out(`[4c runtime inspect write-denied ${t}] ok?!`); } catch (e) { out(`[4c runtime inspect write-denied ${t}]`, e.code, String(e.message).slice(0, 100)); } }
+  spawnSync('icacls', [`${h2.config.runtimeDir}/inspect`, '/remove:d', USER], { windowsHide: true });
+  cleanup(h); cleanup(h2);
+}
+// 5. large PDF near 20 MB, copied whole, through a direct intake and through the real engine (real scan)
+{
+  const sample = fs.readFileSync(`${R}/tests/fixtures/sample.pdf`);
+  const big = Buffer.concat([sample, Buffer.alloc(20 * 1024 * 1024 - 4096 - sample.length, 0x20)]);
+  const bsha = sha(big);
+  const bid = jobId({ pdfSha256: bsha, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+  const h = await makeHome(); const src = `${h.inbox}/big.pdf`; fs.writeFileSync(src, big); fs.mkdirSync(h.jobsDir, { recursive: true });
+  out('[5a large direct]', desc(() => intakePdf(h.jobsDir, bid, { path: src, name: 'big.pdf', bytes: big.length }, bsha)), 'size', big.length, 'copy sha equal', sha(fs.readFileSync(`${h.jobsDir}/${bid}/input/source.pdf`)) === bsha);
+  fs.chmodSync(`${h.jobsDir}/${bid}/input/source.pdf`, 0o666);
+  fs.rmSync(h.jobsDir, { recursive: true, force: true });
+  const srv = startServer(h); await srv.init();
+  const t0 = Date.now(); const r = await srv.call('start_simulation', { pdf_path: src });
+  out('[5b large through server]', r.err ? r.err.code + ' ' + r.err.message.slice(0, 80) : `created=${r.out.created} id=${r.out.job_id === bid}`, `${Date.now() - t0} ms`);
+  const pid = (() => { try { return Number(fs.readFileSync(`${h.jobsDir}/${bid}/runner.pid`, 'utf8')); } catch { return null; } })();
+  if (pid) { out('  runner pid', pid); try { process.kill(pid); } catch {} }
+  const c = `${h.jobsDir}/${bid}/input/source.pdf`;
+  if (fs.existsSync(c)) out('  copy sha equal', sha(fs.readFileSync(c)) === bsha, 'readonly', roBit(c), 'bytes', fs.statSync(c).size);
+  await srv.stop(); await sleep(600);
+  try { fs.chmodSync(c, 0o666); } catch {}
+  cleanup(h);
+}
+out('done');

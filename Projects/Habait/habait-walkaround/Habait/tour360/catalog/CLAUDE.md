@@ -1,11 +1,11 @@
 # catalog/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The item catalog for point-to-replace (items.json, README.md, IKEA permission-request draft); product photos are gitignored.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 4 files here · 1 subfolders · 23 files / 1.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

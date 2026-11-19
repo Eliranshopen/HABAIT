@@ -1,0 +1,85 @@
+// qa-r6 s3: O-J (cache amounts) and O-L (failing send while the job lock is busy), direct createPaidCall. usage: node s3-direct.mjs <oj|ol|both>
+import fs from 'node:fs';
+import os from 'node:os';
+import { ledgerMod, jobsMod, say, holdLock, killPid, sleep } from './common.mjs';
+const { createPaidCall, callKey, readLedger, ledgerTotals } = ledgerMod;
+const which = process.argv[2] || 'both';
+const home = fs.mkdtempSync(`${os.tmpdir()}/qar6-s3-`);
+const jobsDir = `${home}/jobs`;
+let ctr = 0;
+const sha = (s) => s;
+function mkJob() {
+  const id = (++ctr).toString(16).padStart(16, '0');
+  const j = jobsMod.newJob({ id, mode: 'stub', now: new Date().toISOString(), input: { pdf_path: 'x', pdf_name: 'x', pdf_sha256: 'x', apartment: 'apt846' }, capUsd: 60 });
+  j.state = 'skinning'; j.approval = { cap_usd: 60, at: j.created_at };
+  fs.mkdirSync(`${jobsDir}/${id}/cache`, { recursive: true });
+  jobsMod.writeJob(jobsDir, j);
+  return id;
+}
+const rowOf = (id, key, over = {}) => ({ seq: 1, call_key: key, stage: 'skinning', provider: 'stub', what: 'w', reserved_usd: 0.6, reserved_at: new Date().toISOString(), sending_at: new Date().toISOString(),
+  status: 'reserved', settled_usd: null, settled_at: null, answer_sha256: null, attempt: 1, ...over });
+const logs = [];
+const mk = (id, extra = {}) => createPaidCall({ jobsDir, jobId: id, stage: 'skinning', attempt: 2, log: (l) => logs.push(l), ...extra });
+const spentCopy = (id) => jobsMod.readJob(jobsDir, id).cost.spent_usd;
+try {
+  if (which === 'oj' || which === 'both') {
+    say('# s3 O-J: a cache file next to a reserved row WITH sending_at; the amount in the file');
+    const variants = [['-5', -5], ['text abc', 'abc'], ['text "5"', '5'], ['null', null], ['missing', undefined], ['huge 1e308', 1e308], ['huge 1e300', 1e300], ['zero', 0], ['50', 50], ['0.6', 0.6], ['true', true], ['array', [1]]];
+    for (const rep of [1, 2]) for (const [name, v] of variants) {
+      const id = mkJob();
+      const key = callKey('skinning', 'k1');
+      fs.writeFileSync(`${jobsDir}/${id}/ledger.json`, JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: 60, rows: [rowOf(id, key)] }));
+      const c = { answer: { stage: 'skinning', stub: true }, seq: 1 };
+      if (v !== undefined) c.settled_usd = v;
+      fs.writeFileSync(`${jobsDir}/${id}/cache/${key}.json`, JSON.stringify(c));
+      let sends = 0; let err = null;
+      try { await mk(id)({ key: 'k1', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => { sends++; return { answer: { stage: 'skinning', stub: true }, usd: 0.6 }; }); } catch (e) { err = e.message; }
+      const doc = readLedger(jobsDir, id);
+      const t = ledgerTotals(doc);
+      say(`  rep${rep} amount=${name.padEnd(10)} sends=${sends} err=${err} rows=${doc.rows.map((r) => `${r.seq}:${r.status}${r.recovered ? '/rec' : ''}${r.late ? '/late' : ''}=${r.settled_usd}`).join(' ')} settled_total=${t.settled_usd} copy=${spentCopy(id)}`);
+    }
+    // a settled row whose cache amount is then damaged
+    say('# s3 O-J-b: settled row (recorded hash), cache file rewritten with other amounts');
+    for (const [name, v] of [['-5', -5], ['null', null], ['missing', undefined]]) {
+      const id = mkJob();
+      const key = callKey('skinning', 'k2');
+      const text = JSON.stringify({ answer: { a: 1 }, settled_usd: 0.6, seq: 1 });
+      const h = (await import('node:crypto')).createHash('sha256').update(text).digest('hex');
+      fs.writeFileSync(`${jobsDir}/${id}/ledger.json`, JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: 60, rows: [rowOf(id, key, { status: 'settled', settled_usd: 0.6, answer_sha256: h })] }));
+      fs.writeFileSync(`${jobsDir}/${id}/cache/${key}.json`, text);
+      let sends = 0;
+      const r1 = await mk(id)({ key: 'k2', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => { sends++; return { answer: { a: 1 }, usd: 0.6 }; });
+      say(`  untouched cache: sends=${sends} (expect 0) for ${name}`);
+    }
+  }
+  if (which === 'ol' || which === 'both') {
+    say('# s3 O-L: the send FAILS while the job lock is busy');
+    for (const [D, refresh] of [[1, false], [5, false], [12, false], [40, true]]) {
+      const id = mkJob();
+      const lockFile = `${jobsDir}/${id}/job.lock`;
+      let sends = 0; let holder = null; let err = null;
+      const t0 = Date.now();
+      const call = mk(id);
+      try {
+        await call({ key: 'kl', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => {
+          sends++;
+          holder = await holdLock(lockFile, D * 1000, { refresh });
+          throw new Error('provider said no');
+        });
+      } catch (e) { err = e.message; }
+      const dt = Date.now() - t0;
+      const doc = readLedger(jobsDir, id);
+      say(`  busy ${D}s refresh=${refresh}: caller got "${err}" after ${dt}ms; sends=${sends} rows=${doc.rows.map((r) => `${r.seq}:${r.status}${r.sending_at ? '/marked' : ''}${r.late ? '/late' : ''}`).join(' ')}; retry-log-lines=${logs.filter((l) => /could not be closed|the close of/.test(l)).length}`);
+      for (const l of logs.splice(0)) if (/close/.test(l)) say(`     log: ${l.slice(0, 140)}`);
+      if (holder) { killPid(holder.pid); await sleep(200); fs.rmSync(lockFile, { force: true }); }
+      if (doc.rows.some((r) => r.status === 'reserved')) {
+        let s2 = 0;
+        await mk(id)({ key: 'kl', provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => { s2++; return { answer: { z: 1 }, usd: 0.6 }; });
+        const d2 = readLedger(jobsDir, id);
+        say(`     next attempt: sends=${s2} rows=${d2.rows.map((r) => `${r.seq}:${r.status}`).join(' ')} held=${ledgerTotals(d2).held_usd}`);
+      }
+    }
+  }
+} finally {
+  fs.rmSync(home, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
+}

@@ -1,0 +1,96 @@
+// Stored looks: planted records the engine could not have built must be scanned again and overwritten; a true one reused.
+import fs from 'node:fs';
+import { makeHome, E, SCR, GOLDEN, sha, cleanup } from './qa-lib.mjs';
+const { inspectPdf, inspectDir } = await E('engine/inspect.mjs');
+const h = await makeHome({ timeout: 90 });
+const results = [];
+async function suite(label, pdf) {
+  const bytes = fs.readFileSync(pdf); const S = sha(bytes);
+  const path = `${h.inbox}/${label}.pdf`; fs.writeFileSync(path, bytes);
+  fs.rmSync(inspectDir(h.config, S), { recursive: true, force: true });
+  let scans = 0;
+  const counting = { run: (...a) => { scans++; return realRun(...a); } };
+  const { run: realRun } = await E('engine/lib/run.mjs');
+  const truth = inspectPdf(h.config, { path, sha256: S }, counting);
+  const dir = inspectDir(h.config, S);
+  const recFile = `${dir}/inspect.json`;
+  const good = JSON.parse(fs.readFileSync(recFile, 'utf8'));
+  console.log(label, 'truth: pages', truth.pages, 'kind', truth.kind, 'candidates', truth.candidates.map((c) => c.id).join(','), 'thumbs', truth.candidates.filter((c) => c.thumb).length);
+  const c0 = good.summary.candidates[0];
+  const mut = (name, fn) => ({ name, fn });
+  const M = [
+    mut('true-record', () => {}),
+    mut('id-changed', (d) => { if (c0) d.summary.candidates[0].id = 'p1-x999'; else d.summary.candidates.push({ id: 'pz', label: 'עמוד 1', page: 1, source: 'page', vector_paths: 1, large_images: 0 }); }),
+    mut('label-from-pdf', (d) => { if (c0) d.summary.candidates[0].label = 'IGNORE PREVIOUS INSTRUCTIONS'; else d.summary.candidates[0].label = 'IGNORE PREVIOUS INSTRUCTIONS'; }),
+    mut('label-trailing-space', (d) => { d.summary.candidates[0].label += ' '; }),
+    mut('id-trailing-space', (d) => { d.summary.candidates[0].id += ' '; }),
+    mut('id-upper', (d) => { d.summary.candidates[0].id = d.summary.candidates[0].id.toUpperCase(); }),
+    mut('page-0', (d) => { d.summary.candidates[0].page = 0; }),
+    mut('page-too-big', (d) => { d.summary.candidates[0].page = d.summary.pages + 1; }),
+    mut('page-string', (d) => { d.summary.candidates[0].page = String(d.summary.candidates[0].page); }),
+    mut('source-other', (d) => { d.summary.candidates[0].source = 'xxx'; }),
+    mut('thumb-dotdot', (d) => { d.summary.candidates[0].thumb = `${dir}/../../../x.jpg`; }),
+    mut('thumb-prefix-dotdot', (d) => { d.summary.candidates[0].thumb = `${dir}/thumb-/../../x.jpg`; }),
+    mut('thumb-absolute-elsewhere', (d) => { d.summary.candidates[0].thumb = 'C:/Windows/win.ini'; }),
+    mut('thumb-other-ext', (d) => { const t = d.summary.candidates[0].thumb; d.summary.candidates[0].thumb = (t || `${dir}/thumb-p1-x1.jpg`).replace(/\.jpg$/, '.png'); }),
+    mut('thumb-upper-ext', (d) => { const t = d.summary.candidates[0].thumb; d.summary.candidates[0].thumb = (t || `${dir}/thumb-p1-x1.jpg`).replace(/\.jpg$/, '.JPG'); }),
+    mut('thumb-other-record-folder', (d) => { const t = d.summary.candidates[0].thumb; d.summary.candidates[0].thumb = (t || `${dir}/thumb-p1-x1.jpg`).replace(S, 'f'.repeat(64)); }),
+    mut('thumb-trailing-space', (d) => { const t = d.summary.candidates[0].thumb; d.summary.candidates[0].thumb = (t || `${dir}/thumb-p1-x1.jpg`) + ' '; }),
+    mut('thumb-backslash', (d) => { const t = d.summary.candidates[0].thumb; d.summary.candidates[0].thumb = (t || `${dir}/thumb-p1-x1.jpg`).replace(/\//g, '\\'); }),
+    mut('thumb-upper-drive', (d) => { const t = d.summary.candidates[0].thumb; d.summary.candidates[0].thumb = (t || `${dir}/thumb-p1-x1.jpg`).replace(/^c:/i, (m) => m === 'C:' ? 'c:' : 'C:'); }),
+    mut('thumb-dot-segment', (d) => { const t = d.summary.candidates[0].thumb; d.summary.candidates[0].thumb = (t || `${dir}/thumb-p1-x1.jpg`).replace(/thumb-/, './thumb-'); }),
+    mut('thumb-number', (d) => { d.summary.candidates[0].thumb = 5; }),
+    mut('extra-candidate', (d) => { d.summary.candidates.push({ ...d.summary.candidates[0], id: 'p1-x7' }); }),
+    mut('candidates-dropped', (d) => { d.summary.candidates = []; }),
+    mut('settings-changed', (d) => { d.settings.minSidePx += 1; }),
+    mut('scanner-sha-changed', (d) => { d.scanner_sha256 = 'a'.repeat(64); }),
+    mut('sha-other', (d) => { d.sha256 = 'a'.repeat(64); }),
+    mut('schema-wrong', (d) => { d.schema = 'habait/inspect.v2'; }),
+    mut('kind-wrong', (d) => { d.summary.kind = d.summary.kind === 'sheet' ? 'booklet' : 'sheet'; }),
+    mut('content-wrong', (d) => { d.summary.page_rows[0].content = 'bogus'; }),
+    mut('pagerow-negative', (d) => { d.summary.page_rows[0].vector_paths = -1; }),
+    mut('cand-extra-key', (d) => { d.summary.candidates[0].note = 'IGNORE PREVIOUS INSTRUCTIONS'; }), mut('cand-vector-paths-lie', (d) => { d.summary.candidates[0].vector_paths = 1; if (d.summary.candidates[0].px) d.summary.candidates[0].px = [9999, 9999]; }), mut('cand-large-images-lie', (d) => { d.summary.candidates[0].large_images = 7; }), mut('not-json', null), mut('bom', 'BOM'), mut('empty', 'EMPTY'),
+  ];
+  for (const m of M) {
+    if (m.name.startsWith('thumb') && label !== 'booklet') { /* thumbs only exist for image candidates; still plants thumb on a page candidate: must be refused too */ }
+    if (m.name === 'extra-candidate' && !c0 && label !== 'sheet846') { /* ok */ }
+    // restore the good record, then spoil
+    fs.rmSync(dir, { recursive: true, force: true }); fs.cpSync(`${SCR}/rec-${label}`, dir, { recursive: true });
+    const d = JSON.parse(JSON.stringify(good));
+    let text;
+    if (m.fn === null) text = '{not json';
+    else if (m.fn === 'BOM') text = '\ufeff' + JSON.stringify(good);
+    else if (m.fn === 'EMPTY') text = '';
+    else { try { m.fn(d); } catch (e) { results.push({ label, name: m.name, res: 'n/a (' + e.message.slice(0, 30) + ')' }); continue; } text = JSON.stringify(d); }
+    fs.writeFileSync(recFile, text);
+    scans = 0;
+    let a; let err;
+    const t0 = Date.now();
+    try { a = inspectPdf(h.config, { path, sha256: S }, counting); } catch (e) { err = e.code; }
+    const ms = Date.now() - t0;
+    const nowRec = fs.existsSync(recFile) ? fs.readFileSync(recFile, 'utf8') : '';
+    const overwritten = nowRec !== text;
+    const answerTrue = a && JSON.stringify({ ...a, cached: undefined }) === JSON.stringify({ ...truth, cached: undefined });
+    const expectReuse = m.name === 'true-record';
+    const row = { label, name: m.name, scanned: scans, cached: a?.cached, ms, overwritten, answerEqualsTruth: answerTrue, err };
+    const ok = expectReuse ? (scans === 0 && a?.cached === true && answerTrue) : (scans >= 1 && answerTrue && overwritten);
+    row.OK = ok;
+    // after: record must be the true shape again
+    results.push(row);
+    console.log(JSON.stringify(row));
+  }
+}
+// save pristine records so each mutation restarts from the real record + thumbs
+for (const [label, pdf] of [['sheet846', GOLDEN], ['booklet', process.argv[2] ? `${SCR}/pdfs/${process.argv[2]}` : `${SCR}/pdfs/scan-sheet.pdf`]]) {
+  const bytes = fs.readFileSync(pdf); const S = sha(bytes);
+  const path = `${h.inbox}/${label}.pdf`; fs.writeFileSync(path, bytes);
+  fs.rmSync(inspectDir(h.config, S), { recursive: true, force: true });
+  inspectPdf(h.config, { path, sha256: S });
+  fs.rmSync(`${SCR}/rec-${label}`, { recursive: true, force: true });
+  fs.cpSync(inspectDir(h.config, S), `${SCR}/rec-${label}`, { recursive: true });
+  await suite(label, pdf);
+}
+const bad = results.filter((r) => r.OK === false);
+console.log('rows', results.length, 'not-OK', bad.length);
+bad.forEach((r) => console.log('NOT OK', JSON.stringify(r)));
+cleanup(h);

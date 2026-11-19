@@ -1,0 +1,64 @@
+// K1: a process killed in the middle of the intake leaves nothing that stops the next start; three servers, one PDF.
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, GOLDEN, runnerPid } from './lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const gold = fs.readFileSync(GOLDEN); const SHA = sha(gold);
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const out = (...a) => console.log(...a);
+const seed = (h) => { const d = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(d, { recursive: true }); for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${d}/${f}`); };
+const mine = new Set();
+const pidOk = (p) => { try { process.kill(p, 0); return true; } catch { return false; } };
+
+// 1. kill mid-intake at several points: (a) holding the job lock, before the temp write, (b) after the temp is written, before the rename, (c) in the middle of the lock's own creation
+for (const point of ['lock-held-before-write', 'temp-written-before-rename', 'during-write-half']) {
+  const h = await makeHome(); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`); seed(h);
+  const child = `
+import fs from 'node:fs';
+const { intakePdf } = await import('file:///${R}/engine/stages/intake.mjs');
+const { withJobLock } = await import('file:///${R}/engine/jobs.mjs');
+const point = ${JSON.stringify(point)};
+const hang = () => { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 600000); };
+const deps = { write: (to, bytes) => { if (point === 'during-write-half') { fs.writeFileSync(to, bytes.subarray(0, 50000)); console.log('HUNG'); hang(); } else { fs.writeFileSync(to, bytes); if (point === 'temp-written-before-rename') { console.log('HUNG'); hang(); } } } };
+withJobLock(${JSON.stringify(h.jobsDir)}, ${JSON.stringify(ID)}, () => {
+  if (point === 'lock-held-before-write') { console.log('HUNG'); hang(); }
+  intakePdf(${JSON.stringify(h.jobsDir)}, ${JSON.stringify(ID)}, { path: ${JSON.stringify(h.inbox + '/s.pdf')}, name: 's.pdf', bytes: ${gold.length} }, ${JSON.stringify(SHA)}, deps);
+});`;
+  const cf = `${h.home}/child.mjs`; fs.writeFileSync(cf, child);
+  const c = spawn(process.execPath, [cf], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
+  mine.add(c.pid);
+  await new Promise((r) => { c.stdout.on('data', (d) => { if (String(d).includes('HUNG')) r(); }); c.on('exit', r); setTimeout(r, 20000); });
+  const inp = `${h.jobsDir}/${ID}/input`;
+  out(`[kill ${point}] before kill: input holds ${fs.existsSync(inp) ? JSON.stringify(fs.readdirSync(inp)) : 'none'}, job.lock ${fs.existsSync(`${h.jobsDir}/${ID}/job.lock`)}`);
+  spawnSync('taskkill', ['/PID', String(c.pid), '/T', '/F'], { windowsHide: true }); mine.delete(c.pid);
+  await sleep(500);
+  const srv = startServer(h); await srv.init();
+  const t0 = Date.now();
+  const r = await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` });
+  out(`[kill ${point}] next start:`, r.m.error ? 'RPC ' + r.m.error.message : r.err ? r.err.code + ' ' + r.err.message.slice(0, 80) : `created=${r.out.created} id=${r.out.job_id === ID}`, `${Date.now() - t0} ms`);
+  const t = `${inp}/source.pdf`;
+  out(`  copy sha ok: ${fs.existsSync(t) && sha(fs.readFileSync(t)) === SHA}; input holds ${JSON.stringify(fs.readdirSync(inp))}`);
+  const rp = runnerPid(h, ID); if (rp) { mine.add(rp); try { process.kill(rp); } catch {} }
+  await srv.stop(); await sleep(600);
+  try { fs.chmodSync(t, 0o666); } catch {}
+  cleanup(h);
+}
+// 2. three server processes, one PDF, one moment, five rounds
+for (let round = 0; round < 5; round++) {
+  const h = await makeHome(); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`); seed(h);
+  const servers = [startServer(h), startServer(h), startServer(h)];
+  await Promise.all(servers.map((s) => s.init()));
+  const res = await Promise.all(servers.map((s) => s.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` })));
+  const created = res.filter((r) => r.out?.created).length;
+  const errs = res.filter((r) => r.err || r.m.error).map((r) => r.err?.code || 'RPC ' + r.m.error?.message);
+  const t = `${h.jobsDir}/${ID}/input/source.pdf`;
+  out(`[3 servers round ${round}] created:true x${created}, errors ${JSON.stringify(errs)}, jobs ${JSON.stringify(fs.readdirSync(h.jobsDir))}, copy intact ${sha(fs.readFileSync(t)) === SHA}, input holds ${JSON.stringify(fs.readdirSync(`${h.jobsDir}/${ID}/input`))}`);
+  const rp = runnerPid(h, ID); if (rp) { mine.add(rp); try { process.kill(rp); } catch {} }
+  for (const s of servers) await s.stop();
+  await sleep(600);
+  try { fs.chmodSync(t, 0o666); } catch {}
+  cleanup(h);
+}
+for (const p of mine) try { process.kill(p); } catch {}
+out('left alive:', JSON.stringify([...mine].filter(pidOk)));

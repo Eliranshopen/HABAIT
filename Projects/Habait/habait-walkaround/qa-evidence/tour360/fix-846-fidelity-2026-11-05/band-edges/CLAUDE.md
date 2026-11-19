@@ -1,4 +1,5 @@
 # band-edges/ — the band-edge audit of apt846 (2026-11-05, parity R25)
+<!-- last-updated: 2026-11-08 -->
 <!-- context file · 2026-11-05 · fork fix-846-fidelity -->
 
 ## What's here

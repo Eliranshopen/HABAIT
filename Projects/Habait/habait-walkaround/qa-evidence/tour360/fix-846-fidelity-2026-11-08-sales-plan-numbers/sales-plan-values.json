@@ -1,0 +1,67 @@
+{
+  "source": "C:/RnD/Projects/Habait/habait-walkaround/דירה 846- 16.pdf",
+  "source_sha256": "0c74ab308917dd177aa9d307a2c7877ef0c9a1801849b85ad1b1b3eb542c0f0a",
+  "read": "2026-11-08 by eye from 300 dpi renders (the PDF has no text layer: 0 characters, 8515 vector paths, 4 images); crops pdf-titleblock-300.png, pdf-unitbadge-300.png, pdf-full-72.png",
+  "printed": {
+    "plan_title": "תכנית מכר",
+    "building": "TOWER-RED",
+    "floor": 16,
+    "unit_mark": "L",
+    "apartment": "846",
+    "rooms": {
+      "value": 3,
+      "printed": "דירה 846 · 3 חדרים (the unit badge, top right)"
+    },
+    "apartment_area_m2": {
+      "value": 106.72,
+      "printed": "שטח דירה: 106.72 מ\"ר"
+    },
+    "sun_terrace_m2": {
+      "value": 26.15,
+      "printed": "שטח מרפסת שמש: 26.15 מ\"ר"
+    },
+    "terrace_covered_part_m2": {
+      "value": 14.34,
+      "printed": "חלקה המקורה: 14.34 מ\"ר"
+    },
+    "terrace_part_over_public_domain_m2": {
+      "value": 0.28,
+      "printed": "חלקה הבולטת לתחום הציבורי: 0.28 מ\"ר"
+    },
+    "date": "15.10.2025",
+    "scale": "1:50",
+    "architect": "DBLK ARCHITECTS",
+    "developer": "ישראל קנדה · RAINBOW TEL AVIV"
+  },
+  "not_printed": [
+    "storage (מחסן)",
+    "parking (חניה)",
+    "a direction / exposure word (only a north arrow is drawn)",
+    "price"
+  ],
+  "before": {
+    "units.json 846": {
+      "rooms": 4,
+      "area_m2": 118,
+      "outdoor_m2": 22
+    },
+    "hold units_fixture.json 846": {
+      "rooms": 4,
+      "area_m2": 118,
+      "outdoor_m2": 22
+    },
+    "guide.json entrance": "דירת ארבעה חדרים"
+  },
+  "already_matching": [
+    "Habait/engine/fixtures/rainbow-846.project.json (106.72 / 26.15)",
+    "Habait/studio/fixtures/apt846.intake.json (106.72 / 26.15)",
+    "research/.../flyover3d/data/units_real.json (3 / 106.72 / 26.15)"
+  ],
+  "observations_not_changed": {
+    "other_type_L_units": "826, 836, 856, 866 (type L, floors 14/15/17/18) still carry the template 4 rooms / 118 / 22 in units.json — no sales plan for them was given; the hold shows e.g. 866 «קומה 18 · 4 חדרים» beside 846's «3 חדרים»",
+    "guide_audio": "the entrance clip (he/01-entrance.mp3 edge-tts, he/01-entrance.mp4 minimax lip-sync) still SAYS «דירת ארבעה חדרים»; the caption is fixed. Re-voicing is $0 (edge-tts) but the talking-presenter video needs a paid lip-sync run",
+    "guide_small_terrace": "the guide says the bedroom-end terrace is «כ-3 מטר»; the traced plan and the 3D label give 6.74 m² (≈ 7)",
+    "traced_vs_printed": "traced room areas (3D labels): terraces 15.63 + 6.74 = 22.37 m² vs printed sun terrace 26.15; indoor rooms 90.92 m² vs printed apartment area 106.72 (the printed figures include walls / the slab edge; the per-room figures are not printed on the plan)"
+  },
+  "pages_after": "pages/pages.json — apartment page «3 חדרים · 106.72 מ״ר · קומה 16», terrace 26.15; /hold/ pill «קומה 16 · 3 חדרים», card 16 · 3 · 106.72 · 26.15; tour place card (no figures) unchanged; guide caption «דירת שלושה חדרים»; 1440 + 390, no page errors"
+}

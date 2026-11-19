@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הסוכן והמנוע בפעולה</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* A viewer for the screenshots of the end-to-end run of milestone 1.1 (2026-11-17): the real agent UI, the real
+   bridge, Pi and the engine; only the model was a fixed script. The images sit beside this file.
+   Same tokens as the plan page, so the two read as one family. */
+*, *::before, *::after { box-sizing: border-box; }
+:root {
+  --bg: #fbfaf7; --surface: #f3f1ec; --line: #ddd9d0; --fg: #23211d; --muted: #6b675f;
+  --agent: #2f4a73; --agent-soft: #e6ecf5; --engine: #b07714; --engine-soft: #fbf0d9;
+  --real: #2f6b45; --real-soft: #e3f0e7;
+  --display: "Frank Ruhl Libre", "David", "Times New Roman", serif;
+  --body: "Heebo", "Segoe UI", "Arial", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171614; --surface: #211f1c; --line: #3a3732; --fg: #ece9e3; --muted: #a39e94;
+    --agent: #9fb6dc; --agent-soft: #23304a; --engine: #e3a83f; --engine-soft: #3a2d14;
+    --real: #8fcaa2; --real-soft: #1d3326; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171614; --surface: #211f1c; --line: #3a3732; --fg: #ece9e3; --muted: #a39e94;
+  --agent: #9fb6dc; --agent-soft: #23304a; --engine: #e3a83f; --engine-soft: #3a2d14;
+  --real: #8fcaa2; --real-soft: #1d3326; color-scheme: dark;
+}
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.65; }
+.page { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 80px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; text-wrap: balance; line-height: 1.25; margin: 0; }
+p { margin: 0; }
+bdi { unicode-bidi: isolate; }
+code { font-family: var(--mono); font-size: 0.86em; direction: ltr; unicode-bidi: isolate; }
+
+.head { display: flex; flex-direction: column; gap: 12px; }
+.eyebrow { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+.head h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); }
+.thesis { font-size: 1.15rem; max-width: 62ch; }
+.honest { font-size: 0.96rem; color: var(--muted); max-width: 66ch; border-inline-start: 3px solid var(--engine); padding-inline-start: 14px; }
+.honest b { color: var(--fg); }
+
+/* the four moments, as one strip */
+.strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+.strip li { counter-increment: s; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.strip li::before { content: counter(s); font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.strip b { font-size: 0.98rem; line-height: 1.35; }
+.strip span { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+.strip li.you { border-color: var(--agent); background: var(--agent-soft); }
+.strip li.eng { border-color: var(--engine); background: var(--engine-soft); }
+
+h2 { font-size: 1.4rem; }
+.section { display: flex; flex-direction: column; gap: 18px; }
+.lead { color: var(--muted); max-width: 66ch; }
+
+/* one moment: its number, what you see, the screenshot */
+.shot { display: flex; flex-direction: column; gap: 12px; }
+.shot-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.shot-no { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 9px; }
+.shot h3 { font-size: 1.15rem; }
+.shot p { max-width: 70ch; }
+.shot p small { color: var(--muted); font-size: 0.9rem; }
+.frame { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #0b0d1c; }
+.frame img { display: block; width: 100%; height: auto; }
+
+.phones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.phones figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.phones .frame { border-radius: 18px; }
+.phones figcaption { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+.phones figcaption b { color: var(--fg); display: block; }
+
+/* what is real today */
+.rows { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.row:last-child { border-bottom: 0; }
+.st { display: inline-block; font-size: 0.76rem; font-weight: 700; line-height: 1.55; padding: 0 9px; border-radius: 999px; border: 1.5px solid var(--fg); white-space: nowrap; justify-self: start; }
+.st.ok { background: var(--fg); color: var(--bg); }
+.st.new { border-style: dashed; border-color: var(--muted); color: var(--muted); }
+.row small { display: block; color: var(--muted); font-size: 0.88rem; }
+
+.live { background: var(--surface); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; }
+.live ol { margin: 0; padding-inline-start: 20px; display: flex; flex-direction: column; gap: 6px; }
+.note { font-size: 0.9rem; color: var(--muted); max-width: 70ch; }
+
+@media (max-width: 760px) {
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row { grid-template-columns: 1fr; gap: 4px; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="head">
+    <span class="eyebrow">צילומי מסך · 17.11.2026 · מהבדיקה מקצה לקצה של אבן דרך <bdi>1.1</bdi></span>
+    <h1>הסוכן והמנוע בפעולה</h1>
+    <p class="thesis"><b>כך נראה הממשק כשמעלים <bdi>PDF</bdi> של תכנית מכר ומבקשים הדמיה.</b> ארבעה רגעים, מההעלאה ועד שהסיור מוכן.</p>
+    <p class="honest"><b>מה בדיוק מצולם:</b> הממשק, הגשר, <bdi>Pi</bdi> והמנוע אמיתיים, והם רצים יחד בדפדפן אמיתי. רק המודל הוחלף בתסריט קבוע, כדי שהבדיקה תהיה זהה בכל ריצה ולא תעלה כסף. לכן המשפטים של הסוכן בצילומים קבועים מראש.</p>
+  </header>
+
+  <ol class="strip" aria-label="ארבעה רגעים">
+    <li class="you"><b>מעלים <bdi>PDF</bdi> ומבקשים הדמיה</b><span>אתה</span></li>
+    <li class="eng"><b>המנוע עובד, והכרטיס מתקדם</b><span>שלושה שלבים בחינם, עד הצעת מחיר</span></li>
+    <li class="you"><b>מאשרים תקציב</b><span>שום דבר לא מחויב לפני האישור שלך</span></li>
+    <li class="eng"><b>הסיור מוכן</b><span>כפתור אחד פותח אותו</span></li>
+  </ol>
+
+  <section class="section" aria-labelledby="h-desktop">
+    <h2 id="h-desktop">במחשב</h2>
+
+    <article class="shot">
+      <div class="shot-head"><span class="shot-no">1 · 2</span><h3>ההעלאה, והעבודה שמתקדמת</h3></div>
+      <p>למעלה הקובץ שהועלה והבקשה. מתחתיו הסוכן עונה, ונפתח כרטיס עבודה עם ששת השלבים. שלושת הראשונים הסתיימו, והעבודה עצרה ב-<bdi>55%</bdi> עם הצעת מחיר: <bdi>$48</bdi>, בטווח <bdi>$40–$60</bdi>, ל-11 חדרים. הכפתור הסגול הוא הדרך לאשר תקציב.<br><small>התג הצהוב «שחזור הדגמה» אומר שהתוצאה כרגע היא הסיור הקיים של 846 ולא הדמיה חדשה.</small></p>
+      <div class="frame"><img src="1440-quote.png" width="1440" height="900" alt="כרטיס עבודה ב-55 אחוז עם הצעת מחיר וכפתור אשרו תקציב עד 60 דולר" loading="lazy"></div>
+    </article>
+
+    <article class="shot">
+      <div class="shot-head"><span class="shot-no">3</span><h3>אישור התקציב</h3></div>
+      <p>לחיצה על הכפתור שולחת הודעת אישור. לפני שהמנוע ממשיך, נפתח כרטיס נפרד ששואל אותך שוב: תקרת התקציב <bdi>$60</bdi>, ושום דבר לא מחויב לפני האישור. «לאשר» ממשיך, «לחסום» עוצר.<br><small>הכרטיס הזה מגיע משומר הסף של <bdi>Pi</bdi>, לא מהמודל: המודל לא יכול לאשר תשלום בעצמו.</small></p>
+      <div class="frame"><img src="1440-approval.png" width="1440" height="900" alt="כרטיס אישור תקציב עם הכפתורים לאשר ולחסום" loading="lazy"></div>
+    </article>
+
+    <article class="shot">
+      <div class="shot-head"><span class="shot-no">4</span><h3>הסיור מוכן</h3></div>
+      <p>הכרטיס הגיע ל-<bdi>100%</bdi>, כל ששת השלבים מסומנים, והופיע הכפתור «פתחו את הסיור». למטה נשאר רישום קצר של האישור שניתן.</p>
+      <div class="frame"><img src="1440-done.png" width="1440" height="900" alt="כרטיס עבודה ב-100 אחוז עם הכפתור פתחו את הסיור" loading="lazy"></div>
+    </article>
+  </section>
+
+  <section class="section" aria-labelledby="h-phone">
+    <h2 id="h-phone">בטלפון</h2>
+    <p class="lead">אותה זרימה ברוחב של טלפון. הצילום הרביעי מראה מה קורה כשלוחצים «לחסום».</p>
+    <div class="phones">
+      <figure><div class="frame"><img src="390-quote.png" width="390" height="844" alt="כרטיס העבודה בטלפון עם הצעת מחיר" loading="lazy"></div><figcaption><b>הצעת המחיר</b>הכרטיס והכפתור ברוחב מלא</figcaption></figure>
+      <figure><div class="frame"><img src="390-approval.png" width="390" height="844" alt="כרטיס אישור התקציב בטלפון" loading="lazy"></div><figcaption><b>אישור התקציב</b>אותו כרטיס, אותם שני כפתורים</figcaption></figure>
+      <figure><div class="frame"><img src="390-blocked.png" width="390" height="844" alt="מה שרואים אחרי לחיצה על לחסום" loading="lazy"></div><figcaption><b>אחרי «לחסום»</b>העבודה לא ממשיכה לשלב בתשלום</figcaption></figure>
+      <figure><div class="frame"><img src="390-done.png" width="390" height="844" alt="כרטיס העבודה בטלפון ב-100 אחוז" loading="lazy"></div><figcaption><b>הסיור מוכן</b>הכפתור שפותח את הסיור</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-real">
+    <h2 id="h-real">מה אמיתי היום, ומה עדיין דמה</h2>
+    <div class="rows">
+      <div class="row"><span class="st ok">אמיתי</span><span>הממשק, הגשר, <bdi>Pi</bdi> ושמונת הכלים של המנוע<small>אבן דרך <bdi>0.2</bdi></small></span></div>
+      <div class="row"><span class="st ok">אמיתי</span><span>עבודה שנשמרת על הדיסק, ממשיכה אחרי נפילה ולא משלמת פעמיים<small>אבן דרך <bdi>0.3</bdi></small></span></div>
+      <div class="row"><span class="st ok">אמיתי</span><span>קליטת ה-<bdi>PDF</bdi>: המנוע קורא כמה עמודים יש בו ואיזה שרטוט נמצא, ושומר לעבודה עותק מוגן<small>אבן דרך <bdi>1.1</bdi>, נבדקת עכשיו על ידי בודק עצמאי</small></span></div>
+      <div class="row"><span class="st new">דמה</span><span>ששת השלבים שבכרטיס: קריאת התכנית, בניית הדירה, רינדור, מראה ובדיקות התאמה, אריזה<small>מתקדמים על שעון, ובסוף נפתח הסיור הקיים של 846. כל אבן דרך מ-<bdi>1.2</bdi> והלאה מחליפה שלב אחד בעבודה אמיתית</small></span></div>
+      <div class="row"><span class="st new">תסריט</span><span>המשפטים של הסוכן בצילומים<small>בשיחה אמיתית עונה המודל של <bdi>Pi</bdi>. זה נבדק פעם אחת ב-16.11, באישורך</small></span></div>
+    </div>
+  </section>
+
+  <section class="live" aria-labelledby="h-live">
+    <h2 id="h-live">לראות את זה חי</h2>
+    <p>הממשק לא פועל כרגע על המחשב. כדי לפתוח אותו צריך שני חלונות טרמינל:</p>
+    <ol>
+      <li>הגשר: <code>cd C:\HABAIT-Agent-UI\bridge</code> ואז <code>npm start</code>. הוא מדפיס קוד צימוד.</li>
+      <li>הממשק: <code>cd C:\HABAIT-Agent-UI\app</code> ואז <code>npm run dev</code>. פותחים את הכתובת שהוא מדפיס ומקלידים את הקוד.</li>
+    </ol>
+    <p class="note">שיחה אמיתית משתמשת במודל של <bdi>Pi</bdi> ועולה כמה סנטים. המנוע עצמו לא מוציא כסף היום: השלבים בתשלום הם דמה.</p>
+  </section>
+
+</main>
+</body>
+</html>

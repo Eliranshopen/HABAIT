@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import { withFileLock } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs';
+const [, , dir, mode, arg] = process.argv;
+const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+let out = 'ok';
+try {
+  withFileLock(`${dir}/x.lock`, () => {
+    try { fs.writeFileSync(`${dir}/inside`, String(process.pid), { flag: 'wx' }); } catch { out = 'TWO'; }
+    const n = Number(fs.readFileSync(`${dir}/counter`, 'utf8'));
+    sleep(Number(arg || 5));
+    fs.writeFileSync(`${dir}/counter`, String(n + 1));
+    fs.rmSync(`${dir}/inside`, { force: true });
+  }, { waitMs: 120000 });
+} catch (e) { out = 'err ' + (e.message || e.code); }
+process.stdout.write(out);

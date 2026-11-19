@@ -1,0 +1,43 @@
+scenario dry  work C:/Users/elira/AppData/Local/Temp/qa12-dry-4GFe6S load 100
+[
+ {
+  "name": "no vlm",
+  "code": 0,
+  "stdout": "outcome: DRY\nnothing was started and nothing was booked\na paid run would call the vision model: 1 reading(s) and up to 3 run(s) of the judge, about $0.08 in all\nto pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap\nkeys (by name): FAL_KEY: present, OPENROUTER_API_KEY: present\n",
+  "stderr": "",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "vlm, judge on",
+  "code": 0,
+  "stdout": "outcome: DRY\nnothing was started and nothing was booked\na paid run would call the vision model: 0 reading(s) and up to 3 run(s) of the judge, about $0.06 in all\nto pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap\nkeys (by name): FAL_KEY: present, OPENROUTER_API_KEY: present\n",
+  "stderr": "",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "no vlm, budget but no go",
+  "code": 0,
+  "stdout": "outcome: DRY\nnothing was started and nothing was booked\na paid run would call the vision model: 1 reading(s) and up to 3 run(s) of the judge, about $0.08 in all\nto pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap\nkeys (by name): FAL_KEY: present, OPENROUTER_API_KEY: present\n",
+  "stderr": "",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "no vlm json",
+  "code": 0,
+  "stdout": "{\n  \"outcome\": \"DRY\",\n  \"exit\": null,\n  \"seconds\": 0,\n  \"paid\": false,\n  \"outDir\": \"C:/Users/elira/AppData/Local/Temp/qa12-dry-4GFe6S/d4\",\n  \"logFile\": null,\n  \"result\": null,\n  \"wouldCall\": {\n    \"reading\": 1,\n    \"judgeRuns\": 3,\n    \"total\": 4,\n    \"estimateUsd\": 0.08,\n    \"maxBudgetUsd\": 1\n  }\n}\n",
+  "stderr": "",
+  "leaksPlanted": false,
+  "created": false
+ }
+]
+procs at end [
+  '14488 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '6744 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '45564 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs dry',
+  '1852 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs dry',
+  '32692 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs dry'
+]
+exit 0

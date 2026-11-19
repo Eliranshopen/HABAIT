@@ -1,0 +1,585 @@
+{
+  "test": "m0.2.e2e",
+  "started_at": "2026-11-16T15:17:36.484Z",
+  "ok": true,
+  "step_ms": 1000,
+  "dirs": {
+    "ENGINE_DIR": "C:/RnD/.wt/3dengine/Projects/3Dengine",
+    "UI_DIR": "C:/HABAIT-Agent-UI/.wt/engine-mcp",
+    "WRAPPER_DIR": "C:/pi-main/habait/.wt/engine-mcp"
+  },
+  "assertions": [
+    {
+      "name": "prerequisite: UI worktree has bridge/src/server.mjs (C:/HABAIT-Agent-UI/.wt/engine-mcp)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: UI app has node_modules/vite",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: Pi wrapper has install-global.py and both extensions (C:/pi-main/habait/.wt/engine-mcp)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: Pi CLI installed (npm -g @earendil-works/pi-coding-agent)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: Chrome at C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: staged tour page C:/RnD/.wt/deploy-P-7/tour/index.html",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: fixture tests/fixtures/sample.pdf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: python on PATH (runs the wrapper installer)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: port 8787 is free",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: port 4173 is free",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "prerequisite: playwright-core loads (appdeps)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the wrapper installer ran on the temp agent folder",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "installer: habait-guard registered in settings.json",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "installer: habait-engine registered in mcp.json with exposure \"direct\"",
+      "ok": true,
+      "detail": "[\"C:/RnD/Projects/3Dengine/mcp/server.mjs\"]"
+    },
+    {
+      "name": "`pi mcp list` (temp agent folder) shows habait-engine connected with its eight tools",
+      "ok": true,
+      "detail": "exit 0"
+    },
+    {
+      "name": "the app builds (vite build into the temp folder)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the bridge started Pi 1.5.2 in RPC mode on the fake model",
+      "ok": true,
+      "detail": "see C:/Users/elira/AppData/Local/Temp/habait-e2e-VvkZBc/logs/bridge.log"
+    },
+    {
+      "name": "the app paired with the bridge (POST /pair 200)",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "upload of sample.pdf succeeded",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A: the job card appears with the badge «שחזור הדגמה»",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A: the card's percent advanced through intermediate steps before the quote",
+      "ok": true,
+      "detail": "seen 0 → 10 → 45 → 55"
+    },
+    {
+      "name": "A: job file is awaiting_approval with the quote, no approval",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A: the quote line reads «הערכת עלות: $48 · טווח $40–$60 · 11 חדרים»",
+      "ok": true,
+      "detail": "הערכת עלות: $48 · טווח $40–$60 · 11 חדרים"
+    },
+    {
+      "name": "A: the button «אשרו תקציב עד $60» shows",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "1440 quote: no horizontal overflow on either side",
+      "ok": true,
+      "detail": "scrollWidth 1440 / clientWidth 1440"
+    },
+    {
+      "name": "A: the guard card appears BEFORE the job leaves awaiting_approval (job file: no approval yet)",
+      "ok": true,
+      "detail": "state awaiting_approval, approval null"
+    },
+    {
+      "name": "A: guard card title «שלב בתשלום: אישור תקציב לעבודה <job_id>»",
+      "ok": true,
+      "detail": "שלב בתשלום: אישור תקציב לעבודה 512be4c1a0432f1c"
+    },
+    {
+      "name": "A: guard card shows «תקרת התקציב: $60»",
+      "ok": true,
+      "detail": "תקרת התקציב: $60"
+    },
+    {
+      "name": "1440 approval: no horizontal overflow on either side",
+      "ok": true,
+      "detail": "scrollWidth 1440 / clientWidth 1440"
+    },
+    {
+      "name": "A: «לאשר» → the job file gets approval { cap_usd: 60 }",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A: the card ran to 100 % and the job file is done",
+      "ok": true,
+      "detail": "100%, done"
+    },
+    {
+      "name": "A: «פתחו את הסיור» carries a loopback link on the test port (not 8891)",
+      "ok": true,
+      "detail": "http://127.0.0.1:61242/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0"
+    },
+    {
+      "name": "A: GET of the link answers 200 with the 846 tour page (<title> holds «דירה 846»)",
+      "ok": true,
+      "detail": "200, «סיור 360° · דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)»"
+    },
+    {
+      "name": "1440 done: no horizontal overflow on either side",
+      "ok": true,
+      "detail": "scrollWidth 1440 / clientWidth 1440"
+    },
+    {
+      "name": "390 done: no horizontal overflow on either side",
+      "ok": true,
+      "detail": "scrollWidth 390 / clientWidth 390"
+    },
+    {
+      "name": "upload of plan-b.pdf succeeded",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "B: a second, separate job (another id)",
+      "ok": true,
+      "detail": "dce1fcea9fc4132e"
+    },
+    {
+      "name": "B: the job card carries the badge «שחזור הדגמה»",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "B: the card advanced to the quote",
+      "ok": true,
+      "detail": "seen 0 → 10 → 45 → 55"
+    },
+    {
+      "name": "390 quote: no horizontal overflow on either side",
+      "ok": true,
+      "detail": "scrollWidth 390 / clientWidth 390"
+    },
+    {
+      "name": "B: the guard card asks for job B",
+      "ok": true,
+      "detail": "שלב בתשלום: אישור תקציב לעבודה dce1fcea9fc4132e"
+    },
+    {
+      "name": "B: job file has no approval while the card waits",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "390 approval: no horizontal overflow on either side",
+      "ok": true,
+      "detail": "scrollWidth 390 / clientWidth 390"
+    },
+    {
+      "name": "B: «לחסום» → the job file never got an approval and stays awaiting_approval",
+      "ok": true,
+      "detail": "state awaiting_approval, approval null"
+    },
+    {
+      "name": "390 blocked: no horizontal overflow on either side",
+      "ok": true,
+      "detail": "scrollWidth 390 / clientWidth 390"
+    },
+    {
+      "name": "the fake model was offered the eight engine tools by name (exposure direct)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the tool calls were inspect → start → approve (A), inspect → start → approve (B)",
+      "ok": true,
+      "detail": "inspect_plan, start_simulation, approve_paid_stage, inspect_plan, start_simulation, approve_paid_stage"
+    },
+    {
+      "name": "approve_paid_stage got the job id and cap_usd 60 parsed from the button's message",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "no console errors in the page",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "cleanup: no process of this test remains (bridge, Pi, MCP server, runners, static server)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "cleanup: ports 8787, 4173, 61242, 61243 are free (netstat)",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "screenshots": [
+    "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/1440-quote.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/1440-approval.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/1440-done.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/390-done.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/390-quote.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/390-approval.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/390-blocked.png"
+  ],
+  "overflow": [
+    {
+      "state": "1440 quote",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "offenders": [],
+      "ok": true
+    },
+    {
+      "state": "1440 approval",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "offenders": [],
+      "ok": true
+    },
+    {
+      "state": "1440 done",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "offenders": [],
+      "ok": true
+    },
+    {
+      "state": "390 done",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "offenders": [],
+      "ok": true
+    },
+    {
+      "state": "390 quote",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "offenders": [],
+      "ok": true
+    },
+    {
+      "state": "390 approval",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "offenders": [],
+      "ok": true
+    },
+    {
+      "state": "390 blocked",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "offenders": [],
+      "ok": true
+    }
+  ],
+  "console_errors": [],
+  "observed_percents": {
+    "A@1440": [
+      0,
+      10,
+      45,
+      55
+    ],
+    "B@390": [
+      0,
+      10,
+      45,
+      55
+    ]
+  },
+  "fake_model": [
+    {
+      "at": "2026-11-16T15:17:41.033Z",
+      "last_role": "user",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "tool": "mcp__habait_engine__inspect_plan",
+        "args": {
+          "pdf_path": "C:/Users/elira/AppData/Local/Temp/habait-e2e-VvkZBc/bridge/workspace/uploads/a5743e331727a4a0/sample.pdf"
+        },
+        "why": "upload"
+      }
+    },
+    {
+      "at": "2026-11-16T15:17:41.060Z",
+      "last_role": "tool",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "tool": "mcp__habait_engine__start_simulation",
+        "args": {
+          "pdf_path": "C:/Users/elira/AppData/Local/Temp/habait-e2e-VvkZBc/bridge/workspace/uploads/a5743e331727a4a0/sample.pdf",
+          "apartment": "apt846"
+        },
+        "why": "after-inspect"
+      }
+    },
+    {
+      "at": "2026-11-16T15:17:41.094Z",
+      "last_role": "tool",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "text": "התחלתי הדמיה של דירה 846. כשתגיע הערכת העלות אבקש את אישורכם.",
+        "why": "after-start"
+      }
+    },
+    {
+      "at": "2026-11-16T15:17:47.488Z",
+      "last_role": "user",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "tool": "mcp__habait_engine__approve_paid_stage",
+        "args": {
+          "job_id": "512be4c1a0432f1c",
+          "cap_usd": 60
+        },
+        "why": "approval-message"
+      }
+    },
+    {
+      "at": "2026-11-16T15:17:48.084Z",
+      "last_role": "tool",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "text": "קיבלתי. ההדמיה ממשיכה.",
+        "why": "after-approve"
+      }
+    },
+    {
+      "at": "2026-11-16T15:17:56.367Z",
+      "last_role": "user",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "tool": "mcp__habait_engine__inspect_plan",
+        "args": {
+          "pdf_path": "C:/Users/elira/AppData/Local/Temp/habait-e2e-VvkZBc/bridge/workspace/uploads/b02f8cb318eedb0c/plan-b.pdf"
+        },
+        "why": "upload"
+      }
+    },
+    {
+      "at": "2026-11-16T15:17:56.379Z",
+      "last_role": "tool",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "tool": "mcp__habait_engine__start_simulation",
+        "args": {
+          "pdf_path": "C:/Users/elira/AppData/Local/Temp/habait-e2e-VvkZBc/bridge/workspace/uploads/b02f8cb318eedb0c/plan-b.pdf",
+          "apartment": "apt846"
+        },
+        "why": "after-inspect"
+      }
+    },
+    {
+      "at": "2026-11-16T15:17:56.415Z",
+      "last_role": "tool",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "text": "התחלתי הדמיה של דירה 846. כשתגיע הערכת העלות אבקש את אישורכם.",
+        "why": "after-start"
+      }
+    },
+    {
+      "at": "2026-11-16T15:18:02.671Z",
+      "last_role": "user",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "tool": "mcp__habait_engine__approve_paid_stage",
+        "args": {
+          "job_id": "dce1fcea9fc4132e",
+          "cap_usd": 60
+        },
+        "why": "approval-message"
+      }
+    },
+    {
+      "at": "2026-11-16T15:18:03.269Z",
+      "last_role": "tool",
+      "engine_tools": [
+        "mcp__habait_engine__approve_paid_stage",
+        "mcp__habait_engine__cancel_job",
+        "mcp__habait_engine__engine_status",
+        "mcp__habait_engine__get_job",
+        "mcp__habait_engine__get_result",
+        "mcp__habait_engine__inspect_plan",
+        "mcp__habait_engine__list_jobs",
+        "mcp__habait_engine__start_simulation"
+      ],
+      "decision": {
+        "text": "קיבלתי. ההדמיה ממשיכה.",
+        "why": "after-approve"
+      }
+    }
+  ],
+  "cleanup": {
+    "actions": {
+      "browser": "closed",
+      "bridge": "killed",
+      "runner dce1fcea9fc4132e": "gone",
+      "engine_serve": "killed",
+      "fake_model": "closed",
+      "app_server": "closed"
+    },
+    "leftovers_found": [],
+    "processes_after": [],
+    "listening_after": [],
+    "started": [
+      "bridge 11844 alive=false"
+    ],
+    "temp": "removed"
+  },
+  "error": null,
+  "pi_version": "1.5.2",
+  "temp_root": "C:/Users/elira/AppData/Local/Temp/habait-e2e-VvkZBc",
+  "ports": {
+    "bridge": 8787,
+    "app": 4173,
+    "engine_serve": 61242,
+    "fake_model": 61243
+  },
+  "job_a": "512be4c1a0432f1c",
+  "job_b": "dce1fcea9fc4132e",
+  "bridge_log": "C:/RnD/development/tasks/3dengine/logs/0.2/e2e/bridge.log",
+  "finished_at": "2026-11-16T15:18:40.410Z",
+  "summary": "51/51 assertions passed"
+}

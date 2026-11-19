@@ -1,11 +1,11 @@
 # apps-script/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Google Apps Script (lead-to-sheet.gs) for leads and measurement, with a Hebrew README of what Eliran does once.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 2 files here · 0 subfolders · 2 files / 16.5 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

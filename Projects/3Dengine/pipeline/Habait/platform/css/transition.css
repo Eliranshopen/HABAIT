@@ -1,0 +1,25 @@
+/* card 13 (B5): the 360 -> 360 transition demo */
+.t360-page { margin: 0; height: 100%; background: #0b1220; color: #f4f6fb; font-family: 'Heebo', 'Segoe UI', system-ui, -apple-system, Arial, sans-serif; overflow: hidden; }
+.t360-stage { position: fixed; inset: 0; }
+.t360-canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+.t360-hs-layer { position: absolute; inset: 0; pointer-events: none; }
+.t360-hs { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; display: inline-flex; align-items: center; gap: 6px;
+  min-height: 40px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.55); background: rgba(12,18,32,.62);
+  color: #fff; font: 600 14px/1 inherit; cursor: pointer; backdrop-filter: blur(4px); white-space: nowrap; }
+.t360-hs::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #f2a900; box-shadow: 0 0 0 4px rgba(242,169,0,.25); }
+.t360-hs[disabled] { opacity: .5; }
+.t360-top { position: fixed; inset-inline: 0; top: 0; padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 10px; display: flex; gap: 10px; align-items: center;
+  background: linear-gradient(rgba(11,18,32,.75), rgba(11,18,32,0)); pointer-events: none; }
+.t360-top h1 { font-size: 16px; margin: 0; font-weight: 700; }
+.t360-top .room { font-size: 14px; opacity: .8; }
+.t360-bottom { position: fixed; inset-inline: 0; bottom: 0; padding: 10px 12px calc(env(safe-area-inset-bottom, 0px) + 8px);
+  background: linear-gradient(rgba(11,18,32,0), rgba(11,18,32,.85)); }
+.t360-chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.t360-chip { min-height: 40px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: rgba(18,26,44,.9); color: #fff; font: 600 14px/1 inherit; cursor: pointer; }
+.t360-chip[aria-current='true'] { background: #0f5c8f; border-color: #0f5c8f; }
+.t360-adv { margin-top: 6px; font-size: 12px; opacity: .85; }
+.t360-adv summary { cursor: pointer; }
+.t360-adv label { display: inline-flex; gap: 6px; align-items: center; margin-inline-end: 12px; }
+.t360-stats { font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+.t360-legal { margin: 6px 0 0; font-size: 11px; line-height: 1.35; opacity: .7; text-align: center; }
+.t360-err { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; }

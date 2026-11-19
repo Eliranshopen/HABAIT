@@ -1,0 +1,68 @@
+{
+  "$comment": "The engine's one settings file. A path is relative to the engine home unless it is absolute. Machine overrides go in engine.config.local.json (untracked). Keys are NAMED here and never stored.",
+  "pipelineRoot": "pipeline",
+  "python": ".venv/Scripts/python.exe",
+  "basePython": "python",
+  "requirements": "requirements.lock.txt",
+  "appDepsDir": "appdeps",
+  "envRoot": ".",
+  "blender": "C:/Program Files/Blender Foundation/Blender 4.5/blender.exe",
+  "blenderVersion": "4.5.10",
+  "blenderLock": "C:/RnD/.wt/_blender.lock",
+  "chrome": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "legalDir": "house/legal",
+  "jobsDir": "jobs",
+  "runtimeDir": ".runtime",
+  "assets": {
+    "source": "C:/HABAIT-Archive/Habait-Backup/habait-walkaround/360walkaround",
+    "packSource": "C:/HABAIT-Archive/Habait-archive-2026-11-03/habait-walkaround/360walkaround/catalog/.cache",
+    "packCache": "pipeline/360walkaround/catalog/.cache",
+    "catalogManifest": "pipeline/360walkaround/catalog/catalog.manifest.json",
+    "catalogModels": "pipeline/360walkaround/catalog/models",
+    "styleFile": "pipeline/360walkaround/catalog/style-habait-modern.json",
+    "hdriBase": "pipeline/360walkaround"
+  },
+  "keys": ["FAL_KEY", "OPENROUTER_API_KEY"],
+  "nodeLibs": ["sharp", "playwright-core"],
+  "pythonLibs": {
+    "numpy": "numpy",
+    "shapely": "shapely",
+    "cv2": "opencv-python",
+    "PIL": "pillow",
+    "skimage": "scikit-image",
+    "pymupdf": "pymupdf"
+  },
+  "inbox": ["C:/HABAIT-Agent-UI/bridge/workspace/uploads", "inbox", "tests/fixtures"],
+  "stub": {
+    "siteRoot": "C:/RnD/.wt/deploy-P-7",
+    "tourPath": "tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0",
+    "stepSeconds": 6,
+    "rooms": 11,
+    "callUsd": 0,
+    "quote": {
+      "estimate_usd": 48,
+      "range_usd": [40, 60]
+    }
+  },
+  "serve": {
+    "host": "127.0.0.1",
+    "port": 8891
+  },
+  "runner": {
+    "heartbeatSeconds": 2,
+    "heavyStages": ["rendering"],
+    "heavyLock": ".runtime/heavy.lock"
+  },
+  "inspect": {
+    "minSidePx": 1000,
+    "vectorMinPaths": 200,
+    "timeoutSeconds": 30
+  },
+  "trace": {
+    "timeoutSeconds": 1500,
+    "maxBudgetUsd": 1,
+    "judgeRuns": 3,
+    "rounds": 3
+  },
+  "mode": "stub"
+}

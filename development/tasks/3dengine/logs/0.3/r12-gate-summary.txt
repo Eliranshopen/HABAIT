@@ -1,0 +1,15 @@
+# Gate after the clean-up change of the tests (2026-11-17, worktree 3dengine, on top of cc5f410; engine code unchanged)
+# npm test, six runs one after another (timeout 185 each):
+run 1: ℹ tests 267 ℹ pass 267 ℹ fail 0 ℹ duration_ms 86925.4951  | ℹ all files | 99.71 | 96.81 | 96.96 | 
+run 2: ℹ tests 267 ℹ pass 267 ℹ fail 0 ℹ duration_ms 85301.3352  | ℹ all files | 99.71 | 96.81 | 96.96 | 
+run 3: ℹ tests 267 ℹ pass 267 ℹ fail 0 ℹ duration_ms 86278.3736  | ℹ all files | 99.71 | 96.81 | 96.96 | 
+run 4: ℹ tests 267 ℹ pass 267 ℹ fail 0 ℹ duration_ms 86224.4499  | ℹ all files | 99.71 | 96.81 | 96.96 | 
+run 5: ℹ tests 267 ℹ pass 267 ℹ fail 0 ℹ duration_ms 87008.5556  | ℹ all files | 99.71 | 96.81 | 96.96 | 
+run 6: ℹ tests 267 ℹ pass 267 ℹ fail 0 ℹ duration_ms 86792.9023  | ℹ all files | 99.71 | 96.81 | 96.96 | 
+# npm run test:soak -- --kills 8 --freezes 8:
+SOAK kills=12 jobs_finished=2 orphaned_rows=0 recovered_rows=1 resume_retries=0 longest_resume_ms=22 takeovers=8 second_runner_kills=1 (1 inside a pause) never_sent_rows=3 late_rows=0 woke_before_done=3 violations=0
+clean-up: no process of the soak remains
+# node --test tests/unit/cleanup.test.mjs:
+ℹ tests 13 ℹ pass 13 ℹ fail 0 
+# engine processes left after the runs (runner.mjs, kill-soak, cli.mjs serve): none
+# temp homes of these runs left in the temp folder: none (four older folders remain there, last modified 2026-11-16 22:26 and 23:02 and 2026-11-17 05:59 twice: before these runs; one is a kept soak dump with a WHY.txt, the origin of the three m03-home folders was not looked into)

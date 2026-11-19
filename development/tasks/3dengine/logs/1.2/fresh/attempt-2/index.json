@@ -1,0 +1,38 @@
+{
+ "input": "C:\\RnD\\.wt\\3dengine\\Projects\\3Dengine\\tests\\fixtures\\apt846\\source.pdf",
+ "id": "apt846",
+ "model": "google/gemini-3.7-flash",
+ "plans": [
+  {
+   "dir": "C:\\Users\\elira\\AppData\\Local\\Temp\\claude\\76e6db1160dffba0\\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\\scratchpad\\trace-fresh-2\\run\\plan-1",
+   "page": 1,
+   "floor_label": null,
+   "dwelling_label": null,
+   "status": "PASS",
+   "rounds": 1,
+   "plan": "C:\\Users\\elira\\AppData\\Local\\Temp\\claude\\76e6db1160dffba0\\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\\scratchpad\\trace-fresh-2\\run\\plan-1\\plan.general.json",
+   "overlay": "C:\\Users\\elira\\AppData\\Local\\Temp\\claude\\76e6db1160dffba0\\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\\scratchpad\\trace-fresh-2\\run\\plan-1\\overlay.png",
+   "report": "C:\\Users\\elira\\AppData\\Local\\Temp\\claude\\76e6db1160dffba0\\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\\scratchpad\\trace-fresh-2\\run\\plan-1\\report.json",
+   "trace_check": "C:\\Users\\elira\\AppData\\Local\\Temp\\claude\\76e6db1160dffba0\\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\\scratchpad\\trace-fresh-2\\run\\plan-1\\trace-check.json",
+   "rooms": 10,
+   "fixtures": 18,
+   "scale_px_per_cm": 2.2677,
+   "failures": [],
+   "judge_mismatches": [],
+   "could_not_read": [
+    "room 'מבואה' (r-hall-auto-93): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+    "room 'מעבר' (r-corridor-20): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+    "room 'מעבר' (r-corridor-75): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+    "room 'חדר רחצה כללי' (r-bathroom): traced [266, 149] cm vs printed [140, 199] cm ([33.7, 6.4] %) — check the trace or the reading",
+    "room 'מטבח' (r-kitchen): no printed dimensions were read; its size comes from the drawing only",
+    "room 'פינת אוכל' (r-dining-area): no printed dimensions were read; its size comes from the drawing only",
+    "room 'חדר דיור' (r-living-room): no printed dimensions were read; its size comes from the drawing only",
+    "room 'מרפסת שמש' (r-sun-balcony): traced [1061, 345] cm vs printed [270, 474] cm ([123.8, 27.8] %) — check the trace or the reading",
+    "room 'פינת ארונות' (r-closet-area): traced [343, 341] cm vs printed [160, 185] cm ([85.4, 113.1] %) — check the trace or the reading",
+    "room 'כניסה' (r-entrance): no printed dimensions were read; its size comes from the drawing only"
+   ]
+  }
+ ],
+ "spent_usd": 0.0403605,
+ "status": "PASS"
+}

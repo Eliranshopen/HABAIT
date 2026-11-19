@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>תיקון תכנית</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="correct.css">
+</head>
+<body>
+<header>
+  <h1 id="title">תיקון תכנית</h1>
+  <ol class="steps">
+    <li data-step="1" class="on"><span>1</span> מה לבדוק</li>
+    <li data-step="2"><span>2</span> תיקון</li>
+    <li data-step="3"><span>3</span> אישור</li>
+  </ol>
+  <span id="badge" class="badge"></span>
+</header>
+
+<main>
+  <section id="canvas">
+    <svg id="plan" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="zoom">
+      <button id="zin" title="הגדלה" aria-label="הגדלה">+</button>
+      <button id="zout" title="הקטנה" aria-label="הקטנה">−</button>
+      <button id="zfit" title="כל הדירה" aria-label="כל הדירה">⤢</button>
+    </div>
+    <div class="legend"><i class="ok"></i>מתאים לשרטוט <i class="bad"></i>לא מתאים <i class="none"></i>אין מידה בשרטוט</div>
+    <div id="flash" class="flash" hidden></div>
+    <div id="resume" class="resume" hidden></div>
+  </section>
+
+  <aside id="panel">
+    <div id="panel-body"></div>
+    <div class="nav">
+      <button id="prev">→ הקודם</button>
+      <button id="undo" disabled>ביטול פעולה אחרונה</button>
+      <span id="count"></span>
+      <button id="next" class="primary">הבא ←</button>
+    </div>
+    <details class="adv" id="advanced">
+      <summary>הגדרות מתקדמות</summary>
+      <label><input type="checkbox" id="adv-snap" checked> הצמדת פינות לקירות</label>
+      <label><input type="checkbox" id="adv-walls"> להציג את הקירות שזוהו</label>
+      <label><input type="checkbox" id="adv-corners"> להציג פינות של כל החדרים</label>
+      <label>שקיפות השרטוט <input type="range" id="adv-opacity" min="0.2" max="1" step="0.1" value="1"></label>
+      <pre id="adv-paths"></pre>
+    </details>
+  </aside>
+</main>
+
+<footer id="caption"></footer>
+<script type="module" src="correct.js"></script>
+</body>
+</html>

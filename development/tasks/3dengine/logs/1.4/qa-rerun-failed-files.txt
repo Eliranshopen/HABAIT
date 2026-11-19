@@ -1,0 +1,24 @@
+✔ initialize handshake, ping, tools/list = the eight tools with both schemas (365.6222ms)
+✔ engine_status answers in time with a stub-site check (973.45ms)
+✔ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (7085.1189ms)
+✔ the same PDF again → created: false and the same job (35.9753ms)
+✔ cancel_job on a fresh job: cancelled, the runner stops (5063.5097ms)
+✔ every stub reason code (485.9669ms)
+✔ protocol errors: -32601, -32602, -32700 (13.283ms)
+✔ stdout held JSON-RPC lines only; every tools/call answered in time (under 2 s; a first look at a PDF inside the time limit of the scanner) (4.4663ms)
+✔ pidAlive: this process yes; junk and a finished process no (161.2715ms)
+✔ sleepSync blocks about as long as asked; negative is no wait (26.8316ms)
+✔ isMain (1.0282ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18749.5613
+
+real	0m19.125s
+user	0m0.062s
+sys	0m0.076s
+exit 0

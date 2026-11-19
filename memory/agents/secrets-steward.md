@@ -19,3 +19,10 @@
 - **Learned:** production habait-flow does not depend on the code while `TOUR_EDIT_OPEN=1` (`codeOk` returns true first). Whether the name is set in the habait-flow Vercel env is not recorded anywhere; the old project `habait-tour-design` also held one (PROVISION.md, T39/OWED-432). `.env.example` is blocked by the settings deny, so name manifests there were not read.
 - **Owed / open:** Eliran: §5 steps 1-4; main session or `habait-deploy-qa`: 2 probes; main session: OWED-028 fix in a worktree. Rotate after the fix or accept the repeat print.
 - **Second reader:** main session (rnd-9d, fork A coordinator) — must not repeat the value, and schedules OWED-028; pointer: ledger §5.
+
+## 2026-11-18 · secrets-steward · exposure filing: CLAUDE_CODE_MESSAGING_TOKEN (harness token, not ours)
+- **Did:** new ledger §1 row `CLAUDE_CODE_MESSAGING_TOKEN`: a per-session harness token that a QA reviewer's script dumped into `qa-fake-results.txt` (engine 1.3, card 06) while proving a free run holds no real key; main session read it, then removed the value before staging. State `EXPOSED — EXPIRED WITH THE SESSION; nothing to rotate` (my reading of the format; no OWED row, no probe, no checklist). Names only; the value was never given to me.
+- **Evidence:** `C:\RnD\docs\governance\SECRETS-LEDGER.md` §1 last row; `development/tasks/3dengine/logs/1.3/qa-fake-results.txt` (path exists, not opened).
+- **Learned:** a brief for any reviewer that checks "no key in the environment" must say: never print an environment VALUE, names only, also when proving that a value is absent. Harness-owned tokens are not rotatable by us.
+- **Owed / open:** none.
+- **Second reader:** `qa-reviewer` — its scripts must print env names only; one pointer line added to `memory/agents/qa-reviewer.md`.

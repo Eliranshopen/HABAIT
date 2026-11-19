@@ -1,0 +1,9 @@
+
+> habait-3dengine@1.1.0 test:soak
+> node tests/soak/kill-soak.mjs --kills 14 --freezes 8
+
+kill soak: temp home C:/Users/elira/AppData/Local/Temp/killsoak-yM5JjE, port 51000, target 14 kills
+freeze soak: temp home C:/Users/elira/AppData/Local/Temp/freezesoak-4Uoq5Q, port 51014, target 8 takeovers
+  5 takeovers, 2 of them woke while the job was still running
+SOAK kills=17 jobs_finished=2 orphaned_rows=2 recovered_rows=0 resume_retries=0 longest_resume_ms=31 takeovers=8 second_runner_kills=2 (2 inside a pause) never_sent_rows=2 late_rows=0 woke_before_done=4 violations=0
+clean-up: no process of the soak remains

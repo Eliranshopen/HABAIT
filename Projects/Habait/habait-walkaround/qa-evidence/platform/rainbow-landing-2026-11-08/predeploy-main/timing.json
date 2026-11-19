@@ -1,0 +1,51 @@
+{
+ "at": "2026-11-09T10:54:02.476Z",
+ "base": "http://127.0.0.1:58720",
+ "runs": 1,
+ "sizes": {
+  "390": {
+   "runs": [
+    {
+     "tNav": 337,
+     "tFilm": 378,
+     "tStop": 8835,
+     "tPills": 8912,
+     "tCard": 8926,
+     "clip": {
+      "src": "orbit_fast.mp4",
+      "duration": 8.541667
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    }
+   ],
+   "medianCardMs": 8926
+  },
+  "1440": {
+   "runs": [
+    {
+     "tNav": 232,
+     "tFilm": 247,
+     "tStop": 8700,
+     "tPills": 8732,
+     "tCard": 8736,
+     "clip": {
+      "src": "orbit_fast.mp4",
+      "duration": 8.541667
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    }
+   ],
+   "medianCardMs": 8736
+  }
+ },
+ "fails": [],
+ "pass": true
+}

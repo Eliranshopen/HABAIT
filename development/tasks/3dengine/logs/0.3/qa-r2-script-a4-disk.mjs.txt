@@ -1,0 +1,114 @@
+// A4: disk-state attacks: corrupted spent_usd, old locks, changed outputs, cap below ledger, resume in every state.
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, between, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, toDone, realKill, waitEvent, resume, approveWhen, settledSum, heldSum } from './q.mjs';
+const [seed] = process.argv.slice(2).map(Number);
+setSeed(seed);
+const E = await mkEnv({ prefix: 'qa-a4-', callUsd: 0.6, stepMs: 300, heartbeat: 0.1, staleSeconds: 1 });
+const res = {};
+const start = (name, env = {}) => {
+  const pdf = E.pdf(name, name);
+  for (const [k, v] of Object.entries(env)) process.env[k] = v;
+  let id; try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { for (const k of Object.keys(env)) delete process.env[k]; }
+  return { pdf, id };
+};
+const editJob = (id, fn) => { const f = E.jobPath(id, 'job.json'); const j = JSON.parse(fs.readFileSync(f, 'utf8')); fn(j); fs.writeFileSync(f, JSON.stringify(j, null, 2) + '\n'); };
+async function killAt(id, trig, label) {
+  for (let i = 0; i < 3000 && !E.job(id).approval && !/^state:(tracing|building|rendering|awaiting_approval|queued)$/.test(trig); i++) { await approveWhen(E, id, 60); await sleep(10); if (E.job(id).approval) break; }
+  const hit = await waitEvent(E, id, trig, 8000);
+  const p = E.runnerPid(id);
+  const k = hit && await realKill(E, p, label);
+  inv(E, id, `${label} after kill`);
+  return k;
+}
+try {
+  // D1 corrupted spent_usd while the runner is dead (several values)
+  for (const [lbl, val] of [['high', 99], ['neg', -5], ['string', 'abc'], ['null', null], ['zero-after-settle', 0]]) {
+    const { pdf, id } = start(`d1-${lbl}.pdf`);
+    await killAt(id, 'settledcount:2', `D1.${lbl}`);
+    editJob(id, (j) => { j.cost.spent_usd = val; });
+    await resume(E, pdf, `D1.${lbl}`);
+    await sleep(300);
+    const mid = E.job(id).cost.spent_usd;
+    await toDone(E, id, `D1.${lbl}`); finalCheck(E, id, `D1.${lbl}`); await spentOk(E, id, `D1.${lbl}`);
+    res[`D1.${lbl}`] = `spent shortly after resume ${JSON.stringify(mid)}, final ${E.job(id).cost.spent_usd}`;
+  }
+  // D1b: corrupted spent_usd while the runner is ALIVE (does it correct at the next paid call / at done?)
+  {
+    const { pdf, id } = start(`d1b.pdf`);
+    for (let i = 0; i < 2000 && !E.job(id).approval; i++) { await approveWhen(E, id, 60); await sleep(10); }
+    await waitEvent(E, id, 'state:gating', 8000);
+    editJob(id, (j) => { j.cost.spent_usd = 123; });
+    await toDone(E, id, 'D1b'); await spentOk(E, id, 'D1b', 3000); res.D1b = `final ${E.job(id).cost.spent_usd}`;
+  }
+  // D3 an old job.lock of several kinds, before a resume of a killed job
+  for (const [lbl, content, ageS] of [['empty-fresh', '', 0], ['empty-old', '', 5], ['garbage-fresh', 'abc', 0], ['garbage-old', 'abc', 5], ['dead-pid', '99998', 0], ['live-foreign-fresh', String(process.pid), 0], ['live-foreign-6s', String(process.pid), 6], ['live-foreign-11s', String(process.pid), 11], ['pid-0', '0', 0], ['negative', '-4', 0], ['float', '12.5', 0]]) {
+    const { pdf, id } = start(`d3-${lbl}.pdf`);
+    await killAt(id, 'state:building', `D3.${lbl}`);
+    const lock = E.jobPath(id, 'job.lock');
+    fs.writeFileSync(lock, content);
+    if (ageS) { const t = new Date(Date.now() - ageS * 1000); fs.utimesSync(lock, t, t); }
+    const t0 = Date.now();
+    let err = null, r = null;
+    try { r = E.h.start_simulation({ pdf_path: pdf }); } catch (e) { err = e.message; }
+    const ms1 = Date.now() - t0;
+    let total = ms1, tries = 1;
+    // if it threw lock busy, keep trying (a user would retry) until it works: total time blocked
+    while (err && tries < 12) { await sleep(300); tries++; try { r = E.h.start_simulation({ pdf_path: pdf }); err = null; } catch (e) { err = e.message; } total = Date.now() - t0; }
+    res[`D3.${lbl}`] = `first call ${ms1} ms ${err ? 'THREW' : 'ok'}; blocked ${total} ms over ${tries} tries; resumed ${r?.resumed}`;
+    if (total > 2600 && !/live-foreign/.test(lbl)) violate(`D3.${lbl}: resume blocked ${total} ms by an old job.lock (${JSON.stringify(content)} age ${ageS}s)`);
+    if (total > 2600 && /live-foreign/.test(lbl)) note(`D3.${lbl}: a job.lock naming a LIVE foreign pid blocked a resume for ${total} ms (${tries} tries); 'lock busy' thrown at ${ms1} ms`);
+    await toDone(E, id, `D3.${lbl}`); finalCheck(E, id, `D3.${lbl}`);
+  }
+  // D5 resume in every state
+  for (const trig of ['state:tracing', 'state:building', 'state:rendering', 'state:awaiting_approval', 'state:skinning', 'state:gating', 'state:finishing', 'state:packaging', 'state:qa', 'delay:1']) {
+    const { pdf, id } = start(`d5-${trig}.pdf`);
+    const k = await killAt(id, trig, `D5.${trig}`);
+    const j0 = E.job(id);
+    const r = await resume(E, pdf, `D5.${trig}`);
+    await toDone(E, id, `D5.${trig}`); finalCheck(E, id, `D5.${trig}`); await spentOk(E, id, `D5.${trig}`);
+    res[`D5.${trig}`] = `killed ${k} in ${j0.state}, resumed ${r?.r?.resumed}`;
+  }
+  // D5b: failed / review / cancelled restarts
+  for (const st of ['failed', 'review', 'cancelled']) {
+    const { pdf, id } = start(`d5b-${st}.pdf`);
+    await killAt(id, 'state:skinning', `D5b.${st}`);
+    editJob(id, (j) => { j.state = st; j.reason = st === 'cancelled' ? null : { code: 'STAGE_FAILED', message: 'qa' }; });
+    const r = await resume(E, pdf, `D5b.${st}`);
+    await toDone(E, id, `D5b.${st}`); finalCheck(E, id, `D5b.${st}`);
+    res[`D5b.${st}`] = `resumed ${r?.r?.resumed}, reason ${JSON.stringify(E.job(id).reason)}`;
+  }
+  // D2 changed / deleted outputs of an earlier stage while killed in a later one
+  for (const [lbl, op, target] of [['rendering-changed', 'change', 'rendering'], ['tracing-deleted', 'delete', 'tracing'], ['building-changed', 'change', 'building'], ['skinning-changed', 'change', 'skinning']]) {
+    const { pdf, id } = start(`d2-${lbl}.pdf`);
+    await killAt(id, 'state:packaging', `D2.${lbl}`);
+    const f = E.jobPath(id, `stages/${target}/stub.json`);
+    if (op === 'change') fs.appendFileSync(f, ' '); else fs.rmSync(f, { force: true });
+    await resume(E, pdf, `D2.${lbl}`);
+    const j = await toDone(E, id, `D2.${lbl}`);
+    const x = inv(E, id, `D2.${lbl} end`);
+    await spentOk(E, id, `D2.${lbl}`);
+    const led = E.ledger(id);
+    res[`D2.${lbl}`] = { state: j.state, settled: led.rows.filter((r) => r.status === 'settled').length, spent: j.cost.spent_usd, attempts: j.attempts, rows: x.man.rows.map((r) => `${r.stage}${r.attempt}${r.superseded ? 's' : ''}`).join(' ') };
+    if (j.state !== 'done') violate(`D2.${lbl}: ended ${j.state}`);
+  }
+  // D4 approve with a cap below what the ledger already holds (hand-made: approval cleared, state awaiting_approval)
+  {
+    const E2 = E;
+    const { pdf, id } = start('d4.pdf');
+    await killAt(id, 'settledcount:2', 'D4');
+    editJob(id, (j) => { j.state = 'awaiting_approval'; j.percent = 55; j.approval = null; });
+    await resume(E, pdf, 'D4');
+    await sleep(600);
+    let msg = 'approve ok';
+    try { E.h.approve_paid_stage({ job_id: id, cap_usd: 1 }); } catch (e) { msg = `approve threw ${e.code}: ${e.message}`; }
+    res.D4 = msg;
+    try { E.h.approve_paid_stage({ job_id: id, cap_usd: 48 }); res.D4 += ' | 48 accepted'; } catch (e) { res.D4 += ` | 48 threw ${e.code}`; }
+    const j = await toDone(E, id, 'D4', { cap: 48 });
+    const led = E.ledger(id);
+    res.D4 += ` -> ${j.state}, cap ${led.cap_usd}, total ${settledSum(led) + heldSum(led)}, reason ${JSON.stringify(j.reason)}`;
+    inv(E, id, 'D4 end');
+  }
+  heavyOverlap(E, 'a4');
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a4', seed, kills: S.kills, jobsDone: S.jobs, checks: S.checks, res, violations: S.violations, notes: S.notes, leftover: E.leftover }, null, 1));

@@ -1,0 +1,15 @@
+✔ 1. kill in the middle of a stage: the state stays, runner.alive false, rows for tracing and building only (1098.6152ms)
+✔ 2. resume: created false, resumed true; tracing and building untouched; rendering one row, attempt 2 (536.7783ms)
+✔ 3. kill between reserve and settle: one orphaned and one settled row for that call_key; the job goes on (4146.6015ms)
+✔ 4. kill after the settle, before the manifest row: gating runs again (attempt 2), still ONE ledger row for its call (1012.1184ms)
+✔ 5. the end: done, one valid row per stage, spent = 3 × 0.6, the orphan reported apart, the link answers 200 (1574.9116ms)
+✔ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (2271.6294ms)
+✔ 7. restart after cancel: resumed, finishes, no stage that was done before the cancel ran again (4164.948ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15035.4596

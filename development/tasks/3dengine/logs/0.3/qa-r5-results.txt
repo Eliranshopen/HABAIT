@@ -1,0 +1,206 @@
+PASS E cancel in RESERVE_MS of finishing 
+PASS E cancel in RESERVE_MS of finishing 
+PASS E cancel in SETTLE_MS of gating 
+PASS E cancel in CACHE_MS of skinning 
+PASS E cancel in RESERVE_MS of finishing 
+PASS E cancel in RESERVE_MS of skinning 
+PASS E cancel in CACHE_MS of gating 
+PASS E cancel in RESERVE_MS of finishing 
+PASS E cancel in CACHE_MS of gating 
+PASS A keep-kill skinning:sent hold=3 
+PASS A keep-kill finishing:sent hold=3 
+PASS A keep-kill finishing:sent hold=3 
+PASS A keep-kill finishing:sent hold=3 
+PASS A keep-kill gating:sent hold=3 
+PASS A keep-kill gating:sent hold=6 
+PASS A keep-kill gating:sent hold=6 
+PASS A keep-kill finishing:sent hold=6 
+PASS A keep-kill skinning:sent hold=3 
+PASS A keep-kill gating:sent hold=3 
+PASS B kill@building hook=- + 3 simultaneous runners 
+PASS B kill@skinning hook=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS + 3 simultaneous runners 
+PASS B kill@qa hook=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS + 3 simultaneous runners 
+PASS B kill@rendering hook=ENGINE_TEST_PAUSE_AFTER_SETTLE_MS + 3 simultaneous runners 
+PASS B kill@packaging hook=- + 3 simultaneous runners 
+PASS B runner already gone qa 
+PASS B kill@rendering hook=ENGINE_TEST_PAUSE_AFTER_CACHE_MS + 3 simultaneous runners 
+PASS B kill@skinning hook=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS + 3 simultaneous runners 
+PASS B kill@gating hook=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS + 3 simultaneous runners 
+PASS B kill@skinning hook=ENGINE_TEST_PAUSE_AFTER_CACHE_MS + 3 simultaneous runners 
+PASS B kill@rendering hook=ENGINE_TEST_PAUSE_AFTER_CACHE_MS + 3 simultaneous runners 
+PASS B kill@rendering hook=- + 3 simultaneous runners 
+PASS B kill@skinning hook=ENGINE_TEST_PAUSE_AFTER_CACHE_MS + 3 simultaneous runners 
+PASS B kill@gating hook=ENGINE_TEST_PAUSE_AFTER_CACHE_MS + 3 simultaneous runners 
+PASS B kill@gating hook=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS + 3 simultaneous runners 
+PASS B kill@skinning hook=- + 3 simultaneous runners 
+PASS B kill@qa hook=ENGINE_TEST_PAUSE_AFTER_CACHE_MS + 3 simultaneous runners 
+PASS B runner already gone qa 
+PASS B kill@building hook=ENGINE_TEST_PAUSE_AFTER_CACHE_MS + 3 simultaneous runners 
+PASS B kill@skinning hook=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS + 3 simultaneous runners 
+PASS C takeover@skinning wake-first 
+PASS C takeover@tracing wake+spawn 
+PASS C takeover@tracing kill-second-then-wake 
+PASS C takeover@finishing:sent kill-second-then-wake 
+PASS C takeover@finishing:sent wake+spawn 
+PASS C takeover@skinning:reserved wake+spawn 
+PASS C takeover@finishing:sent kill-second-then-wake 
+PASS C takeover@finishing:sent kill-second-then-wake 
+PASS C takeover@skinning wake+spawn 
+PASS C takeover@skinning wake-first 
+PASS C takeover@rendering wake+spawn 
+PASS C takeover@building kill-second-then-wake 
+PASS C takeover@tracing wake-first 
+PASS C takeover@packaging kill-second-then-wake 
+PASS C takeover@skinning kill-second-then-wake 
+PASS C takeover@gating:reserved kill-second-then-wake 
+PASS C takeover@gating:reserved wake+spawn 
+PASS C takeover@packaging wake-first 
+PASS C takeover@finishing kill-second-then-wake 
+PASS C takeover@gating:sent wake+spawn 
+PASS C takeover@tracing wake-first 
+PASS C takeover@building wake+spawn 
+PASS C takeover@gating:reserved wake+spawn 
+PASS C takeover@qa kill-second-then-wake 
+PASS C takeover@qa wake-first 
+PASS C takeover@skinning:reserved wake+spawn 
+PASS C takeover@gating:reserved wake-first 
+PASS C takeover@qa wake+spawn 
+PASS C takeover@finishing:sent wake+spawn 
+PASS C takeover@skinning:reserved wake-first 
+PASS D kill@packaging damage=finishing:delete,skinning:truncate,tracing:truncate 
+PASS D kill@qa damage=rendering:empty,gating:empty,building:append 
+FAIL D kill@finishing damage=skinning:delete,gating:append,rendering:delete ledger grew 2 -> 3 | finishing sent again | cache files changed
+FAIL D kill@finishing damage=rendering:delete,skinning:flip ledger grew 2 -> 3 | finishing sent again | cache files changed
+PASS D kill@qa damage=packaging:truncate,building:flip 
+FAIL D kill@finishing damage=gating:flip,building:flip,rendering:append ledger grew 2 -> 3 | finishing sent again | cache files changed
+FAIL D kill@finishing damage=building:empty ledger grew 2 -> 3 | finishing sent again | cache files changed
+PASS D kill@qa damage=tracing:flip 
+FAIL D kill@finishing damage=rendering:flip,gating:append ledger grew 2 -> 3 | finishing sent again | cache files changed
+PASS D kill@qa damage=gating:append,tracing:empty,finishing:truncate 
+PASS D kill@packaging damage=finishing:append 
+PASS D kill@qa damage=finishing:flip,rendering:delete,tracing:truncate 
+PASS D kill@packaging damage=tracing:append,skinning:truncate,building:truncate 
+PASS D kill@qa damage=tracing:truncate,packaging:append,rendering:truncate 
+PASS F dead-lock job.lock-empty @building resumed=true first progress after 1135 ms 
+PASS F dead-lock heavy.lock @skinning resumed=true first progress after 105 ms 
+PASS F dead-lock job.lock-nl @building resumed=true first progress after 119 ms 
+PASS F dead-lock heavy.guard @building resumed=true first progress after 101 ms 
+PASS F dead-lock heavy.lock @rendering resumed=true first progress after 131 ms 
+PASS F dead-lock heavy.guard+heavy.lock+job.lock @gating resumed=true first progress after 104 ms 
+PASS F dead-lock heavy.guard @rendering resumed=true first progress after 107 ms 
+PASS F dead-lock job.lock+pid @skinning resumed=true first progress after 133 ms 
+PASS F dead-lock job.lock @rendering resumed=true first progress after 134 ms 
+PASS F dead-lock job.lock-empty @skinning resumed=true first progress after 1135 ms 
+PASS F dead-lock job.lock+pid @skinning resumed=true first progress after 235 ms 
+PASS F dead-lock job.lock-empty @rendering resumed=true first progress after 1132 ms 
+PASS F dead-lock job.lock-nl @gating resumed=true first progress after 116 ms 
+PASS F dead-lock job.lock-nl @rendering resumed=true first progress after 135 ms 
+PASS D kill@packaging damage=skinning:truncate 
+PASS D kill@packaging damage=tracing:truncate,finishing:truncate 
+PASS D kill@qa damage=rendering:delete,gating:append 
+PASS D kill@qa damage=packaging:flip,finishing:truncate,skinning:truncate 
+PASS D kill@qa damage=rendering:flip 
+PASS D kill@qa damage=skinning:truncate 
+PASS D kill@qa damage=rendering:empty,skinning:flip 
+PASS D kill@qa damage=finishing:delete 
+PASS D kill@qa damage=packaging:delete,rendering:empty,gating:flip 
+PASS D kill@packaging damage=finishing:empty 
+PASS D kill@qa damage=packaging:truncate 
+PASS D kill@packaging damage=building:delete,tracing:empty 
+PASS D kill@qa damage=building:flip,finishing:flip 
+PASS D kill@qa damage=building:delete,finishing:empty,tracing:empty 
+PASS G done-job runners x4 #0 exit<=109ms bytesSame=true pidFile null->null sawPidFileNamingThem=0 viol=[]
+PASS G done-job runners x4 #1 exit<=112ms bytesSame=true pidFile null->null sawPidFileNamingThem=0 viol=[]
+PASS G done-job runners x4 #2 exit<=110ms bytesSame=true pidFile null->null sawPidFileNamingThem=0 viol=[]
+PASS G cancelled-job runners x2 exit<=86ms state=cancelled
+PASS G two jobs heavy lock, holder killed #0 overlap=false heavyLeft=false viol=[]
+PASS G two jobs heavy lock, holder killed #1 overlap=false heavyLeft=false viol=[]
+PASS G two jobs heavy lock, holder killed #2 overlap=false heavyLeft=false viol=[]
+PASS G two jobs heavy lock, holder killed #3 overlap=false heavyLeft=false viol=[]
+PASS CAP takeover@gating:sent stop=cap counted before wake=50 after=50 quote=75 approve60 refused: cap $60 is below the estimate $75 final rows=s1:settled g2:settled/late f3:settled spent=75 cap=75 
+PASS CAP takeover@skinning:sent stop=cap counted before wake=50 after=50 quote=75 approve60 refused: cap $60 is below the estimate $75 cap $60 is below the estimate $100 final rows=s1:settled/late s2:settled g3:settled f4:settled spent=100 cap=200 
+PASS CAP takeover@gating:sent stop=cap counted before wake=50 after=50 quote=75 approve60 refused: cap $60 is below the estimate $75 final rows=s1:settled g2:settled/late f3:settled spent=75 cap=75 
+PASS CAP takeover@skinning:sent stop=cap counted before wake=50 after=50 quote=75 approve60 refused: cap $60 is below the estimate $75 cap $60 is below the estimate $100 final rows=s1:settled/late s2:settled g3:settled f4:settled spent=100 cap=200 
+PASS CANCEL while frozen at skinning:sent, wake, restart rows after wake=1 settled=1 
+PASS CANCEL while frozen at gating:sent, wake, restart rows after wake=1 settled=1 
+PASS L1 late row after done + kill (none,gating:sent) #0  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=2:settled/late 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,gating:sent) #1  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=2:settled/late 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,gating:sent) #2  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=2:settled/late 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,gating:sent) #3  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=2:settled/late 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,gating:sent) #4  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=2:settled/late 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,gating:sent) #5  state=done settledSum=1.8 spent_usd=1.8 (before wake 1.8) getResult.cost=1.8 rows=2:orphaned 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,gating:sent) #6  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=2:settled/late 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,gating:sent) #7  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=2:settled/late 3:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #0  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=3:settled/late 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #1  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=3:settled/late 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #2  state=done settledSum=1.8 spent_usd=1.8 (before wake 1.8) getResult.cost=1.8 rows=3:orphaned 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #3  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=3:settled/late 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #4  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=3:settled/late 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #5  state=done settledSum=1.8 spent_usd=1.8 (before wake 1.8) getResult.cost=1.8 rows=3:orphaned 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #6  state=done settledSum=1.8 spent_usd=1.8 (before wake 1.8) getResult.cost=1.8 rows=3:orphaned 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+PASS L1 late row after done + kill (none,finishing:sent) #7  state=done settledSum=2.4 spent_usd=2.4 (before wake 1.8) getResult.cost=2.4 rows=3:settled/late 4:settled runnerAlive=false startAgain={created:false,resumed:false}
+FAIL OVER billed 5 on estimate 0.6, cap 1.0 counted=5 spent=5 next call -> BUDGET_CAP
+PASS D2 n=2 delay=0 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=2 delay=0 sent2=0 rows=1
+PASS D2 n=2 delay=50 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=2 delay=50 sent2=0 rows=1
+PASS D2 n=2 delay=800 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=2 delay=800 sent2=0 rows=1
+PASS D2 n=3 delay=0 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=3 delay=0 sent2=0 rows=1
+PASS D2 n=3 delay=50 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=3 delay=50 sent2=0 rows=1
+PASS D2 n=3 delay=800 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=3 delay=800 sent2=0 rows=1
+PASS D2 n=10 delay=0 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=10 delay=0 sent2=0 rows=1
+PASS D2 n=10 delay=50 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=10 delay=50 sent2=0 rows=1
+PASS D2 n=10 delay=800 fail=false sent=1 rows=settled spent=0.6
+PASS D2 again-after n=10 delay=800 sent2=0 rows=1
+PASS D2 n=2 delay=0 fail=true sent=1 rows=failed spent=0
+PASS D2 again-after-fail n=2 sent2=1 rows=failed,settled
+PASS D2 n=2 delay=300 fail=true sent=1 rows=failed spent=0
+PASS D2 again-after-fail n=2 sent2=1 rows=failed,settled
+PASS D2 n=3 delay=0 fail=true sent=1 rows=failed spent=0
+PASS D2 again-after-fail n=3 sent2=1 rows=failed,settled
+PASS D2 n=3 delay=300 fail=true sent=1 rows=failed spent=0
+PASS D2 again-after-fail n=3 sent2=1 rows=failed,settled
+PASS D2-other-instance delay=100 sent=2 rows=settled/late,settled spent=1.2 (contract: allowed, orphan+late)
+PASS D2-other-instance delay=600 sent=2 rows=settled/late,settled spent=1.2 (contract: allowed, orphan+late)
+PASS D2-different-keys cap=60 dt=553 sent=3 outcomes=ok,ok,ok counted=1.7999999999999998
+PASS D2-different-keys cap=1 dt=520 sent=1 outcomes=ok,BUDGET_CAP,BUDGET_CAP counted=0.6
+PASS D2-different-keys cap=1.2 dt=548 sent=2 outcomes=ok,ok,BUDGET_CAP counted=1.2
+PASS O-E unmarked reserved + cache seq right sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E unmarked reserved + cache no seq sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E unmarked reserved + cache seq null sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E unmarked reserved + cache usd 50 seq right sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E unmarked reserved + cache usd 50 no seq sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E two unmarked reserved + cache no seq sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:failed/ns/nomark 3:settled
+PASS O-E unmarked reserved (1) + marked reserved (2) + cache no seq -> marked owns sent=0 ans={"planted":true} spent=0.6 rows=1:failed/ns/nomark 2:settled/rec
+PASS O-E unmarked reserved + cache seq string "1" sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E unmarked reserved + garbage cache sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E unmarked reserved + cache answer null sent=1 ans={"real":true} spent=0.6 rows=1:failed/ns/nomark 2:settled
+PASS O-E marked reserved + cache seq right sent=0 ans={"planted":true} spent=0.6 rows=1:settled/rec
+PASS O-E marked reserved + cache no seq sent=0 ans={"planted":true} spent=0.6 rows=1:settled/rec
+FAIL O-E marked reserved + cache usd 50 (spent follows file?) sent=0 ans={"planted":true} spent=50 rows=1:settled/rec
+FAIL O-E marked reserved + cache usd -5 sent=0 ans={"planted":true} spent=-5 rows=1:settled/rec
+PASS O-E marked reserved + cache usd "abc" sent=0 ans={"planted":true} spent=0 rows=1:settled/rec
+PASS O-E orphaned marked + cache seq right sent=0 ans={"planted":true} spent=0.6 rows=1:settled/rec/late
+FAIL O-E orphaned marked + cache seq right usd 50 sent=0 ans={"planted":true} spent=50 rows=1:settled/rec/late
+PASS O-E orphaned UNmarked + cache seq right sent=1 ans={"real":true} spent=0.6 rows=1:orphaned/nomark 2:settled
+PASS O-E settled null-hash + cache seq right sent=1 ans={"real":true} spent=1.2 rows=1:settled 2:settled
+PASS O-E settled row, cache replaced (other hash) sent=1 ans={"real":true} spent=1.2 rows=1:settled 2:settled
+PASS O-E failed row + cache seq right sent=1 ans={"real":true} spent=0.6 rows=1:failed 2:settled
+FAIL L1 late row after done + kill (SETTLE,skinning:sent) #0  state=done settledSum=2.4 spent_usd=1.8 (before wake 1.8) getResult.cost=1.8 rows=1:settled/late 2:settled runnerAlive=false startAgain={created:false,resumed:false}
+FAIL L1 late row after done + kill (SETTLE,skinning:sent) #1  state=done settledSum=2.4 spent_usd=1.8 (before wake 1.8) getResult.cost=1.8 rows=1:settled/late 2:settled runnerAlive=false startAgain={created:false,resumed:false}
+FAIL L1 late row after done + kill (SETTLE,skinning:sent) #2  state=done settledSum=2.4 spent_usd=1.8 (before wake 1.8) getResult.cost=1.8 rows=1:settled/late 2:settled runnerAlive=false startAgain={created:false,resumed:false}
+FAIL OVER billed 5 on estimate 0.6, cap 1.0 counted=5 spent=5 next call -> BUDGET_CAP
+PASS O-G hold=1s mode=real  dt=3168ms state=done skinning sends=1 rows=1:settled cacheWaitLines=0 spent=1.8 viol=[] log=[]
+PASS O-G hold=5s mode=real  dt=7129ms state=done skinning sends=1 rows=1:settled cacheWaitLines=1 spent=1.8 viol=[] log=["skinning: the cache write of seq 1 waits (job a7cbcdc5bfe9e36e: lock busy); the answer stays in hand","heartbeat skipped: job a7cbcdc5bfe9e36e: lock busy"]
+PASS O-G hold=12s mode=plant  dt=12114ms state=done skinning sends=1 rows=1:settled cacheWaitLines=2 spent=1.8 viol=[] log=["skinning: the cache write of seq 1 waits (job b1ff76314d197b22: lock busy); the answer stays in hand","heartbeat skipped: job b1ff76314d197b22: lock busy","skinning: the cache write of seq 1 waits (job b1ff76314d197b22: lock busy); the answer stays in hand","heartbeat skipped: job b1ff76314d197b22: lock busy"]
+PASS O-G hold=12s mode=real  dt=12120ms state=done skinning sends=1 rows=1:settled cacheWaitLines=2 spent=1.8 viol=[] log=["skinning: the cache write of seq 1 waits (job d2c8261c0a3fe432: lock busy); the answer stays in hand","heartbeat skipped: job d2c8261c0a3fe432: lock busy","skinning: the cache write of seq 1 waits (job d2c8261c0a3fe432: lock busy); the answer stays in hand","heartbeat skipped: job d2c8261c0a3fe432: lock busy"]
+PASS O-G hold=40s mode=plant  dt=12126ms state=done skinning sends=1 rows=1:settled cacheWaitLines=2 spent=1.8 viol=[] log=["skinning: the cache write of seq 1 waits (job b9a32e556a3df6fe: lock busy); the answer stays in hand","heartbeat skipped: job b9a32e556a3df6fe: lock busy","skinning: the cache write of seq 1 waits (job b9a32e556a3df6fe: lock busy); the answer stays in hand","heartbeat skipped: job b9a32e556a3df6fe: lock busy"]
+PASS O-G hold=40s mode=refresh  dt=43037ms state=done skinning sends=2 rows=1:orphaned 2:settled cacheWaitLines=7 spent=1.8 viol=[] log=["skinning: the cache write of seq 1 waits (job 2ba0774bea5e7563: lock busy); the answer stays in hand","heartbeat skipped: job 2ba0774bea5e7563: lock busy","skinning: the cache write of seq 1 waits (job 2ba0774bea5e7563: lock busy); the answer stays in hand","heartbeat skipped: job 2ba0774bea5e7563: lock busy","skinning: the cache write of seq 1 waits (job 2ba0774bea5e7563: lock busy); the answer stays in hand","heartbeat skipped: job 2ba0774bea5e7563: lock busy","skinning: the cache write of seq 1 waits (job 2ba0774bea5e7563: lock busy); the answer stays in hand","heartbeat skipped: job 2ba0774bea5e7563: lock busy"]
+PASS O-G hold=5s mode=real kill killed in keep after 2059ms; dt=7750ms state=done skinning sends=2 rows=1:orphaned 2:settled cacheWaitLines=1 spent=1.8 viol=[] log=["skinning: the cache write of seq 1 waits (job b624f54bec89bff1: lock busy); the answer stays in hand","skinning: reserved row(s) of 046412381bde left by another runner: 1 marked orphaned (the send had started), 0 "]
+PASS O-G hold=12s mode=plant kill killed in keep after 2062ms; dt=15085ms state=done skinning sends=2 rows=1:orphaned 2:settled cacheWaitLines=1 spent=1.8 viol=[] log=["skinning: the cache write of seq 1 waits (job 23cef3d9ae1b209e: lock busy); the answer stays in hand","skinning: reserved row(s) of b83e74fac3c4 left by another runner: 1 marked orphaned (the send had started), 0 "]

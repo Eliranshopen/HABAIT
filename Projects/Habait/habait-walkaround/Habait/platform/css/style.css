@@ -59,6 +59,10 @@ button { font: inherit; color: inherit; }
 .badge-reserved { background: color-mix(in srgb, var(--warn) 16%, transparent); color: var(--warn); }
 .badge-sold { background: color-mix(in srgb, var(--sold) 16%, transparent); color: var(--sold); }
 .badge-unknown { background: color-mix(in srgb, var(--chrome-unknown) 16%, transparent); color: var(--chrome-unknown); }
+/* «נתוני הדגמה» (Eliran 2026-11-10): the numbers of a unit without sales-plan data are demo data — the same pill family as the status
+   badges, the warn hue of the fixture badge, dashed so it reads as "provisional"; small, inline, never a tap target */
+.badge-demo { padding: 2px 8px; font-size: 11px; font-weight: 600; letter-spacing: 0; white-space: nowrap; background: color-mix(in srgb, var(--chrome-warn) 14%, transparent); color: var(--chrome-warn); border: 1px dashed color-mix(in srgb, var(--chrome-warn) 60%, transparent); }
+.unit-demo { display: flex; justify-content: flex-start; margin-top: -2px; }
 
 /* ---------- index ---------- */
 .topbar {

@@ -13,7 +13,11 @@
    T16b (CATALOG-PLAN.md §10.3, D-CAT-14): a catalog request may name the PIECE the visitor tapped (`piece`: category, box on
    0-1000 of the crop, count) — the text step then gets one line saying which piece, and `op: 'replace_judge'` answers whether the
    old piece is gone and the product stands in its place (the acceptance of a catalog turn; the people judge `op: 'judge'` and its
-   size rule are untouched). A catalog request without `piece` takes exactly T14b's path (golden `a413f17c`). */
+   size rule are untouched). A catalog request without `piece` takes exactly T14b's path (golden `a413f17c`).
+   2026-11-16 (plan development/plans/2026-11-16-typed-change-all-tabs.md; Eliran: «להעביר את השינוי לכל לשונית שרואה את הנקודה»):
+   a typed change of reach `object` answers with `follow`, a signed copy of its prepared instruction; the page then sends one
+   FOLLOW turn per other scene that sees the spot (`follow: { token, reference }`): that scene's view plus the first scene's edited
+   view as a second image, no text step, the people editor. Every answer carries the time of each step (`ms_text`, `ms_edit`). */
 import { chatFetch, hasChat } from './chat-transport.mjs';
 import crypto from 'node:crypto';
 
@@ -24,11 +28,20 @@ export const MODELS = {
   kontext: { id: 'fal-ai/flux-pro/kontext', usd: 0.04, reserve: 0.08, slow: false },
   flux3: { id: 'blackforestlabs/flux-3/edit-image', usd: 0.024, reserve: 0.05, slow: true },
   nb2: { id: 'fal-ai/nano-banana-2/edit', usd: 0.08, reserve: 0.1, slow: false },
+  // 2026-11-16, the speed bench (tools/edit_bench.py; Eliran: a faster editor among the models fal hosts): FLUX.2 klein 9B at four
+  // steps answered the people view in 3.8 s (nb2 12.6 s) and the furniture view in 3.6–4.6 s (kontext 7–11 s), the frame held and
+  // the count kept on 2 of 2; with a SECOND image it answers the second image's view, so a follow turn never gets it. fal lists it
+  // at $0.011 a megapixel; booked on the high side.
+  klein: { id: 'fal-ai/flux-2/klein/9b/edit', usd: 0.035, reserve: 0.05, slow: false },
 };
+/* The editor that takes the FIRST attempt of a change of a thing inside the view (people included); a refused result goes on to
+   the proven editors as before. `null` restores the routing of before 2026-11-16. The view's size is the page's crop (edit-live.js). */
+export const FAST_EDITOR = 'klein';
+const VIEW_SIZE = { width: 1264, height: 848 };
 export const TEXT_MODEL = 'google/gemini-3.7-flash';
 export const TEXT_USD = 0.003; // worst case per call; the measured grounding call was about $0.0017
 const MAX_RESERVE = TEXT_USD + Math.max(...Object.values(MODELS).map((m) => m.reserve));
-export const LIMITS = { instructionChars: 300, cropBytes: 2_000_000, referenceBytes: 600_000, dailyUsd: 5, perTurnUsd: Math.round((TEXT_USD + Math.max(...Object.values(MODELS).map((m) => m.usd))) * 1000) / 1000 };
+export const LIMITS = { instructionChars: 300, cropBytes: 2_000_000, referenceBytes: 600_000, followBytes: 1_200_000, dailyUsd: 5, perTurnUsd: Math.round((TEXT_USD + Math.max(...Object.values(MODELS).map((m) => m.usd))) * 1000) / 1000 };
 
 /* The scope (D-T360-24, his "change everything that we can change"): a reach the text step names for every request.
    object = a thing inside the view (furniture, décor, lighting, art, plants, electronics, what is on a table, people, pets);
@@ -89,6 +102,41 @@ const KEEP = {
    never pastes a refused one; a refused attempt is retried — a living change up to three times across the two editors. */
 const FRAME = 'Edit this photo in place: keep the exact same camera position, framing, zoom and field of view.';
 const SCALE = 'Draw the people or animals at the scale of the furniture as it appears now: if the table and chairs are small in the frame, the people are small too. Do not zoom in on them and do not re-compose the photo.';
+
+/* The follow turn (2026-11-16, plan 2026-11-16-typed-change-all-tabs). A typed change lands in ONE scene's panorama; the same spot is
+   seen from other scenes. The page sends each of those scenes' views with the first scene's edited view as a second image, and the
+   editor repeats the change from this camera. The instruction is the FIRST turn's own (`prep.body`), carried in a token this host
+   signed: the scope rule ran once, on the visitor's words, and a page cannot hand the editor an instruction of its own. */
+export const FOLLOW_MODEL = 'nb2';          // the editor that takes a second image; the bench (plan §4 B2) may name another
+export const FOLLOW_TTL_MS = 10 * 60_000;   // a token outlives its turn by ten minutes
+const FOLLOW_SAME = {
+  living: 'the same people or animals: the same number of them, the same faces, hair, clothing, poses and what they hold',
+  object: 'the same objects: the same design, shape, colour, material and size',
+};
+const followText = (prep) => `The second image shows this same room from a different camera position, after this change was made there: ${prep.body} Make the same change in the first image as it looks from the first image's camera: ${prep.living ? FOLLOW_SAME.living : FOLLOW_SAME.object}, standing at the same place in the room, beside the same furniture, drawn in the first image's own perspective and at the scale of the furniture around them. Use the second image only to see what was changed and where in the room it is; do not copy its camera angle, its framing or its background. If that place in the room is not visible in the first image, return the first image unchanged.`;
+/** The full instruction of a follow turn: the frame rule always (two images tempt the editor to re-compose), then the scale rule for people. */
+export function assembleFollow(prep) {
+  return `${FRAME} ${followText(prep)} ${prep.living ? SCALE + ' ' : ''}${KEEP.object}`;
+}
+/* The token: base64url(JSON) + '.' + HMAC-SHA256 under a key derived from the host's own editor key (never sent, never logged). */
+const followKey = (env) => crypto.createHash('sha256').update('tour360-follow-v1\n' + String(env.FAL_KEY || '')).digest();
+export function followToken(env, prep, now = Date.now()) {
+  const payload = Buffer.from(JSON.stringify({ b: prep.body, l: prep.living === true, t: prep.target || '', c: prep.change || '', x: now + FOLLOW_TTL_MS })).toString('base64url');
+  return payload + '.' + crypto.createHmac('sha256', followKey(env)).update(payload).digest('base64url');
+}
+/** The prepared instruction a token carries, or null when it is not this host's, was altered, or is past its time. */
+export function followOpen(env, token, now = Date.now()) {
+  const s = String(token || '');
+  const i = s.indexOf('.');
+  if (i < 8 || s.length > 4000) return null;
+  const payload = s.slice(0, i), mac = Buffer.from(s.slice(i + 1), 'base64url');
+  const want = crypto.createHmac('sha256', followKey(env)).update(payload).digest();
+  if (mac.length !== want.length || !crypto.timingSafeEqual(mac, want)) return null;
+  let p;
+  try { p = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')); } catch { return null; }
+  if (!p || typeof p.b !== 'string' || p.b.length < 20 || !Number.isFinite(p.x) || p.x < now) return null;
+  return { body: p.b, living: p.l === true, target: String(p.t || ''), change: String(p.c || ''), reach: 'object' };
+}
 
 /* The catalog turn (T14b, CATALOG-PLAN.md §2). The text step gets the item beside the visitor's words and this block beside its
    rules; the editor gets the product photo as a second image and the PRODUCT sentence before the keep-clause. The host's catalog
@@ -404,20 +452,38 @@ chairs or the dishes).
 Return ONLY a JSON object: {"object": "short name", "box1": [ymin, xmin, ymax, xmax], "box2": [ymin, xmin, ymax, xmax], "found_in_2": true or false}
 with the boxes normalized to 0-1000 of each image.`;
 const JUDGE_RULE = { iou: 0.5, minArea: 0.6, maxArea: 1.6 };
+/* The anchor judge (2026-11-16, the paid cross-tab proof: qa-evidence/tour360/typed-all-tabs-2026-11-16). A follow turn's answer is
+   drawn from another camera's picture, and two of the six real answers whose border held had the dining table itself redrawn —
+   once three times too large, once smaller and moved. The judge above HELD the first: the largest piece in that view is the sofa
+   in the foreground, which had not moved. No pixel measure told the two from the four right ones (ring, changed share, the height
+   against the plan, edges kept: all overlap). This wording boxes the piece the change is AT, in the answer first, and read all six
+   right on two runs each (judge-anchor-test.json, 12 of 12). `anchor: true` on an `op: 'judge'` request asks for it; a follow turn does. */
+const JUDGE_ANCHOR_SYSTEM = `You compare two photos of the same room taken by the same camera. Image 1 is the original. Image 2 is an edited version in which
+something was added or changed: usually people, sometimes an object. In image 2, find the piece of furniture the added or changed
+thing is AT: the table the people sit at, the sofa they sit on, the surface the object stands on. Call it the anchor. Then find the
+same anchor in image 1. Box the WHOLE anchor in each image (for a table: the table top and its legs or base; never the people, the
+chairs or the dishes). Keep the answer short.
+Return ONLY a JSON object: {"anchor": "short name", "box1": [ymin, xmin, ymax, xmax], "box2": [ymin, xmin, ymax, xmax], "found_in_1": true or false}
+with box1 in image 1 and box2 in image 2, each normalized to 0-1000 of its own image.`;
+/* The ceiling of a judge's answer. Through fal's router (a host without OPENROUTER_API_KEY) the model's reasoning is not capped and
+   shares this ceiling: at 900 three of about twelve answers on 2026-11-16 were cut before their second box, and a judge that cannot
+   be read refuses a picture that may be right (one fast-editor result was lost that way, 20 s and an nb2 call later). */
+const JUDGE_MAX_TOKENS = 2400;
 
-/** Did the furniture keep its place and size? Returns { held, iou, ratio, object }. Throws EditError('judge') when it cannot tell. */
-export async function judge(env, cropDataUrl, resultDataUrl, fetchImpl = fetch) {
+/** Did the furniture keep its place and size? Returns { held, iou, ratio, object }. Throws EditError('judge') when it cannot tell.
+    `anchor` = judge the piece the change is at (above) instead of the largest piece in the view. */
+export async function judge(env, cropDataUrl, resultDataUrl, fetchImpl = fetch, anchor = false) {
   const res = await chatFetch(env, fetchImpl)('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://habait.ai', 'X-Title': 'Habait Tour360 (edit judge)' },
     body: JSON.stringify({
       model: TEXT_MODEL,
       temperature: 0,
-      max_tokens: 900,
+      max_tokens: JUDGE_MAX_TOKENS,
       reasoning: { max_tokens: 300 },
       response_format: { type: 'json_object' },
       messages: [
-        { role: 'system', content: JUDGE_SYSTEM },
+        { role: 'system', content: anchor ? JUDGE_ANCHOR_SYSTEM : JUDGE_SYSTEM },
         { role: 'user', content: [
           { type: 'text', text: 'Image 1 — the original:' }, { type: 'image_url', image_url: { url: cropDataUrl } },
           { type: 'text', text: 'Image 2 — the edit:' }, { type: 'image_url', image_url: { url: resultDataUrl } },
@@ -430,12 +496,21 @@ export async function judge(env, cropDataUrl, resultDataUrl, fetchImpl = fetch) 
   const json = await res.json();
   const text = json.choices?.[0]?.message?.content || '';
   let parsed;
-  try { parsed = JSON.parse(text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '')); } catch { throw new EditError(502, 'judge', 'judge returned no JSON'); }
+  // 2026-11-16: tolerant, as pieceSeen is — the object between the first { and the last }. Through fal's router (no JSON mode) the
+  // model sometimes wraps its answer in a sentence, and a judge that cannot be read refuses a picture that may be right.
+  const ja = text.indexOf('{'), jz = text.lastIndexOf('}');
+  try { parsed = JSON.parse(ja >= 0 && jz > ja ? text.slice(ja, jz + 1) : text); } catch { throw new EditError(502, 'judge', 'judge returned no JSON: ' + text.replace(/\s+/g, ' ').slice(0, 120)); }
   const box = (q) => (Array.isArray(q) && q.length === 4 && q.every((n) => Number.isFinite(n)) ? q.map(Number) : null);
   const b1 = box(parsed.box1), b2 = box(parsed.box2);
-  const object = String(parsed.object || '').slice(0, 60);
-  if (!b1) throw new EditError(502, 'judge', 'judge returned no box');
-  if (!b2 || parsed.found_in_2 === false) return { held: false, iou: 0, ratio: 0, object };
+  const object = String((anchor ? parsed.anchor : parsed.object) || '').slice(0, 60);
+  if (anchor) {
+    // the anchor is found in the ANSWER first; one that is not in the original where the answer has it was redrawn
+    if (!b2) throw new EditError(502, 'judge', 'judge returned no box');
+    if (!b1 || parsed.found_in_1 === false) return { held: false, iou: 0, ratio: 0, object };
+  } else {
+    if (!b1) throw new EditError(502, 'judge', 'judge returned no box');
+    if (!b2 || parsed.found_in_2 === false) return { held: false, iou: 0, ratio: 0, object };
+  }
   const area = (q) => Math.max(0, q[2] - q[0]) * Math.max(0, q[3] - q[1]);
   const inter = Math.max(0, Math.min(b1[2], b2[2]) - Math.max(b1[0], b2[0])) * Math.max(0, Math.min(b1[3], b2[3]) - Math.max(b1[1], b2[1]));
   const union = area(b1) + area(b2) - inter;
@@ -454,9 +529,10 @@ export async function handleJudge(body, env, ledger, { fetchImpl = fetch, log = 
   if (!ok(crop) || !ok(result)) throw new EditError(400, 'bad_request', 'crop and result must be JPEG, PNG or WebP data URLs under 2 MB');
   if (ledger.total() + JUDGE_USD > ledger.cap) throw new EditError(429, 'cap', `the day's cap of $${ledger.cap} is reached`);
   const t0 = Date.now();
-  const id = ledger.reserve({ ts: new Date().toISOString(), op: 'live_judge', scene: String(body?.scene || ''), apartment: String(body?.apartment || ''), reserved_usd: JUDGE_USD, settled_usd: null, status: 'reserved' });
+  const anchor = body?.anchor === true; // 2026-11-16: the piece the change is at, not the largest piece (a follow turn asks for it)
+  const id = ledger.reserve({ ts: new Date().toISOString(), op: 'live_judge', scene: String(body?.scene || ''), apartment: String(body?.apartment || ''), ...(anchor ? { anchor: true } : {}), reserved_usd: JUDGE_USD, settled_usd: null, status: 'reserved' });
   try {
-    const j = await judge(env, crop, result, fetchImpl);
+    const j = await judge(env, crop, result, fetchImpl, anchor);
     ledger.settle(id, JUDGE_USD, { status: 'settled', held: j.held, iou: j.iou, ratio: j.ratio, object: j.object, seconds: (Date.now() - t0) / 1000 });
     log(`live_judge ${j.held ? 'held' : 'NOT held'} iou ${j.iou} area x${j.ratio} (${j.object}) ${((Date.now() - t0) / 1000).toFixed(1)}s`);
     return { ok: true, held: j.held, iou: j.iou, ratio: j.ratio, object: j.object, usd: JUDGE_USD, ms: Date.now() - t0 };
@@ -485,6 +561,7 @@ export function describe(env, catalog = null, code = undefined) {
     ...(code !== undefined && keys && !configured ? { reason: 'code' } : {}),
     models: Object.keys(MODELS),
     scope: SCOPE,
+    follow: true, // 2026-11-16: this host answers follow turns (a page asks before it sends one)
     attempts: MAX_ATTEMPTS,
     limits: LIMITS,
     catalog: { items: catalog ? Object.keys(catalog).length : 0 },
@@ -566,9 +643,12 @@ export async function prepare(env, instruction, lang, fetchImpl = fetch, item = 
 /** Which editor takes the turn: size changes → flux3 (the only one that resizes), people and pets → nb2, everything else → kontext.
     Later attempts (the browser refused a result): a living change gets the people editor a second time — its failure is a matter
     of the run, about one in five on the dining table — and Kontext on the third; anything else goes to nb2 on its second attempt. */
-export const MAX_ATTEMPTS = { living: 3, other: 2, catalog: 2 };
+export const MAX_ATTEMPTS = { living: 3, other: 2, catalog: 2, follow: 2 };
 export function routeModel(prep, attempt = 1) {
   if (prep.catalog) return 'nb2'; // the one editor that takes a second image (the product photo)
+  // 2026-11-16: the fast editor first — a thing inside the view, not a resize (flux3 alone resizes); a wall, the light and the view
+  // outside keep kontext (not measured). From the second attempt on, the routing of before.
+  if (FAST_EDITOR && attempt === 1 && prep.reach === 'object' && !prep.sizeChange) return FAST_EDITOR;
   if (prep.living) return attempt >= 3 ? 'kontext' : 'nb2';
   if (attempt > 1) return 'nb2';
   return prep.sizeChange ? 'flux3' : 'kontext';
@@ -577,7 +657,9 @@ export function routeModel(prep, attempt = 1) {
 /** The image step: one fal call, the result returned as a data URL. A reference (the product photo) rides only with nb2. */
 export async function edit(env, modelKey, cropDataUrl, prompt, fetchImpl = fetch, referenceDataUrl = null) {
   const m = MODELS[modelKey];
-  const payload = modelKey === 'flux3'
+  const payload = modelKey === 'klein'
+    ? { prompt, image_urls: [cropDataUrl], image_size: VIEW_SIZE, num_inference_steps: 4, num_images: 1, output_format: 'jpeg', sync_mode: true }
+    : modelKey === 'flux3'
     ? { prompt, image_urls: [cropDataUrl], aspect_ratio: 'auto', resolution: '1k', output_format: 'jpeg', enable_prompt_expansion: false, safety_tolerance: 2 }
     : modelKey === 'nb2'
       ? { prompt, image_urls: referenceDataUrl ? [cropDataUrl, referenceDataUrl] : [cropDataUrl], aspect_ratio: 'auto', resolution: '1K', num_images: 1, output_format: 'jpeg' }
@@ -605,11 +687,45 @@ export async function edit(env, modelKey, cropDataUrl, prompt, fetchImpl = fetch
   return { dataUrl, width: img.width || null, height: img.height || null, seed: json.seed ?? null, nsfw: Array.isArray(json.has_nsfw_concepts) ? json.has_nsfw_concepts[0] === true : false };
 }
 
+/** One follow turn (2026-11-16): { code, scene, crop, attempt, follow: { token, reference, from } } → the change that already landed in
+    another scene, repeated from this scene's camera. No text step: the instruction is the first turn's, opened from its signed
+    token; the first scene's edited view rides as the second image. Reserved and settled like an edit. */
+export async function handleFollow(body, env, ledger, { fetchImpl = fetch, log = () => {} } = {}) {
+  if (!describe(env).configured) throw new EditError(503, 'not_configured', 'the edit function has no keys on this host');
+  if (!codeOk(env, body?.code)) throw new EditError(403, 'code', 'wrong or missing unlock code');
+  const f = body?.follow && typeof body.follow === 'object' ? body.follow : {};
+  const prep = followOpen(env, f.token);
+  if (!prep) throw new EditError(400, 'follow', 'the follow token is not from this host or is past its time');
+  const okImg = (u, max) => /^data:image\/(jpeg|png|webp);base64,/.test(u) && dataUrlBytes(u) <= max;
+  const crop = String(body?.crop || ''), reference = String(f.reference || '');
+  if (!okImg(crop, LIMITS.cropBytes)) throw new EditError(400, 'bad_request', 'crop must be a JPEG, PNG or WebP data URL under 2 MB');
+  if (!okImg(reference, LIMITS.followBytes)) throw new EditError(400, 'bad_request', 'the reference view must be a JPEG, PNG or WebP data URL under 1.2 MB');
+  const attempt = body?.attempt === 2 ? 2 : 1;
+  const m = MODELS[FOLLOW_MODEL];
+  const t0 = Date.now();
+  if (ledger.total() + m.reserve > ledger.cap) throw new EditError(429, 'cap', `the day's cap of $${ledger.cap} is reached`);
+  const id = ledger.reserve({ ts: new Date().toISOString(), op: 'live_follow', scene: String(body?.scene || ''), apartment: String(body?.apartment || ''), from: String(f.from || '').slice(0, 40), attempt, reserved_usd: m.reserve, settled_usd: null, status: 'reserved' });
+  try {
+    const prompt = assembleFollow(prep);
+    const out = await edit(env, FOLLOW_MODEL, crop, prompt, fetchImpl, reference);
+    const ms = Date.now() - t0;
+    ledger.settle(id, m.usd, { status: 'settled', model: m.id, reach: 'object', living: prep.living, prompt_en: prompt, target: prep.target, change: prep.change, seconds: ms / 1000, result_size: out.width && out.height ? [out.width, out.height] : null, seed: out.seed });
+    log(`live_follow ok ${m.id}${prep.living ? ' living' : ''}${attempt > 1 ? ' attempt ' + attempt : ''} $${m.usd.toFixed(3)} ${(ms / 1000).toFixed(1)}s`);
+    return { ok: true, follow_turn: true, image: out.dataUrl, prompt, target: prep.target, change: prep.change, reach: 'object', living: prep.living, attempt, model: m.id, modelKey: FOLLOW_MODEL, usd: m.usd, ms, ms_text: 0, ms_edit: ms, slow: m.slow };
+  } catch (e) {
+    const seconds = (Date.now() - t0) / 1000;
+    if (e instanceof EditError) { ledger.settle(id, 0, { status: 'failed', reason: e.reason, error: String(e.message).slice(0, 200), seconds }); throw e; }
+    ledger.settle(id, 0, { status: 'unknown', error: String(e && e.message || e).slice(0, 200), seconds });
+    throw new EditError(500, 'error', String(e && e.message || e).slice(0, 200));
+  }
+}
+
 /** One edit turn. `ledger` is { total(), reserve(row) → id, settle(id, usd, patch) } — the laptop keeps a file, the function a day counter. */
 export async function handleEdit(body, env, ledger, { fetchImpl = fetch, log = () => {}, catalog = null } = {}) {
   if (body?.op === 'judge') return handleJudge(body, env, ledger, { fetchImpl, log });
   if (body?.op === 'likeness') return handleLikeness(body, env, ledger, { fetchImpl, log, catalog });
   if (body?.op === 'replace_judge') return handleReplaceJudge(body, env, ledger, { fetchImpl, log, catalog });
+  if (body?.follow !== undefined) return handleFollow(body, env, ledger, { fetchImpl, log }); // 2026-11-16: the same change, seen from another scene
   if (!describe(env).configured) throw new EditError(503, 'not_configured', 'the edit function has no keys on this host');
   if (!codeOk(env, body?.code)) throw new EditError(403, 'code', 'wrong or missing unlock code');
   // a catalog turn (T14b): the item must be in this host's catalog and the reference image must be that item's photo, byte for byte
@@ -633,7 +749,9 @@ export async function handleEdit(body, env, ledger, { fetchImpl = fetch, log = (
   }
   const id = ledger.reserve({ ts: new Date().toISOString(), op: 'live_edit', scene: String(body?.scene || ''), apartment: String(body?.apartment || ''), lang, instruction, attempt, ...(item ? { item: item.id } : {}), ...(piece ? { piece } : {}), reserved_usd: reserve, settled_usd: null, status: 'reserved' });
   let seen = null, seenUsd = 0;
+  let msSeen = 0, msText = 0, msEdit = 0; // 2026-11-16: the time of each step, so a slow turn says where it was slow
   try {
+    const ts = Date.now();
     if (piece) {
       if (piece.seen) seen = piece.seen; // attempt 2 carries attempt 1's answer: no second call
       else {
@@ -644,8 +762,11 @@ export async function handleEdit(body, env, ledger, { fetchImpl = fetch, log = (
         seenUsd = Math.round(seenUsd * 10000) / 10000;
       }
       if (seen.found) piece = { ...piece, seen };
+      msSeen = Date.now() - ts;
     }
+    const tt = Date.now();
     const prep = await prepare(env, instruction, lang, fetchImpl, item, piece);
+    msText = Date.now() - tt;
     if (!prep.allowed) {
       ledger.settle(id, TEXT_USD + seenUsd, { status: 'refused', reason: prep.reason, reach: prep.reach, seconds: (Date.now() - t0) / 1000 });
       return { ok: false, reason: prep.reason, reach: prep.reach, target: prep.target, usd: TEXT_USD + seenUsd, ms: Date.now() - t0 };
@@ -653,11 +774,15 @@ export async function handleEdit(body, env, ledger, { fetchImpl = fetch, log = (
     const modelKey = routeModel(prep, attempt);
     const m = MODELS[modelKey];
     const prompt = assemble(prep, attempt);
+    const te = Date.now();
     const out = await edit(env, modelKey, crop, prompt, fetchImpl, reference);
+    msEdit = Date.now() - te;
     const usd = Math.round((TEXT_USD + seenUsd + m.usd) * 1000) / 1000;
     ledger.settle(id, usd, { status: 'settled', model: m.id, reach: prep.reach, living: prep.living, prompt_en: prompt, target: prep.target, change: prep.change, seconds: (Date.now() - t0) / 1000, result_size: out.width && out.height ? [out.width, out.height] : null, seed: out.seed, ...(piece ? { seen_found: !!(seen && seen.found), seen_box: seen ? seen.box : null, seen_usd: seenUsd } : {}) });
     log(`live_edit ok ${m.id} ${prep.reach}${prep.living ? ' living' : ''}${item ? ' catalog ' + item.id : ''}${attempt > 1 ? ' attempt ' + attempt : ''} $${usd.toFixed(3)} ${((Date.now() - t0) / 1000).toFixed(1)}s`);
-    return { ok: true, image: out.dataUrl, prompt, target: prep.target, change: prep.change, reach: prep.reach, living: prep.living, attempt, model: m.id, modelKey, usd, ms: Date.now() - t0, slow: m.slow, ...(item ? { catalog: true, item: item.id } : {}), ...(piece ? { piece, piece_seen: seen } : {}) };
+    return { ok: true, image: out.dataUrl, prompt, target: prep.target, change: prep.change, reach: prep.reach, living: prep.living, attempt, model: m.id, modelKey, usd, ms: Date.now() - t0, ms_text: msText, ms_edit: msEdit, ...(piece ? { ms_seen: msSeen } : {}), slow: m.slow, ...(item ? { catalog: true, item: item.id } : {}), ...(piece ? { piece, piece_seen: seen } : {}),
+      // a typed change of a thing inside the view may be repeated from the other scenes that see it: the signed instruction rides back
+      ...(!item && prep.reach === 'object' ? { follow: followToken(env, prep) } : {}) };
   } catch (e) {
     if (e instanceof EditError) {
       // a vendor refusal or a transport error after the text step: settle the text step only, keep nothing reserved

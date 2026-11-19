@@ -1,0 +1,62 @@
+{
+ "fly_bearing": 302.01,
+ "step_deg": 6,
+ "rooms": [
+  {
+   "id": "terraceLiving",
+   "dir": "walk/1-terraceLiving",
+   "frames": 12,
+   "turn_deg": -60.22,
+   "leave_via": "hotspot terraceLiving->living"
+  },
+  {
+   "id": "living",
+   "dir": "walk/2-living",
+   "frames": 30,
+   "turn_deg": -173.36,
+   "leave_via": "hotspot living->dining"
+  },
+  {
+   "id": "dining",
+   "dir": "walk/3-dining",
+   "frames": 16,
+   "turn_deg": -88.99,
+   "leave_via": "hotspot dining->kitchen"
+  },
+  {
+   "id": "kitchen",
+   "dir": "walk/4-kitchen",
+   "frames": 6,
+   "turn_deg": 27.65,
+   "leave_via": "hotspot bedroom2->kitchen reversed"
+  },
+  {
+   "id": "bedroom2",
+   "dir": "walk/5-bedroom2",
+   "frames": 28,
+   "turn_deg": -157.32,
+   "leave_via": "hotspot bedroom2->entrance"
+  },
+  {
+   "id": "entrance",
+   "dir": "walk/6-entrance",
+   "frames": 18,
+   "turn_deg": -101.66,
+   "leave_via": "hotspot entrance->living, then hotspot living->bedroomMain"
+  },
+  {
+   "id": "bedroomMain",
+   "dir": "walk/7-bedroomMain",
+   "frames": 27,
+   "turn_deg": 151.2,
+   "leave_via": "hotspot bedroomMain->wardrobe, then hotspot wardrobe->bathMain"
+  },
+  {
+   "id": "bathMain",
+   "dir": "walk/8-bathMain",
+   "frames": 26,
+   "turn_deg": 146.2,
+   "leave_via": "end of the walk (the view picked by eye)"
+  }
+ ]
+}

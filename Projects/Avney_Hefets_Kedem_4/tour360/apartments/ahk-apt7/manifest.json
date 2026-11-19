@@ -1,0 +1,241 @@
+{
+ "$schema": "ahk-tour360/manifest.v1",
+ "apartment": "ahk-apt7",
+ "cost_usd": 0,
+ "inputs": {
+  "living": {
+   "pano": "work/pano-ai/living_gpt.jpg",
+   "pano_sha256": "240dbd1ab8239f168be716362a291b60a50085f8eb2f2e20f815f6d98fd9d987",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/living.png",
+   "cg_sha256": "c4296cf5539f887452c685ca1fe93e6df7dc6072fad96e23f2860980c36e4e84"
+  },
+  "dining": {
+   "pano": "work/pano-ai/dining_gpt.jpg",
+   "pano_sha256": "addc0edffbed950bf71b8018b73acd1652bfe809ec32a3187c543e47983a3f6b",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/dining.png",
+   "cg_sha256": "e148040567d95d411fc4a697aa9d08e0a14f81438f6fdd77f56447dbd7669082"
+  },
+  "kitchen": {
+   "pano": "work/pano-ai/kitchen_gpt.jpg",
+   "pano_sha256": "895ab336e590161bfd9eba7ed1feddf5e6bc7dd0d05e94b30f2345ca3b9b9736",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/kitchen.png",
+   "cg_sha256": "7dd3d57c3ed1e0f0748e3e1253f7f8452319dd90005c0c5f3cf160c59ea5de02"
+  },
+  "foyer": {
+   "pano": "work/pano-ai/foyer_gpt.jpg",
+   "pano_sha256": "42ac41cf5beeb3f760d05b5851c0c5fe5671f1874df01ec9cb267c955c62b1b3",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/foyer.png",
+   "cg_sha256": "41b09ea83ce457ee5938977bb3826b3fa0f5c6616ec415722ceefd7b977675ca"
+  },
+  "balcony": {
+   "pano": "work/pano-ai/balcony_gpt.jpg",
+   "pano_sha256": "85e0db69345b60fd7bbec6d7587a15e66b6935add15e08c641b806e81f058b6e",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/balcony.png",
+   "cg_sha256": "5d355cd616f30af06075a7d50211a9bb3249aebcd17bcf364c03e678bc99d23d"
+  },
+  "corridor": {
+   "pano": "work/pano-ai/corridor_gpt.jpg",
+   "pano_sha256": "eea629893b08fe9f141a80949687444bed94a8e178e6b09fde64fed01f2c8d31",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/corridor.png",
+   "cg_sha256": "64cf7677ccb71ef7e6fd5b8195a4f6004a86cff9d55f30e4ff8b6642724612fa"
+  },
+  "master": {
+   "pano": "work/pano-ai/master_gpt.jpg",
+   "pano_sha256": "ed5dee56634fb730ad543450b3785900c888a85f43a424aeb4cd3a221ada0d3c",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/master.png",
+   "cg_sha256": "995ddc06e84e824302dfdd13ce4589ba34b729f6aad214c3cef3a5349c2299a8"
+  },
+  "ensuite": {
+   "pano": "work/pano-ai/ensuite_gpt.jpg",
+   "pano_sha256": "bfe842c69e1b5f67082b14bf3c9968b564eff95138e9cb43202d75109c114d17",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/ensuite.png",
+   "cg_sha256": "bdd27bc33ac8c236cf0d3232fa9ff17b6ab6c40b20103fc6767099f9849cfa45"
+  },
+  "mamad": {
+   "pano": "work/pano-ai/mamad_gpt.jpg",
+   "pano_sha256": "62af3c5972cdd6682f5356ac453eec20b426e16baa7e501534a27dddbb3ba1d0",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/mamad.png",
+   "cg_sha256": "d125387c9ef3d68ae0f6cd5388bb7bad2eae99e11ea23ff98662a2b95d2a5ed1"
+  },
+  "bath": {
+   "pano": "work/pano-ai/bath_gpt.jpg",
+   "pano_sha256": "04a8d6dbc456b318a06f2c569b97e13ad5db67c9b910880b473ba70087aa06d6",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/bath.png",
+   "cg_sha256": "8fc437944f82115b0cba4a0c7a62ba888b29ca4546fc897b8b24d64a21022a6d"
+  },
+  "bedroom": {
+   "pano": "work/pano-ai/bedroom_gpt.jpg",
+   "pano_sha256": "7700900e5cf683af21fb00eda13414f1c81e60a5c050d0f11c1df5d411654608",
+   "cg": "out/avnei-hefetz-kedem/buildings-1-2/4-rooms/renders/pano/bedroom.png",
+   "cg_sha256": "03cfbe46c866e248b15d9046c751188e1d3bee6bea1140335462e538042231cf"
+  }
+ },
+ "outputs": {
+  "apartment.json": "197085c2cb04433e",
+  "cameras.json": "4485d99c4c7fce72",
+  "markers.json": "59e5cb20fdcc1734",
+  "scenes.json": "d976f2e35f742f25",
+  "catalog/items.json": "c113d3d4b80a9d0d",
+  "catalog/ai/chair-oak-boucle.jpg": "77bf8e626e8aef07",
+  "catalog/ai/coffee-travertine.jpg": "4f689459b509cc4e",
+  "catalog/ai/coffee-walnut.jpg": "c6ebb1aa9365bc51",
+  "catalog/ai/dining-marble.jpg": "189ada2119f417a6",
+  "catalog/ai/dining-oak-oval.jpg": "23189fb0ca61723c",
+  "catalog/ai/sofa-boucle.jpg": "dbf561a47b9228ab",
+  "catalog/ai/sofa-leather.jpg": "3160af856bc9f3ac",
+  "catalog/ai/sofa-linen.jpg": "afa7dba67a0f2f58",
+  "depth/balcony.png": "9ee4ff290f533f6c",
+  "depth/bath.png": "d1bffb98d482deee",
+  "depth/bedroom.png": "1ee610ebcf121258",
+  "depth/corridor.png": "109b6ce69b053e9b",
+  "depth/depth.json": "41689e60c0dc94d2",
+  "depth/dining.png": "f75f3f61d1b5fd02",
+  "depth/ensuite.png": "c37ed2e665567763",
+  "depth/foyer.png": "afcb246f36ad730c",
+  "depth/kitchen.png": "404df7bdb1c05eda",
+  "depth/living.png": "f58cfdbd6c963a6b",
+  "depth/mamad.png": "c530a4fad61e1a43",
+  "depth/master.png": "32b0eff38cd8c148",
+  "panos/balanced/balcony.webp": "c548140b70740683",
+  "panos/balanced/bath.webp": "fcbd375915270845",
+  "panos/balanced/bedroom.webp": "b7d2e982eadd063f",
+  "panos/balanced/corridor.webp": "85aa25a6b5d19e6b",
+  "panos/balanced/dining.webp": "3662b40666155410",
+  "panos/balanced/ensuite.webp": "fa1a412975b52653",
+  "panos/balanced/foyer.webp": "459c1ed9ac692a20",
+  "panos/balanced/kitchen.webp": "3c364574d761d6cf",
+  "panos/balanced/living.webp": "4f8a6e70fe21edbf",
+  "panos/balanced/mamad.webp": "5d4bf986fd76052f",
+  "panos/balanced/master.webp": "8f18de5f8537190a",
+  "panos/original/balcony.webp": "4c1c0ce974cb40f7",
+  "panos/original/bath.webp": "a521a80fbb181b31",
+  "panos/original/bedroom.webp": "d7c0a2df631deca4",
+  "panos/original/corridor.webp": "9b86ad21a1520a39",
+  "panos/original/dining.webp": "91b3d4abfc82adb3",
+  "panos/original/ensuite.webp": "ad1c90458e2d4453",
+  "panos/original/foyer.webp": "ca63facb97221413",
+  "panos/original/kitchen.webp": "62880e53bae0e7b2",
+  "panos/original/living.webp": "005ac2097d548c19",
+  "panos/original/mamad.webp": "49096141d9bf3ef8",
+  "panos/original/master.webp": "8606c7f1a4e908f1",
+  "panos/thumb/balcony.webp": "f85a17e7a9439f06",
+  "panos/thumb/bath.webp": "07899ca7eae99061",
+  "panos/thumb/bedroom.webp": "7356887fd752d1f3",
+  "panos/thumb/corridor.webp": "607ed113dddf800e",
+  "panos/thumb/dining.webp": "390f33d9e7e0cd62",
+  "panos/thumb/ensuite.webp": "87c2a6017e14f298",
+  "panos/thumb/foyer.webp": "bd145973307e04c7",
+  "panos/thumb/kitchen.webp": "77fedd69991b7c83",
+  "panos/thumb/living.webp": "81eea9fadd96c10c",
+  "panos/thumb/mamad.webp": "b7d460904d7a598c",
+  "panos/thumb/master.webp": "cb411dd2d75b6c01",
+  "plan/floorplan.webp": "4bba5d175616b267",
+  "_local/full/balcony.webp": "6850d1f482ab0882",
+  "_local/full/bath.webp": "78bd0a23d18efd4f",
+  "_local/full/bedroom.webp": "56c9b24982b25aa7",
+  "_local/full/corridor.webp": "5f87da7eb391c423",
+  "_local/full/dining.webp": "7430c0a3949e134c",
+  "_local/full/ensuite.webp": "6a86afca9a363193",
+  "_local/full/foyer.webp": "7b81822c0345355a",
+  "_local/full/kitchen.webp": "7bfdad6c2fdf10bb",
+  "_local/full/living.webp": "0cfb3c3ecd508097",
+  "_local/full/mamad.webp": "f182d41f5f94c677",
+  "_local/full/master.webp": "c3f028ac947186de"
+ },
+ "seam": {
+  "living": {
+   "before": 8.57,
+   "after": 0.0,
+   "adjacent_median": 1.33,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 1.33
+  },
+  "dining": {
+   "before": 5.39,
+   "after": 0.0,
+   "adjacent_median": 0.93,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.77
+  },
+  "kitchen": {
+   "before": 2.55,
+   "after": 0.0,
+   "adjacent_median": 0.57,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.59
+  },
+  "foyer": {
+   "before": 4.69,
+   "after": 0.0,
+   "adjacent_median": 0.67,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.5
+  },
+  "balcony": {
+   "before": 4.78,
+   "after": 0.0,
+   "adjacent_median": 0.87,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 1.07
+  },
+  "corridor": {
+   "before": 5.26,
+   "after": 0.0,
+   "adjacent_median": 0.41,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.74
+  },
+  "master": {
+   "before": 2.63,
+   "after": 0.0,
+   "adjacent_median": 0.66,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.52
+  },
+  "ensuite": {
+   "before": 6.96,
+   "after": 0.0,
+   "adjacent_median": 1.22,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 1.09
+  },
+  "mamad": {
+   "before": 4.86,
+   "after": 0.0,
+   "adjacent_median": 0.48,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.55
+  },
+  "bath": {
+   "before": 4.77,
+   "after": 0.0,
+   "adjacent_median": 1.13,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.66
+  },
+  "bedroom": {
+   "before": 5.3,
+   "after": 0.0,
+   "adjacent_median": 0.57,
+   "closed": true,
+   "band_px": 64,
+   "cg_render_seam": 0.55
+  }
+ },
+ "dropped_links": [],
+ "catalog_left_out": [
+  "arm_boucle (armchair: no such piece in the panoramas)",
+  "arm_oak_cane (armchair: no such piece in the panoramas)",
+  "arm_velvet (armchair: no such piece in the panoramas)"
+ ]
+}

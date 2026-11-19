@@ -1,0 +1,22 @@
+[auto-trace 5s] plan 1: 3156×4257 (page 1)
+[auto-trace 5s] auto_prep: sheet mode (saturated 0.00 %), unchanged
+[auto-trace 7s] auto_walls_pdf: 103 gap(s) <= 15 cm in window lines joined
+auto_walls_pdf: beam strip from 7 V25 edge / glass pair(s), 107705 px
+auto_walls_pdf --dims-only: 866 dimension segments, 36 door paths (walls stay raster)
+[auto-trace 29s] read: $0.0124
+[auto-trace 30s] scale 2.2677 px/cm (printed dimension lines: 15 printed values measured tick to tick (140, 160, 185, 199, 210, 212, 270, 275, 342, 344, 348, 474, 530, 744, 1213)); 9 seeds, 10 fixtures read
+[auto-trace 42s] r1 auto_split: 10 seeds, 27 boundary lines, wall angle 36.5, 3 notes
+[auto-trace 42s] r1 note: envelope closing 120 cm (94 % of the walls' hull)
+[auto-trace 42s] r1 note: envelope: 141.6 m� closed footprint, 3 gap line(s) on its outline
+[auto-trace 42s] r1 note: hall-auto-93: 4.7 m� of open space carried no label; made a hall
+[auto-trace 92s] r1 PLAN written C:\Users\elira\AppData\Local\Temp\claude\76e6db1160dffba0\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\scratchpad\trace-fresh-2\run\plan-1\plan.general.json: 10 rooms, 7 wall pieces, 4 openings, 10 panes, 10 cameras, 0 fixtures
+[auto-trace 106s] r1 auto_rooms: 1 built-in box(es) set into a wall: not floor
+auto_rooms: 12 free strip(s) inside the envelope but not enclosed by walls -> outside
+auto_rooms: 11 rooms (axis 17.5 deg), 8 printed rectangles, 5 snapped; 33 notes
+[auto-trace 112s] r1 auto_finalize: 10 rooms, 18 fixtures, wall angle 108.8 deg, scale 2.2677 px/cm (fit x1.0000), 10 notes, overlay C:\Users\elira\AppData\Local\Temp\claude\76e6db1160dffba0\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\scratchpad\trace-fresh-2\run\plan-1\overlay.png
+[auto-trace 114s] r1 trace_check: PASS � 82/82 checks pass; corrections: force_rect []
+[auto-trace 127s] judge: $0.0070
+[auto-trace 166s] judge: $0.0128
+[auto-trace 179s] judge: $0.0083
+[auto-trace 179s] plan 1: PASS after 1 round(s) — 0 mechanical failure(s), judge 0 mismatch(es)
+[auto-trace 179s] done: PASS — plan-1 PASS; $0.0404 → C:\Users\elira\AppData\Local\Temp\claude\76e6db1160dffba0\40c3c5f2-e1ea-4dd3-baf1-ad71447227fd\scratchpad\trace-fresh-2\run\index.json

@@ -1,0 +1,21 @@
+✔ stopPids kills the live pids once each, never this process, and names the ones that stay (144.9261ms)
+✔ stopPids survives a kill that throws (the process ended by itself in the meantime) (0.8583ms)
+✔ processesOf asks only on Windows and only for a folder name that is safe to put in the question (0.7357ms)
+✔ processesOf reads one pid per line, drops junk and this process, and answers [] when the question fails (1.8877ms)
+✔ stopServers: the record names the live server — it is stopped, and nobody else is looked for (0.7809ms)
+✔ stopServers: the record names a server that lost the start — the one that answers the port is found by the home (0.6716ms)
+✔ stopServers: a stranger answers the port and nothing of ours is alive — nothing is killed (0.3856ms)
+✔ stopServers: no record and a silent port — nothing is asked (0.3805ms)
+✔ stopServers gives up after its rounds on a server that will not die (275.1145ms)
+✔ removeHome: a refused removal — whoever still names the home is stopped, and it is tried again (0.5561ms)
+✔ removeHome: a removal that is refused every time throws the refusal after its passes (0.4573ms)
+✔ the removal settings keep one pass short (fs.rmSync waits retryDelay x 1, 2, 3 ... between tries) (0.0825ms)
+✔ REAL: two servers started at once, the record names the one that lost — the home is still removed (2062.2414ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2583.388

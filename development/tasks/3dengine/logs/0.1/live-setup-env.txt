@@ -1,0 +1,6 @@
+needed venv  python -m venv C:/RnD/Projects/3Dengine/.venv
+needed pip   C:/RnD/Projects/3Dengine/.venv/Scripts/python.exe -m pip install --disable-pip-version-check -r C:/RnD/Projects/3Dengine/requirements.lock.txt
+needed npm   npm ci
+done: venv, pip, npm
+(node:12848) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)

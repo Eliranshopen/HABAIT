@@ -1,11 +1,11 @@
 # .claude/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Project-level Claude Code config: the Habait agents (hand-written card in agents/) and the skills folder.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 0 files here · 2 subfolders · 8 files / 51.7 KB in the whole tree (vendor and build output excluded)
 
 ## Subfolders

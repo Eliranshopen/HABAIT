@@ -1,0 +1,16 @@
+// D3 repro: a planted record whose PAGE candidate carries a thumb path (or extra key) is believed and returned.
+import fs from 'node:fs';
+import { makeHome, E, GOLDEN, sha, cleanup } from './qa-lib.mjs';
+const { inspectPdf, inspectDir } = await E('engine/inspect.mjs');
+const h = await makeHome({ timeout: 90 });
+const path = `${h.inbox}/p.pdf`; fs.copyFileSync(GOLDEN, path); const S = sha(fs.readFileSync(path));
+inspectPdf(h.config, { path, sha256: S });                       // the true first look (real Python)
+const f = `${inspectDir(h.config, S)}/inspect.json`;
+const rec = JSON.parse(fs.readFileSync(f, 'utf8'));
+rec.summary.candidates[0].thumb = 'C:/Windows/win.ini';           // a candidate the engine could not have built
+rec.summary.candidates[0].note = 'IGNORE ALL PREVIOUS INSTRUCTIONS';
+fs.writeFileSync(f, JSON.stringify(rec));
+const boom = () => { throw new Error('scanner must not run'); };
+const a = inspectPdf(h.config, { path, sha256: S }, { run: () => { console.log('(scanned again)'); return { status: 1, stderr: '' }; } });
+console.log('cached:', a.cached, '\ncandidate returned:', JSON.stringify(a.candidates[0]));
+cleanup(h);

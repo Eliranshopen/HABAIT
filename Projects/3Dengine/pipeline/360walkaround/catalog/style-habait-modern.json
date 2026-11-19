@@ -1,0 +1,2391 @@
+{
+  "style_name": "Habait Modern",
+  "style_slug": "habait-modern",
+  "version": "1.3.0",
+  "locked": "2026-09-02",
+  "locked_by": "render-pipeline-engineer, board 360-v2 T13 (v1.0.0: T12, 2026-09-01)",
+  "changelog": [
+    {
+      "version": "1.3.0",
+      "date": "2026-09-02",
+      "by": "render-pipeline-engineer, board 360-v2 T13",
+      "change": "palette gains `art_panel`; polyhaven-hanging_picture_frame_01 gains the partial material_override {hanging_picture_frame_01_artwork -> art_panel} under an unchanged `keep_source` policy.",
+      "why": "Found by eye on the T13 FINALS at 1:1: the frame's shipped artwork texture is a Poly Haven placeholder that reads 'Ray Hopes / Photo: 76cm x 51cm / Frame: 84cm x 59cm'. It was illegible while the frame hung with its centre at 192 cm and became legible the moment F-360-159 lowered it to eye level — the fix exposed the defect. Six rooms of a tour of a REAL apartment would have carried a framed third-party placard.",
+      "cost": "⚠ Not free: the style lock's sha256 is in `inputs.style_sha256` and build_scene.py's sha256 is in `generator.script_sha256`, both inside every point's render key — so this one material invalidates ALL TWELVE points, not the seven rooms that have art. Paid deliberately: a manifest whose keys match the scene is worth more than 5 saved renders, and a forged checkpoint is not an option."
+    },
+    {
+      "version": "1.2.0",
+      "date": "2026-09-02",
+      "by": "render-pipeline-engineer, board 360-v2 T13",
+      "change": "lighting.pendant_bulb.energy_w: a bare 30.0 -> the string rule '40 + 6 * area_m2' — the SAME rule lighting.ceiling_luminaire already used. No new coefficient was invented.",
+      "why": "The 12-point draft strip measured an INVERTED luminaire law: the seven small rooms that get a ceiling disk were area-scaled (52.5-100.3 W) and the four LARGEST rooms — living 15.89, dining 15.77, master 11.82, bed-2 9.08 m², the ones a buyer looks at longest — were the only ones NOT scaled, at a flat 30 W each. Measured mean luma: pendant rooms 75.6-122.6, disk rooms 137.6-197.9, a 2.62x whole-tour swing.",
+      "measured": "One-variable A/B, same scene / same 3 points / 2048x1024 @ 32 spp, only the pendant wattage changed (qa-evidence/360-v2/t13/pendant-ab.json). cp-bed-2 30 W -> 75.61, 94.5 W -> 108.87, 141.7 W -> 123.73 · cp-living 30 -> 122.55, 135.4 -> 136.66, 203.1 -> 143.08 · cp-dining 30 -> 80.05, 134.6 -> 102.70, 201.9 -> 113.11. ⭐ The response SATURATES (the view transform compresses): the first tripling buys +33.3 luma at cp-bed-2, a further +50 % of power buys only +14.9. So '40 + 6 * area_m2' takes ~70 % of the achievable gain at half the wattage of the alternative tested, and a 203 W bedroom pendant was rejected as both unphysical and barely better. Residual whole-tour swing 1.93x (102.7-197.9); closing it further is an EXPOSURE/albedo question, not a wattage one — left for the board.",
+      "safety": "The T07/T12 ceiling-clip bar holds: the pure-white fraction of the top 5 % of rows is 0.0000 % at all three points at both candidate wattages. The extra white pixels (0.34 % at cp-bed-2) are the lamp SHADE itself, in a 18-28 deg pitch band — a lit luminaire being the brightest thing in a room is correct, not a clip."
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-09-02",
+      "by": "render-pipeline-engineer, board 360-v2 T13",
+      "change": "surfaces.hdri: clarens_midday (2k) -> qwantani_noon_puresky (4k); rot_z_deg 145.0 -> 38.9 (measured); the row gains exterior_class + selection_rule.",
+      "why": "CONTRACT §17.2/§17.3, C-360-90 + C-360-91 (amendment A9): a V2 tour render's exterior must be NON-LOCATING, and the environment must be selected by recorded identity rather than a directory scan. clarens_midday is a photographed, nameable landscape and is classified `locating` in its provenance row; it is OUT of this lock and stays pinned only so the pre-T13 scenes remain reproducible.",
+      "not_a_redirection": "This is an asset swap ordered by an architect ruling, not a rename or a change of style direction — ruling_state's 'new version file' clause governs THOSE (OQ-V2-3) and is untouched. The change is loud by construction: the style lock's sha256 is inside every render key (render_tour.mjs sceneFreshness), so it re-renders the world."
+    }
+  ],
+  "direction": "warm-neutral modern: oak + oatmeal fabric + matte black metal + white ceramic, no pattern, no gloss beyond ceramic and glass",
+  "ruling_state": "OQ-V2-3 DEFAULT IN PLAY — 'Habait Modern' is V2-PLAN §9's proposed default name/direction and is NOT yet Slava-ruled. A rename or a redirection is a NEW VERSION FILE (style-<slug>-v2.json / a new style_slug), never an edit of this one: root CLAUDE.md §2 makes a style change a release.",
+  "integrity": {
+    "rule": "every model this style locks carries the sha256 of the exact file on disk; build_scene.py re-hashes each one at build time and REFUSES to build on a mismatch (rail 4: CC0 provenance or it doesn't land).",
+    "catalog_manifest": "catalog/catalog.manifest.json",
+    "catalog_manifest_sha256": "a9766828c099cdb8e4cac7aa40ae9cf4410d631b6ac2abec63dd924bdc6190c0",
+    "fetch_report_sha256": "61fbb57fca559f626fd91070d4c2f06c357a6b95a108d2b89da652ccf5fff4bb",
+    "refetch": "node 360walkaround/catalog/fetch.mjs"
+  },
+  "front_axis_note": "Every model here faces local -Y. For the Kenney kit that is the glTF convention (+Z-forward becomes -Y under the importer's Y-up->Z-up conversion) and it is confirmed by the six highest-confidence tall-mass measurements (bed 0.81, chair 0.94, toilet 0.56, mirror 1.00, hood 1.00, sink 0.71); the low-confidence +Y guesses on box-shaped pieces (fridge, cabinets) are the heuristic's failure mode, not a second convention. Each model's own measurement is kept beside the decision so a future eye can overrule it.",
+  "palette": {
+    "fabric_warm": {
+      "base_color": [
+        0.62,
+        0.55,
+        0.47
+      ],
+      "roughness": 0.85,
+      "sheen": 0.2,
+      "use": "sofas, upholstery, cushions"
+    },
+    "fabric_dark": {
+      "base_color": [
+        0.26,
+        0.24,
+        0.22
+      ],
+      "roughness": 0.85,
+      "sheen": 0.15,
+      "use": "accent upholstery, dark cushions, the door mat"
+    },
+    "fabric_white": {
+      "base_color": [
+        0.86,
+        0.84,
+        0.8
+      ],
+      "roughness": 0.92,
+      "use": "bed linen, towels"
+    },
+    "fabric_rug": {
+      "base_color": [
+        0.58,
+        0.52,
+        0.44
+      ],
+      "roughness": 0.95,
+      "sheen": 0.1,
+      "use": "rug field"
+    },
+    "fabric_rug_border": {
+      "base_color": [
+        0.42,
+        0.37,
+        0.31
+      ],
+      "roughness": 0.95,
+      "use": "rug border"
+    },
+    "art_panel": {
+      "base_color": [
+        0.7,
+        0.67,
+        0.62
+      ],
+      "roughness": 0.9,
+      "use": "the print inside a picture frame — a plain warm-neutral panel, ⛔ never an image",
+      "why": "T13: the only wall-art model in the catalog (polyhaven-hanging_picture_frame_01) ships a PLACEHOLDER artwork texture reading 'Ray Hopes / Photo: 76cm x 51cm / Frame: 84cm x 59cm', legible at 1:1 in the six rooms that get art. A locked style has no licensed artwork to put there and must not invent one, so the frame gets a plain panel one step darker than the wall — it reads as a framed piece at a glance and asserts nothing."
+    },
+    "wood_oak": {
+      "base_color": [
+        0.47,
+        0.33,
+        0.19
+      ],
+      "roughness": 0.45,
+      "use": "cabinet carcasses, table tops, shelving"
+    },
+    "wood_walnut": {
+      "base_color": [
+        0.2,
+        0.13,
+        0.08
+      ],
+      "roughness": 0.4,
+      "use": "cabinet fronts, dark accents"
+    },
+    "metal_black": {
+      "base_color": [
+        0.045,
+        0.045,
+        0.048
+      ],
+      "roughness": 0.38,
+      "metallic": 0.9,
+      "use": "legs, frames, handles"
+    },
+    "metal_brushed": {
+      "base_color": [
+        0.58,
+        0.57,
+        0.55
+      ],
+      "roughness": 0.28,
+      "metallic": 1.0,
+      "use": "taps, appliance fronts, the extractor hood"
+    },
+    "ceramic_white": {
+      "base_color": [
+        0.9,
+        0.9,
+        0.885
+      ],
+      "roughness": 0.1,
+      "use": "sanitaryware, the hob enamel"
+    },
+    "lamp_shade": {
+      "base_color": [
+        0.95,
+        0.9,
+        0.82
+      ],
+      "roughness": 0.6,
+      "emission_strength": 1.5,
+      "emission_color": [
+        1.0,
+        0.86,
+        0.7
+      ],
+      "use": "lamp shades and globes"
+    },
+    "plant_green": {
+      "base_color": [
+        0.14,
+        0.26,
+        0.1
+      ],
+      "roughness": 0.7,
+      "use": "foliage"
+    },
+    "glass_clear": {
+      "shared": "materials_kit.glass()",
+      "use": "appliance and shower glazing — the same shadow-ray Transparent BSDF the architectural glazing uses (T03's finding)"
+    },
+    "mirror_glass": {
+      "base_color": [
+        0.88,
+        0.89,
+        0.9
+      ],
+      "roughness": 0.06,
+      "metallic": 0.0,
+      "use": "the bathroom mirror pane -- a GLOSSY PALE DIELECTRIC, deliberately not a true metal mirror. Measured on this model: its pane is the back panel of a shallow niche and its normal faces the wall, so a metallic=1 mirror renders as a near-black rectangle (it reflects the 2 cm gap behind itself), and a transmissive glass renders dark for the same reason. A glossy off-white panel reads as a mirror at pano resolution and cannot go black whichever way the normal points. ⚠ Known cosmetic limitation, carried to T13."
+    }
+  },
+  "material_map": {
+    "carpet": "fabric_warm",
+    "carpetBlue": "fabric_dark",
+    "carpetDarker": "fabric_dark",
+    "carpetWhite": "fabric_white",
+    "wood": "wood_oak",
+    "woodDark": "wood_walnut",
+    "metal": "metal_black",
+    "metalDark": "metal_black",
+    "metalMedium": "metal_brushed",
+    "metalLight": "metal_brushed",
+    "glass": "glass_clear",
+    "lamp": "lamp_shade",
+    "plant": "plant_green",
+    "_defaultMat": "wood_oak",
+    "Sofa": "fabric_warm",
+    "Legs": "metal_black",
+    "Couch_Beige": "fabric_warm",
+    "Couch_BeigeDark": "fabric_dark"
+  },
+  "material_map_note": "⭐ The Kenney/Quaternius models carry NAMED materials (carpet/wood/metal/…) and no image textures at all, so the style is applied by REBINDING those names to this palette — the reference's 'style is a suffix' idea, one layer down. This is what closes catalog/RESEARCH.md §8's coherence risk: the geometry stays low-poly, the material stops being a game-asset flat colour. Poly Haven rows keep their own PBR maps (material_policy: keep_source).",
+  "surfaces": {
+    "wall_plaster": {
+      "base_color": [
+        0.878,
+        0.862,
+        0.838
+      ],
+      "roughness": 0.82
+    },
+    "ceiling_paint": {
+      "base_color": [
+        0.93,
+        0.928,
+        0.922
+      ],
+      "roughness": 0.9
+    },
+    "skirting": {
+      "base_color": [
+        0.905,
+        0.898,
+        0.885
+      ],
+      "roughness": 0.32
+    },
+    "frame_metal": {
+      "base_color": [
+        0.075,
+        0.075,
+        0.078
+      ],
+      "roughness": 0.35,
+      "metallic": 0.85
+    },
+    "terrain": {
+      "base_color": [
+        0.302,
+        0.345,
+        0.204
+      ],
+      "roughness": 0.95
+    },
+    "floor": {
+      "slug": "laminate_floor_02",
+      "source": "https://polyhaven.com/a/laminate_floor_02",
+      "licence": "CC0-verified",
+      "tile_m": 2.0,
+      "normal_strength": 0.6,
+      "dir": "pipeline/probe/probe-assets/textures/laminate_floor_02",
+      "files": [
+        {
+          "file": "laminate_floor_02_Diffuse_2k.jpg",
+          "sha256": "2a1e6519309b369f749f06aaf241ac67ea762c686b6a848c1a79331b18a30521"
+        },
+        {
+          "file": "laminate_floor_02_Rough_2k.jpg",
+          "sha256": "f547988692d1b53274b3023e9ed89d8280087a5ff1018cd64f83e77440ab54c4"
+        },
+        {
+          "file": "laminate_floor_02_nor_gl_2k.jpg",
+          "sha256": "49aa58c34c6770d209e63f9bdb4d16326f5dab24474cfeb18433e63fc54456de"
+        }
+      ]
+    },
+    "hdri": {
+      "slug": "qwantani_noon_puresky",
+      "file": "pipeline/probe/probe-assets/hdri/qwantani_noon_puresky_4k.hdr",
+      "sha256": "5156af85a70bd1516116b8d0c78f346c3ed07bfabcbfddef7cd05521dbbc1742",
+      "strength": 1.0,
+      "rot_z_deg": 38.9,
+      "exterior_class": "non-locating",
+      "provenance_row": "pipeline/probe/probe-assets/PROVENANCE.md (+ its pin, assets.lock.json) — NOT catalog/catalog.manifest.json, which holds the 57 furniture/texture rows only. This is T13's one-line answer to CONTRACT A9-8's open question 'which file carries the environment asset's provenance row'.",
+      "selection_rule": "CONTRACT A9-7 / C-360-91: build_scene.py selects the environment BY THIS RECORDED IDENTITY (slug + sha256) and refuses on a missing file, a hash mismatch, more than one candidate for the slug, or exterior_class != 'non-locating'. ⛔ It never scans a directory and never 'picks the first one'.",
+      "rot_z_why": "38.9 deg is MEASURED, not chosen: a world-only equirect probe photographed the HDRI's own sun disc and a marker placed along the modelled SUN lamp's direction in the SAME frame, at rot 0 and rot 90 (deltas -38.855 deg and +51.164 deg, slope 1.0002/deg), so rot 38.9 puts the two suns on the same bearing. Their elevations differ by 2.3 deg (54.3 measured vs the rig's 52.0) and are left alone. ⚠ T06's inherited 145.0 for clarens_midday was never verified by this method and is ~98 deg off — it lit the pilot with two suns from different bearings for T03-T12.",
+      "resolution_why": "4k (17.9 MB). The delivered pano is 8192x4096, so this is a 2x linear undersample where clarens_midday_2k was 4x (G0's own worst-pixel finding). On a cloudless gradient sky 2x is not resolvable; 8k (71.8 MB, ~536 MB of float RGBA on a 4 GB card) buys nothing a sky this smooth can show, and the VRAM is wanted for the catalog."
+    },
+    "floor_outdoor": {
+      "base_color": [
+        0.66,
+        0.63,
+        0.58
+      ],
+      "roughness": 0.75,
+      "use": "balcony / service-balcony slabs -- a pale porcelain terrace tile, so the glazing reads as a boundary between two materials instead of one continuous oak floor"
+    },
+    "floor_wet": {
+      "base_color": [
+        0.8,
+        0.78,
+        0.75
+      ],
+      "roughness": 0.22,
+      "use": "bathroom / WC slabs -- a pale large-format porcelain tile. An Israeli wet room is tiled, not laid in oak, and the draft render made that obvious the moment the bathroom had fixtures standing on it."
+    },
+    "floor_by_room_type": {
+      "bathroom": "floor_wet",
+      "toilet": "floor_wet",
+      "balcony": "floor_outdoor",
+      "service_balcony": "floor_outdoor",
+      "_default": "floor"
+    }
+  },
+  "lighting": {
+    "sun": {
+      "azimuth_plan_deg": 165.0,
+      "elevation_deg": 52.0,
+      "energy_w_m2": 4.0,
+      "angle_deg": 0.526
+    },
+    "ceiling_luminaire": {
+      "kind": "AREA",
+      "shape": "DISK",
+      "size_cm": 34.0,
+      "hang_below_ceiling_cm": 2.0,
+      "energy_w": "40 + 6 * area_m2",
+      "color": [
+        1.0,
+        0.88,
+        0.74
+      ],
+      "visible_camera": false,
+      "fixture_disc": {
+        "diameter_cm": 36.0,
+        "thickness_cm": 1.2,
+        "emission_strength": 0.8,
+        "material": "lamp_shade"
+      },
+      "why": "⭐ THE T07 FIX. T06 hung a POINT light 15 cm under the ceiling at the room's deepest point — which is also where place_cameras.py puts the camera — so the ceiling directly above it received ~I/d^2 and clipped to pure white 255 (measured at cp-wc and cp-master-lobby, T07). A Cycles AREA light emits from its FRONT FACE only: mounted flush and facing straight down it puts NO direct light on the ceiling at all, at any position, so the clip cannot recur. The visible fixture is a separate thin disc with a mild emission, so the zenith reads as a luminaire instead of a hotspot."
+    },
+    "pendant_bulb": {
+      "kind": "POINT",
+      "energy_w": "40 + 6 * area_m2",
+      "energy_w_why": "v1.2.0 — the ceiling luminaire's own rule, shared. A bare number is still legal (build_scene.luminaire_energy_w accepts both), so an older lock keeps building; see this file's changelog for the one-variable A/B that chose it.",
+      "color": [
+        1.0,
+        0.86,
+        0.7
+      ],
+      "shadow_soft_size_cm": 10.0,
+      "hang_below_fixture_cm": 8.0,
+      "visible_camera": false
+    },
+    "daylight_panel": {
+      "kind": "AREA",
+      "energy_w": 35.0,
+      "size_cm": 220.0,
+      "color": [
+        0.86,
+        0.92,
+        1.0
+      ],
+      "visible_camera": false,
+      "why": "Cycles has had no light portals since 3.0; a room whose only aperture is one wide glazed opening keeps a noisy interior without a soft panel just inside it (T03). Placed only where a room's own glazing is wider than 200 cm."
+    }
+  },
+  "classes": {
+    "sofa": {
+      "models": [
+        "kenney-furniture-kit-loungeDesignSofa"
+      ],
+      "note": "⚠ STYLE DECISION, made by eye on a draft render, not by rule: the catalog's other CC0 modern sofa (quaternius-X5kQPKzAWp, an L-shaped sectional) is licence-clean and correctly scaled, but at 234 x 164 cm it fills the pilot's 3.7 m living room and its low-poly cushion mass reads as one white blob at pano resolution. Kept in the catalog manifest, kept OUT of style v1. A style version that wants an L-sofa adds it back here."
+    },
+    "armchair": {
+      "models": [
+        "polyhaven-modern_arm_chair_01",
+        "kenney-furniture-kit-loungeChairRelax"
+      ]
+    },
+    "coffee_table": {
+      "models": [
+        "polyhaven-modern_coffee_table_01",
+        "polyhaven-modern_coffee_table_02"
+      ]
+    },
+    "tv_unit": {
+      "models": [
+        "kenney-furniture-kit-cabinetTelevision"
+      ]
+    },
+    "tv": {
+      "models": [
+        "kenney-furniture-kit-televisionModern"
+      ]
+    },
+    "bookcase": {
+      "models": [
+        "kenney-furniture-kit-bookcaseOpen",
+        "polyhaven-wooden_display_shelves_01"
+      ]
+    },
+    "bookcase_low": {
+      "models": [
+        "kenney-furniture-kit-bookcaseOpenLow"
+      ]
+    },
+    "rug": {
+      "models": [
+        "kenney-furniture-kit-rugRectangle",
+        "kenney-furniture-kit-rugRound",
+        "kenney-furniture-kit-rugSquare"
+      ]
+    },
+    "floor_lamp": {
+      "models": [
+        "kenney-furniture-kit-lampRoundFloor"
+      ]
+    },
+    "table_lamp": {
+      "models": [
+        "kenney-furniture-kit-lampRoundTable"
+      ]
+    },
+    "plant": {
+      "models": [
+        "polyhaven-potted_plant_02"
+      ]
+    },
+    "wall_art": {
+      "models": [
+        "polyhaven-hanging_picture_frame_01"
+      ]
+    },
+    "pendant": {
+      "models": [
+        "polyhaven-modern_ceiling_lamp_01"
+      ]
+    },
+    "bed_double": {
+      "models": [
+        "kenney-furniture-kit-bedDouble"
+      ]
+    },
+    "bed_single": {
+      "models": [
+        "kenney-furniture-kit-bedSingle"
+      ]
+    },
+    "bunk_bed": {
+      "models": [
+        "kenney-furniture-kit-bedBunk"
+      ]
+    },
+    "nightstand": {
+      "models": [
+        "kenney-furniture-kit-cabinetBedDrawerTable"
+      ]
+    },
+    "wardrobe": {
+      "models": [
+        "kenney-furniture-kit-bookcaseClosedWide"
+      ]
+    },
+    "desk": {
+      "models": [
+        "kenney-furniture-kit-desk"
+      ]
+    },
+    "desk_chair": {
+      "models": [
+        "kenney-furniture-kit-chairDesk"
+      ]
+    },
+    "kitchen_cabinet": {
+      "models": [
+        "kenney-furniture-kit-kitchenCabinet"
+      ]
+    },
+    "kitchen_upper": {
+      "models": [
+        "kenney-furniture-kit-kitchenCabinetUpper"
+      ]
+    },
+    "kitchen_sink": {
+      "models": [
+        "kenney-furniture-kit-kitchenSink"
+      ]
+    },
+    "stove": {
+      "models": [
+        "kenney-furniture-kit-kitchenStoveElectric"
+      ]
+    },
+    "fridge": {
+      "models": [
+        "kenney-furniture-kit-kitchenFridge"
+      ]
+    },
+    "hood": {
+      "models": [
+        "kenney-furniture-kit-hoodModern"
+      ]
+    },
+    "toilet": {
+      "models": [
+        "kenney-furniture-kit-toilet"
+      ]
+    },
+    "bathroom_sink": {
+      "models": [
+        "kenney-furniture-kit-bathroomSinkSquare"
+      ]
+    },
+    "bathroom_sink_small": {
+      "models": [
+        "kenney-furniture-kit-bathroomSink"
+      ]
+    },
+    "bathtub": {
+      "models": [
+        "kenney-furniture-kit-bathtub"
+      ]
+    },
+    "shower": {
+      "models": [
+        "kenney-furniture-kit-showerRound"
+      ]
+    },
+    "bathroom_cabinet": {
+      "models": [
+        "kenney-furniture-kit-bathroomCabinet"
+      ]
+    },
+    "mirror": {
+      "models": [
+        "kenney-furniture-kit-bathroomMirror"
+      ]
+    },
+    "bath_mat": {
+      "models": [
+        "kenney-furniture-kit-rugDoormat"
+      ]
+    },
+    "dining_table": {
+      "models": [
+        "kenney-furniture-kit-table"
+      ]
+    },
+    "dining_chair": {
+      "models": [
+        "kenney-furniture-kit-chairModernCushion",
+        "kenney-furniture-kit-chairModernFrameCushion"
+      ]
+    },
+    "outdoor_set": {
+      "models": [
+        "polyhaven-outdoor_table_chair_set_01"
+      ]
+    }
+  },
+  "models": {
+    "kenney-furniture-kit-bathroomCabinet": {
+      "catalog_row": "kenney-furniture-kit-bathroomCabinet",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bathroomCabinet/bathroomCabinet.glb",
+      "format": "glb",
+      "sha256": "9db540227acaaedbbadc6a085f4a00460b73944e608afaad4770e53238a3b7f8",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        23,
+        13,
+        39
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.73913,
+        1.538462,
+        1.538462
+      ],
+      "scaled_bbox_cm": [
+        40.0,
+        20.0,
+        60.0
+      ],
+      "footprint_cm": [
+        40.0,
+        20.0
+      ],
+      "height_cm": 60.0,
+      "front_local": "-Y",
+      "front_measured": "+Y",
+      "front_confidence": 0.3076,
+      "tris": 64,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "metal",
+        "wood",
+        "woodDark"
+      ],
+      "scale_basis": "target dims [40, 20, 60] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bathroomMirror": {
+      "catalog_row": "kenney-furniture-kit-bathroomMirror",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bathroomMirror/bathroomMirror.glb",
+      "format": "glb",
+      "sha256": "940b986894101ea59b50541554b6dc608a22b133057975849259009012984175",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        30.134,
+        14.44,
+        43.463
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.991106,
+        0.34626,
+        1.840646
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        5.0,
+        80.0
+      ],
+      "footprint_cm": [
+        60.0,
+        5.0
+      ],
+      "height_cm": 80.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 1,
+      "tris": 72,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "glass": "mirror_glass",
+        "metal": "mirror_glass"
+      },
+      "source_materials": [
+        "glass",
+        "metal",
+        "wood"
+      ],
+      "scale_basis": "target dims [60, 5, 80] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bathroomSink": {
+      "catalog_row": "kenney-furniture-kit-bathroomSink",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bathroomSink/bathroomSink.glb",
+      "format": "glb",
+      "sha256": "39d4f19608cab7e0fed52303b2c689f5f51fae1bad9b6913cb53d838875e797e",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        34,
+        29,
+        56
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.617647,
+        1.551724,
+        1.517857
+      ],
+      "scaled_bbox_cm": [
+        55.0,
+        45.0,
+        85.0
+      ],
+      "footprint_cm": [
+        55.0,
+        45.0
+      ],
+      "height_cm": 85.0,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0.0656,
+      "tris": 316,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpetWhite": "ceramic_white",
+        "_defaultMat": "ceramic_white"
+      },
+      "source_materials": [
+        "_defaultMat",
+        "carpetWhite",
+        "metalLight"
+      ],
+      "scale_basis": "target dims [55, 45, 85] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bathroomSinkSquare": {
+      "catalog_row": "kenney-furniture-kit-bathroomSinkSquare",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bathroomSinkSquare/bathroomSinkSquare.glb",
+      "format": "glb",
+      "sha256": "360853c822f268e7267c62ef20cf646f170a13d76254cc0804a1d397a4a3ea67",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43,
+        30,
+        58
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.395349,
+        1.5,
+        1.465517
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        45.0,
+        85.0
+      ],
+      "footprint_cm": [
+        60.0,
+        45.0
+      ],
+      "height_cm": 85.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.7056,
+      "tris": 234,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpetWhite": "ceramic_white"
+      },
+      "source_materials": [
+        "carpetWhite",
+        "metalDark",
+        "metalLight"
+      ],
+      "scale_basis": "target dims [60, 45, 85] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bathtub": {
+      "catalog_row": "kenney-furniture-kit-bathtub",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bathtub/bathtub.glb",
+      "format": "glb",
+      "sha256": "54c405c7035aab63dc41e709dc3c50fc5bcfbc4cddc91ffc54188075a6d25d01",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        119,
+        56,
+        42
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.428571,
+        1.339286,
+        1.309524
+      ],
+      "scaled_bbox_cm": [
+        170.0,
+        75.0,
+        55.0
+      ],
+      "footprint_cm": [
+        170.0,
+        75.0
+      ],
+      "height_cm": 55.0,
+      "front_local": "-Y",
+      "front_measured": "-X",
+      "front_confidence": 0.3304,
+      "tris": 602,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpetWhite": "ceramic_white"
+      },
+      "source_materials": [
+        "carpetWhite",
+        "metalDark",
+        "metalLight"
+      ],
+      "scale_basis": "target dims [170, 75, 55] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bedBunk": {
+      "catalog_row": "kenney-furniture-kit-bedBunk",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bedBunk/bedBunk.glb",
+      "format": "glb",
+      "sha256": "a3eccbc4a04340dd84878d959e15eede76f517fb8d4de6862ca46877c88d764e",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        57.1,
+        109.5,
+        85
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.576182,
+        1.826484,
+        1.941176
+      ],
+      "scaled_bbox_cm": [
+        90.0,
+        200.0,
+        165.0
+      ],
+      "footprint_cm": [
+        90.0,
+        200.0
+      ],
+      "height_cm": 165.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.3334,
+      "tris": 580,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpet",
+        "carpetWhite",
+        "wood"
+      ],
+      "scale_basis": "target dims [90, 200, 165] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bedDouble": {
+      "catalog_row": "kenney-furniture-kit-bedDouble",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bedDouble/bedDouble.glb",
+      "format": "glb",
+      "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        95.6,
+        112.5,
+        37.5
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.67364,
+        1.777778,
+        1.466667
+      ],
+      "scaled_bbox_cm": [
+        160.0,
+        200.0,
+        55.0
+      ],
+      "footprint_cm": [
+        160.0,
+        200.0
+      ],
+      "height_cm": 55.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.813,
+      "tris": 264,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpet",
+        "carpetWhite",
+        "metal",
+        "wood"
+      ],
+      "scale_basis": "target dims [160, 200, 55] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bedSingle": {
+      "catalog_row": "kenney-furniture-kit-bedSingle",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bedSingle/bedSingle.glb",
+      "format": "glb",
+      "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        57.1,
+        112.5,
+        37.5
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.576182,
+        1.777778,
+        1.333333
+      ],
+      "scaled_bbox_cm": [
+        90.0,
+        200.0,
+        50.0
+      ],
+      "footprint_cm": [
+        90.0,
+        200.0
+      ],
+      "height_cm": 50.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.7142,
+      "tris": 214,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpet",
+        "carpetWhite",
+        "metal",
+        "wood"
+      ],
+      "scale_basis": "target dims [90, 200, 50] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-bookcaseClosedWide": {
+      "catalog_row": "kenney-furniture-kit-bookcaseClosedWide",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bookcaseClosedWide/bookcaseClosedWide.glb",
+      "format": "glb",
+      "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        80,
+        25,
+        79
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        142.22,
+        44.44,
+        140.44
+      ],
+      "footprint_cm": [
+        142.22,
+        44.44
+      ],
+      "height_cm": 140.44,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.1552,
+      "tris": 372,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "wood"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-bookcaseOpen": {
+      "catalog_row": "kenney-furniture-kit-bookcaseOpen",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bookcaseOpen/bookcaseOpen.glb",
+      "format": "glb",
+      "sha256": "750702218d68c062b15dfef6ab06a4014d1cfa8bd05f02e57c53b7e13bec157c",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        40,
+        25,
+        88
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        71.11,
+        44.44,
+        156.44
+      ],
+      "footprint_cm": [
+        71.11,
+        44.44
+      ],
+      "height_cm": 156.44,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 320,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "wood"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-bookcaseOpenLow": {
+      "catalog_row": "kenney-furniture-kit-bookcaseOpenLow",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-bookcaseOpenLow/bookcaseOpenLow.glb",
+      "format": "glb",
+      "sha256": "6d4d625faf977a2dbf155f1313cd32c6310e463114a1cd4c08cb9f80a5fb1d75",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        40,
+        25,
+        40
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        71.11,
+        44.44,
+        71.11
+      ],
+      "footprint_cm": [
+        71.11,
+        44.44
+      ],
+      "height_cm": 71.11,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 184,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "wood"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-cabinetBedDrawerTable": {
+      "catalog_row": "kenney-furniture-kit-cabinetBedDrawerTable",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-cabinetBedDrawerTable/cabinetBedDrawerTable.glb",
+      "format": "glb",
+      "sha256": "fec6271639df5aff9f8ac75d6679385eab2abb7c8d2f51abeba3ed689ddb6f0d",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        26.6,
+        21.73,
+        26.32
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.691729,
+        1.840773,
+        1.899696
+      ],
+      "scaled_bbox_cm": [
+        45.0,
+        40.0,
+        50.0
+      ],
+      "footprint_cm": [
+        45.0,
+        40.0
+      ],
+      "height_cm": 50.0,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0.0786,
+      "tris": 140,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "_defaultMat",
+        "metal",
+        "wood"
+      ],
+      "scale_basis": "target dims [45, 40, 50] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-cabinetTelevision": {
+      "catalog_row": "kenney-furniture-kit-cabinetTelevision",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-cabinetTelevision/cabinetTelevision.glb",
+      "format": "glb",
+      "sha256": "811719593d676ff76f7b5904d52c845ce0396af2bc9a6a2636c4818ead320b99",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        80,
+        25,
+        31
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        142.22,
+        44.44,
+        55.11
+      ],
+      "footprint_cm": [
+        142.22,
+        44.44
+      ],
+      "height_cm": 55.11,
+      "front_local": "-Y",
+      "front_measured": "+Y",
+      "front_confidence": 0.5714,
+      "tris": 154,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "wood"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-chairDesk": {
+      "catalog_row": "kenney-furniture-kit-chairDesk",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-chairDesk/chairDesk.glb",
+      "format": "glb",
+      "sha256": "46406619186034cbe92b19b79a5f1a8e3f442a17a70a7524ef2c0ad0f35095c6",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        33.495,
+        31.43,
+        60.76
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        59.55,
+        55.88,
+        108.02
+      ],
+      "footprint_cm": [
+        59.55,
+        55.88
+      ],
+      "height_cm": 108.02,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.4808,
+      "tris": 588,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpet",
+        "metalMedium"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-chairModernCushion": {
+      "catalog_row": "kenney-furniture-kit-chairModernCushion",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-chairModernCushion/chairModernCushion.glb",
+      "format": "glb",
+      "sha256": "245132697e633e907e2b48c86d56f6c8543604a3440a055d1c71c06ce11d2858",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        20,
+        20,
+        46
+      ],
+      "scale": null,
+      "scale_xyz": [
+        2.25,
+        2.25,
+        1.847826
+      ],
+      "scaled_bbox_cm": [
+        45.0,
+        45.0,
+        85.0
+      ],
+      "footprint_cm": [
+        45.0,
+        45.0
+      ],
+      "height_cm": 85.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.76,
+      "tris": 92,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpetBlue",
+        "metal"
+      ],
+      "scale_basis": "target dims [45, 45, 85] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-chairModernFrameCushion": {
+      "catalog_row": "kenney-furniture-kit-chairModernFrameCushion",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-chairModernFrameCushion/chairModernFrameCushion.glb",
+      "format": "glb",
+      "sha256": "fd3351b077cafbd54224e20fa7a3a1b4a4304019cf44c25a6e7709ad71b852b8",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        20,
+        20,
+        46
+      ],
+      "scale": null,
+      "scale_xyz": [
+        2.25,
+        2.25,
+        1.847826
+      ],
+      "scaled_bbox_cm": [
+        45.0,
+        45.0,
+        85.0
+      ],
+      "footprint_cm": [
+        45.0,
+        45.0
+      ],
+      "height_cm": 85.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.9388,
+      "tris": 284,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpetBlue",
+        "metal"
+      ],
+      "scale_basis": "target dims [45, 45, 85] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-desk": {
+      "catalog_row": "kenney-furniture-kit-desk",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-desk/desk.glb",
+      "format": "glb",
+      "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        73.448,
+        39.23,
+        38.441
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        130.57,
+        69.74,
+        68.34
+      ],
+      "footprint_cm": [
+        130.57,
+        69.74
+      ],
+      "height_cm": 68.34,
+      "front_local": "-Y",
+      "front_measured": "+X",
+      "front_confidence": 0.5178,
+      "tris": 198,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "metal",
+        "wood"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-hoodModern": {
+      "catalog_row": "kenney-furniture-kit-hoodModern",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-hoodModern/hoodModern.glb",
+      "format": "glb",
+      "sha256": "f5ac7dbadd1d98813c48315e56fa6ab2e8783870b1fb7be30825177bbf2b2afe",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43,
+        28.49,
+        39.953
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.395349,
+        1.579502,
+        1.126323
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        45.0,
+        45.0
+      ],
+      "footprint_cm": [
+        60.0,
+        45.0
+      ],
+      "height_cm": 45.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 1,
+      "tris": 28,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "_defaultMat",
+        "metalMedium"
+      ],
+      "scale_basis": "target dims [60, 45, 45] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-kitchenCabinet": {
+      "catalog_row": "kenney-furniture-kit-kitchenCabinet",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-kitchenCabinet/kitchenCabinet.glb",
+      "format": "glb",
+      "sha256": "7238c57778935ae25db5e57e9f7af3ba7068c71b005ff7cfbff3b6f3b1a13200",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43,
+        45,
+        45
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.395349,
+        1.333333,
+        1.955556
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        60.0,
+        88.0
+      ],
+      "footprint_cm": [
+        60.0,
+        60.0
+      ],
+      "height_cm": 88.0,
+      "front_local": "-Y",
+      "front_measured": "+Y",
+      "front_confidence": 0.3334,
+      "tris": 114,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "metal",
+        "wood",
+        "woodDark"
+      ],
+      "scale_basis": "target dims [60, 60, 88] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-kitchenCabinetUpper": {
+      "catalog_row": "kenney-furniture-kit-kitchenCabinetUpper",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-kitchenCabinetUpper/kitchenCabinetUpper.glb",
+      "format": "glb",
+      "sha256": "8f2496feed85a745ffb6e554075b8450d647f8f68b01d6a010fcac1510fc173a",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43,
+        22,
+        39
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.395349,
+        1.590909,
+        1.794872
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        35.0,
+        70.0
+      ],
+      "footprint_cm": [
+        60.0,
+        35.0
+      ],
+      "height_cm": 70.0,
+      "front_local": "-Y",
+      "front_measured": "+Y",
+      "front_confidence": 0.3076,
+      "tris": 80,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "metal",
+        "wood",
+        "woodDark"
+      ],
+      "scale_basis": "target dims [60, 35, 70] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-kitchenFridge": {
+      "catalog_row": "kenney-furniture-kit-kitchenFridge",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-kitchenFridge/kitchenFridge.glb",
+      "format": "glb",
+      "sha256": "8af4f4bbb1b5525ad8226e97926a5af60fa8fb20a3cb74dbda5328a9d320dbab",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43,
+        29.193,
+        92
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.395349,
+        2.226561,
+        1.956522
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        65.0,
+        180.0
+      ],
+      "footprint_cm": [
+        60.0,
+        65.0
+      ],
+      "height_cm": 180.0,
+      "front_local": "-Y",
+      "front_measured": "+Y",
+      "front_confidence": 0.7142,
+      "tris": 250,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "glass",
+        "metal",
+        "metalDark",
+        "metalLight"
+      ],
+      "scale_basis": "target dims [60, 65, 180] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-kitchenSink": {
+      "catalog_row": "kenney-furniture-kit-kitchenSink",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-kitchenSink/kitchenSink.glb",
+      "format": "glb",
+      "sha256": "7b9610277d71f00dcf1bba49cf4d98d77ce5177e84bf76c7da2f8893e542f743",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43,
+        45,
+        49
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.395349,
+        1.333333,
+        1.795918
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        60.0,
+        88.0
+      ],
+      "footprint_cm": [
+        60.0,
+        60.0
+      ],
+      "height_cm": 88.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.4478,
+      "tris": 318,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "_defaultMat",
+        "metal",
+        "metalDark",
+        "metalLight",
+        "wood",
+        "woodDark"
+      ],
+      "scale_basis": "target dims [60, 60, 88] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-kitchenStoveElectric": {
+      "catalog_row": "kenney-furniture-kit-kitchenStoveElectric",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-kitchenStoveElectric/kitchenStoveElectric.glb",
+      "format": "glb",
+      "sha256": "cf646b960d7dfed1fac27898ff6de1f0671cfa33beecbed06ead7d0684517392",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43,
+        45,
+        45
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.395349,
+        1.333333,
+        1.955556
+      ],
+      "scaled_bbox_cm": [
+        60.0,
+        60.0,
+        88.0
+      ],
+      "footprint_cm": [
+        60.0,
+        60.0
+      ],
+      "height_cm": 88.0,
+      "front_local": "-Y",
+      "front_measured": "+Y",
+      "front_confidence": 0.309,
+      "tris": 338,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpetWhite": "ceramic_white"
+      },
+      "source_materials": [
+        "carpetWhite",
+        "glass",
+        "metal",
+        "metalDark",
+        "metalMedium",
+        "wood"
+      ],
+      "scale_basis": "target dims [60, 60, 88] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-lampRoundFloor": {
+      "catalog_row": "kenney-furniture-kit-lampRoundFloor",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-lampRoundFloor/lampRoundFloor.glb",
+      "format": "glb",
+      "sha256": "50fe1b5b588edf15bfa9cc880f71a02a4fda6036350b24733d0ef4de5cc5e908",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        15.204,
+        17.556,
+        86
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        27.03,
+        31.21,
+        152.89
+      ],
+      "footprint_cm": [
+        27.03,
+        31.21
+      ],
+      "height_cm": 152.89,
+      "front_local": "-Y",
+      "front_measured": "-X",
+      "front_confidence": 0.2858,
+      "tris": 76,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "lamp",
+        "metal"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-lampRoundTable": {
+      "catalog_row": "kenney-furniture-kit-lampRoundTable",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-lampRoundTable/lampRoundTable.glb",
+      "format": "glb",
+      "sha256": "75bb644caaa3da003b4fcad7a931722dd61cd2858aab70cf660021d5061fa1b2",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        15.204,
+        17.556,
+        31.425
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        27.03,
+        31.21,
+        55.87
+      ],
+      "footprint_cm": [
+        27.03,
+        31.21
+      ],
+      "height_cm": 55.87,
+      "front_local": "-Y",
+      "front_measured": "-X",
+      "front_confidence": 0.25,
+      "tris": 76,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "lamp",
+        "metal"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-loungeChairRelax": {
+      "catalog_row": "kenney-furniture-kit-loungeChairRelax",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-loungeChairRelax/loungeChairRelax.glb",
+      "format": "glb",
+      "sha256": "def698179e44de6cd17f4cfc2730273da54dd25458a29b079fbf4468abe5d98e",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        49,
+        67.469,
+        63
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        87.11,
+        119.94,
+        112.0
+      ],
+      "footprint_cm": [
+        87.11,
+        119.94
+      ],
+      "height_cm": 112.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.4,
+      "tris": 188,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpet",
+        "metal",
+        "wood"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-loungeDesignSofa": {
+      "catalog_row": "kenney-furniture-kit-loungeDesignSofa",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-loungeDesignSofa/loungeDesignSofa.glb",
+      "format": "glb",
+      "sha256": "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        112,
+        41,
+        40
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        199.11,
+        72.89,
+        71.11
+      ],
+      "footprint_cm": [
+        199.11,
+        72.89
+      ],
+      "height_cm": 71.11,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.1876,
+      "tris": 116,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "carpetBlue",
+        "metal"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-rugDoormat": {
+      "catalog_row": "kenney-furniture-kit-rugDoormat",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-rugDoormat/rugDoormat.glb",
+      "format": "glb",
+      "sha256": "bd888e41853342cdc0d34d3f09b99cedc50a144f47b514943b65cdb9a2cfd802",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        42.93,
+        23.701,
+        1
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.863499,
+        2.109616,
+        2.0
+      ],
+      "scaled_bbox_cm": [
+        80.0,
+        50.0,
+        2.0
+      ],
+      "footprint_cm": [
+        80.0,
+        50.0
+      ],
+      "height_cm": 2.0,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 204,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "wood": "fabric_dark"
+      },
+      "source_materials": [
+        "wood"
+      ],
+      "scale_basis": "target dims [80, 50, 2] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-rugRectangle": {
+      "catalog_row": "kenney-furniture-kit-rugRectangle",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-rugRectangle/rugRectangle.glb",
+      "format": "glb",
+      "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        157,
+        92,
+        1
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        279.11,
+        163.56,
+        1.78
+      ],
+      "footprint_cm": [
+        279.11,
+        163.56
+      ],
+      "height_cm": 1.78,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 28,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpet": "fabric_rug",
+        "carpetDarker": "fabric_rug_border"
+      },
+      "source_materials": [
+        "carpet",
+        "carpetDarker"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-rugRound": {
+      "catalog_row": "kenney-furniture-kit-rugRound",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-rugRound/rugRound.glb",
+      "format": "glb",
+      "sha256": "c4cdc8f51ed2dbfb853b147521ed40e995307392fd3b19045b2203ea50f376db",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        92,
+        92,
+        1
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        163.56,
+        163.56,
+        1.78
+      ],
+      "footprint_cm": [
+        163.56,
+        163.56
+      ],
+      "height_cm": 1.78,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0.0898,
+      "tris": 188,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpet": "fabric_rug",
+        "carpetDarker": "fabric_rug_border"
+      },
+      "source_materials": [
+        "carpet",
+        "carpetDarker"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-rugSquare": {
+      "catalog_row": "kenney-furniture-kit-rugSquare",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-rugSquare/rugSquare.glb",
+      "format": "glb",
+      "sha256": "18a63634e9bbdde0b309c008f4cd41df8455f7f2ffdb8fe8985fdf8c2cd06b3d",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        90.433,
+        92,
+        1
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        160.77,
+        163.56,
+        1.78
+      ],
+      "footprint_cm": [
+        160.77,
+        163.56
+      ],
+      "height_cm": 1.78,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 28,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpet": "fabric_rug",
+        "carpetDarker": "fabric_rug_border"
+      },
+      "source_materials": [
+        "carpet",
+        "carpetDarker"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-showerRound": {
+      "catalog_row": "kenney-furniture-kit-showerRound",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-showerRound/showerRound.glb",
+      "format": "glb",
+      "sha256": "1723208eaba3fb215089e02c8cdd3d7201d0980ad0c7b275319eb539f6094bfb",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        56.179,
+        56.179,
+        109.403
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.602022,
+        1.602022,
+        1.828103
+      ],
+      "scaled_bbox_cm": [
+        90.0,
+        90.0,
+        200.0
+      ],
+      "footprint_cm": [
+        90.0,
+        90.0
+      ],
+      "height_cm": 200.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.5098,
+      "tris": 960,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpetWhite": "ceramic_white",
+        "_defaultMat": "ceramic_white"
+      },
+      "source_materials": [
+        "_defaultMat",
+        "carpetWhite",
+        "glass",
+        "metalDark"
+      ],
+      "scale_basis": "target dims [90, 90, 200] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-table": {
+      "catalog_row": "kenney-furniture-kit-table",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-table/table.glb",
+      "format": "glb",
+      "sha256": "ff1a94498d023957f4bc3ff6f55a7a82977d336dbf01a573b3364f03afe5ff61",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        84.149,
+        44.737,
+        32.673
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.901389,
+        2.011758,
+        2.295473
+      ],
+      "scaled_bbox_cm": [
+        160.0,
+        90.0,
+        75.0
+      ],
+      "footprint_cm": [
+        160.0,
+        90.0
+      ],
+      "height_cm": 75.0,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 120,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "wood"
+      ],
+      "scale_basis": "target dims [160, 90, 75] cm (real-world furniture size)"
+    },
+    "kenney-furniture-kit-televisionModern": {
+      "catalog_row": "kenney-furniture-kit-televisionModern",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-televisionModern/televisionModern.glb",
+      "format": "glb",
+      "sha256": "d89519ad0a5f28b5b0dccb0d83209dccf610cda959578238dd21bbf9e219cfc6",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        68.48,
+        12.84,
+        45.475
+      ],
+      "scale": 1.777778,
+      "scale_xyz": [
+        1.777778,
+        1.777778,
+        1.777778
+      ],
+      "scaled_bbox_cm": [
+        121.74,
+        22.83,
+        80.84
+      ],
+      "footprint_cm": [
+        121.74,
+        22.83
+      ],
+      "height_cm": 80.84,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 72,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "metal",
+        "metalDark"
+      ],
+      "scale_basis": "Kenney kit factor 200/112.5 = 1.7778, from bedDouble's length = 200 cm"
+    },
+    "kenney-furniture-kit-toilet": {
+      "catalog_row": "kenney-furniture-kit-toilet",
+      "source_id": "kenney-furniture-kit",
+      "file": "catalog/models/kenney-furniture-kit-toilet/toilet.glb",
+      "format": "glb",
+      "sha256": "16165cfd03c56c2cb443b800570810a22ef770f65e7a468f6761d9dc14eaaeae",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        31.255,
+        47.718,
+        45.096
+      ],
+      "scale": null,
+      "scale_xyz": [
+        1.183811,
+        1.466952,
+        1.729643
+      ],
+      "scaled_bbox_cm": [
+        37.0,
+        70.0,
+        78.0
+      ],
+      "footprint_cm": [
+        37.0,
+        70.0
+      ],
+      "height_cm": 78.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.5604,
+      "tris": 230,
+      "material_policy": "restyle",
+      "material_overrides": {
+        "carpetWhite": "ceramic_white",
+        "_defaultMat": "ceramic_white"
+      },
+      "source_materials": [
+        "_defaultMat",
+        "carpetWhite",
+        "metalDark",
+        "metalLight"
+      ],
+      "scale_basis": "target dims [37, 70, 78] cm (real-world furniture size)"
+    },
+    "polyhaven-hanging_picture_frame_01": {
+      "catalog_row": "polyhaven-hanging_picture_frame_01",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-hanging_picture_frame_01/hanging_picture_frame_01_2k.blend",
+      "format": "blend",
+      "sha256": "86b17dde5ebf276c92e65d56b3061cb324110f57e1382b32fabeddb50c5913f0",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        59.4,
+        1.575,
+        84.1
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        59.4,
+        1.57,
+        84.1
+      ],
+      "footprint_cm": [
+        59.4,
+        1.57
+      ],
+      "height_cm": 84.1,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.8236,
+      "tris": 2586,
+      "material_policy": "keep_source",
+      "material_overrides": {
+        "hanging_picture_frame_01_artwork": "art_panel"
+      },
+      "source_materials": [
+        "hanging_picture_frame_01",
+        "hanging_picture_frame_01_artwork",
+        "hanging_picture_frame_01_glass"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale",
+      "material_policy_note": "`keep_source` + a PARTIAL override (T13): the frame's own wood/metal and glass keep their 2K PBR maps; only the `_artwork` slot is rebound. build_scene.apply_style_materials refuses if this key matches nothing."
+    },
+    "polyhaven-modern_arm_chair_01": {
+      "catalog_row": "polyhaven-modern_arm_chair_01",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-modern_arm_chair_01/modern_arm_chair_01_2k.blend",
+      "format": "blend",
+      "sha256": "c6c92b5a07be4ab37e48fbf43c7ff233b90b1e364987e2bae790aed501fe97f6",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        82.034,
+        98.656,
+        102.285
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        82.03,
+        98.66,
+        102.28
+      ],
+      "footprint_cm": [
+        82.03,
+        98.66
+      ],
+      "height_cm": 102.28,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.3512,
+      "tris": 8916,
+      "material_policy": "keep_source",
+      "material_overrides": {},
+      "source_materials": [
+        "modern_arm_chair_01_legs",
+        "modern_arm_chair_01_pillow"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale"
+    },
+    "polyhaven-modern_ceiling_lamp_01": {
+      "catalog_row": "polyhaven-modern_ceiling_lamp_01",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-modern_ceiling_lamp_01/modern_ceiling_lamp_01_2k.blend",
+      "format": "blend",
+      "sha256": "7eea1d3318ce550b3251593de9c1110f8b9f76af1523ea19e87c3d638e3c117d",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        43.165,
+        43.166,
+        95.155
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        43.16,
+        43.17,
+        95.16
+      ],
+      "footprint_cm": [
+        43.16,
+        43.17
+      ],
+      "height_cm": 95.16,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.2,
+      "tris": 5602,
+      "material_policy": "keep_source",
+      "material_overrides": {},
+      "source_materials": [
+        "modern_ceiling_globe",
+        "modern_ceiling_lamp_01",
+        "modern_ceiling_lamp_01_glass"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale"
+    },
+    "polyhaven-modern_coffee_table_01": {
+      "catalog_row": "polyhaven-modern_coffee_table_01",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-modern_coffee_table_01/modern_coffee_table_01_2k.blend",
+      "format": "blend",
+      "sha256": "e29a5a55b2793add33473e2d641c3dfbebd2d1098e62ccb957f7e11bcd54b46d",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        120.183,
+        60,
+        39
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        120.18,
+        60.0,
+        39.0
+      ],
+      "footprint_cm": [
+        120.18,
+        60.0
+      ],
+      "height_cm": 39.0,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0.0014,
+      "tris": 4504,
+      "material_policy": "keep_source",
+      "material_overrides": {},
+      "source_materials": [
+        "modern_coffee_table_01"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale"
+    },
+    "polyhaven-modern_coffee_table_02": {
+      "catalog_row": "polyhaven-modern_coffee_table_02",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-modern_coffee_table_02/modern_coffee_table_02_2k.blend",
+      "format": "blend",
+      "sha256": "238f70d31434d69333cd50f2bf50da802dad1a920c3ecc472edef553804d61f6",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        119.911,
+        119.966,
+        36.925
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        119.91,
+        119.97,
+        36.92
+      ],
+      "footprint_cm": [
+        119.91,
+        119.97
+      ],
+      "height_cm": 36.92,
+      "front_local": "-Y",
+      "front_measured": "+Y",
+      "front_confidence": 0.5068,
+      "tris": 13645,
+      "material_policy": "keep_source",
+      "material_overrides": {},
+      "source_materials": [
+        "modern_coffee_table_02_base",
+        "modern_coffee_table_02_wood"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale"
+    },
+    "polyhaven-outdoor_table_chair_set_01": {
+      "catalog_row": "polyhaven-outdoor_table_chair_set_01",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-outdoor_table_chair_set_01/outdoor_table_chair_set_01_2k.blend",
+      "format": "blend",
+      "sha256": "e480fc1c3f76212f78d5a13a79f15886b2866c305bcd2758422cb89a775e9810",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        79.254,
+        170.628,
+        85.858
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        79.25,
+        170.63,
+        85.86
+      ],
+      "footprint_cm": [
+        79.25,
+        170.63
+      ],
+      "height_cm": 85.86,
+      "front_local": "-Y",
+      "front_measured": "-X",
+      "front_confidence": 0.1704,
+      "tris": 9828,
+      "material_policy": "keep_source",
+      "material_overrides": {},
+      "source_materials": [
+        "outdoor_table_chair_set_01_chair",
+        "outdoor_table_chair_set_01_table"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale"
+    },
+    "polyhaven-potted_plant_02": {
+      "catalog_row": "polyhaven-potted_plant_02",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-potted_plant_02/potted_plant_02_2k.blend",
+      "format": "blend",
+      "sha256": "b62ded8ac23b439d2d4457916241f45e029d1455cd792f426ef3b0e5f889589c",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        72.895,
+        75.749,
+        63.257
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        72.89,
+        75.75,
+        63.26
+      ],
+      "footprint_cm": [
+        72.89,
+        75.75
+      ],
+      "height_cm": 63.26,
+      "front_local": "-Y",
+      "front_measured": "+X",
+      "front_confidence": 0.276,
+      "tris": 69806,
+      "material_policy": "keep_source",
+      "material_overrides": {},
+      "source_materials": [
+        "potted_plant_02_leaves",
+        "potted_plant_02_pot"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale"
+    },
+    "polyhaven-wooden_display_shelves_01": {
+      "catalog_row": "polyhaven-wooden_display_shelves_01",
+      "source_id": "polyhaven",
+      "file": "catalog/models/polyhaven-wooden_display_shelves_01/wooden_display_shelves_01_2k.blend",
+      "format": "blend",
+      "sha256": "bfd4dc80d6e684fd156bb5c76d87708970cf2d5bbf4cb1805b96a71a7747d920",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        107.776,
+        37.151,
+        155.618
+      ],
+      "scale": 1.0,
+      "scale_xyz": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "scaled_bbox_cm": [
+        107.78,
+        37.15,
+        155.62
+      ],
+      "footprint_cm": [
+        107.78,
+        37.15
+      ],
+      "height_cm": 155.62,
+      "front_local": "-Y",
+      "front_measured": null,
+      "front_confidence": 0,
+      "tris": 3174,
+      "material_policy": "keep_source",
+      "material_overrides": {},
+      "source_materials": [
+        "wooden_display_shelves_01"
+      ],
+      "scale_basis": "1.0 - Poly Haven models are authored at real-world scale"
+    },
+    "quaternius-X5kQPKzAWp": {
+      "catalog_row": "quaternius-X5kQPKzAWp",
+      "source_id": "quaternius-via-polypizza",
+      "file": "catalog/models/quaternius-X5kQPKzAWp/f627491f-7126-4323-8d01-0be933671078.glb",
+      "format": "glb",
+      "sha256": "0a81a9e0532f1ccb51a39d6a71bbc3fa2506dac22fa762b58194ed4741c2f5a0",
+      "licence": "CC0-verified",
+      "measured_bbox_cm": [
+        400.265,
+        280.119,
+        145.243
+      ],
+      "scale": 0.585226,
+      "scale_xyz": [
+        0.585226,
+        0.585226,
+        0.585226
+      ],
+      "scaled_bbox_cm": [
+        234.25,
+        163.93,
+        85.0
+      ],
+      "footprint_cm": [
+        234.25,
+        163.93
+      ],
+      "height_cm": 85.0,
+      "front_local": "-Y",
+      "front_measured": "-Y",
+      "front_confidence": 0.9126,
+      "tris": 3886,
+      "material_policy": "restyle",
+      "material_overrides": {},
+      "source_materials": [
+        "Legs",
+        "Sofa"
+      ],
+      "scale_basis": "uniform, height -> 85 cm"
+    }
+  },
+  "unused_catalog_rows": [
+    "kenney-furniture-kit-books",
+    "kenney-furniture-kit-kitchenCabinetCornerRound",
+    "kenney-furniture-kit-kitchenCoffeeMachine",
+    "kenney-furniture-kit-kitchenMicrowave",
+    "kenney-furniture-kit-loungeDesignSofaCorner",
+    "kenney-furniture-kit-loungeSofaCorner",
+    "kenney-furniture-kit-loungeSofaOttoman",
+    "kenney-furniture-kit-pillow",
+    "kenney-furniture-kit-sideTable",
+    "kenney-furniture-kit-tableCoffee",
+    "polyhaven-modern_wooden_cabinet",
+    "polyhaven-steel_frame_shelves_01",
+    "quaternius-1kwsjhpY84"
+  ],
+  "unused_note": "these CC0 rows are fetched, hashed and import-tested but no class in style v1 references them; a later style version may."
+}

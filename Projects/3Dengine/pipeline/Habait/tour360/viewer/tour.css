@@ -1,0 +1,1762 @@
+/* Habait Tour360 — tour.css (T01, board habait-tour360).
+   The Habait house ground (warm stone, #1a1713 — the navy #0A1330 retired 2026-11-08) over a full-bleed Pannellum panorama. Logical properties throughout; the safe-area
+   insets are the one physical exception (the notch is physical). Amber is reserved for the הדמיה badge and the footer's disclosure
+   dot (Habait house rule). No letter-spacing, no case transforms. Hover only behind (hover: hover) and (pointer: fine). */
+
+@font-face{font-family:'Assistant';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/assistant-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Assistant';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/assistant-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Assistant';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/assistant-hebrew.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:'Heebo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/heebo-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Heebo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/heebo-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Heebo';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/heebo-hebrew.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+
+:root {
+  /* the house tokens (Habait/platform/css/tokens.css, 2026-11-08 — Eliran's pick with direction C: «the house tokens… retire the tour's
+     own navy system»). The viewer is one self-contained page, so the values are copied here; the names keep the house names. */
+  --n-0: #fffcf9; --n-50: #f9f6f3; --n-100: #f2ede8; --n-150: #e8e3de; --n-200: #dbd6d2; --n-300: #bfbbb6; --n-400: #9f9a96;
+  --n-500: #807b77; --n-600: #67625e; --n-700: #514d49; --n-800: #3c3935; --n-850: #2f2b28; --n-900: #24211e; --n-950: #1a1713;
+  --brand-primary: #005d83; --brand-on-primary: #ffffff; --brand-accent: #eea927; --brand-on-accent: #1a1713;
+  --font-text: 'Heebo', system-ui, 'Segoe UI', 'Noto Sans Hebrew', Arial, sans-serif;
+  --fs-h2: 1.375rem; --fs-body: 1rem; --fs-small: 0.875rem;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px;
+  --tap-min: 44px; --r-sm: 6px; --r-md: 12px; --r-full: 999px;
+  --dur-fast: 150ms; --dur-base: 250ms; --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --chrome-bg: var(--n-950);
+  --chrome-fg: var(--n-50);
+  --chrome-muted: rgba(249, 246, 243, 0.72);
+  --chrome-panel: rgba(26, 23, 19, 0.84);
+  --chrome-panel-solid: var(--n-900);
+  --chrome-line: rgba(249, 246, 243, 0.14);
+  --chrome-line-strong: rgba(249, 246, 243, 0.22);
+  --chrome-text-shadow: 0 1px 4px rgb(0 0 0 / 0.8);
+  --chrome-shadow: 0 10px 40px rgb(0 0 0 / 0.45);
+  --chrome-shadow-sm: 0 4px 16px rgb(0 0 0 / 0.4);
+  /* the research's additions (research.md §4): two glass weights, two blurs, the focus ring on dark chrome */
+  --glass-thin: rgba(26, 23, 19, 0.58);
+  --glass-mid: rgba(26, 23, 19, 0.72);
+  --blur-thin: blur(16px) saturate(140%);
+  --blur-thick: blur(24px) saturate(160%);
+  --focus-chrome: #80bee0;
+  /* the viewer's own names, now pointing at the house values (every older rule below reads these) */
+  --ground: var(--n-950);
+  --ground-2: var(--n-900);
+  --ground-3: var(--n-850);
+  --ink: var(--n-50);
+  --ink-2: rgba(249, 246, 243, 0.88);
+  --ink-3: var(--chrome-muted);
+  --line: var(--chrome-line);
+  --glass: var(--glass-thin);
+  --glass-strong: var(--chrome-panel);
+  --focus: var(--focus-chrome);
+  --amber: var(--brand-accent);
+  --amber-ink: var(--brand-on-accent);
+  --ease-out: var(--ease);
+  --font-body: var(--font-text);
+  --font-head: var(--font-text);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+[hidden] { display: none !important; }
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+  background: var(--ground);
+}
+html, body { margin: 0; height: 100%; overflow: clip; }   /* the page never scrolls sideways (RTL: a scroll offset pushed the place card off the right edge) */
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--ground);
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+button { font: inherit; }
+button, [role="button"] {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.t-root { position: fixed; inset: 0; height: 100dvh; overflow: hidden; overflow: clip; }   /* clip: not even a script can scroll it (2026-11-08) */
+
+/* ── the panorama ─────────────────────────────────────────────────────────────── */
+.t-pano { position: absolute; inset: 0; background: var(--ground); touch-action: none; }
+.t-pano:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--focus); }
+.t-pano .pnlm-container { background: var(--ground); font-family: var(--font-body); }
+.t-pano .pnlm-load-box,
+.t-pano .pnlm-about-msg,
+.t-pano .pnlm-error-msg,
+.t-pano .pnlm-panorama-info { display: none !important; }
+
+.t-shade { position: absolute; inset-inline: 0; pointer-events: none; }
+.t-shade-top {
+  top: 0;
+  height: calc(210px + var(--safe-top));
+  background: linear-gradient(to bottom, rgba(26, 23, 19, 0.84), rgba(26, 23, 19, 0.42) 58%, rgba(26, 23, 19, 0));
+}
+.t-shade-bottom {
+  bottom: 0;
+  height: calc(290px + var(--safe-bottom));
+  background: linear-gradient(to top, rgba(26, 23, 19, 0.94), rgba(26, 23, 19, 0.6) 52%, rgba(26, 23, 19, 0));
+}
+
+/* ── the header: brand + the permanent badge · the language switch ────────────── */
+.t-head {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: calc(16px + var(--safe-top));
+  padding-left: calc(20px + var(--safe-left));
+  padding-right: calc(20px + var(--safe-right));
+  pointer-events: none;
+}
+.t-head > * { pointer-events: auto; }
+.t-head-start { display: flex; align-items: center; gap: 10px; }
+.t-head-end { display: flex; align-items: center; gap: 8px; }
+.t-brand {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1;
+  color: var(--ink);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+.t-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--amber);
+  color: var(--amber-ink);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  padding: 7px 11px;
+  border-radius: 999px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
+  white-space: nowrap;
+}
+.t-lang {
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+.t-lang button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 44px;
+  min-height: 44px;   /* the responsive gate: every target ≥ 44×44 (Eliran 2026-11-05, desktop and phone) */
+  padding-inline: 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 140ms var(--ease-out), color 140ms var(--ease-out);
+}
+.t-lang button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+/* scope=apartment (2026-11-02): the link back to the project level, a pill beside the languages */
+.t-return {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  color: var(--ink-2);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.t-return[hidden] { display: none; }
+button.t-return { appearance: none; cursor: pointer; }
+.t-strip [role="listitem"][hidden] { display: none; } /* the other layer's cards (2026-11-02) */
+.t-return:hover { color: var(--ink); }
+
+/* ── the title block: zone · room · apartment · the permanent concept line ────── */
+.t-title {
+  position: absolute;
+  z-index: 2;
+  top: calc(78px + var(--safe-top));
+  inset-inline-start: 22px;
+  max-width: min(460px, calc(100% - 104px));
+  pointer-events: none;
+}
+.t-zone { margin: 0 0 4px; font: 600 14px/1.4 var(--font-body); color: var(--ink-3); }
+.t-room {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.15;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+.t-apt { margin: 6px 0 0; font: 400 15px/1.5 var(--font-body); color: var(--ink-2); }
+.t-concept {
+  margin: 12px 0 0;
+  max-width: 380px;
+  padding-inline-start: 10px;
+  border-inline-start: 2px solid rgba(255, 255, 255, 0.45);
+  font: 400 13.5px/1.55 var(--font-body);
+  color: var(--ink-2);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ── the tool column ───────────────────────────────────────────────────────────── */
+.t-tools {
+  position: absolute;
+  z-index: 2;
+  inset-inline-end: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.t-icon-btn {
+  appearance: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  color: var(--ink);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  transition: transform 120ms var(--ease-out), background 120ms var(--ease-out);
+}
+.t-icon-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.t-icon-btn:active { transform: scale(0.94); background: var(--glass-strong); }
+.t-icon-btn[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+html[dir="rtl"] .t-dir { transform: scaleX(-1); }
+
+/* ── the bottom block: travel row · room strip · the permanent AI note ─────────── */
+.t-bottom {
+  position: absolute;
+  z-index: 2;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: calc(12px + var(--safe-bottom));
+  padding-left: calc(16px + var(--safe-left));
+  padding-right: calc(16px + var(--safe-right));
+}
+.t-travel { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.t-count { min-width: 0; text-align: center; }
+.t-count-main { margin: 0; font: 600 15px/1.3 var(--font-head); }
+.t-count-sub { margin: 2px 0 0; font: 400 13px/1.4 var(--font-body); color: var(--ink-3); }
+.t-num { font-family: var(--font-head); direction: ltr; unicode-bidi: isolate; }
+
+.t-strip {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 3px 2px 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.t-strip::-webkit-scrollbar { display: none; }
+.t-strip > div { flex: 0 0 auto; scroll-snap-align: center; }
+.t-card {
+  appearance: none;
+  position: relative;
+  display: block;
+  width: 150px;
+  height: 92px;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--ground-2);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
+}
+.t-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.t-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 23, 19, 0.88), rgba(26, 23, 19, 0.1) 62%);
+}
+.t-card-num, .t-card-name, .t-card-check { position: absolute; z-index: 1; }
+.t-card-num { top: 7px; inset-inline-start: 9px; font: 700 13px/1 var(--font-head); text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); }
+.t-card-name {
+  bottom: 7px;
+  inset-inline: 9px;
+  font: 600 13.5px/1.25 var(--font-body);
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.t-card-check {
+  top: 6px;
+  inset-inline-end: 6px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ground);
+}
+.t-card-check svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.t-card[aria-current="true"] { border-color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
+.t-card:active { transform: scale(0.97); }
+
+.t-ai {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  font: 400 13px/1.4 var(--font-body);
+  color: var(--ink-2);
+  text-align: center;
+}
+.t-ai-dot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+
+/* ── hotspots (inside the Pannellum container, which is dir=ltr) ───────────────── */
+.t-pano .t-hs { width: 56px; height: 56px; cursor: pointer; outline: none; }
+.t-hs-ring {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: rgba(26, 23, 19, 0.38);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.38), inset 0 0 0 6px rgba(255, 255, 255, 0.16);
+  transition: transform 160ms var(--ease-out), background 160ms var(--ease-out);
+}
+.t-hs-ring::after { content: ""; position: absolute; inset: 13px; border-radius: 50%; background: #fff; }
+.t-hs-ring::before { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.7); opacity: 0; }
+.t-hs-label {
+  position: absolute;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass-strong);
+  color: #fff;
+  font: 600 13.5px/1 var(--font-body);
+  pointer-events: none;
+}
+.t-hs:focus-visible .t-hs-ring { box-shadow: 0 0 0 3px var(--focus); }
+.t-hs:active .t-hs-ring { transform: scale(0.94); }
+
+/* ── loading · error ───────────────────────────────────────────────────────────── */
+.t-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--ground);
+  font: 600 16px/1.4 var(--font-head);
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.t-loading.is-small {
+  inset: auto;
+  top: calc(84px + var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+  gap: 10px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass-strong);
+  font: 600 14px/1.2 var(--font-body);
+  white-space: nowrap;
+}
+.t-loading.is-hidden { opacity: 0; pointer-events: none; }
+.t-loading.is-final .t-spinner { display: none; } /* T18j: a final message, no spinner */
+.t-spinner {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.24);
+  border-top-color: #fff;
+  animation: t-spin 900ms linear infinite;
+}
+.t-loading.is-small .t-spinner { width: 16px; height: 16px; border-width: 2px; }
+@keyframes t-spin { to { transform: rotate(360deg); } }
+
+.t-error {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  background: var(--ground);
+  text-align: center;
+  font: 400 16px/1.5 var(--font-body);
+}
+.t-error button {
+  appearance: none;
+  min-height: 44px;
+  padding-inline: 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--ground);
+  font: 600 15px/1 var(--font-head);
+  cursor: pointer;
+}
+
+/* ── the floor-plan sheet ──────────────────────────────────────────────────────── */
+.t-sheet { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; }
+.t-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 23, 19, 0.62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.t-sheet-panel {
+  position: relative;
+  width: min(980px, calc(100vw - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--ground-2);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+}
+.t-sheet-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.t-sheet-head h2 { margin: 0; font: 700 21px/1.3 var(--font-head); }
+.t-sheet-hint { margin: 4px 0 0; font: 400 14px/1.5 var(--font-body); color: var(--ink-3); }
+.t-plan-wrap { border-radius: 12px; overflow: hidden; background: #fff; }
+.t-plan { display: block; width: 100%; height: auto; }
+.t-pin { cursor: pointer; outline: none; }
+.t-pin circle { fill: #fff; stroke: var(--ground); stroke-width: 4; transition: fill 140ms var(--ease-out); }
+.t-pin text { fill: var(--ground); font-family: var(--font-head); font-weight: 700; font-size: 28px; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.t-pin.is-current circle { fill: var(--ground); stroke: #fff; stroke-width: 5; }
+.t-pin.is-current text { fill: #fff; }
+/* WALKAROUND-QUALITY-PLAN.md card Q09: the view cone — the current pin's navy, see-through, drawn under the pins */
+.t-cone { fill: rgba(26, 23, 19, 0.24); stroke: rgba(26, 23, 19, 0.6); stroke-width: 3; stroke-linejoin: round; pointer-events: none; }
+/* card Q09: the compass — the plan's north, in the sheet's corner */
+.t-compass { pointer-events: none; }
+.t-compass circle { fill: rgba(255, 255, 255, 0.94); stroke: var(--ground); stroke-width: 3; }
+.t-compass path { fill: var(--ground); }
+.t-compass text { fill: var(--ground); font-family: var(--font-head); font-weight: 700; font-size: 36px; text-anchor: middle; dominant-baseline: central; }
+.t-pin:focus-visible circle { stroke: #005d83; stroke-width: 7; }
+.t-plan-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin-top: 14px; }
+.t-plan-item {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--ground-3);
+  color: var(--ink);
+  font: 600 14.5px/1.3 var(--font-body);
+  text-align: start;
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out), background 120ms var(--ease-out);
+}
+.t-plan-item:active { transform: scale(0.98); }
+.t-plan-item[aria-current="true"] { background: var(--ink); color: var(--ground); }
+.t-plan-num { min-width: 22px; font-family: var(--font-head); font-weight: 700; }
+
+/* ── focus, hover, motion ──────────────────────────────────────────────────────── */
+.t-lang button:focus-visible,
+.t-icon-btn:focus-visible,
+.t-card:focus-visible,
+.t-plan-item:focus-visible,
+.t-error button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .t-icon-btn:hover { background: var(--glass-strong); }
+  .t-lang button:not([aria-pressed="true"]):hover { background: rgba(255, 255, 255, 0.12); }
+  .t-card:hover { border-color: rgba(255, 255, 255, 0.55); transform: translateY(-2px); }
+  .t-hs:hover .t-hs-ring { transform: scale(1.1); background: rgba(26, 23, 19, 0.62); }
+  .t-pin:hover circle { fill: #f2ede8; }
+  .t-plan-item:not([aria-current="true"]):hover { background: #3c3935; }
+}
+@media (pointer: coarse) { .t-fine { display: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .t-hs-ring::before { animation: t-pulse 2.6s var(--ease-out) 1s 3; }
+}
+@keyframes t-pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.75); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .t-spinner { animation-duration: 2600ms; }
+  .t-loading { transition: none; }
+}
+
+/* ── phones ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .t-head { padding-top: calc(12px + var(--safe-top)); padding-left: calc(14px + var(--safe-left)); padding-right: calc(14px + var(--safe-right)); }
+  .t-brand { font-size: 17px; }
+  .t-badge { padding: 6px 10px; }
+  .t-lang button { min-width: 44px; padding-inline: 8px; font-size: 13px; }
+  .t-title { top: calc(64px + var(--safe-top)); inset-inline-start: 16px; max-width: calc(100% - 86px); }
+  .t-room { font-size: 25px; }
+  .t-apt { font-size: 14px; }
+  .t-concept { font-size: 13px; max-width: none; }
+  .t-tools { inset-inline-end: 12px; }
+  .t-card { width: 112px; height: 72px; }
+  .t-shade-top { height: calc(240px + var(--safe-top)); }
+  .t-shade-bottom { height: calc(320px + var(--safe-bottom)); }
+  .t-sheet { place-items: end stretch; }
+  .t-sheet-panel {
+    width: 100%;
+    max-height: 90dvh;
+    border-radius: 18px 18px 0 0;
+    padding: 16px 14px calc(16px + var(--safe-bottom));
+  }
+  .t-plan-list { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── the change row and the change panel (prepared examples — PLAN.md §9) ────────── */
+.t-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+/* card Q09 (D-WQ-17, OQ-1): the Original/Designed switch — a two-way pill as the language one, its label line under it */
+.t-look { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.t-look-seg { display: flex; padding: 3px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); }
+.t-look-seg button { appearance: none; border: 0; background: transparent; color: var(--ink-2); font: 600 14px/1 var(--font-head); min-height: 38px; padding-inline: 16px; border-radius: 999px; cursor: pointer; }
+.t-look-seg button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+.t-look-seg button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.t-look-note { margin: 0; padding: 4px 10px; border-radius: 8px; background: var(--glass-strong); color: var(--ink-2); font: 500 12.5px/1.35 var(--font-body); text-align: center; max-width: 34em; }
+.t-pill {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--ink);
+  color: var(--ground);
+  font: 700 15px/1 var(--font-head);
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
+  transition: transform 120ms var(--ease-out), background 120ms var(--ease-out);
+}
+.t-pill svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.t-pill:active { transform: scale(0.97); }
+.t-pill-count {
+  box-sizing: border-box;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ground);
+  color: var(--ink);
+  font: 700 13px/1 var(--font-head);
+}
+.t-pill-quiet {
+  background: var(--glass);
+  color: var(--ink);
+  border-color: var(--line);
+  font-weight: 600;
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+.t-pill-quiet[aria-pressed="true"] { background: var(--glass-strong); border-color: rgba(255, 255, 255, 0.6); }
+
+.t-sheet-panel.is-narrow { width: min(480px, calc(100vw - 32px)); }
+.t-change-list { display: grid; gap: 8px; }
+.t-change-item {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--ground-3);
+  color: var(--ink);
+  font: 600 16px/1.35 var(--font-body);
+  text-align: start;
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out), background 120ms var(--ease-out), color 120ms var(--ease-out);
+}
+.t-change-item:active { transform: scale(0.98); }
+.t-change-item[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.t-change-mark {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+}
+.t-change-mark svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.t-change-row { display: flex; gap: 8px; margin-top: 12px; }
+.t-change-input {
+  display: block;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  min-height: 50px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.32);
+  background: transparent;
+  color: var(--ink-3);
+  font: 400 16px/1.3 var(--font-body);
+}
+.t-change-input:disabled { opacity: 1; -webkit-text-fill-color: var(--ink-3); }
+.t-change-input::placeholder { color: var(--ink-3); opacity: 1; }
+.t-change-note { margin: 12px 0 0; font: 400 13.5px/1.6 var(--font-body); color: var(--ink-3); }
+.t-change-reset {
+  appearance: none;
+  margin-top: 14px;
+  min-height: 44px;
+  padding-inline: 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: 600 14.5px/1 var(--font-head);
+  cursor: pointer;
+}
+.t-pill:focus-visible,
+.t-change-item:focus-visible,
+.t-change-reset:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .t-pill:not(.t-pill-quiet):hover { background: #f2ede8; }
+  .t-pill-quiet:hover { background: var(--glass-strong); }
+  .t-change-item:not([aria-pressed="true"]):hover { background: #3c3935; }
+  .t-change-reset:hover { background: rgba(255, 255, 255, 0.1); }
+}
+@media (max-width: 640px) {
+  .t-pill { padding: 0 15px; font-size: 14.5px; }
+  .t-shade-bottom { height: calc(370px + var(--safe-bottom)); }
+}
+
+/* ── the live typed change (behind the unlock code) ─────────────────────────────── */
+.t-change-input:not(:disabled) { border-style: solid; border-color: rgba(255, 255, 255, 0.4); color: var(--ink); background: var(--ground-2); }
+.t-change-input:not(:disabled)::placeholder { color: var(--ink-3); }
+.t-change-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.t-change-apply {
+  appearance: none;
+  flex: 0 0 auto;
+  min-height: 50px;
+  padding-inline: 16px;
+  border-radius: 12px;
+  border: 0;
+  background: var(--ink);
+  color: var(--ground);
+  font: 700 15px/1 var(--font-head);
+  cursor: pointer;
+}
+.t-change-apply:disabled { opacity: 0.55; cursor: default; }
+.t-change-apply:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.t-change-item.is-live { border-color: rgba(255, 255, 255, 0.5); }
+.t-change-item.is-live:disabled { cursor: default; opacity: 0.8; }
+.t-change-tag {
+  display: inline-block;
+  margin-inline-end: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font: 600 12px/1.4 var(--font-body);
+  vertical-align: 1px;
+}
+.t-change-item[aria-pressed="true"] .t-change-tag { background: rgba(26, 23, 19, 0.14); }
+
+/* ── the typed field on the main screen (unlocked only) ─────────────────────────── */
+.t-change-bar {
+  display: flex;
+  gap: 8px;
+  width: min(640px, 100%);
+  margin: 0 auto;
+}
+.t-change-bar[hidden] { display: none; }
+.t-bar-input {
+  margin-top: 0;
+  min-height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.34) !important;
+  background: var(--glass-strong) !important;
+  color: var(--ink) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
+}
+.t-bar-input::placeholder { color: var(--ink-2) !important; }
+.t-bar-apply { min-height: 48px; box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32); }
+@media (max-width: 640px) {
+  .t-shade-bottom { height: calc(430px + var(--safe-bottom)); }
+}
+
+/* ── the catalog (T14e → T16c, CATALOG-PLAN.md §10.3): a ring on each replaceable piece, the pick bar it opens (the chip and the
+   matching items), the one-time hint, the item card on the result. The rings live inside the Pannellum container (dir=ltr). ──── */
+.t-pano .t-mk { width: 44px; height: 44px; cursor: pointer; outline: none; touch-action: manipulation; opacity: 0; pointer-events: none; transition: opacity 180ms var(--ease-out); }
+.t-pano.has-markers .t-mk { opacity: 1; pointer-events: auto; }
+.t-pano.has-markers.is-moving .t-mk { opacity: 0; pointer-events: none; }
+.t-mk-ring {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(26, 23, 19, 0.28);
+  box-shadow: 0 0 0 4px rgba(26, 23, 19, 0.22), 0 2px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 160ms var(--ease-out), background 160ms var(--ease-out), border-color 160ms var(--ease-out);
+}
+.t-mk-ring::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); }
+.t-mk.is-open .t-mk-ring { background: var(--ink); border-color: var(--ink); box-shadow: 0 0 0 3px var(--focus), 0 2px 10px rgba(0, 0, 0, 0.35); }
+.t-mk.is-open .t-mk-ring::after { background: var(--ground); }
+.t-mk-chip {
+  position: absolute;
+  top: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass-strong);
+  color: #fff;
+  font: 600 13.5px/1 var(--font-body);
+  pointer-events: none;
+}
+.t-mk:focus-visible .t-mk-ring { box-shadow: 0 0 0 3px var(--focus); }
+.t-mk:active .t-mk-ring { transform: scale(0.94); }
+.t-mk-hint {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass-strong);
+  color: var(--ink-2);
+  font: 600 13.5px/1.3 var(--font-body);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+.t-pick { display: grid; gap: 6px; box-sizing: border-box; width: min(640px, 100%); margin: 0 auto; }
+.t-pick-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.t-pick-chip { margin: 0; font: 600 14px/1.4 var(--font-body); color: var(--ink-2); }
+.t-pick-close { width: 36px; height: 36px; flex: 0 0 auto; }
+.t-catalog-strip,
+.t-catalog-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  padding: 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.t-catalog-strip::-webkit-scrollbar,
+.t-catalog-bar::-webkit-scrollbar { display: none; }
+.t-catalog-bar { width: min(640px, 100%); margin: 0 auto; justify-content: safe center; }
+.t-catalog-item {
+  appearance: none;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 84px;
+  padding: 6px 4px 7px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--glass-strong);
+  color: var(--ink);
+  font: 600 12px/1.2 var(--font-body);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  transition: transform 120ms var(--ease-out), border-color 120ms var(--ease-out), background 120ms var(--ease-out);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.t-catalog-item img { width: 60px; height: 60px; object-fit: contain; border-radius: 8px; background: #fff; }
+.t-catalog-item span { max-width: 76px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.t-catalog-item:active { transform: scale(0.97); }
+.t-catalog-item[aria-selected="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.t-catalog-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.t-catalog-strip .t-catalog-item { background: var(--ground-3); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.t-item-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: min(640px, 100%);
+  margin: 0 auto;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: var(--glass-strong);
+  color: var(--ink);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
+}
+.t-item-thumb { flex: 0 0 auto; width: 56px; height: 56px; object-fit: contain; border-radius: 10px; background: #fff; }
+.t-item-body { flex: 1 1 auto; min-width: 0; }
+.t-item-name { margin: 0; font: 700 15px/1.3 var(--font-head); }
+.t-item-price { margin: 2px 0 0; font: 400 13.5px/1.4 var(--font-body); color: var(--ink-2); }
+.t-item-note { margin: 2px 0 0; font: 400 12.5px/1.4 var(--font-body); color: var(--ink-3); }
+.t-item-link { flex: 0 0 auto; text-decoration: none; }
+@media (hover: hover) and (pointer: fine) {
+  .t-catalog-item:not([aria-selected="true"]):hover { border-color: rgba(255, 255, 255, 0.5); }
+  .t-mk:hover .t-mk-ring { transform: scale(1.1); background: rgba(26, 23, 19, 0.55); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-pano .t-mk, .t-mk-ring { transition: none; }
+}
+
+/* ── T16i (the warden's T15a read, F2/F3): the permanent lines — the badge, the concept line, the AI note — stay clear of the
+   bottom stack on short viewports. The item card and the pick bar take the thumbnail strip's slot instead of stacking above it
+   (the travel arrows keep the room navigation); the title's zone line yields; on landscape phones the strip yields outright. ── */
+@media (max-height: 760px) {
+  .t-bottom:has(#t-item-card:not([hidden])) #t-strip,
+  .t-bottom:has(#t-pick:not([hidden])) #t-strip,
+  .t-bottom:has(#t-pick:not([hidden])) #t-mk-hint { display: none; }
+  .t-zone { display: none; }
+  .t-concept { margin-top: 8px; }
+  .t-item-card { padding: 8px 10px; gap: 10px; }
+  .t-item-thumb { width: 44px; height: 44px; }
+  .t-catalog-item { width: 68px; padding: 4px 3px 5px; }
+  .t-catalog-item img { width: 44px; height: 44px; }
+  .t-catalog-item span { max-width: 62px; }
+}
+@media (max-height: 880px) {
+  .t-bottom:has(#t-pick:not([hidden])):has(#t-item-card:not([hidden])) #t-strip { display: none; }
+}
+@media (max-height: 520px) {
+  .t-strip { display: none; }
+  .t-bottom { gap: 6px; }
+  .t-zone, .t-apt { display: none; }
+  .t-title { top: calc(56px + var(--safe-top)); }
+}
+
+/* T16i, second cut (the probe's ten remaining cells: the smallest portrait phones with the pick bar, and landscape phones). While the
+   visitor picks, the pick bar stands alone at the bottom — the card and the text box return when it closes; under 600 px of height the
+   card compacts and the apartment line yields; on landscape phones the travel row and the text box yield while a card or the pick shows
+   (the plan button in the tool column still changes rooms). */
+@media (max-height: 760px) {
+  .t-bottom:has(#t-pick:not([hidden])) #t-item-card,
+  .t-bottom:has(#t-pick:not([hidden])) #t-change-bar { display: none; }
+}
+@media (max-height: 600px) {
+  .t-apt { display: none; }
+  .t-item-card { padding: 6px 8px; gap: 8px; border-radius: 12px; }
+  .t-item-thumb { width: 36px; height: 36px; }
+  .t-item-name { font-size: 14px; }
+  .t-item-price, .t-item-note { font-size: 12px; line-height: 1.3; }
+  .t-bottom:has(#t-item-card:not([hidden])) #t-change-bar { display: none; }
+}
+@media (max-height: 520px) {
+  .t-bottom:has(#t-item-card:not([hidden])) .t-travel,
+  .t-bottom:has(#t-pick:not([hidden])) .t-travel { display: none; }
+}
+
+/* T16i, third cut (the probe's last cell, 320×568 in English with the card: the action pills wrapped into rows under the card).
+   Under 600 px of height with a product card up, the pills compact and the travel row yields; the plan button still changes rooms. */
+@media (max-height: 600px) {
+  .t-bottom:has(#t-item-card:not([hidden])) .t-travel { display: none; }
+  .t-bottom:has(#t-item-card:not([hidden])) .t-actions { gap: 6px; }
+  .t-bottom:has(#t-item-card:not([hidden])) .t-actions .t-pill { min-height: 36px; padding: 0 12px; font-size: 13px; gap: 6px; }
+  .t-bottom:has(#t-item-card:not([hidden])) .t-actions .t-pill svg { width: 15px; height: 15px; }
+}
+
+/* ── T18f (F6, the judge's J-22/J-15/J-09): the item card never covers the piece just changed. Under 760 px of height it is a
+   compact strip at the bottom edge (the thumbnail, the name · the price, the AI-likeness line kept, the link, a close) and the
+   text field yields while it shows; on a tall wide screen it stands in the bottom-start corner, off the view's centre, where the
+   swapped piece and its ring sit. ── */
+.t-item-card { position: relative; }
+.t-item-close { position: absolute; top: 4px; inset-inline-end: 4px; width: 28px; height: 28px; min-height: 0; padding: 0; }
+.t-item-close svg { width: 14px; height: 14px; }
+.t-item-body { padding-inline-end: 24px; }
+@media (max-height: 760px), (max-width: 480px) {
+  .t-item-card { padding: 5px 8px; gap: 8px; border-radius: 16px; }
+  .t-item-thumb { width: 36px; height: 36px; border-radius: 10px; }
+  .t-item-name, .t-item-price { display: inline; margin: 0; }
+  .t-item-name { font-size: 14px; }
+  .t-item-price { font-size: 12.5px; }
+  .t-item-price::before { content: " · "; color: var(--ink-3); }
+  .t-item-note { margin: 1px 0 0; font-size: 11.5px; line-height: 1.3; }
+  .t-item-link { min-height: 32px; padding: 0 10px; font-size: 13px; }
+  .t-bottom:has(#t-item-card:not([hidden])) #t-change-bar { display: none; }
+}
+@media (min-height: 761px) and (min-width: 1000px) {
+  .t-item-card { position: fixed; inset-inline-start: 18px; bottom: calc(150px + var(--safe-bottom)); width: 300px; margin: 0; flex-wrap: wrap; }
+  .t-item-link { margin-inline-start: auto; }
+}
+
+/* ── T18m (F16, D-CAT-26): while a dialog is open the three permanent lines — the badge, the concept line, the AI note — stand
+   above the backdrop, legible; the language switch sleeps and the bottom stack's other children step back (they are behind a
+   modal anyway). The badge and the AI note keep their pointer events so a probe's elementsFromPoint finds them on top. ── */
+html.has-dialog .t-place { z-index: 11; }   /* direction C: the badge and the concept line live on the place card */
+html.has-dialog .t-lang { pointer-events: none; }
+html.has-dialog .t-bottom { z-index: 11; pointer-events: none; }
+html.has-dialog .t-bottom > :not(#t-disclose) { visibility: hidden; }
+html.has-dialog #t-disclose, html.has-dialog #tour-ai-note { pointer-events: auto; }
+html.has-dialog .t-sheet-panel { margin-bottom: calc(var(--ai-h, 36px) + 8px); max-height: calc(100dvh - var(--ai-h, 36px) - 48px); } /* the sheet ends above the AI note, which keeps the bottom edge */
+/* board habait-walkaround T15 (2026-10-13): only the permanent lines rise — the room's zone, name and apartment line step back with
+   the other chrome (on a desktop the raised room name ran over the plan sheet's corner), and on wide screens the sheet starts below
+   the concept line, so the line stays legible without lying on the panel */
+html.has-dialog #t-zone, html.has-dialog #t-room, html.has-dialog #t-apt { display: none; }
+@media (min-width: 769px) {
+  html.has-dialog .t-sheet { padding-top: calc(var(--concept-bottom, 112px) + 12px); }
+  html.has-dialog .t-sheet-panel { max-height: calc(100dvh - var(--concept-bottom, 112px) - 12px - var(--ai-h, 36px) - 40px); }
+  /* the plan gives up height, never the room list: all thirteen buttons stay in view as on the design link */
+  html.has-dialog .t-plan { max-height: calc(100dvh - var(--concept-bottom, 112px) - 12px - 76px - 290px - var(--safe-bottom)); }
+}
+@media (max-width: 768px) {
+  /* a phone's bottom sheet stops below the concept line (measured on open: --concept-bottom) instead of running under it */
+  html.has-dialog .t-sheet-panel { max-height: calc(100dvh - var(--concept-bottom, 138px) - 10px - var(--ai-h, 36px) - 8px); }
+  html.has-dialog .t-plan { max-height: 30dvh; }
+}
+/* board habait-walkaround T19c (F-5, F-10): on a phone the plan sheet counts its padding inside its size. It was 30 px wider than a
+   390 px screen (its close button and the plan's edge were cut off, on the design link too) and 32 px taller than its cap, so its
+   top ran over the concept line. The plan's own height is fitted on open (tour.js placeSheet) so all thirteen rooms stay in view */
+@media (max-width: 768px) {
+  #t-sheet .t-sheet-panel { box-sizing: border-box; }
+  /* and its room list stands a little tighter, so the plan keeps more of its height */
+  html.has-dialog #t-sheet .t-sheet-head { margin-bottom: 10px; }
+  html.has-dialog #t-sheet .t-plan-list { gap: 6px; margin-top: 10px; }
+}
+
+/* ── the videos (Habait studio, 2026-11-01): the flyover intro and a clip per room, in up to three floor finishes ── */
+.t-video-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+.t-floor-seg button { min-height: 34px; padding-inline: 12px; }
+.t-video { position: fixed; inset: 0; z-index: 60; background: #000; display: flex; align-items: center; justify-content: center; }
+.t-video[hidden] { display: none; }
+.t-video-el { width: 100%; height: 100%; object-fit: cover; background: #000; }
+.t-video-top { position: absolute; top: max(12px, env(safe-area-inset-top)); inset-inline: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.t-video-title { margin: 0; color: #fff; font: 600 15px/1.3 var(--font-head); text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+.t-video-play { position: absolute; inset: 0; margin: auto; width: 84px; height: 84px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: #1a1713; display: grid; place-items: center; cursor: pointer; }
+.t-video-play svg { width: 40px; height: 40px; fill: currentColor; }
+.t-video-play[hidden] { display: none; }
+.t-video-floors { position: absolute; bottom: max(18px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); }
+.t-video-floors:empty { display: none; }
+.t-video-top-end { display: flex; align-items: center; gap: 8px; }
+.t-video-sound { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.35); }
+.t-video-sound .t-snd-on, .t-video-sound .t-snd-off { display: none; }
+.t-video-sound[aria-pressed="true"] .t-snd-on { display: block; }
+.t-video-sound[aria-pressed="false"] .t-snd-off { display: block; }
+/* the intro as one continuous visualization: no title over the flight, a quiet skip, and a fade into the live panorama */
+.t-video { transition: opacity .9s ease; }
+.t-video.is-fading { opacity: 0; pointer-events: none; }
+html.is-intro .t-video-title { display: none; }
+html.is-intro .t-video-top { justify-content: flex-start; }
+html.is-intro #t-video-skip { opacity: .55; }
+html.is-intro #t-video-skip:hover { opacity: 1; }
+
+/* ?ui=min — the quiet chrome for the buyer flow (habait-ba, 2026-11-02).
+   2026-11-04 (fix-disclosure-badge, F01/F03, Eliran "כן"): the disclosure (#tour-badge, #tour-concept, #tour-ai-note, root §6)
+   and the tools column (3D / plan) are NEVER hidden here — the buyer flow shows the same badge and reaches the same 3D as /tour/. */
+/* Eliran 2026-11-04: «המשיכו אל הדירה» (ui=min) must carry every feature, so the quiet chrome no longer hides the look switch, its
+   note, the count or «שינוי בעיצוב» (was: habait-ba 2.11 «the buyer flow must feel calm»). */
+.ui-min #t-floor-seg { display: inline-flex !important; }
+/* arriving from the flight (?from=flight|hold|platform): the panorama lands alone, the chrome fades in over 1 s after 0.7 s
+   (1d, M1 v2: "the chrome jumps in at once and covers part of the picture at the landing"). fill-mode backwards: only the start
+   state is forced during the delay; afterwards the normal rules own opacity. */
+@keyframes t-landing { from { opacity: 0; } to { opacity: 1; } }
+.ui-enter .t-shade, .ui-enter .t-head, .ui-enter .t-place, .ui-enter .t-tools, .ui-enter .t-view, .ui-enter .t-bottom { animation: t-landing 1s ease-out .7s backwards; }
+@media (prefers-reduced-motion: reduce) { .ui-enter .t-shade, .ui-enter .t-head, .ui-enter .t-place, .ui-enter .t-tools, .ui-enter .t-view, .ui-enter .t-bottom { animation: none; } }
+/* the buyer flow on a phone (1d, 2026-11-03: the landing read as a dark veil, x0.77 brightness on an iPhone 13): the top and bottom
+   shades covered 500 of 844 px. In ui-min on narrow screens they are shorter and lighter, so the panorama lands at its own brightness. */
+@media (max-width: 640px) {
+  .ui-min .t-shade-top { height: calc(120px + var(--safe-top)); background: linear-gradient(to bottom, rgba(26, 23, 19, 0.62), rgba(26, 23, 19, 0.22) 55%, rgba(26, 23, 19, 0)); }
+  .ui-min .t-shade-bottom { height: calc(200px + var(--safe-bottom)); background: linear-gradient(to top, rgba(26, 23, 19, 0.86), rgba(26, 23, 19, 0.3) 45%, rgba(26, 23, 19, 0)); }
+}
+
+/* ── the ruler (2026-11-03): two taps on the panorama → the distance between the two surface points, from the plan-true depth maps ── */
+.t-measure-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+.t-measure-svg line { stroke: #fff; stroke-width: 2; stroke-dasharray: 6 5; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); }
+.t-mk-measure { width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.45); pointer-events: none; }
+.t-measure-label { padding: 5px 10px; margin: -14px 0 0 -40px; border-radius: 999px; background: var(--glass-strong); color: #fff; font: 700 14px/1.2 var(--font-head); white-space: nowrap; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35); pointer-events: none; direction: rtl; }
+.t-measure-label[lang="en"], .t-measure-label[lang="fr"] { direction: ltr; }
+.t-ruler-on .t-pano, .t-ruler-on .t-pano .pnlm-dragfix, .t-ruler-on .t-pano .pnlm-render-container { cursor: crosshair !important; }
+.t-ruler-on .t-mk { display: none; }
+.t-measure-bar { position: absolute; top: calc(96px + var(--safe-top)); inset-inline: 16px; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; margin: 0 auto; max-width: 720px; padding: 10px 16px; border-radius: 16px; background: var(--glass-strong); color: #fff; border: 1px solid var(--line); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); font: 500 14px/1.35 var(--font-body); pointer-events: auto; }
+.t-measure-bar[hidden] { display: none; }
+.t-measure-hint { font-weight: 700; }
+.t-measure-clear { appearance: none; border: 1px solid rgba(255, 255, 255, 0.35); background: transparent; color: #fff; border-radius: 999px; padding: 5px 12px; font: 600 13px var(--font-body); cursor: pointer; }
+.t-measure-clear[hidden] { display: none; }
+.t-measure-note { flex-basis: 100%; text-align: center; font-size: 12px; opacity: 0.8; }
+.ui-min #t-ruler:not([hidden]) { display: grid; }
+@media (max-width: 640px) { .t-measure-bar { top: calc(84px + var(--safe-top)); padding: 8px 12px; font-size: 13px; } .t-measure-label { font-size: 13px; } }
+
+/* ── "מצב סיור" (2026-11-03): the presenter card, bottom-start, above the strip ── */
+.t-guide-card { position: absolute; inset-inline-start: 16px; bottom: calc(150px + var(--safe-bottom)); z-index: 6; display: flex; gap: 14px; align-items: flex-start; width: min(420px, calc(100vw - 32px)); padding: 14px; border-radius: 18px; background: var(--glass-strong); color: #fff; border: 1px solid var(--line); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35); pointer-events: auto; }
+.t-guide-card[hidden] { display: none; }
+.t-guide-figure { position: relative; flex: 0 0 76px; width: 76px; height: 76px; }
+.t-guide-figure svg { width: 76px; height: 76px; display: block; }
+.t-guide-ring { fill: none; stroke: rgba(255, 255, 255, 0.35); stroke-width: 2; }
+.t-guide-speaking .t-guide-ring { stroke: #80bee0; animation: t-guide-pulse 1.4s ease-in-out infinite; }
+@keyframes t-guide-pulse { 0%, 100% { stroke-width: 2; opacity: 0.7; } 50% { stroke-width: 5; opacity: 1; } }
+.t-guide-eq { position: absolute; inset-inline-end: -2px; bottom: 2px; display: none; gap: 2px; align-items: flex-end; height: 16px; padding: 3px 4px; border-radius: 6px; background: rgba(26, 23, 19, 0.85); }
+.t-guide-speaking .t-guide-eq { display: flex; }
+.t-guide-eq i { display: block; width: 3px; height: 4px; border-radius: 2px; background: #80bee0; animation: t-guide-eq 0.9s ease-in-out infinite; }
+.t-guide-eq i:nth-child(2) { animation-delay: 0.15s; } .t-guide-eq i:nth-child(3) { animation-delay: 0.3s; } .t-guide-eq i:nth-child(4) { animation-delay: 0.45s; }
+@keyframes t-guide-eq { 0%, 100% { height: 4px; } 50% { height: 12px; } }
+.t-guide-body { min-width: 0; flex: 1; }
+.t-guide-name { font: 700 14px/1.2 var(--font-head); }
+.t-guide-count { font: 500 12px/1.3 var(--font-body); opacity: 0.75; margin-top: 2px; }
+.t-guide-text { margin: 8px 0 0; font: 400 14px/1.5 var(--font-body); max-height: 7.5em; overflow: auto; }
+.t-guide-actions { display: flex; gap: 8px; margin-top: 10px; }
+.t-guide-btn { appearance: none; border: 1px solid rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.12); color: #fff; border-radius: 999px; padding: 6px 14px; font: 600 13px var(--font-body); cursor: pointer; }
+.t-guide-btn-stop { background: transparent; }
+.t-guide-on .t-mk { display: none; }
+.ui-min #t-guide:not([hidden]) { display: grid; }
+@media (max-width: 640px) { .t-guide-card { bottom: calc(132px + var(--safe-bottom)); padding: 10px; gap: 10px; width: calc(100vw - 24px); inset-inline-start: 12px; } .t-guide-figure, .t-guide-figure svg { width: 56px; height: 56px; flex-basis: 56px; } .t-guide-text { font-size: 13px; max-height: 5.5em; } }
+
+/* 2026-11-03 (found with the ruler on a phone): the full-width rows of the bottom chrome (arrows, floor switch, actions) swallowed
+   every touch in their band — a pan or a measuring tap there went nowhere. Only their buttons take the pointer. */
+.t-bottom, .t-travel, .t-video-bar, .t-actions { pointer-events: none; }
+.t-bottom > *, .t-travel > *, .t-video-bar > *, .t-actions > * { pointer-events: auto; }
+.t-bottom > .t-travel, .t-bottom > .t-video-bar, .t-bottom > .t-actions { pointer-events: none; }
+
+/* the talking presenter (a lip-synced clip per room, 2026-11-03): replaces the stylised figure in the card */
+.t-guide-video { flex: 0 0 132px; width: 132px; height: 176px; object-fit: cover; border-radius: 14px; background: #1a1713; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35); }
+.t-guide-video[hidden], .t-guide-figure[hidden] { display: none; }
+@media (max-width: 640px) { .t-guide-video { flex-basis: 96px; width: 96px; height: 128px; } }
+
+/* 2026-11-03 (1d, M1 v3): on a phone the header's end group (guide, ruler, back, languages) overflowed the left edge by 25 px and the
+   language pill was clipped ("R EN עב"); it may wrap onto a second row instead */
+/* the phone's language switch is one cycling button now (rule (3) below), so ui=min shows it too (Eliran 2026-11-04) */   /* wrapping put the pill over the room title; the buyer flow on a phone keeps ?lang= and the tour's own default */
+
+/* board transition-rise (2026-11-04): the 3D frame fills the screen exactly like the tour, so the rise starts on the same picture;
+   the header is a floating close button (the title stays for screen readers) at the inline-start top, clear of the dollhouse's
+   centred preset bar */
+.t-3d-frame { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+.t-3d .t-3d-head { position: absolute; inset-block-start: 0; inset-inline: 0; z-index: 1; justify-content: flex-end; background: transparent;
+  border-bottom: 0; pointer-events: none; padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 0 max(10px, env(safe-area-inset-left)); }
+.t-3d .t-3d-close { pointer-events: auto; background: rgba(251, 248, 243, .92); box-shadow: 0 2px 10px rgba(29, 26, 22, .18); }
+.t-3d .t-3d-close:hover { background: #fff; }
+.t-3d-sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* board dollhouse-in-tour (2026-11-03): the 3D dollhouse over the tour — a full-screen layer in the dollhouse's own warm palette;
+   the dollhouse page inside carries its own disclosure pill (הדמיה להמחשה בלבד) */
+.t-3d { position: fixed; inset: 0; z-index: 14; display: flex; flex-direction: column; background: #efe9e0; }
+.t-3d[hidden] { display: none; }
+.t-3d-head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: max(8px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+  background: rgba(251, 248, 243, .94); border-bottom: 1px solid rgba(29, 26, 22, .1); color: #1d1a16; }
+.t-3d-head h2 { margin: 0; font: 700 17px/1.3 var(--font-head, system-ui); }
+.t-3d-close { inline-size: 44px; block-size: 44px; display: grid; place-items: center; border: 0; border-radius: 999px; background: transparent; color: #1d1a16; cursor: pointer; }
+.t-3d-close:hover { background: rgba(29, 26, 22, .08); }
+.t-3d-close svg { inline-size: 22px; block-size: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.t-3d-close:focus-visible { outline: 2px solid #1d1a16; outline-offset: 2px; }
+.t-3d-frame { flex: 1; inline-size: 100%; border: 0; display: block; background: #efe9e0; }
+
+/* ── plan 2026-11-04-apt-furniture-swap (prod check, 390 px): the bottom stack's own boxes never take a tap, only its controls do,
+   so a furniture ring above or between them stays tappable (all four bedroom rings were covered on a phone). ── */
+.t-bottom, .t-bottom > *, .t-look { pointer-events: none; }
+.t-bottom button, .t-bottom input, .t-bottom a, .t-bottom select, .t-bottom label,
+.t-bottom form, .t-bottom [role="listbox"], .t-bottom .t-look-seg, .t-bottom .t-pick, .t-bottom .t-item-card,
+.t-bottom #t-strip, .t-bottom .t-catalog-item, .t-bottom .t-card { pointer-events: auto; }
+
+/* ── plan 2026-11-04-apt-furniture-swap, Eliran's follow-ups ──
+   (1) desktop: the bottom stack was half the view (bar, look, note, finishes, actions, travel, strip, one per row). From 900 px the
+   small controls share ONE row (look + its note, the finishes, the change actions) and the typed bar is a centred 600 px line. */
+@media (min-width: 900px) {
+  .t-bottom { flex-flow: row wrap; justify-content: center; align-items: center; column-gap: 12px; row-gap: 8px; }
+  .t-bottom > .t-pick, .t-bottom > .t-travel, .t-bottom > .t-strip, .t-bottom > .t-ai { flex: 0 0 100%; }
+  .t-bottom > .t-mk-hint { flex: 0 0 auto; width: max-content; max-width: 100%; margin-inline: auto; } /* a pill on its own row (the bar after it takes a full row) */
+  .t-bottom > .t-change-bar { flex: 0 0 auto; width: min(600px, 100%); margin-inline: calc((100% - min(600px, 100%)) / 2); box-sizing: border-box; }
+  .t-bottom > .t-look { display: flex; flex-direction: row; align-items: center; gap: 10px; flex: 0 1 auto; }
+  .t-bottom > .t-look .t-look-note { margin: 0; max-width: 34ch; text-align: start; }
+  .t-bottom > .t-video-bar, .t-bottom > .t-actions { flex: 0 0 auto; }
+}
+/* (2) phone: the guide's card sat over the whole bottom stack, ran off the left edge and cut its text mid-line. While the guide
+   speaks, the card IS the bottom of the screen: one compact strip above the permanent AI line, and the controls under it step aside
+   (the הדמיה badge, the concept line and the AI line stay; the guide's own «הבא» moves between the rooms). */
+@media (max-width: 640px) {
+  .t-guide-card { inset-inline: 10px; width: auto; bottom: calc(34px + var(--safe-bottom)); padding: 10px 12px; gap: 10px; border-radius: 16px; }
+  .t-guide-figure { flex: 0 0 52px; width: 52px; height: 52px; }
+  .t-guide-video { flex: 0 0 64px; width: 64px; height: 84px; }
+  .t-guide-text { margin-top: 4px; font-size: 14px; line-height: 1.45; max-height: 5.8em; }
+  .t-guide-actions { margin-top: 8px; }
+  body:has(#t-guide-card:not([hidden])) .t-bottom > :not(.t-disclose), body:has(#t-guide-card:not([hidden])) .t-acts,
+  body:has(#t-guide-card:not([hidden])) .t-view { display: none !important; }
+}
+/* (3) phone parity (Eliran 2026-11-04): the header ran past the left edge and EN/FR were unreachable. At <=640 px the language
+   switch is ONE button, the current language; a tap moves to the next one (tour.js). */
+@media (max-width: 640px) {
+  .t-lang button:not([aria-pressed="true"]) { display: none; }
+  .t-lang button[aria-pressed="true"]::after { content: " ⇄"; font-size: 11px; opacity: 0.7; }
+}
+/* (4) phone, the same idea as (1): the stack was the bottom half of a phone (bar, look, note, finishes, change, travel, strip — one
+   per row) and hid the furniture itself. At <=640 px the look switch, the finishes and the change actions share one row under the
+   bar, the look note sits under that row, the travel hint line goes (the strip and the arrows stay). */
+@media (max-width: 640px) {
+  .t-bottom { flex-flow: row wrap; justify-content: center; align-items: center; column-gap: 8px; row-gap: 8px; }
+  .t-bottom > * { flex: 0 0 100%; order: 5; }
+  .t-bottom > .t-item-card, .t-bottom > .t-mk-hint, .t-bottom > .t-pick { order: 0; }
+  .t-bottom > .t-mk-hint { flex: 0 0 auto; width: max-content; max-width: 100%; margin-inline: auto; }
+  .t-bottom > .t-change-bar { order: 1; }
+  .t-bottom > .t-look { display: contents; }
+  .t-bottom .t-look-seg:not(.t-floor-seg) { order: 2; flex: 0 0 auto; }
+  .t-bottom > .t-video-bar { order: 2; flex: 0 0 auto; }
+  .t-bottom > .t-actions { order: 2; flex: 0 0 auto; }
+  .t-bottom .t-look-note { order: 3; flex: 0 0 100%; margin: 0; font-size: 11px; }
+  .t-bottom > .t-travel { order: 4; }
+  .t-bottom > .t-strip { order: 5; }
+  .t-bottom > .t-ai { order: 6; }
+  .t-count-sub { display: none; }
+  #t-change-btn-text { display: none; }
+  #t-change-btn { padding-inline: 12px; }
+}
+/* Eliran 2026-11-04: «כפתור שינוי בעיצוב לא עושה כלום אפשר להוריד אותו» — the typed bar and the rings are the way to change; the
+   button is gone everywhere (undo and «הצגת המקור» still appear after a change). */
+#t-change-btn { display: none !important; }
+/* (5) the HUD on one grid (Eliran 2026-11-04: «הכפתורים פה ממש לא מסודרים … כולל את שורת ההקלדה», «גם בדסקטופ וגם בנייד»; rules from
+   the ui-ux-pro-max skill: one 8-px spacing scale, targets ≥ 44 px with ≥ 8 px between them, grouping by whitespace, mirrored edge
+   clusters). Replaces the first right-edge rail (c58f767).
+   · Right rail = the mirror of the tool column: same inset, same 44-px rows, same 8-px gap, centred on the same axis. The look switch
+     and the finishes are two equal-width segments, one under the other, 16 px apart. On phones each segment is ONE button (its current
+     value + ⇄; a tap moves to the next value, tour.js), so the rail is two buttons tall and never covers the room.
+   · The look note leaves the rail and joins the permanent AI line at the bottom: one disclosure row, plain text.
+   · The typed bar is ONE control: the field and «החלה» inside one glass frame, the button at the frame's end (RTL-correct), 16 px of
+     air above the room navigation. */
+.t-bottom > .t-look, .t-bottom > .t-video-bar { display: contents; }
+.t-look .t-look-seg, #t-floor-seg {
+  position: fixed;
+  z-index: 3;
+  inset-inline-start: 18px;
+  box-sizing: border-box;
+  width: 104px;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 16px;
+  pointer-events: auto;
+}
+.t-look .t-look-seg button, #t-floor-seg button { min-height: 44px; width: 100%; padding-inline: 12px; border-radius: 12px; font-size: 14px; }
+.t-look .t-look-seg { top: calc(50% - 134px); }            /* 102 (2 rows) + 16 + 150 (3 rows) = 268, centred like .t-tools */
+#t-floor-seg { top: calc(50% - 16px); }
+#t-floor-seg:empty { display: none; }
+#t-video-btn { order: 2; }
+.t-change-bar {
+  box-sizing: border-box;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
+}
+.t-change-bar:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.t-change-bar .t-bar-input { min-height: 44px; padding-inline: 12px; border: 0 !important; background: transparent !important; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.t-change-bar .t-bar-input:focus-visible { outline: none; }
+.t-change-bar .t-bar-apply { min-height: 44px; padding-inline: 20px; border-radius: 12px; box-shadow: none; }
+.t-bottom > .t-look > .t-look-note { margin: 0; padding: 0; max-width: none; background: none; border-radius: 0; color: var(--ink-2); font: 400 13px/1.4 var(--font-body); text-align: center; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5); }
+@media (min-width: 641px) {
+  .t-bottom { row-gap: 8px; }
+  .t-bottom > .t-change-bar { flex: 0 0 auto; order: 1; width: min(640px, 100%); margin: 0 calc((100% - min(640px, 100%)) / 2) 8px; }
+  .t-bottom > .t-actions { order: 2; }
+  .t-bottom > .t-travel { order: 3; gap: 16px; }
+  .t-bottom > .t-strip { order: 4; flex: 0 0 auto; width: min(1200px, 100%); max-width: none; margin-inline: calc((100% - min(1200px, 100%)) / 2); } /* a full row at any width */
+  .t-bottom > .t-look > .t-look-note { order: 5; flex: 0 0 auto; }
+  .t-bottom > .t-ai { order: 5; flex: 0 0 auto; }
+}
+@media (max-width: 640px) {
+  .t-look .t-look-seg, #t-floor-seg { inset-inline-start: 12px; padding: 0; gap: 0; border-radius: 12px; }
+  .t-look .t-look-seg button:not([aria-pressed="true"]), #t-floor-seg button:not([aria-pressed="true"]) { display: none; }
+  .t-look .t-look-seg button[aria-pressed="true"], #t-floor-seg button[aria-pressed="true"] { background: transparent; color: var(--ink); }
+  .t-look .t-look-seg button[aria-pressed="true"]::after, #t-floor-seg button[aria-pressed="true"]::after { content: " ⇄"; font-size: 11px; opacity: 0.7; }
+  .t-look .t-look-seg { top: calc(50% - 50px); }           /* 46 + 8 + 46 = 100, centred like .t-tools */
+  #t-floor-seg { top: calc(50% + 4px); }
+  .t-bottom > .t-look > .t-look-note { order: 6; flex: 0 0 100%; font-size: 11.5px; }
+  .t-bottom > .t-change-bar { margin-bottom: 8px; }
+}
+/* a ring or a room marker whose label would sit under a HUD control fades out until the view moves it clear (tour.js) */
+.t-pano .t-mk.is-under-hud, .t-pano .t-hs.is-under-hud { opacity: 0 !important; pointer-events: none !important; }
+/* the bar's example text starts at the reading start (RTL) and ends in an ellipsis; dir=auto on an empty field reads LTR and showed
+   its end on phones */
+html[dir="rtl"] .t-bar-input:placeholder-shown { direction: rtl; text-overflow: ellipsis; }
+/* (5) the responsive gate (Eliran 2026-11-05: desktop AND mobile, in code): no header control is ever shrunk under 44×44 or pushed past
+   the edge. Every header control keeps its size (flex-shrink 0). At <= 640 px the header fits 390 px: the brand word steps aside (the
+   permanent הדמיה badge stays — it is the disclosure), and the way back is a 44×44 building button whose words stay its accessible name. */
+.t-head-end > *, .t-icon-btn, .t-lang button { flex-shrink: 0; }
+@media (max-width: 640px) {
+  .t-head { gap: 8px; }
+  .t-head-end { gap: 6px; }
+  .t-brand { display: none; }
+  .t-lang { padding: 0; }
+  .t-lang button[aria-pressed="true"] { min-width: 44px; min-height: 44px; padding-inline: 10px; }
+  a.t-return { width: 44px; min-width: 44px; padding: 0; justify-content: center; font-size: 0; color: transparent; position: relative; }
+  a.t-return::before { content: ''; width: 20px; height: 20px; background: var(--ink); -webkit-mask: var(--t-building) center / contain no-repeat; mask: var(--t-building) center / contain no-repeat; }
+}
+:root { --t-building: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 21V5l8-2v18M12 21V9l8 2v10M2 21h20M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2'/%3E%3C/svg%3E"); }
+
+/* ── 2026-11-08 (Eliran, screenshots: «אני רוצה שכל הפיצ'רים האלה יכנסו תחת כפתור 'שינוי עיצוב' שהכפתור יופיע למעלה, ככה זה לא יכסה לי את
+   המסך»): the look switch, the floor finishes and the typed bar live in ONE panel behind a header button (tour.js moves them). Nothing
+   covers the panorama until it opens. Desktop: a panel under the header at the header's end; phone (≤ 640 px): a bottom sheet. Every
+   target ≥ 44 px; RTL by logical properties. The look note stays on screen (the disclosure row). ── */
+.t-design-btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 0 14px; box-sizing: border-box;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--glass); color: var(--ink);
+  -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%);
+  font: 600 14px/1 var(--font-head); white-space: nowrap; cursor: pointer; appearance: none;
+}
+.t-design-btn[hidden] { display: none; }
+.t-design-btn svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.t-design-btn[aria-expanded="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.t-design-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.t-design-state { padding: 4px 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.16); font-weight: 500; font-size: 12.5px; }
+.t-design-state[hidden] { display: none; }
+.t-design {
+  position: absolute; z-index: 12; top: calc(72px + var(--safe-top)); inset-inline-end: calc(20px + var(--safe-left));
+  width: min(400px, calc(100vw - 40px)); max-height: calc(100dvh - 160px - var(--safe-top) - var(--safe-bottom)); overflow: auto; box-sizing: border-box;
+  display: flex; flex-direction: column; gap: 14px; padding: 14px 16px 16px;
+  border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.22); background: var(--glass-strong); color: var(--ink);
+  -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+.t-design[hidden] { display: none; }
+.t-design-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.t-design-title { margin: 0; font: 700 16px/1.2 var(--font-head); color: var(--ink); }
+.t-design-sec { display: flex; flex-direction: column; gap: 8px; }
+.t-design-sec[hidden] { display: none; }
+.t-design-sub { margin: 0; font: 600 13px/1.2 var(--font-body); color: var(--ink-2); }   /* research.md #10: no letter-spacing on Hebrew */
+/* the moved controls: out of the fixed rail and the bottom stack, into the panel's flow (ids win over the rail's rules) */
+#t-design .t-look-seg, #t-design #t-floor-seg {
+  position: static !important; inset: auto !important; top: auto !important; transform: none !important; width: 100%; margin: 0;
+  display: flex !important; flex-direction: row; gap: 4px; padding: 4px; border-radius: 14px; box-sizing: border-box; pointer-events: auto;
+}
+#t-design .t-look-seg button, #t-design #t-floor-seg button { display: inline-flex !important; align-items: center; justify-content: center; flex: 1 1 0; min-height: 44px; min-width: 44px; padding-inline: 12px; border-radius: 10px; font-size: 14px; }
+#t-design .t-look-seg button[aria-pressed="true"], #t-design #t-floor-seg button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+#t-design .t-look-seg button::after, #t-design #t-floor-seg button::after { content: none !important; }
+#t-design #t-floor-seg button[hidden] { display: none !important; }
+#t-design #t-change-bar { width: 100%; margin: 0; order: 0; box-shadow: none; }
+#t-design #t-change-bar[hidden] { display: none; }
+#t-design .t-bar-input { min-width: 0; flex: 1 1 auto; }
+@media (max-width: 640px) {
+  .t-design-btn { padding: 0 10px; gap: 6px; }
+  .t-design-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } /* the words stay the accessible name */
+  .t-design {
+    position: fixed; top: auto; bottom: 0; inset-inline: 0; width: auto; max-height: min(72dvh, 560px);
+    border-radius: 20px 20px 0 0; padding: 12px 16px calc(18px + var(--safe-bottom)); box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+  }
+  .t-design::before { content: ''; align-self: center; width: 40px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.35); margin-bottom: -4px; }
+}
+
+/* ── 2026-11-08: the guided tour of the buttons (coach marks; tour.js COACH_*). A layer that holds the tour still, a spotlight cut out of
+   a dim veil around ONE control, and a short card beside it (never over it). 44 px buttons, RTL, focus stays in the card.
+   Direction C (2026-11-08): the house palette — a dark n-900 card with n-50 text (the off-system cream retired, research.md #11), the
+   accent ring; the spotlight and the card GLIDE by transform only, 300 ms (research.md #12; tour.js sets translate()). ── */
+.t-coach { position: fixed; inset: 0; z-index: 80; }
+.t-coach[hidden] { display: none; }
+.t-coach-block { position: absolute; inset: 0; background: transparent; }
+.t-coach-spot { position: fixed; left: 0; top: 0; border-radius: 16px; box-shadow: 0 0 0 9999px rgba(26, 23, 19, 0.70); outline: 3px solid var(--chrome-fg);
+  outline-offset: 0; pointer-events: none; transition: transform 300ms var(--ease); will-change: transform; }
+.t-coach-spot::after { content: ''; position: absolute; inset: -3px; border-radius: inherit; box-shadow: 0 0 0 3px var(--brand-accent), 0 0 22px 6px rgba(238, 169, 39, 0.45); }
+.t-coach-spot::before { content: ''; position: absolute; inset: -6px; border-radius: inherit; border: 3px solid var(--brand-accent); opacity: 0; }
+.t-coach-spot.is-pulse::before { animation: t-coach-pulse 900ms var(--ease) 300ms 2; }
+@keyframes t-coach-pulse { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.22); } }
+.t-coach-lit { transform: scale(1.08); transition: transform 200ms var(--ease) 300ms; position: relative; z-index: 1; }
+.t-coach-card { position: fixed; left: 0; top: 0; box-sizing: border-box; max-width: calc(100vw - 24px); padding: 14px 16px 12px; border-radius: 16px;
+  background: var(--chrome-panel-solid); color: var(--chrome-fg); border: 1px solid var(--chrome-line-strong); box-shadow: var(--chrome-shadow);
+  transition: transform 300ms var(--ease); will-change: transform; }
+.t-coach-spot.no-glide, .t-coach-card.no-glide { transition: none; }
+.t-coach-card::before { content: ''; position: absolute; width: 14px; height: 14px; background: var(--chrome-panel-solid); transform: rotate(45deg); }
+.t-coach-card[data-arrow="top"]::before { top: -7px; left: calc(var(--ax, 50%) - 7px); }
+.t-coach-card[data-arrow="bottom"]::before { bottom: -7px; left: calc(var(--ax, 50%) - 7px); }
+.t-coach-card[data-arrow="left"]::before { left: -7px; top: calc(var(--ay, 50%) - 7px); }
+.t-coach-card[data-arrow="right"]::before { right: -7px; top: calc(var(--ay, 50%) - 7px); }
+.t-coach-count { margin: 0 0 4px; font: 600 12px/1 var(--font-body); color: var(--chrome-muted); text-align: start; }
+html[dir="rtl"] .t-coach-count { text-align: end; }
+.t-coach-text { margin: 0; font: 500 15.5px/1.5 var(--font-body); }
+.t-coach-actions { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+.t-coach-gap { flex: 1; }
+.t-coach-btn { appearance: none; min-height: 44px; min-width: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--chrome-line-strong); background: transparent;
+  color: var(--chrome-fg); font: 600 14px/1 var(--font-head); cursor: pointer; }
+.t-coach-btn[hidden] { display: none; }
+.t-coach-next { background: var(--chrome-fg); color: var(--chrome-bg); border-color: var(--chrome-fg); }
+.t-coach-skip { padding-inline: 14px; }   /* «דלג» stays prominent: the demo is long */
+.t-coach-btn:focus-visible { outline: 2px solid var(--focus-chrome); outline-offset: 2px; }
+/* 2026-11-08: the walkthrough's music toggle (tour.js musicStart): a speaker, on/off by aria-pressed; its word «מוזיקה» on the first step only */
+.t-coach-music { display: inline-flex; align-items: center; gap: 6px; padding-inline: 12px; }
+.t-coach-music svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.t-coach-music[aria-pressed="true"] .t-snd-off, .t-coach-music[aria-pressed="false"] .t-snd-on { display: none; }
+.t-coach-music[aria-pressed="false"] { color: var(--chrome-muted); }
+.t-coach-music:not(.is-hint) { padding-inline: 0; width: 44px; justify-content: center; }
+.t-coach-music:not(.is-hint) .t-coach-music-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* while the music waits for a tap (the browser allows sound only after one), the toggle gently invites it — no blocking overlay */
+.t-coach-music.is-invite { position: relative; border-color: var(--brand-accent); }
+.t-coach-music.is-invite::after { content: ''; position: absolute; inset: -4px; border-radius: inherit; border: 2px solid var(--brand-accent); opacity: 0; pointer-events: none; animation: t-music-invite 1.8s var(--ease) infinite; }
+@keyframes t-music-invite { 0% { opacity: 0.85; transform: scale(1); } 70% { opacity: 0; transform: scale(1.14); } 100% { opacity: 0; transform: scale(1.14); } }
+@media (prefers-reduced-motion: reduce) { .t-coach-music.is-invite::after { animation: none; opacity: 0.85; } }
+/* the autoplay walkthrough: a thin bar on the card fills over one step (tour.js sets the duration and pauses it with the clock) */
+.t-coach-bar { height: 3px; margin: -4px -6px 10px; border-radius: 2px; background: var(--chrome-line); overflow: hidden; }
+.t-coach-bar[hidden] { display: none; }
+.t-coach-fill { display: block; height: 100%; width: 100%; background: var(--brand-accent); transform-origin: right center; transform: scaleX(0); animation: t-coach-fill 3500ms linear forwards; }
+html[dir="ltr"] .t-coach-fill { transform-origin: left center; }
+@keyframes t-coach-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .t-coach-spot, .t-coach-card { transition: none; }
+  .t-coach-spot.is-pulse::before { animation: none; }
+  .t-coach-lit { transform: none; transition: none; }
+  .t-coach-fill { animation: none; }
+}
+/* the (?) button: in the tool bar on every width — on phones in the place card's top row beside the way back and the language (2026-11-08,
+   Eliran: «הכפתור הזה של הסבר על הכפתורים לא מופיע במובייל»: the small rail copy read as one more camera icon); the rail copy is retired */
+#t-help-rail, .t-sep-help { display: none !important; }
+.t-tip { position: fixed; z-index: 90; box-sizing: border-box; max-width: min(280px, calc(100vw - 16px)); padding: 7px 10px; border-radius: 8px;
+  background: rgba(36, 33, 30, 0.96); color: var(--chrome-fg); border: 1px solid var(--chrome-line); font: 500 13px/1.45 var(--font-body); box-shadow: var(--chrome-shadow-sm); pointer-events: none; }
+.t-tip[hidden] { display: none; }
+.t-tip::before { content: ''; position: absolute; width: 10px; height: 10px; background: inherit; transform: rotate(45deg); left: calc(var(--ax, 50%) - 5px); }
+.t-tip[data-arrow="bottom"]::before { bottom: -5px; }
+.t-tip[data-arrow="top"]::before { top: -5px; }
+/* a long-press explains instead of opening the phone's own menu or text selection */
+.t-icon-btn, .t-act, .t-view-btn, .t-rooms-btn, .t-design-btn, .t-lang button, .t-return, .t-step, .t-pano .t-hs, .t-pano .t-mk, #t-strip [role="listitem"] { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+
+/* ══ Direction C — the place card and three labelled clusters (Eliran's pick, 2026-11-08; research.md §4C, mock-C-1440/390). The house
+   tokens above; this block owns the layout of the chrome and wins over the older layers by coming last. What it fixes: #1 grouping and
+   one primary («שינוי עיצוב»), #2 visible labels, #4 the concept line on a card (≥ 4.5:1, measured), #5 shorter shades, #6 a door ≠ a
+   furniture ring, #7 the bottom stack, #8 the design panel hangs from its button (tour.js), #9 the phone sheet ends above the AI line.
+   Desktop: place card top inline-start · tool bar top inline-end · camera capsule inline-end centre · strip + room pill bottom centre ·
+   view switch bottom inline-end · the disclosure strip at the bottom edge. Phone: the card on top (the way back and the language in its
+   first row), the camera capsule at 48 %, the room pill, the action bar, the disclosure strip. ══ */
+.t-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; padding: 0; }
+
+/* #5: the shades only where chrome sits, warm */
+.t-shade-top { height: calc(120px + var(--safe-top)); background: linear-gradient(to bottom, rgba(26, 23, 19, 0.55), rgba(26, 23, 19, 0)); }
+.t-shade-bottom { height: calc(170px + var(--safe-bottom)); background: linear-gradient(to top, rgba(26, 23, 19, 0.72), rgba(26, 23, 19, 0)); }
+
+/* ── the place card ── */
+.t-place {
+  position: absolute; z-index: 3; top: calc(16px + var(--safe-top)); inset-inline-start: calc(20px + max(var(--safe-left), var(--safe-right)));
+  box-sizing: border-box; width: 360px; padding: 12px 16px 14px; border-radius: var(--r-md);
+  background: var(--glass-mid); -webkit-backdrop-filter: var(--blur-thick); backdrop-filter: var(--blur-thick);
+  border: 1px solid var(--chrome-line); box-shadow: var(--chrome-shadow-sm); color: var(--chrome-fg); pointer-events: none;
+}
+.t-place-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.t-place .t-brand { font: var(--fw-bold) var(--fs-body)/1 var(--font-text); text-shadow: none; }
+/* brand-credit:start — Habait is the maker of the tour (Eliran 2026-11-09: «הלוגו הוא של החברה שיצרה את העמוד נחיתה ואת כל הסרטון וההדמיה»):
+   a credit line, «הדמיה ואתר:» / "Visualization & site by", then the wordmark; never the developer of the building */
+.t-brand-logo { display: block; height: 24px; width: auto; }   /* round 9: Eliran's Habait wordmark (brand/), currentColor */
+.t-place .t-brand { display: inline-flex; align-items: center; gap: 7px; }
+.t-credit { font: var(--fw-medium) 12px/1 var(--font-text); opacity: 0.86; white-space: nowrap; }
+html[lang="he"] .t-credit [lang="en"], html:not([lang="he"]) .t-credit [lang="he"] { display: none; }
+/* brand-credit:end */
+.t-place .t-badge { height: 26px; padding: 0 10px; font: var(--fw-bold) 13px/1 var(--font-text); box-shadow: none; pointer-events: auto; }
+.t-place .t-title { position: static; max-width: none; margin-top: 10px; pointer-events: none; }
+.t-place .t-zone { margin: 0; font: var(--fw-semibold) var(--fs-small)/1.3 var(--font-text); color: var(--chrome-muted); }
+.t-place .t-room { margin: 2px 0 0; font: var(--fw-bold) 28px/1.15 var(--font-text); text-shadow: none; }
+.t-place .t-apt { margin: 4px 0 0; font: var(--fw-regular) var(--fs-small)/1.4 var(--font-text); color: var(--chrome-muted); }
+.t-place .t-concept {
+  margin: 10px 0 0; padding: 10px 0 0; max-width: none; border: 0; border-top: 1px solid var(--chrome-line);
+  font: var(--fw-regular) 13px/1.55 var(--font-text); color: var(--chrome-fg); text-shadow: none;
+}
+:root { --chrome-muted: rgba(249, 246, 243, 0.78); }   /* the zone and apartment lines keep ≥ 4.5:1 on the card over a white wall */
+
+/* ── the tool bar ── */
+.t-head {
+  top: calc(16px + var(--safe-top)); inset-inline-start: auto; inset-inline-end: calc(20px + max(var(--safe-left), var(--safe-right)));
+  padding: 0; gap: 8px; justify-content: flex-end;
+}
+.t-head > * { flex-shrink: 0; }
+.t-acts {
+  display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: var(--r-full);
+  background: var(--glass-mid); -webkit-backdrop-filter: var(--blur-thick); backdrop-filter: var(--blur-thick);
+  border: 1px solid var(--chrome-line); box-shadow: var(--chrome-shadow-sm);
+}
+.t-act {
+  appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box;
+  min-height: 44px; min-width: 44px; padding: 0; padding-inline: 12px 16px; border: 0; border-radius: var(--r-full);
+  background: transparent; color: var(--chrome-fg); font: var(--fw-semibold) var(--fs-small)/1 var(--font-text); white-space: nowrap; cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.t-act[hidden] { display: none; }
+.t-act svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.t-act[aria-pressed="true"] { background: rgba(249, 246, 243, 0.18); box-shadow: inset 0 0 0 1.5px var(--chrome-fg); }
+.t-act:focus-visible, .t-view-btn:focus-visible, .t-rooms-btn:focus-visible, .t-return:focus-visible { outline: 2px solid var(--focus-chrome); outline-offset: 2px; }
+.t-act-label { display: inline-flex; align-items: center; }
+.t-short { display: none; }
+/* the one primary: «שינוי עיצוב», the floor it shows, a caret (it opens a panel) */
+.t-acts .t-design-btn { border: 0; background: var(--chrome-fg); color: var(--chrome-bg); box-shadow: var(--chrome-shadow-sm); -webkit-backdrop-filter: none; backdrop-filter: none; padding-inline: 12px 10px; }
+.t-acts .t-design-btn[aria-expanded="true"] { background: var(--chrome-fg); color: var(--chrome-bg); border-color: transparent; }
+.t-acts .t-design-btn .t-design-state { padding: 3px 8px; border-radius: var(--r-full); background: rgba(26, 23, 19, 0.12); color: inherit; font: var(--fw-medium) 12.5px/1 var(--font-text); }
+.t-caret { width: 16px; height: 16px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--dur-fast) var(--ease); }
+.t-design-btn[aria-expanded="true"] .t-caret, .t-rooms-btn[aria-expanded="true"] .t-caret { transform: rotate(180deg); }
+/* help, the way back and the language: single glass buttons */
+.t-icon-btn.t-solo { border-radius: var(--r-full); background: var(--glass-mid); border-color: var(--chrome-line); }
+.t-return { gap: 8px; padding: 0; padding-inline: 12px 16px; background: var(--glass-mid); border-color: var(--chrome-line); color: var(--chrome-fg); font: var(--fw-semibold) var(--fs-small)/1 var(--font-text); }
+a.t-return::before { content: ''; flex: 0 0 auto; width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--t-building) center / contain no-repeat; mask: var(--t-building) center / contain no-repeat; }
+:root {
+  --t-globe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18'/%3E%3C/svg%3E");
+  --t-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E");
+  --t-walk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.5 14.5 12 10l4.5 4.5'/%3E%3C/svg%3E");
+}
+@media (min-width: 641px) {
+  /* the language: ONE button (globe · the current language · caret); a tap opens the other two under it (tour.js) */
+  .t-lang { position: relative; padding: 0; background: var(--glass-mid); border-color: var(--chrome-line); }
+  .t-lang button:not([aria-pressed="true"]) { display: none; }
+  .t-lang button[aria-pressed="true"] { display: inline-flex; align-items: center; gap: 6px; padding-inline: 12px 10px; background: transparent; color: var(--chrome-fg); font: var(--fw-semibold) var(--fs-small)/1 var(--font-text); }
+  .t-lang button[aria-pressed="true"]::before, .t-lang button[aria-pressed="true"]::after { content: ''; flex: 0 0 auto; background: currentColor; }
+  .t-lang button[aria-pressed="true"]::before { width: 18px; height: 18px; -webkit-mask: var(--t-globe) center / contain no-repeat; mask: var(--t-globe) center / contain no-repeat; }
+  .t-lang button[aria-pressed="true"]::after { width: 14px; height: 14px; -webkit-mask: var(--t-caret) center / contain no-repeat; mask: var(--t-caret) center / contain no-repeat; }
+  .t-lang.is-open button:not([aria-pressed="true"]) {
+    display: flex; align-items: center; justify-content: center; position: absolute; inset-inline: 0; top: calc(100% + 6px); min-height: 44px;
+    background: var(--chrome-panel-solid); color: var(--chrome-fg); border: 1px solid var(--chrome-line-strong); box-shadow: var(--chrome-shadow-sm);
+  }
+  .t-lang.is-open button:not([aria-pressed="true"]) ~ button:not([aria-pressed="true"]) { top: calc(100% + 56px); }
+}
+
+/* ── the camera capsule ── */
+.t-tools {
+  inset-inline-end: calc(20px + max(var(--safe-left), var(--safe-right))); gap: 2px; padding: 4px; border-radius: var(--r-full);
+  background: var(--glass-thin); -webkit-backdrop-filter: var(--blur-thin); backdrop-filter: var(--blur-thin); border: 1px solid var(--chrome-line);
+}
+.t-tools .t-icon-btn { border: 0; border-radius: var(--r-full); background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.t-tools .t-icon-btn[aria-pressed="true"] { background: var(--chrome-fg); color: var(--chrome-bg); }
+.t-sep { display: block; width: 24px; height: 1px; margin: 2px auto; background: var(--chrome-line-strong); }
+@media (hover: hover) and (pointer: fine) {
+  .t-tools .t-icon-btn:not([aria-pressed="true"]):hover, .t-act:not(.t-design-btn):hover, .t-view-btn:not([aria-pressed="true"]):hover,
+  .t-travel .t-step:hover, .t-rooms-btn:hover { background: rgba(249, 246, 243, 0.12); }
+  .t-icon-btn.t-solo:hover, .t-return:hover, .t-lang:hover { background: var(--chrome-panel); }
+  .t-acts .t-design-btn:hover { background: var(--n-0); }
+}
+
+/* ── the two menus beside «שינוי עיצוב» (2026-11-08, Eliran): «סגנונות צפייה» (#t-view: 360° · תוכנית · תלת-ממד) and «כלי עזר»
+   (#t-tools-menu: מדידה · סיור קולי). Desktop: a small panel 8 px under its button (tour.js menuPlace); phone: a bottom sheet above the
+   AI strip (below). One open at a time; the items are 44 px rows; the current view and a tool that is on are lit. ── */
+.t-menu {
+  position: fixed; z-index: 12; top: calc(72px + var(--safe-top)); inset-inline-end: 20px; box-sizing: border-box; min-width: 220px;
+  display: flex; flex-direction: column; gap: 2px; padding: 6px; border-radius: var(--r-md);
+  background: var(--chrome-panel); -webkit-backdrop-filter: var(--blur-thick); backdrop-filter: var(--blur-thick);
+  border: 1px solid var(--chrome-line-strong); box-shadow: var(--chrome-shadow); color: var(--chrome-fg);
+}
+.t-menu[hidden] { display: none; }
+.t-menu-head { display: none; }
+.t-menu-item, .t-view-btn {
+  appearance: none; display: flex; align-items: center; justify-content: flex-start; gap: 10px; box-sizing: border-box; width: 100%;
+  min-height: 44px; min-width: 44px; padding: 0 14px; border: 0; border-radius: 10px; background: transparent; color: var(--chrome-fg);
+  font: var(--fw-semibold) var(--fs-small)/1 var(--font-text); text-align: start; white-space: nowrap; cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.t-menu-item[hidden], .t-view-btn[hidden] { display: none; }
+.t-menu-item svg, .t-view-btn svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.t-menu-item[aria-pressed="true"], .t-view-btn[aria-pressed="true"] { background: var(--chrome-fg); color: var(--chrome-bg); }
+.t-menu-item:focus-visible, .t-view-btn:focus-visible { outline: 2px solid var(--focus-chrome); outline-offset: -2px; }
+.t-menu .t-act-label { display: inline; }
+.t-menu .t-long { display: inline !important; }
+.t-menu .t-short { display: none !important; }
+#t-view-360 span { min-width: 18px; text-align: center; font-weight: var(--fw-bold); }
+.ui-min #t-ruler:not([hidden]), .ui-min #t-guide:not([hidden]) { display: flex; }
+/* «כלי עזר» lit while the ruler or the voice tour is on: the button keeps a ring and an accent dot */
+.t-act-dot { display: none; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-accent); flex: 0 0 auto; }
+.t-tools-open.is-on { background: rgba(249, 246, 243, 0.18); box-shadow: inset 0 0 0 1.5px var(--chrome-fg); }
+.t-tools-open.is-on .t-act-dot { display: inline-block; }
+.t-act[aria-expanded="true"] .t-caret { transform: rotate(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  .t-menu-item:not([aria-pressed="true"]):hover, .t-view-btn:not([aria-pressed="true"]):hover { background: rgba(249, 246, 243, 0.12); }
+}
+#t-plan-btn .t-i-plan, #t-plan-btn.is-plan .t-i-cube { display: none; }
+#t-plan-btn.is-plan .t-i-plan { display: block; }
+
+/* ── the bottom: the strip, the room pill, the disclosure strip (#7: one column, nothing beside the pill but the view switch) ── */
+.t-bottom { flex-direction: column; flex-wrap: nowrap; align-items: center; gap: 10px; padding-bottom: 0; }
+.t-bottom > .t-pick, .t-bottom > .t-travel, .t-bottom > .t-strip, .t-bottom > .t-change-bar, .t-bottom > .t-mk-hint, .t-bottom > .t-actions,
+.t-bottom > .t-item-card, .t-bottom > .t-video-bar, .t-bottom > .t-look, .t-bottom > .t-disclose { flex: 0 0 auto; }
+.t-bottom > .t-strip { order: 3; width: min(1080px, 100%); max-width: none; margin-inline: auto; }
+.t-strip-closed .t-bottom > .t-strip { display: none; }
+.t-bottom > .t-travel { order: 4; }
+.t-bottom > .t-disclose { order: 9; }
+.t-card { width: 120px; height: 72px; border-radius: var(--r-md); border-color: var(--chrome-line); }
+.t-card::after { background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0) 60%); }
+.t-card-name { font: var(--fw-semibold) 12.5px/1.2 var(--font-text); }
+.t-card[aria-current="true"] { border-color: var(--chrome-fg); box-shadow: none; outline: 2px solid var(--chrome-fg); outline-offset: 2px; }
+.t-strip { padding: 4px 4px 6px; }
+/* the room pill */
+.t-travel {
+  gap: 2px; padding: 4px; border-radius: var(--r-full);
+  background: var(--chrome-panel); -webkit-backdrop-filter: var(--blur-thick); backdrop-filter: var(--blur-thick);
+  border: 1px solid var(--chrome-line); box-shadow: var(--chrome-shadow-sm);
+}
+.t-travel .t-step { border: 0; border-radius: var(--r-full); background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.t-rooms-btn {
+  appearance: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 10px; border: 0; border-radius: var(--r-full);
+  background: transparent; color: var(--chrome-fg); cursor: pointer; font: inherit;
+}
+.t-pill-name { font: var(--fw-semibold) var(--fs-body)/1 var(--font-text); white-space: nowrap; }
+.t-rooms-btn .t-count-main { margin: 0; font: var(--fw-regular) var(--fs-small)/1 var(--font-text); color: var(--chrome-muted); white-space: nowrap; }
+/* the disclosure line (2026-11-08, Eliran: «גם את הפס הזה לא צריך כזה פס בולט. אפשר בכיתוב שקוף לבן למטה ללא רקע חום»): the AI line and the
+   look note sit straight on the picture — no band. Legible by a soft layered text-shadow over the bottom shade (.t-shade-bottom, the one
+   tall fade); the main line ≥ 4.5:1 at the worst pixel around its letters in every room, look and floor (measured). Wording unchanged. */
+.t-bottom > .t-disclose {
+  align-self: stretch; box-sizing: border-box; margin: 2px calc(-16px - var(--safe-right)) 0 calc(-16px - var(--safe-left));
+  display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 4px 16px calc(8px + var(--safe-bottom));
+  background: none; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; pointer-events: auto;
+  --disclose-shadow: 0 0 1px rgba(0, 0, 0, 0.95), 0 1px 2px rgba(0, 0, 0, 0.85), 0 0 6px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 0, 0, 0.45);
+}
+.t-disclose .t-ai { font: var(--fw-medium) 12.5px/1.4 var(--font-text); color: var(--chrome-fg); text-shadow: var(--disclose-shadow); }
+.t-disclose .t-ai-dot { width: 6px; height: 6px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); }
+.t-disclose .t-look-note { margin: 0; padding: 0; max-width: none; background: none; border-radius: 0; color: rgba(249, 246, 243, 0.92); font: var(--fw-regular) 12px/1.4 var(--font-text); text-align: center; text-shadow: var(--disclose-shadow); }
+.t-disclose .t-look-note:empty, .t-disclose .t-look-note[hidden] { display: none; }
+.t-disclose .t-ai { order: 1; }
+.t-disclose .t-look-note { order: 2; }   /* the AI line first, everywhere */
+/* the strip fades out at its two ends (it scrolls) */
+.t-bottom > .t-strip { -webkit-mask-image: linear-gradient(to left, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%); mask-image: linear-gradient(to left, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%); padding-inline: 28px; box-sizing: border-box; scroll-padding-inline: 28px; }
+
+/* ── #6: a door ≠ a furniture ring. A door: a 40 px glass disc with a walk chevron and its name, always. A ring: 24 px, a thin 70 % ring,
+   no dot (44 px to tap). ── */
+.t-hs-ring { inset: 8px; border: 2px solid var(--chrome-fg); background: var(--glass-mid); -webkit-backdrop-filter: var(--blur-thin); backdrop-filter: var(--blur-thin); box-shadow: var(--chrome-shadow-sm); }
+.t-hs-ring::after { inset: 0; border-radius: 0; background: var(--chrome-fg); -webkit-mask: var(--t-walk) center / 22px no-repeat; mask: var(--t-walk) center / 22px no-repeat; }
+.t-hs-label { top: 54px; padding: 6px 12px; border: 0; background: var(--chrome-panel); color: var(--chrome-fg); font: var(--fw-semibold) var(--fs-small)/1 var(--font-text); box-shadow: var(--chrome-shadow-sm); }
+.t-mk-ring { inset: 10px; border: 1.5px solid rgba(255, 255, 255, 0.7); background: rgba(26, 23, 19, 0.18); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08); }
+.t-mk-ring::after { content: none; }
+.t-mk.is-open .t-mk-ring { background: var(--chrome-fg); border-color: var(--chrome-fg); box-shadow: 0 0 0 3px var(--focus-chrome); }
+.t-mk-chip { background: var(--chrome-panel); border: 0; font: var(--fw-semibold) 13px/1 var(--font-text); }
+@media (hover: hover) and (pointer: fine) {
+  .t-hs:hover .t-hs-ring { background: var(--chrome-panel); }
+  .t-mk:hover .t-mk-ring { background: rgba(26, 23, 19, 0.42); border-color: #fff; }
+}
+
+/* ── the panels: the design panel (desktop: hangs from its button, tour.js), the measure bar, the small loading pill ── */
+.t-design { border-radius: var(--r-md); background: var(--chrome-panel); border-color: var(--chrome-line-strong); -webkit-backdrop-filter: var(--blur-thick); backdrop-filter: var(--blur-thick); box-shadow: var(--chrome-shadow); }
+#t-design .t-look-seg, #t-design #t-floor-seg { background: rgba(249, 246, 243, 0.06); border-color: var(--chrome-line); }
+.t-measure-bar { top: calc(84px + var(--safe-top)); max-width: 520px; border-radius: var(--r-md); background: var(--chrome-panel); }
+.t-loading.is-small { top: calc(84px + var(--safe-top)); }
+
+/* ── between a phone and a wide desktop: the place card narrows, the secondary actions keep their icons and their words as names ── */
+@media (min-width: 641px) and (max-width: 1180px) {
+  .t-place { width: 300px; }
+  .t-act:not(.t-design-btn) { padding-inline: 0; width: 44px; }
+  .t-act:not(.t-design-btn) .t-act-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  a.t-return { width: 44px; padding: 0; justify-content: center; font-size: 0; }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  .t-place { width: 260px; }
+  .t-acts .t-design-btn .t-design-state { display: none; }
+}
+
+/* ── phones ── */
+@media (max-width: 640px) {
+  .t-shade-top { height: 0; }
+  .t-shade-bottom, .ui-min .t-shade-bottom { height: calc(240px + var(--safe-bottom)); background: linear-gradient(to top, rgba(26, 23, 19, 0.72), rgba(26, 23, 19, 0)); }
+  .ui-min .t-shade-top { height: 0; }
+  /* the card: badge · room in the first row (the way back and the language sit at its end), the apartment line, the concept line */
+  .t-place {
+    top: calc(12px + var(--safe-top)); inset-inline: calc(12px + var(--safe-right)) calc(12px + var(--safe-left)); width: auto; padding: 8px 12px 10px;
+    display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 8px;
+  }
+  .t-place-top, .t-place .t-title { display: contents; }
+  .t-place .t-brand, .t-place .t-zone { display: none; }
+  .t-place .t-badge { grid-column: 1; grid-row: 1; }
+  .t-place .t-room { grid-column: 2; grid-row: 1; margin: 0; padding-inline-end: 140px; min-height: 44px; display: flex; align-items: center; font-size: 22px; line-height: 1.2; }
+  .t-place .t-apt { grid-column: 1 / -1; margin: 2px 0 0; font-size: 13px; }
+  .t-place .t-concept { grid-column: 1 / -1; margin: 6px 0 0; padding: 0; border: 0; font-size: 13px; }
+  html.has-dialog .t-place .t-room { display: none; }
+  /* the tool bar on a phone: the way back and the language inside the card's first row; the actions become the bottom action bar */
+  .t-head { top: calc(20px + var(--safe-top)); inset-inline-end: calc(18px + var(--safe-left)); gap: 4px; }
+  .t-head .t-return, .t-head .t-lang, .t-head .t-solo { background: transparent; border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .t-head .t-lang button[aria-pressed="true"] { background: transparent; color: var(--chrome-fg); }
+  .t-head a.t-return::before { background: var(--chrome-fg); }
+  /* the open view switch takes the room pill's place (the pill steps back while it is open) */
+  .t-acts {
+    position: fixed; z-index: 4; inset-inline: calc(8px + var(--safe-right)) calc(8px + var(--safe-left)); bottom: calc(var(--ai-h, 56px) + 8px);
+    justify-content: space-between; gap: 4px; padding: 6px; border-radius: var(--r-md); background: var(--chrome-panel);
+  }
+  .t-act { flex: 1 1 0; min-width: 0; flex-direction: column; gap: 4px; min-height: 56px; padding: 0 4px; border-radius: var(--r-md); font-size: 13px; }
+  .t-act svg { width: 20px; height: 20px; }
+  .t-acts .t-view-open { order: 1; }
+  .t-acts .t-tools-open { order: 2; }
+  .t-acts .t-design-btn { order: 3; flex-grow: 1.35; display: grid; grid-template-columns: auto auto; justify-content: center; align-content: center; row-gap: 4px; column-gap: 4px; padding: 0 6px; }
+  .t-acts .t-design-btn[hidden] { display: none; }
+  .t-acts .t-design-btn svg:not(.t-caret) { grid-column: 1 / -1; justify-self: center; }
+  .t-acts .t-design-btn .t-caret { display: none; }
+  .t-acts .t-design-btn { overflow: hidden; grid-template-columns: auto minmax(0, max-content); }
+  .t-acts .t-design-btn .t-design-state { padding: 0; background: none; font: inherit; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }   /* «Design · Oak parq…» in English */
+  .t-acts .t-design-btn .t-design-state::before { content: '· '; }
+  .t-long { display: none; }
+  .t-short { display: inline; }
+  .t-design-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  /* the camera capsule: rotate · home · full · (?) at 48 % */
+  .t-tools { top: 48%; inset-inline-end: calc(12px + max(var(--safe-left), var(--safe-right))); }
+  .t-tools .t-fine { display: none; }
+  /* the view switch opens from «תצוגה», above the action bar at its start */
+  /* the menus are sheets that rise from the action bar, as «תצוגה» did: they end above the bar (its three buttons stay reachable, a tap on
+     another one switches menus) and so far above the AI strip — the AI line stays readable while one is open */
+  .t-menu {
+    top: auto !important; left: calc(8px + var(--safe-left)) !important; right: calc(8px + var(--safe-right)) !important;
+    bottom: calc(var(--ai-h, 56px) + var(--acts-h, 70px) + 16px); width: auto; min-width: 0;
+    border-radius: 18px; padding: 10px 12px 12px; gap: 4px; background: var(--chrome-panel-solid); box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+  }
+  html:has(.t-menu:not([hidden])) .t-bottom > .t-travel { visibility: hidden; }   /* the room pill steps back under an open sheet */
+  .t-menu-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 4px 6px; }
+  .t-menu-title { margin: 0; font: var(--fw-bold) var(--fs-body)/1.2 var(--font-text); }
+  .t-menu-item, .t-view-btn { min-height: 52px; font-size: var(--fs-body); padding: 0 16px; border-radius: var(--r-md); }
+  .t-act[aria-expanded="true"] .t-caret { transform: none; }
+  .t-acts .t-act .t-caret { display: none; }
+  .t-acts .t-tools-open .t-act-dot { position: absolute; top: 8px; inset-inline-end: 22%; }
+  .t-acts .t-tools-open { position: relative; }
+  /* the bottom: the strip (folded; the room pill opens it), the pill, room for the action bar, the disclosure strip */
+  .t-bottom { padding-left: calc(12px + var(--safe-left)); padding-right: calc(12px + var(--safe-right)); }
+  .t-bottom > .t-strip { order: 3; }
+  .t-bottom > .t-travel { order: 4; }
+  .t-bottom > .t-disclose { order: 9; margin: calc(var(--acts-h, 70px) + 10px) calc(-12px - var(--safe-right)) 0 calc(-12px - var(--safe-left)); padding: 4px 14px calc(8px + var(--safe-bottom)); }
+  .t-card { width: 104px; height: 64px; }
+  /* #9: the design sheet ends ABOVE the disclosure strip (the AI line stays readable while it is open) */
+  .t-design { bottom: var(--ai-h, 56px); max-height: min(64dvh, calc(100dvh - var(--ai-h, 56px) - var(--place-h, 150px) - 24px)); padding-bottom: 16px; }
+  .t-guide-card { bottom: calc(var(--ai-h, 56px) + 8px); }
+  .t-measure-bar, .t-loading.is-small { top: calc(var(--place-h, 150px) + 24px + var(--safe-top)); }
+}
+@media (max-width: 640px) and (max-height: 700px) {
+  .t-place .t-apt { display: none; }
+}
+
+/* ══ the phone's immersive mode (2026-11-08, Eliran: «בלחיצה על המסך יופיעו הכפתורים ובלחיצה נוספת הם ייעלמו»): tour.js toggles
+   html.t-chrome-off on a tap (touch screens ≤ 960 px only). The chrome fades with opacity and an 8 px slide, 200 ms; hidden parts take no
+   taps (and are inert); the AI line stays, and a small הדמיה badge takes the corner. Reduced motion: no slide, no fade. ══ */
+.t-place, .t-head > *, .t-tools, .t-bottom > .t-travel, .t-bottom > .t-strip { transition: opacity 200ms var(--ease), transform 200ms var(--ease); }
+.t-chrome-off .t-place, .t-chrome-off .t-head > * { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+.t-chrome-off .t-head > .t-acts { transform: translateY(8px); }
+.t-chrome-off .t-tools { opacity: 0; transform: translateY(-50%) translateX(-8px); pointer-events: none; }
+.t-chrome-off .t-bottom > .t-travel, .t-chrome-off .t-bottom > .t-strip { opacity: 0; transform: translateY(8px); pointer-events: none; }
+.t-badge-mini {
+  position: fixed; z-index: 4; top: calc(12px + var(--safe-top)); inset-inline-start: calc(12px + var(--safe-right));
+  height: 24px; padding: 0 9px; font: var(--fw-bold) 12px/1 var(--font-text); box-shadow: var(--chrome-shadow-sm);
+  opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease);
+}
+.t-chrome-off .t-badge-mini { opacity: 1; }
+/* the tap hint (2026-11-09, Eliran: «…יופיע למטה בעיצוב זכוכית חום בהיר מעל המשפט "תמונות שנוצרו בבינה מלאכותית"»): the disclosure
+   block's first line on touch screens ≤ 960 px. Light warm-brown glass (the house stone, warmed), dark ink: ≥ 4.5:1 over any picture
+   (alpha .80; measured). It sits inside #t-disclose, so --ai-h counts it: the phone's action bar, the sheets and the design panel all end
+   above it. Busy (a tap would not toggle) = it fades but keeps its place, so the action bar never jumps. No taps of its own. */
+:root { --hint-glass: rgba(214, 196, 172, 0.80); --hint-line: rgba(255, 250, 244, 0.5); --hint-ink: var(--n-900); }
+.t-disclose .t-tap-hint { display: none; }
+@media (pointer: coarse) and (max-width: 960px) {
+  .t-disclose .t-tap-hint {
+    display: block; order: 0; margin: 0 0 5px; max-width: calc(100vw - 32px); box-sizing: border-box; padding: 5px 12px; border-radius: var(--r-full);
+    background: var(--hint-glass); border: 1px solid var(--hint-line); color: var(--hint-ink); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+    -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%);
+    font: var(--fw-semibold) 12.5px/1.25 var(--font-text); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    pointer-events: none; transition: opacity 150ms var(--ease), visibility 0s linear 0s;
+  }
+  .t-hint-busy .t-disclose .t-tap-hint { opacity: 0; visibility: hidden; transition: opacity 150ms var(--ease), visibility 0s linear 150ms; }
+  .t-tap-hint > span { display: inline-block; transition: opacity 70ms linear; }
+  .t-tap-hint > span.is-swap { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-disclose .t-tap-hint, .t-tap-hint > span { transition: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-place, .t-head > *, .t-tools, .t-bottom > .t-travel, .t-bottom > .t-strip, .t-badge-mini { transition: none; }
+  .t-chrome-off .t-place, .t-chrome-off .t-head > *, .t-chrome-off .t-bottom > .t-travel, .t-chrome-off .t-bottom > .t-strip { transform: none; }
+  .t-chrome-off .t-tools { transform: translateY(-50%); }
+}
+
+/* the phone's start card (2026-11-08): with no gesture yet, the walkthrough's first card offers one clear «▶ התחילו את ההסבר» (and «דלג»);
+   that tap starts the autoplay and the music together. The back button, the progress bar and the music toggle wait for it. */
+.t-coach-card.is-gate #t-coach-prev, .t-coach-card.is-gate .t-coach-music, .t-coach-card.is-gate .t-coach-bar { display: none !important; }
+.t-coach-card.is-gate .t-coach-next { padding-inline: 18px; font-size: 15px; background: var(--brand-accent); color: var(--brand-on-accent); border-color: var(--brand-accent); }
+
+/* ── point-to-point movement (plan 2026-11-11-tour-point-move): the door mark a click / a direction would take is lit (.is-aim); no way
+   that side pulses the marks (.is-nowhere). #t-nav-hud says what every arrow-key press does (the phone joystick was removed 2026-11-11): a dark pill, centre, the arrow turned to the pressed direction. ── */
+.t-hs.is-aim .t-hs-ring { transform: scale(1.16); background: var(--chrome-fg); box-shadow: 0 0 0 6px rgba(249, 246, 243, 0.28), var(--chrome-shadow-sm); }
+.t-hs.is-aim .t-hs-ring::after { background: var(--chrome-bg); }
+.t-hs.is-aim .t-hs-label { background: var(--chrome-fg); color: var(--chrome-bg); }
+.t-pano.can-go, .t-pano.can-go .pnlm-dragfix, .t-pano.can-go .pnlm-grab, .t-pano.can-go canvas { cursor: pointer; }
+.t-pano.is-nowhere .t-hs-ring { animation: t-nowhere 600ms var(--ease-out); }
+@keyframes t-nowhere { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.28); } 60% { transform: scale(0.96); } }
+.t-nav-hud {
+  position: absolute; z-index: 3; left: 50%; top: 56%; transform: translate(-50%, -50%) scale(0.94); display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px 10px 12px; border-radius: 999px; background: rgba(16, 14, 12, 0.82); color: #fff; direction: ltr; white-space: nowrap;
+  font: var(--fw-semibold) 16px/1.2 var(--font-text); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35); pointer-events: none; opacity: 0;
+  transition: opacity 180ms var(--ease), transform 180ms var(--ease);
+}
+.t-nav-hud[hidden] { display: none; }
+.t-nav-hud.is-on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.t-nav-hud-arrow { flex: 0 0 auto; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: #fff; color: #111; }
+.t-nav-hud-arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.t-nav-hud[data-dir="right"] .t-nav-hud-arrow svg { transform: rotate(90deg); }
+.t-nav-hud[data-dir="down"] .t-nav-hud-arrow svg { transform: rotate(180deg); }
+.t-nav-hud[data-dir="left"] .t-nav-hud-arrow svg { transform: rotate(-90deg); }
+.t-nav-hud[data-kind="none"] .t-nav-hud-arrow { background: rgba(255, 255, 255, 0.35); color: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  .t-nav-hud { transition: none; }
+  .t-pano.is-nowhere .t-hs-ring { animation: none; } .t-hs.is-aim .t-hs-ring { transform: none; }
+}
+
+/* ── Floor arrows (Eliran 2026-11-12: «בצורה מסודרת על הרצפה עם חץ שקוף שלא מפריע»): a room button of the apartment is a white,
+   see-through arrow lying flat on the floor (tilted back in 3D), pointing into the room; its name is small plain text under it, no box.
+   The arrows of a room stand in one row (tour.js floorRows); a farther row is smaller. A name that would meet a nearer one is hidden
+   (.is-quiet) until the arrow is aimed, hovered or focused. */
+.t-pano .t-hs.t-hs-floor { width: 64px; height: 56px; perspective: 260px; filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.6)) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35)); }   /* the outline on the button: a mask clips its own element's filter, so the shadow is drawn here; it keeps a white arrow seen on a white sofa */
+.t-hs-arrow {
+  position: absolute; inset: 0;
+  background: rgba(255, 255, 255, 0.58);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 56'%3E%3Cpath d='M32 3 L60 33 L45 33 L45 53 L19 53 L19 33 L4 33 Z' fill='%23000'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 56'%3E%3Cpath d='M32 3 L60 33 L45 33 L45 53 L19 53 L19 33 L4 33 Z' fill='%23000'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: rotateX(58deg); transform-origin: 50% 70%;
+  transition: background 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.t-pano .t-hs-row1 .t-hs-arrow { transform: rotateX(62deg) scale(0.78); }
+.t-pano .t-hs-row2 .t-hs-arrow { transform: rotateX(66deg) scale(0.62); }
+.t-pano .t-hs.t-hs-floor .t-hs-label {
+  top: 46px; padding: 0; border: 0; background: none; box-shadow: none;
+  color: #fff; font: var(--fw-semibold, 600) 12.5px/1.2 var(--font-text, var(--font-body));
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75), 0 0 8px rgba(0, 0, 0, 0.35);
+  opacity: 0.92; transition: opacity 160ms var(--ease-out);
+}
+.t-pano .t-hs-row1 .t-hs-label, .t-pano .t-hs-row2 .t-hs-label { top: 40px; font-size: 11.5px; }
+.t-pano .t-hs.t-hs-floor.is-quiet .t-hs-label { opacity: 0; }
+.t-pano .t-hs.t-hs-floor:hover .t-hs-arrow, .t-pano .t-hs.t-hs-floor:focus-visible .t-hs-arrow, .t-pano .t-hs.t-hs-floor.is-aim .t-hs-arrow { background: rgba(255, 255, 255, 0.92); }
+.t-pano .t-hs.t-hs-floor.is-aim .t-hs-label { background: none; color: #fff; }
+.t-pano .t-hs.t-hs-floor:focus-visible { box-shadow: none; }
+.t-pano .t-hs.t-hs-floor:focus-visible .t-hs-arrow { outline: 2px solid var(--focus); outline-offset: 4px; }
+.t-pano .t-hs.t-hs-floor:active .t-hs-arrow { background: #fff; }
+@media (prefers-reduced-motion: reduce) { .t-hs-arrow, .t-pano .t-hs.t-hs-floor .t-hs-label { transition: none; } }
+

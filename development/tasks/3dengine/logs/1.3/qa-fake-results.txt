@@ -1,0 +1,112 @@
+ok   runTrace exit4 -> NEEDS_PAID_RUN got NEEDS_PAID_RUN exit=4
+ok   runTrace exit1budget -> STEP_FAILED got STEP_FAILED exit=1
+ok   runTrace exit1 -> STEP_FAILED got STEP_FAILED exit=1
+ok   runTrace exit3 -> NO_PLAN_FOUND got NO_PLAN_FOUND exit=3
+ok   runTrace exit2 -> USAGE got USAGE exit=2
+ok   runTrace exit7 -> STEP_FAILED got STEP_FAILED exit=7
+ok   runTrace pass -> PASS got PASS exit=0
+ok   runTrace fail -> FAIL got FAIL exit=5
+ok   runTrace pass0 -> RESULT_UNREADABLE got RESULT_UNREADABLE exit=0
+ok   runTrace passexit5 -> RESULT_UNREADABLE got RESULT_UNREADABLE exit=5
+ok   runTrace failexit0 -> RESULT_UNREADABLE got RESULT_UNREADABLE exit=0
+ok   runTrace badindex-id -> RESULT_UNREADABLE got RESULT_UNREADABLE exit=0
+ok   runTrace badindex-dir -> RESULT_UNREADABLE got RESULT_UNREADABLE exit=0
+ok   runTrace hang -> TIMEOUT got TIMEOUT exit=1
+ok   judge:true free -> DRY (nothing started) 
+ok   no vlm free -> DRY, nothing started 
+ok   go without budget refused 
+  dump keyish env: {"CLAUDE_CODE_MESSAGING_TOKEN":"<value removed by the main session before the commit>","FAL_KEY":"free-run-no-key"}
+  dump args: ["<tmp>/in.pdf","--out","<tmp>/out-16","--id","abcdef0123456789","--vlm-file","<tmp>/vlm.json","--no-judge","--rounds","3","--budget","0","--env-root","<tmp>/out-16"]
+FAIL free env: the only key-like names are FAL_KEY (any case) = free-run-no-key 
+ok   free args: --budget 0 
+ok   free args: --env-root is the out dir 
+ok   free args: no --ledger/--go 
+ok   free args: --no-judge, --rounds 
+  rounds 0 -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds 10 -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds 2.5 -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds "3" -> accepted rounds=3 (number)
+  rounds "abc" -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds true -> accepted rounds=1 (number)
+  rounds [4] -> accepted rounds=4 (number)
+  rounds null -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds undefined -> accepted rounds=3 (number)
+  rounds "" -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds " 5 " -> accepted rounds=5 (number)
+  rounds 10 -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds -1 -> refused: engine config: "trace.rounds" must be an integer 1..9
+  rounds "1e0" -> accepted rounds=1 (number)
+  rounds "0x3" -> accepted rounds=3 (number)
+  rounds 9 -> accepted rounds=9 (number)
+  rounds 1 -> accepted rounds=1 (number)
+  mode "real" -> accepted mode=real
+  mode "REAL" -> refused
+  mode "Real" -> refused
+  mode " real" -> refused
+  mode "stub" -> accepted mode=stub
+  mode "" -> refused
+  mode null -> accepted mode=stub
+  mode 1 -> refused
+  mode true -> refused
+  mode ["real"] -> refused
+  mode "stub " -> refused
+ok   non-ascii out refused, OUT_PATH, nothing created 
+ok   out path with "é" refused (OUT_PATH) 
+ok   out path with "​" refused (OUT_PATH) 
+ok   out path with " " refused (OUT_PATH) 
+ok   out path with "\t" refused (OUT_PATH) 
+ok   out path with "" refused (OUT_PATH) 
+ok   out path with "\u0001" refused (OUT_PATH) 
+  stage pass: RETURN ["stages/tracing/attempt-1/plan-1/plan.general.json","stages/tracing/attempt-1/plan-1/overlay.png","stages/tracing/attempt-1/plan-1/report.json","stages/tracing/attempt-1/plan-1/trace-check.json","stages/tracing/attempt-1/plan-1/vlm.json"] detail={"rooms":3,"fixtures":1,"checks":5,"dims_checked":1,"dims_max_pct":0.5,"could_not_read":1,"rounds":1,"seconds":0.1}
+ok   stage pass: no MARK/SECRETLINE text in result/error/log 
+  stage fail: ReviewNeeded TRACE_GATE_FAIL | the reading failed its own check: 2 of 5 checks failed (1 of the 1 printed dimensions) | files={"report":"stages/tracing/attempt-1/plan-1/report.json","overlay":"stages/tracing/attempt-1/plan-1/overlay.png"}
+ok   stage fail: no MARK/SECRETLINE text in result/error/log 
+  stage fail0: ReviewNeeded TRACE_GATE_FAIL | the reading traced no plan from this drawing | files={}
+ok   stage fail0: no MARK/SECRETLINE text in result/error/log 
+  stage pass2: EngineError STAGE_FAILED | the reading traced 2 plans, and a job reads one drawing | files=null
+ok   stage pass2: no MARK/SECRETLINE text in result/error/log 
+  stage pass0: EngineError STAGE_FAILED | the reading tool left no result that is this run's | files=null
+ok   stage pass0: no MARK/SECRETLINE text in result/error/log 
+  stage exit3: EngineError NO_PLAN_FOUND | no plan drawing was found in this PDF | files=null
+ok   stage exit3: no MARK/SECRETLINE text in result/error/log 
+  stage exit4: EngineError BUDGET_CAP | a reading of this drawing has to be paid for, and the engine does not pay for one inside a job yet: put a saved reading of this PDF in the readings folder, or pay for one with the trace command | files=null
+ok   stage exit4: no MARK/SECRETLINE text in result/error/log 
+  stage exit1: EngineError STAGE_FAILED | a step of the reading tool failed | files=null
+ok   stage exit1: no MARK/SECRETLINE text in result/error/log 
+  stage exit1budget: EngineError STAGE_FAILED | a step of the reading tool failed | files=null
+ok   stage exit1budget: no MARK/SECRETLINE text in result/error/log 
+  stage exit2: EngineError STAGE_FAILED | the reading tool refused its command | files=null
+ok   stage exit2: no MARK/SECRETLINE text in result/error/log 
+  stage exit7: EngineError STAGE_FAILED | a step of the reading tool failed | files=null
+ok   stage exit7: no MARK/SECRETLINE text in result/error/log 
+  stage hang: EngineError STAGE_FAILED | the reading did not end in time | files=null
+ok   stage hang: no MARK/SECRETLINE text in result/error/log 
+  stage hostile: ReviewNeeded TRACE_GATE_FAIL | the reading failed its own check: ? of ? checks failed (1 of the 1 printed dimensions) | files={"report":"stages/tracing/attempt-1/plan-1/report.json","overlay":"stages/tracing/attempt-1/plan-1/overlay.png"}
+ok   stage hostile: no MARK/SECRETLINE text in result/error/log 
+  stage hostile-pass: RETURN ["stages/tracing/attempt-1/plan-1/plan.general.json","stages/tracing/attempt-1/plan-1/overlay.png","stages/tracing/attempt-1/plan-1/report.json","stages/tracing/attempt-1/plan-1/trace-check.json","stages/tracing/attempt-1/plan-1/vlm.json"] detail={"rooms":null,"fixtures":null,"checks":null,"dims_checked":1,"dims_max_pct":null,"could_not_read":1,"rounds":null,"seconds":0.1}
+ok   stage hostile-pass: no MARK/SECRETLINE text in result/error/log 
+  stage planday: RETURN ["stages/tracing/attempt-1/plan-7/plan.general.json","stages/tracing/attempt-1/plan-7/overlay.png","stages/tracing/attempt-1/plan-7/report.json","stages/tracing/attempt-1/plan-7/trace-check.json","stages/tracing/attempt-1/plan-7/vlm.json"] detail={"rooms":3,"fixtures":1,"checks":5,"dims_checked":1,"dims_max_pct":0.5,"could_not_read":1,"rounds":1,"seconds":0.1}
+ok   stage planday: no MARK/SECRETLINE text in result/error/log 
+  stage badindex-id: EngineError STAGE_FAILED | the reading tool left no result that is this run's | files=null
+ok   stage badindex-id: no MARK/SECRETLINE text in result/error/log 
+  saved=not json: EngineError STAGE_FAILED | what is saved as the reading of this PDF is not a reading | files=null
+ok   saved reading not json: no tool started, STAGE_FAILED 
+  saved=empty: EngineError STAGE_FAILED | what is saved as the reading of this PDF is not a reading | files=null
+ok   saved reading empty: no tool started, STAGE_FAILED 
+  saved=array: EngineError STAGE_FAILED | what is saved as the reading of this PDF is not a reading | files=null
+ok   saved reading array: no tool started, STAGE_FAILED 
+  saved=rooms not list: EngineError STAGE_FAILED | what is saved as the reading of this PDF is not a reading | files=null
+ok   saved reading rooms not list: no tool started, STAGE_FAILED 
+  saved=null: EngineError STAGE_FAILED | what is saved as the reading of this PDF is not a reading | files=null
+ok   saved reading null: no tool started, STAGE_FAILED 
+ok   saved reading is a folder -> STAGE_FAILED no start EngineError STAGE_FAILED | what is saved as the reading of this PDF is not a reading | files=null
+ok   no saved reading -> BUDGET_CAP no start EngineError BUDGET_CAP | a reading of this drawing has to be paid for, and the engine does not pay for one inside a job yet: put a saved reading of this PDF in the readings folder, or pay for one with the trace command | files=null
+ok   hostile pdf_sha256 AAAAAAAAAAAA -> BUDGET_CAP none EngineError BUDGET_CAP | a reading of this drawing has to be paid for, and the engine does not pay for one inside a job yet: put a saved reading of this PDF in the readings folder, or pay for one with the trace command | files=null
+ok   hostile pdf_sha256 ../../../../ -> BUDGET_CAP none EngineError BUDGET_CAP | a reading of this drawing has to be paid for, and the engine does not pay for one inside a job yet: put a saved reading of this PDF in the readings folder, or pay for one with the trace command | files=null
+ok   hostile pdf_sha256 aaaaaaaaaaaa -> BUDGET_CAP none EngineError BUDGET_CAP | a reading of this drawing has to be paid for, and the engine does not pay for one inside a job yet: put a saved reading of this PDF in the readings folder, or pay for one with the trace command | files=null
+ok   hostile pdf_sha256 undefined -> BUDGET_CAP none EngineError BUDGET_CAP | a reading of this drawing has to be paid for, and the engine does not pay for one inside a job yet: put a saved reading of this PDF in the readings folder, or pay for one with the trace command | files=null
+  nonempty attempt folder: EngineError STAGE_FAILED | the reading could not be started: the output folder is not empty: a run needs a folder of its own | files=null
+ok   non-empty attempt folder is refused, not mixed 
+ok   cancel during reading: stage throws what the runner threw, within ~6s CANCELLED_X 2050ms
+ok   cancel: no index.json in the attempt folder 
+FAILED_CHECKS=1

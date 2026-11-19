@@ -1,0 +1,31 @@
+// QA 1.2 part B3: can text of the saved reading (data taken from the PDF) make the real tool's failure look like "needs a paid run"?
+// The engine decides NEEDS_PAID_RUN from a substring of the tool's log (NO_KEY_SENTENCE). Variants of a saved reading that make the tool FAIL while a
+// field holds that sentence. Free runs only, real tool, saved reading, judge off. Usage: node b3.mjs
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { spawnSync } from 'node:child_process';
+const HOME = 'C:/RnD/Projects/3Dengine';
+const { loadConfig } = await import(`file:///${HOME}/engine/config.mjs`);
+const T = await import(`file:///${HOME}/engine/trace.mjs`);
+const REAL = loadConfig({ env: {} }); const BASE = JSON.parse(fs.readFileSync(`${HOME}/engine.config.json`, 'utf8'));
+const W = fs.mkdtempSync(path.join(os.tmpdir(), 'qa12-b3-')).replace(/\\/g, '/');
+fs.writeFileSync(`${W}/engine.config.json`, JSON.stringify({ ...BASE, python: REAL.python, pipelineRoot: REAL.pipelineRoot, appDepsDir: REAL.appDepsDir, legalDir: REAL.legalDir, requirements: REAL.requirements, envRoot: '.' }));
+const cfg = loadConfig({ home: W, env: {} });
+const S = T.NO_KEY_SENTENCE;
+const base = JSON.parse(fs.readFileSync(`${HOME}/tests/fixtures/apt846/saved-reading.json`, 'utf8'));
+const variants = {
+  nameInKey: (r) => { r.rooms[0][S] = 1; },
+  nameAsType: (r) => { r.rooms[0].type = S; r.rooms[1].name_he = S; },
+  dimsString: (r) => { r.printed_dims_cm = S; r.rooms[0].name_en = S; },
+  fixturesBad: (r) => { r.fixtures = [{ kind: S, label: S, x: S }]; r.rooms[2].name_he = S; },
+  roomsNotList: (r) => { r.rooms = { [S]: S }; },
+  scaleBad: (r) => { r.scale_denominator = S; r.rooms[0].name_he = S; },
+};
+for (const [name, mut] of Object.entries(variants)) {
+  if (process.argv.length > 2 && !process.argv.slice(2).includes(name)) continue;
+  const r = JSON.parse(JSON.stringify(base)); mut(r);
+  fs.mkdirSync(`${W}/${name}`); fs.copyFileSync(`${HOME}/tests/fixtures/apt846/source.pdf`, `${W}/${name}/plan.pdf`); fs.writeFileSync(`${W}/${name}/reading.json`, JSON.stringify(r));
+  const t0 = Date.now();
+  const res = await T.runTrace(cfg, { pdf: `${W}/${name}/plan.pdf`, outDir: `${W}/${name}/out`, id: 'qa12-b3', vlmFile: `${W}/${name}/reading.json`, judge: false }, { env: {} });
+  const log = fs.readFileSync(res.logFile, 'utf8');
+  console.log(name, JSON.stringify({ outcome: res.outcome, exit: res.exit, secs: ((Date.now() - t0) / 1000).toFixed(0), sentenceInLog: log.includes(S), partialSentenceInLog: log.includes('QA12') }));
+}
+console.log('work', W);

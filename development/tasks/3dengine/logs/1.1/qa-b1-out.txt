@@ -1,0 +1,20 @@
+badxref.pdf          pages=1 kind=sheet cands=p1 content=vector 1774ms 
+booklet3.pdf         pages=2 kind=booklet cands=p1-x5+thumb,p2-x11+thumb,p2-x13+thumb content=image/image 2011ms 
+empty.pdf            pages=1 kind=sheet cands= content=empty 1556ms 
+enc-owner.pdf        pages=1 kind=sheet cands=p1 content=vector 1652ms 
+encrypted.pdf        ERR NOT_A_PDF: the scanner could not read the file (status 1) 1728ms 
+headeronly.pdf       ERR NOT_A_PDF: the scanner could not read the file (status 1) 1595ms 
+marker-booklet.pdf   pages=3 kind=booklet cands=p1-x7+thumb,p2-x16+thumb,p3-x23+thumb content=image/image/image 1654ms 
+  start: ERR NO_PLAN_FOUND: this PDF has 3 drawings; choose one (candidates: p1-x7, p2-x16, p3-x23) 
+marker-sheet.pdf     pages=1 kind=sheet cands=p1 content=vector 1637ms 
+  start: job 77df177569a00295 
+pages300.pdf         pages=300 kind=booklet cands= content=vector/vector/vector 3233ms 
+scan-sheet.pdf       pages=1 kind=sheet cands=p1 content=image 1732ms 
+truncated.pdf        pages=1 kind=sheet cands=p1 content=vector 1622ms 
+vec-booklet.pdf      pages=3 kind=booklet cands= content=vector/vector/vector 1590ms 
+vec-sheet.pdf        pages=1 kind=sheet cands=p1 content=vector 1579ms 
+zeropages.pdf        ERR NOT_A_PDF: the scanner wrote a page list of the wrong shape 1570ms 
+pages.json that carry marker (expected, on disk): 2
+runner logs with marker: 0
+server stderr has marker: false stderr bytes 0
+ATTEMPTS 16 LEAKS 0

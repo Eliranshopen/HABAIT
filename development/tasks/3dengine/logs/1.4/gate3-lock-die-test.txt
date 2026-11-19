@@ -1,0 +1,35 @@
+Milestone 1.4, after the second review: the new test «a holder dies while eight takers wait» (tests/unit/lock-race.test.mjs), 2026-11-19T08:14:14+02:00, load 21 %
+
+1. AGAINST THE FIRST FORM OF THE NEW LOCK (engine/lib/atomic.mjs of commit 5c9b049f put in place for this one run, then the file restored):
+✖ a holder dies while eight takers wait: they take the lock one after another, never two at the same moment (936.442ms)
+ℹ tests 1
+ℹ pass 0
+ℹ fail 1
+✖ failing tests:
+✖ a holder dies while eight takers wait: they take the lock one after another, never two at the same moment (936.442ms)
+  AssertionError [ERR_ASSERTION]: run 1: every taker held the lock alone: TWO-HOLDERS | TWO-HOLDERS | TWO-HOLDERS | TWO-HOLDERS | TWO-HOLDERS | TWO-HOLDERS | ok | TWO-HOLDERS
+
+2. AGAINST THE LOCK AS IT IS NOW (a stale hold is broken, then the lock is taken by the exclusive step), the whole file:
+✔ eight short-lived processes on one lock: never two holders at the same moment, nobody left out, nothing left behind (6349.003ms)
+✔ a holder dies while eight takers wait: they take the lock one after another, never two at the same moment (8179.5545ms)
+✔ eight processes keep eight readings of one PDF at the same moment: every keep is recorded, and no record of a kept reading is lost (2634.1554ms)
+ℹ tests 3
+ℹ pass 3
+ℹ fail 0
+
+3. ONE MORE TEST, added after the third gate's npm test (the second reviewer named this path as not run and «expected to fail alike»): «a LIVE holder that holds for longer than staleMs loses its hold to eight waiting takers», 2026-11-19T08:37:19+02:00
+   against the first form of the new lock (5c9b049f, put in place for this one run, then restored):
+✖ a LIVE holder that holds for longer than staleMs loses its hold to eight waiting takers, one after another; its late release touches nothing (1804.2565ms)
+ℹ tests 1
+ℹ pass 0
+ℹ fail 1
+✖ failing tests:
+✖ a LIVE holder that holds for longer than staleMs loses its hold to eight waiting takers, one after another; its late release touches nothing (1804.2565ms)
+   against the lock as it is now, the whole file:
+✔ eight short-lived processes on one lock: never two holders at the same moment, nobody left out, nothing left behind (6083.8426ms)
+✔ a holder dies while eight takers wait: they take the lock one after another, never two at the same moment (7642.3244ms)
+✔ a LIVE holder that holds for longer than staleMs loses its hold to eight waiting takers, one after another; its late release touches nothing (9415.9579ms)
+✔ eight processes keep eight readings of one PDF at the same moment: every keep is recorded, and no record of a kept reading is lost (2466.9603ms)
+ℹ tests 4
+ℹ pass 4
+ℹ fail 0

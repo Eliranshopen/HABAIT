@@ -1,0 +1,209 @@
+{
+ "$schema": "tour360/hotspot-pins.v1",
+ "note": "Buttons placed by hand against the shipped room pictures (Eliran 2026-11-11: the bedroom button pointed at the terrace). Applied by tools/make-scenes.mjs after its own rule. yaw = degrees from the picture centre, right positive. Evidence: qa-evidence/platform/point-move-2026-11-11/doors/. 2026-11-11 (later): a viewpoint inside that passage was tried on the 3D model ($0) and dropped — it is 1.2 m wide and the 360 view is door leaves and wall (qa-evidence/platform/point-move-2026-11-11/hall-probe/).",
+ "scenes": {
+  "living": {
+   "remove": [
+    "bedroomMain"
+   ],
+   "set": [
+    {
+     "to": "wardrobe",
+     "as": "bedroomMain",
+     "yaw": 133,
+     "why": "the room picture, 2026-11-11: the door in the recess right of the TV wall; it opens on the wardrobe corner, the suite's way in (exact: the 3D model has this door about 10 degrees to the left, at 124, and a closet here — the picture and the model differ at this spot; hotspot-check reports this one on the closet)",
+     "exact": true
+    },
+    {
+     "to": "dining",
+     "yaw": -58,
+     "why": "the room picture, 2026-11-11: over the dining table, seen above the sofa back (exact: from this camera every lower point is the sofa, and the depth rule would send the button to the terrace glass; hotspot-check reports this one on the table)",
+     "exact": true
+    },
+    {
+     "to": "bathguest",
+     "yaw": -148.2,
+     "v": 0.581,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.55% of the picture, 4.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — its door, seen past the entrance"
+    },
+    {
+     "to": "kitchen",
+     "yaw": -90.4,
+     "why": "kept where the rule placed it (yaw -90.4) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -22° down: hidden under the controls at the level view on desktop and phone)",
+     "v": 0.594,
+     "exact": true
+    }
+   ]
+  },
+  "dining": {
+   "set": [
+    {
+     "to": "living",
+     "yaw": -160,
+     "why": "the room picture, 2026-11-11: the floor beside the armchair, toward the sofa (the rule put it toward the front door)"
+    },
+    {
+     "to": "entrance",
+     "yaw": -146.3,
+     "v": 0.558,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.96% of the picture, 6.9 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    },
+    {
+     "to": "kitchen",
+     "yaw": -77.4,
+     "why": "kept where the rule placed it (yaw -77.4) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -33° down: hidden under the controls at the level view on desktop and phone)",
+     "v": 0.594,
+     "exact": true
+    }
+   ]
+  },
+  "entrance": {
+   "set": [
+    {
+     "to": "kitchen",
+     "yaw": -30,
+     "why": "the room picture, 2026-11-11: the floor right of the tall cabinet | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -38° down: hidden under the controls at the level view on desktop and phone)",
+     "v": 0.594,
+     "exact": true
+    },
+    {
+     "to": "bathguest",
+     "yaw": -61.0,
+     "why": "the room picture and the 3D model, 2026-11-11: the mouth of the passage between the wall and the tall cabinet, the near (bath) side (exact height: the depth model put it at the visitor's feet, 65 degrees down, where nobody sees it) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -45° down: hidden under the controls at the level view on desktop and phone) | phone check: spread from the bedroom-2 button (yaw -61, v 0.64)",
+     "v": 0.64,
+     "exact": true
+    },
+    {
+     "to": "bedroom2",
+     "yaw": -45.0,
+     "why": "the room picture and the 3D model, 2026-11-11: the mouth of the same passage, the far (bedroom) side | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -36° down: hidden under the controls at the level view on desktop and phone) | phone check: spread from the guest-bath button (yaw -45, v 0.55)",
+     "v": 0.55,
+     "exact": true
+    },
+    {
+     "to": "wardrobe",
+     "as": "bedroomMain",
+     "yaw": 63,
+     "why": "the room picture, 2026-11-11 (Eliran: from the entrance there was no way to the room seen in the picture): the master suite's door, right of the TV wall, seen across the living room; it opens on the wardrobe corner (exact: the depth model has this door about 10 degrees to the left, as from the living room, and moved the button onto the TV unit)",
+     "exact": true
+    },
+    {
+     "to": "dining",
+     "yaw": -17.3,
+     "v": 0.552,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.01% of the picture, 7.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    },
+    {
+     "to": "living",
+     "yaw": 2.2,
+     "why": "kept where the rule placed it (yaw 2.2) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -27° down: hidden under the controls at the level view on desktop and phone)",
+     "v": 0.594,
+     "exact": true
+    }
+   ]
+  },
+  "bedroomMain": {
+   "remove": [
+    "living"
+   ],
+   "set": [
+    {
+     "to": "terraceBedroom",
+     "yaw": 117.6,
+     "v": 0.696,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (8.03% of the picture, 2.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — its terrace door (o-13)"
+    },
+    {
+     "to": "living",
+     "yaw": -48.0,
+     "v": 0.548,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.67% of the picture, 4.6 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the wardrobe corner; moved 3.5 degrees right and up off the wardrobe button"
+    },
+    {
+     "to": "terraceLiving",
+     "yaw": 93.8,
+     "v": 0.593,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.32% of the picture, 3.7 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    }
+   ]
+  },
+  "bedroom2": {
+   "remove": [
+    "kitchen"
+   ]
+  },
+  "wardrobe": {
+   "set": [
+    {
+     "to": "living",
+     "yaw": -162,
+     "why": "the room picture, 2026-11-11: the open door to the living room"
+    },
+    {
+     "to": "terraceBedroom",
+     "yaw": 6.0,
+     "v": 0.563,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.62% of the picture, 6.3 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the bedroom, so above its button"
+    },
+    {
+     "to": "bedroomMain",
+     "yaw": 47.5,
+     "why": "kept where the rule placed it (yaw 47.5) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -44° down: hidden under the controls at the level view on desktop and phone)",
+     "v": 0.594,
+     "exact": true
+    }
+   ]
+  },
+  "kitchen": {
+   "set": [
+    {
+     "to": "entrance",
+     "yaw": 107,
+     "why": "the room picture, 2026-11-11: the floor toward the front door, past the armchair (the entrance camera is not in sight, so the rule drops this way)"
+    },
+    {
+     "to": "living",
+     "yaw": 76.0,
+     "why": "kept where the rule placed it (yaw 76.0) | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -33° down: hidden under the controls at the level view on desktop and phone)",
+     "v": 0.594,
+     "exact": true
+    }
+   ]
+  },
+  "terraceLiving": {
+   "set": []
+  },
+  "terraceBedroom": {
+   "set": [
+    {
+     "to": "bedroomMain",
+     "yaw": -100.0,
+     "v": 0.594,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (19.25% of the picture, 2.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — through its terrace door (o-13) | 2026-11-12 browser check: moved down to the floor by the bed (yaw -100, v 0.78), clear of the wardrobe button | 2026-11-12 level-view check: raised to a height seen without tilting the view (it was -24° down: hidden under the controls at the level view on desktop and phone)"
+    },
+    {
+     "to": "wardrobe",
+     "yaw": -88.0,
+     "v": 0.53,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (1.28% of the picture, 6.0 m away; qa-evidence/platform/room-links-2026-11-12/visible.json) — beyond the bedroom, so above its button | 2026-11-12 browser check: moved up onto the far door (yaw -88, v 0.53) — at the first place it covered the bedroom button"
+    },
+    {
+     "to": "living",
+     "yaw": -53.4,
+     "v": 0.573,
+     "exact": true,
+     "why": "seen in the room picture, 2026-11-12 (Eliran: from every room a button to every room seen in it): yaw and height = the median of where the model's depth from this exact spot sees that room (0.74% of the picture, 6.1 m away; qa-evidence/platform/room-links-2026-11-12/visible.json)"
+    }
+   ]
+  }
+ }
+}

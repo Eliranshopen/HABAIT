@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<title>Habait · מערכת העיצוב</title>
+<!-- board platform-ui-ux, card 05: every token and component, both themes side by side. Dev page; not linked from the buyer pages. -->
+<link rel="preload" href="fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+  /* style-guide layout only (not part of the system) */
+  body { margin: 0; background: var(--n-150); }
+  .sg-top { padding: var(--sp-8) var(--gutter) var(--sp-6); background: var(--n-0); color: var(--n-900); font-family: var(--font-text); border-block-end: 1px solid var(--n-200); }
+  .sg-top p { margin: var(--sp-2) 0 0; color: var(--n-600); max-inline-size: 70ch; }
+  .sg-ramp { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: var(--sp-2); margin-block-start: var(--sp-6); }
+  .sg-ramp figure { margin: 0; font-size: 12px; line-height: 1.3; }
+  .sg-ramp code { direction: ltr; unicode-bidi: isolate; }
+  .sg-ramp figure > div { block-size: 44px; border-radius: var(--r-sm); border: 1px solid rgb(0 0 0 / 0.08); margin-block-end: var(--sp-1); }
+  .sg-cols { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 1000px) { .sg-cols { grid-template-columns: 1fr 1fr; } }
+  .sg-col { padding: var(--sp-8) var(--gutter) var(--sp-16); min-inline-size: 0; }
+  .sg-col > .sg-theme { font-size: var(--fs-small); font-weight: var(--fw-bold); color: var(--text-muted); margin: 0 0 var(--sp-6); }
+  .sg-sec { display: grid; gap: var(--sp-4); padding-block: var(--sp-8); border-block-start: 1px solid var(--line); }
+  .sg-sec > h2 { font-size: var(--fs-small); font-weight: var(--fw-bold); color: var(--text-muted); margin: 0; }
+  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--sp-3); }
+  .sg-sw { display: grid; grid-template-columns: 36px 1fr; gap: var(--sp-2); align-items: center; font-size: 12px; line-height: 1.35; }
+  .sg-sw > div { inline-size: 36px; block-size: 36px; border-radius: var(--r-sm); border: 1px solid var(--line); }
+  .sg-sw code { color: var(--text-muted); font-size: 11px; direction: ltr; unicode-bidi: isolate; }
+  .sg-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--sp-4); }
+  .sg-ph { inline-size: 100%; block-size: 100%; display: grid; place-items: center; background: linear-gradient(160deg, #c9d6de 0%, #8fa6b4 45%, #4d6474 100%); color: #fff; font-size: var(--fs-small); }
+  .sg-ph--warm { background: linear-gradient(160deg, #eadfce 0%, #c7ad8a 50%, #7b6249 100%); }
+  .sg-phone { position: relative; block-size: 220px; overflow: auto; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); }
+  .sg-phone p { margin: 0; padding: var(--sp-4) var(--gutter); color: var(--text-muted); }
+  .sg-tokens { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--sp-3); font-size: 12px; }
+  .sg-tokens > div { display: grid; gap: var(--sp-2); justify-items: start; }
+  .sg-motion { inline-size: 40px; block-size: 40px; border-radius: var(--r-sm); background: var(--brand-primary); transition: transform var(--d) var(--ease); }
+  .sg-tokens > div:hover .sg-motion { transform: translateX(-24px); }
+</style>
+</head>
+<body>
+<header class="sg-top">
+  <h1 class="hb-h1" style="color:var(--n-900)">Habait · מערכת העיצוב</h1>
+  <p>כל הטוקנים והרכיבים, בשתי ערכות הנושא זו לצד זו: בהירה עריכתית (ברירת המחדל) וכהה מעודנת. אחת מהן נבחרת בשער 1. מקור הצבעים: LCH, ראו את ההערה בראש <bdi>css/tokens.css</bdi>.</p>
+  <div class="sg-ramp" id="ramp" aria-label="סולם הנייטרלים"></div>
+</header>
+
+<main class="sg-cols">
+  <section class="sg-col hb-base" data-theme="light" aria-label="ערכה בהירה"><p class="sg-theme">ערכה בהירה · <bdi>data-theme="light"</bdi> · ברירת מחדל</p></section>
+  <section class="sg-col hb-base" data-theme="dark" aria-label="ערכה כהה"><p class="sg-theme">ערכה כהה · <bdi>data-theme="dark"</bdi></p></section>
+</main>
+
+<template id="sg">
+  <div class="sg-sec">
+    <h2>צבע · משטחים, טקסט, מותג, סטטוס</h2>
+    <div class="sg-swatches" data-swatches="--surface --surface-raised --surface-sunken --line --line-strong --text --text-muted --brand-primary --brand-ink --brand-accent --accent-ink --status-available --status-reserved --status-sold --danger --whatsapp"></div>
+  </div>
+
+  <div class="sg-sec">
+    <h2>טיפוגרפיה · שש מדרגות</h2>
+    <p class="hb-display">הבית הבא שלך, לפני שנבנה</p>
+    <p class="hb-h1">Rainbow תל אביב</p>
+    <p class="hb-h2">דירה <bdi class="hb-num">846</bdi> · קומה <bdi class="hb-num">8</bdi></p>
+    <p class="hb-lead">סיור בבניין שעוד לא קיים: טיסה סביב הפרויקט, בחירת דירה, והליכה בתוכה.</p>
+    <p class="hb-body">טקסט גוף בגובה שורה 1.6, בלי ריווח אותיות. מספרים ומחירים בתוך עברית מבודדים: <bdi class="hb-num">₪3,450,000</bdi> · <bdi class="hb-num">112 מ"ר</bdi> · <span class="hb-link">קישור בטקסט</span>.</p>
+    <p class="hb-small">טקסט קטן לתוויות ולמטא, לא לגוף.</p>
+    <p class="hb-eyebrow">כותרת עליונה</p>
+  </div>
+
+  <div class="sg-sec">
+    <h2>כפתורים</h2>
+    <div class="hb-row">
+      <button class="hb-btn hb-btn--primary" type="button">לסיור בפרויקט</button>
+      <button class="hb-btn hb-btn--secondary" type="button">הורדת חבילת הדירה</button>
+      <button class="hb-btn hb-btn--ghost" type="button">ביטול</button>
+      <a class="hb-btn hb-btn--wa" href="#wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.3.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>וואטסאפ</a>
+      <button class="hb-btn hb-btn--primary" type="button" disabled>לא זמין</button>
+    </div>
+    <button class="hb-btn hb-btn--primary hb-btn--block" type="button">צור את הפרויקט <span class="hb-btn__meta">· כ-<bdi dir="ltr">$7.56</bdi></span></button>
+  </div>
+
+  <div class="sg-sec">
+    <h2>סטטוס · צבע ותמיד גם טקסט · תג הגילוי</h2>
+    <div class="hb-row">
+      <span class="hb-chip hb-chip--available">פנויה</span>
+      <span class="hb-chip hb-chip--reserved">שמורה</span>
+      <span class="hb-chip hb-chip--sold">נמכרה</span>
+      <span class="hb-chip hb-chip--info">בעבודה</span>
+      <span class="hb-chip hb-chip--plain">ללא סימון</span>
+      <span class="hb-ai-badge">הדמיה · <bdi>AI-generated</bdi></span>
+    </div>
+  </div>
+
+  <div class="sg-sec">
+    <h2>כרטיס מדיה · יחס שמור מראש · סימן היזם על לוחית בהירה</h2>
+    <div class="sg-grid2">
+      <a class="hb-media-card" href="#p">
+        <div class="hb-media-card__media"><div class="sg-ph">תמונת השער</div><span class="hb-media-card__badge hb-ai-badge">הדמיה · <bdi>AI-generated</bdi></span><span class="hb-media-card__mark"><svg width="72" height="28" viewBox="0 0 72 28" aria-label="סימן היזם"><rect x="0" y="4" width="20" height="20" rx="4" fill="#0f5c8f"/><text x="26" y="19" font-size="12" font-weight="700" fill="#1a1713" font-family="Heebo">DEV</text></svg></span></div>
+        <div class="hb-media-card__body">
+          <p class="hb-media-card__title">Rainbow תל אביב</p>
+          <p class="hb-media-card__meta">תל אביב · <bdi class="hb-num">12</bdi> דירות · <bdi class="hb-num">4</bdi> פנויות</p>
+          <span class="hb-chip hb-chip--available">בשיווק</span>
+        </div>
+      </a>
+      <article class="hb-media-card" style="--media-ratio: 16 / 9">
+        <div class="hb-media-card__media"><div class="sg-ph sg-ph--warm">16:9</div></div>
+        <div class="hb-media-card__body"><p class="hb-media-card__title">כרטיס 16:9</p><p class="hb-media-card__meta">היחס נקבע ב-<bdi>--media-ratio</bdi>; שום דבר לא קופץ בטעינה.</p></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="sg-sec">
+    <h2>כרטיס · מצב ריק בשלושה חלקים</h2>
+    <div class="hb-card">
+      <div class="hb-empty">
+        <div class="hb-empty__icon" aria-hidden="true">+</div>
+        <p class="hb-empty__title">עוד אין פרויקטים</p>
+        <p class="hb-empty__text">פרויקט מתחיל בתכנית המכר: מעלים אותה, המערכת קוראת אותה, ואתם מאשרים מה היא הבינה.</p>
+        <button class="hb-btn hb-btn--primary" type="button">פרויקט חדש</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-sec">
+    <h2>העלאה · אזור גרירה ושורת קובץ</h2>
+    <div class="hb-drop">
+      <p class="hb-drop__title">גררו לכאן את קבצי הפרויקט</p>
+      <p class="hb-drop__types">PDF, JPG, PNG, WEBP, DWG · עד <bdi class="hb-num">200 MB</bdi> לקובץ</p>
+      <button class="hb-btn hb-btn--secondary hb-btn--sm" type="button">בחירת קבצים</button>
+    </div>
+    <ul class="hb-files">
+      <li class="hb-file" data-state="done"><span class="hb-file__icon">PDF</span><span class="hb-file__name"><bdi>דירה 846- 16.pdf</bdi></span><select class="hb-chip-select" aria-label="תפקיד הקובץ" title="הצעה של המערכת; אפשר לשנות"><option selected>תכנית מכר</option><option>הדמיה</option><option>חזית</option><option>אחר</option></select><button class="hb-file__remove" type="button" aria-label="הסרת הקובץ">×</button><span class="hb-file__meta" style="grid-column:2/-1"><bdi dir="ltr">2.4 MB</bdi> · הועלה</span></li>
+      <li class="hb-file" data-state="uploading"><span class="hb-file__icon">JPG</span><span class="hb-file__name"><bdi>facade-north.jpg</bdi></span><select class="hb-chip-select" aria-label="תפקיד הקובץ"><option>תכנית מכר</option><option>הדמיה</option><option selected>חזית</option><option>אחר</option></select><button class="hb-file__remove" type="button" aria-label="ביטול ההעלאה">×</button><span class="hb-file__progress" style="--p:62%" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"><span></span></span></li>
+      <li class="hb-file" data-state="error"><span class="hb-file__icon">ZIP</span><span class="hb-file__name"><bdi>archive.zip</bdi></span><span></span><button class="hb-file__remove" type="button" aria-label="הסרת הקובץ">×</button><span class="hb-file__meta" style="grid-column:2/-1">סוג קובץ שלא נתמך: ZIP. אפשר להעלות PDF, תמונה או DWG.</span></li>
+    </ul>
+  </div>
+
+  <div class="sg-sec">
+    <h2>ציר שלבים · ממתין · רץ · צריך אותך · הושלם · נכשל</h2>
+    <ol class="hb-steps">
+      <li class="hb-step" data-state="done"><span class="hb-step__mark" aria-hidden="true">✓</span><p class="hb-step__label">קריאת המסמכים</p><span class="hb-step__state">הושלם · <bdi dir="ltr">0:42</bdi></span></li>
+      <li class="hb-step" data-state="needs-you"><span class="hb-step__mark" aria-hidden="true">!</span><p class="hb-step__label">מה המערכת הבינה</p><span class="hb-step__state">צריך אותך</span><p class="hb-step__note">שני פרטים לא ודאיים מסומנים לבדיקה.</p></li>
+      <li class="hb-step" data-state="running"><span class="hb-step__mark" aria-hidden="true"></span><p class="hb-step__label">בניית הבניין בתלת-ממד</p><span class="hb-step__state">רץ · <bdi dir="ltr">3:10</bdi></span></li>
+      <li class="hb-step" data-state="failed"><span class="hb-step__mark" aria-hidden="true">×</span><p class="hb-step__label">סרטון החוץ</p><span class="hb-step__state">נכשל</span><p class="hb-step__note">Blender לא נמצא. <span class="hb-link">לנסות שוב את השלב</span></p></li>
+      <li class="hb-step" data-state="waiting"><span class="hb-step__mark" aria-hidden="true"><bdi>5</bdi></span><p class="hb-step__label">הסיור בדירה</p><span class="hb-step__state">ממתין</span></li>
+    </ol>
+  </div>
+
+  <div class="sg-sec">
+    <h2>כרטיס תוצאה · ריק · בעבודה · מוכן</h2>
+    <div class="sg-grid2">
+      <article class="hb-result" data-state="empty"><div class="hb-result__media">עוד לא בשרשרת הזו</div><div class="hb-result__body"><div class="hb-result__head"><p class="hb-result__title">סרטון החוץ</p><span class="hb-chip hb-chip--plain">ריק</span></div><p class="hb-result__text">התוצר הזה עוד לא מופק בשרשרת הזו.</p></div></article>
+      <article class="hb-result" data-state="progress"><div class="hb-result__media"></div><div class="hb-result__body"><div class="hb-result__head"><p class="hb-result__title">הבניין והדירות</p><span class="hb-chip hb-chip--info">בעבודה</span></div><p class="hb-result__text">שלב <bdi>3</bdi> מתוך <bdi>6</bdi></p></div></article>
+      <article class="hb-result" data-state="ready"><div class="hb-result__media"><div class="sg-ph sg-ph--warm">סרטון</div></div><div class="hb-result__body"><div class="hb-result__head"><p class="hb-result__title">הסיור בדירה</p><span class="hb-chip hb-chip--available">מוכן</span></div><p class="hb-result__text"><bdi>11</bdi> חדרים · <bdi dir="ltr">2:05</bdi></p></div></article>
+    </div>
+  </div>
+
+  <div class="sg-sec">
+    <h2>מפרט · מספרים ב-<bdi>&lt;bdi&gt;</bdi></h2>
+    <dl class="hb-spec">
+      <div><dt>חדרים</dt><dd><bdi>4</bdi></dd></div>
+      <div><dt>שטח</dt><dd><bdi>112</bdi> <small>מ"ר</small></dd></div>
+      <div><dt>מרפסת</dt><dd><bdi>14</bdi> <small>מ"ר</small></dd></div>
+      <div><dt>קומה</dt><dd><bdi>8</bdi> <small>מתוך <bdi>12</bdi></small></dd></div>
+    </dl>
+  </div>
+
+  <div class="sg-sec">
+    <h2>תקציר משפטי · שורה אחת + "לנוסח המלא" (הנוסח עצמו לא משתנה)</h2>
+    <details class="hb-legal">
+      <summary><span class="hb-legal__line">ההדמיות להמחשה בלבד ואינן מהוות חלק מהסכם המכר; התכנית הקובעת היא התכנית המצורפת לחוזה.</span><span class="hb-legal__more"><span class="hb-legal__open">לנוסח המלא</span><span class="hb-legal__close">לסגירה</span></span></summary>
+      <p class="hb-legal__full">[דוגמת תצוגה בלבד: בדף האמיתי מוצג כאן הנוסח המלא מ-project.json / apartment.json, מילה במילה.]</p>
+    </details>
+  </div>
+
+  <div class="sg-sec">
+    <h2>פס פעולה דביק (טלפון) · לא מכסה את המדיה</h2>
+    <div class="sg-phone">
+      <p>תוכן הדף נגלל כאן; הפס נשאר בתחתית ולא מסתיר את המדיה, כי הוא חלק מהזרימה.</p><p>…</p><p>…</p><p>…</p>
+      <div class="hb-cta-bar"><a class="hb-btn hb-btn--wa" href="#wa">וואטסאפ</a><a class="hb-btn hb-btn--secondary" href="#tel">שיחה</a><a class="hb-btn hb-btn--secondary" href="#zip">ZIP</a></div>
+    </div>
+  </div>
+
+  <div class="sg-sec">
+    <h2>ריווח · רדיוס · צל · תנועה</h2>
+    <div class="sg-tokens">
+      <div><div style="inline-size:var(--sp-1);block-size:16px;background:var(--brand-primary)"></div><code>--sp-1 · 4px</code></div>
+      <div><div style="inline-size:var(--sp-4);block-size:16px;background:var(--brand-primary)"></div><code>--sp-4 · 16px</code></div>
+      <div><div style="inline-size:var(--sp-8);block-size:16px;background:var(--brand-primary)"></div><code>--sp-8 · 32px</code></div>
+      <div><div style="inline-size:var(--sp-16);block-size:16px;background:var(--brand-primary)"></div><code>--sp-16 · 64px</code></div>
+      <div><div style="inline-size:56px;block-size:40px;border:1px solid var(--line-strong);border-radius:var(--r-sm)"></div><code>--r-sm · 6px</code></div>
+      <div><div style="inline-size:56px;block-size:40px;border:1px solid var(--line-strong);border-radius:var(--r-md)"></div><code>--r-md · 12px</code></div>
+      <div><div style="inline-size:56px;block-size:40px;border:1px solid var(--line-strong);border-radius:var(--r-full)"></div><code>--r-full</code></div>
+      <div><div style="inline-size:56px;block-size:40px;background:var(--surface-raised);border-radius:var(--r-sm);box-shadow:var(--shadow-1)"></div><code>--shadow-1</code></div>
+      <div><div style="inline-size:56px;block-size:40px;background:var(--surface-raised);border-radius:var(--r-sm);box-shadow:var(--shadow-2)"></div><code>--shadow-2</code></div>
+      <div><div class="sg-motion" style="--d:var(--dur-fast)"></div><code>--dur-fast · 150ms</code></div>
+      <div><div class="sg-motion" style="--d:var(--dur-base)"></div><code>--dur-base · 250ms</code></div>
+      <div><div class="sg-motion" style="--d:var(--dur-slow)"></div><code>--dur-slow · 400ms</code></div>
+    </div>
+  </div>
+</template>
+
+<script>
+  // one markup, two themes: clone the template into both columns, then print every swatch's resolved value
+  const tpl = document.getElementById('sg');
+  for (const col of document.querySelectorAll('.sg-col')) col.append(tpl.content.cloneNode(true));
+  for (const box of document.querySelectorAll('[data-swatches]')) {
+    const cs = getComputedStyle(box);
+    for (const name of box.dataset.swatches.split(' ')) {
+      const v = cs.getPropertyValue(name).trim();
+      const el = document.createElement('div'); el.className = 'sg-sw';
+      el.innerHTML = `<div style="background:var(${name})"></div><span><bdi>${name}</bdi><br><code>${v}</code></span>`;
+      box.append(el);
+    }
+  }
+  const ramp = document.getElementById('ramp'), rcs = getComputedStyle(document.documentElement);
+  for (const n of [0, 50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]) {
+    const v = rcs.getPropertyValue(`--n-${n}`).trim();
+    const f = document.createElement('figure');
+    f.innerHTML = `<div style="background:${v}"></div><bdi>n-${n}</bdi><br><code>${v}</code>`;
+    ramp.append(f);
+  }
+</script>
+</body>
+</html>

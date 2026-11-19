@@ -1,0 +1,27 @@
+Milestone 1.1, round 4: the gate after the third QA round (FAIL on two low defects; report: qa-live-r3.md).
+Run by the main session on 2026-11-17 in the worktree C:\RnD\.wt\3dengine\Projects\3Dengine, on the code that is committed as round 4.
+
+WHAT CHANGED SINCE aa53708 (two rules, each at the one place it can be enforced)
+  mcp/stub-engine.mjs, engine/inbox.mjs, engine/inspect.mjs, engine/stages/intake.mjs
+                             D-1: every read of the UPLOAD answers NOT_A_PDF when it fails (the check of the path, the read that
+                             gives the hash, the first look's read, the intake's copy): a file that another program holds, or that
+                             may not be read, is "cannot be read at this moment", never an internal error
+  engine/jobs.mjs, engine/manifest.mjs
+                             D-2: job.json is never written when manifest.json is not this job's; the check sits in writeJob, the
+                             one place a job file is written
+  mcp/stub-engine.mjs        a file error of the engine's own folders that reaches any tool's answer is TOOLCHAIN_MISSING with a
+                             fixed message and no path (the reviewer's O-1)
+  contracts/CONTRACT-1.1.md  sections 1, 3, 4, 5, 8, 9, 10
+  tests                      unit: inspect (32), intake (15), stub-engine (25), file-identity (22), inbox (7); closing test part 10
+
+THE GATE
+  npm test (unit + closing tests, line coverage on engine/** and mcp/**), three runs one after another:
+    run 1  367 tests  367 pass  0 fail  116.2 s  lines 99.72 %   (machine load 20 % just before the run)   r4-gate-npm-test-1.txt
+    run 2  367 tests  367 pass  0 fail  129.1 s  lines 99.72 %   (load 6 %)                                 r4-gate-npm-test-2.txt
+    run 3  367 tests  367 pass  0 fail  107.3 s  lines 99.72 %   (load 10 %)                                r4-gate-npm-test-3.txt
+  closing test alone   node --test tests/milestones/m1.1.test.mjs   13 tests, 13 pass, 34.8 s; part 8: 3 true looks, 3 refused NOT_A_PDF;
+                       part 10 holds the upload with a real Windows file lock                              r4-gate-closing-test.txt
+  end to end           npm run test:e2e                              51 of 51 assertions                    r4-gate-e2e.txt
+  soak                 npm run test:soak -- --kills 14 --freezes 8   22 kills, 8 takeovers, violations=0    r4-gate-soak.txt
+
+NOT RUN IN THIS ROUND: a first look on a saturated machine or during a render (contract section 9); anything paid; the network.

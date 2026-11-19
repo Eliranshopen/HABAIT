@@ -1,0 +1,50 @@
+{
+ "keyframes": [
+  {
+   "name": "morning",
+   "label": "בוקר",
+   "hour": 7.5,
+   "export_ev": -1.0,
+   "disp_ev": 0.3,
+   "sky_colors": [
+    "#9fbbd6",
+    "#f2e6d6"
+   ]
+  },
+  {
+   "name": "noon",
+   "label": "צהריים",
+   "hour": 12.5,
+   "export_ev": -1.0,
+   "disp_ev": 0.0,
+   "sky_colors": [
+    "#8fb2d4",
+    "#e3eaf0"
+   ],
+   "from_walk": true
+  },
+  {
+   "name": "golden",
+   "label": "שקיעה",
+   "hour": 17.5,
+   "export_ev": -0.5,
+   "disp_ev": 0.4,
+   "sky_colors": [
+    "#6f7fa6",
+    "#f0b483"
+   ]
+  },
+  {
+   "name": "night",
+   "label": "לילה",
+   "hour": 21.5,
+   "export_ev": 1.0,
+   "disp_ev": 0.2,
+   "sky_colors": [
+    "#0b1220",
+    "#1c2638"
+   ]
+  }
+ ],
+ "north": "ASSUMED: plan up = north"
+}

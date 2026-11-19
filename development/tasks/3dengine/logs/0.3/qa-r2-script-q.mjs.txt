@@ -1,0 +1,205 @@
+// qa-r2 helper library: invariants from the FILES (not the engine's summary), event-triggered kills, suspend.
+import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
+export * from 'file:///C:/RnD/Projects/3Dengine/tests/soak/lib.mjs';
+import { mkEnv, sleep, readText } from 'file:///C:/RnD/Projects/3Dengine/tests/soak/lib.mjs';
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+
+export const STAGES = ['tracing', 'building', 'rendering', 'skinning', 'gating', 'finishing', 'packaging', 'qa'];
+export const PAID = ['skinning', 'gating', 'finishing'];
+export const S = { kills: 0, takeovers: 0, jobs: 0, checks: 0, violations: [], notes: [] };
+export const violate = (msg) => { S.violations.push(msg); console.log('VIOLATION: ' + msg); };
+export const note = (msg) => { S.notes.push(msg); console.log('note: ' + msg); };
+
+let seed = 1;
+export const setSeed = (s) => { seed = s % 2147483647 || 1; };
+export const rnd = () => { seed = (seed * 48271) % 2147483647; return seed / 2147483647; };
+export const between = (a, b) => a + Math.floor(rnd() * (b - a + 1));
+
+export function parse(E, id, f) {
+  let t;
+  try { t = readText(E.jobPath(id, f)); } catch (e) { if (e.code === 'ENOENT') return null; return { __err: `${f} unreadable ${e.code}` }; }
+  try { return JSON.parse(t); } catch (e) { return { __err: `${f} does not parse (${t.length} bytes)` }; }
+}
+export const settledSum = (led) => Math.round((led?.rows || []).filter((r) => r.status === 'settled').reduce((n, r) => n + (Number(r.settled_usd) || 0), 0) * 1e6) / 1e6;
+export const heldSum = (led) => Math.round((led?.rows || []).filter((r) => r.status === 'reserved' || r.status === 'orphaned').reduce((n, r) => n + (Number(r.reserved_usd) || 0), 0) * 1e6) / 1e6;
+
+// structural invariants, true at any instant.  opts.expectLate: allow late rows.
+export function inv(E, id, tag, opts = {}) {
+  S.checks++;
+  const job = parse(E, id, 'job.json'), man = parse(E, id, 'manifest.json'), led = parse(E, id, 'ledger.json');
+  for (const [n, d] of [['job', job], ['manifest', man], ['ledger', led]]) if (d && d.__err) violate(`${tag}: ${d.__err}`);
+  if (!job || job.__err) return null;
+  if (led && !led.__err) {
+    const m = new Map();
+    for (const r of led.rows) if (r.status === 'settled') m.set(r.call_key, (m.get(r.call_key) || 0) + 1);
+    for (const [k, n] of m) if (n > 1) violate(`${tag}: call_key ${k.slice(0, 10)} settled ${n}x`);
+    for (const s of PAID) {
+      const sent = E.sends(id, s);
+      const rows = led.rows.filter((r) => r.stage === s);
+      // sends allowed: 1 + orphaned/late rows (an unknown outcome) ; a not_sent row never sent
+      const allow = 1 + rows.filter((r) => r.status === 'orphaned' || r.late).length + rows.filter((r) => r.status === 'failed' && !r.not_sent).length;
+      if (sent > allow) violate(`${tag}: ${s} sent ${sent}x, rows allow ${allow}: ${JSON.stringify(rows.map((r) => [r.seq, r.status, r.late, r.not_sent, r.recovered]))}`);
+      const sentRows = rows.filter((r) => r.status === 'settled' && !r.recovered).length;
+      if (sentRows > sent) violate(`${tag}: ${s} has ${sentRows} non-recovered settled rows but only ${sent} sends`);
+    }
+    if (typeof led.cap_usd === 'number') {
+      const tot = settledSum(led) + heldSum(led);
+      if (tot > led.cap_usd + 1e-9) violate(`${tag}: ledger total ${tot} above cap ${led.cap_usd}`);
+    }
+  }
+  if (man && !man.__err) {
+    for (const s of STAGES) {
+      const v = man.rows.filter((r) => r.stage === s && r.status === 'done' && !r.superseded);
+      if (v.length > 1) violate(`${tag}: stage ${s} has ${v.length} valid rows`);
+    }
+    // never a row of a later stage while an earlier one has no valid row
+    let gap = null;
+    for (const s of STAGES) {
+      const has = man.rows.some((r) => r.stage === s && r.status === 'done' && !r.superseded);
+      if (!has && gap === null) gap = s;
+      if (has && gap !== null) violate(`${tag}: stage ${s} has a row but ${gap} has none`);
+    }
+    // state never past a stage without a row
+    const idx = STAGES.indexOf(job.state);
+    if (idx > 0) {
+      for (let i = 0; i < idx; i++) if (!man.rows.some((r) => r.stage === STAGES[i] && r.status === 'done' && !r.superseded)) violate(`${tag}: state ${job.state} but ${STAGES[i]} has no valid row`);
+    }
+  }
+  return { job, man, led };
+}
+
+export async function spentOk(E, id, tag, ms = 4000) {
+  const until = Date.now() + ms; let last;
+  for (;;) {
+    const job = parse(E, id, 'job.json'), led = parse(E, id, 'ledger.json');
+    last = `spent ${job?.cost?.spent_usd} vs settled ${settledSum(led)}`;
+    if (job?.cost?.spent_usd === settledSum(led)) return true;
+    if (Date.now() > until) { violate(`${tag}: ${last}`); return false; }
+    await sleep(30);
+  }
+}
+
+// heavy rendering rows of all jobs of this env never overlap
+export function heavyOverlap(E, tag) {
+  const rows = [];
+  for (const id of fs.existsSync(E.config.jobsDir) ? fs.readdirSync(E.config.jobsDir) : []) {
+    const m = parse(E, id, 'manifest.json'); if (!m || m.__err) continue;
+    for (const r of m.rows) if (r.stage === 'rendering' && r.status === 'done') rows.push({ id, a: Date.parse(r.started_at), b: Date.parse(r.finished_at), att: r.attempt });
+  }
+  let bad = 0;
+  for (let i = 0; i < rows.length; i++) for (let j = i + 1; j < rows.length; j++) {
+    if (rows[i].id === rows[j].id) continue;
+    if (rows[i].a < rows[j].b && rows[j].a < rows[i].b) { bad++; violate(`${tag}: rendering rows overlap ${rows[i].id}/${rows[j].id}`); }
+  }
+  return { rows: rows.length, bad };
+}
+
+export async function realKill(E, pid, tag) {
+  if (!(pid > 0 && pidAlive(pid) && pid !== process.pid && E.spawned.has(pid))) return false;
+  process.kill(pid);
+  const until = Date.now() + 5000;
+  while (pidAlive(pid) && Date.now() < until) await sleep(3);
+  if (pidAlive(pid)) { violate(`${tag}: pid ${pid} did not die`); return false; }
+  S.kills++; E.killed.push(pid);
+  return true;
+}
+
+// Tight poll for an event in a job folder. kinds: tmp | joblock | reserved | cacheUnsettled | state:<s> | rows:<n> | heavyfile | settledcount:<n> | delay:<ms>
+export async function waitEvent(E, id, kind, timeoutMs = 6000) {
+  const t0 = Date.now();
+  const dir = `${E.config.jobsDir}/${id}`;
+  const [k, arg] = kind.split(':');
+  for (;;) {
+    let hit = false;
+    try {
+      if (k === 'delay') hit = Date.now() - t0 >= Number(arg);
+      else if (k === 'tmp') hit = fs.readdirSync(dir).some((f) => f.endsWith('.tmp'));
+      else if (k === 'joblock') hit = fs.existsSync(`${dir}/job.lock`);
+      else if (k === 'heavyfile') hit = fs.existsSync(E.config.runner.heavyLock);
+      else if (k === 'heavyguard') hit = fs.existsSync(E.config.runner.heavyLock + '.guard');
+      else if (k === 'state') hit = JSON.parse(fs.readFileSync(`${dir}/job.json`, 'utf8')).state === arg;
+      else if (k === 'rows') hit = JSON.parse(fs.readFileSync(`${dir}/manifest.json`, 'utf8')).rows.length >= Number(arg);
+      else if (k === 'reserved') hit = JSON.parse(fs.readFileSync(`${dir}/ledger.json`, 'utf8')).rows.some((r) => r.status === 'reserved');
+      else if (k === 'settledcount') hit = JSON.parse(fs.readFileSync(`${dir}/ledger.json`, 'utf8')).rows.filter((r) => r.status === 'settled').length >= Number(arg);
+      else if (k === 'cacheUnsettled') {
+        const led = JSON.parse(fs.readFileSync(`${dir}/ledger.json`, 'utf8'));
+        hit = led.rows.some((r) => r.status === 'reserved' && fs.existsSync(`${dir}/cache/${r.call_key}.json`));
+      }
+    } catch { /* file mid-rename: poll again */ }
+    if (hit) return true;
+    if (Date.now() - t0 > timeoutMs) return false;
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 1);
+  }
+}
+
+export async function resume(E, pdf, tag, maxMs = 3500) {
+  const t0 = Date.now();
+  for (let i = 0; ; i++) {
+    try { const r = E.h.start_simulation({ pdf_path: pdf }); return { r, ms: Date.now() - t0, tries: i + 1 }; } catch (e) {
+      if (!/lock busy/i.test(e.message)) { violate(`${tag}: resume threw ${e.message}`); return null; }
+      if (Date.now() - t0 > maxMs) { violate(`${tag}: resume 'lock busy' for ${Date.now() - t0}ms`); return null; }
+      await sleep(40);
+    }
+  }
+}
+
+// ---- real suspension of a process (NtSuspendProcess) via PowerShell ----
+const PS = (cmd) => execFileSync('powershell', ['-NoProfile', '-Command', cmd], { encoding: 'utf8', timeout: 20000 });
+const NT = `Add-Type -Namespace Q -Name N -MemberDefinition '[DllImport("ntdll.dll")] public static extern int NtSuspendProcess(IntPtr h); [DllImport("ntdll.dll")] public static extern int NtResumeProcess(IntPtr h);';`;
+export function suspendPid(E, pid) { if (!E.spawned.has(pid)) throw new Error('not mine'); PS(`${NT} $p=Get-Process -Id ${pid}; [Q.N]::NtSuspendProcess($p.Handle) | Out-Null`); }
+export function resumePid(E, pid) { if (!E.spawned.has(pid)) throw new Error('not mine'); PS(`${NT} $p=Get-Process -Id ${pid}; [Q.N]::NtResumeProcess($p.Handle) | Out-Null`); }
+
+export async function approveWhen(E, id, cap = 60) {
+  const j = E.job(id);
+  if (j && j.state === 'awaiting_approval' && !j.approval) { try { E.h.approve_paid_stage({ job_id: id, cap_usd: Math.max(cap, j.quote?.estimate_usd || 0) }); return true; } catch (e) { if (!/lock busy|NOT_AWAITING/i.test(`${e.code} ${e.message}`)) throw e; } }
+  return false;
+}
+
+// run to done, approving as needed; returns the job
+export async function toDone(E, id, tag, { cap = 60, ms = 40000 } = {}) {
+  const until = Date.now() + ms;
+  for (;;) {
+    const j = E.job(id);
+    if (j.state === 'done') return j;
+    if (j.state === 'failed' || j.state === 'cancelled') { return j; }
+    if (j.state === 'awaiting_approval' && !j.approval) { try { E.h.approve_paid_stage({ job_id: id, cap_usd: Math.max(cap, j.quote?.estimate_usd || 0) }); } catch (e) { if (!/lock busy|NOT_AWAITING/i.test(`${e.code} ${e.message}`)) throw e; } }
+    if (Date.now() > until) { violate(`${tag}: not done in ${ms}ms (state ${j.state})`); return j; }
+    await sleep(40);
+  }
+}
+
+export function finalCheck(E, id, tag, { paidExpected = 3, lateOk = false } = {}) {
+  const r = inv(E, id, tag);
+  if (!r) return;
+  const { job, man, led } = r;
+  if (job.state !== 'done') { violate(`${tag}: final state ${job.state}`); return; }
+  for (const s of STAGES) { const v = man.rows.filter((x) => x.stage === s && x.status === 'done' && !x.superseded).length; if (v !== 1) violate(`${tag}: final ${s} has ${v} valid rows`); }
+  const st = led.rows.filter((x) => x.status === 'settled');
+  if (st.length !== paidExpected) violate(`${tag}: final ${st.length} settled rows, expected ${paidExpected}`);
+  const keys = new Set(st.map((x) => x.call_key)); if (keys.size !== st.length) violate(`${tag}: duplicate settled call_key`);
+  if (job.cost.spent_usd !== settledSum(led)) violate(`${tag}: final spent ${job.cost.spent_usd} != settled ${settledSum(led)}`);
+  const open = led.rows.filter((x) => x.status === 'reserved').length;
+  if (open) violate(`${tag}: ${open} reserved rows left at done`);
+  S.jobs++;
+}
+
+export { mkEnv, sleep, readText, pidAlive };
+
+// persistent PowerShell that can suspend/resume only pids this script spawned
+import { spawn } from 'node:child_process';
+export async function createSuspender(E) {
+  const ps = spawn('powershell', ['-NoProfile', '-NonInteractive', '-Command', '-'], { stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });
+  let buf = ''; const waiters = [];
+  ps.stdout.on('data', (d) => { buf += d.toString(); for (let i = waiters.length - 1; i >= 0; i--) if (buf.includes(waiters[i].tok)) { const w = waiters.splice(i, 1)[0]; w.res(); } });
+  const run = (line, tok) => new Promise((res, rej) => { waiters.push({ tok, res }); ps.stdin.write(line + `\n; Write-Output '${tok}'\n`); setTimeout(() => rej(new Error('ps timeout ' + line)), 15000).unref(); });
+  await run(NT, 'READY1');
+  let n = 2;
+  const api = {
+    suspend: (pid) => { if (!E.spawned.has(pid)) throw new Error('not mine'); return run(`[Q.N]::NtSuspendProcess((Get-Process -Id ${pid}).Handle) | Out-Null`, 'S' + (n++) + 'X'.repeat(3)); },
+    resume: (pid) => { if (!E.spawned.has(pid)) throw new Error('not mine'); return run(`[Q.N]::NtResumeProcess((Get-Process -Id ${pid}).Handle) | Out-Null`, 'R' + (n++) + 'X'.repeat(3)); },
+    close: () => { try { ps.stdin.end(); ps.kill(); } catch { } },
+    pid: ps.pid,
+  };
+  return api;
+}

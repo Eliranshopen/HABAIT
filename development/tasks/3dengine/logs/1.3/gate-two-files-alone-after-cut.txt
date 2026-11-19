@@ -1,0 +1,41 @@
+milestone 1.3 gate: the two files that showed failed lines in the second cut try of run 3, alone: tests/milestones/m0.2.test.mjs and tests/unit/trace.test.mjs
+started: 2026-11-18T11:36:24+02:00
+machine load before: 100 %
+✔ initialize handshake, ping, tools/list = the eight tools with both schemas (723.6136ms)
+✔ engine_status answers in time with a stub-site check (1035.8831ms)
+✔ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (15264.6364ms)
+✔ the same PDF again → created: false and the same job (24.5334ms)
+✔ cancel_job on a fresh job: cancelled, the runner stops (7571.6489ms)
+✔ every stub reason code (199.8626ms)
+✔ protocol errors: -32601, -32602, -32700 (47.3136ms)
+✔ stdout held JSON-RPC lines only; every tools/call answered in time (under 2 s; a first look at a PDF inside the time limit of the scanner) (2.6044ms)
+✔ decide: every value checked and made absolute; free unless go AND a cap (25.0692ms)
+✔ decide: a caller's mistake is a TraceUsageError, and nothing is created (55.7403ms)
+✔ plannedCalls: what a paid run would call, as far as it is known before the run (6.9537ms)
+✔ traceCommand, a free run: the tool cannot pay (a budget of 0, no keys, an env root with no keys file) (5.7455ms)
+✔ traceCommand, a paid run: the cap, the settings' env root, the ledger in the run's folder; the keys stay (3.5349ms)
+✔ runTrace: a run that would need a vision call and was not told to pay starts NOTHING (DRY) (85.0329ms)
+✔ runTrace, a paid run: started with the cap; a free run with nothing to call is started free (133.7041ms)
+✔ runTrace: PASS. The result is numbers, fixed words and paths the engine built; the tool's output is in the log file (119.6415ms)
+✔ text of the PDF is data: a marker in every text field of the tool's files reaches nothing that is returned or printed (130.1395ms)
+✔ a result is read only when it is THIS run's: anything else is RESULT_UNREADABLE, never a PASS and never a crash (950.0495ms)
+✔ a folder that holds an earlier run is never read: refused before anything starts (15.8924ms)
+✔ (1.3) an output folder under a path with characters outside ASCII is refused before anything starts; the PDF and the reading may live anywhere (127.6245ms)
+✔ the tool's exit code is passed through and named; what a free run could not do without paying is NEEDS_PAID_RUN (187.78ms)
+✔ a tool that cannot be started is NOT_STARTED; an output folder that cannot be made is a usage error (29.3338ms)
+✔ TIMEOUT and CANCELLED: the tree is stopped, the folder of a stopped run is not read (374.0481ms)
+✔ killTree: the whole tree on Windows, the process group elsewhere, nothing for a pid that is not one (0.8947ms)
+✔ REAL processes: a tool that started a child and sleeps is stopped by the time limit, and by a cancel; neither is left alive (9056.9576ms)
+✔ formatTrace: one line per fact; a DRY answer says what would be called and names the keys (1.4319ms)
+✔ the settings of the reading: defaults, a settings file that sets them, a local override, bad values (536.5449ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27897.5215
+exit code: 0
+seconds: 29
+machine load after: 100 %

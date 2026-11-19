@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://habait.ai/schemas/habait/manifest.v1.json",
+  "title": "Manifest",
+  "description": "jobs/<job_id>/manifest.json (contract 0.3 §2): one row per FINISHED stage attempt, appended only after the outputs are on the disk. A row whose inputs no longer match is kept and marked superseded.",
+  "type": "object",
+  "required": ["schema", "job_id", "rows"],
+  "properties": {
+    "schema": { "const": "habait/manifest.v1" },
+    "job_id": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stage", "attempt", "status", "started_at", "finished_at", "seconds", "inputs_sha256", "outputs", "cost_usd", "runner_pid"],
+        "properties": {
+          "stage": { "type": "string", "enum": ["tracing", "building", "rendering", "skinning", "gating", "finishing", "packaging", "qa"] },
+          "attempt": { "type": "integer", "minimum": 1 },
+          "status": { "const": "done" },
+          "started_at": { "type": "string", "format": "date-time" },
+          "finished_at": { "type": "string", "format": "date-time" },
+          "seconds": { "type": "number", "minimum": 0 },
+          "inputs_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path", "sha256", "bytes"],
+              "properties": {
+                "path": { "type": "string", "minLength": 1, "description": "relative to the job folder" },
+                "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+                "bytes": { "type": "integer", "minimum": 0 }
+              },
+              "additionalProperties": false
+            }
+          },
+          "cost_usd": { "type": "number", "minimum": 0 },
+          "runner_pid": { "type": "integer", "minimum": 1 },
+          "superseded": { "const": true }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

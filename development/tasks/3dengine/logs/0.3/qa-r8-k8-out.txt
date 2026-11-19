@@ -1,0 +1,66 @@
+susp 11 rc=0 SUMMARY susp seed=11 {"kills":12,"takeovers":34,"violations":8,"scenarios":40,"woke_replaced":42,"caps":0} leftover=[]
+susp 12 rc=0 SUMMARY susp seed=12 {"kills":8,"takeovers":31,"violations":5,"scenarios":40,"woke_replaced":36,"caps":0} leftover=[]
+cap 21 rc=0 SUMMARY cap seed=21 {"kills":6,"takeovers":27,"violations":3,"scenarios":30,"woke_replaced":31,"caps":9} leftover=[]
+storm 31 rc=0 SUMMARY storm seed=31 {"kills":47,"takeovers":21,"violations":1,"scenarios":30,"woke_replaced":0,"caps":0} leftover=[]
+storm 32 rc=0 SUMMARY storm seed=32 {"kills":54,"takeovers":27,"violations":0,"scenarios":30,"woke_replaced":0,"caps":0} leftover=[]
+lock 41 rc=0 SUMMARY lock seed=41 {"kills":24,"takeovers":0,"violations":0,"scenarios":12,"woke_replaced":0,"caps":0} leftover=[]
+cap 22 rc=0 SUMMARY cap seed=22 {"kills":6,"takeovers":18,"violations":7,"scenarios":30,"woke_replaced":28,"caps":9} leftover=[]
+susp 13 rc=0 SUMMARY susp seed=13 {"kills":14,"takeovers":28,"violations":12,"scenarios":40,"woke_replaced":40,"caps":0} leftover=[]
+CHAINDONE
+SUMMARY storm seed=51 {"kills":74,"takeovers":39,"violations":0,"scenarios":45,"woke_replaced":0,"caps":0} leftover=[]
+SUMMARY storm seed=52 {"kills":70,"takeovers":29,"violations":3,"scenarios":45,"woke_replaced":0,"caps":0} leftover=[]
+SUMMARY storm seed=53 {"kills":70,"takeovers":32,"violations":1,"scenarios":45,"woke_replaced":0,"caps":0} leftover=[]
+SUMMARY storm seed=54 {"kills":71,"takeovers":32,"violations":0,"scenarios":45,"woke_replaced":0,"caps":0} leftover=[]
+SUMMARY susp seed=1 {"kills":1,"takeovers":8,"violations":0,"scenarios":6,"woke_replaced":8,"caps":0} leftover=[]
+--- all violations
+     35 VIOLATION start_simulation threw job X: lock busy
+      1 VIOLATION storm#27: runners 19468 did not leave by themselves
+      1 VIOLATION storm#27: runners 40052 did not leave by themselves
+      1 VIOLATION storm#31: runners 15188 did not leave by themselves
+      1 VIOLATION storm#35: runners 8060 did not leave by themselves
+      1 VIOLATION storm#39: runners 31880 did not leave by themselves
+--- lock scenarios
+scenario lock#0 mode=job.lock start_simulation 47 ms, new runner owns pid after 222 ms
+scenario lock#1 mode=job.lock+heavy? start_simulation 44 ms, new runner owns pid after 271 ms
+scenario lock#2 mode=heavy.guard start_simulation 26 ms, new runner owns pid after 185 ms
+scenario lock#3 mode=job.lock start_simulation 60 ms, new runner owns pid after 237 ms
+scenario lock#4 mode=job.lock+heavy? start_simulation 49 ms, new runner owns pid after 216 ms
+scenario lock#5 mode=heavy.guard start_simulation 57 ms, new runner owns pid after 197 ms
+scenario lock#6 mode=job.lock start_simulation 55 ms, new runner owns pid after 235 ms
+scenario lock#7 mode=job.lock+heavy? start_simulation 54 ms, new runner owns pid after 236 ms
+scenario lock#8 mode=heavy.guard start_simulation 26 ms, new runner owns pid after 188 ms
+scenario lock#9 mode=job.lock start_simulation 48 ms, new runner owns pid after 290 ms
+scenario lock#10 mode=job.lock+heavy? start_simulation 50 ms, new runner owns pid after 257 ms
+scenario lock#11 mode=heavy.guard start_simulation 27 ms, new runner owns pid after 179 ms
+SUMMARY lock seed=41 {"kills":24,"takeovers":0,"violations":0,"scenarios":12,"woke_replaced":0,"caps":0} leftover=[]
+--- sample scenarios
+scenario susp#0 two=false r1=20468 r2=null killed2=null done=true spent=1.8
+scenario susp#1 two=true r1=32336 r2=null killed2=null done=true spent=1.8
+scenario susp#2 two=false r1=36704 r2=3112 killed2=3112 done=true spent=1.8
+scenario susp#3 two=true r1=15024 r2=27044 killed2=null done=true spent=1.8
+scenario susp#4 two=false r1=23776 r2=18532 killed2=18532 done=true spent=1.8
+scenario susp#5 two=true r1=32032 r2=35560 killed2=null done=true spent=1.8
+scenario susp#6 two=false r1=28512 r2=36376 killed2=null done=true spent=1.8
+scenario susp#7 two=true r1=34044 r2=28368 killed2=null done=true spent=1.8
+scenario susp#8 two=false r1=31288 r2=null killed2=null done=true spent=1.8
+scenario susp#9 two=true r1=25620 r2=41444 killed2=null done=true spent=1.8
+scenario susp#10 two=false r1=26256 r2=30600 killed2=30600 done=true spent=1.8
+scenario susp#12 two=false r1=10892 r2=1744 killed2=1744 done=true spent=1.8
+scenario susp#13 two=true r1=38940 r2=null killed2=null done=true spent=1.8
+scenario susp#14 two=false r1=4240 r2=7892 killed2=null done=true spent=1.8
+scenario susp#15 two=true r1=23516 r2=22996 killed2=null done=true spent=1.8
+scenario susp#17 two=true r1=16488 r2=null killed2=null done=true spent=1.8
+scenario susp#18 two=false r1=18812 r2=10448 killed2=null done=true spent=1.8
+scenario susp#19 two=true r1=30112 r2=39100 killed2=null done=true spent=1.8
+scenario susp#21 two=true r1=29780 r2=27764 killed2=null done=true spent=1.8
+scenario susp#23 two=true r1=16380 r2=16532 killed2=null done=true spent=1.8
+scenario susp#24 two=false r1=25176 r2=24804 killed2=null done=true spent=1.8
+scenario susp#25 two=true r1=13420 r2=41140 killed2=41140 done=true spent=1.8
+scenario susp#26 two=false r1=17320 r2=20956 killed2=null done=true spent=1.8
+scenario susp#28 two=false r1=40860 r2=23824 killed2=null done=true spent=1.8
+scenario susp#29 two=true r1=20736 r2=22316 killed2=22316 done=true spent=1.8
+scenario susp#30 two=false r1=7488 r2=32092 killed2=null done=true spent=1.8
+scenario susp#31 two=true r1=33456 r2=20016 killed2=null done=true spent=1.8
+scenario susp#32 two=false r1=29060 r2=26724 killed2=26724 done=true spent=1.8
+scenario susp#33 two=true r1=37168 r2=16000 killed2=null done=true spent=1.8
+scenario susp#35 two=true r1=6608 r2=26356 killed2=26356 done=true spent=1.8

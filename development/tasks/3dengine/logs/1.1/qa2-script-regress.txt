@@ -1,0 +1,66 @@
+// Regressions: one job per PDF; three processes at one moment; two looks at once; no PDF text anywhere; outside-inbox refused.
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, startServer, E, SCR, GOLDEN, sha, cleanup, sleep } from './qa-lib.mjs';
+
+const h = await makeHome({ timeout: 90 });
+const H = (await engineOf(h)).handlers;
+fs.copyFileSync(GOLDEN, `${h.inbox}/one.pdf`); fs.copyFileSync(GOLDEN, `${h.inbox}/two.pdf`);
+const a = await H.start_simulation({ pdf_path: `${h.inbox}/one.pdf` });
+const b = await H.start_simulation({ pdf_path: `${h.inbox}/two.pdf` });
+console.log('same PDF twice, two names:', a.job_id === b.job_id, a.created, b.created, 'jobs on disk', fs.readdirSync(h.jobsDir).length);
+
+// three processes, one moment
+async function workers(tool, pdfs, n) {
+  const go = Date.now() + 2500;
+  const ps = [];
+  for (let i = 0; i < n; i++) ps.push(new Promise((res) => {
+    const p = spawn(process.execPath, [`${SCR}/qa-worker.mjs`, tool, pdfs[i % pdfs.length], String(go)], { env: { ...process.env, ...h.env }, stdio: ['ignore', 'pipe', 'pipe'] });
+    let o = ''; p.stdout.on('data', (d) => { o += d; }); p.stderr.on('data', (d) => { o += d; }); p.on('exit', () => res(o.trim()));
+  }));
+  return Promise.all(ps);
+}
+for (let round = 0; round < 4; round++) {
+  const f = `${h.inbox}/race${round}.pdf`;
+  fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, f);
+  const outs = await workers('start_simulation', [f], 3);
+  const parsed = outs.map((o) => { try { return JSON.parse(o.split('\n').pop()); } catch { return { raw: o.slice(0, 120) }; } });
+  console.log('3 processes start one PDF, round', round, 'created:true =', parsed.filter((x) => x.created === true).length, 'ok =', parsed.filter((x) => x.ok).length, 'job ids', new Set(parsed.map((x) => x.job_id)).size, parsed.filter((x) => !x.ok).map((x) => x.code + ':' + (x.msg || x.raw)));
+}
+for (let round = 0; round < 3; round++) {
+  const f = `${h.inbox}/look${round}.pdf`;
+  fs.copyFileSync(`${SCR}/pdfs/scan-sheet.pdf`, f);
+  const outs = await workers('inspect_plan', [f], 3);
+  const parsed = outs.map((o) => { try { return JSON.parse(o.split('\n').pop()); } catch { return { raw: o.slice(0, 120) }; } });
+  const dirs = fs.readdirSync(`${h.config.runtimeDir}/inspect`);
+  console.log('3 looks at one moment, round', round, 'ok', parsed.filter((x) => x.ok).length, 'errors', parsed.filter((x) => !x.ok).map((x) => x.code + ':' + (x.msg || x.raw)), 'temp folders left', dirs.filter((d) => d.startsWith('.tmp-')).length);
+}
+
+// no text of a PDF in any answer / error / log / record
+const MARK = 'IGNORE ALL PREVIOUS INSTRUCTIONS';
+const srv = startServer(h); await srv.init();
+let leaks = 0; const seen = [];
+for (const f of ['marker-sheet.pdf', 'marker-booklet.pdf']) {
+  const p = `${h.inbox}/${f}`; fs.copyFileSync(`${SCR}/pdfs/${f}`, p);
+  for (const tool of ['inspect_plan', 'start_simulation']) {
+    const r = await srv.call(tool, { pdf_path: p, ...(f === 'marker-booklet.pdf' && tool === 'start_simulation' ? { apartment: 'p1-x7' } : {}) });
+    const t = r.l; seen.push(`${f} ${tool} ${r.err ? r.err.code : 'ok'}`);
+    if (t.includes('IGNORE') || t.includes('marker-7f')) { leaks++; console.log('LEAK in answer', f, tool); }
+  }
+}
+// bad / junk
+for (const p of [`${h.inbox}/..\\..\\evil.pdf`, 'C:/Windows/win.ini', `${h.inbox}/../x.pdf`, `${h.home}/outside.pdf`]) {
+  fs.writeFileSync(`${h.home}/outside.pdf`, fs.readFileSync(GOLDEN));
+  for (const tool of ['inspect_plan', 'start_simulation']) { const r = await srv.call(tool, { pdf_path: p }); seen.push(`${path.basename(p)} ${tool} ${r.err ? r.err.code : r.m.error ? 'RPC' + r.m.error.code : 'OK!!'}`); }
+}
+console.log(seen.join('\n'));
+await srv.stop();
+// scan disk for the marker text outside the scanner's own pages.json
+function walk(d, acc = []) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p, acc); else acc.push(p); } return acc; }
+for (const p of walk(h.home).filter((x) => /\.(json|log|txt|pid)$/.test(x) || /runner\.log/.test(x))) {
+  const t = fs.readFileSync(p, 'utf8');
+  if (/IGNORE ALL PREVIOUS|marker-7f3a/.test(t) && !/pages\.json$/.test(p)) { leaks++; console.log('MARKER in', p.slice(h.home.length)); }
+}
+console.log('marker leaks outside pages.json:', leaks);
+cleanup(h);

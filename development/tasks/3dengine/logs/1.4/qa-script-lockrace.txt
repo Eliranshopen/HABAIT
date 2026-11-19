@@ -1,0 +1,23 @@
+// QA: is withFileLock (engine/lib/atomic.mjs, used by keepReading) mutually exclusive between processes that start and end quickly?
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { spawn } from 'node:child_process';
+const { withFileLock } = await import('file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs');
+if (process.argv[2] === 'child') {
+  const [, , , dir, rounds] = process.argv; let viol = 0, busy = 0;
+  for (let i = 0; i < Number(rounds); i++) {
+    try {
+      withFileLock(`${dir}/x.lock`, () => {
+        try { fs.writeFileSync(`${dir}/inside`, String(process.pid), { flag: 'wx' }); } catch { viol++; return; }
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25);
+        fs.rmSync(`${dir}/inside`, { force: true });
+      }, { waitMs: 5000 });
+    } catch { busy++; }
+  }
+  console.log(`child viol=${viol} busy=${busy}`);
+} else {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'qa14l-')).replace(/\\/g, '/');
+  const lines = []; const mode = process.argv[3];
+  const N = 8; const res = await Promise.all(Array.from({ length: N }, () => new Promise((ok) => { let o = ''; const c = spawn(process.execPath, [process.argv[1], 'child', dir, process.argv[4] || '1'], { stdio: ['ignore', 'pipe', 'pipe'] }); c.stdout.on('data', (d) => { o += d; }); c.on('exit', () => ok(o.trim())); })));
+  const v = res.map((l) => Number((/viol=(\d+)/.exec(l) || [0, 0])[1])).reduce((a, b) => a + b, 0);
+  lines.push(...res, `processes ${N}; violations of mutual exclusion ${v}`);
+  fs.writeFileSync(process.argv[2 + 1 - 1 + 0] === 'run' ? process.argv[3] : '/dev/null', lines.join('\n') + '\n'); fs.rmSync(dir, { recursive: true, force: true }); console.log(lines.slice(-1)[0]);
+}

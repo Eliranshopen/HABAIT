@@ -1,0 +1,25 @@
+// QA: N processes keep different readings of one PDF at once. Child mode: node race.mjs child <home> <i>
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { spawn } from 'node:child_process'; import { createHash } from 'node:crypto';
+const R = await import('file:///C:/RnD/Projects/3Dengine/engine/readings.mjs');
+const PDF = createHash('sha256').update('race').digest('hex');
+const cfgOf = (home) => ({ pipelineRoot: `${home}/pipeline`, readingsDir: `${home}/readings` });
+const body = (i) => JSON.stringify({ rooms: [{ i }], _meta: { at: '2026-11-06T10:00:00.000Z', usd: i / 1000 } });
+if (process.argv[2] === 'child') {
+  const [, , , home, i] = process.argv; const f = `${home}/in-${i}.json`; fs.writeFileSync(f, body(Number(i)));
+  try { const r = R.keepReading(cfgOf(home), { pdfSha256: PDF, readingFile: f, source: 'paid', costUsd: 0.01 }); console.log(`OK ${i} kept=${r.kept} sup=${r.superseded}`); }
+  catch (e) { console.log(`ERR ${i} ${e.code || e.name} ${e.message}`); }
+} else {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'qa14r-')).replace(/\\/g, '/');
+  for (const [f, t] of [['Habait/tour360/tools/auto-trace.mjs', 'tool\n'], ['Habait/tour360/server/handler.mjs', 'model\n']]) { fs.mkdirSync(path.dirname(`${home}/pipeline/${f}`), { recursive: true }); fs.writeFileSync(`${home}/pipeline/${f}`, t); }
+  const N = 8; const res = await Promise.all(Array.from({ length: N }, (_, i) => new Promise((ok) => { let o = ''; const c = spawn(process.execPath, [process.argv[1], 'child', home, String(i)], { stdio: ['ignore', 'pipe', 'pipe'] }); c.stdout.on('data', (d) => { o += d; }); c.on('exit', () => ok(o.trim())); })));
+  const lines = [...res]; const okIdx = res.filter((l) => l.startsWith('OK')).map((l) => Number(l.split(' ')[1]));
+  const c = cfgOf(home); const d = R.readingDir(c, PDF); const s = R.findReading(c, PDF);
+  const sup = fs.existsSync(`${d}/superseded`) ? fs.readdirSync(`${d}/superseded`) : [];
+  const supBodies = sup.map((n) => fs.readFileSync(`${d}/superseded/${n}/reading.json`, 'utf8'));
+  const cur = fs.readFileSync(`${d}/reading.json`, 'utf8');
+  const all = new Set([cur, ...supBodies]);
+  const lost = okIdx.filter((i) => !all.has(body(i)));
+  const leftovers = fs.readdirSync(d).filter((n) => n !== 'reading.json' && n !== 'record.json' && n !== 'superseded');
+  lines.push(`final status ${s.status}; kept ok ${okIdx.length}; superseded ${sup.length}; paid readings lost ${lost.length}; leftover files ${JSON.stringify(leftovers)}`);
+  fs.writeFileSync(process.argv[3], lines.join('\n') + '\n'); fs.rmSync(home, { recursive: true, force: true }); console.log(lines.slice(-1)[0]);
+}

@@ -269,6 +269,11 @@ if (fs.existsSync(videosPath)) {
   }
 }
 
+// 2026-11-16 (plan development/plans/2026-11-16-typed-change-all-tabs.md): the plan sheet's pixels per centimetre — cameras.json's
+// crop scale × the sheet's own scale — so the page can place a typed change on the plan and aim the other scenes at it
+const camDoc = fs.existsSync(path.join(APT, 'cameras.json')) ? JSON.parse(read(path.join(APT, 'cameras.json'))) : null;
+const sheetPxPerCm = camDoc && camDoc.plan && Number.isFinite(camDoc.plan.pxPerCm) && Number.isFinite(camDoc.plan.planScale) ? Math.round(camDoc.plan.pxPerCm * camDoc.plan.planScale * 10000) / 10000 : null;
+
 const data = {
   id,
   apartment: {
@@ -278,6 +283,7 @@ const data = {
     title: apartment.title,
     defaultScene: apartment.defaultScene,
     plan: { image: apartment.plan.image, imageSize: apartment.plan.imageSize, viewBox: apartment.plan.viewBox,
+      ...(sheetPxPerCm ? { pxPerCm: sheetPxPerCm } : {}),
       ...(Number.isFinite(apartment.plan.northDeg) ? { northDeg: apartment.plan.northDeg } : {}) }, // card Q09: the compass
   },
   scenes: scenesDoc.scenes.map((s) => ({

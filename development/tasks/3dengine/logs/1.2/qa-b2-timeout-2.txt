@@ -1,0 +1,33 @@
+scenario timeout 2 work C:/Users/elira/AppData/Local/Temp/qa12-timeout-zUYfvx load 100
+=== timeout 2
+{
+ "code": 1,
+ "secs": "4.1",
+ "stdout": "{\n  \"exit\": 1,\n  \"seconds\": 3.3,\n  \"paid\": false,\n  \"outDir\": \"C:/Users/elira/AppData/Local/Temp/qa12-timeout-zUYfvx/out\",\n  \"logFile\": \"C:/Users/elira/AppData/Local/Temp/qa12-timeout-zUYfvx/out/auto-trace.log\",\n  \"outcome\": \"TIMEOUT\",\n  \"result\": null\n}\n",
+ "stderr": "",
+ "aliveRightAfter": [
+  "41516 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "34060 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "8956 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 100 node qa12-b2.mjs timeout 2",
+  "21312 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 100 node qa12-b2.mjs timeout 2",
+  "34300 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs timeout 2"
+ ]
+}
+=== timeout 2 +6s
+{
+ "alive": [
+  "41516 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "34060 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "8956 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 100 node qa12-b2.mjs timeout 2",
+  "21312 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 100 node qa12-b2.mjs timeout 2",
+  "34300 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs timeout 2"
+ ]
+}
+procs at end [
+  '41516 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '34060 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '8956 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs timeout 2',
+  '21312 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs timeout 2',
+  '34300 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs timeout 2'
+]
+exit 0

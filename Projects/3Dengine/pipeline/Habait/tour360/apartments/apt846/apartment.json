@@ -1,0 +1,76 @@
+{
+  "$schema": "tour360/apartment.v1",
+  "id": "apt846",
+  "status": "concept",
+  "title": {
+    "he": "דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)",
+    "en": "Apartment 846 · floor 16 · Rainbow Tel Aviv (concept)",
+    "fr": "Appartement 846 · 16e étage · Rainbow Tel Aviv (concept)"
+  },
+  "project": null,
+  "projectNote": "a pitch link for the developer (Israel Canada, the Rainbow Tel Aviv project, TOWER-RED, type L, unit 846 on floor 16): the geometry is the architect's sales plan dated 15.10.2025 (DBLK Architects, 1:50; the PDF may be kept in git — Eliran 2026-11-04); the furniture follows the plan's dashed outlines; the finish is one Tel Aviv-luxury designer look chosen on 2026-10-28; no developer branding on the page until the developer approves it",
+  "plan": {
+    "image": "plan/floorplan.webp",
+    "imageSize": [
+      1500,
+      1560
+    ],
+    "viewBox": [
+      40,
+      0,
+      1220,
+      1560
+    ],
+    "labelsLanguage": "he",
+    "northDeg": 291.6,
+    "northSource": "the sales plan page's north arrow beside the floor key (DBLK, 15.10.2025, the page rendered at 6736×4764): its two lines fitted on their dark pixels, exactly 90.0° apart, north = 291.6° clockwise from the top of the page, which the plan crop keeps (card Q09, 2026-10-28). The page has a second arrow on the site key at the bottom, about 44° away: that drawing (the towers' site layout) is rotated differently; the floor key is drawn in the unit plan's own rotation"
+  },
+  "sets": {
+    "balanced": {
+      "dir": "panos/balanced",
+      "width": 2048,
+      "height": 1024,
+      "format": "webp",
+      "tracked": true
+    },
+    "thumb": {
+      "dir": "panos/thumb",
+      "width": 640,
+      "height": 320,
+      "format": "webp",
+      "tracked": true
+    },
+    "full": {
+      "dir": "_local/full",
+      "width": 3840,
+      "height": 1920,
+      "format": "webp",
+      "tracked": false,
+      "note": "the model's native answer (3840×1920) for wide non-touch screens, carried by build-tour --full; gitignored, rebuilt by tools/make-sets.mjs from _local/generated/"
+    },
+    "original": {
+      "dir": "panos/original",
+      "width": 2048,
+      "height": 1024,
+      "format": "webp",
+      "tracked": true,
+      "note": "card Q09 (D-WQ-27): the plain CG render each designed picture was skinned from, from 360walkaround/tours/<sets.original.cg_tour>/renders/<cp>/pano.webp (apt846-furnished: the final print-fixed renders the skins and the 1% gate use; 2026-11-05); written by tools/make-sets.mjs, carried by build-tour as panos-original/, shown by the Original/Designed switch",
+      "cg_tour": "apt846-furnished"
+    }
+  },
+  "disclosure": {
+    "badgeKey": "badge",
+    "conceptLineKey": "conceptLine",
+    "aiNoteKey": "aiNote",
+    "copyPack": "../../copy/tour360-copy.json",
+    "permanent": true
+  },
+  "provenance": {
+    "generation": "openai/gpt-image-2.5/sunburst/edit via fal, image_size 4096×2048 requested (the model answers 3840×1920), quality high, seed 7, 2026-10-28; chosen over GPT Image 2 (2K and 4K), Seedream 5 Pro (a perspective photo, not a sphere), FLUX.2 pro (ignored the plan) and its own xhigh setting (a visible seam) on the apartment-37 living-room probe and the 846 living room; prompts and references in prompts.json (recipe prompts.src.mjs); ledger _local/ledger.json",
+    "enhancement": "none: no upscale; WebP from the PNG answers by tools/make-sets.mjs (balanced 2048×1024 q92, full 3840×1920 q90, thumb 640×320)",
+    "geometryNote": "walls, openings and furniture positions follow the sales plan (the drawn furniture as placeholder masses in the CG, card Q02b); materials and fittings are illustrative; every shipped room passes the fidelity gate at the rule in Habait/tour360/fidelity.json (1% working bar, Eliran 2026-11-05: «אני רוצה להוריד את אחוז הסטייה למינימלי»), or the build refuses to package; the view through every window is a generic city skyline under a bright hazy sky, no landmark and no specific building, by Slava’s ruling of 2026-10-29 (D-WQ-32), not the unit’s real outlook"
+  },
+  "sceneCount": 11,
+  "defaultScene": "aerial",
+  "intakeDate": "2026-10-28"
+}

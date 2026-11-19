@@ -1,0 +1,18 @@
+milestone 1.4, the gate after the first review: npm run test:soak -- --kills 40 --freezes 12 (the file mutex of the job layer was replaced)
+started: 2026-11-18T21:40:24+02:00
+machine load before: 100 %
+
+> habait-3dengine@1.4.0 test:soak
+> node tests/soak/kill-soak.mjs --kills 40 --freezes 12
+
+kill soak: temp home C:/Users/elira/AppData/Local/Temp/killsoak-icwwUM, port 63109, target 40 kills
+  25 kills, 0 jobs done, 0 resume retries
+  50 kills, 1 jobs done, 0 resume retries
+freeze soak: temp home C:/Users/elira/AppData/Local/Temp/freezesoak-rcihoV, port 55143, target 12 takeovers
+  5 takeovers, 1 of them woke while the job was still running
+  10 takeovers, 4 of them woke while the job was still running
+SOAK kills=60 jobs_finished=2 orphaned_rows=1 recovered_rows=2 resume_retries=0 longest_resume_ms=709 takeovers=12 second_runner_kills=4 (1 inside a pause) never_sent_rows=3 late_rows=3 woke_before_done=5 violations=0
+clean-up: no process of the soak remains
+exit code: 0
+seconds: 255
+machine load after: 100 %

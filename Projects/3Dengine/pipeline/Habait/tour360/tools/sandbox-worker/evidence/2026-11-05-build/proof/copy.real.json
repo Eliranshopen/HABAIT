@@ -1,0 +1,432 @@
+{
+  "$schema": "tour360/copy.v1",
+  "note": "Every user-facing string of the tour page, ×3 locales. badge bytes = the app's assetCard.render (he/en/fr), so the tour and the buyer canvas say the same word. conceptLine + aiNote: he = Slava's pick (2026-10-04, standard badge + concept line); en + fr APPROVED by Slava as drafted, 2026-10-04 (D-T360-13). A wording change is his, never a build edit. change* keys (2026-10-04, the prepared-examples panel of PLAN.md section 9): UI copy drafted by the main session, Slava's veto open; they are not disclosure wording. 2026-10-04 (later): changeScope/changeType/changeRefusedScope reworded and changeRefusedUnsafe added for D-T360-24 (everything in the view may change, people included; structure and unsafe content refused); changeRetrying/changeReframed added for the frame guard (T12b). changeRefusedRealPerson added 2026-10-05 on his pick «Keep refusing, clearer message» (D-T360-26). optionLine + changedTag added 2026-10-13 (board habait-walkaround T04): Slava's wording rulings D-T360-42 (approved as drafted) then, after the fresh compliance-warden read (PASS-WITH-FLAGS, qa-evidence/tour360/walkaround/T04/WARDEN.md), D-T360-43 the NEUTRAL line (no word 'option'; true on every view; covers light-only changes; the tag in the feminine) — a disclosure wording, his, never a build edit. The burned share mark (D-T360-44) carries badge + conceptLine + aiNote, plus optionLine when the view was changed, in the sharer's language. optionLine/changedTag label AI ideas only in v1 (D-T360-45); a developer's priced finish gets its own wording when one is supplied.",
+  "badge": {
+    "he": "הדמיה",
+    "en": "Rendering",
+    "fr": "Simulation"
+  },
+  "conceptLine": {
+    "he": "הדמיה על בסיס תכנית המכר. המידות תואמות לתכנית בסטייה של עד 1%. הריהוט והגימורים להמחשה בלבד.",
+    "en": "Visualization based on the sales plan. Dimensions match the plan within 1%. Furniture and finishes are for illustration only.",
+    "fr": "Visualisation d’après le plan de vente. Les dimensions correspondent au plan à 1 % près. Mobilier et finitions à titre indicatif."
+  },
+  "aiNote": {
+    "he": "תמונות שנוצרו בבינה מלאכותית · לא צילום של הנכס",
+    "en": "AI-generated images · not photographs of the property",
+    "fr": "Images générées par IA · pas des photographies du bien"
+  },
+  "optionLine": {
+    "he": "הדמיה להמחשה בלבד — הדירה שתימסר עשויה להיראות אחרת",
+    "en": "For illustration only — the apartment as delivered may look different",
+    "fr": "Illustration uniquement — l'appartement livré peut être différent"
+  },
+  "changedTag": {
+    "he": "שונתה",
+    "en": "Changed",
+    "fr": "Modifiée"
+  },
+  "ui": {
+    "title": {
+      "he": "סיור 360°",
+      "en": "360° tour",
+      "fr": "Visite 360°"
+    },
+    "rooms": {
+      "he": "חדרים",
+      "en": "Rooms",
+      "fr": "Pièces"
+    },
+    "floorPlan": {
+      "he": "תוכנית הדירה",
+      "en": "Floor plan",
+      "fr": "Plan"
+    },
+    "floorPlanHint": {
+      "he": "בחרו נקודת מבט ממוספרת כדי להיכנס לחלל",
+      "en": "Choose a numbered viewpoint to enter that space",
+      "fr": "Choisissez un point de vue numéroté pour entrer dans l'espace"
+    },
+    "north": {
+      "he": "צ",
+      "en": "N",
+      "fr": "N"
+    },
+    "dragHint": {
+      "he": "גררו כדי להסתכל סביב",
+      "en": "Drag to look around",
+      "fr": "Faites glisser pour regarder autour"
+    },
+    "markerHint": {
+      "he": "לחצו על סמן כדי לעבור לחדר הבא",
+      "en": "Click a marker to move to the next room",
+      "fr": "Cliquez sur un repère pour passer à la pièce suivante"
+    },
+    "viewpoints": {
+      "he": "{n} / {total} נקודות מבט",
+      "en": "{n} / {total} viewpoints",
+      "fr": "{n} / {total} points de vue"
+    },
+    "explored": {
+      "he": "{n} / {total} נראו",
+      "en": "{n} / {total} explored",
+      "fr": "{n} / {total} explorés"
+    },
+    "prev": {
+      "he": "נקודת המבט הקודמת",
+      "en": "Previous viewpoint",
+      "fr": "Point de vue précédent"
+    },
+    "next": {
+      "he": "נקודת המבט הבאה",
+      "en": "Next viewpoint",
+      "fr": "Point de vue suivant"
+    },
+    "zoomIn": {
+      "he": "הגדלה",
+      "en": "Zoom in",
+      "fr": "Zoom avant"
+    },
+    "zoomOut": {
+      "he": "הקטנה",
+      "en": "Zoom out",
+      "fr": "Zoom arrière"
+    },
+    "resetView": {
+      "he": "איפוס תצוגה",
+      "en": "Reset view",
+      "fr": "Réinitialiser la vue"
+    },
+    "autoRotate": {
+      "he": "סיבוב איטי",
+      "en": "Slow rotation",
+      "fr": "Rotation lente"
+    },
+    "fullscreen": {
+      "he": "מסך מלא",
+      "en": "Full screen",
+      "fr": "Plein écran"
+    },
+    "enterRoom": {
+      "he": "כניסה אל {room}",
+      "en": "Enter {room}",
+      "fr": "Entrer : {room}"
+    },
+    "loadingFirst": {
+      "he": "פותחים את הסיור…",
+      "en": "Opening the tour…",
+      "fr": "Ouverture de la visite…"
+    },
+    "loadingRoom": {
+      "he": "פותחים את {room}…",
+      "en": "Opening {room}…",
+      "fr": "Ouverture : {room}…"
+    },
+    "error": {
+      "he": "התצוגה לא נטענה. נסו דפדפן עם WebGL.",
+      "en": "The view could not load. Try a browser with WebGL.",
+      "fr": "La vue n'a pas pu se charger. Essayez un navigateur avec WebGL."
+    },
+    "tryAgain": {
+      "he": "נסו שוב",
+      "en": "Try again",
+      "fr": "Réessayer"
+    },
+    "language": {
+      "he": "שפה",
+      "en": "Language",
+      "fr": "Langue"
+    },
+    "editMode": {
+      "he": "מצב כיול: לחצו על פתח, בחרו חדר יעד, ייצאו JSON",
+      "en": "Calibration mode: click an opening, pick the target room, export JSON",
+      "fr": "Mode calibrage : cliquez sur une ouverture, choisissez la pièce cible, exportez le JSON"
+    },
+    "close": {
+      "he": "סגירה",
+      "en": "Close",
+      "fr": "Fermer"
+    },
+    "panoLabel": {
+      "he": "תצוגת 360° של החדר. גררו כדי להסתכל סביב, חצים כדי להסתובב.",
+      "en": "360° view of the room. Drag to look around, arrow keys to turn.",
+      "fr": "Vue à 360° de la pièce. Faites glisser pour regarder autour, flèches pour tourner."
+    },
+    "viewpoint": {
+      "he": "נקודת מבט",
+      "en": "Viewpoint",
+      "fr": "Point de vue"
+    },
+    "changeOpen": {
+      "he": "שינוי בעיצוב",
+      "en": "Change the design",
+      "fr": "Modifier le décor"
+    },
+    "changeTitle": {
+      "he": "מה לשנות בחדר?",
+      "en": "What would you like to change?",
+      "fr": "Que souhaitez-vous changer ?"
+    },
+    "changeHint": {
+      "he": "דוגמאות מוכנות מראש. בחרו אחת והחדר ישתנה מול העיניים.",
+      "en": "Prepared examples. Pick one and watch the room change.",
+      "fr": "Exemples préparés. Choisissez-en un et regardez la pièce changer."
+    },
+    "changeExamples": {
+      "he": "דוגמאות מוכנות",
+      "en": "Prepared examples",
+      "fr": "Exemples préparés"
+    },
+    "changeSoon": {
+      "he": "בקרוב: כתבו כאן כל שינוי במילים שלכם",
+      "en": "Soon: type any change in your own words",
+      "fr": "Bientôt : décrivez ici le changement de votre choix"
+    },
+    "changeScope": {
+      "he": "השינוי מוצג מנקודת המבט הזו בלבד. אפשר לשנות כל מה שבתמונה — ריהוט, אנשים, צבעים ואור. מבנה הדירה נשאר כפי שהוא.",
+      "en": "A change shows from this viewpoint only. Anything in the picture can change: furniture, people, colours and light. The apartment’s structure stays as it is.",
+      "fr": "Le changement n'apparaît que depuis ce point de vue. Tout ce qui est dans l'image peut changer : mobilier, personnes, couleurs et lumière. La structure de l'appartement reste telle quelle."
+    },
+    "changeApplying": {
+      "he": "מחילים את השינוי…",
+      "en": "Applying the change…",
+      "fr": "Application du changement…"
+    },
+    "changeShowOriginal": {
+      "he": "הצגת המקור",
+      "en": "See original",
+      "fr": "Voir l'original"
+    },
+    "changeShowChanges": {
+      "he": "הצגת השינויים",
+      "en": "See changes",
+      "fr": "Voir les changements"
+    },
+    "changeReset": {
+      "he": "איפוס השינויים",
+      "en": "Reset the changes",
+      "fr": "Réinitialiser les changements"
+    },
+    "changeFailed": {
+      "he": "השינוי לא נטען. נסו שוב.",
+      "en": "The change did not load. Try again.",
+      "fr": "Le changement n'a pas pu se charger. Réessayez."
+    },
+    "changeType": {
+      "he": "תארו שינוי בחדר, למשל: ספה אפורה כהה, או משפחה ליד שולחן האוכל",
+      "en": "Describe a change, e.g. a dark grey sofa, or a family at the dining table",
+      "fr": "Décrivez un changement, par ex. un canapé gris foncé, ou une famille à table"
+    },
+    "changeApply": {
+      "he": "החלה",
+      "en": "Apply",
+      "fr": "Appliquer"
+    },
+    "changeApplyingLive": {
+      "he": "מחילים את השינוי שלכם… בדרך כלל כ־15 שניות",
+      "en": "Applying your change… usually about 15 seconds",
+      "fr": "Application de votre changement… environ 15 secondes"
+    },
+    "changeApplyingSlow": {
+      "he": "שינוי גודל לוקח כדקה…",
+      "en": "A size change takes about a minute…",
+      "fr": "Un changement de taille prend environ une minute…"
+    },
+    "changeRefusedScope": {
+      "he": "את מבנה הדירה אי אפשר לשנות מתוך הסיור: קירות, חלונות, דלתות וגודל החדרים נשארים כפי שהם.",
+      "en": "The apartment’s structure cannot change from inside the tour: walls, windows, doors and room sizes stay as they are.",
+      "fr": "La structure de l'appartement ne peut pas changer depuis la visite : murs, fenêtres, portes et dimensions restent tels quels."
+    },
+    "changeRefusedRealPerson": {
+      "he": "הסיור לא מוסיף אנשים אמיתיים בשמם. תארו אותם במקום זאת, למשל: שני גברים בחליפות על הספה.",
+      "en": "The tour doesn’t add real, named people. Describe them instead, e.g. two men in suits on the sofa.",
+      "fr": "La visite n'ajoute pas de personnes réelles nommées. Décrivez-les plutôt, par ex. deux hommes en costume sur le canapé."
+    },
+    "changeRefusedUnsafe": {
+      "he": "הבקשה הזו לא מתאימה לסיור. נסו שינוי אחר.",
+      "en": "That request isn’t suitable for the tour. Try another change.",
+      "fr": "Cette demande ne convient pas à la visite. Essayez un autre changement."
+    },
+    "changeRefusedUnclear": {
+      "he": "לא הבנו מה לשנות. נסו לנסח אחרת, למשל: שולחן שחור.",
+      "en": "We couldn't tell what to change. Try other words, e.g. a black table.",
+      "fr": "Nous n'avons pas compris quoi changer. Essayez d'autres mots, par ex. une table noire."
+    },
+    "changeCapReached": {
+      "he": "מכסת השינויים להיום נוצלה.",
+      "en": "Today's change budget is used up.",
+      "fr": "Le budget de changements du jour est épuisé."
+    },
+    "changeNoDiff": {
+      "he": "השינוי לא השפיע על התמונה. נסו לנסח אחרת.",
+      "en": "The change did not affect the image. Try other words.",
+      "fr": "Le changement n'a pas modifié l'image. Essayez d'autres mots."
+    },
+    "changeRetrying": {
+      "he": "התוצאה חזרה בזווית אחרת. מנסים שוב…",
+      "en": "The result came back at a different angle. Trying again…",
+      "fr": "Le résultat est revenu sous un autre angle. Nouvel essai…"
+    },
+    "changeStepChecking": {
+      "he": "בודקים את התוצאה…",
+      "en": "Checking the result…",
+      "fr": "Vérification du résultat…"
+    },
+    "changeStepPlacing": {
+      "he": "משבצים את השינוי בחדר…",
+      "en": "Placing it in the room…",
+      "fr": "Mise en place dans la pièce…"
+    },
+    "changeAttemptOf": {
+      "he": "ניסיון {n} מתוך {m}",
+      "en": "attempt {n} of {m}",
+      "fr": "essai {n} sur {m}"
+    },
+    "changeAlsoIn": {
+      "he": "מעדכנים גם את {room}…",
+      "en": "Updating {room} too…",
+      "fr": "Mise à jour aussi de {room}…"
+    },
+    "changeAlsoFailed": {
+      "he": "ב{room} השינוי לא הוחל",
+      "en": "In {room} the change could not be made",
+      "fr": "Dans {room}, le changement n'a pas pu être fait"
+    },
+    "changeReframed": {
+      "he": "השינוי חזר בזווית צילום אחרת ולכן לא הוחל. נסו שוב או נסחו אחרת.",
+      "en": "The change came back at a different camera angle, so it was not applied. Try again or use other words.",
+      "fr": "Le changement est revenu sous un autre angle de vue et n'a pas été appliqué. Réessayez ou reformulez."
+    },
+    "changeLocked": {
+      "he": "הקלדת שינויים פתוחה לצוות בלבד.",
+      "en": "Typed changes are open to the team only.",
+      "fr": "La saisie de changements est réservée à l'équipe."
+    },
+    "changeUndo": {
+      "he": "ביטול השינוי האחרון",
+      "en": "Undo the last change",
+      "fr": "Annuler le dernier changement"
+    },
+    "changeLiveTag": {
+      "he": "שינוי שלכם",
+      "en": "your change",
+      "fr": "votre changement"
+    },
+    "catalogTitle": {
+      "he": "או בחרו פריט מהקטלוג",
+      "en": "Or pick an item from the catalog",
+      "fr": "Ou choisissez un article du catalogue"
+    },
+    "catalogReplaceWith": {
+      "he": "להחליף את {target} ב-{item}",
+      "en": "Replace {target} with {item}",
+      "fr": "Remplacer {target} par {item}"
+    },
+    "catalogSee": {
+      "he": "לצפייה ב-IKEA",
+      "en": "See it at IKEA",
+      "fr": "Voir chez IKEA"
+    },
+    "catalogPriceAsOf": {
+      "he": "מחיר נכון ל-{date}",
+      "en": "price as of {date}",
+      "fr": "prix au {date}"
+    },
+    "catalogNote": {
+      "he": "הדמיה של המוצר בבינה מלאכותית. המוצר האמיתי עשוי להיראות אחרת.",
+      "en": "An AI likeness of the product. The real product may look different.",
+      "fr": "Une simulation du produit par IA. Le produit réel peut être différent."
+    },
+    "changeRefusedCatalog": {
+      "he": "הפריט אינו מהקטלוג. בחרו פריט מהרשימה.",
+      "en": "That item is not from the catalog. Pick one from the list.",
+      "fr": "Cet article ne vient pas du catalogue. Choisissez-en un dans la liste."
+    },
+    "catalogTargetSofa": {
+      "he": "הספה",
+      "en": "the sofa",
+      "fr": "le canapé"
+    },
+    "catalogTargetArmchair": {
+      "he": "הכורסה",
+      "en": "the armchair",
+      "fr": "le fauteuil"
+    },
+    "catalogTargetCoffeeTable": {
+      "he": "שולחן הקפה",
+      "en": "the coffee table",
+      "fr": "la table basse"
+    },
+    "catalogTargetDiningTable": {
+      "he": "שולחן האוכל",
+      "en": "the dining table",
+      "fr": "la table à manger"
+    },
+    "catalogTargetChair": {
+      "he": "הכיסאות",
+      "en": "the chairs",
+      "fr": "les chaises"
+    },
+    "catalogHint": {
+      "he": "לחצו על רהיט כדי להחליף אותו",
+      "en": "Tap a piece of furniture to replace it",
+      "fr": "Touchez un meuble pour le remplacer"
+    },
+    "catalogMarker": {
+      "he": "להחליף את {target}",
+      "en": "Replace {target}",
+      "fr": "Remplacer {target}"
+    },
+    "catalogChip": {
+      "he": "בחרו פריט במקום {target}",
+      "en": "Pick an item to replace {target}",
+      "fr": "Choisissez un article pour remplacer {target}"
+    },
+    "lookDesigned": {
+      "he": "מעוצב",
+      "en": "Designed",
+      "fr": "Aménagé"
+    },
+    "lookOriginal": {
+      "he": "מקור",
+      "en": "Original",
+      "fr": "Original"
+    },
+    "lookDesignedNote": {
+      "he": "הדמיית AI על גבי מודל הדירה מהתוכנית. הריהוט והגימורים להמחשה בלבד.",
+      "en": "An AI rendering over the apartment’s model from the plan. Furniture and finishes are for illustration only.",
+      "fr": "Un rendu IA sur le modèle de l’appartement d’après le plan. Mobilier et finitions à titre indicatif."
+    },
+    "lookOriginalNote": {
+      "he": "מודל הדירה מהתוכנית, ללא עיצוב. מידות לפי תוכנית המכר.",
+      "en": "The apartment’s model from the plan, undesigned. Dimensions per the sales plan.",
+      "fr": "Le modèle de l’appartement d’après le plan, sans aménagement. Dimensions selon le plan de vente."
+    },
+    "_lookNote": "The four look* strings (the Original/Designed switch) were ruled by Slava on 2026-10-29 (D-WQ-30, OQ-1 closed) as drafted; rewritable on his word only.",
+    "catalogTargetBed": {
+      "he": "המיטה",
+      "en": "the bed",
+      "fr": "le lit"
+    },
+    "catalogTargetLamp": {
+      "he": "המנורה",
+      "en": "the lamp",
+      "fr": "la lampe"
+    },
+    "catalogTargetRug": {
+      "he": "השטיח",
+      "en": "the rug",
+      "fr": "le tapis"
+    },
+    "catalogAiItem": {
+      "he": "הדמיה · AI-generated",
+      "en": "הדמיה · AI-generated",
+      "fr": "הדמיה · AI-generated"
+    },
+    "catalogAiNote": {
+      "he": "פריט לדוגמה שנוצר בבינה מלאכותית, לא מוצר למכירה.",
+      "en": "A sample piece made by AI, not a product for sale.",
+      "fr": "Une pièce d'exemple créée par IA, pas un produit en vente."
+    }
+  }
+}

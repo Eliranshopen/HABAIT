@@ -1,0 +1,894 @@
+===== common.mjs
+// qa-r7 common: invariant checker computed from the files only (never from the engine's own summary).
+import fs from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkEnv, sleep, readText, frozenJob, frozenThenReplaced, toDone, wakeAndLeave, lockFree } from 'file:///C:/RnD/Projects/3Dengine/tests/soak/lib.mjs';
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+
+export { mkEnv, sleep, readText, frozenJob, frozenThenReplaced, toDone, wakeAndLeave, lockFree, pidAlive };
+export const REPO = 'C:/RnD/Projects/3Dengine';
+export const isAmt = (v) => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1000000;
+export const sha = (t) => createHash('sha256').update(t).digest('hex');
+export const rnd0 = (seedBox) => () => { seedBox.s = (seedBox.s * 48271) % 2147483647; return seedBox.s / 2147483647; };
+
+const parse = (f) => {
+  try { return JSON.parse(readText(f)); } catch (e) { if (e.code === 'ENOENT') return null; throw new Error(`${f}: ${e.message}`); }
+};
+const PAID = ['skinning', 'gating', 'finishing'];
+
+// Returns an array of violation strings (empty = fine).
+export function checkJob(E, id, { final = false, rendering = null } = {}) {
+  const v = [];
+  const job = parse(E.jobPath(id, 'job.json'));
+  const man = parse(E.jobPath(id, 'manifest.json'));
+  const led = parse(E.jobPath(id, 'ledger.json'));
+  if (!job) return ['job.json missing'];
+  const rows = led?.rows || [];
+  const done = job.state === 'done';
+  const by = new Map();
+  for (const r of rows) {
+    if (!isAmt(r.reserved_usd)) v.push(`row ${r.seq}: reserved_usd not an amount (${r.reserved_usd})`);
+    if (r.status === 'settled' && !isAmt(r.settled_usd)) v.push(`row ${r.seq}: settled row settled_usd not an amount (${r.settled_usd})`);
+    if (r.status !== 'settled' && r.settled_usd !== null && !(r.status === 'failed' && r.settled_usd === 0) && !(r.status === 'orphaned' && r.settled_usd === null)) v.push(`row ${r.seq}: ${r.status} with settled_usd ${r.settled_usd}`);
+    if (r.status === 'reserved' && done) v.push(`row ${r.seq}: reserved at done`);
+    if (r.status === 'orphaned' && !r.sending_at) v.push(`row ${r.seq}: orphaned without sending_at`);
+    if (r.not_sent && r.sending_at) v.push(`row ${r.seq}: not_sent with sending_at`);
+    if (r.status === 'settled' && !r.sending_at) v.push(`row ${r.seq}: settled without sending_at`);
+    if (r.status === 'settled') { const a = by.get(r.call_key) || []; a.push(r); by.set(r.call_key, a); }
+    if (final && r.status === 'reserved') v.push(`row ${r.seq}: reserved at the end`);
+  }
+  for (const [k, a] of by) {
+    const plain = a.filter((r) => !r.late && r.resend_of === undefined);
+    if (plain.length > 1) v.push(`call ${k.slice(0, 8)}: ${plain.length} plain settled rows`);
+  }
+  // sends <= rows marked
+  for (const s of PAID) {
+    const sends = E.sends(id, s);
+    const marked = rows.filter((r) => r.stage === s && r.sending_at).length;
+    if (sends > marked) v.push(`${s}: ${sends} sends but ${marked} rows marked sending_at`);
+  }
+  const settled = Math.round(rows.filter((r) => r.status === 'settled').reduce((n, r) => n + (Number(r.settled_usd) || 0), 0) * 1e6) / 1e6;
+  const held = Math.round(rows.filter((r) => r.status === 'reserved' || r.status === 'orphaned').reduce((n, r) => n + (Number(r.reserved_usd) || 0), 0) * 1e6) / 1e6;
+  if (job.cost.spent_usd !== settled && (done || final)) v.push(`copy ${job.cost.spent_usd} != ledger ${settled}`);
+  if (typeof led?.cap_usd === 'number' && settled + held > led.cap_usd + 1e-9) v.push(`counted ${settled + held} above cap ${led.cap_usd}`);
+  // manifest: one valid (non superseded) done row per stage
+  const mrows = man?.rows || [];
+  for (const st of ['tracing', 'building', 'rendering', ...PAID, 'packaging', 'qa']) {
+    const valid = mrows.filter((r) => r.stage === st && r.status === 'done' && !r.superseded);
+    if (valid.length > 1) v.push(`stage ${st}: ${valid.length} non-superseded rows`);
+    if (done && valid.length !== 1) v.push(`stage ${st}: ${valid.length} valid rows at done`);
+  }
+  if (fs.existsSync(E.jobPath(id, 'job.lock')) && final) v.push('job.lock left');
+  const log = E.log(id);
+  if (/\berror: /.test(log)) v.push(`runner.log has an error line: ${log.split('\n').find((l) => /\berror: /.test(l))}`);
+  return v;
+}
+
+export function overlapRendering(E, ids) {
+  const iv = [];
+  for (const id of ids) for (const r of (parse(E.jobPath(id, 'manifest.json'))?.rows || [])) if (r.stage === 'rendering') iv.push({ id, a: Date.parse(r.started_at), b: Date.parse(r.finished_at) });
+  const out = [];
+  for (let i = 0; i < iv.length; i++) for (let j = i + 1; j < iv.length; j++) if (iv[i].a < iv[j].b && iv[j].a < iv[i].b) out.push(`rendering overlap ${iv[i].id} / ${iv[j].id}`);
+  return out;
+}
+
+// What every report path says about spent_usd, vs the ledger.
+export async function reports(E, id) {
+  const led = parse(E.jobPath(id, 'ledger.json'));
+  const truth = Math.round((led?.rows || []).filter((r) => r.status === 'settled').reduce((n, r) => n + (Number(r.settled_usd) || 0), 0) * 1e6) / 1e6;
+  const bad = [];
+  const g = E.h.get_job({ job_id: id }).job.cost.spent_usd;
+  const l = E.h.list_jobs({ limit: 50 }).jobs.find((j) => j.job_id === id)?.cost.spent_usd;
+  if (g !== truth) bad.push(`get_job ${g} != ${truth}`);
+  if (l !== truth) bad.push(`list_jobs ${l} != ${truth}`);
+  const j = E.job(id);
+  if (j.state === 'done') {
+    const r = await E.h.get_result({ job_id: id });
+    if (r.cost.spent_usd !== truth) bad.push(`get_result ${r.cost.spent_usd} != ${truth}`);
+  }
+  return { truth, bad };
+}
+===== holder.mjs
+// A live process that holds job.lock of a job (pid text inside, mtime refreshed), for N ms. qa-r7 helper.
+import fs from 'node:fs';
+const [lock, ms, refresh] = [process.argv[2], Number(process.argv[3]), process.argv[4] !== 'norefresh'];
+fs.writeFileSync(`${lock}.qa7`, String(process.pid));
+fs.linkSync(`${lock}.qa7`, lock);
+fs.rmSync(`${lock}.qa7`);
+process.stdout.write('held\n');
+const end = Date.now() + ms;
+const t = setInterval(() => { if (refresh) { const n = new Date(); try { fs.utimesSync(lock, n, n); } catch {} } if (Date.now() > end) { clearInterval(t); try { if (fs.readFileSync(lock, 'utf8') === String(process.pid)) fs.rmSync(lock); } catch {} process.exit(0); } }, 200);
+===== s1-amounts.mjs
+// s1: amounts. B(a) cache files, B(b) estimate_usd, B(c) usd returned by the call. Direct createPaidCall on a bare job
+// (no runner), real files, real sends counted. Prints one line per case; PROBLEM lines are findings.
+import fs from 'node:fs';
+import { mkEnv, isAmt, sha } from './common.mjs';
+import { createPaidCall, callKey, ledgerFile, cacheFile, readLedger } from 'file:///C:/RnD/Projects/3Dengine/engine/ledger.mjs';
+import { newJob, writeJob, jobDir } from 'file:///C:/RnD/Projects/3Dengine/engine/jobs.mjs';
+
+const E = await mkEnv({ prefix: 'qa7-s1-' });
+const jd = E.config.jobsDir;
+let n = 0; let problems = 0;
+const out = [];
+const say = (s) => { out.push(s); console.log(s); };
+const P = (s) => { problems++; say(`PROBLEM ${s}`); };
+
+function bare(cap = 1e9) {
+  n++;
+  const id = (n.toString(16).padStart(4, '0') + 'ab'.repeat(6)).slice(0, 16);
+  fs.mkdirSync(jobDir(jd, id), { recursive: true });
+  const j = newJob({ id, mode: 'stub', now: new Date().toISOString(), input: { pdf_path: 'x', pdf_name: 'x', pdf_sha256: 'a', apartment: 'apt846' }, capUsd: cap });
+  j.state = 'skinning'; j.approval = { cap_usd: cap, at: new Date().toISOString() };
+  writeJob(jd, j);
+  return id;
+}
+const mk = (id, over = {}) => createPaidCall({ jobsDir: jd, jobId: id, stage: 'skinning', attempt: 1, holdMs: 500, ...over });
+const rowsOf = (id) => { try { return JSON.parse(fs.readFileSync(ledgerFile(jd, id), 'utf8')).rows; } catch { return null; } };
+const STAGE = 'skinning';
+
+// ---- B(a): cache file whose settled_usd is X, with the row in state S
+const VALS = {
+  missing: undefined, null: 'null', text: '"5"', textnum: '"0.6"', true: 'true', false: 'false', arr: '[]', arr1: '[1]', obj: '{}',
+  negzero: '-0', zero: '0', tiny: '1e-7', tinyneg: '-1e-9', neg: '-0.01', neg1: '-1', one: '1', six: '0.6', m1e6: '1000000', m1e6c: '1000000.01',
+  big: '1e308', inf: '1e999', ninf: '-1e999', many: '0.1234567891234', nan: 'NaN', str_inf: '"Infinity"', exp: '6e-1', max_safe: '9007199254740993',
+};
+const STATES = ['reserved_nomark', 'reserved_mark', 'orphaned', 'settled', 'failed', 'none'];
+let cases = 0;
+for (const [vn, vt] of Object.entries(VALS)) {
+  for (const st of STATES) {
+    cases++;
+    const id = bare();
+    const key = 'k-' + vn + '-' + st;
+    const ck = callKey(STAGE, key);
+    const answerObj = { stage: STAGE, v: vn };
+    const body = vt === undefined ? `{"answer":${JSON.stringify(answerObj)},"seq":1}` : `{"answer":${JSON.stringify(answerObj)},"settled_usd":${vt},"seq":1}`;
+    fs.mkdirSync(`${jobDir(jd, id)}/cache`, { recursive: true });
+    fs.writeFileSync(cacheFile(jd, id, ck), body);
+    const base = { seq: 1, call_key: ck, stage: STAGE, provider: 'stub', what: 'w', reserved_usd: 0.6, reserved_at: new Date().toISOString(), sending_at: null, status: 'reserved', settled_usd: null, settled_at: null, answer_sha256: null, attempt: 1 };
+    const row = { ...base };
+    if (st === 'reserved_mark') row.sending_at = base.reserved_at;
+    if (st === 'orphaned') { row.sending_at = base.reserved_at; row.status = 'orphaned'; }
+    if (st === 'settled') { Object.assign(row, { sending_at: base.reserved_at, status: 'settled', settled_usd: 0.6, answer_sha256: sha(body) }); }
+    if (st === 'failed') { Object.assign(row, { status: 'failed', settled_usd: 0 }); }
+    if (st !== 'none') fs.writeFileSync(ledgerFile(jd, id), JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: 1e9, rows: [row] }));
+    let sends = 0; let err = null; let got;
+    try { got = await mk(id)({ key, provider: 'stub', what: 'w', estimate_usd: 0.6 }, async () => { sends++; return { answer: { sent: true }, usd: 0.6 }; }); } catch (e) { err = e; }
+    const rows = rowsOf(id) || [];
+    const valid = (() => { if (vt === undefined) return false; try { const x = JSON.parse(vt); return isAmt(x); } catch { return false; } })();
+    // what the contract expects
+    let expectSend;
+    if (st === 'none' || st === 'failed' || st === 'reserved_nomark') expectSend = true;       // no row can own an answer
+    else expectSend = !valid;
+    const tag = `[a] ${vn.padEnd(8)} ${st.padEnd(15)} sends=${sends} rows=${rows.map((r) => `${r.seq}:${r.status}${r.recovered ? '+rec' : ''}${r.late ? '+late' : ''}${r.resend_of ? '+rs' + r.resend_of : ''}(${r.settled_usd})`).join(' ')}${err ? ' ERR ' + err.message : ''}`;
+    say(tag);
+    if (err) P(`${tag}: threw`);
+    if ((sends > 0) !== expectSend) P(`${tag}: expected send=${expectSend}`);
+    // every row amount-valid
+    for (const r of rows) {
+      if (!isAmt(r.reserved_usd)) P(`${tag}: row ${r.seq} reserved_usd not amount ${r.reserved_usd}`);
+      if (r.status === 'settled' && !isAmt(r.settled_usd)) P(`${tag}: row ${r.seq} settled_usd not amount ${r.settled_usd}`);
+    }
+    if (valid && (st === 'reserved_mark' || st === 'orphaned') && !expectSend) {
+      const r = rows.find((x) => x.seq === 1);
+      const want = Math.round(JSON.parse(vt) * 1e6) / 1e6;
+      if (!r || r.status !== 'settled' || r.settled_usd !== want) P(`${tag}: expected row1 settled ${want}`);
+    }
+    // the cache must be refreshed w/ a valid amount after a send
+    if (sends) { try { const c = JSON.parse(fs.readFileSync(cacheFile(jd, id, ck), 'utf8')); if (!isAmt(c.settled_usd)) P(`${tag}: cache after send has bad amount ${c.settled_usd}`); } catch (e) { P(`${tag}: cache unreadable after send ${e.message}`); } }
+  }
+}
+say(`B(a) cases: ${cases}`);
+
+// ---- B(b): estimate_usd
+const ESTS = { undefined: undefined, null: null, text: '0.6', zeroText: '0', neg0: -0, zero: 0, tiny: 1e-7, tinyneg: -1e-9, neg: -1, nan: NaN, inf: Infinity, ninf: -Infinity, m1e6: 1e6, m1e6c: 1000000.01, big: 1e308, true: true, false: false, arr: [], arr1: [0.6], obj: {}, empty: '', many: 0.1234567891234, six: 0.6, bigint: 5n, date: new Date(5), numObj: new Number(1) };
+for (const [en, ev] of Object.entries(ESTS)) {
+  const id = bare();
+  const before = rowsOf(id);
+  const dirBefore = fs.readdirSync(jobDir(jd, id)).sort().join(',');
+  let sends = 0; let err = null;
+  try { await mk(id)({ key: 'e-' + en, provider: 'stub', what: 'w', estimate_usd: ev }, async () => { sends++; return { answer: 1, usd: 0.6 }; }); } catch (e) { err = e; }
+  const rows = rowsOf(id);
+  const dirAfter = fs.readdirSync(jobDir(jd, id)).sort().join(',');
+  const valid = ev === undefined || ev === null || isAmt(ev);
+  say(`[b] ${en.padEnd(9)} valid=${valid} sends=${sends} code=${err?.code || '-'} rows=${rows ? rows.map((r) => `${r.status}(${r.reserved_usd}/${r.settled_usd})`).join(',') : 'no-ledger'}`);
+  if (!valid) {
+    if (!err || err.code !== 'STAGE_FAILED') P(`[b] ${en}: expected STAGE_FAILED, got ${err ? err.code + ' ' + err.message : 'no error'}`);
+    if (sends) P(`[b] ${en}: sent`);
+    if (rows !== null || dirBefore !== dirAfter) P(`[b] ${en}: something was written (${dirBefore} -> ${dirAfter})`);
+  } else {
+    if (err) P(`[b] ${en}: valid estimate threw ${err.message}`);
+    if (!sends) P(`[b] ${en}: not sent`);
+    const r = rows?.[0];
+    const want = ev == null ? 0 : Math.round(ev * 1e6) / 1e6;
+    if (!r || r.reserved_usd !== want) P(`[b] ${en}: reserved_usd ${r?.reserved_usd} want ${want}`);
+    if (r && r.settled_usd !== 0.6 && r.status === 'settled') say(`   (settled ${r.settled_usd})`);
+  }
+}
+
+// ---- B(c): usd returned by the call
+const USDS = { undefined: undefined, null: null, text: '0.5', true: true, arr: [], obj: {}, nan: NaN, inf: Infinity, ninf: -Infinity, neg: -0.2, negtiny: -1e-12, neg0: -0, zero: 0, tiny: 4e-7, tiny2: 5e-7, m1e6: 1e6, m1e6c: 1000000.01, big: 1e308, many: 0.1234567891234, five: 0.5, bigint: 5n, str: 'abc' };
+for (const [un, uv] of Object.entries(USDS)) {
+  const id = bare();
+  let err = null;
+  try { await mk(id)({ key: 'u-' + un, provider: 'stub', what: 'w', estimate_usd: 0.7 }, async () => ({ answer: { x: 1 }, usd: uv })); } catch (e) { err = e; }
+  const rows = rowsOf(id) || [];
+  const r = rows[0];
+  const valid = uv !== undefined && uv !== null && isAmt(uv);
+  const want = valid ? Math.round(uv * 1e6) / 1e6 : 0.7;
+  say(`[c] ${un.padEnd(8)} -> row ${r?.status}(${r?.settled_usd}) want ${want} ${err ? 'ERR ' + err.message : ''}`);
+  if (err) P(`[c] ${un}: threw ${err.message}`);
+  else if (!r || r.status !== 'settled' || r.settled_usd !== want) P(`[c] ${un}: settled ${r?.settled_usd} want ${want}`);
+  if (r && !isAmt(r.settled_usd)) P(`[c] ${un}: settled_usd not an amount`);
+  try { const c = JSON.parse(fs.readFileSync(cacheFile(jd, id, callKey(STAGE, 'u-' + un)), 'utf8')); if (!isAmt(c.settled_usd)) P(`[c] ${un}: cache amount ${c.settled_usd}`); } catch (e) { P(`[c] ${un}: cache: ${e.message}`); }
+}
+// call returns non-objects
+for (const [gn, gv] of Object.entries({ undef: undefined, nul: null, num: 5, str: 'x', fn: () => 1, arr: [1], bigintAnswer: { answer: 5n }, circ: (() => { const o = { answer: {} }; o.answer.self = o.answer; return o; })() })) {
+  const id = bare();
+  let err = null;
+  try { await mk(id)({ key: 'g-' + gn, provider: 'stub', what: 'w', estimate_usd: 0.7 }, async () => gv); } catch (e) { err = e; }
+  const rows = rowsOf(id) || [];
+  say(`[c2] returns ${gn.padEnd(12)} rows=${rows.map((r) => `${r.status}(${r.settled_usd})`).join(',')} ${err ? 'ERR ' + err.message : ''}`);
+  if (err && !['bigintAnswer', 'circ'].includes(gn)) P(`[c2] ${gn}: threw ${err.message}`);
+  if (err && ['bigintAnswer', 'circ'].includes(gn)) say(`   OBS: an unserialisable answer throws AFTER the send; row ${rows[0]?.status} (answer lost, call will be re-sent)`);
+}
+
+say(`PROBLEMS: ${problems}`);
+fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s1-out.txt', out.join('\n') + '\n');
+await E.cleanup();
+===== s2-readtime.mjs
+// s2: how long does each read tool / CLI command take while a LIVE process holds job.lock, copy right vs behind.
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { mkEnv, sleep, pidAlive, REPO } from './common.mjs';
+import { configEnv } from 'file:///C:/RnD/Projects/3Dengine/engine/control.mjs';
+import { jobDir } from 'file:///C:/RnD/Projects/3Dengine/engine/jobs.mjs';
+
+const OUT = []; const say = (s) => { OUT.push(s); console.log(s); };
+const HOLDER = 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/holder.mjs';
+const E = await mkEnv({ prefix: 'qa7-s2-', stepMs: 150, callUsd: 0.6, heartbeat: 0.1 });
+const jd = E.config.jobsDir;
+const pdf = E.pdf('x.pdf', 'x');
+const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+await E.waitFor('awaiting', () => E.job(id).state === 'awaiting_approval', 30000);
+E.approve(id);
+await E.waitFor('done', () => E.job(id).state === 'done', 40000);
+const lock = `${jd}/${id}/job.lock`;
+const jf = `${jd}/${id}/job.json`;
+const env = configEnv(E.config, process.env);
+const cliT = (args) => { const t0 = Date.now(); const r = spawnSync(process.execPath, [`${REPO}/engine/cli.mjs`, ...args], { env, cwd: E.home, encoding: 'utf8', timeout: 30000 }); return { ms: Date.now() - t0, code: r.status }; };
+const setCopy = (v) => { const j = JSON.parse(fs.readFileSync(jf, 'utf8')); j.cost.spent_usd = v; fs.writeFileSync(jf, JSON.stringify(j, null, 2) + '\n'); };
+const hold = async (ms, refresh = true) => {
+  const p = spawn(process.execPath, [HOLDER, lock, String(ms), refresh ? 'refresh' : 'norefresh'], { stdio: ['ignore', 'pipe', 'ignore'] });
+  E.spawned.add(p.pid);
+  await new Promise((r) => p.stdout.once('data', r));
+  return p;
+};
+const timed = async (fn) => { const t0 = performance.now(); let e = null, v; try { v = await fn(); } catch (x) { e = x; } return { ms: Math.round(performance.now() - t0), e, v }; };
+let problems = 0;
+const base = cliT(['jobs', '--json']); say(`baseline CLI jobs --json (no lock): ${base.ms} ms`);
+for (const copy of ['right', 'behind']) {
+  for (const refresh of [true, false]) {
+    const h = await hold(7000, refresh);
+    if (copy === 'behind') setCopy(99); else setCopy(1.8);
+    const rows = [];
+    const T = async (label, fn, lim = 400) => { const r = await timed(fn); rows.push(`${label}=${r.ms}ms${r.e ? '(ERR ' + r.e.message.slice(0, 30) + ')' : ''}`); if (r.ms > lim) { problems++; say(`PROBLEM ${label} took ${r.ms} ms (copy ${copy}, refresh ${refresh}) > ${lim}`); } return r; };
+    const a = await T('get_job', () => E.h.get_job({ job_id: id }));
+    await T('list_jobs', () => E.h.list_jobs({ limit: 10 }));
+    await T('get_result', () => E.h.get_result({ job_id: id }));
+    const c1 = await T('cli job --json', () => cliT(['job', id, '--json']), 1500); rows.push(`(baseline ${base.ms})`);
+    await T('cli jobs', () => cliT(['jobs']), 1500);
+    await T('cli job', () => cliT(['job', id]), 1500);
+    // writers: not claimed fast, only recorded
+    const w = await timed(() => E.h.start_simulation({ pdf_path: pdf })); rows.push(`start_simulation(done)=${w.ms}ms${w.e ? '(ERR ' + w.e.message.slice(0, 30) + ')' : ''}`);
+    say(`copy ${copy} holder-refresh ${refresh}: ${rows.join(' ')} | reported get_job=${a.v?.job.cost.spent_usd} | copy on disk now ${JSON.parse(fs.readFileSync(jf, 'utf8')).cost.spent_usd}`);
+    if (a.v?.job.cost.spent_usd !== 1.8) { problems++; say('PROBLEM get_job did not report 1.8'); }
+    process.kill(h.pid); await sleep(300); fs.rmSync(lock, { force: true });
+    // next read puts the copy right?
+    E.h.get_job({ job_id: id });
+    say(`  after the holder is gone and one read: copy ${JSON.parse(fs.readFileSync(jf, 'utf8')).cost.spent_usd}`);
+  }
+}
+// Holder = a dead pid: reads must not wait at all
+setCopy(99);
+fs.writeFileSync(lock, '2147483000');
+const d = await timed(() => E.h.get_job({ job_id: id })); say(`dead-pid lock, copy behind: get_job ${d.ms} ms, copy now ${JSON.parse(fs.readFileSync(jf, 'utf8')).cost.spent_usd}`);
+say(`PROBLEMS ${problems}`);
+fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s2-out.txt', OUT.join('\n') + '\n');
+await E.cleanup();
+===== s3-damage.mjs
+// s3: ledger.json damaged in many ways. Every tool, every CLI command, and a real runner started on it.
+// Checks: files written? anything sent / paid? runner.pid given back? exit codes of the CLI.
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { mkEnv, sleep, pidAlive, REPO, readText } from './common.mjs';
+import { spawnRunnerDefault, configEnv } from 'file:///C:/RnD/Projects/3Dengine/engine/control.mjs';
+import { jobDir } from 'file:///C:/RnD/Projects/3Dengine/engine/jobs.mjs';
+
+const OUT = [];
+const say = (s) => { OUT.push(s); console.log(s); };
+let problems = 0;
+const P = (s) => { problems++; say(`PROBLEM ${s}`); };
+const E = await mkEnv({ prefix: 'qa7-s3-', stepMs: 150, callUsd: 0.6, heartbeat: 0.1 });
+const jd = E.config.jobsDir;
+const snapRoot = `${E.home}/snap`;
+
+const cli = (args) => {
+  const t0 = Date.now();
+  const r = spawnSync(process.execPath, [`${REPO}/engine/cli.mjs`, ...args], { env: configEnv(E.config, process.env), encoding: 'utf8', timeout: 30000, cwd: E.home });
+  return { code: r.status, out: r.stdout, err: r.stderr, ms: Date.now() - t0 };
+};
+const snap = (id, name) => { fs.rmSync(`${snapRoot}/${name}`, { recursive: true, force: true }); fs.cpSync(jobDir(jd, id), `${snapRoot}/${name}`, { recursive: true }); };
+const restore = (id, name) => { fs.rmSync(jobDir(jd, id), { recursive: true, force: true }); fs.cpSync(`${snapRoot}/${name}`, jobDir(jd, id), { recursive: true }); };
+const bytes = (f) => { try { return fs.readFileSync(f, 'utf8'); } catch { return null; } };
+
+// --- three real jobs: done, awaiting_approval (runner killed), skinning approved (runner killed inside the pause after the mark)
+const pdfD = E.pdf('d.pdf', 'd'); const pdfA = E.pdf('a.pdf', 'a'); const pdfS = E.pdf('s.pdf', 's');
+const idD = E.h.start_simulation({ pdf_path: pdfD }).job_id;
+await E.waitFor('D awaiting', () => E.job(idD).state === 'awaiting_approval', 30000);
+E.approve(idD);
+await E.waitFor('D done', () => E.job(idD).state === 'done', 40000);
+const idA = E.h.start_simulation({ pdf_path: pdfA }).job_id;
+await E.waitFor('A awaiting', () => E.job(idA).state === 'awaiting_approval', 30000);
+await E.kill(idA);
+process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS = '60000';
+const idS = E.h.start_simulation({ pdf_path: pdfS }).job_id;
+delete process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS;
+await E.waitFor('S awaiting', () => E.job(idS).state === 'awaiting_approval', 30000);
+E.approve(idS);
+await E.waitFor('S has a marked row', () => (E.ledger(idS).rows || []).some((r) => r.sending_at), 20000);
+await E.kill(idS);
+say(`jobs: D=${idD} (${E.job(idD).state}) A=${idA} (${E.job(idA).state}) S=${idS} (${E.job(idS).state}, rows ${E.ledger(idS).rows.map((r) => r.status)})`);
+snap(idD, 'D'); snap(idA, 'A'); snap(idS, 'S');
+const goodS = bytes(`${jd}/${idS}/ledger.json`);
+
+const DAMAGE = {
+  deleted: null, truncated: (g) => g.slice(0, Math.floor(g.length / 2)), empty: '', array: '[]', rowsNull: '{"rows":null}', garbage: 'garbage!', jsonNull: 'null',
+  jsonStr: '"x"', jsonNum: '5', rows12: '{"rows":[1,2]}', rowsStr: '{"rows":"abc"}', emptyObj: '{}', rowsEmpty: '{"rows":[]}', rowsObj: '{"rows":[{}]}',
+  rowsNullEl: '{"rows":[null]}', otherJob: (g, id) => JSON.stringify({ schema: 'habait/ledger.v1', job_id: 'ffffffffffffffff', cap_usd: 60, rows: [] }),
+  noRows: (g, id) => JSON.stringify({ schema: 'habait/ledger.v1', job_id: id }), rowsSettledText: (g, id) => JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: 60, rows: [{ seq: 1, call_key: 'x', stage: 'skinning', status: 'settled', settled_usd: '5', reserved_usd: 1 }] }),
+  hugeRow: (g, id) => JSON.stringify({ schema: 'habait/ledger.v1', job_id: id, cap_usd: 60, rows: [{ seq: 1, call_key: 'x', stage: 'skinning', status: 'settled', settled_usd: 1e308, reserved_usd: 1 }] }),
+  bom: (g) => '\ufeff' + g,
+};
+
+let caseN = 0;
+for (const [dn, dv] of Object.entries(DAMAGE)) {
+  // ---------- reads (jobs D = done, A = awaiting, S = skinning)
+  for (const [name, id] of [['D', idD], ['A', idA], ['S', idS]]) {
+    restore(id, name);
+    const lf = `${jd}/${id}/ledger.json`;
+    const good = bytes(lf) ?? '{"schema":"habait/ledger.v1","rows":[]}';
+    if (dv === null) fs.rmSync(lf, { force: true }); else fs.writeFileSync(lf, typeof dv === 'function' ? dv(good, id) : dv);
+    const lBefore = bytes(lf); const jBefore = bytes(`${jd}/${id}/job.json`); const mBefore = bytes(`${jd}/${id}/manifest.json`);
+    const res = {};
+    const tryit = async (label, fn) => { try { res[label] = await fn(); } catch (e) { res[label] = { error: `${e.code || ''} ${e.message}`.slice(0, 80) }; } };
+    await tryit('get_job', () => E.h.get_job({ job_id: id }).job.cost.spent_usd);
+    await tryit('list_jobs', () => E.h.list_jobs({ limit: 20 }).jobs.find((j) => j.job_id === id)?.cost.spent_usd);
+    if (name === 'D') await tryit('get_result', async () => (await E.h.get_result({ job_id: id })).cost.spent_usd);
+    const c1 = cli(['job', id, '--json']); const c2 = cli(['jobs', '--json']); const c3 = cli(['job', id]); const c4 = cli(['ledger', id]); const c5 = cli(['ledger', id, '--json']); const c6 = cli(['jobs']);
+    const afterL = bytes(lf); const afterJ = bytes(`${jd}/${id}/job.json`);
+    const j1 = (() => { try { return JSON.parse(c1.out).cost.spent_usd; } catch { return `unparsable(${c1.code})`; } })();
+    const j2 = (() => { try { return JSON.parse(c2.out).jobs.find((j) => j.job_id === id)?.cost.spent_usd; } catch { return `unparsable(${c2.code})`; } })();
+    caseN++;
+    say(`[${dn}/${name}] get_job=${JSON.stringify(res.get_job)} list=${JSON.stringify(res.list_jobs)} result=${JSON.stringify(res.get_result)} cli job--json=${j1} jobs--json=${j2} | job rc=${c3.code} ledger rc=${c4.code} ledger--json rc=${c5.code} jobs rc=${c6.code}`);
+    if (afterL !== lBefore && !(dv === null)) P(`[${dn}/${name}] ledger.json was written over by a read`);
+    if (dv === null && afterL !== null) say(`   (deleted ledger: a read re-created it? ${afterL?.slice(0, 40)})`);
+    const dmg = ['truncated', 'empty', 'array', 'rowsNull', 'garbage', 'jsonNull', 'jsonStr', 'jsonNum', 'rowsStr', 'emptyObj', 'rowsObj', 'rowsNullEl', 'noRows', 'bom'].includes(dn);
+    if (dmg) {
+      if (afterJ !== jBefore) P(`[${dn}/${name}] job.json written by a read though ledger unreadable`);
+      if (c3.code !== 1 || !c3.err.includes(id)) P(`[${dn}/${name}] CLI job exit ${c3.code}, stderr names job: ${c3.err.includes(id)} (${c3.err.slice(0, 100)})`);
+      if (c4.code !== 1 || !c4.err.includes(id)) P(`[${dn}/${name}] CLI ledger exit ${c4.code}, names job: ${c4.err.includes(id)}`);
+      if (c5.code !== 1) P(`[${dn}/${name}] CLI ledger --json exit ${c5.code}`);
+      if (c1.code !== 0) P(`[${dn}/${name}] CLI job --json exit ${c1.code}`);
+      if (res.get_job !== E.job(id).cost.spent_usd && typeof res.get_job !== 'object') say(`   note get_job ${res.get_job} vs copy ${E.job(id).cost.spent_usd}`);
+    }
+    for (const b of [mBefore]) if (b !== bytes(`${jd}/${id}/manifest.json`)) P(`[${dn}/${name}] manifest written by a read`);
+  }
+  // ---------- writers on the damaged ledger (S): cancel_job, approve (A), start_simulation (D done: nothing spawns)
+  {
+    restore(idD, 'D');
+    const lf = `${jd}/${idD}/ledger.json`; const good = bytes(lf) ?? '{"schema":"habait/ledger.v1","rows":[]}';
+    if (dv === null) fs.rmSync(lf, { force: true }); else fs.writeFileSync(lf, typeof dv === 'function' ? dv(good, idD) : dv);
+    let r; try { r = E.h.start_simulation({ pdf_path: pdfD }); r = `created=${r.created} resumed=${r.resumed} spent=${r.job.cost.spent_usd}`; } catch (e) { r = 'ERR ' + e.message.slice(0, 60); }
+    say(`   start_simulation(D done) -> ${r}`);
+  }
+  {
+    restore(idS, 'S');
+    const lf = `${jd}/${idS}/ledger.json`; const good = bytes(lf) ?? '{"schema":"habait/ledger.v1","rows":[]}';
+    if (dv === null) fs.rmSync(lf, { force: true }); else fs.writeFileSync(lf, typeof dv === 'function' ? dv(good, idS) : dv);
+    const lBefore = bytes(lf);
+    let r; try { r = E.h.cancel_job({ job_id: idS }); r = `state=${r.job.state} spent=${r.job.cost.spent_usd}`; } catch (e) { r = 'ERR ' + e.message.slice(0, 60); }
+    say(`   cancel_job(S) -> ${r}; ledger untouched=${bytes(lf) === lBefore}`);
+    if (bytes(lf) !== lBefore && dv !== null) P(`[${dn}] cancel_job wrote the ledger`);
+  }
+  // ---------- a real runner on S with the damaged ledger
+  {
+    restore(idS, 'S');
+    const lf = `${jd}/${idS}/ledger.json`; const good = bytes(lf) ?? '{"schema":"habait/ledger.v1","rows":[]}';
+    if (dv === null) fs.rmSync(lf, { force: true }); else fs.writeFileSync(lf, typeof dv === 'function' ? dv(good, idS) : dv);
+    const lBefore = bytes(lf); const stagesBefore = fs.existsSync(`${jd}/${idS}/stages`) ? fs.readdirSync(`${jd}/${idS}/stages`).sort().join(',') : '';
+    const sendsBefore = E.sends(idS, 'skinning');
+    fs.rmSync(`${jd}/${idS}/runner.log`, { force: true });
+    const strayBefore = fs.readdirSync(jd).sort().join(',');
+    const pid = spawnRunnerDefault(E.config, idS); E.spawned.add(pid);
+    const t0 = Date.now();
+    let left = false;
+    for (let i = 0; i < 400; i++) { await sleep(50); if (!pidAlive(pid)) { left = true; break; } if (E.job(idS).state === 'done') break; }
+    const dt = Date.now() - t0;
+    const j = E.job(idS);
+    const log = E.log(idS);
+    const lAfter = bytes(lf);
+    const strayAfter = fs.readdirSync(jd).sort().join(',');
+    const sends = E.sends(idS, 'skinning') - sendsBefore;
+    const pidFile = fs.existsSync(`${jd}/${idS}/runner.pid`);
+    say(`   RUNNER on S: left=${left} after ${dt}ms state=${j.state} sends=${sends} runner.pid present=${pidFile} ledger untouched=${lAfter === lBefore} stray folders=${strayAfter === strayBefore ? 'no' : strayAfter}`);
+    const dmg = ['truncated', 'empty', 'array', 'rowsNull', 'garbage', 'jsonNull', 'jsonStr', 'jsonNum', 'rowsStr', 'emptyObj', 'rowsObj', 'rowsNullEl', 'noRows', 'bom'].includes(dn);
+    if (dmg) {
+      if (!left) P(`[${dn}] runner did not stop on a damaged ledger (state ${j.state})`);
+      if (sends) P(`[${dn}] a paid call was sent on a damaged ledger`);
+      if (pidFile && !pidAlive(pid)) P(`[${dn}] runner.pid not given back`);
+      if (lAfter !== lBefore) P(`[${dn}] damaged ledger written over`);
+      if (j.state !== 'skinning') P(`[${dn}] job moved to ${j.state}`);
+      if (/stage run|attempt \d+ started/.test(log)) P(`[${dn}] a stage ran: ${log.split('\n').find((l) => /attempt \d+ started/.test(l))}`);
+    } else if (strayAfter !== strayBefore) P(`[${dn}] runner wrote a ledger outside the job folder: ${strayAfter}`);
+    if (!left && pidAlive(pid)) { try { process.kill(pid); } catch {} await sleep(300); }
+    // let any proceeding runner finish before the next case (it was killed above if still alive)
+    fs.rmSync(`${jd}/undefined`, { recursive: true, force: true });
+    fs.rmSync(`${jd}/ffffffffffffffff`, { recursive: true, force: true });
+  }
+}
+say(`cases ${caseN}, PROBLEMS ${problems}`);
+fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s3-out.txt', OUT.join('\n') + '\n');
+await E.cleanup();
+===== s4-chaos.mjs
+// s4: kills and takeovers of my own design. node s4-chaos.mjs <type> <count> <seed>
+//  chain  : runner1 frozen at a random point, runner2 takes over (random pause hook) and is KILLED, runner3 resumes, runner1 woken at a random moment
+//  heavy  : two jobs, A frozen holding the heavy lock at rendering, B steals it, then kill B / kill A / wake A at random moments
+//  rubble : runner killed at a random moment, then dead-pid / empty / garbage job.lock + heavy.lock.guard rubble planted, resume must start in about 2 s
+//  pauses : two kills of two successive runners, each inside a (random) pause of a paid call; third runner finishes
+//  cap    : a cap that stops the job at the second/third call, kills around the stop and the approval
+//  cancel : frozen at paid:sent, cancel, restart (takeover) while blocked, wake
+import fs from 'node:fs';
+import { mkEnv, sleep, pidAlive, frozenJob, frozenThenReplaced, toDone, wakeAndLeave, checkJob, overlapRendering, reports } from './common.mjs';
+
+const [type, countS, seedS] = process.argv.slice(2);
+const COUNT = Number(countS || 5);
+const box = { s: Number(seedS || 1) };
+const rnd = () => { box.s = (box.s * 48271) % 2147483647; return box.s / 2147483647; };
+const pick = (a) => a[Math.floor(rnd() * a.length)];
+const between = (a, b) => a + Math.floor(rnd() * (b - a + 1));
+const PAID = ['skinning', 'gating', 'finishing'];
+const OUT = []; const say = (s) => { OUT.push(s); console.log(s); };
+let kills = 0; let takeovers = 0; let violations = 0; let scenarios = 0;
+const V = (tag, arr) => { for (const x of arr) { violations++; say(`VIOLATION ${tag}: ${x}`); } };
+
+const E = await mkEnv({ prefix: `qa7-${type}-`, stepMs: 300, callUsd: type === 'cap' ? 25 : 0.6, heartbeat: 0.1, staleSeconds: 1 });
+const kill = async (id) => { const p = await E.kill(id); kills++; return p; };
+const finish = async (id, tag, { extra = [] } = {}) => {
+  await toDone(E, id, 60000);
+  await sleep(150);
+  const v = checkJob(E, id, { final: true });
+  const rp = await reports(E, id);
+  V(tag, [...v, ...rp.bad, ...extra]);
+  return rp.truth;
+};
+const waitLog = (id, text, n = 1, ms = 15000) => E.waitFor(`log ${text}`, () => E.log(id).split(text).length - 1 >= n, ms, 10);
+
+async function chain(i) {
+  const name = `chain${i}`;
+  const paid = pick(PAID);
+  const point = pick([paid, `${paid}:reserved`, `${paid}:sent`]);
+  const hook = pick([{}, { ENGINE_TEST_PAUSE_AFTER_RESERVE_MS: 4000 }, { ENGINE_TEST_PAUSE_AFTER_CACHE_MS: 4000 }, { ENGINE_TEST_PAUSE_AFTER_SETTLE_MS: 4000 }]);
+  const wakeAt = pick(['before3', 'after3', 'afterdone', 'afterkill']);
+  const r = await frozenThenReplaced(E, { name, point, secondEnv: hook });
+  takeovers++;
+  const id = r.id;
+  const hk = Object.keys(hook)[0];
+  let desc = `${name} ${point} hook2=${hk || '-'} wake=${wakeAt}`;
+  // kill runner2: inside its pause when it has one, else at a random moment
+  if (hk) {
+    try { await E.waitFor('pause line', () => E.log(id).includes('test hook: pausing'), 12000, 10); } catch { desc += ' (no pause reached)'; }
+    await sleep(between(0, 300));
+  } else await sleep(between(0, 700));
+  let k2 = null;
+  if (pidAlive(E.runnerPid(id)) && E.runnerPid(id) === r.newPid) { k2 = await kill(id); }
+  if (wakeAt === 'afterkill') r.wake();
+  if (wakeAt === 'before3') { r.wake(); await sleep(between(0, 200)); }
+  const again = E.h.start_simulation({ pdf_path: r.pdf });
+  if (again.resumed) takeovers += 0;
+  if (wakeAt === 'after3') { await sleep(between(0, 500)); r.wake(); }
+  // runner 3 may itself be killed (one in three)
+  if (rnd() < 0.34) {
+    await sleep(between(50, 900));
+    const p3 = E.runnerPid(id);
+    if (p3 && pidAlive(p3) && p3 !== r.pid) { await kill(id); E.h.start_simulation({ pdf_path: r.pdf }); desc += ' +k3'; }
+  }
+  await finish(id, desc);
+  if (wakeAt === 'afterdone') { await sleep(100); r.wake(); }
+  else r.wake();
+  try { await E.waitFor('runner1 gone', () => !pidAlive(r.pid), 20000, 25); } catch { V(desc, ['replaced runner 1 did not leave by itself']); }
+  // after it left: nothing changed by it
+  await sleep(150);
+  V(desc + ' (after runner1 left)', checkJob(E, id, { final: true }));
+  takeovers++;   // runner1 woke to find itself replaced: a lock loss (ownership lost) counted once per scenario
+  say(`ok ${desc} k2=${k2}`);
+}
+
+async function heavy(i) {
+  const a = await frozenJob(E, { name: `hA${i}`, point: 'rendering' });
+  await E.waitFor('A holds heavy', () => E.heavy()?.pid === a.pid, 10000, 20);
+  const pdfB = E.pdf(`hB${i}`, `hB${i}`);
+  const idB = E.h.start_simulation({ pdf_path: pdfB }).job_id;
+  // B reaches rendering and (A being silent for > 1 s) steals the heavy lock
+  await E.waitFor('B owns heavy', () => E.heavy()?.job_id === idB, 25000, 20);
+  takeovers++;
+  const mode = pick(['wakeA', 'killB', 'killA', 'wakeAafterB']);
+  let desc = `heavy${i} ${mode}`;
+  if (mode === 'wakeA') { await sleep(between(0, 150)); a.wake(); }
+  if (mode === 'killB') { await sleep(between(0, 250)); const pb = E.runnerPid(idB); if (pb && pidAlive(pb)) { await kill(idB); E.h.start_simulation({ pdf_path: pdfB }); } a.wake(); }
+  if (mode === 'killA') { process.kill(a.pid); await E.waitFor('A gone', () => !pidAlive(a.pid), 5000, 10); kills++; E.h.start_simulation({ pdf_path: a.pdf }); }
+  if (mode === 'wakeAafterB') { await E.waitFor('B past rendering', () => E.rows(idB).some((r) => r.stage === 'rendering'), 20000, 20); a.wake(); }
+  await finish(idB, `${desc} B`);
+  await finish(a.id, `${desc} A`);
+  if (mode !== 'killA') { try { await E.waitFor('A runner gone', () => !pidAlive(a.pid), 20000, 25); } catch { V(desc, ['A did not leave']); } }
+  V(desc, overlapRendering(E, [a.id, idB]));
+  const left = E.heavy();
+  if (left) V(desc, [`heavy lock left behind: ${JSON.stringify(left)}`]);
+  say(`ok ${desc} Aattempts(rendering)=${E.job(a.id).attempts?.rendering}`);
+}
+
+async function rubble(i) {
+  const pdf = E.pdf(`rub${i}`, `rub${i}`);
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  const stagePick = pick(['tracing', 'building', 'rendering', 'awaiting', 'skinning', 'gating']);
+  await E.waitFor('stage', () => { const j = E.job(id); if (j.state === 'awaiting_approval' && !j.approval && stagePick !== 'awaiting') E.approve(id); return stagePick === 'awaiting' ? j.state === 'awaiting_approval' : j.state === stagePick; }, 40000, 10);
+  await sleep(between(0, 250));
+  await kill(id);
+  const kind = pick(['dead', 'deadSpaces', 'empty', 'garbage', 'zero', 'negative']);
+  const lock = E.jobPath(id, 'job.lock');
+  const content = { dead: '2147480001', deadSpaces: ' 2147480002\n', empty: '', garbage: 'abc', zero: '0', negative: '-7' }[kind];
+  fs.writeFileSync(lock, content);
+  const hl = `${E.config.runner.heavyLock}.guard`;
+  const withHeavy = rnd() < 0.5;
+  if (withHeavy) { fs.mkdirSync(hl.replace(/\/[^/]+$/, ''), { recursive: true }); fs.writeFileSync(hl, '2147480003'); }
+  const t0 = Date.now();
+  E.h.start_simulation({ pdf_path: pdf });   // may itself wait on the lock
+  const tTool = Date.now() - t0;
+  const hb0 = E.job(id).heartbeat_at;
+  // time until a NEW live runner has really written something
+  let tRun = null;
+  try {
+    await E.waitFor('new runner active', () => { const p = E.runnerPid(id); const j = E.job(id); const jl = fs.existsSync(lock) ? fs.readFileSync(lock, 'utf8') : null; return p && pidAlive(p) && j.heartbeat_at !== hb0 && jl !== content; }, 9000, 10);
+    tRun = Date.now() - t0;
+  } catch { tRun = 'never'; }
+  const desc = `rubble${i} ${stagePick} ${kind} heavyGuard=${withHeavy}`;
+  if (tRun === 'never' || tRun > 2600) V(desc, [`resume took ${tRun} ms (start_simulation call ${tTool} ms)`]);
+  await finish(id, desc);
+  if (fs.existsSync(hl)) { fs.rmSync(hl, { force: true }); }
+  say(`ok ${desc} start=${tTool}ms active=${tRun}ms`);
+}
+
+async function pauses(i) {
+  const pdf = E.pdf(`pz${i}`, `pz${i}`);
+  const hooks = ['ENGINE_TEST_PAUSE_AFTER_RESERVE_MS', 'ENGINE_TEST_PAUSE_AFTER_CACHE_MS', 'ENGINE_TEST_PAUSE_AFTER_SETTLE_MS'];
+  const h1 = pick(hooks); const h2 = pick(hooks);
+  process.env[h1] = '30000';
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  delete process.env[h1];
+  await E.waitFor('pause 1', () => { const j = E.job(id); if (j.state === 'awaiting_approval' && !j.approval) E.approve(id); return E.log(id).includes('test hook: pausing'); }, 40000, 10);
+  await sleep(between(0, 300));
+  await kill(id);
+  const n1 = E.log(id).split('test hook: pausing').length - 1;
+  process.env[h2] = '30000';
+  E.h.start_simulation({ pdf_path: pdf });
+  delete process.env[h2];
+  let got2 = true;
+  try { await E.waitFor('pause 2 or done', () => { const j = E.job(id); if (j.state === 'awaiting_approval' && !j.approval) E.approve(id); return E.log(id).split('test hook: pausing').length - 1 > n1 || j.state === 'done'; }, 30000, 10); } catch { got2 = false; }
+  if (E.job(id).state !== 'done') { await sleep(between(0, 300)); const p = E.runnerPid(id); if (p && pidAlive(p)) await kill(id); }
+  E.h.start_simulation({ pdf_path: pdf });
+  await finish(id, `pauses${i} ${h1.slice(-12)} then ${h2.slice(-12)}`);
+  say(`ok pauses${i} ${h1.slice(-12)} then ${h2.slice(-12)} second pause reached=${got2}`);
+}
+
+async function cap(i) {
+  const pdf = E.pdf(`cap${i}`, `cap${i}`);
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  await E.waitFor('awaiting', () => E.job(id).state === 'awaiting_approval', 30000, 10);
+  E.h.approve_paid_stage({ job_id: id, cap_usd: 60 });
+  const killAt = pick(['gating', 'capstop', 'skinning']);
+  await E.waitFor('kill point', () => { const j = E.job(id); return killAt === 'capstop' ? (j.state === 'awaiting_approval' && j.reason?.code === 'BUDGET_CAP') : j.state === killAt; }, 30000, 5);
+  await sleep(between(0, 400));
+  const p = E.runnerPid(id);
+  if (p && pidAlive(p)) await kill(id);
+  E.h.start_simulation({ pdf_path: pdf });
+  await E.waitFor('cap stop', () => { const j = E.job(id); return j.state === 'awaiting_approval' && j.reason?.code === 'BUDGET_CAP' && !j.approval; }, 30000, 10);
+  V(`cap${i} at stop`, checkJob(E, id, {}));
+  const need = E.job(id).quote.estimate_usd;
+  let refused = null;
+  try { E.h.approve_paid_stage({ job_id: id, cap_usd: need - 0.01 }); refused = false; } catch (e) { refused = e.code; }
+  if (refused !== 'BUDGET_CAP') V(`cap${i}`, [`a cap below the need (${need}) was accepted or gave ${refused}`]);
+  E.h.approve_paid_stage({ job_id: id, cap_usd: need });
+  await finish(id, `cap${i} ${killAt} need=${need}`);
+  say(`ok cap${i} ${killAt} need=${need} spent=${E.job(id).cost.spent_usd}`);
+}
+
+async function cancel(i) {
+  const paid = pick(PAID);
+  const point = `${paid}:${pick(['reserved', 'sent'])}`;
+  const f = await frozenJob(E, { name: `cn${i}`, point });
+  E.h.cancel_job({ job_id: f.id });
+  await sleep(between(0, 300));
+  const again = E.h.start_simulation({ pdf_path: f.pdf });
+  takeovers++;
+  const np = await E.waitFor('second runner', () => { const p = E.runnerPid(f.id); return p && p !== f.pid ? p : null; }, 20000, 10).catch(() => null);
+  if (rnd() < 0.5) { await sleep(between(0, 400)); f.wake(); }
+  const cp = E.runnerPid(f.id);
+  if (rnd() < 0.5 && cp && cp !== f.pid && pidAlive(cp)) { await kill(f.id); E.h.start_simulation({ pdf_path: f.pdf }); }
+  f.wake();
+  await finish(f.id, `cancel${i} ${point} resumed=${again.resumed}`);
+  try { await E.waitFor('gone', () => !pidAlive(f.pid), 20000, 25); } catch { V(`cancel${i}`, ['replaced runner 1 did not leave']); }
+  takeovers++;
+  say(`ok cancel${i} ${point}`);
+}
+
+const fn = { chain, heavy, rubble, pauses, cap, cancel }[type];
+for (let i = 0; i < COUNT; i++) {
+  scenarios++;
+  try { await fn(i); } catch (e) { violations++; say(`ERROR scenario ${type}${i}: ${e.message}`); }
+}
+await E.cleanup();
+say(`SUMMARY type=${type} seed=${seedS} scenarios=${scenarios} kills=${kills} takeovers=${takeovers} violations=${violations} leftover=${JSON.stringify(E.leftover)}`);
+fs.appendFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s4-all.txt', OUT.join('\n') + '\n');
+===== s5-wrongid.mjs
+// s5: a ledger.json of job S that names ANOTHER job (or none) in job_id: where does the runner write? (repeat x3)
+import fs from 'node:fs';
+import { mkEnv, sleep, pidAlive } from './common.mjs';
+import { spawnRunnerDefault } from 'file:///C:/RnD/Projects/3Dengine/engine/control.mjs';
+const E = await mkEnv({ prefix: 'qa7-s5-', stepMs: 150, callUsd: 0.6, heartbeat: 0.1 });
+const jd = E.config.jobsDir; const out = [];
+const say = (s) => { out.push(s); console.log(s); };
+const idX = E.h.start_simulation({ pdf_path: E.pdf('x.pdf', 'x') }).job_id;
+await E.waitFor('X awaiting', () => E.job(idX).state === 'awaiting_approval', 30000); E.approve(idX);
+await E.waitFor('X done', () => E.job(idX).state === 'done', 40000);
+const xLedger = () => fs.readFileSync(`${jd}/${idX}/ledger.json`, 'utf8');
+say(`X ledger rows before: ${JSON.parse(xLedger()).rows.length}, spent ${E.job(idX).cost.spent_usd}`);
+for (let rep = 1; rep <= 3; rep++) {
+  for (const variant of ['otherJobExisting', 'noJobId']) {
+    process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS = '60000';
+    const idS = E.h.start_simulation({ pdf_path: E.pdf(`s${rep}${variant}.pdf`, `s${rep}${variant}`) }).job_id;
+    delete process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS;
+    await E.waitFor('S awaiting', () => E.job(idS).state === 'awaiting_approval', 30000); E.approve(idS);
+    await E.waitFor('S marked row', () => (E.ledger(idS).rows || []).some((r) => r.sending_at), 20000);
+    await E.kill(idS);
+    const good = JSON.parse(fs.readFileSync(`${jd}/${idS}/ledger.json`, 'utf8'));
+    const bad = variant === 'otherJobExisting' ? { ...good, job_id: idX, rows: [] } : { rows: [] };
+    fs.writeFileSync(`${jd}/${idS}/ledger.json`, JSON.stringify(bad));
+    const xBefore = xLedger();
+    const pid = spawnRunnerDefault(E.config, idS); E.spawned.add(pid);
+    for (let i = 0; i < 200 && pidAlive(pid); i++) await sleep(50);
+    const j = E.job(idS);
+    const xAfter = xLedger();
+    say(`rep ${rep} ${variant}: runner exit ok=${!pidAlive(pid)} state=${j.state} reason=${JSON.stringify(j.reason)} X ledger changed=${xAfter !== xBefore} (rows now ${JSON.parse(xAfter).rows.length}) S ledger rows=${JSON.parse(fs.readFileSync(`${jd}/${idS}/ledger.json`, 'utf8')).rows.length} jobs/undefined exists=${fs.existsSync(`${jd}/undefined/ledger.json`)} sends=${E.sends(idS, 'skinning')}`);
+    if (xAfter !== xBefore) { fs.writeFileSync(`${jd}/${idX}/ledger.json`, xBefore); }
+    fs.rmSync(`${jd}/undefined`, { recursive: true, force: true });
+    if (pidAlive(pid)) process.kill(pid);
+  }
+}
+fs.writeFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s5-out.txt', out.join('\n') + '\n');
+await E.cleanup();
+===== s6-pidrace.mjs
+// s6: "a runner started for a job that has ended leaves at once and does not take runner.pid" (12.6),
+// including a runner started while another is finishing the job. N rounds; extra runners spawned across the last stage.
+// A violation = runner.pid names an EXTRA runner's pid after the job is done (or while done).
+import fs from 'node:fs';
+import { mkEnv, sleep, pidAlive, checkJob } from './common.mjs';
+import { spawnRunnerDefault } from 'file:///C:/RnD/Projects/3Dengine/engine/control.mjs';
+const ROUNDS = Number(process.argv[2] || 40); const EXTRAS = Number(process.argv[3] || 4);
+const box = { s: Number(process.argv[4] || 77) }; const rnd = () => { box.s = (box.s * 48271) % 2147483647; return box.s / 2147483647; };
+const E = await mkEnv({ prefix: 'qa7-s6-', stepMs: 100, callUsd: 0.6, heartbeat: 0.1 });
+const jd = E.config.jobsDir; let viol = 0; let seenPidOnDone = 0; const out = [];
+const say = (s) => { out.push(s); console.log(s); };
+const nap = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+for (let r = 0; r < ROUNDS; r++) {
+  const pdf = E.pdf(`r${r}.pdf`, `r${r}`);
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  await E.waitFor('awaiting', () => E.job(id).state === 'awaiting_approval', 30000, 5);
+  E.approve(id);
+  await E.waitFor('qa-ish', () => (process.argv[5] === 'early' ? ['gating'] : ['finishing', 'packaging', 'qa']).includes(E.job(id).state), 30000, 2);
+  const extras = [];
+  const t0 = Date.now(); const doneAtBox = {};
+  for (let k = 0; k < EXTRAS; k++) {
+    if (process.argv[5] !== 'early') await sleep(Math.floor(rnd() * 90));
+    const pid = spawnRunnerDefault(E.config, id); E.spawned.add(pid); extras.push(pid);
+  }
+  // after done: watch the pid file hard
+  await E.waitFor('done', () => E.job(id).state === 'done', 30000, 1);
+  const first = E.runnerPid(id);
+  const deadline = Date.now() + 1500; const seen = new Set();
+  while (Date.now() < deadline) {
+    const p = E.runnerPid(id);
+    if (p && extras.includes(p)) { seen.add(p); if (!globalThis.__f) globalThis.__f = performance.now(); globalThis.__l = performance.now(); }
+    nap(1);
+  }
+  const pf = E.runnerPid(id);
+  if (seen.size) { say(`   pid file named the extra for ${(globalThis.__l - globalThis.__f).toFixed(1)} ms (poll 1 ms), job state ${E.job(id).state}, get_job runner.alive meanwhile not measured`); globalThis.__f = 0; viol++; say(`round ${r}: runner.pid named an extra runner (${[...seen]}) AFTER done (job state done)`); }
+  if (pf) { viol++; say(`round ${r}: runner.pid still present at the end: ${pf}`); }
+  for (const p of extras) if (pidAlive(p)) { await sleep(200); }
+  const v = checkJob(E, id, { final: true }); if (v.length) say(`round ${r}: ${v.join('; ')}`);
+}
+say(`rounds ${ROUNDS} extras ${EXTRAS} violations(pid taken after done) ${viol}`);
+fs.appendFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s6-out.txt', out.join('\n') + '\n');
+await E.cleanup();
+===== s7-hold.mjs
+// s7: A duplicate in-flight calls (13.1)   B/C/D a busy job lock after the send (13.3): 8 s (live holder, mtime refreshed),
+// 12 s (live holder, mtime NOT refreshed, taken over at 10 s), 45 s (refreshed: the answer is lost after ~30 s, then a re-send)
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { mkEnv, sleep, pidAlive, frozenJob, toDone, checkJob, reports } from './common.mjs';
+import { createPaidCall, callKey, ledgerFile } from 'file:///C:/RnD/Projects/3Dengine/engine/ledger.mjs';
+import { newJob, writeJob, jobDir } from 'file:///C:/RnD/Projects/3Dengine/engine/jobs.mjs';
+const part = process.argv[2] || 'A';
+const HOLDER = 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/holder.mjs';
+const out = []; const say = (s) => { out.push(s); console.log(s); };
+let problems = 0; const P = (s) => { problems++; say('PROBLEM ' + s); };
+
+if (part === 'A') {
+  const E = await mkEnv({ prefix: 'qa7-s7a-' });
+  const jd = E.config.jobsDir; let n = 0;
+  const bare = () => { n++; const id = (n.toString(16).padStart(4, '0') + 'cd'.repeat(6)).slice(0, 16); fs.mkdirSync(jobDir(jd, id), { recursive: true }); const j = newJob({ id, mode: 'stub', now: new Date().toISOString(), input: { pdf_path: 'x', pdf_name: 'x', pdf_sha256: 'a', apartment: 'apt846' }, capUsd: 100 }); j.state = 'skinning'; j.approval = { cap_usd: 100, at: 'x' }; writeJob(jd, j); return id; };
+  const rows = (id) => JSON.parse(fs.readFileSync(ledgerFile(jd, id), 'utf8')).rows;
+  for (const size of [2, 5, 20]) {
+    const id = bare(); let sends = 0;
+    const pc = createPaidCall({ jobsDir: jd, jobId: id, stage: 'skinning', attempt: 1 });
+    const res = await Promise.all(Array.from({ length: size }, () => pc({ key: 'same', provider: 'p', what: 'w', estimate_usd: 0.6 }, async () => { sends++; await sleep(150); return { answer: { n: sends }, usd: 0.6 }; })));
+    say(`A same key x${size}: sends=${sends} rows=${rows(id).length} answers=${JSON.stringify([...new Set(res.map((r) => JSON.stringify(r)))])}`);
+    if (sends !== 1 || rows(id).length !== 1) P(`A x${size}: ${sends} sends, ${rows(id).length} rows`);
+  }
+  { // first fails: both get its error; a call after is a new call
+    const id = bare(); let sends = 0;
+    const pc = createPaidCall({ jobsDir: jd, jobId: id, stage: 'skinning', attempt: 1 });
+    const f = async () => { sends++; await sleep(100); throw new Error('provider said no'); };
+    const r = await Promise.allSettled([pc({ key: 'k', provider: 'p', what: 'w', estimate_usd: 1 }, f), pc({ key: 'k', provider: 'p', what: 'w', estimate_usd: 1 }, f)]);
+    say(`A failing first: ${r.map((x) => x.status + ':' + (x.reason?.message || '')).join(' | ')} sends=${sends} rows=${rows(id).map((x) => x.status)}`);
+    if (sends !== 1) P('A failing: more than one send');
+    const r3 = await pc({ key: 'k', provider: 'p', what: 'w', estimate_usd: 1 }, async () => { sends++; return { answer: 1, usd: 1 }; });
+    say(`A third call after the failure: sends=${sends} rows=${rows(id).map((x) => x.status)}`);
+  }
+  { // second duplicate with an invalid estimate
+    const id = bare(); let sends = 0;
+    const pc = createPaidCall({ jobsDir: jd, jobId: id, stage: 'skinning', attempt: 1 });
+    const a = pc({ key: 'z', provider: 'p', what: 'w', estimate_usd: 0.6 }, async () => { sends++; await sleep(200); return { answer: 'A', usd: 0.6 }; });
+    await sleep(30);
+    const b = await pc({ key: 'z', provider: 'p', what: 'w', estimate_usd: 'abc' }, async () => { sends++; return { answer: 'B' }; }).then((v) => `answer ${v}`, (e) => `${e.code}`);
+    await a;
+    say(`A duplicate with estimate "abc": ${b}, sends=${sends}  (15.1b says STAGE_FAILED; 13.1 says it gets the answer)`);
+  }
+  { // different keys side by side
+    const id = bare(); let sends = 0;
+    const pc = createPaidCall({ jobsDir: jd, jobId: id, stage: 'skinning', attempt: 1 });
+    await Promise.all(Array.from({ length: 6 }, (_, i) => pc({ key: `d${i}`, provider: 'p', what: 'w', estimate_usd: 1 }, async () => { sends++; await sleep(50); return { answer: i, usd: 1 }; })));
+    const r = rows(id);
+    say(`A 6 different keys: sends=${sends} rows=${r.length} seqs=${r.map((x) => x.seq)} statuses=${[...new Set(r.map((x) => x.status))]}`);
+    if (sends !== 6 || r.length !== 6 || new Set(r.map((x) => x.seq)).size !== 6) P('A different keys: lost or duplicated rows');
+  }
+  await E.cleanup();
+} else {
+  const [holdMs, refresh, label] = { B: [8000, true, '8s refreshed'], C: [12000, false, '12s NOT refreshed'], D: [45000, true, '45s refreshed'] }[part];
+  const E = await mkEnv({ prefix: `qa7-s7${part}-`, stepMs: 200, staleSeconds: 1, heartbeat: 0.1 });
+  const f = await frozenJob(E, { name: `h${part}`, point: 'skinning:sent' });
+  const lock = E.jobPath(f.id, 'job.lock');
+  const h = spawn(process.execPath, [HOLDER, lock, String(holdMs), refresh ? 'refresh' : 'norefresh'], { stdio: ['ignore', 'pipe', 'ignore'] });
+  E.spawned.add(h.pid);
+  await new Promise((r) => h.stdout.once('data', r));
+  const t0 = Date.now();
+  f.wake();
+  await E.waitFor('runner past the send', () => E.log(f.id).includes('the block at'), 5000, 10);
+  // watch the ledger: when does the skinning row get settled / what happens
+  let settledAt = null; let lostAt = null; let sendsMax = 0;
+  const deadline = Date.now() + 70000;
+  while (Date.now() < deadline) {
+    const log = E.log(f.id);
+    sendsMax = Math.max(sendsMax, E.sends(f.id, 'skinning'));
+    let rows = []; try { rows = JSON.parse(fs.readFileSync(E.jobPath(f.id, 'ledger.json'), 'utf8')).rows; } catch {}
+    if (!settledAt && rows.some((r) => r.stage === 'skinning' && r.status === 'settled')) settledAt = Date.now() - t0;
+    if (!lostAt && /could not|lock busy/.test(log) && E.sends(f.id, 'skinning') >= 2) lostAt = Date.now() - t0;
+    if (E.job(f.id).state === 'awaiting_approval' && !E.job(f.id).approval) E.approve(f.id);
+    if (E.job(f.id).state === 'done') break;
+    await sleep(100);
+  }
+  const rows = E.ledger(f.id).rows;
+  say(`${part} holder ${label}: settledAt=${settledAt}ms sends=${E.sends(f.id, 'skinning')} state=${E.job(f.id).state} skinning rows=${rows.filter((r) => r.stage === 'skinning').map((r) => `${r.seq}:${r.status}${r.late ? '+late' : ''}`).join(' ')}`);
+  const log = E.log(f.id).split('\n').filter((l) => /waits|answer stays|could not|orphan|reserved row|never sent/.test(l));
+  say(`   log lines: ${log.length}; first: ${(log[0] || '').slice(0, 160)}; last: ${(log.at(-1) || '').slice(0, 160)}`);
+  if (part !== 'D' && (E.sends(f.id, 'skinning') !== 1)) P(`${part}: the answer was lost / call sent ${E.sends(f.id, 'skinning')} times with the lock busy only ${label}`);
+  if (part === 'D') say(`   D expectation (13.3): answer kept for up to 30 s, then lost -> one more send; sends=${E.sends(f.id, 'skinning')}`);
+  try { process.kill(h.pid); } catch {}
+  await sleep(300); fs.rmSync(lock, { force: true });
+  await toDone(E, f.id, 60000).catch((e) => P(`${part}: ${e.message}`));
+  await sleep(200);
+  const v = checkJob(E, f.id, { final: true }); const rp = await reports(E, f.id);
+  if (v.length || rp.bad.length) P(`${part}: ${[...v, ...rp.bad].join('; ')}`);
+  await E.cleanup();
+}
+say(`part ${part} PROBLEMS ${problems}`);
+fs.appendFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s7-out.txt', out.join('\n') + '\n');
+===== s9-heavydead.mjs
+// s9: the holder of the heavy lock is hard-killed (default staleSeconds 10): the waiting job must take the lock at once (dead pid), not after 10 s.
+import fs from 'node:fs';
+import { mkEnv, sleep, pidAlive, checkJob, overlapRendering, toDone } from './common.mjs';
+const N = Number(process.argv[2] || 8);
+const E = await mkEnv({ prefix: 'qa7-s9-', stepMs: 1200, heartbeat: 0.2 });
+const out = []; const say = (s) => { out.push(s); console.log(s); }; let kills = 0, problems = 0;
+for (let i = 0; i < N; i++) {
+  const pa = E.pdf(`a${i}.pdf`, `a${i}`); const pb = E.pdf(`b${i}.pdf`, `b${i}`);
+  const idA = E.h.start_simulation({ pdf_path: pa }).job_id;
+  const idB = E.h.start_simulation({ pdf_path: pb }).job_id;
+  await E.waitFor('one holds, other waits', () => { const h = E.heavy(); if (!h) return false; const other = h.job_id === idA ? idB : idA; return E.job(other).waiting_for === 'heavy-lock'; }, 40000, 5);
+  const holder = E.heavy().job_id; const waiter = holder === idA ? idB : idA;
+  await sleep(Math.floor(Math.random() * 500));
+  if (E.heavy()?.job_id !== holder) { say(`round ${i}: holder finished first, skipped`); await toDone(E, idA, 60000); await toDone(E, idB, 60000); continue; }
+  const t0 = Date.now();
+  await E.kill(holder); kills++;
+  await E.waitFor('waiter rendering', () => E.job(waiter).state === 'rendering' && !E.job(waiter).waiting_for && E.heavy()?.job_id === waiter, 15000, 5);
+  const dt = Date.now() - t0;
+  say(`round ${i}: killed holder (state ${E.job(holder).state}) -> waiter owns heavy + rendering after ${dt} ms`);
+  if (dt > 2500) { problems++; say(`PROBLEM waited ${dt} ms`); }
+  E.h.start_simulation({ pdf_path: holder === idA ? pa : pb });
+  await toDone(E, idB, 60000); await toDone(E, idA, 60000);
+  const ov = overlapRendering(E, [idA, idB]); const v = [...checkJob(E, idA, { final: true }), ...checkJob(E, idB, { final: true }), ...ov];
+  if (v.length) { problems++; say(`PROBLEM ${v.join('; ')}`); }
+}
+say(`kills ${kills} PROBLEMS ${problems}`);
+fs.appendFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s9-out.txt', out.join('\n') + '\n');
+await E.cleanup();
+===== s10-realcache.mjs
+// s10: D4(a) with REAL runners: kill inside the pause after the mark (row reserved + sending_at), plant a cache file with a
+// bad / good settled_usd, resume with a real runner. Bad -> call sent again, row orphaned, settled 0.6; good -> recovered, no send.
+import fs from 'node:fs';
+import { mkEnv, sleep, checkJob, reports, toDone, isAmt } from './common.mjs';
+const VALS = { missing: undefined, null: 'null', text: '"0.4"', neg: '-0.5', negtiny: '-1e-9', inf: '1e999', big: '1e308', over: '1000000.01', bool: 'true', arr: '[0.4]', obj: '{"a":1}', good04: '0.4', zero: '0', max: '1000000', goodmany: '0.1234567891' };
+const E = await mkEnv({ prefix: 'qa7-s10-', stepMs: 150, heartbeat: 0.1 });
+const out = []; const say = (s) => { out.push(s); console.log(s); }; let problems = 0, kills = 0, k = 0;
+for (const [name, vt] of Object.entries(VALS)) {
+  k++;
+  const pdf = E.pdf(`c${k}.pdf`, `c${k}`);
+  process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS = '60000';
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  delete process.env.ENGINE_TEST_PAUSE_AFTER_RESERVE_MS;
+  await E.waitFor('aw', () => E.job(id).state === 'awaiting_approval', 30000); E.approve(id);
+  await E.waitFor('marked', () => (E.ledger(id).rows || []).some((r) => r.sending_at), 20000);
+  await E.kill(id); kills++;
+  const row = E.ledger(id).rows[0];
+  const body = `{"answer":{"stage":"skinning","stub":true}${vt === undefined ? '' : `,"settled_usd":${vt}`},"seq":1}`;
+  fs.mkdirSync(E.jobPath(id, 'cache'), { recursive: true });
+  fs.writeFileSync(E.jobPath(id, `cache/${row.call_key}.json`), body);
+  const before = E.sends(id, 'skinning');
+  E.h.start_simulation({ pdf_path: pdf });
+  await toDone(E, id, 40000); await sleep(150);
+  const rows = E.ledger(id).rows.filter((r) => r.stage === 'skinning');
+  const sent = E.sends(id, 'skinning') - before;
+  const valid = vt !== undefined && (() => { try { return isAmt(JSON.parse(vt)); } catch { return false; } })();
+  const rp = await reports(E, id); const v = checkJob(E, id, { final: true });
+  say(`${name.padEnd(8)} valid=${valid} resumed sends=${sent} skinning rows=${rows.map((r) => `${r.seq}:${r.status}${r.recovered ? '+rec' : ''}(${r.settled_usd})`).join(' ')} reported spent=${rp.truth} (get_job/list/get_result agree: ${rp.bad.length === 0})`);
+  if (valid !== (sent === 0)) { problems++; say(`PROBLEM ${name}: valid=${valid} but sends=${sent}`); }
+  if (v.length || rp.bad.length) { problems++; say(`PROBLEM ${name}: ${[...v, ...rp.bad].join('; ')}`); }
+  if (valid) { const want = Math.round(JSON.parse(vt) * 1e6) / 1e6; if (rows[0].settled_usd !== want) { problems++; say(`PROBLEM ${name}: row1 settled ${rows[0].settled_usd} want ${want}`); } }
+}
+say(`kills ${kills} PROBLEMS ${problems}`);
+fs.appendFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r7/s10-out.txt', out.join('\n') + '\n');
+await E.cleanup();
+===== selftest.mjs
+import fs from 'node:fs';
+import { mkEnv, checkJob } from './common.mjs';
+const E = await mkEnv({ prefix: 'qa7-self-', stepMs: 100 });
+const id = E.h.start_simulation({ pdf_path: E.pdf('x.pdf', 'x') }).job_id;
+await E.waitFor('aw', () => E.job(id).state === 'awaiting_approval', 20000); E.approve(id);
+await E.waitFor('done', () => E.job(id).state === 'done', 30000);
+console.log('clean job:', JSON.stringify(checkJob(E, id, { final: true })));
+const lf = E.jobPath(id, 'ledger.json'); const good = fs.readFileSync(lf, 'utf8');
+const L = JSON.parse(good);
+const tweaks = { 'reserved at done': (d) => { d.rows[0].status = 'reserved'; d.rows[0].settled_usd = null; }, 'orphaned w/o mark': (d) => { d.rows[0].status = 'orphaned'; d.rows[0].sending_at = null; d.rows[0].settled_usd = null; }, 'two plain settled': (d) => { d.rows.push({ ...d.rows[0], seq: 99 }); }, 'bad amount': (d) => { d.rows[0].settled_usd = -1; }, 'null settled': (d) => { d.rows[0].settled_usd = null; } };
+for (const [n, f] of Object.entries(tweaks)) { const d = JSON.parse(good); f(d); fs.writeFileSync(lf, JSON.stringify(d)); console.log(n, '->', JSON.stringify(checkJob(E, id, { final: true })).slice(0, 200)); }
+fs.writeFileSync(lf, good);
+fs.appendFileSync(E.jobPath(id, 'stages/skinning/sends.log'), 'x\nx\nx\n'); console.log('extra sends ->', JSON.stringify(checkJob(E, id, { final: true })).slice(0, 160));
+await E.cleanup();

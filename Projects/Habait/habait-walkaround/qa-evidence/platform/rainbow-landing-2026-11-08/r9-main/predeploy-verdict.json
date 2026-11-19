@@ -1,0 +1,602 @@
+{
+ "$schema": "habait/responsive-gate.v1",
+ "at": "2026-11-09T14:22:27.572Z",
+ "rule": "Eliran 2026-11-05: desktop AND mobile, in code",
+ "sizes": [
+  {
+   "width": 1440,
+   "height": 900
+  },
+  {
+   "width": 390,
+   "height": 844
+  }
+ ],
+ "pass": true,
+ "pages": [
+  {
+   "url": "/",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "root-1440.png"
+  },
+  {
+   "url": "/",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "root-390.png"
+  },
+  {
+   "url": "/landing.html",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "landing-html-1440.png"
+  },
+  {
+   "url": "/landing.html",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "landing-html-390.png"
+  },
+  {
+   "url": "/apartment.html",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "apartment-html-1440.png"
+  },
+  {
+   "url": "/apartment.html",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "apartment-html-390.png"
+  },
+  {
+   "url": "/hold/",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "canvas#c «»",
+    "area": 1296000
+   },
+   "screenshot": "hold-1440.png"
+  },
+  {
+   "url": "/hold/",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "canvas#c «»",
+    "area": 329160
+   },
+   "screenshot": "hold-390.png"
+  },
+  {
+   "url": "/studio/",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "studio-1440.png"
+  },
+  {
+   "url": "/studio/",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "studio-390.png"
+  },
+  {
+   "url": "/tour/?room=entrance",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-entrance-1440.png"
+  },
+  {
+   "url": "/tour/?room=entrance",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-entrance-390.png"
+  },
+  {
+   "url": "/tour/?room=kitchen",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-kitchen-1440.png"
+  },
+  {
+   "url": "/tour/?room=kitchen",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-kitchen-390.png"
+  },
+  {
+   "url": "/tour/?room=dining",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-dining-1440.png"
+  },
+  {
+   "url": "/tour/?room=dining",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-dining-390.png"
+  },
+  {
+   "url": "/tour/?room=living",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-living-1440.png"
+  },
+  {
+   "url": "/tour/?room=living",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-living-390.png"
+  },
+  {
+   "url": "/tour/?room=terraceLiving",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-terraceLiving-1440.png"
+  },
+  {
+   "url": "/tour/?room=terraceLiving",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-terraceLiving-390.png"
+  },
+  {
+   "url": "/tour/?room=terraceBedroom",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-terraceBedroom-1440.png"
+  },
+  {
+   "url": "/tour/?room=terraceBedroom",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-terraceBedroom-390.png"
+  },
+  {
+   "url": "/tour/?room=bedroomMain",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-bedroomMain-1440.png"
+  },
+  {
+   "url": "/tour/?room=bedroomMain",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-bedroomMain-390.png"
+  },
+  {
+   "url": "/tour/?room=wardrobe",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-wardrobe-1440.png"
+  },
+  {
+   "url": "/tour/?room=wardrobe",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-wardrobe-390.png"
+  },
+  {
+   "url": "/tour/?room=bathMain",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-bathMain-1440.png"
+  },
+  {
+   "url": "/tour/?room=bathMain",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-bathMain-390.png"
+  },
+  {
+   "url": "/tour/?room=bedroom2",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-bedroom2-1440.png"
+  },
+  {
+   "url": "/tour/?room=bedroom2",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-bedroom2-390.png"
+  },
+  {
+   "url": "/tour/?room=bathguest",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "tour-room-bathguest-1440.png"
+  },
+  {
+   "url": "/tour/?room=bathguest",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "tour-room-bathguest-390.png"
+  }
+ ]
+}

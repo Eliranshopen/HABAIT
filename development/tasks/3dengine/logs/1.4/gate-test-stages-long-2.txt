@@ -1,0 +1,32 @@
+milestone 1.4 gate: npm run test:stages, the WHOLE tier (five files side by side), ONE bounded run of up to 25 minutes in the background (Eliran, 2026-11-18, for the engine's stage tests on a loaded machine). Before it: a foreground run under 540 s was cut with all five files still reading (gate-test-stages-2-cut-at-540s.txt; a render of another session held the machine at 100 %). The 1.4 file goes on from the checkpoint of its first run (made 2026-11-18 14:41, 557 s).
+started: 2026-11-18T20:25:46+02:00
+machine load before: 100 %
+
+> habait-3dengine@1.4.0 test:stages
+> node --test "tests/stages/**/*.test.mjs"
+
+✔ 3. the paid path, walked without paying: the vision call is booked before it is sent, carries the key in its header on either route, and a refused call costs nothing (105701.1742ms)
+✔ 1. the 846 PDF from the saved reading, at $0: exit 0, 10 of 10 rooms, every printed dimension within 1 % (0.83 % at most); the measured run again, byte for byte (338769.3427ms)
+✔ 2. the 846 PDF from ONE fresh reading (paid, $0.04 inside a cap of $0.50): PASS, 10 of 10 rooms, every printed dimension within 1 %; asserted from the evidence the run wrote, with no call (287.9331ms)
+✔ 4. the 846 PDF with its true saved reading: the reading passes, its five files are the stage's outputs, and the job stops at the build (345200.398ms)
+✔ 5. no answer of a tool, no job file and no line of the runner's log holds a name the reading took from the drawing (33.4217ms)
+✔ the fixture: the saved reading of 846 with ONE printed dimension changed by hand, and nothing else (1996.968ms)
+✔ 1. a reading with a printed dimension changed by hand: the job ends in review with TRACE_GATE_FAIL, and the build never starts (333108.2998ms)
+✔ 2. a PDF with no drawing: NO_PLAN_FOUND, and no job is made (5589.2042ms)
+✔ 3. a PDF that has a drawing and no saved reading: failed / BUDGET_CAP; the reading tool never starts, nothing is billed (4768.1494ms)
+✔ 5. no answer of a tool, no job file and no line of a runner's log holds a name the reading took from the drawing (32.3164ms)
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (2201.9642ms)
+ℹ going on from the first run of an earlier invocation (made 2026-11-18T12:41:44.720Z, 557 s): it is not made again
+✔ 2. the SECOND run, a real job of the same PDF: it reads from the store, books $0, makes NO request, and its plan is the first run's, byte for byte (335227.4923ms)
+✔ 3. `reading show`: what is kept, in numbers and fixed words; and no room name of the reading in any answer, job file, record or log (532.1737ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 347575.8934
+exit code: 0
+seconds: 359
+machine load after: 65 %

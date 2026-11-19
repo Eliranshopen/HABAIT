@@ -1,0 +1,48 @@
+  cancel0 tracing 2904ms done
+  cancel1 skinning:reserved 2803ms done
+  cancel2 tracing 3651ms done
+  cancel3 finishing:reserved 3350ms done
+  cancel4 gating:reserved 2845ms done
+  cancel5 packaging 2856ms done
+{
+ "script": "a2c-cancel",
+ "seed": 601,
+ "takeovers": 6,
+ "kills": 0,
+ "jobsDone": 6,
+ "checks": 116,
+ "res": {
+  "cancel0 tracing 2904ms": {
+   "rowsBefore": 3,
+   "rowsAfterCancel": 3,
+   "cancelledState": "cancelled"
+  },
+  "cancel1 skinning:reserved 2803ms": {
+   "rowsBefore": 4,
+   "rowsAfterCancel": 4,
+   "cancelledState": "cancelled"
+  },
+  "cancel2 tracing 3651ms": {
+   "rowsBefore": 3,
+   "rowsAfterCancel": 3,
+   "cancelledState": "cancelled"
+  },
+  "cancel3 finishing:reserved 3350ms": {
+   "rowsBefore": 6,
+   "rowsAfterCancel": 6,
+   "cancelledState": "cancelled"
+  },
+  "cancel4 gating:reserved 2845ms": {
+   "rowsBefore": 5,
+   "rowsAfterCancel": 5,
+   "cancelledState": "cancelled"
+  },
+  "cancel5 packaging 2856ms": {
+   "rowsBefore": 7,
+   "rowsAfterCancel": 7,
+   "cancelledState": "cancelled"
+  }
+ },
+ "violations": [],
+ "leftover": []
+}

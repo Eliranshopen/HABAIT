@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, SCR } from './qa-lib.mjs';
+const h = await makeHome({ timeout: 90 });
+for (let round = 0; round < 5; round++) {
+  const f = `${h.inbox}/r${round}.pdf`;
+  fs.writeFileSync(f, Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from(`\n%race ${round} ${Date.now()}\n`)]));
+  const go = Date.now() + 2500;
+  const outs = await Promise.all([0, 1, 2].map(() => new Promise((res) => { const p = spawn(process.execPath, [`${SCR}/qa-worker.mjs`, 'start_simulation', f, String(go)], { env: { ...process.env, ...h.env }, stdio: ['ignore', 'pipe', 'pipe'] }); let o = ''; p.stdout.on('data', (d) => { o += d; }); p.on('exit', () => res(o.trim().split('\n').pop())); })));
+  const parsed = outs.map((o) => { try { return JSON.parse(o); } catch { return { raw: o }; } });
+  console.log('round', round, 'created:true', parsed.filter((x) => x.created === true).length, 'ok', parsed.filter((x) => x.ok).length, 'ids', new Set(parsed.map((x) => x.job_id)).size, parsed.filter((x) => !x.ok).map((x) => x.code));
+}

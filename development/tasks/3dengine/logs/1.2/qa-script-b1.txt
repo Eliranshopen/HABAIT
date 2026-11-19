@@ -1,0 +1,112 @@
+// QA 1.2 part B1: fake-tool matrix. Section 2 (cost) and section 1 (values handed to the tool). No real tool, no network.
+// Run: node b1.mjs   (copy of this file kept as qa-script-b1.txt)
+import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'; import { EventEmitter } from 'node:events';
+const ENG = 'file:///C:/RnD/Projects/3Dengine/engine/';
+const { loadConfig } = await import(ENG + 'config.mjs');
+const T = await import(ENG + 'trace.mjs');
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'qa12-b1-')).replace(/\\/g, '/');
+const PDF = 'C:/RnD/Projects/3Dengine/tests/fixtures/apt846/source.pdf';
+const READ = 'C:/RnD/Projects/3Dengine/tests/fixtures/apt846/saved-reading.json';
+const base = loadConfig({ env: {} });
+let n = 0, bad = 0;
+const note = (ok, what) => { n++; if (!ok) { bad++; if (bad < 40) console.log('BREAK', what); } };
+let spawns = [];
+const spawn = (cmd, args, opts) => {
+  const c = new EventEmitter(); c.pid = 4242; spawns.push({ args, env: opts.env, cwd: opts.cwd });
+  setImmediate(() => { fs.writeFileSync(path.join(args[args.indexOf('--out') + 1], 'index.json'), '{}'); c.emit('exit', 0); });
+  return c;
+};
+const KEYNAMES = ['FAL_KEY', 'OPENROUTER_API_KEY'];
+const isKey = (name) => KEYNAMES.some((k) => k === name.toUpperCase());
+const envs = [
+  { FAL_KEY: 'FAKEVAL1', OPENROUTER_API_KEY: 'FAKEVAL2' },
+  { fal_key: 'FAKEVAL1', Openrouter_Api_Key: 'FAKEVAL2' },
+  { Fal_Key: 'FAKEVAL1' }, { OPENROUTER_API_KEY: 'FAKEVAL2', PATH: 'x' }, {},
+];
+const settingsVariants = [
+  ['default', base], ['envRoot-with-keys', { ...base, envRoot: 'C:/RnD' }],
+  ['lower-names', { ...base, keys: ['fal_key', 'openrouter_api_key'] }],
+];
+const goV = [true, false, 'true', 1, undefined, null];
+const budV = [undefined, null, 0, 0.05, '0.05', NaN, Infinity, -1, 1, 1.0001, 5, 1e-9, -0];
+const vlmV = [null, READ]; const judgeV = [true, false, undefined, 'false', 0, null];
+let id = 0;
+for (const [sn, cfg] of settingsVariants) for (const env of envs) for (const go of goV) for (const b of budV) for (const vlm of vlmV) for (const judge of judgeV) {
+  spawns = []; const out = `${root}/r${++id}`;
+  const opts = { pdf: PDF, outDir: out, id: 'apt846', vlmFile: vlm, judge, go, budgetUsd: b };
+  let res = null, err = null;
+  try { res = await T.runTrace(cfg, opts, { env, spawn, killWaitMs: 50 }); } catch (e) { err = e; }
+  const max = cfg.trace.maxBudgetUsd;
+  const validCap = typeof b === 'number' && Number.isFinite(b) && b > 0 && b <= max;
+  const capGiven = b !== undefined && b !== null;
+  const wantErr = (capGiven && !validCap) || (go === true && !capGiven);
+  const paidOracle = go === true && validCap;
+  const needCall = (vlm ? 0 : 1) + (judge !== false ? 3 : 0) > 0;
+  const tag = `${sn}|env${JSON.stringify(Object.keys(env))}|go=${String(go)}|b=${String(b)}|vlm=${!!vlm}|judge=${String(judge)}`;
+  if (wantErr) { note(err instanceof T.TraceUsageError && spawns.length === 0, 'should be usage error ' + tag); continue; }
+  if (err) { note(false, 'unexpected throw ' + err.message + ' ' + tag); continue; }
+  if (!paidOracle && needCall) { note(res.outcome === 'DRY' && spawns.length === 0 && !fs.existsSync(out), 'should be DRY ' + tag); continue; }
+  note(spawns.length === 1, 'should have started once ' + tag); if (spawns.length !== 1) continue;
+  const a = spawns[0].args; const budget = Number(a[a.indexOf('--budget') + 1]); const er = a[a.indexOf('--env-root') + 1];
+  const keyLeft = Object.keys(spawns[0].env).filter(isKey);
+  if (paidOracle) {
+    note(budget === b && er === cfg.envRoot.replace(/\\/g, '/') && a.includes('--ledger'), 'paid args ' + tag); note(res.paid === true, 'paid flag ' + tag);
+  } else {
+    note(budget === 0, 'free budget>0! ' + tag);
+    note(er === out, 'free env-root is not own folder ' + tag);
+    note(!a.includes('--ledger'), 'free has ledger ' + tag);
+    if (sn !== 'lower-names') note(keyLeft.length === 0, 'free run kept a key name in env ' + keyLeft + ' ' + tag);
+    else note(keyLeft.length === 0, 'free run kept a key name in env (lower-case names in settings) ' + keyLeft + ' ' + tag);
+    note(res.paid === false, 'paid flag on free ' + tag);
+  }
+}
+console.log('B1 section 2 matrix', { runs: id, checks: n, breaks: bad });
+// ids
+const idCases = ['--no-judge', '--budget', '--go', '-x', '-', '', ' ', 'a b', 'a\nb', 'apt846\n', '\napt846', 'a'.repeat(65), 'א', 'ａpt', 'a/b', 'a\\b', '..', 'a.b', '_a', 'a'.repeat(64), '0', undefined, null, 5, ['a'], { toString() { return 'a'; } }];
+let idBad = 0;
+for (const c of idCases) {
+  spawns = [];
+  let err = null; try { await T.runTrace(base, { pdf: PDF, outDir: `${root}/i${++id}`, id: c, vlmFile: READ, judge: false }, { env: {}, spawn, killWaitMs: 50 }); } catch (e) { err = e; }
+  const ok = c === undefined || (typeof c === 'string' && T.TRACE_ID_RE.test(c));
+  const started = spawns.length === 1;
+  const a = started ? spawns[0].args : [];
+  const flagsOk = !started || (a.filter((x) => x === '--no-judge').length === 1 && a.filter((x) => x === '--budget').length === 1 && a.indexOf('--id') > 0 && /^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/.test(a[a.indexOf('--id') + 1]));
+  if ((ok !== started) || !flagsOk) { idBad++; console.log('BREAK id', JSON.stringify(c), { started, err: err && err.message }); }
+  else console.log('id', JSON.stringify(c)?.slice(0, 20), started ? 'accepted' : 'refused');
+}
+console.log('B1 section 1 ids', { cases: idCases.length, breaks: idBad });
+// paths
+const mk = (name, content) => { const p = `${root}/${name}`; fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, content); return p; };
+const folderPdf = `${root}/folder.pdf`; fs.mkdirSync(folderPdf);
+fs.mkdirSync(`${root}/emptyd`);
+const pcases = [
+  ['pdf is a folder', { pdf: folderPdf, vlmFile: READ }], ['pdf missing', { pdf: `${root}/none.pdf`, vlmFile: READ }],
+  ['pdf relative', { pdf: path.relative(process.cwd(), PDF), vlmFile: READ }, true],
+  ['pdf with space + hebrew', { pdf: mk('תיקיה עם רווח/קובץ תוכנית.pdf', '%PDF-1.4'), vlmFile: READ }, true],
+  ['pdf named --no-judge.pdf', { pdf: mk('--no-judge.pdf', '%PDF'), vlmFile: READ }, true],
+  ['vlm not json', { pdf: PDF, vlmFile: mk('v1.json', 'not json') }], ['vlm array', { pdf: PDF, vlmFile: mk('v2.json', '[]') }],
+  ['vlm null', { pdf: PDF, vlmFile: mk('v3.json', 'null') }], ['vlm number', { pdf: PDF, vlmFile: mk('v4.json', '5') }],
+  ['vlm empty file', { pdf: PDF, vlmFile: mk('v5.json', '') }], ['vlm folder', { pdf: PDF, vlmFile: root }],
+  ['vlm BOM json', { pdf: PDF, vlmFile: mk('v6.json', '\uFEFF{"a":1}') }],
+  ['vlm {} ', { pdf: PDF, vlmFile: mk('v7.json', '{}') }, true],
+  ['vlm missing', { pdf: PDF, vlmFile: `${root}/nope.json` }],
+  ['out is a file', { pdf: PDF, vlmFile: READ, outDir: mk('afile', 'x') }],
+  ['out nonempty', { pdf: PDF, vlmFile: READ, outDir: path.dirname(mk('ne/x', 'x')) }],
+  ['out empty existing', { pdf: PDF, vlmFile: READ, outDir: `${root}/emptyd` }, true],
+  ['out named --budget', { pdf: PDF, vlmFile: READ, outDir: `${root}/--budget` }, true],
+  ['out with space+hebrew', { pdf: PDF, vlmFile: READ, outDir: `${root}/פלט עם רווח/run` }, true],
+  ['out relative', { pdf: PDF, vlmFile: READ, outDir: path.relative(process.cwd(), `${root}/rel1`) }, true],
+  ['out has hidden .env', { pdf: PDF, vlmFile: READ, outDir: path.dirname(mk('hid/.env', 'X=1')) }],
+];
+let pb = 0;
+for (const [name, o, shouldStart] of pcases) {
+  spawns = []; let err = null;
+  try { await T.runTrace(base, { outDir: `${root}/p${++id}`, judge: false, id: 'apt846', ...o }, { env: {}, spawn, killWaitMs: 50 }); } catch (e) { err = e; }
+  const started = spawns.length === 1; const want = !!shouldStart;
+  let abs = true;
+  if (started) { const a = spawns[0].args; for (const k of ['--out', '--vlm-file']) { const v = a[a.indexOf(k) + 1]; if (v && !path.isAbsolute(v)) abs = false; } if (!path.isAbsolute(a[1])) abs = false; if (!path.isAbsolute(a[0])) abs = false;
+    for (const f of ['--no-judge', '--budget', '--id', '--vlm-file', '--out', '--env-root']) if (a.filter((x) => x === f).length > 1) abs = false; }
+  if (started !== want || !abs) { pb++; console.log('BREAK path', name, { started, abs, err: err && err.message }); } else console.log('path', name, started ? 'started(abs)' : 'refused: ' + (err ? err.message : '?'));
+}
+console.log('B1 section 1 paths', { cases: pcases.length, breaks: pb });
+console.log('root', root);

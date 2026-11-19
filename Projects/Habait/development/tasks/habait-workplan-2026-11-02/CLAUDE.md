@@ -1,11 +1,11 @@
 # habait-workplan-2026-11-02/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The board that breaks part C of HABAIT-RESEARCH-2026-11-02 (engine to platform workplan) into task-NN cards, with run-tasks.md, gates/ and qa/ (README in Hebrew).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 39 files here · 2 subfolders · 124 files / 55.9 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

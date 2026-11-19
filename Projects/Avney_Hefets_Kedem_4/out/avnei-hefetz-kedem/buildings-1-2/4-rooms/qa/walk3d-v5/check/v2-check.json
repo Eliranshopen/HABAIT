@@ -1,0 +1,73 @@
+{
+ "steps": [
+  {
+   "n": "d rings in view",
+   "ok": true,
+   "rings": [
+    "coffee",
+    "rug",
+    "sofa"
+   ]
+  },
+  {
+   "n": "d catalog bar with generated tiles",
+   "ok": true
+  },
+  {
+   "n": "d a generated sofa is placed",
+   "ok": true,
+   "state": {
+    "slot:sofa": "cat:sofa_leather"
+   }
+  },
+  {
+   "n": "free text: velvet armchair + walnut floor",
+   "ok": true,
+   "st": {
+    "slot:sofa": "cat:sofa_leather",
+    "slot:armchair": "cat:arm_velvet",
+    "floor": "walnut",
+    "floorm": "walnut",
+    "floorb": "walnut"
+   }
+  },
+  {
+   "n": "clock",
+   "ok": true
+  },
+  {
+   "n": "design panel",
+   "ok": true
+  },
+  {
+   "n": "view from above",
+   "ok": true
+  },
+  {
+   "n": "p rings in view",
+   "ok": false,
+   "rings": []
+  },
+  {
+   "n": "p catalog bar with generated tiles",
+   "ok": true
+  },
+  {
+   "n": "p a generated sofa is placed",
+   "ok": true,
+   "state": {
+    "slot:sofa": "cat:sofa_leather"
+   }
+  },
+  {
+   "n": "p design sheet",
+   "ok": true
+  }
+ ],
+ "errors": [],
+ "overflow": {
+  "d": false,
+  "p": false
+ },
+ "pass": false
+}

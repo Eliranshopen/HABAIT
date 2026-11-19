@@ -1,0 +1,64 @@
+Milestone 1.2 (reading the 846 plan inside the engine): the gate.
+Run by the main session on 2026-11-18 in the worktree C:/RnD/.wt/3dengine/Projects/3Dengine, on the code that is committed as the milestone.
+
+THE MACHINE DURING THIS GATE
+  Other sessions rendered with Blender on this machine for most of it. The load read before every run is in the last line of that run's file.
+
+THE GATE
+  closing test    npm run test:stages   3 tests, 3 pass, 220 s (load before: 100 %, 1 Blender)                 gate-stages-1.txt
+                    1. the 846 PDF from the saved reading, the real tool through the engine's command: exit 0, PASS, room count 10 of 10,
+                       18 printed-dimension checks within 1 % (0.82 % at most; the plan's line: 0.83 %), the three measurement files byte for byte
+                       those of the measured run, $0, no ledger file, two planted keys never reach the tool                                  212 s
+                    2. the ONE paid reading of 2026-11-18, from its pinned evidence, no call: PASS, 10 of 10, 18 checks within 1 %
+                       (0.82 % at most), the ledger's four rows, the total 0.0403605 USD inside the cap of 0.50 USD                          0.03 s
+                    3. the paid path walked without paying (planted keys, a recording fetch): the key's header on both routes,
+                       the call in the ledger although refused, a refused call costs $0                                                      62 s
+  fast suite      npm test (unit tests + the closing tests of 0.1 to 1.1, line coverage of engine/** and mcp/**), three runs one after another:
+                    390 tests  390 pass  0 fail  207.4 s  lines 99.74 %  (load before: 100 %, 1 Blender)    gate-npm-test-1.txt
+                    390 tests  390 pass  0 fail  199.3 s  lines 99.74 %  (load before: 88 %, 1 Blender)     gate-npm-test-2.txt
+                    390 tests  390 pass  0 fail  198.4 s  lines 99.74 %  (load before: 32 %, 1 Blender)     gate-npm-test-3.txt
+  end to end      npm run test:e2e      51 of 51, 130 s                                                       gate-e2e.txt
+  readiness       node engine/cli.mjs doctor   READY (both key names present)                                 gate-doctor.txt
+  no soak: this milestone does not touch the runner, the manifest or the ledger of a job.
+
+THE PAID READING (task 05; Eliran's cap: 0.50 USD, given in the session's question dialog on 2026-11-18)
+  dry run        nothing started, nothing created                                                              fresh/dry-run.txt
+  attempt 1      REFUSED by the provider: HTTP 401, 11 s into the run, before any reading; billed 0            fresh/attempt-1/
+                 cause: the tool sent its call to OpenRouter without the key's header (Projects/3Dengine/pipeline/PORT-CHANGES.md)
+  attempt 2      after the one-line change of the tool: exit 0, PASS, 10 of 10 rooms, 82 checks with 0 failed,
+                 printed dimensions 0.82 % at most, the judge with no agreed mismatch, 180 s, 0.0403605 USD   fresh/attempt-2/
+  the spend      fresh/spend.txt (a row before each call, the actual after it). Total: 0.0403605 USD.
+
+COVERAGE OF THE ONE BROUGHT-IN FILE THIS MILESTONE CHANGED (plan 7.2 counts such a file)
+  The changed line (auto-trace.mjs, the Authorization header) is run and asserted by part 3 of the closing test, which FAILS on the tool
+  as it was brought (checked once by putting the old file back: the header was "none", expected "bearer-planted").
+  The coverage tool counts the tool's own process. Measured in a run of part 3 alone: auto-trace.mjs 64.22 % of its lines,
+  chat-transport.mjs 100 %. The main session's own run of that measurement was not saved to a file (the review's O-4);
+  the reviewer measured it again and it is the same: qa-a-coverage-part3.txt.
+  NOT measured: the number with the real reading of part 1 added. With the coverage tool on, the real reading did not end inside 540 s
+  (the whole file: cut at 543 s; part 1 alone: cut at 541 s; machine at 33 % and then 100 % load). No process was left by either.
+  dev-stages-2-coverage.txt, dev-stages-cov-part1.txt
+  The 80 % bar of the gate is the fast suite's, on the engine's own code: 99.74 %.
+
+RUNS DURING THE BUILD (before the gate), kept:
+  dev-npm-test-1.txt   390 of 390, lines 99.74 %, 290 s (100 % load)       dev-stages-1.txt   part 1 alone, 164 s
+  the hand run before the cards were written: 492 s at 100 % load (recorded in m1.2/README.md)
+
+NOT RUN: a quiet-machine timing of both tiers; the fal route with real money (its header is proven by part 3).
+
+THE LIVE HOME (task 07), C:/RnD/Projects/3Dengine on main 6d006c1, at 97 to 100 % load
+  npm test              390 of 390, lines 99.74 %, 190 s                                              live-npm-test.txt
+  npm run test:stages   3 of 3, 95 s                                                                  live-stages.txt
+  readiness             READY                                                                         live-doctor.txt
+
+QA BY A FRESH REVIEWER (task 08), on 6d006c1: PASS, no defect, one round                               qa-live.md, qa-*.txt
+  its own gate at 100 % load: test:stages 3 of 3 (273 s); npm test 390 of 390, lines 99.74 % (234 s); readiness READY
+  about 17,000 checks of its own and 20 runs of the real tool; eight observations, answered in contract 1.2 sections 4, 9, 10
+
+AFTER THE PASS (the close): ONE test change, no engine code
+  The review's O-3: the closing test of 0.1 left the changed tool file out of its comparison whole. PORT-CHANGES.md now records the
+  file's git blob id (dda034682b68744465ea3b6acdfad4421ccccd23) and the test compares the disk with it. Checked with a wrong id in the
+  list: the test fails and names the file. Committed as c9caca6 with the contract's record of the review.
+  npm test, working folder   390 of 390, lines 99.74 %, 241 s (load 100 %, 1 Blender)                  close-npm-test.txt
+  npm test, live home        390 of 390, lines 99.74 %, 278 s (load 100 %, 2 Blenders)                 close-live-npm-test.txt
+  The stage tier was not run again: no file it runs changed after 6d006c1 (the tool, engine/trace.mjs, the command, the fixtures).

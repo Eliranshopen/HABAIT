@@ -1,0 +1,95 @@
+// QA scratch (qa-reviewer, 1.3): hand-edited `review` records, wherever a job file is read or written. Temp jobs dir only.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const ENG = 'C:/RnD/Projects/3Dengine';
+const imp = (p) => import(pathToFileURL(`${ENG}/${p}`).href);
+const J = await imp('engine/jobs.mjs');
+const M = await imp('engine/manifest.mjs');
+const C = await imp('engine/control.mjs');
+const { loadConfig } = await imp('engine/config.mjs');
+const out = [];
+const say = (...a) => { const s = a.join(' '); out.push(s); console.log(s); };
+let bad = 0;
+const expect = (label, cond, extra = '') => { if (!cond) bad++; say(`${cond ? 'ok  ' : 'FAIL'} ${label} ${extra}`); };
+
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'qa13rev-'));
+const jobsDir = `${tmp}/jobs`;
+const id = 'abcdef0123456789';
+fs.mkdirSync(`${jobsDir}/${id}`, { recursive: true });
+const now = new Date().toISOString();
+const sha = 'b'.repeat(64);
+const mk = (over = {}) => ({ ...J.newJob({ id, mode: 'real', now, input: { pdf_path: 'x.pdf', pdf_name: 'x.pdf', pdf_sha256: sha, apartment: null, bytes: 1 }, version: undefined }), ...over });
+let base;
+try { base = mk(); } catch (e) { say('newJob signature differs:', e.message); }
+delete base.engine_version;
+const good = { stage: 'tracing', attempt: 1, files: { report: 'stages/tracing/attempt-1/plan-1/report.json', overlay: 'stages/tracing/attempt-1/plan-1/overlay.png' } };
+const cases = [
+  ['good', 'review', good, true],
+  ['no files obj but empty', 'review', { ...good, files: {} }, true],
+  ['not review state: building', 'building', good, false],
+  ['not review state: failed', 'failed', good, false],
+  ['not review state: done', 'done', good, false],
+  ['record null in building', 'building', null, true],
+  ['extra key', 'review', { ...good, extra: 1 }, false],
+  ['missing stage', 'review', { attempt: 1, files: {} }, false],
+  ['stage unknown', 'review', { ...good, stage: 'nope' }, false],
+  ['stage building but path says tracing', 'review', { ...good, stage: 'building' }, false],
+  ['stage building consistent', 'review', { stage: 'building', attempt: 1, files: { report: 'stages/building/attempt-1/r.json' } }, true],
+  ['attempt 0', 'review', { ...good, attempt: 0 }, false],
+  ['attempt -1', 'review', { ...good, attempt: -1 }, false],
+  ['attempt 1.5', 'review', { ...good, attempt: 1.5 }, false],
+  ['attempt "1"', 'review', { ...good, attempt: '1' }, false],
+  ['attempt 2 path says 1', 'review', { ...good, attempt: 2 }, false],
+  ['attempt 01 path', 'review', { stage: 'tracing', attempt: 1, files: { report: 'stages/tracing/attempt-01/r.json' } }, false],
+  ['file name overlay2', 'review', { ...good, files: { overlay2: 'stages/tracing/attempt-1/x' } }, false],
+  ['file name __proto__', 'review', JSON.parse('{"stage":"tracing","attempt":1,"files":{"__proto__":"stages/tracing/attempt-1/x"}}'), false],
+  ['path ..', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/../../../job.json' } }, false],
+  ['path .. mid', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/a/../b' } }, false],
+  ['path ends ..', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/..' } }, false],
+  ['path absolute', 'review', { ...good, files: { report: 'C:/Windows/win.ini' } }, false],
+  ['path backslash', 'review', { ...good, files: { report: 'stages\\tracing\\attempt-1\\a' } }, false],
+  ['path mixed backslash dotdot', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/..\\..\\job.json' } }, false],
+  ['path other attempt', 'review', { ...good, files: { report: 'stages/tracing/attempt-2/r.json' } }, false],
+  ['path with space', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/a b' } }, false],
+  ['path with colon (ADS)', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/a:b' } }, false],
+  ['path non-string', 'review', { ...good, files: { report: 5 } }, false],
+  ['path null', 'review', { ...good, files: { report: null } }, false],
+  ['files array', 'review', { ...good, files: [] }, false],
+  ['files null', 'review', { ...good, files: null }, false],
+  ['record array', 'review', [], false],
+  ['record string', 'review', 'x', false],
+  ['dot segment path (inside)', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/./r.json' } }, true],
+  ['trailing dots (win strips)', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/...' } }, true],
+  ['unicode', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/é' } }, false],
+  ['newline', 'review', { ...good, files: { report: 'stages/tracing/attempt-1/a\nb' } }, false],
+  ['huge attempt', 'review', { stage: 'tracing', attempt: 1e21, files: {} }, true],
+];
+for (const [label, state, rec, accepted] of cases) {
+  const job = { ...base, state, review: rec };
+  let got; try { J.checkJob(job, id); got = true; } catch (e) { got = e instanceof J.JobUnreadable ? false : `threw ${e.constructor.name}`; }
+  let w; try { J.writeJob(jobsDir, job, id); w = true; } catch (e) { w = e instanceof J.JobUnreadable ? false : `threw ${e.constructor.name}: ${e.message.slice(0, 40)}`; }
+  expect(`${label}: checkJob ${accepted ? 'accepts' : 'refuses'} / writeJob same`, got === accepted && w === accepted, `check=${got} write=${w}`);
+  if (accepted && w === true) { try { const rd = J.readJob(jobsDir, id); expect(`  ${label}: readJob returns it`, Boolean(rd)); } catch (e) { expect(`  ${label}: readJob`, false, e.message); } }
+  // a refused record file written by hand to disk: readJob refuses
+  fs.writeFileSync(`${jobsDir}/${id}/job.json`, JSON.stringify(job));
+  let r; try { J.readJob(jobsDir, id); r = true; } catch (e) { r = e instanceof J.JobUnreadable ? false : `threw ${e.constructor.name}`; }
+  expect(`  ${label}: hand-written file read ${accepted ? 'ok' : 'refused'}`, r === accepted, `read=${r}`);
+}
+// the other readers: listJobs, restartJob, shownJob on a forged file
+const config = loadConfig({});
+const cfg2 = { ...config, jobsDir };
+fs.writeFileSync(`${jobsDir}/${id}/job.json`, JSON.stringify({ ...base, state: 'review', review: { ...good, files: { report: 'stages/tracing/attempt-1/../../../job.json' } }, reason: { code: 'TRACE_GATE_FAIL', message: 'm' } }));
+let t; try { t = J.listJobs(jobsDir, 10); say('  listJobs on forged file returns', JSON.stringify(t).slice(0, 80)); } catch (e) { say('  listJobs throws', e.constructor.name); }
+try { const rj = C.restartJob(cfg2, id); say('  restartJob on forged ->', rj ? 'RESTARTED (bad)' : 'null'); if (rj) bad++; } catch (e) { say('  restartJob on forged throws', e.constructor.name, e.message.slice(0, 60)); expect('restartJob refuses forged review record', true); }
+// setState clears the record when leaving review
+const j2 = { ...base, state: 'review', review: good, reason: { code: 'X', message: 'm' } };
+J.setState(j2, 'tracing', now); expect('setState(tracing) deletes review record', j2.review === undefined);
+J.setState(j2, 'review', now); expect('setState(review) alone keeps/does not invent', j2.review === undefined);
+// schema file knows the field
+const schema = JSON.parse(fs.readFileSync(`${ENG}/contracts/job.schema.json`, 'utf8'));
+say('  schema review.properties:', JSON.stringify(schema.properties.review.properties || {}).slice(0, 400));
+fs.writeFileSync('C:/RnD/.wt/3dengine/development/tasks/3dengine/logs/1.3/qa-review-results.txt', out.join('\n') + `\nFAILED_CHECKS=${bad}\n`);
+say('FAILED_CHECKS', bad);
+fs.rmSync(tmp, { recursive: true, force: true });

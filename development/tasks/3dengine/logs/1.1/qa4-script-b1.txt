@@ -1,0 +1,104 @@
+// B1: every read of the upload answers a reason code, through the real server over stdio.
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, GOLDEN } from './lib.mjs';
+const SHA = sha(fs.readFileSync(GOLDEN));
+const USER = process.env.USERNAME;
+const OK_CODES = new Set(['NOT_A_PDF', 'PATH_NOT_ALLOWED', 'FILE_TOO_LARGE']);
+let bad = 0; let total = 0;
+const tally = {};
+function judge(tag, r) {
+  total++;
+  let s;
+  if (r.m.error) { s = 'RPC ' + r.m.error.code + ' ' + r.m.error.message; bad++; }
+  else if (r.err) { s = 'TOOL ' + r.err.code; if (!OK_CODES.has(r.err.code)) { s += ' <<UNEXPECTED'; bad++; } if (/[A-Za-z]:[\\/]/.test(r.err.message)) { s += ' <<PATH'; bad++; } s += ' | ' + r.err.message.slice(0, 90); }
+  else s = 'ok';
+  const k = s.split('|')[0].trim(); tally[k] = (tally[k] || 0) + 1;
+  console.log(`${tag}: ${s}`.slice(0, 240));
+}
+const hold = (file, mode, secs) => {
+  const f = file.replace(/\//g, '\\');
+  const ps = spawn('powershell', ['-NoProfile', '-Command', `$f=[IO.File]::Open('${f}','Open','${mode.access}','${mode.share}'); Write-Output LOCKED; Start-Sleep -Seconds ${secs}; $f.Close()`], { stdio: ['ignore', 'pipe', 'ignore'], windowsHide: true });
+  return new Promise((r) => ps.stdout.once('data', () => r(ps)));
+};
+const kill = (ps) => spawnSync('taskkill', ['/PID', String(ps.pid), '/T', '/F'], { windowsHide: true });
+const tools = ['inspect_plan', 'start_simulation'];
+
+async function fresh({ seed = false, srvStart = true } = {}) {
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`);
+  if (seed) { const dir = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(dir, { recursive: true });
+    for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${dir}/${f}`); }
+  const srv = startServer(h); await srv.init();
+  return { h, srv };
+}
+const pids = [];
+// seed a record with a first real look
+const seedHome = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLDEN, `${seedHome.inbox}/s.pdf`);
+{ const s = startServer(seedHome); await s.init(); const r = await s.call('inspect_plan', { pdf_path: `${seedHome.inbox}/s.pdf` }); console.log('seed look', r.err?.code || 'ok');
+  fs.mkdirSync(SCR + '/rec', { recursive: true });
+  const dir = `${seedHome.config.runtimeDir}/inspect/${SHA}`; for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${dir}/${f}`, `${SCR}/rec/${f}`);
+  await s.stop(); cleanup(seedHome); }
+
+// 1. locks: modes
+for (const [name, mode] of [['Read/None', { access: 'Read', share: 'None' }], ['ReadWrite/None', { access: 'ReadWrite', share: 'None' }], ['Read/Read', { access: 'Read', share: 'Read' }], ['Write/Read', { access: 'ReadWrite', share: 'Read' }], ['ReadWrite/ReadWrite', { access: 'ReadWrite', share: 'ReadWrite' }]]) {
+  for (const seed of [false, true]) {
+    const { h, srv } = await fresh({ seed });
+    const ps = await hold(`${h.inbox}/s.pdf`, mode, 40); pids.push(ps.pid);
+    for (const t of tools) judge(`lock ${name} seed=${seed} ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+    kill(ps); await sleep(400);
+    for (const t of tools) judge(`  after unlock ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+    const insp = `${h.config.runtimeDir}/inspect`;
+    if (fs.existsSync(insp)) for (const d of fs.readdirSync(insp)) if (!d.startsWith('.tmp') && d !== SHA) console.log('  STRAY record', d);
+    await srv.stop(); cleanup(h);
+  }
+}
+// 2. ACL deny
+for (const spec of ['(R,RD,GR)', '(RX)', '(DENY)']) {
+  const { h, srv } = await fresh({ seed: true });
+  const arg = spec === '(DENY)' ? '(F)' : spec;
+  spawnSync('icacls', [`${h.inbox}/s.pdf`, '/deny', `${USER}:${arg}`], { windowsHide: true });
+  for (const t of tools) judge(`acl deny ${arg} ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  // deny on the folder (traverse/list)
+  spawnSync('icacls', [`${h.inbox}/s.pdf`, '/remove:d', USER], { windowsHide: true });
+  await srv.stop(); cleanup(h);
+}
+{ // deny on inbox folder itself
+  const { h, srv } = await fresh({ seed: true });
+  spawnSync('icacls', [h.inbox, '/deny', `${USER}:(OI)(CI)(RX)`], { windowsHide: true });
+  for (const t of tools) judge(`acl deny on inbox folder ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  spawnSync('icacls', [h.inbox, '/remove:d', USER], { windowsHide: true });
+  await srv.stop(); cleanup(h);
+}
+// 3. removed / replaced by a folder; zero byte; partial; garbage
+{
+  const { h, srv } = await fresh({ seed: true });
+  fs.rmSync(`${h.inbox}/s.pdf`);
+  for (const t of tools) judge(`removed ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  fs.mkdirSync(`${h.inbox}/s.pdf`);
+  for (const t of tools) judge(`replaced by folder ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  fs.rmdirSync(`${h.inbox}/s.pdf`); fs.writeFileSync(`${h.inbox}/s.pdf`, '');
+  for (const t of tools) judge(`zero byte ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  fs.writeFileSync(`${h.inbox}/s.pdf`, fs.readFileSync(GOLDEN).subarray(0, 90000));
+  for (const t of tools) judge(`truncated half ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  fs.writeFileSync(`${h.inbox}/s.pdf`, '%PDF-1.4\n' + 'x'.repeat(500));
+  for (const t of tools) judge(`pdf header garbage ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  fs.writeFileSync(`${h.inbox}/s.pdf`, fs.readFileSync(GOLDEN));
+  for (const t of tools) judge(`restored ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  await srv.stop(); cleanup(h);
+}
+// 4. toggling lock: held only during part of the call; many calls
+for (const seed of [true, false]) {
+  const { h, srv } = await fresh({ seed });
+  const f = `${h.inbox}/s.pdf`.replace(/\//g, '\\');
+  const ps = spawn('powershell', ['-NoProfile', '-Command', `while($true){ try{ $x=[IO.File]::Open('${f}','Open','Read','None'); Start-Sleep -Milliseconds 15; $x.Close() }catch{}; Start-Sleep -Milliseconds 7 }`], { stdio: 'ignore', windowsHide: true }); pids.push(ps.pid);
+  await sleep(1500);
+  const n = seed ? 120 : 20;
+  for (let i = 0; i < n; i++) judge(`toggle seed=${seed} #${i} ${tools[i % 2]}`, await srv.call(tools[i % 2], { pdf_path: `${h.inbox}/s.pdf` }));
+  kill(ps); await sleep(300);
+  const insp = `${h.config.runtimeDir}/inspect`;
+  console.log('records after toggle:', fs.existsSync(insp) ? JSON.stringify(fs.readdirSync(insp)).replace(new RegExp(SHA, 'g'), 'SHA') : 'none', 'jobs:', fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir).length : 0);
+  await srv.stop(); cleanup(h);
+}
+console.log(`TOTAL ${total} calls, ${bad} bad`, JSON.stringify(tally));
+console.log('holder pids started:', pids.join(','));

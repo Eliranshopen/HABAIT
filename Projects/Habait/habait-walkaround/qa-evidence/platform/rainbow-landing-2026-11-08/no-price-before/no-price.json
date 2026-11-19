@@ -1,0 +1,133 @@
+{
+ "at": "2026-11-08T14:19:25.500Z",
+ "base": "http://127.0.0.1:63366",
+ "pattern": "/₪|\\bILS\\b|\\b\\d{1,3}(?:,\\d{3}){2,}\\b|\\b\\d{7,}\\b|מחיר|\\bPrice\\b/",
+ "sizes": {
+  "360": {
+   "aptPriceEl": {
+    "hidden": false,
+    "text": "‏7,950,000 ‏₪"
+   },
+   "apartment": {
+    "chars": 665,
+    "hit": "7,950,000"
+   },
+   "apartmentAbout": {
+    "chars": 2060,
+    "hit": "7,950,000"
+   },
+   "landingHtml": {
+    "chars": 1448,
+    "hit": "מחיר"
+   },
+   "rootStudioLinks": 1,
+   "rootStudioLinksEn": 1,
+   "holdCard846": {
+    "chars": 311,
+    "hit": "7,950,000"
+   },
+   "holdCard856": {
+    "chars": 316,
+    "hit": "8,050,000"
+   },
+   "listRows": 12,
+   "holdList": {
+    "chars": 616,
+    "hit": "מחיר"
+   },
+   "errors": []
+  },
+  "390": {
+   "aptPriceEl": {
+    "hidden": false,
+    "text": "‏7,950,000 ‏₪"
+   },
+   "apartment": {
+    "chars": 665,
+    "hit": "7,950,000"
+   },
+   "apartmentAbout": {
+    "chars": 2060,
+    "hit": "7,950,000"
+   },
+   "landingHtml": {
+    "chars": 1448,
+    "hit": "מחיר"
+   },
+   "rootStudioLinks": 1,
+   "rootStudioLinksEn": 1,
+   "holdCard846": {
+    "chars": 311,
+    "hit": "7,950,000"
+   },
+   "holdCard856": {
+    "chars": 316,
+    "hit": "8,050,000"
+   },
+   "listRows": 12,
+   "holdList": {
+    "chars": 616,
+    "hit": "מחיר"
+   },
+   "errors": []
+  },
+  "1440": {
+   "aptPriceEl": {
+    "hidden": false,
+    "text": "‏7,950,000 ‏₪"
+   },
+   "apartment": {
+    "chars": 677,
+    "hit": "7,950,000"
+   },
+   "apartmentAbout": {
+    "chars": 2072,
+    "hit": "7,950,000"
+   },
+   "landingHtml": {
+    "chars": 1448,
+    "hit": "מחיר"
+   },
+   "rootStudioLinks": 1,
+   "rootStudioLinksEn": 1,
+   "holdCard846": {
+    "chars": 311,
+    "hit": "7,950,000"
+   },
+   "holdCard856": {
+    "chars": 316,
+    "hit": "8,050,000"
+   },
+   "listRows": 12,
+   "holdList": {
+    "chars": 616,
+    "hit": "מחיר"
+   },
+   "errors": []
+  }
+ },
+ "fails": [
+  "360: apartment: price text «7,950,000»",
+  "360: apartmentAbout: price text «7,950,000»",
+  "360: landingHtml: price text «מחיר»",
+  "360: the landing still links /studio/",
+  "360: holdCard846: price text «7,950,000»",
+  "360: holdCard856: price text «8,050,000»",
+  "360: holdList: price text «מחיר»",
+  "390: apartment: price text «7,950,000»",
+  "390: apartmentAbout: price text «7,950,000»",
+  "390: landingHtml: price text «מחיר»",
+  "390: the landing still links /studio/",
+  "390: holdCard846: price text «7,950,000»",
+  "390: holdCard856: price text «8,050,000»",
+  "390: holdList: price text «מחיר»",
+  "1440: apartment: price text «7,950,000»",
+  "1440: apartmentAbout: price text «7,950,000»",
+  "1440: landingHtml: price text «מחיר»",
+  "1440: the landing still links /studio/",
+  "1440: holdCard846: price text «7,950,000»",
+  "1440: holdCard856: price text «8,050,000»",
+  "1440: holdList: price text «מחיר»"
+ ],
+ "pass": false
+}

@@ -1,0 +1,12 @@
+  jobs 25, kills 27
+  jobs 30, kills 32
+heavy rows { rows: 30, bad: 0 }
+{"script":"a1","seed":101,"callUsd":0.6,"kills":32,"jobsDone":30,"checks":145,"byTrig":{"heavyfile":2,"joblock":4,"rows:2":4,"rows:3":2,"settledcount:1":1,"delay:200":4,"delay:500":2,"heavyguard":2,"settledcount:2":1,"state:gating":1,"rows:5":1,"state:rendering":1,"tmp":1,"delay:60":3,"state:skinning":1,"rows:1":1,"rows:7":1},"violations":[],"leftover":[]}
+file:///C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r2/a1-events.mjs:28
+      const approveTask = (async () => { if (trig !== 'state:awaiting_approval') for (let i = 0; i < 200; i++) { await approveWhen(E, id, cap); await sleep(25); if (E.job(id).state === 'done') return; } })();
+                                                                                                                                                                              ^
+
+TypeError: Cannot read properties of null (reading 'state')
+    at file:///C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r2/a1-events.mjs:28:175
+
+Node.js v24.22.1

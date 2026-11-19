@@ -1,0 +1,73 @@
+// QA scratch (qa-reviewer, 1.3): cancel, hard kill and resume DURING a real reading. Temp home 'qa13k-', no keys, never pays.
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
+const ENG = 'C:/RnD/Projects/3Dengine';
+const { startRealHome, FIXTURES, GOLDEN, GOLDEN_SHA } = await import(pathToFileURL(`${ENG}/tests/stages/real-home.mjs`).href);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const out = [];
+const say = (...a) => { const s = a.join(' '); out.push(s); console.log(s); };
+const readJ = (f) => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return null; } };
+const procs = (needle) => {
+  const r = spawnSync('powershell', ['-NoProfile', '-Command', `Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -and $_.CommandLine.Contains('${needle}') -and $_.ProcessId -ne ${process.pid} -and $_.Name -notmatch 'powershell' } | ForEach-Object { "$($_.ProcessId)|$($_.Name)|$($_.CommandLine.Length)" }`], { encoding: 'utf8' });
+  return (r.stdout || '').split(/\r?\n/).filter(Boolean);
+};
+const NEEDLE = 'qa13k-';
+const h = await startRealHome({ prefix: NEEDLE, readings: { [GOLDEN_SHA]: `${FIXTURES}/apt846/saved-reading.json` } });
+const base = h.home.split('/').pop();
+const E = () => ({ ...process.env, ENGINE_HOME: h.home, ENGINE_JOBS_DIR: h.jobsDir });
+const waitFor = async (fn, ms, label) => { const end = Date.now() + ms; for (;;) { const v = fn(); if (v) return v; if (Date.now() > end) throw new Error(`timeout waiting for ${label}`); await sleep(300); } };
+try {
+  const pdf = `${h.inbox}/rainbow-846.pdf`; fs.copyFileSync(GOLDEN, pdf);
+  const s = await h.ok('start_simulation', { pdf_path: pdf });
+  const id = s.job_id; const d = h.jobDir(id);
+  // ---- K1: cancel while the tool runs
+  await waitFor(() => fs.existsSync(`${d}/stages/tracing/attempt-1/auto-trace.log`) && procs(base).some((p) => /node/i.test(p) && !/server|runner/.test(p)) , 120000, 'tool start');
+  await sleep(8000);
+  const before = procs(base); say('K1 processes of the home before cancel:', before.length, before.map((x) => x.split('|').slice(0, 2).join(':')).join(' '));
+  const c = await h.ok('cancel_job', { job_id: id }); say('K1 cancel_job answer state:', c.job?.state ?? JSON.stringify(c).slice(0, 120));
+  const t0 = Date.now();
+  await waitFor(() => { const j = readJ(`${d}/job.json`); return j && j.state === 'cancelled' && !(readJ(`${d}/runner.pid`)); }, 60000, 'cancelled').catch((e) => say('K1', e.message));
+  await h.runnersGone().catch((e) => say('K1 runnersGone:', e.message));
+  await sleep(3000);
+  const after = procs(base).filter((x) => !/server\.mjs/.test(x));
+  say('K1 secs to settle', Math.round((Date.now() - t0) / 1000), '| processes of the home after (minus the MCP server):', after.length, after.join(' ; '));
+  const j1 = readJ(`${d}/job.json`); const man1 = readJ(`${d}/manifest.json`); const led1 = readJ(`${d}/ledger.json`);
+  say('K1 job state', j1.state, 'reason', JSON.stringify(j1.reason), 'attempts', JSON.stringify(j1.attempts), 'manifest rows', man1?.rows?.length ?? 'no file', 'ledger rows', led1?.rows?.length ?? 'no file', 'review', JSON.stringify(j1.review ?? null));
+  say('K1 attempt-1 files:', fs.readdirSync(`${d}/stages/tracing/attempt-1`).join(','), '| index.json exists:', fs.existsSync(`${d}/stages/tracing/attempt-1/index.json`));
+  // ---- K2: restart, hard kill the runner during the reading, resume
+  const s2 = await h.ok('start_simulation', { pdf_path: pdf }); say('K2 restart: created', s2.created, 'state', s2.job.state);
+  await waitFor(() => fs.existsSync(`${d}/stages/tracing/attempt-2/auto-trace.log`), 120000, 'attempt 2 tool');
+  await sleep(6000);
+  const rp = [Number(fs.readFileSync(`${d}/runner.pid`, "utf8").trim())].filter(Boolean); say('K2 runner pids', rp.join(','));
+  for (const p of rp) spawnSync('taskkill', ['/PID', String(p), '/F'], { stdio: 'ignore' });
+  await sleep(2500);
+  const orphan = procs(base).filter((x) => !/server\.mjs/.test(x)); say('K2 after hard kill of the runner only, processes left:', orphan.length, orphan.map((x) => x.split('|').slice(0, 2).join(':')).join(' '));
+  const snap2 = fs.readdirSync(`${d}/stages/tracing/attempt-2`).join(',');
+  const r = spawnSync(process.execPath, [`${ENG}/engine/cli.mjs`, 'resume', id], { env: E(), encoding: 'utf8', cwd: ENG, timeout: 60000 });
+  say('K2 resume:', r.status, (r.stdout || '').trim().slice(0, 200));
+  const end = await h.follow(id, ['done', 'review', 'failed', 'cancelled', 'awaiting_approval'], 400000);
+  await h.runnersGone();
+  await sleep(1500);
+  const j2 = readJ(`${d}/job.json`); const man2 = readJ(`${d}/manifest.json`); const led2 = readJ(`${d}/ledger.json`);
+  say('K2 end state', end.job.state, JSON.stringify(end.job.reason), 'attempts', JSON.stringify(j2.attempts), 'manifest rows', JSON.stringify(man2?.rows?.map((x) => [x.stage, x.attempt, x.status])), 'ledger rows', led2?.rows?.length ?? 'no file', 'spent', end.job.cost.spent_usd);
+  say('K2 tracing folders:', fs.readdirSync(`${d}/stages/tracing`).join(','));
+  for (const a of fs.readdirSync(`${d}/stages/tracing`)) say(`  ${a}:`, fs.readdirSync(`${d}/stages/tracing/${a}`).join(','));
+  const rowT = man2?.rows?.find((x) => x.stage === 'tracing');
+  say('K2 tracing row outputs:', JSON.stringify(rowT?.outputs?.map((o) => o.path)));
+  say('K2 attempt-2 (killed) listing at kill time:', snap2, '| now:', fs.readdirSync(`${d}/stages/tracing/attempt-2`).join(','));
+  await sleep(90000);
+  const left = procs(base).filter((x) => !/server\.mjs/.test(x)); say('K2 90 s later, processes of the home left (minus MCP server):', left.length, left.join(' ; '));
+  const att = fs.readdirSync(`${d}/stages/tracing`);
+  for (const a of att) { const idx = readJ(`${d}/stages/tracing/${a}/index.json`); say(`  ${a} index.json:`, idx ? `${idx.status} id=${idx.id} plans=${idx.plans?.length}` : 'none'); }
+  const log = fs.readFileSync(`${d}/runner.log`, 'utf8').split('\n').filter((l) => /tracing|takeover|resum|supersed|interrupt|started|stopped/i.test(l)).slice(-25);
+  say('runner.log (filtered):'); log.forEach((l) => say('   ', l.slice(0, 200)));
+} catch (e) { say('ERROR', e.stack); process.exitCode = 1; }
+finally {
+  const left = procs(base).filter((x) => !/server\.mjs/.test(x));
+  say('final: processes of the home before stop():', left.length, left.join(' ; '));
+  await h.stop();
+  await sleep(1500);
+  say('after stop(): processes naming the home:', procs(base).length);
+  fs.writeFileSync('C:/RnD/.wt/3dengine/development/tasks/3dengine/logs/1.3/qa-real-kill.txt', out.join('\n') + '\n');
+}

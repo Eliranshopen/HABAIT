@@ -1,0 +1,409 @@
+{
+ "$schema": "tour360/scenes.v1",
+ "apartment": "apt846-auto",
+ "coordinateNotes": {
+  "u_v": "normalized position on the FULL equirectangular image: u 0→1 left→right (0.5 = image centre = yaw 0); v 0.68 on the floor line",
+  "plan": "x/y in the pixel space of plan/floorplan.webp = the plan crop (3750×3900 px, ≈2.268 px/cm, rotated as the architect drew it) × 0.4",
+  "hotspots": "u from the plan bearing to the opening the visitor walks through (cameras.json `via`), minus the bearing the panorama centre faces (`lookAt`); computed by tools/make-scenes.mjs, not calibrated by eye",
+  "heading": "the start yaw of every room is 0, the panorama centre the prompt aimed (cameras.json lookAt; centreBearingDeg is that bearing in plan image space)"
+ },
+ "scenes": [
+  {
+   "id": "entrance",
+   "name": {
+    "he": "כניסה",
+    "en": "Entrance",
+    "fr": "Entrée"
+   },
+   "zone": {
+    "he": "מרחב מגורים",
+    "en": "Living",
+    "fr": "Séjour"
+   },
+   "asset": "01-entrance",
+   "plan": {
+    "x": 281,
+    "y": 692
+   },
+   "heading": 176,
+   "northOffset": 0,
+   "centreBearingDeg": 296,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.054,
+     "v": 0.84,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE l-tv (CG depth) to floor"
+    },
+    {
+     "to": "bedroom2",
+     "u": 0.797,
+     "v": 1,
+     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off wall (CG depth) to floor"
+    },
+    {
+     "to": "bathGuest",
+     "u": 0.761,
+     "v": 1,
+     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off wall (CG depth) to floor"
+    }
+   ]
+  },
+  {
+   "id": "kitchen",
+   "name": {
+    "he": "מטבח",
+    "en": "Kitchen",
+    "fr": "Cuisine"
+   },
+   "zone": {
+    "he": "מרחב מגורים",
+    "en": "Living",
+    "fr": "Séjour"
+   },
+   "asset": "02-kitchen",
+   "plan": {
+    "x": 714,
+    "y": 590
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 21.1,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.008,
+     "v": 0.55,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE l-armchair (the ray skims it) (CG depth) to opening o-8"
+    },
+    {
+     "to": "dining",
+     "u": 0.621,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  },
+  {
+   "id": "dining",
+   "name": {
+    "he": "פינת אוכל",
+    "en": "Dining",
+    "fr": "Entrée"
+   },
+   "zone": {
+    "he": "מרחב מגורים",
+    "en": "Living",
+    "fr": "Séjour"
+   },
+   "asset": "03-dining",
+   "plan": {
+    "x": 952,
+    "y": 517
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 93,
+   "hotspots": [
+    {
+     "to": "kitchen",
+     "u": 0.972,
+     "v": 0.82,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE k-counter (CG depth) to floor"
+    },
+    {
+     "to": "living",
+     "u": 0.766,
+     "v": 0.69,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE l-tv (floor 4 cm from it) (CG depth) to floor"
+    }
+   ]
+  },
+  {
+   "id": "living",
+   "name": {
+    "he": "סלון",
+    "en": "Living room",
+    "fr": "Séjour"
+   },
+   "zone": {
+    "he": "מרחב מגורים",
+    "en": "Living",
+    "fr": "Séjour"
+   },
+   "asset": "04-living",
+   "plan": {
+    "x": 380,
+    "y": 862
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 101,
+   "hotspots": [
+    {
+     "to": "entrance",
+     "u": 0.138,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to opening o-12"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.371,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE d-table (floor 0 cm from it) (within 2° of the marker) (CG depth) to floor"
+    },
+    {
+     "to": "dining",
+     "u": 0.394,
+     "v": 0.76,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE l-sofa (CG depth) to floor"
+    },
+    {
+     "to": "terraceLiving",
+     "u": 0.524,
+     "v": 0.65,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE l-coffee (the ray skims it) (CG depth) to opening o-5"
+    },
+    {
+     "to": "wardrobe",
+     "u": 0.721,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off FIXTURE w-closet-2 (CG depth) to opening o-6"
+    }
+   ]
+  },
+  {
+   "id": "terraceLiving",
+   "name": {
+    "he": "מרפסת שמש",
+    "en": "Sun terrace",
+    "fr": "Terrasse"
+   },
+   "zone": {
+    "he": "המרפסת",
+    "en": "The terrace",
+    "fr": "La terrasse"
+   },
+   "asset": "05-terrace-living",
+   "plan": {
+    "x": 1194,
+    "y": 685
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 161,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.769,
+     "v": 0.68,
+     "source": "the visible floor toward the target camera (the hand via and its opening are hidden)"
+    },
+    {
+     "to": "terraceBedroom",
+     "u": 0.63,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off wall (within 2° of the marker) (CG depth) to floor"
+    }
+   ]
+  },
+  {
+   "id": "terraceBedroom",
+   "name": {
+    "he": "מרפסת · קצה החדרים",
+    "en": "Terrace, bedroom end",
+    "fr": "Terrasse"
+   },
+   "zone": {
+    "he": "המרפסת",
+    "en": "The terrace",
+    "fr": "La terrasse"
+   },
+   "asset": "06-terrace-bedroom",
+   "plan": {
+    "x": 834,
+    "y": 1468
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 53,
+   "hotspots": [
+    {
+     "to": "terraceLiving",
+     "u": 0.465,
+     "v": 0.68,
+     "source": "the visible floor toward the target camera (the hand via and its opening are hidden); R23b moved off wall (CG depth) to glass railing-13"
+    },
+    {
+     "to": "bedroomMain",
+     "u": 0.314,
+     "v": 0.68,
+     "source": "the visible floor toward the target camera (the hand via and its opening are hidden)"
+    }
+   ]
+  },
+  {
+   "id": "bedroomMain",
+   "name": {
+    "he": "חדר שינה הורים",
+    "en": "Main bedroom",
+    "fr": "Chambre"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "07-bedroom-main",
+   "plan": {
+    "x": 762,
+    "y": 1176
+   },
+   "heading": 159,
+   "northOffset": 0,
+   "centreBearingDeg": 129,
+   "hotspots": [
+    {
+     "to": "wardrobe",
+     "u": 0.96,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to opening o-6"
+    },
+    {
+     "to": "terraceBedroom",
+     "u": 0.419,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  },
+  {
+   "id": "wardrobe",
+   "name": {
+    "he": "פינת ארונות",
+    "en": "Wardrobe",
+    "fr": "Dressing"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "08-wardrobe",
+   "plan": {
+    "x": 447,
+    "y": 1100
+   },
+   "heading": 150,
+   "northOffset": 0,
+   "centreBearingDeg": 331,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.462,
+     "v": 0.65,
+     "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to opening o-1"
+    },
+    {
+     "to": "bedroomMain",
+     "u": 0.847,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to floor"
+    },
+    {
+     "to": "bathMain",
+     "u": 0.261,
+     "v": 0.68,
+     "source": "plan-bearing via the opening; R23b moved off wall (CG depth) to opening o-9"
+    }
+   ]
+  },
+  {
+   "id": "bathMain",
+   "name": {
+    "he": "חדר רחצה הורים",
+    "en": "Main bathroom",
+    "fr": "Salle de bain"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "09-bath-main",
+   "plan": {
+    "x": 282,
+    "y": 1139
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 244,
+   "hotspots": [
+    {
+     "to": "wardrobe",
+     "u": 0.143,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  },
+  {
+   "id": "bedroom2",
+   "name": {
+    "he": "חדר שינה",
+    "en": "Bedroom",
+    "fr": "Chambre"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "10-bedroom-2",
+   "plan": {
+    "x": 570,
+    "y": 381
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 38,
+   "hotspots": [
+    {
+     "to": "entrance",
+     "u": 0.956,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  },
+  {
+   "id": "bathGuest",
+   "name": {
+    "he": "חדר רחצה כללי",
+    "en": "Guest bathroom",
+    "fr": "Salle de bain"
+   },
+   "zone": {
+    "he": "אגף החדרים",
+    "en": "Bedrooms",
+    "fr": "Chambres"
+   },
+   "asset": "11-bath-guest",
+   "plan": {
+    "x": 379,
+    "y": 522
+   },
+   "heading": 0,
+   "northOffset": 0,
+   "centreBearingDeg": 139,
+   "hotspots": [
+    {
+     "to": "entrance",
+     "u": 0.424,
+     "v": 0.68,
+     "source": "plan-bearing via the opening"
+    }
+   ]
+  }
+ ]
+}

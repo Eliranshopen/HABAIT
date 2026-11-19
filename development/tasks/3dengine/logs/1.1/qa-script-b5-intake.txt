@@ -1,0 +1,104 @@
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, sleep, snapshot } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const { intakePdf } = await E('engine/stages/intake.mjs');
+const { ENGINE_VERSION } = await E('engine/config.mjs');
+const h = await makeHome({ timeout: 60 });
+const H = (await engineOf(h)).handlers;
+let n = 0; const bad = [];
+const mk = (name, extra) => { const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from(`\n% ${extra}\n`)]); fs.writeFileSync(`${h.inbox}/${name}.pdf`, b); return { path: `${h.inbox}/${name}.pdf`, sha: sha(b), bytes: b }; };
+const idFor = (s, apt = 'p1') => jobId({ pdfSha256: s, apartment: apt, mode: 'stub', version: ENGINE_VERSION });
+const inputOf = (id) => `${h.jobsDir}/${id}/input/source.pdf`;
+const ro = (f) => (fs.statSync(f).mode & 0o222) === 0;
+const attr = (f) => spawnSync('cmd', ['/c', 'attrib', f.split('/').join('\\')], { encoding: 'utf8' }).stdout.slice(0, 12).trim();
+
+// e. read-only, hash, second start no-op
+{
+  const a = mk('e1', 'e1'); n++;
+  const r = await H.start_simulation({ pdf_path: a.path });
+  const f = inputOf(r.job_id);
+  console.log('e. copy hash ok', sha(fs.readFileSync(f)) === a.sha, 'read-only (mode)', ro(f), 'attrib:', attr(f), 'bytes ok', r.job.input.pdf_bytes === a.bytes.length);
+  if (sha(fs.readFileSync(f)) !== a.sha || !ro(f)) bad.push('copy');
+  const m1 = fs.statSync(f).mtimeMs; const jj = fs.readFileSync(`${h.jobsDir}/${r.job_id}/job.json`, 'utf8'); await sleep(30);
+  const r2 = await H.start_simulation({ pdf_path: a.path }); n++;
+  console.log('e. second start created', r2.created, 'copy mtime unchanged', fs.statSync(f).mtimeMs === m1);
+  if (r2.created || fs.statSync(f).mtimeMs !== m1) bad.push('second start');
+  // upload deleted after job exists → still works (job keeps its own copy)
+  fs.rmSync(a.path); n++;
+  try { await H.start_simulation({ pdf_path: a.path }); console.log('upload deleted → ?'); } catch (e) { console.log('e. upload deleted, restart:', e.code); }
+}
+// d. foreign file at input/source.pdf (different hash, read-only and writable); a directory; leftover temps
+{
+  const a = mk('d1', 'd1'); const id = idFor(a.sha);
+  fs.mkdirSync(`${h.jobsDir}/${id}/input`, { recursive: true });
+  fs.writeFileSync(inputOf(id), 'FOREIGN'); fs.chmodSync(inputOf(id), 0o444); n++;
+  try { await H.start_simulation({ pdf_path: a.path }); bad.push('foreign accepted'); console.log('d. foreign: accepted!'); } catch (e) { console.log('d. foreign file:', e.code, '|', e.message, '| untouched', fs.readFileSync(inputOf(id), 'utf8') === 'FOREIGN', '| job.json?', fs.existsSync(`${h.jobsDir}/${id}/job.json`)); if (e.code !== 'NOT_A_PDF') bad.push('foreign code'); }
+  // a directory at source.pdf
+  const b = mk('d2', 'd2'); const id2 = idFor(b.sha);
+  fs.mkdirSync(`${h.jobsDir}/${id2}/input/source.pdf`, { recursive: true }); n++;
+  try { await H.start_simulation({ pdf_path: b.path }); console.log('d. dir at source.pdf: accepted?!'); bad.push('dir accepted'); } catch (e) { console.log('d. directory at source.pdf →', e.code || e.name, '|', String(e.message).slice(0, 120), '| job.json?', fs.existsSync(`${h.jobsDir}/${id2}/job.json`)); }
+  // foreign with the right hash but writable: markReadOnly
+  const c = mk('d3', 'd3'); const id3 = idFor(c.sha);
+  fs.mkdirSync(`${h.jobsDir}/${id3}/input`, { recursive: true }); fs.writeFileSync(inputOf(id3), c.bytes); n++;
+  const r = await H.start_simulation({ pdf_path: c.path });
+  console.log('d. right-hash copy there, writable, no job.json → start created', r.created, 'now read-only', ro(inputOf(id3)));
+  if (!ro(inputOf(id3))) bad.push('not made ro');
+  // leftover temps
+  const d = mk('d4', 'd4'); const id4 = idFor(d.sha); fs.mkdirSync(`${h.jobsDir}/${id4}/input`, { recursive: true });
+  const live = spawn(process.execPath, ['-e', 'setTimeout(()=>{},60000)'], { stdio: 'ignore' });
+  fs.writeFileSync(`${h.jobsDir}/${id4}/input/source.pdf.99999991.tmp`, 'x'); fs.writeFileSync(`${h.jobsDir}/${id4}/input/source.pdf.${live.pid}.tmp`, 'y'); fs.writeFileSync(`${h.jobsDir}/${id4}/input/source.pdf.${process.pid}.tmp`, 'z'); n++;
+  await H.start_simulation({ pdf_path: d.path });
+  const left = fs.readdirSync(`${h.jobsDir}/${id4}/input`);
+  console.log('d. temps after intake:', left.join(', '), '(dead pid temp removed, live other pid kept, own pid temp overwritten/removed)');
+  if (left.includes('source.pdf.99999991.tmp')) bad.push('dead temp not removed');
+  live.kill();
+}
+// j. direct intake: source changed (hash differs) → NOT_A_PDF, nothing placed, no temp; source gone
+{
+  const a = mk('j1', 'j1'); n++;
+  const id = 'abcdef0123456789'; // jobs dir direct
+  const fake = sha(Buffer.from('other'));
+  try { intakePdf(h.jobsDir, id, { path: a.path }, fake); bad.push('j changed accepted'); } catch (e) { console.log('j. changed source →', e.code, e.message, '| files:', fs.readdirSync(`${h.jobsDir}/${id}/input`)); }
+  n++; try { intakePdf(h.jobsDir, id, { path: `${h.inbox}/nope.pdf` }, a.sha); bad.push('gone accepted'); } catch (e) { console.log('j. gone source →', e.code, e.message, '| files:', fs.readdirSync(`${h.jobsDir}/${id}/input`)); }
+  // copy dep: deletes the upload between check and copy
+  n++; try { intakePdf(h.jobsDir, id, { path: a.path }, a.sha, { copy: (f, t) => { fs.rmSync(f); fs.copyFileSync(f, t); } }); } catch (e) { console.log('j. upload deleted at copy →', e.code, e.message); }
+  // changed during copy
+  fs.writeFileSync(a.path, a.bytes); n++;
+  try { intakePdf(h.jobsDir, id, { path: a.path }, a.sha, { copy: (f, t) => { fs.copyFileSync(f, t); fs.appendFileSync(t, 'x'); } }); bad.push('torn accepted'); } catch (e) { console.log('j. torn copy →', e.code, e.message, '| files:', fs.readdirSync(`${h.jobsDir}/${id}/input`)); }
+}
+// a. two processes at one moment, same PDF; 10 rounds
+const results = [];
+for (let round = 0; round < 10; round++) {
+  const a = mk(`a${round}`, `a${round}`); const id = idFor(a.sha);
+  const go = Date.now() + 2500;
+  const ps = [0, 1, 2].map(() => spawn(process.execPath, [`${SCR}/qa-worker.mjs`, 'start_simulation', a.path, String(go)], { env: { ...process.env, ...h.env }, stdio: ['ignore', 'pipe', 'pipe'] }));
+  const outs = await Promise.all(ps.map((p) => new Promise((res) => { let o = ''; p.stdout.on('data', (d) => { o += d; }); p.stderr.on('data', (d) => { o += d; }); p.on('exit', () => res(o.trim().split('\n').pop())); })));
+  n += 3;
+  const parsed = outs.map((o) => { try { return JSON.parse(o); } catch { return { raw: o.slice(0, 200) }; } });
+  const created = parsed.filter((p) => p.created === true).length;
+  const copyOk = fs.existsSync(inputOf(id)) && sha(fs.readFileSync(inputOf(id))) === a.sha && ro(inputOf(id));
+  const errs = parsed.filter((p) => p.ok === false || p.raw);
+  results.push({ round, created, errs: errs.map((e) => e.code || e.raw || e.msg), copyOk });
+  if (created !== 1 || !copyOk) bad.push('race round ' + round);
+}
+console.log('a. two/three-process starts (10 rounds x 3 procs):', JSON.stringify(results.map((r) => `${r.created}c/${r.errs.length}e/${r.copyOk}`)));
+console.log('   errors seen:', JSON.stringify(results.flatMap((r) => r.errs)));
+// b. upload rewritten while starts run
+{
+  const A = mk('b-up', 'A'); const Bbytes = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from('\n% B-variant padding padding\n')]);
+  const writer = spawn(process.execPath, ['-e', `const fs=require('fs');const a=fs.readFileSync(${JSON.stringify(A.path)});const b=fs.readFileSync(${JSON.stringify(SCR + '/pdfs/vec-sheet.pdf')});const B=Buffer.concat([b,Buffer.from('\\n% B-variant padding padding\\n')]);let i=0;setInterval(()=>{try{fs.writeFileSync(${JSON.stringify(A.path)},(i++%2)?B:a)}catch(e){}},3)`], { stdio: 'ignore' });
+  const seen = { ok: 0, errs: {} }; const jobs = new Set();
+  for (let i = 0; i < 40; i++) { n++; try { const r = await H.start_simulation({ pdf_path: A.path }); seen.ok++; jobs.add(r.job_id); } catch (e) { const k = `${e.code || e.name}:${String(e.message).slice(0, 60)}`; seen.errs[k] = (seen.errs[k] || 0) + 1; } }
+  writer.kill(); await sleep(200);
+  console.log('b. 40 starts while the upload was rewritten every 3 ms:', JSON.stringify(seen));
+  // every job folder: copy hash must equal job.input.pdf_sha256 and id must match
+  let mism = 0; for (const j of fs.readdirSync(h.jobsDir)) { const jf = `${h.jobsDir}/${j}/job.json`; if (!fs.existsSync(jf)) continue; const job = JSON.parse(fs.readFileSync(jf, 'utf8')); const cf = inputOf(j); if (!fs.existsSync(cf) || sha(fs.readFileSync(cf)) !== job.input.pdf_sha256 || idFor(job.input.pdf_sha256, job.input.apartment) !== j) { mism++; console.log('   MISMATCH', j); } }
+  console.log('b. job folders whose copy != recorded hash or id != own input:', mism);
+  if (mism) bad.push('race mismatch');
+}
+// leftover temp files anywhere under jobs
+const tmps = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = `${d}/${e.name}`; if (e.isDirectory()) walk(p); else if (/\.tmp$/.test(e.name)) tmps.push(p.slice(h.jobsDir.length)); } })(h.jobsDir);
+console.log('.tmp files left under jobs:', JSON.stringify(tmps));
+console.log('ATTEMPTS', n, 'BAD', JSON.stringify(bad));
+cleanup(h);

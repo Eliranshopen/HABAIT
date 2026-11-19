@@ -1,0 +1,38 @@
+scenario cancel 4 work C:/Users/elira/AppData/Local/Temp/qa12-cancel-wZkvOI load 100
+=== cancel 4
+{
+ "outcome": "CANCELLED",
+ "exit": 1,
+ "secs": "5.9",
+ "result": null,
+ "alive": [
+  "29084 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "37652 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "26148 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 4",
+  "24120 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 4",
+  "37664 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs cancel 4"
+ ]
+}
+=== cancel +6s
+{
+ "alive": [
+  "29084 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "37652 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "26148 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 4",
+  "24120 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 4",
+  "37664 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs cancel 4"
+ ]
+}
+=== pre-aborted
+{
+ "outcome": "CANCELLED",
+ "outCreated": false
+}
+procs at end [
+  '29084 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '37652 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '26148 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 120 node qa12-b2.mjs cancel 4',
+  '24120 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 120 node qa12-b2.mjs cancel 4',
+  '37664 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs cancel 4'
+]
+exit 0

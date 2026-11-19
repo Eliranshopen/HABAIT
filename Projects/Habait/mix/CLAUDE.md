@@ -1,11 +1,11 @@
 # mix/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Loose reference inputs: a PDF, Facebook videos, the Reengeneering-for-demo video with its Hebrew analysis, and the archived 2026-11-02 SESSIONS file.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 7 files here · 0 subfolders · 7 files / 97.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

@@ -1,0 +1,15 @@
+// worker: start_simulation (or inspect_plan) from its own process, at a given wall-clock moment
+import { E } from './qa-lib.mjs';
+const [, , tool, pdf, goAt, apt] = process.argv;
+const { loadConfig } = await E('engine/config.mjs');
+const { createStubEngine } = await E('mcp/stub-engine.mjs');
+const config = loadConfig({ env: process.env });
+const eng = createStubEngine(config, { spawnRunner: () => {}, ensureServe: async () => {} });
+while (Date.now() < Number(goAt)) { /* spin to the barrier */ }
+try {
+  const args = { pdf_path: pdf, ...(apt ? { apartment: apt } : {}) };
+  const r = await eng.handlers[tool](args);
+  console.log(JSON.stringify({ ok: true, created: r.created, job_id: r.job_id, sha: r.sha256, cands: r.candidates?.length }));
+} catch (e) {
+  console.log(JSON.stringify({ ok: false, code: e.code || null, name: e.name, msg: String(e.message).slice(0, 200) }));
+}

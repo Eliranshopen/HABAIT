@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A1A28">
+<title>Rainbow תל אביב · Habait</title>
+<meta name="description" content="Rainbow תל אביב — מגדל מגורים על קו הים. טיסה סביב המגדל, בחירת דירה מתוך הטיסה וכניסה פנימה. הדמיה.">
+<link rel="icon" type="image/svg+xml" href="brand/habait-mark.svg">
+<link rel="apple-touch-icon" href="brand/habait-touch-180.png">
+<!-- the LCP is the hero poster (frame 0 of the film loop); the film itself starts after the page has loaded (js/home.js) -->
+<link rel="preload" as="image" media="(orientation: landscape), (min-aspect-ratio: 4/5)" href="fixtures/rainbow/landing/hero-poster-1920.jpg" imagesrcset="fixtures/rainbow/landing/hero-poster-960.jpg 960w, fixtures/rainbow/landing/hero-poster-1920.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" href="fixtures/rainbow/landing/hero-poster-portrait.jpg" fetchpriority="high">
+<link rel="preload" href="fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/frank-ruhl-libre-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/rainbow-landing.css">
+</head>
+<!--
+  The habait-flow root = the Rainbow landing page (plan development/plans/2026-11-08-rainbow-landing.md). Round 10 (Eliran 2026-11-09:
+  «אני רוצה שהדף נחיתה יהיה כללי ואז סיור לפרויקט … מגרסת v2 אפשר לקחת את הצילום מסך בלי טקסט שמשייך לדירה ספציפית … את כל הנראות של
+  habait-flow צריך לשפר גם ברמת המלל וגם ברמת הנראות. תמשיך לחפש באינטרנט דברים דומים ולקבל השראה»):
+  - the page is about the PROJECT; the one action «לסיור בפרויקט» opens /hold/ (fly-around, bird's eye, the apartment picker) unchanged;
+  - the hero is v2's (the full-bleed tower film, the large serif «Rainbow» + «תל אביב», the developer line, the pause button, the badge),
+    with no line about one apartment;
+  - our own identity, direction B (midnight, sand, bronze; Heebo + Frank Ruhl Libre). Presentation ideas from six tower sites, inspiration
+    only (plan round 10: which idea from where); no reference's palette, fonts, grid, section order, copy, buttons or media.
+  Roles (Eliran 2026-11-09): the project is the developer's — «יזם: ישראל קנדה» from project.json, plain text; Habait made the site, the film
+  and the visualisation — «הדמיה ואתר: Habait». Facts only from project.json and the place names printed on render THE-1; no prices.
+  Disclosure (§6): our film and pictures «הדמיה · AI-generated»; the four project renders «הדמיה» / «Render».
+  Earlier versions: tools/_unused/ (index-r8.html, index-r8-roles.html, index-r9.html).
+-->
+<body class="hb-base rl lb">
+<a class="rl-skip" href="#main" data-t="skip">דילוג לתוכן</a>
+<header class="rl-top" id="top">
+  <div class="rl-top__in">
+    <a class="rl-brand" href="./" aria-label="Habait"><img class="rl-brand__logo" src="brand/habait-wordmark-sand-small.svg" alt="Habait" width="131" height="68"></a>
+    <nav class="rl-top__nav" aria-label="ניווט" data-t-aria="nav">
+      <a class="rl-top__link" href="#place" data-t="nav.place">המיקום</a>
+      <a class="rl-top__link" href="#experience" data-t="nav.experience">החוויה</a>
+      <button class="rl-lang" id="langToggle" type="button" aria-label="English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 1. hero (from v2, project-level): the tower film edge to edge, poster first; the large serif name, the developer, one line, the action -->
+  <section class="rl-hero lb-hero" id="hero" aria-labelledby="heroTitle">
+    <div class="lb-hero__media" data-hero-media>
+      <picture>
+        <source media="(max-aspect-ratio: 4/5)" srcset="fixtures/rainbow/landing/hero-poster-portrait.jpg" width="720" height="1080">
+        <img class="lb-hero__poster" id="heroPoster" src="fixtures/rainbow/landing/hero-poster-1920.jpg"
+          srcset="fixtures/rainbow/landing/hero-poster-960.jpg 960w, fixtures/rainbow/landing/hero-poster-1920.jpg 1920w" sizes="100vw"
+          width="1920" height="1080" alt="" fetchpriority="high" decoding="async">
+      </picture>
+      <video class="lb-hero__video" id="heroVideo" muted playsinline loop preload="metadata" aria-hidden="true" tabindex="-1"
+        data-src-1080="fixtures/rainbow/landing/hero-1080.mp4" data-src-720="fixtures/rainbow/landing/hero-720.mp4" data-src-portrait="fixtures/rainbow/landing/hero-portrait.mp4"></video>
+    </div>
+    <span class="lb-hero__scrim" aria-hidden="true"></span>
+    <div class="lb-hero__corner">
+      <span class="hb-ai-badge lb-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span>
+      <button class="rl-play" id="heroToggle" type="button" aria-label="הפעלת הסרטון" data-state="paused">
+        <svg class="rl-play__pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2" fill="currentColor"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2" fill="currentColor"/></svg>
+        <svg class="rl-play__play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a.8.8 0 0 0 1.2.7l10.4-6.5a.8.8 0 0 0 0-1.4L9.2 4.8A.8.8 0 0 0 8 5.5Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <div class="lb-hero__body" data-plate>
+      <p class="lb-dev" data-dev-row hidden><span data-t="foot.dev">יזם:</span> <span data-dev-name></span></p>
+      <h1 class="lb-hero__title" id="heroTitle"><span class="lb-latin" lang="en">Rainbow</span> <span class="lb-hero__city" data-t="hero.city">תל אביב</span></h1>
+      <p class="rl-hero__promise lb-hero__lead" data-t="hero.promise">טסים סביב המגדל, בוחרים דירה מתוך הבניין ונכנסים אליה. הכול בהדמיה.</p>
+      <a class="lb-btn" id="heroCta" href="#experience" data-route="tour-project"><span data-t="cta.tour">לסיור בפרויקט</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <a class="lb-cue" href="#statement" aria-label="להמשך" data-t-aria="cue"><span aria-hidden="true" data-t="cue.text">המגדל והסביבה</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
+
+  <!-- 2. the statement, set between two bronze rules -->
+  <section class="lb-statement" id="statement" aria-labelledby="statementText">
+    <p class="lb-statement__text" id="statementText" data-up data-t="statement">בין נמל תל אביב למרינה, מול הים הפתוח. המגדל עוד לא קם, וכבר אפשר לטוס סביבו ולהיכנס פנימה.</p>
+    <!-- the project sheet: who, where, what, and who made this page — facts from project.json -->
+    <dl class="lb-sheet" data-sheet>
+      <div><dt data-t="fact.dev">יזם</dt><dd data-dev-name></dd></div>
+      <div><dt data-t="fact.where">מיקום</dt><dd data-t="fact.whereVal">תל אביב, על קו הים, בין הנמל למרינה</dd></div>
+      <div><dt data-t="fact.what">הפרויקט</dt><dd data-tagline>מגדל מגורים על קו הים</dd></div>
+      <div><dt data-t="fact.made">הדמיה ואתר</dt><dd lang="en">Habait</dd></div>
+    </dl>
+  </section>
+
+  <!-- 3. location: render THE-1 (Eliran's) wide, and under it the five places printed on it as a numbered legend -->
+  <section class="lb-place" id="place" aria-labelledby="placeTitle">
+    <div class="lb-head">
+      <p class="lb-index"><span>01</span><span data-t="place.eyebrow">המיקום</span></p>
+      <h2 class="lb-h2" id="placeTitle" data-up data-t="place.title">בין הנמל למרינה</h2>
+      <p class="lb-lead" data-up data-t="place.lead">מה שמסביב למגדל, כפי שמסומן בהדמיה.</p>
+    </div>
+    <figure class="rl-fig lb-place__fig" data-open>
+      <picture>
+        <source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-1-640.webp 640w, fixtures/rainbow/landing/renders/the-1-1056.webp 1056w" sizes="(min-width: 960px) 80vw, 100vw">
+        <img src="fixtures/rainbow/landing/renders/the-1-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-1-640.jpg 640w, fixtures/rainbow/landing/renders/the-1-1056.jpg 1056w" sizes="(min-width: 960px) 80vw, 100vw"
+          width="1056" height="696" loading="lazy" decoding="async" alt="המגדל והבניין הנמוך לצידו מול הים, עם סימון נמל תל אביב, פארק רידינג, המרינה, חוף הים וכוכב הצפון" data-t-alt="alt.the1">
+      </picture>
+      <span class="hb-ai-badge lb-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+    </figure>
+    <ol class="lb-legend" aria-label="מקומות בסביבה" data-t-aria="place.list" data-legend>
+      <li><span data-t="place.port">נמל תל אביב</span></li>
+      <li><span data-t="place.reading">פארק רידינג</span></li>
+      <li><span data-t="place.marina">המרינה</span></li>
+      <li><span data-t="place.beach">חוף הים</span></li>
+      <li><span data-t="place.kochav">כוכב הצפון</span></li>
+    </ol>
+  </section>
+
+  <!-- 4. architecture: the three renders as a centred stage — one picture in front, its neighbours waiting at the sides.
+       Desktop with motion: the scroll moves the stage (pinned); phones: swipe (scroll-snap). Static: a plain row. -->
+  <section class="lb-arch" id="arch" aria-labelledby="archTitle">
+    <div class="lb-arch__pin">
+      <div class="lb-head">
+        <p class="lb-index"><span>02</span><span data-t="arch.eyebrow">האדריכלות</span></p>
+        <h2 class="lb-h2" id="archTitle" data-up data-t="arch.title">מרפסות כמו גלים</h2>
+      </div>
+      <div class="lb-stage" data-stage>
+        <div class="lb-stage__track" data-stage-track>
+          <figure class="rl-fig lb-slide" data-slide>
+            <picture><source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-2-640.webp 640w, fixtures/rainbow/landing/renders/the-2-1056.webp 1056w" sizes="(min-width: 960px) 58vw, 84vw">
+            <img src="fixtures/rainbow/landing/renders/the-2-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-2-640.jpg 640w, fixtures/rainbow/landing/renders/the-2-1056.jpg 1056w" sizes="(min-width: 960px) 58vw, 84vw"
+              width="1056" height="696" loading="lazy" decoding="async" alt="המגדל בשעת ערב, מול הים" data-t-alt="alt.the2"></picture>
+            <figcaption class="lb-slide__cap"><span class="lb-slide__n">I</span><span data-t="cap.the2">המגדל בשעת ערב</span></figcaption>
+            <span class="hb-ai-badge lb-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+          </figure>
+          <figure class="rl-fig lb-slide" data-slide>
+            <picture><source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-3-640.webp 640w, fixtures/rainbow/landing/renders/the-3-1056.webp 1056w" sizes="(min-width: 960px) 58vw, 84vw">
+            <img src="fixtures/rainbow/landing/renders/the-3-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-3-640.jpg 640w, fixtures/rainbow/landing/renders/the-3-1056.jpg 1056w" sizes="(min-width: 960px) 58vw, 84vw"
+              width="1056" height="696" loading="lazy" decoding="async" alt="הבניינים הנמוכים מהרחוב, והמגדל מאחוריהם" data-t-alt="alt.the3"></picture>
+            <figcaption class="lb-slide__cap"><span class="lb-slide__n">II</span><span data-t="cap.the3">מהרחוב</span></figcaption>
+            <span class="hb-ai-badge lb-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+          </figure>
+          <figure class="rl-fig lb-slide" data-slide>
+            <picture><source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-6-640.webp 640w, fixtures/rainbow/landing/renders/the-6-1056.webp 1056w" sizes="(min-width: 960px) 58vw, 84vw">
+            <img src="fixtures/rainbow/landing/renders/the-6-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-6-640.jpg 640w, fixtures/rainbow/landing/renders/the-6-1056.jpg 1056w" sizes="(min-width: 960px) 58vw, 84vw"
+              width="1056" height="696" loading="lazy" decoding="async" alt="מבט על הגגות" data-t-alt="alt.the6"></picture>
+            <figcaption class="lb-slide__cap"><span class="lb-slide__n">III</span><span data-t="cap.the6">מבט על הגגות</span></figcaption>
+            <span class="hb-ai-badge lb-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+          </figure>
+        </div>
+      </div>
+      <div class="lb-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- 5. the experience: the four stops of the ONE flow behind «לסיור בפרויקט» — first as a row of four drawn marks, then as an offset
+       collage of their pictures, each with its number and name on a chip at the corner. Not links: the one action is the CTA. -->
+  <section class="lb-steps" id="experience" aria-labelledby="stepsTitle">
+    <div class="lb-head">
+      <p class="lb-index"><span>03</span><span data-t="steps.eyebrow">החוויה</span></p>
+      <h2 class="lb-h2" id="stepsTitle" data-up data-t="steps.title">מהשמיים, ישר לסלון</h2>
+      <p class="lb-lead" data-up data-t="steps.lead">סיור אחד, ארבע עצירות.</p>
+    </div>
+    <ul class="lb-marks" aria-hidden="true" data-marks>
+      <li><svg viewBox="0 0 48 48"><ellipse cx="24" cy="30" rx="19" ry="6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="20" y="8" width="8" height="26" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="41" cy="29" r="2" fill="currentColor"/></svg><span data-t="step1.title">טיסה סביב המגדל</span></li>
+      <li><svg viewBox="0 0 48 48"><rect x="14" y="6" width="20" height="36" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M14 15h20M14 24h20M14 33h20M24 6v36" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="29" cy="20" r="3" fill="currentColor"/></svg><span data-t="step2.title">עצירה מול החזית</span></li>
+      <li><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15" fill="none" stroke="currentColor" stroke-width="1.2"/><ellipse cx="24" cy="24" rx="15" ry="5" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M36 13l3-2 1 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span data-t="step3.title">בתוך הדירה</span></li>
+      <li><svg viewBox="0 0 48 48"><rect x="7" y="12" width="15" height="24" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="26" y="12" width="15" height="24" fill="currentColor" opacity=".35"/><rect x="26" y="12" width="15" height="24" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span data-t="step4.title">פרקט או שיש?</span></li>
+    </ul>
+    <ol class="lb-collage">
+      <li class="lb-tile lb-tile--a">
+        <figure class="rl-card__media lb-tile__media" data-open><img src="fixtures/rainbow/landing/hero-poster-960.jpg" width="960" height="540" loading="lazy" decoding="async" alt="">
+          <span class="lb-chip"><b>01</b><span data-t="step1.title">טיסה סביב המגדל</span></span>
+          <span class="hb-ai-badge lb-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></figure>
+        <p class="lb-tile__text" data-t="step1.text">המגדל והסביבה מהאוויר, מכל הכיוונים.</p>
+      </li>
+      <li class="lb-tile lb-tile--b">
+        <figure class="rl-card__media lb-tile__media" data-open><img src="fixtures/rainbow/landing/facade.jpg" width="1080" height="608" loading="lazy" decoding="async" alt="">
+          <span class="lb-chip"><b>02</b><span data-t="step2.title">עצירה מול החזית</span></span>
+          <span class="hb-ai-badge lb-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></figure>
+        <p class="lb-tile__text" data-t="step2.text">הטיסה נעצרת, וכל הדירות מסומנות על המגדל. בוחרים אחת.</p>
+      </li>
+      <li class="lb-tile lb-tile--c">
+        <figure class="rl-card__media lb-tile__media" data-open><img src="fixtures/rainbow/landing/interior-entrance.jpg" width="1080" height="756" loading="lazy" decoding="async" alt="">
+          <span class="lb-chip"><b>03</b><span data-t="step3.title">בתוך הדירה</span></span>
+          <span class="hb-ai-badge lb-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></figure>
+        <p class="lb-tile__text" data-t="step3.text">סיור 360° בחדרים, עם תכנית ותלת־ממד.</p>
+      </li>
+      <li class="lb-tile lb-tile--d">
+        <figure class="rl-card__media lb-tile__media lb-pair" data-open><img src="fixtures/rainbow/landing/finish-parquet.jpg" width="540" height="810" loading="lazy" decoding="async" alt=""><img src="fixtures/rainbow/landing/finish-marble.jpg" width="540" height="810" loading="lazy" decoding="async" alt="">
+          <span class="lb-pair__tag lb-pair__tag--a" data-t="finish.parquet">פרקט</span><span class="lb-pair__tag lb-pair__tag--b" data-t="finish.marble">שיש</span>
+          <span class="lb-chip"><b>04</b><span data-t="step4.title">פרקט או שיש?</span></span>
+          <span class="hb-ai-badge lb-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></figure>
+        <p class="lb-tile__text" data-t="step4.text">מחליפים ריצוף וגימורים, והדירה משתנה מול העיניים.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 6. the closing line and the one action, on the night colour -->
+  <section class="lb-close" aria-labelledby="closeTitle" data-close>
+    <p class="lb-word lb-word--sm" aria-hidden="true" lang="en">RAINBOW<span>TEL AVIV</span></p>
+    <h2 class="lb-close__title" id="closeTitle" data-up data-t="close.title">הטיסה מתחילה כאן.</h2>
+    <a class="lb-btn" id="closeCta" href="#hero" data-route="tour-project"><span data-t="cta.tour">לסיור בפרויקט</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
+</main>
+
+<footer class="rl-foot">
+  <div class="rl-wrap">
+    <div class="rl-foot__row">
+      <!-- Habait = the maker of this site, the film and the visualisation (never the developer of the building) -->
+      <p class="rl-foot__credit"><span data-t="credit">הדמיה ואתר:</span>
+      <a class="rl-brand rl-brand--foot" href="./" aria-label="Habait"><img class="rl-foot__logo" src="brand/habait-logo-sand.svg" data-logo-he="brand/habait-logo-sand.svg" data-logo-en="brand/habait-wordmark-sand.svg" alt="Habait — הבית של כל הבתים" data-alt-he="Habait — הבית של כל הבתים" data-alt-en="Habait" width="131" height="81"></a></p>
+      <p class="rl-foot__dev" data-dev-row hidden><span data-t="foot.dev">יזם:</span> <span id="devName" data-dev-name></span></p>
+    </div>
+    <!-- the legal wording is project.json's disclaimer, unchanged (§6): one line that opens the full text in place -->
+    <details class="hb-legal rl-legal" id="legal">
+      <summary><span class="hb-legal__line" id="legalLine"></span><span class="hb-legal__more"><span class="hb-legal__open" data-t="legal.more">לפרטים</span><span class="hb-legal__close" data-t="legal.less">סגירה</span></span></summary>
+      <div class="hb-legal__full" id="legalFull"></div>
+    </details>
+    <!-- accessibility-statement link SLOT (root CLAUDE.md §6): its text and target are Eliran's. Empty for buyers until he writes them. -->
+    <p class="rl-foot__a11y" id="a11ySlot"></p>
+    <p class="hb-small index-foot" id="devFoot" hidden>Habait · v0</p>
+  </div>
+</footer>
+
+<script defer src="js/vendor/gsap-3.13.0.min.js"></script>
+<script defer src="js/vendor/ScrollTrigger-3.13.0.min.js"></script>
+<script defer src="js/vendor/CustomEase-3.13.0.min.js"></script>
+<script defer src="js/vendor/lenis-1.3.4.min.js"></script>
+<script type="module" src="js/home.js"></script>
+<script type="module" src="js/landing-motion.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+// Does a wrong look (scan of a torn file, same bytes before and after) get KEPT and served later?
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, sleep } from './qa-lib.mjs';
+const { inspectDir } = await E('engine/inspect.mjs');
+const h = await makeHome({ timeout: 60 });
+const H = (await engineOf(h)).handlers;
+const A = `${h.inbox}/same.pdf`;
+fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, A);
+const S = sha(fs.readFileSync(A));
+const truth = await H.inspect_plan({ pdf_path: A });
+const rec = `${inspectDir(h.config, S)}/inspect.json`;
+let found = false;
+for (let attempt = 0; attempt < 6 && !found; attempt++) {
+  const writer = spawn(process.execPath, ['-e', `const fs=require('fs');const b=fs.readFileSync(${JSON.stringify(SCR + '/pdfs/vec-sheet.pdf')});setInterval(()=>{try{fs.writeFileSync(${JSON.stringify(A)},b)}catch(e){}},3)`], { stdio: 'ignore' });
+  for (let i = 0; i < 20 && !found; i++) {
+    fs.rmSync(inspectDir(h.config, S), { recursive: true, force: true });
+    let r; try { r = await H.inspect_plan({ pdf_path: A }); } catch { continue; }
+    if (JSON.stringify(r.page_rows) !== JSON.stringify(truth.page_rows)) {
+      writer.kill(); await sleep(400);
+      // restore the file to its exact original bytes, as a finished upload would be
+      fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, A);
+      console.log('wrong look returned: vector_paths', r.page_rows[0].vector_paths, 'vs true', truth.page_rows[0].vector_paths, 'content', r.page_rows[0].content, 'candidates', r.candidates.length, 'vs', truth.candidates.length);
+      const kept = JSON.parse(fs.readFileSync(rec, 'utf8'));
+      console.log('record on disk for the PDF hash (file is quiet and has that exact hash:', sha(fs.readFileSync(A)) === S, '): vector_paths', kept.summary.page_rows[0].vector_paths);
+      const again = await H.inspect_plan({ pdf_path: A });
+      console.log('ask again, quiet file: vector_paths', again.page_rows[0].vector_paths, 'candidates', again.candidates.length, '→', JSON.stringify(again.page_rows) === JSON.stringify(truth.page_rows) ? 'correct' : 'STILL THE WRONG LOOK (served from the record)');
+      let s; try { const x = await H.start_simulation({ pdf_path: A }); s = 'job created ' + x.created + ' apartment ' + x.job.input.apartment; } catch (e) { s = e.code + ': ' + e.message; }
+      console.log('start_simulation on the quiet, intact file:', s);
+      found = true;
+    }
+  }
+  if (!found) writer.kill();
+}
+if (!found) console.log('no wrong look in this run');
+cleanup(h);

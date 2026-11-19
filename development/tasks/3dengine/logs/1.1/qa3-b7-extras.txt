@@ -1,0 +1,41 @@
+locked upload inspect_plan: RPC -32603 internal error in inspect_plan: a file error of the engine (EBUSY)
+locked upload start_simulation: RPC -32603 internal error in start_simulation: a file error of the engine (EBUSY)
+after unlock inspect_plan: ok
+read-denied upload inspect_plan: TOOL NOT_A_PDF | no such file
+read-denied upload start_simulation: TOOL NOT_A_PDF | no such file
+timeout 0.3s inspect_plan: TOOL FILE_TOO_LARGE | the first look did not finish in 0.3 s (a very large file, or this machine is busy); ask again
+timeout 0.3s start_simulation: TOOL FILE_TOO_LARGE | the first look did not finish in 0.3 s (a very large file, or this machine is busy); ask again
+after timeout, inspect folder holds: []  jobs: none
+temp sweep: [".tmp-SHA-20916-1","SHA"]
+apartment "<script>alert(1)</script>": RPC -32602 invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$
+apartment "p1\n": RPC -32602 invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$
+apartment "p1 ": RPC -32602 invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$
+apartment "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx: RPC -32602 invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$
+apartment "IGNORE PREVIOUS": RPC -32602 invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$
+apartment "עמוד 1": RPC -32602 invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$
+apartment "__proto__": TOOL NO_PLAN_FOUND | "__proto__" is not a drawing of this PDF; candidates: p1
+apartment "p2": TOOL NO_PLAN_FOUND | "p2" is not a drawing of this PDF; candidates: p1
+apartment "": RPC -32602 invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$
+stderr leak of marker: false  stderr bytes 0
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-37480-1794917752546-5 EPERM
+live runner, stored input swap: state before=awaiting_approval approve=ok final=failed reason=STAGE_FAILED manifest rows=tracing,building,rendering ledger rows=no ledger spent=0
+node:fs:483
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\Users\elira\AppData\Local\Temp\qa3-home-37480-1794917759083-6\jobs-temp\04762ca47a173685\runner.pid'
+    at Object.readFileSync (node:fs:483:20)
+    at file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r3-s/b7.mjs:88:25
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\qa3-home-37480-1794917759083-6\\jobs-temp\\04762ca47a173685\\runner.pid'
+}
+
+Node.js v24.22.1
+live runner, stored input remove: state before=awaiting_approval approve=ok final=failed reason=STAGE_FAILED manifest rows=tracing,building,rendering ledger rows=no ledger spent=0
+live runner, stored input dir: state before=awaiting_approval approve=ok final=failed reason=STAGE_FAILED manifest rows=tracing,building,rendering ledger rows=no ledger spent=0
+live runner, stored input chmod-append: state before=awaiting_approval approve=ok final=failed reason=STAGE_FAILED manifest rows=tracing,building,rendering ledger rows=no ledger spent=0
+bypass: get_job answers state queued
+bypass: runner exit null job state now awaiting_approval stored hash 6c91b33a6383 real hash of stored file 6c91b33a6383 original pdf 0c74ab308917

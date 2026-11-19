@@ -1,11 +1,11 @@
 # studio/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Habait Studio: a dashboard and fixed nine-stage pipeline that turns a developer's sales plan and materials into per-room visualization videos (see README.md).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 5 files here · 8 subfolders · 12746 files / 8.0 GB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

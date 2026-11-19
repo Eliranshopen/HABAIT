@@ -1,0 +1,56 @@
+## manifest other id + ledger settled $1
+   job 04762ca47a173685 -> exit 1  WROTE: 04762ca47a173685/job.json  | job: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's fi
+   job 04762ca47a173685 --json -> exit 0  | { "schema": "habait/job.v1", "job_id": "04762ca47a173685", "engine_version": "1.1.0", "mode": "stub", "state": "awaiting_approval"
+   ledger 04762ca47a173685 -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   ledger 04762ca47a173685 --json -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   jobs -> exit 0  | no jobs 
+   jobs --json -> exit 0  | { "jobs": [] } 
+   resume 04762ca47a173685 -> exit 1  | resume: job 04762ca47a173685: manifest.json is not this job's file (it names job "ffffffffffffffff") 
+## manifest garbage + ledger settled $1
+   job 04762ca47a173685 -> exit 1  WROTE: 04762ca47a173685/job.json  | job: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's fi
+   job 04762ca47a173685 --json -> exit 0  | { "schema": "habait/job.v1", "job_id": "04762ca47a173685", "engine_version": "1.1.0", "mode": "stub", "state": "awaiting_approval"
+   ledger 04762ca47a173685 -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   ledger 04762ca47a173685 --json -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   jobs -> exit 0  | no jobs 
+   jobs --json -> exit 0  | { "jobs": [] } 
+   resume 04762ca47a173685 -> exit 1  | resume: job 04762ca47a173685: manifest.json is not this job's file (it is not JSON) 
+## manifest dir + ledger settled $1
+   job 04762ca47a173685 -> exit 1  WROTE: 04762ca47a173685/job.json  | job: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's fi
+   job 04762ca47a173685 --json -> exit 0  | { "schema": "habait/job.v1", "job_id": "04762ca47a173685", "engine_version": "1.1.0", "mode": "stub", "state": "awaiting_approval"
+   ledger 04762ca47a173685 -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   ledger 04762ca47a173685 --json -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   jobs -> exit 0  | no jobs 
+   jobs --json -> exit 0  | { "jobs": [] } 
+   resume 04762ca47a173685 -> exit 1  | resume: job 04762ca47a173685: manifest.json is not this job's file (it is not a file) 
+## manifest bad row + ledger settled $1
+   job 04762ca47a173685 -> exit 1  WROTE: 04762ca47a173685/job.json  | job: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's fi
+   job 04762ca47a173685 --json -> exit 0  | { "schema": "habait/job.v1", "job_id": "04762ca47a173685", "engine_version": "1.1.0", "mode": "stub", "state": "awaiting_approval"
+   ledger 04762ca47a173685 -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   ledger 04762ca47a173685 --json -> exit 1  | ledger: ledger.json or manifest.json of job 04762ca47a173685 cannot be read (job 04762ca47a173685: manifest.json is not this job's
+   jobs -> exit 0  | no jobs 
+   jobs --json -> exit 0  | { "jobs": [] } 
+   resume 04762ca47a173685 -> exit 1  | resume: job 04762ca47a173685: manifest.json is not this job's file (row 1 names no stage of the engine) 
+## job.json other id
+   job 04762ca47a173685 -> exit 1  | job: job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef") 
+   job 04762ca47a173685 --json -> exit 1  | job: job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef") 
+   ledger 04762ca47a173685 -> exit 1  | ledger: job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef") 
+   ledger 04762ca47a173685 --json -> exit 1  | ledger: job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef") 
+   jobs -> exit 0  | no jobs 
+   jobs --json -> exit 0  | { "jobs": [] } 
+   resume 04762ca47a173685 -> exit 1  | resume: job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef") 
+## job.json id not of its input
+   job 04762ca47a173685 -> exit 1  | job: job 04762ca47a173685: job.json is not this job's file (its id is not the id of its own input) 
+   job 04762ca47a173685 --json -> exit 1  | job: job 04762ca47a173685: job.json is not this job's file (its id is not the id of its own input) 
+   ledger 04762ca47a173685 -> exit 1  | ledger: job 04762ca47a173685: job.json is not this job's file (its id is not the id of its own input) 
+   ledger 04762ca47a173685 --json -> exit 1  | ledger: job 04762ca47a173685: job.json is not this job's file (its id is not the id of its own input) 
+   jobs -> exit 0  | no jobs 
+   jobs --json -> exit 0  | { "jobs": [] } 
+   resume 04762ca47a173685 -> exit 1  | resume: job 04762ca47a173685: job.json is not this job's file (its id is not the id of its own input) 
+## job.json garbage
+   job 04762ca47a173685 -> exit 1  | job: job 04762ca47a173685: job.json is not this job's file (it is not JSON) 
+   job 04762ca47a173685 --json -> exit 1  | job: job 04762ca47a173685: job.json is not this job's file (it is not JSON) 
+   ledger 04762ca47a173685 -> exit 1  | ledger: job 04762ca47a173685: job.json is not this job's file (it is not JSON) 
+   ledger 04762ca47a173685 --json -> exit 1  | ledger: job 04762ca47a173685: job.json is not this job's file (it is not JSON) 
+   jobs -> exit 0  | no jobs 
+   jobs --json -> exit 0  | { "jobs": [] } 
+   resume 04762ca47a173685 -> exit 1  | resume: job 04762ca47a173685: job.json is not this job's file (it is not JSON) 

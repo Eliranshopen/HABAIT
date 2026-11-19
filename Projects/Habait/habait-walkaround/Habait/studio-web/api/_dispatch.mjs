@@ -24,7 +24,11 @@
 export const SNAPSHOT_PATH = 'studio/worker/snapshot.json';
 export const STAGES = {
   trace: { timeoutMin: 30, vcpus: 2, draft: false, persistent: false },   // auto-trace + trace-check + judge: fal I/O, little CPU
-  build: { timeoutMin: 44, vcpus: 4, draft: true, persistent: true },     // apartment … qa; chunked across sessions (Hobby: 45 min each)
+  // parity row 40 (the coordinator's ruling, 2026-11-08): the build renders at the setting the fidelity gate was proven on, 2048x1024@16 —
+  // the 1024x512 draft failed the auto 846's entrance at 1.88 % where 2048 passes at 0.96 (a local re-render reproduced the cloud's
+  // number exactly). Cost: about 40-45 min of rendering on 4 vCPU = about 3 CPU-h per build, most of Hobby's 5 a month; the render
+  // resumes per point (render_tour's manifest skip), so it chunks across the 44-min sessions of the persistent sandbox
+  build: { timeoutMin: 44, vcpus: 4, draft: false, render: '2048x1024@16', persistent: true },     // apartment … qa; chunked across sessions (Hobby: 45 min each)
 };
 export const VM = {
   root: '/vercel/sandbox', hw: '/vercel/sandbox/hw', py: '/vercel/sandbox/venv/bin/python', blob: '/vercel/sandbox/blobdeps',
@@ -51,9 +55,23 @@ export function sandboxEnv(stage, deadlineMs, env = process.env) {
 export function jobCommand(jobId, stage, flags = []) {
   const rj = 'Habait/tour360/tools/run-job.mjs';
   const named = flags.some((f) => f.startsWith('--render='));   // a named render setting replaces the stage's draft
-  const extra = [...(STAGES[stage].draft && !named ? ['--draft'] : []), ...flags].filter((f) => /^--[a-z-]+(=\d+x\d+@\d+)?$/.test(f)).map((f) => ` ${f}`).join('');
+  const extra = [...(STAGES[stage].render && !named ? [`--render=${STAGES[stage].render}`] : STAGES[stage].draft && !named ? ['--draft'] : []), ...flags].filter((f) => /^--[a-z-]+(=\d+x\d+@\d+)?$/.test(f)).map((f) => ` ${f}`).join('');
   return `cd ${VM.hw} && echo "=== session $(date -u +%FT%TZ)" >> ${VM.log}; node ${rj} --sweep-only --stale-min 50 >> ${VM.log} 2>&1; node ${rj} --once --job ${jobId}${extra} >> ${VM.log} 2>&1; echo "EXIT=$?" >> ${VM.log}`;
 }
+
+// ───────────────────────────── the build lock (Eliran 2026-11-08: «כן, ועם נעילת בנייה»; parity row 41)
+// A project's BUILD (the stage that calls fal: skin, finishes, judges) runs only after Habait approved that project. The flag lives
+// OUTSIDE the developer's prefix (studio/approvals/<uid>/<pid>.json), where no portal API writes: only Habait's admin CLI
+// (tour360/tools/approve-build.mjs) does. Upload, reading, trace and the trace approval are not locked. A $0 job (job.no_paid, set
+// only by Habait's test CLI) is not a paid build and is not locked.
+export const BUILD_WAIT_HE = 'הבנייה ממתינה לאישור צוות Habait — נעדכן כאן';
+export const approvalPath = (uid, pid) => `studio/approvals/${uid}/${pid}.json`;
+export async function buildApproved(store, uid, pid) {
+  if (!uid || !pid) return false;
+  const a = await store.readJson(approvalPath(uid, pid)).catch(() => null);
+  return a?.build_approved === true;
+}
+export function buildLockError() { return Object.assign(new Error(BUILD_WAIT_HE), { code: 'build_approval' }); }
 
 /** Which stage a queued job needs next — the executor's own rule (run-job.mjs handle()): a trace until one is approved, or
  *  again after a correction newer than the approval; otherwise the build. */
@@ -99,6 +117,8 @@ export async function dispatch(job, jobPathname, { stage, store, Sandbox = null,
   if (!S) throw new Error(`unknown stage ${stage}`);
   const snap = await store.readJson(SNAPSHOT_PATH);
   if (!snap?.snapshotId) throw new Error(`no worker snapshot at ${SNAPSHOT_PATH} (tools/sandbox-worker/worker.mjs build-snapshot --go)`);
+  // the lock is checked HERE, by the one function every dispatch goes through (the portal's POST and page-load retry, the worker CLI)
+  if (stage === 'build' && job.no_paid !== true && !flags.includes('--no-paid') && !(await buildApproved(store, job.owner, job.project))) throw buildLockError();
   if (stage === 'build' && !snap.withBlender) throw new Error('the worker snapshot carries no Blender (build-snapshot --with-blender --go)');
   const SB = Sandbox || (await import('@vercel/sandbox')).Sandbox;
   const cap = Math.min(Number(timeoutMin || S.timeoutMin), 45);

@@ -1,0 +1,267 @@
+{
+  "test": "m0.2.e2e --live",
+  "dry": false,
+  "started_at": "2026-11-16T15:19:10.654Z",
+  "ok": true,
+  "ui_dir": "C:/HABAIT-Agent-UI",
+  "wrapper_dir": "C:/pi-main/habait",
+  "prerequisites": [
+    {
+      "name": "bridge config C:/HABAIT-Agent-UI/bridge/config.json readable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "bridge config pi.cwd = C:/RnD/Projects/3Dengine",
+      "ok": true,
+      "detail": "pi.cwd = C:/RnD/Projects/3Dengine"
+    },
+    {
+      "name": "bridge config has engine.jobsDir",
+      "ok": true,
+      "detail": "C:/RnD/Projects/3Dengine/jobs"
+    },
+    {
+      "name": "bridge writes its pairing token to HABAIT_BRIDGE_TOKEN_FILE (test tooling)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "bridge agentDir has the web extension (C:/pi-main/habait)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pi wrapper guard at C:/pi-main/habait",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "app has node_modules/vite",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pi CLI installed",
+      "ok": true,
+      "detail": "Pi 1.5.2"
+    },
+    {
+      "name": "Chrome at C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "playwright-core loads (engine appdeps)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "fixture tests/fixtures/sample.pdf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "port 8787 is free",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "port 4173 is free",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "port 8891 is free",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "`pi mcp list` shows \"habait-engine: connected, 8 tools\"",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "steps": [
+    {
+      "step": "app built (needed (dist older than src))",
+      "ok": true,
+      "at": "2026-11-16T15:19:12.257Z",
+      "t_s": 1.6,
+      "detail": ""
+    },
+    {
+      "step": "app served by vite preview on 4173",
+      "ok": true,
+      "at": "2026-11-16T15:19:12.800Z",
+      "t_s": 2.1,
+      "detail": ""
+    },
+    {
+      "step": "bridge started Pi in RPC mode",
+      "ok": true,
+      "at": "2026-11-16T15:19:13.593Z",
+      "t_s": 2.9,
+      "detail": ""
+    },
+    {
+      "step": "a fresh Pi session (POST /session/new)",
+      "ok": true,
+      "at": "2026-11-16T15:19:13.702Z",
+      "t_s": 3,
+      "detail": "status 200"
+    },
+    {
+      "step": "app paired with the bridge",
+      "ok": true,
+      "at": "2026-11-16T15:19:14.473Z",
+      "t_s": 3.8,
+      "detail": ""
+    },
+    {
+      "step": "PDF uploaded (unique for this run)",
+      "ok": true,
+      "at": "2026-11-16T15:19:15.978Z",
+      "t_s": 5.3,
+      "detail": ""
+    },
+    {
+      "step": "message sent",
+      "ok": true,
+      "at": "2026-11-16T15:19:16.078Z",
+      "t_s": 5.4,
+      "detail": "הכינו לי בבקשה הדמיה 360 מהתכנית שהעליתי, דירה 846."
+    },
+    {
+      "step": "job card with «שחזור הדגמה»",
+      "ok": true,
+      "at": "2026-11-16T15:20:00.559Z",
+      "t_s": 49.9,
+      "detail": "db4d76d9d9c2deb2"
+    },
+    {
+      "step": "quote and «אשרו תקציב עד $60»",
+      "ok": true,
+      "at": "2026-11-16T15:20:24.769Z",
+      "t_s": 74.1,
+      "detail": "הערכת עלות: $48 · טווח $40–$60 · 11 חדרים"
+    },
+    {
+      "step": "approve button clicked (the one extra message)",
+      "ok": true,
+      "at": "2026-11-16T15:20:51.814Z",
+      "t_s": 101.2,
+      "detail": ""
+    },
+    {
+      "step": "guard card before any approval in the job file",
+      "ok": true,
+      "at": "2026-11-16T15:20:59.923Z",
+      "t_s": 109.3,
+      "detail": "שלב בתשלום: אישור תקציב לעבודה db4d76d9d9c2deb2; state awaiting_approval, approval null"
+    },
+    {
+      "step": "job file approval.cap_usd = 60",
+      "ok": true,
+      "at": "2026-11-16T15:21:00.201Z",
+      "t_s": 109.5,
+      "detail": "{\"cap_usd\":60,\"at\":\"2026-11-16T15:21:00.199Z\"}"
+    },
+    {
+      "step": "100 % and «פתחו את הסיור»",
+      "ok": true,
+      "at": "2026-11-16T15:21:39.297Z",
+      "t_s": 148.6,
+      "detail": "100% · http://127.0.0.1:8891/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0"
+    },
+    {
+      "step": "GET of the link = 200 with the 846 tour (<title> holds «דירה 846»)",
+      "ok": true,
+      "at": "2026-11-16T15:21:39.514Z",
+      "t_s": 148.9,
+      "detail": "200 «סיור 360° · דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)»"
+    }
+  ],
+  "tools": [
+    "project_open",
+    "mcp__habait_engine__inspect_plan",
+    "mcp__habait_engine__start_simulation",
+    "project_record",
+    "mcp__habait_engine__approve_paid_stage",
+    "project_record"
+  ],
+  "tools_source": "bridge log lines \"[tool] <name>\": the bridge logs one per tool_execution_start, the same event that writes each `activity` record on the /chat stream (the record itself carries the tool name, but the app drops it)",
+  "agent_texts": [
+    "אני מתחיל בבדיקת התכנית שהעלית ופותח את פרויקט דירה 846.",
+    "נמצאה דירה 846 בעמוד 1. מפעיל את הסימולציה. *(המנוע עדיין ב–stub — זה יחזיר את הסיור הקיים של דירה 846 ולא יוציא כסף.)*",
+    "עדכנתי את כרטיס הפרויקט.",
+    "הסימולציה התחילה.\n\n- **דירה:** 846\n- **מזהה משימה:** `db4d76d9d9c2deb2`\n- **מצב:** בתור\n- **עלות:** 0$ — המנוע נמצא כרגע במצב **stub**, כך שהתוצאה תהיה שחזור של סיור ההדגמה הקיים לדירה 846 ולא הדמיה חדשה.\n\nכשהמנוע יסיים יהיה כאן הקישור לסיור. אם תרצה להפעיל את ההדמיה האמיתית כשהמנוע יהיה מוכן, נעדכן אותך.",
+    "מאשר את השלב בתשלום עם תקרה של 60$.",
+    "האישור נקלט.\n\n- **מזהה עבודה:** `db4d76d9d9c2deb2`\n- **תקרה מאושרת:** $60\n- **הצעת מחיר:** $48 (טווח $40–$60) ל–11 חדרים\n- **מצב:** ממתין לאישור תשלום / בעבודה\n- **עלות עד כה:** $0\n\nזו עדיין מערכת ה–stub, אז בסיום יוחזר סיור ההדגמה הקיים לדירה 846. כשתרצה, אבדוק אם העבודה הסתיימה ואציג את הקישור.",
+    "מעולה. כשתרצה, אבקש את התוצאה ואראה לך את הקישור לסיור."
+  ],
+  "final_job": {
+    "schema": "habait/job.v1",
+    "job_id": "db4d76d9d9c2deb2",
+    "mode": "stub",
+    "state": "done",
+    "percent": 100,
+    "created_at": "2026-11-16T15:20:00.445Z",
+    "updated_at": "2026-11-16T15:21:37.321Z",
+    "heartbeat_at": "2026-11-16T15:21:37.321Z",
+    "input": {
+      "pdf_path": "C:/RnD/Projects/3Dengine/jobs/db4d76d9d9c2deb2/input/source.pdf",
+      "pdf_name": "sample.pdf",
+      "pdf_sha256": "b02d89cee1a461de6e49e265007fbdcd30eeed2a0b947988e94b4eeb39ecc43c",
+      "apartment": "apt846"
+    },
+    "quote": {
+      "estimate_usd": 48,
+      "range_usd": [
+        40,
+        60
+      ],
+      "rooms": 11,
+      "basis": "measured on apartment 846"
+    },
+    "approval": {
+      "cap_usd": 60,
+      "at": "2026-11-16T15:21:00.199Z"
+    },
+    "cost": {
+      "spent_usd": 0,
+      "cap_usd": 60
+    },
+    "result": {
+      "local_url": "http://127.0.0.1:8891/tour/?scope=apartment&room=terraceLiving&floor=parquet&video=0",
+      "tour_dir": "C:/RnD/.wt/deploy-P-7/tour"
+    },
+    "reason": null
+  },
+  "cost": "not exposed: the /chat stream carries run.started, text.delta, activity, job, question, confirmation, status and run.* records only, and the bridge has no usage endpoint; Pi keeps usage in its own session file, which this script must not read",
+  "screenshots": [
+    "C:/RnD/development/tasks/3dengine/logs/0.2/live/1440-card.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/live/1440-quote.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/live/1440-approval.png",
+    "C:/RnD/development/tasks/3dengine/logs/0.2/live/1440-done.png"
+  ],
+  "console_errors": [],
+  "brake": null,
+  "cleanup": {
+    "actions": {
+      "browser": "closed",
+      "bridge": "killed",
+      "preview": "killed",
+      "engine_serve": "killed"
+    },
+    "leftovers_killed": [],
+    "listening_after": [],
+    "started": [
+      "vite-preview 35200 alive=false",
+      "bridge 22516 alive=false"
+    ]
+  },
+  "error": null,
+  "finished_at": "2026-11-16T15:21:50.505Z",
+  "duration_s": 160
+}

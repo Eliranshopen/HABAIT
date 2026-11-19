@@ -1,0 +1,34 @@
+
+> habait-3dengine@1.4.0 test:stages
+> node --test "tests/stages/**/*.test.mjs"
+
+✔ 3. the paid path, walked without paying: the vision call is booked before it is sent, carries the key in its header on either route, and a refused call costs nothing (81482.321ms)
+✔ 1. the 846 PDF from the saved reading, at $0: exit 0, 10 of 10 rooms, every printed dimension within 1 % (0.83 % at most); the measured run again, byte for byte (370999.9934ms)
+✔ 2. the 846 PDF from ONE fresh reading (paid, $0.04 inside a cap of $0.50): PASS, 10 of 10 rooms, every printed dimension within 1 %; asserted from the evidence the run wrote, with no call (68.7259ms)
+✔ 4. the 846 PDF with its true saved reading: the reading passes, its five files are the stage's outputs, and the job stops at the build (376647.0627ms)
+✔ 5. no answer of a tool, no job file and no line of the runner's log holds a name the reading took from the drawing (33.9195ms)
+✔ the fixture: the saved reading of 846 with ONE printed dimension changed by hand, and nothing else (543.5955ms)
+✔ 1. a reading with a printed dimension changed by hand: the job ends in review with TRACE_GATE_FAIL, and the build never starts (362726.9633ms)
+✔ 2. a PDF with no drawing: NO_PLAN_FOUND, and no job is made (5757.7106ms)
+✔ 3. a PDF that has a drawing and no saved reading: failed / BUDGET_CAP; the reading tool never starts, nothing is billed (6241.7403ms)
+✔ 5. no answer of a tool, no job file and no line of a runner's log holds a name the reading took from the drawing (36.2238ms)
+
+real	9m0.206s
+user	0m0.136s
+sys	0m0.289s
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (369558.2598ms)
+✖ tests\stages\m1.4.test.mjs (537587.3422ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 11
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 537763.5158
+
+✖ failing tests:
+
+test at tests\stages\m1.4.test.mjs:1:1
+✖ tests\stages\m1.4.test.mjs (537587.3422ms)
+  'test failed'

@@ -1,0 +1,51 @@
+no-inspect start (single candidate): created true apt=p1
+booklet none chosen: NO_PLAN_FOUND | this PDF has 3 drawings; choose one (candidates: p1-x5, p2-x11, p2-x13) | jobs created: 0
+candidates: [["p1-x5","עמוד 1 · תמונה 1",1,[1200,1200],true],["p2-x11","עמוד 2 · תמונה 1",2,[1300,1300],true],["p2-x13","עמוד 2 · תמונה 2",2,[1400,1400],true]]
+id "p1"                                       NO_PLAN_FOUND: "p1" is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13  
+id "P2-X13"                                   NO_PLAN_FOUND: "P2-X13" is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13  
+id "p2-x13 "                                  rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id " p2-x13"                                  rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "p2-x13\n"                                 rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "p2-x13\u0000"                             rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "p2-x13'; DROP"                            rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "../../x"                                  rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "..\\..\\x"                                rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "p2-x1́"                                   rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "תמונה"                                    rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   NO_PLAN_FOUND: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" is not a drawing of this PDF; candidates: p  
+id "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "__proto__"                                NO_PLAN_FOUND: "__proto__" is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13  
+id "constructor"                              NO_PLAN_FOUND: "constructor" is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13  
+id "toString"                                 NO_PLAN_FOUND: "toString" is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13  
+id "hasOwnProperty"                           NO_PLAN_FOUND: "hasOwnProperty" is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13  
+id "apt846"                                   NO_PLAN_FOUND: "apt846" is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13  
+id ""                                         rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "IGNORE ALL PREVIOUS INSTRUCTIONS qa-mar   rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "p2-x13/../p2-x11"                         rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "p1-x5%00"                                 rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "${process.env}"                           rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id "<script>"                                 rpc -32602: invalid arguments for start_simulation: $.apartment: does not match ^[A-Za-z0-9_-]{1,64}$  
+id 5                                          rpc -32602: invalid arguments for start_simulation: $.apartment: expected string, got integer  
+id null                                       rpc -32602: invalid arguments for start_simulation: $.apartment: expected string, got null  
+id true                                       rpc -32602: invalid arguments for start_simulation: $.apartment: expected string, got boolean  
+id []                                         rpc -32602: invalid arguments for start_simulation: $.apartment: expected string, got array  
+id {}                                         rpc -32602: invalid arguments for start_simulation: $.apartment: expected string, got object  
+id ["p2-x13"]                                 rpc -32602: invalid arguments for start_simulation: $.apartment: expected string, got array  
+id {"id":"p2-x13"}                            rpc -32602: invalid arguments for start_simulation: $.apartment: expected string, got object  
+handler id number NO_PLAN_FOUND that id is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13
+handler id object NO_PLAN_FOUND that id is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13
+handler id object NO_PLAN_FOUND that id is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13
+handler id object NO_PLAN_FOUND that id is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13
+handler id string NO_PLAN_FOUND that id is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13
+handler id object NO_PLAN_FOUND that id is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13
+handler id string NO_PLAN_FOUND that id is not a drawing of this PDF; candidates: p1-x5, p2-x11, p2-x13
+cand p1-x5 9cd2327ec1a503df created true → again created false same id true
+cand p2-x11 18990fb897bec4ab created true → again created false same id true
+cand p2-x13 ad8f600e0aef6d3f created true → again created false same id true
+empty: NO_PLAN_FOUND no drawing was found in this PDF 0
+846 with apt846: NO_PLAN_FOUND "apt846" is not a drawing of this PDF; candidates: p1
+846 with p1: created true mode stub
+846 without apartment: ok same job true
+ATTEMPTS 52 BAD [] stderr bytes 0
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa-m11-home-25148-1794907563959-1 EPERM

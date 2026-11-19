@@ -1,0 +1,5 @@
+node qa-r3-script-r1.mjs.txt (as r1.mjs) <callUsd> <reps>
+callUsd 0.6 reps 3: after the wake rows "1:settled/late 2:reserved"; at done ledger = 1:s:settled/late 2:s:reserved 3:g:settled 4:f:settled; reserved_row_left=3 of 3
+callUsd 25 reps 3: same, reserved_row_left=3 of 3
+callUsd 25, approve cap 80 (3 real calls = 75 <= 80), reps 2: cap_stops=1 each (phantom 25 counted: 100 > 80), reserved_row_left=2 of 2
+steps: takeover at skinning:sent, second runner env PAUSE_AFTER_RESERVE 20000; when row2 is reserved wake the first (it settles row1 late, caches); kill the second; resume (third); finish.

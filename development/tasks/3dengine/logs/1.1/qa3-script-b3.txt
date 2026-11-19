@@ -1,0 +1,163 @@
+// B2/B3: through the real MCP server over stdio, plant the wrong kind of thing at every path, call every tool.
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, snapshot, diffSnap, sleep } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const GOLD = 'C:/RnD/Projects/3Dengine/tests/fixtures/apt846/source.pdf';
+const SHA = sha(fs.readFileSync(GOLD));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const USER = process.env.USERNAME;
+const ONLY = process.argv[2] ? new RegExp(process.argv[2]) : null;
+const PATHISH = /[A-Za-z]:[\\/]|\\\\|AppData|qa3-home|\.runtime|jobs-temp|\/Users\/|uploads/i;
+
+const icacls = (p, ...a) => spawnSync('icacls', [p, ...a], { windowsHide: true });
+const deny = (p) => icacls(p, '/deny', `${USER}:(OI)(CI)(W,DC)`);
+const undeny = (p) => { try { icacls(p, '/remove:d', USER); } catch {} };
+const rm = (p) => fs.rmSync(p, { recursive: true, force: true });
+const F = (p, c = 'x') => { rm(p); fs.mkdirSync(p.slice(0, p.lastIndexOf('/')), { recursive: true }); fs.writeFileSync(p, c); };
+const D = (p, withFile) => { rm(p); fs.mkdirSync(p, { recursive: true }); if (withFile) fs.writeFileSync(`${p}/f.txt`, 'x'); };
+const RO = (p) => fs.chmodSync(p, 0o444);
+
+const rt = (h) => `${h.home}/.runtime`;
+const insp = (h) => `${rt(h)}/inspect`;
+const rec = (h) => `${insp(h)}/${SHA}`;
+const jd = (h) => `${h.jobsDir}/${ID}`;
+const good = { schema: 'habait/job.v1' };
+
+// BEFORE: planted before the first call (no job yet unless the plant makes one).
+const before = {
+  'rt is a file': (h) => { rm(rt(h)); F(rt(h)); },
+  'inspect is a file': (h) => { rm(insp(h)); F(insp(h)); },
+  'inspect read-only(acl)': (h) => { rm(rec(h)); deny(insp(h)); },
+  'sha folder is a file': (h) => { rm(rec(h)); F(rec(h)); },
+  'sha folder empty dir': (h) => { rm(rec(h)); D(rec(h)); },
+  'sha folder garbage': (h) => { rm(rec(h)); D(rec(h), true); F(`${rec(h)}/inspect.json`, '{}'); },
+  'sha folder read-only(acl)': (h) => { deny(rec(h)); },
+  'look temp is a file': (h, c) => { rm(rec(h)); F(`${insp(h)}/.tmp-${SHA}-${c.pid}-1`); },
+  'look temp is a dir with content': (h, c) => { rm(rec(h)); D(`${insp(h)}/.tmp-${SHA}-${c.pid}-1`, true); D(`${insp(h)}/.tmp-${SHA}-${c.pid}-1/out/pages.json`); },
+  'look temp/out is a file': (h, c) => { rm(rec(h)); D(`${insp(h)}/.tmp-${SHA}-${c.pid}-1`); F(`${insp(h)}/.tmp-${SHA}-${c.pid}-1/out`); },
+  'look temp/source.pdf is a dir': (h, c) => { rm(rec(h)); D(`${insp(h)}/.tmp-${SHA}-${c.pid}-1/source.pdf`, true); },
+  'jobs is a file': (h) => { rm(h.jobsDir); F(h.jobsDir); },
+  'jobs read-only(acl)': (h) => { D(h.jobsDir); deny(h.jobsDir); },
+  'job folder is a file': (h) => { F(jd(h)); },
+  'job folder empty': (h) => { D(jd(h)); },
+  'job folder read-only(acl)': (h) => { D(jd(h)); deny(jd(h)); },
+  'input is a file': (h) => { F(`${jd(h)}/input`); },
+  'input/source.pdf is a dir': (h) => { D(`${jd(h)}/input/source.pdf`, true); },
+  'input read-only(acl)': (h) => { D(`${jd(h)}/input`); deny(`${jd(h)}/input`); },
+  'intake temp is a dir': (h, c) => { D(`${jd(h)}/input/source.pdf.${c.pid}.tmp`, true); },
+  'intake temp is a file': (h, c) => { F(`${jd(h)}/input/source.pdf.${c.pid}.tmp`); },
+  'job.json is a dir': (h) => { D(`${jd(h)}/job.json`, true); },
+  'job.json garbage': (h) => { F(`${jd(h)}/job.json`, 'not json'); },
+  'job.json empty': (h) => { F(`${jd(h)}/job.json`, ''); },
+  'job.json BOM {}': (h) => { F(`${jd(h)}/job.json`, '\ufeff{}'); },
+  'job.json other id': (h) => { F(`${jd(h)}/job.json`, JSON.stringify({ ...good, job_id: '0123456789abcdef', state: 'queued', input: {}, cost: {} })); },
+  'job.json read-only file': (h) => { F(`${jd(h)}/job.json`, 'x'); RO(`${jd(h)}/job.json`); },
+  'manifest is a dir': (h) => { D(`${jd(h)}/manifest.json`, true); },
+  'manifest garbage': (h) => { F(`${jd(h)}/manifest.json`, '[[['); },
+  'manifest other id': (h) => { F(`${jd(h)}/manifest.json`, JSON.stringify({ schema: 'habait/manifest.v1', job_id: 'ffffffffffffffff', rows: [] })); },
+  'manifest read-only': (h) => { F(`${jd(h)}/manifest.json`, '{}'); RO(`${jd(h)}/manifest.json`); },
+  'ledger is a dir': (h) => { D(`${jd(h)}/ledger.json`, true); },
+  'ledger garbage': (h) => { F(`${jd(h)}/ledger.json`, 'zzz'); },
+  'runner.pid is a dir': (h) => { D(`${jd(h)}/runner.pid`, true); },
+  'runner.pid garbage': (h) => { F(`${jd(h)}/runner.pid`, 'abc'); },
+  'job.lock is a dir': (h) => { D(`${jd(h)}/job.lock`, true); },
+  'job.lock is a stale file': (h) => { F(`${jd(h)}/job.lock`, '999999'); fs.utimesSync(`${jd(h)}/job.lock`, new Date(0), new Date(0)); },
+  'runner.log is a dir': (h) => { D(`${jd(h)}/runner.log`, true); },
+  'stages is a file': (h) => { F(`${jd(h)}/stages`); },
+};
+
+// AFTER: a real job exists (created through start_simulation, runner killed); then planted.
+const after = {
+  'A input removed->file': (h) => { rm(`${jd(h)}/input`); F(`${jd(h)}/input`); },
+  'A source.pdf is a dir': (h) => { rm(`${jd(h)}/input`); D(`${jd(h)}/input/source.pdf`, true); },
+  'A source.pdf missing': (h) => { fs.chmodSync(`${jd(h)}/input/source.pdf`, 0o666); rm(`${jd(h)}/input/source.pdf`); },
+  'A job.json is a dir': (h) => { rm(`${jd(h)}/job.json`); D(`${jd(h)}/job.json`, true); },
+  'A job.json garbage': (h) => { F(`${jd(h)}/job.json`, '{bad'); },
+  'A job.json empty': (h) => { F(`${jd(h)}/job.json`, ''); },
+  'A job.json BOM+valid': (h) => { const t = fs.readFileSync(`${jd(h)}/job.json`, 'utf8'); F(`${jd(h)}/job.json`, '\ufeff' + t); },
+  'A job.json other state': (h) => { const j = JSON.parse(fs.readFileSync(`${jd(h)}/job.json`, 'utf8')); j.state = 'stuck'; F(`${jd(h)}/job.json`, JSON.stringify(j)); },
+  'A job.json read-only': (h) => { RO(`${jd(h)}/job.json`); },
+  'A job.json acl-deny': (h) => { deny(`${jd(h)}/job.json`); },
+  'A manifest is a dir': (h) => { rm(`${jd(h)}/manifest.json`); D(`${jd(h)}/manifest.json`, true); },
+  'A manifest garbage': (h) => { F(`${jd(h)}/manifest.json`, 'nope'); },
+  'A manifest empty': (h) => { F(`${jd(h)}/manifest.json`, ''); },
+  'A manifest BOM': (h) => { const t = fs.readFileSync(`${jd(h)}/manifest.json`, 'utf8'); F(`${jd(h)}/manifest.json`, '\ufeff' + t); },
+  'A manifest row bad path': (h) => { const m = JSON.parse(fs.readFileSync(`${jd(h)}/manifest.json`, 'utf8')); m.rows[0].outputs = [{ path: '../../x', sha256: 'a'.repeat(64), bytes: 1 }]; F(`${jd(h)}/manifest.json`, JSON.stringify(m)); },
+  'A manifest other id': (h) => { const m = JSON.parse(fs.readFileSync(`${jd(h)}/manifest.json`, 'utf8')); m.job_id = '1111111111111111'; F(`${jd(h)}/manifest.json`, JSON.stringify(m)); },
+  'A manifest read-only': (h) => { RO(`${jd(h)}/manifest.json`); },
+  'A ledger is a dir': (h) => { rm(`${jd(h)}/ledger.json`); D(`${jd(h)}/ledger.json`, true); },
+  'A ledger garbage': (h) => { F(`${jd(h)}/ledger.json`, 'qq'); },
+  'A runner.pid is a dir': (h) => { rm(`${jd(h)}/runner.pid`); D(`${jd(h)}/runner.pid`, true); },
+  'A job.lock is a dir': (h) => { rm(`${jd(h)}/job.lock`); D(`${jd(h)}/job.lock`, true); },
+  'A runner.log is a dir': (h) => { rm(`${jd(h)}/runner.log`); D(`${jd(h)}/runner.log`, true); },
+  'A stages is a file': (h) => { rm(`${jd(h)}/stages`); F(`${jd(h)}/stages`); },
+  'A job folder acl-deny': (h) => { deny(jd(h)); },
+  'A jobs acl-deny': (h) => { deny(h.jobsDir); },
+};
+
+function killAll(h) {
+  // kill runners of this home only
+  const r = spawnSync('powershell', ['-NoProfile', '-Command', `Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*runner.mjs*' -and $_.CommandLine -like '*${h.home.split('/').pop()}*' } | ForEach-Object { $_.ProcessId }`], { encoding: 'utf8', windowsHide: true });
+  void r;
+  // runner command lines do not carry the home (it is in the env); use runner.pid files
+  try { for (const d of fs.readdirSync(h.jobsDir)) { try { const p = Number(fs.readFileSync(`${h.jobsDir}/${d}/runner.pid`, 'utf8')); if (p) spawnSync('taskkill', ['/PID', String(p), '/T', '/F'], { windowsHide: true }); } catch {} } } catch {}
+}
+const tidy = (h) => { for (const p of [rec(h), insp(h), h.jobsDir, jd(h), `${jd(h)}/input`, `${jd(h)}/job.json`, `${jd(h)}/manifest.json`]) { try { undeny(p); } catch {} } };
+
+const summary = [];
+async function callAll(srv, h, label, withJob) {
+  const out = [];
+  const seq = [['inspect_plan', { pdf_path: `${h.inbox}/s.pdf` }], ['start_simulation', { pdf_path: `${h.inbox}/s.pdf` }],
+    ['get_job', { job_id: ID }], ['approve_paid_stage', { job_id: ID, cap_usd: 100 }], ['get_result', { job_id: ID }], ['list_jobs', {}], ['cancel_job', { job_id: ID }], ['start_simulation', { pdf_path: `${h.inbox}/s.pdf` }]];
+  for (const [name, args] of seq) {
+    let line;
+    try {
+      const r = await srv.call(name, args);
+      if (r.m.error) line = { kind: 'RPC', msg: r.m.error.message };
+      else if (r.err) line = { kind: 'TOOL', code: r.err.code, msg: r.err.message };
+      else line = { kind: 'ok' };
+    } catch (e) { line = { kind: 'CLIENT', msg: e.message }; }
+    const flag = (line.kind === 'RPC' && PATHISH.test(line.msg)) ? ' !!PATH-IN-RPC' : (line.kind === 'TOOL' && PATHISH.test(line.msg) && line.code !== 'TOOLCHAIN_MISSING' ? ' ??path-in-tool' : '');
+    out.push(`${name}: ${line.kind}${line.code ? ' ' + line.code : ''}${line.msg ? ' | ' + line.msg.slice(0, 140) : ''}${flag}`);
+    if (flag.startsWith(' !!')) summary.push(`DEFECT? ${label} ${name}: ${line.msg}`);
+    if (line.kind === 'CLIENT') summary.push(`CLIENT-ERR ${label} ${name}: ${line.msg}`);
+  }
+  return out;
+}
+
+async function scenario(label, plant, mode) {
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  fs.mkdirSync(rec(h), { recursive: true });
+  for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/rec-sheet846/${f}`, `${rec(h)}/${f}`);
+  const srv = startServer(h);
+  await srv.init();
+  const c = { pid: srv.proc.pid };
+  let snap0, snap1;
+  try {
+    if (mode === 'after') {
+      const r = await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` });
+      if (r.err || r.m.error) { console.log(`## ${label}: setup failed`, JSON.stringify(r.m).slice(0, 200)); return; }
+      for (let i = 0; i < 100; i++) { const g = await srv.call('get_job', { job_id: ID }); if (g.out?.job?.state === 'awaiting_approval') break; await sleep(200); }
+      killAll(h); await sleep(300);
+    }
+    plant(h, c);
+    const safe = (f) => { try { return f(); } catch { return {}; } };
+    snap0 = safe(() => snapshot(jd(h), (p) => /job\.lock|\.tmp$/.test(p)));
+    const bystander = `${h.jobsDir}/aaaaaaaaaaaaaaaa`;
+    const lines = await callAll(srv, h, label, mode === 'after');
+    snap1 = safe(() => snapshot(jd(h), (p) => /job\.lock|\.tmp$/.test(p)));
+    const changed = diffSnap(snap0, snap1);
+    console.log(`## ${label}${changed.length ? '   CHANGED FILES: ' + changed.join(',') : ''}`);
+    for (const l of lines) console.log('   ' + l);
+  } catch (e) {
+    console.log(`## ${label}: scenario error ${e.message}`);
+  } finally {
+    await srv.stop(); killAll(h); await sleep(200); tidy(h); cleanup(h);
+  }
+}
+
+for (const [k, fn] of Object.entries(before)) if (!ONLY || ONLY.test(k)) await scenario(k, fn, 'before');
+for (const [k, fn] of Object.entries(after)) if (!ONLY || ONLY.test(k)) await scenario(k, fn, 'after');
+console.log('\nSUMMARY FLAGS:', summary.length); for (const s of summary) console.log(s);

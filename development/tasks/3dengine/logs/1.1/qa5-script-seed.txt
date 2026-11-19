@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import { makeHome, E, SCR, sha, cleanup, GOLDEN } from './lib.mjs';
+const { inspectPdf } = await E('engine/inspect.mjs');
+const SAMPLE = 'C:/RnD/Projects/3Dengine/tests/fixtures/sample.pdf';
+for (const [p, name] of [[GOLDEN, 'rec'], [SAMPLE, 'rec2']]) {
+  const h = await makeHome({ timeout: 120 });
+  const s = sha(fs.readFileSync(p));
+  const t0 = Date.now();
+  const r = inspectPdf(h.config, { path: p, sha256: s });
+  console.log(name, r.kind, r.candidates.length, Date.now() - t0, 'ms');
+  fs.mkdirSync(`${SCR}/${name}`, { recursive: true });
+  for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${h.config.runtimeDir}/inspect/${s}/${f}`, `${SCR}/${name}/${f}`);
+  cleanup(h);
+}

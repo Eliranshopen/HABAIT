@@ -1,0 +1,75 @@
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { withFileLock, lockState } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs';
+const base = fs.mkdtempSync('C:/Users/elira/AppData/Local/Temp/qa2/f-');
+const res = [];
+const rec = (name, ok, extra = '') => { res.push({ name, ok, extra }); console.log((ok ? 'PASS ' : 'FAIL ') + name + (extra ? ' :: ' + extra : '')); };
+const p = (s) => `${base}/${s}`;
+const dead = spawnSync(process.execPath, ['-e', '0']).pid;
+const sleeper = spawn(process.execPath, ['-e', 'setTimeout(()=>{},120000)']); const live = sleeper.pid;
+const opts = { waitMs: 700, staleMs: 300 };
+const busyOpts = { waitMs: 700, staleMs: 60000 };
+const now = () => Date.now();
+const entry = (lock, pid, at, nonce = 'abcdef01') => { fs.mkdirSync(lock, { recursive: true }); fs.writeFileSync(`${lock}/h.${pid}.${at}.${nonce}`, ''); };
+const old = (l) => { const t = new Date(now() - 5000); fs.utimesSync(l, t, t); };
+function attempt(name, setup, expect, o = opts, path = p(name)) {
+  fs.mkdirSync(path.replace(/[/\\][^/\\]*$/, ''), { recursive: true });
+  setup(path);
+  let ran = 0, out;
+  try { withFileLock(path, () => { ran++; }, { ...o, label: 'L' }); out = ran === 1 ? 'took' : 'ran' + ran; }
+  catch (e) { out = /lock busy$/.test(e.message) ? 'busy' : 'err ' + e.code + ' ' + e.message.slice(0, 60); }
+  rec(name, out === expect, `got ${out}, want ${expect}; state after: ${lockState(path).kind}`);
+}
+attempt('free', () => {}, 'took');
+attempt('empty-folder', (l) => fs.mkdirSync(l), 'took');
+attempt('dead-fresh', (l) => entry(l, dead, now()), 'took');
+attempt('live-fresh', (l) => entry(l, live, now()), 'busy', busyOpts);
+attempt('live-old', (l) => entry(l, live, now() - 5000), 'took');
+attempt('future-live', (l) => entry(l, live, now() + 3600e3), 'busy', busyOpts);
+attempt('future-dead', (l) => entry(l, dead, now() + 3600e3), 'took');
+attempt('huge-time-live', (l) => entry(l, live, 9999999999999999), 'busy', busyOpts);
+attempt('two-entries', (l) => { entry(l, dead, now()); entry(l, dead, now() - 1, 'abcdef02'); }, 'busy', busyOpts);
+attempt('foreign-file', (l) => { fs.mkdirSync(l); fs.writeFileSync(`${l}/readme.txt`, 'x'); }, 'busy', busyOpts);
+attempt('foreign-plus-entry', (l) => { entry(l, dead, now()); fs.writeFileSync(`${l}/readme.txt`, 'x'); }, 'busy', busyOpts);
+attempt('subfolder', (l) => fs.mkdirSync(`${l}/sub`, { recursive: true }), 'busy', busyOpts);
+attempt('badname-entry', (l) => { fs.mkdirSync(l); fs.writeFileSync(`${l}/h.${dead}.1.zz`, ''); }, 'busy', busyOpts);
+attempt('oldfile-dead', (l) => fs.writeFileSync(l, String(dead)), 'took');
+attempt('oldfile-live-fresh', (l) => fs.writeFileSync(l, String(live)), 'busy', busyOpts);
+attempt('oldfile-live-aged', (l) => { fs.writeFileSync(l, String(live)); old(l); }, 'took');
+attempt('oldfile-empty-aged', (l) => { fs.writeFileSync(l, ''); old(l); }, 'took');
+attempt('oldfile-empty-fresh(waits 1s, waitMs 2000)', (l) => fs.writeFileSync(l, ''), 'took', { waitMs: 2500, staleMs: 300 });
+attempt('oldfile-garbage-aged', (l) => { fs.writeFileSync(l, 'zzz\u0000'); old(l); }, 'took');
+attempt('leftover-new-gone-tmp', (l) => { fs.mkdirSync(`${l}.1.abc.new.tmp`, { recursive: true }); fs.writeFileSync(`${l}.1.abc.new.tmp/h.1.1.abcdef`, ''); fs.writeFileSync(`${l}.1.abc.gone.tmp`, ''); }, 'took');
+attempt('spaces-hebrew', () => {}, 'took', opts, p('\u05e9\u05dd \u05e2\u05dd \u05e8\u05d5\u05d5\u05d7\u05d9\u05dd/x y.lock'));
+attempt('parent-missing', () => {}, 'took', opts, p('a/b/c/d/x.lock'));
+attempt('long-path', () => {}, 'took', opts, p(('d'.repeat(30) + '/').repeat(7) + 'x.lock'));
+fs.mkdirSync(p('jt-empty'), { recursive: true });
+attempt('junction-to-empty', (l) => fs.symlinkSync(p('jt-empty'), l, 'junction'), 'took');
+fs.mkdirSync(p('jt-held'), { recursive: true }); entry(p('jt-held'), live, now());
+attempt('junction-to-held', (l) => fs.symlinkSync(p('jt-held'), l, 'junction'), 'busy', busyOpts);
+{ const l = p('throws'); let ran = 0, code = '';
+  try { withFileLock(l, () => { ran++; throw Object.assign(new Error('boom'), { code: 'XBOOM' }); }, opts); } catch (e) { code = e.code; }
+  rec('fn-throws-passed-on-and-released', ran === 1 && code === 'XBOOM' && lockState(l).kind === 'free', `ran ${ran} code ${code} state ${lockState(l).kind}`); }
+rec('returns fn value', withFileLock(p('rv'), () => 42, opts) === 42);
+{ const l = p('alive-swap2'); entry(l, dead, now());
+  const alive = (pid) => { if (pid === dead) { fs.rmSync(l, { recursive: true }); entry(l, live, now()); return false; } return true; };
+  let out; try { withFileLock(l, () => { out = 'took'; }, { waitMs: 400, staleMs: 60000, alive, label: 'L' }); } catch { out = 'busy'; }
+  rec('alive-swap: holder replaced by a live fresh one between look and act -> busy, live entry untouched', out === 'busy' && lockState(l).kind === 'held' && lockState(l).pid === live, `out ${out} state ${lockState(l).kind}`); }
+{ const l = p('alive-swap-same-pid'); entry(l, dead, now());
+  let once = 0; const alive = (pid) => { if (pid === dead && !once++) { fs.rmSync(l, { recursive: true }); entry(l, dead, now(), 'cafebabe'); } return false; };
+  let out; try { withFileLock(l, () => { out = 'took'; }, { waitMs: 400, staleMs: 300, alive, label: 'L' }); } catch { out = 'busy'; }
+  rec('alive-swap-same-pid: the entry replaced by another entry of the same dead pid (new nonce): taker acts only on the exact entry, then re-looks', out === 'took', `out ${out}`); }
+{ const l = p('alive-release'); entry(l, dead, now());
+  const alive = () => { fs.rmSync(l, { recursive: true }); return false; };
+  let out; try { withFileLock(l, () => { out = 'took'; }, { waitMs: 400, staleMs: 300, alive, label: 'L' }); } catch { out = 'busy'; }
+  rec('alive-release: holder gone between look and act -> one take', out === 'took', `out ${out}`); }
+{ const l = p('sleeper'); let te;
+  withFileLock(l, () => { const s = lockState(l); te = `h.${live}.${now()}.feedbeef`; fs.renameSync(`${l}/${s.entry}`, `${l}/${te}`); }, opts);
+  const s2 = lockState(l);
+  rec('taken-over holder releases: taker entry untouched', s2.kind === 'held' && s2.entry === te, `state ${s2.kind}`); }
+{ const l = p('nested'); let inner = 'x';
+  withFileLock(l, () => { try { withFileLock(l, () => { inner = 'took'; }, { waitMs: 200, staleMs: 10000, label: 'L' }); } catch { inner = 'busy'; } }, opts);
+  rec('nested same lock same process is busy, not two holders', inner === 'busy', inner + ' after: ' + lockState(l).kind); }
+sleeper.kill();
+console.log(JSON.stringify({ total: res.length, fail: res.filter((r) => !r.ok).map((r) => r.name) }));
+fs.rmSync(base, { recursive: true, force: true });

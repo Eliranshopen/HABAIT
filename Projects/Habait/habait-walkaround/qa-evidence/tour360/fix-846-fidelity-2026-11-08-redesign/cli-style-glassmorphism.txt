@@ -1,0 +1,41 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py glassmorphism frosted --domain style -n 2
+## UI Pro Max Search Results
+**Domain:** style | **Query:** glassmorphism frosted
+**Source:** styles.csv | **Found:** 2 results
+
+### Result 1
+- **Style Category:** Glassmorphism
+- **Type:** General
+- **Keywords:** Frosted glass, transparent, blurred background, layered, vibrant background, light source, depth, multi-layer
+- **Primary Colors:** Translucent white: rgba(255,255,255,0.1-0.3)
+- **Effects & Animation:** Backdrop blur (10-20px), subtle border (1px solid rgba white 0.2), light reflection, Z-depth
+- **Best For:** Modern SaaS, financial dashboards, high-end corporate, lifestyle apps, modal overlays, navigation
+- **Light Mode ✓:** ✓ Full
+- **Dark Mode ✓:** ✓ Full
+- **Performance:** ⚠ Good
+- **Accessibility:** ⚠ Ensure 4.5:1
+- **Framework Compatibility:** Tailwind 9/10, MUI 8/10, Chakra 8/10
+- **Complexity:** Medium
+- **AI Prompt Keywords:** Design a glassmorphic interface with frosted glass effect. Use backdrop blur (10-20px), translucent overlays (rgba 10-30% opacity), vibrant background colors, subtle borders, light source reflection, layered depth. Perfect for modern overlays and cards.
+- **CSS/Technical Keywords:** backdrop-filter: blur(15px), background: rgba(255, 255, 255, 0.15), border: 1px solid rgba(255,255,255,0.2), -webkit-backdrop-filter: blur(15px), z-index layering for depth
+- **Implementation Checklist:** ☐ Backdrop-filter blur 10-20px, ☐ Translucent white 15-30% opacity, ☐ Subtle border 1px light, ☐ Vibrant background verified, ☐ Text contrast 4.5:1 checked
+- **Design System Variables:** --blur-amount: 15px, --glass-opacity: 0.15, --border-color: rgba(255,255,255,0.2), --background: vibrant color, --text-color: light/dark based on BG
+
+### Result 2
+- **Style Category:** Modern Dark (Cinema Mobile)
+- **Type:** Mobile
+- **Keywords:** dark mode, cinematic, ambient light, glassmorphism, deep black, indigo, glow, blur, atmospheric, reanimated, haptic, premium, layered, frosted glass, linear gradient
+- **Primary Colors:** Deep #020203, Base #050506, Elevated #0a0a0c, Accent #5E6AD2
+- **Effects & Animation:** Expo.out Bezier(0.16,1,0.3,1) easing; spring modals (damping:20 stiffness:90); haptic-linked press (Impact Light/Medium); animated ambient light blobs (Reanimated translateX/Y slow oscillation); BlurView glassmorphism headers/nav (intensity 20); scale press 0.97 → 1.0; avoid pure #000000 (OLED smear...
+- **Best For:** Developer tools, pro productivity apps, fintech/trading dashboards, media/streaming platforms, AI tool interfaces, high-end gaming companion apps
+- **Light Mode ✓:** ✓ Light mode only as exception
+- **Dark Mode ✓:** ✓ Dark Mode Primary
+- **Performance:** ⚠ Good (blur effects require native driver)
+- **Accessibility:** ⚠ WCAG AA (requires careful accent contrast check)
+- **Framework Compatibility:** React Native 10/10, Expo 10/10, react-native-skia 9/10, SwiftUI 8/10
+- **Complexity:** High
+- **AI Prompt Keywords:** Design a cinematic dark mobile app. Background: LinearGradient from #0a0a0f (top) to #020203 (bottom). Add 2–3 absolute animated 'blob' views: circular, blurRadius 30–50, opacity 0.08–0.12, slow Reanimated oscillation. Cards: borderRadius 16, border rgba(255,255,255,0.08) hairline, subtle top-edge s...
+- **CSS/Technical Keywords:** borderRadius: 16 (cards/buttons), background: LinearGradient #0a0a0f→#020203, border: StyleSheet.hairlineWidth rgba(255,255,255,0.08), BlurView intensity={20} tint='dark', useAnimatedStyle + withRepeat (blob oscillation), Easing.bezier(0.16,1,0.3,1), withSpring damping:20 stiffness:90, Haptics.impac...
+- **Implementation Checklist:** ☐ No pure #000000 backgrounds, ☐ LinearGradient base screen, ☐ Animated ambient blobs (Reanimated, native driver), ☐ BlurView on tab bar and headers, ☐ borderRadius 16 on all cards, ☐ Haptic feedback on every Pressable, ☐ Bezier(0.16,1,0.3,1) easing used, ☐ Accent glow behind primary button, ☐ No so...
+- **Design System Variables:** --bg-deep: #020203, --bg-base: #050506, --bg-elevated: #0a0a0c, --surface: rgba(255 255 255/0.05), --foreground: #EDEDEF, --foreground-muted: #8A8F98, --accent: #5E6AD2, --accent-glow: rgba(94 106 210/0.2), --border: rgba(255 255 255/0.08), --radius: 16px, --easing: cubic-bezier(0.16 1 0.3 1), --fon...
+

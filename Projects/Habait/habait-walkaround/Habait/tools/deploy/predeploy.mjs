@@ -2,7 +2,7 @@
 /* Habait — tools/deploy/predeploy.mjs: the habait-flow PREDEPLOY gate (Eliran 2026-11-05: «כל דבר שאתה מעדכן חייב להתאים גם לגרסת המובייל
    בנוסף לגרסת הדסקטופ» — «וזה כלל שחייב להיות בלוגיקה בקוד»). Runs tools/qa/responsive-gate.mjs on a STAGE folder (the output of
    Projects/Habait/tools/deploy-vercel/stage_flow.py), served locally with the stage's own vercel.json rewrites, over the site's pages:
-     /  ·  /landing.html  ·  /apartment.html  ·  /hold/  ·  /studio/  ·  /tour/?room=<every room of the staged tour>
+     /  ·  /landing.html  ·  /apartment.html  ·  /hold/  ·  /apartment-journey/ (846, 2026-11-09)  ·  /studio/  ·  /tour/?room=<every room of the staged tour>
    at 1440×900 and 390×844. The functions (/api/*) do not run locally, so their 404s are ignored (--ignore-api); every other 4xx fails.
    Exit 0 = PASS (deploy may proceed on Eliran's go), 1 = FAIL (do not deploy: <stage>/PREDEPLOY-FAIL.json lists why), 2 = usage.
    usage: node Habait/tools/deploy/predeploy.mjs <stage dir> [--out <dir>] [--pages /a,/b] [--settle 3500] */
@@ -25,7 +25,7 @@ if (fs.existsSync(tourHtml)) {
   const t = fs.readFileSync(tourHtml, 'utf8'); const re = /"id":"([A-Za-z0-9]+)"((?:(?!"id":")[\s\S]){0,600}?)"asset":"\d\d-/g; let m;
   while ((m = re.exec(t))) if (!rooms.includes(m[1])) rooms.push(m[1]);
 }
-const pages = opt('--pages') ? opt('--pages').split(',') : ['/', '/landing.html', '/apartment.html', '/hold/', '/studio/', ...rooms.map((r) => `/tour/?room=${r}`)]
+const pages = opt('--pages') ? opt('--pages').split(',') : ['/', '/landing.html', '/apartment.html', '/hold/', '/apartment-journey/?from=hold&unit=846', '/studio/', ...rooms.map((r) => `/tour/?room=${r}`)]
   .filter((p) => fs.existsSync(path.join(stage, p.split('?')[0].replace(/^\//, '') || 'index.html')) || fs.existsSync(path.join(stage, p.split('?')[0].replace(/^\//, ''), 'index.html')));
 
 const { gate, serveStatic } = await import(pathToFileURL(path.join(HERE, '..', 'qa', 'responsive-gate.mjs')).href);

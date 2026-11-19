@@ -1,0 +1,27 @@
+[1a first] ok {"copied":true,"bytes":183222}
+  sha equal true readonly true input holds ["source.pdf"]
+[1b second] ok {"copied":false,"bytes":183222} mtime same true
+[1c writable then again] ok {"copied":false,"bytes":183222} readonly again true
+[1d upload gone, copy there] ok {"copied":false,"bytes":183222}
+[1e verify] {"ok":true}
+[1f verify after append] {"ok":false,"why":"changed"}
+[2 changed bytes] EngineError NOT_A_PDF | the file changed while it was being read input holds []
+[3 other-file] EngineError NOT_A_PDF | job 04762ca47a173685 already holds another file as its input (input/source.pdf); it is never overwritten holds ["source.pdf"]
+[3 target-folder] EngineError NOT_A_PDF | job 04762ca47a173685 already holds something that is not a file as its input (input/source.pdf); it is never o holds ["source.pdf"]
+[3 input-file] EngineError NOT_A_PDF | job 04762ca47a173685 holds something that is not a folder where its input folder (input) belongs; it is never  holds input is not a folder
+[3 temp-folder] EngineError NOT_A_PDF | job 04762ca47a173685 holds something that is not a file at the intake's temp name (input/source.pdf.9732.tmp); holds ["source.pdf.9732.tmp"]
+[3 temp-file-dead] ok {"copied":true,"bytes":183222} holds ["source.pdf"]
+[3 temp-file-live] ok {"copied":true,"bytes":183222} holds ["source.pdf","source.pdf.36396.tmp"]
+[3 temp-file-samepid] ok {"copied":true,"bytes":183222} holds ["source.pdf"]
+[3b jobdir is file] NOT_A_PDF job 04762ca47a173685 holds something that is not a folder where its folder belongs; it is never over
+[habait-engine] start_simulation: the folder of job 04762ca47a173685 cannot be used (EPERM)
+[4a input write-denied] TOOLCHAIN_MISSING the folder of job 04762ca47a173685 cannot be used by the engine
+[habait-engine] start_simulation: the folder of job 04762ca47a173685 cannot be used (EPERM)
+[4b jobs dir write-denied] TOOLCHAIN_MISSING the folder of job 04762ca47a173685 cannot be used by the engine
+[4c runtime inspect write-denied inspect_plan] TOOLCHAIN_MISSING the first look could not be stored in the engine's runtime folder
+[4c runtime inspect write-denied start_simulation] TOOLCHAIN_MISSING the first look could not be stored in the engine's runtime folder
+[5a large direct] ok {"copied":true,"bytes":20967424} size 20967424 copy sha equal true
+[5b large through server] created=true id=true 12268 ms
+  copy sha equal true readonly true bytes 20967424
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-9732-1794939733608-13 EPERM
+done

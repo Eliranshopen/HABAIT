@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+const [, , N, R, hold] = process.argv;
+let two = 0, errs = 0, lost = 0, runs = 0, procs = 0;
+for (let r = 0; r < Number(R); r++) {
+  const dir = fs.mkdtempSync('C:/Users/elira/AppData/Local/Temp/qa2/r-');
+  fs.writeFileSync(`${dir}/counter`, '0');
+  const outs = await Promise.all(Array.from({ length: Number(N) }, () => new Promise((res) => {
+    let o = ''; const c = spawn(process.execPath, ['C:/Users/elira/AppData/Local/Temp/qa2/child.mjs', dir, 'x', hold || '5']);
+    c.stdout.on('data', (d) => (o += d)); c.on('close', () => res(o));
+  })));
+  procs += outs.length; runs++;
+  two += outs.filter((o) => o === 'TWO').length; errs += outs.filter((o) => o.startsWith('err') || o === '').length;
+  const cnt = Number(fs.readFileSync(`${dir}/counter`, 'utf8'));
+  if (cnt !== Number(N)) lost++;
+  const left = fs.readdirSync(dir).filter((n) => n !== 'counter');
+  if (left.length) console.log('left', left.join(','));
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+console.log(JSON.stringify({ N: Number(N), runs, procs, twoHolders: two, errors: errs, lostUpdateRuns: lost }));

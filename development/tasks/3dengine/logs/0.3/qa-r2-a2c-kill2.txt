@@ -1,0 +1,52 @@
+  kill20 tracing 3401ms done
+  kill21 finishing:reserved 2834ms done
+  kill22 qa 3300ms done
+  kill23 qa 3393ms done
+  kill24 rendering 3337ms done
+  kill25 gating:reserved 3251ms done
+  kill26 qa 3528ms done
+  kill27 skinning 3107ms done
+{
+ "script": "a2c-kill2",
+ "seed": 501,
+ "takeovers": 8,
+ "kills": 4,
+ "jobsDone": 8,
+ "checks": 586,
+ "res": {
+  "kill20 tracing 3401ms": {
+   "trig": "cacheUnsettled",
+   "killed": true
+  },
+  "kill21 finishing:reserved 2834ms": {
+   "trig": "tmp",
+   "killed": false
+  },
+  "kill22 qa 3300ms": {
+   "trig": "cacheUnsettled",
+   "killed": false
+  },
+  "kill23 qa 3393ms": {
+   "trig": "tmp",
+   "killed": false
+  },
+  "kill24 rendering 3337ms": {
+   "trig": "joblock",
+   "killed": true
+  },
+  "kill25 gating:reserved 3251ms": {
+   "trig": "delay:1",
+   "killed": true
+  },
+  "kill26 qa 3528ms": {
+   "trig": "heavyfile",
+   "killed": false
+  },
+  "kill27 skinning 3107ms": {
+   "trig": "cacheUnsettled",
+   "killed": true
+  }
+ },
+ "violations": [],
+ "leftover": []
+}

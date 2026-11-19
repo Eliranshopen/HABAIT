@@ -1,0 +1,59 @@
+# gate runs (qa-r8)
+npm test run 1 rc=1 dur=81s 
+npm test run 2 rc=0 dur=81s 
+npm test run 3 rc=0 dur=81s 
+npm test run 4 rc=0 dur=82s 
+npm test run 5 rc=0 dur=81s 
+npm test run 6 rc=0 dur=81s 
+m0.3 run 1 rc=0 dur=81s 
+m0.3 run 2 rc=0 dur=80s 
+m0.3 run 3 rc=0 dur=80s 
+m0.3 run 4 rc=0 dur=81s 
+m0.3 run 5 rc=0 dur=79s 
+m0.3 run 6 rc=0 dur=80s 
+m0.3 run 7 rc=0 dur=80s 
+m0.3 run 8 rc=0 dur=79s 
+ALLDONE
+git status after:
+gate-out.txt.npm1.log ℹ tests 255 ℹ pass 254 ℹ fail 1 
+gate-out.txt.npm2.log ℹ tests 254 ℹ pass 254 ℹ fail 0 
+gate-out.txt.npm3.log ℹ tests 254 ℹ pass 254 ℹ fail 0 
+gate-out.txt.npm4.log ℹ tests 254 ℹ pass 254 ℹ fail 0 
+gate-out.txt.npm5.log ℹ tests 254 ℹ pass 254 ℹ fail 0 
+gate-out.txt.npm6.log ℹ tests 254 ℹ pass 254 ℹ fail 0 
+gate-out.txt.m03_1.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+gate-out.txt.m03_2.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+gate-out.txt.m03_3.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+gate-out.txt.m03_4.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+gate-out.txt.m03_5.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+gate-out.txt.m03_6.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+gate-out.txt.m03_7.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+gate-out.txt.m03_8.log ℹ tests 17 ℹ pass 17 ℹ fail 0 
+--- failed run 1 excerpt
+✖ failing tests:
+
+test at tests\milestones\m0.2.test.mjs:152:1
+✖ C:\RnD\Projects\3Dengine\tests\milestones\m0.2.test.mjs (2187.303ms)
+  Error: EPERM, Permission denied: 'C:\Users\elira\AppData\Local\Temp\m02-home-CYhDYO'
+      at Object.rmSync (node:fs:1282:18)
+      at TestContext.<anonymous> (file:///C:/RnD/Projects/3Dengine/tests/milestones/m0.2.test.mjs:171:6)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestHook.run (node:internal/test_runner/test:1409:7)
+      at async Test.runHook (node:internal/test_runner/test:1289:9)
+      at async after (node:internal/test_runner/test:1342:9)
+      at async Test.run (node:internal/test_runner/test:1428:7) {
+    errno: 1,
+    code: 'EPERM',
+    path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\m02-home-CYhDYO',
+    syscall: 'rm'
+  }
+--- extra npm runs
+npm test extra run 7 rc=0 dur=86s
+npm test extra run 8 rc=0 dur=85s
+npm test extra run 9 rc=0 dur=86s
+npm test extra run 10 rc=0 dur=86s
+EXTRADONE
+extra7 ℹ tests 254 ℹ pass 254 ℹ fail 0 
+extra8 ℹ tests 254 ℹ pass 254 ℹ fail 0 
+extra9 ℹ tests 254 ℹ pass 254 ℹ fail 0 
+extra10 ℹ tests 254 ℹ pass 254 ℹ fail 0 

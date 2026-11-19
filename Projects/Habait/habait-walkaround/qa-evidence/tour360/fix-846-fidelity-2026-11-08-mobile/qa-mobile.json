@@ -1,0 +1,492 @@
+[
+ {
+  "dev": "pixel7",
+  "name": "music-direct",
+  "rule": "Chromium-rule stand-in",
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "invite": true,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterFirstTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterSkip": {
+   "coach": false,
+   "state": "suspended",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterHelpTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterEnd": {
+   "coach": false,
+   "state": "suspended",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "music-toggle-first",
+  "rule": "Chromium-rule stand-in",
+  "afterToggleTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "music-hold",
+  "rule": "Chromium-rule stand-in",
+  "entered": true,
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterFirstTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "help-portrait",
+  "rule": "Chromium-rule stand-in",
+  "help": {
+   "x": 143.078125,
+   "y": 43,
+   "w": 44,
+   "h": 44,
+   "display": "grid"
+  },
+  "hit": "t-help",
+  "inView": true,
+  "afterTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "help-landscape",
+  "rule": "Chromium-rule stand-in",
+  "help": {
+   "x": 188.03125,
+   "y": 43,
+   "w": 44,
+   "h": 44,
+   "display": "grid"
+  },
+  "hit": "t-help",
+  "inView": true,
+  "afterTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "immersive-portrait",
+  "rule": "Chromium-rule stand-in",
+  "spot": {
+   "x": 206,
+   "y": 302.03999999999996
+  },
+  "actsHitShown": "t-design-btn",
+  "hidden": {
+   "coach": false,
+   "state": "none",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": true,
+   "active": true
+  },
+  "whenHidden": {
+   "place": 0,
+   "placeInert": true,
+   "miniBadge": 1,
+   "ai": 1,
+   "aiOnScreen": true,
+   "hint": true,
+   "rail": 0,
+   "pill": 0
+  },
+  "actsHitHidden": "pano",
+  "shownAgain": true,
+  "actsHitShownAgain": "t-design-btn",
+  "dragToggled": false,
+  "pinchToggled": false,
+  "doubleTapToggled": false,
+  "menuTap": {
+   "off": false,
+   "menuClosed": true
+  },
+  "doorTap": "no door in view",
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "immersive-landscape",
+  "rule": "Chromium-rule stand-in",
+  "active": true,
+  "hidden": {
+   "coach": false,
+   "state": "none",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": false,
+   "session": null,
+   "off": true,
+   "active": true
+  },
+  "whenHidden": {
+   "place": 0,
+   "mini": 1,
+   "ai": 1
+  },
+  "shownAgain": true,
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "music-direct",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "invite": true,
+   "muted": false,
+   "silent": null,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterFirstTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": true,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterSkip": {
+   "coach": false,
+   "state": "suspended",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": false,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterHelpTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": true,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterEnd": {
+   "coach": false,
+   "state": "suspended",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": false,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "music-toggle-first",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "afterToggleTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": true,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "music-hold",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "entered": true,
+  "opened": true,
+  "atOpen": {
+   "coach": true,
+   "state": "suspended",
+   "on": false,
+   "invite": true,
+   "muted": false,
+   "silent": null,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "afterFirstTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": true,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "help-portrait",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "help": {
+   "x": 143.078125,
+   "y": 43,
+   "w": 44,
+   "h": 44,
+   "display": "grid"
+  },
+  "hit": "t-help",
+  "inView": true,
+  "afterTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": true,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "help-landscape",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "help": {
+   "x": 188.03125,
+   "y": 43,
+   "w": 44,
+   "h": 44,
+   "display": "grid"
+  },
+  "hit": "t-help",
+  "inView": true,
+  "afterTap": {
+   "coach": true,
+   "state": "running",
+   "on": true,
+   "invite": false,
+   "muted": false,
+   "silent": true,
+   "ios": true,
+   "session": null,
+   "off": false,
+   "active": true
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "immersive-portrait",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "spot": {
+   "x": 195,
+   "y": 239.04
+  },
+  "actsHitShown": "t-design-btn",
+  "hidden": {
+   "coach": false,
+   "state": "none",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": true,
+   "session": null,
+   "off": true,
+   "active": true
+  },
+  "whenHidden": {
+   "place": 0,
+   "placeInert": true,
+   "miniBadge": 1,
+   "ai": 1,
+   "aiOnScreen": true,
+   "hint": true,
+   "rail": 0,
+   "pill": 0
+  },
+  "actsHitHidden": "pano",
+  "shownAgain": true,
+  "actsHitShownAgain": "t-design-btn",
+  "dragToggled": false,
+  "pinchToggled": false,
+  "doubleTapToggled": false,
+  "menuTap": {
+   "off": false,
+   "menuClosed": true
+  },
+  "doorTap": "no door in view",
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "immersive-landscape",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "active": true,
+  "hidden": {
+   "coach": false,
+   "state": "none",
+   "on": false,
+   "invite": false,
+   "muted": false,
+   "silent": null,
+   "ios": true,
+   "session": null,
+   "off": true,
+   "active": true
+  },
+  "whenHidden": {
+   "place": 0,
+   "mini": 1,
+   "ai": 1
+  },
+  "shownAgain": true,
+  "errors": []
+ },
+ {
+  "dev": "desktop1440",
+  "name": "no-toggle",
+  "active": false,
+  "off": false,
+  "cls": false,
+  "help": "grid",
+  "rail": "none",
+  "errors": []
+ }
+]

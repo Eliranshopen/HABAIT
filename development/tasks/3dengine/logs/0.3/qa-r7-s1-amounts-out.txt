@@ -1,0 +1,224 @@
+[a] missing  reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] missing  reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] missing  orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] missing  settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] missing  failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] missing  none            sends=1 rows=1:settled(0.6)
+[a] null     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] null     reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] null     orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] null     settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] null     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] null     none            sends=1 rows=1:settled(0.6)
+[a] text     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] text     reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] text     orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] text     settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] text     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] text     none            sends=1 rows=1:settled(0.6)
+[a] textnum  reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] textnum  reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] textnum  orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] textnum  settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] textnum  failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] textnum  none            sends=1 rows=1:settled(0.6)
+[a] true     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] true     reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] true     orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] true     settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] true     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] true     none            sends=1 rows=1:settled(0.6)
+[a] false    reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] false    reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] false    orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] false    settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] false    failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] false    none            sends=1 rows=1:settled(0.6)
+[a] arr      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] arr      reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] arr      orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] arr      settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] arr      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] arr      none            sends=1 rows=1:settled(0.6)
+[a] arr1     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] arr1     reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] arr1     orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] arr1     settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] arr1     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] arr1     none            sends=1 rows=1:settled(0.6)
+[a] obj      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] obj      reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] obj      orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] obj      settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] obj      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] obj      none            sends=1 rows=1:settled(0.6)
+[a] negzero  reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] negzero  reserved_mark   sends=0 rows=1:settled+rec(0)
+[a] negzero  orphaned        sends=0 rows=1:settled+rec+late(0)
+[a] negzero  settled         sends=0 rows=1:settled(0.6)
+[a] negzero  failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] negzero  none            sends=1 rows=1:settled(0.6)
+[a] zero     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] zero     reserved_mark   sends=0 rows=1:settled+rec(0)
+[a] zero     orphaned        sends=0 rows=1:settled+rec+late(0)
+[a] zero     settled         sends=0 rows=1:settled(0.6)
+[a] zero     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] zero     none            sends=1 rows=1:settled(0.6)
+[a] tiny     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] tiny     reserved_mark   sends=0 rows=1:settled+rec(0)
+[a] tiny     orphaned        sends=0 rows=1:settled+rec+late(0)
+[a] tiny     settled         sends=0 rows=1:settled(0.6)
+[a] tiny     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] tiny     none            sends=1 rows=1:settled(0.6)
+[a] tinyneg  reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] tinyneg  reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] tinyneg  orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] tinyneg  settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] tinyneg  failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] tinyneg  none            sends=1 rows=1:settled(0.6)
+[a] neg      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] neg      reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] neg      orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] neg      settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] neg      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] neg      none            sends=1 rows=1:settled(0.6)
+[a] neg1     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] neg1     reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] neg1     orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] neg1     settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] neg1     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] neg1     none            sends=1 rows=1:settled(0.6)
+[a] one      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] one      reserved_mark   sends=0 rows=1:settled+rec(1)
+[a] one      orphaned        sends=0 rows=1:settled+rec+late(1)
+[a] one      settled         sends=0 rows=1:settled(0.6)
+[a] one      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] one      none            sends=1 rows=1:settled(0.6)
+[a] six      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] six      reserved_mark   sends=0 rows=1:settled+rec(0.6)
+[a] six      orphaned        sends=0 rows=1:settled+rec+late(0.6)
+[a] six      settled         sends=0 rows=1:settled(0.6)
+[a] six      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] six      none            sends=1 rows=1:settled(0.6)
+[a] m1e6     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] m1e6     reserved_mark   sends=0 rows=1:settled+rec(1000000)
+[a] m1e6     orphaned        sends=0 rows=1:settled+rec+late(1000000)
+[a] m1e6     settled         sends=0 rows=1:settled(0.6)
+[a] m1e6     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] m1e6     none            sends=1 rows=1:settled(0.6)
+[a] m1e6c    reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] m1e6c    reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] m1e6c    orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] m1e6c    settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] m1e6c    failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] m1e6c    none            sends=1 rows=1:settled(0.6)
+[a] big      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] big      reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] big      orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] big      settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] big      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] big      none            sends=1 rows=1:settled(0.6)
+[a] inf      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] inf      reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] inf      orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] inf      settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] inf      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] inf      none            sends=1 rows=1:settled(0.6)
+[a] ninf     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] ninf     reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] ninf     orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] ninf     settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] ninf     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] ninf     none            sends=1 rows=1:settled(0.6)
+[a] many     reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] many     reserved_mark   sends=0 rows=1:settled+rec(0.123457)
+[a] many     orphaned        sends=0 rows=1:settled+rec+late(0.123457)
+[a] many     settled         sends=0 rows=1:settled(0.6)
+[a] many     failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] many     none            sends=1 rows=1:settled(0.6)
+[a] nan      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] nan      reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] nan      orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] nan      settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] nan      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] nan      none            sends=1 rows=1:settled(0.6)
+[a] str_inf  reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] str_inf  reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] str_inf  orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] str_inf  settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] str_inf  failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] str_inf  none            sends=1 rows=1:settled(0.6)
+[a] exp      reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] exp      reserved_mark   sends=0 rows=1:settled+rec(0.6)
+[a] exp      orphaned        sends=0 rows=1:settled+rec+late(0.6)
+[a] exp      settled         sends=0 rows=1:settled(0.6)
+[a] exp      failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] exp      none            sends=1 rows=1:settled(0.6)
+[a] max_safe reserved_nomark sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] max_safe reserved_mark   sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] max_safe orphaned        sends=1 rows=1:orphaned(null) 2:settled(0.6)
+[a] max_safe settled         sends=1 rows=1:settled(0.6) 2:settled+rs1(0.6)
+[a] max_safe failed          sends=1 rows=1:failed(0) 2:settled(0.6)
+[a] max_safe none            sends=1 rows=1:settled(0.6)
+B(a) cases: 162
+[b] undefined valid=true sends=1 code=- rows=settled(0/0.6)
+[b] null      valid=true sends=1 code=- rows=settled(0/0.6)
+[b] text      valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] zeroText  valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] neg0      valid=true sends=1 code=- rows=settled(0/0.6)
+[b] zero      valid=true sends=1 code=- rows=settled(0/0.6)
+[b] tiny      valid=true sends=1 code=- rows=settled(0/0.6)
+[b] tinyneg   valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] neg       valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] nan       valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] inf       valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] ninf      valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] m1e6      valid=true sends=1 code=- rows=settled(1000000/0.6)
+[b] m1e6c     valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] big       valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] true      valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] false     valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] arr       valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] arr1      valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] obj       valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] empty     valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] many      valid=true sends=1 code=- rows=settled(0.123457/0.6)
+[b] six       valid=true sends=1 code=- rows=settled(0.6/0.6)
+[b] bigint    valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] date      valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[b] numObj    valid=false sends=0 code=STAGE_FAILED rows=no-ledger
+[c] undefined -> row settled(0.7) want 0.7 
+[c] null     -> row settled(0.7) want 0.7 
+[c] text     -> row settled(0.7) want 0.7 
+[c] true     -> row settled(0.7) want 0.7 
+[c] arr      -> row settled(0.7) want 0.7 
+[c] obj      -> row settled(0.7) want 0.7 
+[c] nan      -> row settled(0.7) want 0.7 
+[c] inf      -> row settled(0.7) want 0.7 
+[c] ninf     -> row settled(0.7) want 0.7 
+[c] neg      -> row settled(0.7) want 0.7 
+[c] negtiny  -> row settled(0.7) want 0.7 
+[c] neg0     -> row settled(0) want 0 
+[c] zero     -> row settled(0) want 0 
+[c] tiny     -> row settled(0) want 0 
+[c] tiny2    -> row settled(0.000001) want 0.000001 
+[c] m1e6     -> row settled(1000000) want 1000000 
+[c] m1e6c    -> row settled(0.7) want 0.7 
+[c] big      -> row settled(0.7) want 0.7 
+[c] many     -> row settled(0.123457) want 0.123457 
+[c] five     -> row settled(0.5) want 0.5 
+[c] bigint   -> row settled(0.7) want 0.7 
+[c] str      -> row settled(0.7) want 0.7 
+[c2] returns undef        rows=settled(0.7) 
+[c2] returns nul          rows=settled(0.7) 
+[c2] returns num          rows=settled(0.7) 
+[c2] returns str          rows=settled(0.7) 
+[c2] returns fn           rows=settled(0.7) 
+[c2] returns arr          rows=settled(0.7) 
+[c2] returns bigintAnswer rows=reserved(null) ERR Do not know how to serialize a BigInt
+   OBS: an unserialisable answer throws AFTER the send; row reserved (answer lost, call will be re-sent)
+[c2] returns circ         rows=reserved(null) ERR Converting circular structure to JSON
+    --> starting at object with constructor 'Object'
+    --- property 'self' closes the circle
+   OBS: an unserialisable answer throws AFTER the send; row reserved (answer lost, call will be re-sent)
+PROBLEMS: 0

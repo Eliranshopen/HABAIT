@@ -608,7 +608,8 @@
         "read": "tools/dimline-reader.py: 45-degree tick strokes, the pair matching the printed number (2026-11-05)"
       }
     ],
-    "printed_dimensions_source": "the PDF's dimension chains (24dimension_m layer; dim_chains.py on pdf-vectors.json, auto-trace run-pdf-846), tick to tick = the printed value, mapped into this frame (sheet offset 1750,380 px at 2.2677 px/cm); 30 lines (the overall line of a chained dimension is left out, its parts are kept). Measured by tools/printed_dimensions.py (2026-11-05)"
+    "printed_dimensions_source": "the PDF's dimension chains (24dimension_m layer; dim_chains.py on pdf-vectors.json, auto-trace run-pdf-846), tick to tick = the printed value, mapped into this frame (sheet offset 1750,380 px at 2.2677 px/cm); 30 lines (the overall line of a chained dimension is left out, its parts are kept). Measured by tools/printed_dimensions.py (2026-11-05)",
+    "laundry_niche": "Eliran 2026-11-12: the washing-machine niche on the west wall (circle in a square on the sales plan) is shown OPEN and EMPTY, with NO door at the niche or on the wall fin beside it (the plan draws none): «עדיף שתשאיר את הנישה ריקה», «עדיין יש פה דלת שלא קיימת בתכנית מכר». The former fixture l-laundry (a closing door 2026-11-05, then a washer) is removed; the niche is the walls' own recess."
   },
   "rooms": [
     {
@@ -8182,44 +8183,6 @@
       ],
       "source": "sales-plan drawing, read by hand",
       "note": ""
-    },
-    {
-      "id": "l-laundry",
-      "room_id": "r-living",
-      "kind": "wardrobe",
-      "polygon_cm": [
-        [
-          226.09,
-          1128.47
-        ],
-        [
-          292.16,
-          1149.9
-        ],
-        [
-          313.59,
-          1083.83
-        ],
-        [
-          247.52,
-          1062.4
-        ]
-      ],
-      "z_cm": 0,
-      "height_cm": 220,
-      "centre_cm": [
-        269.84,
-        1106.15
-      ],
-      "angle_deg": 108,
-      "size_cm": [
-        70,
-        70
-      ],
-      "source": "sales-plan drawing, read by hand (fidelity audit F8, 2026-11-05)",
-      "note": "the washing-machine niche on the west wall (circle-in-square on the plan), closed by a zero-line flush door; the electrical cabinet beside it sits in the wall mass and is not modelled",
-      "words_en": "a tall zero-line flush door closing the laundry niche in the wall recess, painted the wall colour, a slim matte black lever; no washing machine visible",
-      "finish": "white"
     }
   ],
   "furnishing": {

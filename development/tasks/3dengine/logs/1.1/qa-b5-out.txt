@@ -1,0 +1,17 @@
+e. copy hash ok true read-only (mode) true attrib: A    R bytes ok true
+e. second start created false copy mtime unchanged true
+e. upload deleted, restart: NOT_A_PDF
+d. foreign file: NOT_A_PDF | job b2ffedf9307c72ea already holds another file as its input (input/source.pdf); it is never overwritten | untouched true | job.json? false
+d. directory at source.pdf → EPERM | EPERM: operation not permitted, rename 'C:\Users\elira\AppData\Local\Temp\qa-m11-home-34868-1794907622920-1\jobs-temp\f1 | job.json? false
+d. right-hash copy there, writable, no job.json → start created true now read-only true
+d. temps after intake: source.pdf, source.pdf.30236.tmp (dead pid temp removed, live other pid kept, own pid temp overwritten/removed)
+j. changed source → NOT_A_PDF the file changed while it was being read | files: []
+j. gone source → NOT_A_PDF the file is gone | files: []
+j. upload deleted at copy → NOT_A_PDF the file is gone
+j. torn copy → NOT_A_PDF the file changed while it was being read | files: []
+a. two/three-process starts (10 rounds x 3 procs): ["1c/0e/true","1c/0e/true","1c/0e/true","1c/0e/true","1c/0e/true","1c/0e/true","1c/0e/true","1c/0e/true","1c/0e/true","1c/0e/true"]
+   errors seen: []
+b. 40 starts while the upload was rewritten every 3 ms: {"ok":11,"errs":{"NOT_A_PDF:the scanner could not read the file (status 1)":1,"NO_PLAN_FOUND:no drawing was found in this PDF":28}}
+b. job folders whose copy != recorded hash or id != own input: 0
+.tmp files left under jobs: ["/a6a41445d04c587c/input/source.pdf.30236.tmp"]
+ATTEMPTS 81 BAD []

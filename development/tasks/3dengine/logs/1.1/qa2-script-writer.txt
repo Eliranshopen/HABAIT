@@ -1,0 +1,31 @@
+// writer: rewrites FILE in place, forever, until killed. mode: trunc | half | garbage | zero | chunks
+import fs from 'node:fs';
+const [, , file, src, mode, pauseMs = '3', other, idleS = '0'] = process.argv; const idle = Number(idleS);
+const good = fs.readFileSync(src);
+const alt = other ? fs.readFileSync(other) : null;
+const pause = Number(pauseMs);
+const nap = (ms) => { if (ms > 0) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); };
+const crypto = await import('node:crypto');
+for (;;) {
+  try {
+    if (mode === 'trunc') {
+      const fd = fs.openSync(file, 'w'); nap(pause); fs.writeSync(fd, good); fs.closeSync(fd);
+    } else if (mode === 'half') {
+      const fd = fs.openSync(file, 'w'); fs.writeSync(fd, good, 0, good.length >> 1); nap(pause);
+      fs.writeSync(fd, good, good.length >> 1); fs.closeSync(fd);
+    } else if (mode === 'garbage') {
+      const fd = fs.openSync(file, 'w'); fs.writeSync(fd, crypto.randomBytes(good.length)); nap(pause);
+      fs.writeSync(fd, good, 0, good.length, 0); fs.closeSync(fd);
+    } else if (mode === 'zero') {
+      const fd = fs.openSync(file, 'w'); fs.closeSync(fd); nap(pause);
+      fs.writeFileSync(file, good); nap(pause);
+    } else if (mode === 'chunks') {
+      const fd = fs.openSync(file, 'w'); const n = 8; const step = Math.ceil(good.length / n);
+      for (let i = 0; i < n; i++) { fs.writeSync(fd, good, i * step, Math.min(step, good.length - i * step)); nap(pause); }
+      fs.closeSync(fd);
+    } else if (mode === 'alt') { // alternate between the good bytes and ANOTHER pdf
+      fs.writeFileSync(file, alt); nap(pause); fs.writeFileSync(file, good); nap(pause);
+    }
+  } catch (e) { /* locked */ }
+  nap(idle);
+}

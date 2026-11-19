@@ -1,0 +1,834 @@
+[
+ {
+  "case": "people",
+  "model": "klein-4b",
+  "endpoint": "fal-ai/flux-2/klein/4b/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 12.63,
+  "ring": 0.068,
+  "changed": 0.122,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 745502,
+  "file": "people/klein-4b-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "klein-9b",
+  "endpoint": "fal-ai/flux-2/klein/9b/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 3.79,
+  "ring": 0.078,
+  "changed": 0.105,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 762003,
+  "file": "people/klein-9b-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "klein-9b",
+  "endpoint": "fal-ai/flux-2/klein/9b/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 3.81,
+  "ring": 0.099,
+  "changed": 0.137,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 737873,
+  "file": "people/klein-9b-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "klein-4b",
+  "endpoint": "fal-ai/flux-2/klein/4b/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 3.95,
+  "ring": 0.07,
+  "changed": 0.134,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 751489,
+  "file": "people/klein-4b-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "flux2-flash",
+  "endpoint": "fal-ai/flux-2/flash/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 20.56,
+  "ring": 0.318,
+  "changed": 0.226,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 715996,
+  "file": "people/flux2-flash-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "flux2-flash",
+  "endpoint": "fal-ai/flux-2/flash/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 20.07,
+  "ring": 0.17,
+  "changed": 0.154,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 704154,
+  "file": "people/flux2-flash-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "flux2-turbo",
+  "endpoint": "fal-ai/flux-2/turbo/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 10.52,
+  "ring": 0.261,
+  "changed": 0.201,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 718040,
+  "file": "people/flux2-turbo-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "flux2-turbo",
+  "endpoint": "fal-ai/flux-2/turbo/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 8.73,
+  "ring": 0.131,
+  "changed": 0.156,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 710686,
+  "file": "people/flux2-turbo-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "grok",
+  "endpoint": "xai/grok-imagine-image/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 10.26,
+  "ring": 0.057,
+  "changed": 0.118,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 219439,
+  "file": "people/grok-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "grok",
+  "endpoint": "xai/grok-imagine-image/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 10.22,
+  "ring": 0.063,
+  "changed": 0.105,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 219666,
+  "file": "people/grok-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "kontext",
+  "endpoint": "fal-ai/flux-pro/kontext",
+  "run": 1,
+  "status": "ok",
+  "seconds": 8.34,
+  "ring": 0.023,
+  "changed": 0.068,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 283196,
+  "file": "people/kontext-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "kontext",
+  "endpoint": "fal-ai/flux-pro/kontext",
+  "run": 2,
+  "status": "ok",
+  "seconds": 11.71,
+  "ring": 0.054,
+  "changed": 0.107,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 288702,
+  "file": "people/kontext-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "nb2-1k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 12.56,
+  "ring": 0.0,
+  "changed": 0.068,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 252866,
+  "file": "people/nb2-1k-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "nb2-1k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 12.56,
+  "ring": 0.006,
+  "changed": 0.072,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 287517,
+  "file": "people/nb2-1k-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "nb2-0.5k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 11.25,
+  "ring": 0.126,
+  "changed": 0.185,
+  "size": [
+   620,
+   416
+  ],
+  "bytes": 105191,
+  "file": "people/nb2-0.5k-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "nb2-0.5k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 9.49,
+  "ring": 0.104,
+  "changed": 0.166,
+  "size": [
+   620,
+   416
+  ],
+  "bytes": 99611,
+  "file": "people/nb2-0.5k-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "flux2-pro",
+  "endpoint": "fal-ai/flux-2-pro/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 15.25,
+  "ring": 0.48,
+  "changed": 0.355,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 480741,
+  "file": "people/flux2-pro-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "flux2-pro",
+  "endpoint": "fal-ai/flux-2-pro/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 17.67,
+  "ring": 0.457,
+  "changed": 0.504,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 477091,
+  "file": "people/flux2-pro-run2.jpg"
+ },
+ {
+  "case": "people",
+  "model": "seedream5-lite",
+  "endpoint": "fal-ai/bytedance/seedream/v5/lite/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 46.45,
+  "ring": 0.141,
+  "changed": 0.198,
+  "size": [
+   null,
+   null
+  ],
+  "bytes": 379597,
+  "file": "people/seedream5-lite-run1.jpg"
+ },
+ {
+  "case": "people",
+  "model": "seedream5-lite",
+  "endpoint": "fal-ai/bytedance/seedream/v5/lite/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 40.72,
+  "ring": 0.143,
+  "changed": 0.181,
+  "size": [
+   null,
+   null
+  ],
+  "bytes": 403817,
+  "file": "people/seedream5-lite-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "klein-9b",
+  "endpoint": "fal-ai/flux-2/klein/9b/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 4.56,
+  "ring": 0.175,
+  "changed": 0.232,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 756857,
+  "file": "object/klein-9b-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "klein-9b",
+  "endpoint": "fal-ai/flux-2/klein/9b/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 3.56,
+  "ring": 0.17,
+  "changed": 0.245,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 755834,
+  "file": "object/klein-9b-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "klein-4b",
+  "endpoint": "fal-ai/flux-2/klein/4b/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 3.37,
+  "ring": 0.169,
+  "changed": 0.256,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 745639,
+  "file": "object/klein-4b-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "klein-4b",
+  "endpoint": "fal-ai/flux-2/klein/4b/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 5.7,
+  "ring": 0.16,
+  "changed": 0.25,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 732001,
+  "file": "object/klein-4b-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "flux2-flash",
+  "endpoint": "fal-ai/flux-2/flash/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 12.76,
+  "ring": 0.167,
+  "changed": 0.235,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 632391,
+  "file": "object/flux2-flash-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "flux2-flash",
+  "endpoint": "fal-ai/flux-2/flash/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 9.24,
+  "ring": 0.146,
+  "changed": 0.223,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 635035,
+  "file": "object/flux2-flash-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "flux2-turbo",
+  "endpoint": "fal-ai/flux-2/turbo/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 8.45,
+  "ring": 0.129,
+  "changed": 0.241,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 657235,
+  "file": "object/flux2-turbo-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "flux2-turbo",
+  "endpoint": "fal-ai/flux-2/turbo/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 15.9,
+  "ring": 0.146,
+  "changed": 0.235,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 666293,
+  "file": "object/flux2-turbo-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "grok",
+  "endpoint": "xai/grok-imagine-image/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 11.38,
+  "ring": 0.082,
+  "changed": 0.198,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 211111,
+  "file": "object/grok-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "grok",
+  "endpoint": "xai/grok-imagine-image/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 13.11,
+  "ring": 0.116,
+  "changed": 0.213,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 210148,
+  "file": "object/grok-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "kontext",
+  "endpoint": "fal-ai/flux-pro/kontext",
+  "run": 1,
+  "status": "ok",
+  "seconds": 10.96,
+  "ring": 0.141,
+  "changed": 0.212,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 282040,
+  "file": "object/kontext-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "kontext",
+  "endpoint": "fal-ai/flux-pro/kontext",
+  "run": 2,
+  "status": "ok",
+  "seconds": 6.98,
+  "ring": 0.16,
+  "changed": 0.244,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 280878,
+  "file": "object/kontext-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "nb2-1k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 13.31,
+  "ring": 0.13,
+  "changed": 0.216,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 245086,
+  "file": "object/nb2-1k-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "nb2-1k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 12.06,
+  "ring": 0.092,
+  "changed": 0.2,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 249505,
+  "file": "object/nb2-1k-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "nb2-0.5k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 9.1,
+  "ring": 0.105,
+  "changed": 0.212,
+  "size": [
+   620,
+   416
+  ],
+  "bytes": 99681,
+  "file": "object/nb2-0.5k-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "nb2-0.5k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 8.86,
+  "ring": 0.127,
+  "changed": 0.218,
+  "size": [
+   620,
+   416
+  ],
+  "bytes": 100128,
+  "file": "object/nb2-0.5k-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "flux2-pro",
+  "endpoint": "fal-ai/flux-2-pro/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 15.95,
+  "ring": 0.431,
+  "changed": 0.474,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 352122,
+  "file": "object/flux2-pro-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "flux2-pro",
+  "endpoint": "fal-ai/flux-2-pro/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 15.7,
+  "ring": 0.581,
+  "changed": 0.731,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 334253,
+  "file": "object/flux2-pro-run2.jpg"
+ },
+ {
+  "case": "object",
+  "model": "seedream5-lite",
+  "endpoint": "fal-ai/bytedance/seedream/v5/lite/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 42.93,
+  "ring": 0.131,
+  "changed": 0.247,
+  "size": [
+   null,
+   null
+  ],
+  "bytes": 362524,
+  "file": "object/seedream5-lite-run1.jpg"
+ },
+ {
+  "case": "object",
+  "model": "seedream5-lite",
+  "endpoint": "fal-ai/bytedance/seedream/v5/lite/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 39.92,
+  "ring": 0.107,
+  "changed": 0.228,
+  "size": [
+   null,
+   null
+  ],
+  "bytes": 359485,
+  "file": "object/seedream5-lite-run2.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "nb2-1k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 13.83,
+  "ring": 0.249,
+  "changed": 0.359,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 256925,
+  "file": "follow/nb2-1k-run1.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "nb2-1k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 17.35,
+  "ring": 0.021,
+  "changed": 0.152,
+  "size": [
+   1264,
+   848
+  ],
+  "bytes": 258782,
+  "file": "follow/nb2-1k-run2.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "nb2-0.5k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 10.26,
+  "ring": 0.126,
+  "changed": 0.185,
+  "size": [
+   620,
+   416
+  ],
+  "bytes": 99931,
+  "file": "follow/nb2-0.5k-run1.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "nb2-0.5k",
+  "endpoint": "fal-ai/nano-banana-2/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 9.57,
+  "ring": 0.363,
+  "changed": 0.52,
+  "size": [
+   620,
+   416
+  ],
+  "bytes": 98585,
+  "file": "follow/nb2-0.5k-run2.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "klein-9b",
+  "endpoint": "fal-ai/flux-2/klein/9b/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 4.68,
+  "ring": 0.696,
+  "changed": 0.74,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 741530,
+  "file": "follow/klein-9b-run1.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "klein-9b",
+  "endpoint": "fal-ai/flux-2/klein/9b/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 4.16,
+  "ring": 0.695,
+  "changed": 0.741,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 736353,
+  "file": "follow/klein-9b-run2.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "klein-4b",
+  "endpoint": "fal-ai/flux-2/klein/4b/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 4.09,
+  "ring": 0.686,
+  "changed": 0.726,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 784450,
+  "file": "follow/klein-4b-run1.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "klein-4b",
+  "endpoint": "fal-ai/flux-2/klein/4b/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 4.1,
+  "ring": 0.724,
+  "changed": 0.741,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 770033,
+  "file": "follow/klein-4b-run2.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "flux2-turbo",
+  "endpoint": "fal-ai/flux-2/turbo/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 12.06,
+  "ring": 0.703,
+  "changed": 0.756,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 712899,
+  "file": "follow/flux2-turbo-run1.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "flux2-turbo",
+  "endpoint": "fal-ai/flux-2/turbo/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 13.67,
+  "ring": 0.72,
+  "changed": 0.764,
+  "size": [
+   1280,
+   864
+  ],
+  "bytes": 708028,
+  "file": "follow/flux2-turbo-run2.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "grok",
+  "endpoint": "xai/grok-imagine-image/edit",
+  "run": 1,
+  "status": "ok",
+  "seconds": 12.19,
+  "ring": 0.592,
+  "changed": 0.561,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 260691,
+  "file": "follow/grok-run1.jpg"
+ },
+ {
+  "case": "follow",
+  "model": "grok",
+  "endpoint": "xai/grok-imagine-image/edit",
+  "run": 2,
+  "status": "ok",
+  "seconds": 11.61,
+  "ring": 0.528,
+  "changed": 0.525,
+  "size": [
+   1248,
+   832
+  ],
+  "bytes": 260818,
+  "file": "follow/grok-run2.jpg"
+ }
+]

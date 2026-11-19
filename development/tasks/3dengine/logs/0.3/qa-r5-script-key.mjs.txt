@@ -1,0 +1,112 @@
+// D2 (same key at once) and O-E (planted cache files), createPaidCall used directly, real timing.
+import fs from 'node:fs';
+import { bareJob, ledM, rec, sleep, jobsM } from './h.mjs';
+import { createHash } from 'node:crypto';
+const sha = (t) => createHash('sha256').update(t).digest('hex');
+const spec = (key, est = 0.6) => ({ key, provider: 'stub', what: 'qa', estimate_usd: est });
+
+async function d2(n, delay, fail) {
+  const B = bareJob();
+  const pc = ledM.createPaidCall({ jobsDir: B.jobsDir, jobId: B.id, stage: 'skinning', attempt: 1 });
+  let sent = 0;
+  const fn = async () => { sent++; await sleep(delay); if (fail) throw new Error('boom'); return { answer: { a: 1 }, usd: 0.6 }; };
+  const rs = await Promise.allSettled(Array.from({ length: n }, () => pc(spec('k1'), fn)));
+  const led = B.ledger();
+  const same = rs.every((r) => r.status === (fail ? 'rejected' : 'fulfilled')) &&
+    new Set(rs.map((r) => JSON.stringify(r.value ?? r.reason?.message))).size === 1;
+  const ok = sent === 1 && led.rows.length === 1 && same && led.rows[0].status === (fail ? 'failed' : 'settled');
+  rec(`D2 n=${n} delay=${delay} fail=${fail}`, ok, `sent=${sent} rows=${led.rows.map((r) => r.status + (r.late ? '/late' : '')).join(',')} spent=${B.job().cost.spent_usd}`);
+  // same key again after the first finished
+  let sent2 = 0;
+  const a2 = await pc(spec('k1'), async () => { sent2++; return { answer: { a: 2 }, usd: 0.6 }; }).catch((e) => e.message);
+  const led2 = B.ledger();
+  if (!fail) rec(`D2 again-after n=${n} delay=${delay}`, sent2 === 0 && led2.rows.length === 1 && JSON.stringify(a2) === '{"a":1}', `sent2=${sent2} rows=${led2.rows.length}`);
+  else rec(`D2 again-after-fail n=${n}`, sent2 === 1 && led2.rows.length === 2, `sent2=${sent2} rows=${led2.rows.map((r) => r.status + (r.resend_of ? '/resend' : '')).join(',')}`);
+  B.cleanup();
+}
+
+async function otherInstance(delay) {
+  // the same key in ANOTHER stage attempt (another createPaidCall) while the first is in flight
+  const B = bareJob();
+  const mk = (attempt) => ledM.createPaidCall({ jobsDir: B.jobsDir, jobId: B.id, stage: 'skinning', attempt });
+  let sent = 0;
+  const fn = async () => { sent++; await sleep(delay); return { answer: { a: 1 }, usd: 0.6 }; };
+  const p1 = mk(1)(spec('k1'), fn);
+  await sleep(delay / 3);
+  const p2 = mk(2)(spec('k1'), fn);
+  await Promise.all([p1, p2]);
+  const led = B.ledger();
+  rec(`D2-other-instance delay=${delay}`, sent === 2 && led.rows.length === 2, `sent=${sent} rows=${led.rows.map((r) => r.status + (r.late ? '/late' : '')).join(',')} spent=${B.job().cost.spent_usd} (contract: allowed, orphan+late)`);
+  B.cleanup();
+}
+
+async function differentKeys(cap) {
+  const B = bareJob({ cap });
+  const pc = ledM.createPaidCall({ jobsDir: B.jobsDir, jobId: B.id, stage: 'skinning', attempt: 1 });
+  let sent = 0;
+  const t0 = Date.now();
+  const fn = async () => { sent++; await sleep(500); return { answer: { a: 1 }, usd: 0.6 }; };
+  const rs = await Promise.allSettled([pc(spec('a'), fn), pc(spec('b'), fn), pc(spec('c'), fn)]);
+  const dt = Date.now() - t0;
+  const led = B.ledger();
+  const counted = led.rows.filter((r) => ['settled'].includes(r.status)).reduce((n, r) => n + r.settled_usd, 0);
+  rec(`D2-different-keys cap=${cap}`, dt < 1400 && counted <= cap + 1e-9 && sent === led.rows.filter((r) => r.sending_at).length,
+    `dt=${dt} sent=${sent} outcomes=${rs.map((r) => r.status === 'fulfilled' ? 'ok' : r.reason.code).join(',')} counted=${counted}`);
+  B.cleanup();
+}
+
+// O-E: planted cache files
+async function plant(name, rowsSpec, cacheSpec, expect) {
+  const B = bareJob();
+  const key = ledM.callKey('skinning', 'k1');
+  const t = new Date().toISOString();
+  const rows = rowsSpec.map((r, i) => ({ seq: i + 1, call_key: key, stage: 'skinning', provider: 'stub', what: 'qa', reserved_usd: 0.6, reserved_at: t,
+    sending_at: null, status: 'reserved', settled_usd: null, settled_at: null, answer_sha256: null, attempt: 1, ...r }));
+  const doc = { schema: 'habait/ledger.v1', job_id: B.id, cap_usd: 60, rows };
+  jobsM.writeJob; // noop
+  fs.mkdirSync(`${B.jobsDir}/${B.id}/cache`, { recursive: true });
+  fs.writeFileSync(`${B.jobsDir}/${B.id}/ledger.json`, JSON.stringify(doc));
+  if (cacheSpec) fs.writeFileSync(`${B.jobsDir}/${B.id}/cache/${key}.json`, typeof cacheSpec === 'string' ? cacheSpec : JSON.stringify(cacheSpec));
+  const pc = ledM.createPaidCall({ jobsDir: B.jobsDir, jobId: B.id, stage: 'skinning', attempt: 2 });
+  let sent = 0;
+  const ans = await pc(spec('k1'), async () => { sent++; return { answer: { real: true }, usd: 0.6 }; }).catch((e) => ({ err: e.message }));
+  const led = B.ledger();
+  const spent = B.job().cost.spent_usd;
+  const summary = `sent=${sent} ans=${JSON.stringify(ans)} spent=${spent} rows=${led.rows.map((r) => `${r.seq}:${r.status}${r.recovered ? '/rec' : ''}${r.late ? '/late' : ''}${r.not_sent ? '/ns' : ''}${r.sending_at ? '' : '/nomark'}`).join(' ')}`;
+  rec(`O-E ${name}`, expect({ sent, ans, spent, led }), summary);
+  B.cleanup();
+}
+
+const mark = { sending_at: new Date().toISOString() };
+const c = (o) => ({ answer: { planted: true }, settled_usd: 0.6, ...o });
+const k = process.argv[2] || 'all';
+if (k === 'all' || k === 'd2') {
+  for (const n of [2, 3, 10]) for (const d of [0, 50, 800]) await d2(n, d, false);
+  for (const n of [2, 3]) for (const d of [0, 300]) await d2(n, d, true);
+  for (const d of [100, 600]) await otherInstance(d);
+  await differentKeys(60); await differentKeys(1.0); await differentKeys(1.2);
+}
+if (k === 'all' || k === 'plant') {
+  const nosend = ({ sent, spent, led }) => sent === 1 && spent === 0.6 && !led.rows.some((r) => r.recovered);
+  await plant('unmarked reserved + cache seq right', [{}], c({ seq: 1 }), nosend);
+  await plant('unmarked reserved + cache no seq', [{}], c({}), nosend);
+  await plant('unmarked reserved + cache seq null', [{}], c({ seq: null }), nosend);
+  await plant('unmarked reserved + cache usd 50 seq right', [{}], c({ seq: 1, settled_usd: 50 }), nosend);
+  await plant('unmarked reserved + cache usd 50 no seq', [{}], c({ settled_usd: 50 }), nosend);
+  await plant('two unmarked reserved + cache no seq', [{}, {}], c({}), nosend);
+  await plant('unmarked reserved (1) + marked reserved (2) + cache no seq -> marked owns', [{}, { ...mark }], c({}), ({ sent, led }) => sent === 0 && led.rows[1].status === 'settled' && led.rows[0].status === 'failed');
+  await plant('unmarked reserved + cache seq string "1"', [{}], c({ seq: '1' }), nosend);
+  await plant('unmarked reserved + garbage cache', [{}], 'garbage{', nosend);
+  await plant('unmarked reserved + cache answer null', [{}], { answer: null, settled_usd: 0.6, seq: 1 }, nosend);
+  await plant('marked reserved + cache seq right', [{ ...mark }], c({ seq: 1 }), ({ sent, spent }) => sent === 0 && spent === 0.6);
+  await plant('marked reserved + cache no seq', [{ ...mark }], c({}), ({ sent, spent }) => sent === 0 && spent === 0.6);
+  await plant('marked reserved + cache usd 50 (spent follows file?)', [{ ...mark }], c({ seq: 1, settled_usd: 50 }), ({ sent, spent }) => sent === 0 && spent <= 0.6);
+  await plant('marked reserved + cache usd -5', [{ ...mark }], c({ seq: 1, settled_usd: -5 }), ({ spent }) => spent >= 0);
+  await plant('marked reserved + cache usd "abc"', [{ ...mark }], c({ seq: 1, settled_usd: 'abc' }), ({ spent }) => Number.isFinite(spent));
+  await plant('orphaned marked + cache seq right', [{ ...mark, status: 'orphaned' }], c({ seq: 1 }), ({ sent, led }) => sent === 0 && led.rows[0].late === true);
+  await plant('orphaned marked + cache seq right usd 50', [{ ...mark, status: 'orphaned' }], c({ seq: 1, settled_usd: 50 }), ({ sent, spent }) => sent === 0 && spent <= 0.6);
+  await plant('orphaned UNmarked + cache seq right', [{ status: 'orphaned' }], c({ seq: 1 }), nosend);
+  await plant('settled null-hash + cache seq right', [{ ...mark, status: 'settled', settled_usd: 0.6, settled_at: 'x', answer_sha256: null }], c({ seq: 1 }), ({ sent }) => sent === 1);
+  await plant('settled row, cache replaced (other hash)', [{ ...mark, status: 'settled', settled_usd: 0.6, settled_at: 'x', answer_sha256: sha('zzz') }], c({ seq: 1 }), ({ sent, led }) => sent === 1 && led.rows[1]?.resend_of === 1);
+  await plant('failed row + cache seq right', [{ ...mark, status: 'failed', settled_usd: 0, not_sent: false }], c({ seq: 1 }), ({ sent }) => sent === 1);
+}

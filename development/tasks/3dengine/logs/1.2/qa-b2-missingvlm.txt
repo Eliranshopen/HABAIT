@@ -1,0 +1,16 @@
+scenario missingvlm  work C:/Users/elira/AppData/Local/Temp/qa12-missingvlm-GCNlhR load 47
+=== missingvlm
+{
+ "code": 2,
+ "stdout": "",
+ "stderr": "trace: the saved reading is not a file\n",
+ "outCreated": false
+}
+procs at end [
+  '14488 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '6744 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '27932 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs missingvlm',
+  '41832 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs missingvlm',
+  '32372 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs missingvlm'
+]
+exit 0

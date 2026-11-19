@@ -1,0 +1,19 @@
+{
+ "script": "r1",
+ "kills": 47,
+ "jobsDone": 47,
+ "checks": 89,
+ "out": {
+  "D1.0": "at kill spent=0 settled=0.6; 0.5s after resume spent=0.6; final spent=1.8; skinning sends 1",
+  "D1.1": "at kill spent=0 settled=0.6; 0.5s after resume spent=0.6; final spent=1.8; skinning sends 1",
+  "D1.2": "at kill spent=0.6 settled=0.6; 0.5s after resume spent=1.2; final spent=1.8; skinning sends 1",
+  "D1.3": "at kill spent=0 settled=0.6; 0.5s after resume spent=0.6; final spent=1.8; skinning sends 1",
+  "D2": "40 kills (35 with job.lock present at the kill), empty lock left 0x, longest resume 43 ms",
+  "D4": "state cancelled; rows tracing#1,building#1,rendering#1,skinning#1; ledger skinning:settled; runner alive false; gating started false | restart -> done, skinning sends 1",
+  "O1": "skinning rows [[\"settled\",true]], sends 1",
+  "O2": "runner.alive false, resumed true",
+  "D3": "after resume: state awaiting_approval, reason \"BUDGET_CAP\", quote est 60 cap_reached true, approval null, approvals 1 | approved 60 -> done; ledger skinning:orphaned,skinning:settled,gating:settled,finishing:settled; cap 120; total counted 120; reason now null"
+ },
+ "violations": [],
+ "leftover": []
+}

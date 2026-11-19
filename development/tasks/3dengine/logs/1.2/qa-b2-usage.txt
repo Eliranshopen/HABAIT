@@ -1,0 +1,99 @@
+scenario usage  work C:/Users/elira/AppData/Local/Temp/qa12-usage-FSnphC load 100
+[
+ {
+  "name": "go without budget",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: a paid run needs a cap (--budget <usd>) together with --go\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "budget 5 go",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: the cap is above the most a reading may be allowed (1)\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "budget 0 go",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: the cap must be a number above 0\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "budget abc",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: the cap must be a number above 0\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "no out",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: an output folder is needed (--out)\n",
+  "leaksPlanted": false,
+  "created": null
+ },
+ {
+  "name": "no pdf",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: a PDF path is needed\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "out value is a flag",
+  "code": 1,
+  "stdout": "",
+  "stderr": "trace: --out needs a value\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "id --no-judge",
+  "code": 1,
+  "stdout": "",
+  "stderr": "trace: --id needs a value\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "id bad",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: the id must be 1 to 64 letters, digits, \"_\" or \"-\", and start with a letter or a digit\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "pdf is folder",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: the PDF is not a file\n",
+  "leaksPlanted": false,
+  "created": false
+ },
+ {
+  "name": "vlm not json",
+  "code": 2,
+  "stdout": "",
+  "stderr": "trace: the saved reading is not a JSON object\n",
+  "leaksPlanted": false,
+  "created": false
+ }
+]
+procs at end [
+  '14488 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '6744 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '5404 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs usage',
+  '41500 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs usage',
+  '19708 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs usage'
+]
+exit 0

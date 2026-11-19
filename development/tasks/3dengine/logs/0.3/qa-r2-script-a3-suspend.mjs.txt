@@ -1,0 +1,58 @@
+// A3: REAL suspension (NtSuspendProcess) of a runner at random / event moments. Usage: node a3-suspend.mjs <seed> <n> <longMs?>
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, between, rnd, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, toDone, waitEvent, resume, approveWhen, createSuspender } from './q.mjs';
+const [seed, n, longMs] = process.argv.slice(2).map(Number);
+setSeed(seed);
+const E = await mkEnv({ prefix: 'qa-a3-', callUsd: 0.6, stepMs: 350, heartbeat: 0.1, staleSeconds: 1 });
+const SU = await createSuspender(E);
+const TRIG = ['delay:10', 'delay:200', 'delay:700', 'delay:1300', 'delay:2500', 'joblock', 'joblock', 'tmp', 'reserved', 'cacheUnsettled', 'state:rendering', 'state:awaiting_approval', 'heavyfile', 'heavyguard', 'rows:3', 'rows:5'];
+const res = []; let lockBusyOnResume = 0;
+try {
+  for (let k = 0; k < n; k++) {
+    const name = `a3-${seed}-${k}.pdf`; const pdf = E.pdf(name, name);
+    const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+    const trig = process.argv[5] || TRIG[between(0, TRIG.length - 1)];
+    const tag = `S${k} ${trig} ${id}`;
+    let stop = false;
+    (async () => { while (!stop) { await approveWhen(E, id, 60); await sleep(25); } })();
+    const hit = await waitEvent(E, id, trig, 6000);
+    const p1 = E.runnerPid(id);
+    if (!hit || !p1 || !pidAlive(p1)) { stop = true; await toDone(E, id, tag); continue; }
+    const dur = longMs || between(1500, 3200);
+    await SU.suspend(p1);
+    S.takeovers++;
+    const snap = { jl: fs.existsSync(E.jobPath(id, 'job.lock')), tmp: fs.readdirSync(E.jobPath(id, '.')).filter((f) => f.endsWith('.tmp')).length };
+    inv(E, id, `${tag} suspended`);
+    // wait until the engine says dead, then start a second runner
+    let replaced = null;
+    const t0 = Date.now();
+    for (let i = 0; i < 400 && Date.now() - t0 < dur - 100; i++) await sleep(10);
+    let alive = E.h.get_job({ job_id: id }).job.runner.alive;
+    let tries = 0, r2 = null;
+    for (; tries < 6 && !r2; tries++) {
+      try { r2 = E.h.start_simulation({ pdf_path: pdf }); } catch (e) { if (/lock busy/.test(e.message)) { lockBusyOnResume++; await sleep(100); } else throw e; }
+    }
+    const p2 = E.runnerPid(id);
+    // let the second work a bit, then wake the first at the end of dur
+    while (Date.now() - t0 < dur) await sleep(10);
+    await SU.resume(p1);
+    const woke = Date.now();
+    // sample while both exist
+    const until = Date.now() + 2500;
+    while (Date.now() < until) { inv(E, id, `${tag} after wake`); await sleep(30); }
+    await toDone(E, id, tag); stop = true;
+    const t1 = Date.now(); while (pidAlive(p1) && Date.now() - t1 < 8000) await sleep(40);
+    if (pidAlive(p1)) violate(`${tag}: resumed old runner ${p1} still alive 8 s after done`);
+    finalCheck(E, id, tag); await spentOk(E, id, tag);
+    const led = E.ledger(id);
+    for (const s of PAID) if (E.sends(id, s) > 1) {
+      const rows = led.rows.filter((x) => x.stage === s);
+      violate(`${tag}: ${s} sent ${E.sends(id, s)}x ${JSON.stringify(rows.map((x) => [x.status, x.late, x.not_sent, x.recovered]))}`);
+    }
+    res.push({ k, trig, dur, holdLock: snap.jl, tmp: snap.tmp, aliveWhenDead: alive, tries, replaced: Boolean(p2 && p2 !== p1), p1log: E.log(id).includes(`runner ${p1} stopped: superseded`) });
+    console.log(`  ${tag} dur ${dur} replaced ${p2 !== p1} lock ${snap.jl} ok`);
+  }
+  heavyOverlap(E, 'a3');
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { SU.close(); await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a3', seed, takeovers: S.takeovers, jobsDone: S.jobs, checks: S.checks, lockBusyOnResume, res, violations: S.violations, leftover: E.leftover }));

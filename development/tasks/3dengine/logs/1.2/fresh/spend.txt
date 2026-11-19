@@ -1,0 +1,9 @@
+# Spend of milestone 1.2, task 05: ONE fresh reading of the 846 drawing (root section 7: a row BEFORE the call).
+# Columns: when (local) | what | provider and model | estimate | cap | who approved | actual (filled after the run)
+
+2026-11-18 | reserved before the call | node engine/cli.mjs trace tests/fixtures/apt846/source.pdf --out <scratch>/trace-fresh-1/run --id apt846 --budget 0.5 --go : 1 reading + up to 3 runs of the judge | OpenRouter, google/gemini-3.7-flash (the tool's own TEXT_MODEL) | about 0.08 to 0.09 USD | 0.50 USD (the tool stops before a call that would pass it) | Eliran, in the session's question dialog, 2026-11-18: «$0.50 (מומלץ)» | pending
+2026-11-18 | attempt 1, after the call | the provider refused the reading call: HTTP 401, before any reading was made | OpenRouter | - | 0.50 USD | - | 0.00 USD (the tool's ledger: reserved 0.02, settled 0, status 'http 401'; attempt-1/ledger.json)
+2026-11-18 | reserved before the call, attempt 2 | the same command, output folder <scratch>/trace-fresh-2/run, after the one-line change of the tool (pipeline/PORT-CHANGES.md): 1 reading + up to 3 runs of the judge | OpenRouter, google/gemini-3.7-flash | about 0.08 to 0.09 USD | 0.50 USD, the same approval (nothing was billed so far) | Eliran, 2026-11-18: «$0.50 (מומלץ)» | pending
+2026-11-18 | attempt 2, after the run | PASS: exit 0, 10 of 10 rooms, 82 checks with 0 failed, printed dimensions 0.82 % at most, the judge with no agreed mismatch, 180 s | OpenRouter, google/gemini-3.7-flash | - | 0.50 USD | - | 0.0403605 USD (the tool's ledger: the reading 0.012351, the three judge runs 0.006966 + 0.012765 + 0.0082785; attempt-2/ledger.json)
+
+TOTAL of milestone 1.2: 0.0403605 USD of the 0.50 USD cap. One reading was made (attempt 1 was refused before any reading and billed nothing).

@@ -1,11 +1,11 @@
 # fal-bench-2026-11-02/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 fal.ai model benchmark for renderings from a sales plan, 2026-11-02 (habait-89; tracks A-E, logs, ledgers, comparison site); README (Hebrew) records spend of $8.07.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 38 files here · 10 subfolders · 2808 files / 1.7 GB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

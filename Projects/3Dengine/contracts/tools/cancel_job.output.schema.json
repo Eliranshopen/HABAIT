@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cancel_job output",
+  "type": "object",
+  "properties": {
+    "job": {
+      "$ref": "../job.schema.json"
+    }
+  },
+  "required": [
+    "job"
+  ],
+  "additionalProperties": false
+}

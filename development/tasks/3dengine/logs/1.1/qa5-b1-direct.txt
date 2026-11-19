@@ -1,0 +1,71 @@
+intake  folder: ENG NOT_A_PDF
+   input holds []
+inspect folder: ENG NOT_A_PDF
+handler inspect_plan folder: ENG NOT_A_PDF
+handler start_simulation folder: ENG NOT_A_PDF
+intake  removed: ENG NOT_A_PDF
+   input holds []
+inspect removed: ENG NOT_A_PDF
+handler inspect_plan removed: ENG NOT_A_PDF
+handler start_simulation removed: ENG NOT_A_PDF
+intake  lock-none: ENG NOT_A_PDF
+   input holds []
+inspect lock-none: ENG NOT_A_PDF
+[habait-engine] the upload cannot be read (EBUSY)
+handler inspect_plan lock-none: ENG NOT_A_PDF
+[habait-engine] the upload cannot be read (EBUSY)
+handler start_simulation lock-none: ENG NOT_A_PDF
+intake  lock-rw-none: ENG NOT_A_PDF
+   input holds []
+inspect lock-rw-none: ENG NOT_A_PDF
+[habait-engine] the upload cannot be read (EBUSY)
+handler inspect_plan lock-rw-none: ENG NOT_A_PDF
+[habait-engine] the upload cannot be read (EBUSY)
+handler start_simulation lock-rw-none: ENG NOT_A_PDF
+intake  acl-deny-read: ENG NOT_A_PDF
+   input holds []
+inspect acl-deny-read: ENG NOT_A_PDF
+handler inspect_plan acl-deny-read: ENG NOT_A_PDF
+handler start_simulation acl-deny-read: ENG NOT_A_PDF
+intake  acl-deny-all: ENG NOT_A_PDF
+   input holds []
+inspect acl-deny-all: ENG NOT_A_PDF
+handler inspect_plan acl-deny-all: ENG NOT_A_PDF
+handler start_simulation acl-deny-all: ENG NOT_A_PDF
+intake  truncated: ENG NOT_A_PDF
+   input holds []
+inspect truncated: ENG NOT_A_PDF
+handler inspect_plan truncated: ENG NOT_A_PDF
+handler start_simulation truncated: ENG NOT_A_PDF
+intake  zero: ENG NOT_A_PDF
+   input holds []
+inspect zero: ENG NOT_A_PDF
+handler inspect_plan zero: ENG NOT_A_PDF
+handler start_simulation zero: ENG NOT_A_PDF
+intake  other-pdf: ENG NOT_A_PDF
+   input holds []
+inspect other-pdf: ENG NOT_A_PDF
+handler inspect_plan other-pdf: ok
+handler start_simulation other-pdf: ok
+intake  hardlink: ok
+   input holds ["source.pdf"]
+inspect hardlink: ok
+handler inspect_plan hardlink: ok
+handler start_simulation hardlink: ok
+intake  junction-in: ENG NOT_A_PDF
+   input holds []
+node:fs:1410
+  const result = binding.mkdir(
+                         ^
+
+Error: EEXIST: file already exists, mkdir 'C:\Users\elira\AppData\Local\Temp\qa5-home-26572-1794939423846-11\uploads\real'
+    at Object.mkdirSync (node:fs:1410:26)
+    at prep (file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r5-s/d1.mjs:53:46)
+    at file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r5-s/d1.mjs:85:14 {
+  errno: -4075,
+  code: 'EEXIST',
+  syscall: 'mkdir',
+  path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\qa5-home-26572-1794939423846-11\\uploads\\real'
+}
+
+Node.js v24.22.1

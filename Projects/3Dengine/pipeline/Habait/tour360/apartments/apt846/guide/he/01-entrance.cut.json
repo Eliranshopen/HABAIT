@@ -1,0 +1,45 @@
+{
+ "schema": "habait-tour/guide-cut.v1",
+ "made": "2026-11-08",
+ "why": "Eliran 2026-11-08: «כרגע תוריד את החלק של הקול שאומר 4 חדרים. שלא יהיה התייחסות לכמות החדרים»",
+ "tool": "ffmpeg 8.0.1-full_build-www.gyan.dev",
+ "cost_usd": 0,
+ "inputs": {
+  "he/_orig/01-entrance.before-roomcut-2026-11-08.mp4": "61a3c6e4e9dbee3dfbb0c542fb76a2cdbf074145562e938b5ce92315a374e1b6",
+  "he/_orig/01-entrance.before-roomcut-2026-11-08.mp3": "64360c639fe899b3751b669f2809f2a1998e3aaa0e4a5ec0203d4c97383398a7"
+ },
+ "outputs": {
+  "he/01-entrance.mp4": "5ec7567c9088c5a8fb6a0a2bca392954ac384395cb311e072167050e154e9286",
+  "he/01-entrance.mp3": "a7d03b2eda4493ee418fe552f2678b8ae9a1f91c97dac28ab1f39ec7d5e30c3d"
+ },
+ "cut": {
+  "keep_a": [
+   0,
+   6.125
+  ],
+  "remove": [
+   6.125,
+   12.958333
+  ],
+  "keep_b": [
+   12.958333,
+   27.583333
+  ],
+  "removed_s": 6.833,
+  "crossfade_s": 0.125,
+  "crossfade": "video xfade fade + audio acrossfade tri/tri",
+  "frame_aligned_24fps": true,
+  "duration_before_s": 27.583,
+  "duration_after_s": 20.626,
+  "shift_after_cut_s": -6.958
+ },
+ "removed_text": "דירת ארבעה חדרים, לפי תכנית המכר מיום 15 באוקטובר 2025.",
+ "why_whole_sentence": "the phrase opens the sentence and ends at a 0.48 s comma pause; cutting only it would leave «לפי תכנית המכר מיום 15 באוקטובר 2025.» as a fragment, so both cut edges sit inside full-stop pauses (5.64–6.73 s and 12.36–13.47 s)",
+ "alignment": "edge-tts re-synthesis of the voiced text with the clip's own voice (he-IL-HilaNeural, −4 %): 27.576 s, the same as the clip; word boundaries «16» ends 5.70, «דירת» 6.57, «2025» ends 12.41, «ההדמיה» 13.28; ffmpeg silencedetect −38 dB matches",
+ "encode": {
+  "video": "libx264 high crf 18 slow 24 fps yuv420p",
+  "audio_mp4": "aac 128k 32 kHz stereo",
+  "audio_mp3": "libmp3lame 48k 24 kHz mono"
+ },
+ "caption": "guide.json he step entrance: the sentence removed, seconds 27.58 → 20.63 (no cue files exist: the caption is one block per step)"
+}

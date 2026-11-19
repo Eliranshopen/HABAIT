@@ -1,0 +1,799 @@
+{
+ "status": "PASS",
+ "n_checks": 82,
+ "n_failed": 0,
+ "checks": [
+  {
+   "check": "dims",
+   "room": "r-master-bedroom",
+   "fixture": null,
+   "name": "חדר שינה הורים",
+   "expected": 347.7,
+   "got": 347.8,
+   "pct": 0.06,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-closet-area",
+   "fixture": null,
+   "name": "פינת ארונות",
+   "expected": 160,
+   "got": 160.3,
+   "pct": 0.19,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-closet-area",
+   "fixture": "fx-drawn-13-wardrobe",
+   "name": "פינת ארונות",
+   "expected": 160,
+   "got": 159.1,
+   "pct": 0.58,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-master-bathroom",
+   "fixture": null,
+   "name": "חדר רחצה הורים",
+   "expected": 210,
+   "got": 210.1,
+   "pct": 0.03,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-master-bathroom",
+   "fixture": "fx-drawn-12-shower",
+   "name": "חדר רחצה הורים",
+   "expected": 210,
+   "got": 208.5,
+   "pct": 0.73,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-master-bedroom",
+   "fixture": null,
+   "name": "חדר שינה הורים",
+   "expected": 343.6,
+   "got": 343.7,
+   "pct": 0.03,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-dining-area",
+   "fixture": null,
+   "name": "פינת אוכל",
+   "expected": 744.3,
+   "got": 746.8,
+   "pct": 0.34,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-living-room",
+   "fixture": null,
+   "name": "חדר דיור",
+   "expected": 529.5,
+   "got": 529.2,
+   "pct": 0.06,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-closet-area",
+   "fixture": null,
+   "name": "פינת ארונות",
+   "expected": 185,
+   "got": 184.5,
+   "pct": 0.29,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-closet-area",
+   "fixture": "fx-drawn-14-wardrobe",
+   "name": "פינת ארונות",
+   "expected": 185,
+   "got": 184,
+   "pct": 0.53,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-master-bathroom",
+   "fixture": null,
+   "name": "חדר רחצה הורים",
+   "expected": 212.5,
+   "got": 212.8,
+   "pct": 0.13,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-bedroom",
+   "fixture": null,
+   "name": "חדר שינה",
+   "expected": 275,
+   "got": 275,
+   "pct": 0.01,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-bedroom",
+   "fixture": null,
+   "name": "חדר שינה",
+   "expected": 342.2,
+   "got": 342.3,
+   "pct": 0.03,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-bathroom",
+   "fixture": null,
+   "name": "חדר רחצה כללי",
+   "expected": 199.1,
+   "got": 198.7,
+   "pct": 0.18,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-bathroom",
+   "fixture": null,
+   "name": "חדר רחצה כללי",
+   "expected": 140,
+   "got": 140.1,
+   "pct": 0.07,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-bathroom",
+   "fixture": "fx-drawn-11-shower",
+   "name": "חדר רחצה כללי",
+   "expected": 140,
+   "got": 141.1,
+   "pct": 0.82,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-sun-balcony",
+   "fixture": null,
+   "name": "מרפסת שמש",
+   "expected": 474.2,
+   "got": 474.2,
+   "pct": 0.01,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "dims",
+   "room": "r-sun-balcony",
+   "fixture": null,
+   "name": "מרפסת שמש",
+   "expected": 270.1,
+   "got": 270.1,
+   "pct": 0,
+   "tol": "1 % between the dimension's own extension lines",
+   "rule": "printed_dimensions.measure_line",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-bathroom",
+   "name": "חדר רחצה כללי",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-sun-balcony",
+   "name": "מרפסת שמש",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-closet-area",
+   "name": "פינת ארונות",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה הורים",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "label_has_room",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "one traced room",
+   "got": "traced",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bedroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-bathroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר רחצה כללי",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-kitchen",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מטבח",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-dining-area",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "פינת אוכל",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-living-room",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר דיור",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-sun-balcony",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "מרפסת שמש",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-master-bedroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר שינה הורים",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-closet-area",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "פינת ארונות",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-master-bathroom",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "חדר רחצה הורים",
+   "pass": true
+  },
+  {
+   "check": "room_has_label",
+   "room": "r-entrance",
+   "expected": "a printed label, or a door-split lobby / an unlabelled walkable connector",
+   "got": "כניסה",
+   "pass": true
+  },
+  {
+   "check": "room_count",
+   "expected": 10,
+   "got": 10,
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 1,
+   "hinge_cm": [
+    168,
+    789
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-3",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 2,
+   "hinge_cm": [
+    556,
+    659
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-1",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 3,
+   "hinge_cm": [
+    382,
+    1227
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-2",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 6,
+   "hinge_cm": [
+    294,
+    1453
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-6",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 7,
+   "hinge_cm": [
+    409,
+    696
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-7",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 8,
+   "hinge_cm": [
+    188,
+    815
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-8",
+   "pass": true
+  },
+  {
+   "check": "door_arc",
+   "arc": 10,
+   "hinge_cm": [
+    313,
+    1479
+   ],
+   "expected": "an opening between two rooms",
+   "got": "o-arc-10",
+   "pass": true
+  },
+  {
+   "check": "entrance",
+   "expected": "an opening on the building edge next to the entrance label",
+   "got": {
+    "opening": "o-3",
+    "dist_to_label_cm": 74
+   },
+   "pass": true
+  },
+  {
+   "check": "windows_traced",
+   "expected": "glazing on the plan traced as panes",
+   "got": 10,
+   "pass": true
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-bathroom",
+   "name": "חדר רחצה כללי",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "pass": true
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": [
+    "counter",
+    "hob",
+    "island",
+    "sink",
+    "tall_unit"
+   ],
+   "got": [
+    "counter",
+    "hob"
+   ],
+   "pass": true
+  },
+  {
+   "check": "wet_room_fixtures",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה הורים",
+   "expected": [
+    "bathtub",
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "got": [
+    "shower",
+    "vanity",
+    "wc"
+   ],
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [35.4]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bedroom",
+   "name": "חדר שינה",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-bathroom",
+   "name": "חדר רחצה כללי",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [36.0]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-bathroom",
+   "name": "חדר רחצה כללי",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-bathroom",
+   "name": "חדר רחצה כללי",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-bathroom",
+   "name": "חדר רחצה כללי",
+   "expected": ">= 1.5 m²",
+   "got": 3.2,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [35.3]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-kitchen",
+   "name": "מטבח",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [37.0]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-dining-area",
+   "name": "פינת אוכל",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [10.0, 17.6]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-living-room",
+   "name": "חדר דיור",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-sun-balcony",
+   "name": "מרפסת שמש",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [19.0]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-sun-balcony",
+   "name": "מרפסת שמש",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [19.0]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-master-bedroom",
+   "name": "חדר שינה הורים",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-closet-area",
+   "name": "פינת ארונות",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [18.0]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-closet-area",
+   "name": "פינת ארונות",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-closet-area",
+   "name": "פינת ארונות",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה הורים",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [17.5]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה הורים",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה הורים",
+   "expected": "the printed label inside its room (<= 50 cm)",
+   "got": "0 cm away",
+   "pass": true
+  },
+  {
+   "check": "wet_room_area",
+   "room": "r-master-bathroom",
+   "name": "חדר רחצה הורים",
+   "expected": ">= 1.5 m²",
+   "got": 4.46,
+   "pass": true
+  },
+  {
+   "check": "orthogonal",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "no edge > 30 cm off the room's own axes (wall-backed directions [10.0, 37.0]°, plan axis 17.5°) unless along a diagonal/curved wall",
+   "got": "ok",
+   "pass": true
+  },
+  {
+   "check": "inside_envelope",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "<= 2 % outside",
+   "got": "0.0 %",
+   "pass": true
+  },
+  {
+   "check": "label_in_room",
+   "room": "r-entrance",
+   "name": "כניסה",
+   "expected": "the printed label inside its room (<= 150 cm)",
+   "got": "55 cm away",
+   "pass": true
+  }
+ ],
+ "failures": [],
+ "corrections": {
+  "force_rect": []
+ },
+ "round": 1,
+ "judge": {
+  "model": "google/gemini-3.7-flash",
+  "role": "report (not a gate until stable)",
+  "runs": 3,
+  "per_run": [
+   [
+    {
+     "room": "6",
+     "issue": "The balcony area does not extend to include the narrow passage (מעבר צר) at the bottom."
+    }
+   ],
+   [
+    {
+     "room": "חדר שינה הורים",
+     "issue": "Missing window on the bottom exterior wall (width 348)."
+    }
+   ],
+   []
+  ],
+  "agreed_2of3": [],
+  "mismatches": [],
+  "agreement_rate": 0,
+  "usd": 0.02801
+ }
+}

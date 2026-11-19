@@ -1,0 +1,103 @@
+// D1: direct calls. intakePdf (real fs, the read at place 4) and inspectPdf (real fs, fake scanner, place 3)
+// and the engine handlers (places 1 and 2) with the upload in every unreadable state. Allowed: NOT_A_PDF,
+// PATH_NOT_ALLOWED, FILE_TOO_LARGE or ok. TOOLCHAIN_MISSING / raw error / RPC = defect. Also the mirror.
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, sleep, GOLDEN, engineOf } from './lib.mjs';
+const { intakePdf } = await E('engine/stages/intake.mjs');
+const { inspectPdf } = await E('engine/inspect.mjs');
+const { jobId } = await E('engine/jobs.mjs');
+const SAMPLE = 'C:/RnD/Projects/3Dengine/tests/fixtures/sample.pdf';
+const gold = fs.readFileSync(GOLDEN);
+const SHA = sha(gold);
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const USER = process.env.USERNAME;
+const out = (...a) => console.log(...a);
+const OK = new Set(['NOT_A_PDF', 'PATH_NOT_ALLOWED', 'FILE_TOO_LARGE']);
+let bad = 0; let n = 0;
+const PATHRE = /[A-Za-z]:[\\/]/;
+function verdict(tag, fn) {
+  n++;
+  let s;
+  try { const r = fn(); s = 'ok'; if (r === 'raw') s = 'ok'; }
+  catch (e) {
+    const code = e.code;
+    const isEng = e.constructor.name === 'EngineError';
+    if (!isEng) { s = `RAW ${e.constructor.name} ${code} <<DEFECT`; bad++; }
+    else if (!OK.has(code)) { s = `ENG ${code} <<DEFECT | ${String(e.message).slice(0, 80)}`; bad++; }
+    else { s = `ENG ${code}`; if (PATHRE.test(e.message)) { s += ' <<PATH'; bad++; } }
+  }
+  out(`${tag}: ${s}`);
+  return s;
+}
+const hold = (file, access, share, secs) => {
+  const f = file.replace(/\//g, '\\');
+  const ps = spawn('powershell', ['-NoProfile', '-Command', `$f=[IO.File]::Open('${f}','Open','${access}','${share}'); Write-Output L; Start-Sleep -Seconds ${secs}; $f.Close()`], { stdio: ['ignore', 'pipe', 'ignore'], windowsHide: true });
+  return new Promise((r) => ps.stdout.once('data', () => r(ps)));
+};
+const kill = (ps) => spawnSync('taskkill', ['/PID', String(ps.pid), '/T', '/F'], { windowsHide: true });
+const states = ['folder', 'removed', 'lock-none', 'lock-rw-none', 'acl-deny-read', 'acl-deny-all', 'truncated', 'zero', 'other-pdf', 'hardlink', 'junction-in', 'junction-out', 'healthy'];
+async function prep(state, src, h) {
+  let ps = null;
+  switch (state) {
+    case 'folder': fs.rmSync(src); fs.mkdirSync(src); break;
+    case 'removed': fs.rmSync(src); break;
+    case 'lock-none': ps = await hold(src, 'Read', 'None', 25); break;
+    case 'lock-rw-none': ps = await hold(src, 'ReadWrite', 'None', 25); break;
+    case 'acl-deny-read': spawnSync('icacls', [src, '/deny', `${USER}:(R,RD,GR)`], { windowsHide: true }); break;
+    case 'acl-deny-all': spawnSync('icacls', [src, '/deny', `${USER}:(F)`], { windowsHide: true }); break;
+    case 'truncated': fs.writeFileSync(src, gold.subarray(0, 90000)); break;
+    case 'zero': fs.writeFileSync(src, ''); break;
+    case 'other-pdf': fs.copyFileSync(SAMPLE, src); break;
+    case 'hardlink': fs.rmSync(src); fs.writeFileSync(`${h.home}/hl.pdf`, gold); fs.linkSync(`${h.home}/hl.pdf`, src); break;
+    case 'junction-in': { fs.rmSync(src); fs.mkdirSync(`${h.inbox}/real`,{recursive:true}); try{fs.rmSync(src,{recursive:true,force:true})}catch{} fs.symlinkSync(`${h.inbox}/real`, src, 'junction'); break; }
+    case 'junction-out': { fs.rmSync(src); fs.mkdirSync(`${h.home}/outside`,{recursive:true}); try{fs.rmSync(src,{recursive:true,force:true})}catch{} fs.symlinkSync(`${h.home}/outside`, src, 'junction'); break; }
+    default: break;
+  }
+  return ps;
+}
+function undo(state, src, ps) {
+  if (ps) kill(ps);
+  if (state.startsWith('acl')) spawnSync('icacls', [src, '/remove:d', USER], { windowsHide: true });
+}
+const fakeRun = (cfg) => (py, args) => {
+  const outDir = args[args.indexOf('scan') + 2];
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(`${outDir}/pages.json`, JSON.stringify({ pages: 1, page_rows: [{ page: 1, size_pt: [100, 100], drawings: 300, images: [] }] }));
+  return { status: 0, stdout: '', stderr: '' };
+};
+
+for (const state of (process.argv[2] ? process.argv[2].split(',') : states)) {
+  const h = await makeHome({ timeout: 120 });
+  const src = `${h.inbox}/s.pdf`;
+  // --- place 4: intakePdf directly
+  fs.copyFileSync(GOLDEN, src); fs.mkdirSync(h.jobsDir, { recursive: true });
+  let ps = await prep(state, src, h);
+  verdict(`intake  ${state}`, () => intakePdf(h.jobsDir, ID, { path: src, name: 's.pdf', bytes: gold.length }, SHA));
+  const inp = `${h.jobsDir}/${ID}/input`;
+  out(`   input holds ${fs.existsSync(inp) ? JSON.stringify(fs.readdirSync(inp)) : 'none'}`);
+  undo(state, src, ps); await sleep(300);
+  // --- place 3: inspectPdf directly (fake scanner, real fs, real hash steps)
+  fs.rmSync(h.jobsDir, { recursive: true, force: true });
+  try { fs.chmodSync(src, 0o666); } catch {}
+  try { fs.rmSync(src, { recursive: true, force: true }); } catch {}
+  fs.copyFileSync(GOLDEN, src);
+  ps = await prep(state, src, h);
+  verdict(`inspect ${state}`, () => inspectPdf(h.config, { path: src, sha256: SHA }, { run: fakeRun(h.config) }));
+  const insp = `${h.config.runtimeDir}/inspect`;
+  if (fs.existsSync(insp)) for (const d of fs.readdirSync(insp)) if (d !== SHA) out(`   STRAY under inspect: ${d}`);
+  undo(state, src, ps); await sleep(300);
+  // --- places 1 and 2: the handlers (real checkedUpload) with a seeded record, then the intake
+  try { fs.chmodSync(src, 0o666); } catch {}
+  try { fs.rmSync(src, { recursive: true, force: true }); } catch {}
+  fs.copyFileSync(GOLDEN, src);
+  const d = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(d, { recursive: true });
+  for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${d}/${f}`);
+  const eng = await engineOf(h);
+  ps = await prep(state, src, h);
+  for (const t of ['inspect_plan', 'start_simulation']) verdict(`handler ${t} ${state}`, () => eng.handlers[t]({ pdf_path: src }));
+  undo(state, src, ps); await sleep(300);
+  try { fs.chmodSync(src, 0o666); } catch {}
+  cleanup(h);
+}
+out(`TOTAL ${n} calls, ${bad} defects`);

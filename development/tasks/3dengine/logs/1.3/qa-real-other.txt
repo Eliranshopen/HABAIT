@@ -1,0 +1,4 @@
+start #1 reading=dim_kitchen created=true state=queued
+[1:dim_kitchen] state=review reason=TRACE_GATE_FAIL | the reading failed its own check: 4 of 82 checks failed (0 of the 18 printed dimensions) | review={"stage":"tracing","attempt":1,"files":{"report":"stages/tracing/attempt-1/plan-1/report.json","overlay":"stages/tracing/attempt-1/plan-1/overlay.png"}} attempts={"tracing":1} manifestRows=undefined ledgerRows=undefined spent=0 stagesDir=["tracing"] tracingDirs=["attempt-1"] seen=queued>tracing>review secs=91
+  leak: []
+tool answers kept: 222

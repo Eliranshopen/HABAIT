@@ -1,0 +1,14 @@
+[    0.6 s] created sandbox gold-left-python-Cq3mX2 (4 vCPU) in 0.6 s
+[    1.0 s] === sysinfo
+[    1.6 s]     sysinfo: 0.6 s wall, 0.8 active vCPU-s
+[    2.1 s] === apt
+[   14.0 s]     apt: 11.9 s wall, 7.8 active vCPU-s
+[   14.2 s] === blender_download
+[   17.4 s]     blender_download: 3.2 s wall, 0.2 active vCPU-s  ERROR no mirror served the verified tarball: [{"url":"https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":22,"s":0.3,"err":"curl: (22) The requested URL returned error: 403"},{"url":"https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":23,"s":0.7,"err":"curl: (23) client returned ERROR on write of 8192 bytes"},{"url":"https://mirror.clarkson.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":23,"s":0.5,"err":"curl: (23) client returned ERROR on write of 16120 bytes"},{"url":"https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":23,"s":1.5,"err":"curl: (23) client returned ERROR on write of 8192 bytes"}]
+[   17.4 s] ERROR Error: blender_download: no mirror served the verified tarball: [{"url":"https://download.blender.org/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":22,"s":0.3,"err":"curl: (22) The requested URL returned error: 403"},{"url":"https://mirrors.ocf.berkeley.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":23,"s":0.7,"err":"curl: (23) client returned ERROR on write of 8192 bytes"},{"url":"https://mirror.clarkson.edu/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":23,"s":0.5,"err":"curl: (23) client returned ERROR on write of 16120 bytes"},{"url":"https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.10-linux-x64.tar.xz","exit":23,"s":1.5,"err":"curl: (23) client returned ERROR on write of 8192 bytes"}]
+    at phase (file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:150:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///C:/RnD/.wt/sandbox-worker/Projects/Habait/habait-walkaround/Habait/tour360/tools/sandbox-worker/spike.mjs:191:3
+[   18.7 s] stop() returned
+[   18.9 s] status after stop (poll 1): stopped
+[   18.9 s] done in 17.4 s; est. $0.0011

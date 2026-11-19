@@ -1,5 +1,6 @@
-<!-- context file · 2026-11-05 · fix-846-fidelity WIP snapshot -->
 # wip-2026-11-05 — the fix-846-fidelity state at the account switch (2026-11-05 ~19:15)
+<!-- last-updated: 2026-11-08 -->
+<!-- context file · 2026-11-05 · fix-846-fidelity WIP snapshot -->
 
 Snapshots of two `_local` files the next session needs (the `_local` folder itself is not tracked):
 - `picks.json` — the picture each room ships (`_local/generated/<file>`); copy back over `_local/picks.json` if it was lost.

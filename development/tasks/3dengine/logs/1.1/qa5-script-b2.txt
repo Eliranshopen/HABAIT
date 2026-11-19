@@ -1,0 +1,113 @@
+// B2: job.json is never written when manifest.json is not this job's, by any path. Hash everything before/after.
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, engineOf, GOLDEN, snapshot, diffSnap } from './lib.mjs';
+const { jobId, readJob, writeJob } = await E('engine/jobs.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const SHA = sha(fs.readFileSync(GOLDEN));
+const SAMPLE = `${R}/tests/fixtures/sample.pdf`;
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const goodRow = { stage: 'tracing', attempt: 1, status: 'done', inputs_sha256: 'a'.repeat(64), outputs: [] };
+const mf = (o) => JSON.stringify({ schema: 'habait/manifest.v1', job_id: ID, rows: [], ...o });
+const OTHER = 'f'.repeat(16);
+const SPOILS = {
+  notjson: () => '{ not json',
+  empty: () => '',
+  bom: () => '\ufeff' + mf({}),
+  wrongid: () => mf({ job_id: OTHER }),
+  wrongschema: () => mf({ schema: 'x' }),
+  array: () => '[]',
+  badstage: () => mf({ rows: [{ ...goodRow, stage: 'nope' }] }),
+  escape: () => mf({ rows: [{ ...goodRow, outputs: [{ path: '../../x', sha256: 'b'.repeat(64) }] }] }),
+  attempt0: () => mf({ rows: [{ ...goodRow, attempt: 0 }] }),
+  badhash: () => mf({ rows: [{ ...goodRow, inputs_sha256: 'zz' }] }),
+  folder: 'DIR',
+};
+const STATES = ['queued', 'tracing', 'awaiting_approval', 'skinning', 'failed', 'cancelled', 'review', 'done'];
+let diffs = 0; let scen = 0; let rpcErr = 0; const notes = [];
+const pids = [];
+const cliEnv = (h) => ({ ...process.env, ...h.env });
+const cli = (h, args) => spawnSync(process.execPath, [`${R}/engine/cli.mjs`, ...args], { env: cliEnv(h), encoding: 'utf8', timeout: 60000, windowsHide: true });
+const skip = (p) => /(^|\/)(job\.lock|.+\.tmp)$/.test(p);
+
+for (const [kind, body] of Object.entries(SPOILS)) {
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`); fs.copyFileSync(SAMPLE, `${h.inbox}/b.pdf`);
+  const seedDir = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(seedDir, { recursive: true });
+  for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${seedDir}/${f}`);
+  const eng = await engineOf(h, { inspect: (c, file) => (file.path.endsWith('b.pdf') ? { pages: 1, kind: 'sheet', page_rows: [], candidates: [{ id: 'p1', label: 'x', page: 1, source: 'page', vector_paths: 300, large_images: 0 }] } : undefined) ?? undefined });
+  // real inspect for golden (record seeded) -> use default; for sample use scripted: rebuild engine with default inspect instead
+  const eng2 = await engineOf(h);
+  await eng2.handlers.start_simulation({ pdf_path: `${h.inbox}/s.pdf` });
+  let bys; try { bys = await eng2.handlers.start_simulation({ pdf_path: `${h.inbox}/b.pdf` }); } catch (e) { bys = { err: e.message }; } console.log('bystander', bys.err || bys.job_id);
+  const srv = startServer(h); await srv.init();
+  const jf = `${h.jobsDir}/${ID}/job.json`;
+  for (const st of STATES) {
+    scen++;
+    // set state + wrong cost copy, under a good (absent) manifest
+    fs.rmSync(`${h.jobsDir}/${ID}/manifest.json`, { recursive: true, force: true });
+    const j = readJob(h.jobsDir, ID); j.state = st; j.cost = { ...j.cost, spent_usd: 7.77 };
+    if (st === 'awaiting_approval') j.quote = { estimate_usd: 48, range_usd: [40, 60] };
+    fs.writeFileSync(jf, JSON.stringify(j, null, 2));
+    if (body === 'DIR') fs.mkdirSync(`${h.jobsDir}/${ID}/manifest.json`); else fs.writeFileSync(`${h.jobsDir}/${ID}/manifest.json`, body());
+    const before = snapshot(h.jobsDir, skip);
+    const tag = `${kind}/${st}`;
+    const out = [];
+    const t = async (name, args) => { const r = await srv.call(name, args); if (r.m.error) { rpcErr++; out.push(`${name}: RPC ${r.m.error.message.slice(0, 80)}`); } else out.push(`${name}:${r.err ? r.err.code : 'ok'}`); };
+    await t('get_job', { job_id: ID });
+    await t('get_result', { job_id: ID });
+    await t('approve_paid_stage', { job_id: ID, cap_usd: 100 });
+    await t('cancel_job', { job_id: ID });
+    await t('list_jobs', {});
+    await t('start_simulation', { pdf_path: `${h.inbox}/s.pdf` });
+    for (const a of [['job', ID], ['job', ID, '--json'], ['ledger', ID], ['jobs'], ['resume', ID]]) { const r = cli(h, a); out.push(`cli ${a[0]}${a[2] ? ' --json' : ''}:${r.status}`); }
+    if (['queued', 'awaiting_approval', 'tracing', 'skinning', 'failed'].includes(st)) { const r = spawnSync(process.execPath, [`${R}/engine/runner.mjs`, ID], { env: cliEnv(h), encoding: 'utf8', timeout: 25000, windowsHide: true }); out.push(`runner:${r.status}${r.error ? ' ' + r.error.code : ''}`); }
+    const after = snapshot(h.jobsDir, skip);
+    const d = diffSnap(before, after);
+    const undef = fs.existsSync(`${h.jobsDir}/undefined`);
+    if (d.length || undef) { diffs++; notes.push(`${tag}: CHANGED ${JSON.stringify(d)} undefined=${undef}`); }
+    console.log(`${tag}: diff=${d.length} ${out.join(' ')}`);
+    // runner.pid left by anything?
+    const rp = `${h.jobsDir}/${ID}/runner.pid`; if (fs.existsSync(rp)) { const p = Number(fs.readFileSync(rp, 'utf8').trim()); if (p) pids.push(p); }
+  }
+  await srv.stop(); cleanup(h);
+}
+// reverse direction: manifest/ledger/source.pdf written when job.json is not this job's
+for (const jkind of ['notjson', 'wrongid', 'folder', 'nostate', 'engine_version_mismatch']) {
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`);
+  const seedDir = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(seedDir, { recursive: true });
+  for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${seedDir}/${f}`);
+  const eng = await engineOf(h); await eng.handlers.start_simulation({ pdf_path: `${h.inbox}/s.pdf` });
+  const jf = `${h.jobsDir}/${ID}/job.json`; const j = JSON.parse(fs.readFileSync(jf, 'utf8'));
+  if (jkind === 'notjson') fs.writeFileSync(jf, '{x');
+  if (jkind === 'wrongid') fs.writeFileSync(jf, JSON.stringify({ ...j, job_id: OTHER }));
+  if (jkind === 'folder') { fs.rmSync(jf); fs.mkdirSync(jf); }
+  if (jkind === 'nostate') fs.writeFileSync(jf, JSON.stringify({ ...j, state: 'stuck' }));
+  if (jkind === 'engine_version_mismatch') fs.writeFileSync(jf, JSON.stringify({ ...j, engine_version: '0.9.0' }));
+  const srv = startServer(h); await srv.init();
+  const before = snapshot(h.jobsDir, skip);
+  for (const n of ['get_job', 'get_result', 'cancel_job']) await srv.call(n, { job_id: ID });
+  await srv.call('approve_paid_stage', { job_id: ID, cap_usd: 100 }); await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` });
+  for (const a of [['job', ID], ['ledger', ID], ['resume', ID]]) cli(h, a);
+  spawnSync(process.execPath, [`${R}/engine/runner.mjs`, ID], { env: cliEnv(h), encoding: 'utf8', timeout: 25000, windowsHide: true });
+  const after = snapshot(h.jobsDir, skip); const d = diffSnap(before, after);
+  console.log(`reverse job.json=${jkind}: changed files ${JSON.stringify(d)}`);
+  if (d.length) { diffs++; notes.push(`reverse ${jkind}: ${JSON.stringify(d)}`); }
+  await srv.stop(); cleanup(h);
+}
+// job.json absent, manifest foreign: start_simulation
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`);
+  const seedDir = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(seedDir, { recursive: true });
+  for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${seedDir}/${f}`);
+  fs.mkdirSync(`${h.jobsDir}/${ID}`, { recursive: true }); fs.writeFileSync(`${h.jobsDir}/${ID}/manifest.json`, mf({ job_id: OTHER }));
+  const srv = startServer(h); await srv.init();
+  const r = await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` });
+  console.log('no job.json + foreign manifest start_simulation:', r.m.error ? 'RPC ' + r.m.error.message : r.err ? r.err.code + ' | ' + r.err.message.slice(0, 120) : 'ok');
+  console.log('  job folder holds', JSON.stringify(fs.readdirSync(`${h.jobsDir}/${ID}`)), fs.existsSync(`${h.jobsDir}/${ID}/job.json`) ? 'JOB.JSON WRITTEN' : 'no job.json');
+  await srv.stop(); cleanup(h);
+}
+console.log(`SCENARIOS ${scen}, scenarios with changed files ${diffs}, JSON-RPC errors ${rpcErr}`);
+for (const n of notes) console.log('NOTE', n);
+console.log('runner pids seen', pids.join(','));

@@ -1,0 +1,97 @@
+// Round-1 items D1..D4 + observations, re-tested with REAL processes.
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, between, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, toDone, realKill, waitEvent, resume, approveWhen, settledSum, heldSum } from './q.mjs';
+setSeed(77);
+const out = {};
+const mk = (o) => mkEnv({ stepMs: 300, heartbeat: 0.1, staleSeconds: 1, ...o });
+const startWith = (E, name, env = {}) => { const pdf = E.pdf(name, name); for (const [k, v] of Object.entries(env)) process.env[k] = v; let id; try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { for (const k of Object.keys(env)) delete process.env[k]; } return { pdf, id }; };
+const approveNow = async (E, id, cap = 60) => { for (let i = 0; i < 2000; i++) { if (await approveWhen(E, id, cap)) return; if (E.job(id).approval) return; await sleep(10); } };
+let E = await mk({ prefix: 'qa-r1-a-', callUsd: 0.6 });
+try {
+  // D1: kill in the exact window between settle and the spent_usd update (PAUSE_AFTER_SETTLE: closeRow done, syncSpent not yet)
+  for (let i = 0; i < 4; i++) {
+    const { pdf, id } = startWith(E, `r1d1-${i}.pdf`, { ENGINE_TEST_PAUSE_AFTER_SETTLE_MS: '4000' });
+    await approveNow(E, id);
+    await waitEvent(E, id, 'settledcount:1', 10000);
+    await sleep(100);
+    const stale = E.job(id).cost.spent_usd;     // expected 0: the update comes after the pause
+    await realKill(E, E.runnerPid(id), `D1.${i}`);
+    const afterKill = { spent: E.job(id).cost.spent_usd, settled: settledSum(E.ledger(id)) };
+    await resume(E, pdf, `D1.${i}`);
+    await sleep(500);
+    const afterResume = E.job(id).cost.spent_usd;
+    await toDone(E, id, `D1.${i}`); finalCheck(E, id, `D1.${i}`); await spentOk(E, id, `D1.${i}`);
+    out[`D1.${i}`] = `at kill spent=${afterKill.spent} settled=${afterKill.settled}; 0.5s after resume spent=${afterResume}; final spent=${E.job(id).cost.spent_usd}; skinning sends ${E.sends(id, 'skinning')}`;
+  }
+  // D2: 40 kills while job.lock exists: after each, the lock is absent or non-empty; resume < 2.6 s
+  let emptySeen = 0, maxMs = 0, kills = 0, lockKills = 0;
+  for (let i = 0; i < 40; i++) {
+    const { pdf, id } = startWith(E, `r1d2-${i}.pdf`);
+    const asyncApprove = (async () => { for (let j = 0; j < 400; j++) { await approveWhen(E, id, 60); await sleep(20); const x = E.job(id); if (!x || x.state === 'done') return; } })();
+    await sleep(between(0, 900));
+    const hit = await waitEvent(E, id, 'joblock', 3000);
+    const ok = await realKill(E, E.runnerPid(id), `D2.${i}`);
+    if (ok) { kills++; if (hit) lockKills++; }
+    try { const l = E.jobPath(id, 'job.lock'); if (fs.existsSync(l) && fs.readFileSync(l, 'utf8').trim() === '') emptySeen++; } catch { }
+    inv(E, id, `D2.${i}`);
+    if (E.job(id).state !== 'done') { const r = await resume(E, pdf, `D2.${i}`, 3500); if (r) maxMs = Math.max(maxMs, r.ms); }
+    await toDone(E, id, `D2.${i}`); finalCheck(E, id, `D2.${i}`);
+  }
+  out.D2 = `${kills} kills (${lockKills} with job.lock present at the kill), empty lock left ${emptySeen}x, longest resume ${maxMs} ms`;
+  // D4: cancel during a paid call
+  {
+    const { pdf, id } = startWith(E, 'r1d4.pdf', { ENGINE_TEST_PAUSE_AFTER_RESERVE_MS: '1500' });
+    await approveNow(E, id);
+    await waitEvent(E, id, 'reserved', 10000);
+    E.h.cancel_job({ job_id: id });
+    await sleep(3500);
+    const j = E.job(id), rows = E.rows(id).map((r) => `${r.stage}#${r.attempt}`), led = E.ledger(id).rows.map((r) => `${r.stage}:${r.status}`);
+    out.D4 = `state ${j.state}; rows ${rows.join(',')}; ledger ${led.join(',')}; runner alive ${pidAlive(E.runnerPid(id) || 0)}; gating started ${Boolean(j.attempts?.gating)}`;
+    inv(E, id, 'D4');
+    await resume(E, pdf, 'D4 restart'); await toDone(E, id, 'D4'); finalCheck(E, id, 'D4'); await spentOk(E, id, 'D4');
+    out.D4 += ` | restart -> done, skinning sends ${E.sends(id, 'skinning')}`;
+  }
+  // Obs 1: kill after the cache write before the settle -> recovered, sent once
+  {
+    const { pdf, id } = startWith(E, 'r1o1.pdf', { ENGINE_TEST_PAUSE_AFTER_CACHE_MS: '3000' });
+    await approveNow(E, id);
+    await waitEvent(E, id, 'cacheUnsettled', 10000);
+    await realKill(E, E.runnerPid(id), 'O1');
+    await resume(E, pdf, 'O1'); await toDone(E, id, 'O1'); finalCheck(E, id, 'O1');
+    const row = E.ledger(id).rows.filter((r) => r.stage === 'skinning');
+    out.O1 = `skinning rows ${JSON.stringify(row.map((r) => [r.status, r.recovered]))}, sends ${E.sends(id, 'skinning')}`;
+  }
+  // Obs 2: recycled pid: runner.pid names a live foreign pid with an old heartbeat
+  {
+    const { pdf, id } = startWith(E, 'r1o2.pdf');
+    await waitEvent(E, id, 'state:building', 5000);
+    const p = E.runnerPid(id);
+    await realKill(E, p, 'O2');
+    const f = E.jobPath(id, 'runner.pid'); fs.writeFileSync(f, String(process.pid));
+    const old = new Date(Date.now() - 60000); fs.utimesSync(f, old, old);
+    const jf = E.jobPath(id, 'job.json'); const d = JSON.parse(fs.readFileSync(jf, 'utf8')); d.heartbeat_at = old.toISOString(); fs.writeFileSync(jf, JSON.stringify(d, null, 2) + '\n');
+    const g = E.h.get_job({ job_id: id }).job.runner;
+    const r = await resume(E, pdf, 'O2');
+    out.O2 = `runner.alive ${g.alive}, resumed ${r?.r?.resumed}`;
+    await toDone(E, id, 'O2'); finalCheck(E, id, 'O2');
+  }
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); } finally { await E.cleanup(); }
+// D3: orphan + cap = estimate (48), calls of $30
+E = await mk({ prefix: 'qa-r1-b-', callUsd: 30 });
+try {
+  const { pdf, id } = startWith(E, 'r1d3.pdf', { ENGINE_TEST_PAUSE_AFTER_RESERVE_MS: '3000' });
+  for (let i = 0; i < 2000; i++) { const j = E.job(id); if (j.state === 'awaiting_approval' && !j.approval) { E.h.approve_paid_stage({ job_id: id, cap_usd: 48 }); break; } await sleep(10); }
+  await waitEvent(E, id, 'reserved', 10000);
+  await realKill(E, E.runnerPid(id), 'D3');
+  await resume(E, pdf, 'D3');
+  const r = await E.waitFor('awaiting_approval with cap_reached or a failure', () => { const j = E.job(id); return j.state === 'awaiting_approval' || j.state === 'failed' || j.state === 'done' ? j : null; }, 15000);
+  const q = r.quote;
+  out.D3 = `after resume: state ${r.state}, reason ${JSON.stringify(r.reason && r.reason.code)}, quote est ${q?.estimate_usd} cap_reached ${q?.cap_reached}, approval ${JSON.stringify(r.approval)}, approvals ${r.approvals?.length}`;
+  let a = 'none';
+  try { E.h.approve_paid_stage({ job_id: id, cap_usd: q.estimate_usd }); a = 'approved ' + q.estimate_usd; } catch (e) { a = 'approve threw ' + e.message; }
+  const j = await toDone(E, id, 'D3', { cap: q.estimate_usd });
+  const led = E.ledger(id);
+  out.D3 += ` | ${a} -> ${j.state}; ledger ${led.rows.map((x) => x.stage + ':' + x.status).join(',')}; cap ${led.cap_usd}; total counted ${settledSum(led) + heldSum(led)}; reason now ${JSON.stringify(j.reason)}`;
+  inv(E, id, 'D3 end');
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); } finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'r1', kills: S.kills, jobsDone: S.jobs, checks: S.checks, out, violations: S.violations, leftover: E.leftover }, null, 1));

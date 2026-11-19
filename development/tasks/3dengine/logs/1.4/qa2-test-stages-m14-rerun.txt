@@ -1,0 +1,16 @@
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (383.0238ms)
+ℹ going on from the first run of an earlier invocation (made 2026-11-18T20:26:26.693Z, 369 s): it is not made again
+✔ 2. the SECOND run, a real job of the same PDF: it reads from the store, books $0, makes NO request, and its plan is the first run's, byte for byte (268459.2903ms)
+✔ 3. `reading show`: what is kept, in numbers and fixed words; and no room name of the reading in any answer, job file, record or log (403.705ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 271014.8499
+
+real	4m31.311s
+user	0m0.046s
+sys	0m0.045s

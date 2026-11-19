@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import os from 'node:os';
+import { spawn } from 'node:child_process';
+const dir = fs.mkdtempSync(`${os.tmpdir()}/qa-r2-lock-`);
+fs.writeFileSync(`${dir}/counter`, '0');
+const ms = Number(process.argv[2] || 20000), W = Number(process.argv[3] || 6), mode = process.argv[4] || 'dead';
+const kids = []; const outs = [];
+for (let i = 0; i < W; i++) {
+  const c = spawn(process.execPath, ['C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r2/a5-worker.mjs', dir, String(ms)], { stdio: ['ignore', 'pipe', 'inherit'], windowsHide: true });
+  let o = ''; c.stdout.on('data', (d) => (o += d)); c.on('exit', () => outs.push(o.trim())); kids.push(c);
+}
+let planted = 0; const until = Date.now() + ms;
+while (Date.now() < until) {
+  try { fs.writeFileSync(`${dir}/x.lock`, mode === 'dead' ? '99999' : '', { flag: 'wx' }); planted++; if (mode === 'empty') { const t = new Date(Date.now() - 2000); fs.utimesSync(`${dir}/x.lock`, t, t); } } catch { }
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 2);
+}
+await new Promise((r) => { const t = setInterval(() => { if (outs.length === W) { clearInterval(t); r(); } }, 100); setTimeout(r, ms + 15000); });
+const counter = Number(fs.readFileSync(`${dir}/counter`, 'utf8'));
+const tot = outs.map((o) => { try { return JSON.parse(o); } catch { return { viol: 0, ops: 0, busy: 0 }; } }).reduce((a, b) => ({ viol: a.viol + b.viol, ops: a.ops + b.ops, busy: a.busy + b.busy }), { viol: 0, ops: 0, busy: 0 });
+console.log(JSON.stringify({ mode, planted, workers: W, ...tot, counter, lostUpdates: tot.ops - counter }));
+fs.rmSync(dir, { recursive: true, force: true });

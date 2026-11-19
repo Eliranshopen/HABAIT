@@ -1,0 +1,767 @@
+{
+ "$schema": "tour360/markers.v1",
+ "apartment": "ahk-apt7",
+ "scanned_on": "2026-11-18",
+ "model": "none: geometric, from plan.json fixtures and build_scene.py placements, occlusion checked on the ray-cast depth ($0)",
+ "categories_with_items": [
+  "sofa",
+  "coffee_table",
+  "dining_table",
+  "chair"
+ ],
+ "scenes": {
+  "living": {
+   "pano_sha256": "4f8a6e70fe21edbf18f9a41498ad0514fdc19a639253707dcfeaadf5979034f1",
+   "asset": "living",
+   "heading": -137.8,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": [
+    {
+     "id": "living-sofa",
+     "category": "sofa",
+     "yaw": -146.93,
+     "pitch": -29.9,
+     "span_deg": [
+      42.6,
+      31.5
+     ],
+     "outlines": [
+      [
+       [
+        -168.23,
+        -34.44
+       ],
+       [
+        -162.29,
+        -45.63
+       ],
+       [
+        -125.62,
+        -32.01
+       ],
+       [
+        -125.62,
+        -16.95
+       ],
+       [
+        -137.66,
+        -14.17
+       ],
+       [
+        -168.23,
+        -18.49
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 2.57
+    },
+    {
+     "id": "living-coffee-table",
+     "category": "coffee_table",
+     "yaw": -121.63,
+     "pitch": -45.7,
+     "span_deg": [
+      45.8,
+      31.5
+     ],
+     "outlines": [
+      [
+       [
+        -144.54,
+        -48.23
+       ],
+       [
+        -107.73,
+        -61.46
+       ],
+       [
+        -98.72,
+        -42.48
+       ],
+       [
+        -98.72,
+        -34.48
+       ],
+       [
+        -123.98,
+        -29.95
+       ],
+       [
+        -144.54,
+        -40.02
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 2.03
+    },
+    {
+     "id": "living-dining-table",
+     "category": "dining_table",
+     "yaw": 6.7,
+     "pitch": -35.87,
+     "span_deg": [
+      68.0,
+      28.2
+     ],
+     "outlines": [
+      [
+       [
+        -27.31,
+        -49.95
+       ],
+       [
+        40.7,
+        -45.43
+       ],
+       [
+        40.7,
+        -28.05
+       ],
+       [
+        29.27,
+        -21.78
+       ],
+       [
+        -18.59,
+        -23.47
+       ],
+       [
+        -27.31,
+        -31.99
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 1.96
+    },
+    {
+     "id": "living-chair",
+     "category": "chair",
+     "yaw": 11.23,
+     "pitch": -47.46,
+     "span_deg": [
+      91.9,
+      49.0
+     ],
+     "outlines": [
+      [
+       [
+        -38.61,
+        -58.88
+       ],
+       [
+        -6.26,
+        -64.61
+       ],
+       [
+        -4.13,
+        -64.68
+       ],
+       [
+        31.66,
+        -61.0
+       ],
+       [
+        33.19,
+        -60.58
+       ],
+       [
+        53.33,
+        -51.69
+       ],
+       [
+        53.33,
+        -28.98
+       ],
+       [
+        24.03,
+        -15.7
+       ],
+       [
+        -14.85,
+        -16.57
+       ],
+       [
+        -38.61,
+        -35.93
+       ]
+      ]
+     ],
+     "count": 6,
+     "distance_m": 1.91
+    }
+   ]
+  },
+  "dining": {
+   "pano_sha256": "3662b40666155410aa7bf88acdc3023a644686d2274cde2628b7e0c1cf2987c9",
+   "asset": "dining",
+   "heading": 46.2,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": [
+    {
+     "id": "dining-sofa",
+     "category": "sofa",
+     "yaw": 172.63,
+     "pitch": -18.45,
+     "span_deg": [
+      27.6,
+      15.8
+     ],
+     "outlines": [
+      [
+       [
+        158.83,
+        -24.93
+       ],
+       [
+        -173.57,
+        -26.35
+       ],
+       [
+        -173.57,
+        -13.57
+       ],
+       [
+        -174.83,
+        -10.98
+       ],
+       [
+        162.75,
+        -10.54
+       ],
+       [
+        158.83,
+        -12.77
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 3.82
+    },
+    {
+     "id": "dining-coffee-table",
+     "category": "coffee_table",
+     "yaw": 168.03,
+     "pitch": -30.29,
+     "span_deg": [
+      24.4,
+      17.2
+     ],
+     "outlines": [
+      [
+       [
+        155.84,
+        -36.35
+       ],
+       [
+        -179.77,
+        -38.88
+       ],
+       [
+        -179.77,
+        -31.17
+       ],
+       [
+        -179.84,
+        -22.6
+       ],
+       [
+        162.84,
+        -21.69
+       ],
+       [
+        155.84,
+        -28.89
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 2.84
+    },
+    {
+     "id": "dining-dining-table",
+     "category": "dining_table",
+     "yaw": 99.74,
+     "pitch": -36.01,
+     "span_deg": [
+      31.4,
+      38.6
+     ],
+     "outlines": [
+      [
+       [
+        84.04,
+        -55.3
+       ],
+       [
+        115.43,
+        -52.67
+       ],
+       [
+        115.43,
+        -34.54
+       ],
+       [
+        100.8,
+        -16.72
+       ],
+       [
+        87.6,
+        -16.99
+       ],
+       [
+        84.04,
+        -37.17
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 2.29
+    },
+    {
+     "id": "dining-chair",
+     "category": "chair",
+     "yaw": 78.7,
+     "pitch": -39.33,
+     "span_deg": [
+      67.3,
+      41.5
+     ],
+     "outlines": [
+      [
+       [
+        63.56,
+        -52.08
+       ],
+       [
+        90.25,
+        -55.1
+       ],
+       [
+        109.9,
+        -53.43
+       ],
+       [
+        130.82,
+        -47.33
+       ],
+       [
+        130.82,
+        -25.39
+       ],
+       [
+        109.43,
+        -13.58
+       ],
+       [
+        78.52,
+        -14.09
+       ],
+       [
+        63.56,
+        -29.32
+       ]
+      ]
+     ],
+     "count": 6,
+     "distance_m": 2.25
+    }
+   ]
+  },
+  "kitchen": {
+   "pano_sha256": "3c364574d761d6cf1283b4dca9ee02c26aed71a02add246b2d284a28deea577e",
+   "asset": "kitchen",
+   "heading": -35.5,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": [
+    {
+     "id": "kitchen-coffee-table",
+     "category": "coffee_table",
+     "yaw": 138.7,
+     "pitch": -18.42,
+     "span_deg": [
+      16.6,
+      9.8
+     ],
+     "outlines": [
+      [
+       [
+        130.41,
+        -20.18
+       ],
+       [
+        139.42,
+        -23.3
+       ],
+       [
+        146.99,
+        -19.83
+       ],
+       [
+        146.99,
+        -15.13
+       ],
+       [
+        138.3,
+        -13.54
+       ],
+       [
+        130.41,
+        -15.41
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 4.57
+    },
+    {
+     "id": "kitchen-dining-table",
+     "category": "dining_table",
+     "yaw": 104.54,
+     "pitch": -16.45,
+     "span_deg": [
+      13.2,
+      15.0
+     ],
+     "outlines": [
+      [
+       [
+        97.96,
+        -17.03
+       ],
+       [
+        101.58,
+        -23.96
+       ],
+       [
+        111.12,
+        -22.94
+       ],
+       [
+        111.12,
+        -12.53
+       ],
+       [
+        104.75,
+        -8.93
+       ],
+       [
+        97.96,
+        -9.14
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 4.64
+    },
+    {
+     "id": "kitchen-chair",
+     "category": "chair",
+     "yaw": 98.42,
+     "pitch": -16.66,
+     "span_deg": [
+      23.8,
+      16.9
+     ],
+     "outlines": [
+      [
+       [
+        93.14,
+        -17.21
+       ],
+       [
+        93.51,
+        -19.11
+       ],
+       [
+        93.96,
+        -21.32
+       ],
+       [
+        94.57,
+        -24.25
+       ],
+       [
+        103.39,
+        -23.73
+       ],
+       [
+        109.33,
+        -23.09
+       ],
+       [
+        116.97,
+        -21.93
+       ],
+       [
+        116.97,
+        -9.99
+       ],
+       [
+        109.26,
+        -7.3
+       ],
+       [
+        93.14,
+        -7.72
+       ]
+      ]
+     ],
+     "count": 6,
+     "distance_m": 4.62
+    }
+   ]
+  },
+  "foyer": {
+   "pano_sha256": "459c1ed9ac692a20b38fd2ebb82a8eeed2adeb03bd5d9aff1fb22a2b83e88331",
+   "asset": "foyer",
+   "heading": 96.9,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": [
+    {
+     "id": "foyer-coffee-table",
+     "category": "coffee_table",
+     "yaw": 117.63,
+     "pitch": -28.44,
+     "span_deg": [
+      25.2,
+      17.2
+     ],
+     "outlines": [
+      [
+       [
+        105.04,
+        -28.26
+       ],
+       [
+        111.34,
+        -37.02
+       ],
+       [
+        130.22,
+        -31.73
+       ],
+       [
+        130.22,
+        -24.88
+       ],
+       [
+        120.17,
+        -19.85
+       ],
+       [
+        105.04,
+        -21.96
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 3.05
+    },
+    {
+     "id": "foyer-dining-table",
+     "category": "dining_table",
+     "yaw": 74.23,
+     "pitch": -18.27,
+     "span_deg": [
+      15.0,
+      17.1
+     ],
+     "outlines": [
+      [
+       [
+        66.73,
+        -25.47
+       ],
+       [
+        77.43,
+        -26.84
+       ],
+       [
+        81.73,
+        -18.5
+       ],
+       [
+        81.73,
+        -9.97
+       ],
+       [
+        74.33,
+        -9.7
+       ],
+       [
+        66.73,
+        -14.04
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 4.22
+    },
+    {
+     "id": "foyer-chair",
+     "category": "chair",
+     "yaw": 81.07,
+     "pitch": -18.68,
+     "span_deg": [
+      26.7,
+      19.3
+     ],
+     "outlines": [
+      [
+       [
+        60.32,
+        -24.15
+       ],
+       [
+        68.73,
+        -25.68
+       ],
+       [
+        75.39,
+        -26.54
+       ],
+       [
+        85.43,
+        -27.22
+       ],
+       [
+        86.08,
+        -23.79
+       ],
+       [
+        86.11,
+        -23.63
+       ],
+       [
+        86.6,
+        -20.96
+       ],
+       [
+        86.99,
+        -18.71
+       ],
+       [
+        86.99,
+        -8.43
+       ],
+       [
+        69.46,
+        -7.91
+       ],
+       [
+        60.32,
+        -11.1
+       ]
+      ]
+     ],
+     "count": 6,
+     "distance_m": 4.2
+    }
+   ]
+  },
+  "balcony": {
+   "pano_sha256": "c548140b707406830e1407f93caf88162c6412f014f233a7d0f8989d1b7b7dc0",
+   "asset": "balcony",
+   "heading": 0.0,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": []
+  },
+  "corridor": {
+   "pano_sha256": "85aa25a6b5d19e6b9705da8a33b179a940b942e5ac6c4c686bf2e2c8ff69db17",
+   "asset": "corridor",
+   "heading": 0.0,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": [
+    {
+     "id": "corridor-coffee-table",
+     "category": "coffee_table",
+     "yaw": -105.78,
+     "pitch": -23.66,
+     "span_deg": [
+      19.1,
+      12.8
+     ],
+     "outlines": [
+      [
+       [
+        -115.33,
+        -27.84
+       ],
+       [
+        -98.25,
+        -30.04
+       ],
+       [
+        -96.23,
+        -23.63
+       ],
+       [
+        -96.23,
+        -18.16
+       ],
+       [
+        -109.62,
+        -17.27
+       ],
+       [
+        -115.33,
+        -21.61
+       ]
+      ]
+     ],
+     "count": 1,
+     "distance_m": 3.58
+    }
+   ]
+  },
+  "master": {
+   "pano_sha256": "8f18de5f8537190a26e07db50838ad59f0a5dc435cacb2ef55450dbcbc020866",
+   "asset": "master",
+   "heading": 54.6,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": []
+  },
+  "ensuite": {
+   "pano_sha256": "fa1a412975b5265320148f86778d987d6a043c8d28b105916d24fa4de8356481",
+   "asset": "ensuite",
+   "heading": -23.2,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": []
+  },
+  "mamad": {
+   "pano_sha256": "5d4bf986fd76052f3af98858c2a2128b2230c61bb4766026e0534964825f021a",
+   "asset": "mamad",
+   "heading": 90.0,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": []
+  },
+  "bath": {
+   "pano_sha256": "fcbd3759152708455f78dfb7a2edfbb3381bdfc69c230fa393a08f9b18780cf6",
+   "asset": "bath",
+   "heading": 53.1,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": []
+  },
+  "bedroom": {
+   "pano_sha256": "b7d2e982eadd063f1c6e066644e081c2db0e5ec0aec9a1764740400357f329e1",
+   "asset": "bedroom",
+   "heading": 90.0,
+   "scanned_on": "2026-11-18",
+   "usd": 0,
+   "markers": []
+  }
+ }
+}

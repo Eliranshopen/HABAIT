@@ -1,11 +1,11 @@
 # shots-baseline/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Screenshots of the check against the unchanged baseline build (before the button).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 1 files here · 0 subfolders · 1 files / 736 B in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

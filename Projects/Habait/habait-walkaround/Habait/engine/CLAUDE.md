@@ -1,12 +1,12 @@
 # engine/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Lane A, the engine and cli.py: takes a project's files (sales-plan PDF, later DXF/IFC) and produces plan.json, units.json, clay scene and panoramas that the other lanes consume.
 
-## What's here (2026-11-05)
-5 files here · 12 subfolders · 1611 files / 965.0 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+5 files here · 12 subfolders · 1611 files / 967.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
@@ -19,13 +19,13 @@ Lane A, the engine and cli.py: takes a project's files (sales-plan PDF, later DX
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `_local/` | [`_local/CLAUDE.md`](_local/CLAUDE.md) | 1530 (963.0 MB) |
+| `_local/` | [`_local/CLAUDE.md`](_local/CLAUDE.md) | 1530 (965.0 MB) |
 | `bench/` | [`bench/CLAUDE.md`](bench/CLAUDE.md) | 10 (89.5 KB) |
 | `correct/` | [`correct/CLAUDE.md`](correct/CLAUDE.md) | 10 (206.7 KB) |
 | `docs/` | [`docs/CLAUDE.md`](docs/CLAUDE.md) | 5 (109.4 KB) |
 | `experiments/` | [`experiments/CLAUDE.md`](experiments/CLAUDE.md) | 6 (116.6 KB) |
 | `fixtures/` | [`fixtures/CLAUDE.md`](fixtures/CLAUDE.md) | 2 (9.1 KB) |
-| `gates/` | [`gates/CLAUDE.md`](gates/CLAUDE.md) | 7 (855.0 KB) |
+| `gates/` | [`gates/CLAUDE.md`](gates/CLAUDE.md) | 7 (858.3 KB) |
 | `intake/` | [`intake/CLAUDE.md`](intake/CLAUDE.md) | 18 (444.3 KB) |
 | `schema/` | [`schema/CLAUDE.md`](schema/CLAUDE.md) | 1 (14.9 KB) |
 | `stages/` | [`stages/CLAUDE.md`](stages/CLAUDE.md) | 9 (78.9 KB) |

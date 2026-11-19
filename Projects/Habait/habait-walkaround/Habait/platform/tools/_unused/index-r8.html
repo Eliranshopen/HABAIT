@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A1A28">
+<title>Rainbow תל אביב · Habait</title>
+<meta name="description" content="Rainbow תל אביב — מגדל מגורים על קו הים. טיסה סביב המגדל, בחירת דירה מתוך הטיסה וכניסה פנימה. הדמיה.">
+<link rel="icon" type="image/svg+xml" href="brand/habait-mark.svg">
+<link rel="apple-touch-icon" href="brand/habait-touch-180.png">
+<!-- the LCP is the hero poster (frame 0 of the film loop); the film itself starts after the page has loaded (js/home.js) -->
+<link rel="preload" as="image" media="(orientation: landscape), (min-aspect-ratio: 4/5)" href="fixtures/rainbow/landing/hero-poster-1920.jpg" imagesrcset="fixtures/rainbow/landing/hero-poster-960.jpg 960w, fixtures/rainbow/landing/hero-poster-1920.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(max-aspect-ratio: 4/5)" href="fixtures/rainbow/landing/hero-poster-portrait.jpg" fetchpriority="high">
+<link rel="preload" href="fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/frank-ruhl-libre-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/rainbow-landing.css">
+<script>
+  // ?theme=dark|light preview (unchanged from the previous home page); read from the URL, never stored
+  (function () { var t = new URLSearchParams(location.search).get('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; })();
+</script>
+</head>
+<!--
+  The habait-flow root = the dedicated Rainbow landing page (plan development/plans/2026-11-08-rainbow-landing.md, Eliran 2026-11-08:
+  «דף נחיתה ייעודי לפרויקט RAINBOW, ששם ישר יהיה סרטון של כל הבניין מבחוץ»). Replaces the generic one-card projects page; projects.json
+  lists one project. Every fact printed comes from project.json, apartment.json, the sales-plan meta or the place labels on render THE-1.
+  Disclosure (root §6): our own film and pictures carry «הדמיה · AI-generated»; the four project renders carry «הדמיה» / «Render».
+-->
+<body class="hb-base rl rl-b">
+<a class="rl-skip" href="#main" data-t="skip">דילוג לתוכן</a>
+<header class="rl-top" id="top">
+  <div class="rl-top__in">
+    <a class="rl-brand" href="./" aria-label="Habait"><img class="rl-brand__logo" src="brand/habait-wordmark-sand-small.svg" alt="Habait" width="131" height="68"></a>
+    <nav class="rl-top__nav" aria-label="ניווט" data-t-aria="nav">
+      <a class="rl-top__link" href="#place" data-t="nav.place">המיקום</a>
+      <a class="rl-top__link" href="#experience" data-t="nav.experience">החוויה</a>
+      <button class="rl-lang" id="langToggle" type="button" aria-label="English">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 1. hero: the exterior orbit film (AI: Kling v2v + Topaz Starlight, board exterior-film), poster first -->
+  <section class="rl-hero" id="hero" aria-labelledby="heroTitle">
+    <div class="rl-hero__media">
+      <picture>
+        <source media="(max-aspect-ratio: 4/5)" srcset="fixtures/rainbow/landing/hero-poster-portrait.jpg" width="720" height="1080">
+        <img class="rl-hero__poster" id="heroPoster" src="fixtures/rainbow/landing/hero-poster-1920.jpg"
+          srcset="fixtures/rainbow/landing/hero-poster-960.jpg 960w, fixtures/rainbow/landing/hero-poster-1920.jpg 1920w" sizes="(min-width: 960px) 56vw, 100vw"
+          width="1920" height="1080" alt="" fetchpriority="high" decoding="async">
+      </picture>
+      <video class="rl-hero__video" id="heroVideo" muted playsinline loop preload="metadata" aria-hidden="true" tabindex="-1"
+        data-src-1080="fixtures/rainbow/landing/hero-1080.mp4" data-src-720="fixtures/rainbow/landing/hero-720.mp4" data-src-portrait="fixtures/rainbow/landing/hero-portrait.mp4"></video>
+      <span class="rl-hero__scrim" aria-hidden="true"></span>
+      <span class="rl-hero__cap" aria-hidden="true" lang="en">RAINBOW</span>
+      <div class="rl-hero__corner">
+        <span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span>
+        <button class="rl-play" id="heroToggle" type="button" aria-label="הפעלת הסרטון" data-state="paused">
+          <svg class="rl-play__pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2" fill="currentColor"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2" fill="currentColor"/></svg>
+          <svg class="rl-play__play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a.8.8 0 0 0 1.2.7l10.4-6.5a.8.8 0 0 0 0-1.4L9.2 4.8A.8.8 0 0 0 8 5.5Z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="rl-hero__body">
+      <p class="rl-kick" data-t="hero.eyebrow">תל אביב · על קו הים</p>
+      <h1 class="rl-hero__title" id="heroTitle"><span class="hb-sr" lang="en">RAINBOW Tel Aviv · </span><span class="rl-hero__l1" data-t="hero.l1">גבוה מעל הים.</span> <span class="rl-hero__l2" data-t="hero.l2">עוד לפני שהוא קם.</span></h1>
+      <p class="rl-hero__promise" data-t="hero.promise">טסים סביב המגדל, ומשם ישר אל תוך הדירה. הכול בהדמיה.</p>
+      <div class="rl-hero__ctas">
+        <a class="rl-btn rl-btn--accent" id="heroCta" href="#experience" data-route="tour-project"><span data-t="cta.tour">לסיור בפרויקט</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- round 7 (2026-11-09, Eliran: «שלא יראה כמו דף נחיתה פשוט של AI אלא משהו מרשים»): a scroll story in chapters after the film.
+       Static by default (no JS / reduced motion = every word and picture visible in a plain editorial layout); js/landing-motion.js adds
+       the motion on top (GSAP + ScrollTrigger; Lenis on desktop only). Facts and badges are unchanged from the earlier rounds. -->
+
+  <!-- 2. statement: the promise, word by word on scroll -->
+  <section class="rl-statement" id="statement" aria-labelledby="statementText">
+    <div class="rl-wrap">
+      <p class="rl-statement__text" id="statementText" data-words data-t="statement">בין נמל תל אביב למרינה, מול הים הפתוח. את המגדל הזה כבר אפשר לראות מבפנים, בהדמיה.</p>
+    </div>
+  </section>
+
+  <!-- 3. chapter 01 · location: render THE-1 (Eliran's) and the place names printed on it; a split screen pinned on desktop -->
+  <section class="rl-chapter rl-place" id="place" aria-labelledby="placeTitle">
+    <div class="rl-place__grid">
+      <figure class="rl-fig rl-place__fig">
+        <div class="rl-place__zoom" data-zoom>
+          <picture>
+            <source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-1-640.webp 640w, fixtures/rainbow/landing/renders/the-1-1056.webp 1056w" sizes="(min-width: 960px) 62vw, 100vw">
+            <img src="fixtures/rainbow/landing/renders/the-1-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-1-640.jpg 640w, fixtures/rainbow/landing/renders/the-1-1056.jpg 1056w" sizes="(min-width: 960px) 62vw, 100vw"
+              width="1056" height="696" loading="lazy" decoding="async" alt="המגדל והבניין הנמוך לצידו מול הים, עם סימון נמל תל אביב, פארק רידינג, המרינה, חוף הים וכוכב הצפון" data-t-alt="alt.the1">
+          </picture>
+        </div>
+        <span class="hb-ai-badge rl-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+      </figure>
+      <div class="rl-place__panel">
+        <p class="rl-index"><span class="rl-index__n">01</span><span data-t="place.eyebrow">המיקום</span></p>
+        <h2 class="rl-h2" id="placeTitle" data-t="place.title" data-reveal>בין הנמל למרינה</h2>
+        <p class="rl-lead" data-t="place.lead" data-reveal>מה מקיף את המגדל, כפי שמסומן בהדמיה:</p>
+        <ol class="rl-places" aria-label="מקומות בסביבה" data-t-aria="place.list" data-places>
+          <li><span data-t="place.port">נמל תל אביב</span></li>
+          <li><span data-t="place.reading">פארק רידינג</span></li>
+          <li><span data-t="place.marina">המרינה</span></li>
+          <li><span data-t="place.beach">חוף הים</span></li>
+          <li><span data-t="place.kochav">כוכב הצפון</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. chapter 02 · architecture: renders THE-2 / THE-3 / THE-6 — a horizontal gallery pinned on desktop, a plain stack elsewhere -->
+  <section class="rl-chapter rl-arch" id="arch" aria-labelledby="archTitle">
+    <div class="rl-arch__pin">
+      <div class="rl-wrap rl-arch__head">
+        <p class="rl-index"><span class="rl-index__n">02</span><span data-t="arch.eyebrow">האדריכלות</span></p>
+        <h2 class="rl-h2" id="archTitle" data-t="arch.title" data-reveal>מרפסות כמו גלים</h2>
+      </div>
+      <div class="rl-arch__viewport">
+        <div class="rl-arch__track" data-track>
+          <figure class="rl-fig rl-arch__item rl-arch__item--a">
+            <div class="rl-arch__media" data-drift><picture>
+            <source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-2-640.webp 640w, fixtures/rainbow/landing/renders/the-2-1056.webp 1056w" sizes="(min-width: 960px) 60vw, 100vw">
+            <img src="fixtures/rainbow/landing/renders/the-2-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-2-640.jpg 640w, fixtures/rainbow/landing/renders/the-2-1056.jpg 1056w" sizes="(min-width: 960px) 60vw, 100vw"
+              width="1056" height="696" loading="lazy" decoding="async" alt="המגדל בשעת ערב, מול הים" data-t-alt="alt.the2">
+          </picture></div>
+            <figcaption class="rl-cap"><span class="rl-cap__n">I</span><span data-t="cap.the2">המגדל בשעת ערב</span></figcaption>
+            <span class="hb-ai-badge rl-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+          </figure>
+          <figure class="rl-fig rl-arch__item rl-arch__item--b">
+            <div class="rl-arch__media" data-drift><picture>
+            <source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-3-640.webp 640w, fixtures/rainbow/landing/renders/the-3-1056.webp 1056w" sizes="(min-width: 960px) 44vw, 100vw">
+            <img src="fixtures/rainbow/landing/renders/the-3-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-3-640.jpg 640w, fixtures/rainbow/landing/renders/the-3-1056.jpg 1056w" sizes="(min-width: 960px) 44vw, 100vw"
+              width="1056" height="696" loading="lazy" decoding="async" alt="הבניינים הנמוכים מהרחוב, והמגדל מאחוריהם" data-t-alt="alt.the3">
+          </picture></div>
+            <figcaption class="rl-cap"><span class="rl-cap__n">II</span><span data-t="cap.the3">מהרחוב</span></figcaption>
+            <span class="hb-ai-badge rl-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+          </figure>
+          <figure class="rl-fig rl-arch__item rl-arch__item--c">
+            <div class="rl-arch__media" data-drift><picture>
+            <source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-6-640.webp 640w, fixtures/rainbow/landing/renders/the-6-1056.webp 1056w" sizes="(min-width: 960px) 44vw, 100vw">
+            <img src="fixtures/rainbow/landing/renders/the-6-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-6-640.jpg 640w, fixtures/rainbow/landing/renders/the-6-1056.jpg 1056w" sizes="(min-width: 960px) 44vw, 100vw"
+              width="1056" height="696" loading="lazy" decoding="async" alt="מבט על הגגות" data-t-alt="alt.the6">
+          </picture></div>
+            <figcaption class="rl-cap"><span class="rl-cap__n">III</span><span data-t="cap.the6">מבט על הגגות</span></figcaption>
+            <span class="hb-ai-badge rl-badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. chapter 03 · the experience: the steps of the ONE flow behind «לסיור בפרויקט», in order. Desktop with motion: a sticky frame
+       whose picture follows the step in view; elsewhere each step carries its own picture. Not links: the one action is the CTA. -->
+  <section class="rl-chapter rl-steps" id="experience" aria-labelledby="stepsTitle">
+    <div class="rl-wrap">
+      <div class="rl-steps__head">
+        <p class="rl-index"><span class="rl-index__n">03</span><span data-t="steps.eyebrow">החוויה</span></p>
+        <h2 class="rl-h2" id="stepsTitle" data-t="steps.title" data-reveal>מהשמיים, ישר לסלון</h2>
+        <p class="rl-lead" data-t="steps.lead" data-reveal>סיור אחד, ארבע עצירות.</p>
+      </div>
+      <div class="rl-steps__grid">
+        <div class="rl-steps__frame" aria-hidden="true">
+          <div data-layer="0" class="rl-card__media rl-steps__layer is-on"><img src="fixtures/rainbow/landing/hero-poster-960.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+          <div data-layer="1" class="rl-card__media rl-steps__layer"><img src="fixtures/rainbow/landing/facade.jpg" width="1080" height="608" loading="lazy" decoding="async" alt=""><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+          <div data-layer="2" class="rl-card__media rl-steps__layer"><img src="fixtures/rainbow/landing/interior-entrance.jpg" width="1080" height="756" loading="lazy" decoding="async" alt=""><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+          <div data-layer="3" class="rl-card__media rl-card__media--pair rl-steps__layer"><img src="fixtures/rainbow/landing/finish-parquet.jpg" width="540" height="810" loading="lazy" decoding="async" alt=""><img src="fixtures/rainbow/landing/finish-marble.jpg" width="540" height="810" loading="lazy" decoding="async" alt=""><span class="rl-pair__tag rl-pair__tag--a" data-t="finish.parquet">פרקט</span><span class="rl-pair__tag rl-pair__tag--b" data-t="finish.marble">שיש</span><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+        </div>
+        <ol class="rl-steps__list">
+          <li class="rl-step" data-step="0">
+            <div class="rl-card__media rl-step__media"><img src="fixtures/rainbow/landing/hero-poster-960.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+            <span class="rl-step__n" aria-hidden="true">01</span>
+            <h3 class="rl-h3" data-t="step1.title">טיסה סביב המגדל</h3>
+            <p data-t="step1.text">המגדל והסביבה מהאוויר, מכל הכיוונים.</p>
+          </li>
+          <li class="rl-step" data-step="1">
+            <div class="rl-card__media rl-step__media"><img src="fixtures/rainbow/landing/facade.jpg" width="1080" height="608" loading="lazy" decoding="async" alt=""><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+            <span class="rl-step__n" aria-hidden="true">02</span>
+            <h3 class="rl-h3" data-t="step2.title">עצירה מול החזית</h3>
+            <p data-t="step2.text">הטיסה נעצרת, וכל הדירות מסומנות על המגדל. בוחרים אחת.</p>
+          </li>
+          <li class="rl-step" data-step="2">
+            <div class="rl-card__media rl-step__media"><img src="fixtures/rainbow/landing/interior-entrance.jpg" width="1080" height="756" loading="lazy" decoding="async" alt=""><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+            <span class="rl-step__n" aria-hidden="true">03</span>
+            <h3 class="rl-h3" data-t="step3.title">בתוך הדירה</h3>
+            <p data-t="step3.text">סיור 360° בחדרים, עם תכנית ותלת־ממד.</p>
+          </li>
+          <li class="rl-step" data-step="3">
+            <div class="rl-card__media rl-card__media--pair rl-step__media"><img src="fixtures/rainbow/landing/finish-parquet.jpg" width="540" height="810" loading="lazy" decoding="async" alt=""><img src="fixtures/rainbow/landing/finish-marble.jpg" width="540" height="810" loading="lazy" decoding="async" alt=""><span class="rl-pair__tag rl-pair__tag--a" data-t="finish.parquet">פרקט</span><span class="rl-pair__tag rl-pair__tag--b" data-t="finish.marble">שיש</span><span class="hb-ai-badge rl-badge" data-badge="ai">הדמיה · <bdi>AI-generated</bdi></span></div>
+            <span class="rl-step__n" aria-hidden="true">04</span>
+            <h3 class="rl-h3" data-t="step4.title">פרקט או שיש?</h3>
+            <p data-t="step4.text">מחליפים ריצוף וגימורים, והדירה משתנה מול העיניים.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. closing band: the poster frame opens from an inset window to full bleed as it scrolls in (scrubbed); the one CTA again -->
+  <section class="rl-close" aria-labelledby="closeTitle" data-close>
+    <div class="rl-close__media" aria-hidden="true"><picture><source type="image/webp" srcset="fixtures/rainbow/landing/renders/the-2-640.webp 640w, fixtures/rainbow/landing/renders/the-2-1056.webp 1056w" sizes="100vw"><img src="fixtures/rainbow/landing/renders/the-2-1056.jpg" srcset="fixtures/rainbow/landing/renders/the-2-640.jpg 640w, fixtures/rainbow/landing/renders/the-2-1056.jpg 1056w" sizes="100vw" width="1056" height="696" loading="lazy" decoding="async" alt=""></picture></div>
+    <span class="hb-ai-badge rl-badge rl-close__badge" data-badge="render"><span data-t="badge.render">הדמיה</span></span>
+    <div class="rl-wrap rl-close__in">
+      <p class="rl-word rl-word--sm" aria-hidden="true"><span lang="en">RAINBOW</span></p>
+      <h2 class="rl-close__title" id="closeTitle" data-t="close.title">הטיסה מתחילה כאן.</h2>
+      <a class="rl-btn rl-btn--accent" id="closeCta" href="#hero" data-route="tour-project"><span data-t="cta.tour">לסיור בפרויקט</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </section>
+</main>
+
+<footer class="rl-foot">
+  <div class="rl-wrap">
+    <div class="rl-foot__row">
+      <a class="rl-brand rl-brand--foot" href="./" aria-label="Habait"><img class="rl-foot__logo" src="brand/habait-logo-sand.svg" data-logo-he="brand/habait-logo-sand.svg" data-logo-en="brand/habait-wordmark-sand.svg" alt="Habait — הבית של כל הבתים" data-alt-he="Habait — הבית של כל הבתים" data-alt-en="Habait" width="131" height="81"></a>
+      <p class="rl-foot__dev"><span data-t="foot.dev">יזם:</span> <span id="devName">ישראל קנדה</span></p>
+    </div>
+    <!-- the legal wording is project.json's disclaimer, unchanged (§6): one line that opens the full text in place -->
+    <details class="hb-legal rl-legal" id="legal">
+      <summary><span class="hb-legal__line" id="legalLine"></span><span class="hb-legal__more"><span class="hb-legal__open" data-t="legal.more">לפרטים</span><span class="hb-legal__close" data-t="legal.less">סגירה</span></span></summary>
+      <div class="hb-legal__full" id="legalFull"></div>
+    </details>
+    <!-- accessibility-statement link SLOT (root CLAUDE.md §6): its text and target are Eliran's. Empty for buyers until he writes them. -->
+    <p class="rl-foot__a11y" id="a11ySlot"></p>
+    <p class="hb-small index-foot" id="devFoot" hidden>Habait · v0</p>
+  </div>
+</footer>
+
+<!-- motion (round 7): pinned vendor copies, self-hosted (js/vendor/VENDOR.json: versions, npm integrity, sha256, licences); classic deferred
+     scripts run before the deferred modules, in document order. No JS / reduced motion = the static page. -->
+<script defer src="js/vendor/gsap-3.13.0.min.js"></script>
+<script defer src="js/vendor/ScrollTrigger-3.13.0.min.js"></script>
+<script defer src="js/vendor/SplitText-3.13.0.min.js"></script>
+<script defer src="js/vendor/CustomEase-3.13.0.min.js"></script>
+<script defer src="js/vendor/lenis-1.3.4.min.js"></script>
+<script type="module" src="js/home.js"></script>
+<script type="module" src="js/landing-motion.js"></script>
+</body>
+</html>

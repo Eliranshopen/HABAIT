@@ -8,7 +8,7 @@
    POST { id, traceCorrection: text } → sends the trace back with the developer's correction */
 import crypto from 'node:crypto';
 import { json, userId, pdir, isPid, readJson, writeJson, files, reindexFiles, projectIndex, projectIndexAdd, opsMark, spent, jobPath, enqueue, logLine } from './_studio.mjs';
-import { dispatch, needsDispatch, stageOf, stopFinished } from './_dispatch.mjs';
+import { dispatch, needsDispatch, stageOf, stopFinished, buildApproved, BUILD_WAIT_HE } from './_dispatch.mjs';
 
 // the queue worker (fork E, 2026-11-05, plan 2026-11-04-sandbox-worker): the same request that queues a job boots its Vercel
 // Sandbox. A failure here (no snapshot yet, the plan's sandbox quota paused, an SDK error) leaves the job queued with a log line;
@@ -16,10 +16,19 @@ import { dispatch, needsDispatch, stageOf, stopFinished } from './_dispatch.mjs'
 async function startWorker(uid, pid, job, stage) {
   try { return { ok: true, sandbox: await dispatch(job, jobPath(uid, pid), { stage, store: { readJson, writeJson }, log: logLine }) }; }
   catch (e) {
+    if (e?.code === 'build_approval') { await waitForHabait(uid, pid, job); return { ok: false, reason: 'build_approval', message: BUILD_WAIT_HE }; }
     logLine(job, `השרת לא הופעל (${String(e?.message || e).slice(0, 90)}) — העבודה ממתינה בתור`);
     await writeJson(jobPath(uid, pid), job).catch(() => {});
     return { ok: false, error: String(e?.message || e).slice(0, 300) };
   }
+}
+
+// the build lock (parity row 41): a build that Habait has not approved waits, with no queue pointer and no sandbox; Habait's admin
+// CLI (tour360/tools/approve-build.mjs) writes the approval and puts the job back in the queue
+async function waitForHabait(uid, pid, job) {
+  if (job.needs?.type !== 'build_approval') logLine(job, BUILD_WAIT_HE);
+  job.state = 'waiting'; job.stage = 'build_approval'; job.needs = { type: 'build_approval', message: BUILD_WAIT_HE };
+  await writeJson(jobPath(uid, pid), job);
 }
 
 export const STEPS = [
@@ -157,6 +166,11 @@ export async function POST(request) {
       }
       job.needs = null;
       job.state = 'queued';
+      if (body.approveTrace && job.no_paid !== true && !(await buildApproved({ readJson }, uid, body.id))) {
+        await writeJson(f, project);
+        await waitForHabait(uid, body.id, job);   // the trace is approved and kept; the build itself waits for Habait (no queue, no sandbox)
+        return json(200, { ok: true, job, waiting: 'build_approval', message: BUILD_WAIT_HE });
+      }
       await enqueue(uid, body.id, job);
       await writeJson(f, project);
       const worker = await startWorker(uid, body.id, job, body.approveTrace ? 'build' : 'trace');

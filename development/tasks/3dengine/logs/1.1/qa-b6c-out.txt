@@ -1,0 +1,10 @@
+--- repeat 1
+wrong look returned: vector_paths 395 vs true 400 content vector candidates 1 vs 1
+record on disk for the PDF hash (file is quiet and has that exact hash: true ): vector_paths 395
+ask again, quiet file: vector_paths 395 candidates 1 → STILL THE WRONG LOOK (served from the record)
+start_simulation on the quiet, intact file: job created true apartment p1
+--- repeat 2
+wrong look returned: vector_paths 394 vs true 400 content vector candidates 1 vs 1
+record on disk for the PDF hash (file is quiet and has that exact hash: true ): vector_paths 394
+ask again, quiet file: vector_paths 394 candidates 1 → STILL THE WRONG LOOK (served from the record)
+start_simulation on the quiet, intact file: job created true apartment p1

@@ -1,9 +1,9 @@
 # .claude/skills/ — harness skills
-<!-- last-updated: 2026-11-04 -->
+<!-- last-updated: 2026-11-10 -->
 
 ## What's here
-Every `/skill` the main session can invoke — one folder per skill, each with its own `SKILL.md` (the contract) and a generated `CLAUDE.md` that only routes to it (root §8.6; its sub-folders `references/`, `agents/`, `evals/`… carry one too). **36 skill dirs** on disk (`ls -d .claude/skills/*/ | wc -l`, minus any dir without a `SKILL.md`). **15 are explicit-only**
-(`disable-model-invocation: true`, invoked as `/name`) and **21 may auto-trigger** (`plan-to-tasks` and `sync-context` became explicit-only 2026-11-04, plan `development/plans/2026-11-04-workflow-cleanup.md`;
+Every `/skill` the main session can invoke — one folder per skill, each with its own `SKILL.md` (the contract) and a generated `CLAUDE.md` that only routes to it (root §8.6; its sub-folders `references/`, `agents/`, `evals/`… carry one too). **47 skill dirs** on disk (`ls -d .claude/skills/*/ | wc -l`, minus any dir without a `SKILL.md`). **15 are explicit-only**
+(`disable-model-invocation: true`, invoked as `/name`) and **32 may auto-trigger** (11 web-motion / copy / reengineering skills installed 2026-11-09 on Eliran's word with `npx skills add … -y --copy`, group W below — `memory/project/2026-11-09-ui-skills-installed.md`; `plan-to-tasks` and `sync-context` became explicit-only 2026-11-04, plan `development/plans/2026-11-04-workflow-cleanup.md`;
 `improve-animations` became explicit-only and `frontend-design` was archived 2026-11-04, plan `development/plans/2026-11-04-owed-cleanup.md`). 22 more were moved to `C:\RnD\archive\skills\` on 2026-11-03 (plan `development/plans/2026-11-03-harness-focus.md`; restore = move back). The register — provenance, pin status and invocation mode per skill — is [`docs/skill-taxonomy.md`](../../docs/skill-taxonomy.md); this is the map.
 
 ## The groups (a taxonomy, not a folder layout — no dir moves)
@@ -13,6 +13,7 @@ Every `/skill` the main session can invoke — one folder per skill, each with i
 | D · Design authority (9) | `shadcn` · `ui-ux-pro-max` · `web-design-guidelines` · `marketing-psychology` · `refero-design` · `hebrew-rtl-best-practices` · `office-ui-principles` · `ui-craft-dashboard` · `playground` | real dirs, never symlinks (D6); `web-design-guidelines` pinned to a vendored dated copy; the last four explicit-only except `hebrew-rtl-best-practices`; `frontend-design` is served by the installed plugin `frontend-design:frontend-design` (repo copy archived 2026-11-04, OWED-007) |
 | F · Animation & motion (11) | `animate` · `animation-vocabulary` · `apple-design` · `ask-sonner` · `emil-design-eng` · `find-animation-opportunities` · `improve-animations` · `pick-ui-library` · `prototype` · `review-animations` · `break-ui` | the ordered toolset for motion and UI-polish work — the one ruled line of design precedence; `pick-ui-library`, `prototype`, `review-animations`, `break-ui`, `improve-animations` explicit-only (`improve-animations` writes plan files, 2026-11-04) |
 | V · Video Division (1) | `video-division` | the front door of `video/`; the vendor skills under `video/.claude/skills/` are directory-scoped and not counted here |
+| W · Web motion, copy & reengineering (11) | `find-skills` · `build-awwwards-quality-sites` · `cinematic-scroll-storytelling` · `landing-page-design` · `gsap-scrolltrigger` · `gsap-plugins` · `gsap-timeline` · `copywriting` · `antislop-copywriting` · `reanimate` · `design-system` | installed 2026-11-09 for the Rainbow landing rounds (`--copy`, no junction); all auto-trigger; their rails are in Conventions below |
 | Ungrouped (9) | `grilling` · `improve-codebase-architecture` · `codebase-design` · `domain-modeling` · `mobile-native` · `real-estate-content-production` · `imagegen-frontend-mobile` · `mobile-responsive` · `responsive-design` | `mattpocock/skills` trio (2026-11-03): `improve-codebase-architecture` (explicit-only) uses `codebase-design` and `domain-modeling` (both auto) and hands off to `grilling`. `real-estate-content-production` (auto, `calesthio/generative-media-skills`, 2026-11-03): property-media truth/disclosure/QA; US sources, Habait §6 wins. 2026-11-04 installs: gotchas below |
 | Archived 2026-11-03 (22) + 2026-11-04 (1) | groups A, B, E, `analyze-plan`, `worktree-ops`, `run-eval`, `test-bounded`, `grill-me`, `animate-expo`, `write-swift`; `frontend-design` (2026-11-04, OWED-007: the plugin copy wins) | in `C:\RnD\archive\skills\`, moved not deleted; restore = move back |
 
@@ -24,6 +25,7 @@ Every `/skill` the main session can invoke — one folder per skill, each with i
 5. **Nothing is deleted to hit a ceiling** — relocate with a stub.
 
 ## Conventions / gotchas
+- **Group W rails (2026-11-09):** `landing-page-design`'s inference.sh image generation and `design-system`'s Stitch / `STITCH_API_KEY` path are forbidden (paid, foreign key). `reanimate` clones a reference for MEASUREMENT only — a reference site is inspiration, never a copy (`memory/project/2026-11-09-inspiration-not-copy.md`).
 - Design-skill precedence is **unruled** (D14 — Eliran's open call); the one ruled line is motion → group F. Surface conflicts rather than silently picking.
 - ⛔ **Grep is not a usage count** — common-word names (`ship`, `studio`, `animate`, `prototype`) hit ordinary prose. The 2026-11-03 archive was decided on scope (habait-walkaround + Video), not on usage counts; Eliran delegated the call.
 - MCP servers (`21st`, `refero`, HeyGen, fal) register only in the per-machine `~/.claude.json`, never in the repo; a new server's `mcp__*` tools appear after a session restart.

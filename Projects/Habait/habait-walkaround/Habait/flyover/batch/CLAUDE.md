@@ -1,11 +1,11 @@
 # batch/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Batch rendering of descend clips for every apartment in units.json on Kaggle (README-he.md, batch_units.py, render_cameras.py).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 3 files here · 1 subfolders · 44 files / 60.0 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

@@ -1,0 +1,126 @@
+milestone 1.4 gate: npm run test:stages, the WHOLE tier (five files side by side), after the machine came back from sleep (the long run before it was void: the machine slept for about four hours in the middle, gate-test-stages-long-1-machine-slept.txt). The 1.4 file goes on from the checkpoint of its first run (made 2026-11-18 14:41, 557 s at 100 % load).
+started: 2026-11-18T20:15:27+02:00
+machine load before: 100 %
+
+> habait-3dengine@1.4.0 test:stages
+> node --test "tests/stages/**/*.test.mjs"
+
+✔ 3. the paid path, walked without paying: the vision call is booked before it is sent, carries the key in its header on either route, and a refused call costs nothing (323061.5734ms)
+✖ 1. the 846 PDF from the saved reading, at $0: exit 0, 10 of 10 rooms, every printed dimension within 1 % (0.83 % at most); the measured run again, byte for byte (535834.0401ms)
+✔ 2. the 846 PDF from ONE fresh reading (paid, $0.04 inside a cap of $0.50): PASS, 10 of 10 rooms, every printed dimension within 1 %; asserted from the evidence the run wrote, with no call (154.1774ms)
+✖ 4. the 846 PDF with its true saved reading: the reading passes, its five files are the stage's outputs, and the job stops at the build (534495.9325ms)
+✖ 5. no answer of a tool, no job file and no line of the runner's log holds a name the reading took from the drawing (205.8698ms)
+✔ the fixture: the saved reading of 846 with ONE printed dimension changed by hand, and nothing else (621.2022ms)
+✖ 1. a reading with a printed dimension changed by hand: the job ends in review with TRACE_GATE_FAIL, and the build never starts (534202.4351ms)
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (1659.4243ms)
+ℹ going on from the first run of an earlier invocation (made 2026-11-18T12:41:44.720Z, 557 s): it is not made again
+✖ tests\stages\m1.4.test.mjs (536331.1252ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 4
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 536666.1201
+
+✖ failing tests:
+
+test at tests\stages\m1.2.test.mjs:62:1
+✖ 1. the 846 PDF from the saved reading, at $0: exit 0, 10 of 10 rooms, every printed dimension within 1 % (0.83 % at most); the measured run again, byte for byte (535834.0401ms)
+  AssertionError [ERR_ASSERTION]: exit 1
+  
+  {
+    "exit": 1,
+    "seconds": 535.1,
+    "paid": false,
+    "outDir": "C:/Users/elira/AppData/Local/Temp/m12-home-zsHAPi/run",
+    "logFile": "C:/Users/elira/AppData/Local/Temp/m12-home-zsHAPi/run/auto-trace.log",
+    "outcome": "STEP_FAILED",
+    "result": null,
+    "reading": {
+      "from": "file",
+      "store": null,
+      "readAt": null,
+      "kept": false,
+      "superseded": null,
+      "notKept": null
+    }
+  }
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.2.test.mjs:78:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\stages\m1.3-pass.test.mjs:42:1
+✖ 4. the 846 PDF with its true saved reading: the reading passes, its five files are the stage's outputs, and the job stops at the build (534495.9325ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      code: 'STAGE_FAILED',
+  +   message: 'a step of the reading tool failed'
+  -   message: 'building: stage "building" has no "real" implementation'
+    }
+  
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.3-pass.test.mjs:60:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { code: 'STAGE_FAILED', message: 'a step of the reading tool failed' },
+    expected: { code: 'STAGE_FAILED', message: 'building: stage "building" has no "real" implementation' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\stages\m1.3-pass.test.mjs:114:1
+✖ 5. no answer of a tool, no job file and no line of the runner's log holds a name the reading took from the drawing (205.8698ms)
+  Error: ENOENT: no such file or directory, open 'C:\Users\elira\AppData\Local\Temp\m13p-home-ow6gQB\jobs-temp\eaa9f325bfb6c022\stages\tracing\attempt-1\plan-1\report.json'
+      at Object.readFileSync (node:fs:483:20)
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.3-pass.test.mjs:127:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\m13p-home-ow6gQB\\jobs-temp\\eaa9f325bfb6c022\\stages\\tracing\\attempt-1\\plan-1\\report.json'
+  }
+
+test at tests\stages\m1.3.test.mjs:64:1
+✖ 1. a reading with a printed dimension changed by hand: the job ends in review with TRACE_GATE_FAIL, and the build never starts (534202.4351ms)
+  AssertionError [ERR_ASSERTION]: the job ended failed (STAGE_FAILED: a step of the reading tool failed); it was seen in queued → tracing → failed
+  
+  'failed' !== 'review'
+  
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.3.test.mjs:77:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'failed',
+    expected: 'review',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\stages\m1.4.test.mjs:1:1
+✖ tests\stages\m1.4.test.mjs (536331.1252ms)
+  'test failed'
+machine load after: 60 %

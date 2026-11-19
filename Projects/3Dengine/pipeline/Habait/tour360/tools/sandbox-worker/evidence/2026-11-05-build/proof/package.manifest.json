@@ -1,0 +1,68 @@
+{
+ "$schema": "habait/project-package.v1",
+ "id": "pbuild846",
+ "contract": "Habait/tour360/PROJECT-PACKAGE.md",
+ "steps": {
+  "apartment": {
+   "seconds": 0,
+   "plan": "../in/plan.json",
+   "plan_sha256": "23c55c1f7782eb3f75c74f2cac3c9a609cbc058b1dc9a807167178f5180de9a3",
+   "rooms": 11,
+   "spec": "spec.json",
+   "at": "2026-11-05T13:08:00.179Z"
+  },
+  "cameras": {
+   "seconds": 1,
+   "scenes": 11,
+   "links": 24,
+   "orphans": [],
+   "at": "2026-11-05T13:08:00.902Z"
+  },
+  "prompts": {
+   "seconds": 0,
+   "scenes": 11,
+   "shared_material_block": true,
+   "at": "2026-11-05T13:08:00.904Z"
+  },
+  "furnish": {
+   "seconds": 8,
+   "seconds_tool": 8,
+   "report": "360walkaround/tours/pbuild846/_furnish/report.json",
+   "rooms_furnished": 11,
+   "items": 65,
+   "audit": "PASS",
+   "notes": [],
+   "at": "2026-11-05T13:08:08.948Z"
+  },
+  "scenes": {
+   "seconds": 2,
+   "out": "scenes.json: 11 scenes, 24 links",
+   "at": "2026-11-05T13:34:55.357Z"
+  },
+  "sets": {
+   "seconds": 8,
+   "scenes": 11,
+   "designed": "CG (no --skin)",
+   "at": "2026-11-05T13:35:03.365Z"
+  },
+  "gate": {
+   "seconds": 8,
+   "verdict": "PASS (CG only: the CG set gated against the plan, metric, $0)",
+   "skinned": 0,
+   "at": "2026-11-05T13:39:49.706Z"
+  },
+  "build": {
+   "seconds": 1,
+   "line": "build-tour: pbuild846 → Habait/tour360/dist/pbuild846 · index.html 310 KB · 11 scenes · 11 panos · 11 original · 0 patches · 11 thumbs · 6 fonts · catalog none · markers none · total 1.64 MB",
+   "rings_and_catalog": false,
+   "at": "2026-11-05T13:39:51.067Z"
+  },
+  "package": {
+   "seconds": 8,
+   "files": 101,
+   "mb": 7,
+   "landing_room": "living",
+   "at": "2026-11-05T13:39:59.591Z"
+  }
+ }
+}

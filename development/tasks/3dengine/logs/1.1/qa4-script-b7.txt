@@ -1,0 +1,36 @@
+// race: the upload is swapped for a folder / removed / locked between steps, many start_simulation calls (in-process engine, seeded record)
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, sleep, GOLDEN, engineOf } from './lib.mjs';
+const SHA = sha(fs.readFileSync(GOLDEN));
+const mode = process.argv[2] || 'folder';
+const h = await makeHome({ timeout: 120 });
+const src = `${h.inbox}/s.pdf`; fs.copyFileSync(GOLDEN, src);
+const d = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(d, { recursive: true }); for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${d}/${f}`);
+const eng = await engineOf(h);
+const swapper = `
+const fs=require('fs'); const s=${JSON.stringify(src)}; const k=s+'.keep'; const mode=${JSON.stringify(mode)};
+const gold=fs.readFileSync(${JSON.stringify(GOLDEN)});
+let stop=false; process.on('message',()=>{stop=true});
+(async()=>{ while(!stop){
+  try{ if(mode==='folder'){ fs.renameSync(s,k); fs.mkdirSync(s); const t=Date.now(); while(Date.now()-t<2){} fs.rmdirSync(s); fs.renameSync(k,s);}
+       else if(mode==='remove'){ fs.renameSync(s,k); const t=Date.now(); while(Date.now()-t<2){} fs.renameSync(k,s);}
+       else if(mode==='zero'){ fs.writeFileSync(s,''); const t=Date.now(); while(Date.now()-t<1){} fs.writeFileSync(s,gold);} }catch(e){}
+  await new Promise(r=>setImmediate(r)); } })();`;
+fs.writeFileSync(`${h.home}/swap.cjs`, swapper);
+const sw = spawn(process.execPath, [`${h.home}/swap.cjs`], { stdio: 'ignore', windowsHide: true, detached: false });
+await sleep(500);
+const tally = {}; const msgs = {};
+for (let i = 0; i < 2500; i++) {
+  try { const j = fs.readdirSync(h.jobsDir)[0]; if (j) fs.chmodSync(`${h.jobsDir}/${j}/input/source.pdf`, 0o666); } catch {}
+  fs.rmSync(h.jobsDir, { recursive: true, force: true, maxRetries: 3 });
+  try { eng.handlers.start_simulation({ pdf_path: src }); tally.ok = (tally.ok || 0) + 1; }
+  catch (e) { const k = `${e.constructor.name}:${e.code || ''}`; tally[k] = (tally[k] || 0) + 1; msgs[k] = msgs[k] || String(e.message).replace(/[A-Za-z]:[\\/][^ ']*/g, '<PATH>').slice(0, 130); }
+  // readonly source.pdf in a job blocks rmSync: chmod
+  try { const j = fs.readdirSync(h.jobsDir)[0]; if (j) fs.chmodSync(`${h.jobsDir}/${j}/input/source.pdf`, 0o666); } catch {}
+}
+sw.kill();
+console.log('mode', mode, JSON.stringify(tally));
+for (const [k, m] of Object.entries(msgs)) console.log('  ', k, '|', m);
+await sleep(300); try { fs.chmodSync(`${src}`, 0o666); } catch {}
+cleanup(h);

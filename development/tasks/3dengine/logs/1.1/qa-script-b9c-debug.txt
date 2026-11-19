@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup } from './qa-lib.mjs';
+const pipe = `${SCR}/pipe-slow`;
+const h = await makeHome({ pipelineRoot: pipe, timeout: 60 });
+const H = (await engineOf(h)).handlers;
+for (const mode of ['delete', 'replace']) {
+  const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from(`\n% dbg ${mode}\n`)]); const p = `${h.inbox}/dbg-${mode}.pdf`; fs.writeFileSync(p, b);
+  const t0 = Date.now();
+  const code = mode === 'delete' ? `fs.rmSync(p)` : `fs.writeFileSync(p, fs.readFileSync(${JSON.stringify(SCR + '/pdfs/scan-sheet.pdf')}))`;
+  const c = spawn(process.execPath, ['-e', `const fs=require('fs');const p=${JSON.stringify(p)};setTimeout(()=>{try{${code};console.log('changed at',Date.now()-${t0})}catch(e){console.log('changer error',e.code)}},1500)`], { stdio: ['ignore', 'pipe', 'inherit'] });
+  c.stdout.on('data', (d) => process.stdout.write('  [changer] ' + d));
+  let ans; try { const r = await H.start_simulation({ pdf_path: p }); ans = 'OK ' + r.job_id + ' apt ' + r.job.input.apartment; } catch (e) { ans = e.code + ' ' + e.message; }
+  console.log(mode, 'took', Date.now() - t0, 'ms →', ans, '| upload exists now:', fs.existsSync(p));
+  await new Promise((r) => setTimeout(r, 300));
+}
+cleanup(h);

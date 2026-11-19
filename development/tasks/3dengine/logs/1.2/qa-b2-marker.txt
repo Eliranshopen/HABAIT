@@ -1,0 +1,43 @@
+scenario marker  work C:/Users/elira/AppData/Local/Temp/qa12-marker-N0rpgJ load 100
+=== marker
+{
+ "code": 0,
+ "secs": "255.3",
+ "outcome": "PASS",
+ "markerInStdout": false,
+ "markerInStderr": false,
+ "markerInHuman": false,
+ "hebrewInJsonOutsidePaths": false,
+ "hebrewInHumanOutsidePaths": false,
+ "markerInLogFile": false,
+ "stderr": "",
+ "outcomeDetail": {
+  "exit": 0,
+  "paid": false,
+  "rooms": [
+   10
+  ]
+ }
+}
+outcome: PASS
+seconds: 254.6
+paid run: no
+tool exit code: 0
+plan 1: PASS after 1 round(s)
+  rooms: 10 (room count 10 of 10), fixtures: 18
+  checks: 82, failed: 0
+  printed dimensions: 18 checked, 0 failed, the largest 0.82 %
+  could not read: 10 line(s); judge: skipped
+  plan file: C:/Users/elira/AppData/Local/Temp/qa12-marker-N0rpgJ/out dir/run 1/plan-1/plan.general.json
+spent: $0.0000
+output folder: C:/Users/elira/AppData/Local/Temp/qa12-marker-N0rpgJ/out dir/run 1
+the tool's own output: C:/Users/elira/AppData/Local/Temp/qa12-marker-N0rpgJ/out dir/run 1/auto-trace.log
+ledger exists: false
+procs at end [
+  '44300 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '17448 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '24312 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 540 node qa12-b2.mjs marker',
+  '28576 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 540 node qa12-b2.mjs marker',
+  '37492 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs marker'
+]
+exit 0

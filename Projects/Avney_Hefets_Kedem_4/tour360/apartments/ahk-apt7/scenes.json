@@ -1,0 +1,421 @@
+{
+ "$schema": "tour360/scenes.v1",
+ "apartment": "ahk-apt7",
+ "coordinateNotes": {
+  "u_v": "normalized position on the FULL equirectangular image: u 0->1 left->right (0.5 = image centre = yaw 0 = plan up); v 0.68 (the viewer draws interior door markers on its floor rows)",
+  "plan": "x/y in the pixel space of plan/floorplan.webp = the sales-sheet crop x 0.5 (sheet px = plan_meta.origin_px + cm x scale_px_per_cm)",
+  "hotspots": "u from the plan bearing camera -> the opening between the two rooms (plan.json openings), or the straight way to the target camera in the open plan; computed by tools/tour360/make_apartment.py, not by eye",
+  "heading": "the start yaw = the bearing of plan.json cameras[].look (the view the panorama was composed for)"
+ },
+ "scenes": [
+  {
+   "id": "living",
+   "name": {
+    "he": "סלון",
+    "en": "Living room",
+    "fr": "Séjour"
+   },
+   "zone": {
+    "he": "אזור המגורים",
+    "en": "Living area",
+    "fr": "Espace de vie"
+   },
+   "asset": "living",
+   "plan": {
+    "x": 740.0,
+    "y": 866.0
+   },
+   "heading": -137.8,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "balcony",
+     "u": 0.4219,
+     "v": 0.68,
+     "source": "the opening s-balcony (sliding_door) on the plan; bearing -28.1 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "corridor",
+     "u": 0.7335,
+     "v": 0.68,
+     "source": "the opening p-living-corridor (passage) on the plan; bearing 84.1 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "dining",
+     "u": 0.375,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing -45.0 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "foyer",
+     "u": 0.2717,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing -82.2 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.338,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing -58.3 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "dining",
+   "name": {
+    "he": "פינת אוכל",
+    "en": "Dining area",
+    "fr": "Coin repas"
+   },
+   "zone": {
+    "he": "אזור המגורים",
+    "en": "Living area",
+    "fr": "Espace de vie"
+   },
+   "asset": "dining",
+   "plan": {
+    "x": 545.0,
+    "y": 671.0
+   },
+   "heading": 46.2,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "balcony",
+     "u": 0.5318,
+     "v": 0.68,
+     "source": "the opening s-balcony (sliding_door) on the plan; bearing 11.4 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.303,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing -70.9 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "living",
+     "u": 0.875,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing 135.0 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "kitchen",
+   "name": {
+    "he": "מטבח",
+    "en": "Kitchen",
+    "fr": "Cuisine"
+   },
+   "zone": {
+    "he": "אזור המגורים",
+    "en": "Living area",
+    "fr": "Espace de vie"
+   },
+   "asset": "kitchen",
+   "plan": {
+    "x": 270.0,
+    "y": 576.0
+   },
+   "heading": -35.5,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "dining",
+     "u": 0.803,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing 109.1 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "foyer",
+     "u": 0.9583,
+     "v": 0.68,
+     "source": "the way round: the nearest floor point seen from both cameras (no opening on the plan between them); bearing 165.0 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "living",
+     "u": 0.838,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing 121.7 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "foyer",
+   "name": {
+    "he": "כניסה",
+    "en": "Entrance",
+    "fr": "Entrée"
+   },
+   "zone": {
+    "he": "אזור המגורים",
+    "en": "Living area",
+    "fr": "Espace de vie"
+   },
+   "asset": "foyer",
+   "plan": {
+    "x": 320.0,
+    "y": 808.5
+   },
+   "heading": 96.9,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "kitchen",
+     "u": 0.4901,
+     "v": 0.68,
+     "source": "the way round: the nearest floor point seen from both cameras (no opening on the plan between them); bearing -3.6 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "living",
+     "u": 0.7717,
+     "v": 0.68,
+     "source": "open plan: the straight way to the target camera (no wall between); bearing 97.8 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "balcony",
+   "name": {
+    "he": "מרפסת",
+    "en": "Balcony",
+    "fr": "Balcon"
+   },
+   "zone": {
+    "he": "אזור המגורים",
+    "en": "Living area",
+    "fr": "Espace de vie"
+   },
+   "asset": "balcony",
+   "plan": {
+    "x": 570.0,
+    "y": 431.1
+   },
+   "heading": 0.0,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "dining",
+     "u": 0.0335,
+     "v": 0.68,
+     "source": "the opening s-balcony (sliding_door) on the plan; bearing -167.9 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "living",
+     "u": 0.8457,
+     "v": 0.68,
+     "source": "the opening s-balcony (sliding_door) on the plan; bearing 124.5 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "corridor",
+   "name": {
+    "he": "מסדרון",
+    "en": "Corridor",
+    "fr": "Couloir"
+   },
+   "zone": {
+    "he": "אזור השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "corridor",
+   "plan": {
+    "x": 956.5,
+    "y": 851.0
+   },
+   "heading": 0.0,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "bath",
+     "u": 0.9323,
+     "v": 0.68,
+     "source": "the opening d-bath (door) on the plan; bearing 155.6 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "bedroom",
+     "u": 0.0077,
+     "v": 0.68,
+     "source": "the opening d-bedroom (door) on the plan; bearing -177.2 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "living",
+     "u": 0.2512,
+     "v": 0.68,
+     "source": "the opening p-living-corridor (passage) on the plan; bearing -89.6 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "mamad",
+     "u": 0.5395,
+     "v": 0.68,
+     "source": "the opening d-mamad (mamad_door) on the plan; bearing 14.2 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "master",
+     "u": 0.4954,
+     "v": 0.68,
+     "source": "the opening d-master (door) on the plan; bearing -1.7 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "master",
+   "name": {
+    "he": "חדר שינה הורים",
+    "en": "Master bedroom",
+    "fr": "Chambre parentale"
+   },
+   "zone": {
+    "he": "אזור השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "master",
+   "plan": {
+    "x": 1180.0,
+    "y": 411.0
+   },
+   "heading": 54.6,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "corridor",
+     "u": 0.1981,
+     "v": 0.68,
+     "source": "the opening d-master (door) on the plan; bearing -108.7 deg from the panorama centre (plan up)"
+    },
+    {
+     "to": "ensuite",
+     "u": 0.3238,
+     "v": 0.68,
+     "source": "the opening d-ensuite (door) on the plan; bearing -63.4 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "ensuite",
+   "name": {
+    "he": "חדר רחצה הורים",
+    "en": "Master bathroom",
+    "fr": "Salle de bains parentale"
+   },
+   "zone": {
+    "he": "אזור השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "ensuite",
+   "plan": {
+    "x": 1015.0,
+    "y": 256.0
+   },
+   "heading": -23.2,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "master",
+     "u": 0.9914,
+     "v": 0.68,
+     "source": "the opening d-ensuite (door) on the plan; bearing 176.9 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "mamad",
+   "name": {
+    "he": "חדר שינה / ממ\"ד",
+    "en": "Bedroom / safe room",
+    "fr": "Chambre / espace protégé"
+   },
+   "zone": {
+    "he": "אזור השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "mamad",
+   "plan": {
+    "x": 1150.0,
+    "y": 661.9
+   },
+   "heading": 90.0,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "corridor",
+     "u": 0.3629,
+     "v": 0.68,
+     "source": "the opening d-mamad (mamad_door) on the plan; bearing -49.3 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "bath",
+   "name": {
+    "he": "חדר רחצה",
+    "en": "Bathroom",
+    "fr": "Salle de bains"
+   },
+   "zone": {
+    "he": "אזור השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "bath",
+   "plan": {
+    "x": 1100.0,
+    "y": 991.0
+   },
+   "heading": 53.1,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "corridor",
+     "u": 0.2225,
+     "v": 0.68,
+     "source": "the opening d-bath (door) on the plan; bearing -99.9 deg from the panorama centre (plan up)"
+    }
+   ]
+  },
+  {
+   "id": "bedroom",
+   "name": {
+    "he": "חדר שינה",
+    "en": "Bedroom",
+    "fr": "Chambre"
+   },
+   "zone": {
+    "he": "אזור השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "bedroom",
+   "plan": {
+    "x": 1012.5,
+    "y": 1226.0
+   },
+   "heading": 90.0,
+   "northOffset": 0,
+   "centreBearingDeg": 0,
+   "hotspots": [
+    {
+     "to": "corridor",
+     "u": 0.4375,
+     "v": 0.68,
+     "source": "the opening d-bedroom (door) on the plan; bearing -22.5 deg from the panorama centre (plan up)"
+    }
+   ]
+  }
+ ]
+}

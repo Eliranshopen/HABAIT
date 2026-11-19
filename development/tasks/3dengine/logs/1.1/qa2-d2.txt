@@ -1,0 +1,40 @@
+{"name":"runtime-is-file","tool":"inspect_plan","verdict":"tool-error TOOLCHAIN_MISSING: the first look could not be stored in the engine's runtime folder","fixedMsg":true,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"runtime-is-file","tool":"start_simulation","verdict":"tool-error TOOLCHAIN_MISSING: the first look could not be stored in the engine's runtime folder","fixedMsg":true,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"runtime-inspect-is-file","tool":"inspect_plan","verdict":"tool-error TOOLCHAIN_MISSING: the first look could not be stored in the engine's runtime folder","fixedMsg":true,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"runtime-inspect-is-file","tool":"start_simulation","verdict":"tool-error TOOLCHAIN_MISSING: the first look could not be stored in the engine's runtime folder","fixedMsg":true,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"runtime-is-file-readonly","tool":"inspect_plan","verdict":"tool-error TOOLCHAIN_MISSING: the first look could not be stored in the engine's runtime folder","fixedMsg":true,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"runtime-is-file-readonly","tool":"start_simulation","verdict":"tool-error TOOLCHAIN_MISSING: the first look could not be stored in the engine's runtime folder","fixedMsg":true,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"inspect-sha-is-file","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"inspect-sha-is-file","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913931211-8 EPERM
+{"name":"inspect-sha-is-file-readonly","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"inspect-sha-is-file-readonly","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913935219-10 EPERM
+{"name":"inspect-sha-folder-with-readonly-file+folder-inspectjson","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"inspect-sha-folder-with-readonly-file+folder-inspectjson","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913939054-12 EPERM
+{"name":"inspect-sha-folder-ro-attrib","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"inspect-sha-folder-ro-attrib","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913943063-14 EPERM
+{"name":"inspect-sha-folder-locked-by-open-handle","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"inspect-sha-folder-locked-by-open-handle","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913947151-16 EPERM
+{"name":"tmp-name-taken-by-file","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"tmp-name-taken-by-file","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913951389-18 EPERM
+{"name":"tmp-name-taken-by-readonly-file","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"tmp-name-taken-by-readonly-file","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913955336-20 EPERM
+{"name":"tmp-name-taken-by-folder-with-ro-file","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"tmp-name-taken-by-folder-with-ro-file","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913959404-22 EPERM
+{"name":"tmp-out-is-file","tool":"inspect_plan","verdict":"OK (answered) mode,pdf_path,sha256,bytes","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":0}
+{"name":"tmp-out-is-file","tool":"start_simulation","verdict":"OK (answered) job_id,created,resumed,job","fixedMsg":false,"leakOfPathOrRawCode":true,"jobsMade":1}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-25128-1794913963577-24 EPERM
+{"name":"runtime-disappears-during-look","tool":"inspect_plan","verdict":"tool-error NOT_A_PDF: the scanner could not read the file (status 1)","fixedMsg":false,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"runtime-disappears-during-look","tool":"start_simulation","verdict":"tool-error NOT_A_PDF: the scanner could not read the file (status 1)","fixedMsg":false,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"inspect-dir-disappears-during-look","tool":"inspect_plan","verdict":"tool-error NOT_A_PDF: the scanner could not read the file (status 1)","fixedMsg":false,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"inspect-dir-disappears-during-look","tool":"start_simulation","verdict":"tool-error NOT_A_PDF: the scanner could not read the file (status 1)","fixedMsg":false,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"inspect-replaced-by-file-during-look","tool":"inspect_plan","verdict":"tool-error NOT_A_PDF: the scanner could not read the file (status 1)","fixedMsg":false,"leakOfPathOrRawCode":false,"jobsMade":0}
+{"name":"inspect-replaced-by-file-during-look","tool":"start_simulation","verdict":"tool-error NOT_A_PDF: the scanner could not read the file (status 1)","fixedMsg":false,"leakOfPathOrRawCode":false,"jobsMade":0}
+DONE 30

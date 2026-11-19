@@ -1,0 +1,49 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py z-index overlay modal fixed position safe area --domain ux -n 6
+## UI Pro Max Search Results
+**Domain:** ux | **Query:** z-index overlay modal fixed position safe area
+**Source:** ux-guidelines.csv | **Found:** 4 results
+
+### Result 1
+- **Category:** Layout
+- **Issue:** Fixed Positioning
+- **Platform:** Web
+- **Description:** Fixed elements can overlap or be inaccessible
+- **Do:** Account for safe areas and other fixed elements
+- **Don't:** Stack multiple fixed elements carelessly
+- **Code Example Good:** Fixed nav + fixed bottom with gap
+- **Code Example Bad:** Multiple overlapping fixed elements
+- **Severity:** Medium
+
+### Result 2
+- **Category:** Layout
+- **Issue:** Stacking Context
+- **Platform:** Web
+- **Description:** New stacking contexts reset z-index
+- **Do:** Understand what creates new stacking context
+- **Don't:** Expect z-index to work across contexts
+- **Code Example Good:** Parent with z-index isolates children
+- **Code Example Bad:** z-index: 9999 not working
+- **Severity:** Medium
+
+### Result 3
+- **Category:** Navigation
+- **Issue:** Sticky Navigation
+- **Platform:** Web
+- **Description:** Fixed nav should not obscure content
+- **Do:** Add padding-top to body equal to nav height
+- **Don't:** Let nav overlap first section content
+- **Code Example Good:** pt-20 (if nav is h-20)
+- **Code Example Bad:** No padding compensation
+- **Severity:** Medium
+
+### Result 4
+- **Category:** Layout
+- **Issue:** Z-Index Management
+- **Platform:** Web
+- **Description:** Stacking context conflicts cause hidden elements
+- **Do:** Define z-index scale system (10 20 30 50)
+- **Don't:** Use arbitrary large z-index values
+- **Code Example Good:** z-10 z-20 z-50
+- **Code Example Bad:** z-[9999]
+- **Severity:** High
+

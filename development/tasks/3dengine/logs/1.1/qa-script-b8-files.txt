@@ -1,0 +1,119 @@
+import fs from 'node:fs';
+import { spawnSync, spawn } from 'node:child_process';
+import { makeHome, engineOf, SCR, sha, cleanup, sleep, runRunner, runnerPid, killPid, pidAlive, snapshot, diffSnap } from './qa-lib.mjs';
+const R = 'C:/RnD/Projects/3Dengine';
+const h = await makeHome({ timeout: 60, stepMs: '30' });
+const H = (await engineOf(h)).handlers;
+const mk = (name) => { const b = Buffer.concat([fs.readFileSync(`${SCR}/pdfs/vec-sheet.pdf`), Buffer.from(`\n% ${name}\n`)]); const p = `${h.inbox}/${name}.pdf`; fs.writeFileSync(p, b); return p; };
+const X = mk('x'); const Y = mk('y'); const Z = mk('z');
+const xr = await H.start_simulation({ pdf_path: X }); const yr = await H.start_simulation({ pdf_path: Y }); const zr = await H.start_simulation({ pdf_path: Z });
+const [xid, yid, zid] = [xr.job_id, yr.job_id, zr.job_id];
+// let Y and Z run a real runner to awaiting_approval, then kill it: they have job.json + manifest.json
+for (const id of [yid, zid]) {
+  const p = spawn(process.execPath, [`${R}/engine/runner.mjs`, id], { env: { ...process.env, ...h.env }, stdio: 'ignore', windowsHide: true });
+  const t0 = Date.now(); while (JSON.parse(fs.readFileSync(`${h.jobsDir}/${id}/job.json`, 'utf8')).state !== 'awaiting_approval' && Date.now() - t0 < 30000) await sleep(80);
+  killPid(p.pid); await sleep(400); try { fs.rmSync(`${h.jobsDir}/${id}/runner.pid`, { force: true }); } catch {}
+}
+// X also gets a manifest (run it to awaiting approval too), then killed; keep pristine copies of both X files
+{
+  const p = spawn(process.execPath, [`${R}/engine/runner.mjs`, xid], { env: { ...process.env, ...h.env }, stdio: 'ignore', windowsHide: true });
+  const t0 = Date.now(); while (JSON.parse(fs.readFileSync(`${h.jobsDir}/${xid}/job.json`, 'utf8')).state !== 'awaiting_approval' && Date.now() - t0 < 30000) await sleep(80);
+  killPid(p.pid); await sleep(400); fs.rmSync(`${h.jobsDir}/${xid}/runner.pid`, { force: true });
+}
+const jx = `${h.jobsDir}/${xid}/job.json`; const mx = `${h.jobsDir}/${xid}/manifest.json`;
+const PJ = fs.readFileSync(jx, 'utf8'); const PM = fs.readFileSync(mx, 'utf8');
+const pj = () => JSON.parse(PJ); const pm = () => JSON.parse(PM);
+const jobVariants = {
+  'job_id = other job': (j) => { j.job_id = yid; return j; },
+  'job_id missing': (j) => { delete j.job_id; return j; },
+  'job_id null': (j) => { j.job_id = null; return j; },
+  'job_id number': (j) => { j.job_id = 123; return j; },
+  'job_id undefined string': (j) => { j.job_id = 'undefined'; return j; },
+  'job_id ../other': (j) => { j.job_id = `../${yid}`; return j; },
+  'job_id other + other hash': (j) => { j.job_id = yid; j.input = { ...j.input, pdf_sha256: sha(fs.readFileSync(Y)), apartment: 'p1' }; return j; },
+  'schema other': (j) => { j.schema = 'habait/job.v2'; return j; },
+  'schema missing': (j) => { delete j.schema; return j; },
+  'state stuck': (j) => { j.state = 'stuck'; return j; },
+  'state null': (j) => { j.state = null; return j; },
+  'state __proto__': (j) => { j.state = '__proto__'; return j; },
+  'input missing': (j) => { delete j.input; return j; },
+  'input array': (j) => { j.input = []; return j; },
+  'cost null': (j) => { j.cost = null; return j; },
+  'engine_version number': (j) => { j.engine_version = 1; return j; },
+  'whole file array': () => [],
+  'whole file null': () => null,
+  'whole file string': () => 'x',
+  'raw: not JSON': 'RAW{not json',
+  'raw: empty': 'RAW',
+  'raw: BOM+valid': 'RAW\uFEFF' + PJ,
+};
+const manVariants = {
+  'job_id = other job': (m) => { m.job_id = yid; return m; },
+  'job_id missing': (m) => { delete m.job_id; return m; },
+  'job_id undefined': (m) => { m.job_id = 'undefined'; return m; },
+  'schema other': (m) => { m.schema = 'habait/manifest.v9'; return m; },
+  'rows not array': (m) => { m.rows = {}; return m; },
+  'row null': (m) => { m.rows[0] = null; return m; },
+  'row stage bogus': (m) => { m.rows[0].stage = 'bogus'; return m; },
+  'row stage __proto__': (m) => { m.rows[0].stage = '__proto__'; return m; },
+  'attempt 0': (m) => { m.rows[0].attempt = 0; return m; },
+  'attempt -1': (m) => { m.rows[0].attempt = -1; return m; },
+  'attempt 1.5': (m) => { m.rows[0].attempt = 1.5; return m; },
+  'attempt "1"': (m) => { m.rows[0].attempt = '1'; return m; },
+  'inputs_sha short': (m) => { m.rows[0].inputs_sha256 = 'abc'; return m; },
+  'inputs_sha upper': (m) => { m.rows[0].inputs_sha256 = 'A'.repeat(64); return m; },
+  'output ../other/job.json': (m) => { m.rows[0].outputs = [{ path: `../${yid}/job.json`, sha256: 'a'.repeat(64) }]; return m; },
+  'output absolute': (m) => { m.rows[0].outputs = [{ path: 'C:/Windows/win.ini', sha256: 'a'.repeat(64) }]; return m; },
+  'output a/../../b': (m) => { m.rows[0].outputs = [{ path: 'a/../../b', sha256: 'a'.repeat(64) }]; return m; },
+  'output backslash ..': (m) => { m.rows[0].outputs = [{ path: `..\\${yid}\\job.json`, sha256: 'a'.repeat(64) }]; return m; },
+  'output drive-relative': (m) => { m.rows[0].outputs = [{ path: 'C:foo', sha256: 'a'.repeat(64) }]; return m; },
+  'output UNC': (m) => { m.rows[0].outputs = [{ path: '\\\\localhost\\c$\\x', sha256: 'a'.repeat(64) }]; return m; },
+  'output NUL': (m) => { m.rows[0].outputs = [{ path: 'a\u0000b', sha256: 'a'.repeat(64) }]; return m; },
+  'output not string': (m) => { m.rows[0].outputs = [{ path: 5, sha256: 'a'.repeat(64) }]; return m; },
+  'whole file array': () => [],
+  'raw: not JSON': 'RAW{{',
+};
+const clone = (o) => JSON.parse(JSON.stringify(o));
+const OTHERS = [yid, zid];
+const snapOthers = () => { const o = {}; for (const id of OTHERS) for (const [k, v] of Object.entries(snapshot(`${h.jobsDir}/${id}`))) o[`${id}/${k}`] = v; return o; };
+const topLevel = () => fs.readdirSync(h.jobsDir).sort().join(',');
+const topBase = topLevel();
+let n = 0; const bad = []; const table = [];
+const cli = (args) => spawnSync(process.execPath, [`${R}/engine/cli.mjs`, ...args], { env: { ...process.env, ...h.env }, encoding: 'utf8', timeout: 30000 });
+async function round(kind, name, make) {
+  // restore pristine, apply variant
+  fs.writeFileSync(jx, PJ); fs.writeFileSync(mx, PM);
+  if (kind === 'job') { const v = typeof make === 'string' ? make.slice(3) : JSON.stringify(make(pj())); fs.writeFileSync(jx, v); } else { const v = typeof make === 'string' ? make.slice(3) : JSON.stringify(make(pm())); fs.writeFileSync(mx, v); }
+  const poisonedJ = fs.readFileSync(jx, 'utf8'); const poisonedM = fs.readFileSync(mx, 'utf8');
+  const before = snapOthers(); const xBefore = snapshot(`${h.jobsDir}/${xid}`, (p) => /runner\.(log|pid)$/.test(p));
+  const out = [];
+  const r = runRunner(h, xid, 30000); n++; out.push(`runner exit ${r.status}${/stopped: unreadable/.test(r.log) ? ' (unreadable)' : ''}${r.log.includes(xid) ? ' names job' : ' NO JOB NAME'}`);
+  for (const t of ['get_job', 'approve_paid_stage', 'cancel_job', 'get_result']) { n++; try { await H[t]({ job_id: xid, ...(t === 'approve_paid_stage' ? { cap_usd: 60 } : {}) }); out.push(`${t}:OK`); } catch (e) { out.push(`${t}:${e.code || e.name}`); } }
+  n++; try { const s = await H.start_simulation({ pdf_path: X }); out.push(`start:created=${s.created}`); } catch (e) { out.push(`start:${e.code || e.name}`); }
+  n++; try { const l = await H.list_jobs({ limit: 50 }); out.push(`list:${l.jobs.some((j) => j.job_id === xid) ? 'INCLUDES X' : 'omits X'}`); } catch (e) { out.push(`list:${e.code || e.name}`); }
+  const c1 = cli(['job', xid]); n++; const c2 = cli(['jobs']); n++; const c3 = cli(['ledger', xid]); n++; const c4 = cli(['resume', xid]); n++;
+  out.push(`cli job ${c1.status} jobs ${c2.status} ledger ${c3.status} resume ${c4.status}`);
+  // wait for any runner the CLI resume may have spawned to finish / kill it
+  await sleep(500);
+  const rp = runnerPid(h, xid); if (rp && pidAlive(rp)) killPid(rp);
+  await sleep(300);
+  const after = snapOthers(); const xAfter = snapshot(`${h.jobsDir}/${xid}`, (p) => /runner\.(log|pid)$/.test(p));
+  const changedOthers = diffSnap(before, after);
+  const xChanged = diffSnap(xBefore, xAfter);
+  const undefinedDir = fs.existsSync(`${h.jobsDir}/undefined`) || fs.existsSync(`${h.jobsDir}/null`);
+  const top = topLevel() !== topBase;
+  const sameFiles = fs.readFileSync(mx, 'utf8') === poisonedM && (kind === 'manifest' || fs.readFileSync(jx, 'utf8') === poisonedJ);  // job.json may be changed by approve/cancel when ITS file is valid
+  const looks = out.join(' | ');
+  const okX = xChanged.filter((k) => k !== 'job.json' && k !== 'manifest.json').length === 0;
+  const ok = changedOthers.length === 0 && !undefinedDir && !top && sameFiles;
+  if (!ok) bad.push(`${kind}/${name}`);
+  table.push(`${ok ? 'ok ' : 'BAD'} ${kind} ${name}: ${looks}${changedOthers.length ? ' OTHERS CHANGED ' + changedOthers.join(',') : ''}${undefinedDir ? ' UNDEFINED-DIR' : ''}${top ? ' NEW-TOPLEVEL ' + topLevel() : ''}${sameFiles ? '' : ' X-FILES-REWRITTEN'}${okX ? '' : ' X-OTHER-FILES ' + xChanged.join(',')}`);
+}
+if (!process.env.ONLY_MAN) for (const [k, v] of Object.entries(jobVariants)) await round('job', k, v);
+for (const [k, v] of Object.entries(manVariants)) await round('manifest', k, v);
+console.log(table.join('\n'));
+console.log('jobs top-level now:', topLevel(), '| base:', topBase);
+console.log('ATTEMPTS (calls) ', n, 'variants', Object.keys(jobVariants).length + Object.keys(manVariants).length, 'BAD', JSON.stringify(bad));
+for (const j of fs.readdirSync(h.jobsDir)) { const p = runnerPid(h, j); if (p && pidAlive(p)) killPid(p); }
+await sleep(1000);
+cleanup(h);

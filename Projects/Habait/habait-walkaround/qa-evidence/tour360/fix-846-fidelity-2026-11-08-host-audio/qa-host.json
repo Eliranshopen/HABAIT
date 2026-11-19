@@ -1,0 +1,578 @@
+[
+ {
+  "dev": "pixel7",
+  "name": "hold-parent-audio",
+  "rule": "Chromium-rule stand-in",
+  "entered": true,
+  "afterEnterTap": {
+   "parentCtx": "running",
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": false,
+   "step": 0,
+   "n": 0,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "opened": true,
+  "atOpen": {
+   "parentCtx": "running",
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 0,
+   "n": 20,
+   "playing": true,
+   "state": "running",
+   "on": true,
+   "host": "parent",
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "afterSkip": {
+   "parentCtx": "suspended",
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": false,
+   "step": 0,
+   "n": 20,
+   "playing": false,
+   "state": "suspended",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "direct-start-card",
+  "rule": "Chromium-rule stand-in",
+  "opened": true,
+  "atOpen": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 0,
+   "coach": true,
+   "step": 0,
+   "n": 20,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": true,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "▶ התחילו את ההסבר",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "afterFirstTap": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 0,
+   "n": 20,
+   "playing": true,
+   "state": "running",
+   "on": true,
+   "host": "frame",
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 1,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "no-restart",
+  "rule": "Chromium-rule stand-in",
+  "seen": [
+   {
+    "after": "floor1",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=concrete&video=0"
+   },
+   {
+    "after": "floor2",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=marble&video=0"
+   },
+   {
+    "after": "floor0",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=parquet&video=0"
+   },
+   {
+    "after": "look-original",
+    "coach": false
+   },
+   {
+    "after": "look-designed",
+    "coach": false
+   },
+   {
+    "after": "lang-en",
+    "coach": false
+   },
+   {
+    "after": "room-next",
+    "coach": false
+   }
+  ],
+  "manualReloadOpens": true,
+  "newTabOpens": true,
+  "errors": []
+ },
+ {
+  "dev": "pixel7",
+  "name": "mid-walkthrough-floor",
+  "rule": "Chromium-rule stand-in",
+  "before": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 4,
+   "n": 20,
+   "playing": false,
+   "state": "running",
+   "on": true,
+   "host": "frame",
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 1,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "veilBlocksFloor": true,
+  "after": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 0,
+   "coach": false,
+   "step": 0,
+   "n": 0,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "",
+   "internal": true,
+   "url": "?scope=apartment&room=living&floor=concrete&video=0"
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "hold-parent-audio",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "entered": true,
+  "afterEnterTap": {
+   "parentCtx": "running",
+   "parentSilent": true,
+   "parentCtxMade": 1,
+   "coach": false,
+   "step": 0,
+   "n": 0,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "opened": true,
+  "atOpen": {
+   "parentCtx": "running",
+   "parentSilent": true,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 0,
+   "n": 20,
+   "playing": true,
+   "state": "running",
+   "on": true,
+   "host": "parent",
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "afterSkip": {
+   "parentCtx": "suspended",
+   "parentSilent": false,
+   "parentCtxMade": 1,
+   "coach": false,
+   "step": 0,
+   "n": 20,
+   "playing": false,
+   "state": "suspended",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "direct-start-card",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "opened": true,
+  "atOpen": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 0,
+   "coach": true,
+   "step": 0,
+   "n": 19,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": true,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "▶ התחילו את ההסבר",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "afterFirstTap": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 0,
+   "n": 19,
+   "playing": true,
+   "state": "running",
+   "on": true,
+   "host": "frame",
+   "gate": false,
+   "frameSilent": true,
+   "frameCtxMade": 1,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "no-restart",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "seen": [
+   {
+    "after": "floor1",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=concrete&video=0"
+   },
+   {
+    "after": "floor2",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=marble&video=0"
+   },
+   {
+    "after": "floor0",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=parquet&video=0"
+   },
+   {
+    "after": "look-original",
+    "coach": false
+   },
+   {
+    "after": "look-designed",
+    "coach": false
+   },
+   {
+    "after": "lang-en",
+    "coach": false
+   },
+   {
+    "after": "room-next",
+    "coach": false
+   }
+  ],
+  "manualReloadOpens": true,
+  "newTabOpens": true,
+  "errors": []
+ },
+ {
+  "dev": "iphone14",
+  "name": "mid-walkthrough-floor",
+  "rule": "WebKit-rule stand-in (Chromium engine)",
+  "before": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 4,
+   "n": 19,
+   "playing": false,
+   "state": "running",
+   "on": true,
+   "host": "frame",
+   "gate": false,
+   "frameSilent": true,
+   "frameCtxMade": 1,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "veilBlocksFloor": true,
+  "after": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 0,
+   "coach": false,
+   "step": 0,
+   "n": 0,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "",
+   "internal": true,
+   "url": "?scope=apartment&room=living&floor=concrete&video=0"
+  },
+  "errors": []
+ },
+ {
+  "dev": "desktop1440",
+  "name": "hold-parent-audio",
+  "rule": "Chromium-rule stand-in",
+  "entered": true,
+  "afterEnterTap": {
+   "parentCtx": "running",
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": false,
+   "step": 0,
+   "n": 0,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "opened": true,
+  "atOpen": {
+   "parentCtx": "running",
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 0,
+   "n": 23,
+   "playing": true,
+   "state": "running",
+   "on": true,
+   "host": "parent",
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "afterSkip": {
+   "parentCtx": "suspended",
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": false,
+   "step": 0,
+   "n": 23,
+   "playing": false,
+   "state": "suspended",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=flight&ui=min&ret"
+  },
+  "errors": []
+ },
+ {
+  "dev": "desktop1440",
+  "name": "direct-start-card",
+  "rule": "Chromium-rule stand-in",
+  "opened": true,
+  "atOpen": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 0,
+   "n": 23,
+   "playing": true,
+   "state": "suspended",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 1,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "afterFirstTap": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 1,
+   "n": 23,
+   "playing": false,
+   "state": "running",
+   "on": true,
+   "host": "frame",
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 1,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "errors": []
+ },
+ {
+  "dev": "desktop1440",
+  "name": "no-restart",
+  "rule": "Chromium-rule stand-in",
+  "seen": [
+   {
+    "after": "floor1",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=concrete&video=0"
+   },
+   {
+    "after": "floor2",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=marble&video=0"
+   },
+   {
+    "after": "floor0",
+    "coach": false,
+    "internal": true,
+    "url": "?scope=apartment&room=living&floor=parquet&video=0"
+   },
+   {
+    "after": "look-original",
+    "coach": false
+   },
+   {
+    "after": "look-designed",
+    "coach": false
+   },
+   {
+    "after": "lang-en",
+    "coach": false
+   },
+   {
+    "after": "room-next",
+    "coach": false
+   }
+  ],
+  "manualReloadOpens": true,
+  "newTabOpens": true,
+  "errors": []
+ },
+ {
+  "dev": "desktop1440",
+  "name": "mid-walkthrough-floor",
+  "rule": "Chromium-rule stand-in",
+  "before": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 1,
+   "coach": true,
+   "step": 5,
+   "n": 23,
+   "playing": false,
+   "state": "running",
+   "on": true,
+   "host": "frame",
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 1,
+   "next": "הבא",
+   "internal": false,
+   "url": "?scope=apartment&room=living&floor=parquet"
+  },
+  "veilBlocksFloor": true,
+  "after": {
+   "parentCtx": null,
+   "parentSilent": null,
+   "parentCtxMade": 0,
+   "coach": false,
+   "step": 0,
+   "n": 0,
+   "playing": false,
+   "state": "none",
+   "on": false,
+   "host": null,
+   "gate": false,
+   "frameSilent": null,
+   "frameCtxMade": 0,
+   "next": "",
+   "internal": true,
+   "url": "?scope=apartment&room=living&floor=concrete&video=0"
+  },
+  "errors": []
+ }
+]

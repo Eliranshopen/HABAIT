@@ -1,0 +1,52 @@
+B1 section 2 matrix { runs: 14040, checks: 16995, breaks: 0 }
+id "--no-judge" refused
+id "--budget" refused
+id "--go" refused
+id "-x" refused
+id "-" refused
+id "" refused
+id " " refused
+id "a b" refused
+id "a\nb" refused
+id "apt846\n" refused
+id "\napt846" refused
+id "aaaaaaaaaaaaaaaaaaa refused
+id "א" refused
+id "ａpt" refused
+id "a/b" refused
+id "a\\b" refused
+id ".." refused
+id "a.b" refused
+id "_a" refused
+id "aaaaaaaaaaaaaaaaaaa accepted
+id "0" accepted
+id undefined accepted
+id null refused
+id 5 refused
+id ["a"] refused
+id {} refused
+B1 section 1 ids { cases: 26, breaks: 0 }
+path pdf is a folder refused: the PDF is not a file
+path pdf missing refused: the PDF is not a file
+path pdf relative started(abs)
+path pdf with space + hebrew started(abs)
+path pdf named --no-judge.pdf started(abs)
+path vlm not json refused: the saved reading is not a JSON object
+path vlm array refused: the saved reading is not a JSON object
+path vlm null refused: the saved reading is not a JSON object
+path vlm number refused: the saved reading is not a JSON object
+path vlm empty file refused: the saved reading is not a JSON object
+path vlm folder refused: the saved reading is not a file
+path vlm BOM json refused: the saved reading is not a JSON object
+path vlm {}  started(abs)
+path vlm missing refused: the saved reading is not a file
+path out is a file refused: the output folder is not a folder
+path out nonempty refused: the output folder is not empty: a run needs a folder of its own
+path out empty existing started(abs)
+path out named --budget started(abs)
+path out with space+hebrew started(abs)
+path out relative started(abs)
+path out has hidden .env refused: the output folder is not empty: a run needs a folder of its own
+B1 section 1 paths { cases: 21, breaks: 0 }
+root C:/Users/elira/AppData/Local/Temp/qa12-b1-Sf9yV8
+exit 0

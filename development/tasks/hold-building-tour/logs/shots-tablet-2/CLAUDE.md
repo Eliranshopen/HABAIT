@@ -1,11 +1,11 @@
 # shots-tablet-2/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Tablet re-run 2 of the check (C3 timing re-check).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 6 files here · 0 subfolders · 6 files / 12.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

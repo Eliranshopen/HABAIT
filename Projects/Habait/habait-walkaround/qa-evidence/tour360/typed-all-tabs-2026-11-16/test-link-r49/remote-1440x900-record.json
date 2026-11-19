@@ -1,0 +1,134 @@
+{
+  "live": "https://rainbow-v2-test.vercel.app/tour/",
+  "size": "1440x900",
+  "room": "living",
+  "look": [
+    -6,
+    67,
+    75
+  ],
+  "text": "להוסיף שני רמקולים עומדים על הרצפה משני צידי הטלוויזיה",
+  "remote": true,
+  "apartment": "apt846",
+  "pxPerCm": 0.9,
+  "served_vs_head_lines": {
+    "tour.js": "not compared",
+    "edit-live.js": "not compared"
+  },
+  "real": false,
+  "when": "2026-11-16T15:29:40.185Z",
+  "cap": 0,
+  "booked": 0.278,
+  "ms_first_picture": 7042,
+  "turn": {
+    "text": "להוסיף שני רמקולים עומדים על הרצפה משני צידי הטלוויזיה",
+    "attempts": [
+      {
+        "attempt": 1,
+        "model": "fal-ai/flux-2/klein/9b/edit",
+        "reach": "object",
+        "living": false,
+        "ring": 0.068,
+        "ring_band": "ring",
+        "ring_n": 40640,
+        "ring_total": 40640,
+        "fraction": 0.242,
+        "judge": null,
+        "held": true,
+        "ms": 4863,
+        "ms_text": 3279,
+        "ms_edit": 1584
+      }
+    ],
+    "error": null,
+    "ms_total": 6913,
+    "follow": {
+      "rooms": [
+        {
+          "room": "dining",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.046,
+              "judge": null,
+              "held": true,
+              "ms": 10490
+            }
+          ],
+          "ms": 12330
+        },
+        {
+          "room": "kitchen",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.038,
+              "judge": null,
+              "held": true,
+              "ms": 11783
+            }
+          ],
+          "ms": 13682
+        },
+        {
+          "room": "entrance",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.048,
+              "judge": null,
+              "held": true,
+              "ms": 13185
+            }
+          ],
+          "ms": 15121
+        }
+      ],
+      "skip": null,
+      "ms": 17211,
+      "spot": {
+        "x": 7.61,
+        "y": 11.2,
+        "z": -0.32,
+        "w": 4.04,
+        "h": 2.01,
+        "dist": 2.39
+      },
+      "targets": [
+        {
+          "room": "dining",
+          "yaw": 149.47,
+          "pitch": -4.91,
+          "hfov": 100,
+          "dist": 3.73
+        },
+        {
+          "room": "entrance",
+          "yaw": 22.94,
+          "pitch": -3.27,
+          "hfov": 95.2,
+          "dist": 5.6
+        },
+        {
+          "room": "kitchen",
+          "yaw": 66.65,
+          "pitch": -3.15,
+          "hfov": 92,
+          "dist": 5.81
+        }
+      ]
+    }
+  },
+  "calls": [],
+  "failed": [],
+  "errors": []
+}

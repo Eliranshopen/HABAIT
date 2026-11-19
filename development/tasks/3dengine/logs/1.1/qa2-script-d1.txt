@@ -1,0 +1,48 @@
+// D1: writers vs first looks. usage: node d1.mjs <mode> <pauseMs> <pdf> <looks> [writers] [other]
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, sleep } from './qa-lib.mjs';
+const [, , mode, pause, pdfName, looksS, writersS = '1', other] = process.argv;
+const { inspectDir } = await E('engine/inspect.mjs');
+const h = await makeHome({ timeout: 90 });
+const eng = await engineOf(h); const H = eng.handlers;
+const src = `${SCR}/pdfs/${pdfName}`;
+const A = `${h.inbox}/same.pdf`;
+fs.copyFileSync(src, A);
+const S = sha(fs.readFileSync(A));
+const truth = await H.inspect_plan({ pdf_path: A });
+const T = JSON.stringify(truth.page_rows) + JSON.stringify(truth.candidates.map((c) => c.id));
+const rec = (x) => `${inspectDir(h.config, x)}/inspect.json`;
+let bad = 0; const tally = {};
+const writers = [];
+for (let w = 0; w < Number(writersS); w++) writers.push(spawn(process.execPath, [`${SCR}/writer.mjs`, A, src, mode, pause, other ? `${SCR}/pdfs/${other}` : '', process.env.IDLE || '0'], { stdio: 'ignore' }));
+await sleep(300);
+const sd = `${h.config.runtimeDir}/inspect`;
+for (let i = 0; i < Number(looksS); i++) {
+  fs.rmSync(inspectDir(h.config, S), { recursive: true, force: true });
+  let r; let tag;
+  try { r = await H.inspect_plan({ pdf_path: A }); } catch (e) { tag = 'err:' + (e.code || e.name); tally[tag] = (tally[tag] || 0) + 1; continue; }
+  const same = JSON.stringify(r.page_rows) + JSON.stringify(r.candidates.map((c) => c.id)) === T;
+  if (r.sha256 === S) { tag = same ? 'plan-hash-true' : 'PLAN-HASH-WRONG-LOOK'; } else tag = same ? 'other-hash-true' : 'other-hash-own-bytes';
+  if (tag === 'PLAN-HASH-WRONG-LOOK') bad++;
+  tally[tag] = (tally[tag] || 0) + 1;
+  // every record on disk: named by its own hash, no pdf copy in it, and under S must be the truth
+  for (const d of fs.existsSync(sd) ? fs.readdirSync(sd) : []) {
+    if (d.startsWith('.tmp-')) continue;
+    const f = rec(d); if (!fs.existsSync(f)) continue;
+    const j = JSON.parse(fs.readFileSync(f, 'utf8'));
+    const files = fs.readdirSync(`${sd}/${d}`);
+    if (j.sha256 !== d) { bad++; console.log('RECORD NAME MISMATCH', d); }
+    if (files.some((n) => /\.pdf$/i.test(n))) { bad++; console.log('PDF COPY IN RECORD', d, files); }
+    if (d === S && JSON.stringify(j.summary.page_rows) + JSON.stringify(j.summary.candidates.map((c) => c.id)) !== T) { bad++; console.log('WRONG RECORD UNDER PLAN HASH'); }
+  }
+}
+for (const w of writers) w.kill();
+await sleep(500);
+fs.copyFileSync(src, A);
+const quiet = await H.inspect_plan({ pdf_path: A });
+const qok = JSON.stringify(quiet.page_rows) + JSON.stringify(quiet.candidates.map((c) => c.id)) === T && quiet.sha256 === S;
+let sim = '';
+try { const x = await H.start_simulation({ pdf_path: A }); sim = 'sim ok created=' + x.created; } catch (e) { sim = 'sim ' + e.code; }
+console.log(JSON.stringify({ mode, pause, pdfName, writers: writersS, looks: looksS, tally, bad, quietTrue: qok, sim }));
+cleanup(h);

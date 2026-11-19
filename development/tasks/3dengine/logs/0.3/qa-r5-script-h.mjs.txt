@@ -1,0 +1,95 @@
+// qa-r5 helpers: invariant checker computed from the files, direct-job builder, tiny utils.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const R = 'file:///C:/RnD/Projects/3Dengine/';
+export const imp = (p) => import(R + p);
+export const lib = await imp('tests/soak/lib.mjs');
+export const jobsM = await imp('engine/jobs.mjs');
+export const ledM = await imp('engine/ledger.mjs');
+export const procM = await imp('engine/lib/proc.mjs');
+export const atomicM = await imp('engine/lib/atomic.mjs');
+export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+export const rd = (f) => { for (let i = 0; i < 100; i++) { try { return fs.readFileSync(f, 'utf8'); } catch (e) { if (e.code === 'ENOENT') return null; if (!['EPERM', 'EBUSY', 'EACCES'].includes(e.code)) throw e; } } return null; };
+export const rj = (f) => { for (let i = 0; i < 100; i++) { const t = rd(f); if (t === null) return null; try { return JSON.parse(t); } catch { /* retry */ } } throw new Error('unparseable ' + f); };
+export const pidAlive = procM.pidAlive;
+
+// A bare temp job with an approval, for createPaidCall used directly.
+export function bareJob({ cap = 60 } = {}) {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'qa-r5-bare-'));
+  const jobsDir = `${home}/jobs`;
+  const id = [...Array(16)].map(() => '0123456789abcdef'[Math.floor(Math.random() * 16)]).join('');
+  const j = jobsM.newJob({ id, mode: 'stub', now: new Date().toISOString(), input: { pdf_sha256: 'x', apartment: 'a', pdf_name: 'x.pdf' }, capUsd: cap });
+  j.approval = { cap_usd: cap, at: new Date().toISOString() };
+  j.state = 'skinning';
+  jobsM.writeJob(jobsDir, j);
+  return { home, jobsDir, id, ledger: () => ledM.readLedger(jobsDir, id), job: () => jobsM.readJob(jobsDir, id),
+    cleanup: () => fs.rmSync(home, { recursive: true, force: true }) };
+}
+
+// Invariants from the files (never from an engine summary). opts: quiet (no runner alive), done, cap, damaged.
+export function check(E, id, { quiet = true, done = true, cap = null, damaged = false, label = '' } = {}) {
+  const v = [];
+  const P = (rel) => E.jobPath(id, rel);
+  let led, man, job;
+  try { led = rj(P('ledger.json')); man = rj(P('manifest.json')); job = rj(P('job.json')); } catch (e) { return [`${label} unparseable: ${e.message}`]; }
+  if (!job) return [`${label} no job`];
+  led = led || { rows: [] }; man = man || { rows: [] };
+  const rows = led.rows;
+  const byKey = new Map();
+  for (const r of rows) { if (!byKey.has(r.call_key)) byKey.set(r.call_key, []); byKey.get(r.call_key).push(r); }
+  if ((done || quiet) && rows.some((r) => r.status === 'reserved')) v.push(`reserved row while quiet/done: ${rows.filter((r) => r.status === 'reserved').map((r) => r.seq)}`);
+  for (const r of rows) {
+    if (r.status === 'orphaned' && !r.sending_at) v.push(`orphaned without sending_at seq ${r.seq}`);
+    if (r.not_sent && r.sending_at) v.push(`not_sent WITH sending_at seq ${r.seq}`);
+    if (r.status === 'settled' && !r.sending_at) v.push(`settled WITHOUT sending_at seq ${r.seq}`);
+  }
+  for (const [k, rs] of byKey) {
+    const settledPlain = rs.filter((r) => r.status === 'settled' && !r.late && r.resend_of === undefined);
+    if (settledPlain.length > 1) v.push(`call ${k.slice(0, 8)}: ${settledPlain.length} plain settled rows`);
+    const stage = rs[0].stage;
+    const sends = E.sends(id, stage);
+    const marked = rs.filter((r) => r.sending_at).length;
+    if (sends > marked) v.push(`${stage}: ${sends} sends > ${marked} rows marked sending_at`);
+    const settled = rs.filter((r) => r.status === 'settled').length;
+    if (settled > sends) v.push(`${stage}: ${settled} settled rows > ${sends} sends`);
+    // a row marked after a non-late settled row must carry resend_of
+    for (const r of rs) {
+      if (r.sending_at && r.resend_of === undefined && rs.some((o) => o.seq < r.seq && o.status === 'settled' && !o.late && o.settled_at && o.settled_at <= r.reserved_at)) {
+        v.push(`${stage}: seq ${r.seq} sent after a settled row without resend_of`);
+      }
+    }
+  }
+  let settledSum = 0; let held = 0;
+  for (const r of rows) { if (r.status === 'settled') settledSum += r.settled_usd; else if (r.status === 'reserved' || r.status === 'orphaned') held += r.reserved_usd; }
+  settledSum = Math.round(settledSum * 1e6) / 1e6;
+  if (quiet && job.cost.spent_usd !== settledSum) v.push(`spent_usd ${job.cost.spent_usd} != settled sum ${settledSum}`);
+  const c = cap ?? job.cost.cap_usd;
+  if (typeof c === 'number' && settledSum + held > c + 1e-9 && !(job.state === 'awaiting_approval')) v.push(`counted ${settledSum + held} > cap ${c}`);
+  const stages = ['tracing', 'building', 'rendering', 'skinning', 'gating', 'finishing', 'packaging', 'qa'];
+  for (const s of stages) {
+    const valid = man.rows.filter((r) => r.stage === s && r.status === 'done' && !r.superseded);
+    if (valid.length > 1) v.push(`stage ${s}: ${valid.length} valid rows`);
+    if (done && valid.length !== 1) v.push(`stage ${s}: ${valid.length} valid rows at done`);
+    if (!damaged && man.rows.filter((r) => r.stage === s).length > 1) v.push(`stage ${s}: repeated (${man.rows.filter((r) => r.stage === s).length} rows) without damage`);
+  }
+  const log = E.log(id);
+  if (/runner \d+ error:/.test(log)) v.push('a runner crashed: ' + (log.match(/runner \d+ error:.*/) || [''])[0]);
+  if (done && job.state !== 'done') v.push(`state ${job.state} not done`);
+  if (done) { const p = E.runnerPid(id); if (p && pidAlive(p)) { /* runner may still be exiting */ } }
+  return v.map((x) => `${label} ${x}`);
+}
+
+export const results = [];
+export function rec(name, ok, detail = '') {
+  const line = `${ok ? 'PASS' : 'FAIL'} ${name} ${detail}`;
+  results.push(line);
+  console.log(line);
+  try { fs.appendFileSync(process.env.QA_OUT || 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r5/results.txt', line.slice(0, 1500) + '\n'); } catch { /* */ }
+}
+
+export function counters() {
+  const f = 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r5/counters.json';
+  return { add(k, n = 1) { let o = {}; try { o = JSON.parse(fs.readFileSync(f, 'utf8')); } catch { /* */ } o[k] = (o[k] || 0) + n; fs.writeFileSync(f, JSON.stringify(o)); } };
+}

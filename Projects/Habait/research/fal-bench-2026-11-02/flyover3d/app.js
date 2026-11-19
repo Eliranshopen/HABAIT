@@ -19,6 +19,7 @@ import * as analytics from 'http://127.0.0.1:8850/js/analytics.js';
 
 const SKY_R = 2500;
 const q = new URLSearchParams(location.search);
+const PHONE = matchMedia('(hover: none) and (pointer: coarse) and (max-width: 900px) and (orientation: portrait)');   // hold-phone 2026-11-09: a portrait phone
 const clipEl = document.getElementById('clip');
 const orbit = window.__orbit || null;
 const birds = createBirds({ canvas: document.getElementById('birds') });     // a few birds over the clip and the hold (Eliran: 'לראות גם ציפורים עפות')                     // step 1 (the orbit clip) is already playing: index.html started it
@@ -32,6 +33,32 @@ function tourUrl() {
   if (q.get('sid')) u.searchParams.set('sid', q.get('sid'));
   const back = new URL(location.href); back.hash = ''; back.searchParams.delete('orbit');                          // back to the HOLD, not to the video again
   u.searchParams.set('return', q.get('return') || back.toString());                 // the tour's "חזרה לבניין" pill comes back here
+  return u.toString();
+}
+// 2026-11-09 (Eliran: «סיור לפרויקט ויהיה את כל המסלול של הסרטון ובחירת דירה מתוך הבניין ומעוף ציפור»; plan 2026-11-09-rainbow-v2.md §8):
+// 846 has a full simulation, so «המשיכו אל הדירה» opens its APARTMENT JOURNEY (platform/apartment-journey/: floor 16 lit on this hold's own
+// frame, the floor isolated, the cutaway, the rooms) instead of flying straight into the tour; the journey hands on to the same tour URL
+// (?tour=) and comes back here (?return=, without the orbit film). The card's «לסיור 360°» keeps the direct descent + tour.
+// round 4 (2026-11-10, Eliran: «משלב לחיצה על "המשיכו אל הדירה" יש את הריחוף עם האנימציה של הקומות ואז זה ממשיך לסיור 360»): the journey
+// lands in the LIVING ROOM, so its tour opens there, at the view the journey's landing draws (the same yaw; pitch −2 and hfov are the tour's)
+const JOURNEY_YAW = 180;   // 2026-11-10 (bird flight, stage 2): the tour opens looking INTO the room, the way the flight film enters it (was -40, toward the windows)
+function journeyTourUrl() { const t = new URL(tourUrl()); t.searchParams.set('room', 'living'); t.searchParams.set('yaw', String(JOURNEY_YAW)); return t.toString(); }
+// 2026-11-10 (Eliran: the flight must start with the tap, no standing picture): the journey's film is asked for as soon as a unit is picked,
+// so it is in the browser's cache when «כניסה לדירה» is tapped. A failed warm-up changes nothing (the journey waits for the film itself).
+let journeyWarm = false, journeyWarmP = null;   // journeyWarmP: the film's download while it runs (the background node loads wait for it)
+function warmJourney() {
+  if (journeyWarm) return; journeyWarm = true;
+  try { const c = navigator.connection || {}; if (c.saveData || /(^|-)[23]g$/.test(c.effectiveType || '') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    journeyWarmP = fetch(new URL('media/fly-846-1280.mp4', journeyUrl()).toString(), { credentials: 'same-origin' }).then((r) => r.blob()).catch(() => {}).then(() => { journeyWarmP = null; }); } catch (e) { /* no warm-up */ }
+}
+document.addEventListener('click', (e) => { if (e.target && e.target.closest && e.target.closest('.hotspot')) warmJourney(); }, true);
+function journeyUrl(unit = '846', fr = '') {
+  const u = new URL(q.get('journey') || 'http://127.0.0.1:8850/apartment-journey/', location.href);   // the stage rewrites the host to /
+  u.searchParams.set('from', 'hold'); u.searchParams.set('unit', unit); u.searchParams.set('project', q.get('project') || 'rainbow');
+  if (q.get('sid')) u.searchParams.set('sid', q.get('sid'));
+  const tour = new URL(journeyTourUrl()); u.searchParams.set('tour', tour.toString());
+  u.searchParams.set('return', tour.searchParams.get('return'));
+  if (fr) u.searchParams.set('fr', fr);                                          // the hold's on-screen frame box: the journey starts on it
   return u.toString();
 }
 const canvas = document.getElementById('c');
@@ -117,6 +144,7 @@ if (q.get('hold') !== '360') {
     if (q.get('hold') === 'ring') { try { arc = await createArcHold({ canvas: document.getElementById('arc'), base: './data/holdring' }); } catch (e) { console.warn('ring unavailable:', e.message); } }
     if (!arc) arc = await createArcHold({ canvas: document.getElementById('arc') });
     arc.active = true; setLine(0.85);
+    if (!orbit && arc.settle) arc.settle(0);   // no film (back from the journey / the tour): the tower framing at once
   }
   catch (e) { console.warn('arc hold unavailable, falling back to the 360 sphere:', e.message); arc = null; }
 }
@@ -408,6 +436,54 @@ document.getElementById('hot').onclick = flyToApartment;
 document.getElementById('reset').onclick = async () => { await ensureSite(); building.leaving = false; inside = false; flying = false; targetT = 0; document.getElementById('enter').style.display = 'none'; document.getElementById('fade').style.opacity = 0; initLook(); };
 let fadeGen = 0;   // board hold-building-tour gate D1: a newer fade or a restore cancels a running fade (bump fadeGen)
 function fadeAmbience(ms = 600) { const amb = document.getElementById('amb'); if (amb && !amb.paused) { const gen = ++fadeGen; const v0 = amb.volume; const t0 = performance.now(); const f = () => { if (gen !== fadeGen) return; const k = Math.min(1, (performance.now() - t0) / ms); amb.volume = v0 * (1 - k); if (k < 1) requestAnimationFrame(f); else amb.pause(); }; f(); } }
+// The journey plays in a full-screen frame OVER the hold (round 4): it animates the floors and the glide and tells this page when to load
+// the tour (habait:journey-preload) and when to show it (habait:journey-land / habait:journey-skip). The tour frame is THIS page's, like
+// the descent's (flyToApartment), so the walkthrough music keeps the AudioContext the visitor's tap made here (habaitAudioUnlock).
+// Reduced motion: no flight — the tour at once. Back from the tour = its «חזרה לבניין» (?return=, the hold at the stop).
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const journey = { frame: null, tour: null, tourReady: false, shown: false, unit: '846' };
+function journeyTour() {
+  if (journey.tour) return journey.tour;
+  const f = document.createElement('iframe'); f.id = 'tourFrame'; f.src = journeyTourUrl(); f.allow = 'fullscreen; autoplay'; f.allowFullscreen = true;
+  f.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;border:0;opacity:0;z-index:9;background:#000;transition:opacity .6s ease;pointer-events:none';
+  f.addEventListener('load', () => { setTimeout(() => { journey.tourReady = true; }, 700); }, { once: true });   // its first view painted
+  document.body.appendChild(f); journey.tour = f; return f;
+}
+function journeyShowTour() {
+  if (journey.shown) return; const f = journeyTour();
+  const show = () => {
+    if (journey.shown) return; journey.shown = true;
+    f.style.opacity = '1'; f.style.pointerEvents = 'auto'; fadeAmbience(900);
+    inside = true; halted = true; if (arc) arc.active = false;
+    for (const id of ['hud', 'pickerStage', 'soundBtn', 'clipSkip', 'clipLine', 'dragHint', 'buildingBtn']) { const e = document.getElementById(id); if (e) e.style.display = 'none'; }
+    glow.svg.style.display = 'none';
+    setTimeout(() => { if (journey.frame) { journey.frame.remove(); journey.frame = null; } }, 700);
+  };
+  if (journey.tourReady) return show();
+  const t0 = performance.now(); const wait = setInterval(() => { if (journey.tourReady || performance.now() - t0 > 10000) { clearInterval(wait); show(); } }, 100);
+}
+addEventListener('message', (e) => {
+  if (!journey.frame || e.source !== journey.frame.contentWindow || !e.data || typeof e.data !== 'object') return;
+  if (e.data.type === 'habait:journey-preload') journeyTour();
+  if (e.data.type === 'habait:journey-land' || e.data.type === 'habait:journey-skip') journeyShowTour();
+});
+function openJourney(unit = '846') {
+  if (building.frame || building.leaving) return; building.leaving = true; journey.unit = unit;
+  picker.close(); status('אל דירה ' + unit + '…');
+  if (reduceMotion.matches) { journeyShowTour(); return; }                         // reduced motion: straight to the tour
+  const go = () => {
+    const fr = arc && arc.framing; const vw = innerWidth, vh = innerHeight;
+    const box = fr ? [fr.OX, fr.OY, fr.W * fr.S, fr.H * fr.S, vw, vh].map((v) => Math.round(v * 10) / 10).join(',') + (fr.portrait && fr.settle > 0.99 ? ',p' : '') : '';
+    const f = document.createElement('iframe'); f.id = 'journeyFrame'; f.src = journeyUrl(unit, box); f.allow = 'autoplay'; f.title = 'דירה ' + unit;
+    f.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;border:0;opacity:0;z-index:8;background:transparent;transition:opacity .45s ease';
+    f.addEventListener('load', () => { requestAnimationFrame(() => { f.style.opacity = '1'; }); }, { once: true });
+    document.body.appendChild(f); journey.frame = f;
+  };
+  if (arc && arc.goCentre) arc.goCentre(450, () => setTimeout(go, 150)); else go();   // the hold pose (and the card's lift back to 0) first
+}
+window.__journey = { url: journeyUrl, open: openJourney, get frame() { return journey.frame; }, get tour() { return journey.tour; }, get shown() { return journey.shown; } };
+// back from the journey with the browser's Back (bfcache restores this page as it was: faded out, leaving): lift the fade, allow a new pick
+addEventListener('pageshow', (e) => { if (!e.persisted || inside) return; const fd = document.getElementById('fade'); fd.style.opacity = 0; building.leaving = false; });
 document.getElementById('enterBtn').onclick = () => {
   document.getElementById('fade').style.opacity = 1; fadeAmbience();                 // the ambience fades with the picture
   setTimeout(() => { location.href = tourUrl(); }, 650);
@@ -474,14 +550,75 @@ const facadeTangent = new THREE.Vector3(hotspot.x - holdPos.x, hotspot.y - holdP
 const placed = placeUnits(unitsRaw, hotspot, facadeTangent);
 const posById = new Map(placed.map((u) => [String(u.id), u.pos]));
 const project = projectMeta;
-{ const t = document.getElementById('clipTitle'); if (t) { const nm = (project.name && (project.name.he || project.name)) || 'Rainbow תל אביב'; const sub = (project.tagline && (project.tagline.he || project.tagline)) || (project.subtitle && project.subtitle.he) || 'שדה דב · על קו הים'; t.querySelector('.t1').textContent = typeof nm === 'string' ? nm : 'Rainbow תל אביב'; t.querySelector('.t2').textContent = typeof sub === 'string' ? sub : ''; } }
+{ const t = document.getElementById('clipTitle'); if (t) { const nm = (project.name && (project.name.he || project.name)) || 'Rainbow תל אביב'; const sub = (project.tagline && (project.tagline.he || project.tagline)) || (project.subtitle && project.subtitle.he) || 'שדה דב · על קו הים'; t.querySelector('.t1').textContent = typeof nm === 'string' ? nm : 'Rainbow תל אביב'; t.querySelector('.t2').textContent = typeof sub === 'string' ? sub : ''; const dev = project.developer && (project.developer.he || project.developer); const t3 = t.querySelector('.t3'); if (t3) t3.textContent = typeof dev === 'string' && dev ? `יזם: ${dev}` : ''; } }
 try { analytics.initAnalytics({ base: { project: project.id, lang: i18n.getLang(), surface: 'flyover3d' } }); } catch (e) { console.warn('analytics', e.message); }
+// 2026-11-08 (Eliran, iPhone: «המוזיקת רקע של ההסבר על הכפתורים עדיין לא פועלת אוטומטית במובייל»): the tour's walkthrough music is HOSTED
+// here. iOS plays sound only after a gesture in the same document, and the tour is a new document in an iframe; so inside the visitor's
+// «המשיכו אל הדירה» tap this page creates and resumes an AudioContext, sets the audio session to "playback" and starts a silent looping
+// <audio> (touch WebKit: the ringer switch), and keeps them on window.__habaitAudio. The same-origin tour builds its music on that context
+// when its walkthrough opens — no tap inside the tour. Never around the autoplay rule: all of it runs inside the visitor's own tap.
+function habaitAudioUnlock() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+    const H = window.__habaitAudio || (window.__habaitAudio = {});
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { /* not there */ }
+    if (!H.ac) H.ac = new AC();
+    if (H.ac.state !== 'running') H.ac.resume().catch(() => {});
+    const src = H.ac.createBufferSource(); src.buffer = H.ac.createBuffer(1, 1, 22050); src.connect(H.ac.destination); src.start(0);
+    const touchWebKit = navigator.maxTouchPoints > 0 && window.CSS && CSS.supports && CSS.supports('-webkit-touch-callout', 'none');
+    if (touchWebKit) {
+      if (!H.silent) {   // 0.1 s of 8-bit silence, built here
+        const n = 800, b = new Uint8Array(44 + n), v = new DataView(b.buffer), w = (o, t) => { for (let i = 0; i < t.length; i++) b[o + i] = t.charCodeAt(i); };
+        w(0, 'RIFF'); v.setUint32(4, 36 + n, true); w(8, 'WAVE'); w(12, 'fmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+        v.setUint32(24, 8000, true); v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, 'data'); v.setUint32(40, n, true); b.fill(128, 44);
+        let bin = ''; for (const x of b) bin += String.fromCharCode(x);
+        H.silent = new Audio('data:audio/wav;base64,' + btoa(bin)); H.silent.loop = true; H.silent.setAttribute('playsinline', '');
+      }
+      H.silent.play().catch(() => {});
+    }
+  } catch (e) { /* no audio: the tour falls back to its own first tap */ }
+}
 // the SAME picker as flow.html (habait-ab's js/picker.js): pills, card, drawer, legend, lead/WhatsApp, analytics — one source of truth
 const picker = createPicker({
   units: unitsRaw, container: document.getElementById('pickerStage'), i18n, analytics, project,
   canEnter: (u) => String(u.id) === '846',
-  onEnter: (u) => { if (String(u.id) === '846') flyToApartment(); },
+  onSelect: (u) => { glow.unit = String(u.id); },                                  // the floor glow follows the open card (its floor)
+  // hold-phone 2026-11-09 (the blueprint's «Enter level»): on a phone the one CTA of 846's sheet reads «כניסה לדירה» — the same button,
+  // the same journey, the same audio unlock in its tap; desktop keeps «המשיכו אל הדירה»
+  continueLabel: (u) => (String(u.id) === '846' && PHONE.matches ? { he: 'כניסה לדירה', en: 'Enter the apartment' } : null),
+  onEnter: (u) => { if (String(u.id) === '846') { habaitAudioUnlock(); openJourney('846'); } },   // the unlock first: still inside the tap
+  // the direct way, unchanged: the photoreal descent with the tour loading behind it (the audio unlock in the same tap)
+  extraActions: (u) => (String(u.id) === '846' ? [{ id: 'unitTour360', label: { he: 'לסיור 360°', en: '360° tour' }, onClick: () => { habaitAudioUnlock(); flyToApartment(); } }] : []),
 });
+// the project and its developer under the title (Eliran 2026-11-09: «צריך שיישאר השם של יזם הפרויקט»): project.json `name` + `developer`,
+// text only (never the developer's logo); desktop — phones hide the title block (round 6)
+{
+  const ttl = document.querySelector('#pickerStage .picker-title');
+  const en = (i18n.getLang ? i18n.getLang() : 'he') === 'en';
+  const pk = (o) => (o && typeof o === 'object' ? (en ? o.en || o.he : o.he || o.en) : o) || '';
+  const dev = pk(project.developer), nm = pk(project.name);
+  if (ttl && dev) { const d = document.createElement('div'); d.className = 'picker-dev'; d.textContent = [nm, `${en ? 'Developer:' : 'יזם:'} ${dev}`].filter(Boolean).join(' · '); ttl.after(d); }
+}
+// the legal line at the bottom edge (rainbow-landing round 5): clamped to 2 lines; when the full text does not fit, «פרטים» opens it on a tap
+{
+  const legal = document.querySelector('#pickerStage .picker-disclaimer');
+  if (legal) {
+    const he = () => (i18n.getLang ? i18n.getLang() : 'he') !== 'en';
+    const cue = () => {
+      const open = legal.classList.contains('open');
+      const over = !open && legal.scrollHeight > legal.clientHeight + 2;
+      legal.dataset.more = open ? (he() ? 'סגירה' : 'Close') : over ? (he() ? 'פרטים' : 'Details') : '';
+      if (open || over) { legal.setAttribute('role', 'button'); legal.tabIndex = 0; legal.setAttribute('aria-expanded', String(open)); }
+      else { legal.removeAttribute('role'); legal.removeAttribute('tabindex'); legal.removeAttribute('aria-expanded'); }
+    };
+    const toggle = () => { if (!legal.dataset.more) return; legal.classList.toggle('open'); cue(); };
+    legal.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+    legal.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    legal.addEventListener('pointerdown', (e) => e.stopPropagation());   // never starts a drag of the view
+    new ResizeObserver(cue).observe(legal);
+    new MutationObserver(cue).observe(legal, { childList: true, characterData: true, subtree: true });
+  }
+}
 const isAtHold = () => !intro && !flying && !inside && Math.abs(t - T_HOLD) < 0.02 && !clipShowing;
 // Units behind the facade we look at (habait-4b, card 19: 837/847/857 sit behind 846 from the hold, visible_frac 0.15) would land on the
 // same pixel as the unit in front: a pill that is within 14 px of a NEARER unit's pill is hidden (it stays in the "דירות" drawer).
@@ -502,12 +639,44 @@ function projectAll() {
   }
 }
 const projectUnit = (u) => screenPos.get(String(u.id)) || null;
+// 2026-11-09 (round 2, the "floor picker" idea of Eliran's blueprint, built on our own frame): while 846's card is open at the hold, its
+// floor glows — a band one floor high (anchor ± 1.6 m, floor-to-floor 3.2 m as the picker) across the tower's face (−7 … +31.5 m along the
+// facade tangent: −9.5 … +31.5 m are the tower's edges in the hold frame 91, solved through holdarc/camera.json; the right end trimmed to −7
+// by eye on the 1440 hold), projected every frame through the SAME camera
+// as the pills, so it follows a drag. Light only: the picture is not altered.
+const floorById = new Map((unitsRaw.units || unitsRaw || []).map((u) => [String(u.id), Number(u.floor)]));
+const glow = (() => {
+  const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'), poly = document.createElementNS(NS, 'polygon');
+  svg.id = 'floorGlow'; svg.setAttribute('aria-hidden', 'true');
+  svg.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;display:none;overflow:visible';
+  poly.setAttribute('fill', 'rgba(238,169,39,.22)'); poly.setAttribute('stroke', 'rgba(238,169,39,.95)'); poly.setAttribute('stroke-width', '1.5');
+  poly.style.filter = 'drop-shadow(0 0 10px rgba(238,169,39,.75))';
+  svg.append(poly); document.getElementById('pickerStage').before(svg);
+  const up = new THREE.Vector3(0, 0, 1), corners = [[-7, 1.6], [31.5, 1.6], [31.5, -1.6], [-7, -1.6]];
+  return { unit: null, svg, poly, corners, up };
+})();
+function updateGlow() {
+  const sheet = document.getElementById('unitSheet');
+  const fl = glow.unit != null ? floorById.get(glow.unit) : undefined;
+  const on = Number.isFinite(fl) && sheet && !sheet.hidden && isAtHold() && !building.frame && !building.leaving;
+  if (!on) { if (glow.svg.style.display !== 'none') glow.svg.style.display = 'none'; if (arc && arc.lift) arc.lift = 0; return; }
+  const useArc = arc && arc.active && !arc.pass, pts = [];
+  for (const [k, z] of glow.corners) {
+    const w = hotspot.clone().addScaledVector(facadeTangent, k).addScaledVector(glow.up, z + (fl - 16) * 3.2);
+    if (useArc) { const a = arc.project(w); pts.push(`${a.x.toFixed(1)},${a.y.toFixed(1)}`); }
+    else { const v = w.project(camera); if (v.z >= 1) { glow.svg.style.display = 'none'; return; } pts.push(`${((v.x + 1) / 2 * innerWidth).toFixed(1)},${((1 - v.y) / 2 * innerHeight).toFixed(1)}`); }
+  }
+  glow.poly.setAttribute('points', pts.join(' ')); glow.svg.style.display = 'block';
+  // hold-phone: on a phone the card is a bottom sheet — lift the framed picture so the chosen floor stays visible above it
+  if (PHONE.matches && useArc) { const bottom = Math.max(...pts.map((q) => +q.split(',')[1])), top = sheet.getBoundingClientRect().top; arc.lift = arc.lift + (bottom - (top - 28)); }
+}
+window.__glow = { get on() { return glow.svg.style.display === 'block'; }, get points() { return glow.poly.getAttribute('points'); } };
 console.log('units', placed.length, 'approximate positions', placed.filter((u) => u.approx).length);
 const hotEl = document.getElementById('hot');
 let holdEase = null, holdEaseLogged = false;
 function updateHotspot() {
   const atHold = isAtHold();                                                     // the ease onto the units starts only once the clip is gone
-  projectAll(); picker.update(projectUnit);
+  projectAll(); picker.update(projectUnit); updateGlow();
   document.getElementById('bar').style.display = (atHold || inside || clipShowing || !siteLoaded) ? 'none' : 'block';
   document.getElementById('info').style.display = atHold || inside || clipShowing ? 'none' : 'block';
   document.getElementById('hudButtons').style.display = (clipShowing || ((atHold || inside) && !siteLoaded)) ? 'none' : 'block';   // debug buttons only with the 3D site
@@ -528,18 +697,32 @@ addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; cam
 // ---- the cut from the orbit clip to the hold: when the clip is over AND the hold has rendered; never a black screen or text --------
 let holdReady = false;
 function hideOrbitClip() {
-  orbit.done = true; clipShowing = false; showDragHint();   // Eliran 2026-11-04 (via rnd-67): no idle glide after the clip — its 4.5 fps drift of stills read as a freeze; the hold rests on the clip's end pose and moves only on drag
+  orbit.done = true; clipShowing = false; showDragHint();
+  if (arc && arc.settle) arc.settle(1100);   // hold-phone 2026-11-09: on a portrait screen, ease from the film's cover framing to the tower framing   // Eliran 2026-11-04 (via rnd-67): no idle glide after the clip — its 4.5 fps drift of stills read as a freeze; the hold rests on the clip's end pose and moves only on drag
   document.getElementById('clipSkip').style.display = 'none'; lineEl.style.display = 'none'; document.getElementById('clipLegal').style.display = 'none';   // the picker chrome carries its own disclaimer at the hold
   clipEl.style.transition = 'opacity .5s'; clipEl.style.opacity = '0';
   setTimeout(() => { clipEl.style.display = 'none'; clipEl.pause(); clipEl.removeAttribute('src'); clipEl.load(); clipEl.style.opacity = '1'; }, 550);
   console.log(`orbit clip -> hold after ${Math.round(performance.now() - orbit.startedAt)} ms (ended ${orbit.ended} error ${orbit.error} skipped ${orbit.skipped})`);
 }
 // the drag affordance (v6, 3.11; Eliran on the hold after the video: "תקוע"): a quiet chip 1.5 s after the cut, gone on the first drag or after 9 s
+// rainbow-landing round 3: the chip goes 14 px under the picker's top chrome, in the sky above the units, never on a pill or on the chrome:
+// on a portrait phone under the whole top column (title, legend, «דירות», the legal line); on wider screens under the title
+function placeDragHint(h) {
+  if (matchMedia('(hover: none) and (pointer: coarse) and (max-width: 900px), (hover: none) and (pointer: coarse) and (max-height: 500px)').matches) { h.style.top = ''; return; }   // phones: CSS places it (round 6; portrait: hold-phone, above the legal line)
+  const ch = document.querySelector('#pickerStage .picker-chrome');
+  if (!ch || ch.hidden) return;
+  const sel = matchMedia('(max-width: 640px) and (orientation: portrait)').matches ? '.picker-title, .picker-dev, .picker-bottom > :not(.picker-disclaimer)' : '.picker-title, .picker-dev';   // the legal line sits at the bottom edge (round 5)
+  const b = [...ch.querySelectorAll(sel)].reduce((m, e) => Math.max(m, e.getBoundingClientRect().bottom), 0);
+  if (b) { h.style.bottom = 'auto'; h.style.top = `${Math.round(b + 14)}px`; }
+}
 function showDragHint() {
   const h = document.getElementById('dragHint'); if (!h || !arc) return;
-  setTimeout(() => { if (halted || inside || arc.interacted) return; h.style.display = 'block'; requestAnimationFrame(() => h.classList.add('on'));
-    const off = () => { h.classList.remove('on'); setTimeout(() => { h.style.display = 'none'; }, 700); };
-    const poll = setInterval(() => { if (arc.interacted || halted || inside) { clearInterval(poll); off(); } }, 200); setTimeout(() => { clearInterval(poll); off(); }, 9000); }, 1500);
+  setTimeout(() => { if (halted || inside || arc.interacted) return;
+    if (PHONE.matches) h.textContent = '⟷ גררו לסיבוב · צבטו לזום';                     // hold-phone: shorter on a phone
+    h.style.display = 'block'; placeDragHint(h); requestAnimationFrame(() => h.classList.add('on'));
+    const off = () => { h.classList.remove('on'); setTimeout(() => { h.style.display = 'none'; }, 700); removeEventListener('pointerdown', off, true); };
+    addEventListener('pointerdown', off, true);                                        // the first touch anywhere
+    const poll = setInterval(() => { if (arc.interacted || halted || inside) { clearInterval(poll); off(); } }, 200); setTimeout(() => { clearInterval(poll); off(); }, PHONE.matches ? 5000 : 9000); }, 1500);
 }
 function clipGate() {
   if (!orbit || orbit.done) return;
@@ -559,7 +742,9 @@ function frame(now) {
 }
 renderer.compile(scene, camera); renderer.render(scene, camera);                 // the first (shader-compiling) frame happens behind the clip
 setLine(1); holdReady = true; if (loadEl) loadEl.remove(); if (!orbit) showDragHint();   // no idle glide (see hideOrbitClip)
-window.__hold = { get arc() { return arc && { active: arc.active, index: arc.index, loaded: arc.loaded, N: arc.N, pass: arc.pass, mode: arc.mode, tracks: arc.tracks }; }, get sphere() { return { on: sphere.on, fov: camera.fov, look: [lookDir.x, lookDir.y, lookDir.z].map((v) => Math.round(v * 1000) / 1000) }; }, get ready() { return holdReady; }, get siteLoaded() { return siteLoaded; }, get clipShowing() { return clipShowing; }, nodesReady: () => nodes.map((n) => n.ready), units: placed.length };
+window.__hold = { get framing() { return arc && arc.framing; }, get arc() { return arc && { active: arc.active, index: arc.index, loaded: arc.loaded, N: arc.N, pass: arc.pass, mode: arc.mode, tracks: arc.tracks }; }, get sphere() { return { on: sphere.on, fov: camera.fov, look: [lookDir.x, lookDir.y, lookDir.z].map((v) => Math.round(v * 1000) / 1000) }; }, get ready() { return holdReady; }, get siteLoaded() { return siteLoaded; }, get clipShowing() { return clipShowing; }, nodesReady: () => nodes.map((n) => n.ready), units: placed.length };
 requestAnimationFrame(frame);
 // background: the terrace node (the landing after the descent clip), then the rest — never the glb
-loadNodeTex(nodes[N - 1]).then(() => Promise.all(nodes.map((n) => loadNodeTex(n)))).then(() => console.log('all nodes loaded')).catch((e) => console.warn('node textures', e.message));
+// 2026-11-11: one node at a time, and never beside the journey's film — on a 1–3 MB/s line the eight files (5.4 MB) loaded together took
+// the line from the film (2 MB) when a visitor tapped «כניסה לדירה» soon after picking a unit: the flight began 10 s late (measured live).
+(async () => { try { for (const n of [nodes[N - 1], ...nodes]) { if (journeyWarmP) await journeyWarmP; await loadNodeTex(n); } console.log('all nodes loaded'); } catch (e) { console.warn('node textures', e.message); } })();

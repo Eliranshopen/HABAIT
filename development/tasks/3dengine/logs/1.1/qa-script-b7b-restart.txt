@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import { makeHome, engineOf, SCR, cleanup, runRunner } from './qa-lib.mjs';
+const h = await makeHome({ timeout: 60 });
+const H = (await engineOf(h)).handlers;   // spawnRunner is a no-op here: the runner is started by hand below
+const p = `${h.inbox}/r.pdf`; fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, p);
+const a = await H.start_simulation({ pdf_path: p }); const id = a.job_id;
+const jf = `${h.jobsDir}/${id}/job.json`; const rj = () => JSON.parse(fs.readFileSync(jf, 'utf8'));
+const files = () => fs.readdirSync(`${h.jobsDir}/${id}`).join(',');
+await H.cancel_job({ job_id: id });
+console.log('after cancel:', rj().state);
+const c = `${h.jobsDir}/${id}/input/source.pdf`; fs.chmodSync(c, 0o666); fs.appendFileSync(c, '\n%changed');
+const b = await H.start_simulation({ pdf_path: p });
+console.log('start again: created', b.created, 'resumed', b.resumed, 'state', rj().state);
+const r = runRunner(h, id, 60000);
+console.log('runner exit', r.status, '| state', rj().state, rj().reason?.code, '|', rj().reason?.message, '| files:', files());
+const ledger = fs.existsSync(`${h.jobsDir}/${id}/ledger.json`);
+console.log('ledger.json exists', ledger);
+cleanup(h);

@@ -1,0 +1,18 @@
+✔ GET a file, a folder index, an encoded path; content types (138.5225ms)
+✔ HEAD has headers and no body; other methods → 405 (6.4647ms)
+✔ a folder without slash redirects (query kept); no listing; missing → 404 (18.3714ms)
+✔ no path outside the root: traversal, encoded traversal, bad encoding, NUL (5.9488ms)
+✔ a link inside the root that leads outside → 403 (a directory junction: no privilege needed) (8.7551ms)
+✔ contentType by extension; startServe refuses a missing root (4.6621ms)
+✔ isListening, localUrl, serveFile (10.8663ms)
+✔ ensureServe: already listening → nothing started (23.4505ms)
+✔ ensureServe: nothing listening → spawns detached cli serve, records serve.json, waits until it listens (122.2703ms)
+✔ ensureServe: a server that never comes up → listening false after waitMs (134.0024ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1237.3474

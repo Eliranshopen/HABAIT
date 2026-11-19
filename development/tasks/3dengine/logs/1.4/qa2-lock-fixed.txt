@@ -1,0 +1,33 @@
+PASS free :: got took, want took; state after: free
+PASS empty-folder :: got took, want took; state after: free
+PASS dead-fresh :: got took, want took; state after: free
+PASS live-fresh :: got busy, want busy; state after: held
+PASS live-old :: got took, want took; state after: free
+PASS future-live :: got busy, want busy; state after: held
+PASS future-dead :: got took, want took; state after: free
+PASS huge-time-live :: got busy, want busy; state after: foreign
+PASS two-entries :: got busy, want busy; state after: foreign
+PASS foreign-file :: got busy, want busy; state after: foreign
+PASS foreign-plus-entry :: got busy, want busy; state after: foreign
+PASS subfolder :: got busy, want busy; state after: foreign
+PASS badname-entry :: got busy, want busy; state after: foreign
+PASS oldfile-dead :: got took, want took; state after: free
+PASS oldfile-live-fresh :: got busy, want busy; state after: file
+PASS oldfile-live-aged :: got took, want took; state after: free
+PASS oldfile-empty-aged :: got took, want took; state after: free
+PASS oldfile-empty-fresh(waits 1s, waitMs 2000) :: got took, want took; state after: free
+PASS oldfile-garbage-aged :: got took, want took; state after: free
+PASS leftover-new-gone-tmp :: got took, want took; state after: free
+PASS spaces-hebrew :: got took, want took; state after: free
+PASS parent-missing :: got took, want took; state after: free
+PASS long-path :: got took, want took; state after: free
+PASS junction-to-empty :: got took, want took; state after: free
+PASS junction-to-held :: got busy, want busy; state after: held
+PASS fn-throws-passed-on-and-released :: ran 1 code XBOOM state free
+PASS returns fn value
+PASS alive-swap: holder replaced by a live fresh one between look and act -> busy, live entry untouched :: out busy state held
+PASS alive-swap-same-pid: the entry replaced by another entry of the same dead pid (new nonce): taker acts only on the exact entry, then re-looks :: out took
+PASS alive-release: holder gone between look and act -> one take :: out took
+PASS taken-over holder releases: taker entry untouched :: state held
+PASS nested same lock same process is busy, not two holders :: busy after: free
+{"total":32,"fail":[]}

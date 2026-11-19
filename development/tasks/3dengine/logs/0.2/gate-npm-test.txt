@@ -1,0 +1,189 @@
+
+> habait-3dengine@0.2.0 test
+> node --test --experimental-test-coverage --test-coverage-lines=80 "--test-coverage-include=engine/**/*.mjs" "--test-coverage-include=mcp/**/*.mjs" "tests/unit/**/*.test.mjs" "tests/milestones/**/*.test.mjs"
+
+✔ a. parity: run-project.mjs --parity → 41 rows · PASS (344.3222ms)
+✔ b. catalog: fetch.mjs --verify-only → 57/57 rows OK (336.0786ms)
+✔ c. readiness: the doctor reports ready except keys (5696.0823ms)
+✔ d. port identity: pipeline/ equals commit a63494a, blob for blob (1648.4123ms)
+✔ initialize handshake, ping, tools/list = the eight tools with both schemas (301.8842ms)
+✔ engine_status answers in time with a stub-site check (467.9558ms)
+✔ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (989.3053ms)
+✔ the same PDF again → created: false and the same job (3.4832ms)
+✔ cancel_job on a fresh job: cancelled, the runner stops (35.1777ms)
+✔ every stub reason code (32.4665ms)
+✔ protocol errors: -32601, -32602, -32700 (1.3372ms)
+✔ stdout held JSON-RPC lines only; every tools/call answered under 2 s (0.672ms)
+✔ every engine/**/*.mjs and mcp/**/*.mjs imports cleanly (77.2533ms)
+✔ help and no command (2.1142ms)
+✔ unknown command → usage on stderr, exit 2 (0.3467ms)
+✔ doctor: exit 0 when ready or ready except keys, 1 otherwise; --json (1.0213ms)
+✔ env prints the pointers, never a key (0.4623ms)
+✔ setup-env: nothing to do / dry run / --go ok / --go failure (1.822ms)
+✔ bring-assets: dry run, missing in source, --from, --go ok and failure (1.4363ms)
+✔ a config error is reported on stderr with exit 1 (0.2864ms)
+✔ main with the real config: env command (2.4996ms)
+✔ isMain compares the script path with the module url (0.5414ms)
+✔ job / jobs: human lines and --json; missing job exit 1; job needs an id (26.1591ms)
+✔ serve: --root required; serves until the server closes (13.1386ms)
+✔ mcp: runs the server with the loaded config (0.6218ms)
+✔ ENGINE_HOME is the folder above engine/, absolute, forward slashes (2.4428ms)
+✔ defaults: relative paths resolve against home, absolute kept, basePython untouched (7.9705ms)
+✔ the real engine.config.json loads with the default home (2.4344ms)
+✔ local override merges shallow, assets one level deep (5.9212ms)
+✔ env overrides ENGINE_PYTHON / ENGINE_BLENDER / ENGINE_CHROME win over files (9.0084ms)
+✔ injected readFile / exists are used (0.7362ms)
+✔ a missing required field throws an Error naming it (32.4231ms)
+✔ wrong shapes are rejected (8.3234ms)
+✔ pipelineEnv returns exactly the eleven pointers (3.8162ms)
+✔ 0.2 blocks: inbox, stub, serve resolved; ENGINE_VERSION from package.json (4.7856ms)
+✔ 0.2 env overrides: ENGINE_HOME, ENGINE_JOBS_DIR, ENGINE_SERVE_PORT, ENGINE_STUB_STEP_MS (22.7783ms)
+✔ 0.2 local override merges stub and serve one level deep (8.3156ms)
+✔ 0.2 blocks: missing or wrong shapes are named (40.9541ms)
+✔ all checks ok with fakes → READY (10.959ms)
+✔ a fake secret value never reaches the report or the result (1.1094ms)
+✔ keys: from env, from env-file names, missing → READY EXCEPT KEYS (1.2984ms)
+✔ node version too old (1.1674ms)
+✔ python: missing interpreter, probe failure, no JSON, import error, version mismatch (2.4886ms)
+✔ python snippet imports every module and asks every pin (0.2957ms)
+✔ node-libs: unresolvable, wrong version, no lock (1.6688ms)
+✔ blender: missing, wrong version; chrome and legal missing (1.0617ms)
+✔ pipeline: parity failure and the env it is given (0.8313ms)
+✔ assets-catalog: a missing row, an unreadable manifest (1.5419ms)
+✔ assets-hdri: missing file, mismatch, no record in the style file (2.6649ms)
+✔ assets-packs: zip missing, zip with the wrong hash, no sources array (0.9847ms)
+✔ readEnvNames returns names with non-empty values only, never values (7.1125ms)
+✔ resolveNodeLib finds an installed library version, throws when absent (26.8679ms)
+✔ every pipeline env fallback is covered by pipelineEnv or the allow-list (356.5428ms)
+✔ the allow-list carries a reason for each name (0.3068ms)
+✔ a PDF inside the inbox passes: real path, given name, bytes (11.4758ms)
+✔ outside, .. escapes, empty, NUL → PATH_NOT_ALLOWED (7.8032ms)
+✔ an inbox folder that does not exist allows nothing (5.3579ms)
+✔ a link inside the inbox that leads outside is refused (a directory junction: no privilege needed) (18.9204ms)
+✔ missing file, a folder, wrong magic → NOT_A_PDF; over 20 MB → FILE_TOO_LARGE (18.7711ms)
+✔ isInside / allowedRoot / sha256Buffer (1.6056ms)
+✔ jobId: 16 hex, deterministic, sensitive to every part (2.9126ms)
+✔ states, percents, terminal set match the contract (1.8236ms)
+✔ newJob validates against contracts/job.schema.json; write/read round trip; no temp file left (12.2753ms)
+✔ readJob: malformed id or missing job → null; a broken file throws (8.4817ms)
+✔ writeJob gives up on a non-retryable rename error and removes its temp file (876.3816ms)
+✔ updateJob: mutate writes, null writes nothing, missing job → job null; lock released (163.361ms)
+✔ setState keeps percent for review/failed/cancelled (0.2898ms)
+✔ withJobLock: a busy lock times out; a stale one is taken over (55.8278ms)
+✔ listJobs: newest first, limit, skips foreign and broken folders; missing dir is empty (31.7397ms)
+✔ formatJob: one line with state, percent, name, and link or reason (0.5557ms)
+✔ normalizeName: lower-case, _ to - (1.7695ms)
+✔ parseLock reads name==version, skips comments and blanks (2.1512ms)
+✔ parseLock rejects an unpinned line (0.8361ms)
+✔ the real requirements lock parses as written (20 pins) (11.8473ms)
+✔ sha256File streams the hash of a file (28.5721ms)
+✔ run returns status, stdout and stderr (178.9629ms)
+✔ run through a shell sends one command string and raises no deprecation warning (130.6322ms)
+✔ run reports a spawn error as status -1 with the reason (4.1118ms)
+✔ run honours the timeout (220.985ms)
+✔ JSON read/write and manifest rows (14.2067ms)
+✔ listFiles is recursive, sorted, forward slashes; missing folder is empty (5.1147ms)
+✔ path helpers (0.3951ms)
+✔ initialize negotiates the protocol version (5.3272ms)
+✔ ping, tools/list, notifications get no reply, unknown method -32601 (0.6534ms)
+✔ tools/call: success shape, tool failure is a RESULT, bad name/args -32602, crash -32603 (25.617ms)
+✔ invalid requests -32600; client responses ignored; parse error -32700 with id null; blank lines ignored (2.2436ms)
+✔ toolSuccess / toolFailure shapes (0.3002ms)
+✔ runStdio: one JSON line per answer on stdout, logs on stderr, ends when stdin ends (31.1753ms)
+✔ runStdio with the default stub engine answers tools/list (55.1761ms)
+✔ exactly the eight tools of the contract, each with title, description, both schemas, annotations (35.678ms)
+✔ tools/list schemas are the contract files, with the Job inlined (75.3302ms)
+✔ every contract schema uses only the keywords the checker implements (19.8616ms)
+✔ read-only tools are marked read-only; approve and cancel are not; cancel is destructive (0.559ms)
+✔ inlineRefs refuses any other $ref (0.9433ms)
+✔ pidAlive: this process yes; junk and a finished process no (162.7655ms)
+✔ sleepSync blocks about as long as asked; negative is no wait (34.8376ms)
+✔ isMain (0.684ms)
+✔ a valid value has no errors (3.4821ms)
+✔ every keyword reports its error with a path (2.9132ms)
+✔ assertSupported accepts the subset and annotations, refuses anything else (1.8956ms)
+✔ GET a file, a folder index, an encoded path; content types (48.6731ms)
+✔ HEAD has headers and no body; other methods → 405 (7.5327ms)
+✔ a folder without slash redirects (query kept); no listing; missing → 404 (12.3251ms)
+✔ no path outside the root: traversal, encoded traversal, bad encoding, NUL (4.271ms)
+✔ a link inside the root that leads outside → 403 (a directory junction: no privilege needed) (6.6941ms)
+✔ contentType by extension; startServe refuses a missing root (4.6495ms)
+✔ isListening, localUrl, serveFile (6.2876ms)
+✔ ensureServe: already listening → nothing started (7.9244ms)
+✔ ensureServe: nothing listening → spawns detached cli serve, records serve.json, waits until it listens (80.4682ms)
+✔ ensureServe: a server that never comes up → listening false after waitMs (150.2129ms)
+✔ planAssets: present / copy / missing-in-source, pack and HDRI, with sizes (39.7338ms)
+✔ applyAssets copies, verifies, fails the missing row, writes a manifest row; second run copies nothing (76.8142ms)
+✔ a wrong file at the target is overwritten; a bad source is a post-copy mismatch (41.9146ms)
+✔ --from overrides the source; a missing HDRI / pack source is a failure; copy errors are caught (21.5987ms)
+✔ a style file without an HDRI record plans no HDRI entry (24.1955ms)
+✔ nothing needed when the probes pass (4.763ms)
+✔ everything needed on a bare machine; commands as specified (0.944ms)
+✔ pip needed when a pin is off even though the venv exists (0.3921ms)
+✔ applyEnv runs needed steps in order and writes a manifest row each (7.1738ms)
+✔ applyEnv stops at the first failure with its reason (8.8682ms)
+✔ applyEnv with nothing needed runs nothing and writes nothing (1.4093ms)
+✔ engine_status: doctor checks + stub-site; mode stub; missing = failed ids (9.6331ms)
+✔ engine_status: no doctor result yet → not ready, a pending check; missing site → not ready (9.9866ms)
+✔ inspect_plan: sha256, bytes, the one candidate (9.0879ms)
+✔ start_simulation: creates job + input copy + one runner; again → same job, no second job (22.9999ms)
+✔ start_simulation: a live runner is not doubled; a terminal job gets no runner (29.6318ms)
+✔ start_simulation: unknown apartment → NO_PLAN_FOUND; bad path → PATH_NOT_ALLOWED (50.9001ms)
+✔ get_job / approve / cancel / get_result: reason codes and the happy path (39.9692ms)
+✔ approve with no quote on the job → estimate 0; cancel a live job keeps its percent (20.0231ms)
+✔ an unknown job id creates no folder (3.7141ms)
+✔ list_jobs: newest first, default 10 (26.49ms)
+✔ configEnv points a child at the same home, jobs, port and step; tourDir; runner pid file (4.1391ms)
+✔ spawnRunnerDefault starts the real runner detached; for an unknown job it exits at once (139.397ms)
+✔ doctor cache: runs the child once, keeps the result in memory and on disk, never a key value (21.3098ms)
+✔ doctor cache: a slow first run → get returns null after the wait; an error is reported (33.9599ms)
+✔ doctor cache default child: the real CLI on a temp home answers with JSON (449.8181ms)
+✔ nextState walks the sequence and waits for the approval (3.4055ms)
+✔ a whole walk: quote at awaiting_approval, waits, approval, serve started before done, pid file released (153.6052ms)
+✔ cancelled during a step → exits with "cancelled" and writes nothing over it (18.691ms)
+✔ already terminal / unknown job / malformed id / no next state (17.526ms)
+✔ the job file vanishes mid-run → no-job (7.6662ms)
+✔ no approval before the deadline → approval-timeout (15.9043ms)
+✔ a second runner exits while the first is alive; a stale pid file is taken over (11.7739ms)
+✔ the real runner process walks a job to done against a temp home (393.1771ms)
+ℹ tests 144
+ℹ suites 0
+ℹ pass 144
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8127.95
+ℹ start of coverage report
+ℹ -------------------------------------------------------------------
+ℹ file               | line % | branch % | funcs % | uncovered lines
+ℹ -------------------------------------------------------------------
+ℹ engine             |        |          |         | 
+ℹ  cli.mjs           | 100.00 |    97.26 |   94.74 | 
+ℹ  config.mjs        | 100.00 |    96.43 |  100.00 | 
+ℹ  doctor.mjs        | 100.00 |    95.39 |  100.00 | 
+ℹ  inbox.mjs         | 100.00 |    93.75 |  100.00 | 
+ℹ  jobs.mjs          | 100.00 |    94.55 |  100.00 | 
+ℹ  lib               |        |          |         | 
+ℹ   files.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   hash.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   json.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   lock.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   main.mjs         | 100.00 |    83.33 |  100.00 | 
+ℹ   paths.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   proc.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   run.mjs          | 100.00 |   100.00 |  100.00 | 
+ℹ  serve.mjs         | 100.00 |   100.00 |   89.47 | 
+ℹ  setup             |        |          |         | 
+ℹ   assets.mjs       | 100.00 |    98.08 |  100.00 | 
+ℹ   env.mjs          | 100.00 |    87.50 |   80.00 | 
+ℹ mcp                |        |          |         | 
+ℹ  schema-check.mjs  | 100.00 |   100.00 |  100.00 | 
+ℹ  server.mjs        | 100.00 |    98.46 |   88.89 | 
+ℹ  stub-engine.mjs   | 100.00 |    95.45 |   97.50 | 
+ℹ  stub-runner.mjs   |  97.39 |    96.83 |  100.00 | 112-114
+ℹ  tools.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ -------------------------------------------------------------------
+ℹ all files          |  99.84 |    96.92 |   97.19 | 
+ℹ -------------------------------------------------------------------
+ℹ end of coverage report

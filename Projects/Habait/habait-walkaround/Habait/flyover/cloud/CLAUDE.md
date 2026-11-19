@@ -1,11 +1,11 @@
 # cloud/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Free cloud-render alternatives for the realistic orbit video tested on Kaggle (Blender Cycles, Wan, VACE, refine lanes) with REPORT.md.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 2 files here · 6 subfolders · 122 files / 118.7 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

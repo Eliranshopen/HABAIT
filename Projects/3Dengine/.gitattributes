@@ -1,0 +1,5 @@
+# The engine's test inputs are BYTES, not text: git must never change their line endings on checkout.
+# A PDF written with LF has a cross-reference table of byte offsets; a checkout that turned LF into CRLF
+# (core.autocrlf) made the live engine home hold other bytes than the worktree (found at milestone 1.1).
+*.pdf -text
+tests/fixtures/** -text

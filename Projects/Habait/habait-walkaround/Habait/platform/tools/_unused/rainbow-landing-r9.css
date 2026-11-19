@@ -1,0 +1,239 @@
+/* The Rainbow landing page at the site root (plan development/plans/2026-11-08-rainbow-landing.md, round 9).
+   Round 9 (Eliran 2026-11-09: «העמוד נחיתה נראה עדיין מאוד מיושן. אני רוצה משהו בסגנון הזה https://rainbowtlv.com/»): the look and the
+   motion feel of the developer's own site, learnt from a read-only teardown (qa-evidence/platform/rainbow-landing-2026-11-08/r9-reference/
+   DESIGN.md), rebuilt with our content: a gallery-white page, ink-black text, one field of flat colour blocks on the first and the last
+   screen, one picture per screen with a narrow text column beside it, sides alternating, a black square button, a pink bottom bar with
+   the rainbow stripe. Nothing of theirs is copied (code, text, logo, pictures, film); their commercial fonts are replaced by free ones
+   with full Hebrew: Bellefair (display) and Assistant (text), self-hosted (fonts/SOURCES.md).
+   The round-8 stylesheet (direction B) is kept in tools/_unused/rainbow-landing-r8.css.
+   Static by default: no JS / reduced motion = every word and picture visible; js/landing-motion.js adds the motion (html.rl-motion). */
+
+@font-face { font-family: 'Bellefair'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(../fonts/bellefair-hebrew-400-normal.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'Bellefair'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(../fonts/bellefair-latin-400-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Assistant'; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url(../fonts/assistant-hebrew-wght-normal.woff2) format('woff2-variations'), url(../fonts/assistant-hebrew-wght-normal.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'Assistant'; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url(../fonts/assistant-latin-wght-normal.woff2) format('woff2-variations'), url(../fonts/assistant-latin-wght-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Assistant'; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url(../fonts/assistant-latin-ext-wght-normal.woff2) format('woff2-variations'), url(../fonts/assistant-latin-ext-wght-normal.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* ---------- tokens (the landing only) ---------- */
+body.rl9 {
+  /* the reference palette (DESIGN.md §2): white, ink, the seven flat accents */
+  --r9-white: #FFFFFF; --r9-ink: #000000; --r9-mute: #3D3D3D; --r9-line: #E6E6E6;
+  --r9-pink: #F3BAC1; --r9-yellow: #FFEC13; --r9-olive: #70770D; --r9-sky: #7CC0E3; --r9-blue: #1B36FF; --r9-orange: #FF6E13; --r9-plum: #572365;
+  --r9-display: 'Bellefair', 'Frank Ruhl Libre', Georgia, serif;
+  --r9-text: 'Assistant', 'Heebo', system-ui, 'Segoe UI', Arial, sans-serif;
+  --r9-head: 64px;                                   /* the white header bar */
+  --r9-row-pad: clamp(64px, 11vw, 160px);            /* 160 px between chapters at 1440 (DESIGN.md §5), 64 px on phones */
+  --surface: var(--r9-white); --surface-raised: var(--r9-white); --surface-sunken: #F4F4F4; --text: var(--r9-ink); --text-muted: var(--r9-mute);
+  --line: var(--r9-line); --line-strong: #BDBDBD; --brand-ink: var(--r9-ink); --focus: var(--r9-blue);
+  color-scheme: light; background: var(--r9-white); color: var(--r9-ink);
+  font-family: var(--r9-text); font-weight: 400; font-size: 1.0625rem; line-height: 1.55;
+}
+[hidden] { display: none !important; }
+.rl, .rl main { overflow-x: clip; }   /* main clips the words that enter from the page edge (the viewport would scroll otherwise) */
+.rl-wrap { inline-size: min(100% - 2 * var(--gutter), 1400px); margin-inline: auto; }
+.rl-skip { position: absolute; inset-inline-start: var(--sp-4); inset-block-start: -100px; z-index: 60; padding: var(--sp-3) var(--sp-4); background: var(--r9-ink); color: var(--r9-white); }
+.rl-skip:focus { inset-block-start: var(--sp-4); }
+.rl9 :focus-visible { outline: 2px solid var(--r9-blue); outline-offset: 3px; }
+html.rl-motion { scroll-behavior: auto !important; }
+html.lenis, html.lenis body { block-size: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+/* ---------- the rainbow stripe (bottom bar, footer): seven flat segments ---------- */
+.rl-stripe { display: flex; block-size: 4px; }
+.rl-stripe > i { flex: 1; }
+.rl-stripe > i:nth-child(1) { background: var(--r9-plum); flex: 1.4; } .rl-stripe > i:nth-child(2) { background: var(--r9-sky); flex: 0.8; }
+.rl-stripe > i:nth-child(3) { background: var(--r9-blue); flex: 2.4; } .rl-stripe > i:nth-child(4) { background: var(--r9-olive); flex: 0.9; }
+.rl-stripe > i:nth-child(5) { background: var(--r9-yellow); flex: 1.8; } .rl-stripe > i:nth-child(6) { background: var(--r9-pink); flex: 1.2; }
+.rl-stripe > i:nth-child(7) { background: var(--r9-orange); flex: 1.6; }
+
+/* ---------- header: a white bar, always (the reference hides it on the first screen; ours carries the language switch) ---------- */
+.rl-top { position: fixed; inset-block-start: 0; inset-inline: 0; z-index: 40; background: var(--r9-white); color: var(--r9-ink);
+  transition: box-shadow 0.5s ease; padding-block-start: env(safe-area-inset-top); }
+.rl-top.is-solid { box-shadow: 0 1px 0 var(--r9-line); }
+.rl-top__in { inline-size: min(100% - 2 * var(--gutter), 1410px); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4);
+  min-block-size: var(--r9-head); }
+.rl-brand { display: inline-flex; align-items: center; color: inherit; text-decoration: none; min-block-size: var(--tap-min); }
+.rl-brand__logo { display: block; block-size: 30px; inline-size: auto; }
+.rl-top__nav { display: flex; align-items: center; gap: clamp(4px, 1.6vw, 28px); }
+.rl-top__link { display: none; align-items: center; min-block-size: var(--tap-min); padding-inline: var(--sp-2); color: inherit; text-decoration: none;
+  font-size: 1.125rem; font-weight: 400; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat;
+  background-position: 100% calc(100% - 10px); transition: background-size 0.3s ease-in-out; }
+[dir="ltr"] .rl-top__link { background-position: 0 calc(100% - 10px); }
+.rl-top__link:hover { background-size: calc(100% - 2 * var(--sp-2)) 1px; background-position-x: center; }
+@media (min-width: 760px) { .rl-top__link { display: inline-flex; } }
+.rl-lang { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-block-size: var(--tap-min); min-inline-size: var(--tap-min); padding-inline: var(--sp-2);
+  border: 0; background: transparent; color: inherit; font: inherit; font-size: 1.0625rem; cursor: pointer; }
+.rl-lang::before { content: ''; inline-size: 16px; block-size: 16px; border: 1.4px solid currentColor; border-radius: 50%;
+  background: linear-gradient(currentColor, currentColor) center / 1.4px 100% no-repeat, linear-gradient(currentColor, currentColor) center / 100% 1.4px no-repeat; opacity: 0.85; }
+@media (max-width: 759px) { .rl9 { --r9-head: 56px; } .rl-brand__logo { block-size: 26px; } }
+
+/* ---------- the colour-block field (hero and closing screen); decorative, aria-hidden ---------- */
+.rl-blocks { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: var(--r9-pink); }
+.rl-blocks > i { position: absolute; display: block; }
+/* our own arrangement of the reference palette (not their picture): a tall yellow and a pink column at the inline end, a sky band on
+   top, a plum hairline, a blue and an orange block at the inline start, an olive band below */
+.rl-blocks > i:nth-child(1) { background: var(--r9-yellow); inset-block: 0 46%; inset-inline: 0 76%; }
+.rl-blocks > i:nth-child(2) { background: var(--r9-pink); inset-block: 54% 0; inset-inline: 0 76%; }
+.rl-blocks > i:nth-child(3) { background: var(--r9-sky); inset-block: 0 74%; inset-inline: 24% 18%; }
+.rl-blocks > i:nth-child(4) { background: var(--r9-plum); inset-block: 0 0; inset-inline: 82% 17%; }
+.rl-blocks > i:nth-child(5) { background: var(--r9-blue); inset-block: 0 38%; inset-inline: 83% 0; }
+.rl-blocks > i:nth-child(6) { background: var(--r9-orange); inset-block: 62% 0; inset-inline: 83% 0; }
+.rl-blocks > i:nth-child(7) { background: var(--r9-olive); inset-block: 78% 0; inset-inline: 24% 18%; }
+
+/* ---------- 1. hero: the colour field, one white card in the middle holding the film and the words ---------- */
+.rl-hero { box-sizing: border-box; position: relative; isolation: isolate; display: grid; place-items: center; min-block-size: max(100svh, 640px);
+  padding: calc(var(--r9-head) + env(safe-area-inset-top) + clamp(20px, 5vh, 56px)) clamp(20px, 7vw, 120px) clamp(56px, 9vh, 96px); }
+.rl-card { position: relative; background: var(--r9-white); color: var(--r9-ink); inline-size: 100%; }
+/* the second white layer offset under the card (the reference's .banner-inner-overlay, 9 px) */
+.rl-card::before { content: ''; position: absolute; inset: 9px -9px -9px 9px; background: var(--r9-white); opacity: 0.55; z-index: -1; }
+.rl-hero__card { max-inline-size: 1180px; display: grid; padding: 12px; gap: 0; }
+.rl-hero__media { position: relative; overflow: hidden; background: #DCE7EF; aspect-ratio: 10 / 11; }
+.rl-hero__media picture { display: contents; }
+.rl-hero__poster, .rl-hero__video { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 50% 50%; display: block; }
+.rl-hero__video { opacity: 0; transition: opacity 900ms ease; }
+.rl-hero.is-playing .rl-hero__video { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .rl-hero__video { transition: none; } }
+.rl-hero__corner { position: absolute; inset-block-end: var(--sp-3); inset-inline-end: var(--sp-3); z-index: 2; display: flex; align-items: center; gap: var(--sp-2); }
+.rl-hero__corner .rl-badge { position: static; }
+.rl-play { display: inline-grid; place-items: center; inline-size: var(--tap-min); block-size: var(--tap-min); border-radius: 50%; border: 0;
+  background: rgb(255 255 255 / 0.92); color: var(--r9-ink); cursor: pointer; transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; }
+.rl-play svg { inline-size: 18px; block-size: 18px; }
+.rl-play[data-state="playing"] .rl-play__play, .rl-play[data-state="paused"] .rl-play__pause { display: none; }
+.rl-play:hover { background: var(--r9-ink); color: var(--r9-white); }
+.rl-hero__body { display: grid; justify-items: center; text-align: center; gap: 14px; padding: 26px 14px 18px; }
+.rl-mark { margin: 0; display: grid; justify-items: center; gap: 4px; direction: ltr; font-family: var(--r9-display); line-height: 1; }
+.rl-mark > span:first-child { font-size: clamp(2.3rem, 1.7rem + 2.4vw, 3.6rem); letter-spacing: 0.08em; margin-inline-end: -0.08em; }
+.rl-mark__sub { font-family: var(--r9-text); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.42em; margin-inline-end: -0.42em; }
+.rl-dev { margin: 2px 0 0; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.02em; color: var(--r9-ink); }
+.rl-dev > span:first-child { color: var(--r9-mute); font-weight: 400; }
+.rl-hero__title { margin: 4px 0 0; font-family: var(--r9-display); font-weight: 400; font-size: clamp(1.9rem, 1.45rem + 1.5vw, 2.85rem); line-height: 1.08; text-wrap: balance; }
+.rl-hero__l1, .rl-hero__l2 { display: block; }
+.rl-hero__promise { margin: 0; max-inline-size: 30ch; font-size: clamp(1.02rem, 0.96rem + 0.3vw, 1.2rem); line-height: 1.5; color: var(--r9-mute); text-wrap: balance; }
+.rl-hero__ctas { margin-block-start: 8px; }
+.rl-cue { position: absolute; inset-block-end: 6px; inset-inline-start: 50%; translate: -50% 0; display: grid; place-items: center; inline-size: var(--tap-min); block-size: var(--tap-min); color: var(--r9-ink); }
+[dir="rtl"] .rl-cue { translate: 50% 0; }
+.rl-cue svg { inline-size: 22px; block-size: 22px; }
+@media (min-width: 600px) and (max-width: 959px) { .rl-hero__media { aspect-ratio: 16 / 10; } }
+@media (min-width: 960px) {
+  /* the words at the inline start (read first), the film beside them */
+  .rl-hero__card { grid-template-columns: minmax(300px, 0.58fr) minmax(0, 1fr); grid-template-areas: "body media"; inline-size: min(100%, 78vw); align-items: stretch; }
+  .rl-hero__media { grid-area: media; aspect-ratio: 16 / 10; }
+  .rl-hero__body { grid-area: body; align-content: center; padding: 28px clamp(20px, 3vw, 48px); }
+}
+
+/* ---------- buttons: the black square button (DESIGN.md §4); hover to the accent blue, 0.3 s ease-in-out ---------- */
+.rl-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-block-size: 48px; padding-inline: 34px; border-radius: 2px; border: 0;
+  background: var(--r9-ink); color: var(--r9-white); font: inherit; font-size: 1.125rem; font-weight: 500; line-height: 1.2; text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color 0.3s ease-in-out; }
+.rl-btn:hover { background: var(--r9-blue); }
+.rl-btn:active { translate: 0 1px; }
+.rl-btn svg { inline-size: 18px; block-size: 18px; flex: none; }
+[dir="ltr"] .rl-btn svg { transform: scaleX(-1); }
+
+/* ---------- type ---------- */
+.rl-kick { margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.16em; color: var(--r9-ink); }
+.rl-idx { margin: 0 0 18px; display: inline-flex; align-items: baseline; gap: 12px; direction: ltr; font-family: var(--r9-display); font-size: 1rem; letter-spacing: 0.3em; }
+.rl-idx__n { font-size: 0.85rem; letter-spacing: 0.12em; color: var(--r9-mute); }
+.rl-h2 { margin: 0 0 22px; font-family: var(--r9-display); font-weight: 400; font-size: clamp(2.4rem, 1.5rem + 2.6vw, 3.75rem); line-height: 1.12; letter-spacing: -0.01em; text-wrap: balance; }
+.rl-h3 { margin: 0 0 16px; font-family: var(--r9-display); font-weight: 400; font-size: clamp(1.9rem, 1.35rem + 1.7vw, 2.9rem); line-height: 1.12; text-wrap: balance; }
+.rl-lead, .rl-row__text p { margin: 0; font-size: clamp(1.06rem, 0.98rem + 0.36vw, 1.36rem); line-height: 1.45; color: var(--r9-ink); text-wrap: pretty; }
+
+/* ---------- 2. statement: one centred paragraph (the reference's intro, 621 px) ---------- */
+.rl-statement { padding-block: clamp(72px, 9vw, 120px); }
+.rl-statement__text { margin: 0 auto; max-inline-size: 30ch; text-align: center; font-family: var(--r9-display); font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.6rem); line-height: 1.3; text-wrap: balance; }
+
+/* ---------- full-bleed bands (the reference's parallax picture between sections) ---------- */
+.rl-band { position: relative; margin: 0; overflow: hidden; block-size: clamp(300px, 52vw, 760px); background: var(--surface-sunken); }
+.rl-band .rl-band__img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+.rl-band img { inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+html.rl-motion .rl-band .rl-band__img { inset: -9% 0; block-size: 118%; will-change: transform; }
+.rl-band__cap { position: absolute; inset-block-end: 0; inset-inline-start: 0; z-index: 2; padding: 10px 16px; margin: 0; background: var(--r9-white); font-size: 0.95rem; }
+
+/* ---------- figures and badges (root §6: every property picture carries its badge) ---------- */
+.rl-fig { position: relative; margin: 0; overflow: hidden; background: var(--surface-sunken); }
+.rl-fig img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.rl-badge { position: absolute; inset-block-start: var(--sp-3); inset-inline-end: var(--sp-3); z-index: 3; }
+
+/* ---------- chapter rows: one picture bleeding to its page edge, a narrow text column beside it, sides alternating ---------- */
+.rl-chapter { position: relative; scroll-margin-block-start: var(--r9-head); }
+.rl-row { display: grid; padding-block: var(--r9-row-pad); }
+.rl-row + .rl-row { padding-block-start: 0; }
+.rl-row__media { aspect-ratio: 3 / 2; background: var(--r9-white); }   /* white behind the wipe, as the reference */
+.rl-wipe { position: absolute; inset: 0; overflow: hidden; }
+.rl-wipe__in { position: absolute; inset: 0; }
+.rl-wipe__in picture, .rl-wipe__in img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+html.rl-motion .rl-wipe, html.rl-motion .rl-wipe__in { will-change: transform; }
+.rl-row__text { padding: 36px var(--gutter) 0; display: grid; justify-items: center; text-align: center; }
+.rl-row__text > * { max-inline-size: 30rem; }
+.rl-places { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px; }
+.rl-places li { padding: 6px 14px; border: 1px solid var(--r9-ink); font-size: 1rem; line-height: 1.3; }
+.rl-step__n { display: block; margin-block-end: 10px; direction: ltr; font-family: var(--r9-display); font-size: 1.05rem; letter-spacing: 0.24em; color: var(--r9-mute); }
+.rl-row__cta { margin-block-start: 34px; }
+@media (min-width: 960px) {
+  .rl-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.42fr); grid-template-areas: "text media"; align-items: center; column-gap: clamp(40px, 5vw, 96px);
+    padding-inline: max(15px, calc((100vw - 1440px) / 2 + 15px)) 0; }
+  .rl-row--start { grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr); grid-template-areas: "media text"; padding-inline: 0 max(15px, calc((100vw - 1440px) / 2 + 15px)); }
+  .rl-row__media { grid-area: media; aspect-ratio: 844 / 556; }
+  .rl-row__text { grid-area: text; padding: 0; }
+  .rl-row + .rl-row { padding-block-start: 0; }
+}
+/* step 04: the same floor in two finishes, side by side */
+.rl-pair { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: var(--r9-white); }
+.rl-pair img { min-inline-size: 0; inline-size: 100%; block-size: 100%; object-fit: cover; display: block; }
+.rl-pair__tag { position: absolute; inset-block-end: var(--sp-3); z-index: 3; padding: 3px 10px; background: var(--r9-white); color: var(--r9-ink); font-size: 0.85rem; }
+.rl-pair__tag--a { inset-inline-start: var(--sp-3); }
+.rl-pair__tag--b { inset-inline-end: var(--sp-3); }
+
+/* ---------- 03 experience head ---------- */
+.rl-steps__list { list-style: none; margin: 0; padding: 0; }
+.rl-steps__head { display: grid; justify-items: center; text-align: center; padding: var(--r9-row-pad) var(--gutter) 0; }
+.rl-steps__head .rl-h2 { margin-block-end: 14px; }
+
+/* ---------- closing screen: the colour field again, a white card with the one action ---------- */
+.rl-close { box-sizing: border-box; position: relative; isolation: isolate; display: grid; place-items: center; min-block-size: clamp(560px, 92svh, 820px); padding: 72px clamp(20px, 7vw, 120px); margin-block-start: var(--r9-row-pad); }
+.rl-close .rl-blocks > i:nth-child(1) { inset-inline: 76% 0; }
+.rl-close .rl-blocks > i:nth-child(2) { inset-inline: 76% 0; }
+.rl-close .rl-blocks > i:nth-child(4) { inset-inline: 17% 82%; }
+.rl-close .rl-blocks > i:nth-child(5) { inset-inline: 0 83%; }
+.rl-close .rl-blocks > i:nth-child(6) { inset-inline: 0 83%; }
+.rl-close__card { max-inline-size: 760px; display: grid; justify-items: center; text-align: center; gap: 18px; padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 72px); }
+.rl-close__title { margin: 0; font-family: var(--r9-display); font-weight: 400; font-size: clamp(2.3rem, 1.4rem + 2.8vw, 4.4rem); line-height: 1.06; text-wrap: balance; }
+
+/* ---------- the bottom bar (the reference's sticky pink bar): the one action, shown between the hero and the closing screen ---------- */
+.rl-bar { position: fixed; inset-inline: 0; inset-block-end: 0; z-index: 35; background: var(--r9-pink); color: var(--r9-ink);
+  translate: 0 110%; visibility: hidden; transition: translate 0.5s ease, visibility 0s linear 0.5s; padding-block-end: env(safe-area-inset-bottom); }
+.rl-bar.is-on { translate: 0 0; visibility: visible; transition: translate 0.5s ease, visibility 0s linear 0s; }
+.rl-bar__in { inline-size: min(100% - 2 * var(--gutter), 1410px); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); min-block-size: 68px; }
+.rl-bar__name { margin: 0; display: grid; direction: ltr; text-align: end; line-height: 1.05; font-family: var(--r9-display); font-size: 1.35rem; letter-spacing: 0.08em; }
+[dir="ltr"] .rl-bar__name { text-align: start; }
+.rl-bar__name small { font-family: var(--r9-text); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.4em; }
+.rl-bar .rl-btn { min-block-size: 46px; padding-inline: 26px; font-size: 1.05rem; }
+@media (max-width: 759px) { .rl-bar__in { min-block-size: 62px; } .rl-bar__name { font-size: 1.1rem; } .rl-bar .rl-btn { padding-inline: 20px; } }
+
+/* ---------- footer ---------- */
+.rl-foot { padding-block: 0 var(--sp-10); background: var(--r9-white); }
+.rl-foot__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-3) var(--sp-6); padding-block: var(--sp-8) var(--sp-4); }
+.rl-brand--foot { min-block-size: 0; }
+.rl-foot__logo { display: block; block-size: 104px; inline-size: auto; }
+html[lang="en"] .rl-foot__logo { block-size: 64px; }
+.rl-foot__credit { margin: 0; display: inline-flex; align-items: center; gap: 14px; color: var(--r9-mute); font-size: 0.95rem; }
+.rl-foot__dev { margin: 0; color: var(--r9-ink); font-size: 1.05rem; }
+.rl-foot__dev > span:first-child { color: var(--r9-mute); }
+.rl-foot__a11y { margin: 0; }
+.rl-foot__a11y:empty { display: none; }
+.rl-legal { border-block-start-color: var(--r9-line); color: var(--r9-mute); }
+.rl-legal .hb-legal__more { display: inline-flex; align-items: center; min-block-size: var(--tap-min); color: var(--r9-ink); }
+.home-todo { font-size: var(--fs-small); color: var(--status-reserved-ink); border: 1px dashed currentColor; padding: var(--sp-1) var(--sp-2); }
+
+/* motion hooks (js/landing-motion.js sets the start states with GSAP; nothing here hides content by itself) */
+html.rl-motion [data-fade] { will-change: transform, opacity; }

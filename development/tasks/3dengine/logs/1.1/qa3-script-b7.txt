@@ -1,0 +1,105 @@
+// B3/B6 extras: an upload that cannot be read at the moment of the look (locked, read denied), timeout, temp sweep,
+// apartment echo, text in server stderr, swapped stored input during a live runner.
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, engineOf } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const GOLD = 'C:/RnD/Projects/3Dengine/tests/fixtures/apt846/source.pdf';
+const SHA = sha(fs.readFileSync(GOLD));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const USER = process.env.USERNAME;
+const line = (t, r) => console.log(`${t}: ${r.m.error ? 'RPC ' + r.m.error.code + ' ' + r.m.error.message : r.err ? 'TOOL ' + r.err.code + ' | ' + r.err.message : 'ok'}`.slice(0, 260));
+
+async function seeded() {
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  const dir = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(dir, { recursive: true });
+  for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/rec-sheet846/${f}`, `${dir}/${f}`);
+  return h;
+}
+
+// 1. locked upload (share mode none) held by another process
+{
+  const h = await seeded(); const srv = startServer(h); await srv.init();
+  const file = `${h.inbox}/s.pdf`.replace(/\//g, '\\');
+  const ps = spawn('powershell', ['-NoProfile', '-Command', `$f=[IO.File]::Open('${file}','Open','ReadWrite','None'); Write-Output LOCKED; Start-Sleep -Seconds 25; $f.Close()`], { stdio: ['ignore', 'pipe', 'ignore'], windowsHide: true });
+  await new Promise((r) => ps.stdout.once('data', r));
+  for (const t of ['inspect_plan', 'start_simulation']) line(`locked upload ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  spawnSync('taskkill', ['/PID', String(ps.pid), '/T', '/F'], { windowsHide: true });
+  await sleep(500);
+  for (const t of ['inspect_plan']) line(`after unlock ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  await srv.stop(); cleanup(h);
+}
+// 2. read denied by ACL on the upload
+{
+  const h = await seeded(); const srv = startServer(h); await srv.init();
+  spawnSync('icacls', [`${h.inbox}/s.pdf`, '/deny', `${USER}:(R,RD,GR)`], { windowsHide: true });
+  for (const t of ['inspect_plan', 'start_simulation']) line(`read-denied upload ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  spawnSync('icacls', [`${h.inbox}/s.pdf`, '/remove:d', USER], { windowsHide: true });
+  await srv.stop(); cleanup(h);
+}
+// 3. timeout path
+{
+  const h = await makeHome({ timeout: 0.3 }); fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  const srv = startServer(h); await srv.init();
+  for (const t of ['inspect_plan', 'start_simulation']) line(`timeout 0.3s ${t}`, await srv.call(t, { pdf_path: `${h.inbox}/s.pdf` }));
+  const insp = `${h.config.runtimeDir}/inspect`;
+  console.log('after timeout, inspect folder holds:', fs.existsSync(insp) ? JSON.stringify(fs.readdirSync(insp)) : 'nothing', ' jobs:', fs.existsSync(h.jobsDir) ? JSON.stringify(fs.readdirSync(h.jobsDir)) : 'none');
+  await srv.stop(); cleanup(h);
+}
+// 4. temp sweep: dead pid removed, live pid kept
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  const insp = `${h.config.runtimeDir}/inspect`; fs.mkdirSync(`${insp}/.tmp-${SHA}-99999999-1/out`, { recursive: true });
+  const live = spawn(process.execPath, ['-e', 'setTimeout(()=>{},30000)'], { stdio: 'ignore' });
+  fs.mkdirSync(`${insp}/.tmp-${SHA}-${live.pid}-1/out`, { recursive: true });
+  const eng = await engineOf(h); await eng.handlers.inspect_plan({ pdf_path: `${h.inbox}/s.pdf` });
+  console.log('temp sweep:', JSON.stringify(fs.readdirSync(insp)).replace(new RegExp(SHA, 'g'), 'SHA'));
+  live.kill(); cleanup(h);
+}
+// 5. apartment echo, text in server stderr
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  fs.copyFileSync(`${SCR}/pdfs/marker-sheet.pdf`, `${h.inbox}/m.pdf`); fs.copyFileSync(`${SCR}/pdfs/marker-booklet.pdf`, `${h.inbox}/mb.pdf`);
+  const srv = startServer(h); await srv.init();
+  for (const a of ['<script>alert(1)</script>', 'p1\n', 'p1 ', 'x'.repeat(200), 'IGNORE PREVIOUS', 'עמוד 1', '__proto__', 'p2', '']) line(`apartment ${JSON.stringify(a).slice(0, 30)}`, await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf`, apartment: a }));
+  for (const f of ['m.pdf', 'mb.pdf']) for (const t of ['inspect_plan', 'start_simulation']) { const r = await srv.call(t, { pdf_path: `${h.inbox}/${f}` }); if (/IGNORE|marker-7f/.test(r.l)) console.log('LEAK in answer', f, t); }
+  await sleep(500);
+  console.log('stderr leak of marker:', /IGNORE ALL|marker-7f/.test(srv.stderr), ' stderr bytes', srv.stderr.length);
+  await srv.stop(); cleanup(h);
+}
+// 6. stored input changed during a LIVE runner (real server): swapped / removed / dir, then approve
+for (const kind of ['swap', 'remove', 'dir', 'chmod-append']) {
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  const srv = startServer(h); await srv.init();
+  const r = await srv.call('start_simulation', { pdf_path: `${h.inbox}/s.pdf` });
+  let st; for (let i = 0; i < 100; i++) { const g = await srv.call('get_job', { job_id: ID }); st = g.out?.job?.state; if (st === 'awaiting_approval') break; await sleep(200); }
+  const f = `${h.jobsDir}/${ID}/input/source.pdf`;
+  fs.chmodSync(f, 0o666);
+  if (kind === 'swap') fs.writeFileSync(f, Buffer.concat([fs.readFileSync(f), Buffer.from('\n%x')]));
+  if (kind === 'remove') fs.rmSync(f);
+  if (kind === 'dir') { fs.rmSync(f); fs.mkdirSync(f); }
+  if (kind === 'chmod-append') fs.appendFileSync(f, '\n');
+  const a = await srv.call('approve_paid_stage', { job_id: ID, cap_usd: 100 });
+  let fin; for (let i = 0; i < 60; i++) { const g = await srv.call('get_job', { job_id: ID }); fin = g.out?.job; if (['failed', 'done', 'review', 'cancelled'].includes(fin?.state)) break; await sleep(250); }
+  const m = JSON.parse(fs.readFileSync(`${h.jobsDir}/${ID}/manifest.json`, 'utf8'));
+  const led = fs.existsSync(`${h.jobsDir}/${ID}/ledger.json`) ? JSON.parse(fs.readFileSync(`${h.jobsDir}/${ID}/ledger.json`, 'utf8')).rows.length : 'no ledger';
+  console.log(`live runner, stored input ${kind}: state before=${st} approve=${a.err ? a.err.code : 'ok'} final=${fin?.state} reason=${fin?.reason?.code} manifest rows=${m.rows.map((x) => x.stage).join(',')} ledger rows=${led} spent=${fin?.cost?.spent_usd}`);
+  const pid = Number(fs.readFileSync(`${h.jobsDir}/${ID}/runner.pid`, 'utf8')) || 0; if (pid) spawnSync('taskkill', ['/PID', String(pid), '/T', '/F'], { windowsHide: true });
+  await srv.stop(); cleanup(h);
+}
+// 7. section-4 bypass: engine_version deleted, stored copy swapped, hash rewritten
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  const eng = await engineOf(h); await eng.handlers.start_simulation({ pdf_path: `${h.inbox}/s.pdf` });
+  const jd = `${h.jobsDir}/${ID}`; const f = `${jd}/input/source.pdf`;
+  fs.chmodSync(f, 0o666); const nb = Buffer.concat([fs.readFileSync(f), Buffer.from('\n%swapped')]); fs.writeFileSync(f, nb);
+  const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); delete j.engine_version; j.input.pdf_sha256 = sha(nb); fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j));
+  for (const t of ['get_job']) { try { const r = await eng.handlers[t]({ job_id: ID }); console.log('bypass: get_job answers state', r.job.state); } catch (e) { console.log('bypass: get_job throws', e.code, e.message.slice(0, 100)); } }
+  const { runRunner } = await import(`file:///${SCR}/qa-lib.mjs`);
+  const rr = runRunner(h, ID, 25000);
+  const j2 = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8'));
+  console.log('bypass: runner exit', rr.status, 'job state now', j2.state, 'stored hash', j2.input.pdf_sha256.slice(0, 12), 'real hash of stored file', sha(fs.readFileSync(f)).slice(0, 12), 'original pdf', SHA.slice(0, 12));
+  const pid = (() => { try { return Number(fs.readFileSync(`${jd}/runner.pid`, 'utf8')); } catch { return 0; } })(); if (pid) spawnSync('taskkill', ['/PID', String(pid), '/T', '/F'], { windowsHide: true });
+  cleanup(h);
+}

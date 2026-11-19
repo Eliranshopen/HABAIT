@@ -1,0 +1,34 @@
+O-2 done, fails so far 0
+O-2 TOCTOU getter: error LEDGER_UNREADABLE ledger.json of job 236de30e3b66094a cannot be read: row 1: reserved_usd is not an amount; ledger file absent
+O-3 BigInt: call1 ok row1 {status:settled, not_kept:true, sha:null} cache files 0; call2 ok sends=2 rows=settled(nk),settled(resend_of 1)(nk) spent=1.2
+O-3 circular: call1 ok row1 {status:settled, not_kept:true, sha:null} cache files 0; call2 ok sends=2 rows=settled(nk),settled(resend_of 1)(nk) spent=1.2
+O-3 function: call1 ok row1 {status:settled, not_kept:true, sha:null} cache files 0; call2 ok sends=2 rows=settled(nk),settled(resend_of 1)(nk) spent=1.2
+O-3 symbol: call1 ok row1 {status:settled, not_kept:true, sha:null} cache files 0; call2 ok sends=2 rows=settled(nk),settled(resend_of 1)(nk) spent=1.2
+O-3 undefined: call1 ok row1 {status:settled, not_kept:undefined, sha:557e8fa9296d60daa81df33e3e43fd0a8a983dd726e7a93f5605e60211d44a04} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 throwing toJSON: call1 ok row1 {status:settled, not_kept:true, sha:null} cache files 0; call2 ok sends=2 rows=settled(nk),settled(resend_of 1)(nk) spent=1.2
+O-3 toJSON undefined: call1 ok row1 {status:settled, not_kept:true, sha:null} cache files 0; call2 ok sends=2 rows=settled(nk),settled(resend_of 1)(nk) spent=1.2
+O-3 nested BigInt: call1 ok row1 {status:settled, not_kept:true, sha:null} cache files 0; call2 ok sends=2 rows=settled(nk),settled(resend_of 1)(nk) spent=1.2
+O-3 NaN: call1 ok row1 {status:settled, not_kept:undefined, sha:557e8fa9296d60daa81df33e3e43fd0a8a983dd726e7a93f5605e60211d44a04} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 Infinity: call1 ok row1 {status:settled, not_kept:undefined, sha:557e8fa9296d60daa81df33e3e43fd0a8a983dd726e7a93f5605e60211d44a04} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 Date: call1 ok row1 {status:settled, not_kept:undefined, sha:7bdfe82e8254409ea390341a8f088a7cf94ffb7d7980435a1be56419772ba045} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 Map: call1 ok row1 {status:settled, not_kept:undefined, sha:a45f7c3d938c5c06fb535e05a0e1583a7e77afd324f283684cdabb80d6fec87c} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 null: call1 ok row1 {status:settled, not_kept:undefined, sha:557e8fa9296d60daa81df33e3e43fd0a8a983dd726e7a93f5605e60211d44a04} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 {a:undefined}: call1 ok row1 {status:settled, not_kept:undefined, sha:a45f7c3d938c5c06fb535e05a0e1583a7e77afd324f283684cdabb80d6fec87c} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 object with fn: call1 ok row1 {status:settled, not_kept:undefined, sha:7364cec1c9488675c134031be4b50a54059ae61bbf3f2f1df977035b1d8d6752} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 big string: call1 ok row1 {status:settled, not_kept:undefined, sha:bc9c1614265f8c35a8043527f129f90d057fbde29c40b13d4914aa2eba1f506e} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 0: call1 ok row1 {status:settled, not_kept:undefined, sha:6b6b7144f7795ef60ad0d77e6357004d3161f37cccc9d4163bd2ad9ad59f3f07} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+O-3 empty string: call1 ok row1 {status:settled, not_kept:undefined, sha:ff26ab154bd3b8d496ef90a440fd27491aa653f7764e29348f6a1f68790d68fb} cache files 1; call2 ok sends=1 rows=settled spent=0.6
+usd 0: settled 0, cache 0, copy 0
+usd -0: settled 0, cache 0, copy 0
+usd 1e6: settled 1000000, cache 1000000, copy 1000000
+usd 1e6+1: settled 0.6, cache 0.6, copy 0.6
+usd "0.5": settled 0.6, cache 0.6, copy 0.6
+usd NaN: settled 0.6, cache 0.6, copy 0.6
+usd -1: settled 0.6, cache 0.6, copy 0.6
+usd Infinity: settled 0.6, cache 0.6, copy 0.6
+usd null: settled 0.6, cache 0.6, copy 0.6
+usd undefined: settled 0.6, cache 0.6, copy 0.6
+usd 5e-7: settled 0.000001, cache 0.000001, copy 0.000001
+usd 4e-7: settled 0, cache 0, copy 0
+OBS getter-throwing result object: error "getter", row reserved marked=true
+SUMMARY P8 fails=0

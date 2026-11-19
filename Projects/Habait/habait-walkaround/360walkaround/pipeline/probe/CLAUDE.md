@@ -1,11 +1,11 @@
 # probe/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Probe scripts and verdicts for the Blender pipeline: hello-render, scene dump, determinism checks and their preview outputs.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 8 files here · 2 subfolders · 51 files / 168.5 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

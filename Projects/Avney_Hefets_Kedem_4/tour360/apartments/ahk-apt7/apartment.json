@@ -1,0 +1,72 @@
+{
+ "$schema": "tour360/apartment.v1",
+ "id": "ahk-apt7",
+ "status": "concept",
+ "title": {
+  "he": "אבני חפץ · קדם · בניין 1-2 · קומה א׳ · דירה 7 (הדמיה)",
+  "en": "Avnei Hefetz · Kedem · buildings 1-2 · floor 1 · apartment 7 (concept)",
+  "fr": "Avnei Hefetz · Kedem · bâtiments 1-2 · 1er étage · appartement 7 (concept)"
+ },
+ "project": null,
+ "projectNote": "Avnei Hefetz Kedem, model \"yored\", buildings 1-2, floor A, apartment 7 (8 = mirror), 4 rooms, 94 m2 + balcony 7.39 m2. Geometry: the traced sales sheet (model/plan.json); look: Cycles render of the plan-true model made photoreal by GPT Image 2.5 (tools/pano_gpt.mjs). No developer branding on the page.",
+ "plan": {
+  "image": "plan/floorplan.webp",
+  "imageSize": [
+   1588,
+   1493
+  ],
+  "viewBox": [
+   0,
+   0,
+   1588,
+   1493
+  ],
+  "labelsLanguage": "he",
+  "northNote": "no north arrow and no site plan in the sources (plan_meta.assumptions): the compass is left out, never guessed"
+ },
+ "sets": {
+  "balanced": {
+   "dir": "panos/balanced",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true
+  },
+  "thumb": {
+   "dir": "panos/thumb",
+   "width": 640,
+   "height": 320,
+   "format": "webp",
+   "tracked": true
+  },
+  "full": {
+   "dir": "_local/full",
+   "width": 3840,
+   "height": 1920,
+   "format": "webp",
+   "tracked": false
+  },
+  "original": {
+   "dir": "panos/original",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true,
+   "note": "the clean Cycles render each designed picture was made from (renders/pano/<room>.png), same yaw frame"
+  }
+ },
+ "disclosure": {
+  "badgeKey": "badge",
+  "conceptLineKey": "conceptLine",
+  "aiNoteKey": "aiNote",
+  "copyPack": "RAINBOW copy/tour360-copy.json (read-only)",
+  "permanent": true
+ },
+ "provenance": {
+  "generation": "openai/gpt-image-2.5/sunburst/edit via fal on the Cycles panoramas, 2026-11-18 (tools/pano_gpt.mjs, ledger tools/catalog/ledger-pano.json); this folder adds no paid step",
+  "enhancement": "none; seam cross-fade where measured (manifest.json seam), WebP sets by tools/tour360/make_apartment.py"
+ },
+ "sceneCount": 11,
+ "defaultScene": "living",
+ "intakeDate": "2026-11-18"
+}

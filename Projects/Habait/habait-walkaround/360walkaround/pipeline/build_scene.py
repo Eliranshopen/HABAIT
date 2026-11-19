@@ -893,7 +893,7 @@ def floor_key_for(room, surfaces, kit):
 # because the CG had no fixtures and the prompt forbids inventing; `fixtures[]` (traced by hand from the
 # sales plan's drawn furniture) gives it masses to dress. Placeholders, never catalog models.
 FIXTURE_KINDS = ("counter", "tall_unit", "table", "sofa", "tv_unit", "bed", "bedside", "wardrobe",
-                 "vanity", "shower", "wc", "lounger")
+                 "vanity", "shower", "wc", "lounger", "washer")
 FIXTURE_COLOR = (0.26, 0.26, 0.26)   # a matte neutral grey (linear). MEASURED on the first Q02b kitchen draft: at
                                      # 0.62 the fixture faces rendered 174-194/255 against walls at 179-192 (AgX +
                                      # up-facing tops catch more light), i.e. NOT distinguishable from the plaster

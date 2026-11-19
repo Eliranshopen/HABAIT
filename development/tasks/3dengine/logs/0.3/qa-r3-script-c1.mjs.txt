@@ -1,0 +1,21 @@
+// qa-r3 c1: cache folder damaged/deleted + paid-stage output deleted while the runner is DEAD
+import fs from 'node:fs';
+import { mkEnv, resume, finish, inv, settledSum } from './q.mjs';
+for (const mode of ['cache-delete', 'cache-garbage', 'cache-none-output-only']) {
+  const E = await mkEnv({ prefix: 'qa3c1-', callUsd: 0.6, stepMs: 300, heartbeat: 0.1 });
+  try {
+    const pdf = E.pdf('c1.pdf', mode);
+    const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+    await E.waitFor('packaging', () => { const j = E.job(id); if (j.state === 'awaiting_approval' && !j.approval) E.approve(id); return j.state === 'packaging'; }, 40000, 10);
+    await E.kill(id);
+    const before = E.ledger(id).rows.length;
+    fs.rmSync(E.jobPath(id, 'stages/skinning/stub.json'));
+    if (mode === 'cache-delete') fs.rmSync(E.jobPath(id, 'cache'), { recursive: true });
+    if (mode === 'cache-garbage') for (const f of fs.readdirSync(E.jobPath(id, 'cache'))) fs.writeFileSync(E.jobPath(id, `cache/${f}`), 'garbage');
+    await resume(E, pdf);
+    await finish(E, id);
+    await E.waitFor('quiet', () => E.runnerPid(id) === null, 10000, 20);
+    const l = E.ledger(id);
+    console.log(mode, 'ledger rows', before, '->', l.rows.length, l.rows.map((r) => `${r.stage[0]}:${r.status}`).join(' '), 'spent', E.job(id).cost.spent_usd, 'sends', ['skinning','gating','finishing'].map((s) => E.sends(id, s)), 'inv', JSON.stringify(inv(E, id, { expectDone: true })));
+  } finally { await E.cleanup(); }
+}

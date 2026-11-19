@@ -1,0 +1,92 @@
+ok   good: checkJob accepts / writeJob same check=true write=true
+ok     good: readJob returns it 
+ok     good: hand-written file read ok read=true
+ok   no files obj but empty: checkJob accepts / writeJob same check=true write=true
+ok     no files obj but empty: readJob returns it 
+ok     no files obj but empty: hand-written file read ok read=true
+ok   not review state: building: checkJob refuses / writeJob same check=false write=false
+ok     not review state: building: hand-written file read refused read=false
+ok   not review state: failed: checkJob refuses / writeJob same check=false write=false
+ok     not review state: failed: hand-written file read refused read=false
+ok   not review state: done: checkJob refuses / writeJob same check=false write=false
+ok     not review state: done: hand-written file read refused read=false
+ok   record null in building: checkJob accepts / writeJob same check=true write=true
+ok     record null in building: readJob returns it 
+ok     record null in building: hand-written file read ok read=true
+ok   extra key: checkJob refuses / writeJob same check=false write=false
+ok     extra key: hand-written file read refused read=false
+ok   missing stage: checkJob refuses / writeJob same check=false write=false
+ok     missing stage: hand-written file read refused read=false
+ok   stage unknown: checkJob refuses / writeJob same check=false write=false
+ok     stage unknown: hand-written file read refused read=false
+ok   stage building but path says tracing: checkJob refuses / writeJob same check=false write=false
+ok     stage building but path says tracing: hand-written file read refused read=false
+ok   stage building consistent: checkJob accepts / writeJob same check=true write=true
+ok     stage building consistent: readJob returns it 
+ok     stage building consistent: hand-written file read ok read=true
+ok   attempt 0: checkJob refuses / writeJob same check=false write=false
+ok     attempt 0: hand-written file read refused read=false
+ok   attempt -1: checkJob refuses / writeJob same check=false write=false
+ok     attempt -1: hand-written file read refused read=false
+ok   attempt 1.5: checkJob refuses / writeJob same check=false write=false
+ok     attempt 1.5: hand-written file read refused read=false
+ok   attempt "1": checkJob refuses / writeJob same check=false write=false
+ok     attempt "1": hand-written file read refused read=false
+ok   attempt 2 path says 1: checkJob refuses / writeJob same check=false write=false
+ok     attempt 2 path says 1: hand-written file read refused read=false
+ok   attempt 01 path: checkJob refuses / writeJob same check=false write=false
+ok     attempt 01 path: hand-written file read refused read=false
+ok   file name overlay2: checkJob refuses / writeJob same check=false write=false
+ok     file name overlay2: hand-written file read refused read=false
+ok   file name __proto__: checkJob refuses / writeJob same check=false write=false
+ok     file name __proto__: hand-written file read refused read=false
+ok   path ..: checkJob refuses / writeJob same check=false write=false
+ok     path ..: hand-written file read refused read=false
+ok   path .. mid: checkJob refuses / writeJob same check=false write=false
+ok     path .. mid: hand-written file read refused read=false
+ok   path ends ..: checkJob refuses / writeJob same check=false write=false
+ok     path ends ..: hand-written file read refused read=false
+ok   path absolute: checkJob refuses / writeJob same check=false write=false
+ok     path absolute: hand-written file read refused read=false
+ok   path backslash: checkJob refuses / writeJob same check=false write=false
+ok     path backslash: hand-written file read refused read=false
+ok   path mixed backslash dotdot: checkJob refuses / writeJob same check=false write=false
+ok     path mixed backslash dotdot: hand-written file read refused read=false
+ok   path other attempt: checkJob refuses / writeJob same check=false write=false
+ok     path other attempt: hand-written file read refused read=false
+ok   path with space: checkJob refuses / writeJob same check=false write=false
+ok     path with space: hand-written file read refused read=false
+ok   path with colon (ADS): checkJob refuses / writeJob same check=false write=false
+ok     path with colon (ADS): hand-written file read refused read=false
+ok   path non-string: checkJob refuses / writeJob same check=false write=false
+ok     path non-string: hand-written file read refused read=false
+ok   path null: checkJob refuses / writeJob same check=false write=false
+ok     path null: hand-written file read refused read=false
+ok   files array: checkJob refuses / writeJob same check=false write=false
+ok     files array: hand-written file read refused read=false
+ok   files null: checkJob refuses / writeJob same check=false write=false
+ok     files null: hand-written file read refused read=false
+ok   record array: checkJob refuses / writeJob same check=false write=false
+ok     record array: hand-written file read refused read=false
+ok   record string: checkJob refuses / writeJob same check=false write=false
+ok     record string: hand-written file read refused read=false
+ok   dot segment path (inside): checkJob accepts / writeJob same check=true write=true
+ok     dot segment path (inside): readJob returns it 
+ok     dot segment path (inside): hand-written file read ok read=true
+ok   trailing dots (win strips): checkJob accepts / writeJob same check=true write=true
+ok     trailing dots (win strips): readJob returns it 
+ok     trailing dots (win strips): hand-written file read ok read=true
+ok   unicode: checkJob refuses / writeJob same check=false write=false
+ok     unicode: hand-written file read refused read=false
+ok   newline: checkJob refuses / writeJob same check=false write=false
+ok     newline: hand-written file read refused read=false
+ok   huge attempt: checkJob accepts / writeJob same check=true write=true
+ok     huge attempt: readJob returns it 
+ok     huge attempt: hand-written file read ok read=true
+  listJobs on forged file returns []
+  restartJob on forged throws JobUnreadable job abcdef0123456789: job.json is not this job's file (its r
+ok   restartJob refuses forged review record 
+ok   setState(tracing) deletes review record 
+ok   setState(review) alone keeps/does not invent 
+  schema review.properties: {"stage":{"type":"string","enum":["tracing","building","rendering","skinning","gating","finishing","packaging","qa"]},"attempt":{"type":"integer","minimum":1},"files":{"type":"object","additionalProperties":false,"properties":{"report":{"type":"string"},"overlay":{"type":"string"}}}}
+FAILED_CHECKS=0

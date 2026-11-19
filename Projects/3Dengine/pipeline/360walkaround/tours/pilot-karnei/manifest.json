@@ -1,0 +1,1891 @@
+{
+  "schema": "render-manifest/0.1.0",
+  "tour_id": "pilot-karnei",
+  "points": {
+    "probe-4k-draft": {
+      "point_id": "cp-living",
+      "room_id": "r-living",
+      "dir": "renders/probe",
+      "outputs": {
+        "pano": {
+          "file": "pano-4k-draft.png",
+          "bytes": 8268413,
+          "sha256": "0b8d573234ff3087338cf10abfd5b91e95e4a1e005fe3fcc47c5396cb0d4c873"
+        },
+        "depth": {
+          "file": "depth-4k-draft.png",
+          "bytes": 354852,
+          "sha256": "3af835d63da84c0cc1a6487aa8c9e9ab9d75c04e8153161d9a6f1475343cda1e"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "resolution": [
+        4096,
+        2048
+      ],
+      "render": {
+        "backend": "OPTIX",
+        "samples": 64,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          107.426,
+          112.751
+        ],
+        "cycles_time": [
+          105.88,
+          111.18
+        ],
+        "depth_pack": 0.679
+      },
+      "memory": {
+        "device_peak_mb": 1368.21,
+        "host_peak_mb": 1939.99,
+        "post_render_peak_mb": 1604.16,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "1a67fae5bfc2ded42d8b7a9c337e3f81562bdca450db148786c48377bf6fc8a4",
+      "inputs": {
+        "point": "cp-living",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "0.1.0",
+            "script_sha256": "2ea5517f92fc5a16e4765b4bbaf53f027dd45cb05c42941dfddf61c3ff4ff8b8",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T10:26:29+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "ebcaa9725ba1f783e37eec21f3f3291160600eff68da665b2c3de127bdadd93e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "seed": 0,
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            4096,
+            2048
+          ],
+          "samples": 64,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano-4k-draft.png",
+          "webp_quality": 90,
+          "depth": "on",
+          "script": "0.1.0",
+          "script_sha256": "b30b6f0d2fc55736bbfd55452a8693eaffdcd19bb0733f0a038bcfb46f617dff",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano-4k-draft.render.json",
+      "rendered_utc": "2026-09-01T11:37:38+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "probe": {
+      "point_id": "cp-living",
+      "room_id": "r-living",
+      "dir": "renders/probe",
+      "outputs": {
+        "pano_png": {
+          "file": "pano-8k.png",
+          "bytes": 31946066,
+          "sha256": "0bd9ffc758e561df036e38f724748e0629ef8874ee96efd06fc52c7e77c6f965",
+          "retained_in_repo": false,
+          "note": "the lossless 8K master was written only to measure the WebP encode loss (PSNR 45.24 dB, mean delta 0.92/255) and was then removed: 31,946,066 B is too heavy for git. Regenerate with `--also-png`; the hash above is of that master."
+        },
+        "pano": {
+          "file": "pano-8k.webp",
+          "bytes": 1353452,
+          "sha256": "1ee96ea76dd289f34ac0bfe824d609dc7d54bda49961db0b9e280ad7088f8fb6"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 975417,
+          "sha256": "89260e4e9eb2a733f27e4e034eebe37ec423eb2b5109c54245be392ff27ce6ed"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1403.978
+        ],
+        "cycles_time": [
+          1389.95
+        ],
+        "depth_pack": 2.499
+      },
+      "memory": {
+        "device_peak_mb": 1369.48,
+        "host_peak_mb": 5972.03,
+        "post_render_peak_mb": 3524.17,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "45ee2e98f5c69de959b3d3e549daeb5c953dcf771a77f503b7adab95aca86ffa",
+      "inputs": {
+        "point": "cp-living",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "0.1.0",
+            "script_sha256": "2ea5517f92fc5a16e4765b4bbaf53f027dd45cb05c42941dfddf61c3ff4ff8b8",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T10:26:29+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "ebcaa9725ba1f783e37eec21f3f3291160600eff68da665b2c3de127bdadd93e",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "seed": 0,
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano-8k.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "script": "0.1.0",
+          "script_sha256": "b30b6f0d2fc55736bbfd55452a8693eaffdcd19bb0733f0a038bcfb46f617dff",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano-8k.render.json",
+      "rendered_utc": "2026-09-01T11:26:47+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-living": {
+      "kind": "pano",
+      "point_id": "cp-living",
+      "room_id": "r-living",
+      "dir": "renders/cp-living",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 812108,
+          "sha256": "83c955946044594e4ad210092dae0b42244a08da73a3efdb18a0eb61cc0d3f4d"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 952911,
+          "sha256": "d4d761379a5cf9985029049b0abc0add922ed2bbc0e130c4f81eaf7b74253602"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1766.454
+        ],
+        "cycles_time": [
+          1758.34
+        ],
+        "depth_pack": 2.108
+      },
+      "memory": {
+        "device_peak_mb": 1387.91,
+        "host_peak_mb": 6641.42,
+        "post_render_peak_mb": 3834.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "27c9d547dff45f523ab5b4ea937c3f3f044fed77245af9c611a57f0256d4147b",
+      "inputs": {
+        "point": "cp-living",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "bc4741ff96054ee102cb04809d09510da712148013ae846ea9e20bfb3bb6e627",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-02T06:34:48+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0.0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T08:07:39+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-wc": {
+      "kind": "pano",
+      "point_id": "cp-wc",
+      "room_id": "r-wc",
+      "dir": "renders/cp-wc",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 233700,
+          "sha256": "c1e75884cdbf7627476ca7613be37d08f9e02bbae6ce8042945f12248b032149"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1144864,
+          "sha256": "5446bf91981b8a00ab8a125e078ab2db349ca82636bf871c916de653187e7cfb"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1987.086
+        ],
+        "cycles_time": [
+          1978.93
+        ],
+        "depth_pack": 2.309
+      },
+      "memory": {
+        "device_peak_mb": 1427.9,
+        "host_peak_mb": 6682.27,
+        "post_render_peak_mb": 3874.1,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "3ab399ad5bd7193018c354912f9db8cccadc525820cb577aef562d00e94d23b4",
+      "inputs": {
+        "point": "cp-wc",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T23:11:34+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T06:18:00+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-entry": {
+      "kind": "pano",
+      "point_id": "cp-entry",
+      "room_id": "r-dining",
+      "dir": "renders/cp-entry",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 852110,
+          "sha256": "3d7d324b43b67060fea95eb111bdc1da4d9011e6d728375ca795c93ea7bec919"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1260883,
+          "sha256": "5583eb90f4aa538080585b15efa7fa3b4f6a4bc5d0e73c21479cd12e1e8aaada"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1866.008
+        ],
+        "cycles_time": [
+          1858.65
+        ],
+        "depth_pack": 2.306
+      },
+      "memory": {
+        "device_peak_mb": 1387.91,
+        "host_peak_mb": 6641.42,
+        "post_render_peak_mb": 3834.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "e06f2e31710e57c94a52e63da1ce3b58f3612d0b929fa6872614bd20a9fd791f",
+      "inputs": {
+        "point": "cp-entry",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "bc4741ff96054ee102cb04809d09510da712148013ae846ea9e20bfb3bb6e627",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-02T06:34:48+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0.0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T07:09:11+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-dining": {
+      "kind": "pano",
+      "point_id": "cp-dining",
+      "room_id": "r-dining",
+      "dir": "renders/cp-dining",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 1117870,
+          "sha256": "7a926500a49ab8255d232461c75eb06254bf7d8c373591612d51a81b36c7ae62"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1065575,
+          "sha256": "4ed0d4aac11206d28732ab57a9d00b2c9d17be739696e5f6061f701239336849"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1726.932
+        ],
+        "cycles_time": [
+          1718.91
+        ],
+        "depth_pack": 2.335
+      },
+      "memory": {
+        "device_peak_mb": 1387.91,
+        "host_peak_mb": 6641.42,
+        "post_render_peak_mb": 3834.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "09ff65a6fb88a22e48055742c2747b4c322e5b298bc233edb16f408921654cfb",
+      "inputs": {
+        "point": "cp-dining",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "bc4741ff96054ee102cb04809d09510da712148013ae846ea9e20bfb3bb6e627",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-02T06:34:48+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0.0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T07:38:05+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-kitchen": {
+      "kind": "pano",
+      "point_id": "cp-kitchen",
+      "room_id": "r-kitchen",
+      "dir": "renders/cp-kitchen",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 1305984,
+          "sha256": "d2017119043dc83bb61e6513ec32fce68cf01b35613fee97d014ff9b9a98098a"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1030791,
+          "sha256": "e3eea862140e611deab9afd4f5bc0cfc4aa01a1cdf1ec79b64eb1af0370d1f25"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1794.269
+        ],
+        "cycles_time": [
+          1777.53
+        ],
+        "depth_pack": 2.554
+      },
+      "memory": {
+        "device_peak_mb": 1387.91,
+        "host_peak_mb": 6641.42,
+        "post_render_peak_mb": 3834.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "98590cb108a1ad8d00d6f8d28d2867b93769eab89d890a2517489fab2044aa03",
+      "inputs": {
+        "point": "cp-kitchen",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "bc4741ff96054ee102cb04809d09510da712148013ae846ea9e20bfb3bb6e627",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-02T06:34:48+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0.0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T08:37:41+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-corridor": {
+      "kind": "pano",
+      "point_id": "cp-corridor",
+      "room_id": "r-corridor",
+      "dir": "renders/cp-corridor",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 953198,
+          "sha256": "3db7e4f85b1b0ff550aadd5ddf82152ee6175d984cb5b5166764ba6aee6231c2"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1277546,
+          "sha256": "e086bfcf1198a32a13b2ebf10fd806947d63c0b3336f1117acd2c5314218ea76"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1980.695
+        ],
+        "cycles_time": [
+          1969.33
+        ],
+        "depth_pack": 3.221
+      },
+      "memory": {
+        "device_peak_mb": 1387.9,
+        "host_peak_mb": 6641.41,
+        "post_render_peak_mb": 3834.1,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "aa00de1283d5a24ce9771bc1196957e352c6993f1293e56606b0ff20960b84b5",
+      "inputs": {
+        "point": "cp-corridor",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "bc4741ff96054ee102cb04809d09510da712148013ae846ea9e20bfb3bb6e627",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-02T06:34:48+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0.0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T09:10:53+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-mamad": {
+      "kind": "pano",
+      "point_id": "cp-mamad",
+      "room_id": "r-mamad",
+      "dir": "renders/cp-mamad",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 1175816,
+          "sha256": "b569ada7ddf725673f20d3e643db4ee117f5568cd71005abac9971786e8eddcb"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 903769,
+          "sha256": "5558172c1090ba4d896d03213153a1918b4ce05109db673ab910bf2f63045d32"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1933.876
+        ],
+        "cycles_time": [
+          1911.11
+        ],
+        "depth_pack": 7.107
+      },
+      "memory": {
+        "device_peak_mb": 1387.91,
+        "host_peak_mb": 6641.42,
+        "post_render_peak_mb": 3834.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "b9ec888a684b1d330ee07820e833c3df788e2e1af323a2e98706bb026168eb95",
+      "inputs": {
+        "point": "cp-mamad",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "bc4741ff96054ee102cb04809d09510da712148013ae846ea9e20bfb3bb6e627",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-02T06:34:48+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "be613e60c659c989e76263cca44d72a39c1655ff62a846a2a9f1707580653bd0",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0.0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T09:43:27+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-bed-2": {
+      "kind": "pano",
+      "point_id": "cp-bed-2",
+      "room_id": "r-bed-2",
+      "dir": "renders/cp-bed-2",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 1056566,
+          "sha256": "14acfa13e2246afda77bce9824c8bbb1468cc8d2c3d9fd2301a11b0778371146"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1011166,
+          "sha256": "f73572de7eeef6299486fb6ca050782449fa4db286ddb3271f6eb3e1da42d238"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1850.427
+        ],
+        "cycles_time": [
+          1842.14
+        ],
+        "depth_pack": 2.399
+      },
+      "memory": {
+        "device_peak_mb": 1427.91,
+        "host_peak_mb": 6682.28,
+        "post_render_peak_mb": 3874.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "3a0eb2362b523d887551b142ee2248b851381a63b695d3fc84bd5ef06857266a",
+      "inputs": {
+        "point": "cp-bed-2",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T23:11:34+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T03:29:09+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-master": {
+      "kind": "pano",
+      "point_id": "cp-master",
+      "room_id": "r-master",
+      "dir": "renders/cp-master",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 1071086,
+          "sha256": "9ef786ccd42b702cb318a3f0d0ff048ebdc7f65bb098fcb1c00b4c0a2fad1ce2"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1017343,
+          "sha256": "92dad73b0353e94a3b64dd8dea6c97b4a149276f77c4e120cba880cbab676d41"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          1873.435
+        ],
+        "cycles_time": [
+          1864.58
+        ],
+        "depth_pack": 2.523
+      },
+      "memory": {
+        "device_peak_mb": 1427.91,
+        "host_peak_mb": 6682.27,
+        "post_render_peak_mb": 3874.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "2b68b7af471a55494c36a9bce03ccc58658ff2a939b161bd7ecc0853c4778a18",
+      "inputs": {
+        "point": "cp-master",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T23:11:34+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T04:00:31+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-bath-main": {
+      "kind": "pano",
+      "point_id": "cp-bath-main",
+      "room_id": "r-bath-main",
+      "dir": "renders/cp-bath-main",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 298296,
+          "sha256": "58ddf3039cb76e5e13ef585ebf73d95656f7001e52e06b6f5f0febeaf5c2e70d"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1212674,
+          "sha256": "ef86645c9238a8881dfe2c3585af4d84e55e485d726dce184ce143c335ce8308"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          2096.775
+        ],
+        "cycles_time": [
+          2088.66
+        ],
+        "depth_pack": 2.558
+      },
+      "memory": {
+        "device_peak_mb": 1427.91,
+        "host_peak_mb": 6682.27,
+        "post_render_peak_mb": 3874.1,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "a61ff150982a87332b78fa784f299f157cbf7df31170ad1ec65f579c3107924b",
+      "inputs": {
+        "point": "cp-bath-main",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T23:11:34+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T04:35:35+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-ensuite": {
+      "kind": "pano",
+      "point_id": "cp-ensuite",
+      "room_id": "r-ensuite",
+      "dir": "renders/cp-ensuite",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 343034,
+          "sha256": "a95e5102b36e149eab8f69110939fc0e138e2fc0d7a0c310f55cf384e78673da"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1209223,
+          "sha256": "d9532dd2eca4d157c21d29ea17da96f748442478f22d22911f41c1d77b02af1b"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          2087.115
+        ],
+        "cycles_time": [
+          2079.16
+        ],
+        "depth_pack": 2.375
+      },
+      "memory": {
+        "device_peak_mb": 1427.91,
+        "host_peak_mb": 6682.27,
+        "post_render_peak_mb": 3874.1,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "fc64f38e059a184dd1577b45b61e048ae4a0b27633a462d976fc51df8c3ad6a2",
+      "inputs": {
+        "point": "cp-ensuite",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T23:11:34+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T05:10:30+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "cp-master-lobby": {
+      "kind": "pano",
+      "point_id": "cp-master-lobby",
+      "room_id": "r-master-lobby",
+      "dir": "renders/cp-master-lobby",
+      "outputs": {
+        "pano": {
+          "file": "pano.webp",
+          "bytes": 1000370,
+          "sha256": "956191cb9540a97c709c08dde29036b93988b1495eb9f2f2d6296b3d3ed2d6a0"
+        },
+        "depth": {
+          "file": "depth.png",
+          "bytes": 1294806,
+          "sha256": "c33171aabd1cbd044dd993c2a090e2b396e9008d28150447849567779a1e3330"
+        }
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "resolution": [
+        8192,
+        4096
+      ],
+      "wrap_pad_px": 512,
+      "render": {
+        "backend": "OPTIX",
+        "samples": 256,
+        "adaptive_sampling": true,
+        "denoise": true,
+        "tile_size": 2048,
+        "texture_limit_render": "OFF",
+        "seed": 0
+      },
+      "timings_s": {
+        "render_wall_clock": [
+          2047.826
+        ],
+        "cycles_time": [
+          2039.48
+        ],
+        "depth_pack": 2.407
+      },
+      "memory": {
+        "device_peak_mb": 1427.91,
+        "host_peak_mb": 6682.27,
+        "post_render_peak_mb": 3874.11,
+        "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+        "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+        "hybrid_masks_device_figure": false
+      },
+      "input_key": "e30b14b08d25969a9afeef7c47790816bab80832d0384ba857df18bb00c28a2f",
+      "inputs": {
+        "point": "cp-master-lobby",
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T23:11:34+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            8192,
+            4096
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "pano.webp",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 512,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "pano.render.json",
+      "rendered_utc": "2026-09-02T05:44:46+00:00",
+      "note": "rerun-skip keys on INPUT hashes only — an output hash drifts on every identical re-render (ENV.md §4.3) and would re-trigger an expensive render."
+    },
+    "topview": {
+      "kind": "topview",
+      "dir": "renders",
+      "outputs": {
+        "topview": {
+          "file": "topview.png",
+          "bytes": 1250969,
+          "sha256": "8acb63350a9ded12ccde9674051c081932445b4b95594160a352bf71a934a647"
+        },
+        "roomids": {
+          "file": "topview-roomids.png",
+          "bytes": 15447,
+          "sha256": "b7b1a3c3e2e66f368dff718234e4674e783f9c54c0b9a1fc2d21b065acc653e4"
+        },
+        "topview_depth": {
+          "file": "topview-depth.png",
+          "bytes": 30239,
+          "sha256": "d663c3621b2f6d9667dad7e49d5655488321ff08c60d078bcf5422764306f11b"
+        }
+      },
+      "resolution": [
+        1018,
+        1166
+      ],
+      "registration": {
+        "file": "topview.registration.json",
+        "plan_cm": {
+          "x0": -30,
+          "y0": -30.120923,
+          "x1": 1242.1,
+          "y1": 1426.920923
+        },
+        "cm_per_px": {
+          "x": 1.249607073,
+          "y": 1.249607073
+        },
+        "map": {
+          "plan_to_image": "col = (x_cm - plan_cm.x0)/cm_per_px.x - 0.5 ; row = (y_cm - plan_cm.y0)/cm_per_px.y - 0.5",
+          "image_to_plan": "x_cm = plan_cm.x0 + (col + 0.5)*cm_per_px.x ; y_cm = plan_cm.y0 + (row + 0.5)*cm_per_px.y",
+          "note": "row 0 is the image's TOP scanline and the SMALLEST plan y (plan y grows downward on the drawing, SCHEMA §1) — the affine has no flip in either axis."
+        }
+      },
+      "alignment": {
+        "best_shift": {
+          "dx": 0,
+          "dy": 0,
+          "iou": 0.967108
+        },
+        "aligned": true,
+        "zero_shift_iou": 0.967108
+      },
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100,
+      "depth_invalid_value": 0,
+      "input_key": "9cf9599ccca74c0fcb6899fe2bc2a69b33384cfb6984835225d5cf6cc707f44f",
+      "inputs": {
+        "point": {
+          "top_view": true,
+          "px_per_m": 80,
+          "margin_cm": 30,
+          "res": [
+            1018,
+            1166
+          ]
+        },
+        "scene": {
+          "generator": {
+            "script": "pipeline/build_scene.py",
+            "version": "1.1.0",
+            "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+            "materials_kit_version": "0.2.0",
+            "place_cameras_version": "0.1.0",
+            "placement_templates_version": "1.0.0",
+            "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+            "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+            "blender": "4.5.10 LTS",
+            "generated_utc": "2026-09-01T23:11:34+00:00"
+          },
+          "inputs": {
+            "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+            "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+            "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+            "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+            "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+            "furnish_seed": 0,
+            "seed": 0,
+            "room_mode": "all",
+            "cap_virtual": "on",
+            "furniture": true
+          }
+        },
+        "settings": {
+          "res": [
+            1018,
+            1166
+          ],
+          "samples": 256,
+          "adaptive": "on",
+          "adaptive_threshold": 0.01,
+          "denoise": "on",
+          "denoise_device": "cpu",
+          "device": "AUTO",
+          "hybrid": false,
+          "tile_size": 0,
+          "texture_limit": "OFF",
+          "seed": 0,
+          "pano": "topview.png",
+          "webp_quality": 90,
+          "depth": "on",
+          "wrap_pad": 0,
+          "script": "0.2.0",
+          "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+          "depth_encoding": "rgb24-be",
+          "depth_scale": 100,
+          "top_view_samples": 128
+        }
+      },
+      "cost_usd": 0,
+      "sidecar": "topview.registration.json",
+      "rendered_utc": "2026-09-02T06:19:11+00:00"
+    }
+  },
+  "updated_utc": "2026-09-02T09:43:27+00:00",
+  "depth_contract": {
+    "encoding": "rgb24-be",
+    "scale": 100,
+    "decode": "(R<<16 | G<<8 | B) / 100 => metres (radial distance from the camera origin)",
+    "invalid_value": 0
+  },
+  "batches": [
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T19:37:08+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-living",
+        "cp-master",
+        "cp-bath-main"
+      ],
+      "seconds": 502.74,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T19:47:01+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-living",
+        "cp-master",
+        "cp-bath-main"
+      ],
+      "seconds": 515.06,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T20:06:57+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-living",
+        "cp-master",
+        "cp-bath-main",
+        "cp-wc",
+        "cp-master-lobby"
+      ],
+      "seconds": 891.36,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T20:16:56+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-mamad"
+      ],
+      "seconds": 175.43,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T20:33:08+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-living",
+        "cp-master",
+        "cp-bath-main",
+        "cp-wc",
+        "cp-master-lobby"
+      ],
+      "seconds": 950.55,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T20:33:11+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-living",
+        "cp-master",
+        "cp-bath-main",
+        "cp-wc",
+        "cp-master-lobby",
+        "cp-mamad"
+      ],
+      "seconds": 3.06,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T21:53:47+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-entry",
+        "cp-dining",
+        "cp-living",
+        "cp-kitchen",
+        "cp-corridor",
+        "cp-mamad",
+        "cp-bed-2",
+        "cp-master",
+        "cp-bath-main",
+        "cp-ensuite",
+        "cp-master-lobby",
+        "cp-wc"
+      ],
+      "seconds": 2013.9,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-01T22:10:26+00:00",
+      "mode": "draft",
+      "resolution": [
+        4096,
+        2048
+      ],
+      "samples": 64,
+      "wrap_pad": 512,
+      "points": [
+        "cp-entry",
+        "cp-dining",
+        "cp-bed-2"
+      ],
+      "seconds": 494.94,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-02T06:18:09+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 256,
+      "wrap_pad": 512,
+      "points": [
+        "cp-entry",
+        "cp-dining",
+        "cp-living",
+        "cp-kitchen",
+        "cp-corridor",
+        "cp-mamad",
+        "cp-bed-2",
+        "cp-master",
+        "cp-bath-main",
+        "cp-ensuite",
+        "cp-master-lobby",
+        "cp-wc"
+      ],
+      "seconds": 21429.22,
+      "verdict": "PASS",
+      "cost_usd": 0
+    },
+    {
+      "tool": "pipeline/render_tour.mjs",
+      "version": "0.1.0",
+      "finished_utc": "2026-09-02T06:19:20+00:00",
+      "mode": "final",
+      "resolution": [
+        8192,
+        4096
+      ],
+      "samples": 256,
+      "wrap_pad": 512,
+      "points": [
+        "cp-entry",
+        "cp-dining",
+        "cp-living",
+        "cp-kitchen",
+        "cp-corridor",
+        "cp-mamad",
+        "cp-bed-2",
+        "cp-master",
+        "cp-bath-main",
+        "cp-ensuite",
+        "cp-master-lobby",
+        "cp-wc"
+      ],
+      "seconds": 31.47,
+      "verdict": "PASS",
+      "cost_usd": 0
+    }
+  ]
+}

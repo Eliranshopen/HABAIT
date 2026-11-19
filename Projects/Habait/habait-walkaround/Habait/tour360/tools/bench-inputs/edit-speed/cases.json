@@ -1,0 +1,39 @@
+{
+  "$schema": "tour360/edit-bench-cases.v1",
+  "written": "2026-11-16",
+  "note": "Prompts are server/handler.mjs assemble() / assembleFollow() of the fixed preparations above. Inputs are 1264x848 JPEG views the page cut from the served apt846 tour (tools/follow-live-check.mjs, 2026-11-16).",
+  "cases": [
+    {
+      "id": "people",
+      "kind": "living",
+      "images": [
+        "kitchen-dining.jpg"
+      ],
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. Add two people sitting on the existing dining chairs at the round dining table: a man and a woman in casual clothing, talking over coffee cups on the table, photorealistic, matching the room's lighting, perspective and scale, faces natural and relaxed, not looking at the camera. Draw the people or animals at the scale of the furniture as it appears now: if the table and chairs are small in the frame, the people are small too. Do not zoom in on them and do not re-compose the photo. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move or zoom the camera.",
+      "current_model": "nb2-1k"
+    },
+    {
+      "id": "object",
+      "kind": "object",
+      "images": [
+        "kitchen-dining.jpg"
+      ],
+      "prompt": "Replace the dining chairs around the round table with black leather dining chairs on slim black metal legs. Keep the same number of chairs, each at the place and scale of the chair it replaces. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move or zoom the camera.",
+      "current_model": "kontext"
+    },
+    {
+      "id": "follow",
+      "kind": "follow",
+      "images": [
+        "dining-table.jpg"
+      ],
+      "reference_from": {
+        "case": "people",
+        "model": "nb2-1k",
+        "run": 1
+      },
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two people sitting on the existing dining chairs at the round dining table: a man and a woman in casual clothing, talking over coffee cups on the table, photorealistic, matching the room's lighting, perspective and scale, faces natural and relaxed, not looking at the camera. Make the same change in the first image as it looks from the first image's camera: the same people or animals: the same number of them, the same faces, hair, clothing, poses and what they hold, standing at the same place in the room, beside the same furniture, drawn in the first image's own perspective and at the scale of the furniture around them. Use the second image only to see what was changed and where in the room it is; do not copy its camera angle, its framing or its background. If that place in the room is not visible in the first image, return the first image unchanged. Draw the people or animals at the scale of the furniture as it appears now: if the table and chairs are small in the frame, the people are small too. Do not zoom in on them and do not re-compose the photo. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move or zoom the camera.",
+      "current_model": "nb2-1k"
+    }
+  ]
+}

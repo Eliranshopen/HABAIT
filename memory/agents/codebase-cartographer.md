@@ -35,3 +35,8 @@
 
 ## 2026-11-04 · main-session → second-reader pointer
 - runs/2026-11-04-context-sync-3.md — /sync-context 3: check-context PASS 6/6 (root 19.9 KB, detail relocated with stubs), verify-memory CLEAN (parser fixed), HOT corrected, OWED-022 resolved; incident: --apply wrote 414 cards into an in-flight backup copy → `memory/runs/2026-11-04-context-sync-3.md`
+
+## 2026-11-04 · main-session → second-reader pointer
+- runs/2026-11-04-context-sync-5.md — sync #5 by rnd-32: cards applied, memory CLEAN, check-context 6/6, board_state CLEAN; 4 stale cards left while A7 writes; rnd-67 owns the rest → `memory/runs/2026-11-04-context-sync-5.md`
+
+- 2026-11-10 (rnd-9d): Projects/Habait-backup-2026-11-04 removed on Eliran's word; its generated cards are gone from disk — next /sync-context refreshes the map → `memory/runs/2026-11-10-backup-folder-removed.md`

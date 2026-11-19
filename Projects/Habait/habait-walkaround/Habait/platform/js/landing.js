@@ -60,6 +60,7 @@ const L = {
     'facts.title': 'דירה {unit}',
     'facts.floor': 'קומה', 'facts.rooms': 'חדרים', 'facts.area': 'שטח', 'facts.outdoor': 'מרפסת', 'facts.price': 'מחיר', 'facts.status': 'סטטוס',
     'facts.m2': '{n} מ״ר',
+    'facts.demo': 'נתוני הדגמה', 'facts.demoTitle': 'המספרים להמחשה בלבד — לדירה זו אין עדיין נתוני תכנית מכר',
     'lead.title': 'רוצים לשמוע עוד?',
     'lead.sub': 'השאירו פרטים או כתבו לנו בוואטסאפ, ונחזור אליכם.',
     'lightbox.close': 'סגירה',
@@ -85,6 +86,7 @@ const L = {
     'facts.title': 'Apartment {unit}',
     'facts.floor': 'Floor', 'facts.rooms': 'Rooms', 'facts.area': 'Area', 'facts.outdoor': 'Terrace', 'facts.price': 'Price', 'facts.status': 'Status',
     'facts.m2': '{n} m²',
+    'facts.demo': 'Sample data', 'facts.demoTitle': 'Illustrative numbers — this unit has no sales-plan data yet',
     'lead.title': 'Want to hear more?',
     'lead.sub': 'Leave your details or message us on WhatsApp and we will get back to you.',
     'lightbox.close': 'Close',
@@ -175,6 +177,8 @@ function renderText() {
   renderAvailability();
   // facts of the featured unit (same in both arms)
   $('factsTitle').textContent = l('facts.title', { unit: unit.id });
+  // Eliran 2026-11-10: demo numbers (units.json source: "demo") carry «נתוני הדגמה» beside the title; 846 (sales-plan) shows nothing extra
+  if (unit.source === 'demo') $('factsTitle').append(' ', el('span', { class: 'hb-chip hb-chip--plain hb-chip--demo', title: l('facts.demoTitle') }, l('facts.demo')));
   const dl = $('factsList');
   dl.innerHTML = '';
   const row = (k, v) => { if (v === undefined || v === null || v === '') return; const d = el('div', { class: 'landing-fact' }); d.append(el('dt', {}, l(k)), el('dd', {}, String(v))); dl.appendChild(d); };
@@ -182,7 +186,7 @@ function renderText() {
   row('facts.area', unit.area_m2 ? l('facts.m2', { n: unit.area_m2 }) : null);
   row('facts.outdoor', unit.outdoor_m2 ? l('facts.m2', { n: unit.outdoor_m2 }) : null);
   row('facts.floor', unit.floor);
-  row('facts.price', formatPrice(unit.price, ctx.units.currency));
+  if (ctx.meta.prices_public === true) row('facts.price', formatPrice(unit.price, ctx.units.currency));   // Eliran 2026-11-08: fixture prices hidden
   row('facts.status', t(`status.${unit.status || 'unknown'}`));
   if (S.arm === 'a') renderGallery();
   renderLead();
@@ -206,6 +210,7 @@ function renderAvailability() {
     const meta = el('span', { class: 'avail-row__meta' });
     const part = (key, n) => { if (n === undefined || n === null || n === '') return; const s = el('span'); const [pre, post] = l(key, { n: '\u0000' }).split('\u0000'); s.append(pre, el('bdi', {}, String(n)), post); meta.append(s); };
     part('avail.rooms', u.rooms); part('avail.area', u.area_m2); part('avail.floor', u.floor);
+    if (u.source === 'demo') meta.append(el('span', { class: 'hb-chip hb-chip--plain hb-chip--demo', title: l('facts.demoTitle') }, l('facts.demo')));
     a.append(num, chip, meta, el('span', { class: 'avail-row__go', 'aria-hidden': 'true' }, '›')   /* U+203A is bidi-mirrored: it points forward in RTL and LTR */);
     li.append(a); list.append(li);
   }

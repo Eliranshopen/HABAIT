@@ -1,0 +1,55 @@
+/* The apartment journey, round 4: one full screen, no scrolling (plan development/plans/2026-11-09-rainbow-v2.md §9). Logical properties;
+   the frame and its band/pin are in the hold frame's own picture coordinates (left/top), whatever the page direction. */
+.jr {
+  --bg: #08131e; --ink: #f5f0e8; --muted: rgb(245 240 232 / 0.74); --line: rgb(245 240 232 / 0.22); --accent: var(--brand-accent);
+  /* floor 16 in the hold frame (media/manifest.json floor16): 846's anchor projected through the hold camera, the band = one floor */
+  --ax: 49.79%; --ay: 78.83%; --bx0: 14%; --bx1: 60%; --by0: 75.65%; --by1: 82.01%;
+  margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-text); overflow: hidden;
+}
+.jr *, .jr *::before, .jr *::after { box-sizing: border-box; }
+.jr-stage { position: fixed; inset: 0; overflow: hidden; isolation: isolate; background: var(--bg); }
+/* the air around a portrait framing — as the hold draws it since 2026-11-10: a gradient from the page's navy to the frame's own edge
+   colours (journey.js sets --air), never a copy of the picture (a scaled copy showed as a ghost tower on iPhone Safari) */
+.jr-air { position: absolute; inset: 0; background: var(--air, var(--bg)); opacity: 0; }
+.jr.is-portrait .jr-air { opacity: 1; }
+/* the frame: placed by journey.js (the hold's own on-screen box when it is passed, else cover); transforms are GSAP's */
+.jr-frame { position: absolute; left: 0; top: 0; inline-size: 100%; block-size: 100%; transform-origin: var(--ax) var(--ay); }
+.jr-frame__img { display: block; inline-size: 100%; block-size: 100%; }
+.jr.is-portrait .jr-frame__img { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 90%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 90%, transparent 100%); }
+.jr-band { position: absolute; left: var(--bx0); width: calc(var(--bx1) - var(--bx0)); top: var(--by0); height: calc(var(--by1) - var(--by0));
+  border-block: 1px solid color-mix(in srgb, var(--accent) 90%, transparent); background: color-mix(in srgb, var(--accent) 12%, transparent);
+  box-shadow: 0 0 0 200vmax rgb(4 10 18 / var(--dim, 0.45)), 0 0 28px color-mix(in srgb, var(--accent) 55%, transparent); }
+.jr-pin { position: absolute; left: var(--ax); top: var(--ay); inline-size: 14px; block-size: 14px; margin: -7px 0 0 -7px; display: grid; justify-items: center; }
+.jr-pin__dot { inline-size: 14px; block-size: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgb(238 169 39 / .3), 0 0 0 10px rgb(238 169 39 / .12); }
+.jr-pin__label { position: absolute; inset-block-end: 22px; padding: 3px 10px; border-radius: 999px; background: rgb(4 10 18 / .78); border: 1px solid var(--line); font-size: .85rem; font-weight: 600; white-space: nowrap; }
+.jr-scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to left, rgb(4 10 18 / .55), transparent 46%); }
+/* the bird flight: the film covers the screen (16:9; a phone sees its middle, where the terrace and the glass doors are) */
+.jr-fly { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 50% 50%; opacity: 0; visibility: hidden; pointer-events: none; z-index: 3; background: var(--bg); }
+/* the landing: the living room as the tour's first view (journey.js draws it) */
+.jr-land { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; opacity: 0; pointer-events: none; z-index: 4; }
+/* the copy beside the tower: as in Eliran's screenshot — «16», «דירה 846», the facts */
+.jr-copy { position: absolute; z-index: 5; inset-inline-start: clamp(16px, 4vw, 56px); inset-block: 0; margin-block: auto; block-size: fit-content; display: grid; gap: 8px; max-inline-size: 440px; }
+/* the copy also runs over the moving film: a soft shadow keeps it readable on any frame */
+.jr-copy { text-shadow: 0 1px 14px rgb(4 10 18 / .55), 0 0 2px rgb(4 10 18 / .5); }
+.jr-eyebrow { margin: 0; font-size: .875rem; font-weight: 500; color: var(--muted); }
+.jr-title { margin: 0; line-height: .85; }
+.jr-num { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(7rem, 4rem + 12vw, 15rem); font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.02em; }
+.jr-unit { margin: 0; font-family: var(--font-display); font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.4rem); }
+.jr-facts { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.jr-facts li { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: rgb(4 10 18 / .5); font-size: .9rem; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.jr-badge { position: absolute; z-index: 6; inset-block-start: max(14px, env(safe-area-inset-top)); inset-inline-end: 14px; }
+.jr-skip { position: absolute; z-index: 6; inset-block-end: max(18px, calc(env(safe-area-inset-bottom) + 12px)); inset-inline-end: 14px; display: inline-flex; align-items: center; gap: 6px;
+  min-block-size: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgb(4 10 18 / .55); color: var(--ink); text-decoration: none;
+  font-size: .9rem; font-weight: 600; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.jr-skip svg { inline-size: 18px; block-size: 18px; }
+.jr-skip:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* phones (portrait): the copy at the top, in the air above the framed tower */
+@media (max-aspect-ratio: 4/5) {
+  .jr-scrim { background: linear-gradient(to bottom, rgb(4 10 18 / .7) 0%, rgb(4 10 18 / .25) 34%, transparent 50%); }
+  .jr-copy { inset-block: max(56px, calc(env(safe-area-inset-top) + 48px)) auto; margin-block: 0; inset-inline: 16px; max-inline-size: none;
+    grid-template-columns: auto 1fr; align-items: end; column-gap: 16px; }
+  .jr-copy .jr-eyebrow, .jr-facts { grid-column: 1 / -1; }
+  .jr-num { font-size: clamp(5.5rem, 28vw, 9rem); }
+  .jr-unit { padding-block-end: .5em; }
+  .jr-facts li { font-size: .82rem; padding: 5px 10px; }
+}

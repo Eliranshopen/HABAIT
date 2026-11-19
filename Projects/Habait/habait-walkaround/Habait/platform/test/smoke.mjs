@@ -20,6 +20,14 @@ await test('fixture rainbow validates', () => {
   assert.ok(r.flow.segments.some((s) => s.id === 'hold-facade' && s.role === 'hold'));
 });
 
+// Eliran 2026-11-10 («להשאיר כהדגמה עם סימון»): only 846 has sales-plan data; every other unit is demo and says so
+await test('units.json provenance: 846 = sales-plan, every other unit = demo', () => {
+  const units = JSON.parse(readFileSync(join(ROOT, 'fixtures/rainbow/units.json'), 'utf8'));
+  for (const u of units.units) assert.equal(u.source, u.id === '846' ? 'sales-plan' : 'demo', `unit ${u.id} source`);
+  const bad = JSON.parse(JSON.stringify(units)); bad.units[0].source = 'guess';
+  assert.ok(validateSchema(unitsSchema, bad).some((e) => e.includes('source')), 'schema rejects an unknown source');
+});
+
 await test('schema rejects a bad status / missing field / unknown next', () => {
   const units = JSON.parse(readFileSync(join(ROOT, 'fixtures/rainbow/units.json'), 'utf8'));
   units.units[0].status = 'maybe';

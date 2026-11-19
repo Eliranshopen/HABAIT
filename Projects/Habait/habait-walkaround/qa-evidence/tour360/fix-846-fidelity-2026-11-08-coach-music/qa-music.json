@@ -1,0 +1,756 @@
+{
+ "rows": [
+  {
+   "tag": "1440",
+   "ctx": "tour",
+   "beforeGesture": {
+    "state": "none",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterTap": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "sync": [
+    {
+     "step": 1,
+     "barsIntoCycle": 0.011,
+     "offBarMs": 24,
+     "accents": 1
+    },
+    {
+     "step": 2,
+     "barsIntoCycle": 0.004,
+     "offBarMs": 8,
+     "accents": 2
+    }
+   ],
+   "afterNext": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "manualAccent": 1,
+   "skipFading": {
+    "state": "running",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "afterSkip": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "replay": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.67,
+    "coach": true,
+    "pressed": "true"
+   },
+   "muted": {
+    "state": "suspended",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "stored": "1",
+   "reloadAuto": false,
+   "reloadMuted": {
+    "state": "none",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "unmuted": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.91,
+    "coach": true,
+    "pressed": "true"
+   },
+   "hidden": {
+    "state": "suspended",
+    "on": true,
+    "muted": false,
+    "gain": 0.91,
+    "coach": true,
+    "pressed": "true"
+   },
+   "visible": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterEnd": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "beforeGuide": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.67,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterGuide": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   }
+  },
+  {
+   "tag": "1440",
+   "ctx": "apartment",
+   "beforeGesture": {
+    "state": "none",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterTap": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterNext": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "manualAccent": 1,
+   "skipFading": {
+    "state": "running",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "afterSkip": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "replay": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.67,
+    "coach": true,
+    "pressed": "true"
+   },
+   "muted": {
+    "state": "suspended",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "stored": "1",
+   "reloadAuto": false,
+   "reloadMuted": {
+    "state": "none",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "unmuted": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.9,
+    "coach": true,
+    "pressed": "true"
+   },
+   "hidden": {
+    "state": "suspended",
+    "on": true,
+    "muted": false,
+    "gain": 0.9,
+    "coach": true,
+    "pressed": "true"
+   },
+   "visible": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterEnd": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   }
+  },
+  {
+   "tag": "1440",
+   "ctx": "hold",
+   "beforeGesture": {
+    "state": "none",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterTap": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "sync": [
+    {
+     "step": 1,
+     "barsIntoCycle": 0.009,
+     "offBarMs": 20,
+     "accents": 1
+    },
+    {
+     "step": 2,
+     "barsIntoCycle": 0.007,
+     "offBarMs": 15,
+     "accents": 2
+    }
+   ],
+   "afterNext": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "manualAccent": 1,
+   "skipFading": {
+    "state": "running",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "afterSkip": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "replay": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.67,
+    "coach": true,
+    "pressed": "true"
+   },
+   "muted": {
+    "state": "suspended",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "stored": "1",
+   "reloadAuto": false,
+   "reloadMuted": {
+    "state": "none",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "unmuted": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.91,
+    "coach": true,
+    "pressed": "true"
+   },
+   "hidden": {
+    "state": "suspended",
+    "on": true,
+    "muted": false,
+    "gain": 0.91,
+    "coach": true,
+    "pressed": "true"
+   },
+   "visible": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterEnd": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   }
+  },
+  {
+   "tag": "1440",
+   "uiCheck": true,
+   "boxes": 137,
+   "changed": [],
+   "removed": [],
+   "pixelsDiffer": 0,
+   "ofPixels": 1296000
+  },
+  {
+   "tag": "390",
+   "ctx": "tour",
+   "beforeGesture": {
+    "state": "none",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterTap": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "sync": [
+    {
+     "step": 1,
+     "barsIntoCycle": 0.003,
+     "offBarMs": 7,
+     "accents": 1
+    },
+    {
+     "step": 2,
+     "barsIntoCycle": 0.004,
+     "offBarMs": 10,
+     "accents": 2
+    }
+   ],
+   "afterNext": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "manualAccent": 1,
+   "skipFading": {
+    "state": "running",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "afterSkip": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "replay": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.66,
+    "coach": true,
+    "pressed": "true"
+   },
+   "muted": {
+    "state": "suspended",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "stored": "1",
+   "reloadAuto": false,
+   "reloadMuted": {
+    "state": "none",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "unmuted": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.93,
+    "coach": true,
+    "pressed": "true"
+   },
+   "hidden": {
+    "state": "suspended",
+    "on": true,
+    "muted": false,
+    "gain": 0.93,
+    "coach": true,
+    "pressed": "true"
+   },
+   "visible": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterEnd": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "beforeGuide": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.67,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterGuide": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   }
+  },
+  {
+   "tag": "390",
+   "ctx": "apartment",
+   "beforeGesture": {
+    "state": "none",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterTap": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterNext": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "manualAccent": 1,
+   "skipFading": {
+    "state": "running",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "afterSkip": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "replay": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.66,
+    "coach": true,
+    "pressed": "true"
+   },
+   "muted": {
+    "state": "suspended",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "stored": "1",
+   "reloadAuto": false,
+   "reloadMuted": {
+    "state": "none",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "unmuted": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.91,
+    "coach": true,
+    "pressed": "true"
+   },
+   "hidden": {
+    "state": "suspended",
+    "on": true,
+    "muted": false,
+    "gain": 0.91,
+    "coach": true,
+    "pressed": "true"
+   },
+   "visible": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterEnd": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   }
+  },
+  {
+   "tag": "390",
+   "ctx": "hold",
+   "beforeGesture": {
+    "state": "none",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterTap": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "sync": [
+    {
+     "step": 1,
+     "barsIntoCycle": 0.003,
+     "offBarMs": 6,
+     "accents": 1
+    },
+    {
+     "step": 2,
+     "barsIntoCycle": 0.004,
+     "offBarMs": 8,
+     "accents": 2
+    }
+   ],
+   "afterNext": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "manualAccent": 1,
+   "skipFading": {
+    "state": "running",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "afterSkip": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   },
+   "replay": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.67,
+    "coach": true,
+    "pressed": "true"
+   },
+   "muted": {
+    "state": "suspended",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "stored": "1",
+   "reloadAuto": false,
+   "reloadMuted": {
+    "state": "none",
+    "on": false,
+    "muted": true,
+    "gain": 0,
+    "coach": true,
+    "pressed": "false"
+   },
+   "unmuted": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 0.89,
+    "coach": true,
+    "pressed": "true"
+   },
+   "hidden": {
+    "state": "suspended",
+    "on": true,
+    "muted": false,
+    "gain": 0.89,
+    "coach": true,
+    "pressed": "true"
+   },
+   "visible": {
+    "state": "running",
+    "on": true,
+    "muted": false,
+    "gain": 1,
+    "coach": true,
+    "pressed": "true"
+   },
+   "afterEnd": {
+    "state": "suspended",
+    "on": false,
+    "muted": false,
+    "gain": 0,
+    "coach": false,
+    "pressed": "true"
+   }
+  },
+  {
+   "tag": "390",
+   "uiCheck": true,
+   "boxes": 137,
+   "changed": [],
+   "removed": [],
+   "pixelsDiffer": 69,
+   "ofPixels": 1316640
+  },
+  {
+   "preview": {
+    "wav": "C:\\RnD\\.wt\\fix-846-fidelity\\Projects\\Habait\\habait-walkaround\\qa-evidence\\tour360\\fix-846-fidelity-2026-11-08-coach-music\\coach-music-preview-v2.wav",
+    "bytes": 4851044,
+    "secs": 27.5,
+    "rate": 44100,
+    "bpm": 108,
+    "stepSec": 6.6667,
+    "steps": [
+     6.767,
+     13.433,
+     20.1,
+     26.767
+    ],
+    "peak": 0.142,
+    "peakDbfs": -17,
+    "rmsDbfs": -30.3,
+    "sha1": "292491689599e3d1",
+    "sha2": "35c7bb1d2c6abeea",
+    "renderToRender": {
+     "maxStep16bit": 1,
+     "samplesDiffer": 230,
+     "of": 2425500
+    }
+   }
+  }
+ ],
+ "errors": [],
+ "warns": []
+}

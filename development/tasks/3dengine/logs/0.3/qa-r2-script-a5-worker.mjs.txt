@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import { withFileLock } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs';
+const [dir, ms] = [process.argv[2], Number(process.argv[3])];
+const lock = `${dir}/x.lock`, marker = `${dir}/inside`, counter = `${dir}/counter`;
+let viol = 0, ops = 0, busy = 0; const until = Date.now() + ms;
+while (Date.now() < until) {
+  try {
+    withFileLock(lock, () => {
+      try { fs.writeFileSync(marker, String(process.pid), { flag: 'wx' }); } catch { viol++; }
+      const n = Number(fs.readFileSync(counter, 'utf8') || 0);
+      const t = Date.now(); while (Date.now() - t < 1) { /* hold 1ms */ }
+      fs.writeFileSync(counter, String(n + 1));
+      ops++;
+      try { fs.rmSync(marker, { force: true }); } catch { }
+    }, { waitMs: 2000, staleMs: 10000 });
+  } catch (e) { busy++; }
+}
+console.log(JSON.stringify({ pid: process.pid, viol, ops, busy }));

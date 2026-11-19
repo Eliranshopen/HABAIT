@@ -1,0 +1,10 @@
+Milestone 1.4, after the second review: what does a rename guarantee on this machine, between REAL processes at the same moment?
+The script is the main session's own (gate3-rename-facts-script.txt). Run 2026-11-19T08:13:16+02:00, load 37 %.
+A = the take-over of the lock as it was first written (5c9b049f): several processes rename ONE source. B = the take of a free lock.
+
+A. one source file, renamed by every process to a name of its own: {"rounds":30,"processes":8,"roundsWithMoreThanOneDone":30,"mostDoneInOneRound":8,"codes":{"done":234,"ENOENT":6}}
+B. every process renames its own prepared folder onto ONE free path: {"rounds":30,"processes":8,"roundsWithMoreThanOneDone":0,"roundsWithNone":0,"codes":{"EPERM":210,"done":30}}
+C. a folder renamed onto an existing EMPTY folder: EPERM
+C. a folder renamed onto an existing folder that holds a file: EPERM
+node v24.22.1, win32 10.0.26200
+exit code: 0

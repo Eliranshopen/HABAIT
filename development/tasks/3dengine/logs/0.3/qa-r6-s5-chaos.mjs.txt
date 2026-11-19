@@ -1,0 +1,106 @@
+// qa-r6 s5: heavy-lock losses with two jobs, and random operation sequences (kill / cancel / start / approve) on one job.
+// usage: node s5-chaos.mjs <seed> <heavyN> <chaosN>
+import fs from 'node:fs';
+import { mkEnv, toDone, sleep, pidAlive, check, overlaps, killPid, stats, say, rnd, ledgerSum, cliSpent } from './common.mjs';
+
+const seed = Number(process.argv[2] || 1);
+const HN = Number(process.argv[3] || 4);
+const CN = Number(process.argv[4] || 6);
+const r = rnd(seed);
+const pick = (a) => a[Math.floor(r() * a.length)];
+const E = await mkEnv({ prefix: 'qar6-s5-', staleSeconds: 1, heartbeat: 0.1, stepMs: 700 });
+say(`# s5 seed=${seed} heavy=${HN} chaos=${CN} home=${E.home}`);
+const setEnv = (o) => { for (const [k, v] of Object.entries(o)) process.env[k] = String(v); };
+const clrEnv = (o) => { for (const k of Object.keys(o)) delete process.env[k]; };
+const V = (m) => { stats.violations.push(m); say(`  VIOLATION ${m}`); };
+
+async function heavyScenario(i) {
+  const v = pick(['finish-then-wake', 'kill-B-then-wake', 'wake-mid-B', 'kill-A']);
+  const pa = E.pdf(`s5h-${seed}-${i}-A.pdf`, `A${seed}${i}`);
+  const pb = E.pdf(`s5h-${seed}-${i}-B.pdf`, `B${seed}${i}`);
+  const wake = `${E.home}/wakeA-${i}`;
+  const fe = { ENGINE_TEST_FREEZE_MS: 60000, ENGINE_TEST_FREEZE_AT: 'rendering', ENGINE_TEST_FREEZE_WAKE: wake };
+  setEnv(fe);
+  let ida;
+  try { ida = E.h.start_simulation({ pdf_path: pa }).job_id; } finally { clrEnv(fe); }
+  const pidA = await E.waitFor('A pid', () => E.runnerPid(ida), 15000);
+  await E.waitFor('A holds the heavy lock and is blocked', () => E.heavy()?.pid === pidA && E.log(ida).includes(`runner ${pidA} test hook: thread blocked`), 30000);
+  const idb = E.h.start_simulation({ pdf_path: pb }).job_id;
+  const pidB = await E.waitFor('B pid', () => E.runnerPid(idb), 15000);
+  if (v === 'kill-A') {
+    killPid(pidA); stats.kills++;
+    await E.waitFor('B takes the lock', () => E.heavy()?.pid === pidB, 20000);
+    stats.takeovers++; // lock taken from a dead holder
+  } else {
+    await E.waitFor('B takes the lock over from silent A', () => E.heavy()?.pid === pidB, 20000);
+    stats.takeovers++;
+    if (v === 'kill-B-then-wake') { killPid(pidB); stats.kills++; await E.waitFor('B gone', () => !pidAlive(pidB), 5000, 10); fs.writeFileSync(wake, 'w'); }
+    else if (v === 'wake-mid-B') fs.writeFileSync(wake, 'w');
+    else { await E.waitFor('B rendering row', () => E.rows(idb).some((x) => x.stage === 'rendering'), 20000, 20); fs.writeFileSync(wake, 'w'); }
+  }
+  // bring every job to awaiting then done
+  if (v === 'kill-B-then-wake') { const x = E.h.start_simulation({ pdf_path: pb }); if (!x.resumed) V(`heavy ${v}: B not resumed`); }
+  if (v === 'kill-A') { const x = E.h.start_simulation({ pdf_path: pa }); if (!x.resumed) V(`heavy ${v}: A not resumed`); }
+  await Promise.all([toDone(E, ida, 60000), toDone(E, idb, 60000)]);
+  await sleep(400);
+  for (const [id, n] of [[ida, 'A'], [idb, 'B']]) {
+    const vs = check(E, id, { quiet: true }); if (vs.length) V(`heavy ${v} ${n}: ${vs.join('; ')}`);
+    const rend = E.rows(id).filter((x) => x.stage === 'rendering');
+    if (rend.filter((x) => !x.superseded).length !== 1) V(`heavy ${v} ${n}: rendering valid rows ${rend.filter((x) => !x.superseded).length}`);
+  }
+  const ov = overlaps(E, [ida, idb]); if (ov.length) V(`heavy ${v}: overlapping rendering rows ${JSON.stringify(ov)}`);
+  if (E.heavy()) V(`heavy ${v}: heavy lock left ${JSON.stringify(E.heavy())}`);
+  say(`  heavy#${i} ${v}: A=${pidA} B=${pidB} attempts A=${JSON.stringify(E.job(ida).attempts)} B=${JSON.stringify(E.job(idb).attempts)} overlaps=${ov.length}`);
+  for (const p of [pidA, pidB]) if (pidAlive(p)) { await E.waitFor(`pid ${p} leaves`, () => !pidAlive(p), 20000, 25).catch(() => { V(`pid ${p} stayed`); killPid(p); }); }
+}
+
+async function chaos(i) {
+  const pdf = E.pdf(`s5c-${seed}-${i}.pdf`, `C${seed}${i}`);
+  const hooks = pick([{}, {}, { ENGINE_TEST_PAUSE_AFTER_RESERVE_MS: 600 }, { ENGINE_TEST_PAUSE_AFTER_CACHE_MS: 600 }, { ENGINE_TEST_PAUSE_AFTER_SETTLE_MS: 600 }]);
+  setEnv(hooks);
+  const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+  const ops = [];
+  const nOps = 4 + Math.floor(r() * 6);
+  try {
+    for (let k = 0; k < nOps; k++) {
+      await sleep(Math.floor(r() * 700));
+      const op = pick(['kill', 'kill', 'cancel', 'start', 'start2', 'approve', 'kill+start']);
+      ops.push(op);
+      const j = E.job(id);
+      if (op === 'kill') { const p = E.runnerPid(id); if (p && pidAlive(p)) { killPid(p); stats.kills++; } }
+      else if (op === 'cancel') { try { E.h.cancel_job({ job_id: id }); } catch (e) { if (!/lock busy/.test(e.message)) throw e; } }
+      else if (op === 'start') { try { E.h.start_simulation({ pdf_path: pdf }); } catch (e) { if (!/lock busy/.test(e.message)) throw e; } }
+      else if (op === 'start2') { for (let q = 0; q < 2; q++) { try { E.h.start_simulation({ pdf_path: pdf }); } catch (e) { if (!/lock busy/.test(e.message)) throw e; } } }
+      else if (op === 'approve') { if (j.state === 'awaiting_approval') E.approve(id); }
+      else { const p = E.runnerPid(id); if (p && pidAlive(p)) { killPid(p); stats.kills++; } try { E.h.start_simulation({ pdf_path: pdf }); } catch (e) { if (!/lock busy/.test(e.message)) throw e; } }
+    }
+  } finally { clrEnv(hooks); }
+  // finalize
+  const until = Date.now() + 90000;
+  for (;;) {
+    const j = E.job(id);
+    if (j.state === 'done') break;
+    if (Date.now() > until) { V(`chaos#${i}: never reached done (state ${j.state})`); break; }
+    if (j.state === 'awaiting_approval' && !j.approval) E.approve(id);
+    else if (['cancelled', 'failed', 'review'].includes(j.state) || (E.h.get_job({ job_id: id }).job.runner.alive === false)) { try { E.h.start_simulation({ pdf_path: pdf }); } catch (e) { if (!/lock busy/.test(e.message)) throw e; } }
+    await sleep(150);
+  }
+  const p = E.runnerPid(id);
+  if (p) await E.waitFor('runner gone', () => !pidAlive(p), 15000, 25).catch(() => V(`chaos#${i}: runner stayed`));
+  await sleep(300);
+  const vs = check(E, id, { quiet: true }); if (vs.length) V(`chaos#${i} [${ops.join(',')}] ${JSON.stringify(hooks)}: ${vs.join('; ')}`);
+  const log = E.log(id);
+  const sup = (log.match(/stopped: superseded|runner\.pid names another runner/g) || []).length;
+  const rows = E.ledger(id).rows;
+  say(`  chaos#${i} ops=[${ops.join(',')}] hooks=${JSON.stringify(hooks)} superseded=${sup} ledger=${rows.map((x) => `${x.status[0]}${x.late ? 'L' : ''}${x.not_sent ? 'n' : ''}`).join('')} spent=${E.job(id).cost.spent_usd}/${ledgerSum(E, id)}`);
+}
+
+try {
+  for (let i = 0; i < HN; i++) await heavyScenario(i).catch((e) => V(`heavy#${i} threw ${e.message}`));
+  for (let i = 0; i < CN; i++) await chaos(i).catch((e) => V(`chaos#${i} threw ${e.message}`));
+} finally {
+  await E.cleanup();
+  say(`# s5 done seed=${seed} kills=${stats.kills} takeovers=${stats.takeovers} violations=${stats.violations.length} leftover=${JSON.stringify(E.leftover)}`);
+  for (const x of stats.violations) say(`  V: ${x}`);
+  fs.appendFileSync(`C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r6/counters.txt`, `s5 seed=${seed} kills=${stats.kills} takeovers=${stats.takeovers} violations=${stats.violations.length}\n`);
+}

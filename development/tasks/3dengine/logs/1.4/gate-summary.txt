@@ -1,0 +1,181 @@
+Milestone 1.4 (a saved reading): the gate.
+Run by the main session on 2026-11-18 in the worktree C:/RnD/.wt/3dengine/Projects/3Dengine, on the code that is committed as the milestone.
+Nothing was paid. The «paid» first run of the closing test is the real reading tool against a SCRIPTED model on a temp home: a planted fake key,
+no keys file, `fetch` replaced in the tool's process, no network.
+
+THE MACHINE DURING THIS GATE
+  Renders of other sessions (Blender) held this machine at 100 % for most of the day, and it slept once for about four hours in the middle of a run.
+  ONE reading of the 846 drawing took 458, 461, 492 and 558 s at that load (71 s on a quiet machine). The load read before and after every run is in
+  that run's file. Two decisions of Eliran were taken because of it, both during this gate, in the session's question dialog:
+    «בדיקות פעם אחת»        each tier of tests runs ONCE in a gate; a run is repeated only when it failed or was cut (taken at the gate of 1.3)
+    «ריצה אחת ארוכה ברקע»   for the engine's stage tests only, on a loaded machine: ONE bounded run of up to 25 minutes in the background
+                            (timeout 1500 npm run test:stages), instead of 540 s in the foreground
+  Both are written in development/tasks/3dengine/run-tasks.md, step 3.
+
+THE GATE: WHAT PASSED
+  fast suite      npm test, ONCE: 428 tests, 428 pass, 0 fail, 188 s, lines 99.77 % (load before: 21 %)          gate-npm-test.txt
+                  coverage of the code this milestone wrote or changed: engine/readings.mjs 100 % of lines, engine/cli.mjs 100 %, engine/trace.mjs 100 %,
+                  engine/stages/tracing.mjs 100 %, engine/config.mjs 100 %
+  stage tier      npm run test:stages, the WHOLE tier (five files side by side), the one long background run:
+                  13 tests, 13 pass, 0 fail, 359 s (load before: 100 %, after: 65 %)                              gate-test-stages-long-2.txt
+                    1.4 (tests/stages/m1.4.test.mjs)
+                      1.  the FIRST run, the command, paid against the scripted model: PASS, 10 rooms, one request with the planted key as a Bearer
+                          header, the made-up cost (0.0123) in the run's ledger and in the kept record; the store holds the tool's own reading file byte
+                          for byte, a record with today's reader, and the plan carries the day the command decided and the drawing's id.
+                          In THIS run the test went on from its checkpoint: the first run had been made at 14:41 (557 s at 100 % load,
+                          gate-test-stages-m14-resumable-1.txt) and was not made again; the checkpoint was checked against the disk.
+                      2.  the SECOND run, a real job of the same PDF on the same home, about six hours later: tracing done with a manifest row at $0,
+                          the job's ledger empty, NO new request (the request record still holds one line), plan.general.json byte for byte the first
+                          run's, traced from the kept reading                                                                           335 s
+                      3.  `reading show`: exit 0, the date, the source, the cost, the model; no room name in what it printed, in any answer of a tool,
+                          in a job file, in the record, in the request record or in the checkpoint
+                    1.2 and 1.3 (their files, changed as contract 1.4 section 8 says): the command (339 s) and a job (345 s) from the fixture reading
+                      both give the PINNED plan: the hash of plan.general.json in tests/fixtures/apt846/expected-trace.json, trace_date 2026-11-06 (the
+                      day of the reading, not of the run), apartment_id = the drawing's id; the failing side of 1.3 (review / TRACE_GATE_FAIL, 333 s);
+                      no drawing; no kept reading; the walked paid path (106 s); the pinned paid reading of 1.2
+  end to end      npm run test:e2e: 51 of 51, 236 s (load before: 100 %), the second try                           gate-e2e.txt
+  readiness       node engine/cli.mjs doctor: READY (both key names present)                                       gate-doctor.txt
+  no soak: this milestone does not touch the runner, the manifest or the ledger of a job.
+
+THE RUNS THAT DID NOT END, EACH WITH ITS REASON (all on the same code, all at 100 % machine load unless said)
+  13:47  the whole tier, foreground, 540 s: the four older files PASSED (11 tests); the 1.4 file passed its first run (240 s) and was cut in its
+         second. The load went from 1 % to 100 % during the run.                                              gate-test-stages.txt
+  13:58  the 1.4 file alone: first run 492 s, cut (exit 124) in the second run. The cut killed the reading tool, and the test reported the job
+         as a failed step: an artefact of the cut, not a fault of the engine.                                  gate-test-stages-m14-alone-1-cut-at-540s.txt
+  14:10  the same again: first run 461 s, cut (exit 124).                                                      gate-test-stages-m14-alone-2-cut-at-540s.txt
+         THEN the closing test was changed: it keeps a checkpoint after its first run (bound to the hash of the engine's code, of the test and
+         of the reader) and a later invocation goes on from it. No engine code changed.
+  14:32  the 1.4 file, now resumable: first run 558 s, checkpoint written, cut (exit 124).                     gate-test-stages-m14-resumable-1.txt
+  14:42  the 1.4 file again: went on from the checkpoint in 1.3 s; the second run alone did not end in 540 s, cut. gate-test-stages-m14-resumable-2.txt
+         THEN Eliran allowed the long background run.
+  16:05  the long run: VOID. The machine slept for about four hours in the middle (the run «took» 14,859 s and the tests timed out).
+                                                                                                               gate-test-stages-long-1-machine-slept.txt
+  20:15  after the machine came back: the whole tier in the foreground, cut at 540 s with all five files still reading.   gate-test-stages-2-cut-at-540s.txt
+  20:25  the long run: 13 of 13 (above).
+  20:32  end to end, first try: 27 of 27 assertions passed, then a browser screenshot did not end in its 30 s (page.screenshot: Timeout):
+         the machine, not the engine.                                                                          gate-e2e-1-screenshot-timeout.txt
+  After every cut run the processes of its temp homes were listed; none was left. Temp folders of cut runs were removed by name.
+
+WHAT WAS FOUND AND CHANGED DURING THE BUILD AND THE GATE
+  1. A paid run that crossed midnight between the model's answer and the plan would have given a later run another date. The day of the plan is
+     now decided by the command before the tool starts and kept in the record (plan_date); contract 1.4 section 3. Found while the closing test
+     was written, before any run.
+  2. Four doubled lines in engine/CLAUDE.md, left by the notes patch of milestone 1.3 (a helper that inserted twice). Removed.
+  3. The closing test of 1.4 made resumable (above). A test change; the first whole pass of the unchanged chain in ONE invocation is dev-m14-1.txt.
+  No engine code changed after gate-npm-test.txt (13:44). After it: tests/stages/m1.4.test.mjs and tests/stages/real-home.mjs (the stage tier,
+  which then ran whole and passed), context files, the task cards.
+
+RUNS DURING THE BUILD (before the gate), kept:
+  dev-fixture-run.txt   the 846 fixture reading through the command with the drawing's id: PASS, 458 s at 100 % load; the plan carries 2026-11-06
+                        and the drawing's id; expected-trace.json was written from this run (every number and the three measurement hashes unchanged)
+  dev-m14-1.txt         the 1.4 closing test alone, both runs in ONE invocation, before it was made resumable: 3 of 3, 357 s (load before: 97 %)
+
+NOT RUN
+  A quiet-machine timing of the tier with the 1.4 file in it (the reviewer of 1.3 measured the tier before 1.4 at 131 s on a quiet machine).
+  The coverage tool on the stage tier (a real reading under it does not end in its time: milestone 1.2's gate).
+  A real paid reading: none was needed, and a job cannot pay for one yet.
+  A kept reading made stale by a change of the REAL reading tool: proven with stand-in files in the unit tests of the store (one changed byte of the
+  tool, or of the file that names the model, makes every kept reading stale; a new engine version does not).
+
+========================================================================================================================
+THE FIRST REVIEW AND THE SECOND GATE (2026-11-18, evening)
+  The gate above was merged (main e0aee0cb) and a fresh reviewer read the live home. VERDICT: FAIL, one defect (qa-live.md, evidence qa-*).
+  D-1  The engine's file mutex (withFileLock, engine/lib/atomic.mjs, written at milestone 0.3) was not exclusive between short-lived
+       processes: two holders at one moment in the reviewer's runs of eight processes (4 of 15, and more: qa-lockrace-*.txt, qa-race-*.txt),
+       so eight keeps of one PDF at once could lose the record of a kept reading. The cause: a taker judged «the holder is dead» from text it
+       had read a moment before, moved the lock aside to look at it, and the lock it moved was already another, live process's.
+  Everything else the reviewer attacked held (its report: 227 checks of forged pairs and records, 55 of the command and the stage, 114 of
+  settings numbers; its own gate passed).
+
+WHAT CHANGED AFTER THE REVIEW (commits 5c9b049f and the one after it on the branch)
+  1. The mutex was replaced (contract 1.4 section 11): the lock is a FOLDER that holds ONE entry named after its holder; take, release and
+     take-over are each ONE atomic rename that names the exact holder it expects. It is the lock of a job's files, of the heavy lock's guard
+     and of the readings store. A lock FILE of the engine before 1.4 is still read by its old rules.
+  2. Three observations of the review closed in code: O-2 an instant written 24:00:00 was taken (engine/trace.mjs); O-4 readingsDir went
+     through String() (engine/config.mjs); O-5 a keep whose write failed after the old pair was moved aside left no valid pair: the new pair
+     is now written whole, under temp names, before anything is moved (engine/readings.mjs).
+     O-1 and O-3 are as the contract says (section 10). O-6 (fixed waits of the 0.2 tests at 100 % load) is carried on the board to card 08.
+  3. Tests: tests/unit/lock-race.test.mjs (REAL short-lived processes: 8 runs of 8 holders, 4 storms of 8 keeps of one PDF); the mutex cases
+     of lib.test.mjs and resilience.test.mjs rewritten; a busy lock in a test is a held one (holdLock); tests for O-2, O-4, O-5.
+
+THE SECOND GATE: WHAT PASSED (in the working folder, on the code of 5c9b049f; each tier once)
+  fast suite      npm test: 431 tests, 431 pass, 0 fail, 227 s, lines 99.77 % (load before 100 %, after 100 %)        gate2-npm-test.txt
+                  engine/lib/atomic.mjs 99.03 % of lines, engine/readings.mjs 98.81 %
+  soak            npm run test:soak -- --kills 40 --freezes 12 (run because the lock of a job's files changed):
+                  kills 60, takeovers 12, violations 0, 255 s (load 100 %); no process of the soak remained              gate2-soak.txt
+  stage tier      npm run test:stages, the WHOLE tier, the one long background run: 13 tests, 13 pass, 0 fail, 760 s
+                  (load before 100 %; the 1.4 file started from nothing because the engine's code had changed: its first run 495 s,
+                  its second, a real job from the kept reading, 262 s, NO new request, the plan byte for byte)          gate2-test-stages.txt
+                  (the «load after» line of that file is empty: the load query gave nothing at that moment)
+  end to end      npm run test:e2e: 51 of 51, 90 s (load before 17 %)                                                   gate2-e2e.txt
+  readiness       node engine/cli.mjs doctor: READY (both key names present)                                            gate2-doctor.txt
+
+THE LOCK RACE, RUN AGAIN AFTER THE GATE                                                                                  gate2-lockrace.txt
+  The new lock: 40 runs of 8 processes and 40 runs of 16, no two holders, nobody busy, no error (load 32 %).
+  The OLD lock, taken out of git (21cd9f96), did NOT show its defect any more once the renders of the other sessions had let go of the machine:
+  0 two holders in 140 runs (80 on a quiet machine, 60 under 20 and 60 busy processes of the script's own). The defect needs a machine held by
+  other work (processor, memory and disk together). The main session's own first reproduction (10 of 30 at 100 % load) and the 80 clean runs
+  of the new lock at that same load were printed in the session and NOT kept as files; what is kept from that load is gate2-npm-test.txt.
+  THEREFORE one more test, added after gate2-npm-test.txt and run alone (tests/unit/resilience.test.mjs: 30 of 30): the sequence of D-1 FIXED,
+  with no race in it: the holder changes between a taker's look and its act (the hold ended and another took the lock; ended and nobody took
+  it; taken again by the same pid), and nothing of the lock that stands there is moved. It is a test only; no engine code changed after
+  5c9b049f. `npm test` was not run again for it (each tier once); the second reviewer runs the whole suite on the merged code.
+
+NOT RUN IN THE SECOND GATE
+  The race of the old lock under the load that showed it (it cannot be called up: it was other sessions' renders).
+  A quiet-machine timing of the stage tier. A real paid reading (none needed).
+
+========================================================================================================================
+THE SECOND REVIEW AND THE THIRD GATE (2026-11-18 evening, 2026-11-19 morning)
+  The second gate was merged (main c647cdd8) and a NEW fresh reviewer read the live home. It was cut by a network failure at 22:44, in the
+  middle of its attacks on the lock, and finished its report the next morning from the files it had saved. VERDICT: FAIL, one defect
+  (qa-live-r2.md, evidence qa2-*).
+  D-1  A holder that is KILLED while several takers wait was taken over by all of them at once: the bodies of four takers overlapped in
+       10 of 10 of the reviewer's runs (qa2-lock-takeover-overlap.txt), and in 4 of 8 with a real killed holder (qa2-lock-kill-*.txt).
+  What held: the first review's D-1 did not come back (36 runs, 512 holders, no two holders, no lost update); 32 of 32 fixed sequences;
+  its gate (the stage tier in two invocations, npm test 432 of 432, READY).
+  NOT reviewed (cut): its own attacks on the store, the command and the settings (scope B). The third reviewer starts there.
+
+THE CAUSE, MEASURED BEFORE ANYTHING WAS CHANGED                                                                   gate3-rename-facts.txt
+  The first form of the new lock (5c9b049f) handed a stale holder's entry over by RENAMING it to the taker's own entry, and counted on the
+  rename to work for one taker only. A rename is exclusive on the name it CREATES, not on its source: Windows renames through a handle of
+  the source. Eight processes that renamed ONE source file at the same moment: more than one was told it worked in 30 rounds of 30, up to
+  8 of 8 (234 of 240). Eight processes that each renamed a folder of their own ONTO one free path: exactly one in 30 rounds of 30.
+  (My own check of this at the first fix was one process, one rename after another: it could not show it.)
+
+WHAT CHANGED AFTER THE SECOND REVIEW
+  1. engine/lib/atomic.mjs: a stale hold is BROKEN, never handed over. Its entry is moved out of the folder (it can only ever be that hold's:
+     a name is never used twice and nothing is renamed INTO the folder), the empty folder is removed, and the lock is then TAKEN like any
+     free lock, by the one exclusive step. Contract 1.4 section 11, rewritten.
+  2. The reviewer's O-1 closed: a hold whose time is further than staleMs from now in EITHER direction is stale (a time far in the future,
+     with a live pid, never grew old). O-2 closed: tests that kill a holder while takers wait (below).
+     O-3 (the stage tier does not end inside 540 s even on a quiet machine, since the 1.4 file makes two real readings one after the other;
+     its checkpoint carries a second invocation) is carried on the board to card 08, with the first review's O-6.
+  3. Tests, with REAL processes (tests/unit/lock-race.test.mjs): a holder that DIES while eight takers wait, six times; a LIVE holder whose
+     hold grows older than staleMs while eight takers wait, four times. Both FAIL on the first form of the lock on a quiet machine (run 1:
+     seven of eight takers together) and pass now.                                                                 gate3-lock-die-test.txt
+     Fixed sequences (tests/unit/resilience.test.mjs): a broken hold is taken as a FREE lock (a new folder); a time in the future.
+
+THE THIRD GATE: WHAT PASSED (in the working folder; each tier once; nothing paid)
+  fast suite      npm test, the run that counts (after the last change of engine code): 434 tests, 434 pass, 0 fail, 137 s,
+                  lines 99.81 %; engine/lib/atomic.mjs 100 % of lines, engine/readings.mjs 98.81 %                    gate3-npm-test-2.txt
+                  (the run before that change: 433 of 433, 182 s, load before 69 %                                     gate3-npm-test.txt)
+  soak            npm run test:soak -- --kills 40 --freezes 12: kills 44, takeovers 12, violations 0, 107 s (load before 24 %); nothing remained
+                                                                                                                       gate3-soak.txt
+  stage tier      npm run test:stages in the foreground, timeout 540 (load before 42 %): the four older files PASSED (11 tests) and the 1.4
+                  file's first run passed (302 s, checkpoint written); its second run did not end inside the limit (the run stopped at 537 s).
+                                                                                                         gate3-test-stages-1-cut-at-540s.txt
+                  The 1.4 file again, alone: went on from its checkpoint, 3 of 3, 221 s (the second run, a real job from the kept reading:
+                  218 s, NO new request, the plan byte for byte).                                         gate3-test-stages-m14-resume.txt
+                  Together: 14 of 14 test lines. This is the reviewer's O-3, not load.
+  end to end      npm run test:e2e: 51 of 51, 100 s (load before 3 %)                                                  gate3-e2e.txt
+  readiness       node engine/cli.mjs doctor: READY (both key names present)                                           gate3-doctor.txt
+  WHY npm test RAN TWICE: after the first run, the soak, the stage tier and the end-to-end test, two things were added. A test (the live holder
+  whose hold grows stale, gate3-lock-die-test.txt part 3), and ONE change of engine code: a taker that cannot move a stale entry just now (a
+  passing file error) waits a few milliseconds before it looks again; it used to look again at once, in a loop, until its waitMs ran out
+  (found by the main session reading its own fix; tests/unit/resilience.test.mjs, case 6). So the fast suite ran again, whole. The soak, the
+  stage tier and the end-to-end test were NOT run again: the change is reached only when a rename of a stale entry fails with a passing
+  error, and what they exercise is unchanged. The third reviewer runs every tier on the merged code.
+
+NOT RUN IN THE THIRD GATE
+  A quiet-machine timing of the whole stage tier in one invocation (it does not fit 540 s: O-3). A real paid reading (none needed).

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "inspect_plan input",
+  "type": "object",
+  "properties": {
+    "pdf_path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "description": "Absolute path of the uploaded sales-plan PDF; it must be inside an allowed upload folder."
+    }
+  },
+  "required": [
+    "pdf_path"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,55 @@
+mut summary.extra key: ok answer==true:true leak:false record-after:true
+mut candidate extra key: ok answer==true:true leak:false record-after:true
+mut candidate thumb ..: ok answer==true:true leak:false record-after:true
+mut candidates emptied: ok answer==true:true leak:false record-after:true
+mut vector_paths changed: ok answer==true:true leak:false record-after:true
+mut scanner_sha wrong: ok answer==true:true leak:false record-after:true
+mut settings changed: ok answer==true:true leak:false record-after:true
+mut sha wrong: ok answer==true:true leak:false record-after:true
+mut schema wrong: ok answer==true:true leak:false record-after:true
+mut pages.json emptied pages: ok answer==true:true leak:false record-after:true
+mut pages.json text marker (summary must not carry): ok answer==true:true leak:false record-after:true
+mut pages.json deleted: ok answer==true:true leak:false record-after:true
+mut inspect.json array: ok answer==true:true leak:false record-after:true
+mut inspect.json bom: ok answer==true:true leak:false record-after:true
+[reuse w/o python] inspect_plan TOOLCHAIN_MISSING 3ms
+[reuse w/o python] start_simulation TOOLCHAIN_MISSING
+[mutated record, no python] inspect_plan TOOLCHAIN_MISSING the engine's Python is missing: C:/nonexistent/python.exe
+[text] m.pdf inspect_plan: ok leak=false
+[text] m.pdf start_simulation: ok leak=false
+[text] m.pdf inspect_plan: ok leak=false
+[text] mb.pdf inspect_plan: ok leak=false
+[text] mb.pdf start_simulation: NO_PLAN_FOUND leak=false
+[text] mb.pdf inspect_plan: ok leak=false
+[text] files other than pages.json/pdfs holding the marker: [] answer leaks 0
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-42148-1794923789126-3 EPERM
+[path outside] inspect_plan: PATH_NOT_ALLOWED
+[path outside] start_simulation: PATH_NOT_ALLOWED
+[path dotdot] inspect_plan: PATH_NOT_ALLOWED
+[path dotdot] start_simulation: PATH_NOT_ALLOWED
+[path junction] inspect_plan: PATH_NOT_ALLOWED
+[path junction] start_simulation: PATH_NOT_ALLOWED
+[path 8.3?] inspect_plan: PATH_NOT_ALLOWED
+[path 8.3?] start_simulation: PATH_NOT_ALLOWED
+[path unc] inspect_plan: PATH_NOT_ALLOWED
+[path unc] start_simulation: PATH_NOT_ALLOWED
+[path relative] inspect_plan: PATH_NOT_ALLOWED
+[path relative] start_simulation: PATH_NOT_ALLOWED
+[path empty] inspect_plan: RPC:invalid arguments for inspect_plan: $.pdf_path: shorter than
+[path empty] start_simulation: RPC:invalid arguments for start_simulation: $.pdf_path: shorter 
+[path nul] inspect_plan: PATH_NOT_ALLOWED
+[path nul] start_simulation: PATH_NOT_ALLOWED
+[path url] inspect_plan: PATH_NOT_ALLOWED
+[path url] start_simulation: PATH_NOT_ALLOWED
+[path ads] inspect_plan: ok
+[path ads] start_simulation: ok
+[path trailing dot] inspect_plan: NOT_A_PDF
+[path trailing dot] start_simulation: NOT_A_PDF
+[path dir] inspect_plan: NOT_A_PDF
+[path dir] start_simulation: NOT_A_PDF
+[path] job folders 1 inspect folder 1
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-42148-1794923809290-4 EPERM
+[same pdf twice] true true false folders 1
+[tamper live runner] state failed STAGE_FAILED rows 3 ledger exists 0
+runner pids I started: 31832,25328 alive: none
+done 0

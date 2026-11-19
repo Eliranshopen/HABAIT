@@ -1,11 +1,11 @@
 # maale-efraim-2026-11-04/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent context file's row for this folder is the description._
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 1 files here · 2 subfolders · 13 files / 75.4 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

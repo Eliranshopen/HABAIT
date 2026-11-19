@@ -1,0 +1,135 @@
+note: D3.live-foreign-fresh: a job.lock naming a LIVE foreign pid blocked a resume for 10038 ms (5 tries); 'lock busy' thrown at 2006 ms
+note: D3.live-foreign-6s: a job.lock naming a LIVE foreign pid blocked a resume for 4030 ms (2 tries); 'lock busy' thrown at 2007 ms
+VIOLATION: D2.rendering-changed end: skinning sent 2x, rows allow 1: [[1,"settled",null,null,null],[4,"settled",null,null,null]]
+VIOLATION: D2.rendering-changed end: gating sent 2x, rows allow 1: [[2,"settled",null,null,null],[5,"settled",null,null,null]]
+VIOLATION: D2.rendering-changed end: finishing sent 2x, rows allow 1: [[3,"settled",null,null,null],[6,"settled",null,null,null]]
+VIOLATION: D2.tracing-deleted end: skinning sent 2x, rows allow 1: [[1,"settled",null,null,null],[4,"settled",null,null,null]]
+VIOLATION: D2.tracing-deleted end: gating sent 2x, rows allow 1: [[2,"settled",null,null,null],[5,"settled",null,null,null]]
+VIOLATION: D2.tracing-deleted end: finishing sent 2x, rows allow 1: [[3,"settled",null,null,null],[6,"settled",null,null,null]]
+VIOLATION: D2.building-changed end: skinning sent 2x, rows allow 1: [[1,"settled",null,null,null],[4,"settled",null,null,null]]
+VIOLATION: D2.building-changed end: gating sent 2x, rows allow 1: [[2,"settled",null,null,null],[5,"settled",null,null,null]]
+VIOLATION: D2.building-changed end: finishing sent 2x, rows allow 1: [[3,"settled",null,null,null],[6,"settled",null,null,null]]
+VIOLATION: D2.skinning-changed end: gating sent 2x, rows allow 1: [[2,"settled",null,null,null],[4,"settled",null,null,null]]
+VIOLATION: D2.skinning-changed end: finishing sent 2x, rows allow 1: [[3,"settled",null,null,null],[5,"settled",null,null,null]]
+{
+ "script": "a4",
+ "seed": 1001,
+ "kills": 34,
+ "jobsDone": 29,
+ "checks": 68,
+ "res": {
+  "D1.high": "spent shortly after resume 1.2, final 1.8",
+  "D1.neg": "spent shortly after resume 1.2, final 1.8",
+  "D1.string": "spent shortly after resume 1.2, final 1.8",
+  "D1.null": "spent shortly after resume 1.2, final 1.8",
+  "D1.zero-after-settle": "spent shortly after resume 1.2, final 1.8",
+  "D1b": "final 1.8",
+  "D3.empty-fresh": "first call 1039 ms ok; blocked 1039 ms over 1 tries; resumed true",
+  "D3.empty-old": "first call 51 ms ok; blocked 51 ms over 1 tries; resumed true",
+  "D3.garbage-fresh": "first call 1058 ms ok; blocked 1058 ms over 1 tries; resumed true",
+  "D3.garbage-old": "first call 19 ms ok; blocked 19 ms over 1 tries; resumed true",
+  "D3.dead-pid": "first call 28 ms ok; blocked 28 ms over 1 tries; resumed true",
+  "D3.live-foreign-fresh": "first call 2006 ms ok; blocked 10038 ms over 5 tries; resumed true",
+  "D3.live-foreign-6s": "first call 2007 ms ok; blocked 4030 ms over 2 tries; resumed true",
+  "D3.live-foreign-11s": "first call 21 ms ok; blocked 21 ms over 1 tries; resumed true",
+  "D3.pid-0": "first call 1039 ms ok; blocked 1039 ms over 1 tries; resumed true",
+  "D3.negative": "first call 1033 ms ok; blocked 1033 ms over 1 tries; resumed true",
+  "D3.float": "first call 1045 ms ok; blocked 1045 ms over 1 tries; resumed true",
+  "D5.state:tracing": "killed true in tracing, resumed true",
+  "D5.state:building": "killed true in building, resumed true",
+  "D5.state:rendering": "killed true in rendering, resumed true",
+  "D5.state:awaiting_approval": "killed true in awaiting_approval, resumed true",
+  "D5.state:skinning": "killed true in skinning, resumed true",
+  "D5.state:gating": "killed true in gating, resumed true",
+  "D5.state:finishing": "killed true in finishing, resumed true",
+  "D5.state:packaging": "killed true in packaging, resumed true",
+  "D5.state:qa": "killed true in qa, resumed true",
+  "D5.delay:1": "killed true in awaiting_approval, resumed true",
+  "D5b.failed": "resumed true, reason null",
+  "D5b.review": "resumed true, reason null",
+  "D5b.cancelled": "resumed true, reason null",
+  "D2.rendering-changed": {
+   "state": "done",
+   "settled": 6,
+   "spent": 3.6,
+   "attempts": {
+    "tracing": 1,
+    "building": 1,
+    "rendering": 2,
+    "skinning": 2,
+    "gating": 2,
+    "finishing": 2,
+    "packaging": 2,
+    "qa": 1
+   },
+   "rows": "tracing1 building1 rendering1s skinning1s gating1s finishing1s rendering2 skinning2 gating2 finishing2 packaging2 qa1"
+  },
+  "D2.tracing-deleted": {
+   "state": "done",
+   "settled": 6,
+   "spent": 3.6,
+   "attempts": {
+    "tracing": 2,
+    "building": 2,
+    "rendering": 2,
+    "skinning": 2,
+    "gating": 2,
+    "finishing": 2,
+    "packaging": 2,
+    "qa": 1
+   },
+   "rows": "tracing1s building1s rendering1s skinning1s gating1s finishing1s tracing2 building2 rendering2 skinning2 gating2 finishing2 packaging2 qa1"
+  },
+  "D2.building-changed": {
+   "state": "done",
+   "settled": 6,
+   "spent": 3.6,
+   "attempts": {
+    "tracing": 1,
+    "building": 2,
+    "rendering": 2,
+    "skinning": 2,
+    "gating": 2,
+    "finishing": 2,
+    "packaging": 2,
+    "qa": 1
+   },
+   "rows": "tracing1 building1s rendering1s skinning1s gating1s finishing1s building2 rendering2 skinning2 gating2 finishing2 packaging2 qa1"
+  },
+  "D2.skinning-changed": {
+   "state": "done",
+   "settled": 5,
+   "spent": 3,
+   "attempts": {
+    "tracing": 1,
+    "building": 1,
+    "rendering": 1,
+    "skinning": 2,
+    "gating": 2,
+    "finishing": 2,
+    "packaging": 1,
+    "qa": 1
+   },
+   "rows": "tracing1 building1 rendering1 skinning1s gating1s finishing1s skinning2 gating2 finishing2 packaging1 qa1"
+  },
+  "D4": "approve threw BUDGET_CAP: cap $1 is below the estimate $48 | 48 accepted -> done, cap 48, total 1.8, reason null"
+ },
+ "violations": [
+  "D2.rendering-changed end: skinning sent 2x, rows allow 1: [[1,\"settled\",null,null,null],[4,\"settled\",null,null,null]]",
+  "D2.rendering-changed end: gating sent 2x, rows allow 1: [[2,\"settled\",null,null,null],[5,\"settled\",null,null,null]]",
+  "D2.rendering-changed end: finishing sent 2x, rows allow 1: [[3,\"settled\",null,null,null],[6,\"settled\",null,null,null]]",
+  "D2.tracing-deleted end: skinning sent 2x, rows allow 1: [[1,\"settled\",null,null,null],[4,\"settled\",null,null,null]]",
+  "D2.tracing-deleted end: gating sent 2x, rows allow 1: [[2,\"settled\",null,null,null],[5,\"settled\",null,null,null]]",
+  "D2.tracing-deleted end: finishing sent 2x, rows allow 1: [[3,\"settled\",null,null,null],[6,\"settled\",null,null,null]]",
+  "D2.building-changed end: skinning sent 2x, rows allow 1: [[1,\"settled\",null,null,null],[4,\"settled\",null,null,null]]",
+  "D2.building-changed end: gating sent 2x, rows allow 1: [[2,\"settled\",null,null,null],[5,\"settled\",null,null,null]]",
+  "D2.building-changed end: finishing sent 2x, rows allow 1: [[3,\"settled\",null,null,null],[6,\"settled\",null,null,null]]",
+  "D2.skinning-changed end: gating sent 2x, rows allow 1: [[2,\"settled\",null,null,null],[4,\"settled\",null,null,null]]",
+  "D2.skinning-changed end: finishing sent 2x, rows allow 1: [[3,\"settled\",null,null,null],[5,\"settled\",null,null,null]]"
+ ],
+ "notes": [
+  "D3.live-foreign-fresh: a job.lock naming a LIVE foreign pid blocked a resume for 10038 ms (5 tries); 'lock busy' thrown at 2006 ms",
+  "D3.live-foreign-6s: a job.lock naming a LIVE foreign pid blocked a resume for 4030 ms (2 tries); 'lock busy' thrown at 2007 ms"
+ ],
+ "leftover": []
+}

@@ -1,0 +1,30 @@
+Milestone 1.1, round 3: the gate after the second QA round (FAIL on D-1, D-2, D-3; report: qa-live-r2.md).
+Run by the main session on 2026-11-17 in the worktree C:\RnD\.wt\3dengine\Projects\3Dengine, on the code that is committed as round 3.
+
+WHAT CHANGED SINCE 0589956 (each family closed by a rule, not by one more case)
+  engine/inspect.mjs         D-1: a stored first look is REBUILT from the record's own pages.json and reused only when the stored
+                             summary is equal to the rebuilt one; O-1: a look's folder that is gone when the scanner returns is
+                             TOOLCHAIN_MISSING
+  engine/control.mjs, engine/cli.mjs
+                             D-2: startOrResume and restartJob read both job.json and manifest.json; the CLI's resume exits 1,
+                             names the job and the reason, and starts no runner
+  mcp/stub-engine.mjs, engine/stages/intake.mjs
+                             D-3: a file where the job folder belongs, and a folder at the intake's temp name, are NOT_A_PDF naming
+                             the job; every other file error of the job folder during start_simulation is TOOLCHAIN_MISSING with a
+                             fixed message and no path
+  mcp/server.mjs             an internal error that is a file error (an errno name, UNKNOWN, ERR_FS_*) leaves as
+                             "a file error of the engine (<code>)": its own message, which holds a path, stays out
+  contracts/CONTRACT-1.1.md  sections 1, 3, 5, 8, 9, 10
+  tests                      unit: inspect (32), file-identity (21), intake (14), stub-engine (23), mcp-server (8); closing test part 9
+
+THE GATE
+  npm test (unit + closing tests, line coverage on engine/** and mcp/**), three runs one after another:
+    run 1  361 tests  361 pass  0 fail  103.5 s  lines 99.72 %   (machine load 19 % just before the run)   r3-gate-npm-test-1.txt
+    run 2  361 tests  361 pass  0 fail  107.2 s  lines 99.72 %   (load 13 %)                                r3-gate-npm-test-2.txt
+    run 3  361 tests  361 pass  0 fail  105.2 s  lines 99.72 %   (load 2 %)                                 r3-gate-npm-test-3.txt
+  closing test alone   node --test tests/milestones/m1.1.test.mjs   12 tests, 12 pass, 27.8 s; part 8: 3 true looks, 3 refused NOT_A_PDF
+                                                                                                           r3-gate-closing-test.txt
+  end to end           npm run test:e2e                              51 of 51 assertions                    r3-gate-e2e.txt
+  soak                 npm run test:soak -- --kills 14 --freezes 8   14 kills, 8 takeovers, violations=0    r3-gate-soak.txt
+
+NOT RUN IN THIS ROUND: a first look on a saturated machine or during a render (contract section 9); anything paid; the network.

@@ -1,0 +1,748 @@
+{
+  "url": "http://127.0.0.1:8931/",
+  "title": "Rainbow תל אביב · Habait",
+  "viewport": [
+    1440,
+    900
+  ],
+  "scrollY": 0,
+  "devicePixelRatio": 1,
+  "libs": [
+    "gsap+ScrollTrigger",
+    "lenis smooth-scroll"
+  ],
+  "fonts": [
+    "Bellefair 400 normal",
+    "Assistant 200 800 normal"
+  ],
+  "canvases": [],
+  "target": {
+    "selector": "#hero",
+    "found": true,
+    "rect": [
+      0,
+      0,
+      1440,
+      900
+    ]
+  },
+  "animations": [],
+  "keyframes": [
+    {
+      "name": "hb-pulse",
+      "css": "@keyframes hb-pulse { \n  0%, 100% { opacity: 1; transform: scale(1); }\n  50% { opacity: 0.35; transform: scale(0.7); }\n}"
+    },
+    {
+      "name": "hb-shimmer",
+      "css": "@keyframes hb-shimmer { \n  100% { background-position: -150% 0px; }\n}"
+    }
+  ],
+  "nodes": [
+    {
+      "el": "section#hero.rl-hero.is-playing",
+      "rect": [
+        0,
+        0,
+        1440,
+        900
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "relative",
+        "display": "grid",
+        "padding": "109px 100.8px 81px"
+      }
+    },
+    {
+      "el": "div.rl-blocks",
+      "rect": [
+        0,
+        0,
+        1440,
+        900
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(243, 186, 193)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "hidden",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "i",
+      "rect": [
+        1094,
+        0,
+        346,
+        486
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(255, 236, 19)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "i",
+      "rect": [
+        1094,
+        486,
+        346,
+        414
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(243, 186, 193)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "i",
+      "rect": [
+        259,
+        0,
+        835,
+        234
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(124, 192, 227)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "i",
+      "rect": [
+        245,
+        0,
+        14,
+        900
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(87, 35, 101)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "i",
+      "rect": [
+        0,
+        0,
+        245,
+        558
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(27, 54, 255)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "i",
+      "rect": [
+        0,
+        558,
+        245,
+        342
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(255, 110, 19)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "i",
+      "rect": [
+        259,
+        702,
+        835,
+        198
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(112, 119, 13)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "div.rl-card.rl-hero__card",
+      "rect": [
+        146,
+        230,
+        1147,
+        468
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(255, 255, 255)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "relative",
+        "display": "grid",
+        "padding": "12px"
+      }
+    },
+    {
+      "el": "div.rl-hero__media",
+      "rect": [
+        158,
+        242,
+        711,
+        444
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(220, 231, 239)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "hidden",
+        "position": "relative",
+        "display": "block"
+      }
+    },
+    {
+      "el": "img#heroPoster.rl-hero__poster",
+      "rect": [
+        158,
+        242,
+        711,
+        444
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "clip",
+        "position": "absolute",
+        "display": "block"
+      },
+      "src": "http://127.0.0.1:8931/fixtures/rainbow/landing/hero-poster-960.jpg"
+    },
+    {
+      "el": "video#heroVideo.rl-hero__video",
+      "rect": [
+        158,
+        242,
+        711,
+        444
+      ],
+      "text": "",
+      "style": {
+        "transition": "opacity 0.9s",
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "clip",
+        "position": "absolute",
+        "display": "block"
+      },
+      "src": "http://127.0.0.1:8931/fixtures/rainbow/landing/hero-1080.mp4"
+    },
+    {
+      "el": "div.rl-hero__corner",
+      "rect": [
+        170,
+        630,
+        171,
+        44
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "flex",
+        "gap": "8px"
+      }
+    },
+    {
+      "el": "span.hb-ai-badge.rl-badge",
+      "rect": [
+        222,
+        642,
+        119,
+        21
+      ],
+      "style": {
+        "color": "rgb(255, 252, 249)",
+        "background-color": "rgba(26, 23, 19, 0.78)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "12px",
+        "font-weight": "600",
+        "line-height": "16.8px",
+        "border-radius": "6px",
+        "backdrop-filter": "blur(6px)",
+        "display": "flex",
+        "gap": "4px",
+        "padding": "2px 8px"
+      }
+    },
+    {
+      "el": "bdi",
+      "rect": [
+        230,
+        644,
+        63,
+        17
+      ],
+      "text": "AI-generated",
+      "style": {
+        "color": "rgb(255, 252, 249)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "12px",
+        "font-weight": "400",
+        "line-height": "16.8px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "button#heroToggle.rl-play",
+      "rect": [
+        170,
+        630,
+        44,
+        44
+      ],
+      "style": {
+        "transition": "background-color 0.3s ease-in-out, color 0.3s ease-in-out",
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgba(255, 255, 255, 0.92)",
+        "font-family": "Arial",
+        "font-size": "13.3333px",
+        "font-weight": "400",
+        "border-radius": "50%",
+        "display": "grid",
+        "padding": "1px 6px"
+      }
+    },
+    {
+      "el": "svg.rl-play__pause",
+      "rect": [
+        183,
+        643,
+        18,
+        18
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Arial",
+        "font-size": "13.3333px",
+        "font-weight": "400",
+        "overflow": "hidden",
+        "display": "block"
+      }
+    },
+    {
+      "el": "rect",
+      "rect": [
+        188,
+        647,
+        3,
+        11
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Arial",
+        "font-size": "13.3333px",
+        "font-weight": "400",
+        "display": "inline"
+      }
+    },
+    {
+      "el": "rect",
+      "rect": [
+        194,
+        647,
+        3,
+        11
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Arial",
+        "font-size": "13.3333px",
+        "font-weight": "400",
+        "display": "inline"
+      }
+    },
+    {
+      "el": "div.rl-hero__body",
+      "rect": [
+        869,
+        242,
+        412,
+        444
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "grid",
+        "gap": "14px",
+        "padding": "28px 43.2px"
+      }
+    },
+    {
+      "el": "p.rl-mark",
+      "rect": [
+        924,
+        299,
+        304,
+        73
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "17px",
+        "display": "grid",
+        "gap": "4px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        924,
+        299,
+        308,
+        58
+      ],
+      "text": "RAINBOW",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "57.6px",
+        "font-weight": "400",
+        "line-height": "57.6px",
+        "letter-spacing": "4.608px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "span.rl-mark__sub",
+      "rect": [
+        1039,
+        361,
+        78,
+        11
+      ],
+      "text": "TEL AVIV",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "11.2px",
+        "font-weight": "600",
+        "line-height": "11.2px",
+        "letter-spacing": "4.704px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "h1#heroTitle.rl-hero__title",
+      "rect": [
+        942,
+        390,
+        267,
+        97
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "44.8px",
+        "font-weight": "400",
+        "line-height": "48.384px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "span.hb-sr",
+      "rect": [
+        1074,
+        390,
+        1,
+        1
+      ],
+      "text": "RAINBOW Tel Aviv ·",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "44.8px",
+        "font-weight": "400",
+        "line-height": "48.384px",
+        "clip-path": "inset(50%)",
+        "overflow": "hidden",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "span.rl-hero__l1",
+      "rect": [
+        942,
+        390,
+        267,
+        48
+      ],
+      "text": "גבוה מעל הים.",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "44.8px",
+        "font-weight": "400",
+        "line-height": "48.384px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "span.rl-hero__l2",
+      "rect": [
+        942,
+        439,
+        267,
+        48
+      ],
+      "text": "עוד לפני שהוא קם.",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "44.8px",
+        "font-weight": "400",
+        "line-height": "48.384px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "p.rl-hero__promise",
+      "rect": [
+        934,
+        501,
+        283,
+        58
+      ],
+      "text": "טסים סביב המגדל, ומשם ישר אל תוך הדירה. הכול בהדמיה.",
+      "style": {
+        "color": "rgb(61, 61, 61)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "19.2px",
+        "font-weight": "400",
+        "line-height": "28.8px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "div.rl-hero__ctas",
+      "rect": [
+        979,
+        581,
+        192,
+        48
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "a#heroCta.rl-btn",
+      "rect": [
+        979,
+        581,
+        192,
+        48
+      ],
+      "style": {
+        "transition": "background-color 0.3s ease-in-out",
+        "color": "rgb(255, 255, 255)",
+        "background-color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "18px",
+        "font-weight": "500",
+        "line-height": "21.6px",
+        "border-radius": "2px",
+        "display": "inline-flex",
+        "gap": "10px",
+        "padding": "0px 34px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        1041,
+        594,
+        96,
+        22
+      ],
+      "text": "לסיור בפרויקט",
+      "style": {
+        "color": "rgb(255, 255, 255)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "18px",
+        "font-weight": "500",
+        "line-height": "21.6px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "svg",
+      "rect": [
+        1013,
+        596,
+        18,
+        18
+      ],
+      "style": {
+        "color": "rgb(255, 255, 255)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "18px",
+        "font-weight": "500",
+        "line-height": "21.6px",
+        "overflow": "hidden",
+        "display": "block"
+      }
+    },
+    {
+      "el": "path",
+      "rect": [
+        1020,
+        600,
+        5,
+        9
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(255, 255, 255)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "18px",
+        "font-weight": "500",
+        "line-height": "21.6px",
+        "display": "inline"
+      }
+    },
+    {
+      "el": "a.rl-cue",
+      "rect": [
+        698,
+        850,
+        44,
+        44
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "grid"
+      }
+    },
+    {
+      "el": "svg",
+      "rect": [
+        709,
+        861,
+        22,
+        22
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "hidden",
+        "display": "block"
+      }
+    },
+    {
+      "el": "path",
+      "rect": [
+        714,
+        869,
+        13,
+        6
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "inline"
+      }
+    }
+  ]
+}

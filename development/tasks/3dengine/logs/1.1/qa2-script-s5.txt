@@ -1,0 +1,104 @@
+// Section 5 for every tool and both files. In-process engine (no-op spawnRunner that records calls) + CLI + real runner.
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, GOLDEN, sha, sleep, runRunner, pidAlive, killPid, snapshot, diffSnap, cleanup, runnerPid } from './qa-lib.mjs';
+const R = 'C:/RnD/Projects/3Dengine';
+const { loadConfig } = await E('engine/config.mjs');
+const { createStubEngine } = await E('mcp/stub-engine.mjs');
+const SAMPLE = `${R}/tests/fixtures/sample.pdf`;
+
+const h = await makeHome({ timeout: 90 });
+// baseline: victim A (GOLDEN) to awaiting_approval with a runner we kill; control B (sample) just created.
+const base = await engineOf(h);
+fs.copyFileSync(GOLDEN, `${h.inbox}/a.pdf`); fs.copyFileSync(SAMPLE, `${h.inbox}/b.pdf`);
+const A = await base.handlers.start_simulation({ pdf_path: `${h.inbox}/a.pdf` });
+const B = await base.handlers.start_simulation({ pdf_path: `${h.inbox}/b.pdf` });
+const idA = A.job_id; const idB = B.job_id;
+for (const id of [idA, idB]) {
+  const p = spawn(process.execPath, [`${R}/engine/runner.mjs`, id], { env: { ...process.env, ...h.env }, stdio: 'ignore', windowsHide: true });
+  for (let i = 0; i < 400; i++) { await sleep(100); try { if (JSON.parse(fs.readFileSync(`${h.jobsDir}/${id}/job.json`, 'utf8')).state === 'awaiting_approval') break; } catch {} }
+  p.kill(); killPid(p.pid); await sleep(300);
+}
+console.log('baseline', idA.slice(0, 10), JSON.parse(fs.readFileSync(`${h.jobsDir}/${idA}/job.json`, 'utf8')).state, 'manifest rows', JSON.parse(fs.readFileSync(`${h.jobsDir}/${idA}/manifest.json`, 'utf8')).rows.length);
+const goodJob = fs.readFileSync(`${h.jobsDir}/${idA}/job.json`, 'utf8');
+const goodMan = fs.readFileSync(`${h.jobsDir}/${idA}/manifest.json`, 'utf8');
+const otherJob = fs.readFileSync(`${h.jobsDir}/${idB}/job.json`, 'utf8');
+const otherMan = fs.readFileSync(`${h.jobsDir}/${idB}/manifest.json`, 'utf8');
+const man = JSON.parse(goodMan);
+const row0 = man.rows[0] || { stage: 'intake', attempt: 1, inputs_sha256: 'a'.repeat(64), outputs: [] };
+
+const variants = [];
+const V = (file, name, make) => variants.push({ file, name, make });
+// job.json variants
+V('job.json', 'other-id', () => otherJob);
+V('job.json', 'not-json', () => '{not json');
+V('job.json', 'empty', () => '');
+V('job.json', 'bom', () => '\ufeff' + goodJob);
+V('job.json', 'array', () => '[]');
+V('job.json', 'state-unknown', () => JSON.stringify({ ...JSON.parse(goodJob), state: 'stuck' }));
+V('job.json', 'id-not-of-input', () => JSON.stringify({ ...JSON.parse(goodJob), input: { ...JSON.parse(goodJob).input, apartment: 'p9' } }));
+V('job.json', 'folder', 'FOLDER');
+// manifest.json variants
+V('manifest.json', 'other-id', () => otherMan);
+V('manifest.json', 'not-json', () => '{not json');
+V('manifest.json', 'empty', () => '');
+V('manifest.json', 'bom', () => '\ufeff' + goodMan);
+V('manifest.json', 'bad-stage', () => JSON.stringify({ ...man, rows: [{ ...row0, stage: 'zzz' }] }));
+V('manifest.json', 'attempt-0', () => JSON.stringify({ ...man, rows: [{ ...row0, attempt: 0 }] }));
+V('manifest.json', 'attempt-frac', () => JSON.stringify({ ...man, rows: [{ ...row0, attempt: 1.5 }] }));
+V('manifest.json', 'bad-inputs-sha', () => JSON.stringify({ ...man, rows: [{ ...row0, inputs_sha256: 'x' }] }));
+V('manifest.json', 'out-absolute', () => JSON.stringify({ ...man, rows: [{ ...row0, outputs: [{ path: 'C:/Windows/x', sha256: 'a'.repeat(64) }] }] }));
+V('manifest.json', 'out-dotdot', () => JSON.stringify({ ...man, rows: [{ ...row0, outputs: [{ path: '../x', sha256: 'a'.repeat(64) }] }] }));
+V('manifest.json', 'rows-not-array', () => JSON.stringify({ ...man, rows: {} }));
+V('manifest.json', 'no-schema', () => JSON.stringify({ job_id: idA, rows: [] }));
+V('manifest.json', 'folder', 'FOLDER');
+V('manifest.json', 'MISSING(is a job)', null);
+
+const TOOLS = ['get_job', 'approve_paid_stage', 'cancel_job', 'get_result', 'start_simulation', 'list_jobs'];
+const out = [];
+const skip = (p) => /job\.lock$|\.tmp[^/]*$|\.tmp-/.test(p);
+let n = 0;
+for (const v of variants) {
+  for (const tool of [...TOOLS, 'CLI job', 'CLI jobs', 'CLI resume', 'CLI ledger', 'RUNNER']) {
+    n++;
+    const dir = `${h.home}/jobs-v${n}`;
+    fs.cpSync(h.jobsDir, dir, { recursive: true });
+    for (const f of fs.readdirSync(dir)) for (const x of ['job.lock']) try { fs.rmSync(`${dir}/${f}/${x}`, { force: true }); } catch {}
+    for (const id of [idA, idB]) { try { fs.rmSync(`${dir}/${id}/runner.pid`, { force: true }); } catch {} }
+    const p = `${dir}/${idA}/${v.file}`;
+    fs.rmSync(p, { recursive: true, force: true });
+    if (v.make === 'FOLDER') fs.mkdirSync(p);
+    else if (v.make) fs.writeFileSync(p, v.make());
+    const before = snapshot(dir, skip);
+    const env = { ...h.env, ENGINE_JOBS_DIR: dir };
+    const config = loadConfig({ env, home: h.home });
+    let res;
+    const spawned = [];
+    try {
+      if (tool.startsWith('CLI')) {
+        const sub = tool.split(' ')[1];
+        const args = [`${R}/engine/cli.mjs`, sub, ...(sub === 'jobs' ? ['--json'] : [idA])];
+        const r = spawnSync(process.execPath, args, { env: { ...process.env, ...env }, encoding: 'utf8', timeout: 30000, windowsHide: true });
+        res = `exit ${r.status} :: ${(r.stdout + r.stderr).replace(/\s+/g, ' ').slice(0, 150)}`;
+        if (sub === 'jobs') res = `exit ${r.status} :: lists A? ${(r.stdout || '').includes(idA.slice(0, 12))} B? ${(r.stdout || '').includes(idB.slice(0, 12))}`;
+      } else if (tool === 'RUNNER') {
+        const r = runRunner({ ...h, env }, idA, 25000);
+        res = `exit ${r.status} :: ${r.log.replace(/\s+/g, ' ').slice(0, 150)}`;
+      } else {
+        const eng = createStubEngine(config, { spawnRunner: (...a) => { spawned.push(a); }, ensureServe: async () => {} });
+        const args = { get_job: { job_id: idA }, approve_paid_stage: { job_id: idA, cap_usd: 5 }, cancel_job: { job_id: idA }, get_result: { job_id: idA },
+          start_simulation: { pdf_path: `${h.inbox}/a.pdf` }, list_jobs: {} }[tool];
+        const r = await eng.handlers[tool](args);
+        res = tool === 'list_jobs' ? `ok lists A? ${r.jobs.some((j) => j.job_id === idA)} B? ${r.jobs.some((j) => j.job_id === idB)}` : `ok ${JSON.stringify(r).slice(0, 80).replace(/[A-Z]:[\\/][^"]*/g, '<path>')}`;
+      }
+    } catch (e) { res = `${e.code || e.name}: ${String(e.message).slice(0, 160)}`; }
+    await sleep(tool === 'CLI resume' ? 600 : 0);
+    const rp = runnerPid({ jobsDir: dir }, idA); if (rp && pidAlive(rp)) killPid(rp);
+    const after = snapshot(dir, skip);
+    const changed = diffSnap(before, after);
+    const row = { file: v.file, variant: v.name, tool, res, changed, runnersSpawned: spawned.length, undefinedDir: fs.existsSync(`${dir}/undefined`) };
+    out.push(row);
+    console.log(JSON.stringify(row));
+  }
+}
+console.log('rows', out.length, 'rows with changes', out.filter((r) => r.changed.length).length);

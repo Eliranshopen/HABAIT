@@ -1,0 +1,6 @@
+## 2026-11-08 · main session · tour UI redesign — Eliran's pick
+- **Did:** Eliran picked direction C (the place card plus three labelled clusters: מדידה / סיור קולי / שינוי עיצוב; a 360°/תוכנית/תלת-ממד switch at the bottom; zoom and rotate in one quiet capsule). He also picked the house warm-stone palette over the tour's navy, and the walkthrough on the first visit only, with (?) to replay it. Fork A (ac6644dc803d90e3a) was sent step 3: implement at $0, gates, merge, copy to live. No deploy without Eliran's own go.
+- **Evidence:** the mocks are in `.wt/fix-846-fidelity/Projects/Habait/habait-walkaround/qa-evidence/tour360/fix-846-fidelity-2026-11-08-redesign/mockups/mock-{A,B,C}-{1440,390}.png` and the audit is `research.md` in the same folder. Decision page: https://claude.ai/artifact/4v2QtiXymm7J2sLxN5h4bv. Answers: AskUserQuestion 2026-11-08.
+- **Learned:** with the buttons labelled, the walkthrough is no longer needed on every visit. The phone design sheet covers the AI line on live today (audit #9); it is fixed in this redesign.
+- **Owed / open:** fork A implements; then the main session stages, asks for the deploy go, deploys, and verifies (prod gate plus map→3D).
+- **Second reader:** habait-deploy-qa, because the map→3D selector may change (#t-plan-btn) when 3D moves into the switch.

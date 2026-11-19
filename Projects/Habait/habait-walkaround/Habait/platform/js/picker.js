@@ -13,7 +13,7 @@
 //   picker.close();            // closes card and drawer
 //   picker.setLang('he'|'en'); // re-labels everything, flips dir
 //   picker.destroy();
-// The optional hooks (onSelect, onTour, canEnter, cardNote, enterProps, context, layer, chrome, title, apartmentUrl)
+// The optional hooks (onSelect, onTour, canEnter, cardNote, enterProps, context, layer, chrome, title, apartmentUrl, extraActions)
 // are what flow.js needs to keep its flight behaviour; other viewers can ignore them. See README "picker.js for other viewers".
 // Card 24 (D2, additive, 2026-11-02): a favorite toggle (☆/★) in the unit card -> analytics.setFavorite(unit, on)
 // (opts.favorites = false hides it); a unit chosen from the drawer on another floor -> analytics.floorSwitch({ floor, prev });
@@ -51,6 +51,9 @@ export function createPicker(opts = {}) {
     title = null,             // {he, en} | string for the chrome title (default 'picker.title')
     apartmentUrl,             // (unit, sid) -> URL of the apartment page; false = no link; default ../apartment.html
     favorites: showFav = true, // card 24: the ☆ toggle in the unit card; false hides it
+    extraActions = () => [],  // (unit) -> [{ id, label: {he, en} | string, onClick(unit) }] extra card buttons after «continue»
+    continueLabel = () => null, // (unit) -> {he, en} | string | null: the «continue» button's label (2026-11-09 hold-phone: «כניסה לדירה»); null = unchanged
+                              // (2026-11-09 apartment journey: the hold's direct «לסיור 360°» on 846); default none = the card is unchanged
   } = opts;
   if (!container) throw new Error('createPicker: container is required');
   const i18n = opts.i18n || i18nDefault;
@@ -60,6 +63,8 @@ export function createPicker(opts = {}) {
   const currency = unitsDoc.currency || 'ILS';
   const byId = new Map(units.map((u) => [String(u.id), u]));
   const project = typeof opts.project === 'string' ? { id: opts.project } : (opts.project || {});
+  // prices render only when the project says so (project.json prices_public: true; Eliran 2026-11-08: the fixture prices stay hidden)
+  const showPrices = project.prices_public === true;
   const projectId = project.id || unitsDoc.project || '';
   const doc = container.ownerDocument || document;
   const win = doc.defaultView || window;
@@ -176,7 +181,11 @@ export function createPicker(opts = {}) {
   let inSetLang = false;
 
   const badge = (u) => `<span class="badge badge-${esc(u.status)}">${esc(tr(`status.${u.status}`))}</span>`;
-  const markerHTML = (u) => `<span class="dot"></span><span>${esc(u.id)}</span><span class="sub">${esc(tr('unit.floor'))} ${esc(u.floor)} · ${esc(u.rooms)} ${esc(tr('unit.rooms'))}</span>`;
+  // Eliran 2026-11-10 («להשאיר כהדגמה עם סימון»): a unit whose numbers are demo data (units.json source: "demo") carries «נתוני הדגמה»
+  // next to its numbers; source "sales-plan" (846) shows nothing extra. Decorative text only — never a tap target of its own.
+  const isDemo = (u) => u.source === 'demo';
+  const demoBadge = (u) => (isDemo(u) ? `<span class="badge badge-demo" data-demo="${esc(u.id)}" title="${esc(tr('unit.demoTitle'))}">${esc(tr('unit.demo'))}</span>` : '');
+  const markerHTML = (u) => `<span class="dot"></span><span>${esc(u.id)}</span><span class="sub">${esc(tr('unit.floor'))} ${esc(u.floor)} · ${esc(u.rooms)} ${esc(tr('unit.rooms'))}</span>`;   // Eliran 2026-11-10 (option 1): no demo mark on the building's pills — only some pills show their sub-line, so it read as if only three units were demo; the mark stays on the unit card and in the units list
 
   function makeMarker(u) {
     const b = el('button', `hotspot pulse status-${u.status}`);
@@ -285,16 +294,18 @@ export function createPicker(opts = {}) {
       ${badge(u)}
       ${showFav ? '<button class="unit-fav" id="unitFav" type="button" aria-pressed="false"></button>' : ''}
     </div>
-    <div class="unit-price">${esc(price(u.price))}</div>
+    ${showPrices ? `<div class="unit-price">${esc(price(u.price))}</div>` : ''}
     <div class="unit-facts">
       <div class="fact"><b>${esc(u.floor)}</b><span>${esc(tr('unit.floor'))}</span></div>
       <div class="fact"><b>${esc(u.rooms)}</b><span>${esc(tr('unit.rooms'))}</span></div>
       <div class="fact"><b>${esc(u.area_m2)}</b><span>${esc(tr('unit.area'))}</span></div>
       <div class="fact"><b>${esc(u.outdoor_m2)}</b><span>${esc(tr('unit.outdoor'))}</span></div>
     </div>
+    ${isDemo(u) ? `<div class="unit-demo">${demoBadge(u)}</div>` : ''}
     <div class="unit-actions">
-      <button class="btn btn-primary" id="unitContinue" type="button" ${can ? '' : 'disabled'}>${esc(u.status === 'sold' ? tr('unit.continueSold') : tr('unit.continue'))}</button>
+      <button class="btn btn-primary" id="unitContinue" type="button" ${can ? '' : 'disabled'}>${esc((continueLabel(u) && pick(continueLabel(u))) || (u.status === 'sold' ? tr('unit.continueSold') : tr('unit.continue')))}</button>
       ${can ? '' : `<a class="btn btn-ghost" id="unitTour" href="${esc(u.tour_url)}" rel="noopener">${esc(tr('unit.openTour'))}</a>`}<!-- Eliran 2026-11-04: «המשיכו אל הדירה» and «לסיור 360» do the same; one entry, the tour link only where continue cannot run -->
+      ${(extraActions(u) || []).map((x, i) => `<button class="btn btn-ghost" type="button" data-extra="${i}" id="${esc(x.id || `unitExtra${i}`)}">${esc(pick(x.label))}</button>`).join('')}
       ${page ? `<a class="btn btn-ghost" id="unitPage" href="${esc(page)}" rel="noopener">${esc(tr('picker.aptPage'))}</a>` : ''}
     </div>
     ${note ? `<div class="unit-note">${esc(note)}</div>` : ''}
@@ -313,6 +324,12 @@ export function createPicker(opts = {}) {
       paint(isFav(u));
       fav.addEventListener('click', () => { const on = fav.getAttribute('aria-pressed') !== 'true'; setFav(u, on); paint(on); });
     }
+    const extras = extraActions(u) || [];
+    body.querySelectorAll('[data-extra]').forEach((b) => b.addEventListener('click', () => {
+      const x = extras[Number(b.dataset.extra)]; if (!x) return;
+      noteViewed(u.id); cap('unit_enter', { unit: u.id, status: u.status, action: x.id || 'extra', ...(enterProps(u) || {}) });
+      closeCard(); if (typeof x.onClick === 'function') x.onClick(u);
+    }));
     body.querySelector('#unitTour')?.addEventListener('click', () => {
       if (onTour) onTour(u);
       cap('tour_handoff', { unit: u.id, tour_url: u.tour_url, from: 'card' });
@@ -340,7 +357,7 @@ export function createPicker(opts = {}) {
         const b = el('button', 'unit-row');
         b.type = 'button';
         b.dataset.unit = u.id;
-        b.innerHTML = `<b>${esc(u.id)}</b><span class="meta">${esc(u.type)} · ${esc(u.rooms)} ${esc(tr('unit.rooms'))} · ${esc(u.area_m2)} ${esc(tr('unit.area'))}</span><span class="price">${esc(price(u.price))}</span>${badge(u)}`;
+        b.innerHTML = `<b>${esc(u.id)}</b><span class="meta">${esc(u.type)} · ${esc(u.rooms)} ${esc(tr('unit.rooms'))} · ${esc(u.area_m2)} ${esc(tr('unit.area'))}</span>${showPrices ? `<span class="price">${esc(price(u.price))}</span>` : ''}${demoBadge(u)}${badge(u)}`;
         b.addEventListener('click', () => select(u.id, 'list')); // select only; onEnter is not called from the list
         g.appendChild(b);
       }

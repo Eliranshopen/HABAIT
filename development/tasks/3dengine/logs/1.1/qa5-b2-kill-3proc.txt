@@ -1,0 +1,23 @@
+[kill lock-held-before-write] before kill: input holds none, job.lock true
+[kill lock-held-before-write] next start: created=true id=true 98 ms
+  copy sha ok: true; input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942219695-1 EPERM
+[kill temp-written-before-rename] before kill: input holds ["source.pdf.11748.tmp"], job.lock true
+[kill temp-written-before-rename] next start: created=true id=true 148 ms
+  copy sha ok: true; input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942222829-2 EPERM
+[kill during-write-half] before kill: input holds ["source.pdf.45896.tmp"], job.lock true
+[kill during-write-half] next start: created=true id=true 457 ms
+  copy sha ok: true; input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942226035-3 EPERM
+[3 servers round 0] created:true x1, errors [], jobs ["04762ca47a173685"], copy intact true, input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942236130-4 EPERM
+[3 servers round 1] created:true x1, errors [], jobs ["04762ca47a173685"], copy intact true, input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942239439-5 EPERM
+[3 servers round 2] created:true x1, errors [], jobs ["04762ca47a173685"], copy intact true, input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942248448-6 EPERM
+[3 servers round 3] created:true x1, errors [], jobs ["04762ca47a173685"], copy intact true, input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942256099-7 EPERM
+[3 servers round 4] created:true x1, errors [], jobs ["04762ca47a173685"], copy intact true, input holds ["source.pdf"]
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa5-home-8060-1794942262036-8 EPERM
+left alive: []

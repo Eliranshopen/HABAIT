@@ -1,0 +1,98 @@
+// B3: plant the wrong kind of thing at every path the engine uses, call every tool through the real server.
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, engineOf, GOLDEN } from './lib.mjs';
+const { jobId, readJob } = await E('engine/jobs.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const SHA = sha(fs.readFileSync(GOLDEN));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const USER = process.env.USERNAME;
+const runnerPids = () => String(spawnSync('powershell', ['-NoProfile', '-Command', "Get-CimInstance Win32_Process -Filter \"Name='node.exe'\" | Where-Object { $_.CommandLine -like '*3Dengine*runner.mjs*' } | ForEach-Object { $_.ProcessId }"], { encoding: 'utf8' }).stdout).split(/\s+/).filter(Boolean).map(Number);
+const before = new Set(runnerPids());
+let rpc = 0, pathLeak = 0, calls = 0, plants = 0;
+const codes = {};
+const seen = new Set(); const mine = [];
+
+// plant: [name, phase('pre'|'post'), fn(h)]
+const dir = (p) => fs.mkdirSync(p, { recursive: true });
+const file = (p, c = 'x') => { fs.rmSync(p, { recursive: true, force: true }); dir(p.replace(/\/[^/]*$/, '')); fs.writeFileSync(p, c); };
+const asDir = (p) => { fs.rmSync(p, { recursive: true, force: true }); dir(p); };
+const ro = (p) => fs.chmodSync(p, 0o444);
+const J = (h, s) => `${h.jobsDir}/${ID}${s ? '/' + s : ''}`;
+const RT = (h, s) => `${h.config.runtimeDir}${s ? '/' + s : ''}`;
+const deny = (p) => spawnSync('icacls', [p, '/deny', `${USER}:(OI)(CI)(W,DC)`], { windowsHide: true });
+const undeny = (p) => spawnSync('icacls', [p, '/remove:d', USER], { windowsHide: true });
+const PLANTS = [
+  ['.runtime=file', 'pre', (h) => { fs.rmSync(RT(h), { recursive: true, force: true }); file(RT(h)); }],
+  ['.runtime/inspect=file', 'pre', (h) => file(RT(h, 'inspect'))],
+  ['inspect/<sha>=file', 'pre', (h) => file(RT(h, `inspect/${SHA}`))],
+  ['inspect/<sha>/inspect.json=dir', 'pre', (h) => { asDir(RT(h, `inspect/${SHA}/inspect.json`)); }],
+  ['inspect/<sha>/pages.json=dir (inspect.json valid)', 'seed', (h) => { asDir(RT(h, `inspect/${SHA}/pages.json`)); }],
+  ['inspect=readonly(acl)', 'pre', (h) => { dir(RT(h, 'inspect')); deny(RT(h, 'inspect')); }],
+  ['runtime=readonly(acl)', 'pre', (h) => { dir(RT(h)); deny(RT(h)); }],
+  ['doctor.json=dir', 'pre', (h) => asDir(RT(h, 'doctor.json'))],
+  ['heavy.lock=dir', 'pre', (h) => asDir(RT(h, 'heavy.lock'))],
+  ['jobsDir=file', 'pre', (h) => { fs.rmSync(h.jobsDir, { recursive: true, force: true }); file(h.jobsDir); }],
+  ['jobsDir=readonly(acl)', 'pre', (h) => { dir(h.jobsDir); deny(h.jobsDir); }],
+  ['jobs/<id>=file', 'pre', (h) => file(J(h))],
+  ['jobs/<id>=readonly(acl)', 'pre', (h) => { dir(J(h)); deny(J(h)); }],
+  ['job/input=file', 'post', (h) => { fs.rmSync(J(h, 'input'), { recursive: true, force: true }); file(J(h, 'input')); }],
+  ['job/input/source.pdf=dir', 'post', (h) => { fs.chmodSync(J(h, 'input/source.pdf'), 0o666); asDir(J(h, 'input/source.pdf')); }],
+  ['job/input/source.pdf=gone', 'post', (h) => { fs.chmodSync(J(h, 'input/source.pdf'), 0o666); fs.rmSync(J(h, 'input/source.pdf')); }],
+  ['job/input/source.pdf.<pid>.tmp=dir (pre-job)', 'pre', (h) => { dir(J(h, 'input')); asDir(J(h, `input/source.pdf.${process.pid}.tmp`)); }],
+  ['job/job.json=dir', 'post', (h) => { fs.rmSync(J(h, 'job.json')); asDir(J(h, 'job.json')); }],
+  ['job/job.json=readonly', 'post', (h) => ro(J(h, 'job.json'))],
+  ['job/manifest.json=dir', 'post', (h) => asDir(J(h, 'manifest.json'))],
+  ['job/manifest.json=readonly', 'post', (h) => { file(J(h, 'manifest.json'), JSON.stringify({ schema: 'habait/manifest.v1', job_id: ID, rows: [] })); ro(J(h, 'manifest.json')); }],
+  ['job/ledger.json=dir', 'post', (h) => asDir(J(h, 'ledger.json'))],
+  ['job/ledger.json=garbage', 'post', (h) => file(J(h, 'ledger.json'), 'zzz')],
+  ['job/runner.pid=dir', 'post', (h) => asDir(J(h, 'runner.pid'))],
+  ['job/runner.log=dir', 'post', (h) => asDir(J(h, 'runner.log'))],
+  ['job/job.lock=dir', 'post', (h) => asDir(J(h, 'job.lock'))],
+  ['job/job.lock=garbage file', 'post', (h) => file(J(h, 'job.lock'), 'notapid')],
+  ['job/cache=file', 'post', (h) => file(J(h, 'cache'))],
+  ['job/stages=file', 'post', (h) => file(J(h, 'stages'))],
+  ['job folder=readonly(acl)', 'post', (h) => deny(J(h))],
+  ['job/input=readonly(acl)', 'post', (h) => deny(J(h, 'input'))],
+];
+const TOOLS = [['get_job', { job_id: ID }], ['get_result', { job_id: ID }], ['approve_paid_stage', { job_id: ID, cap_usd: 100 }], ['cancel_job', { job_id: ID }], ['list_jobs', {}], ['inspect_plan', null], ['start_simulation', null]];
+
+for (const [name, phase, fn] of PLANTS) {
+  plants++;
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`);
+  const seedRec = () => { const d = RT(h, `inspect/${SHA}`); dir(d); for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${d}/${f}`); };
+  if (phase === 'post' || phase === 'seed' || name.startsWith('jobs/') || name.startsWith('jobsDir')) {}
+  if (phase === 'seed') seedRec();
+  if (phase === 'post') { seedRec(); const eng = await engineOf(h); eng.handlers.start_simulation({ pdf_path: `${h.inbox}/s.pdf` }); }
+  try { fn(h); } catch (e) { console.log(`PLANT FAILED ${name}: ${e.code}`); }
+  const srv = startServer(h); await srv.init();
+  const res = [];
+  for (const [tn, a] of TOOLS) {
+    const args = a ?? { pdf_path: `${h.inbox}/s.pdf` };
+    const r = await srv.call(tn, args); calls++;
+    let s;
+    if (r.m.error) { rpc++; s = `RPC${r.m.error.code}:${r.m.error.message.slice(0, 70)}`; if (/[A-Za-z]:[\\/]|\\\\/.test(r.m.error.message)) { pathLeak++; s += ' <<PATH'; } }
+    else if (r.err) { s = r.err.code; if (/[A-Za-z]:[\\/]/.test(r.err.message)) { pathLeak++; s += `<<PATHINMSG:${r.err.message.slice(0, 100)}`; } codes[r.err.code] = (codes[r.err.code] || 0) + 1; }
+    else s = 'ok';
+    res.push(`${tn}=${s}`);
+  }
+  console.log(`${name} :: ${res.join(' ')}`);
+  try { const pp = Number(fs.readFileSync(J(h, 'runner.pid'), 'utf8').trim()); if (pp) mine.push(pp); } catch {}
+  await srv.stop();
+  undeny(h.home); for (const p of [RT(h), RT(h, 'inspect'), h.jobsDir, J(h), J(h, 'input')]) { try { undeny(p); } catch {} }
+  cleanup(h);
+}
+// engine_status with .runtime / doctor.json planted
+for (const name of ['.runtime=file', 'doctor.json=dir']) {
+  const h = await makeHome({ timeout: 120 });
+  if (name === '.runtime=file') file(RT(h)); else asDir(RT(h, 'doctor.json'));
+  const srv = startServer(h); await srv.init();
+  const r = await srv.call('engine_status', {}); await sleep(6000); const r2 = await srv.call('engine_status', {}); calls += 2;
+  for (const x of [r, r2]) console.log(`engine_status ${name}: ${x.m.error ? 'RPC ' + x.m.error.message.slice(0, 100) : x.err ? x.err.code : 'ok'}`);
+  await srv.stop(); cleanup(h);
+}
+const now = mine.filter((p) => runnerPids().includes(p));
+console.log(`PLANTS ${plants}, TOOL CALLS ${calls}, JSON-RPC errors ${rpc}, path leaks ${pathLeak}`, JSON.stringify(codes));
+console.log('new runner pids to kill:', now.join(','));
+for (const p of now) spawnSync('taskkill', ['/PID', String(p), '/F'], { windowsHide: true });

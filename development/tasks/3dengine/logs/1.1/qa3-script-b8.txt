@@ -1,0 +1,39 @@
+// B2 restart paths: start_simulation on every state with a spoiled manifest/job file; a runner spy; hash before/after.
+import fs from 'node:fs';
+import { makeHome, E, sha, cleanup, snapshot, diffSnap } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const { createStubEngine } = await E('mcp/stub-engine.mjs');
+const GOLD = 'C:/RnD/Projects/3Dengine/tests/fixtures/apt846/source.pdf';
+const SHA = sha(fs.readFileSync(GOLD));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const states = ['queued', 'tracing', 'awaiting_approval', 'skinning', 'cancelled', 'failed', 'review', 'done'];
+const spoil = {
+  'manifest other id': (jd) => fs.writeFileSync(`${jd}/manifest.json`, JSON.stringify({ schema: 'habait/manifest.v1', job_id: 'eeeeeeeeeeeeeeee', rows: [] })),
+  'manifest dir': (jd) => fs.mkdirSync(`${jd}/manifest.json`),
+  'manifest garbage': (jd) => fs.writeFileSync(`${jd}/manifest.json`, '{'),
+  'manifest row no hash': (jd) => fs.writeFileSync(`${jd}/manifest.json`, JSON.stringify({ schema: 'habait/manifest.v1', job_id: ID, rows: [{ stage: 'tracing', attempt: 1, status: 'done', outputs: [] }] })),
+  'job.json other id': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.job_id = 'dddddddddddddddd'; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+  'job.json moved input': (jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.input.pdf_sha256 = '1'.repeat(64); fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); },
+};
+let n = 0, bad = 0;
+for (const [sl, fn] of Object.entries(spoil)) for (const st of states) {
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  let spawned = 0;
+  const eng = createStubEngine(h.config, { spawnRunner: () => { spawned++; }, ensureServe: async () => {}, isRunnerAlive: () => false });
+  await eng.handlers.start_simulation({ pdf_path: `${h.inbox}/s.pdf` });
+  spawned = 0;
+  const jd = `${h.jobsDir}/${ID}`;
+  const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.state = st; if (st === 'failed') j.reason = { code: 'STAGE_FAILED', message: 'x' }; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j));
+  fn(jd);
+  const b0 = snapshot(h.jobsDir, (p) => /job\.lock|\.tmp$/.test(p));
+  const res = {};
+  for (const [t, a] of [['start_simulation', { pdf_path: `${h.inbox}/s.pdf` }], ['get_job', { job_id: ID }], ['approve_paid_stage', { job_id: ID, cap_usd: 99 }], ['cancel_job', { job_id: ID }], ['get_result', { job_id: ID }]]) {
+    try { await eng.handlers[t](a); res[t] = 'ok'; } catch (e) { res[t] = e.code || e.name; }
+  }
+  const ch = diffSnap(b0, snapshot(h.jobsDir, (p) => /job\.lock|\.tmp$/.test(p)));
+  const okAll = Object.values(res).every((v) => v === 'JOB_NOT_FOUND');
+  n++;
+  if (ch.length || spawned || !okAll || fs.existsSync(`${h.jobsDir}/undefined`)) { bad++; console.log('DEFECT?', sl, st, 'changed', ch, 'spawned', spawned, JSON.stringify(res)); }
+  cleanup(h);
+}
+console.log('cases', n, 'not-clean', bad);

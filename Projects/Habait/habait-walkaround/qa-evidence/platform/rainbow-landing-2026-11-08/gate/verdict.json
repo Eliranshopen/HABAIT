@@ -1,0 +1,184 @@
+{
+ "$schema": "habait/responsive-gate.v1",
+ "at": "2026-11-09T13:08:17.931Z",
+ "rule": "Eliran 2026-11-05: desktop AND mobile, in code",
+ "sizes": [
+  {
+   "width": 1440,
+   "height": 900
+  },
+  {
+   "width": 390,
+   "height": 844
+  }
+ ],
+ "pass": true,
+ "pages": [
+  {
+   "url": "/",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "root-1440.png"
+  },
+  {
+   "url": "/",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "root-390.png"
+  },
+  {
+   "url": "/landing.html?project=rainbow",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "landing-html-project-rainbow-1440.png"
+  },
+  {
+   "url": "/landing.html?project=rainbow",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "landing-html-project-rainbow-390.png"
+  },
+  {
+   "url": "/apartment.html?project=rainbow&unit=846",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "apartment-html-project-rainbow-unit-846-1440.png"
+  },
+  {
+   "url": "/apartment.html?project=rainbow&unit=846",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "apartment-html-project-rainbow-unit-846-390.png"
+  },
+  {
+   "url": "/hold/",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "canvas#c «»",
+    "area": 1296000
+   },
+   "screenshot": "hold-1440.png"
+  },
+  {
+   "url": "/hold/",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "canvas#c «»",
+    "area": 329160
+   },
+   "screenshot": "hold-390.png"
+  },
+  {
+   "url": "/studio/",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "studio-1440.png"
+  },
+  {
+   "url": "/studio/",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "studio-390.png"
+  }
+ ]
+}

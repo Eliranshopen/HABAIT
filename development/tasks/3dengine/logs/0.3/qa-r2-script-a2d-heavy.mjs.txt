@@ -1,0 +1,97 @@
+// A2d: heavy lock attacks with 2-3 jobs. Usage: node a2d-heavy.mjs <seed>
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, between, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, toDone, realKill, waitEvent, approveWhen } from './q.mjs';
+const [seed] = process.argv.slice(2).map(Number);
+setSeed(seed);
+const E = await mkEnv({ prefix: 'qa-a2d-', callUsd: 0.6, stepMs: 500, heartbeat: 0.1, staleSeconds: 1 });
+const res = {};
+const HEAVY = E.config.runner.heavyLock;
+const start = (name, env = {}) => {
+  const pdf = E.pdf(name, name);
+  for (const [k, v] of Object.entries(env)) process.env[k] = v;
+  let id; try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { for (const k of Object.keys(env)) delete process.env[k]; }
+  return { pdf, id };
+};
+async function all(ids, tag, ms = 60000) {
+  const until = Date.now() + ms;
+  for (;;) {
+    let done = 0;
+    for (const id of ids) { const x = inv(E, id, `${tag} sample`); if (x?.job.state === 'done') done++; else await approveWhen(E, id, 60); }
+    heavyOverlap(E, tag);
+    if (done === ids.length) return true;
+    if (Date.now() > until) { violate(`${tag}: not all done: ${ids.map((i) => E.job(i).state)}`); return false; }
+    await sleep(60);
+  }
+}
+const attempts = (id) => E.rows(id).filter((r) => r.stage === 'rendering').map((r) => r.attempt);
+try {
+  // H1: A blocked at rendering with the lock; B and C take it over in turn
+  for (let i = 0; i < 3; i++) {
+    const A = start(`h1a-${seed}-${i}.pdf`, { ENGINE_TEST_FREEZE_MS: String(between(3000, 4500)), ENGINE_TEST_FREEZE_AT: 'rendering' });
+    await sleep(between(0, 300));
+    const B = start(`h1b-${seed}-${i}.pdf`);
+    const C = i === 2 ? start(`h1c-${seed}-${i}.pdf`) : null;
+    S.takeovers++;
+    const ids = [A.id, B.id, ...(C ? [C.id] : [])];
+    await all(ids, `H1.${i}`);
+    for (const id of ids) { finalCheck(E, id, `H1.${i} ${id}`); await spentOk(E, id, `H1.${i}`); }
+    res[`H1.${i}`] = { A: attempts(A.id), B: attempts(B.id), C: C && attempts(C.id) };
+    if (attempts(A.id).includes(1)) note(`H1.${i}: A kept an attempt-1 rendering row (${JSON.stringify(E.rows(A.id).filter((r) => r.stage === 'rendering').map((r) => [r.attempt, r.started_at, r.finished_at]))})`);
+  }
+  // H2: lock file rewritten under a live (blocked or healthy) holder
+  for (const [lbl, edit] of [['garbage', () => fs.writeFileSync(HEAVY, 'not json {{')], ['empty', () => fs.writeFileSync(HEAVY, '')], ['delete', () => fs.rmSync(HEAVY, { force: true })],
+    ['foreign-live-fresh', () => fs.writeFileSync(HEAVY, JSON.stringify({ pid: process.pid, job_id: 'ffffffffffffffff', at: new Date().toISOString(), refreshed_at: new Date().toISOString() }))],
+    ['other-pid', () => fs.writeFileSync(HEAVY, JSON.stringify({ pid: 4242, job_id: 'ffffffffffffffff', at: new Date().toISOString(), refreshed_at: new Date().toISOString() }))]]) {
+    // healthy holder A rendering (long step), B waits; edit lock during A's render
+    const A = start(`h2a-${seed}-${lbl}.pdf`);
+    await waitEvent(E, A.id, 'state:rendering', 10000);
+    const B = start(`h2b-${seed}-${lbl}.pdf`);
+    await sleep(between(100, 350));
+    edit();
+    S.takeovers++;
+    const ids = [A.id, B.id];
+    // for the foreign-live-fresh variant, drop the fake lock after 2.5 s so nobody waits forever
+    if (lbl === 'foreign-live-fresh') setTimeout(() => { try { fs.rmSync(HEAVY, { force: true }); } catch { } }, 4000);
+    await all(ids, `H2.${lbl}`);
+    for (const id of ids) { finalCheck(E, id, `H2.${lbl} ${id}`); await spentOk(E, id, `H2.${lbl}`); }
+    res[`H2.${lbl}`] = { A: attempts(A.id), B: attempts(B.id), attemptsStateA: E.job(A.id).attempts };
+  }
+  // H3: holder hard-killed while it holds the lock; two others proceed; resume
+  for (let i = 0; i < 3; i++) {
+    const A = start(`h3a-${seed}-${i}.pdf`);
+    await waitEvent(E, A.id, i === 0 ? 'state:rendering' : (i === 1 ? 'heavyfile' : 'heavyguard'), 10000);
+    const B = start(`h3b-${seed}-${i}.pdf`), C = start(`h3c-${seed}-${i}.pdf`);
+    const pidA = E.runnerPid(A.id);
+    const lockBefore = E.heavy();
+    const killed = await realKill(E, pidA, `H3.${i}`);
+    S.takeovers++;
+    inv(E, A.id, `H3.${i} after kill`);
+    await sleep(1500);
+    const rr = E.h.start_simulation({ pdf_path: A.pdf });
+    await all([A.id, B.id, C.id], `H3.${i}`);
+    for (const id of [A.id, B.id, C.id]) { finalCheck(E, id, `H3.${i} ${id}`); await spentOk(E, id, `H3.${i}`); }
+    res[`H3.${i}`] = { killed, lockHolderBefore: lockBefore?.pid, resumed: rr.resumed, A: attempts(A.id), B: attempts(B.id) };
+  }
+  // H4: lock holder blocked (rendering) AND its job cancelled meanwhile; B takes lock; A wakes
+  {
+    const A = start(`h4a-${seed}.pdf`, { ENGINE_TEST_FREEZE_MS: '3500', ENGINE_TEST_FREEZE_AT: 'rendering' });
+    await waitEvent(E, A.id, 'state:rendering', 10000);
+    const B = start(`h4b-${seed}.pdf`);
+    await sleep(1500);
+    E.h.cancel_job({ job_id: A.id });
+    S.takeovers++;
+    await all([B.id], 'H4');
+    await sleep(3500);
+    const a = E.job(A.id);
+    if (a.state !== 'cancelled') violate(`H4: A state ${a.state} after cancel + wake`);
+    if (E.rows(A.id).some((r) => r.stage === 'rendering')) violate(`H4: A has a rendering row after cancel`);
+    const h = E.heavy(); if (h && h.job_id === A.id) violate(`H4: heavy lock still names the cancelled job A`);
+    res.H4 = { aState: a.state, lock: h };
+    E.h.start_simulation({ pdf_path: A.pdf });
+    await all([A.id, B.id], 'H4 restart');
+    finalCheck(E, A.id, 'H4 A'); finalCheck(E, B.id, 'H4 B');
+  }
+  heavyOverlap(E, 'a2d');
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a2d', seed, takeovers: S.takeovers, kills: S.kills, jobsDone: S.jobs, checks: S.checks, res, violations: S.violations, leftover: E.leftover }, null, 1));

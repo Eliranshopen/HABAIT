@@ -1,0 +1,514 @@
+
+> habait-3dengine@1.1.0 test
+> node --test --experimental-test-coverage --test-coverage-lines=80 "--test-coverage-include=engine/**/*.mjs" "--test-coverage-include=mcp/**/*.mjs" "tests/unit/**/*.test.mjs" "tests/milestones/**/*.test.mjs"
+
+✔ a. parity: run-project.mjs --parity → 41 rows · PASS (600.2468ms)
+✔ b. catalog: fetch.mjs --verify-only → 57/57 rows OK (910.8234ms)
+✔ c. readiness: the doctor reports ready except keys (45443.9624ms)
+✔ d. port identity: pipeline/ equals commit a63494a, blob for blob (9643.6983ms)
+✔ initialize handshake, ping, tools/list = the eight tools with both schemas (346.3825ms)
+✔ engine_status answers in time with a stub-site check (1024.2283ms)
+✔ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (34176.9839ms)
+✔ the same PDF again → created: false and the same job (172.1369ms)
+✔ cancel_job on a fresh job: cancelled, the runner stops (3516.7263ms)
+✔ every stub reason code (274.5325ms)
+✔ protocol errors: -32601, -32602, -32700 (61.0007ms)
+✔ stdout held JSON-RPC lines only; every tools/call answered in time (under 2 s; a first look at a PDF inside the time limit of the scanner) (1.4318ms)
+✔ 1. kill in the middle of a stage: the state stays, runner.alive false, rows for tracing and building only (6725.9489ms)
+✔ 2. resume: created false, resumed true; tracing and building untouched; rendering one row, attempt 2 (1711.5456ms)
+✔ 3. kill between reserve and settle: one orphaned and one settled row for that call_key; the job goes on (8862.6826ms)
+✔ 4. kill after the settle, before the manifest row: gating runs again (attempt 2), still ONE ledger row for its call (5379.9946ms)
+✔ 5. the end: done, one valid row per stage, spent = 3 × 0.6, the orphan reported apart, the link answers 200 (4378.7082ms)
+✔ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (9134.5778ms)
+✔ 7. restart after cancel: resumed, finishes, no stage that was done before the cancel ran again (13376.8784ms)
+✔ 8. kill after the cache write, before the settle: ONE settled recovered row, ONE send, done, spent = settled sum (8980.5829ms)
+✔ 9. a wrong spent_usd on the disk is corrected when the runner starts, and again at done (6330.243ms)
+✔ 10. the cap is reached and it is not a dead end: back to awaiting_approval, 60 refused, 90 accepted, done with 90 (5161.626ms)
+✔ 11. an EMPTY job.lock does not block a resume (stale after 1 s); a fresh empty one delays it by about 2 s at most (7731.4735ms)
+✔ 12. a recycled pid does not look alive: runner.alive false, resumed true, a real runner takes the pid file over (3277.8189ms)
+✔ 13. a live runner that gives no sign of life is replaced; when it wakes it writes nothing and sends nothing (21644.6098ms)
+✔ 14. a runner that was silent loses the heavy lock to another job: it stops, waits, renders again; no overlap (6136.1739ms)
+✔ 15. a damaged and a deleted output of earlier stages are rebuilt; no later stage runs again; nothing is billed again (9138.0936ms)
+✔ 16. a reservation left by a dead runner is always closed: orphaned when its send had started, dropped when it had not (15767.7991ms)
+✔ 17. what was spent is what the ledger says, also after done: a late answer, and its runner killed right after the settle (8628.9613ms)
+✔ 1. the 846 PDF is one sheet with one drawing; the look is real, holds no text of a PDF, and is kept (36991.7921ms)
+✔ 2. the same PDF twice gives the same job_id; the job keeps its own read-only copy and runs on (1666.601ms)
+✔ 3. a file outside the allowed folders is refused by both tools, and nothing is created for it (108.5272ms)
+✔ 4. a PDF with no drawing: no candidate, and no job is started for it (2595.0943ms)
+✔ 5. a stored copy that was changed by hand is never used: the next runner ends the job failed, nothing runs, nothing is billed (4453.2716ms)
+✔ 5b. a stored copy changed while a LIVE runner waits for the approval: the paid stage never starts on it (7346.3364ms)
+✖ 5c. the stored copy swapped AND its hash rewritten in job.json: the file no longer adds up, and nothing runs on it (4113.1937ms)
+✔ 6. a job file that names another job, or none: a real runner stops, names the job, and changes no file of any job (9398.4029ms)
+✔ 7. a look that cannot be stored (.runtime/inspect is a file): both tools answer TOOLCHAIN_MISSING, with no path, and start nothing (116.9583ms)
+✖ 8. the upload rewritten in place with the same bytes during first looks: every answer is the true look or NOT_A_PDF, and the kept record is true (12961.3724ms)
+✔ stdout held JSON-RPC lines only (8.2988ms)
+✔ every engine/**/*.mjs and mcp/**/*.mjs imports cleanly (107.9117ms)
+✔ stopPids kills the live pids once each, never this process, and names the ones that stay (154.4627ms)
+✔ stopPids survives a kill that throws (the process ended by itself in the meantime) (2.8778ms)
+✔ processesOf asks only on Windows and only for a folder name that is safe to put in the question (4.823ms)
+✔ processesOf reads one pid per line, drops junk and this process, and answers [] when the question fails (6.5162ms)
+✔ stopServers: the record names the live server — it is stopped, and nobody else is looked for (0.7365ms)
+✔ stopServers: the record names a server that lost the start — the one that answers the port is found by the home (0.4286ms)
+✔ stopServers: a stranger answers the port and nothing of ours is alive — nothing is killed (0.3656ms)
+✔ stopServers: no record and a silent port — nothing is asked (0.3187ms)
+✔ stopServers gives up after its rounds on a server that will not die (260.3205ms)
+✔ removeHome: a refused removal — whoever still names the home is stopped, and it is tried again (1.3737ms)
+✔ removeHome: a removal that is refused every time throws the refusal after its passes (1.6059ms)
+✔ the removal settings keep one pass short (fs.rmSync waits retryDelay x 1, 2, 3 ... between tries) (0.3059ms)
+✔ REAL: two servers started at once, the record names the one that lost — the home is still removed (17988.8555ms)
+✔ help and no command (2.4109ms)
+✔ unknown command → usage on stderr, exit 2 (0.2394ms)
+✔ doctor: exit 0 when ready or ready except keys, 1 otherwise; --json (1.0522ms)
+✔ env prints the pointers, never a key (0.4045ms)
+✔ setup-env: nothing to do / dry run / --go ok / --go failure (0.6645ms)
+✔ bring-assets: dry run, missing in source, --from, --go ok and failure (1.0407ms)
+✔ a config error is reported on stderr with exit 1 (0.3264ms)
+✔ main with the real config: env command (2.4379ms)
+✔ isMain compares the script path with the module url (0.4027ms)
+✔ job / jobs: human lines and --json; missing job exit 1; job needs an id (26.523ms)
+✔ serve: --root required; serves until the server closes (8.9023ms)
+✔ mcp: runs the server with the loaded config (0.8321ms)
+✔ 0.3 job: stages with their rows, the ledger, orphans, STALLED; jobs marks STALLED; --json carries runner (72.9783ms)
+✔ 0.3 resume: a stalled job gets a runner; a live one does not; a cancelled one is restarted; done stays (60.8975ms)
+✔ job and ledger name the file that cannot be read and exit 1; job --json still prints the job file (170.8268ms)
+✔ ENGINE_HOME is the folder above engine/, absolute, forward slashes (1.9649ms)
+✔ defaults: relative paths resolve against home, absolute kept, basePython untouched (12.7396ms)
+✔ the real engine.config.json loads with the default home (2.7152ms)
+✔ local override merges shallow, assets one level deep (8.993ms)
+✔ env overrides ENGINE_PYTHON / ENGINE_BLENDER / ENGINE_CHROME win over files (11.3943ms)
+✔ injected readFile / exists are used (0.5321ms)
+✔ a missing required field throws an Error naming it (41.9832ms)
+✔ wrong shapes are rejected (10.0318ms)
+✔ pipelineEnv returns exactly the eleven pointers (33.6421ms)
+✔ 0.2 blocks: inbox, stub, serve resolved; ENGINE_VERSION from package.json (7.9732ms)
+✔ 0.2 env overrides: ENGINE_HOME, ENGINE_JOBS_DIR, ENGINE_SERVE_PORT, ENGINE_STUB_STEP_MS (19.2672ms)
+✔ 0.2 local override merges stub and serve one level deep (16.908ms)
+✔ 0.2 blocks: missing or wrong shapes are named (54.0847ms)
+✔ 0.3: the runner block and stub.callUsd, with defaults for a 0.2 settings file (133.2219ms)
+✔ RUNNER is engine/runner.mjs; configEnv; tourDir; the pid file and runnerAlive (26.6485ms)
+✔ runnerInfo / withRunner / isStalled: computed, never in the file (17.8807ms)
+✔ restartState: the first stage with no valid row; awaiting_approval for a paid stage with no approval; qa when all are valid (384.7997ms)
+✔ restartJob: state set back, reason cleared, waiting_for removed; not restartable → null (59.7085ms)
+✔ startOrResume: the four rules of contract 0.3 §6 (432.9969ms)
+✔ all checks ok with fakes → READY (8.883ms)
+✔ a fake secret value never reaches the report or the result (1.1266ms)
+✔ keys: from env, from env-file names, missing → READY EXCEPT KEYS (1.4668ms)
+✔ node version too old (2.09ms)
+✔ python: missing interpreter, probe failure, no JSON, import error, version mismatch (3.3549ms)
+✔ python snippet imports every module and asks every pin (0.3441ms)
+✔ node-libs: unresolvable, wrong version, no lock (2.7897ms)
+✔ blender: missing, wrong version; chrome and legal missing (1.2242ms)
+✔ pipeline: parity failure and the env it is given (0.8914ms)
+✔ assets-catalog: a missing row, an unreadable manifest (1.5962ms)
+✔ assets-hdri: missing file, mismatch, no record in the style file (2.3974ms)
+✔ assets-packs: zip missing, zip with the wrong hash, no sources array (1.0721ms)
+✔ readEnvNames returns names with non-empty values only, never values (32.7854ms)
+✔ resolveNodeLib finds an installed library version, throws when absent (22.1826ms)
+✔ every pipeline env fallback is covered by pipelineEnv or the allow-list (582.2723ms)
+✔ the allow-list carries a reason for each name (0.3519ms)
+✔ checkJob takes a job file of the id asked for, and names what is wrong with any other (5.5627ms)
+✔ readJob: no file and a malformed id are null; a file that is not this job's throws (25.2566ms)
+✔ writeJob and updateJob write only under the id asked for, and never a job that names another (157.5928ms)
+✔ listJobs leaves out a folder whose job.json is not that job's (94.1214ms)
+✔ insideJob: a relative path that stays in the job folder, and nothing else (0.8387ms)
+✔ checkManifest takes the manifest of the id asked for, and names the row that is wrong (1.9513ms)
+✔ readManifest, writeManifest and appendRow never work through a manifest that is not this job's (84.691ms)
+✔ a runner on a job.json that names another job, or none: it stops, writes nothing, and takes no pid file (198.7547ms)
+✔ a runner on a manifest.json that names another job: it stops before its first heartbeat and gives the pid file back (344.3617ms)
+✔ a job file spoiled WHILE the runner works: it stops, and the job is not marked failed (256.2139ms)
+✔ notThisJobs, and the process exit code of a runner that stopped on such a file (0.9384ms)
+✔ restartJob and startOrResume do not restart a job through a file that is not its own (46.1475ms)
+✔ the tools answer JOB_NOT_FOUND, naming the job and the reason; list_jobs leaves it out (57.5098ms)
+✔ readOwnJob and listOwnJobs: a job is its own only when its manifest is too; no manifest yet is fine (90.5362ms)
+✔ O-1: every tool that names a job answers JOB_NOT_FOUND for a manifest.json that is not its own; list_jobs leaves it out; nothing is written (716.8166ms)
+✔ O-1: a manifest spoiled between the check and the write is caught under the lock; nothing is written (81.5997ms)
+✔ the CLI prints the job and the reason and exits 1; `jobs` leaves the folder out (28.4449ms)
+✔ a FOLDER where job.json or manifest.json belongs is not this job's file: readers, tools, list, runner (70.6295ms)
+✔ one holder at a time; a dead holder is stale and taken over; release only by the holder (72.6688ms)
+✔ holdsHeavy: yes, no, or not known just now; a refresh that cannot read the lock writes nothing (131.819ms)
+✔ a PDF inside the inbox passes: real path, given name, bytes (17.252ms)
+✔ outside, .. escapes, empty, NUL → PATH_NOT_ALLOWED (74.5228ms)
+✔ an inbox folder that does not exist allows nothing (6.6532ms)
+✔ a link inside the inbox that leads outside is refused (a directory junction: no privilege needed) (11.6403ms)
+✔ missing file, a folder, wrong magic → NOT_A_PDF; over 20 MB → FILE_TOO_LARGE (39.5939ms)
+✔ isInside / allowedRoot / sha256Buffer (1.2061ms)
+✔ the 846-like sheet: kind sheet, one candidate p1 from the page, content vector (77.5988ms)
+✔ an empty page has no candidate; a page with one large image and few drawings has one (159.5993ms)
+✔ a booklet: one candidate per large image, in page order, with its thumbnail in the final folder (43.9442ms)
+✔ the cache: a second look does not run the scanner (26.0693ms)
+✔ the cache: a planted or stale inspect.json is scanned again and replaced (16897.1751ms)
+✔ the cache: a changed setting rescans, with the new minimum side in the command (1562.5201ms)
+✔ failures: the toolchain missing → TOOLCHAIN_MISSING (858.6043ms)
+✔ failures: a timeout → FILE_TOO_LARGE that says the first look did not finish in time (270.2184ms)
+✔ failures: the scanner fails or writes no usable pages.json → NOT_A_PDF (6481.8151ms)
+✔ a bad hash or path is refused before anything runs (191.6653ms)
+✔ two processes: a valid final folder that appears during the scan is the answer; the temp folder is gone (1330.8841ms)
+✔ two processes: an invalid final folder that appears during the scan is replaced (487.0242ms)
+✔ placing: a rename that keeps failing ends TOOLCHAIN_MISSING (the engine, not the PDF) with no temp folder; a passing error is retried (611.4295ms)
+✔ no text of the PDF anywhere: answers, the stored summary, errors, log lines (2273.1199ms)
+✔ settingsOf: defaults, a partial block, unusable values (0.7119ms)
+✔ summarize is pure: same input, same output, input unchanged; drops pdf and text (0.9762ms)
+✔ a temp folder of a process that no longer runs is taken away by the next look; a live one is left (669.3628ms)
+✔ a file that changes (or goes away) while the scanner reads it: NOT_A_PDF, and nothing is kept for its old hash (586.2694ms)
+✔ D1: the scanner is given a private copy of the bytes that were hashed, never the upload (421.2865ms)
+✔ D1: a file rewritten in place with the same bytes during the look: the look is of the intact bytes, and it is kept (492.7287ms)
+✔ D1: bytes whose hash is not the asked one → NOT_A_PDF, the scanner is not run, nothing is kept (157.3426ms)
+✔ D1: an upload that cannot be read (gone, a folder) → NOT_A_PDF, the scanner is not run (297.4555ms)
+✔ D2: .runtime/inspect is a file, or .runtime is a file → TOOLCHAIN_MISSING, the scanner is not run (240.3343ms)
+✔ D2: the private copy or inspect.json cannot be written → TOOLCHAIN_MISSING, nothing kept, no temp folder (362.063ms)
+✔ D2: an EngineError thrown on purpose passes as it is (not turned into TOOLCHAIN_MISSING) (167.8733ms)
+✔ O-4: planted candidates the engine could not have written are scanned again and replaced; a true record is reused (7304.5256ms)
+✔ O-4: a page candidate is believed only as p1 on page 1 labelled exactly עמוד 1 (1.0669ms)
+✔ an intact stored input: the runner works (the real check, no stand-in) (363.8479ms)
+✔ a stored input that was changed by hand: the next start ends the job failed, no stage runs, nothing is billed (146.9981ms)
+✔ a stored input that is gone: failed with "missing"; and a resume in the middle of a job checks it too (693.0998ms)
+✔ a job that has ended is not looked at again; a job whose folder lost its input after `done` stays done (25.5968ms)
+✔ the settings of the first look: defaults, a settings file that sets them, a local override, bad values (54.9258ms)
+✔ the fixtures are the bytes the tests count on: the golden 846 PDF, the page with a drawing, the empty page (7.7872ms)
+✔ a stored input changed while a LIVE runner waits for the approval: the paid stage never starts on it (426.3584ms)
+✔ the hash in job.json cannot be moved: a job file must carry the id of its own input (45.2365ms)
+✔ the copy has the source bytes and hash, is read-only; the source is untouched (49.7235ms)
+✔ a second call copies nothing and leaves the file as it is; a lost read-only mark comes back (42.7002ms)
+✔ the source changed after the caller hashed it → NOT_A_PDF, nothing in place, no temp file (11.1436ms)
+✔ the source swapped during the copy (injected copy) → NOT_A_PDF, nothing in place, no temp file (30.7868ms)
+✔ a copy that fails half-way leaves no temp file and the failure is passed on (10.4246ms)
+✔ a foreign input/source.pdf is never overwritten → NOT_A_PDF naming the job (9.3303ms)
+✔ O-5: a folder at input/source.pdf → NOT_A_PDF naming the job; nothing is overwritten or removed (6.533ms)
+✔ O-5: input is a file, not a folder → NOT_A_PDF naming the job; the file is left as it was (4.6481ms)
+✔ stale temp files of dead processes do not stop the intake and are cleared; a live one is kept (18.6764ms)
+✔ an injected liveness check decides which left-over temp files go (10.7482ms)
+✔ verifyInput: ok, missing, changed by hand, absent or malformed hash; it writes nothing (24.425ms)
+✔ a job folder holding the read-only copy can be removed (56.3495ms)
+✔ a few MB PDF is copied and verified (271.2344ms)
+✔ jobId: 16 hex, deterministic, sensitive to every part (2.9459ms)
+✔ states, percents, terminal set match the contract (1.5936ms)
+✔ newJob validates against contracts/job.schema.json; write/read round trip; no temp file left (40.5161ms)
+✖ readJob: malformed id or missing job → null; a broken file throws (28.9571ms)
+✔ writeJob gives up on a non-retryable rename error and removes its temp file (5071.784ms)
+✔ updateJob: mutate writes, null writes nothing, missing job → job null; lock released (79.4791ms)
+✔ setState keeps percent for review/failed/cancelled (0.6299ms)
+✔ withJobLock: a busy lock times out; a stale one is taken over (165.0774ms)
+✔ listJobs: newest first, limit, skips foreign and broken folders; missing dir is empty (364.629ms)
+✔ formatJob: one line with state, percent, name, and link or reason (1.194ms)
+✔ usd rounds to micro-dollars; callKey depends on stage and key; empty ledger (14.1745ms)
+✔ no approval → BUDGET_CAP "no approved cap", nothing written; unknown job → JOB_NOT_FOUND (19.061ms)
+✔ reserve, send, cache, settle; spent_usd updated; the same call again comes from the cache (no row, not sent) (124.1425ms)
+✔ a settled row whose cache is gone or altered is billed again (a new row), and the estimate is the default amount (309.9096ms)
+✔ a reserved row whose send had started (runner died in the call) becomes orphaned, is kept, counts toward the cap (110.5553ms)
+✔ a cap that the estimate alone exceeds → BUDGET_CAP; a null cap does not limit (162.3447ms)
+✔ a failed call: row failed with settled_usd 0, the error rethrown, no cache (44.9529ms)
+✔ the test hooks sleep after the reserve and after the settle, only when set (156.0997ms)
+✔ normalizeName: lower-case, _ to - (1.7339ms)
+✔ parseLock reads name==version, skips comments and blanks (2.0456ms)
+✔ parseLock rejects an unpinned line (0.9262ms)
+✔ the real requirements lock parses as written (20 pins) (3.4843ms)
+✔ sha256File streams the hash of a file (16.4599ms)
+✔ run returns status, stdout and stderr (790.365ms)
+✔ run through a shell sends one command string and raises no deprecation warning (711.5258ms)
+✔ run reports a spawn error as status -1 with the reason (6.7781ms)
+✔ run honours the timeout (224.0901ms)
+✔ JSON read/write and manifest rows (19.4313ms)
+✔ listFiles is recursive, sorted, forward slashes; missing folder is empty (8.0776ms)
+✔ path helpers (0.6403ms)
+✔ atomic writes: no temp file left; a non-retryable rename error removes the temp file; the file mutex; sync hash (3831.0418ms)
+✖ read: a missing file is an empty manifest; write is atomic and round-trips; schema holds (68.4591ms)
+✔ inputsSha256 changes with every part, and with the previous outputs (0.7736ms)
+✔ the resume rule: valid only when done, not superseded, same inputs, outputs intact (39.9507ms)
+✔ walkManifest / firstInvalidStage: chained inputs; a broken early output invalidates the rest (50.398ms)
+✔ appendRow supersedes older done rows of the same stage, keeps them; supersede can keep one inputs hash (32.2203ms)
+✔ initialize negotiates the protocol version (3.4099ms)
+✔ ping, tools/list, notifications get no reply, unknown method -32601 (0.977ms)
+✔ tools/call: success shape, tool failure is a RESULT, bad name/args -32602, crash -32603 (26.4702ms)
+✔ invalid requests -32600; client responses ignored; parse error -32700 with id null; blank lines ignored (1.0516ms)
+✔ toolSuccess / toolFailure shapes (0.2572ms)
+✔ runStdio: one JSON line per answer on stdout, logs on stderr, ends when stdin ends (86.3735ms)
+✔ runStdio with the default stub engine answers tools/list (166.5261ms)
+✔ exactly the eight tools of the contract, each with title, description, both schemas, annotations (35.784ms)
+✔ tools/list schemas are the contract files, with the Job inlined (79.9403ms)
+✔ every contract schema uses only the keywords the checker implements (113.5077ms)
+✔ read-only tools are marked read-only; approve and cancel are not; cancel is destructive (0.4471ms)
+✔ inlineRefs refuses any other $ref (1.1103ms)
+✔ pidAlive: this process yes; junk and a finished process no (325.3823ms)
+✔ sleepSync blocks about as long as asked; negative is no wait (27.9179ms)
+✔ isMain (1.3693ms)
+✔ a lock is born with its content; when is a lock stale (17.1494ms)
+✔ withFileLock: an empty lock left by a killed process blocks about a second, not ten (287.7612ms)
+✔ the heavy lock is refreshed by its holder and is stale when it is not (91.5912ms)
+✔ alive = a live pid AND a recent sign of life (a recycled pid does not look alive) (36.4907ms)
+✔ a reserved row whose answer is in the cache is settled from it and never sent again (104.3454ms)
+✔ a reserved row whose send had started, with NO cached answer, is orphaned, kept and counted; the call is sent once (90.775ms)
+✔ syncSpent writes the settled sum only when it differs; a cache file of the wrong shape is no answer (56.5086ms)
+✔ the guard runs inside the lock before anything is reserved; a call that comes back late is still recorded (152.5698ms)
+✔ replaced between the reserve and the send: nothing is sent, the row is closed as never sent (204.1775ms)
+✔ a late answer never replaces the cached answer of the runner that owns the job (169.0713ms)
+✔ syncSpent reads the ledger while it holds the job lock, so a stale total is never written (68.0937ms)
+✔ D1: the answer is in the cache and ANOTHER runner left a reservation: that row is closed too, never left reserved (89.5815ms)
+✔ a reserved row that was never marked as sending is closed as never sent; the call goes out once, nothing is held (82.2405ms)
+✔ the cache names its row: that row is the one settled from it, whatever its place or state (96.9356ms)
+✔ a cache that cannot be trusted is no answer: the call is made again, and the new row says why (484.3739ms)
+✔ a row is marked as sending just before the send, under the lock; the pause "after the reserve" comes after that mark (186.8522ms)
+✔ a reservation that was closed while its own runner still owns the job is not sent (a state that should not exist) (131.1876ms)
+✔ D2: two calls with the same key at the same moment are ONE call: one reservation, one send, the same answer (1619.2594ms)
+✔ O-E: a cache file is no answer for a row whose send never started, whatever the file says (1271.8144ms)
+✔ O-G: the job lock is busy right after the send: the answer stays in hand and is recorded when the lock is free (1892.0911ms)
+✔ D3: job.cost.spent_usd is written in the same locked step as the settle, before anything else can happen (3764.5765ms)
+✔ D3: withTrueCost / shownJob: the ledger's total is what a read of a job reports (1391.8422ms)
+✔ D4 / O-J / O-P: a cache whose amount is not a number from 0 to 1,000,000 is not an answer (10393.2778ms)
+✔ O-P: an estimate that is not an amount stops the call before anything is written; a cost that is not one is recorded as the estimate (7893.1446ms)
+✔ O-M: a read of a job does not wait for a busy job lock; it answers with the ledger's total at once (604.7807ms)
+✔ O-L: a failed send whose row cannot be closed at once: the close is tried again, and the caller gets the send's own error (687.7821ms)
+✔ D6 / O-1: a ledger file is read only when it is the ledger of this job, row by row (962.4579ms)
+✔ O-2: an estimate that is not an amount is refused first: with no approval, and with the same key in flight (466.0233ms)
+✔ O-3: an answer that JSON cannot hold: the stage gets it, the call is settled, nothing is cached, and the row says so (3216.0262ms)
+✔ nextAfter, hooksFromEnv, StageInterrupted (3.8569ms)
+✔ a whole walk with the real stub stages: rows, quote, wait, approval, three paid calls, result, heartbeat, pid released (1081.8152ms)
+✔ resume rule: every stage with a valid row is skipped, not run, not billed; rows untouched (1229.5943ms)
+✔ an earlier stage whose output changed: the runner goes back to it, its old row superseded (10736.7573ms)
+✔ a stage that runs again with OTHER bytes changes the inputs of every stage after it: they run again, new call keys (18501.1324ms)
+✔ cancel in the middle of a stage: no row for it, heavy lock released, exits "cancelled" (1563.3139ms)
+✔ a stage that throws: STAGE_FAILED for an Error, its own code for an EngineError; no row; lock released (11274.3209ms)
+✔ heavy lock busy: waits in building with waiting_for, takes the lock when the holder dies, field removed (2815.4548ms)
+✔ the heavy lock is held until the job leaves the heavy state, and carried across two heavy stages in a row (550.9634ms)
+✔ heavy lock busy and the job is cancelled while it waits: exits, waiting_for removed (589.1761ms)
+✔ resumed IN a heavy stage with the lock busy: waits in that stage; cancelled meanwhile → exits (650.2265ms)
+✔ the job leaves the state while the heavy lock is taken: the lock is given back (325.7121ms)
+✔ an approval already there: awaiting_approval is passed without a wait; a state with no earlier rows walks back first (1044.3032ms)
+✔ already terminal / unknown job / malformed id / a state outside the contract / the job file vanishes (218.8323ms)
+✔ a second runner waits for runner.pid, then exits "busy"; a stale pid file is taken over; claim/release (148.773ms)
+✔ a heartbeat that cannot take the job lock is skipped, not fatal (2076.7237ms)
+✔ a transient file error (EPERM, lock busy) is waited out, not a failure; past MAX_TRANSIENT it ends the runner (3129.968ms)
+✔ runnerMain: loads the config from env, passes the hooks, exit codes, logs to stderr (5.114ms)
+✔ round 2: spent_usd is put right from the ledger when a runner starts (263.359ms)
+✔ round 2: the heavy lock is refreshed at every heartbeat (963.8523ms)
+✔ round 2: a cancel that arrives during a paid call: what was done and paid is recorded, then the runner stops (1962.417ms)
+✔ round 2: a runner that was replaced writes nothing more (no row, no state change, no heartbeat) (450.6545ms)
+✔ round 2: replaced while it waits for an approval: it stops at the next step (187.0183ms)
+✔ round 2: a replaced runner cannot reserve a paid call (1075.1572ms)
+✔ round 2: the freeze hook blocks at the named point, and only there (18330.6774ms)
+✔ round 2: replaced between the reserve and the send: the call is not sent, and its row says so (1187.6694ms)
+✔ round 2: replaced while it waits for the heavy lock: it stops and never takes the lock (827.0771ms)
+✔ round 2: a stage that asks checkCancelled after it was replaced stops there (533.638ms)
+✔ round 2: the pid file is given back under the job lock; another runner's file is left alone (115.4372ms)
+✔ round 2: a pid file that cannot be read for a moment is not a lost job (1034.5281ms)
+✔ round 2: replaced during a paid call: what was paid is in the ledger, no output is written, no row (969.563ms)
+✔ round 2: a runner that lost the heavy lock stops its heavy stage, writes no row, waits, and runs it again (377.8374ms)
+✔ round 2: the loss is seen by the heartbeat and stays seen; a stage that never asks is stopped before its row (1102.1163ms)
+✔ round 3: the freeze point "<stage>:sent" is after the call was sent and before anything is recorded (1538.7995ms)
+✔ round 3: the answer of a replaced runner comes back late: billed and recorded, the cached answer of the owner kept, no output (1402.1237ms)
+✔ round 3: the block of the freeze hook ends at its time, or as soon as the wake file is there (3186.0137ms)
+✔ round 4: a runner started for a job that has ended leaves at once and never takes runner.pid (383.6982ms)
+✔ round 7: a ledger that cannot be read ends the runner at once: no stage runs, nothing is paid, the pid file is given back (213.8388ms)
+✔ D5: the state of the job is looked at again inside the locked claim: a job that ended in between is not taken (514.0523ms)
+✔ D6: a runner started on a job whose ledger names ANOTHER job stops at once and writes into no ledger (1138.9528ms)
+✔ a valid value has no errors (6.4851ms)
+✔ every keyword reports its error with a path (0.7844ms)
+✔ assertSupported accepts the subset and annotations, refuses anything else (0.7722ms)
+✔ GET a file, a folder index, an encoded path; content types (377.9791ms)
+✔ HEAD has headers and no body; other methods → 405 (6.033ms)
+✔ a folder without slash redirects (query kept); no listing; missing → 404 (9.837ms)
+✔ no path outside the root: traversal, encoded traversal, bad encoding, NUL (4.3006ms)
+✔ a link inside the root that leads outside → 403 (a directory junction: no privilege needed) (32.7964ms)
+✔ contentType by extension; startServe refuses a missing root (4.1364ms)
+✔ isListening, localUrl, serveFile (11.6933ms)
+✔ ensureServe: already listening → nothing started (16.6873ms)
+✔ ensureServe: nothing listening → spawns detached cli serve, records serve.json, waits until it listens (103.1836ms)
+✔ ensureServe: a server that never comes up → listening false after waitMs (130.0176ms)
+✔ planAssets: present / copy / missing-in-source, pack and HDRI, with sizes (87.9886ms)
+✔ applyAssets copies, verifies, fails the missing row, writes a manifest row; second run copies nothing (89.8544ms)
+✔ a wrong file at the target is overwritten; a bad source is a post-copy mismatch (57.2312ms)
+✔ --from overrides the source; a missing HDRI / pack source is a failure; copy errors are caught (47.316ms)
+✔ a style file without an HDRI record plans no HDRI entry (28.6701ms)
+✔ nothing needed when the probes pass (7.8498ms)
+✔ everything needed on a bare machine; commands as specified (0.6404ms)
+✔ pip needed when a pin is off even though the venv exists (0.2471ms)
+✔ applyEnv runs needed steps in order and writes a manifest row each (26.9752ms)
+✔ applyEnv stops at the first failure with its reason (50.6559ms)
+✔ applyEnv with nothing needed runs nothing and writes nothing (16.6651ms)
+✔ the registry has one module per stage, in the runner order, each with a stub (4.0503ms)
+✔ the stub: waits in slices checking for a cancel, then writes stub.json as its one output, the same bytes at every attempt (24.6497ms)
+✔ a paid stub stage makes ONE paid call with a stable key and stub.callUsd (11.2893ms)
+✔ a stub that is no longer the job's runner after its paid call writes no output (5.3404ms)
+✔ a cancel stops the stub before it writes anything; the default sleep is real (33.3282ms)
+✔ engine_status: doctor checks + stub-site; mode stub; missing = failed ids (17.9687ms)
+✔ engine_status: no doctor result yet → not ready, a pending check; missing site → not ready (11.4457ms)
+✔ inspect_plan: sha256, bytes, and the first look as it is: mode real, pages, kind, rows, candidates (26.6117ms)
+✔ chooseCandidate: the one that was asked for; the only one when none is asked; otherwise NO_PLAN_FOUND with the ids (0.9688ms)
+✔ start_simulation: creates job + input copy + one runner; again → same job, no second job (67.7865ms)
+✔ start_simulation: a live runner is not doubled; a terminal job gets no runner (37.9741ms)
+✔ start_simulation: unknown apartment → NO_PLAN_FOUND; bad path → PATH_NOT_ALLOWED (13.2891ms)
+✔ start_simulation: a PDF with no drawing, and one with several and none chosen, start no job (65.5349ms)
+✔ start_simulation: the upload changes between its hash and the copy: no job, no copy left (15.7637ms)
+✔ get_job / approve / cancel / get_result: reason codes and the happy path (176.1489ms)
+✔ approve with no quote on the job → estimate 0; cancel a live job keeps its percent (73.5986ms)
+✔ an unknown job id creates no folder (16.0713ms)
+✔ list_jobs: newest first, default 10 (124.8816ms)
+✔ configEnv points a child at the same home, jobs, port and step; tourDir; runner pid file (46.3951ms)
+✔ spawnRunnerDefault starts the real runner detached; for an unknown job it exits at once (375.8731ms)
+✔ doctor cache: runs the child once, keeps the result in memory and on disk, never a key value (17.0998ms)
+✔ doctor cache: a slow first run → get returns null after the wait; an error is reported (106.444ms)
+✔ doctor cache default child: the real CLI on a temp home answers with JSON (1489.1384ms)
+✔ 0.3: start_simulation resumes a stalled job, restarts a cancelled one; get_job and list_jobs carry the computed runner (637.8885ms)
+✔ D3: get_job, list_jobs and get_result report the ledger's settled total and put the copy in job.json right (878.9654ms)
+ℹ tests 347
+ℹ suites 0
+ℹ pass 343
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 154805.7888
+ℹ start of coverage report
+ℹ -------------------------------------------------------------------
+ℹ file               | line % | branch % | funcs % | uncovered lines
+ℹ -------------------------------------------------------------------
+ℹ engine             |        |          |         | 
+ℹ  cli.mjs           | 100.00 |    96.58 |   96.55 | 
+ℹ  config.mjs        | 100.00 |    97.26 |  100.00 | 
+ℹ  control.mjs       | 100.00 |    93.55 |  100.00 | 
+ℹ  doctor.mjs        | 100.00 |    96.03 |  100.00 | 
+ℹ  heavy-lock.mjs    | 100.00 |   100.00 |   78.57 | 
+ℹ  inbox.mjs         | 100.00 |    93.75 |  100.00 | 
+ℹ  inspect.mjs       | 100.00 |    97.40 |  100.00 | 
+ℹ  jobs.mjs          | 100.00 |    97.70 |  100.00 | 
+ℹ  ledger.mjs        |  98.87 |    98.77 |   98.21 | 388-390 425-426
+ℹ  lib               |        |          |         | 
+ℹ   atomic.mjs       |  96.53 |    86.27 |  100.00 | 98-99 119-121
+ℹ   files.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   hash.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   json.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   lock.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   main.mjs         | 100.00 |    83.33 |  100.00 | 
+ℹ   paths.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   proc.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   run.mjs          | 100.00 |   100.00 |  100.00 | 
+ℹ  manifest.mjs      | 100.00 |   100.00 |  100.00 | 
+ℹ  runner.mjs        | 100.00 |    94.20 |   96.97 | 
+ℹ  serve.mjs         | 100.00 |   100.00 |   89.47 | 
+ℹ  setup             |        |          |         | 
+ℹ   assets.mjs       | 100.00 |    98.08 |  100.00 | 
+ℹ   env.mjs          | 100.00 |    87.50 |   80.00 | 
+ℹ  stages            |        |          |         | 
+ℹ   building.mjs     | 100.00 |   100.00 |  100.00 | 
+ℹ   finishing.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ   gating.mjs       | 100.00 |   100.00 |  100.00 | 
+ℹ   index.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   intake.mjs       |  98.28 |    97.92 |  100.00 | 52-53
+ℹ   packaging.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ   qa.mjs           | 100.00 |   100.00 |  100.00 | 
+ℹ   rendering.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ   skinning.mjs     | 100.00 |   100.00 |  100.00 | 
+ℹ   stub.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   tracing.mjs      | 100.00 |   100.00 |  100.00 | 
+ℹ mcp                |        |          |         | 
+ℹ  schema-check.mjs  | 100.00 |   100.00 |  100.00 | 
+ℹ  server.mjs        | 100.00 |    98.46 |   88.89 | 
+ℹ  stub-engine.mjs   | 100.00 |    96.43 |   97.50 | 
+ℹ  tools.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ -------------------------------------------------------------------
+ℹ all files          |  99.71 |    96.94 |   97.37 | 
+ℹ -------------------------------------------------------------------
+ℹ end of coverage report
+
+✖ failing tests:
+
+test at tests\milestones\m1.1.test.mjs:367:1
+✖ 5c. the stored copy swapped AND its hash rewritten in job.json: the file no longer adds up, and nothing runs on it (4113.1937ms)
+  AssertionError [ERR_ASSERTION]: no file of the job changed; no runner.pid is left
+  + actual - expected
+  
+    {
+      'input/source.pdf': 'a0eeac08d91b6e7241ae9876b29bcabf50fd550647b0434c9be25dd1a9193cd7',
+      'job.json': '22e8b88c3dcb864ad856a609164e1b1252c3133fbb4b3ec4746423cfe01e07a5',
+      'job.json.20364.2bddc918d508b8.tmp': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+  -   'job.lock': '14ceac3a949a6a5e9a87aa4457bf9c3cf1673b0dd0b11fe989231263c07d7574',
+      'manifest.json': 'da5d4198368eb0036a63188534abff5b91e25ba5075599362f163d2f0bbf651f',
+      'runner.log': 'cfd3480a4a76d05f0bded7580d8bcb4f988c410decab2ffdc8e4aed195166e5b',
+      'stages/building/stub.json': 'd61e319461c705c9944b4b3184de0c2f0468cf95a18d22b32e81260cfa91abba',
+      'stages/rendering/stub.json': 'bbc8adc6d2246fde5b0a26ca84edaabffea8d4b43d7a5c40810769893fa9c018',
+      'stages/tracing/stub.json': '0593f3e0609332ef4cdc7dad294bed60596b3022282ffaa5ca801a08f872d4da'
+  
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/milestones/m1.1.test.mjs:395:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { 'input/source.pdf': 'a0eeac08d91b6e7241ae9876b29bcabf50fd550647b0434c9be25dd1a9193cd7', 'job.json': '22e8b88c3dcb864ad856a609164e1b1252c3133fbb4b3ec4746423cfe01e07a5', 'job.json.20364.2bddc918d508b8.tmp': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'manifest.json': 'da5d4198368eb0036a63188534abff5b91e25ba5075599362f163d2f0bbf651f', 'runner.log': 'cfd3480a4a76d05f0bded7580d8bcb4f988c410decab2ffdc8e4aed195166e5b', 'stages/building/stub.json': 'd61e319461c705c9944b4b3184de0c2f0468cf95a18d22b32e81260cfa91abba', 'stages/rendering/stub.json': 'bbc8adc6d2246fde5b0a26ca84edaabffea8d4b43d7a5c40810769893fa9c018', 'stages/tracing/stub.json': '0593f3e0609332ef4cdc7dad294bed60596b3022282ffaa5ca801a08f872d4da' },
+    expected: { 'input/source.pdf': 'a0eeac08d91b6e7241ae9876b29bcabf50fd550647b0434c9be25dd1a9193cd7', 'job.json': '22e8b88c3dcb864ad856a609164e1b1252c3133fbb4b3ec4746423cfe01e07a5', 'job.json.20364.2bddc918d508b8.tmp': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'job.lock': '14ceac3a949a6a5e9a87aa4457bf9c3cf1673b0dd0b11fe989231263c07d7574', 'manifest.json': 'da5d4198368eb0036a63188534abff5b91e25ba5075599362f163d2f0bbf651f', 'runner.log': 'cfd3480a4a76d05f0bded7580d8bcb4f988c410decab2ffdc8e4aed195166e5b', 'stages/building/stub.json': 'd61e319461c705c9944b4b3184de0c2f0468cf95a18d22b32e81260cfa91abba', 'stages/rendering/stub.json': 'bbc8adc6d2246fde5b0a26ca84edaabffea8d4b43d7a5c40810769893fa9c018', 'stages/tracing/stub.json': '0593f3e0609332ef4cdc7dad294bed60596b3022282ffaa5ca801a08f872d4da' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\milestones\m1.1.test.mjs:479:1
+✖ 8. the upload rewritten in place with the same bytes during first looks: every answer is the true look or NOT_A_PDF, and the kept record is true (12961.3724ms)
+  AssertionError [ERR_ASSERTION]: look 6 is another look: {"jsonrpc":"2.0","id":89,"result":{"content":[{"type":"text","text":"{\"mode\":\"real\",\"pdf_path\":\"C:/Users/elira/AppData/Local/Temp/m11-home-lyj9GA/uploads/rewritten-in-place.pdf\",\"sha256\":\"d49817825bec402b2eca05a981a5d507bc3706eae3f6b075af3e24d204c5fdc8\",\"bytes\":6910,\"pages\":1,\"kind\":\"sheet\",\"page_rows\":[{\"page\":1,\"width_pt\":842,\"height_pt\":595,\"vector_paths\":149,\"images\":0,\"large_images\":0,\"content\":\"empty\"}],\"candidates\":[]}"}],"structuredContent":{"mode":"real","pdf_path":"C:/Users/elira/AppData/Local/Temp/m11-home-lyj9GA/uploads/rewritten-in-place.pdf","sha256":"d49817825bec402b2eca05a981a5d507bc3706eae3f6b075af3e24d204c5fdc8","bytes":6910,"pages":1,"kind":"sheet","page_rows":[{"page":1,"width_pt":842,"height_pt":595,"vector_paths":149,"images":0,"large_images":0,"content":"empty"}],"candidates":[]}}}
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/milestones/m1.1.test.mjs:507:16)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\unit\jobs.test.mjs:42:1
+✖ readJob: malformed id or missing job → null; a broken file throws (28.9571ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /EISDIR|EPERM|EACCES/. Input:
+  
+  "JobUnreadable: job fedcba9876543210: job.json is not this job's file (it is not a file)"
+  
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/unit/jobs.test.mjs:49:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: JobUnreadable: job fedcba9876543210: job.json is not this job's file (it is not a file)
+        at readJob (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/engine/jobs.mjs:104:36)
+        at file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/unit/jobs.test.mjs:49:23
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/unit/jobs.test.mjs:49:10)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+        at Test.postRun (node:internal/test_runner/test:1542:19)
+        at Test.run (node:internal/test_runner/test:1467:12),
+    expected: /EISDIR|EPERM|EACCES/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests\unit\manifest.test.mjs:41:1
+✖ read: a missing file is an empty manifest; write is atomic and round-trips; schema holds (68.4591ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /EISDIR|EPERM|EACCES/. Input:
+  
+  "ManifestUnreadable: job abcdef0123456789: manifest.json is not this job's file (it is not a file)"
+  
+      at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/unit/manifest.test.mjs:53:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: ManifestUnreadable: job abcdef0123456789: manifest.json is not this job's file (it is not a file)
+        at readManifest (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/engine/manifest.mjs:76:36)
+        at file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/unit/manifest.test.mjs:53:23
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///C:/RnD/.wt/3dengine/Projects/3Dengine/tests/unit/manifest.test.mjs:53:10)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.start (node:internal/test_runner/test:1262:17)
+        at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17),
+    expected: /EISDIR|EPERM|EACCES/,
+    operator: 'throws',
+    diff: 'simple'
+  }

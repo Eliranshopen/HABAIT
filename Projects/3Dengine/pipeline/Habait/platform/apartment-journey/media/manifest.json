@@ -1,0 +1,147 @@
+{
+ "schema": "habait.media-manifest.v0",
+ "plan": "development/plans/2026-11-09-rainbow-v2.md",
+ "rows": [
+  {
+   "output": "tower-16-1920.jpg",
+   "bytes": 263159,
+   "sha256": "e938620f79876f21ca7a18607083e6853fd0eb8e2db17ed9462322c985cd3592",
+   "input": "research/fal-bench-2026-11-02/flyover3d/data/holdarc/jpg_hi/frame_0091.jpg",
+   "input_sha256": "c7fba4d7ea938391415abeb6f3631aaac66677143dd2e63d76fa3178fa78aa2e",
+   "args": [
+    "-q:v",
+    "3",
+    "-map_metadata",
+    "-1"
+   ],
+   "tool": "ffmpeg 8.0.1-full_build-www.gyan.dev",
+   "cost_usd": 0,
+   "ai_generated": true,
+   "disclosure": "הדמיה · AI-generated (root §6)",
+   "at": "2026-11-09T16:12:37"
+  },
+  {
+   "output": "tower-16-960.jpg",
+   "bytes": 120118,
+   "sha256": "dcaecbf81384fc8aec800fa89ade9d2703781a8bef31f15452bd738a8545a690",
+   "input": "research/fal-bench-2026-11-02/flyover3d/data/holdarc/jpg_hi/frame_0091.jpg",
+   "input_sha256": "c7fba4d7ea938391415abeb6f3631aaac66677143dd2e63d76fa3178fa78aa2e",
+   "args": [
+    "-vf",
+    "scale=960:-2:flags=lanczos",
+    "-q:v",
+    "3",
+    "-map_metadata",
+    "-1"
+   ],
+   "tool": "ffmpeg 8.0.1-full_build-www.gyan.dev",
+   "cost_usd": 0,
+   "ai_generated": true,
+   "disclosure": "הדמיה · AI-generated (root §6)",
+   "at": "2026-11-09T16:12:37"
+  },
+  {
+   "output": "fly-846-1280.mp4",
+   "bytes": 2008687,
+   "sha256": "0fb8920bc86ffa4b9673f70006078e189973a70d594d82b7c0e966fcff3117d2",
+   "inputs": [
+    {
+     "file": "qa-evidence/platform/bird-flight-2026-11-10/matching/take-d1/real.mp4",
+     "sha256": "1bd11aa284b086bcb953afe663f26c61dca2698ea1f77844222ed56170040159",
+     "made_by": "kling/v4/video-to-video/edit 720p on clay frames 95..200, request 01a1c6e9-34ee-7550-88e3-ca8bbca238a7, $0.84"
+    },
+    {
+     "file": "qa-evidence/platform/bird-flight-2026-11-10/matching/take-t3/real.mp4",
+     "sha256": "5461933daeca67e64810281d549e0dfc3072e7f142db14d2080d488edf3a2e96",
+     "made_by": "kling/v4/video-to-video/edit 720p on clay frames 201..344, request 01a1c6e6-86d2-7a90-8bde-cf4acb573a33, $1.13"
+    }
+   ],
+   "args": [
+    "-i",
+    "take-d1/real.mp4",
+    "-ss",
+    "1.1",
+    "-t",
+    "4.4",
+    "-i",
+    "take-t3/real.mp4",
+    "-filter_complex",
+    "[0:v]setpts=PTS/1.25,fps=24,scale=1280:720,format=yuv420p[a];[1:v]setpts=(PTS-STARTPTS)/1.35,fps=24,scale=1280:720,format=yuv420p[b];[a][b]xfade=transition=fade:duration=0.3:offset=2.9[v]",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "slow",
+    "-crf",
+    "23",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-map_metadata",
+    "-1"
+   ],
+   "tool": "ffmpeg 8.0.1-full_build-www.gyan.dev",
+   "cost_usd": 4.23,
+   "ai_generated": true,
+   "disclosure": "הדמיה · AI-generated (root §6)",
+   "note": "the bird flight with the tour's living room (Eliran 2026-11-10: the film must match the simulation): descent (x1.25) + entry from 1.1 s (x1.35), both re-made by Kling v2v on the 11-02 clay path with views of the shipped parquet panorama as the look; 6.2 s. cost_usd = all five takes of the evening (t1 lost, t2 superseded, t3 + d1 used).",
+   "at": "2026-11-11T01:20:00"
+  },
+  {
+   "output": "fly-846-854.mp4",
+   "bytes": 856888,
+   "sha256": "5e000d8254627b2225c87dd84eabef69c43f7dce19cd4aaa31f91fc016b8e84e",
+   "inputs": [
+    {
+     "file": "qa-evidence/platform/bird-flight-2026-11-10/matching/take-d1/real.mp4",
+     "sha256": "1bd11aa284b086bcb953afe663f26c61dca2698ea1f77844222ed56170040159",
+     "made_by": "kling/v4/video-to-video/edit 720p on clay frames 95..200, request 01a1c6e9-34ee-7550-88e3-ca8bbca238a7, $0.84"
+    },
+    {
+     "file": "qa-evidence/platform/bird-flight-2026-11-10/matching/take-t3/real.mp4",
+     "sha256": "5461933daeca67e64810281d549e0dfc3072e7f142db14d2080d488edf3a2e96",
+     "made_by": "kling/v4/video-to-video/edit 720p on clay frames 201..344, request 01a1c6e6-86d2-7a90-8bde-cf4acb573a33, $1.13"
+    }
+   ],
+   "args": [
+    "-i",
+    "fly-846-1280.mp4",
+    "-vf",
+    "scale=854:480:flags=lanczos",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "slow",
+    "-crf",
+    "25",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-map_metadata",
+    "-1"
+   ],
+   "tool": "ffmpeg 8.0.1-full_build-www.gyan.dev",
+   "cost_usd": 0,
+   "ai_generated": true,
+   "disclosure": "הדמיה · AI-generated (root §6)",
+   "note": "the bird flight with the tour's living room (Eliran 2026-11-10: the film must match the simulation): descent (x1.25) + entry from 1.1 s (x1.35), both re-made by Kling v2v on the 11-02 clay path with views of the shipped parquet panorama as the look; 6.2 s. cost_usd = all five takes of the evening (t1 lost, t2 superseded, t3 + d1 used).",
+   "at": "2026-11-11T01:20:00"
+  }
+ ],
+ "floor16": {
+  "anchor": [
+   0.4979,
+   0.7883
+  ],
+  "band": [
+   0.7565,
+   0.8201
+  ],
+  "frame": "research/fal-bench-2026-11-02/flyover3d/data/holdarc/jpg_hi/frame_0091.jpg",
+  "floor_to_floor_m": 3.2,
+  "source": "projection of site_nodes.json apartment_hotspot_world (10.325, -11.148, 1.0) and ±1.6 m through holdarc/camera.json frame 91"
+ }
+}

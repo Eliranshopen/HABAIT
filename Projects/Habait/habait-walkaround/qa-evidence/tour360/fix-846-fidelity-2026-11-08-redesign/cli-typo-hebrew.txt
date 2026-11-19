@@ -1,0 +1,41 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py hebrew rtl modern elegant --domain typography -n 3
+## UI Pro Max Search Results
+**Domain:** typography | **Query:** hebrew rtl modern elegant
+**Source:** typography.csv | **Found:** 3 results
+
+### Result 1
+- **Font Pairing Name:** Hebrew Modern
+- **Category:** Sans + Sans
+- **Heading Font:** Noto Sans Hebrew
+- **Body Font:** Noto Sans Hebrew
+- **Mood/Style Keywords:** hebrew, modern, RTL, clean, professional, readable
+- **Best For:** Hebrew sites, Israeli market, Jewish content, bilingual sites
+- **Google Fonts URL:** https://fonts.google.com/share?selection.family=Noto+Sans+Hebrew:wght@300;400;500;700
+- **CSS Import:** @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;700&display=swap');
+- **Tailwind Config:** fontFamily: { sans: ['Noto Sans Hebrew', 'sans-serif'] }
+- **Notes:** RTL support. Clean modern Hebrew typography.
+
+### Result 2
+- **Font Pairing Name:** Arabic Elegant
+- **Category:** Serif + Sans
+- **Heading Font:** Noto Naskh Arabic
+- **Body Font:** Noto Sans Arabic
+- **Mood/Style Keywords:** arabic, elegant, traditional, cultural, RTL, readable
+- **Best For:** Arabic sites, Middle East market, Islamic content, bilingual sites
+- **Google Fonts URL:** https://fonts.google.com/share?selection.family=Noto+Naskh+Arabic:wght@400;500;600;700|Noto+Sans+Arabic:wght@300;400;500;700
+- **CSS Import:** @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap');
+- **Tailwind Config:** fontFamily: { serif: ['Noto Naskh Arabic', 'serif'], sans: ['Noto Sans Arabic', 'sans-serif'] }
+- **Notes:** RTL support. Naskh for traditional, Sans for modern Arabic.
+
+### Result 3
+- **Font Pairing Name:** Japanese Elegant
+- **Category:** Serif + Sans
+- **Heading Font:** Noto Serif JP
+- **Body Font:** Noto Sans JP
+- **Mood/Style Keywords:** japanese, elegant, traditional, modern, multilingual, readable
+- **Best For:** Japanese sites, Japanese restaurants, cultural sites, anime/manga
+- **Google Fonts URL:** https://fonts.google.com/share?selection.family=Noto+Sans+JP:wght@300;400;500;700|Noto+Serif+JP:wght@400;500;600;700
+- **CSS Import:** @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+- **Tailwind Config:** fontFamily: { serif: ['Noto Serif JP', 'serif'], sans: ['Noto Sans JP', 'sans-serif'] }
+- **Notes:** Noto fonts excellent Japanese support. Traditional + modern feel.
+

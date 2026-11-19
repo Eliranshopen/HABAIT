@@ -1,0 +1,211 @@
+=== holder.mjs ===
+// A foreign lock holder: node holder.mjs <lockfile> <seconds> <mode: real|plant|refresh>
+// real = takes the lock through the engine's own withFileLock and sits in it; plant = a lock file that names this
+// (live) pid and is never refreshed; refresh = same, but the mtime is touched every 2 s (a legitimate long holder).
+import fs from 'node:fs';
+const [lock, secs, mode] = process.argv.slice(2);
+const { withFileLock, createLockWithContent } = await import('file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs');
+const { sleepSync } = await import('file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs');
+const ms = Number(secs) * 1000;
+if (mode === 'real') {
+  withFileLock(lock, () => { fs.writeFileSync(lock + '.held', String(process.pid)); sleepSync(ms); }, { waitMs: 5000 });
+} else {
+  while (!createLockWithContent(lock, String(process.pid))) sleepSync(20);
+  fs.writeFileSync(lock + '.held', String(process.pid));
+  const until = Date.now() + ms;
+  while (Date.now() < until) {
+    sleepSync(500);
+    if (mode === 'refresh') { try { const t = new Date(); fs.utimesSync(lock, t, t); } catch { /* */ } }
+  }
+  try { if (fs.readFileSync(lock, 'utf8') === String(process.pid)) fs.rmSync(lock, { force: true }); } catch { /* */ }
+}
+try { fs.rmSync(lock + '.held', { force: true }); } catch { /* */ }
+=== lockstress.mjs ===
+// Mutual exclusion of the engine's file lock while dead-holder locks keep appearing (takeOverStale races).
+// node lockstress.mjs <workers> <iters> <injector: yes|no>
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+const A = process.argv.slice(2);
+const SELF = process.argv[1].replace(/\\/g, '/');
+const { withFileLock, createLockWithContent } = await import('file:///C:/RnD/Projects/3Dengine/engine/lib/atomic.mjs');
+const { sleepSync } = await import('file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs');
+if (A[0] === 'worker') {
+  const [, lock, dir, iters] = A;
+  let viol = 0;
+  for (let i = 0; i < Number(iters); i++) {
+    withFileLock(lock, () => {
+      const inside = `${dir}/inside`;
+      let fd;
+      try { fd = fs.openSync(inside, 'wx'); } catch { viol++; }
+      const n = Number(fs.readFileSync(`${dir}/counter`, 'utf8'));
+      sleepSync(1);
+      fs.writeFileSync(`${dir}/counter`, String(n + 1));
+      if (fd !== undefined) { fs.closeSync(fd); fs.rmSync(inside, { force: true }); }
+    }, { waitMs: 120000 });
+  }
+  fs.appendFileSync(`${dir}/viol.log`, `${process.pid} ${viol}\n`);
+} else if (A[0] === 'inject') {
+  const [, lock, dead, secs] = A;
+  const until = Date.now() + Number(secs) * 1000;
+  let n = 0;
+  while (Date.now() < until) { if (createLockWithContent(lock, dead)) n++; sleepSync(1); }
+  fs.appendFileSync(path.join(path.dirname(lock), 'inject.log'), `${n}\n`);
+} else {
+  const [workers, iters, inj] = [Number(A[0]), Number(A[1]), A[2] === 'yes'];
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'qa-r5-ls-'));
+  const lock = `${dir}/the.lock`;
+  fs.writeFileSync(`${dir}/counter`, '0');
+  const dead = await new Promise((res) => { const c = spawn(process.execPath, ['-e', ''], { stdio: 'ignore' }); const p = c.pid; c.on('exit', () => res(p)); });
+  const kids = [];
+  const ps = [];
+  for (let i = 0; i < workers; i++) { const c = spawn(process.execPath, [SELF, 'worker', lock, dir, String(iters)], { stdio: 'inherit' }); kids.push(c.pid); ps.push(new Promise((r) => c.on('exit', r))); }
+  let injector;
+  if (inj) { injector = spawn(process.execPath, [SELF, 'inject', lock, String(dead), '60'], { stdio: 'inherit' }); kids.push(injector.pid); }
+  const t0 = Date.now();
+  await Promise.all(ps);
+  if (injector) { try { process.kill(injector.pid); } catch { /* */ } }
+  const counter = Number(fs.readFileSync(`${dir}/counter`, 'utf8'));
+  const viol = fs.existsSync(`${dir}/viol.log`) ? fs.readFileSync(`${dir}/viol.log`, 'utf8').trim().split('\n').map((l) => Number(l.split(' ')[1])).reduce((a, b) => a + b, 0) : -1;
+  const injected = fs.existsSync(`${dir}/inject.log`) ? fs.readFileSync(`${dir}/inject.log`, 'utf8').trim() : '(killed)';
+  const line = `LOCKSTRESS workers=${workers} iters=${iters} injector=${inj} counter=${counter} expected=${workers * iters} lost=${workers * iters - counter} overlaps=${viol} dt=${Date.now() - t0}ms`;
+  console.log(line);
+  fs.appendFileSync('C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r5/results.txt', line + '\n');
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+=== cap.mjs ===
+// cap + takeover + late answer, and cancel while a runner is frozen at :sent
+import fs from 'node:fs';
+import { lib, check, rec, sleep, pidAlive, counters } from './h.mjs';
+const C = counters();
+const sumSettled = (led) => Math.round(led.rows.filter((r) => r.status === 'settled').reduce((n, r) => n + r.settled_usd, 0) * 1e6) / 1e6;
+const held = (led) => Math.round(led.rows.filter((r) => ['reserved', 'orphaned'].includes(r.status)).reduce((n, r) => n + r.reserved_usd, 0) * 1e6) / 1e6;
+const E = await lib.mkEnv({ prefix: 'qa-r5-cap-', heartbeat: 0.1, staleSeconds: 1, callUsd: Number(process.env.CALLUSD || 25) });
+try {
+  for (const point of []) {
+    const f = await lib.frozenThenReplaced(E, { name: `cap-${point}.pdf`, point });
+    C.add('takeovers');
+    // second runner: does it stop at the cap?
+    const st = await E.waitFor('cap stop or done', () => { const j = E.job(f.id); return j.state === 'awaiting_approval' && j.reason?.code === 'BUDGET_CAP' ? 'cap' : j.state === 'done' ? 'done' : j.state === 'failed' ? 'failed' : false; }, 30000, 20);
+    let note = `stop=${st}`;
+    let led = E.ledger(f.id);
+    const counted1 = sumSettled(led) + held(led);
+    const quote1 = E.job(f.id).quote?.estimate_usd;
+    f.wake();
+    await E.waitFor('first leaves', () => !pidAlive(f.oldPid), 20000, 25);
+    await sleep(300);
+    led = E.ledger(f.id);
+    const counted2 = sumSettled(led) + held(led);
+    note += ` counted before wake=${counted1} after=${counted2} quote=${quote1}`;
+    let refused = '';
+    if (st === 'cap') {
+      try { E.h.approve_paid_stage({ job_id: f.id, cap_usd: 60 }); refused = 'approve60 accepted'; } catch (e) { refused = `approve60 refused: ${e.message.slice(0, 60)}`; }
+      note += ` ${refused}`;
+      const j = E.job(f.id);
+      if (j.state === 'awaiting_approval' && !j.approval) E.h.approve_paid_stage({ job_id: f.id, cap_usd: Math.max(quote1, 75) });
+    }
+    await lib.toDone(E, f.id, 60000).catch((e) => { note += ' ' + e.message.slice(0, 80); });
+    // approve again whenever asked, with a big cap
+    for (let k = 0; k < 4 && E.job(f.id).state === 'awaiting_approval'; k++) { E.h.approve_paid_stage({ job_id: f.id, cap_usd: 200 }); await lib.toDone(E, f.id, 30000).catch(() => {}); }
+    await sleep(500);
+    const v = check(E, f.id, { label: point });
+    const led2 = E.ledger(f.id);
+    note += ` final rows=${led2.rows.map((r) => `${r.stage[0]}${r.seq}:${r.status}${r.late ? '/late' : ''}`).join(' ')} spent=${E.job(f.id).cost.spent_usd} cap=${E.job(f.id).cost.cap_usd}`;
+    rec(`CAP takeover@${point}`, v.length === 0 && E.job(f.id).state === 'done', note + ' ' + v.join(' | '));
+  }
+  // cancel while frozen at :sent, wake, restart
+  for (const point of ['skinning:sent', 'gating:sent']) {
+    const f = await lib.frozenJob(E, { name: `cx-${point}.pdf`, point });
+    E.h.cancel_job({ job_id: f.id });
+    f.wake();
+    await E.waitFor('gone', () => !pidAlive(f.pid), 15000, 25);
+    await sleep(300);
+    const stage = point.split(':')[0];
+    const man = E.rows(f.id).filter((r) => r.stage === stage);
+    const settled = E.ledger(f.id).rows.filter((r) => r.stage === stage && r.status === 'settled').length;
+    E.h.start_simulation({ pdf_path: f.pdf });
+    await lib.toDone(E, f.id, 60000);
+    await sleep(500);
+    const v = check(E, f.id, { label: 'cx' });
+    rec(`CANCEL while frozen at ${point}, wake, restart`, v.length === 0 && man.length === 1 && settled === 1, `rows after wake=${man.length} settled=${settled} ${v.join(' | ')}`);
+  }
+} finally { await E.cleanup(); }
+=== ended.mjs ===
+// G: runners started by hand for jobs that have ended; two jobs + heavy lock with kill of the holder.
+import fs from 'node:fs';
+import { lib, check, rec, sleep, pidAlive, counters } from './h.mjs';
+import { spawnRunnerDefault } from 'file:///C:/RnD/Projects/3Dengine/engine/control.mjs';
+const C = counters();
+const E = await lib.mkEnv({ prefix: 'qa-r5-end-', heartbeat: 0.1 });
+const sp = (id) => { const p = spawnRunnerDefault(E.config, id); E.spawned.add(p); return p; };
+const snap = (id) => ['job.json', 'ledger.json', 'manifest.json'].map((f) => { try { return fs.readFileSync(E.jobPath(id, f), 'utf8'); } catch { return ''; } }).join('|');
+try {
+  // done job, 4 runners at once, repeated
+  for (let r = 0; r < 3; r++) {
+    const pdf = E.pdf(`g${r}.pdf`, `g${r}`);
+    const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+    await lib.toDone(E, id, 45000);
+    await E.waitFor('first runner gone', () => !pidAlive(E.runnerPid(id) || 0), 10000, 20).catch(() => {});
+    await sleep(300);
+    const before = snap(id);
+    const pidFileBefore = E.runnerPid(id);
+    const t0 = Date.now();
+    const pids = [sp(id), sp(id), sp(id), sp(id)];
+    let maxSeen = 0;
+    while (pids.some((p) => pidAlive(p)) && Date.now() - t0 < 6000) { const rp = E.runnerPid(id); if (rp && pids.includes(rp)) maxSeen++; await sleep(5); }
+    const dt = Date.now() - t0;
+    await sleep(300);
+    const v = check(E, id, { label: `G${r}` });
+    const same = snap(id) === before;
+    rec(`G done-job runners x4 #${r}`, v.length === 0 && same && pids.every((p) => !pidAlive(p)) && E.runnerPid(id) === pidFileBefore && maxSeen === 0, `exit<=${dt}ms bytesSame=${same} pidFile ${pidFileBefore}->${E.runnerPid(id)} sawPidFileNamingThem=${maxSeen} viol=${JSON.stringify(v)}`);
+  }
+  // cancelled job
+  {
+    const pdf = E.pdf('gc.pdf', 'gc');
+    const id = E.h.start_simulation({ pdf_path: pdf }).job_id;
+    await E.waitFor('building', () => E.job(id).state === 'building', 20000, 5);
+    E.h.cancel_job({ job_id: id });
+    await E.waitFor('gone', () => !pidAlive(E.runnerPid(id) || 0), 10000, 20).catch(() => {});
+    const before = snap(id);
+    const t0 = Date.now();
+    const pids = [sp(id), sp(id)];
+    while (pids.some((p) => pidAlive(p)) && Date.now() - t0 < 6000) await sleep(5);
+    rec('G cancelled-job runners x2', snap(id) === before && pids.every((p) => !pidAlive(p)), `exit<=${Date.now() - t0}ms state=${E.job(id).state}`);
+  }
+  // two jobs with the heavy lock: kill the holder in the middle of rendering, again and again
+  for (let r = 0; r < 4; r++) {
+    const a = E.h.start_simulation({ pdf_path: E.pdf(`ha${r}.pdf`, `ha${r}`) }).job_id;
+    const b = E.h.start_simulation({ pdf_path: E.pdf(`hb${r}.pdf`, `hb${r}`) }).job_id;
+    let killedOne = false;
+    await E.waitFor('someone renders', () => {
+      for (const id of [a, b]) {
+        const j = E.job(id);
+        if (j.state === 'awaiting_approval' && !j.approval) E.approve(id);
+      }
+      if (!killedOne) {
+        const h = E.heavy();
+        if (h && (h.job_id === a || h.job_id === b) && E.job(h.job_id).state === 'rendering' && pidAlive(h.pid)) { process.kill(h.pid); C.add('kills'); killedOne = h.job_id; }
+      }
+      return killedOne;
+    }, 30000, 5);
+    await E.waitFor('gone', () => !pidAlive(E.runnerPid(killedOne) || 0), 5000, 10).catch(() => {});
+    E.h.start_simulation({ pdf_path: E.pdf(killedOne === a ? `ha${r}.pdf` : `hb${r}.pdf`, killedOne === a ? `ha${r}` : `hb${r}`) });
+    await lib.toDone(E, a, 60000); await lib.toDone(E, b, 60000);
+    await sleep(500);
+    const ra = E.rows(a).filter((x) => x.stage === 'rendering'); const rb = E.rows(b).filter((x) => x.stage === 'rendering');
+    let overlap = false;
+    for (const x of ra) for (const y of rb) if (x.started_at < y.finished_at && y.started_at < x.finished_at) overlap = true;
+    const v = [...check(E, a, { label: 'ha' }), ...check(E, b, { label: 'hb' })];
+    rec(`G two jobs heavy lock, holder killed #${r}`, !overlap && v.length === 0 && !fs.existsSync(E.config.runner.heavyLock), `overlap=${overlap} heavyLeft=${fs.existsSync(E.config.runner.heavyLock)} viol=${JSON.stringify(v)}`);
+  }
+} finally { await E.cleanup(); }
+=== over.mjs ===
+import { bareJob, ledM, rec } from './h.mjs';
+const B = bareJob({ cap: 1.0 });
+const pc = ledM.createPaidCall({ jobsDir: B.jobsDir, jobId: B.id, stage: 'skinning', attempt: 1 });
+await pc({ key: 'a', provider: 'stub', what: 'x', estimate_usd: 0.6 }, async () => ({ answer: 1, usd: 5 }));
+const r = await pc({ key: 'b', provider: 'stub', what: 'x', estimate_usd: 0.1 }, async () => ({ answer: 1, usd: 0.1 })).catch((e) => e.code);
+const led = B.ledger(); const t = ledM.ledgerTotals(led);
+rec('OVER billed 5 on estimate 0.6, cap 1.0', t.cap_total_usd <= 1.0, `counted=${t.cap_total_usd} spent=${B.job().cost.spent_usd} next call -> ${r}`);
+B.cleanup();

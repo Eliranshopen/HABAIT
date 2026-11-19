@@ -1,0 +1,22 @@
+✔ 1. the 846 PDF is one sheet with one drawing; the look is real, holds no text of a PDF, and is kept (3911.2963ms)
+✔ 2. the same PDF twice gives the same job_id; the job keeps its own read-only copy and runs on (440.0083ms)
+✔ 3. a file outside the allowed folders is refused by both tools, and nothing is created for it (10.8706ms)
+✔ 4. a PDF with no drawing: no candidate, and no job is started for it (1574.4487ms)
+✔ 5. a stored copy that was changed by hand is never used: the next runner ends the job failed, nothing runs, nothing is billed (2121.8025ms)
+✔ 5b. a stored copy changed while a LIVE runner waits for the approval: the paid stage never starts on it (2096.619ms)
+✔ 5c. the stored copy swapped AND its hash rewritten in job.json: the file no longer adds up, and nothing runs on it (2203.2131ms)
+✔ 6. a job file that names another job, or none: a real runner stops, names the job, and changes no file of any job (3278.2237ms)
+✔ 7. a look that cannot be stored (.runtime/inspect is a file): both tools answer TOOLCHAIN_MISSING, with no path, and start nothing (28.9328ms)
+✔ 8. the upload rewritten in place with the same bytes during first looks: no answer and no record under the plan's hash is another look (8264.3014ms)
+ℹ looks during the rewrite: 4 true, 2 refused NOT_A_PDF, 0 of half-written bytes under their own hash
+✔ 9. QA round 2: a planted record is scanned again; a job folder that is a file is NOT_A_PDF; resume through a foreign manifest exits 1 (6014.1334ms)
+✔ 10. QA round 3: an upload that another program holds is NOT_A_PDF, not an internal error; `engine job` never writes through a manifest that is not the job's (4619.0461ms)
+✔ stdout held JSON-RPC lines only (1.2518ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 34716.5182

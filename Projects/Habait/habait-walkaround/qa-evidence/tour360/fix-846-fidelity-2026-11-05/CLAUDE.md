@@ -1,5 +1,6 @@
-<!-- context file · 2026-11-05 · fix-846-fidelity final QA evidence -->
 # fix-846-fidelity-2026-11-05 — the evidence of the apt846 fidelity fix (worktree fix-846-fidelity)
+<!-- last-updated: 2026-11-08 -->
+<!-- context file · 2026-11-05 · fix-846-fidelity final QA evidence -->
 
 | File | What it shows |
 |---|---|

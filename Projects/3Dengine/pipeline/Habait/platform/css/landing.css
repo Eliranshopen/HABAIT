@@ -1,0 +1,124 @@
+/* Project landing page (A/B, card 25), redesigned on the tokens by platform-ui-ux card 14: light editorial outside the media,
+   dark only inside it. Mobile first, logical properties only. Shares css/style.css (the lead form, .btn) and components.css (hb-*). */
+
+/* light page: the legacy names css/style.css and js/lead.js use are re-pointed to the theme for this page only.
+   The media (hero still, the flight frame, the lightbox) keep the dark chrome. applyBrand() may set --bg from project.json; the
+   page surface is the theme's, the brand keeps --primary / --accent (white-label, contrast checked by tools/contrast.mjs). */
+body.page-landing {
+  --fg: var(--text); --muted: var(--text-muted); --panel: var(--surface-raised); --panel-solid: var(--surface-raised);
+  --chrome-line: var(--line-strong); --chrome-well: var(--surface-sunken);
+  background: var(--surface); color: var(--text); overflow-x: hidden; min-block-size: 100%;
+}
+.page-landing .lightbox, .page-landing .landing-media { --fg: var(--chrome-fg); --muted: var(--chrome-muted); --panel-solid: var(--chrome-panel-solid); --chrome-line: color-mix(in srgb, var(--n-50) 14%, transparent); }
+
+/* header */
+.landing-top { position: sticky; inset-block-start: 0; z-index: 10; padding: 0; background: color-mix(in srgb, var(--surface) 90%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-block-end: 1px solid var(--line); }
+.landing-top__in { display: flex; align-items: center; justify-content: space-between; min-block-size: 60px; padding-block-start: var(--safe-top); }
+.landing-top .brand { color: var(--text); text-decoration: none; letter-spacing: 0; }
+.landing-top .brand-name { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-h2); }
+.landing-top .lang-toggle { min-inline-size: var(--tap-min); min-block-size: var(--tap-min); }
+.landing-top .brand { min-block-size: var(--tap-min); display: inline-flex; align-items: center; }
+
+/* media first */
+.landing-main { display: grid; gap: 0; }
+.variant { display: grid; gap: 0; }
+.landing-media { background: var(--chrome-bg); color: var(--chrome-fg); }
+.hero-shot { position: relative; margin: 0; background: var(--chrome-panel-solid); }
+.hero-shot__media { position: relative; aspect-ratio: 16 / 9; max-block-size: 72vh; background: var(--chrome-panel-solid); }
+.hero-shot img { display: block; inline-size: 100%; aspect-ratio: 16 / 9; max-block-size: 72vh; object-fit: cover; }
+.hero-badge { position: absolute; inset-block-start: var(--sp-4); inset-inline-end: var(--sp-4); }
+.hero-play { position: absolute; inset-block-end: var(--sp-6); inset-inline-start: var(--gutter); display: inline-flex; align-items: center; gap: var(--sp-3); min-block-size: 52px; padding-block: var(--sp-2); padding-inline: var(--sp-2) var(--sp-6); border-radius: var(--r-full); background: color-mix(in srgb, var(--n-0) 94%, transparent); color: var(--n-900); font-weight: var(--fw-semibold); text-decoration: none; box-shadow: var(--shadow-2); transition: transform var(--dur-fast) var(--ease); }
+.hero-play:hover { transform: translateY(-1px); }
+.hero-play[hidden] { display: none; }   /* a project with no film (project.json film:false) has no «לטיסה סביב הפרויקט» */
+.hero-play:focus-visible { outline: 2px solid var(--n-0); outline-offset: 3px; }
+.hero-play__icon { inline-size: 36px; block-size: 36px; border-radius: var(--r-full); display: grid; place-items: center; background: var(--brand-primary); color: var(--brand-on-primary); }
+/* the play icon is never mirrored in RTL (media-playback icons keep their direction) */
+.shot-caption { margin: 0; padding: var(--sp-2) var(--gutter); font-size: 12px; line-height: 1.45; color: var(--chrome-muted); background: var(--chrome-bg); }
+.hero-shot .shot-caption { padding-block: var(--sp-3); }   /* below the still, never under the play button */
+.flight-frame { background: var(--chrome-bg); min-block-size: max(420px, min(74vh, 640px)); }
+.flight-frame iframe { display: block; inline-size: 100%; block-size: min(74vh, 640px); min-block-size: 420px; border: 0; }
+.flight-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); padding-block: var(--sp-3); color: var(--chrome-muted); }
+.flight-actions .hb-btn--secondary { background: transparent; color: var(--chrome-fg); border-color: var(--chrome-line); }
+.flight-actions .hb-small { color: var(--chrome-muted); }
+
+/* Phase 4 A2: the body and footer paint only once the page is ready (the media above them is then in place), so nothing
+   painted early is pushed down. visibility keeps their boxes; boot() sets body.ready on success AND on error. */
+body.page-landing:not(.ready) .landing-body, body.page-landing:not(.ready) .landing-foot { visibility: hidden; }
+
+/* card 19 F3: arm B — one voice above the fold (the flight's own HUD) */
+body.page-landing[data-variant="b"] .landing-top .lang-toggle { display: none; }
+body.page-landing[data-variant="b"] .landing-hero .landing-title { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* body */
+.landing-body { display: grid; gap: var(--sp-12); padding-block: var(--sp-10) var(--sp-16); }
+.landing-hero { display: grid; gap: var(--sp-2); }
+.landing-hero .hb-chip { justify-self: start; }
+.landing-title { margin: 0; }
+.landing-sub { margin: 0; }
+.landing-section { display: grid; gap: var(--sp-4); }
+.section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--sp-2) var(--sp-4); }
+.section-head p { margin: 0; }
+
+/* availability: one row per apartment, status in words + colour, numbers in <bdi> */
+.avail-list { list-style: none; margin: 0; padding: 0; display: grid; border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: var(--surface-raised); }
+.avail-list li + li { border-block-start: 1px solid var(--line); }
+.avail-row { display: grid; grid-template-columns: 4.5rem auto 1fr auto; align-items: center; gap: var(--sp-3) var(--sp-4); min-block-size: 56px; padding: var(--sp-2) var(--sp-5); color: var(--text); text-decoration: none; transition: background-color var(--dur-fast) var(--ease); }
+.avail-row:hover { background: var(--surface-sunken); }
+.avail-row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.avail-row .hb-chip { justify-self: start; }
+.avail-row__unit { font-weight: var(--fw-bold); font-size: var(--fs-lead); font-variant-numeric: tabular-nums; }
+.avail-row__meta { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-4); color: var(--text-muted); font-size: var(--fs-small); }
+.avail-row__go { color: var(--text-muted); font-size: var(--fs-h2); }
+@media (max-width: 520px) { .avail-row { grid-template-columns: auto 1fr auto; } .avail-row__meta { grid-column: 1 / -1; grid-row: 2; } .avail-row__unit { grid-row: 1; } }
+
+/* facts + lead */
+.landing-split { display: grid; gap: var(--sp-6); align-items: start; }
+@media (min-width: 900px) { .landing-split { grid-template-columns: 1fr 1fr; } }
+.landing-facts-card, .landing-lead { display: grid; gap: var(--sp-4); }
+.landing-facts-card h2, .landing-lead h2 { margin: 0; }
+.landing-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 0; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; }
+.landing-fact { display: grid; gap: var(--sp-1); padding: var(--sp-3); background: var(--surface-raised); }
+.landing-fact dt { font-size: var(--fs-small); color: var(--text-muted); }
+.landing-fact dd { margin: 0; font-weight: var(--fw-bold); font-size: var(--fs-lead); overflow-wrap: normal; word-break: keep-all; font-variant-numeric: tabular-nums; }   /* Gate 2 F1: a price never breaks mid-number */
+@media (max-width: 520px) { .landing-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.landing-lead p { margin: 0; }
+.landing-lead .lead-form { border-block-start: 0; padding-block-start: 0; }
+.landing-lead .lead-form .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* text inputs have an intrinsic width (~20ch): without min-width 0 the two-column row widens a 390 px phone to ~470 px */
+.landing-lead .lead-form input:not([type=checkbox]) { min-inline-size: 0; inline-size: 100%; background: var(--surface-raised); border-color: var(--line-strong); color: var(--text); }
+.landing-lead .lead-form label.check input { min-block-size: 0; inline-size: 20px; block-size: 20px; flex: none; }
+.landing-lead .lead-form .btn { inline-size: 100%; }
+.landing-lead .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+
+/* gallery: real stills only */
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3); }
+.tile { position: relative; display: block; padding: 0; border: 0; border-radius: var(--r-md); overflow: hidden; background: var(--surface-sunken); cursor: pointer; text-align: start; color: var(--chrome-fg); }
+.tile img { display: block; inline-size: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform var(--dur-slow) var(--ease); }
+.tile:hover img { transform: scale(1.03); }
+.tile::after { content: ''; position: absolute; inset: 35% 0 0; background: linear-gradient(to top, var(--chrome-scrim) 0%, var(--chrome-scrim) 38%, transparent 100%); pointer-events: none; }
+.tile-badge { position: absolute; inset-block-start: var(--sp-2); inset-inline-end: var(--sp-2); z-index: 1; }
+.tile-label { position: absolute; z-index: 1; inset-inline-start: var(--sp-3); inset-block-end: var(--sp-6); font-size: var(--fs-small); font-weight: var(--fw-bold); text-shadow: var(--chrome-text-shadow); }
+.tile-legal { position: absolute; z-index: 1; inset-inline-start: var(--sp-3); inset-block-end: var(--sp-2); font-size: 11px; color: var(--chrome-muted); text-shadow: var(--chrome-text-shadow); }
+
+/* lightbox (dark: inside the media) */
+.lightbox { max-inline-size: min(96vw, 1200px); inline-size: 100%; padding: 0; border: 0; border-radius: var(--r-md); background: var(--chrome-panel-solid); color: var(--chrome-fg); }
+.lightbox::backdrop { background: var(--chrome-scrim); }
+.lightbox img { display: block; inline-size: 100%; max-block-size: 72vh; object-fit: contain; background: var(--chrome-bg); }
+.lightbox-badge { position: absolute; inset-block-start: var(--sp-3); inset-inline-end: var(--sp-3); }
+.lightbox .btn { margin: 0 var(--sp-3) var(--sp-3); }
+
+/* footer: the legal summary that opens the full text in place */
+.landing-foot { border-block-start: 1px solid var(--line); padding-block: var(--sp-4) calc(var(--sp-8) + var(--safe-bottom)); }
+.landing-legal { border-block-start: 0; }
+#legalFull p { margin: 0 0 var(--sp-2); font-size: var(--fs-small); line-height: 1.6; color: var(--text-muted); }
+#legalFull p.legal-head { font-weight: var(--fw-bold); color: var(--text); }
+.index-foot { margin: var(--sp-4) 0 0; }
+
+@media (min-width: 760px) {
+  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .landing-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .flight-frame iframe { block-size: min(70vh, 720px); }
+  .landing-lead .lead-form .btn { inline-size: auto; }
+}
+/* the responsive gate (Eliran 2026-11-05: every target ≥ 44×44, desktop and phone) */
+#flightFull { min-block-size: 44px; }

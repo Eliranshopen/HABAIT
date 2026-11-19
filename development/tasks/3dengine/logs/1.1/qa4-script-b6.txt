@@ -1,0 +1,35 @@
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, GOLDEN } from './lib.mjs';
+const { intakePdf } = await E('engine/stages/intake.mjs');
+const { jobId } = await E('engine/jobs.mjs');
+const SHA = sha(fs.readFileSync(GOLDEN));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const USER = process.env.USERNAME;
+const out = (...a) => console.log(...a);
+// (a) valid record + python that exists but would fail: record is reused (python not started)
+{
+  const h = await makeHome({ timeout: 120 }); fs.copyFileSync(GOLDEN, `${h.inbox}/s.pdf`);
+  const d = `${h.config.runtimeDir}/inspect/${SHA}`; fs.mkdirSync(d, { recursive: true }); for (const f of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/rec/${f}`, `${d}/${f}`);
+  const cfg = JSON.parse(fs.readFileSync(`${h.home}/engine.config.json`, 'utf8')); cfg.python = 'C:/Windows/System32/cmd.exe'; fs.writeFileSync(`${h.home}/engine.config.json`, JSON.stringify(cfg));
+  const srv = startServer(h); await srv.init();
+  const t0 = Date.now(); const r = await srv.call('inspect_plan', { pdf_path: `${h.inbox}/s.pdf` });
+  out('[record reused, python=cmd.exe]', r.err?.code || 'ok', Date.now() - t0, 'ms');
+  await srv.stop(); cleanup(h);
+}
+// (b) intakePdf directly: source locked (None), ACL read-denied, removed, folder; jobs folder state afterwards
+for (const kind of ['lock-none', 'lock-read', 'acl-deny', 'gone', 'folder', 'free']) {
+  const h = await makeHome({ timeout: 120 }); const src = `${h.inbox}/s.pdf`; fs.copyFileSync(GOLDEN, src); fs.mkdirSync(h.jobsDir, { recursive: true });
+  let ps = null;
+  if (kind.startsWith('lock')) { const f = src.replace(/\//g, '\\'); ps = spawn('powershell', ['-NoProfile', '-Command', `$f=[IO.File]::Open('${f}','Open','Read','${kind === 'lock-none' ? 'None' : 'Read'}'); Write-Output L; Start-Sleep -Seconds 20; $f.Close()`], { stdio: ['ignore', 'pipe', 'ignore'], windowsHide: true }); await new Promise((r) => ps.stdout.once('data', r)); }
+  if (kind === 'acl-deny') spawnSync('icacls', [src, '/deny', `${USER}:(R,RD,GR)`], { windowsHide: true });
+  if (kind === 'gone') fs.rmSync(src);
+  if (kind === 'folder') { fs.rmSync(src); fs.mkdirSync(src); }
+  let res;
+  try { const r = intakePdf(h.jobsDir, ID, { path: src, name: 's.pdf', bytes: 183222 }, SHA); res = 'ok ' + JSON.stringify(Object.keys(r)); } catch (e) { res = `${e.constructor.name} ${e.code} | ${String(e.message).replace(/[A-Za-z]:[\\/][^ ]*/g, '<PATH>').slice(0, 100)}`; }
+  const leftovers = fs.existsSync(`${h.jobsDir}/${ID}/input`) ? fs.readdirSync(`${h.jobsDir}/${ID}/input`) : 'no input dir';
+  out(`[intake ${kind}]`, res, 'input holds', JSON.stringify(leftovers));
+  if (ps) spawnSync('taskkill', ['/PID', String(ps.pid), '/T', '/F'], { windowsHide: true });
+  if (kind === 'acl-deny') spawnSync('icacls', [src, '/remove:d', USER], { windowsHide: true });
+  await sleep(300); cleanup(h);
+}

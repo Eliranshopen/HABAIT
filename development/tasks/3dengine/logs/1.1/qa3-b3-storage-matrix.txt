@@ -1,0 +1,598 @@
+## rt is a file
+   inspect_plan: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+## inspect is a file
+   inspect_plan: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+## inspect read-only(acl)
+   inspect_plan: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+## sha folder is a file   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916909857-4 EPERM
+## sha folder empty dir   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916914476-5 EPERM
+## sha folder garbage   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916918382-6 EPERM
+## sha folder read-only(acl)
+   inspect_plan: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the first look could not be stored in the engine's runtime folder
+## look temp is a file   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916930404-8 EPERM
+## look temp is a dir with content   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916934408-9 EPERM
+## look temp/out is a file   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916938213-10 EPERM
+## look temp/source.pdf is a dir   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916942188-11 EPERM
+## jobs is a file
+   inspect_plan: ok
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: RPC | internal error in list_jobs: a file error of the engine (ENOTDIR)
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+## jobs read-only(acl)
+   inspect_plan: ok
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: RPC | internal error in list_jobs: a file error of the engine (EPERM)
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+## job folder is a file: scenario error ENOTDIR: not a directory, scandir 'C:\Users\elira\AppData\Local\Temp\qa3-home-39108-1794916948820-14\jobs-temp\04762ca47a173685'
+## job folder empty   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916950205-15 EPERM
+## job folder read-only(acl): scenario error EPERM: operation not permitted, scandir 'C:\Users\elira\AppData\Local\Temp\qa3-home-39108-1794916952120-16\jobs-temp\04762ca47a173685'
+## input is a file
+   inspect_plan: ok
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 holds something that is not a folder where its input folder (input) belongs; it is never overwritten
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 holds something that is not a folder where its input folder (input) belongs; it is never overwritten
+## input/source.pdf is a dir
+   inspect_plan: ok
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 already holds something that is not a file as its input (input/source.pdf); it is never overwritten
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 already holds something that is not a file as its input (input/source.pdf); it is never overwritten
+## input read-only(acl): scenario error EPERM: operation not permitted, scandir 'C:\Users\elira\AppData\Local\Temp\qa3-home-39108-1794916956562-19\jobs-temp\04762ca47a173685\input'
+## intake temp is a dir
+   inspect_plan: ok
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 holds something that is not a file at the intake's temp name (input/source.pdf.26480.tmp); it is never removed
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 holds something that is not a file at the intake's temp name (input/source.pdf.26480.tmp); it is never removed
+## intake temp is a file   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916960069-21 EPERM
+## job.json is a dir
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+## job.json garbage
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+## job.json empty
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+## job.json BOM {}
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+## job.json other id
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef")
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef")
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef")
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef")
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef")
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it names job "0123456789abcdef")
+## job.json read-only file
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+## manifest is a dir   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+## manifest garbage   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+## manifest other id   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "ffffffffffffffff")
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "ffffffffffffffff")
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "ffffffffffffffff")
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "ffffffffffffffff")
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "ffffffffffffffff")
+## manifest read-only   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (its schema is null)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (its schema is null)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (its schema is null)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (its schema is null)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (its schema is null)
+## ledger is a dir   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## ledger garbage   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## runner.pid is a dir   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## runner.pid garbage   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916984354-35 EPERM
+## job.lock is a dir
+   inspect_plan: ok
+   start_simulation: RPC | internal error in start_simulation: job 04762ca47a173685: lock busy
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: RPC | internal error in start_simulation: job 04762ca47a173685: lock busy
+## job.lock is a stale file   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794916993114-37 EPERM
+## runner.log is a dir   CHANGED FILES: input/source.pdf,job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## stages is a file   CHANGED FILES: input/source.pdf,job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: TOOL NOT_AWAITING_APPROVAL | job 04762ca47a173685 is "queued", not "awaiting_approval"
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "queued", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A input removed->file   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A source.pdf is a dir   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A source.pdf missing   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A job.json is a dir
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not a file)
+## A job.json garbage
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+## A job.json empty
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+## A job.json BOM+valid
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (it is not JSON)
+## A job.json other state
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (its state is "stuck")
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (its state is "stuck")
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (its state is "stuck")
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (its state is "stuck")
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (its state is "stuck")
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: job.json is not this job's file (its state is "stuck")
+## A job.json read-only   CHANGED FILES: runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: RPC | internal error in approve_paid_stage: a file error of the engine (EPERM)
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: RPC | internal error in cancel_job: a file error of the engine (EPERM)
+   start_simulation: ok
+## A job.json acl-deny   CHANGED FILES: job.json,runner.pid
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794917042212-49 EPERM
+## A manifest is a dir
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not a file)
+## A manifest garbage
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+## A manifest empty
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+## A manifest BOM
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it is not JSON)
+## A manifest row bad path
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (row 1, output 1: its path is not inside the job folder)
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (row 1, output 1: its path is not inside the job folder)
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (row 1, output 1: its path is not inside the job folder)
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (row 1, output 1: its path is not inside the job folder)
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (row 1, output 1: its path is not inside the job folder)
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (row 1, output 1: its path is not inside the job folder)
+## A manifest other id
+   inspect_plan: ok
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "1111111111111111")
+   get_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "1111111111111111")
+   approve_paid_stage: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "1111111111111111")
+   get_result: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "1111111111111111")
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "1111111111111111")
+   start_simulation: TOOL JOB_NOT_FOUND | job 04762ca47a173685: manifest.json is not this job's file (it names job "1111111111111111")
+## A manifest read-only   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa3-home-39108-1794917075015-56 EPERM
+## A ledger is a dir   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A ledger garbage   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A runner.pid is a dir   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A job.lock is a dir
+   inspect_plan: ok
+   start_simulation: RPC | internal error in start_simulation: job 04762ca47a173685: lock busy
+   get_job: ok
+   approve_paid_stage: RPC | internal error in approve_paid_stage: job 04762ca47a173685: lock busy
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: RPC | internal error in cancel_job: job 04762ca47a173685: lock busy
+   start_simulation: RPC | internal error in start_simulation: job 04762ca47a173685: lock busy
+## A runner.log is a dir   CHANGED FILES: job.json
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A stages is a file   CHANGED FILES: job.json,runner.log
+   inspect_plan: ok
+   start_simulation: ok
+   get_job: ok
+   approve_paid_stage: ok
+   get_result: TOOL NOT_DONE | job 04762ca47a173685 is "awaiting_approval", not "done"
+   list_jobs: ok
+   cancel_job: ok
+   start_simulation: ok
+## A job folder acl-deny: scenario error EPERM: operation not permitted, scandir 'C:\Users\elira\AppData\Local\Temp\qa3-home-39108-1794917111645-63\jobs-temp\04762ca47a173685'
+## A jobs acl-deny: scenario error EPERM: operation not permitted, scandir 'C:\Users\elira\AppData\Local\Temp\qa3-home-39108-1794917115600-64\jobs-temp\04762ca47a173685'
+
+SUMMARY FLAGS: 0
+## job folder is a file
+   inspect_plan: ok
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 holds something that is not a folder where its folder belongs; it is never overwritten
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL NOT_A_PDF | job 04762ca47a173685 holds something that is not a folder where its folder belongs; it is never overwritten
+## job folder read-only(acl)
+   inspect_plan: ok
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+## input read-only(acl)
+   inspect_plan: ok
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+   get_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   approve_paid_stage: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   get_result: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   list_jobs: ok
+   cancel_job: TOOL JOB_NOT_FOUND | no job 04762ca47a173685
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+## A job folder acl-deny
+   inspect_plan: ok
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+   get_job: RPC | internal error in get_job: a file error of the engine (EPERM)
+   approve_paid_stage: RPC | internal error in approve_paid_stage: a file error of the engine (EPERM)
+   get_result: RPC | internal error in get_result: a file error of the engine (EPERM)
+   list_jobs: ok
+   cancel_job: RPC | internal error in cancel_job: a file error of the engine (EPERM)
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+## A jobs acl-deny
+   inspect_plan: ok
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+   get_job: RPC | internal error in get_job: a file error of the engine (EPERM)
+   approve_paid_stage: RPC | internal error in approve_paid_stage: a file error of the engine (EPERM)
+   get_result: RPC | internal error in get_result: a file error of the engine (EPERM)
+   list_jobs: RPC | internal error in list_jobs: a file error of the engine (EPERM)
+   cancel_job: RPC | internal error in cancel_job: a file error of the engine (EPERM)
+   start_simulation: TOOL TOOLCHAIN_MISSING | the folder of job 04762ca47a173685 cannot be used by the engine
+
+SUMMARY FLAGS: 0

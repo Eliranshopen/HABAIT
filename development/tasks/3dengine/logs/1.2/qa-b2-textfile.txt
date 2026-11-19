@@ -1,0 +1,24 @@
+scenario textfile  work C:/Users/elira/AppData/Local/Temp/qa12-textfile-EPfQvm load 100
+=== textfile
+{
+ "code": 1,
+ "secs": "1.5",
+ "stdout": "outcome: STEP_FAILED\nseconds: 0.8\npaid run: no\ntool exit code: 1\noutput folder: C:/Users/elira/AppData/Local/Temp/qa12-textfile-EPfQvm/out\nthe tool's own output: C:/Users/elira/AppData/Local/Temp/qa12-textfile-EPfQvm/out/auto-trace.log\n",
+ "stderr": "",
+ "ledger": false,
+ "alive": [
+  "14488 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "6744 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "36384 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 100 node qa12-b2.mjs textfile",
+  "26300 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 100 node qa12-b2.mjs textfile",
+  "34708 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs textfile"
+ ]
+}
+procs at end [
+  '14488 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '6744 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '36384 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs textfile',
+  '26300 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 100 node qa12-b2.mjs textfile',
+  '34708 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs textfile'
+]
+exit 0

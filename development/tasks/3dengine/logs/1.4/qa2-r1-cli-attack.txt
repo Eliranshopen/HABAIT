@@ -1,0 +1,12 @@
+node:fs:2479
+      path = getValidatedPath(path);
+             ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+    at Object.writeFileSync (node:fs:2479:14)
+    at file:///C:/Users/elira/AppData/Local/Temp/qa2/r1-cli-attack.mjs:91:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+
+Node.js v24.22.1

@@ -1,0 +1,96 @@
+
+> habait-3dengine@0.1.0 test
+> node --test --experimental-test-coverage --test-coverage-lines=80 "--test-coverage-include=engine/**/*.mjs" "tests/unit/**/*.test.mjs" "tests/milestones/**/*.test.mjs"
+
+✔ a. parity: run-project.mjs --parity → 41 rows · PASS (214.1773ms)
+✔ b. catalog: fetch.mjs --verify-only → 57/57 rows OK (158.1913ms)
+✔ c. readiness: the doctor reports ready except keys (2566.7232ms)
+✔ d. port identity: pipeline/ equals commit a63494a, blob for blob (1570.1133ms)
+✔ every engine/**/*.mjs imports cleanly (16.5514ms)
+✔ help and no command (1.3951ms)
+✔ unknown command → usage on stderr, exit 2 (0.1897ms)
+✔ doctor: exit 0 when ready or ready except keys, 1 otherwise; --json (0.5877ms)
+✔ env prints the pointers, never a key (0.2503ms)
+✔ setup-env: nothing to do / dry run / --go ok / --go failure (0.8693ms)
+✔ bring-assets: dry run, missing in source, --from, --go ok and failure (0.7597ms)
+✔ a config error is reported on stderr with exit 1 (0.1688ms)
+✔ main with the real config: env command (1.1592ms)
+✔ isMain compares the script path with the module url (0.257ms)
+✔ ENGINE_HOME is the folder above engine/, absolute, forward slashes (2.3597ms)
+✔ defaults: relative paths resolve against home, absolute kept, basePython untouched (7.5185ms)
+✔ the real engine.config.json loads with the default home (0.8017ms)
+✔ local override merges shallow, assets one level deep (6.8163ms)
+✔ env overrides ENGINE_PYTHON / ENGINE_BLENDER / ENGINE_CHROME win over files (5.2254ms)
+✔ injected readFile / exists are used (1.0172ms)
+✔ a missing required field throws an Error naming it (21.9102ms)
+✔ wrong shapes are rejected (6.6316ms)
+✔ pipelineEnv returns exactly the eleven pointers (4.6642ms)
+✔ all checks ok with fakes → READY (5.6075ms)
+✔ a fake secret value never reaches the report or the result (0.5883ms)
+✔ keys: from env, from env-file names, missing → READY EXCEPT KEYS (0.7027ms)
+✔ node version too old (1.341ms)
+✔ python: missing interpreter, probe failure, no JSON, import error, version mismatch (1.3463ms)
+✔ python snippet imports every module and asks every pin (0.1556ms)
+✔ node-libs: unresolvable, wrong version, no lock (1.2114ms)
+✔ blender: missing, wrong version; chrome and legal missing (0.5754ms)
+✔ pipeline: parity failure and the env it is given (0.4064ms)
+✔ assets-catalog: a missing row, an unreadable manifest (1.1672ms)
+✔ assets-hdri: missing file, mismatch, no record in the style file (1.8749ms)
+✔ assets-packs: zip missing, zip with the wrong hash, no sources array (0.749ms)
+✔ readEnvNames returns names with non-empty values only, never values (3.698ms)
+✔ resolveNodeLib finds an installed library version, throws when absent (18.867ms)
+✔ every pipeline env fallback is covered by pipelineEnv or the allow-list (123.3785ms)
+✔ the allow-list carries a reason for each name (0.1594ms)
+✔ normalizeName: lower-case, _ to - (1.057ms)
+✔ parseLock reads name==version, skips comments and blanks (1.3012ms)
+✔ parseLock rejects an unpinned line (0.5082ms)
+✔ the real requirements lock parses as written (20 pins) (1.3489ms)
+✔ sha256File streams the hash of a file (10.0593ms)
+✔ run returns status, stdout and stderr (91.1671ms)
+✔ run through a shell sends one command string and raises no deprecation warning (73.0297ms)
+✔ run reports a spawn error as status -1 with the reason (2.2865ms)
+✔ run honours the timeout (212.5811ms)
+✔ JSON read/write and manifest rows (6.4207ms)
+✔ listFiles is recursive, sorted, forward slashes; missing folder is empty (2.9247ms)
+✔ path helpers (0.4239ms)
+✔ planAssets: present / copy / missing-in-source, pack and HDRI, with sizes (23.9668ms)
+✔ applyAssets copies, verifies, fails the missing row, writes a manifest row; second run copies nothing (44.7207ms)
+✔ a wrong file at the target is overwritten; a bad source is a post-copy mismatch (31.0729ms)
+✔ --from overrides the source; a missing HDRI / pack source is a failure; copy errors are caught (13.1371ms)
+✔ a style file without an HDRI record plans no HDRI entry (8.7586ms)
+✔ nothing needed when the probes pass (2.6772ms)
+✔ everything needed on a bare machine; commands as specified (0.5017ms)
+✔ pip needed when a pin is off even though the venv exists (0.1776ms)
+✔ applyEnv runs needed steps in order and writes a manifest row each (7.4585ms)
+✔ applyEnv stops at the first failure with its reason (5.4867ms)
+✔ applyEnv with nothing needed runs nothing and writes nothing (0.5968ms)
+ℹ tests 62
+ℹ suites 0
+ℹ pass 62
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4621.0578
+ℹ start of coverage report
+ℹ -------------------------------------------------------------
+ℹ file         | line % | branch % | funcs % | uncovered lines
+ℹ -------------------------------------------------------------
+ℹ engine       |        |          |         | 
+ℹ  cli.mjs     |  98.32 |    94.74 |  100.00 | 118-119
+ℹ  config.mjs  | 100.00 |    93.75 |  100.00 | 
+ℹ  doctor.mjs  | 100.00 |    95.39 |  100.00 | 
+ℹ  lib         |        |          |         | 
+ℹ   files.mjs  | 100.00 |   100.00 |  100.00 | 
+ℹ   hash.mjs   | 100.00 |   100.00 |  100.00 | 
+ℹ   json.mjs   | 100.00 |   100.00 |  100.00 | 
+ℹ   lock.mjs   | 100.00 |   100.00 |  100.00 | 
+ℹ   paths.mjs  | 100.00 |   100.00 |  100.00 | 
+ℹ   run.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ  setup       |        |          |         | 
+ℹ   assets.mjs | 100.00 |    98.08 |  100.00 | 
+ℹ   env.mjs    | 100.00 |    87.50 |   80.00 | 
+ℹ -------------------------------------------------------------
+ℹ all files    |  99.74 |    95.84 |   99.04 | 
+ℹ -------------------------------------------------------------
+ℹ end of coverage report

@@ -1,0 +1,373 @@
+{
+ "note": "The apartment's OWN furniture, from Eliran's pictures (2026-11-17 22:09, folder «בניין 1 קומה א דירה 7»: «תיקח את התמונות האלה ותלביש אותן בהדמייה שיראה יוקרתי וריאליסטי»). Each item: crops of his pictures (boxes in the 1280-wide frame) -> the same item as a studio photo (fal-ai/nano-banana-pro/edit) -> 3D (Hunyuan 3D v3.1 pro, PBR). 6 items ~ $4.05, cap $6. Single beds, wardrobes, kitchen, vanities, TV are built in Blender ($0). 2026-11-18: his pick «upgrade the walk»: every base item multi-view (front studio + back/left/right from nano-banana-pro/edit) into Hunyuan multi-view + PBR + face_count ($0.825); 8 more items from his pictures.",
+ "pics": {
+  "living": "בניין 1 קומה א דירה 7 - 01 סלון.png",
+  "dining": "בניין 1 קומה א דירה 7 - 03 פינת אוכל.png",
+  "master": "בניין 1 קומה א דירה 7 - 05 חדר שינה הורים.png",
+  "bath": "בניין 1 קומה א דירה 7 - 08 חדר רחצה.png",
+  "ensuite": "בניין 1 קומה א דירה 7 - 06 מקלחת הורים.png",
+  "kids": "בניין 1 קומה א דירה 7 - 07 חדר שינה ממד.png",
+  "balcony": "C:/RnD/Projects/Avney_Hefets_Kedem_4/בניין 1 קומה א דירה 7 - 10 מרפסת.png"
+ },
+ "items": [
+  {
+   "id": "base_sofa",
+   "slot": "sofa",
+   "he": "ספת בוקלה על בסיס אלון",
+   "size_cm": [
+    210,
+    90,
+    80
+   ],
+   "crops": [
+    [
+     "living",
+     [
+      775,
+      415,
+      1280,
+      714
+     ]
+    ],
+    [
+     "dining",
+     [
+      0,
+      520,
+      440,
+      714
+     ]
+    ]
+   ],
+   "desc": "this exact sofa: a three-seat sofa upholstered in cream white textured boucle, boxy seat and back cushions, rounded padded arms, standing on a thin solid light oak base frame visible as a strip along the bottom",
+   "include": "the whole sofa with its oak base, no pillows",
+   "mv": true
+  },
+  {
+   "id": "base_coffee",
+   "slot": "coffee",
+   "he": "שולחן טרוורטין עגול",
+   "size_cm": [
+    90,
+    90,
+    40
+   ],
+   "crops": [
+    [
+     "living",
+     [
+      585,
+      540,
+      830,
+      714
+     ]
+    ],
+    [
+     "dining",
+     [
+      605,
+      595,
+      965,
+      714
+     ]
+    ]
+   ],
+   "desc": "this exact coffee table: a round top of light beige travertine stone with visible pores, on a low cross-shaped base of solid light oak planks",
+   "include": "the table only",
+   "mv": true
+  },
+  {
+   "id": "base_dining",
+   "slot": "dining",
+   "he": "שולחן אוכל אלון בהיר",
+   "size_cm": [
+    180,
+    90,
+    75
+   ],
+   "crops": [
+    [
+     "dining",
+     [
+      535,
+      380,
+      810,
+      575
+     ]
+    ]
+   ],
+   "desc": "this exact dining table: a rectangular top in very light natural oak, on two thick solid oak block legs (trestle style), without the chairs and without the bowl",
+   "include": "the table only, no chairs, nothing on it",
+   "mv": true
+  },
+  {
+   "id": "base_chair",
+   "slot": "chairs",
+   "he": "כיסא מרופד שמנת",
+   "size_cm": [
+    50,
+    55,
+    85
+   ],
+   "crops": [
+    [
+     "dining",
+     [
+      610,
+      395,
+      735,
+      575
+     ]
+    ]
+   ],
+   "desc": "this exact dining chair: seat and curved backrest upholstered in smooth cream off-white fabric, four slim slightly splayed light oak legs",
+   "include": "one chair only",
+   "mv": true
+  },
+  {
+   "id": "base_bed",
+   "slot": "bedm",
+   "he": "מיטה זוגית בוקלה",
+   "size_cm": [
+    180,
+    210,
+    125
+   ],
+   "crops": [
+    [
+     "master",
+     [
+      360,
+      300,
+      925,
+      714
+     ]
+    ]
+   ],
+   "desc": "this exact double bed: a tall cream boucle upholstered wingback headboard, a low boucle upholstered base, white sheets and two white pillows, a beige linen duvet folded back at the top",
+   "include": "the bed with its bedding, no nightstands, no lamps",
+   "mv": true
+  },
+  {
+   "id": "base_night",
+   "slot": "night",
+   "he": "שידת לילה ומנורה",
+   "size_cm": [
+    50,
+    40,
+    95
+   ],
+   "crops": [
+    [
+     "master",
+     [
+      900,
+      345,
+      1052,
+      612
+     ]
+    ]
+   ],
+   "desc": "this exact bedside table with its lamp: a light oak nightstand with one drawer with a small brass pull and an open shelf below, and on top a white ceramic table lamp with a cream linen drum shade",
+   "include": "the nightstand together with the lamp on it",
+   "mv": true
+  },
+  {
+   "id": "base_vanity",
+   "slot": "vanities",
+   "he": "ארון אמבטיה אלון",
+   "size_cm": [
+    80,
+    48,
+    55
+   ],
+   "crops": [
+    [
+     "bath",
+     [
+      675,
+      410,
+      905,
+      714
+     ]
+    ]
+   ],
+   "desc": "this exact bathroom vanity: a wall-hung light natural oak cabinet with two drawers, a white ceramic integrated basin top with a rectangular bowl, and a tall brushed brass single-lever tap",
+   "include": "the vanity with its basin and tap, no mirror, no wall",
+   "mv": true
+  },
+  {
+   "id": "base_toilet",
+   "slot": "toilet",
+   "he": "אסלה תלויה",
+   "size_cm": [
+    37,
+    54,
+    40
+   ],
+   "crops": [
+    [
+     "ensuite",
+     [
+      800,
+      455,
+      955,
+      625
+     ]
+    ]
+   ],
+   "desc": "this exact wall-hung toilet: a white glossy ceramic rimless bowl with a slim white seat and lid, the back flat as if against a wall",
+   "include": "the toilet only, no wall, no flush plate",
+   "mv": true
+  },
+  {
+   "id": "base_tub",
+   "slot": "tub",
+   "he": "אמבטיה עם חיפוי טרוורטין",
+   "size_cm": [
+    157,
+    70,
+    55
+   ],
+   "crops": [
+    [
+     "bath",
+     [
+      280,
+      410,
+      645,
+      714
+     ]
+    ]
+   ],
+   "desc": "this exact built-in bathtub: a white glossy acrylic rectangular tub with a rounded inner basin, its front and side panels clad in honed beige travertine tiles",
+   "include": "the tub with its travertine front panel",
+   "mv": false,
+   "mv_note": "2026-11-18: the generated side views were inconsistent (a corner tub, a short bed); single view from the studio photo"
+  },
+  {
+   "id": "base_single_bed",
+   "slot": "beds",
+   "he": "מיטת יחיד",
+   "size_cm": [
+    92,
+    200,
+    55
+   ],
+   "crops": [
+    [
+     "kids",
+     [
+      610,
+      365,
+      965,
+      630
+     ]
+    ]
+   ],
+   "desc": "this exact single bed: a plain white box base, a mattress with a white fitted sheet, a beige linen duvet with a white top sheet folded back, one white pillow",
+   "include": "the whole bed with its bedding",
+   "mv": false,
+   "mv_note": "2026-11-18: the generated side views were inconsistent (a corner tub, a short bed); single view from the studio photo"
+  },
+  {
+   "id": "base_bal_chair",
+   "slot": "bal_chair",
+   "he": "כיסא מרפסת טיק",
+   "size_cm": [
+    58,
+    60,
+    80
+   ],
+   "crops": [
+    [
+     "balcony",
+     [
+      470,
+      415,
+      615,
+      645
+     ]
+    ]
+   ],
+   "desc": "this exact outdoor armchair: a solid teak frame with flat armrests, a woven natural rope back panel and a thick cream outdoor seat cushion",
+   "include": "one chair only",
+   "mv": true
+  },
+  {
+   "id": "base_bal_table",
+   "slot": "bal_table",
+   "he": "שולחן מרפסת טרוורטין",
+   "size_cm": [
+    66,
+    66,
+    72
+   ],
+   "crops": [
+    [
+     "balcony",
+     [
+      545,
+      490,
+      780,
+      714
+     ]
+    ]
+   ],
+   "desc": "this exact round bistro table: a thick honed travertine round top with natural pores on a slim dark bronze metal base with four legs",
+   "include": "the table only",
+   "mv": true,
+   "fit_h": true
+  },
+  {
+   "id": "base_planter_agave",
+   "slot": "planter",
+   "he": "עציץ אבן עם אגבה",
+   "size_cm": [
+    50,
+    50,
+    105
+   ],
+   "crops": [
+    [
+     "balcony",
+     [
+      515,
+      245,
+      660,
+      445
+     ]
+    ]
+   ],
+   "desc": "this exact tall planter: a round tapered beige rough concrete pot with a large blue-green agave plant",
+   "include": "the pot with the plant",
+   "mv": true,
+   "fit_h": true
+  },
+  {
+   "id": "base_planter_yucca",
+   "slot": "planter2",
+   "he": "עציץ אבן עם יוקה",
+   "size_cm": [
+    45,
+    45,
+    150
+   ],
+   "crops": [
+    [
+     "balcony",
+     [
+      620,
+      165,
+      760,
+      440
+     ]
+    ]
+   ],
+   "desc": "this exact tall planter: a tall cylindrical beige textured concrete pot with a yucca plant with a single trunk and a spiky green crown",
+   "include": "the pot with the plant",
+   "mv": true,
+   "fit_h": true
+  }
+ ]
+}

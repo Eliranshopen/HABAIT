@@ -1,0 +1,116 @@
+{
+ "_doc": "Day/Night keyframes for the Avnei Hefetz apt 7 walk (2026-11-17, Eliran: «תשתמש גם בסקיל day-night-keyframes ותטמיע אותו כפיצ'ר»). Format of the skill's walk_presets (relight.py reads sun/sky/interior/exposure; exposure is not used by the bake). Bearings: 0 = plan up, clockwise; plan up = north is ASSUMED (the sheet's north was not read). 'noon' is the walk's own bake (HDRI + sun), not re-baked. disp_ev = the page's display offset per key; export_ev = the EV the light atlas is saved at (the page multiplies back).",
+ "keyframes": [
+  {
+   "name": "morning",
+   "label": "בוקר",
+   "hour": 7.5,
+   "sun": {
+    "az": 100,
+    "el": 14,
+    "energy": 3.0,
+    "color": [
+     1.0,
+     0.84,
+     0.68
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 14,
+    "az": 100,
+    "strength": 1.0,
+    "dust": 2.0
+   },
+   "interior": 0.0,
+   "exposure": 0,
+   "export_ev": -1.0,
+   "disp_ev": 0.3,
+   "sky_colors": [
+    "#9fbbd6",
+    "#f2e6d6",
+    "#a8a493"
+   ]
+  },
+  {
+   "name": "noon",
+   "label": "צהריים",
+   "hour": 12.5,
+   "from_walk": true,
+   "export_ev": -1.0,
+   "disp_ev": 0.0,
+   "sky_colors": [
+    "#8fb2d4",
+    "#e3eaf0",
+    "#b9b6a6"
+   ]
+  },
+  {
+   "name": "golden",
+   "label": "שקיעה",
+   "hour": 17.5,
+   "sun": {
+    "az": 262,
+    "el": 7,
+    "energy": 6.0,
+    "color": [
+     1.0,
+     0.62,
+     0.36
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 7,
+    "az": 262,
+    "strength": 1.0,
+    "dust": 3.0
+   },
+   "interior": 0.5,
+   "lamp_color": [
+    1.0,
+    0.78,
+    0.55
+   ],
+   "exposure": 0,
+   "export_ev": -0.5,
+   "disp_ev": 0.0,
+   "sky_colors": [
+    "#5d6c96",
+    "#f2a66d",
+    "#5a4a3c"
+   ]
+  },
+  {
+   "name": "night",
+   "label": "לילה",
+   "hour": 21.5,
+   "sun": null,
+   "sky": {
+    "type": "color",
+    "color": [
+     0.006,
+     0.01,
+     0.022
+    ],
+    "strength": 1.0
+   },
+   "interior": 1.0,
+   "lamp_color": [
+    1.0,
+    0.76,
+    0.52
+   ],
+   "exposure": 0,
+   "export_ev": 1.0,
+   "disp_ev": -0.9,
+   "sky_colors": [
+    "#070b14",
+    "#141b2a",
+    "#0d0f14"
+   ]
+  }
+ ]
+}

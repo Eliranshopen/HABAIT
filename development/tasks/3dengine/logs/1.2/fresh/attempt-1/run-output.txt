@@ -1,0 +1,17 @@
+# Attempt 1 of the fresh reading (milestone 1.2, task 05), 2026-11-18: REFUSED by the provider (HTTP 401), nothing billed.
+# The command's printed answer follows. The line 'exit code' at its end is WRONG: it printed the status of the echo before it.
+# The command's own exit code was not captured; for the outcome STEP_FAILED it is 1 (engine/trace.mjs exitCodeOf).
+# Cause, found in the tool's code: its vision call went to OpenRouter with no Authorization header (see ../../../../../Projects/3Dengine/pipeline/PORT-CHANGES.md).
+# The tool's ledger of this attempt: attempt-1/ledger.json (reserved 0.02, settled 0, status 'http 401'); its log: attempt-1/auto-trace.log.
+
+# The fresh reading of milestone 1.2 (task 05), 2026-11-18, in the working folder's engine home, branch 3dengine at 8437270.
+# Command: node engine/cli.mjs trace tests/fixtures/apt846/source.pdf --out <scratch>/trace-fresh-1/run --id apt846 --budget 0.5 --go
+
+outcome: STEP_FAILED
+seconds: 11.4
+paid run: yes
+tool exit code: 1
+output folder: <scratch>/trace-fresh-1/run
+the tool's own output: <scratch>/trace-fresh-1/run/auto-trace.log
+
+exit code: 0

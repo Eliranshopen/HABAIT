@@ -1,0 +1,82 @@
+// D2: every way a look cannot be stored, through the real MCP server (stdio), both tools.
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+import { makeHome, startServer, E, SCR, GOLDEN, sha, cleanup, sleep } from './qa-lib.mjs';
+const S = sha(fs.readFileSync(GOLDEN));
+const FIXED = "the first look could not be stored in the engine's runtime folder";
+const results = [];
+
+async function scenario(name, setup, { during } = {}) {
+  for (const tool of ['inspect_plan', 'start_simulation']) {
+    const h = await makeHome({ timeout: 60 });
+    const pdf = `${h.inbox}/plan.pdf`;
+    fs.copyFileSync(GOLDEN, pdf);
+    const srv = startServer(h);
+    await srv.init();
+    const rt = h.config.runtimeDir;
+    await setup({ h, rt, srv });
+    let killer;
+    if (during) killer = await during({ h, rt, srv });
+    const r = await srv.call(tool, { pdf_path: pdf });
+    if (killer) killer.kill();
+    const e = r.err; const m = r.m;
+    let verdict;
+    if (m.error) verdict = `RPC-ERROR ${m.error.code} ${m.error.message}`;
+    else if (e) verdict = `tool-error ${e.code}: ${e.message}`;
+    else verdict = `OK (answered) ${Object.keys(r.out).slice(0, 4)}`;
+    const raw = JSON.stringify(m);
+    const leak = /ENOENT|ENOTDIR|EEXIST|EPERM|EACCES|EISDIR|ENOTEMPTY|[A-Z]:[\\/]|qa2-home/.test(raw);
+    const jobsMade = fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir).filter((n) => !n.startsWith('.')) : [];
+    const fixed = e?.code === 'TOOLCHAIN_MISSING' && e.message === FIXED;
+    results.push({ name, tool, verdict, fixedMsg: fixed, leakOfPathOrRawCode: leak, jobsMade: jobsMade.length });
+    console.log(JSON.stringify(results[results.length - 1]));
+    await srv.stop();
+    cleanup(h);
+  }
+}
+
+await scenario('runtime-is-file', ({ rt }) => { fs.rmSync(rt, { recursive: true, force: true }); fs.writeFileSync(rt, 'x'); });
+await scenario('runtime-inspect-is-file', ({ rt }) => { fs.mkdirSync(rt, { recursive: true }); fs.writeFileSync(`${rt}/inspect`, 'x'); });
+await scenario('runtime-is-file-readonly', ({ rt }) => { fs.rmSync(rt, { recursive: true, force: true }); fs.writeFileSync(rt, 'x'); fs.chmodSync(rt, 0o444); });
+await scenario('inspect-sha-is-file', ({ rt }) => { fs.mkdirSync(`${rt}/inspect`, { recursive: true }); fs.writeFileSync(`${rt}/inspect/${S}`, 'x'); });
+await scenario('inspect-sha-is-file-readonly', ({ rt }) => { fs.mkdirSync(`${rt}/inspect`, { recursive: true }); fs.writeFileSync(`${rt}/inspect/${S}`, 'x'); fs.chmodSync(`${rt}/inspect/${S}`, 0o444); });
+await scenario('inspect-sha-folder-with-readonly-file+folder-inspectjson', ({ rt }) => {
+  fs.mkdirSync(`${rt}/inspect/${S}/inspect.json/sub`, { recursive: true }); fs.writeFileSync(`${rt}/inspect/${S}/inspect.json/sub/f`, 'x'); fs.chmodSync(`${rt}/inspect/${S}/inspect.json/sub/f`, 0o444);
+});
+await scenario('inspect-sha-folder-ro-attrib', async ({ rt }) => {
+  fs.mkdirSync(`${rt}/inspect/${S}`, { recursive: true }); fs.writeFileSync(`${rt}/inspect/${S}/pages.json`, 'x'); fs.chmodSync(`${rt}/inspect/${S}/pages.json`, 0o444);
+  const { spawnSync } = await import('node:child_process'); spawnSync('attrib', ['+R', `${rt}/inspect/${S}`.replace(/\//g, '\\')]);
+});
+await scenario('inspect-sha-folder-locked-by-open-handle', async ({ rt }) => {
+  fs.mkdirSync(`${rt}/inspect/${S}`, { recursive: true }); fs.writeFileSync(`${rt}/inspect/${S}/x.txt`, 'x');
+  globalThis.__fd = fs.openSync(`${rt}/inspect/${S}/x.txt`, 'r');
+});
+try { fs.closeSync(globalThis.__fd); } catch {}
+await scenario('tmp-name-taken-by-file', ({ rt, srv }) => {
+  fs.mkdirSync(`${rt}/inspect`, { recursive: true });
+  for (let n = 1; n <= 3; n++) fs.writeFileSync(`${rt}/inspect/.tmp-${S}-${srv.proc.pid}-${n}`, 'x');
+});
+await scenario('tmp-name-taken-by-readonly-file', ({ rt, srv }) => {
+  fs.mkdirSync(`${rt}/inspect`, { recursive: true });
+  for (let n = 1; n <= 3; n++) { const p = `${rt}/inspect/.tmp-${S}-${srv.proc.pid}-${n}`; fs.writeFileSync(p, 'x'); fs.chmodSync(p, 0o444); }
+});
+await scenario('tmp-name-taken-by-folder-with-ro-file', ({ rt, srv }) => {
+  fs.mkdirSync(`${rt}/inspect`, { recursive: true });
+  for (let n = 1; n <= 3; n++) { const p = `${rt}/inspect/.tmp-${S}-${srv.proc.pid}-${n}`; fs.mkdirSync(`${p}/out`, { recursive: true }); fs.writeFileSync(`${p}/out/pages.json`, 'x'); fs.chmodSync(`${p}/out/pages.json`, 0o444); fs.writeFileSync(`${p}/source.pdf`, 'x'); fs.chmodSync(`${p}/source.pdf`, 0o444); }
+});
+await scenario('tmp-out-is-file', ({ rt, srv }) => {
+  fs.mkdirSync(`${rt}/inspect`, { recursive: true });
+  // cannot pre-plant 'out' since tmp is rm'd; plant tmp itself as a file inside a file chain
+  fs.writeFileSync(`${rt}/inspect/.tmp-${S}-${srv.proc.pid}-1`, 'x');
+});
+await scenario('runtime-disappears-during-look', ({ rt }) => { fs.mkdirSync(rt, { recursive: true }); }, {
+  during: ({ rt }) => {
+    const k = spawn(process.execPath, ['-e', `const fs=require('fs');setInterval(()=>{try{fs.rmSync(${JSON.stringify(rt)},{recursive:true,force:true})}catch(e){}},15)`], { stdio: 'ignore' });
+    return k;
+  } });
+await scenario('inspect-dir-disappears-during-look', ({ rt }) => { fs.mkdirSync(`${rt}/inspect`, { recursive: true }); }, {
+  during: ({ rt }) => spawn(process.execPath, ['-e', `const fs=require('fs');setInterval(()=>{try{fs.rmSync(${JSON.stringify(rt + '/inspect')},{recursive:true,force:true})}catch(e){}},40)`], { stdio: 'ignore' }) });
+await scenario('inspect-replaced-by-file-during-look', ({ rt }) => { fs.mkdirSync(`${rt}/inspect`, { recursive: true }); }, {
+  during: ({ rt }) => spawn(process.execPath, ['-e', `const fs=require('fs');setTimeout(()=>{try{fs.rmSync(${JSON.stringify(rt + '/inspect')},{recursive:true,force:true});fs.writeFileSync(${JSON.stringify(rt + '/inspect')},'x')}catch(e){}},900)`], { stdio: 'ignore' }) });
+console.log('DONE', results.length);

@@ -1,0 +1,51 @@
+// Is withFileLock mutually exclusive between SHORT-LIVED processes (each takes the lock once and exits)?
+//   node lockrace.mjs <engine home> <runs> [processes]
+// A child takes the lock, creates a marker file with the `wx` flag (a marker that is already there = two holders at
+// the same moment), waits 25 ms, removes the marker, releases, and exits at once.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
+
+if (process.argv[2] === 'child') {
+  const [, , , home, dir] = process.argv;
+  const { withFileLock } = await import(pathToFileURL(`${home}/engine/lib/atomic.mjs`).href);
+  let out = 'ok';
+  try {
+    withFileLock(`${dir}/x.lock`, () => {
+      try {
+        fs.writeFileSync(`${dir}/inside`, String(process.pid), { flag: 'wx' });
+      } catch {
+        out = 'TWO-HOLDERS';
+        return;
+      }
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25);
+      fs.rmSync(`${dir}/inside`, { force: true });
+    }, { waitMs: 20000 });
+  } catch (e) {
+    out = /lock busy/.test(String(e.message)) ? 'busy' : `error ${e.code || e.message}`;
+  }
+  process.stdout.write(out);
+} else {
+  const home = process.argv[2];
+  const runs = Number(process.argv[3] || 20);
+  const n = Number(process.argv[4] || 8);
+  const totals = { runs, processes: n, twoHolders: 0, busy: 0, errors: 0, runsWithViolation: 0 };
+  for (let r = 0; r < runs; r++) {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lockrace-')).replace(/\\/g, '/');
+    const res = await Promise.all(Array.from({ length: n }, () => new Promise((ok) => {
+      let o = '';
+      const c = spawn(process.execPath, [process.argv[1], 'child', home, dir], { stdio: ['ignore', 'pipe', 'ignore'] });
+      c.stdout.on('data', (d) => { o += d; });
+      c.on('exit', () => ok(o.trim()));
+    })));
+    const v = res.filter((x) => x === 'TWO-HOLDERS').length;
+    totals.twoHolders += v;
+    totals.busy += res.filter((x) => x === 'busy').length;
+    totals.errors += res.filter((x) => x.startsWith('error')).length;
+    if (v) totals.runsWithViolation += 1;
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+  console.log(JSON.stringify(totals));
+}

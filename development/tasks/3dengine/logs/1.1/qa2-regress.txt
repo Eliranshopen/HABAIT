@@ -1,0 +1,26 @@
+same PDF twice, two names: true true false jobs on disk 1
+3 processes start one PDF, round 0 created:true = 1 ok = 3 job ids 1 []
+3 processes start one PDF, round 1 created:true = 0 ok = 3 job ids 1 []
+3 processes start one PDF, round 2 created:true = 0 ok = 3 job ids 1 []
+3 processes start one PDF, round 3 created:true = 0 ok = 3 job ids 1 []
+3 looks at one moment, round 0 ok 3 errors [] temp folders left 0
+3 looks at one moment, round 1 ok 3 errors [] temp folders left 0
+3 looks at one moment, round 2 ok 3 errors [] temp folders left 0
+marker-sheet.pdf inspect_plan ok
+marker-sheet.pdf start_simulation ok
+marker-booklet.pdf inspect_plan ok
+marker-booklet.pdf start_simulation ok
+evil.pdf inspect_plan PATH_NOT_ALLOWED
+evil.pdf start_simulation PATH_NOT_ALLOWED
+win.ini inspect_plan PATH_NOT_ALLOWED
+win.ini start_simulation PATH_NOT_ALLOWED
+x.pdf inspect_plan PATH_NOT_ALLOWED
+x.pdf start_simulation PATH_NOT_ALLOWED
+outside.pdf inspect_plan PATH_NOT_ALLOWED
+outside.pdf start_simulation PATH_NOT_ALLOWED
+marker leaks outside pages.json: 0
+round 0 created:true 1 ok 3 ids 1 []
+round 1 created:true 1 ok 3 ids 1 []
+round 2 created:true 1 ok 3 ids 1 []
+round 3 created:true 1 ok 3 ids 1 []
+round 4 created:true 1 ok 3 ids 1 []

@@ -766,6 +766,7 @@ export async function build({ projectDir, unitId, out, tourApartment, glbPath, l
     id: project.id, name: project.name, tagline: project.tagline, developer: project.developer,
     brand: { ...(project.brand || {}), logo }, leads: { whatsapp_number: project.leads?.whatsapp_number || '', agent: project.leads?.agent || null, email: project.leads?.email || null },
     exterior: project.exterior || null, fixture: !!project.fixture, currency: unitsDoc.currency || 'ILS',
+    prices_public: project.prices_public === true,   // Eliran 2026-11-08: the apartment page shows a price only when this is true
   };
   // card 24: the analytics block reaches the standalone page (apartment.js -> initAnalytics({ config: P.analytics }));
   // allowlisted keys only, empty values dropped. No posthog_key = the page never loads the PostHog adapter.
@@ -792,6 +793,7 @@ export async function build({ projectDir, unitId, out, tourApartment, glbPath, l
     '='.repeat(72),
     L(unit.floor, 'קומה', 'Floor'), L(unit.rooms, 'חדרים', 'Rooms'), L(unit.area_m2, 'שטח מ״ר', 'Area m²'), L(unit.outdoor_m2, 'מרפסת מ״ר', 'Outdoor m²'),
     L(unit.type, 'טיפוס', 'Type'), L(planDate, 'תאריך תכנית המכר', 'Sales-plan date'), L(architect, 'אדריכל', 'Architect'),
+    ...(unit.source ? [L(unit.source === 'demo' ? 'נתוני הדגמה / sample data' : 'תכנית מכר / sales plan', 'מקור נתוני הדירה', 'Unit data source')] : []),   // Eliran 2026-11-10
     L(pm.source_sha256, 'sha256 של התכנית ששימשה', 'sha256 of the plan used'), L(today(), 'הופק', 'Produced'), L(version, 'גרסה', 'Version'),
     '',
     'תוכן / Contents:',

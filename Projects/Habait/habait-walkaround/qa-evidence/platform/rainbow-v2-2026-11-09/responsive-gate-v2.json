@@ -1,0 +1,50 @@
+{
+ "$schema": "habait/responsive-gate.v1",
+ "at": "2026-11-09T14:35:17.553Z",
+ "rule": "Eliran 2026-11-05: desktop AND mobile, in code",
+ "sizes": [
+  {
+   "width": 1440,
+   "height": 900
+  },
+  {
+   "width": 390,
+   "height": 844
+  }
+ ],
+ "pass": true,
+ "pages": [
+  {
+   "url": "/v2/",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "v2-1440.png"
+  },
+  {
+   "url": "/v2/",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": null,
+   "screenshot": "v2-390.png"
+  }
+ ]
+}

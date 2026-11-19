@@ -1,0 +1,67 @@
+// R1: real MCP server over stdio. A swapper process changes the upload while thousands of calls run.
+// Records for golden and sample are seeded (cache) so calls are fast; truncated mode makes real scans.
+// usage: node r1.mjs <mode> <count>   modes: folder remove other hardlink trunc lockflip junction
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, startServer, sleep, GOLDEN } from './lib.mjs';
+const mode = process.argv[2] || 'folder';
+const count = Number(process.argv[3] || 800);
+const SAMPLE = 'C:/RnD/Projects/3Dengine/tests/fixtures/sample.pdf';
+const SHA = sha(fs.readFileSync(GOLDEN)); const SSHA = sha(fs.readFileSync(SAMPLE));
+const h = await makeHome({ timeout: 120 });
+const src = `${h.inbox}/s.pdf`; fs.copyFileSync(GOLDEN, src);
+for (const [s, f] of [[SHA, 'rec'], [SSHA, 'rec2']]) {
+  const d = `${h.config.runtimeDir}/inspect/${s}`; fs.mkdirSync(d, { recursive: true });
+  for (const x of ['inspect.json', 'pages.json']) fs.copyFileSync(`${SCR}/${f}/${x}`, `${d}/${x}`);
+}
+const swapper = `
+const fs=require('fs'); const s=${JSON.stringify(src)}; const k=s+'.keep'; const hl=s+'.hl'; const mode=${JSON.stringify(mode)};
+const gold=fs.readFileSync(${JSON.stringify(GOLDEN)}); const samp=fs.readFileSync(${JSON.stringify(SAMPLE)});
+const wait=(ms)=>{const t=Date.now(); while(Date.now()-t<ms){}};
+let stop=false; process.on('message',()=>{stop=true}); let i=0;
+(async()=>{ while(!stop){ i++;
+  try{
+   if(mode==='folder'){ fs.renameSync(s,k); fs.mkdirSync(s); wait(2); fs.rmdirSync(s); fs.renameSync(k,s);}
+   else if(mode==='remove'){ fs.renameSync(s,k); wait(2); fs.renameSync(k,s);}
+   else if(mode==='other'){ fs.writeFileSync(s,samp); wait(1); fs.writeFileSync(s,gold);}
+   else if(mode==='hardlink'){ fs.renameSync(s,k); fs.linkSync(k,s); wait(2); fs.rmSync(s); fs.renameSync(k,s);}
+   else if(mode==='trunc'){ if(i%40===0){ fs.writeFileSync(s,gold.subarray(0,50000+i)); wait(1500); fs.writeFileSync(s,gold);} }
+   else if(mode==='junction'){ fs.renameSync(s,k); fs.mkdirSync(${JSON.stringify(h.inbox + '/jdir')},{recursive:true}); fs.symlinkSync(${JSON.stringify(h.inbox + '/jdir')},s,'junction'); wait(2); fs.rmdirSync(s); fs.renameSync(k,s);}
+   else if(mode==='lockflip'){ const fd=fs.openSync(s,'r+'); wait(2); fs.closeSync(fd);}
+  }catch(e){}
+  await new Promise(r=>setImmediate(r)); } })();`;
+fs.writeFileSync(`${h.home}/swap.cjs`, swapper);
+const srv = startServer(h); await srv.init();
+const sw = spawn(process.execPath, [`${h.home}/swap.cjs`], { stdio: 'ignore', windowsHide: true });
+const swpid = sw.pid;
+console.log('swapper pid', swpid, 'server pid', srv.proc.pid);
+await sleep(400);
+const OK = new Set(['NOT_A_PDF', 'PATH_NOT_ALLOWED', 'FILE_TOO_LARGE']);
+const tally = {}; const msgs = {}; let rpc = 0; let bad = 0; let created = 0;
+const t0 = Date.now();
+for (let i = 0; i < count; i++) {
+  const tool = i % 2 ? 'inspect_plan' : 'start_simulation';
+  const tc = Date.now(); const r = await srv.call(tool, { pdf_path: src }); const dt = Date.now() - tc; if (dt > 5000) console.log('SLOW call', i, tool, dt, 'ms ->', r.err ? r.err.code : (r.m.error ? 'RPC' : 'ok')); if (i % 50 === 0) console.log('progress', i, ((Date.now() - t0) / 1000) | 0, 's');
+  let k;
+  if (r.m.error) { k = `RPC ${r.m.error.code}`; rpc++; bad++; msgs[k] = r.m.error.message.slice(0, 120); let lk='none'; try { const jd = fs.readdirSync(h.jobsDir); for (const j of jd) { const lf=`${h.jobsDir}/${j}/job.lock`; if (fs.existsSync(lf)) lk += ` ${j} lock=${fs.readFileSync(lf,'utf8')} age=${Date.now()-fs.statSync(lf).mtimeMs}ms`; } } catch {} console.log('RPC at call', i, tool, 'dt', dt, 'ms; lock now:', lk, '; server pid', srv.proc.pid, '; stderr tail:', JSON.stringify(srv.stderr.slice(-300))); }
+  else if (r.err) { k = `${tool}:${r.err.code}`; if (!OK.has(r.err.code)) { bad++; msgs[k] = r.err.message.slice(0, 140); } if (/[A-Za-z]:[\\/]/.test(r.err.message)) { bad++; msgs[k + ' PATH'] = r.err.message.slice(0, 140); } }
+  else { k = `${tool}:ok`; if (tool === 'start_simulation' && r.out.created) created++; }
+  tally[k] = (tally[k] || 0) + 1;
+}
+sw.kill();
+console.log(`mode ${mode} calls ${count} secs ${((Date.now() - t0) / 1000) | 0} bad ${bad} rpc ${rpc} created ${created}`);
+console.log(JSON.stringify(tally));
+for (const [k, m] of Object.entries(msgs)) console.log('  ', k, '|', m);
+const insp = `${h.config.runtimeDir}/inspect`;
+for (const d of fs.readdirSync(insp)) if (d !== SHA && d !== SSHA && !d.startsWith('.tmp')) console.log('  record under another hash', d);
+// the job copy, if any, has the right hash
+for (const j of fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir) : []) { try { const f = `${h.jobsDir}/${j}/input/source.pdf`; console.log('  job', j, 'copy sha ok:', sha(fs.readFileSync(f)) === SHA || sha(fs.readFileSync(f)) === SSHA); } catch {} }
+// kill runner processes we started
+const pids = [];
+for (const j of fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir) : []) { try { pids.push(Number(fs.readFileSync(`${h.jobsDir}/${j}/runner.pid`, 'utf8').trim())); } catch {} }
+console.log('runner pids seen', JSON.stringify(pids));
+for (const p of pids) { try { process.kill(p); } catch {} }
+await srv.stop(); await sleep(500);
+try { fs.chmodSync(src, 0o666); } catch {}
+for (const j of fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir) : []) { try { fs.chmodSync(`${h.jobsDir}/${j}/input/source.pdf`, 0o666); } catch {} }
+cleanup(h);

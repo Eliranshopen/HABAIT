@@ -1,0 +1,21 @@
+// D2: a very long disk path for the runtime folder. usage: node d2long.mjs <depthChars>
+import fs from 'node:fs';
+import { makeHome, startServer, E, GOLDEN, cleanup } from './qa-lib.mjs';
+const { loadConfig } = await E('engine/config.mjs');
+const len = Number(process.argv[2] || 250);
+const h0 = await makeHome({ timeout: 60 });          // short home: gives us config, inbox, port
+const long = `${h0.home}/${'d'.repeat(Math.min(len, 200))}/${'e'.repeat(Math.max(0, len - 200))}`.replace(/\/$/, '');
+fs.mkdirSync(long, { recursive: true });
+fs.copyFileSync(`${h0.home}/engine.config.json`, `${long}/engine.config.json`);
+const env = { ...h0.env, ENGINE_HOME: long, ENGINE_JOBS_DIR: `${h0.home}/jobs-temp` };
+const config = loadConfig({ env, home: long });
+console.log('runtimeDir length', config.runtimeDir.length);
+const pdf = `${h0.inbox}/plan.pdf`; fs.copyFileSync(GOLDEN, pdf);
+const h = { ...h0, env, config };
+for (const tool of ['inspect_plan', 'start_simulation']) {
+  const srv = startServer(h); await srv.init();
+  const r = await srv.call(tool, { pdf_path: pdf });
+  console.log(tool, r.m.error ? 'RPC-ERROR ' + JSON.stringify(r.m.error) : r.err ? `tool-error ${r.err.code}: ${r.err.message}` : 'OK', 'stderr:', srv.stderr.slice(0, 200).replace(/\s+/g, ' '));
+  await srv.stop();
+}
+cleanup(h0);

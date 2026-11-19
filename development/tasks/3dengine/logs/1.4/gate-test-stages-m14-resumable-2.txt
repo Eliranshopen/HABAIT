@@ -1,0 +1,23 @@
+milestone 1.4 gate: tests/stages/m1.4.test.mjs alone, invocation 2 (invocation 1 made the first run in 558 s at 100 % load and was cut by the 540 s limit right after it: gate-test-stages-m14-resumable-1.txt)
+started: 2026-11-18T14:42:31+02:00
+machine load before: 100 %
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (1258.201ms)
+ℹ going on from the first run of an earlier invocation (made 2026-11-18T12:41:44.720Z, 557 s): it is not made again
+✖ tests\stages\m1.4.test.mjs (559897.1051ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 559973.7375
+
+✖ failing tests:
+
+test at tests\stages\m1.4.test.mjs:1:1
+✖ tests\stages\m1.4.test.mjs (559897.1051ms)
+  'test failed'
+exit code: 124
+seconds: 563
+machine load after: 100 %

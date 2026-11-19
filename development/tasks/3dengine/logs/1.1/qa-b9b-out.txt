@@ -1,0 +1,11 @@
+inspect_plan     PDF append a byte            → NOT_A_PDF: the file changed while it was being read | look kept under old hash: false | temp left: 0 | jobs so far: 0
+inspect_plan     PDF delete                   → NOT_A_PDF: the scanner could not read the file (status 1) | look kept under old hash: false | temp left: 0 | jobs so far: 0
+inspect_plan     PDF replace with other PDF   → NOT_A_PDF: the file changed while it was being read | look kept under old hash: false | temp left: 0 | jobs so far: 0
+inspect_plan     PDF same bytes rewritten     → OK 1 | look kept under old hash: true | temp left: 0 | jobs so far: 0
+start_simulation PDF append a byte            → NOT_A_PDF: the file changed while it was being read | look kept under old hash: false | temp left: 0 | jobs so far: 0
+start_simulation PDF delete                   → NOT_A_PDF: the scanner could not read the file (status 1) | look kept under old hash: false | temp left: 0 | jobs so far: 0
+start_simulation PDF replace with other PDF   → NOT_A_PDF: the file changed while it was being read | look kept under old hash: false | temp left: 0 | jobs so far: 0
+start_simulation PDF same bytes rewritten     → OK 142e214e07a0c3f2 | look kept under old hash: true | temp left: 0 | jobs so far: 1
+server, look cannot be stored: line = {"jsonrpc":"2.0","id":2,"error":{"code":-32603,"message":"internal error in inspect_plan: ENOTDIR: not a directory, mkdir 'C:\\Users\\elira\\AppData\\Local\\Temp\\qa-m11-home-36424-1794908565726-2\\.runtime\\inspect\\.tmp-3d53e2df68b33a3b28791e40ac55d147d5ce333dc0f89286d8875bc33f0737ad-40280-1'"}}
+server start_simulation:  {"jsonrpc":"2.0","id":3,"error":{"code":-32603,"message":"internal error in start_simulation: ENOTDIR: not a directory, mkdir 'C:\\Users\\elira\\AppData\\Local\\Temp\\qa-m11-home-36424-1794908565726-2\\.runtime\\inspect\\.tmp-3d53e2df68b33a3b28791e40ac55d147d5ce333dc0f89286d8875bc33f0737ad-40280-2'" | jobs dir exists false
+ATTEMPTS 10 BAD []

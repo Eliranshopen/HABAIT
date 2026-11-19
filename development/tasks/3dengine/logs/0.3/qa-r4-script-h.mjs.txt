@@ -1,0 +1,219 @@
+// qa-r4 helpers: my own invariant checker (from the files only) and runner-chain machinery.
+import fs from 'node:fs';
+import { mkEnv, sleep, readText } from 'file:///C:/RnD/Projects/3Dengine/tests/soak/lib.mjs';
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+export { mkEnv, sleep, readText, pidAlive };
+
+export function rng(seed) {
+  let a = seed >>> 0;
+  const r = () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  r.int = (n) => Math.floor(r() * n);
+  r.pick = (arr) => arr[r.int(arr.length)];
+  return r;
+}
+export const PAID = ['skinning', 'gating', 'finishing'];
+export const STAGES = ['tracing', 'building', 'rendering', 'skinning', 'gating', 'finishing', 'packaging', 'qa'];
+const readJson = (f) => JSON.parse(readText(f));
+const usd = (n) => Math.round(Number(n) * 1e6) / 1e6;
+
+// Invariants from the files. quiet = no runner of the job can still write.
+export function inv(E, id, { quiet = false, damaged = false, expectDone = false } = {}) {
+  const v = [];
+  let job, led, man;
+  try {
+    job = readJson(E.jobPath(id, 'job.json'));
+    led = fs.existsSync(E.jobPath(id, 'ledger.json')) ? readJson(E.jobPath(id, 'ledger.json')) : { rows: [], cap_usd: null };
+    man = fs.existsSync(E.jobPath(id, 'manifest.json')) ? readJson(E.jobPath(id, 'manifest.json')) : { rows: [] };
+  } catch (e) { return [`parse: ${e.message}`]; }
+  const rows = led.rows;
+  const done = job.state === 'done';
+  if (expectDone && !done) v.push(`job not done: ${job.state} ${JSON.stringify(job.reason)}`);
+  if (job.state === 'failed') v.push(`job failed: ${JSON.stringify(job.reason)}`);
+  if (done && rows.some((r) => r.status === 'reserved')) v.push('reserved row at done');
+  if (quiet && rows.some((r) => r.status === 'reserved')) v.push('reserved row while quiet');
+  for (const r of rows) {
+    if (r.status === 'orphaned' && !r.sending_at) v.push(`orphaned without sending_at seq ${r.seq}`);
+    if (r.not_sent && r.sending_at) v.push(`not_sent but has sending_at seq ${r.seq}`);
+    if (r.status === 'failed' && r.sending_at && !r.not_sent) v.push(`failed with sending_at, no not_sent, seq ${r.seq}`);
+    if (r.status === 'failed' && !r.not_sent) v.push(`failed row without not_sent seq ${r.seq}`);
+    if (r.late && r.status !== 'settled') v.push(`late on a non-settled row seq ${r.seq}`);
+  }
+  const keys = [...new Set(rows.map((r) => r.call_key))];
+  for (const k of keys) {
+    const kr = rows.filter((r) => r.call_key === k).sort((a, b) => a.seq - b.seq);
+    const stage = kr[0].stage;
+    const settled = kr.filter((r) => r.status === 'settled');
+    const plain = settled.filter((r) => !r.late && !r.resend_of);
+    if (plain.length > 1) v.push(`${stage}: ${plain.length} settled rows that are neither late nor resend_of (seq ${plain.map((r) => r.seq)})`);
+    for (let i = 0; i < kr.length; i++) {
+      if (!kr[i].sending_at || kr[i].resend_of) continue;
+      for (let j = 0; j < i; j++) {
+        if (kr[j].status === 'settled' && !kr[j].late) v.push(`${stage}: seq ${kr[i].seq} sent although seq ${kr[j].seq} was settled (not late) and it has no resend_of`);
+      }
+    }
+    let sends = 0;
+    try { sends = fs.readFileSync(E.jobPath(id, `stages/${stage}/sends.log`), 'utf8').split('\n').filter(Boolean).length; } catch { /* none */ }
+    const marked = kr.filter((r) => r.sending_at).length;
+    const real = settled.filter((r) => !r.recovered).length;
+    if (sends > marked) v.push(`${stage}: ${sends} sends but only ${marked} rows marked sending`);
+    if (real > sends) v.push(`${stage}: ${real} non-recovered settled rows but ${sends} sends`);
+    if (!quiet) continue;
+  }
+  const sum = usd(rows.filter((r) => r.status === 'settled').reduce((n, r) => n + (Number(r.settled_usd) || 0), 0));
+  if (quiet && job.cost.spent_usd !== sum) v.push(`spent_usd ${job.cost.spent_usd} != settled sum ${sum}`);
+  const held = usd(rows.filter((r) => r.status === 'reserved' || r.status === 'orphaned').reduce((n, r) => n + (Number(r.reserved_usd) || 0), 0));
+  const cap = job.cost.cap_usd;
+  if (typeof cap === 'number' && usd(sum + held) > cap) v.push(`counted ${usd(sum + held)} > cap ${cap}`);
+  // manifest
+  for (const st of STAGES) {
+    const dn = man.rows.filter((r) => r.stage === st && r.status === 'done');
+    const valid = dn.filter((r) => !r.superseded);
+    if (valid.length > 1) v.push(`${st}: ${valid.length} valid rows`);
+    if (done && valid.length !== 1) v.push(`${st}: ${valid.length} valid rows at done`);
+    if (!damaged && dn.length > 1) v.push(`${st}: ${dn.length} done rows without any damage (stage repeated)`);
+  }
+  if (done) {
+    { const pp = E.runnerPid(id); if (pp && pidAlive(pp)) v.push('runner.pid names a live process at done'); }
+  }
+  // runner crashed?
+  const log = E.log(id);
+  for (const line of log.split('\n')) if (/runner \d+ error:/.test(line)) v.push(`runner error line: ${line.slice(0, 200)}`);
+  return v;
+}
+
+export function capWatch(E, id, sink) {
+  // read the ledger first, then the job: counted <= cap must hold
+  try {
+    const led = readJson(E.jobPath(id, 'ledger.json'));
+    const job = readJson(E.jobPath(id, 'job.json'));
+    const cap = job.cost.cap_usd;
+    const c = usd(led.rows.reduce((n, r) => n + (r.status === 'settled' ? Number(r.settled_usd) || 0 : (r.status === 'reserved' || r.status === 'orphaned') ? Number(r.reserved_usd) || 0 : 0), 0));
+    if (typeof cap === 'number' && c > cap) sink.add(`LIVE counted ${c} > cap ${cap}`);
+  } catch { /* file busy */ }
+}
+
+export function withEnv(vars, fn) {
+  for (const [k, v] of Object.entries(vars)) process.env[k] = String(v);
+  try { return fn(); } finally { for (const k of Object.keys(vars)) delete process.env[k]; }
+}
+
+export const freezeVars = (point, wakeFile) => ({ ENGINE_TEST_FREEZE_MS: 50000, ENGINE_TEST_FREEZE_AT: point, ENGINE_TEST_FREEZE_WAKE: wakeFile });
+export const pauseVars = (kind) => ({ [`ENGINE_TEST_PAUSE_AFTER_${kind}_MS`]: 60000 });
+
+export class Chain {
+  constructor(E, name, capUsd = 60, sink = new Set()) {
+    this.E = E; this.name = name; this.runners = []; this.trace = []; this.kills = 0; this.kills2 = 0; this.kills3 = 0; this.takeovers = 0;
+    this.capUsd = capUsd; this.sink = sink; this.pdf = E.pdf(name, name); this.id = null; this.n = 0;
+  }
+  t(s) { this.trace.push(s); }
+  approve() {
+    const { E, id } = this;
+    const j = E.job(id);
+    if (!j || j.state !== 'awaiting_approval' || j.approval) return;
+    let cap = this.capUsd;
+    if (j.reason?.code === 'BUDGET_CAP') cap = Math.max(cap, Math.ceil(j.quote.estimate_usd) + 1);
+    try { E.h.approve_paid_stage({ job_id: id, cap_usd: cap }); this.capUsd = cap; this.t(`approve cap ${cap}`); } catch (e) { this.t(`approve refused ${e.message.slice(0, 60)}`); if (j.reason?.code === 'BUDGET_CAP') this.capUsd = cap + 25; }
+  }
+  // start the next runner (first call creates the job)
+  async start({ freeze = null, pause = null } = {}) {
+    const { E } = this;
+    const idx = this.n++;
+    const wakeFile = `${E.home}/wake-${this.name}-${idx}`;
+    const vars = {};
+    if (freeze) Object.assign(vars, freezeVars(freeze, wakeFile));
+    if (pause) Object.assign(vars, pauseVars(pause));
+    const prev = this.id ? E.runnerPid(this.id) : null;
+    const res = withEnv(vars, () => E.h.start_simulation({ pdf_path: this.pdf }));
+    if (!this.id) this.id = res.job_id;
+    else if (res.created !== false || res.resumed !== true) this.t(`start not a resume: ${JSON.stringify(res)}`);
+    const id = this.id;
+    let pid = null;
+    const until = Date.now() + 20000;
+    while (Date.now() < until) {
+      const p = E.runnerPid(id);
+      if (p && p !== prev && pidAlive(p)) { pid = p; break; }
+      if (E.job(id)?.state === 'done') break;
+      await sleep(15);
+    }
+    const r = { idx, pid, freeze, pause, wakeFile, killed: false, woke: false };
+    this.runners.push(r);
+    this.t(`start #${idx} pid ${pid} freeze=${freeze} pause=${pause}`);
+    return r;
+  }
+  // wait until runner r is blocked / paused (or the job ended or r is gone). returns true when reached.
+  async reach(r, ms = 15000) {
+    const { E, id } = this;
+    const until = Date.now() + ms;
+    while (Date.now() < until) {
+      this.approve();
+      capWatch(E, id, this.sink);
+      const log = E.log(id);
+      if (r.freeze && log.includes(`runner ${r.pid} test hook: thread blocked`)) {
+        // must also look dead to the engine (staleSeconds small)
+        let dead = false;
+        try { dead = E.h.get_job({ job_id: id }).job.runner.alive === false; } catch { /* lock busy */ }
+        if (dead || E.runnerPid(id) !== r.pid) return true;
+      }
+      if (r.pause && log.includes(`runner ${r.pid} test hook: pausing`)) return true;
+      if (E.job(id)?.state === 'done' || E.job(id)?.state === 'failed') return false;
+      if (!pidAlive(r.pid)) return false;
+      await sleep(15);
+    }
+    this.t(`reach timeout for #${r.idx}`);
+    return false;
+  }
+  async kill(r) {
+    if (r.killed || !pidAlive(r.pid)) return;
+    process.kill(r.pid);
+    const until = Date.now() + 5000;
+    while (pidAlive(r.pid) && Date.now() < until) await sleep(10);
+    r.killed = true; this.kills++;
+    if (r.idx === 1) this.kills2++;
+    if (r.idx === 2) this.kills3++;
+    this.t(`kill #${r.idx} pid ${r.pid}`);
+  }
+  wake(r) { if (!r.woke && r.freeze) { fs.writeFileSync(r.wakeFile, 'w'); r.woke = true; this.t(`wake #${r.idx}`); } }
+  // run to the end: wake the blocked ones in the order given, finish with clean runners
+  async finish(rand, { wakeDelayMax = 300 } = {}) {
+    const { E, id } = this;
+    const frozen = this.runners.filter((r) => r.freeze && !r.woke && !r.killed && pidAlive(r.pid));
+    const order = frozen.sort(() => rand() - 0.5);
+    for (const r of order) { await sleep(rand.int(wakeDelayMax)); this.wake(r); }
+    const until = Date.now() + 60000;
+    let stallSince = 0;
+    while (Date.now() < until) {
+      this.approve();
+      capWatch(E, id, this.sink);
+      const j = E.job(id);
+      if (j.state === 'done') break;
+      if (j.state === 'failed') break;
+      const owner = E.runnerPid(id);
+      const paused = this.runners.find((r) => r.pid === owner && r.pause && !r.killed && E.log(id).includes(`runner ${r.pid} test hook: pausing`));
+      if (paused) { await this.kill(paused); stallSince = 0; }
+      const alive = owner && pidAlive(owner);
+      let engineAlive = true;
+      try { engineAlive = E.h.get_job({ job_id: id }).job.runner.alive; } catch { /* busy */ }
+      const waiting = j.state === 'awaiting_approval' && !j.approval;
+      if (!waiting && (!alive || !engineAlive) && !this.runners.some((r) => r.freeze && !r.woke && !r.killed && pidAlive(r.pid))) {
+        if (!stallSince) stallSince = Date.now();
+        if (Date.now() - stallSince > 700) { await this.start({}); stallSince = 0; }
+      } else stallSince = 0;
+      await sleep(30);
+    }
+    // everything gone?
+    for (const r of this.runners) {
+      if (!r.killed && pidAlive(r.pid)) {
+        const u = Date.now() + 15000;
+        while (pidAlive(r.pid) && Date.now() < u) await sleep(30);
+        if (pidAlive(r.pid)) { this.sink.add(`runner #${r.idx} pid ${r.pid} did not leave by itself`); await this.kill(r); }
+      }
+    }
+    await sleep(150);
+  }
+}
+
+export async function lockGone(E, id, ms = 3000) {
+  const u = Date.now() + ms;
+  while (Date.now() < u) { if (!fs.existsSync(E.jobPath(id, 'job.lock'))) return true; await sleep(10); }
+  return false;
+}

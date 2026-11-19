@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#0b1220">
+  <title>Habait · מדידה</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dash">
+  <header class="dash-top">
+    <div class="dash-title">
+      <h1 data-t="title">דירות חמות וקרות</h1>
+      <p class="dash-sub" id="sub" data-t="loading">טוען…</p>
+    </div>
+    <button type="button" class="dash-btn" id="langBtn">EN</button>
+  </header>
+
+  <main class="dash-main">
+    <section class="kpis" id="kpis" aria-live="polite"></section>
+
+    <section class="card" id="unitsCard">
+      <div class="card-head">
+        <h2 data-t="units">דירות</h2>
+        <div class="legend"><span class="heat hot" data-t="hot">חם</span><span class="heat warm" data-t="warm">פושר</span><span class="heat cold" data-t="cold">קר</span></div>
+      </div>
+      <div class="table-wrap"><table id="unitsTable"></table></div>
+      <p class="empty" id="empty" hidden data-t="empty">אין עדיין אירועים. פתחו את הפלואו או את דף הדירה, ואז רעננו.</p>
+    </section>
+
+    <div class="grid2">
+      <section class="card"><h2 data-t="floors">קומות</h2><div class="table-wrap"><table id="floorsTable"></table></div></section>
+      <section class="card"><h2 data-t="rooms">חדרים: זמן צפייה</h2><div class="table-wrap"><table id="roomsTable"></table></div></section>
+      <section class="card"><h2 data-t="finishes">רצפות</h2><div class="table-wrap"><table id="finishTable"></table></div></section>
+      <section class="card"><h2 data-t="sources">מקורות (src)</h2><div class="table-wrap"><table id="srcTable"></table></div></section>
+    </div>
+
+    <details class="card advanced" id="advanced">
+      <summary data-t="advanced">הגדרות מתקדמות</summary>
+      <form id="advForm" class="adv-form">
+        <label><span data-t="project">פרויקט</span> <select name="project" id="projectSel"></select></label>
+        <label><span data-t="days">תקופה</span>
+          <select name="days" id="daysSel">
+            <option value="7" data-t="d7">7 ימים</option>
+            <option value="30" data-t="d30">30 ימים</option>
+            <option value="0" selected data-t="dall">הכול</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" name="tests" id="testsChk"> <span data-t="tests">לכלול אירועי בדיקה (Playwright)</span></label>
+        <label><span data-t="file">קובץ אירועים (JSONL)</span> <input name="file" id="fileInp" dir="ltr" value="_local/events.jsonl"></label>
+        <fieldset>
+          <legend data-t="ph">PostHog (רק אחרי שנפתח חשבון)</legend>
+          <label><span>API host</span> <input name="ph_host" id="phHost" dir="ltr" placeholder="https://us.posthog.com"></label>
+          <label><span>Project ID</span> <input name="ph_project" id="phProject" dir="ltr" inputmode="numeric"></label>
+          <label><span>Personal API key</span> <input name="ph_key" id="phKey" dir="ltr" type="password" autocomplete="off" placeholder="phx_..."></label>
+          <p class="hint" data-t="phHint">המפתח נשמר רק בדפדפן הזה (localStorage), לא בקובץ. ריק = קוראים מהקובץ המקומי בלבד.</p>
+        </fieldset>
+        <button class="dash-btn primary" type="submit" data-t="apply">טעינה</button>
+      </form>
+    </details>
+  </main>
+
+  <footer class="dash-foot">
+    <p data-t="legal">הדמיות Habait הן להמחשה בלבד; המסמכים המחייבים הם המפרט והתכניות החתומים (טיוטת כיתוב v0, ממתין לעו״ד). הדשבורד פנימי ואינו מוצג לרוכשים.</p>
+  </footer>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

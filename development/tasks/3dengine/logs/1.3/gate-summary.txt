@@ -1,0 +1,100 @@
+Milestone 1.3 (the trace gate): the gate.
+Run by the main session on 2026-11-18 in the worktree C:/RnD/.wt/3dengine/Projects/3Dengine, on the code that is committed as the milestone.
+Nothing was paid: every reading is free (a saved reading, the judge off). No key is in a test home or in its environment.
+
+THE MACHINE DURING THIS GATE
+  Other sessions held this machine at 100 % for most of it. The load read before and after every run is in that run's file.
+
+THE GATE
+  closing tests   npm run test:stages   10 tests, 10 pass, 425 s (load before and after: 100 %)                gate-test-stages-1.txt
+                  the four files run side by side: the two of 1.2 (3 tests) and the two of 1.3 (7 tests)
+                    1.3, the failing side (tests/stages/m1.3.test.mjs), a REAL job: the MCP server, its detached runner, the reading tool, Python
+                      fixture  the changed reading differs from the saved one in two values only (348 -> 448)
+                      1.  the 846 PDF with that reading: the job ends review / TRACE_GATE_FAIL; report.json and overlay.png are where the
+                          job's review record says; attempts = tracing 1 and nothing else; no manifest row; no folder and no log line of a
+                          later stage (Blender is not started); no ledger row, spent 0                                                401 s
+                      2.  a PDF with no drawing: start_simulation answers NO_PLAN_FOUND, no job folder is made                           9 s
+                      3.  a PDF with a drawing and no saved reading: failed / BUDGET_CAP, no attempt folder (the tool never started),
+                          no ledger row                                                                                                  8 s
+                      5.  no room name of the reading in any answer of a tool, in job.json, manifest.json, ledger.json or runner.log
+                    1.3, the passing side (tests/stages/m1.3-pass.test.mjs), a REAL job with the TRUE saved reading
+                      4.  one manifest row (tracing, attempt 1, done, $0) whose five outputs are on the disk with the hashes the row
+                          states; the plan has 10 rooms; 82 checks, 0 failed; room count 10 of 10; 18 printed dimensions within 1 %;
+                          trace-check.json, report.json and rooms.json are byte for byte those of 1.2's measured run; the job then
+                          stops at building: failed / STAGE_FAILED (no real build yet); no ledger row, spent 0                        422 s
+                      5.  no room name of the reading in any answer of a tool, in a job file or in the runner's log
+                    1.2 (unchanged files): the saved reading through the command 412 s; the pinned paid reading; the walked paid path 80 s
+  fast suite      npm test (unit tests + the closing tests of 0.1 to 1.1, line coverage of engine/** and mcp/**), five full runs:
+                    410 tests  410 pass  0 fail  168 s  lines 99.75 %  (load before: 31 %)       gate-npm-test-1.txt
+                    410 tests  410 pass  0 fail  263 s  lines 99.75 %  (load before: 100 %)      gate-npm-test-2.txt
+                    (two tries cut by the limit, below)
+                    410 tests  410 pass  0 fail  192 s  lines 99.75 %  (load before: 100 %)      gate-npm-test-3.txt
+                    410 tests  410 pass  0 fail  235 s  lines 99.75 %  (load before: 100 %)      gate-npm-test-4.txt
+                    410 tests  410 pass  0 fail  213 s  lines 99.75 %  (load before: 100 %)      gate-npm-test-5.txt
+                  The card asks for three passes in a row: runs 3, 4 and 5 are that (one after another, nothing between them).
+                  TWO tries of the third run were CUT by the 300 s limit on the saturated machine, before it passed:
+                    try 1  cut at 315 s; the 0.3 closing test was still running, part 10 of the 1.1 closing test was marked failed
+                           gate-npm-test-3-cut-at-300s.txt      then the 1.1 closing test alone: 13 of 13, 167 s (load 100 %)
+                           gate-m1.1-alone-after-cut.txt
+                    try 2  cut at 300 s (no summary was printed; the wrapper's exit-code and seconds lines are not in the file: the
+                           test process outlived the cut and wrote over them; no process of it was left a minute later); three
+                           lines of the 0.2 closing test and one of tests/unit/trace.test.mjs (two real processes stopped by a time
+                           limit) were marked failed                                  gate-npm-test-3-second-try-cut.txt
+                           then those two files alone: 27 of 27, 29 s (load 100 %)   gate-two-files-alone-after-cut.txt
+                  After try 1 one static server of a temp home was left (pid 17928, of this run); it was stopped by its pid.
+                  Coverage of the new code: engine/stages/tracing.mjs 100 % of lines, engine/readings.mjs 100 %, engine/trace.mjs 100 %.
+  end to end      npm run test:e2e      51 of 51, 95 s (load before: 8 %)                        gate-e2e.txt
+  soak            npm run test:soak (the runner changed in this milestone: the path to review)
+                    run 1  --kills 14 --freezes 8: VIOLATION after 5 kills, 9 s: «finishing sent 1 times, only 0 row(s) marked as sending»
+                           gate-soak-1-checker-race.txt, the dumped files in gate-soak-1-dump.txt
+                           NOT a fault of the engine: the dumped ledger has the row's sending_at at 09:42:33.666Z and the send's own
+                           line at 09:42:33.669Z. The mark was on the disk 3 ms before the send. The soak's check (written at 0.3)
+                           read ledger.json first and counted the sends after, and a live runner marked and sent between the two
+                           reads. The check now counts the sends first (tests/soak/kill-soak.mjs, the one change of a test of an
+                           earlier milestone that is not in the contract's first list; contract 1.3 section 7).
+                    run 2  --kills 14 --freezes 8: kills 16, takeovers 8, woke_before_done 6, violations 0, 49 s   gate-soak-2.txt
+                    run 3  --kills 40 --freezes 12: kills 41, takeovers 12, second_runner_kills 4, late_rows 2,
+                           woke_before_done 4, violations 0, 141 s                                              gate-soak-3.txt
+  readiness       node engine/cli.mjs doctor   READY (both key names present)                    gate-doctor.txt
+
+WHAT WAS FOUND AND CHANGED DURING THE GATE
+  1. The settings file now states the new defaults ("mode": "stub", "trace.rounds": 3). One unit test said the file names no mode;
+     it failed (dev-npm-test-2-one-failed.txt: 409 of 410) and was rewritten to say what holds: the home's file says stub, and a
+     settings file written before 1.3, with neither field, still loads as a stub home with three rounds.
+  2. The soak's check, above.
+  No engine code changed after the first gate run (gate-npm-test-1.txt). After the last npm test run only tests/soak/kill-soak.mjs,
+  the contract and context files changed.
+
+RUNS DURING THE BUILD (before the gate), kept:
+  dev-npm-test-1.txt    410 of 410, lines 99.75 %, 244 s (the code of tasks 02 to 04, before the closing test was written)
+  dev-m13-pass-1.txt    the passing side alone: 2 of 2, 128 s (load before: 48 %)
+  dev-m13-fail-1.txt    the failing side alone: 5 of 5, 315 s (load before: 40 %, after: 100 %)
+  the hand run of the changed reading through the command, before the test was written: exit 5, FAIL, 86 checks, 6 failed,
+  room count 11 of 10, 344 s (not kept as a file; the closing test asserts the same numbers' shape from the job)
+
+THE LIVE HOME (task 07), C:/RnD/Projects/3Dengine on main ef2d2dc (the branch and main name the same commit; never pushed)
+  npm test              CUT at 300 s by the limit: the 0.3 closing test was still running (load 0 % before, 94 % after: a render of
+                        another session started). Six static servers of its temp homes were left; each was stopped by its pid.
+                        live-npm-test-1-cut-at-300s.txt
+                        NOT run again, on Eliran's decision of 2026-11-18 («בדיקות פעם אחת», his answer in the session's question
+                        dialog): each tier runs once in the gate, and after a merge the live home gets the readiness command only.
+                        The gate above ran both tiers on this same code in the working folder.
+  readiness             READY (both key names present); version 1.3.0, mode stub, three rounds          live-doctor.txt
+  No tracked file of the engine changed in the live tree.
+
+QA BY A FRESH REVIEWER (task 08), on ef2d2dc: PASS, no defect, one round                                qa-live.md, qa-*.txt
+  its own gate, each tier once, at 1 to 28 % load: test:stages 10 of 10 (131 s); npm test 410 of 410, lines 99.75 % (100 s);
+  readiness READY; the soak with 0 violations (19 kills, 8 takeovers)
+  ten starts of the real tool: four failing readings through one job (review / TRACE_GATE_FAIL every time, an attempt folder each),
+  a cancel and a hard kill during a reading; 40 forged tool results; 88 expectations on hand-edited review records
+  six observations, answered in contract 1.3 section 9 and on the board (Carried items)
+  ONE thing in its evidence was changed by the main session before the commit: qa-fake-results.txt line 18 held the VALUE of a
+  per-session token of the harness (its name: CLAUDE_CODE_MESSAGING_TOKEN; not a key of the project), printed by the reviewer's
+  own dump of key-like environment names. The value was removed from the file; the event is filed with secrets-steward.
+
+NOT RUN
+  A quiet-machine timing of both tiers by the author (the reviewer's run above is one: 131 s and 100 s). The stage tier needed 425 s of its 540 s limit at 100 % load, with four readings side by side.
+  The coverage tool on the stage tier (a real reading under it does not end inside 540 s: milestone 1.2's gate).
+  A paid reading: this milestone pays nothing, and a job cannot pay for a reading yet (contract 1.3 section 3).
+  The changed reading at the default of three rounds through a job: the tool's own log of the hand run says «no further correction
+  applies» after round 1, so the rounds setting does not change this reading's result; the closing test's home uses one round.

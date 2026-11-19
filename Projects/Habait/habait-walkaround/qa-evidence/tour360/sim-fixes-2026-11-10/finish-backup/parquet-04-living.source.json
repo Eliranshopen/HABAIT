@@ -1,0 +1,7 @@
+{
+ "answer": "04-living__floor-parquet__s7__nano-banana-2__8e484dc05dee.png",
+ "source": "04-living__seam3__s7__oven-ebd0c9d11ee2.png",
+ "composite": "R26 floor-only (--whole --keep-furniture, FLOOR_SLACK 30, FLOOR_GROW 40) of the nano-banana-2 finish (registered, R30b) on its own source; 2026-11-06 live fix: the shipped finish was the raw gpt25 answer, which redrew the kitchen (uppers, a cabinet wall)",
+ "rebased_from": "04-living__seam3__s7__cb468dab033a.png",
+ "rebase": "R26b (tools/rebase_finish.py, $0, 2026-11-06): the finish kept, the oven repair carried over from the new source wherever it differs from the old one above the floor"
+}

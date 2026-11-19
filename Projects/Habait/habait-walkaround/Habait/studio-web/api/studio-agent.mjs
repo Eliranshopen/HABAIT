@@ -5,7 +5,7 @@
    Every call is a paid fal call: the ledger row is opened BEFORE it runs and closed after it (root §7); the hard cap holds.
    Sales-plan fidelity (Eliran 2026-11-04): the agent reads, it never estimates a measurement; what it cannot read goes to
    `uncertainties`, and the developer must approve the reading before any build step (the `approve` step). */
-import { json, put, userId, pdir, isPid, readJson, writeJson, files, falLLM, filesForModel, ledgerOpen, ledgerClose, spent, FAL_MODEL } from './_studio.mjs';
+import { json, put, userId, pdir, isPid, readJson, writeJson, files, falLLM, filesForModel, ledgerOpen, ledgerClose, spent, FAL_MODEL, jobPath } from './_studio.mjs';
 
 export const config = { maxDuration: 300 };
 
@@ -93,7 +93,24 @@ Rules:
   developer to confirm or correct it.
 - The steps: upload → read the sales plan → the developer approves the reading → build → fidelity check against the sales plan → publish.
   Say which step is next and what the developer must do.
+- BUILD JOB is the live state of the build; the page shows the same state above this chat. Never contradict it: needs
+  trace_approval = the trace waits for the developer's approval (the «השרטוט תואם לתכנית המכר: אישור» button in the «שרטוט הדירה»
+  card); needs build_approval = the developer already approved the trace and the build waits for the Habait team's approval (nothing
+  for the developer to do); state review = Habait's team or the automatic fixer is on it; state done = the links are in the build card.
 - Reply in the language of the question (Hebrew by default), short and concrete. No marketing language.`;
+
+/** The build job as the chat sees it (2026-11-08: the agent's words must agree with the build card): the fields the card reads, no
+ *  internals (sandbox, inputs, consent text). Exported for the $0 test. */
+export function jobForChat(job) {
+  if (!job) return '(no build job yet)';
+  const check = job.needs?.check || job.check || null;
+  return JSON.stringify({
+    state: job.state, stage: job.stage, percent: job.percent ?? null, needs: job.needs?.type || null,
+    trace_check: check?.verdict || null, trace_approved: Boolean(job.approvals?.trace),
+    review: job.review ? { stage: job.review.stage, step: job.review.step || null } : null,
+    error: job.error || null, updated: job.updated || null, last_log: (job.log || []).slice(-4).map((l) => `${l.at} ${l.line}`),
+  });
+}
 
 function parseObject(text) {
   const s = String(text || ''); const a = s.indexOf('{'); const b = s.lastIndexOf('}');
@@ -170,12 +187,13 @@ export async function POST(request) {
   if (body.op === 'chat') {
     const q = String(body.message || '').trim().slice(0, 2000);
     if (!q) return json(400, { ok: false, reason: 'empty' });
-    const [chat, spec, fl] = await Promise.all([readJson(`${base}chat.json`, []), readJson(`${base}spec.json`), files(uid, id)]);
+    const [chat, spec, fl, job] = await Promise.all([readJson(`${base}chat.json`, []), readJson(`${base}spec.json`), files(uid, id), readJson(jobPath(uid, id))]);
     const data = [
       `PROJECT: ${project.name}`,
       `UPLOADED FILES:\n${fl.map((f) => `- ${f.name} (${Math.round(f.bytes / 1024)} KB)`).join('\n') || '(none)'}`,
       `WHAT THE AGENT READ FROM THE FILES (JSON):\n${spec ? JSON.stringify({ ...spec, _meta: undefined }).slice(0, 30000) : '(the sales plan has not been read yet)'}`,
       `STEPS: ${JSON.stringify(project.steps || {})}`,
+      `BUILD JOB: ${jobForChat(job)}`,
     ].join('\n\n');
     const turns = chat.slice(-12).map((t) => `${t.role === 'user' ? 'DEVELOPER' : 'AGENT'}: ${t.content}`).join('\n\n');
     const led = await ledgerOpen(uid, id, { step: 'chat', endpoint: `fal:openrouter/router/vision:${FAL_MODEL}`, estUsd: 0.05, note: 'chat answer' });

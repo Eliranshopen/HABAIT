@@ -1,0 +1,29 @@
+✔ 1. kill in the middle of a stage: the state stays, runner.alive false, rows for tracing and building only (7317.5789ms)
+✔ 2. resume: created false, resumed true; tracing and building untouched; rendering one row, attempt 2 (3739.7425ms)
+✔ 3. kill between reserve and settle: one orphaned and one settled row for that call_key; the job goes on (8460.3621ms)
+✔ 4. kill after the settle, before the manifest row: gating runs again (attempt 2), still ONE ledger row for its call (5466.1504ms)
+✔ 5. the end: done, one valid row per stage, spent = 3 × 0.6, the orphan reported apart, the link answers 200 (8592.0283ms)
+✔ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (12074.2716ms)
+✔ 7. restart after cancel: resumed, finishes, no stage that was done before the cancel ran again (24100.5621ms)
+✔ 8. kill after the cache write, before the settle: ONE settled recovered row, ONE send, done, spent = settled sum (26523.3989ms)
+✔ 9. a wrong spent_usd on the disk is corrected soon after the runner starts, and again at done (24812.0597ms)
+✔ 10. the cap is reached and it is not a dead end: back to awaiting_approval, 60 refused, 90 accepted, done with 90 (20289.5627ms)
+✔ 11. an EMPTY job.lock does not block a resume (stale after 1 s); a fresh empty one delays it by about 2 s at most (10011.0089ms)
+✔ 12. a recycled pid does not look alive: runner.alive false, resumed true, a real runner takes the pid file over (1673.1027ms)
+✔ 13. a live runner that gives no sign of life is replaced; when it wakes it writes nothing and sends nothing (16483.1442ms)
+✔ 14. a runner that was silent loses the heavy lock to another job: it stops, waits, renders again; no overlap (4130.4499ms)
+✖ tests\milestones\m0.3.test.mjs (179842.0958ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 14
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 179879.2741
+
+✖ failing tests:
+
+test at tests\milestones\m0.3.test.mjs:1:1
+✖ tests\milestones\m0.3.test.mjs (179842.0958ms)
+  'test failed'

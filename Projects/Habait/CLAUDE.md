@@ -1,9 +1,9 @@
 # Projects/Habait/ — the Habait project's context file
-<!-- last-updated: 2026-11-04 -->
+<!-- last-updated: 2026-11-08 -->
 
 > Copied from `C:\Habait` on 2026-11-03 (board `C:\RnD\development\tasks\copy-habait-2026-11-03`); paths re-pointed to `C:\RnD\Projects\Habait`, see `REPOINTED.md`. The root harness card `C:\RnD\CLAUDE.md` applies above this file. `C:\Habait` is archived after cut-over.
 
-> **Git — local only (Eliran, 2026-11-04; replaces the 2026-11-03 "no git").** **One repo:** since 2026-11-04 this folder is tracked by `C:\RnD`'s git (commit `de560da`); `habait-walkaround` has no `.git` of its own (archived at `C:\Habait-git-archive-2026-11-04`). **A new feature = a git worktree off `main`**: `git -C C:/RnD worktree add C:/RnD/.wt/<feature> -b <feature>`, on its own branch, merged into `main` when done (root `CLAUDE.md` §8.7, procedure in `C:\RnD\.wt\CLAUDE.md`). ⛔ Never push: `origin` is the previous owner's GitHub.
+> **Git — local only (Eliran, 2026-11-04; replaces the 2026-11-03 "no git").** **One repo:** since 2026-11-04 this folder is tracked by `C:\RnD`'s git (commit `de560da`); `habait-walkaround` has no `.git` of its own (archived at `C:\Habait-git-archive-2026-11-04`). **A new feature = a git worktree off `main`**: `git -C C:/RnD worktree add C:/RnD/.wt/<feature> -b <feature>`, on its own branch, merged into `main` when done (root `CLAUDE.md` §8.7, procedure in `C:\RnD\.wt\CLAUDE.md`). ⛔ Never push `main` (old `origin` = previous owner's). Only remote: the HABAIT mirror (root §11).
 > Older "no git" lines in `memory.md`, `SESSIONS.md`, `docs/_memory_preamble.txt`, `.claude/agents/` and the board files are history. `C:\Habait` was archived on 2026-11-03 as `C:\Habait-archive-2026-11-03` (frozen; never read keys from it, never write there).
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.

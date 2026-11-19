@@ -1,11 +1,11 @@
 # qa-deployed/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Evidence of card 22 of board platform-ui-ux: headless-Chrome paint proof of https://habait-flow.vercel.app. Read-only HTTP/browser; nothing deployed.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 68 files here · 0 subfolders · 68 files / 15.0 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

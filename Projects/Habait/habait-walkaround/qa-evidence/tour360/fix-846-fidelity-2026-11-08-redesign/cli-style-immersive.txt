@@ -1,0 +1,77 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py immersive media viewer minimal dark content-first --domain style -n 4
+## UI Pro Max Search Results
+**Domain:** style | **Query:** immersive media viewer minimal dark content-first
+**Source:** styles.csv | **Found:** 4 results
+
+### Result 1
+- **Style Category:** Spatial UI (VisionOS)
+- **Type:** General
+- **Keywords:** Glass, depth, immersion, spatial, translucent, gaze, gesture, apple, vision-pro
+- **Primary Colors:** Frosted Glass #FFFFFF (15-30% opacity), System White
+- **Effects & Animation:** Parallax depth, dynamic lighting response, gaze-hover effects, smooth scale on focus
+- **Best For:** Spatial computing apps, VR/AR interfaces, immersive media, futuristic dashboards
+- **Light Mode ✓:** ✓ Full
+- **Dark Mode ✓:** ✓ Full
+- **Performance:** ⚠ Moderate (blur cost)
+- **Accessibility:** ⚠ Contrast risks
+- **Framework Compatibility:** SwiftUI, React (Three.js/Fiber)
+- **Complexity:** High
+- **AI Prompt Keywords:** Design a VisionOS-style spatial interface. Use: frosted glass panels, depth layers, translucent backgrounds (15-30% opacity), vibrant colors for active states, gaze-hover effects, floating windows, immersive feel.
+- **CSS/Technical Keywords:** backdrop-filter: blur(40px) saturate(180%), background: rgba(255,255,255,0.2), border-radius: 24px, box-shadow: 0 8px 32px rgba(0,0,0,0.1), transform: scale on focus, depth via shadows
+- **Implementation Checklist:** ☐ Glass effect visible, ☐ Depth layers clear, ☐ Hover states defined, ☐ Colors vibrant on active, ☐ Floating feel achieved, ☐ Contrast maintained
+- **Design System Variables:** --glass-bg: rgba(255,255,255,0.2), --glass-blur: 40px, --glass-saturate: 180%, --window-radius: 24px, --depth-shadow: 0 8px 32px rgba(0,0,0,0.1), --focus-scale: 1.02
+
+### Result 2
+- **Style Category:** Dark Mode (OLED)
+- **Type:** General
+- **Keywords:** Dark theme, low light, high contrast, deep black, midnight blue, eye-friendly, OLED, night mode, power efficient
+- **Primary Colors:** Deep Black #000000, Dark Grey #121212, Midnight Blue #0A0E27
+- **Effects & Animation:** Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emission, high readability, visible focus
+- **Best For:** Night-mode apps, coding platforms, entertainment, eye-strain prevention, OLED devices, low-light
+- **Light Mode ✓:** ✗ No
+- **Dark Mode ✓:** ✓ Only
+- **Performance:** ⚡ Excellent
+- **Accessibility:** ✓ WCAG AAA
+- **Framework Compatibility:** Tailwind 10/10, MUI 10/10, Chakra 10/10
+- **Complexity:** Low
+- **AI Prompt Keywords:** Create an OLED-optimized dark interface with deep black (#000000), dark grey (#121212), midnight blue accents. Use minimal glow effects, vibrant neon accents (green, blue, gold, purple), high contrast text. Optimize for eye comfort and OLED power saving.
+- **CSS/Technical Keywords:** background: #000000 or #121212, color: #FFFFFF or #E0E0E0, text-shadow: 0 0 10px neon-color (sparingly), filter: brightness(0.8) if needed, color-scheme: dark
+- **Implementation Checklist:** ☐ Deep black #000000 or #121212, ☐ Vibrant neon accents used, ☐ Text contrast 7:1+, ☐ Minimal glow effects, ☐ OLED power optimization, ☐ No white (#FFFFFF) background
+- **Design System Variables:** --bg-black: #000000, --bg-dark-grey: #121212, --text-primary: #FFFFFF, --accent-neon: neon colors, --glow-effect: minimal, --oled-optimized: true
+
+### Result 3
+- **Style Category:** Zero Interface
+- **Type:** General
+- **Keywords:** Minimal visible UI, voice-first, gesture-based, AI-driven, invisible controls, predictive, context-aware, ambient
+- **Primary Colors:** Neutral backgrounds: Soft white #FAFAFA, light grey #F0F0F0, warm off-white #F5F1E8
+- **Effects & Animation:** Voice recognition UI, gesture detection, AI predictions (smooth reveal), progressive disclosure, smart suggestions
+- **Best For:** Voice assistants, AI platforms, future-forward UX, smart home, contextual computing, ambient experiences
+- **Light Mode ✓:** ✓ Full
+- **Dark Mode ✓:** ✓ Full
+- **Performance:** ⚡ Excellent
+- **Accessibility:** ✓ Excellent
+- **Framework Compatibility:** Tailwind 10/10, Custom 10/10
+- **Complexity:** Low
+- **AI Prompt Keywords:** Create a voice-first, gesture-based, AI-driven interface with minimal visible UI, progressive disclosure, voice recognition UI, gesture detection, AI predictions, smart suggestions, context-aware actions. Hide controls until needed.
+- **CSS/Technical Keywords:** voice-commands: Web Speech API, gesture-detection: touch events, AI-predictions: hidden by default (reveal on hover), progressive-disclosure: show on demand, minimal UI visible
+- **Implementation Checklist:** ☐ Voice commands responsive, ☐ Gesture detection active, ☐ AI predictions hidden/revealed, ☐ Progressive disclosure working, ☐ Minimal visible UI, ☐ Smart suggestions contextual
+- **Design System Variables:** --voice-ui: enabled, --gesture-detection: active, --ai-predictions: smart, --progressive-disclosure: true, --visible-ui: minimal, --context-aware: true
+
+### Result 4
+- **Style Category:** Flat Design Mobile (Touch-First)
+- **Type:** Mobile
+- **Keywords:** flat, 2D, no shadow, color blocking, geometric, bold, poster, icon, touch-first, minimal, clean, tailored, cross-platform
+- **Primary Colors:** Blue #3B82F6, Emerald #10B981
+- **Effects & Animation:** Immediate press feedback (scale 0.97, no delay), color section blocking (full-width contrasting View), zero elevation/shadow, solid icon containers (colored squares/circles), geometric low-opacity shape overlays, bottom tabs solid fill (no floating)
+- **Best For:** Cross-platform apps (iOS+Android parity), information-dense dashboards, system UI, brand illustration, onboarding flows, marketing pages, icon design
+- **Light Mode ✓:** ✓ Full
+- **Dark Mode ✓:** ◐ Partial (Dark mode via color swap only)
+- **Performance:** ⚡ Excellent (no GPU effects)
+- **Accessibility:** ✓ WCAG AA (large bold type helps)
+- **Framework Compatibility:** React Native 10/10, Expo 10/10, NativeWind 10/10, Flutter 9/10, SwiftUI 9/10
+- **Complexity:** Low
+- **AI Prompt Keywords:** Design a Flat Mobile app. NO shadows (shadowOpacity: 0, elevation: 0). Color creates all hierarchy. Sections: full-width View blocks alternating contrasting bg colors (Blue Hero → White Content → Gray Block). Buttons: solid #3B82F6, borderRadius 8, height 56. Cards: backgroundColor #FFFFFF (on gray ...
+- **CSS/Technical Keywords:** shadowOpacity: 0, elevation: 0, borderRadius: 6/12/999, height: 48 minimum touch targets, spacing: 4/8/16/24/32/48 system, backgroundColor (section blocking), Pressable scale: pressed ? 0.97 : 1, fontWeight: '800' heads / '600' sub / '400' body, letterSpacing: -0.5 heads / 1 labels, textTransform: '...
+- **Implementation Checklist:** ☐ Zero elevation AND shadowOpacity on all elements, ☐ Color-blocking sections (not borders), ☐ All touch targets ≥ 48×48, ☐ No gradients on flat elements, ☐ Icons inside solid colored containers, ☐ Pressable scale feedback, ☐ Geometric shapes as bg decoration, ☐ Bold flat bottom tabs (no floating), ...
+- **Design System Variables:** --bg: #FFFFFF, --surface: #F3F4F6, --fg: #111827, --primary: #3B82F6, --secondary: #10B981, --accent: #F59E0B, --border: #E5E7EB, --radius-sm: 6px, --radius-md: 12px, --radius-pill: 999px, --shadow: none, --elevation: 0, --touch-target: 48px, --spacing: 4 8 16 24 32 48
+

@@ -16,6 +16,7 @@ export const APT_STR = {
   he: {
     'apt.back': 'חזרה לבניין',
     'apt.title': 'דירה {unit}',
+    'apt.brand.dev': 'יזם: {dev}',
     'apt.tab.tour': 'סיור 360°',
     'apt.tab.plan': 'תכנית',
     'apt.tab.photos': 'תמונות',
@@ -49,6 +50,9 @@ export const APT_STR = {
     'apt.fact.area': 'מ״ר',
     'apt.fact.outdoor': 'מ״ר מרפסת',
     'apt.fact.type': 'טיפוס',
+    'apt.fact.source': 'מקור הנתונים',
+    'apt.demo': 'נתוני הדגמה',
+    'apt.demoTitle': 'המספרים להמחשה בלבד — לדירה זו אין עדיין נתוני תכנית מכר',
     'apt.fact.price': 'מחיר',
     'apt.fact.status': 'סטטוס',
     'apt.fact.developer': 'יזם',
@@ -57,6 +61,7 @@ export const APT_STR = {
   en: {
     'apt.back': 'Back to the building',
     'apt.title': 'Apartment {unit}',
+    'apt.brand.dev': 'Developer: {dev}',
     'apt.tab.tour': '360° tour',
     'apt.tab.plan': 'Plan',
     'apt.tab.photos': 'Photos',
@@ -90,6 +95,9 @@ export const APT_STR = {
     'apt.fact.area': 'm²',
     'apt.fact.outdoor': 'm² outdoor',
     'apt.fact.type': 'Type',
+    'apt.fact.source': 'Data source',
+    'apt.demo': 'Sample data',
+    'apt.demoTitle': 'Illustrative numbers — this unit has no sales-plan data yet',
     'apt.fact.price': 'Price',
     'apt.fact.status': 'Status',
     'apt.fact.developer': 'Developer',
@@ -224,7 +232,8 @@ async function main() {
   if (b.accent) root.style.setProperty('--accent', b.accent);
   if (b.background) { root.style.setProperty('--bg', b.background); document.querySelector('meta[name=theme-color]')?.setAttribute('content', b.background); }
   const logo = document.getElementById('brandLogo');
-  if (b.logo) { logo.src = asset(b.logo); logo.hidden = false; }
+  // round 9 (Eliran 2026-11-09: «הבית זאת בעצם החברה שבנתה את זה והמיתוג יהיה»): the header carries the Habait brand, then the project name
+  logo.src = new URL('brand/habait-wordmark-navy-small.svg', location.href).toString(); logo.alt = 'Habait'; logo.hidden = false; logo.classList.add('apt-brand__habait');
   document.getElementById('brand').href = back;
   document.getElementById('backBtn').href = back;
   document.getElementById('aptNotBuilt').hidden = mode !== 'fallback';
@@ -255,7 +264,12 @@ async function main() {
     $('langToggle').textContent = lang() === 'he' ? 'EN' : 'עב';
     const pname = pick(P.name);
     document.title = `${t('apt.title', { unit: U.id })} · ${pname}`;
-    $('brandName').textContent = pname;
+    // the header (Eliran 2026-11-09): Habait's mark = the maker of the page; the project name with its developer (project.json `developer`, text only)
+    const dev = pick(P.developer);
+    const nameEl = document.createElement('span'); nameEl.className = 'apt-brand__name'; nameEl.textContent = pname;
+    const parts = [nameEl];
+    if (dev) { const d = document.createElement('span'); d.className = 'apt-brand__dev'; d.textContent = t('apt.brand.dev', { dev }); parts.push(d); }
+    $('brandName').replaceChildren(...parts);
     // platform-ui-ux card 16: title + summary with every number in <bdi>
     const withBdi = (node, text, value) => { const [pre, post] = text.split('\u0000'); const b = document.createElement('bdi'); b.textContent = String(value); node.replaceChildren(pre, b, post ?? ''); };
     withBdi($('aptTitle'), t('apt.title', { unit: '\u0000' }), U.id);
@@ -267,10 +281,16 @@ async function main() {
       if (k === 'apt.fact.floor') sum.append(`${t(k)} `, b); else sum.append(b, ` ${t(k)}`);
     }
     $('aptProject').textContent = [pname, pick(P.tagline)].filter(Boolean).join(' · ');
-    $('aptPrice').textContent = formatPrice(U.price, U.currency || P.currency || 'ILS');
+    // prices only when the project says so (prices_public: true in project.json → apartment.json; Eliran 2026-11-08: fixture prices hidden)
+    const showPrices = P.prices_public === true;
+    $('aptPrice').hidden = !showPrices;
+    $('aptPrice').textContent = showPrices ? formatPrice(U.price, U.currency || P.currency || 'ILS') : '';
     const st = $('aptStatus');
     const CHIP = { 'for-sale': 'hb-chip--available', reserved: 'hb-chip--reserved', sold: 'hb-chip--sold' };
     if (U.status) { st.hidden = false; st.className = `hb-chip ${CHIP[U.status] || ''}`; st.textContent = t(`status.${U.status}`); }
+    // Eliran 2026-11-10: a unit whose numbers are demo data (units.json source: "demo") says so next to them; 846 (sales-plan) shows nothing
+    const demo = U.source === 'demo';
+    $('aptDemo').hidden = !demo; $('aptDemo').textContent = demo ? t('apt.demo') : ''; $('aptDemo').title = demo ? t('apt.demoTitle') : '';
     // development badge: only on the laptop or with ?dev=1, the same rule as index.html (board apartment-3d card 04)
     const DEV = params.get('dev') === '1' || ['127.0.0.1', 'localhost'].includes(location.hostname);
     $('aptFixture').hidden = !(P.fixture && DEV);
@@ -315,8 +335,9 @@ async function main() {
     const rows = [
       ...unitFacts(),
       ['apt.fact.type', U.type],
-      ['apt.fact.price', formatPrice(U.price, U.currency || 'ILS')],
+      ['apt.fact.price', P.prices_public === true ? formatPrice(U.price, U.currency || 'ILS') : null],
       ['apt.fact.status', U.status ? t(`status.${U.status}`) : null],
+      ['apt.fact.source', U.source === 'demo' ? t('apt.demo') : null],
       ['apt.fact.developer', pick(P.developer)],
     ].filter(([, v]) => v !== undefined && v !== null && v !== '');
     $('aboutFacts').innerHTML = '';

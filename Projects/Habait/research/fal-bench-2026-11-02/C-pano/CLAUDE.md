@@ -1,11 +1,11 @@
 # C-pano/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Track C outputs of the fal bench: panorama images per model with .json metadata.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 19 files here · 0 subfolders · 19 files / 40.5 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

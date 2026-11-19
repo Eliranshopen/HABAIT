@@ -1,11 +1,11 @@
 # E-exterior-pano/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Track E of the fal bench: exterior panorama nodes (node-a-aerial, node-b-tower, node-c-facade, node-d-terrace) and a test folder.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 0 files here · 5 subfolders · 32 files / 77.9 MB in the whole tree (vendor and build output excluded)
 
 ## Subfolders

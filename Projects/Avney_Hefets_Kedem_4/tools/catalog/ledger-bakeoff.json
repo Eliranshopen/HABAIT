@@ -1,0 +1,61 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 5,
+ "note": "Eliran 2026-11-18: the sofa through three more 3D models (inside his ~$20 «upgrade the walk»)",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T10:34:17.250Z",
+   "item": "base_sofa",
+   "op": "rodin",
+   "model": "fal-ai/hyper3d/rodin/v2.5",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "3758c4efe43ef6681827b25dde138f4d6e68ee15867ace9f3fafee800ddd2e9f",
+   "queue": {
+    "request_id": "01a1ee39-3ed6-74a0-aaad-e7afbc265142",
+    "status_url": "https://queue.fal.run/fal-ai/hyper3d/requests/01a1ee39-3ed6-74a0-aaad-e7afbc265142/status",
+    "response_url": "https://queue.fal.run/fal-ai/hyper3d/requests/01a1ee39-3ed6-74a0-aaad-e7afbc265142"
+   },
+   "settled_usd": 1.2,
+   "seconds": 323.541,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\catalog\\bakeoff\\base_sofa_rodin.glb"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T10:40:15.536Z",
+   "item": "base_sofa",
+   "op": "meshy",
+   "model": "meshy/v7.1/multi-image-to-3d",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "f33fba58ed439974b057bf47567fad351fa1f6c6f38f90d02b683c0b6cf368a3",
+   "queue": {
+    "request_id": "01a1ee3e-a386-7063-8668-671684279364",
+    "status_url": "https://queue.fal.run/meshy/v7.1/requests/01a1ee3e-a386-7063-8668-671684279364/status",
+    "response_url": "https://queue.fal.run/meshy/v7.1/requests/01a1ee3e-a386-7063-8668-671684279364"
+   },
+   "settled_usd": 1.2,
+   "seconds": 210.735,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\catalog\\bakeoff\\base_sofa_meshy.glb"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T10:44:16.193Z",
+   "item": "base_sofa",
+   "op": "hitem",
+   "model": "hitem3d/hi3d/v3.0/multi-view-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "241d622ec692c18cb8c2812f4a9f4a9a898dbc2abea5c521948ee549f45760ea",
+   "queue": {
+    "request_id": "01a1ee42-7840-72f1-8b79-a813659e48d6",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee42-7840-72f1-8b79-a813659e48d6/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee42-7840-72f1-8b79-a813659e48d6"
+   },
+   "settled_usd": 2.1,
+   "seconds": 680.142,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\catalog\\bakeoff\\base_sofa_hitem.glb"
+  }
+ ]
+}

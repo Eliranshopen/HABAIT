@@ -1,0 +1,69 @@
+
+> habait-3dengine@0.2.0 test
+> node --test --experimental-test-coverage --test-coverage-lines=80 "--test-coverage-include=engine/**/*.mjs" "--test-coverage-include=mcp/**/*.mjs" "tests/unit/**/*.test.mjs" "tests/milestones/**/*.t
+
+✔ a. parity: run-project.mjs --parity → 41 rows · PASS (275.451ms)
+✔ b. catalog: fetch.mjs --verify-only → 57/57 rows OK (385.7782ms)
+✔ c. readiness: the doctor reports ready except keys (2732.7352ms)
+✔ d. port identity: pipeline/ equals commit a63494a, blob for blob (967.3306ms)
+✔ initialize handshake, ping, tools/list = the eight tools with both schemas (318.9704ms)
+✔ engine_status answers in time with a stub-site check (438.9572ms)
+✔ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (2163.5995ms)
+✔ the same PDF again → created: false and the same job (3.6787ms)
+✔ cancel_job on a fresh job: cancelled, the runner stops (43.7124ms)
+✔ every stub reason code (39.8725ms)
+✔ protocol errors: -32601, -32602, -32700 (1.1674ms)
+✔ stdout held JSON-RPC lines only; every tools/call answered under 2 s (0.7049ms)
+✔ 1. kill in the middle of a stage: the state stays, runner.alive false, rows for tracing and building only (1352.0021ms)
+✔ 2. resume: created false, resumed true; tracing and building untouched; rendering one row, attempt 2 (1064.2644ms)
+✔ 3. kill between reserve and settle: one orphaned and one settled row for that call_key; the job goes on (4169.8511ms)
+✔ 4. kill after the settle, before the manifest row: gating runs again (attempt 2), still ONE ledger row for its call (1070.2129ms)
+✔ 5. the end: done, one valid row per stage, spent = 3 × 0.6, the orphan reported apart, the link answers 200 (1575.7987ms)
+✔ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (2273.7983ms)
+✔ 7. restart after cancel: resumed, finishes, no stage that was done before the cancel ran again (4161.8852ms)
+✔ 8. kill after the cache write, before the settle: ONE settled recovered row, ONE send, done, spent = settled sum (4673.9833ms)
+✔ 9. a wrong spent_usd on the disk is corrected soon after the runner starts, and again at done (4566.9284ms)
+✔ 10. the cap is reached and it is not a dead end: back to awaiting_approval, 60 refused, 90 accepted, done with 90 (2757.0363ms)
+✖ 11. an EMPTY job.lock does not block a resume (stale after 1 s); a fresh empty one delays it by about 2 s at most (4622.1304ms)
+✔ 12. a recycled pid does not look alive: runner.alive false, resumed true, a real runner takes the pid file over (1706.8458ms)
+✔ 13. a live runner that gives no sign of life is replaced; when it wakes it writes nothing and sends nothing (15397.6555ms)
+✔ 14. a runner that was silent loses the heavy lock to another job: it stops, waits, renders again; no overlap (7639.7288ms)
+✔ configEnv points a child at the same home, jobs, port and step; tourDir; runner pid file (4.35ms)
+✔ spawnRunnerDefault starts the real runner detached; for an unknown job it exits at once (136.9538ms)
+✔ doctor cache: runs the child once, keeps the result in memory and on disk, never a key value (64.3139ms)
+✔ doctor cache: a slow first run → get returns null after the wait; an error is reported (26.121ms)
+✔ doctor cache default child: the real CLI on a temp home answers with JSON (450.9146ms)
+✔ 0.3: start_simulation resumes a stalled job, restarts a cancelled one; get_job and list_jobs carry the computed runner (27.6792ms)
+ℹ tests 221
+ℹ suites 0
+ℹ pass 220
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58077.8584
+ℹ start of coverage report
+ℹ -------------------------------------------------------------------
+ℹ file               | line % | branch % | funcs % | uncovered lines
+ℹ -------------------------------------------------------------------
+ℹ engine             |        |          |         | 
+ℹ  cli.mjs           | 100.00 |    97.35 |   96.43 | 
+ℹ  config.mjs        | 100.00 |    97.18 |  100.00 | 
+✖ failing tests:
+
+test at tests\milestones\m0.3.test.mjs:428:1
+✖ 11. an EMPTY job.lock does not block a resume (stale after 1 s); a fresh empty one delays it by about 2 s at most (4622.1304ms)
+  AssertionError [ERR_ASSERTION]: no lock left behind
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/RnD/Projects/3Dengine/tests/milestones/m0.3.test.mjs:452:35)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -36,17 +36,45 @@ function mountSignIn() {
   clerk.mountSignIn(el, { fallbackRedirectUrl: '/studio/', signUpFallbackRedirectUrl: '/studio/' });
 }
 
+// the boot never hangs on «טוען…» (Eliran 2026-11-08, preview: stuck forever in his browser): every network step has a deadline,
+// a watchdog covers what is left, and a stall shows a Hebrew error naming the step, with a retry button
+const BOOT_STEPS = { config: 'הגדרות השרת', clerk: 'טעינת ההתחברות', load: 'חיבור לחשבון', watchdog: 'טעינת הדף' };
+let bootDone = false;
+const withTimeout = (p, ms, step) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error(`timeout ${step} ${ms} ms`), { step })), ms))]);
+function bootFail(step, why) {
+  if (bootDone) return; bootDone = true;
+  console.error('studio boot failed', step, why);
+  show('st-boot');
+  $('st-boot').innerHTML = `<div class="st-boot-err" role="alert"><p><b>הדף לא נטען עד הסוף.</b></p>
+    <p class="st-muted st-small">השלב שנתקע: ${esc(BOOT_STEPS[step] || step)}. בדקו את החיבור לאינטרנט, או כבו חוסם פרסומות לאתר הזה, ונסו שוב.</p>
+    <button class="hb-btn hb-btn--primary" type="button" id="st-retry">נסו שוב</button></div>`;
+  $('st-retry').addEventListener('click', () => location.reload());
+}
+function bootOk() { bootDone = true; }
+
 async function boot() {
-  const cfg = await fetch('/api/studio-config').then((r) => r.json()).catch(() => null);
-  const pk = cfg?.clerkPublishableKey;
-  if (!pk) { $('st-boot').innerHTML = '<p class="st-muted">ההתחברות עוד לא מוגדרת בשרת.</p>'; return; }
-  const fapi = atob(pk.split('_')[2] || '').replace(/\$$/, '');
-  const [he] = await Promise.all([
-    import(CLERK_HE).then((m) => m.heIL).catch(() => undefined),
-    loadScript(`https://${fapi}/npm/@clerk/clerk-js@5/dist/clerk.browser.js`, { 'data-clerk-publishable-key': pk }),
-  ]);
-  clerk = window.Clerk;
-  await clerk.load({ localization: he });
+  const t0 = performance.now(); const mark = (s) => console.info(`studio boot · ${s} · ${Math.round(performance.now() - t0)} ms`);
+  const watchdog = setTimeout(() => { if (!bootDone && !$('st-boot').hidden) bootFail('watchdog', 'still on the boot screen after 30 s'); }, 30000);
+  let step = 'config';
+  try {
+    const cfg = await withTimeout(fetch('/api/studio-config', { cache: 'no-store' }).then((r) => { if (!r.ok) throw new Error(`studio-config ${r.status}`); return r.json(); }), 10000, step);
+    mark('config');
+    const pk = cfg?.clerkPublishableKey;
+    if (!pk) { bootOk(); clearTimeout(watchdog); $('st-boot').innerHTML = '<p class="st-muted">ההתחברות עוד לא מוגדרת בשרת.</p>'; return; }
+    const fapi = atob(pk.split('_')[2] || '').replace(/\$$/, '');
+    step = 'clerk';
+    const [he] = await Promise.all([
+      withTimeout(import(CLERK_HE), 6000, 'he').then((m) => m.heIL).catch(() => undefined),   // the Hebrew strings are optional: never block on them
+      withTimeout(loadScript(`https://${fapi}/npm/@clerk/clerk-js@5/dist/clerk.browser.js`, { 'data-clerk-publishable-key': pk }), 20000, step),
+    ]);
+    mark('clerk script');
+    step = 'load';
+    clerk = window.Clerk;
+    if (!clerk) throw new Error('window.Clerk missing after the script loaded');
+    await withTimeout(clerk.load({ localization: he }), 20000, step);
+    mark('clerk.load');
+  } catch (e) { clearTimeout(watchdog); bootFail(e.step || step, e); return; }
+  bootOk(); clearTimeout(watchdog);
   window.addEventListener('hashchange', route);   // always: a visitor who signs in on this page must still move between views
   clerk.addListener(({ user }) => { if (user && !$('st-signin').hidden) route(); });
   if (!clerk.user) { show('st-signin'); mountSignIn(); return; }
@@ -78,55 +106,133 @@ $('st-new').addEventListener('submit', async (e) => {
 });
 $('st-back').addEventListener('click', (e) => { e.preventDefault(); location.hash = ''; listProjects(); });
 
+let openSeq = 0;   // the newest read wins: a slow older response never paints over a newer one
 async function openProject(id, { quiet = false } = {}) {
   if (!quiet) show('st-project');
+  const seq = ++openSeq;
   const r = await api(`/api/studio-projects?id=${encodeURIComponent(id)}`);
+  if (seq !== openSeq) return;
   if (!r.ok) { if (!quiet) location.hash = ''; return; }
   current = r;
   render();
   if (jobActive(r.job)) startPoll(id); else stopPoll();
 }
-// the job poll (fork E, 2026-11-05): every Blob operation counts against the store's quota, so a running job is followed by reading
-// ONLY its job.json (?only=job), with a backoff — 10 s, then 20 s after a minute without change, then 60 s after five — never while
-// the tab is hidden, and not at all once the job waits for the developer or is finished ('review' = Habait's queue: a slow 5-min check)
-const jobActive = (j) => j && ['queued', 'running', 'review'].includes(j.state);
-let pollSig = '', pollSince = 0;
-function startPoll(id) {
-  if (poll) return;
-  pollSince = Date.now(); pollSig = '';
-  const tick = async () => {
-    poll = null;
-    if (!current || location.hash !== `#p=${id}`) return;
-    if (!document.hidden) {
-      const r = await api(`/api/studio-projects?id=${encodeURIComponent(id)}&only=job`);
-      if (r.ok && r.job) {
-        const sig = `${r.job.state}|${r.job.stage}|${r.job.percent}|${(r.job.log || []).length}`;
-        if (sig !== pollSig) { pollSig = sig; pollSince = Date.now(); }
-        const changedState = current.job?.state !== r.job.state;
-        current.job = r.job; render();
-        if (changedState || !jobActive(r.job)) return openProject(id, { quiet: true });   // a state change: one full read, then the rule above
-      }
-    }
-    const idle = Date.now() - pollSince;
-    const every = current.job?.state === 'review' ? 300000 : idle > 300000 ? 60000 : idle > 60000 ? 20000 : 10000;
-    poll = setTimeout(tick, every);
-  };
-  poll = setTimeout(tick, 10000);
+// the job poll (fork E 2026-11-05; live status 2026-11-08). The store's quota: a poll reads ONLY job.json (?only=job, one known path,
+// never a list()), and a state change triggers one full read. Every state that is not finished is followed — 'waiting' too (Eliran
+// 2026-11-08: the card stayed on «ממתין לאישור השרטוט» for hours after the trace was approved; the page stopped polling while a job
+// waited, so an approval from another tab or device, or Habait's build approval, never reached it; and the build approval's own
+// re-dispatch rides on this poll, see needsDispatch). Cadence: running/queued 8 s → 15 s after 2 min without change → 30 s after 10;
+// waiting 15 → 30 → 60 s; Habait's review 60 s. A hidden tab is not polled; it reads at once when it becomes visible again.
+const LIVE_STATES = ['queued', 'running', 'waiting', 'review'];
+const jobActive = (j) => Boolean(j && LIVE_STATES.includes(j.state));
+const jobSig = (j) => (j ? `${j.state}|${j.stage}|${j.percent}|${j.needs?.type || ''}|${(j.log || []).length}|${j.updated || ''}` : '');
+function pollEvery(job, idle) {
+  if (job?.state === 'review') return 60000;
+  if (job?.state === 'waiting') return idle > 600000 ? 60000 : idle > 120000 ? 30000 : 15000;
+  return idle > 600000 ? 30000 : idle > 120000 ? 15000 : 8000;
 }
-function stopPoll() { if (poll) { clearTimeout(poll); poll = null; } }
+let pollSig = '', pollSince = 0, pollPid = null, pollPaused = false;
+function schedule(ms) { if (poll) clearTimeout(poll); poll = setTimeout(pollTick, ms); }
+function startPoll(id) {
+  if (poll && pollPid === id) return;   // already following this project
+  stopPoll();
+  pollPid = id; pollSince = Date.now(); pollSig = jobSig(current?.job); pollPaused = false;
+  schedule(pollEvery(current?.job, 0));
+}
+async function pollTick() {
+  poll = null;
+  const id = pollPid;
+  if (!id || !current || current.project?.id !== id || location.hash !== `#p=${id}`) return;
+  if (document.hidden) { pollPaused = true; return; }   // resumed by visibilitychange
+  const seq = openSeq;
+  const r = await api(`/api/studio-projects?id=${encodeURIComponent(id)}&only=job`);
+  if (pollPid !== id || seq !== openSeq) return;   // the project changed, or a full read started meanwhile (it owns the poll now)
+  if (r.ok && r.job) {
+    const sig = jobSig(r.job);
+    const changed = sig !== pollSig;
+    if (changed) { pollSig = sig; pollSince = Date.now(); }
+    const changedState = current.job?.state !== r.job.state || current.job?.needs?.type !== r.job.needs?.type;
+    if (changed) { current.job = r.job; render(); }
+    if (changedState || !jobActive(r.job)) return openProject(id, { quiet: true });   // one full read (steps, trace card), then the rule above
+  }
+  schedule(pollEvery(current.job, Date.now() - pollSince));
+}
+function stopPoll() { if (poll) { clearTimeout(poll); poll = null; } pollPid = null; pollPaused = false; }
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden || !pollPaused || !pollPid) return;
+  pollPaused = false; pollSince = Date.now(); schedule(0);
+});
 
 /* ---------- the steps: the first three from the project, the rest from the build job ---------- */
 // job.stage may be a portal stage or one of the runner's steps (tour360/PROJECT-PACKAGE.md, tools/run-project.mjs); each maps to a portal step
-const PHASE = { queued: 'queued', trace: 'trace', trace_approval: 'trace', review: 'trace', trace_check: 'trace',
+const PHASE = { queued: 'queued', trace: 'trace', trace_approval: 'trace', review: 'trace', trace_check: 'trace', build_approval: 'build',
   platform: 'build', apartment: 'build', cameras: 'build', prompts: 'build', scenes: 'build', furnish: 'build', model: 'build', render: 'build', skin: 'build', sets: 'build', markers: 'build', dollhouse: 'build',
-  fidelity: 'fidelity', consistency: 'fidelity',
+  fidelity: 'fidelity', consistency: 'fidelity', gate: 'fidelity', qa: 'fidelity', casework: 'build',
   build: 'publish', package: 'publish', publish: 'publish', 'publish-local': 'publish', done: 'done' };
-const PHASES = ['queued', 'trace', 'build', 'fidelity', 'publish', 'done'];
-const STAGE_HE = { queued: 'בתור', trace: 'שרטוט הדירה מתכנית המכר', trace_check: 'בדיקה אוטומטית של השרטוט מול תכנית המכר', trace_approval: 'ממתין לאישור השרטוט', review: 'ממשיכים לדייק', platform: 'דף הפרויקט והדירות', apartment: 'נתוני הדירה',
+const STAGE_HE = { queued: 'בתור', trace: 'שרטוט הדירה מתכנית המכר', trace_check: 'בדיקה אוטומטית של השרטוט מול תכנית המכר', trace_approval: 'השרטוט מוכן וממתין לאישורכם', build_approval: 'השרטוט אושר · הבנייה ממתינה לאישור צוות Habait', review: 'ממשיכים לדייק', platform: 'דף הפרויקט והדירות', apartment: 'נתוני הדירה',
   cameras: 'נקודות הצילום בחדרים', prompts: 'תיאור העיצוב', scenes: 'מפת החדרים והמעברים', furnish: 'ריהוט לפי התכנית', model: 'בניית מודל הדירה', render: 'צילום החדרים מהמודל',
   skin: 'עיצוב החדרים', sets: 'הכנת תמונות הסיור', markers: 'סימון הרהיטים להחלפה', dollhouse: 'מודל תלת-ממד', fidelity: 'בדיקת התאמה לתכנית המכר', consistency: 'בדיקת עקביות בין החדרים',
-  build: 'בניית הסיור', package: 'הרכבת חבילת הפרויקט', publish: 'פרסום', 'publish-local': 'פרסום', done: 'מוכן' };
-const jIdx = (stage) => PHASES.indexOf(PHASE[stage] || 'build');
+  build: 'בניית הסיור', package: 'הרכבת חבילת הפרויקט', gate: 'בדיקת ההדמיה מול תכנית המכר', qa: 'בדיקת התצוגה בנייד ובמחשב', casework: 'איתור הכיור והכיריים', publish: 'פרסום', 'publish-local': 'פרסום', done: 'ההדמיה מוכנה' };
+
+/* ---------- ONE status, read by the flow bar AND the agent panel (Eliran 2026-11-08: the panel said «אין שרטוט שממתין לאישור»
+   while the card said «ממתין לאישור השרטוט»; then: «עדיף שיהיה סרגל התקדמות בחלק העליון של הפורטל») ----------
+   head  the one line both show, word for word (the bar's status line, the panel's status line)
+   hint  what the developer does next, and where (the panel only)
+   step  the flow step it belongs to (FLOW below), kind: you | habait | running | review | failed | done
+   go    the element to scroll to and focus — `label` for the panel's button, `bar` for the bar's action button */
+const FLOW = ['העלאה', 'קריאת התכנית', 'אישור הנתונים', 'שרטוט', 'אישור השרטוט', 'אישור Habait', 'בנייה', 'בדיקה מול תכנית המכר', 'פרסום'];
+const STEP_OF_PHASE = { queued: 3, trace: 3, build: 6, fidelity: 7, publish: 8, done: 8 };
+const stepOfStage = (stage) => (stage === 'build_approval' ? 5 : stage === 'trace_approval' ? 4 : STEP_OF_PHASE[PHASE[stage] || 'build']);
+const GO = { trace: { el: 'st-trace-ok', label: 'מעבר לאישור השרטוט', bar: 'לאישור השרטוט ←' }, spec: { el: 'st-approve', label: 'מעבר לאישור הנתונים', bar: 'לאישור הנתונים ←' },
+  build: { el: 'st-build-card', label: 'מעבר לבניית ההדמיה', bar: 'להתחלת הבנייה ←' }, rebuild: { el: 'st-build-card', label: 'מעבר לבנייה מחדש', bar: 'לבנייה מחדש ←' },
+  files: { el: 'st-drop', label: 'מעבר לקבצים', bar: 'להעלאת קבצים ←' }, read: { el: 'st-read', label: 'מעבר לקריאת התכנית', bar: 'לקריאת התכנית ←' },
+  results: { el: 'st-flow-act', label: 'מעבר לקישורים', bar: '' } };
+function jobStatus(c = current) {
+  const job = c?.job; const st = c?.project?.steps || {};
+  if (!job) {
+    if (!c?.files?.length) return { key: 'upload', step: 0, kind: 'you', head: 'הצעד הבא: העלאת תכנית המכר', hint: 'גררו את קובץ ה-PDF לכרטיס «קבצים», או בחרו אותו משם.', go: GO.files };
+    if (st.read?.state === 'running') return { key: 'reading', step: 1, kind: 'running', head: 'הסוכן קורא את תכנית המכר', hint: 'הקריאה לוקחת כדקה או שתיים.' };
+    if (st.read?.state === 'failed') return { key: 'read_failed', step: 1, kind: 'failed', head: 'הקריאה של תכנית המכר נכשלה', hint: 'נסו שוב בכפתור «הסוכן יקרא את תכנית המכר» בכרטיס «קבצים».', go: GO.read };
+    if (!c.spec) return { key: 'read', step: 1, kind: 'you', head: 'הצעד הבא: קריאת תכנית המכר', hint: 'הכפתור «הסוכן יקרא את תכנית המכר» נמצא בכרטיס «קבצים».', go: GO.read };
+    if (st.approve?.state !== 'done') return { key: 'approve', step: 2, kind: 'you', head: 'הצעד הבא: אישור הנתונים מול תכנית המכר', hint: 'בדקו את מה שהסוכן קרא, ואשרו בכפתור שבתחתית הכרטיס «מה הסוכן קרא מתכנית המכר».', go: GO.spec };
+    return { key: 'build', step: 3, kind: 'you', head: 'הצעד הבא: בניית ההדמיה', hint: 'סמנו את ההסכמה ולחצו «בנו את ההדמיה» בכרטיס «בניית ההדמיה».', go: GO.build };
+  }
+  const verdict = checkVerdict(job);
+  const traceOk = Boolean(job.approvals?.trace);
+  // parity row 39: any review raised after the approved trace (a failed build step, or a build check: gate / qa / skin / fidelity) is a
+  // BUILD review — never the drawing's «ממשיכים לדייק» card
+  const buildReview = job.state === 'review' && Boolean(job.review) && job.review.stage !== 'trace';
+  if (job.state === 'done') return { key: 'done', step: 8, kind: 'done', head: 'ההדמיה מוכנה', hint: 'הקישורים לדף הפרויקט ולסיור נמצאים בסרגל ההתקדמות בראש הדף.', go: GO.results };
+  if (job.state === 'failed') {
+    const s = job.stage || 'build';
+    return { key: 'failed', step: stepOfStage(s), kind: 'failed', head: `נעצר: ${STAGE_HE[s] || s}`, hint: 'אפשר לנסות שוב בכפתור «נסו לבנות שוב» בכרטיס «בניית ההדמיה».', go: GO.rebuild };
+  }
+  if (buildReview) {
+    const s = job.review.step || (job.review.stage === 'build' ? job.stage : job.review.stage);
+    return { key: 'build_review', step: Math.max(6, stepOfStage(s)), kind: 'review', head: `בבדיקה של צוות Habait · ${STAGE_HE[s] || s}`, hint: 'אין צורך לעשות דבר. נעדכן כאן כשהבנייה תמשיך.' };
+  }
+  if (job.state === 'review' || (job.needs?.type === 'trace_approval' && verdict !== 'PASS')) {
+    return { key: 'trace_review', step: 3, kind: 'review', head: 'ממשיכים לדייק', hint: 'הבדיקה האוטומטית מצאה הבדל בין השרטוט לתכנית המכר. המערכת ממשיכה לתקן לבד; אין צורך לעשות דבר.' };
+  }
+  if (job.needs?.type === 'trace_approval') {
+    return { key: 'trace_approval', step: 4, kind: 'you', head: 'השרטוט מוכן וממתין לאישורכם', hint: 'הכפתור «השרטוט תואם לתכנית המכר: אישור» נמצא בכרטיס «שרטוט הדירה», מתחת לשרטוט.', go: GO.trace };
+  }
+  if (job.needs?.type === 'build_approval' || job.stage === 'build_approval') {
+    return { key: 'build_approval', step: 5, kind: 'habait', head: 'השרטוט אושר · הבנייה ממתינה לאישור צוות Habait', hint: 'אין צורך לעשות דבר. נעדכן כאן כשהבנייה תתחיל.' };
+  }
+  if (job.state === 'queued') {
+    if (traceOk && stageOfJob(job) === 'build') return { key: 'build_queued', step: 6, kind: 'running', head: 'השרטוט אושר · הבנייה בתור', hint: 'הבנייה תתחיל בדקות הקרובות. אפשר לסגור את הדף ולחזור אחר כך.' };
+    if (job.stage === 'trace' && (job.corrections || []).length) return { key: 'correction_queued', step: 3, kind: 'running', head: 'התיקון התקבל · השרטוט מתעדכן', hint: 'נציג כאן את השרטוט המתוקן לאישור.' };
+    return { key: 'queued', step: 3, kind: 'running', head: 'בתור', hint: 'הבנייה תתחיל בדקות הקרובות. אפשר לסגור את הדף ולחזור אחר כך.' };
+  }
+  const s = job.stage || 'build';
+  return { key: 'running', step: stepOfStage(s), kind: 'running', head: STAGE_HE[s] || s, hint: 'הבנייה רצה בשרת. אפשר לסגור את הדף ולחזור אחר כך; ההתקדמות מתעדכנת כאן.' };
+}
+// the executor's own rule (api/_dispatch.mjs stageOf): a trace until one is approved, or again after a newer correction; else the build
+function stageOfJob(job) {
+  const approvedAt = job.approvals?.trace?.at || '';
+  return !job.inputs?.trace || (job.corrections || []).some((x) => x.at > approvedAt) ? 'trace' : 'build';
+}
 
 const checkVerdict = (job) => String(job?.needs?.check?.verdict || job?.check?.verdict || '').toUpperCase();
 const fmt = (v) => (v === null || v === undefined || v === '' ? '—' : esc(v));
@@ -140,31 +246,69 @@ function checkTable(check) {
   }).join('')}</tbody></table>`;
 }
 
-function stepState(id) {
-  const st = current.project.steps || {};
-  const job = current.job;
-  if (id === 'upload') return current.files.length ? 'done' : 'next';
-  if (id === 'read' || id === 'approve') {
-    if (st[id]?.state) return st[id].state === 'running' ? 'running' : st[id].state;
-    const first = ['read', 'approve'].find((s) => st[s]?.state !== 'done');
-    return current.files.length && first === id ? 'next' : 'wait';
-  }
-  if (!job) return id === 'trace' && st.approve?.state === 'done' ? 'next' : 'wait';
-  if (id === 'trace' && job.approvals?.trace) return 'done';
-  if (id === 'trace' && (job.state === 'review' || checkVerdict(job) === 'FAIL')) return 'running';
-  if (id === 'trace' && job.needs?.type === 'trace_approval') return 'next';
-  if (job.state === 'done') return 'done';
-  const k = jIdx(job.stage); const me = PHASES.indexOf(id);
-  if (k > me) return 'done';
-  if (k === me) return job.state === 'failed' ? 'next' : 'running';
-  return 'wait';
+// the flow bar: one row per step of FLOW; done ✓, the current step from jobStatus() (its head is the agent panel's line word for word),
+// the rest muted. The action: the developer's turn → a button to the place; done → the result links; Habait's turn, running, review →
+// the words only. Repainted by every render(), so the job poll moves it.
+const KIND_HE = { you: 'ממתין לכם', habait: 'ממתין לצוות Habait', running: 'בעבודה', review: 'בבדיקה', failed: 'נעצר', done: 'הושלם' };
+function resultLinks(job) {
+  const res = job?.result || {};
+  return [res.page ? { label: 'דף הפרויקט', href: res.page } : null, res.tour ? { label: 'סיור 360° בדירה', href: res.tour } : null, ...(job?.links || [])]
+    .filter(Boolean).filter((l) => /^(\/|https:\/\/)/.test(l.href));
 }
+function renderFlow() {
+  const s = jobStatus(); const n = FLOW.length; const all = s.kind === 'done';
+  const bar = $('st-flow');
+  bar.dataset.kind = s.kind; bar.dataset.status = s.key; bar.dataset.step = String(s.step);
+  $('st-flow-steps').innerHTML = FLOW.map((label, i) => {
+    const state = all || i < s.step ? 'done' : i === s.step ? 'current' : 'todo';
+    const mark = state === 'done' ? '✓' : state === 'current' && s.kind === 'failed' ? '!' : String(i + 1);
+    const sr = state === 'done' ? ' · הושלם' : state === 'current' ? ` · ${KIND_HE[s.kind]}` : '';
+    return `<li class="${state}"${state === 'current' ? ` data-kind="${s.kind}" aria-current="step"` : ''}><span class="st-flow-dot" aria-hidden="true">${mark}</span><span class="st-flow-label">${esc(label)}<span class="st-sr">${esc(sr)}</span></span></li>`;
+  }).join('');
+  $('st-flow-name').textContent = all ? 'כל השלבים הושלמו' : FLOW[s.step];
+  $('st-flow-count').textContent = all ? `${n} מתוך ${n}` : `שלב ${s.step + 1} מתוך ${n}`;
+  $('st-flow-kind').textContent = KIND_HE[s.kind];
+  $('st-flow-head').textContent = s.head;
+  $('st-flow-line').style.width = `${Math.round(((all ? n : s.step + 0.5) / n) * 100)}%`;
+  const act = $('st-flow-act');
+  if (all) {
+    act.innerHTML = resultLinks(current.job).map((l, i) => `<a class="hb-btn ${i === 0 ? 'hb-btn--primary' : 'hb-btn--secondary'}" href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
+  } else if ((s.kind === 'you' || s.kind === 'failed') && s.go?.bar && $(s.go.el)) {
+    act.innerHTML = `<button class="hb-btn hb-btn--primary" type="button" data-target="${esc(s.go.el)}">${esc(s.go.bar)}</button>`;
+  } else act.innerHTML = '';
+  act.hidden = !act.childElementCount;
+  const err = s.kind === 'failed' ? (current.job?.error || '') : '';
+  $('st-flow-err').hidden = !err; $('st-flow-err').textContent = err;
+  flowMetrics();
+}
+$('st-flow-act').addEventListener('click', (e) => { const b = e.target.closest('button[data-target]'); if (b) scrollToTarget(b.dataset.target); });
+$('st-flow-toggle').addEventListener('click', () => {
+  const open = !$('st-flow').classList.contains('open');
+  $('st-flow').classList.toggle('open', open);
+  $('st-flow-toggle').setAttribute('aria-expanded', String(open));
+});
+// scroll to the place where the developer acts (the panel's button and the bar's button): the card into view, the control focused
+function scrollToTarget(id) {
+  const t = $(id || ''); if (!t) return;
+  const card = t.closest('.st-card, .st-flow') || t;
+  t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: t === card ? 'start' : 'center' });   // the control itself, centred (a tall trace card centred hid its button)
+  if (t.matches('button, a, input, textarea')) t.focus({ preventScroll: true }); else { card.setAttribute('tabindex', '-1'); card.focus({ preventScroll: true }); }
+}
+// the sticky offsets: the bar sits under the sticky header; the chat sits under both (scroll-padding keeps a scrolled-to card visible)
+function flowMetrics() {
+  const root = document.documentElement.style;
+  const head = document.querySelector('.st-head')?.offsetHeight || 0;
+  const flow = getComputedStyle($('st-flow')).position === 'sticky' && !$('st-project').hidden ? $('st-flow').offsetHeight + 12 : 0;
+  root.setProperty('--st-head-h', `${head}px`); root.setProperty('--st-flow-h', `${flow}px`);
+  root.scrollPaddingTop = `${head + flow + 8}px`;
+}
+addEventListener('resize', () => { if (current) flowMetrics(); });
 
 function render() {
   const { project, files, spec, chat, spent } = current;
   $('st-pname').textContent = project.name;
   $('st-spent').textContent = `עלות AI בפרויקט: $${Number(spent || 0).toFixed(2)}`;
-  $('st-steps').innerHTML = current.steps.map((s) => `<li class="${stepState(s.id)}">${esc(s.he)}</li>`).join('');
+  renderFlow();
   $('st-files').innerHTML = files.map((f) => `<li class="${/\.pdf$/i.test(f.name) && !f.pages ? 'sub' : ''}"><span>${esc(f.name)}</span><span>${kb(f.bytes)}${/\.pdf$/i.test(f.name) ? (f.pages ? ' · עמודים מוכנים' : '') : ''}</span></li>`).join('');
   const hasReadable = files.some((f) => /\.(pdf|png|jpe?g|webp)$/i.test(f.name));
   $('st-file').disabled = false;
@@ -174,8 +318,12 @@ function render() {
   renderSpec(spec);
   renderBuild();
   renderTrace();
-  renderChat(chat);
+  renderAgentStatus();
+  // the messages repaint only when the chat itself changed: a poll repaints the status, never wipes a pending «הסוכן חושב…»
+  const sig = `${current.project.id}|${chat.length}|${chat[chat.length - 1]?.at || ''}`;
+  if (sig !== chatShown) { chatShown = sig; renderChat(chat); }
 }
+let chatShown = '';
 
 function renderSpec(spec) {
   $('st-spec-card').hidden = !spec;
@@ -202,33 +350,21 @@ function renderSpec(spec) {
   $('st-approve').textContent = approved ? 'הנתונים אושרו ✓' : 'הנתונים תואמים לתכנית המכר: אישור';
 }
 
+// the build card holds only the START (consent + «בנו את ההדמיה»): before the first build and after a stop. The progress is the flow
+// bar at the top; the log, the per-room check and a technical error are in «פירוט ויומן» under it, collapsed (Eliran 2026-11-08)
 function renderBuild() {
   const approved = current.project.steps?.approve?.state === 'done';
   const job = current.job;
-  $('st-build-card').hidden = !approved && !job;
-  if ($('st-build-card').hidden) return;
-  $('st-consent-text').textContent = current.consent?.he || '';
-  const active = job && ['queued', 'running', 'waiting', 'review'].includes(job.state);
-  $('st-build-start').hidden = Boolean(active || job?.state === 'done');
-  $('st-build').disabled = !$('st-consent').checked;
-  $('st-build').textContent = job?.state === 'failed' ? 'נסו לבנות שוב' : 'בנו את ההדמיה';
-  $('st-job').hidden = !job;
+  const canStart = approved && (!job || job.state === 'failed');
+  $('st-build-card').hidden = !canStart;
+  $('st-flow-more').hidden = !job;
+  if (canStart) {
+    $('st-consent-text').textContent = current.consent?.he || '';
+    $('st-build').disabled = !$('st-consent').checked;
+    $('st-build').textContent = job?.state === 'failed' ? 'נסו לבנות שוב' : 'בנו את ההדמיה';
+  }
   if (!job) return;
-  // a build step that stopped is in Habait's review (run-job toReview): the step stays on the bar, the words say Habait is on it
-  const buildReview = job.state === 'review' && job.review?.stage === 'build';
-  const stage = job.state === 'done' ? 'done' : buildReview ? job.stage : job.state === 'review' ? 'review' : job.needs?.type === 'trace_approval' ? (checkVerdict(job) === 'PASS' ? 'trace_approval' : 'review') : job.stage;
-  $('st-job-stage').textContent = buildReview ? `בבדיקה של צוות Habait · ${STAGE_HE[stage] || stage}` : job.state === 'failed' ? `נעצר: ${STAGE_HE[stage] || stage}` : (STAGE_HE[stage] || stage);
-  const pct = Math.max(0, Math.min(100, Math.round(Number(job.percent) || (job.state === 'done' ? 100 : 0))));
-  $('st-job-pct').textContent = `${pct}%`;
-  $('st-job-bar').style.width = `${pct}%`;
-  $('st-job-log').innerHTML = (job.log || []).slice(-8).reverse().map((l) => `<li dir="auto">${esc(new Date(l.at).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' }))} · ${esc(l.line)}</li>`).join('');
-  const res = job.result || {};
-  const links = [
-    res.page ? { label: 'דף הפרויקט', href: res.page } : null,
-    res.tour ? { label: 'סיור 360° בדירה', href: res.tour } : null,
-    ...(job.links || []),
-  ].filter(Boolean).filter((l) => /^(\/|https:\/\/)/.test(l.href));
-  $('st-job-results').innerHTML = links.map((l, i) => `<a class="hb-btn ${i === 0 ? 'hb-btn--primary' : 'hb-btn--secondary'}" href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
+  $('st-job-log').innerHTML = (job.log || []).slice(-30).reverse().map((l) => `<li dir="auto">${esc(new Date(l.at).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' }))} · ${esc(l.line)}</li>`).join('');
   const fid = job.result?.fidelity || job.fidelity || null;
   const rooms = Array.isArray(fid?.rooms) ? fid.rooms : [];
   $('st-job-fid').innerHTML = rooms.length ? `<p class="st-small"><b>בדיקת התאמה לתכנית המכר, לפי חדר${fid.verdict ? `: ${esc(fid.verdict)}` : ''}</b></p><table class="st-spec-table st-check"><thead><tr><th>חדר</th><th>תוצאה</th><th>הערה</th></tr></thead><tbody>${rooms.map((r) => {
@@ -242,7 +378,7 @@ function renderBuild() {
 let traceShown = '';
 async function renderTrace() {
   const job = current.job;
-  const review = Boolean(job && ((job.state === 'review' && job.review?.stage !== 'build') || (job.needs?.type === 'trace_approval' && checkVerdict(job) !== 'PASS')));
+  const review = Boolean(job && ((job.state === 'review' && job.review?.stage === 'trace') || (job.needs?.type === 'trace_approval' && checkVerdict(job) !== 'PASS')));
   const need = job?.needs?.type === 'trace_approval' && checkVerdict(job) === 'PASS' ? job.needs : null;
   $('st-trace-card').hidden = !need && !review;
   $('st-trace-review').hidden = !review;
@@ -267,22 +403,45 @@ $('st-consent').addEventListener('change', () => { $('st-build').disabled = !$('
 $('st-build').addEventListener('click', async () => {
   $('st-build').disabled = true;
   const r = await api('/api/studio-projects', { method: 'POST', body: JSON.stringify({ id: current.project.id, build: true, consent: $('st-consent').checked }) });
-  if (!r.ok) { note(r.message || 'לא הצלחתי להתחיל את הבנייה'); $('st-build').disabled = false; return; }
-  openProject(current.project.id);
+  await openProject(current.project.id, { quiet: true });   // success or refusal: the card and the agent's status line from a fresh read
+  if (!r.ok && !jobActive(current.job)) { note(r.message || 'לא הצלחתי להתחיל את הבנייה'); $('st-build').disabled = !$('st-consent').checked; }
 });
-$('st-trace-ok').addEventListener('click', async () => {
-  const r = await api('/api/studio-projects', { method: 'POST', body: JSON.stringify({ id: current.project.id, approveTrace: true }) });
-  if (!r.ok) { note(r.message || 'האישור נכשל'); return; }
-  openProject(current.project.id);
-});
+// the developer's own approval or correction: the page re-reads the project at once, success OR refusal. A refusal is usually a stale
+// page (the trace was approved from another tab or device): the fresh read repaints the card and the agent's status line, and the
+// server's words go to the panel only when the fresh state still asks for the developer (never «אין שרטוט שממתין לאישור» beside a card
+// that says the opposite — Eliran 2026-11-08)
+async function traceAction(body, failText) {
+  const pid = current.project.id;
+  const btn = $('st-trace-ok'); const send = $('st-trace-fix').querySelector('button[type="submit"]');
+  btn.disabled = true; send.disabled = true;
+  try {
+    const r = await api('/api/studio-projects', { method: 'POST', body: JSON.stringify({ id: pid, ...body }) });
+    if (r.ok && r.job && current?.project?.id === pid) { current.job = r.job; render(); }   // paint the server's answer before the re-read
+    await openProject(pid, { quiet: true });
+    if (!r.ok && current?.job?.needs?.type === 'trace_approval') note(r.message || failText);
+    return r.ok;
+  } finally { btn.disabled = false; send.disabled = false; }
+}
+$('st-trace-ok').addEventListener('click', () => traceAction({ approveTrace: true }, 'האישור נכשל'));
 $('st-trace-fix').addEventListener('submit', async (e) => {
   e.preventDefault();
   const text = $('st-trace-text').value.trim(); if (!text) return;
-  const r = await api('/api/studio-projects', { method: 'POST', body: JSON.stringify({ id: current.project.id, traceCorrection: text }) });
-  if (!r.ok) { note(r.message || 'שליחת התיקון נכשלה'); return; }
-  $('st-trace-text').value = '';
-  openProject(current.project.id);
+  if (await traceAction({ traceCorrection: text }, 'שליחת התיקון נכשלה')) $('st-trace-text').value = '';
 });
+
+// the agent panel's status line: jobStatus() — the card's own headline, word for word, plus where to act; never a chat reply
+function renderAgentStatus() {
+  const s = jobStatus();
+  $('st-agent-status').dataset.status = s.key;
+  $('st-agent-head').textContent = s.head;
+  $('st-agent-hint').textContent = s.hint || '';
+  $('st-agent-hint').hidden = !s.hint;
+  const go = $('st-agent-go');
+  const target = s.go && $(s.go.el);
+  go.hidden = !target;
+  if (target) { go.textContent = s.go.label; go.dataset.target = s.go.el; }
+}
+$('st-agent-go').addEventListener('click', () => scrollToTarget($('st-agent-go').dataset.target));
 
 function renderChat(chat) {
   const msgs = chat.length ? chat : [{ role: 'note', content: 'שלום. העלו את תכנית המכר ואני אקרא אותה, אציג לכם את מה שקראתי לאישור, ואלווה אתכם עד הפרסום.' }];
@@ -527,4 +686,4 @@ $('st-ask').addEventListener('submit', async (e) => {
   $('st-spent').textContent = `עלות AI בפרויקט: $${Number(r.spent || 0).toFixed(2)}`;
 });
 
-boot().catch((e) => { console.error(e); $('st-boot').innerHTML = '<p class="st-muted">הטעינה נכשלה. רעננו את הדף.</p>'; });
+boot().catch((e) => { bootDone = false; bootFail('watchdog', e); });

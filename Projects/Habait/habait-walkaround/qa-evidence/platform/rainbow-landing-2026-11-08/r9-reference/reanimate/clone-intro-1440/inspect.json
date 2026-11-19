@@ -1,0 +1,96 @@
+{
+  "url": "http://127.0.0.1:8931/",
+  "title": "Rainbow תל אביב · Habait",
+  "viewport": [
+    1440,
+    900
+  ],
+  "scrollY": 612,
+  "devicePixelRatio": 1,
+  "libs": [
+    "gsap+ScrollTrigger",
+    "lenis smooth-scroll"
+  ],
+  "fonts": [
+    "Bellefair 400 normal",
+    "Assistant 200 800 normal"
+  ],
+  "canvases": [],
+  "target": {
+    "selector": "#statement",
+    "found": true,
+    "rect": [
+      0,
+      288,
+      1440,
+      348
+    ]
+  },
+  "animations": [],
+  "keyframes": [
+    {
+      "name": "hb-pulse",
+      "css": "@keyframes hb-pulse { \n  0%, 100% { opacity: 1; transform: scale(1); }\n  50% { opacity: 0.35; transform: scale(0.7); }\n}"
+    },
+    {
+      "name": "hb-shimmer",
+      "css": "@keyframes hb-shimmer { \n  100% { background-position: -150% 0px; }\n}"
+    }
+  ],
+  "nodes": [
+    {
+      "el": "section#statement.rl-statement",
+      "rect": [
+        0,
+        288,
+        1440,
+        348
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "block",
+        "padding": "120px 0px"
+      }
+    },
+    {
+      "el": "div.rl-wrap",
+      "rect": [
+        32,
+        408,
+        1376,
+        108
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "p#statementText.rl-statement__text",
+      "rect": [
+        401,
+        408,
+        639,
+        108
+      ],
+      "text": "בין נמל תל אביב למרינה, מול הים הפתוח. את המגדל הזה כבר אפשר",
+      "style": {
+        "will-change": "transform, opacity",
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "41.6px",
+        "font-weight": "400",
+        "line-height": "54.08px",
+        "display": "block"
+      }
+    }
+  ]
+}

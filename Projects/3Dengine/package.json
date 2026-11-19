@@ -1,0 +1,14 @@
+{
+  "name": "habait-3dengine",
+  "private": true,
+  "type": "module",
+  "version": "1.4.0",
+  "scripts": {
+    "test": "node --test --experimental-test-coverage --test-coverage-lines=80 \"--test-coverage-include=engine/**/*.mjs\" \"--test-coverage-include=mcp/**/*.mjs\" \"tests/unit/**/*.test.mjs\" \"tests/milestones/**/*.test.mjs\"",
+    "test:unit": "node --test --experimental-test-coverage --test-coverage-lines=80 \"--test-coverage-include=engine/**/*.mjs\" \"--test-coverage-include=mcp/**/*.mjs\" \"tests/unit/**/*.test.mjs\"",
+    "doctor": "node engine/cli.mjs doctor",
+    "test:e2e": "node tests/e2e/m0.2.e2e.mjs",
+    "test:soak": "node tests/soak/kill-soak.mjs",
+    "test:stages": "node --test \"tests/stages/**/*.test.mjs\""
+  }
+}

@@ -1,0 +1,43 @@
+// D1 for start_simulation: writer vs start_simulation; every job's stored copy must have the job's hash; records likewise.
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, sleep } from './qa-lib.mjs';
+const [, , mode, pause, pdfName, looksS, idle = '20'] = process.argv;
+const { inspectDir } = await E('engine/inspect.mjs');
+const h = await makeHome({ timeout: 90 });
+const H = (await engineOf(h)).handlers;
+const src = `${SCR}/pdfs/${pdfName}`;
+const A = `${h.inbox}/same.pdf`;
+fs.copyFileSync(src, A);
+const S = sha(fs.readFileSync(A));
+const truth = await H.inspect_plan({ pdf_path: A });
+const T = JSON.stringify(truth.page_rows);
+fs.rmSync(inspectDir(h.config, S), { recursive: true, force: true });
+const w = spawn(process.execPath, [`${SCR}/writer.mjs`, A, src, mode, pause, '', idle], { stdio: 'ignore' });
+await sleep(300);
+const tally = {}; let bad = 0;
+for (let i = 0; i < Number(looksS); i++) {
+  if (i % 2 === 0) fs.rmSync(inspectDir(h.config, S), { recursive: true, force: true });
+  try { const x = await H.start_simulation({ pdf_path: A }); const k = 'job:' + (x.created ? 'new' : 'again'); tally[k] = (tally[k] || 0) + 1; }
+  catch (e) { const k = 'err:' + (e.code || e.name); tally[k] = (tally[k] || 0) + 1; }
+}
+w.kill(); await sleep(400);
+// audit
+for (const d of fs.existsSync(h.jobsDir) ? fs.readdirSync(h.jobsDir) : []) {
+  const jf = `${h.jobsDir}/${d}/job.json`; if (!fs.existsSync(jf)) { console.log('job folder without job.json', d, fs.readdirSync(`${h.jobsDir}/${d}`)); continue; }
+  const j = JSON.parse(fs.readFileSync(jf, 'utf8'));
+  const stored = sha(fs.readFileSync(`${h.jobsDir}/${d}/input/source.pdf`));
+  if (stored !== j.input.pdf_sha256) { bad++; console.log('STORED COPY != JOB HASH', d); }
+  console.log('job', d.slice(0, 12), 'pdf', j.input.pdf_sha256.slice(0, 12), j.input.pdf_sha256 === S ? '(plan hash)' : '(other)');
+}
+const sd = `${h.config.runtimeDir}/inspect`;
+for (const d of fs.existsSync(sd) ? fs.readdirSync(sd) : []) {
+  if (d.startsWith('.tmp-')) { console.log('LEFT TEMP', d); bad++; continue; }
+  const j = JSON.parse(fs.readFileSync(`${sd}/${d}/inspect.json`, 'utf8'));
+  if (d === S && JSON.stringify(j.summary.page_rows) !== T) { bad++; console.log('WRONG RECORD UNDER PLAN HASH'); }
+  if (j.sha256 !== d) { bad++; console.log('NAME MISMATCH'); }
+}
+fs.copyFileSync(src, A);
+const q = await H.inspect_plan({ pdf_path: A });
+console.log(JSON.stringify({ mode, pause, pdfName, tally, bad, quietTrue: JSON.stringify(q.page_rows) === T && q.sha256 === S }));
+cleanup(h);

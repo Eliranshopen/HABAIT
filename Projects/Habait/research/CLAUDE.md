@@ -1,18 +1,18 @@
 # research/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Dated research and benchmark folders: fal.ai model bench, product research, rainbow developer-page capture, 2024 investor deck extract.
 
-## What's here (2026-11-05)
-0 files here · 10 subfolders · 3966 files / 2.3 GB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+0 files here · 10 subfolders · 4332 files / 2.3 GB in the whole tree (vendor and build output excluded)
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
 | `apartment-3d-ux-2026-11-03/` | [`apartment-3d-ux-2026-11-03/CLAUDE.md`](apartment-3d-ux-2026-11-03/CLAUDE.md) | 443 (261.2 MB) |
-| `auto-trace-2026-11-04/` | [`auto-trace-2026-11-04/CLAUDE.md`](auto-trace-2026-11-04/CLAUDE.md) | 313 (58.8 MB) |
+| `auto-trace-2026-11-04/` | [`auto-trace-2026-11-04/CLAUDE.md`](auto-trace-2026-11-04/CLAUDE.md) | 679 (96.4 MB) |
 | `developer-page-rainbow-2026-11-02/` | [`developer-page-rainbow-2026-11-02/CLAUDE.md`](developer-page-rainbow-2026-11-02/CLAUDE.md) | 11 (42.3 MB) |
 | `fal-bench-2026-11-02/` | [`fal-bench-2026-11-02/CLAUDE.md`](fal-bench-2026-11-02/CLAUDE.md) | 2808 (1.7 GB) |
 | `feature-split-2026-11-04/` | [`feature-split-2026-11-04/CLAUDE.md`](feature-split-2026-11-04/CLAUDE.md) | 126 (81.4 MB) |

@@ -1,0 +1,93 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py animation reduced motion duration easing --domain ux -n 8
+## UI Pro Max Search Results
+**Domain:** ux | **Query:** animation reduced motion duration easing
+**Source:** ux-guidelines.csv | **Found:** 8 results
+
+### Result 1
+- **Category:** Animation
+- **Issue:** Reduced Motion
+- **Platform:** All
+- **Description:** Respect user's motion preferences
+- **Do:** Check prefers-reduced-motion media query
+- **Don't:** Ignore accessibility motion settings
+- **Code Example Good:** @media (prefers-reduced-motion: reduce)
+- **Code Example Bad:** No motion query check
+- **Severity:** High
+
+### Result 2
+- **Category:** Animation
+- **Issue:** Easing Functions
+- **Platform:** All
+- **Description:** Linear motion feels robotic
+- **Do:** Use ease-out for entering ease-in for exiting
+- **Don't:** Use linear for UI transitions
+- **Code Example Good:** ease-out
+- **Code Example Bad:** linear
+- **Severity:** Low
+
+### Result 3
+- **Category:** Animation
+- **Issue:** Duration Timing
+- **Platform:** All
+- **Description:** Animations should feel responsive not sluggish
+- **Do:** Use 150-300ms for micro-interactions
+- **Don't:** Use animations longer than 500ms for UI
+- **Code Example Good:** transition-all duration-200
+- **Code Example Bad:** duration-1000
+- **Severity:** Medium
+
+### Result 4
+- **Category:** Animation
+- **Issue:** Excessive Motion
+- **Platform:** All
+- **Description:** Too many animations cause distraction and motion sickness
+- **Do:** Animate 1-2 key elements per view maximum
+- **Don't:** Animate everything that moves
+- **Code Example Good:** Single hero animation
+- **Code Example Bad:** animate-bounce on 5+ elements
+- **Severity:** High
+
+### Result 5
+- **Category:** Animation
+- **Issue:** Continuous Animation
+- **Platform:** All
+- **Description:** Infinite animations are distracting
+- **Do:** Use for loading indicators only
+- **Don't:** Use for decorative elements
+- **Code Example Good:** animate-spin on loader
+- **Code Example Bad:** animate-bounce on icons
+- **Severity:** Medium
+
+### Result 6
+- **Category:** Accessibility
+- **Issue:** Motion Sensitivity
+- **Platform:** All
+- **Description:** Parallax/Scroll-jacking causes nausea
+- **Do:** Respect prefers-reduced-motion
+- **Don't:** Force scroll effects
+- **Code Example Good:** @media (prefers-reduced-motion)
+- **Code Example Bad:** ScrollTrigger.create()
+- **Severity:** High
+
+### Result 7
+- **Category:** Animation
+- **Issue:** Loading States
+- **Platform:** All
+- **Description:** Show feedback during async operations
+- **Do:** Use skeleton screens or spinners
+- **Don't:** Leave UI frozen with no feedback
+- **Code Example Good:** animate-pulse skeleton
+- **Code Example Bad:** Blank screen while loading
+- **Severity:** High
+
+### Result 8
+- **Category:** Animation
+- **Issue:** Transform Performance
+- **Platform:** Web
+- **Description:** Some CSS properties trigger expensive repaints
+- **Do:** Use transform and opacity for animations
+- **Don't:** Animate width/height/top/left properties
+- **Code Example Good:** transform: translateY()
+- **Code Example Bad:** top: 10px animation
+- **Severity:** Medium
+

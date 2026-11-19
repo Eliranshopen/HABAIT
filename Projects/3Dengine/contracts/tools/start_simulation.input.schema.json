@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "start_simulation input",
+  "type": "object",
+  "properties": {
+    "pdf_path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "description": "Absolute path of the uploaded sales-plan PDF; it must be inside an allowed upload folder."
+    },
+    "apartment": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "description": "A candidate id from inspect_plan. May be left out when the PDF has exactly one candidate."
+    },
+    "budget_cap_usd": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "Optional spending cap in USD, recorded on a new job."
+    }
+  },
+  "required": [
+    "pdf_path"
+  ],
+  "additionalProperties": false
+}

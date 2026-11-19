@@ -1,0 +1,109 @@
+{
+ "encoding": "rgb24-be",
+ "scale": 100,
+ "invalid": 0,
+ "decode": "(R<<16 | G<<8 | B) / 100 => metres (radial distance from the camera origin)",
+ "frame": "u = 0.5 + yaw/360 (yaw 0 = the panorama centre = plan up), v = 0.5 - pitch/180; radial distance along the ray",
+ "source": "tools/tour360/depth_pano.py: one ray per pixel against a BVH of every render-visible mesh of scene/apartment.blend (the scene the panoramas were rendered from), 1024x512; through glazing the value is the distance to the pane",
+ "scenes": {
+  "living": {
+   "file": "living.png",
+   "cp": "pano_living",
+   "plan_cm": [
+    582.4,
+    693.5,
+    160
+   ]
+  },
+  "dining": {
+   "file": "dining.png",
+   "cp": "pano_dining",
+   "plan_cm": [
+    410.5,
+    521.6,
+    160
+   ]
+  },
+  "kitchen": {
+   "file": "kitchen.png",
+   "cp": "pano_kitchen",
+   "plan_cm": [
+    168.0,
+    437.8,
+    160
+   ]
+  },
+  "foyer": {
+   "file": "foyer.png",
+   "cp": "pano_foyer",
+   "plan_cm": [
+    212.1,
+    642.8,
+    160
+   ]
+  },
+  "balcony": {
+   "file": "balcony.png",
+   "cp": "pano_balcony",
+   "plan_cm": [
+    432.5,
+    310.0,
+    160
+   ]
+  },
+  "corridor": {
+   "file": "corridor.png",
+   "cp": "pano_corridor",
+   "plan_cm": [
+    773.3,
+    680.3,
+    160
+   ]
+  },
+  "master": {
+   "file": "master.png",
+   "cp": "pano_master",
+   "plan_cm": [
+    970.4,
+    292.3,
+    160
+   ]
+  },
+  "ensuite": {
+   "file": "ensuite.png",
+   "cp": "pano_ensuite",
+   "plan_cm": [
+    824.9,
+    155.6,
+    160
+   ]
+  },
+  "mamad": {
+   "file": "mamad.png",
+   "cp": "pano_mamad",
+   "plan_cm": [
+    944.0,
+    513.6,
+    160
+   ]
+  },
+  "bath": {
+   "file": "bath.png",
+   "cp": "pano_bath",
+   "plan_cm": [
+    899.9,
+    803.8,
+    160
+   ]
+  },
+  "bedroom": {
+   "file": "bedroom.png",
+   "cp": "pano_bedroom",
+   "plan_cm": [
+    822.7,
+    1011.0,
+    160
+   ]
+  }
+ }
+}

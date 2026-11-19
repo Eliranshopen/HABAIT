@@ -1,0 +1,68 @@
+{
+  "task": "WALKAROUND-QUALITY-PLAN Q01b (D-WQ-28): the general-polygon path; rail 1 on both paths",
+  "date": "2026-10-28",
+  "actor": "render-pipeline-engineer",
+  "blender": "4.5.10 LTS",
+  "instrument": "pipeline/probe/dump_scene.py - decoded scene data (matrix_world, raw float32 vertex buffers, lights, materials, world); never .blend bytes",
+  "pilot_rectilinear_regression": {
+    "plan": "tours/pilot-karnei/plan.json",
+    "baseline": {
+      "builder": "build_scene.py v1.1.0 (HEAD, before this card)",
+      "dump_sha256": "6d8f9b88d444b36eaf096db92d8eb20b035011fd806320541c58bd73920707a1"
+    },
+    "after": {
+      "builder": "build_scene.py v1.2.0 + plan_general.py v0.1.0 + place_cameras.py v0.2.0",
+      "dump_sha256": "6d8f9b88d444b36eaf096db92d8eb20b035011fd806320541c58bd73920707a1"
+    },
+    "objects": 355,
+    "scene_data_identical": true,
+    "checks": "166/166 geometry + 12/12 camera clearance, both builds",
+    "report_differences": {
+      "generator": [
+        "version 1.1.0 -> 1.2.0",
+        "place_cameras_version 0.1.0 -> 0.2.0",
+        "script_sha256",
+        "generated_utc"
+      ],
+      "output": [
+        "blend path",
+        "bytes (a .blend container is not byte-stable, ENV.md 4.3)"
+      ],
+      "log": [
+        "the version header line",
+        "the saved path/bytes line"
+      ],
+      "everything_else": "identical, key order included"
+    },
+    "note": "the committed tours/pilot-karnei/scene-full.report.json was NOT regenerated (its paths are the main checkout); a pilot rerun reads the scene as stale by build_scene.py sha (as after any builder edit) and rebuilds the same scene data"
+  },
+  "apt846_general_determinism": {
+    "plan": "tours/apt846/plan.json",
+    "plan_sha256": "af672a01e937e3df73e5a4d182d2752367585a0e82323540e84557b5f35bbbc1",
+    "build_A_dump_sha256": "4298b59ba3a7c0a844b5631cfe7875ac6b7ecf5efec17badee18cece9b599164",
+    "build_B_dump_sha256": "4298b59ba3a7c0a844b5631cfe7875ac6b7ecf5efec17badee18cece9b599164",
+    "objects": 251,
+    "scene_data_identical": true,
+    "checks": "182/182 geometry; camera clearance 9/11 (reported, not failed: authored points)"
+  },
+  "q02_pilot_regression": {
+    "builder": "build_scene.py v1.2.0 Q02 state (roofed rooms, ground offset, fixtures prep) + plan_general.py (bridging, 12 cm posts)",
+    "dump_sha256": "6d8f9b88d444b36eaf096db92d8eb20b035011fd806320541c58bd73920707a1",
+    "scene_data_identical_to_baseline": true,
+    "note": "render_pano.py v0.3.0 re-keys every pilot render (its sha256 is in the input key); accepted (OQ-G4), not re-rendered"
+  },
+  "q05b_door_glass_frame": {
+    "date": "2026-10-29",
+    "builder": "build_scene.py v1.3.0 + plan_general.py v0.2.0 (answer 2c, door_glass_frames)",
+    "pilot_dump_sha256": "6d8f9b88d444b36eaf096db92d8eb20b035011fd806320541c58bd73920707a1",
+    "pilot_scene_data_identical_to_baseline": true,
+    "pilot_checks": "166/166 geometry + 12/12 camera clearance",
+    "apt846_build_A_dump_sha256_raw": "36d78d39e246c5752896cdba2dd62cc2ecbfc10fb4fb3cec66698d94c79a0f49",
+    "apt846_build_B_dump_sha256_raw": "71e96181014c5cd7449cfc9a89f217157389df9c64b727a6ac0ce7438fe777a9",
+    "apt846_raw_difference": "images[0..3].filepath only: the tour .blend stores the textures and the HDRI relative (//../../pipeline/...), the scratch .blend on another drive stores them absolute",
+    "apt846_dump_sha256_paths_normalised": "416c2513fe913b8054bd407a3c598e1562de305145a811920feae93973377e10",
+    "apt846_scene_data_identical": true,
+    "apt846_objects": 265,
+    "apt846_checks": "230/230 geometry; camera clearance 9/11 (reported, not failed: authored points)"
+  }
+}

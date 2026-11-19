@@ -1,0 +1,67 @@
+{
+ "note": "landing-page motion (plan 2026-11-08-rainbow-landing, rounds 7-8); pinned, self-hosted, never fetched at runtime from a CDN. Round 8 (2026-11-09): GSAP 3.12.5 -> 3.13.0 (released 2025, every plugin free: SplitText, ScrambleText, CustomEase added); the 3.12.5 files moved to tools/_unused/.",
+ "fetched": "2026-11-09",
+ "rows": [
+  {
+   "file": "gsap-3.13.0.min.js",
+   "npm": "gsap@3.13.0",
+   "dist": "dist/gsap.min.js",
+   "source": "npm pack (registry.npmjs.org), unmodified",
+   "tarball_integrity": "sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==",
+   "sha256": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+   "bytes": 72435,
+   "license": "GreenSock Standard 'no charge' license, https://gsap.com/standard-license (every plugin free since 3.13; header kept in each file)"
+  },
+  {
+   "file": "ScrollTrigger-3.13.0.min.js",
+   "npm": "gsap@3.13.0",
+   "dist": "dist/ScrollTrigger.min.js",
+   "source": "npm pack (registry.npmjs.org), unmodified",
+   "tarball_integrity": "sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==",
+   "sha256": "308219390e5e3b84cda0c481e70caa9820883ae10bda44e6e9a149a81aac4b3f",
+   "bytes": 44157,
+   "license": "GreenSock Standard 'no charge' license, https://gsap.com/standard-license (every plugin free since 3.13; header kept in each file)"
+  },
+  {
+   "file": "SplitText-3.13.0.min.js",
+   "npm": "gsap@3.13.0",
+   "dist": "dist/SplitText.min.js",
+   "source": "npm pack (registry.npmjs.org), unmodified",
+   "tarball_integrity": "sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==",
+   "sha256": "5e519ea2470faa15ca4d4f27e9263e5906c07c034a9b4771164dee108136563a",
+   "bytes": 7247,
+   "license": "GreenSock Standard 'no charge' license, https://gsap.com/standard-license (every plugin free since 3.13; header kept in each file)"
+  },
+  {
+   "file": "ScrambleTextPlugin-3.13.0.min.js",
+   "npm": "gsap@3.13.0",
+   "dist": "dist/ScrambleTextPlugin.min.js",
+   "source": "npm pack (registry.npmjs.org), unmodified",
+   "tarball_integrity": "sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==",
+   "sha256": "e9ce04a07d932d8506f21a0db0e394ce526f69b9f1a93c70b64de3b823daa452",
+   "bytes": 11687,
+   "license": "GreenSock Standard 'no charge' license, https://gsap.com/standard-license (every plugin free since 3.13; header kept in each file)",
+   "loaded": false,
+   "note": "vendored with the 3.13.0 set, not loaded by any page yet (numeral scramble deferred to a later round)"
+  },
+  {
+   "file": "CustomEase-3.13.0.min.js",
+   "npm": "gsap@3.13.0",
+   "dist": "dist/CustomEase.min.js",
+   "source": "npm pack (registry.npmjs.org), unmodified",
+   "tarball_integrity": "sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==",
+   "sha256": "1cb16222708d6c44d20bfdd6b512ea968f3a71f4d0b2f43b27cd2476349845a0",
+   "bytes": 7069,
+   "license": "GreenSock Standard 'no charge' license, https://gsap.com/standard-license (every plugin free since 3.13; header kept in each file)"
+  },
+  {
+   "file": "lenis-1.3.4.min.js",
+   "npm": "lenis@1.3.4",
+   "dist": "dist/lenis.min.js",
+   "source": "npm pack (registry.npmjs.org), unmodified",
+   "sha256": "67f0fe0cfc672269ced6bf0cf44913ca3d7a60235a89f9a93c66f5767adea729",
+   "bytes": 16397,
+   "license": "MIT, lenis-1.3.4.LICENSE.txt"
+  }
+ ]
+}

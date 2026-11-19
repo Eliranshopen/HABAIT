@@ -1,11 +1,11 @@
 # developer-page-rainbow-2026-11-02/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Capture of the Rainbow developer page: page.html, its images and sources.json.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 11 files here · 0 subfolders · 11 files / 42.3 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

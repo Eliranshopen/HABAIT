@@ -1,0 +1,28 @@
+swapper pid 28532 server pid 47112
+mode folder calls 1000 secs 14 bad 1 rpc 1 created 1
+{"start_simulation:ok":9,"inspect_plan:ok":8,"start_simulation:NOT_A_PDF":473,"inspect_plan:NOT_A_PDF":488,"start_simulation:PATH_NOT_ALLOWED":17,"inspect_plan:PATH_NOT_ALLOWED":4,"RPC -32603":1}
+   RPC -32603 | internal error in start_simulation: job 04762ca47a173685: lock busy
+  job 04762ca47a173685 copy sha ok: true
+runner pids seen [21732]
+swapper pid 22708 server pid 17820
+mode remove calls 1000 secs 82 bad 1 rpc 1 created 1
+{"start_simulation:ok":36,"inspect_plan:ok":30,"inspect_plan:NOT_A_PDF":470,"start_simulation:NOT_A_PDF":463,"RPC -32603":1}
+   RPC -32603 | internal error in start_simulation: job 04762ca47a173685: lock busy
+  job 04762ca47a173685 copy sha ok: true
+runner pids seen [36984]
+swapper pid 47792 server pid 11628
+swapper pid 20672 server pid 28908
+swapper pid 39292 server pid 47904
+mode hardlink calls 1000 secs 152 bad 0 rpc 0 created 1
+{"start_simulation:ok":171,"inspect_plan:ok":151,"inspect_plan:NOT_A_PDF":340,"start_simulation:NOT_A_PDF":320,"start_simulation:PATH_NOT_ALLOWED":9,"inspect_plan:PATH_NOT_ALLOWED":9}
+  job 04762ca47a173685 copy sha ok: true
+runner pids seen [27744]
+swapper pid 19372 server pid 8108
+mode junction calls 1500 secs 0 bad 0 rpc 0 created 0
+{"start_simulation:NOT_A_PDF":750,"inspect_plan:NOT_A_PDF":749,"inspect_plan:ok":1}
+runner pids seen []
+swapper pid 2672 server pid 31904
+mode lockflip calls 600 secs 3 bad 0 rpc 0 created 1
+{"start_simulation:ok":300,"inspect_plan:ok":300}
+  job 04762ca47a173685 copy sha ok: true
+runner pids seen [41600]

@@ -1,0 +1,526 @@
+{
+  "url": "http://127.0.0.1:8931/",
+  "title": "Rainbow תל אביב · Habait",
+  "viewport": [
+    1440,
+    900
+  ],
+  "scrollY": 1701,
+  "devicePixelRatio": 1,
+  "libs": [
+    "gsap+ScrollTrigger",
+    "lenis smooth-scroll"
+  ],
+  "fonts": [
+    "Bellefair 400 normal",
+    "Assistant 200 800 normal"
+  ],
+  "canvases": [],
+  "target": {
+    "selector": "#place",
+    "found": true,
+    "rect": [
+      0,
+      296,
+      1440,
+      840
+    ]
+  },
+  "animations": [],
+  "keyframes": [
+    {
+      "name": "hb-pulse",
+      "css": "@keyframes hb-pulse { \n  0%, 100% { opacity: 1; transform: scale(1); }\n  50% { opacity: 0.35; transform: scale(0.7); }\n}"
+    },
+    {
+      "name": "hb-shimmer",
+      "css": "@keyframes hb-shimmer { \n  100% { background-position: -150% 0px; }\n}"
+    }
+  ],
+  "nodes": [
+    {
+      "el": "section#place.rl-chapter.rl-place",
+      "rect": [
+        0,
+        296,
+        1440,
+        840
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "relative",
+        "display": "block"
+      }
+    },
+    {
+      "el": "div.rl-row.rl-row--start",
+      "rect": [
+        0,
+        296,
+        1440,
+        840
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "grid",
+        "gap": "normal 72px",
+        "padding": "158.4px 0px 158.4px 15px"
+      }
+    },
+    {
+      "el": "figure.rl-fig.rl-row__media",
+      "rect": [
+        646,
+        454,
+        794,
+        523
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "background-color": "rgb(244, 244, 244)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "hidden",
+        "position": "relative",
+        "display": "block"
+      }
+    },
+    {
+      "el": "div.rl-wipe",
+      "rect": [
+        646,
+        454,
+        794,
+        523
+      ],
+      "style": {
+        "will-change": "transform",
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "hidden",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "div.rl-wipe__in",
+      "rect": [
+        646,
+        454,
+        794,
+        523
+      ],
+      "style": {
+        "will-change": "transform",
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "position": "absolute",
+        "display": "block"
+      }
+    },
+    {
+      "el": "picture",
+      "rect": [
+        646,
+        454,
+        794,
+        523
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "img",
+      "rect": [
+        646,
+        454,
+        794,
+        523
+      ],
+      "text": "",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "overflow": "clip",
+        "display": "block"
+      },
+      "src": "http://127.0.0.1:8931/fixtures/rainbow/landing/renders/the-1-1056.webp"
+    },
+    {
+      "el": "span.hb-ai-badge.rl-badge",
+      "rect": [
+        658,
+        466,
+        46,
+        21
+      ],
+      "style": {
+        "color": "rgb(255, 252, 249)",
+        "background-color": "rgba(26, 23, 19, 0.78)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "12px",
+        "font-weight": "600",
+        "line-height": "16.8px",
+        "border-radius": "6px",
+        "backdrop-filter": "blur(6px)",
+        "position": "absolute",
+        "display": "flex",
+        "gap": "4px",
+        "padding": "2px 8px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        666,
+        468,
+        30,
+        17
+      ],
+      "text": "הדמיה",
+      "style": {
+        "color": "rgb(255, 252, 249)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "12px",
+        "font-weight": "600",
+        "line-height": "16.8px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "div.rl-row__text",
+      "rect": [
+        15,
+        589,
+        559,
+        253
+      ],
+      "style": {
+        "will-change": "transform, opacity",
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "grid"
+      }
+    },
+    {
+      "el": "p.rl-idx",
+      "rect": [
+        203,
+        589,
+        184,
+        30
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "20.864px",
+        "font-weight": "400",
+        "line-height": "30.2528px",
+        "letter-spacing": "6.2592px",
+        "display": "flex",
+        "gap": "12px"
+      }
+    },
+    {
+      "el": "span.rl-idx__n",
+      "rect": [
+        203,
+        597,
+        14,
+        20
+      ],
+      "text": "01",
+      "style": {
+        "color": "rgb(61, 61, 61)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "13.6px",
+        "font-weight": "400",
+        "line-height": "19.72px",
+        "letter-spacing": "1.632px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        229,
+        589,
+        157,
+        30
+      ],
+      "text": "LOCATION",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "20.864px",
+        "font-weight": "400",
+        "line-height": "30.2528px",
+        "letter-spacing": "6.2592px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "h2#placeTitle.rl-h2",
+      "rect": [
+        147,
+        619,
+        296,
+        67
+      ],
+      "text": "בין הנמל למרינה",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Bellefair, \"Frank Ruhl Libre\", Georgia, serif",
+        "font-size": "60px",
+        "font-weight": "400",
+        "line-height": "67.2px",
+        "letter-spacing": "-0.6px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "p.rl-lead",
+      "rect": [
+        133,
+        709,
+        324,
+        30
+      ],
+      "text": "מה מקיף את המגדל, כפי שמסומן בהדמיה:",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "20.864px",
+        "font-weight": "400",
+        "line-height": "30.2528px",
+        "display": "block"
+      }
+    },
+    {
+      "el": "ol.rl-places",
+      "rect": [
+        55,
+        765,
+        480,
+        78
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "17px",
+        "font-weight": "400",
+        "line-height": "26.35px",
+        "display": "flex",
+        "gap": "8px 10px"
+      }
+    },
+    {
+      "el": "li",
+      "rect": [
+        383,
+        765,
+        106,
+        35
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "list-item",
+        "padding": "6px 14px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        398,
+        771,
+        76,
+        21
+      ],
+      "text": "נמל תל אביב",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "inline"
+      }
+    },
+    {
+      "el": "li",
+      "rect": [
+        270,
+        765,
+        102,
+        35
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "list-item",
+        "padding": "6px 14px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        285,
+        771,
+        72,
+        21
+      ],
+      "text": "פארק רידינג",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "inline"
+      }
+    },
+    {
+      "el": "li",
+      "rect": [
+        186,
+        765,
+        74,
+        35
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "list-item",
+        "padding": "6px 14px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        201,
+        771,
+        44,
+        21
+      ],
+      "text": "המרינה",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "inline"
+      }
+    },
+    {
+      "el": "li",
+      "rect": [
+        100,
+        765,
+        76,
+        35
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "list-item",
+        "padding": "6px 14px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        115,
+        771,
+        46,
+        21
+      ],
+      "text": "חוף הים",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "inline"
+      }
+    },
+    {
+      "el": "li",
+      "rect": [
+        248,
+        808,
+        93,
+        35
+      ],
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "list-item",
+        "padding": "6px 14px"
+      }
+    },
+    {
+      "el": "span",
+      "rect": [
+        263,
+        814,
+        63,
+        21
+      ],
+      "text": "כוכב הצפון",
+      "style": {
+        "color": "rgb(0, 0, 0)",
+        "font-family": "Assistant, Heebo, system-ui, \"Segoe UI\", Arial, sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "20.8px",
+        "display": "inline"
+      }
+    }
+  ]
+}

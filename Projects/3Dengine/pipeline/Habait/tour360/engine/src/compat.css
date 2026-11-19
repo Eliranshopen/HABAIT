@@ -1,0 +1,19 @@
+/* What PSV draws that today's tour does not show: its loader (the page has its own), its grey ground (the page's is navy). */
+.psv-loader-container { display: none !important; }
+.psv-marker { cursor: pointer; }
+/* the old viewer's own hand over the picture (Pannellum 2.5.6 .pnlm-grab / .pnlm-grabbing, T19c F-9); !important over the
+   cursor PSV writes on its container */
+.psv-container { cursor: grab !important; cursor: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2226%22%20width%3D%2226%22%3E%0A%3Cpath%20stroke%3D%22%23000%22%20stroke-width%3D%221px%22%20fill%3D%22%23fff%22%20d%3D%22m15.3%2020.5s6.38-6.73%204.64-8.24-3.47%201.01-3.47%201.01%203.61-5.72%201.41-6.49c-2.2-0.769-3.33%204.36-3.33%204.36s0.873-5.76-1.06-5.76-1.58%205.39-1.58%205.39-0.574-4.59-2.18-4.12c-1.61%200.468-0.572%205.51-0.572%205.51s-1.58-4.89-2.93-3.79c-1.35%201.11%200.258%205.25%200.572%206.62%200.836%202.43%202.03%202.94%202.17%205.55%22%2F%3E%0A%3C%2Fsvg%3E%0A') 12 8,default !important; }
+.psv-container.is-grabbing { cursor: grabbing !important; cursor: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2226%22%20width%3D%2226%22%3E%0A%3Cpath%20stroke%3D%22%23000%22%20stroke-width%3D%221px%22%20fill%3D%22%23fff%22%20d%3D%22m15.3%2020.5s5.07-5.29%203.77-6.74c-1.31-1.45-2.53%200.14-2.53%200.14s2.74-3.29%200.535-4.06c-2.2-0.769-2.52%201.3-2.52%201.3s0.81-2.13-1.12-2.13-1.52%201.77-1.52%201.77-0.261-1.59-1.87-1.12c-1.61%200.468-0.874%202.17-0.874%202.17s-0.651-1.55-2-0.445c-1.35%201.11-0.68%202.25-0.365%203.62%200.836%202.43%202.03%202.94%202.17%205.55%22%2F%3E%0A%3C%2Fsvg%3E%0A') 12 8,default !important; }
+/* the viewer is ONE layer under the page: its marker layers (z 10–30) stay inside it, so no door ring or marker SVG ever lies over
+   the page's chrome and disclosure lines (z 2–3) — Pannellum's hotspots lived inside its render container the same way (T18) */
+.psv-container { isolation: isolate; }
+/* the first room shows at once, as Pannellum's does — PSV fades its canvas in over 100 ms (T19c F-6, first paint) */
+.psv-canvas-container { transition: none; }
+/* the tier-1 walk-in (WALKAROUND-QUALITY-PLAN.md card Q08): the captured frame over the canvas AND the markers (z 10 to 30), under
+   PSV tooltips (z 50); the clip box fades, the zoom box magnifies about the view centre; transform and opacity only, so the
+   compositor runs it even while a texture upload holds the main thread */
+.hb-walk { position: absolute; inset: 0; z-index: 40; pointer-events: none; overflow: hidden; will-change: opacity; }
+.hb-walk-zoom { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
+.hb-walk-layer { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hb-walk-layer + .hb-walk-layer { will-change: opacity; }

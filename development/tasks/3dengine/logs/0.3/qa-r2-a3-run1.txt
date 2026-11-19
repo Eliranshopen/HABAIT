@@ -1,0 +1,21 @@
+  S1 state:awaiting_approval 99988a8922da0ac3 dur 2214 replaced false lock false ok
+  S2 delay:1300 d18b6b6d77937549 dur 1663 replaced false lock false ok
+  S3 delay:200 89e210a912c142ad dur 2364 replaced false lock false ok
+  S5 delay:700 a104bb7d7840097d dur 2602 replaced false lock false ok
+  S6 heavyfile 41d4841720b8d84d dur 2302 replaced false lock false ok
+  S7 delay:700 350624cd56748e65 dur 1889 replaced false lock false ok
+  S8 rows:3 67e5c01bfe3c507b dur 2460 replaced false lock false ok
+  S9 state:awaiting_approval 1b18ba73e3169c2d dur 2463 replaced false lock false ok
+  S11 rows:3 18e8bc8250a22a19 dur 3177 replaced false lock false ok
+  S12 delay:2500 a57753ab8ee2ebb1 dur 2090 replaced false lock false ok
+  S14 delay:700 7c8127fd339425a7 dur 2015 replaced false lock false ok
+  S16 rows:3 cdfb5616bbda8a03 dur 3156 replaced false lock false ok
+  S17 delay:1300 091fab1b79587cbe dur 2336 replaced false lock true ok
+  S19 delay:1300 9ea50b0a96809b3b dur 2237 replaced false lock false ok
+  S20 state:rendering 8076cf3fe2d8f046 dur 2155 replaced false lock true ok
+  S22 rows:3 7490e78c701a32b8 dur 2097 replaced false lock false ok
+  S23 tmp e1674cb2ebfc7816 dur 2784 replaced false lock false ok
+  S24 rows:3 c8477350a93f1989 dur 2849 replaced false lock true ok
+  S25 delay:200 5a71a4149867da68 dur 1718 replaced false lock false ok
+  S26 delay:200 6c724a32b5fe1a9f dur 2587 replaced false lock false ok
+{"script":"a3","seed":902,"takeovers":20,"jobsDone":20,"checks":1170,"lockBusyOnResume":7,"res":[{"k":1,"trig":"state:awaiting_approval","dur":2214,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":2,"trig":"delay:1300","dur":1663,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":3,"trig":"delay:200","dur":2364,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":5,"trig":"delay:700","dur":2602,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":6,"trig":"heavyfile","dur":2302,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":7,"trig":"delay:700","dur":1889,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":8,"trig":"rows:3","dur":2460,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":9,"trig":"state:awaiting_approval","dur":2463,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":11,"trig":"rows:3","dur":3177,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":12,"trig":"delay:2500","dur":2090,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":14,"trig":"delay:700","dur":2015,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":16,"trig":"rows:3","dur":3156,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":17,"trig":"delay:1300","dur":2336,"holdLock":true,"tmp":0,"aliveWhenDead":false,"tries":4,"replaced":false,"p1log":false},{"k":19,"trig":"delay:1300","dur":2237,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":20,"trig":"state:rendering","dur":2155,"holdLock":true,"tmp":1,"aliveWhenDead":false,"tries":4,"replaced":false,"p1log":false},{"k":22,"trig":"rows:3","dur":2097,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":23,"trig":"tmp","dur":2784,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":24,"trig":"rows:3","dur":2849,"holdLock":true,"tmp":0,"aliveWhenDead":false,"tries":2,"replaced":false,"p1log":false},{"k":25,"trig":"delay:200","dur":1718,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true},{"k":26,"trig":"delay:200","dur":2587,"holdLock":false,"tmp":0,"aliveWhenDead":false,"tries":1,"replaced":false,"p1log":true}],"violations":[],"leftover":[]}

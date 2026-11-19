@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "inspect_plan output",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "stub",
+        "real"
+      ],
+      "description": "\"real\" = this first look read the PDF itself (since milestone 1.1). The simulation that a job runs is still a stub: see job.mode."
+    },
+    "pdf_path": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "candidates": {
+      "type": "array",
+      "description": "The drawings a job can be started for. A sheet has one (its page) unless the page is empty; a booklet has one per large image.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,64}$",
+            "description": "Pass it to start_simulation as \"apartment\"."
+          },
+          "label": {
+            "type": "string",
+            "description": "Built by the engine from the page number; never text of the PDF."
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "page",
+              "image"
+            ]
+          },
+          "vector_paths": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "large_images": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "px": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "thumb": {
+            "type": "string",
+            "description": "Absolute path of a 640-px thumbnail on this machine."
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "page",
+          "source"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "pages": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "How many pages the PDF has."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "sheet",
+        "booklet"
+      ],
+      "description": "\"sheet\" = one page; \"booklet\" = more than one."
+    },
+    "page_rows": {
+      "type": "array",
+      "description": "One row per page, in order. Numbers and fixed words only: never text of the PDF.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "width_pt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "height_pt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "vector_paths": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "How many vector drawing paths the page holds."
+          },
+          "images": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "large_images": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Embedded images whose shorter side is at least the engine's minimum."
+          },
+          "content": {
+            "type": "string",
+            "enum": [
+              "vector",
+              "image",
+              "empty"
+            ]
+          }
+        },
+        "required": [
+          "page",
+          "width_pt",
+          "height_pt",
+          "vector_paths",
+          "images",
+          "large_images",
+          "content"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "mode",
+    "pdf_path",
+    "sha256",
+    "bytes",
+    "pages",
+    "kind",
+    "page_rows",
+    "candidates"
+  ],
+  "additionalProperties": false
+}

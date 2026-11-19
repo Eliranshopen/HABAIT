@@ -1,0 +1,277 @@
+{
+  "generator": {
+    "script": "pipeline/render_pano.py",
+    "version": "0.2.0",
+    "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+    "blender": "4.5.10 LTS",
+    "rendered_utc": "2026-09-02T05:44:46+00:00"
+  },
+  "point": {
+    "id": "cp-master-lobby",
+    "room_id": "r-master-lobby",
+    "plan_cm": [
+      400.9,
+      984.6,
+      140.0
+    ],
+    "yaw_deg": 317.0,
+    "world_m": [
+      4.009,
+      -9.846,
+      1.4
+    ],
+    "euler_xyz_deg": [
+      90.000003,
+      0.0,
+      -317.000008
+    ]
+  },
+  "projection": {
+    "type": "equirectangular",
+    "api": "camera.panorama_type (4.3+)",
+    "fov": "360x180",
+    "resolution": [
+      8192,
+      4096
+    ],
+    "row_mapping": "lat = -90 + (row+0.5)/H*180 ; row 0 = BOTTOM (Blender buffer)",
+    "col_mapping": "u = (col+0.5)/W ; u=0.5 = camera forward ; u increases to the right",
+    "png_scanline_order": "top row first (this file flips the Blender buffer)"
+  },
+  "wrap_pad": {
+    "pad_px_each_side": 512,
+    "rendered_resolution": [
+      9216,
+      4096
+    ],
+    "longitude_range_deg": {
+      "longitude_min_deg": -202.5,
+      "longitude_max_deg": 202.5,
+      "latitude_deg": [
+        -90.0,
+        90.0
+      ]
+    },
+    "cropped_to": [
+      8192,
+      4096
+    ],
+    "why": "F-360-118: OIDN and the WebP encoder are wrap-blind 2-D operators, so the two edge columns of an equirect frame keep denoiser residue the interior loses. The pad renders real azimuthal overlap, is denoised and encoded WITH it, and is cropped off in the compositor — same angular grid, same file size.",
+    "grid_identity": "pad angle = pad_px * 360/W, so azimuth(col) = -180 + (col+0.5)*360/W for the surviving columns, exactly as with pad 0"
+  },
+  "depth_encoding": "rgb24-be",
+  "depth_scale": 100,
+  "depth_units": "metres",
+  "depth_decode": "(R<<16 | G<<8 | B) / 100 => metres (radial distance from the camera origin)",
+  "depth_invalid_value": 0,
+  "depth_quantisation": "round-half-to-even to the nearest centimetre",
+  "depth_note": "radial per-ray distance, NOT planar depth (ENV.md §4.1). Through glazing the value is the distance to the PANE, which is what a ruler should measure.",
+  "render": {
+    "engine": "CYCLES",
+    "backend": "OPTIX",
+    "devices": [
+      "NVIDIA RTX A2000 Laptop GPU"
+    ],
+    "device_note": "GPU only",
+    "samples": 256,
+    "adaptive_sampling": true,
+    "adaptive_threshold": 0.01,
+    "denoise": true,
+    "denoiser": "OPENIMAGEDENOISE",
+    "denoising_use_gpu": false,
+    "use_auto_tile": true,
+    "tile_size": 2048,
+    "texture_limit_render": "OFF",
+    "seed": 0,
+    "view_transform": "AgX",
+    "look": "AgX - Punchy",
+    "film_exposure": 0.0
+  },
+  "encode": {
+    "pano_format": "WEBP",
+    "webp_quality": 90,
+    "png_compression": 15,
+    "depth_png": "hand-rolled, colour type 2, 8-bit, filter Sub, zlib level 6 (no colour management touches a depth byte)"
+  },
+  "timings_s": {
+    "render_wall_clock": [
+      2047.826
+    ],
+    "cycles_time": [
+      2039.48
+    ],
+    "depth_pack": 2.407
+  },
+  "memory": {
+    "device_peak_mb": 1427.91,
+    "host_peak_mb": 6682.27,
+    "post_render_peak_mb": 3874.11,
+    "source": "Cycles' own status field; nvidia-smi per-process is N/A on this WDDM GPU",
+    "note": "device_peak_mb = Cycles' `Mem:…, Peak:…` during the render phases only; post_render_peak_mb is the same field during Finishing/Compositing, where it reports HOST buffers, not VRAM; host_peak_mb is Blender's own `(Peak …)`",
+    "hybrid_masks_device_figure": false
+  },
+  "outputs": {
+    "pano": {
+      "file": "pano.webp",
+      "bytes": 1000370,
+      "sha256": "956191cb9540a97c709c08dde29036b93988b1495eb9f2f2d6296b3d3ed2d6a0"
+    },
+    "depth": {
+      "file": "depth.png",
+      "bytes": 1294806,
+      "sha256": "c33171aabd1cbd044dd993c2a090e2b396e9008d28150447849567779a1e3330"
+    }
+  },
+  "depth_stats": {
+    "png_bytes": 1294806,
+    "pack_seconds": 2.407,
+    "pixels": 33554432,
+    "valid_pixels": 33554432,
+    "sky_pixels": 0,
+    "min_m": 0.6620007157325745,
+    "max_m": 9.651998519897461,
+    "clipped_above_24bit": 0,
+    "clipped_below_1cm": 0,
+    "packed_data_sha256": "b940457aac296ee10c79271377811c29e8d17ff6a347334ad993d943d4152c22",
+    "roundtrip_max_byte_diff": 0,
+    "nadir_row_m": [
+      1.4,
+      1.4
+    ],
+    "zenith_row_m": [
+      1.2,
+      1.2
+    ]
+  },
+  "pano_checks": {
+    "size": [
+      8192,
+      4096
+    ],
+    "is_requested_size": true,
+    "is_2to1": true,
+    "poles": {
+      "zenith": {
+        "min_std": 0.001058,
+        "mean_luma_255": 157.766,
+        "unique_row0": 6,
+        "all_black_rows": 0,
+        "any_all_black": false
+      },
+      "nadir": {
+        "min_std": 0.009407,
+        "mean_luma_255": 138.1838,
+        "unique_row0": 93,
+        "all_black_rows": 0,
+        "any_all_black": false
+      },
+      "rows_examined": 15,
+      "note": "a polar row is one point of the sphere smeared across W px, so near-constant is CORRECT; only an ALL-BLACK row (plus an invalid depth zenith/nadir) is a hole"
+    },
+    "no_polar_hole": true
+  },
+  "depth_checks": [
+    {
+      "name": "nadir (floor)",
+      "surface": "r-master-lobby floor z=0",
+      "note": "the single number that proves metres AND the row order",
+      "azimuth_from_forward_deg": 0.0,
+      "latitude_deg": -90.0,
+      "col": 4096,
+      "row_from_bottom": 0,
+      "dir_world": [
+        -0.00026144,
+        0.00028057,
+        -0.99999993
+      ],
+      "expected_m": 1.4,
+      "decoded_m": 1.4,
+      "packed_units": 140,
+      "error_cm": 0.0,
+      "pass": true
+    },
+    {
+      "name": "zenith (ceiling)",
+      "surface": "r-master-lobby ceiling z=260 cm",
+      "note": "⚠ a pendant/emitter hanging over THIS point would read short — see --check-mode report",
+      "azimuth_from_forward_deg": 0.0,
+      "latitude_deg": 90.0,
+      "col": 4096,
+      "row_from_bottom": 4095,
+      "dir_world": [
+        -0.00026144,
+        0.00028057,
+        0.99999993
+      ],
+      "expected_m": 1.2,
+      "decoded_m": 1.2,
+      "packed_units": 120,
+      "error_cm": 0.0,
+      "pass": true
+    },
+    {
+      "name": "room r-master-lobby is not rectangular — the 4 wall checks are SKIPPED",
+      "surface": "n/a",
+      "note": "a bbox face is not a wall on a non-rectangular loop",
+      "skipped": true,
+      "pass": true
+    }
+  ],
+  "depth_check_worst_cm": 0.0,
+  "inputs": {
+    "point": "cp-master-lobby",
+    "scene": {
+      "generator": {
+        "script": "pipeline/build_scene.py",
+        "version": "1.1.0",
+        "script_sha256": "86f383e08a886a8934d980bd429b693bff2d5d00d4936f4c6f2bc7bf13149bd3",
+        "materials_kit_version": "0.2.0",
+        "place_cameras_version": "0.1.0",
+        "placement_templates_version": "1.0.0",
+        "placement_templates_sha256": "3c25bedb5461f741044b2c9790da3fe59fe6a708e35c0e8a7f4d2111a27c3161",
+        "materials_kit_sha256": "8509ab58a2eca0ebf0456a638933f0ba5d62a89d6555cc948b2e4fda0a970ab6",
+        "blender": "4.5.10 LTS",
+        "generated_utc": "2026-09-01T23:11:34+00:00"
+      },
+      "inputs": {
+        "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+        "plan_sha256": "d39ae01d4e1f20eccac1fc26193b3e60fce23feec4f3bf2aedb85cfe8ebcd319",
+        "assets_dir": "D:/AgentTeams/RealEstateTeam/360walkaround/pipeline/probe/probe-assets",
+        "style": "D:/AgentTeams/RealEstateTeam/360walkaround/catalog/style-habait-modern.json",
+        "style_sha256": "3e341ca3ed4e6de998ea8cc2818db7736730aa39e5f7c948a5c38bd1c4feada4",
+        "furnish_seed": 0,
+        "seed": 0,
+        "room_mode": "all",
+        "cap_virtual": "on",
+        "furniture": true
+      }
+    },
+    "settings": {
+      "res": [
+        8192,
+        4096
+      ],
+      "samples": 256,
+      "adaptive": "on",
+      "adaptive_threshold": 0.01,
+      "denoise": "on",
+      "denoise_device": "cpu",
+      "device": "AUTO",
+      "hybrid": false,
+      "tile_size": 0,
+      "texture_limit": "OFF",
+      "seed": 0,
+      "pano": "pano.webp",
+      "webp_quality": 90,
+      "depth": "on",
+      "wrap_pad": 512,
+      "script": "0.2.0",
+      "script_sha256": "f51b429b93dc154db3df775940ad00ccfa6245f6a19c5adbbfba6895efaaf66c",
+      "depth_encoding": "rgb24-be",
+      "depth_scale": 100
+    }
+  },
+  "input_key": "e30b14b08d25969a9afeef7c47790816bab80832d0384ba857df18bb00c28a2f",
+  "cost_usd": 0.0,
+  "machine": "local — RTX A2000 Laptop 4 GB (ENV.md §1); $0, see RENDER-LEDGER.md"
+}

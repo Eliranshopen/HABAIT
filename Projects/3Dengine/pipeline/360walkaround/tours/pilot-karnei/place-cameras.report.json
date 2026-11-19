@@ -1,0 +1,40 @@
+{
+  "generator": {
+    "script": "pipeline/place_cameras.py",
+    "version": "0.1.0"
+  },
+  "plan": "D:/AgentTeams/RealEstateTeam/360walkaround/tours/pilot-karnei/plan.json",
+  "before_count": 9,
+  "after_count": 12,
+  "added": [
+    {
+      "id": "cp-ensuite",
+      "room_id": "r-ensuite",
+      "x": 406.7,
+      "y": 1181.1,
+      "z": 140.0,
+      "yaw_deg": 210.0,
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~67.8 cm plan-space clearance to the nearest drawn wall face"
+    },
+    {
+      "id": "cp-master-lobby",
+      "room_id": "r-master-lobby",
+      "x": 400.9,
+      "y": 984.6,
+      "z": 140.0,
+      "yaw_deg": 317.0,
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~73.6 cm plan-space clearance to the nearest drawn wall face"
+    },
+    {
+      "id": "cp-wc",
+      "room_id": "r-wc",
+      "x": 565.1,
+      "y": 260.2,
+      "z": 140.0,
+      "yaw_deg": 143.0,
+      "note": "auto-placed (T06 rule, place_cameras.py v0.1.0): deepest interior point, yaw = longest clear sightline, ~62.5 cm plan-space clearance to the nearest drawn wall face"
+    }
+  ],
+  "warnings": [],
+  "policy": "authored seeds kept verbatim; the rule fills every indoor room still lacking one; outdoor rooms get zero; deterministic grid-search placement + ray-cast yaw; see this file's module docstring for the exact rule"
+}

@@ -1,0 +1,141 @@
+===== s2-out
+baseline CLI jobs --json (no lock): 77 ms
+copy right holder-refresh true: get_job=1ms list_jobs=1ms get_result=3ms cli job --json=76ms (baseline 77) cli jobs=86ms cli job=75ms start_simulation(done)=2004ms(ERR job 9a471bf7b73c2a56: lock bus) | reported get_job=1.8 | copy on disk now 1.8
+  after the holder is gone and one read: copy 1.8
+copy right holder-refresh false: get_job=1ms list_jobs=1ms get_result=1ms cli job --json=73ms (baseline 77) cli jobs=76ms cli job=72ms start_simulation(done)=2006ms(ERR job 9a471bf7b73c2a56: lock bus) | reported get_job=1.8 | copy on disk now 1.8
+  after the holder is gone and one read: copy 1.8
+copy behind holder-refresh true: get_job=58ms list_jobs=63ms get_result=64ms cli job --json=146ms (baseline 77) cli jobs=146ms cli job=157ms start_simulation(done)=2008ms(ERR job 9a471bf7b73c2a56: lock bus) | reported get_job=1.8 | copy on disk now 99
+  after the holder is gone and one read: copy 1.8
+copy behind holder-refresh false: get_job=56ms list_jobs=63ms get_result=63ms cli job --json=133ms (baseline 77) cli jobs=145ms cli job=144ms start_simulation(done)=2013ms(ERR job 9a471bf7b73c2a56: lock bus) | reported get_job=1.8 | copy on disk now 99
+  after the holder is gone and one read: copy 1.8
+dead-pid lock, copy behind: get_job 17 ms, copy now 1.8
+PROBLEMS 0
+===== s4-all
+ok chain0 skinning hook2=- wake=before3 k2=13784
+ok chain1 gating:reserved hook2=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS wake=afterkill +k3 k2=22480
+ok chain2 skinning:reserved hook2=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS wake=afterdone k2=29668
+ok chain3 finishing:reserved hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=afterdone +k3 k2=38636
+ok chain4 finishing:reserved hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=afterkill k2=40660
+ok chain5 gating hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=after3 +k3 k2=32504
+SUMMARY type=chain seed=7001 scenarios=6 kills=9 takeovers=12 violations=0 leftover=[]
+ok chain0 skinning:reserved hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=before3 k2=35088
+ok chain1 finishing:sent hook2=- wake=before3 k2=1992
+ok chain2 gating hook2=- wake=afterdone +k3 k2=24076
+ok chain3 skinning hook2=ENGINE_TEST_PAUSE_AFTER_RESERVE_MS wake=afterdone +k3 k2=24516
+ok chain4 finishing:sent hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=after3 k2=7052
+ok chain5 skinning:reserved hook2=ENGINE_TEST_PAUSE_AFTER_SETTLE_MS wake=before3 k2=10424
+ok chain6 skinning hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=after3 k2=27716
+ok chain7 skinning:sent hook2=ENGINE_TEST_PAUSE_AFTER_SETTLE_MS wake=before3 k2=40168
+ok chain8 finishing:sent hook2=- wake=before3 +k3 k2=17324
+ok chain9 gating:sent hook2=ENGINE_TEST_PAUSE_AFTER_SETTLE_MS wake=before3 +k3 k2=23128
+ok chain10 skinning hook2=- wake=before3 k2=24864
+ok chain11 skinning:sent hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=before3 k2=41476
+ok chain12 gating hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=afterdone k2=41884
+ok chain13 gating:reserved hook2=- wake=afterkill k2=27204
+ok chain14 finishing hook2=ENGINE_TEST_PAUSE_AFTER_SETTLE_MS wake=before3 k2=27596
+ok chain15 skinning:sent hook2=- wake=afterkill k2=41428
+ok chain16 skinning:sent hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=after3 k2=23216
+ok chain17 finishing hook2=ENGINE_TEST_PAUSE_AFTER_CACHE_MS wake=afterkill k2=40192
+SUMMARY type=chain seed=7002 scenarios=18 kills=22 takeovers=36 violations=0 leftover=[]
+ok heavy0 wakeA Aattempts(rendering)=2
+ok heavy1 killB Aattempts(rendering)=2
+ok heavy2 killA Aattempts(rendering)=2
+ok heavy3 killB Aattempts(rendering)=2
+ok heavy4 killB Aattempts(rendering)=2
+ok heavy5 wakeAafterB Aattempts(rendering)=2
+ok heavy6 wakeA Aattempts(rendering)=2
+ok heavy7 killB Aattempts(rendering)=2
+SUMMARY type=heavy seed=7003 scenarios=8 kills=5 takeovers=8 violations=0 leftover=[]
+ok rubble0 tracing negative heavyGuard=false start=1055ms active=1132ms
+ok rubble1 awaiting negative heavyGuard=false start=1044ms active=1118ms
+ok rubble2 rendering deadSpaces heavyGuard=false start=48ms active=124ms
+ok rubble3 gating zero heavyGuard=true start=1039ms active=1126ms
+ok rubble4 gating empty heavyGuard=true start=1049ms active=1134ms
+ok rubble5 gating dead heavyGuard=false start=24ms active=94ms
+ok rubble6 rendering garbage heavyGuard=true start=1046ms active=1122ms
+ok rubble7 awaiting empty heavyGuard=true start=1040ms active=1119ms
+ok rubble8 rendering garbage heavyGuard=false start=1046ms active=1135ms
+ok rubble9 skinning deadSpaces heavyGuard=false start=37ms active=107ms
+ok rubble10 skinning deadSpaces heavyGuard=false start=44ms active=121ms
+ok rubble11 awaiting negative heavyGuard=false start=1042ms active=1120ms
+SUMMARY type=rubble seed=7004 scenarios=12 kills=12 takeovers=0 violations=0 leftover=[]
+ok pauses0 R_RESERVE_MS then TER_CACHE_MS second pause reached=true
+ok pauses1 TER_CACHE_MS then ER_SETTLE_MS second pause reached=true
+ok pauses2 TER_CACHE_MS then R_RESERVE_MS second pause reached=true
+ok pauses3 TER_CACHE_MS then R_RESERVE_MS second pause reached=true
+ok pauses4 ER_SETTLE_MS then TER_CACHE_MS second pause reached=true
+ok pauses5 R_RESERVE_MS then TER_CACHE_MS second pause reached=true
+ok pauses6 R_RESERVE_MS then TER_CACHE_MS second pause reached=true
+ok pauses7 TER_CACHE_MS then TER_CACHE_MS second pause reached=true
+SUMMARY type=pauses seed=7005 scenarios=8 kills=16 takeovers=0 violations=0 leftover=[]
+ok cap0 gating need=75 spent=75
+ok cap1 gating need=75 spent=75
+ok cap2 capstop need=75 spent=75
+ok cap3 skinning need=75 spent=75
+ok cap4 skinning need=75 spent=75
+SUMMARY type=cap seed=7006 scenarios=5 kills=5 takeovers=0 violations=0 leftover=[]
+ok cancel0 skinning:sent
+ok cancel1 skinning:reserved
+ok cancel2 gating:sent
+ok cancel3 gating:sent
+ok cancel4 finishing:sent
+ok cancel5 skinning:reserved
+SUMMARY type=cancel seed=7007 scenarios=6 kills=3 takeovers=12 violations=0 leftover=[]
+===== s5-out
+X ledger rows before: 3, spent 1.8
+rep 1 otherJobExisting: runner exit ok=true state=failed reason={"code":"STAGE_FAILED","message":"skinning: Cannot read properties of undefined (reading 'status')"} X ledger changed=true (rows now 1) S ledger rows=0 jobs/undefined exists=false sends=0
+rep 1 noJobId: runner exit ok=true state=failed reason={"code":"STAGE_FAILED","message":"skinning: Cannot read properties of undefined (reading 'status')"} X ledger changed=false (rows now 3) S ledger rows=0 jobs/undefined exists=true sends=0
+rep 2 otherJobExisting: runner exit ok=true state=failed reason={"code":"STAGE_FAILED","message":"skinning: Cannot read properties of undefined (reading 'status')"} X ledger changed=true (rows now 1) S ledger rows=0 jobs/undefined exists=false sends=0
+rep 2 noJobId: runner exit ok=true state=failed reason={"code":"STAGE_FAILED","message":"skinning: Cannot read properties of undefined (reading 'status')"} X ledger changed=false (rows now 3) S ledger rows=0 jobs/undefined exists=true sends=0
+rep 3 otherJobExisting: runner exit ok=true state=failed reason={"code":"STAGE_FAILED","message":"skinning: Cannot read properties of undefined (reading 'status')"} X ledger changed=true (rows now 1) S ledger rows=0 jobs/undefined exists=false sends=0
+rep 3 noJobId: runner exit ok=true state=failed reason={"code":"STAGE_FAILED","message":"skinning: Cannot read properties of undefined (reading 'status')"} X ledger changed=false (rows now 3) S ledger rows=0 jobs/undefined exists=true sends=0
+===== s6-out
+round 0: runner.pid named an extra runner (31916) AFTER done (job state done)
+round 45: runner.pid named an extra runner (21548) AFTER done (job state done)
+round 55: runner.pid named an extra runner (28252) AFTER done (job state done)
+rounds 60 extras 5 violations(pid taken after done) 3
+round 4: runner.pid named an extra runner (43552) AFTER done (job state done)
+round 16: runner.pid named an extra runner (14596) AFTER done (job state done)
+round 39: runner.pid named an extra runner (16480) AFTER done (job state done)
+rounds 40 extras 5 violations(pid taken after done) 3
+   pid file named the extra for 15.9 ms (poll 1 ms), job state done, get_job runner.alive meanwhile not measured
+round 10: runner.pid named an extra runner (41652) AFTER done (job state done)
+   pid file named the extra for 0.0 ms (poll 1 ms), job state done, get_job runner.alive meanwhile not measured
+round 11: runner.pid named an extra runner (40992) AFTER done (job state done)
+rounds 45 extras 6 violations(pid taken after done) 2
+===== s7-out
+A same key x2: sends=1 rows=1 answers=["{\"n\":1}"]
+A same key x5: sends=1 rows=1 answers=["{\"n\":1}"]
+A same key x20: sends=1 rows=1 answers=["{\"n\":1}"]
+A failing first: rejected:provider said no | rejected:provider said no sends=1 rows=failed
+A third call after the failure: sends=2 rows=failed,settled
+A duplicate with estimate "abc": answer A, sends=1  (15.1b says STAGE_FAILED; 13.1 says it gets the answer)
+A 6 different keys: sends=6 rows=6 seqs=1,2,3,4,5,6 statuses=settled
+part A PROBLEMS 0
+B holder 8s refreshed: settledAt=8448ms sends=1 state=done skinning rows=1:settled
+   log lines: 2; first: 2026-11-17T03:03:06.501Z runner 36440 skinning: the cache write of seq 1 waits (job 1dd734a8293f160c: lock busy); the answer stays in hand; last: 2026-11-17T03:03:12.525Z runner 36440 skinning: the cache write of seq 1 waits (job 1dd734a8293f160c: lock busy); the answer stays in hand
+part B PROBLEMS 0
+C holder 12s NOT refreshed: settledAt=10147ms sends=1 state=done skinning rows=1:settled
+   log lines: 2; first: 2026-11-17T03:03:19.002Z runner 3312 skinning: the cache write of seq 1 waits (job c95715451a27a666: lock busy); the answer stays in hand; last: 2026-11-17T03:03:25.028Z runner 3312 skinning: the cache write of seq 1 waits (job c95715451a27a666: lock busy); the answer stays in hand
+part C PROBLEMS 0
+D holder 45s refreshed: settledAt=45367ms sends=2 state=done skinning rows=1:orphaned 2:settled
+   log lines: 6; first: 2026-11-17T03:03:37.449Z runner 14480 skinning: the cache write of seq 1 waits (job d18ed2db3d44a41f: lock busy); the answer stays in hand; last: 2026-11-17T03:04:20.653Z runner 14480 skinning: reserved row(s) of ac559d2a0ed6 left by another runner: 1 marked orphaned (the send had started), 0 closed as ne
+   D expectation (13.3): answer kept for up to 30 s, then lost -> one more send; sends=2
+part D PROBLEMS 0
+===== s9-out
+round 0: killed holder (state rendering) -> waiter owns heavy + rendering after 139 ms
+round 1: killed holder (state rendering) -> waiter owns heavy + rendering after 171 ms
+round 2: killed holder (state rendering) -> waiter owns heavy + rendering after 16 ms
+round 3: killed holder (state rendering) -> waiter owns heavy + rendering after 29 ms
+round 4: killed holder (state rendering) -> waiter owns heavy + rendering after 45 ms
+round 5: killed holder (state rendering) -> waiter owns heavy + rendering after 1453 ms
+round 6: killed holder (state rendering) -> waiter owns heavy + rendering after 202 ms
+round 7: killed holder (state rendering) -> waiter owns heavy + rendering after 204 ms
+kills 8 PROBLEMS 0
+===== s10-out
+===== s10 (stdout, the script died at its last value because my own toDone approved $60 after a recovered $1,000,000 row hit the cap; the engine was right)
+missing/null/text/neg/negtiny/inf/big/over/bool/arr/obj: each -> resumed sends=1, rows 1:orphaned(null) 2:settled(0.6), reported spent 1.8, get_job/list/get_result agree
+good04 -> sends=0 rows 1:settled+rec(0.4) reported spent 1.6
+zero   -> sends=0 rows 1:settled+rec(0) reported spent 1.2
+max (1000000) -> recovered at $1,000,000, next stage stopped at the cap (correct)
+===== s8: stub.callUsd -1 / "abc" / 2000000 in the temp settings: loadConfig refuses ("stub.callUsd must be a number 0..1000"), so the real stage cannot carry a bad amount; B(b) and B(c) were run with createPaidCall directly (s1).

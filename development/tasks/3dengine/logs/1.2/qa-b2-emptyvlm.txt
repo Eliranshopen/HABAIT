@@ -1,0 +1,24 @@
+scenario emptyvlm  work C:/Users/elira/AppData/Local/Temp/qa12-emptyvlm-bWwALR load 20
+=== emptyvlm
+{
+ "code": 1,
+ "secs": "13.9",
+ "stdout": "outcome: STEP_FAILED\nseconds: 13.7\npaid run: no\ntool exit code: 1\noutput folder: C:/Users/elira/AppData/Local/Temp/qa12-emptyvlm-bWwALR/out\nthe tool's own output: C:/Users/elira/AppData/Local/Temp/qa12-emptyvlm-bWwALR/out/auto-trace.log\n",
+ "stderr": "",
+ "ledger": false,
+ "alive": [
+  "15088 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "38560 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "45076 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 300 node qa12-b2.mjs emptyvlm",
+  "45976 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 300 node qa12-b2.mjs emptyvlm",
+  "30864 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs emptyvlm"
+ ]
+}
+procs at end [
+  '15088 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '38560 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '45076 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 300 node qa12-b2.mjs emptyvlm',
+  '45976 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 300 node qa12-b2.mjs emptyvlm',
+  '30864 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs emptyvlm'
+]
+exit 0

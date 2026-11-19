@@ -1,0 +1,43 @@
+baseline 3 cached? false
+second  cached? true
+rescanned+ok  not JSON
+rescanned+ok  empty file
+rescanned+ok  array
+rescanned+ok  null
+rescanned+ok  schema v2
+rescanned+ok  no schema
+rescanned+ok  other sha
+rescanned+ok  other scanner sha
+rescanned+ok  settings minSide
+rescanned+ok  settings vectorMin
+rescanned+ok  settings missing
+rescanned+ok  settings string
+rescanned+ok  summary missing
+rescanned+ok  summary null
+rescanned+ok  pages 0
+rescanned+ok  kind wrong
+rescanned+ok  rows short
+rescanned+ok  row bad content
+rescanned+ok  row width neg
+rescanned+ok  cand id bad chars
+rescanned+ok  cand id too long
+rescanned+ok  cand label not engine
+rescanned+ok  cand thumb outside
+BELIEVED/WRONG  cand thumb dotdot  (served from cache)
+rescanned+ok  cand page > pages
+rescanned+ok  cand source other
+rescanned+ok  cand px zero
+rescanned+ok  candidates not array
+rescanned+ok  large_images>images
+rescanned+ok  BOM + valid
+minSide 1350 → rescanned true cands p2-x13
+again same settings cached true
+back to 1000 → rescanned (not cached) true cands 3
+vectorMin change → rescan true
+scanner edited → rescanned true record scanner_sha now true
+then cached true
+hostile scanner → NOT_A_PDF the scanner could not read the file (status 3) leak? false
+marker-in-pages-doc → answer leaks? false inspect.json leaks? false logs leak? false
+timeout → FILE_TOO_LARGE the first look did not finish in 2 s (a very large file, or this machine is busy); ask again 2023 ms
+temp folders left under inspect: []
+ATTEMPTS 42 BAD 1

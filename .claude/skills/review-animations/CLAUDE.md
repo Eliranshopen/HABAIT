@@ -1,11 +1,11 @@
 # review-animations/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Skill `review-animations` — Reviews animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy. Default to flagging; approval is earned. The contract is `SKILL.md`; this card only routes (root `CLAUDE.md` §8.4).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 2 files here · 0 subfolders · 2 files / 17.8 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

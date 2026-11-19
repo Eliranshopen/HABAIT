@@ -1,16 +1,28 @@
 # tour360/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent context file's row for this folder is the description._
 
-## What's here (2026-11-05)
-0 files here · 1 subfolders · 20 files / 3.6 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+0 files here · 13 subfolders · 266 files / 115.6 MB in the whole tree (vendor and build output excluded)
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
+| `T16/` | [`T16/CLAUDE.md`](T16/CLAUDE.md) | 41 (4.0 MB) |
+| `fix-846-fidelity-2026-11-05/` | [`fix-846-fidelity-2026-11-05/CLAUDE.md`](fix-846-fidelity-2026-11-05/CLAUDE.md) | 151 (107.6 MB) |
+| `fix-846-fidelity-2026-11-08-coach-music/` | [`fix-846-fidelity-2026-11-08-coach-music/CLAUDE.md`](fix-846-fidelity-2026-11-08-coach-music/CLAUDE.md) | 2 (16.8 KB) |
+| `fix-846-fidelity-2026-11-08-direction-c/` | [`fix-846-fidelity-2026-11-08-direction-c/CLAUDE.md`](fix-846-fidelity-2026-11-08-direction-c/CLAUDE.md) | 3 (33.2 KB) |
+| `fix-846-fidelity-2026-11-08-every-visit/` | [`fix-846-fidelity-2026-11-08-every-visit/CLAUDE.md`](fix-846-fidelity-2026-11-08-every-visit/CLAUDE.md) | 6 (24.9 KB) |
+| `fix-846-fidelity-2026-11-08-grouped/` | [`fix-846-fidelity-2026-11-08-grouped/CLAUDE.md`](fix-846-fidelity-2026-11-08-grouped/CLAUDE.md) | 4 (21.5 KB) |
+| `fix-846-fidelity-2026-11-08-host-audio/` | [`fix-846-fidelity-2026-11-08-host-audio/CLAUDE.md`](fix-846-fidelity-2026-11-08-host-audio/CLAUDE.md) | 3 (24.5 KB) |
+| `fix-846-fidelity-2026-11-08-menus/` | [`fix-846-fidelity-2026-11-08-menus/CLAUDE.md`](fix-846-fidelity-2026-11-08-menus/CLAUDE.md) | 5 (55.5 KB) |
+| `fix-846-fidelity-2026-11-08-mobile/` | [`fix-846-fidelity-2026-11-08-mobile/CLAUDE.md`](fix-846-fidelity-2026-11-08-mobile/CLAUDE.md) | 6 (37.4 KB) |
+| `fix-846-fidelity-2026-11-08-redesign/` | [`fix-846-fidelity-2026-11-08-redesign/CLAUDE.md`](fix-846-fidelity-2026-11-08-redesign/CLAUDE.md) | 19 (120.3 KB) |
+| `fix-846-fidelity-2026-11-08-sales-plan-numbers/` | [`fix-846-fidelity-2026-11-08-sales-plan-numbers/CLAUDE.md`](fix-846-fidelity-2026-11-08-sales-plan-numbers/CLAUDE.md) | 2 (4.8 KB) |
+| `fix-846-fidelity-2026-11-09-tap-hint/` | [`fix-846-fidelity-2026-11-09-tap-hint/CLAUDE.md`](fix-846-fidelity-2026-11-09-tap-hint/CLAUDE.md) | 4 (28.5 KB) |
 | `furniture-swap/` | [`furniture-swap/CLAUDE.md`](furniture-swap/CLAUDE.md) | 20 (3.6 MB) |
 
 ## Gotchas

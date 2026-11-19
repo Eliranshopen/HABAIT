@@ -1,0 +1,239 @@
+{
+ "rooms": 10,
+ "fixtures": 18,
+ "scale_px_per_cm": 2.2677,
+ "scale_fit_factor": 1.0,
+ "scale_fitted": false,
+ "dims": [
+  {
+   "room": "r-bedroom",
+   "name_he": "חדר שינה",
+   "measured_cm": [
+    343,
+    276
+   ],
+   "printed_cm": [
+    275,
+    342
+   ],
+   "ratio": [
+    1.0015082834295945,
+    1.0054127316201273
+   ],
+   "delta_pct": [
+    0.3,
+    0.4
+   ]
+  },
+  {
+   "room": "r-bathroom",
+   "name_he": "חדר רחצה כללי",
+   "measured_cm": [
+    266,
+    149
+   ],
+   "printed_cm": [
+    140,
+    199
+   ],
+   "ratio": [
+    1.338503330099827,
+    1.0625978620960954
+   ],
+   "delta_pct": [
+    33.7,
+    6.4
+   ]
+  },
+  {
+   "room": "r-kitchen",
+   "name_he": "מטבח",
+   "measured_cm": [
+    524,
+    336
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-dining-area",
+   "name_he": "פינת אוכל",
+   "measured_cm": [
+    589,
+    224
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-living-room",
+   "name_he": "חדר דיור",
+   "measured_cm": [
+    918,
+    443
+   ],
+   "printed_cm": null
+  },
+  {
+   "room": "r-sun-balcony",
+   "name_he": "מרפסת שמש",
+   "measured_cm": [
+    1061,
+    345
+   ],
+   "printed_cm": [
+    270,
+    474
+   ],
+   "ratio": [
+    2.2378813326606672,
+    1.276203705002864
+   ],
+   "delta_pct": [
+    123.8,
+    27.8
+   ]
+  },
+  {
+   "room": "r-master-bedroom",
+   "name_he": "חדר שינה הורים",
+   "measured_cm": [
+    346,
+    342
+   ],
+   "printed_cm": [
+    348,
+    344
+   ],
+   "ratio": [
+    0.9940708549841135,
+    0.9942297308416095
+   ],
+   "delta_pct": [
+    -0.6,
+    -0.6
+   ]
+  },
+  {
+   "room": "r-closet-area",
+   "name_he": "פינת ארונות",
+   "measured_cm": [
+    343,
+    341
+   ],
+   "printed_cm": [
+    160,
+    185
+   ],
+   "ratio": [
+    1.8559955765896987,
+    2.1294218847146285
+   ],
+   "delta_pct": [
+    85.4,
+    113.1
+   ]
+  },
+  {
+   "room": "r-master-bathroom",
+   "name_he": "חדר רחצה הורים",
+   "measured_cm": [
+    211,
+    208
+   ],
+   "printed_cm": [
+    210,
+    212
+   ],
+   "ratio": [
+    0.9956017386482447,
+    0.9924910712056512
+   ],
+   "delta_pct": [
+    -0.5,
+    -1.0
+   ]
+  },
+  {
+   "room": "r-entrance",
+   "name_he": "כניסה",
+   "measured_cm": [
+    394,
+    351
+   ],
+   "printed_cm": null
+  }
+ ],
+ "could_not_read": [
+  "room 'מבואה' (r-hall-auto-93): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'מעבר' (r-corridor-20): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'מעבר' (r-corridor-75): no closed region was traced around its label (the flood leaked or the label sits on a line)",
+  "room 'חדר רחצה כללי' (r-bathroom): traced [266, 149] cm vs printed [140, 199] cm ([33.7, 6.4] %) — check the trace or the reading",
+  "room 'מטבח' (r-kitchen): no printed dimensions were read; its size comes from the drawing only",
+  "room 'פינת אוכל' (r-dining-area): no printed dimensions were read; its size comes from the drawing only",
+  "room 'חדר דיור' (r-living-room): no printed dimensions were read; its size comes from the drawing only",
+  "room 'מרפסת שמש' (r-sun-balcony): traced [1061, 345] cm vs printed [270, 474] cm ([123.8, 27.8] %) — check the trace or the reading",
+  "room 'פינת ארונות' (r-closet-area): traced [343, 341] cm vs printed [160, 185] cm ([85.4, 113.1] %) — check the trace or the reading",
+  "room 'כניסה' (r-entrance): no printed dimensions were read; its size comes from the drawing only"
+ ],
+ "legend": [
+  {
+   "n": 1,
+   "id": "r-bedroom",
+   "name_he": "חדר שינה",
+   "area_m2": 9.397
+  },
+  {
+   "n": 2,
+   "id": "r-bathroom",
+   "name_he": "חדר רחצה כללי",
+   "area_m2": 3.213
+  },
+  {
+   "n": 3,
+   "id": "r-kitchen",
+   "name_he": "מטבח",
+   "area_m2": 12.342
+  },
+  {
+   "n": 4,
+   "id": "r-dining-area",
+   "name_he": "פינת אוכל",
+   "area_m2": 11.697
+  },
+  {
+   "n": 5,
+   "id": "r-living-room",
+   "name_he": "חדר דיור",
+   "area_m2": 28.44
+  },
+  {
+   "n": 6,
+   "id": "r-sun-balcony",
+   "name_he": "מרפסת שמש",
+   "area_m2": 18.974
+  },
+  {
+   "n": 7,
+   "id": "r-master-bedroom",
+   "name_he": "חדר שינה הורים",
+   "area_m2": 11.827
+  },
+  {
+   "n": 8,
+   "id": "r-closet-area",
+   "name_he": "פינת ארונות",
+   "area_m2": 5.734
+  },
+  {
+   "n": 9,
+   "id": "r-master-bathroom",
+   "name_he": "חדר רחצה הורים",
+   "area_m2": 4.393
+  },
+  {
+   "n": 10,
+   "id": "r-entrance",
+   "name_he": "כניסה",
+   "area_m2": 5.666
+  }
+ ]
+}

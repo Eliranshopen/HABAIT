@@ -1,0 +1,115 @@
+// qa-r3 helpers: invariants computed from the files by this script, scenario helpers on top of tests/soak/lib.mjs
+import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
+const REPO = 'C:/RnD/Projects/3Dengine';
+const lib = await import(pathToFileURL(`${REPO}/tests/soak/lib.mjs`).href);
+export const { mkEnv, frozenJob, toDone, gone, sleep, pidAlive: _p } = lib;
+import { pidAlive } from 'file:///C:/RnD/Projects/3Dengine/engine/lib/proc.mjs';
+export { pidAlive };
+export const STAGES = ['tracing', 'building', 'rendering', 'skinning', 'gating', 'finishing', 'packaging', 'qa'];
+export const PAID = ['skinning', 'gating', 'finishing'];
+export const HOOKS = ['ENGINE_TEST_PAUSE_AFTER_RESERVE_MS', 'ENGINE_TEST_PAUSE_AFTER_CACHE_MS', 'ENGINE_TEST_PAUSE_AFTER_SETTLE_MS'];
+
+export function rng(seed) {
+  let s = seed >>> 0;
+  const f = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+  f.int = (a, b) => a + Math.floor(f() * (b - a + 1));
+  f.pick = (arr) => arr[Math.floor(f() * arr.length)];
+  return f;
+}
+export const usd = (n) => Math.round(n * 1e6) / 1e6;
+export const settledSum = (l) => usd(l.rows.filter((r) => r.status === 'settled').reduce((n, r) => n + (Number(r.settled_usd) || 0), 0));
+
+// quiet = no runner alive / nothing writing: then spent_usd must equal the settled sum
+export function inv(E, id, { quiet = true, expectDone = false, tag = '' } = {}) {
+  const v = [];
+  let job, man, led;
+  try { job = E.job(id); man = E.rows(id); led = E.ledger(id); } catch (e) { return [`${tag} parse: ${e.message}`]; }
+  const byKey = {};
+  for (const r of led.rows) (byKey[r.call_key] ||= []).push(r);
+  for (const [k, rs] of Object.entries(byKey)) {
+    const s = rs.filter((r) => r.status === 'settled');
+    const late = s.filter((r) => r.late).length;
+    if (s.length > 1 + late) v.push(`${tag} call ${k.slice(0, 8)} settled ${s.length}x with ${late} late`);
+    for (const r of rs) if (r.late && r.status !== 'settled') v.push(`${tag} late flag on non-settled row`);
+  }
+  for (const st of PAID) {
+    const rs = led.rows.filter((r) => r.stage === st);
+    const real = rs.filter((r) => r.status === 'settled' && !r.recovered).length;
+    const rec = rs.filter((r) => r.status === 'settled' && r.recovered).length;
+    const maybe = rs.filter((r) => r.status === 'orphaned' || r.status === 'reserved' || (r.status === 'failed' && !r.not_sent)).length;
+    const sends = E.sends(id, st);
+    if (sends < real) v.push(`${tag} ${st}: sends ${sends} < settled real rows ${real}`);
+    if (sends > real + rec + maybe) v.push(`${tag} ${st}: sends ${sends} > settled-real ${real} + unknown ${maybe}`);
+  }
+  for (const st of STAGES) {
+    const n = man.filter((r) => r.stage === st && r.status === 'done' && !r.superseded).length;
+    if (n > 1) v.push(`${tag} ${st}: ${n} valid rows`);
+  }
+  let seenMissing = false;
+  for (const st of STAGES) {
+    const has = man.some((r) => r.stage === st && r.status === 'done' && !r.superseded);
+    if (!has) seenMissing = true; else if (seenMissing && job.state !== 'done') { /* a later row with an earlier gap: allowed while going back */ }
+  }
+  const sum = settledSum(led);
+  if (quiet && job.cost.spent_usd !== sum) v.push(`${tag} spent ${job.cost.spent_usd} != settled ${sum}`);
+  const hasLate = led.rows.some((r) => r.late);
+  const caps = [job.cost.cap_usd, ...(job.approvals || []).map((a) => a.cap_usd), job.approval?.cap_usd].filter((x) => typeof x === 'number');
+  const cap = caps.length ? Math.max(...caps) : null;
+  if (cap !== null && !hasLate) {
+    const counted = usd(led.rows.reduce((n, r) => n + (r.status === 'settled' ? r.settled_usd : (r.status === 'reserved' || r.status === 'orphaned') ? r.reserved_usd : 0), 0));
+    if (counted > cap + 1e-9) v.push(`${tag} counted ${counted} > cap ${cap}`);
+  }
+  if (expectDone) {
+    if (job.state !== 'done') v.push(`${tag} state ${job.state}`);
+    for (const st of STAGES) if (man.filter((r) => r.stage === st && !r.superseded).length !== 1) v.push(`${tag} ${st} rows != 1`);
+    if (led.rows.some((r) => r.status === 'reserved')) v.push(`${tag} reserved row left at done`);
+  }
+  return v;
+}
+
+// rendering rows of different jobs never overlap
+export function overlaps(E, ids) {
+  const rr = [];
+  for (const id of ids) for (const r of E.rows(id)) if (r.stage === 'rendering' && r.status === 'done') rr.push({ id, a: Date.parse(r.started_at), b: Date.parse(r.finished_at), at: r.attempt });
+  const out = [];
+  for (let i = 0; i < rr.length; i++) for (let j = i + 1; j < rr.length; j++) if (rr[i].id !== rr[j].id && rr[i].a < rr[j].b && rr[j].a < rr[i].b) out.push(`rendering overlap ${rr[i].id}#${rr[i].at} / ${rr[j].id}#${rr[j].at}`);
+  return out;
+}
+
+export function setEnv(o) { for (const [k, v] of Object.entries(o || {})) process.env[k] = String(v); }
+export function clearEnv() { for (const k of [...HOOKS, 'ENGINE_TEST_FREEZE_MS', 'ENGINE_TEST_FREEZE_AT', 'ENGINE_TEST_FREEZE_WAKE']) delete process.env[k]; }
+
+// first runner frozen at `point` (a LIVE process, looks dead), then a second runner takes over (its env: secondEnv)
+export async function takeover(E, { name, point, secondEnv = {} }) {
+  clearEnv();
+  const f = await frozenJob(E, { name, point });
+  if (E.runnerPid(f.id) !== f.pid) throw new Error('runner.pid changed before takeover');
+  setEnv(secondEnv);
+  let again;
+  try { again = E.h.start_simulation({ pdf_path: f.pdf }); } finally { clearEnv(); }
+  if (again.created !== false || again.resumed !== true) throw new Error(`not a resume ${JSON.stringify(again)}`);
+  const newPid = await E.waitFor('second runner owns runner.pid', () => { const p = E.runnerPid(f.id); return p && p !== f.pid ? p : null; }, 20000);
+  if (f.woke() || !pidAlive(f.pid)) throw new Error('first runner not blocked at takeover');
+  return { ...f, oldPid: f.pid, newPid };
+}
+
+// wait until the job is done, approving when asked; throws on failed
+export async function finish(E, id, ms = 60000) {
+  await E.waitFor(`job ${id} done`, () => {
+    const j = E.job(id);
+    if (j.state === 'failed') throw new Error(`failed ${JSON.stringify(j.reason)}`);
+    if (j.state === 'awaiting_approval' && !j.approval) E.approve(id);
+    return j.state === 'done';
+  }, ms, 20);
+}
+export const quietGone = async (E, id) => {
+  await E.waitFor('runner pid file gone', () => E.runnerPid(id) === null, 10000, 20);
+};
+export async function resume(E, pdf) {
+  for (let i = 0; i < 6; i++) {
+    try { return E.h.start_simulation({ pdf_path: pdf }); } catch (e) { if (!/lock busy/.test(e.message)) throw e; await sleep(300); }
+  }
+  throw new Error('resume: lock busy x6');
+}
+export function report(name, rows) { console.log(`## ${name}`); for (const r of rows) console.log(r); }

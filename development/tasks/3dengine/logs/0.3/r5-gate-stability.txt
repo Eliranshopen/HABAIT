@@ -1,0 +1,18 @@
+Stability of the gate on the worktree (2026-11-16, the machine loaded by another session's job)
+closing test tests/milestones/m0.3.test.mjs, 10 runs in a row:
+  run 1: tests 15 pass 15 fail 0 
+  run 2: tests 15 pass 15 fail 0 
+  run 3: tests 15 pass 15 fail 0 
+  run 4: tests 15 pass 15 fail 0 
+  run 5: tests 15 pass 15 fail 0 
+  run 6: tests 15 pass 15 fail 0 
+  run 7: tests 15 pass 15 fail 0 
+  run 8: tests 15 pass 15 fail 0 
+  run 9: tests 15 pass 15 fail 0 
+  run 10: tests 15 pass 15 fail 0 
+npm test (the whole suite with the coverage bar), 5 runs in a row:
+  run 1: tests 228 pass 228 fail 0  lines 99.60 %
+  run 2: tests 228 pass 228 fail 0  lines 99.60 %
+  run 3: tests 228 pass 228 fail 0  lines 99.60 %
+  run 4: tests 228 pass 228 fail 0  lines 99.60 %
+  run 5: tests 228 pass 228 fail 0  lines 99.60 %

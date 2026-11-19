@@ -1,0 +1,108 @@
+// A2b: manual second runner, runner.pid rewritten / deleted under a live runner. Usage: node a2b-pid.mjs <seed>
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { mkEnv, sleep, S, setSeed, between, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, toDone, waitEvent, resume, approveWhen } from './q.mjs';
+import { configEnv } from 'file:///C:/RnD/Projects/3Dengine/engine/control.mjs';
+const [seed] = process.argv.slice(2).map(Number);
+setSeed(seed);
+const E = await mkEnv({ prefix: 'qa-a2b-', callUsd: 0.6, stepMs: 500, heartbeat: 0.1, staleSeconds: 1 });
+const RUNNER = 'C:/RnD/Projects/3Dengine/engine/runner.mjs';
+const res = {};
+function manual(id, extraEnv = {}) {
+  const logf = `${E.home}/manual-${id}-${Date.now()}.log`;
+  const fd = fs.openSync(logf, 'a');
+  const c = spawn(process.execPath, [RUNNER, id], { detached: true, stdio: ['ignore', fd, fd], windowsHide: true, env: { ...configEnv(E.config), ...extraEnv }, cwd: E.home });
+  c.unref(); E.spawned.add(c.pid);
+  return { pid: c.pid, logf };
+}
+const start = (name, env = {}) => {
+  const pdf = E.pdf(name, name);
+  for (const [k, v] of Object.entries(env)) process.env[k] = v;
+  let id; try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { for (const k of Object.keys(env)) delete process.env[k]; }
+  return { pdf, id };
+};
+const pidFile = (id) => E.jobPath(id, 'runner.pid');
+try {
+  // B1: a second runner by hand while the first is alive
+  for (let i = 0; i < 4; i++) {
+    const { pdf, id } = start(`b1-${seed}-${i}.pdf`);
+    const tag = `B1.${i} ${id}`;
+    const p1 = await E.waitFor('first runner pid', () => E.runnerPid(id));
+    await waitEvent(E, id, `state:${['tracing', 'building', 'rendering', 'awaiting_approval'][i]}`, 5000);
+    const m = manual(id);
+    S.takeovers++; // an attempted takeover
+    await sleep(500);
+    inv(E, id, `${tag} during second`);
+    if (E.runnerPid(id) !== p1) violate(`${tag}: runner.pid changed to ${E.runnerPid(id)} though first (${p1}) was alive and beating`);
+    await toDone(E, id, tag);
+    const t0 = Date.now(); while (pidAlive(m.pid) && Date.now() - t0 < 6000) await sleep(50);
+    if (pidAlive(m.pid)) violate(`${tag}: manual second runner ${m.pid} still alive 6 s later`);
+    finalCheck(E, id, tag); await spentOk(E, id, tag);
+    const mlog = fs.readFileSync(m.logf, 'utf8');
+    if (!/busy|superseded/.test(mlog)) note(`${tag}: manual runner log: ${mlog.trim().split('\n').slice(-2).join(' | ')}`);
+    for (const r of E.rows(id)) if (r.runner_pid === m.pid) violate(`${tag}: manual runner wrote row ${r.stage}`);
+    res[`B1.${i}`] = 'ok';
+  }
+  // B2: delete runner.pid under a live runner (at several states)
+  for (const st of ['tracing', 'building', 'rendering', 'awaiting_approval']) {
+    const { pdf, id } = start(`b2-${seed}-${st}.pdf`);
+    const tag = `B2 ${st} ${id}`;
+    const p1 = await E.waitFor('pid', () => E.runnerPid(id));
+    await waitEvent(E, id, `state:${st}`, 8000);
+    fs.rmSync(pidFile(id), { force: true });
+    S.takeovers++;
+    const t0 = Date.now(); while (pidAlive(p1) && Date.now() - t0 < 10000) await sleep(50);
+    const after = E.job(id); const rowsA = E.rows(id).length;
+    inv(E, id, `${tag} after delete`);
+    await sleep(800);
+    const rowsB = E.rows(id).length;
+    if (pidAlive(p1) && st !== 'awaiting_approval') note(`${tag}: runner ${p1} still alive 10 s after runner.pid was deleted (state ${E.job(id).state})`);
+    if (E.rows(id).length !== rowsB) violate(`${tag}: manifest changing after`);
+    const r = await resume(E, pdf, tag);
+    inv(E, id, `${tag} after resume`);
+    await toDone(E, id, tag); finalCheck(E, id, tag); await spentOk(E, id, tag);
+    res[`B2.${st}`] = `old runner ${pidAlive(p1) ? 'alive' : 'gone'}, state after delete ${after.state}, resumed ${r?.r?.resumed}`;
+  }
+  // B3: runner.pid rewritten to a live foreign pid (this script) / garbage / empty
+  for (const [lbl, content] of [['foreign-live', String(process.pid)], ['garbage', 'abc'], ['empty', ''], ['zero', '0'], ['dead', '99999']]) {
+    const { pdf, id } = start(`b3-${seed}-${lbl}.pdf`);
+    const tag = `B3 ${lbl} ${id}`;
+    const p1 = await E.waitFor('pid', () => E.runnerPid(id));
+    await waitEvent(E, id, 'state:building', 8000);
+    fs.writeFileSync(pidFile(id), content);
+    S.takeovers++;
+    const t0 = Date.now(); while (pidAlive(p1) && Date.now() - t0 < 10000) await sleep(50);
+    inv(E, id, `${tag} after rewrite`);
+    // immediately try to resume (the foreign live pid + fresh mtime may look alive for staleMs)
+    const j1 = E.h.get_job({ job_id: id }).job;
+    await sleep(1800);
+    const r = await resume(E, pdf, tag);
+    if (!r || r.r.resumed !== true) { violate(`${tag}: resume after 1.8 s answered ${JSON.stringify(r && { c: r.r.created, r: r.r.resumed })}; runner.alive ${E.h.get_job({ job_id: id }).job.runner.alive}`); }
+    inv(E, id, `${tag} after resume`);
+    await toDone(E, id, tag); finalCheck(E, id, tag); await spentOk(E, id, tag);
+    res[`B3.${lbl}`] = `runner.alive right after ${j1.runner.alive}; old runner ${pidAlive(p1) ? 'alive' : 'gone'}; resumed ${r?.r?.resumed}`;
+  }
+  // B6/B7: runner.pid rewritten while a paid call is reserved (pause after reserve) / already sent (pause after cache)
+  for (const [lbl, hook, wait] of [['reserved', 'ENGINE_TEST_PAUSE_AFTER_RESERVE_MS', 'reserved'], ['cached', 'ENGINE_TEST_PAUSE_AFTER_CACHE_MS', 'cacheUnsettled'], ['reserved2', 'ENGINE_TEST_PAUSE_AFTER_RESERVE_MS', 'reserved']]) {
+    const { pdf, id } = start(`b6-${seed}-${lbl}.pdf`, { [hook]: '1800' });
+    const tag = `B6 ${lbl} ${id}`;
+    const p1 = await E.waitFor('pid', () => E.runnerPid(id));
+    for (let i = 0; i < 2000 && !E.job(id).approval; i++) { await approveWhen(E, id, 60); await sleep(20); }
+    const hit = await waitEvent(E, id, wait, 15000);
+    if (!hit) { violate(`${tag}: no ${wait} event`); continue; }
+    fs.writeFileSync(pidFile(id), String(process.pid));
+    S.takeovers++;
+    const t0 = Date.now(); while (pidAlive(p1) && Date.now() - t0 < 10000) await sleep(50);
+    inv(E, id, `${tag} after rewrite+wake`);
+    const led1 = E.ledger(id).rows.map((r) => [r.seq, r.stage, r.status, r.not_sent, r.late]);
+    await sleep(1500);
+    const r = await resume(E, pdf, tag);
+    await toDone(E, id, tag); finalCheck(E, id, tag); await spentOk(E, id, tag);
+    const led = E.ledger(id).rows.map((r) => [r.seq, r.stage, r.status, r.not_sent ? 'not_sent' : '', r.late ? 'late' : '', r.recovered ? 'rec' : '']);
+    res[`B6.${lbl}`] = `after-wake ${JSON.stringify(led1)} final ${JSON.stringify(led.filter((x) => x[1] === 'skinning'))} sends ${E.sends(id, 'skinning')}`;
+    if (E.sends(id, 'skinning') !== 1) violate(`${tag}: skinning sent ${E.sends(id, 'skinning')}x (rewrite ${lbl})`);
+  }
+  heavyOverlap(E, 'a2b');
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a2b', seed, attempts: S.takeovers, jobsDone: S.jobs, checks: S.checks, res, violations: S.violations, leftover: E.leftover }, null, 1));

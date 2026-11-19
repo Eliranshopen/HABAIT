@@ -1,11 +1,11 @@
 # qa-deployed-shots/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Screenshots and paint-proof.json from card 07 (QA on https://habait-flow.vercel.app).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 24 files here · 0 subfolders · 24 files / 36.2 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

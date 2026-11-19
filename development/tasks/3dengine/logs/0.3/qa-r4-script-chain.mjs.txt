@@ -1,0 +1,113 @@
+// node chain.mjs <mode: d1|rand|cap> <count|from-to> <seed>
+import fs from 'node:fs';
+import { mkEnv, sleep, inv, rng, Chain, PAID, STAGES, lockGone, pidAlive } from './h.mjs';
+
+const OUT = 'C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r4/results.jsonl';
+const mode = process.argv[2];
+const arg = process.argv[3] || '1';
+const seed = Number(process.argv[4] || 1);
+const totals = { scen: 0, viol: 0, kills: 0, kills2: 0, kills3: 0, takeovers: 0 };
+
+async function waitGone(pid, ms = 20000) { const u = Date.now() + ms; while (pidAlive(pid) && Date.now() < u) await sleep(20); return !pidAlive(pid); }
+
+async function scenD1(i, P, H, W, R3) {
+  const E = await mkEnv({ prefix: 'qr4d1-', staleSeconds: 1, stepMs: 250 });
+  const c = new Chain(E, `d1-${i}.pdf`);
+  try {
+    const r1 = await c.start({ freeze: `${P}:sent` });
+    const ok1 = await c.reach(r1, 30000);
+    const r2 = await c.start({ pause: H });
+    c.takeovers++;
+    const ok2 = await c.reach(r2, 20000);
+    if (!ok1 || !ok2) c.t(`NOTREACHED ok1=${ok1} ok2=${ok2}`);
+    if (W === 0) { c.wake(r1); await waitGone(r1.pid); await c.kill(r2); }
+    else if (W === 1) { await c.kill(r2); c.wake(r1); await waitGone(r1.pid); }
+    else {
+      await c.kill(r2);
+      const nextStage = STAGES[STAGES.indexOf(P) + 1];
+      const r3 = await c.start(R3 === 'frozen' ? { freeze: nextStage } : {});
+      if (R3 === 'frozen') await c.reach(r3, 15000);
+      c.wake(r1); await waitGone(r1.pid);
+    }
+    await c.finish(rng(seed + i));
+    await lockGone(E, c.id);
+    const v = [...inv(E, c.id, { quiet: true, expectDone: true }), ...c.sink];
+    const led = E.ledger(c.id).rows.filter((r) => r.stage === P).map((r) => `${r.seq}:${r.status}${r.late ? '/late' : ''}${r.recovered ? '/rec' : ''}${r.not_sent ? '/ns' : ''}${r.resend_of ? '/rs' + r.resend_of : ''}`).join(' ');
+    return { E, c, v, desc: `d1 P=${P} H=${H} W=${W} R3=${R3} ledger[${P}]=${led} spent=${E.job(c.id).cost.spent_usd}` };
+  } catch (e) { return { E, c, v: [`EXC ${e.stack.split('\n').slice(0, 3).join(' | ')}`], desc: `d1 P=${P} H=${H} W=${W}` }; }
+}
+
+const points = (fromIdx) => {
+  const out = [];
+  for (let k = fromIdx; k < STAGES.length; k++) { out.push(STAGES[k]); if (PAID.includes(STAGES[k])) { out.push(`${STAGES[k]}:reserved`, `${STAGES[k]}:sent`); } }
+  return out;
+};
+const stageIdx = (E, id) => { const j = E.job(id); const s = j.state === 'awaiting_approval' || j.state === 'queued' ? 'rendering' : j.state; const k = STAGES.indexOf(s); return k < 0 ? 0 : k; };
+
+async function scenRand(i, rand, cap) {
+  const E = await mkEnv({ prefix: 'qr4r-', staleSeconds: 1, stepMs: 200, callUsd: cap ? 25 : 0.6 });
+  const startCap = cap ? rand.pick([48, 60, 75, 80, 100]) : 60;
+  const c = new Chain(E, `rand-${i}.pdf`, startCap);
+  const N = 3 + rand.int(2);
+  try {
+    let cur = null;
+    for (let k = 0; k < N; k++) {
+      const idx = c.id ? stageIdx(E, c.id) : 3;
+      const roll = rand();
+      const opt = {};
+      if (roll < 0.5) opt.freeze = rand.pick(points(Math.min(idx, 3)));
+      else if (roll < 0.8) opt.pause = rand.pick(['RESERVE', 'CACHE', 'SETTLE']);
+      if (k === 0 && !opt.freeze) opt.freeze = rand.pick(points(3));
+      if (cur) {
+        const frozen = cur.freeze && !cur.woke && !cur.killed && pidAlive(cur.pid);
+        if (frozen && rand() < 0.6) { c.takeovers++; c.t('takeover'); }
+        else if (!cur.killed && pidAlive(cur.pid)) await c.kill(cur);
+      }
+      if (c.id && E.job(c.id).state === 'done') break;
+      if (mode === 'randc' && c.id && cur && rand() < 0.35) { try { E.h.cancel_job({ job_id: c.id }); c.t('cancel'); await sleep(rand.int(400)); } catch (e) { c.t('cancel err ' + e.message.slice(0, 40)); } }
+      const r = await c.start(opt);
+      if (r.pid === null) break;
+      cur = r;
+      await c.reach(r, opt.pause ? 7000 : 12000);
+      // sometimes wake an earlier frozen runner mid-chain
+      const earlier = c.runners.filter((x) => x !== r && x.freeze && !x.woke && !x.killed && pidAlive(x.pid));
+      if (earlier.length && rand() < 0.35) { c.wake(rand.pick(earlier)); await sleep(rand.int(250)); }
+    }
+    await c.finish(rand);
+    await lockGone(E, c.id);
+    const v = [...inv(E, c.id, { quiet: true, expectDone: true }), ...c.sink];
+    const led = E.ledger(c.id).rows.map((r) => `${r.stage[0]}${r.seq}:${r.status}${r.late ? '/late' : ''}${r.recovered ? '/rec' : ''}${r.not_sent ? '/ns' : ''}${r.resend_of ? '/rs' + r.resend_of : ''}`).join(' ');
+    return { E, c, v, desc: `rand cap=${cap ? startCap : '-'} N=${N} ledger=${led} spent=${E.job(c.id).cost.spent_usd}` };
+  } catch (e) { return { E, c, v: [`EXC ${e.stack.split('\n').slice(0, 3).join(' | ')}`], desc: 'rand' }; }
+}
+
+async function main() {
+  const jobs = [];
+  if (mode === 'd1') {
+    let i = 0;
+    for (const P of PAID) for (const H of ['RESERVE', 'CACHE', 'SETTLE']) for (const W of [0, 1, 2]) {
+      i++;
+      const R3 = W === 2 && i % 2 === 0 ? 'frozen' : 'plain';
+      jobs.push(() => scenD1(i, P, H, W, R3));
+    }
+    const [a, b] = arg.includes('-') ? arg.split('-').map(Number) : [1, jobs.length];
+    jobs.splice(0, jobs.length, ...jobs.slice(a - 1, b));
+  } else {
+    const [a, b] = arg.includes('-') ? arg.split('-').map(Number) : [1, Number(arg)];
+    for (let i = a; i <= b; i++) { const rand = rng(seed * 1000 + i); jobs.push(() => scenRand(i, rand, mode === 'cap' || mode === 'randc' && i % 2 === 0)); }
+  }
+  for (const j of jobs) {
+    const t0 = Date.now();
+    const r = await j();
+    totals.scen++; totals.kills += r.c.kills; totals.kills2 += r.c.kills2; totals.kills3 += r.c.kills3; totals.takeovers += r.c.takeovers; totals.viol += r.v.length ? 1 : 0;
+    const line = { mode, desc: r.desc, kills: r.c.kills, k2: r.c.kills2, k3: r.c.kills3, takeovers: r.c.takeovers, secs: Math.round((Date.now() - t0) / 100) / 10, viol: r.v, trace: r.v.length ? r.c.trace : undefined, home: r.v.length ? r.E.home : undefined };
+    console.log(JSON.stringify(line));
+    fs.appendFileSync(OUT, JSON.stringify(line) + '\n');
+    if (r.v.length) { process.env.M03_KEEP = '1'; }
+    await r.E.cleanup();
+    delete process.env.M03_KEEP;
+    if (r.E.leftover?.length) console.log('LEFTOVER', r.E.leftover);
+  }
+  console.log('TOTALS', JSON.stringify(totals));
+}
+await main();

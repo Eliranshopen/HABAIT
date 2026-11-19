@@ -1,0 +1,17 @@
+✔ 1. the 846 PDF is one sheet with one drawing; the look is real, holds no text of a PDF, and is kept (3868.2808ms)
+✔ 2. the same PDF twice gives the same job_id; the job keeps its own read-only copy and runs on (331.4195ms)
+✔ 3. a file outside the allowed folders is refused by both tools, and nothing is created for it (6.944ms)
+✔ 4. a PDF with no drawing: no candidate, and no job is started for it (1740.0932ms)
+✔ 5. a stored copy that was changed by hand is never used: the next runner ends the job failed, nothing runs, nothing is billed (2341.7871ms)
+✔ 5b. a stored copy changed while a LIVE runner waits for the approval: the paid stage never starts on it (2193.0373ms)
+✔ 5c. the stored copy swapped AND its hash rewritten in job.json: the file no longer adds up, and nothing runs on it (2415.2406ms)
+✔ 6. a job file that names another job, or none: a real runner stops, names the job, and changes no file of any job (2972.9402ms)
+✔ stdout held JSON-RPC lines only (1.9317ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16068.5484

@@ -1,0 +1,45 @@
+{
+ "$schema": "tour360/videos.v1",
+ "note": "written by tools/skin-project.mjs: the house floor finishes of apt846 (no video), 2026-11-05",
+ "floors": [
+  {
+   "id": "parquet",
+   "name": {
+    "he": "פרקט",
+    "en": "Oak parquet",
+    "fr": "Parquet"
+   },
+   "panos": "panos-parquet"
+  },
+  {
+   "id": "concrete",
+   "name": {
+    "he": "בטון",
+    "en": "Concrete",
+    "fr": "Béton"
+   },
+   "panos": "panos-concrete"
+  },
+  {
+   "id": "marble",
+   "name": {
+    "he": "שיש",
+    "en": "Marble",
+    "fr": "Marbre"
+   },
+   "panos": "panos-marble"
+  }
+ ],
+ "defaultFloor": "parquet",
+ "sets": {
+  "parquet": {
+   "rooms": {}
+  },
+  "concrete": {
+   "rooms": {}
+  },
+  "marble": {
+   "rooms": {}
+  }
+ }
+}

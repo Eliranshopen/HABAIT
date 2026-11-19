@@ -1,0 +1,31 @@
+{
+ "script": "a6-race",
+ "seed": 1101,
+ "kills": 6,
+ "takeovers": 0,
+ "jobsDone": 18,
+ "checks": 679,
+ "out": {
+  "A0": "kill false, 3 starts -> [true,true,false], max live spawned runners seen (all jobs) 3",
+  "A1": "kill true, 3 starts -> [true,true,true], max live spawned runners seen (all jobs) 3",
+  "A2": "kill true, 3 starts -> [true,true,true], max live spawned runners seen (all jobs) 3",
+  "A3": "kill true, 2 starts -> [true,true], max live spawned runners seen (all jobs) 2",
+  "A4": "kill true, 3 starts -> [true,true,true], max live spawned runners seen (all jobs) 3",
+  "A5": "kill true, 3 starts -> [true,true,true], max live spawned runners seen (all jobs) 3",
+  "A6": "kill false, 2 starts -> [false,false], max live spawned runners seen (all jobs) 1",
+  "A7": "kill true, 2 starts -> [true,true], max live spawned runners seen (all jobs) 2",
+  "D0": "restart true, row runners 1",
+  "D1": "restart true, row runners 2",
+  "D2": "restart true, row runners 1",
+  "D3": "restart true, row runners 1",
+  "D4": "restart true, row runners 1",
+  "D5": "restart true, row runners 2",
+  "D6": "restart true, row runners 2",
+  "D7": "restart true, row runners 2",
+  "D8": "restart true, row runners 1",
+  "D9": "restart true, row runners 2"
+ },
+ "violations": [],
+ "notes": [],
+ "leftover": []
+}

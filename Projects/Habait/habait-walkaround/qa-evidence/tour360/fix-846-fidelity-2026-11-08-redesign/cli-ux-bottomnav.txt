@@ -1,0 +1,93 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py bottom navigation tab bar mobile --domain ux -n 8
+## UI Pro Max Search Results
+**Domain:** ux | **Query:** bottom navigation tab bar mobile
+**Source:** ux-guidelines.csv | **Found:** 8 results
+
+### Result 1
+- **Category:** Navigation
+- **Issue:** Back Button
+- **Platform:** Mobile
+- **Description:** Users expect back to work predictably
+- **Do:** Preserve navigation history properly
+- **Don't:** Break browser/app back button behavior
+- **Code Example Good:** history.pushState()
+- **Code Example Bad:** location.replace()
+- **Severity:** High
+
+### Result 2
+- **Category:** Navigation
+- **Issue:** Sticky Navigation
+- **Platform:** Web
+- **Description:** Fixed nav should not obscure content
+- **Do:** Add padding-top to body equal to nav height
+- **Don't:** Let nav overlap first section content
+- **Code Example Good:** pt-20 (if nav is h-20)
+- **Code Example Bad:** No padding compensation
+- **Severity:** Medium
+
+### Result 3
+- **Category:** Forms
+- **Issue:** Mobile Keyboards
+- **Platform:** Mobile
+- **Description:** Show appropriate keyboard for input type
+- **Do:** Use inputmode attribute
+- **Don't:** Default keyboard for all inputs
+- **Code Example Good:** inputmode='numeric'
+- **Code Example Bad:** Text keyboard for numbers
+- **Severity:** Medium
+
+### Result 4
+- **Category:** Responsive
+- **Issue:** Mobile First
+- **Platform:** Web
+- **Description:** Design for mobile then enhance for larger
+- **Do:** Start with mobile styles then add breakpoints
+- **Don't:** Desktop-first causing mobile issues
+- **Code Example Good:** Default mobile + md: lg: xl:
+- **Code Example Bad:** Desktop default + max-width queries
+- **Severity:** Medium
+
+### Result 5
+- **Category:** Navigation
+- **Issue:** Breadcrumbs
+- **Platform:** Web
+- **Description:** Show user location in site hierarchy
+- **Do:** Use for sites with 3+ levels of depth
+- **Don't:** Use for flat single-level sites
+- **Code Example Good:** Home > Category > Product
+- **Code Example Bad:** Only on deep nested pages
+- **Severity:** Low
+
+### Result 6
+- **Category:** Accessibility
+- **Issue:** Keyboard Navigation
+- **Platform:** Web
+- **Description:** All functionality accessible via keyboard
+- **Do:** Tab order matches visual order
+- **Don't:** Keyboard traps or illogical tab order
+- **Code Example Good:** tabIndex for custom order
+- **Code Example Bad:** Unreachable elements
+- **Severity:** High
+
+### Result 7
+- **Category:** Accessibility
+- **Issue:** Heading Hierarchy
+- **Platform:** Web
+- **Description:** Screen readers use headings for navigation
+- **Do:** Use sequential heading levels h1-h6
+- **Don't:** Skip heading levels or misuse for styling
+- **Code Example Good:** h1 then h2 then h3
+- **Code Example Bad:** h1 then h4
+- **Severity:** Medium
+
+### Result 8
+- **Category:** Accessibility
+- **Issue:** Skip Links
+- **Platform:** Web
+- **Description:** Allow keyboard users to skip navigation
+- **Do:** Provide skip to main content link
+- **Don't:** No skip link on nav-heavy pages
+- **Code Example Good:** Skip to main content link
+- **Code Example Bad:** 100 tabs to reach content
+- **Severity:** Medium
+

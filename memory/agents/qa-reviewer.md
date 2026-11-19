@@ -97,3 +97,64 @@
 - **Learned:** Staged hold files can be byte-verified against live by replaying stage_flow.py subs; tablet C3 at 90 s passed first run.
 - **Owed / open:** none
 - **Second reader:** none
+
+## 2026-11-17 · main session → second-reader pointer
+- engine milestone 0.3 CLOSED (3dengine card 03): a job on the disk; one detached runner, manifest + ledger per job, kill then resume, no double billing; 8 fresh-reviewer rounds (1-7 FAIL, 8th PASS); 267 tests, coverage 99.71%, e2e 51/51; main 157e994; keys present; carried: manifest/job id check to 1.1, serve record to 3.3 → `memory/runs/2026-11-16-3dengine-milestones.md`
+
+## 2026-11-17 · sub-agent (general-purpose as qa-reviewer, for the main session) · board 3dengine m1.1 task 08: QA on the live main
+- **Did:** Verdict FAIL: gate green (m1.1 closing test 5 of 5, npm test 330/330 at 99.7 percent lines, 4 runs), about 1200 own attempts; two reproduced breaks of contract section 1 (D1 same-bytes in-place rewrite during the look keeps a torn look under the PDF hash; D2 unusable runtime folder gives raw ENOTDIR instead of TOOLCHAIN_MISSING). Stored input, job-file identity, paths, candidates and intake held.
+- **Evidence:** `development/tasks/3dengine/logs/1.1/qa-live.md`
+- **Learned:** A before-and-after whole-file hash cannot detect a torn read when the bytes are rewritten identically; read once and give the scanner those bytes.
+- **Owed / open:** Fix D1 and D2 in engine/inspect.mjs, decide O-1 (manifest check by the other tools), then a re-check.
+- **Second reader:** none
+
+## 2026-11-17 · qa-reviewer · QA round 2 of engine milestone 1.1: FAIL on three low-to-medium defects
+- **Did:** Ran the gate (closing x3, npm test x2: all green, 347 tests, 99.66 pct) and about 700 own attempts on commit 0589956. Round-1 D1 and D2 closed. Found: sheet candidate in stored record believes thumb/extra keys; CLI resume starts a runner on a foreign manifest; job folder as a file gives -32603 raw EEXIST.
+- **Evidence:** `development/tasks/3dengine/logs/1.1/qa-live-r2.md`
+- **Learned:** Round-2 fixes close the named hole but validators and the CLI were not swept for the same class: check every reader and command for the same family.
+- **Owed / open:** none
+- **Second reader:** none
+
+## 2026-11-17 · qa-reviewer · QA round 3 of 3Dengine milestone 1.1: FAIL on two low defects
+- **Did:** Ran the gate (3 closing runs, 2 npm runs, all green, 99.72 pct lines) and about 900 own attempts in temp homes: stored look, storage matrix over MCP, CLI, runners, restarts, races. Found D-1 a locked upload leaves as JSON-RPC EBUSY not NOT_A_PDF, and D-2 CLI job rewrites job.json of a job with a foreign manifest.
+- **Evidence:** `development/tasks/3dengine/logs/1.1/qa-live-r3.md`
+- **Learned:** The families named in rounds 1 and 2 held; the next cases were at the edges (locked file, CLI read path).
+- **Owed / open:** Builder answers D-1 and D-2; section 4 wording on engine_version
+- **Second reader:** none
+
+## 2026-11-17 · qa-reviewer · 3dengine 1.1 QA round 4: FAIL (one low defect)
+- **Did:** Ran the gate (3x closing test, 2x npm test, 367 pass, 99.72 pct lines) and about 650 attempts on aaec50c. Round 3 defects closed; the write rule held in 88 foreign-manifest scenarios. One low defect: an upload turned into a folder at the intake copy answers TOOLCHAIN_MISSING, not NOT_A_PDF.
+- **Evidence:** `development/tasks/3dengine/logs/1.1/qa-live-r4.md`
+- **Learned:** Detached runners and serve processes outlive scripts: track PIDs.
+- **Owed / open:** Builder: intake treats a non-file source as the upload's trouble.
+- **Second reader:** none
+
+## 2026-11-17 · qa-reviewer · 3dengine 1.1 QA round 5 on b7790fd: PASS
+- **Did:** Ran the m1.1 gate (6 runs) and npm test (5 runs) under 100 percent load; 53 direct calls plus 8,566 raced stdio calls on every unreadable state of the upload; intake, kill-mid-intake, 3-server, 20 MB, healthy-job and earlier-defect checks. No defect; observations: lock busy RPC 3 times in 8,566 calls under load, test 10 wait fails under load.
+- **Evidence:** `development/tasks/3dengine/logs/1.1/qa-live-r5.md`
+- **Learned:** Under saturated load the gate needs more than 300 s; npm test cut by a timeout leaves detached m03 serve processes.
+- **Owed / open:** none
+- **Second reader:** none
+
+## 2026-11-18 · qa-reviewer · 3dengine 1.2 QA on live main 6d006c1: PASS
+- **Did:** Ran the gate (stages 3/3, npm test 390/390 at 99.74 pct, doctor READY) and about 17000 attempts: 14040 fake-tool cost-matrix runs, 26 result forgeries, 20 real-tool free runs (marker sentence, time limits, cancels, bad inputs). No binding line broken; paid run evidence agrees.
+- **Evidence:** `development/tasks/3dengine/logs/1.2/qa-live.md`
+- **Learned:** Free reading from a saved reading never leaked the marker into output or log. Hebrew letters in the OUTPUT path make the real raster step fail (OpenCV); the closing test of 0.1 exempts the whole auto-trace.mjs, so nothing pins the one-line change (I diffed it by hand).
+- **Owed / open:** 1.3: ASCII job folder, go by outcome not exit on TIMEOUT/CANCELLED, pin blob dda03468 of auto-trace.mjs.
+- **Second reader:** none
+
+## 2026-11-18 · main session → second-reader pointer
+- Eliran 2026-11-18: engine gate = each test tier ONCE (npm test, test:stages), repeated only when failed or cut; live home after a merge = doctor only. QA, sync-context, plan-to-tasks per milestone stay. → `memory/project/2026-11-18-engine-gate-tests-once.md`
+
+## 2026-11-18 · qa-reviewer · QA 1.3 trace gate: PASS, no defects
+- **Did:** Fresh review of engine 1.3 on main ef2d2dc: both gate tiers, soak, 10 real-tool starts, fake-tool and forged-record attacks; report is in the 3dengine worktree at development/tasks/3dengine/logs/1.3/qa-live.md (qa-* evidence beside it).
+- **Evidence:** `development/tasks/3dengine/logs/1.3/gate-summary.txt`
+- **Learned:** A real job ending review needs no cancel path fix; the tool's check ignores room type (build stage must validate); a harness helper has no runnerPids export; the soak race claim of the author is right.
+- **Owed / open:** Main session merges the report from the worktree; O-1 goes to the building milestone.
+- **Second reader:** `platform-dev`
+
+## 2026-11-18 · secrets-steward → second-reader pointer
+- Never print an environment VALUE, names only, also when proving a value is absent (1.3 card 06 dump carried a harness token into `qa-fake-results.txt`; removed before commit) → `memory/agents/secrets-steward.md`, ledger row `CLAUDE_CODE_MESSAGING_TOKEN`
+
+## 2026-11-18 · main session → second-reader pointer
+- Eliran 2026-11-18: engine stage tests (npm run test:stages) on a loaded machine may run ONCE bounded at 25 minutes in the background (timeout 1500); root section 12 limits stay for everything else. → `memory/project/2026-11-18-engine-stage-tests-long-run.md`

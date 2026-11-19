@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # /sync-context — the context layer, the memory, the drift checks
 
-> ⏸ **Local git on `main` since 2026-11-04; identity set, no remote (Eliran: local only).** Check 16 (worktree inventory) is on hold until re-pointed to `C:\RnD`'s git worktrees (one repo since 2026-11-04) (Eliran 2026-11-04: features in git worktrees under `.wt\`): print `SUSPENDED (check 16 — not re-pointed)`. Check 17 (versions) is on hold: report it `SUSPENDED (no remote)`. Check 0 reads file modified times, not commit dates. No step commits anything.
+> ⏸ **Local git on `main` since 2026-11-04; identity set. One remote since 2026-11-08: `github` → `Eliranshopen/HABAIT`, a media-free snapshot mirror, not a version source (root §11).** Check 16 (worktree inventory) is on hold until re-pointed to `C:\RnD`'s git worktrees (one repo since 2026-11-04) (Eliran 2026-11-04: features in git worktrees under `.wt\`): print `SUSPENDED (check 16 — not re-pointed)`. Check 17 (versions) is on hold: report it `SUSPENDED (no remote)`. Check 0 reads file modified times, not commit dates. No step commits anything.
 
 Lean contract (2026-11-04, plan `development/plans/2026-11-04-workflow-cleanup.md`). Numbering is kept because other files point at it (Target 3e, Checks 9, 16, 17). Every check's full specification and history: [references/full-spec-2026-11-04.md](references/full-spec-2026-11-04.md). Retired text: [RETIRED-2026-10-22.md](RETIRED-2026-10-22.md). The rules this pass enforces are root `CLAUDE.md` §0 (memory), §8.6 (a context file in every folder) and §8.8 (plans). Where this file and those rules disagree, the root wins.
 
@@ -43,7 +43,7 @@ The root `CLAUDE.md` `## Context map` lists the **areas** (the hand-written cont
 | 11 | HOT freshness | `memory/HOT.md` ≤ 60 lines and its line-2 stamp names this pass | PASS / FAIL |
 | 12 | memory caps, strict | `node .claude/skills/sync-context/verify-memory.mjs --strict` after 3e | REPORTED (gates at `/close-board`) |
 | 16 | worktree inventory | on hold until `check-worktrees.mjs` reads `git -C C:/RnD worktree list` | `SUSPENDED (check 16 — not re-pointed)` |
-| 17 | version register | needs a remote | `SUSPENDED (no remote)` |
+| 17 | version register | needs an app-repo remote (root §11 `<app-repo>` row); the HABAIT snapshot mirror does not count | `SUSPENDED (no remote)` |
 | 18 | plan / board state (2026-11-04) | `python scripts/board_state.py`: both tables against each board README's `**State:**` line; boards and plans with no row | CLEAN / DRIFT (fix leading words with `--go`; add missing rows by hand) |
 | — | weekly metrics | `node .claude/skills/sync-context/metrics.mjs`, verbatim | report-only, never gates; "dirty measures dirtiness, not truth" |
 

@@ -1,0 +1,7 @@
+[record reused, python=cmd.exe] ok 252 ms
+[intake lock-none] EngineError NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); ask again input holds []
+[intake lock-read] ok ["path","bytes","sha256","copied"] input holds ["source.pdf"]
+[intake acl-deny] EngineError NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); ask again input holds []
+[intake gone] EngineError NOT_A_PDF | the file is gone input holds []
+[intake folder] Error EPERM | EPERM: operation not permitted, copyfile '<PATH> -> '<PATH> input holds []
+[intake free] ok ["path","bytes","sha256","copied"] input holds ["source.pdf"]

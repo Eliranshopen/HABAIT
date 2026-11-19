@@ -1,0 +1,27 @@
+// qa-r3 repro D1: late answer woken BEFORE the second runner is killed in its reserve->send window; third runner finishes.
+import fs from 'node:fs';
+import { mkEnv, takeover, clearEnv, resume, sleep, pidAlive, inv, settledSum } from './q.mjs';
+const callUsd = Number(process.argv[2] || 0.6); const reps = Number(process.argv[3] || 3);
+let phantom = 0; let capstops = 0;
+for (let i = 0; i < reps; i++) {
+  const E = await mkEnv({ prefix: 'qa3r1-', callUsd, stepMs: 300, heartbeat: 0.1, staleSeconds: 1 });
+  try {
+    const r = await takeover(E, { name: `r1-${i}.pdf`, point: 'skinning:sent', secondEnv: { ENGINE_TEST_PAUSE_AFTER_RESERVE_MS: 20000 } });
+    await E.waitFor('second reserved', () => { const m = E.ledger(r.id).rows; return m.length >= 2 && m.at(-1).status === 'reserved'; }, 20000, 5);
+    r.wake();
+    await E.waitFor('first left', () => !pidAlive(r.oldPid), 20000, 20);
+    console.log('after wake rows:', E.ledger(r.id).rows.map((x) => `${x.seq}:${x.status}${x.late ? '/late' : ''}`).join(' '));
+    await E.kill(r.id);
+    clearEnv();
+    await resume(E, r.pdf);
+    let stops = 0;
+    await E.waitFor('done', () => { const j = E.job(r.id); if (j.state === 'awaiting_approval' && !j.approval) { if (j.reason?.code === 'BUDGET_CAP') stops++; E.h.approve_paid_stage({ job_id: r.id, cap_usd: callUsd > 1 ? 80 + 40 * stops : 60 }); } return j.state === 'done'; }, 60000, 20);
+    await E.waitFor('quiet', () => E.runnerPid(r.id) === null, 15000, 20);
+    const l = E.ledger(r.id);
+    const res = l.rows.filter((x) => x.status === 'reserved');
+    console.log(`rep ${i}: rows=${l.rows.map((x) => `${x.seq}:${x.stage[0]}:${x.status}${x.late ? '/late' : ''}`).join(' ')} reservedLeft=${res.length} cap_stops=${stops} spent=${E.job(r.id).cost.spent_usd} settled=${settledSum(l)} sends=${['skinning','gating','finishing'].map(s=>E.sends(r.id,s))}`);
+    if (res.length) phantom++; capstops += stops;
+    console.log('  inv:', JSON.stringify(inv(E, r.id, { expectDone: true })));
+  } finally { await E.cleanup(); }
+}
+console.log(`RESULT callUsd=${callUsd} reps=${reps} reserved_row_left=${phantom} spurious_cap_stops=${capstops}`);

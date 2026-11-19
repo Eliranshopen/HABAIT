@@ -1,0 +1,43 @@
+// L1: a replaced runner settles a LATE row after the job is done, and is hard-killed before its syncSpent.
+// node late.mjs <reps> <hook: SETTLE|CACHE|none> <point>
+import fs from 'node:fs';
+import { lib, rec, sleep, pidAlive, counters, check } from './h.mjs';
+const [reps, hook, point] = [Number(process.argv[2] || 2), process.argv[3] || 'SETTLE', process.argv[4] || 'skinning:sent'];
+const C = counters();
+const E = await lib.mkEnv({ prefix: 'qa-r5-late-', heartbeat: 0.1, staleSeconds: 1 });
+try {
+  for (let i = 0; i < reps; i++) {
+    const name = `late${i}.pdf`;
+    if (hook !== 'none') process.env[`ENGINE_TEST_PAUSE_AFTER_${hook}_MS`] = '20000';
+    let f;
+    try { f = await lib.frozenJob(E, { name, point }); } finally { for (const k of lib.HOOK_VARS) delete process.env[k]; }
+    const again = E.h.start_simulation({ pdf_path: f.pdf });
+    C.add('takeovers');
+    await E.waitFor('second runner', () => { const p = E.runnerPid(f.id); return p && p !== f.pid; }, 20000);
+    await lib.toDone(E, f.id, 60000);
+    await sleep(500);
+    const before = E.ledger(f.id);
+    const spentBefore = E.job(f.id).cost.spent_usd;
+    f.wake();
+    // the first runner now settles its late row, then pauses; kill it inside the pause
+    let msg = '';
+    if (hook === 'none') { await sleep(Math.floor(Math.random() * 80)); } else {
+      await E.waitFor('the first runner reached its pause', () => E.log(f.id).includes(`after the ${hook === 'SETTLE' ? 'settle' : 'cache write'} of seq`) && E.log(f.id).split('\n').some((l) => l.includes(`runner ${f.pid} test hook: pausing`)), 15000, 5).catch((e) => { msg = 'NO PAUSE ' + e.message.slice(0, 60); });
+    }
+    if (pidAlive(f.pid)) { process.kill(f.pid); C.add('kills'); }
+    await E.waitFor('gone', () => !pidAlive(f.pid), 5000, 10);
+    await sleep(800);
+    const led = E.ledger(f.id);
+    const settled = Math.round(led.rows.filter((r) => r.status === 'settled').reduce((n, r) => n + r.settled_usd, 0) * 1e6) / 1e6;
+    const j = E.job(f.id);
+    const anyAlive = [f.pid, E.runnerPid(f.id)].some((p) => p && pidAlive(p));
+    // a start of the done job must not repair it (nothing starts for done)
+    const r2 = E.h.start_simulation({ pdf_path: f.pdf });
+    await sleep(1500);
+    const j2 = E.job(f.id);
+    const res = await E.h.get_result({ job_id: f.id });
+    const eq = j2.cost.spent_usd === settled;
+    rec(`L1 late row after done + kill (${hook},${point}) #${i}`, eq && !anyAlive,
+      `${msg} state=${j.state} settledSum=${settled} spent_usd=${j2.cost.spent_usd} (before wake ${spentBefore}) getResult.cost=${res.cost.spent_usd} rows=${led.rows.filter((r) => r.stage === point.split(':')[0]).map((r) => `${r.seq}:${r.status}${r.late ? '/late' : ''}`).join(' ')} runnerAlive=${anyAlive} startAgain={created:${r2.created},resumed:${r2.resumed}}`);
+  }
+} finally { await E.cleanup(); }

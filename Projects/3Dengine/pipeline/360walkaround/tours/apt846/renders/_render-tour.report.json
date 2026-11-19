@@ -1,0 +1,106 @@
+{
+  "generator": {
+    "script": "pipeline/render_tour.mjs",
+    "version": "0.1.0",
+    "started_utc": "2026-10-29T13:47:47+00:00",
+    "finished_utc": "2026-10-29T14:11:03+00:00",
+    "seconds": 1395.52
+  },
+  "settings": {
+    "mode": "final",
+    "resolution": [
+      8192,
+      4096
+    ],
+    "samples": 128,
+    "wrap_pad": 512,
+    "scene": "scene-full.blend",
+    "chunk": 1,
+    "blender": "C:/Program Files/Blender Foundation/Blender 4.5/blender.exe",
+    "px_per_m": 80
+  },
+  "scene": {
+    "clean": true,
+    "why": "plan.json + the style lock + the material board + the generator scripts hash the same as the scene report",
+    "planHash": "48f21d9034cb0200a75e6d384b1cb910968d2c26249ba505915c154d829a6c0e",
+    "scripts": [
+      {
+        "file": "build_scene.py",
+        "sha256": "3213042d0274baff055af35be0e0379c386fe5af5a4b4830f9160d0e666d838f"
+      },
+      {
+        "file": "materials_kit.py",
+        "sha256": "63e3524616c439afc158616baf465cfa5f729c3ef1e65cb8ec604299f6b90771"
+      },
+      {
+        "file": "place_cameras.py",
+        "sha256": "e946fa0a0e147108151779986e1830a1e69a83c74a9d7cb5f2031bf4de1692b4"
+      },
+      {
+        "file": "placement_templates.py",
+        "sha256": "3b82d7f7de340cdd6cc76b2febdbd32cf231b1bdcfa0ec618ff3b8cceae878a3"
+      },
+      {
+        "file": "plan_general.py",
+        "sha256": "1b2cd674fdf87158fdf4924816d43676d0fa14ed841d32c99cde7c5d1f4a8613"
+      }
+    ],
+    "styleHash": "8fae372304e3dcb52554d486b45b68bbc8dd7ede198cfaec2907850f9a32ef17",
+    "built_utc": "2026-10-29T11:00:26+00:00",
+    "checks": "230/230"
+  },
+  "points_requested": [
+    "cp-wardrobe"
+  ],
+  "forced": [],
+  "runs": [
+    {
+      "points": [
+        "cp-wardrobe"
+      ],
+      "skip_if_clean": true,
+      "exit": 0,
+      "seconds": 1394.21,
+      "skipped": [],
+      "rendered": [
+        "cp-wardrobe"
+      ],
+      "log": "renders/_logs/render-cp-wardrobe-x1.log"
+    }
+  ],
+  "skipped_this_run": [],
+  "rendered_this_run": [
+    "cp-wardrobe"
+  ],
+  "point_checks": [
+    {
+      "id": "cp-wardrobe",
+      "ok": true,
+      "problems": [],
+      "depth": {
+        "w": 8192,
+        "h": 4096,
+        "nadir_m": 1.6,
+        "camera_z_m": 1.6,
+        "nadir_error_cm": 0,
+        "zenith_m": 1.3,
+        "expected_zenith_m": 1.3,
+        "open_sky": false,
+        "valid_fraction": 1,
+        "invalid_pixels": 0
+      },
+      "pano_bytes": 210548,
+      "depth_bytes": 1320754,
+      "seconds": 1380.898,
+      "device_peak_mb": 867.86,
+      "depth_checks_failed": 0,
+      "depth_check_worst_cm": 0,
+      "input_key": "d493964b01b796643b3ea7fe53607f35dcb74b506d69d996e6888a75e0694f25",
+      "skipped_this_run": false
+    }
+  ],
+  "top_view": null,
+  "cost_usd": 0,
+  "machine": "local — RTX A2000 Laptop 4 GB (ENV.md §1); $0, see pipeline/RENDER-LEDGER.md",
+  "verdict": "PASS"
+}

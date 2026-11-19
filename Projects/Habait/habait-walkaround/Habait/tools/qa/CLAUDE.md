@@ -1,4 +1,5 @@
 # Habait/tools/qa/ — the responsive gate
+<!-- last-updated: 2026-11-08 -->
 <!-- created: 2026-11-05 · fork F (rnd-9d), project-runner · authority: Eliran («כל דבר שאתה מעדכן חייב להתאים גם לגרסת המובייל בנוסף לגרסת הדסקטופ» — «וזה כלל שחייב להיות בלוגיקה בקוד») -->
 
 | File | Purpose |

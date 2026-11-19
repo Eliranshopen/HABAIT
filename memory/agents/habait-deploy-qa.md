@@ -101,3 +101,99 @@
 
 ## 2026-11-05 · fork C of rnd-67 (project runner) → second-reader pointer
 - 2026-11-05 · fork C rnd-67 · first real portal job (Maale Efraim) through run-job against the real store → review (both floors FAIL trace-check, 34 mismatches, $0.104); executor: every floor checked, ledger outside the trace folder → runs/2026-11-05-maale-efraim-real-job.md → `memory/runs/2026-11-05-maale-efraim-real-job.md`
+
+## 2026-11-08 · main session → second-reader pointer
+- GitHub remote = Eliranshopen/HABAIT, PUBLIC by Eliran's choice (his gmail account), media-free no-history snapshot 444c5b2 of main@8864cbf; replaces 'no remote'; habait-rnd superseded, delete owed to Eliran → `memory/project/2026-11-08-github-remote-habait.md`
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — tour UI direction C merged 88b989f and live-copied (not deployed): the 3D control is `#t-plan-btn` inside `#t-view` (id unchanged); the walkthrough opens on the FIRST visit only (fresh context = shown, `?coach=0` off, `?coach=1` forced); predeploy PASS 30/30.
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — walkthrough music merged 5cec070 and live-copied (not deployed): no AudioContext before a gesture; after a tap it is "running", after «דלג»/the end "suspended"; mute key `habait-tour-music-muted-v1`; predeploy 30/30.
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — walkthrough music v2 merged 89f134b, live-copied (not deployed): step = 3 bars at 108 BPM = 6.667 s (was 6.8 s); the step timer snaps to the music grid while it plays; accents on step changes; audio states unchanged; predeploy 30/30.
+
+## 2026-11-08 · sub-agent rainbow-landing → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — the next habait-flow deploy carries the new root page (Rainbow landing, merged df98ecd) + 14 MB media under fixtures/rainbow/landing/; deployed QA = re-run Habait/platform/test/rainbow-landing.check.mjs against prod (film plays 1440+390, badges, routes).
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- project/2026-11-08-846-numbers-sales-plan.md — 846 = the sales plan: apartment page «3 חדרים · 106.72 מ״ר · קומה 16», terrace 26.15; hold pill «קומה 16 · 3 חדרים»; merged 68ae48e/08cdeb3, live copied + build_zip rebuilt, predeploy 30/30, not deployed.
+
+## 2026-11-08 · sub-agent rainbow-landing (round 2) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — the root landing is project-level now (merged fa28f34): deployed QA = run test/rainbow-landing.check.mjs AND test/rainbow-flow.check.mjs (landing → CTA → film → stop → all units → enter) against prod.
+
+## 2026-11-08 · sub-agent rainbow-landing (round 3) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — /hold/ phone chrome changed (merged 69cfd49): deployed QA adds test/hold-chrome.check.mjs (360/390/430/1440, bbox overlaps of the top chrome) to the landing and flow checks.
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — tool menus merged 9dcdeb7/30a6e6c, live-copied (not deployed): the 3D is `#t-plan-btn` INSIDE the «סגנונות צפייה» menu — open `#t-view-btn` first (desktop and phone); «כלי עזר» = `#t-tools-btn`; walkthrough key `habait-tour-coach-seen-v2`; the AI line has no band; predeploy 30/30.
+- 2026-11-08 · main session: a viewer deploy now needs a worker snapshot refresh (worker.mjs refresh-snapshot --go, then snapshots.mjs boot + delete the superseded one) before any real portal build → runs/2026-11-08-worker-snapshot-refresh.md
+
+## 2026-11-08 · sub-agent rainbow-landing (round 4) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — prices hidden behind project.json prices_public (merged 6673204): deployed QA adds test/no-price.check.mjs (apartment page, hold cards, units list, landing.html at 360/390/1440) against prod.
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — merged e1927f4, live-copied (not deployed): the walkthrough opens on EVERY tour load (use `?coach=0` for a clean screen); its music starts at open where the browser already allows sound (/hold/ → tour), else on the first tap; Playwright's evaluate() counts as a user gesture and this Chrome does not enforce Web Audio autoplay under automation — probe with CDP userGesture:false.
+
+## 2026-11-08 · sub-agent portal-live-status → second-reader pointer
+- runs/2026-11-08-portal-live-status.md — main 9718703 now holds the live portal (portal-stage d1b8fdd, build lock) + live job status; a plain `stage_flow.py --edit-api --studio` of main ships it (no --studio-src), but also main's undeployed platform rounds (rainbow-landing 6673204, tour 255dc9f). Not deployed; Eliran's go.
+
+## 2026-11-08 · sub-agent portal flow bar → second-reader pointer
+- runs/2026-11-08-portal-flow-bar.md — main 829b2a7: /studio/ project page has the flow bar #st-flow (9 steps); #st-job-stage and #st-steps are gone — a post-deploy check of /studio/ looks for #st-flow-head = #st-agent-head. Not deployed; Eliran's go.
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — phone round merged 5b8ffd8, live-copied (not deployed): on touch ≤ 960 px a tap on the panorama hides the chrome (immersive; tap again to show); (?) is `#t-help` on phones too (top row); the walkthrough adds the «שינוי עיצוב» panel steps; music unlocks on the first tap in the tour on iPhone.
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — merged 37bf147, live-copied (not deployed): /hold/ unlocks the walkthrough audio in «המשיכו אל הדירה» (`window.__habaitAudio`) and the tour plays on it with no tap; phones on a direct link get «▶ התחילו את ההסבר» first; a floor change reloads with a one-shot `?ir=1` and the walkthrough stays closed.
+
+## 2026-11-08 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — merged 6c2fe26, live-copied (not deployed): the design panel's walkthrough is three section steps (view, floor, typed change); every step is 2 bars = 4.444 s (was 6.667 s); counts 1440 20/22, Pixel 7 17/19, iPhone 14 16/18 (visitor/unlocked).
+
+## 2026-11-08 · sub-agent rainbow-landing (round 5) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — /hold/ legal line now at the bottom edge (merged 24f0f29): deployed QA runs test/hold-chrome.check.mjs (360/390/430 portrait, 390 landscape, 1440; legal-line contrast + no marker overlap) against prod.
+
+## 2026-11-09 · fork fix-846-fidelity → second-reader pointer
+- runs/2026-11-08-tour360-redesign.md — merged f97d4ae, live-copied (not deployed): phones show `#t-tap-hint` (light-brown glass pill, first line of `#t-disclose`) «להסתרת/להצגת הכפתורים לחצו על המסך»; the phone action bar sits ~30 px higher; `#t-chrome-hint` (the old toast) is gone.
+
+## 2026-11-09 · sub-agent rainbow-landing (round 6) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — /hold/ phones now show a right-edge column (merged f9f6148): deployed QA runs test/hold-chrome.check.mjs (phones: no title, icon/«דירות»/legend on the right, no pill covered, the icon opens the film; desktop unchanged) against prod.
+
+## 2026-11-09 · sub-agent rainbow-landing (round 6b) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — /hold/ intro is now orbit_fast.mp4 (2x, merged 7802edc): deployed QA runs test/hold-timing.check.mjs against prod (click → picker ≈ 9 s at 390 and 1440).
+
+## 2026-11-09 · sub-agent rainbow-landing (round 7) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — the landing is now a scroll story (merged 782594a): deployed QA adds test/landing-motion.shots.mjs (desktop: Lenis + 2 pins; phone: native, no pins; reduced motion static; no overflow) to the landing check against prod.
+
+## 2026-11-09 · sub-agent rainbow-landing (round 8 build) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — the landing is now direction B with GSAP 3.13 SplitText (merged 0b3f3be): deployed QA runs test/rainbow-landing.check.mjs and test/landing-motion.shots.mjs against prod.
+
+## 2026-11-09 · sub-agent rainbow-landing (brand) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — the Habait brand is in (merged 58c9ada; the live tour dist was patched by tour360/tools/apply-brand-to-dist.py): deployed QA runs test/brand-placements.shots.mjs against prod.
+
+## 2026-11-09 · sub-agent rainbow-landing (round 9) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — the landing is rebuilt in the rainbowtlv.com feel and the roles are named (developer from project.json; Habait credited). Merged 3a0a5e6, not deployed. The live tour dist was patched (credit). Deployed QA: run rainbow-landing.check, landing-motion.shots and brand-placements against prod.
+
+## 2026-11-09 · sub-agent rainbow-v2 → second-reader pointer
+- runs/2026-11-09-rainbow-v2.md — a SEPARATE test page `/v2/` is in main (a6a32ec), NOT deployed. If Eliran gives a go it is a Vercel PREVIEW only, never the prod alias. `/v2/` is not in predeploy.mjs default pages: gate it explicitly (`responsive-gate.mjs --serve <stage> --rewrites <stage>/vercel.json --ignore-api /v2/`); last stage: predeploy 32/32, gate /v2/ PASS 1440+390.
+
+- 2026-11-09 (rnd-9d): reference sites are inspiration only, never a copy (landing r9 rolled back 16:47) → `memory/project/2026-11-09-inspiration-not-copy.md`
+
+## 2026-11-09 · sub-agent rainbow-landing (round 10) → second-reader pointer
+- runs/2026-11-08-rainbow-landing.md — round 10 is merged (4eabbab, not deployed): the project landing with v2's hero and the roles. The motion test now expects one desktop pin (the picture stage). Deployed QA: run rainbow-landing.check, landing-motion.shots and brand-placements.
+
+## 2026-11-09 · sub-agent rainbow-v2-r2 → second-reader pointer
+- runs/2026-11-09-rainbow-v2.md (round 2) — main 91ed932 (NOT deployed) changes /hold/: 846 «המשיכו אל הדירה» → /apartment-journey/ (the tour opens inside it after the iOS unlock); the card adds a direct «לסיור 360°»; 846 floor glow. /v2/ forwards to /. predeploy now gates /apartment-journey/?from=hold&unit=846; rainbow-flow.check walks the new route. Real-iPhone music check still owed.
+
+## 2026-11-09 · sub-agent hold-phone → second-reader pointer
+- runs/2026-11-09-hold-phone.md — main 10d4af4 (NOT deployed) changes /hold/ on PORTRAIT phones: tower framing from tower_ndc_box (floor ≥ 33 px), small pills, chosen-floor glow, toast hint, one-line legal, glass sheet with «כניסה לדירה» (846 → journey). New gate test/hold-phone.check.mjs (375/390/430/1440); run with hold-chrome + rainbow-flow. Real-iPhone look owed.
+
+## 2026-11-10 · sub-agent journey-r4 → second-reader pointer
+- runs/2026-11-10-apartment-journey-r4.md — main a8f0ddd (NOT deployed): /hold/ 846 «כניסה לדירה» = one ~9 s flight over the hold (floors → glide → living-room landing) then the hold cross-fades to #tourFrame (room=living&yaw=-40). New gate test/apartment-journey.check.mjs; run with hold-phone, hold-chrome, rainbow-flow. Round-3 page archived in platform/tools/_unused/.
+
+- 2026-11-10 (rnd-9d): iPhone ghost tower at the phone hold stop fixed (gradient air, ee80a5a); after a habait-flow deploy re-run hold-phone.check in WebKit too → `memory/runs/2026-11-10-hold-ghost.md`
+
+
+## 2026-11-10 · sub-agent units-demo-marker → second-reader pointer
+- runs/2026-11-10-units-demo-marker.md — main 51471bf (NOT deployed): units.json carries `source` per unit (846 sales-plan, 11 demo); «נתוני הדגמה» badge on every render of a demo unit's numbers (hold pill/card/drawer via js/picker.js, apartment, landing). Deployed QA: run test/units-demo-marker.shots.mjs + no-price.check against prod after any habait-flow deploy; 846 must stay badge-free.

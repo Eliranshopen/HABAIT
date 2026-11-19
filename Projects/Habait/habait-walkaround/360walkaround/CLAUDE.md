@@ -1,12 +1,12 @@
 # 360walkaround/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 The Blender-based 360 walkaround lab: a plan-to-panorama pipeline, a CC0 furniture catalog, a pano server and the rendered tours.
 
-## What's here (2026-11-05)
-2 files here · 4 subfolders · 309 files / 454.4 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+2 files here · 4 subfolders · 341 files / 460.2 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
@@ -19,7 +19,7 @@ The Blender-based 360 walkaround lab: a plan-to-panorama pipeline, a CC0 furnitu
 | `catalog/` | [`catalog/CLAUDE.md`](catalog/CLAUDE.md) | 118 (274.0 MB) |
 | `pipeline/` | [`pipeline/CLAUDE.md`](pipeline/CLAUDE.md) | 76 (169.5 MB) |
 | `server/` | [`server/CLAUDE.md`](server/CLAUDE.md) | 1 (14.2 KB) |
-| `tours/` | [`tours/CLAUDE.md`](tours/CLAUDE.md) | 112 (10.9 MB) |
+| `tours/` | [`tours/CLAUDE.md`](tours/CLAUDE.md) | 144 (16.7 MB) |
 
 ## Gotchas
 _none recorded_

@@ -1,11 +1,11 @@
 # skins-extra/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Extra skin and bake experiments for the tower (bake nodes, facade coverage, gain and grade probes, ledger.json).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 59 files here · 3 subfolders · 276 files / 377.7 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

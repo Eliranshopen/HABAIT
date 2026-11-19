@@ -1,0 +1,27 @@
+{
+ "script": "a2b",
+ "seed": 401,
+ "attempts": 16,
+ "jobsDone": 16,
+ "checks": 41,
+ "res": {
+  "B1.0": "ok",
+  "B1.1": "ok",
+  "B1.2": "ok",
+  "B1.3": "ok",
+  "B2.tracing": "old runner gone, state after delete tracing, resumed true",
+  "B2.building": "old runner gone, state after delete building, resumed true",
+  "B2.rendering": "old runner gone, state after delete rendering, resumed true",
+  "B2.awaiting_approval": "old runner gone, state after delete awaiting_approval, resumed true",
+  "B3.foreign-live": "runner.alive right after true; old runner gone; resumed true",
+  "B3.garbage": "runner.alive right after false; old runner gone; resumed true",
+  "B3.empty": "runner.alive right after false; old runner gone; resumed true",
+  "B3.zero": "runner.alive right after false; old runner gone; resumed true",
+  "B3.dead": "runner.alive right after false; old runner gone; resumed true",
+  "B6.reserved": "after-wake [[1,\"skinning\",\"failed\",true,null]] final [[1,\"skinning\",\"failed\",\"not_sent\",\"\",\"\"],[2,\"skinning\",\"settled\",\"\",\"\",\"\"]] sends 1",
+  "B6.cached": "after-wake [[1,\"skinning\",\"settled\",null,null]] final [[1,\"skinning\",\"settled\",\"\",\"\",\"\"]] sends 1",
+  "B6.reserved2": "after-wake [[1,\"skinning\",\"failed\",true,null]] final [[1,\"skinning\",\"failed\",\"not_sent\",\"\",\"\"],[2,\"skinning\",\"settled\",\"\",\"\",\"\"]] sends 1"
+ },
+ "violations": [],
+ "leftover": []
+}

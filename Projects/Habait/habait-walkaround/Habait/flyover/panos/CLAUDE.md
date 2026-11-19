@@ -1,11 +1,11 @@
 # panos/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Panorama inputs for the flyover experiments (node-b-tower, node-c-facade).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 0 files here · 2 subfolders · 14 files / 17.4 MB in the whole tree (vendor and build output excluded)
 
 ## Subfolders

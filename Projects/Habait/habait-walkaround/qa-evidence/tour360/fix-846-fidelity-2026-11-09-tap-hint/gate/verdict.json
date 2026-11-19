@@ -1,0 +1,132 @@
+{
+ "$schema": "habait/responsive-gate.v1",
+ "at": "2026-11-09T06:34:47.955Z",
+ "rule": "Eliran 2026-11-05: desktop AND mobile, in code",
+ "sizes": [
+  {
+   "width": 1440,
+   "height": 900
+  },
+  {
+   "width": 390,
+   "height": 844
+  }
+ ],
+ "pass": true,
+ "pages": [
+  {
+   "url": "/?room=living&video=0&guide=0",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "room-living-video-0-guide-0-1440.png"
+  },
+  {
+   "url": "/?room=living&video=0&guide=0",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "room-living-video-0-guide-0-390.png"
+  },
+  {
+   "url": "/?room=living&video=0&guide=0&from=apartment&scope=apartment",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "room-living-video-0-guide-0-from-apartment-scope-apartment-1440.png"
+  },
+  {
+   "url": "/?room=living&video=0&guide=0&from=apartment&scope=apartment",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "room-living-video-0-guide-0-from-apartment-scope-apartment-390.png"
+  },
+  {
+   "url": "/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=platform&project=rainbow",
+   "size": "1440",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 1296000
+   },
+   "screenshot": "scope-apartment-room-terraceLiving-floor-parquet-video-0-from-platform-project-r-1440.png"
+  },
+  {
+   "url": "/?scope=apartment&room=terraceLiving&floor=parquet&video=0&from=platform&project=rainbow",
+   "size": "390",
+   "pass": true,
+   "fails": [],
+   "counts": {
+    "overflow": 0,
+    "targets": 0,
+    "covering": 0,
+    "errors": 0,
+    "http": 0
+   },
+   "inline_links": [],
+   "canvas": {
+    "el": "div#pano.t-pano.pnlm-container «תצוגת 360° של החדר. גררו כדי ל»",
+    "area": 329160
+   },
+   "screenshot": "scope-apartment-room-terraceLiving-floor-parquet-video-0-from-platform-project-r-390.png"
+  }
+ ]
+}

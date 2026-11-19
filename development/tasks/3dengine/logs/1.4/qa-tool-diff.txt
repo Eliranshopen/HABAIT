@@ -1,0 +1,10 @@
+88c88,90
+<   const res = await chatFetch(env)(OPENROUTER_CHAT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: TEXT_MODEL, temperature: 0, max_tokens: maxTokens, usage: { include: true }, messages: [{ role: 'system', content: system }, { role: 'user', content }] }) });
+---
+>   // (engine port, 2026-11-18, PORT-CHANGES.md) with an OpenRouter key the call goes straight to OpenRouter, which needs the key in
+>   // its header, as every other caller of chatFetch sends it; through fal the transport builds its own headers and this one is unused
+>   const res = await chatFetch(env)(OPENROUTER_CHAT, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(env.OPENROUTER_API_KEY ? { Authorization: 'Bearer ' + env.OPENROUTER_API_KEY } : {}) }, body: JSON.stringify({ model: TEXT_MODEL, temperature: 0, max_tokens: maxTokens, usage: { include: true }, messages: [{ role: 'system', content: system }, { role: 'user', content }] }) });
+250c252
+<     roofed_outdoor: false, fixtures: [], source_file: `${path.basename(input)}${P.page ? ` page ${P.page}` : ''}${P.floor_label ? ` (${P.floor_label})` : ''}`, trace_date: new Date().toISOString().slice(0, 10), scale_basis: `${PPC} px/cm: ${basis}`,
+---
+>     roofed_outdoor: false, fixtures: [], source_file: `${path.basename(input)}${P.page ? ` page ${P.page}` : ''}${P.floor_label ? ` (${P.floor_label})` : ''}`, trace_date: arg('--trace-date', new Date().toISOString().slice(0, 10)), scale_basis: `${PPC} px/cm: ${basis}`,

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C · Ivory Gallery & Brass</title>
+<link rel="stylesheet" href="../css/tokens.css"><link rel="stylesheet" href="../css/components.css">
+<style>
+/* DIRECTION C — "Ivory Gallery & Brass" (Aman / gallery calm): bone #F4EFE7 page, ink #17181A text (17:1), brass #8E6B38 accent
+   (lines, numerals, large display only; 4.6:1 on bone), deep ink #17181A bands. Frank Ruhl Libre display at very large sizes with
+   generous tracking for Latin caps; Heebo 300 body; tiny tracked labels. Sharp edges, no shadows, no cards; full-viewport frames. */
+:root{--bone:#F4EFE7;--ink:#17181A;--muted:#5B5853;--brass:#8E6B38;--line:rgb(23 24 26/.14)}
+*{box-sizing:border-box}body{margin:0;background:var(--bone);color:var(--ink);font-family:'Heebo',sans-serif;font-weight:300}
+.top{position:absolute;inset:0 0 auto;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(16px,4vw,56px);color:#fff;font-size:13px;border-bottom:1px solid rgb(255 255 255/.22)}
+.top nav{display:flex;gap:28px;align-items:center}.top a{color:#fff;text-decoration:none}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Frank Ruhl Libre',serif;letter-spacing:.34em;font-size:14px}.brand i{width:8px;height:8px;background:#D8B47A;display:inline-block}
+.view{border-bottom:1px solid #D8B47A;padding:12px 0;min-height:44px;display:inline-flex;align-items:center;letter-spacing:.06em}
+.hero{position:relative;height:100svh;min-height:600px;color:#fff;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:44% 50%}
+.hero::after{content:'';position:absolute;inset:0;background:rgb(23 24 26/.34)}
+.hc{position:absolute;z-index:3;inset:0;display:grid;place-content:center;justify-items:center;text-align:center;gap:22px;padding:0 16px}
+.coords{font-size:11px;letter-spacing:.42em;opacity:.9}
+h1{font-family:'Frank Ruhl Libre',serif;font-weight:500;font-size:clamp(2.6rem,1rem + 5.6vw,6.6rem);line-height:1.02;margin:0;max-width:14ch}
+.cta{display:inline-flex;gap:14px;align-items:center;min-height:52px;padding:0 30px;background:var(--bone);color:var(--ink);border-radius:0;font-weight:500;text-decoration:none;font-size:16px}
+.hero .hb-ai-badge{position:absolute;z-index:4;bottom:20px;inset-inline-end:clamp(16px,4vw,56px)}
+.word{position:absolute;z-index:3;bottom:18px;inset-inline-start:clamp(16px,4vw,56px);font-family:'Frank Ruhl Libre',serif;letter-spacing:.5em;font-size:13px;direction:ltr}
+.statement{padding:clamp(96px,16vh,220px) 16px;text-align:center}
+.statement p{font-family:'Frank Ruhl Libre',serif;font-weight:500;font-size:clamp(1.9rem,1rem + 3vw,3.8rem);line-height:1.18;margin:0 auto;max-width:20ch}
+.statement small{display:block;margin-top:28px;font-family:'Heebo';font-size:11px;letter-spacing:.4em;color:var(--brass)}
+.frame{position:relative;height:100vh;overflow:hidden}.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.frame::after{content:'';position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(to top,rgb(23 24 26/.55),transparent)}
+.frame .cap{position:absolute;z-index:2;bottom:28px;inset-inline-start:clamp(16px,4vw,56px);color:var(--bone);font-size:12px;letter-spacing:.32em}
+.frame .hb-ai-badge{position:absolute;z-index:2;top:20px;inset-inline-end:clamp(16px,4vw,56px)}
+@media (max-width:760px){.top nav a:not(.view){display:none}.frame{height:72svh}}
+</style></head><body>
+<header class="top"><span class="brand"><i></i><span lang="en">RAINBOW</span></span><nav><a href="#">המיקום</a><a href="#">האדריכלות</a><a href="#">EN</a><a class="view" href="#">לסיור בפרויקט</a></nav></header>
+<section class="hero"><img src="../fixtures/rainbow/landing/hero-poster-1920.jpg" alt="">
+  <div class="hc"><span class="coords" lang="en">TEL AVIV · ON THE SEAFRONT</span><h1>מגדל מגורים על קו הים של תל אביב.</h1><a class="cta" href="#">לסיור בפרויקט <span aria-hidden="true">←</span></a></div>
+  <span class="word" lang="en">RAINBOW</span><span class="hb-ai-badge">הדמיה · <bdi>AI-generated</bdi></span></section>
+<section class="statement"><p>סיור בבניין, לפני שהוא קם — מהשמיים, אל הסלון.</p><small>01 — המיקום</small></section>
+<section class="frame"><img src="../fixtures/rainbow/landing/renders/the-1-1056.jpg" alt=""><span class="cap">01 — על קו הים של תל אביב</span><span class="hb-ai-badge">הדמיה</span></section>
+</body></html>

@@ -1,0 +1,35 @@
+// ABA: the upload is re-written IN PLACE with the very same bytes while a first look runs.
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { makeHome, engineOf, E, SCR, sha, cleanup, sleep } from './qa-lib.mjs';
+const { inspectDir } = await E('engine/inspect.mjs');
+const h = await makeHome({ timeout: 60 });
+const H = (await engineOf(h)).handlers;
+const A = `${h.inbox}/same.pdf`;
+fs.copyFileSync(`${SCR}/pdfs/vec-sheet.pdf`, A);   // 300 pages: the scan is slow enough to overlap a rewrite
+const S = sha(fs.readFileSync(A));
+const truth = (await H.inspect_plan({ pdf_path: A })); // clean look first (no writer)
+console.log('truth: pages', truth.pages, 'rows vector', truth.page_rows.filter((r) => r.content === 'vector').length);
+const writer = spawn(process.execPath, ['-e', `const fs=require('fs');const b=fs.readFileSync(${JSON.stringify(SCR + '/pdfs/vec-sheet.pdf')});setInterval(()=>{try{fs.writeFileSync(${JSON.stringify(A)},b)}catch(e){}},3)`], { stdio: 'ignore' });
+let poisoned = 0; let refused = 0; let ok = 0; let other = 0; const detail = [];
+for (let i = 0; i < 30; i++) {
+  fs.rmSync(inspectDir(h.config, S), { recursive: true, force: true });
+  try {
+    const r = await H.inspect_plan({ pdf_path: A });
+    const good = r.pages === truth.pages && JSON.stringify(r.page_rows) === JSON.stringify(truth.page_rows);
+    if (good) ok++; else { poisoned++; detail.push(`look ${i}: pages=${r.pages} vector rows=${r.page_rows.filter((x) => x.content === 'vector').length}`); }
+  } catch (e) { if (e.code === 'NOT_A_PDF') refused++; else { other++; detail.push(e.code + e.message.slice(0, 60)); } }
+}
+writer.kill(); await sleep(300);
+console.log('with a same-bytes rewrite running: correct', ok, 'refused NOT_A_PDF', refused, 'WRONG look returned', poisoned, 'other', other);
+console.log(detail.slice(0, 5).join('\n'));
+console.log('file bytes at the end equal the original:', sha(fs.readFileSync(A)) === S);
+// is a wrong look KEPT? take a wrong one, stop the writer, ask again
+const rec = `${inspectDir(h.config, S)}/inspect.json`;
+if (fs.existsSync(rec)) {
+  const kept = JSON.parse(fs.readFileSync(rec, 'utf8')).summary;
+  console.log('kept record now: pages', kept.pages, 'vector rows', kept.page_rows.filter((x) => x.content === 'vector').length, 'matches truth', JSON.stringify(kept.page_rows) === JSON.stringify(truth.page_rows));
+  const again = await H.inspect_plan({ pdf_path: A });
+  console.log('asked again with a quiet file: matches truth', JSON.stringify(again.page_rows) === JSON.stringify(truth.page_rows));
+}
+cleanup(h);

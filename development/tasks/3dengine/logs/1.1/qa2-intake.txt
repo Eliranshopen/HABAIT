@@ -1,0 +1,41 @@
+{"name":"source.pdf is a FOLDER","verdict":"tool-error NOT_A_PDF: job 04762ca47a173685 already holds something that is not a file as its input (input/source.pdf); it is never overwritten","rawLeak":false,"changed":[],"extra":""}
+{"name":"input is a FILE","verdict":"tool-error NOT_A_PDF: job 04762ca47a173685 holds something that is not a folder where its input folder (input) belongs; it is never overwritten","rawLeak":false,"changed":[],"extra":""}
+{"name":"job folder is a FILE","verdict":"RPC-ERROR -32603 internal error in start_simulation: EEXIST: file already exists, mkdir 'C:\\Users\\elira\\AppData\\Local","rawLeak":true,"changed":[],"extra":""}
+{"name":"read-only foreign input/source.pdf","verdict":"tool-error NOT_A_PDF: job 04762ca47a173685 already holds another file as its input (input/source.pdf); it is never overwritten","rawLeak":false,"changed":[],"extra":"foreign kept"}
+{"name":"writable foreign input/source.pdf","verdict":"tool-error NOT_A_PDF: job 04762ca47a173685 already holds another file as its input (input/source.pdf); it is never overwritten","rawLeak":false,"changed":[],"extra":"foreign kept"}
+file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/intake.mjs:34
+  ({ jd, srv }) => fs.existsSync(`${jd}/input/source.pdf.${srv.proc.pid}.tmp/x/f`) ? 'foreign kept' : 'foreign removed');
+                                                               ^
+
+TypeError: Cannot read properties of undefined (reading 'proc')
+    at file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/intake.mjs:34:64
+    at sc (file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/intake.mjs:22:123)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/intake.mjs:33:1
+
+Node.js v24.22.1
+{"name":"own temp name is a FOLDER (server pid)","verdict":"RPC-ERROR -32603 internal error in start_simulation: EPERM: operation not permitted, copyfile 'C:\\Users\\elira\\AppData","rawLeak":true,"changed":[],"extra":"foreign kept"}
+{"name":"own temp name is a read-only FILE (server pid)","verdict":"OK","rawLeak":true,"changed":["04762ca47a173685/input/source.pdf.28232.tmp","04762ca47a173685/input/source.pdf","04762ca47a173685/job.json","04762ca47a173685/runner.log"],"extra":""}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-30232-1794914565983-2 EPERM
+{"name":"leftover temp of dead pid is swept","verdict":"OK","rawLeak":true,"changed":["04762ca47a173685/input/source.pdf.99999999.tmp","04762ca47a173685/input/source.pdf","04762ca47a173685/job.json","04762ca47a173685/runner.log"],"extra":"swept"}
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa2-home-30232-1794914568097-3 EPERM
+{"name":"job.lock is a FOLDER","verdict":"RPC-ERROR -32603 internal error in start_simulation: job 04762ca47a173685: lock busy","rawLeak":false,"changed":[],"extra":""}
+node:fs:1630
+  const result = binding.readdir(
+                         ^
+
+Error: ENOTDIR: not a directory, scandir 'C:\Users\elira\AppData\Local\Temp\qa2-home-30232-1794914574309-5\jobs-temp'
+    at Object.readdirSync (node:fs:1630:26)
+    at walk (file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/qa-lib.mjs:65:44)
+    at snapshot (file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/qa-lib.mjs:66:3)
+    at sc (file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/intake.mjs:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///C:/Users/elira/AppData/Local/Temp/qa-m11-r2-s/intake.mjs:32:1 {
+  errno: -4052,
+  code: 'ENOTDIR',
+  syscall: 'scandir',
+  path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\qa2-home-30232-1794914574309-5\\jobs-temp'
+}
+
+Node.js v24.22.1
+{"name":"input has a read-only source.pdf of the TRUE bytes (unmarked resume)","verdict":"OK","rawLeak":true,"changed":["04762ca47a173685/job.json","04762ca47a173685/runner.log"],"extra":"readonly now: true"}

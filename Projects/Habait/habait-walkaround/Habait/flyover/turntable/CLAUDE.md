@@ -1,11 +1,11 @@
 # turntable/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Availability spinner of the tower in the residence.tech style: 72 frames at 5 degree steps with per-unit polygons (turntable.py, card 21, C6a).
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 4 files here · 2 subfolders · 154 files / 110.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

@@ -1,0 +1,78 @@
+{
+ "res": [
+  {
+   "tag": "1440",
+   "ctx": "room=living&video=0&guide=0&co",
+   "walk": {
+    "from": "living",
+    "to": "terraceLiving",
+    "via": "כניסה אל מרפסת שמש"
+   },
+   "tips": {
+    "t-view-360": "360°: החדר עצמו, כפי שאתם רואים אותו עכשיו.",
+    "t-map-btn": "תוכנית: תוכנית הדירה, ומעבר מהיר לכל חדר.",
+    "t-plan-btn": "תלת-ממד: הדירה כולה במודל תלת-ממדי, ומשם נכנסים לכל חדר.",
+    "t-rooms-btn": "פותח או מקפל את רצועת החדרים.",
+    "t-design-btn": "שינוי עיצוב: מעוצב או מקור, בחירת ריצוף ותיאור שינוי בחדר במילים."
+   },
+   "langKbd": {
+    "open": true,
+    "expanded": "true",
+    "closed": true
+   }
+  },
+  {
+   "tag": "1440",
+   "ctx": "scope=apartment&room=terraceLi",
+   "walk": {
+    "from": "terraceLiving",
+    "to": "living",
+    "via": "כניסה אל סלון"
+   },
+   "tips": {
+    "t-view-360": "360°: החדר עצמו, כפי שאתם רואים אותו עכשיו.",
+    "t-map-btn": "תוכנית: תוכנית הדירה, ומעבר מהיר לכל חדר.",
+    "t-plan-btn": "תלת-ממד: הדירה כולה במודל תלת-ממדי, ומשם נכנסים לכל חדר.",
+    "t-rooms-btn": "פותח או מקפל את רצועת החדרים.",
+    "t-design-btn": "שינוי עיצוב: מעוצב או מקור, בחירת ריצוף ותיאור שינוי בחדר במילים."
+   },
+   "langKbd": {
+    "open": true,
+    "expanded": "true",
+    "closed": true
+   }
+  },
+  {
+   "tag": "390",
+   "ctx": "room=living&video=0&guide=0&co",
+   "walk": {
+    "from": "living",
+    "to": "terraceLiving",
+    "via": "כניסה אל מרפסת שמש"
+   }
+  },
+  {
+   "tag": "390",
+   "ctx": "scope=apartment&room=terraceLi",
+   "walk": {
+    "from": "terraceLiving",
+    "to": "living",
+    "via": "כניסה אל סלון"
+   },
+   "ring": {
+    "pick": false,
+    "open": false,
+    "marker": null
+   }
+  },
+  {
+   "reduced": {
+    "open": true,
+    "playing": false,
+    "tr": "0s",
+    "lit": 0
+   }
+  }
+ ],
+ "errors": []
+}

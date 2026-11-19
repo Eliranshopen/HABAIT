@@ -79,3 +79,17 @@
 
 ## 2026-11-04 · main-session → second-reader pointer
 - runs/2026-11-04-transition-rise.md — the tour↔dollhouse protocol grew: `habait:scenes`, `rise`, `rise-ready`, `rise-done`, `3d-hide` (tour → page on close; the page drops a dive in flight) and `enter-room {dove}`. The viewer has `rise`/`dive`/`transitionPreview`. In the repo, NOT deployed: a deploy needs Eliran's own go and must rebuild platform 846 + tour apt846 from live (rnd-23's prod snapshot of ~07:2x predates it).
+
+
+## 2026-11-16 · platform-dev · 3dengine m0.2 task 04 — app job card
+- **Did:** HABAIT agent UI (worktree `C:/HABAIT-Agent-UI/.wt/engine-mcp/app`, branch engine-mcp, uncommitted): `job` AgentEvent, bridge `job` record → event, `GET /jobs/<id>` polling every 2 s (token sent, paused when hidden, 404 ×3 / 400 stop, network error retried), one JobCard per job_id, loopback rule `isAllowedJobUrl`, mock scenario `?play=job` / `?scenario=job`.
+- **Evidence:** `C:/HABAIT-Agent-UI/.wt/engine-mcp/app/src/agent/job*.ts`, `src/store/jobBlocks.ts`, `src/components/jobCard.tsx`; gate typecheck 0 · build 0 · `npm test` 32/32, line coverage 100 % on job*.ts + resultUrl.ts.
+- **Learned:** node --test + tsc -b in this app: tests excluded from tsconfig.app and included in tsconfig.node (types node); logic modules import with `.ts` extensions (allowImportingTsExtensions already on).
+- **Owed / open:** nothing rendered yet — 390/1440 RTL check of the card and the `?play=job` walk in a browser is owed (QA card); end-state words for review/failed/cancelled and the bad-link note are mine, not the contract's.
+- **Second reader:** none.
+
+## 2026-11-18 · main session → second-reader pointer
+- 2026-11-18 engine 1.2: Eliran's cap 0.50 USD; ONE fresh reading of 846 passed for 0.0404 USD after a one-line change of auto-trace.mjs (its OpenRouter call carried no key header: first attempt HTTP 401, billed 0). Gate: closing test 3 of 3, 390 tests, lines 99.74 %; main 6d006c1; QA runs. The portal's tool has the same line → `memory/runs/2026-11-16-3dengine-milestones.md`
+
+## 2026-11-18 · qa-reviewer → second-reader pointer
+- qa-reviewer 2026-11-18: engine 1.3 trace gate QA PASS, 0 defects, 6 observations; report in worktree logs/1.3/qa-live.md; room type unchecked by tool check (building milestone). → `memory/agents/qa-reviewer.md`

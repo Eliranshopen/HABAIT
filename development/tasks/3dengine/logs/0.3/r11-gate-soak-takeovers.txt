@@ -1,0 +1,11 @@
+freeze soak: temp home C:/Users/elira/AppData/Local/Temp/freezesoak-o29hH2, port 51439, target 40 takeovers
+  5 takeovers, 4 of them woke while the job was still running
+  10 takeovers, 7 of them woke while the job was still running
+  15 takeovers, 9 of them woke while the job was still running
+  20 takeovers, 12 of them woke while the job was still running
+  25 takeovers, 14 of them woke while the job was still running
+  30 takeovers, 15 of them woke while the job was still running
+  35 takeovers, 19 of them woke while the job was still running
+  40 takeovers, 21 of them woke while the job was still running
+SOAK kills=0 jobs_finished=0 orphaned_rows=2 recovered_rows=0 resume_retries=0 longest_resume_ms=23 takeovers=40 second_runner_kills=10 (4 inside a pause) never_sent_rows=6 late_rows=7 woke_before_done=21 violations=0
+clean-up: no process of the soak remains

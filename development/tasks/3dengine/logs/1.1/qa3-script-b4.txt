@@ -1,0 +1,47 @@
+// B2 (CLI): every CLI command that takes a job id, on a job whose manifest/job file is not its own. Hash before and after.
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { makeHome, E, SCR, sha, cleanup, snapshot, diffSnap, sleep } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const R = 'C:/RnD/Projects/3Dengine';
+const GOLD = `${R}/tests/fixtures/apt846/source.pdf`;
+const SHA = sha(fs.readFileSync(GOLD));
+const ID = jobId({ pdfSha256: SHA, apartment: 'p1', mode: 'stub', version: '1.1.0' });
+const ledgerDoc = (id, usd) => ({ schema: 'habait/ledger.v1', job_id: id, cap_usd: 50, rows: [{ seq: 1, call_key: 'k', stage: 'rendering', status: 'settled', reserved_usd: usd, settled_usd: usd }] });
+
+const variants = {
+  'manifest other id + ledger settled $1': (h, jd) => { fs.writeFileSync(`${jd}/manifest.json`, JSON.stringify({ schema: 'habait/manifest.v1', job_id: 'ffffffffffffffff', rows: [] })); fs.writeFileSync(`${jd}/ledger.json`, JSON.stringify(ledgerDoc(ID, 1))); },
+  'manifest garbage + ledger settled $1': (h, jd) => { fs.writeFileSync(`${jd}/manifest.json`, 'zzz'); fs.writeFileSync(`${jd}/ledger.json`, JSON.stringify(ledgerDoc(ID, 1))); },
+  'manifest dir + ledger settled $1': (h, jd) => { fs.mkdirSync(`${jd}/manifest.json`); fs.writeFileSync(`${jd}/ledger.json`, JSON.stringify(ledgerDoc(ID, 1))); },
+  'manifest bad row + ledger settled $1': (h, jd) => { fs.writeFileSync(`${jd}/manifest.json`, JSON.stringify({ schema: 'habait/manifest.v1', job_id: ID, rows: [{ stage: 'nope' }] })); fs.writeFileSync(`${jd}/ledger.json`, JSON.stringify(ledgerDoc(ID, 1))); },
+  'job.json other id': (h, jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.job_id = '0123456789abcdef'; fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); fs.writeFileSync(`${jd}/ledger.json`, JSON.stringify(ledgerDoc(ID, 1))); },
+  'job.json id not of its input': (h, jd) => { const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.input.pdf_sha256 = 'a'.repeat(64); fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j)); fs.writeFileSync(`${jd}/ledger.json`, JSON.stringify(ledgerDoc(ID, 1))); },
+  'job.json garbage': (h, jd) => { fs.writeFileSync(`${jd}/job.json`, '{x'); },
+};
+
+for (const [label, plant] of Object.entries(variants)) {
+  const h = await makeHome({ timeout: 120 });
+  fs.copyFileSync(GOLD, `${h.inbox}/s.pdf`);
+  const { createStubEngine } = await E('mcp/stub-engine.mjs');
+  const eng = createStubEngine(h.config, { spawnRunner: () => {}, ensureServe: async () => {} });
+  const r = await eng.handlers.start_simulation({ pdf_path: `${h.inbox}/s.pdf` });
+  const jd = `${h.jobsDir}/${ID}`;
+  // put the job in awaiting_approval so that `resume` would start a runner
+  const j = JSON.parse(fs.readFileSync(`${jd}/job.json`, 'utf8')); j.state = 'awaiting_approval'; j.percent = 55; j.quote = { estimate_usd: 48, range_usd: [40, 60] };
+  fs.writeFileSync(`${jd}/job.json`, JSON.stringify(j));
+  plant(h, jd);
+  const by = `${h.jobsDir}/bbbbbbbbbbbbbbbb`;
+  const before = snapshot(h.jobsDir, (p) => /job\.lock|\.tmp$/.test(p));
+  console.log(`## ${label}`);
+  for (const args of [['job', ID], ['job', ID, '--json'], ['ledger', ID], ['ledger', ID, '--json'], ['jobs'], ['jobs', '--json'], ['resume', ID]]) {
+    const b0 = snapshot(h.jobsDir, (p) => /job\.lock|\.tmp$/.test(p));
+    const p = spawnSync(process.execPath, [`${R}/engine/cli.mjs`, ...args], { env: { ...process.env, ...h.env }, encoding: 'utf8', timeout: 30000, windowsHide: true });
+    await sleep(150);
+    const b1 = snapshot(h.jobsDir, (q) => /job\.lock|\.tmp$/.test(q));
+    const ch = diffSnap(b0, b1);
+    const pidf = fs.existsSync(`${jd}/runner.pid`) ? 'RUNNER.PID-EXISTS' : '';
+    console.log(`   ${args.join(' ')} -> exit ${p.status}${ch.length ? '  WROTE: ' + ch.join(',') : ''} ${pidf} | ${(p.stdout + p.stderr).replace(/\s+/g, ' ').slice(0, 130)}`);
+    if (pidf) { try { const pid = Number(fs.readFileSync(`${jd}/runner.pid`, 'utf8')); spawnSync('taskkill', ['/PID', String(pid), '/T', '/F'], { windowsHide: true }); } catch {} }
+  }
+  cleanup(h);
+}

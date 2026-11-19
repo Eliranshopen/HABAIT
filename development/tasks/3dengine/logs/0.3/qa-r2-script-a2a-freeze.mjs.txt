@@ -1,0 +1,51 @@
+// A2a: hook-frozen runner replaced at random points; own invariants. Usage: node a2a-freeze.mjs <seed> <n>
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, between, inv, spentOk, heavyOverlap, finalCheck, violate, note, STAGES, PAID, pidAlive, frozenThenReplaced, finishAfterTakeover } from './q.mjs';
+const [seed, n] = process.argv.slice(2).map(Number);
+setSeed(seed);
+const E = await mkEnv({ prefix: 'qa-a2a-', callUsd: 0.6, stepMs: 400, heartbeat: 0.1, staleSeconds: 1 });
+const POINTS = [...STAGES, ...PAID.map((s) => `${s}:reserved`)];
+console.log('a2a home', E.home);
+const per = {};
+try {
+  for (let k = 0; k < n; k++) {
+    const point = POINTS[between(0, POINTS.length - 1)];
+    const freezeMs = between(2400, 3600);
+    const tag = `T${k} ${point} ${freezeMs}ms`;
+    let r;
+    try {
+      r = await frozenThenReplaced(E, { name: `a2a-${seed}-${k}.pdf`, point, freezeMs });
+    } catch (e) { violate(`${tag}: setup ${e.message}`); continue; }
+    S.takeovers++;
+    inv(E, r.id, `${tag} right after takeover`);
+    // sample invariants while the first one wakes and the second works
+    const t0 = Date.now();
+    const stopAt = Date.now() + freezeMs + 1500;
+    let doneSeen = false;
+    while (Date.now() < stopAt) {
+      inv(E, r.id, `${tag} sample`);
+      const j = E.job(r.id);
+      if (j.state === 'awaiting_approval' && !j.approval) { try { E.h.approve_paid_stage({ job_id: r.id, cap_usd: 60 }); } catch { } }
+      await sleep(40);
+    }
+    await finishAfterTakeover(E, r, { freezeMs });
+    finalCheck(E, r.id, `${tag} final`);
+    await spentOk(E, r.id, `${tag} final`);
+    const man = E.rows(r.id), led = E.ledger(r.id);
+    const at = STAGES.indexOf(r.stage);
+    for (const row of man) {
+      if (STAGES.indexOf(row.stage) >= at && row.runner_pid === r.oldPid) violate(`${tag}: row of ${row.stage} written by the replaced runner ${r.oldPid}`);
+    }
+    for (const s of PAID) if (E.sends(r.id, s) !== 1) violate(`${tag}: ${s} sent ${E.sends(r.id, s)}x`);
+    const open = led.rows.filter((x) => x.status === 'orphaned' || x.status === 'reserved');
+    if (open.length) violate(`${tag}: open rows ${JSON.stringify(open.map((x) => [x.seq, x.status]))}`);
+    const lg = E.log(r.id);
+    if (!lg.includes(`runner ${r.oldPid} stopped: superseded`)) violate(`${tag}: old runner did not log superseded`);
+    if (!pidAlive(r.oldPid) === false) { /* gone */ }
+    per[point] = (per[point] || 0) + 1;
+    console.log(`  ${tag} ok (jobs ${S.jobs}, takeovers ${S.takeovers})`);
+  }
+  heavyOverlap(E, 'a2a');
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a2a', seed, takeovers: S.takeovers, jobsDone: S.jobs, checks: S.checks, per, violations: S.violations, leftover: E.leftover }));

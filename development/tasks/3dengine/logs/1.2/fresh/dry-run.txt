@@ -1,0 +1,11 @@
+# The dry run of the fresh reading (milestone 1.2, task 05), 2026-11-17, in the working folder's engine home.
+# Command: node engine/cli.mjs trace tests/fixtures/apt846/source.pdf --out <scratch>/trace-fresh-1/run --id apt846
+
+outcome: DRY
+nothing was started and nothing was booked
+a paid run would call the vision model: 1 reading(s) and up to 3 run(s) of the judge, about $0.08 in all
+to pay: add --budget <usd> --go (a cap above 0 and at most 1); the tool stops before a call that would pass the cap
+keys (by name): FAL_KEY: present, OPENROUTER_API_KEY: present
+
+exit code: 0
+the output folder after the dry run: does not exist (nothing was created)

@@ -1,0 +1,45 @@
+milestone 1.4 gate: npm run test:e2e (browser -> bridge -> Pi -> a scripted model -> the engine, milestone 0.2), ONCE
+started: 2026-11-18T20:32:47+02:00
+machine load before: 100 %
+
+> habait-3dengine@1.4.0 test:e2e
+> node tests/e2e/m0.2.e2e.mjs
+
+PASS  prerequisite: UI worktree has bridge/src/server.mjs (C:/HABAIT-Agent-UI/.wt/engine-mcp)
+PASS  prerequisite: UI app has node_modules/vite
+PASS  prerequisite: Pi wrapper has install-global.py and both extensions (C:/pi-main/habait/.wt/engine-mcp)
+PASS  prerequisite: Pi CLI installed (npm -g @earendil-works/pi-coding-agent)
+PASS  prerequisite: Chrome at C:/Program Files/Google/Chrome/Application/chrome.exe
+PASS  prerequisite: staged tour page C:/RnD/.wt/deploy-P-7/tour/index.html
+PASS  prerequisite: fixture tests/fixtures/sample.pdf
+PASS  prerequisite: python on PATH (runs the wrapper installer)
+PASS  prerequisite: port 8787 is free
+PASS  prerequisite: port 4173 is free
+PASS  prerequisite: playwright-core loads (appdeps)
+PASS  the wrapper installer ran on the temp agent folder
+PASS  installer: habait-guard registered in settings.json
+PASS  installer: habait-engine registered in mcp.json with exposure "direct"  — ["C:/RnD/Projects/3Dengine/mcp/server.mjs"]
+PASS  `pi mcp list` (temp agent folder) shows habait-engine connected with its eight tools  — exit 0
+PASS  the app builds (vite build into the temp folder)
+PASS  the bridge started Pi 1.5.2 in RPC mode on the fake model  — see C:/Users/elira/AppData/Local/Temp/habait-e2e-ohF8hj/logs/bridge.log
+PASS  the app paired with the bridge (POST /pair 200)  — status 200
+PASS  upload of sample.pdf succeeded
+PASS  A: the job card appears with the badge «שחזור הדגמה»
+PASS  A: the card's percent advanced through intermediate steps before the quote  — seen 0 → 10 → 25 → 45 → 55
+PASS  A: job file is awaiting_approval with the quote, no approval
+PASS  A: the quote line reads «הערכת עלות: $48 · טווח $40–$60 · 11 חדרים»  — הערכת עלות: $48 · טווח $40–$60 · 11 חדרים
+PASS  A: the button «אשרו תקציב עד $60» shows
+PASS  1440 quote: no horizontal overflow on either side  — scrollWidth 1440 / clientWidth 1440
+PASS  cleanup: no process of this test remains (bridge, Pi, MCP server, runners, static server)
+PASS  cleanup: ports 8787, 4173, 62768, 62769 are free (netstat)
+ERROR  page.screenshot: Timeout 30000ms exceeded.
+Call log:
+[2m  - taking page screenshot[22m
+[2m  - waiting for fonts to load...[22m
+[2m  - fonts loaded[22m
+
+
+E2E FAIL: 27/27 assertions passed; stopped by an error. Report: C:/Users/elira/AppData/Local/Temp/habait-engine-e2e/report.json
+exit code: 1
+seconds: 262
+machine load after: 100 %

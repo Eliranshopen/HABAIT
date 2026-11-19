@@ -1,0 +1,22 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>360 · סלון · דוגמה</title>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }</script>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#111;font:15px Heebo,system-ui,sans-serif;color:#fff}canvas{display:block;touch-action:none}
+#ui{position:fixed;top:12px;inset-inline:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}button{border:0;border-radius:999px;padding:9px 16px;font:inherit;background:rgba(40,36,32,.8);color:#fff;cursor:pointer}
+button[aria-pressed=true]{background:#f9f6f3;color:#24211e;font-weight:700}.b{background:#eea927;color:#24211e;border-radius:999px;padding:3px 10px;font-weight:700;font-size:13px}
+#h{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(40,36,32,.8);padding:7px 14px;border-radius:999px;font-size:13px}</style></head>
+<body><div id="ui"><span class="b">הדמיה</span><button data-k="ai" aria-pressed="true">אחרי · ריאליסטי (AI)</button><button data-k="render" aria-pressed="false">לפני · רינדור</button></div><div id="h">גררו כדי להסתכל מסביב · גלגלת לזום</div>
+<script type="module">
+import * as THREE from 'three';
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.setSize(innerWidth, innerHeight); r.outputColorSpace = THREE.SRGBColorSpace; document.body.prepend(r.domElement);
+const sc = new THREE.Scene(), cam = new THREE.PerspectiveCamera(80, innerWidth / innerHeight, 0.1, 100);
+const g = new THREE.SphereGeometry(10, 96, 64); g.scale(-1, 1, 1); const m = new THREE.MeshBasicMaterial(); sc.add(new THREE.Mesh(g, m));
+const L = new THREE.TextureLoader(), T = {}; const load = (k) => (T[k] ||= L.loadAsync(`p360/living_${k}.jpg`).then((t) => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; }));
+async function show(k) { m.map = await load(k); m.needsUpdate = true; document.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.k === k))); }
+document.querySelectorAll('button').forEach((b) => b.onclick = () => show(b.dataset.k)); show('ai'); load('render');
+let lon = 0, lat = -5, d = null; const el = r.domElement;
+el.onpointerdown = (e) => { d = [e.clientX, e.clientY, lon, lat]; el.setPointerCapture(e.pointerId); };
+el.onpointermove = (e) => { if (!d) return; lon = d[2] + (e.clientX - d[0]) * 0.12; lat = Math.max(-85, Math.min(85, d[3] + (e.clientY - d[1]) * 0.12)); };
+el.onpointerup = () => { d = null; }; addEventListener('wheel', (e) => { cam.fov = Math.max(35, Math.min(100, cam.fov + Math.sign(e.deltaY) * 4)); cam.updateProjectionMatrix(); });
+addEventListener('resize', () => { cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); r.setSize(innerWidth, innerHeight); });
+r.setAnimationLoop(() => { const p = THREE.MathUtils.degToRad(90 - lat), t = THREE.MathUtils.degToRad(lon); cam.lookAt(Math.sin(p) * Math.cos(t), Math.cos(p), Math.sin(p) * Math.sin(t)); r.render(sc, cam); });
+</script></body></html>

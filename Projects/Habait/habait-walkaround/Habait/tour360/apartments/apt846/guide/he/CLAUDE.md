@@ -1,17 +1,18 @@
 # he/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-05)
-33 files here · 0 subfolders · 33 files / 56.8 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+34 files here · 1 subfolders · 36 files / 62.0 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `01-entrance.mp3` | 161.6 KB | 2026-11-03 |
-| `01-entrance.mp4` | 11.1 MB | 2026-11-03 |
+| `01-entrance.cut.json` | 2.1 KB | 2026-11-08 |
+| `01-entrance.mp3` | 121.4 KB | 2026-11-08 |
+| `01-entrance.mp4` | 5.1 MB | 2026-11-08 |
 | `01-entrance.mp4.json` | 759 B | 2026-11-03 |
 | `02-kitchen.mp3` | 77.2 KB | 2026-11-03 |
 | `02-kitchen.mp4` | 3.9 MB | 2026-11-03 |
@@ -43,6 +44,11 @@ _Not written yet — one line on what this folder is for. Until then the parent 
 | `11-bath-guest.mp3` | 99.1 KB | 2026-11-03 |
 | `11-bath-guest.mp4` | 6.9 MB | 2026-11-03 |
 | `11-bath-guest.mp4.json` | 760 B | 2026-11-03 |
+
+## Subfolders
+| Folder | Card | Files in tree |
+|---|---|---|
+| `_orig/` | [`_orig/CLAUDE.md`](_orig/CLAUDE.md) | 2 (11.2 MB) |
 
 ## Gotchas
 _none recorded_

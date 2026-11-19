@@ -1,0 +1,202 @@
+{
+ "$schema": "tour360/cameras.v1",
+ "apartment": "ahk-apt7",
+ "note": "The camera table of model/plan.json (cm on the traced sheet, x right, y down); the panoramas were rendered from scene/apartment.blend camera objects pano_<id> at these points, centre = plan up. The viewer sheet is the sales-sheet crop x planScale.",
+ "plan": {
+  "crop": "C:/RnD/Projects/Avney_Hefets_Kedem_4/בניין 1-2 דגם יורד קומה א דירות 7-8.jpg",
+  "crop_px": [
+   160,
+   98,
+   3336,
+   3084
+  ],
+  "width": 3176,
+  "height": 2986,
+  "pxPerCm": 2.2681,
+  "planScale": 0.5,
+  "sheet": "plan/floorplan.webp"
+ },
+ "eye_m": 1.6,
+ "scenes": [
+  {
+   "id": "living",
+   "asset": "living",
+   "at_cm": [
+    582.4,
+    693.5
+   ],
+   "lookAt_cm": [
+    454.6,
+    834.6
+   ],
+   "links": [
+    "balcony",
+    "corridor",
+    "dining",
+    "foyer",
+    "kitchen"
+   ]
+  },
+  {
+   "id": "dining",
+   "asset": "dining",
+   "at_cm": [
+    410.5,
+    521.6
+   ],
+   "lookAt_cm": [
+    520.7,
+    415.8
+   ],
+   "links": [
+    "balcony",
+    "kitchen",
+    "living"
+   ]
+  },
+  {
+   "id": "kitchen",
+   "asset": "kitchen",
+   "at_cm": [
+    168.0,
+    437.8
+   ],
+   "lookAt_cm": [
+    57.8,
+    283.5
+   ],
+   "links": [
+    "dining",
+    "foyer",
+    "living"
+   ]
+  },
+  {
+   "id": "foyer",
+   "asset": "foyer",
+   "at_cm": [
+    212.1,
+    642.8
+   ],
+   "lookAt_cm": [
+    520.7,
+    680.3
+   ],
+   "links": [
+    "kitchen",
+    "living"
+   ]
+  },
+  {
+   "id": "balcony",
+   "asset": "balcony",
+   "at_cm": [
+    432.5,
+    310.0
+   ],
+   "lookAt_cm": [
+    432.5,
+    195.3
+   ],
+   "links": [
+    "dining",
+    "living"
+   ]
+  },
+  {
+   "id": "corridor",
+   "asset": "corridor",
+   "at_cm": [
+    773.3,
+    680.3
+   ],
+   "lookAt_cm": [
+    773.3,
+    459.9
+   ],
+   "links": [
+    "bath",
+    "bedroom",
+    "living",
+    "mamad",
+    "master"
+   ]
+  },
+  {
+   "id": "master",
+   "asset": "master",
+   "at_cm": [
+    970.4,
+    292.3
+   ],
+   "lookAt_cm": [
+    1138.0,
+    173.3
+   ],
+   "links": [
+    "corridor",
+    "ensuite"
+   ]
+  },
+  {
+   "id": "ensuite",
+   "asset": "ensuite",
+   "at_cm": [
+    824.9,
+    155.6
+   ],
+   "lookAt_cm": [
+    785.2,
+    63.0
+   ],
+   "links": [
+    "master"
+   ]
+  },
+  {
+   "id": "mamad",
+   "asset": "mamad",
+   "at_cm": [
+    944.0,
+    513.6
+   ],
+   "lookAt_cm": [
+    1138.0,
+    513.6
+   ],
+   "links": [
+    "corridor"
+   ]
+  },
+  {
+   "id": "bath",
+   "asset": "bath",
+   "at_cm": [
+    899.9,
+    803.8
+   ],
+   "lookAt_cm": [
+    1005.7,
+    724.4
+   ],
+   "links": [
+    "corridor"
+   ]
+  },
+  {
+   "id": "bedroom",
+   "asset": "bedroom",
+   "at_cm": [
+    822.7,
+    1011.0
+   ],
+   "lookAt_cm": [
+    961.6,
+    1011.0
+   ],
+   "links": [
+    "corridor"
+   ]
+  }
+ ]
+}

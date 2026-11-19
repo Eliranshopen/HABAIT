@@ -1,0 +1,71 @@
+$ python .claude/skills/ui-ux-pro-max/scripts/search.py accessibilityLabel touch targets safe areas --domain web -n 6
+## UI Pro Max Search Results
+**Domain:** web | **Query:** accessibilityLabel touch targets safe areas
+**Source:** app-interface.csv | **Found:** 6 results
+
+### Result 1
+- **Category:** Safe Areas
+- **Issue:** Safe Area Insets
+- **Platform:** iOS/Android/React Native
+- **Description:** Content must not overlap notches/gesture bars
+- **Do:** Wrap screens in SafeAreaView or apply insets
+- **Don't:** Place tappable content under system bars
+- **Code Example Good:** <SafeAreaView style={{ flex: 1 }}><Screen /></SafeAreaView>
+- **Code Example Bad:** <View style={{ flex: 1 }}><Screen /></View>
+- **Severity:** High
+
+### Result 2
+- **Category:** Touch
+- **Issue:** Touch Spacing
+- **Platform:** iOS/Android/React Native
+- **Description:** Adjacent touch targets need enough spacing
+- **Do:** Keep at least 8dp spacing between touchables
+- **Don't:** Cluster many buttons with no gap
+- **Code Example Good:** <View style={{ gap: 8 }}><Button ... /><Button ... /></View>
+- **Code Example Bad:** <View><Button ... /><Button ... /></View>
+- **Severity:** Medium
+
+### Result 3
+- **Category:** Touch
+- **Issue:** Touch Target Size
+- **Platform:** iOS/Android/React Native
+- **Description:** Primary touch targets must be at least 44x44pt
+- **Do:** Increase hitSlop or padding to meet minimum
+- **Don't:** Small icons with tiny touch area
+- **Code Example Good:** <Pressable hitSlop={10}><Icon /></Pressable>
+- **Code Example Bad:** <Pressable><Icon style={{ width: 16, height: 16 }} /></Pressable>
+- **Severity:** Critical
+
+### Result 4
+- **Category:** Accessibility
+- **Issue:** Icon Button Labels
+- **Platform:** iOS/Android/React Native
+- **Description:** Icon-only buttons must expose an accessible label
+- **Do:** Set accessibilityLabel or label prop on icon buttons
+- **Don't:** Icon buttons without accessible names
+- **Code Example Good:** <Pressable accessibilityLabel="Close"><XIcon /></Pressable>
+- **Code Example Bad:** <Pressable><XIcon /></Pressable>
+- **Severity:** Critical
+
+### Result 5
+- **Category:** Accessibility
+- **Issue:** Form Control Labels
+- **Platform:** iOS/Android/React Native
+- **Description:** All inputs must have a visible label and an accessibility label
+- **Do:** Pair Text label with input and set accessibilityLabel
+- **Don't:** Inputs with placeholder only
+- **Code Example Good:** <View><Text>Email</Text><TextInput accessibilityLabel="Email address" /></View>
+- **Code Example Bad:** <TextInput placeholder="Email" /></View>
+- **Severity:** Critical
+
+### Result 6
+- **Category:** Touch
+- **Issue:** Gesture Conflicts
+- **Platform:** iOS/Android/React Native
+- **Description:** Custom gestures must not break system scroll/back
+- **Do:** Reserve horizontal swipes for carousels
+- **Don't:** Full-screen custom swipe conflicting with back
+- **Code Example Good:** HorizontalPager inside vertical ScrollView
+- **Code Example Bad:** PanResponder on full screen blocking back
+- **Severity:** High
+

@@ -1,0 +1,1126 @@
+{
+ "note": "The design layer of the 3D walk (2026-11-17, Eliran: «אני רוצה את כל הפיצ'רים שקיימים בפרויקט של RAINBOW כמו שינוי ריהוט או אביזרים ע\"י לחיצה על העיגול ... וגם שורת טקסט חופשי לעיצוב»). pieces[].match is a regex on an object's name or any ancestor's name (walk3d_bake.py prep); the first piece that matches owns the object. channels[].mats = the materials a colour or finish change repaints (\"*\" = every material of the piece) (the rest of the piece, legs and handles, keeps its colour). Everything here is $0: the page repaints the baked model, nothing is generated.",
+ "pieces": [
+  {
+   "id": "sofa",
+   "he": "ספה",
+   "en": "sofa",
+   "match": "^(l-sofa|sofa_)",
+   "ring": true,
+   "slot": "sofa",
+   "words": [
+    "ספה",
+    "ספת",
+    "הספה",
+    "sofa",
+    "couch"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "fabric"
+    }
+   ]
+  },
+  {
+   "id": "armchair",
+   "he": "כורסה",
+   "en": "armchair",
+   "match": "^l-armchair",
+   "ring": true,
+   "slot": "armchair",
+   "words": [
+    "כורסה",
+    "כורסא",
+    "הכורסה",
+    "armchair",
+    "כורסת"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "modern_arm_chair_01_pillow"
+     ],
+     "palette": "fabric"
+    }
+   ]
+  },
+  {
+   "id": "coffee",
+   "he": "שולחן סלון",
+   "en": "coffee table",
+   "match": "^l-coffee",
+   "ring": true,
+   "slot": "coffee",
+   "words": [
+    "שולחן סלון",
+    "שולחן קפה",
+    "שולחן הסלון",
+    "coffee table"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "wood"
+    }
+   ]
+  },
+  {
+   "id": "rug",
+   "he": "שטיח",
+   "en": "rug",
+   "match": "^l-rug",
+   "ring": true,
+   "words": [
+    "שטיח",
+    "השטיח",
+    "rug",
+    "carpet"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "rug_wool"
+     ],
+     "palette": "rug"
+    }
+   ]
+  },
+  {
+   "id": "tvunit",
+   "he": "מזנון",
+   "en": "TV unit",
+   "match": "^l-tv-unit",
+   "ring": true,
+   "words": [
+    "מזנון",
+    "המזנון",
+    "tv unit",
+    "sideboard"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "oak_veneer"
+     ],
+     "palette": "wood"
+    }
+   ]
+  },
+  {
+   "id": "tv",
+   "he": "טלוויזיה",
+   "en": "TV",
+   "match": "^l-tv$",
+   "ring": false,
+   "words": [],
+   "channels": []
+  },
+  {
+   "id": "dining",
+   "he": "שולחן אוכל",
+   "en": "dining table",
+   "match": "^(l-dining)",
+   "ring": true,
+   "slot": "dining",
+   "words": [
+    "שולחן אוכל",
+    "שולחן האוכל",
+    "פינת אוכל",
+    "dining table"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "wood"
+    }
+   ]
+  },
+  {
+   "id": "chairs",
+   "he": "כיסאות אוכל",
+   "en": "dining chairs",
+   "match": "^chair_",
+   "ring": true,
+   "slot": "chairs",
+   "words": [
+    "כיסאות",
+    "כסאות",
+    "כיסא",
+    "כסא",
+    "chairs",
+    "chair"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "fabric"
+    }
+   ]
+  },
+  {
+   "id": "pendant",
+   "he": "מנורה תלויה",
+   "en": "pendant lamp",
+   "match": "^pendant_",
+   "ring": true,
+   "slot": "pendant",
+   "words": [
+    "מנורה",
+    "מנורת",
+    "גוף תאורה",
+    "נברשת",
+    "pendant",
+    "lamp"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "black_metal"
+     ],
+     "palette": "metal"
+    }
+   ]
+  },
+  {
+   "id": "plant",
+   "he": "עציץ",
+   "en": "plant",
+   "match": "^l-plant",
+   "ring": false,
+   "words": [],
+   "channels": []
+  },
+  {
+   "id": "kitchen",
+   "he": "מטבח",
+   "en": "kitchen",
+   "match": "^k-",
+   "ring": true,
+   "words": [
+    "מטבח",
+    "המטבח",
+    "ארונות מטבח",
+    "חזיתות",
+    "kitchen",
+    "cabinets",
+    "חזיתות המטבח"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "חזיתות",
+     "mats": [
+      "white_lacquer"
+     ],
+     "palette": "front"
+    },
+    {
+     "id": "top",
+     "he": "משטח וחיפוי",
+     "mats": [
+      "quartz_caesarstone"
+     ],
+     "palette": "stone"
+    }
+   ]
+  },
+  {
+   "id": "wardrobes",
+   "he": "ארונות קיר",
+   "en": "wardrobes",
+   "match": "^(m|s|r)-wardrobe",
+   "ring": true,
+   "words": [
+    "ארון",
+    "ארונות",
+    "ארונות קיר",
+    "wardrobe",
+    "wardrobes",
+    "closet"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "oak_veneer"
+     ],
+     "palette": "wood"
+    }
+   ]
+  },
+  {
+   "id": "bedm",
+   "he": "מיטה זוגית",
+   "en": "double bed",
+   "match": "^m-bed",
+   "ring": true,
+   "words": [
+    "מיטה זוגית",
+    "המיטה הזוגית",
+    "ראש מיטה",
+    "double bed",
+    "headboard"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "fabric"
+    }
+   ]
+  },
+  {
+   "id": "beds",
+   "he": "מיטות",
+   "en": "beds",
+   "match": "^(s|r)-bed",
+   "ring": true,
+   "words": [
+    "מיטות",
+    "מיטה",
+    "מיטת",
+    "bed",
+    "beds"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "מסגרת וראש מיטה",
+     "mats": [
+      "fabric_warm_grey"
+     ],
+     "palette": "fabric"
+    },
+    {
+     "id": "linen",
+     "he": "מצעים",
+     "mats": [
+      "fabric_linen",
+      "fabric_sage"
+     ],
+     "palette": "fabric"
+    }
+   ]
+  },
+  {
+   "id": "night",
+   "he": "שידות לילה",
+   "en": "nightstands",
+   "match": "^m-night",
+   "ring": false,
+   "words": [
+    "שידה",
+    "שידות",
+    "nightstand"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "wood"
+    }
+   ]
+  },
+  {
+   "id": "vanities",
+   "he": "ארונות אמבטיה",
+   "en": "vanities",
+   "match": "^(e|b)-vanity",
+   "ring": true,
+   "words": [
+    "ארון אמבטיה",
+    "ארונות אמבטיה",
+    "כיור",
+    "vanity"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "oak_veneer"
+     ],
+     "palette": "wood"
+    }
+   ]
+  },
+  {
+   "id": "outdoor",
+   "he": "פינת ישיבה במרפסת",
+   "en": "balcony set",
+   "match": "^o-",
+   "ring": false,
+   "words": [],
+   "channels": []
+  },
+  {
+   "id": "doors",
+   "he": "דלתות",
+   "en": "doors",
+   "match": "^(leaf_|jamb_)",
+   "ring": false,
+   "words": [
+    "דלת",
+    "דלתות",
+    "doors",
+    "door"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "door_white_flush"
+     ],
+     "palette": "front"
+    }
+   ]
+  },
+  {
+   "id": "floor",
+   "he": "ריצוף",
+   "en": "floor",
+   "match": "^floor_(tile80|kitchen|living|foyer|corridor|mamad|bedroom)",
+   "ring": false,
+   "words": [
+    "ריצוף",
+    "רצפה",
+    "הרצפה",
+    "רצפת",
+    "אריחים",
+    "floor",
+    "flooring",
+    "tiles"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "גימור",
+     "mats": [
+      "*"
+     ],
+     "finish": "floor"
+    }
+   ]
+  },
+  {
+   "id": "floorm",
+   "he": "רצפת חדר השינה",
+   "en": "bedroom floor",
+   "match": "^floor_(parquet|master)",
+   "ring": false,
+   "words": [
+    "פרקט",
+    "parquet"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "גימור",
+     "mats": [
+      "*"
+     ],
+     "finish": "floor"
+    }
+   ]
+  },
+  {
+   "id": "floorb",
+   "he": "ריצוף חדרי הרחצה",
+   "en": "bathroom floor",
+   "match": "^floor_(bathtile|bath|ensuite)",
+   "ring": false,
+   "words": [],
+   "channels": [
+    {
+     "id": "main",
+     "he": "גימור",
+     "mats": [
+      "*"
+     ],
+     "finish": "floor"
+    }
+   ]
+  },
+  {
+   "id": "bathwalls",
+   "he": "חיפוי חדרי רחצה",
+   "en": "bathroom tiles",
+   "match": "^tile_",
+   "ring": false,
+   "words": [
+    "חיפוי אמבטיה",
+    "קרמיקה",
+    "bathroom tiles"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "bathwall"
+    }
+   ]
+  },
+  {
+   "id": "deck",
+   "he": "דק המרפסת",
+   "en": "deck",
+   "match": "^floor_(deck|balcony)",
+   "ring": false,
+   "words": [
+    "דק",
+    "deck"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "*"
+     ],
+     "palette": "wood"
+    }
+   ]
+  },
+  {
+   "id": "ceiling",
+   "he": "תקרה",
+   "en": "ceiling",
+   "match": "^(ceiling|balcony_soffit|slab_above|balcony_roof|fixture_)",
+   "ring": false,
+   "words": [],
+   "channels": []
+  },
+  {
+   "id": "walls",
+   "he": "קירות",
+   "en": "walls",
+   "match": "^(wall_|lintel_|sill_)",
+   "ring": false,
+   "words": [
+    "קיר",
+    "קירות",
+    "הקירות",
+    "צבע קירות",
+    "walls",
+    "wall",
+    "paint"
+   ],
+   "channels": [
+    {
+     "id": "main",
+     "he": "צבע",
+     "mats": [
+      "wall_paint"
+     ],
+     "palette": "wall"
+    }
+   ]
+  }
+ ],
+ "palettes": {
+  "fabric": [
+   [
+    "grey",
+    "אפור חם",
+    "#8a847c"
+   ],
+   [
+    "linen",
+    "פשתן",
+    "#d8d1c4"
+   ],
+   [
+    "sand",
+    "חול",
+    "#c7b293"
+   ],
+   [
+    "sage",
+    "ירוק מרווה",
+    "#7f8f78"
+   ],
+   [
+    "navy",
+    "כחול כהה",
+    "#2f3e57"
+   ],
+   [
+    "terracotta",
+    "טרקוטה",
+    "#b0623f"
+   ],
+   [
+    "charcoal",
+    "פחם",
+    "#3b3a39"
+   ],
+   [
+    "mustard",
+    "חרדל",
+    "#c99a2e"
+   ],
+   [
+    "blush",
+    "ורוד עתיק",
+    "#c9a19a"
+   ],
+   [
+    "cream",
+    "שמנת",
+    "#ece4d4"
+   ]
+  ],
+  "wood": [
+   [
+    "oak",
+    "אלון טבעי",
+    "#a8875f"
+   ],
+   [
+    "lightoak",
+    "אלון בהיר",
+    "#cdb592"
+   ],
+   [
+    "walnut",
+    "אגוז",
+    "#5e4130"
+   ],
+   [
+    "black",
+    "שחור מט",
+    "#2a2827"
+   ],
+   [
+    "white",
+    "לבן",
+    "#e9e6e0"
+   ],
+   [
+    "greige",
+    "גרייז'",
+    "#a39b8f"
+   ]
+  ],
+  "rug": [
+   [
+    "wool",
+    "צמר טבעי",
+    "#b8ad9c"
+   ],
+   [
+    "ivory",
+    "שנהב",
+    "#e6dfd2"
+   ],
+   [
+    "grey",
+    "אפור",
+    "#8d8c88"
+   ],
+   [
+    "rust",
+    "חלודה",
+    "#9c5a3c"
+   ],
+   [
+    "blue",
+    "כחול",
+    "#4f6480"
+   ],
+   [
+    "green",
+    "ירוק",
+    "#6d7a5c"
+   ]
+  ],
+  "front": [
+   [
+    "white",
+    "לבן מבריק",
+    "#eceae6"
+   ],
+   [
+    "greige",
+    "גרייז'",
+    "#aca395"
+   ],
+   [
+    "sage",
+    "ירוק מרווה",
+    "#8a9883"
+   ],
+   [
+    "navy",
+    "כחול כהה",
+    "#2f3c52"
+   ],
+   [
+    "black",
+    "שחור מט",
+    "#2b2a29"
+   ],
+   [
+    "oak",
+    "אלון",
+    "#a8875f"
+   ],
+   [
+    "walnut",
+    "אגוז",
+    "#5e4130"
+   ],
+   [
+    "clay",
+    "חימר",
+    "#b88e72"
+   ]
+  ],
+  "stone": [
+   [
+    "white",
+    "קיסר לבן",
+    "#ebe8e3"
+   ],
+   [
+    "grey",
+    "בטון אפור",
+    "#9a9894"
+   ],
+   [
+    "black",
+    "שחור",
+    "#2e2d2c"
+   ],
+   [
+    "beige",
+    "בז'",
+    "#d6c7ae"
+   ]
+  ],
+  "metal": [
+   [
+    "black",
+    "שחור",
+    "#1e1d1c"
+   ],
+   [
+    "brass",
+    "פליז",
+    "#b08d4a"
+   ],
+   [
+    "white",
+    "לבן",
+    "#e6e3dd"
+   ],
+   [
+    "copper",
+    "נחושת",
+    "#a5643c"
+   ]
+  ],
+  "wall": [
+   [
+    "white",
+    "לבן",
+    "#ecebe7"
+   ],
+   [
+    "warmwhite",
+    "לבן חם",
+    "#efe7da"
+   ],
+   [
+    "cream",
+    "שמנת",
+    "#e6dcc8"
+   ],
+   [
+    "greige",
+    "גרייז'",
+    "#c9c1b4"
+   ],
+   [
+    "sage",
+    "ירוק מרווה",
+    "#b8c0ae"
+   ],
+   [
+    "blue",
+    "כחול אפרפר",
+    "#a9b6c2"
+   ],
+   [
+    "clay",
+    "חימר",
+    "#cfae97"
+   ],
+   [
+    "grey",
+    "אפור בהיר",
+    "#bdbcb8"
+   ]
+  ],
+  "bathwall": [
+   [
+    "white",
+    "לבן",
+    "#e8e6e2"
+   ],
+   [
+    "grey",
+    "אפור",
+    "#a6a5a1"
+   ],
+   [
+    "sand",
+    "חול",
+    "#d1c3ab"
+   ],
+   [
+    "green",
+    "ירוק",
+    "#8fa08e"
+   ],
+   [
+    "blue",
+    "כחול",
+    "#7c93a8"
+   ],
+   [
+    "black",
+    "שחור",
+    "#2f2f2f"
+   ]
+  ]
+ },
+ "floors": [
+  {
+   "id": "orig",
+   "he": "כמו בתמונות"
+  },
+  {
+   "id": "his-oak",
+   "he": "אלון בהיר רחב (כמו בתמונות)",
+   "mode": "wood",
+   "hex": "#9a8774"
+  },
+  {
+   "id": "p80-light",
+   "he": "פורצלן 80×80 בהיר",
+   "mode": "tile",
+   "size": 0.8,
+   "hex": "#dcd8d0",
+   "grout": "#c3beb4"
+  },
+  {
+   "id": "p80-grey",
+   "he": "פורצלן 80×80 אפור",
+   "mode": "tile",
+   "size": 0.8,
+   "hex": "#a9a7a2",
+   "grout": "#8f8d88"
+  },
+  {
+   "id": "p120-beige",
+   "he": "פורצלן 60×120 בז'",
+   "mode": "tile",
+   "size": 0.6,
+   "len": 1.2,
+   "hex": "#cbbba3",
+   "grout": "#b3a48d"
+  },
+  {
+   "id": "p80-dark",
+   "he": "פורצלן 80×80 כהה",
+   "mode": "tile",
+   "size": 0.8,
+   "hex": "#5d5a56",
+   "grout": "#4a4845"
+  },
+  {
+   "id": "concrete",
+   "he": "מראה בטון",
+   "mode": "tile",
+   "size": 1.2,
+   "hex": "#9d9a94",
+   "grout": "#8a8781"
+  },
+  {
+   "id": "oak",
+   "he": "פרקט אלון",
+   "mode": "wood",
+   "hex": "#b48d62"
+  },
+  {
+   "id": "lightoak",
+   "he": "פרקט אלון בהיר",
+   "mode": "wood",
+   "hex": "#d2b994"
+  },
+  {
+   "id": "walnut",
+   "he": "פרקט אגוז",
+   "mode": "wood",
+   "hex": "#6e4c35"
+  }
+ ],
+ "variants": {
+  "sofa": [
+   [
+    "v0",
+    "ספה עכשווית (במודל)"
+   ],
+   [
+    "v1",
+    "ספה על רגלי עץ"
+   ],
+   [
+    "v2",
+    "ספה מעוגלת"
+   ]
+  ],
+  "armchair": [
+   [
+    "v0",
+    "כורסה מודרנית (במודל)"
+   ],
+   [
+    "v1",
+    "כורסה מרובעת"
+   ],
+   [
+    "v2",
+    "כורסת עץ"
+   ]
+  ],
+  "coffee": [
+   [
+    "v0",
+    "שולחן עגול (במודל)"
+   ],
+   [
+    "v1",
+    "שולחן מלבני משיש"
+   ],
+   [
+    "v2",
+    "זוג שולחנות עגולים"
+   ]
+  ],
+  "dining": [
+   [
+    "v0",
+    "שולחן עץ (במודל)"
+   ],
+   [
+    "v1",
+    "שולחן לבן ורגלי עץ"
+   ],
+   [
+    "v2",
+    "שולחן כבד מעץ"
+   ]
+  ],
+  "chairs": [
+   [
+    "v0",
+    "כיסאות מרופדים (במודל)"
+   ],
+   [
+    "v1",
+    "כיסאות עץ"
+   ],
+   [
+    "v2",
+    "כיסאות שחורים"
+   ]
+  ],
+  "pendant": [
+   [
+    "v0",
+    "כיפה שחורה (במודל)"
+   ],
+   [
+    "v1",
+    "כדור זכוכית"
+   ],
+   [
+    "v2",
+    "מנורה ליניארית"
+   ]
+  ],
+  "floorlamp": [
+   [
+    "none",
+    "בלי"
+   ],
+   [
+    "v1",
+    "מנורת עמידה"
+   ]
+  ],
+  "art": [
+   [
+    "none",
+    "בלי"
+   ],
+   [
+    "v1",
+    "תמונה על הקיר"
+   ],
+   [
+    "v2",
+    "מראה עגולה"
+   ]
+  ],
+  "vase": [
+   [
+    "none",
+    "בלי"
+   ],
+   [
+    "v1",
+    "אגרטל על השולחן"
+   ]
+  ]
+ },
+ "styles": [
+  {
+   "id": "orig",
+   "he": "כמו במודל",
+   "set": {}
+  },
+  {
+   "id": "light",
+   "he": "מודרני בהיר",
+   "set": {
+    "floor": "p80-light",
+    "walls": "white",
+    "sofa": "linen",
+    "armchair": "cream",
+    "coffee": "white",
+    "rug": "ivory",
+    "wardrobes": "white",
+    "chairs": "linen",
+    "dining": "white",
+    "tvunit": "white",
+    "kitchen": "white",
+    "kitchen.top": "white"
+   }
+  },
+  {
+   "id": "warm",
+   "he": "חם ועץ",
+   "set": {
+    "floor": "oak",
+    "walls": "warmwhite",
+    "sofa": "sand",
+    "armchair": "terracotta",
+    "coffee": "walnut",
+    "rug": "rust",
+    "wardrobes": "oak",
+    "chairs": "sand",
+    "dining": "oak",
+    "tvunit": "walnut",
+    "pendant": "brass",
+    "kitchen": "oak",
+    "kitchen.top": "beige"
+   }
+  },
+  {
+   "id": "scandi",
+   "he": "סקנדינבי",
+   "set": {
+    "floor": "lightoak",
+    "walls": "white",
+    "sofa": "grey",
+    "armchair": "mustard",
+    "coffee": "lightoak",
+    "rug": "wool",
+    "wardrobes": "lightoak",
+    "chairs": "linen",
+    "dining": "lightoak",
+    "tvunit": "lightoak",
+    "pendant": "white",
+    "kitchen": "white",
+    "kitchen.top": "white"
+   }
+  },
+  {
+   "id": "dark",
+   "he": "כהה ואלגנטי",
+   "set": {
+    "floor": "p80-dark",
+    "walls": "greige",
+    "sofa": "navy",
+    "armchair": "charcoal",
+    "coffee": "black",
+    "rug": "grey",
+    "wardrobes": "walnut",
+    "chairs": "charcoal",
+    "dining": "walnut",
+    "tvunit": "black",
+    "pendant": "brass",
+    "kitchen": "black",
+    "kitchen.top": "white"
+   }
+  },
+  {
+   "id": "nature",
+   "he": "טבעי וירוק",
+   "set": {
+    "floor": "p120-beige",
+    "walls": "sage",
+    "sofa": "cream",
+    "armchair": "sage",
+    "coffee": "oak",
+    "rug": "green",
+    "wardrobes": "oak",
+    "chairs": "sand",
+    "dining": "oak",
+    "tvunit": "oak",
+    "kitchen": "sage",
+    "kitchen.top": "beige"
+   }
+  }
+ ],
+ "base": {}
+}

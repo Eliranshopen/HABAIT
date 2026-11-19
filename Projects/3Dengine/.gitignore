@@ -1,0 +1,14 @@
+# The engine home: machine-local files stay out of git.
+# Rebuilt by: node engine/cli.mjs setup-env --go   and   node engine/cli.mjs bring-assets --go
+.venv/
+.runtime/
+jobs/
+node_modules/
+coverage/
+engine.config.local.json
+__pycache__/
+*.pyc
+
+# Secrets: no env file is ever committed.
+.env*
+!.env.example

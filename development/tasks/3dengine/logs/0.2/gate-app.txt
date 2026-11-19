@@ -1,0 +1,65 @@
+
+> habait-agent-ui@0.1.0 test
+> node --test --experimental-test-coverage --test-coverage-lines=80 "--test-coverage-include=src/**/job*.ts" "--test-coverage-include=src/agent/resultUrl.ts" "--test-coverage-exclude=src/**/*.test.ts" "src/**/*.test.ts"
+
+✔ parseJob keeps the contract fields of a full record (2.0067ms)
+✔ parseJob rejects records without a valid id or state (0.184ms)
+✔ parseJob fills defaults, clamps the percent and drops broken parts (1.1789ms)
+✔ terminal states are done, review, failed, cancelled (0.1628ms)
+✔ mergeJob takes the fresh record, ignores older ones and never revives a terminal job (0.2074ms)
+✔ isLoopbackJobUrl accepts http loopback with an explicit port only (0.1911ms)
+✔ line 1 reads in Hebrew with the job id; other paid steps do not match (0.9527ms)
+✔ the cap line: known, unknown, or not the engine guard (1.203ms)
+✔ the mock title mirrors the real guard (0.1083ms)
+✔ the mock job is a valid stub job (2.1203ms)
+✔ walks to awaiting_approval, waits there, then walks to done after the approval (0.9527ms)
+✔ approval only in awaiting_approval; unknown states stay (0.084ms)
+✔ parseApproveMessage rejects other text (0.1178ms)
+✔ polls every 2 seconds (0.9351ms)
+✔ decision: fetch while live and visible, wait while hidden, stop when terminal, unknown or stopped (1.0181ms)
+✔ a network error changes nothing: keep the job, try again (0.1371ms)
+✔ 404 stops after a few tries in a row; a job answer resets the count (0.1006ms)
+✔ 400 stops at once; a terminal job answer stops (0.0899ms)
+✔ HTTP status → answer kind (0.0937ms)
+✔ six steps with the contract labels (1.5058ms)
+✔ every live state maps to its step (1.1274ms)
+✔ steps are done / active / pending around the current state (0.298ms)
+✔ end states stop on the step their percent reached (0.1141ms)
+✔ quote, button text and chat message follow the contract (0.2539ms)
+✔ title and stub badge (0.1102ms)
+✔ card view per state (0.2546ms)
+✔ announcements only when the step or end state changes (0.162ms)
+✔ existing callers keep their behaviour: loopback is refused without the option (0.8901ms)
+✔ a job local_url may be loopback; everything else follows the agent rule (0.2209ms)
+✔ openHref: mock versions open the demo page, real ones their URL (0.3816ms)
+✔ findJobMsg finds the message that holds the card (0.9742ms)
+✔ a first stream event stores the job and adds one card to its message (1.1768ms)
+✔ a later event for the same job updates in place: no second card (0.1566ms)
+✔ a poll answer never creates a card; a stale answer changes nothing (0.0985ms)
+✔ markApprovalSent flags only that job card (0.1608ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 225.0507
+ℹ start of coverage report
+ℹ -----------------------------------------------------------------
+ℹ file             | line % | branch % | funcs % | uncovered lines
+ℹ -----------------------------------------------------------------
+ℹ src              |        |          |         | 
+ℹ  agent           |        |          |         | 
+ℹ   job.ts         | 100.00 |    98.75 |  100.00 | 
+ℹ   jobApproval.ts | 100.00 |   100.00 |  100.00 | 
+ℹ   jobMock.ts     | 100.00 |    95.00 |  100.00 | 
+ℹ   jobPoll.ts     | 100.00 |   100.00 |  100.00 | 
+ℹ   jobView.ts     | 100.00 |   100.00 |  100.00 | 
+ℹ   resultUrl.ts   | 100.00 |   100.00 |  100.00 | 
+ℹ  store           |        |          |         | 
+ℹ   jobBlocks.ts   | 100.00 |   100.00 |  100.00 | 
+ℹ -----------------------------------------------------------------
+ℹ all files        | 100.00 |    99.11 |  100.00 | 
+ℹ -----------------------------------------------------------------
+ℹ end of coverage report

@@ -1,0 +1,216 @@
+{
+ "errors": [],
+ "steps": [
+  {
+   "name": "rings shown in the living room",
+   "ok": true,
+   "rings": [
+    "sofa"
+   ]
+  },
+  {
+   "name": "a ring opens the piece card",
+   "ok": true,
+   "title": "ספה"
+  },
+  {
+   "name": "model and colour from the card",
+   "ok": true,
+   "s": {
+    "slot:sofa": "v2",
+    "sofa": "navy"
+   }
+  },
+  {
+   "name": "accessories from the card",
+   "ok": true,
+   "s": {
+    "slot:sofa": "v2",
+    "sofa": "navy",
+    "acc:floorlamp": "v1",
+    "acc:art": "v1"
+   }
+  },
+  {
+   "name": "undo takes back the last change",
+   "ok": true,
+   "s": {
+    "slot:sofa": "v2",
+    "sofa": "navy",
+    "acc:floorlamp": "v1"
+   }
+  },
+  {
+   "name": "before/after shows the original",
+   "ok": true
+  },
+  {
+   "name": "the design panel opens",
+   "ok": true
+  },
+  {
+   "name": "free text: green sofa + wood floor",
+   "ok": true,
+   "said": "בוצע: ספה: ירוק · ריצוף: פרקט אלון",
+   "s": {
+    "slot:sofa": "v2",
+    "sofa": "#7f8f78",
+    "acc:floorlamp": "v1",
+    "floor": "oak",
+    "floorm": "oak"
+   }
+  },
+  {
+   "name": "free text: kitchen fronts + worktop",
+   "ok": true,
+   "said": "בוצע: מטבח: כחול · משטח המטבח: שחור",
+   "s": {
+    "slot:sofa": "v2",
+    "sofa": "#7f8f78",
+    "acc:floorlamp": "v1",
+    "floor": "oak",
+    "floorm": "oak",
+    "kitchen": "#1d2636",
+    "kitchen.top": "#2b2a29"
+   }
+  },
+  {
+   "name": "free text refuses a structural change",
+   "ok": true,
+   "said": "המבנה נשאר לפי תכנית המכר. אפשר לשנות צבעים, גימורים, ריצוף וריהוט."
+  },
+  {
+   "name": "free text: walls + evening",
+   "ok": true,
+   "said": "בוצע: אווירת ערב · קירות: שמנת",
+   "s": {
+    "slot:sofa": "v2",
+    "sofa": "#7f8f78",
+    "acc:floorlamp": "v1",
+    "floor": "oak",
+    "floorm": "oak",
+    "kitchen": "#1d2636",
+    "kitchen.top": "#2b2a29",
+    "light": "evening",
+    "walls": "#e6dcc8"
+   }
+  },
+  {
+   "name": "free text: a style",
+   "ok": true,
+   "said": "בוצע: סגנון: סקנדינבי",
+   "s": {
+    "floor": "lightoak",
+    "floorm": "lightoak",
+    "walls": "white",
+    "sofa": "grey",
+    "armchair": "mustard",
+    "coffee": "lightoak",
+    "rug": "wool",
+    "wardrobes": "lightoak",
+    "chairs": "linen",
+    "dining": "lightoak",
+    "tvunit": "lightoak",
+    "pendant": "white",
+    "kitchen": "white",
+    "kitchen.top": "white"
+   }
+  },
+  {
+   "name": "style chip",
+   "ok": true,
+   "s": {
+    "floor": "p80-dark",
+    "floorm": "p80-dark",
+    "walls": "greige",
+    "sofa": "navy",
+    "armchair": "charcoal",
+    "coffee": "black",
+    "rug": "grey",
+    "wardrobes": "walnut",
+    "chairs": "charcoal",
+    "dining": "walnut",
+    "tvunit": "black",
+    "pendant": "brass",
+    "kitchen": "black",
+    "kitchen.top": "white"
+   }
+  },
+  {
+   "name": "the design link restores the design",
+   "ok": true
+  },
+  {
+   "name": "reset",
+   "ok": true,
+   "s": {}
+  },
+  {
+   "name": "a tap in the view from above walks there",
+   "ok": true,
+   "me": {
+    "x": 5.625736483631839,
+    "z": 9.233042069563288
+   }
+  },
+  {
+   "name": "tape measure gives a length",
+   "ok": true,
+   "ml": "130 ס\"מ"
+  },
+  {
+   "name": "a tap on the plan moves there",
+   "ok": true,
+   "p0": {
+    "x": 5.824,
+    "z": 6.935
+   },
+   "p1": {
+    "x": 9.961928571428572,
+    "z": 3.286193781224126
+   }
+  },
+  {
+   "name": "rings across the apartment",
+   "ok": true,
+   "pieces": [
+    "dining",
+    "chairs",
+    "pendant",
+    "sofa",
+    "armchair",
+    "kitchen",
+    "tvunit",
+    "coffee",
+    "rug",
+    "wardrobes",
+    "bedm",
+    "beds",
+    "vanities"
+   ]
+  },
+  {
+   "name": "phone: rings",
+   "ok": true,
+   "rings": [
+    "sofa"
+   ]
+  },
+  {
+   "name": "phone: a ring tap opens the card",
+   "ok": true
+  },
+  {
+   "name": "phone: free text",
+   "ok": true
+  }
+ ],
+ "overflow": {
+  "desktop": [],
+  "phone": {
+   "doc": false,
+   "els": []
+  }
+ },
+ "pass": true
+}

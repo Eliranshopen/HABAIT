@@ -1,5 +1,5 @@
 # Habait/studio-web — the developer portal on habait-flow (/studio)
-<!-- last-updated: 2026-11-04 -->
+<!-- last-updated: 2026-11-08 -->
 <!-- context file · written 2026-11-04 by session rnd-67 (plan development/plans/2026-11-04-developer-platform.md, P0) -->
 
 ## What's here
@@ -54,6 +54,17 @@ The site is a fixed TEMPLATE + one DATA PACKAGE per project (Eliran). The build 
   version travel in job.json.
 
 ## Conventions / gotchas
+- **Live status, one wording (2026-11-08, Eliran's Rainbow screenshots):** the page polls `?only=job` (one known path, never a list)
+  while the job is `queued|running|waiting|review` — `waiting` included, so a trace approved on another device or Habait's build
+  approval reaches an open page, and the build approval's re-dispatch rides on that poll (`needsDispatch`); a hidden tab is not polled
+  and reads at once when shown. Approve, correction and build re-read the project at once, success or refusal. The build card's
+  headline and the agent panel's status line are both `jobStatus().head` in `studio.js` (never two wordings); the chat prompt gets the
+  same job state (`jobForChat` in `api/studio-agent.mjs`).
+- **The flow bar (2026-11-08, Eliran: «עדיף שיהיה סרגל התקדמות בחלק העליון של הפורטל»):** `#st-flow` under the title, sticky under the
+  header on desktop, compact on a phone (step name, «שלב N מתוך 9», a thin line, the action; a tap opens the list): 9 steps העלאה → … →
+  פרסום, each state's step and kind (`you|habait|running|review|failed|done`) from `jobStatus()`, its head = the agent line. The
+  build card holds only the start (no job, or after a stop); the log, the per-room check and a technical error are in «פירוט ויומן»
+  under the bar, collapsed. The server's 7 `STEPS` are no longer drawn.
 - Staged by `Projects/Habait/tools/deploy-vercel/stage_flow.py <out> --edit-api --studio` (the files go to `/studio/` and `/api/`).
 - Env names (values only in Vercel): `CLERK_SECRET_KEY`, `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `BLOB_READ_WRITE_TOKEN`, `FAL_KEY` (SECRETS-LEDGER).
 - Sales-plan fidelity (Eliran 2026-11-04) is a hard gate: no build step before the developer approves the reading, and no build

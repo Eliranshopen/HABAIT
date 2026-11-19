@@ -1,0 +1,20 @@
+milestone 1.4 gate: npm run test:stages (the closing tests that run the real reading tool: 1.2, 1.3 and 1.4, five files side by side), ONCE
+started: 2026-11-18T13:47:36+02:00
+machine load before: 1 %
+
+> habait-3dengine@1.4.0 test:stages
+> node --test "tests/stages/**/*.test.mjs"
+
+✔ 3. the paid path, walked without paying: the vision call is booked before it is sent, carries the key in its header on either route, and a refused call costs nothing (39354.1202ms)
+✔ 1. the 846 PDF from the saved reading, at $0: exit 0, 10 of 10 rooms, every printed dimension within 1 % (0.83 % at most); the measured run again, byte for byte (244775.2101ms)
+✔ 2. the 846 PDF from ONE fresh reading (paid, $0.04 inside a cap of $0.50): PASS, 10 of 10 rooms, every printed dimension within 1 %; asserted from the evidence the run wrote, with no call (1390.8533ms)
+✔ 4. the 846 PDF with its true saved reading: the reading passes, its five files are the stage's outputs, and the job stops at the build (237753.0013ms)
+✔ 5. no answer of a tool, no job file and no line of the runner's log holds a name the reading took from the drawing (435.4248ms)
+✔ the fixture: the saved reading of 846 with ONE printed dimension changed by hand, and nothing else (179.0718ms)
+✔ 1. a reading with a printed dimension changed by hand: the job ends in review with TRACE_GATE_FAIL, and the build never starts (251197.2147ms)
+✔ 2. a PDF with no drawing: NO_PLAN_FOUND, and no job is made (14244.1365ms)
+✔ 3. a PDF that has a drawing and no saved reading: failed / BUDGET_CAP; the reading tool never starts, nothing is billed (4002.4167ms)
+✔ 5. no answer of a tool, no job file and no line of a runner's log holds a name the reading took from the drawing (149.2609ms)
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (239804.7789ms)
+✖ tests\stages\m1.4.test.mjs (553420.1097ms)
+machine load after: 100 %

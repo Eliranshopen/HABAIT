@@ -1,11 +1,11 @@
 # engine/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 A TypeScript/Vite package (src, test) for the tour360 engine.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 5 files here · 2 subfolders · 12 files / 123.0 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

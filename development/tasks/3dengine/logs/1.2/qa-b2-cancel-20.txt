@@ -1,0 +1,38 @@
+scenario cancel 20 work C:/Users/elira/AppData/Local/Temp/qa12-cancel-XTeFsh load 100
+=== cancel 20
+{
+ "outcome": "CANCELLED",
+ "exit": 1,
+ "secs": "21.2",
+ "result": null,
+ "alive": [
+  "29084 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "37652 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "18056 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 20",
+  "43796 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 20",
+  "35056 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs cancel 20"
+ ]
+}
+=== cancel +6s
+{
+ "alive": [
+  "29084 bash.exe \"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427",
+  "37652 bash.exe \"C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe\" -c \"source /c/Users/elira/.claude/shell-snapshots/snapshot-bash",
+  "18056 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 20",
+  "43796 timeout.exe \"C:\\Program Files\\Git\\usr\\bin\\timeout.exe\" 120 node qa12-b2.mjs cancel 20",
+  "35056 node.exe \"C:\\Program Files\\nodejs\\node.exe\" qa12-b2.mjs cancel 20"
+ ]
+}
+=== pre-aborted
+{
+ "outcome": "CANCELLED",
+ "outCreated": false
+}
+procs at end [
+  '29084 bash.exe "C:\\Program Files\\Git\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash-1794829427',
+  '37652 bash.exe "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe" -c "source /c/Users/elira/.claude/shell-snapshots/snapshot-bash',
+  '18056 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 120 node qa12-b2.mjs cancel 20',
+  '43796 timeout.exe "C:\\Program Files\\Git\\usr\\bin\\timeout.exe" 120 node qa12-b2.mjs cancel 20',
+  '35056 node.exe "C:\\Program Files\\nodejs\\node.exe" qa12-b2.mjs cancel 20'
+]
+exit 0

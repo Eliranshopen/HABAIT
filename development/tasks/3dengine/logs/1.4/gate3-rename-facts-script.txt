@@ -1,0 +1,86 @@
+// What does a rename guarantee on this machine, between REAL processes at the same moment?
+//   node rename-facts.mjs <rounds> <processes>
+// A. N processes rename ONE source file to N different names (the take-over of the lock as it was written at first):
+//    how many of them are told it worked?
+// B. N processes each rename their OWN prepared folder (one file inside) onto ONE path that does not exist (the take of
+//    a free lock): how many are told it worked?
+// C. One process: a folder renamed onto an existing EMPTY folder, and onto an existing folder that holds a file.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+
+const mode = process.argv[2];
+if (mode === 'child-a' || mode === 'child-b') {
+  const [, , , dir, gate] = process.argv;
+  while (!fs.existsSync(gate)) { /* spin: all children start their rename at the same moment */ }
+  let out;
+  try {
+    if (mode === 'child-a') fs.renameSync(`${dir}/src`, `${dir}/dst.${process.pid}`);
+    else fs.renameSync(`${dir}/prep.${process.pid}`, `${dir}/L`);
+    out = 'done';
+  } catch (e) {
+    out = e.code;
+  }
+  process.stdout.write(out);
+} else {
+  const rounds = Number(process.argv[2] || 20);
+  const n = Number(process.argv[3] || 8);
+  const run = (child, setup) => new Promise((resolve) => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'renfacts-')).replace(/\\/g, '/');
+    const gate = `${dir}/go`;
+    const kids = Array.from({ length: n }, () => spawn(process.execPath, [process.argv[1], child, dir, gate], { stdio: ['ignore', 'pipe', 'ignore'] }));
+    setup(dir, kids.map((k) => k.pid));
+    const outs = kids.map((k) => new Promise((ok) => {
+      let o = '';
+      k.stdout.on('data', (d) => { o += d; });
+      k.on('exit', () => ok(o));
+    }));
+    setTimeout(() => fs.writeFileSync(gate, ''), 400);            // every child is up and spinning by then
+    Promise.all(outs).then((res) => {
+      const left = fs.readdirSync(dir).filter((x) => x !== 'go');
+      fs.rmSync(dir, { recursive: true, force: true });
+      resolve({ res, left });
+    });
+  });
+  const a = { rounds, processes: n, roundsWithMoreThanOneDone: 0, mostDoneInOneRound: 0, codes: {} };
+  for (let r = 0; r < rounds; r++) {
+    const { res } = await run('child-a', (dir) => fs.writeFileSync(`${dir}/src`, ''));
+    const done = res.filter((x) => x === 'done').length;
+    if (done > 1) a.roundsWithMoreThanOneDone += 1;
+    a.mostDoneInOneRound = Math.max(a.mostDoneInOneRound, done);
+    for (const x of res) a.codes[x] = (a.codes[x] || 0) + 1;
+  }
+  console.log('A. one source file, renamed by every process to a name of its own:', JSON.stringify(a));
+  const b = { rounds, processes: n, roundsWithMoreThanOneDone: 0, roundsWithNone: 0, codes: {} };
+  for (let r = 0; r < rounds; r++) {
+    const { res } = await run('child-b', (dir, pids) => {
+      for (const p of pids) {
+        fs.mkdirSync(`${dir}/prep.${p}`);
+        fs.writeFileSync(`${dir}/prep.${p}/h.${p}`, '');
+      }
+    });
+    const done = res.filter((x) => x === 'done').length;
+    if (done > 1) b.roundsWithMoreThanOneDone += 1;
+    if (done === 0) b.roundsWithNone += 1;
+    for (const x of res) b.codes[x] = (b.codes[x] || 0) + 1;
+  }
+  console.log('B. every process renames its own prepared folder onto ONE free path:', JSON.stringify(b));
+  const d = fs.mkdtempSync(path.join(os.tmpdir(), 'renfacts-')).replace(/\\/g, '/');
+  const tryRename = (from, to) => {
+    try {
+      fs.renameSync(from, to);
+      return `done (the path now holds: ${fs.readdirSync(to).join(',')})`;
+    } catch (e) {
+      return e.code;
+    }
+  };
+  fs.mkdirSync(`${d}/p1`); fs.writeFileSync(`${d}/p1/mine`, '');
+  fs.mkdirSync(`${d}/empty`);
+  console.log('C. a folder renamed onto an existing EMPTY folder:', tryRename(`${d}/p1`, `${d}/empty`));
+  fs.mkdirSync(`${d}/p2`); fs.writeFileSync(`${d}/p2/mine`, '');
+  fs.mkdirSync(`${d}/full`); fs.writeFileSync(`${d}/full/other`, '');
+  console.log('C. a folder renamed onto an existing folder that holds a file:', tryRename(`${d}/p2`, `${d}/full`));
+  fs.rmSync(d, { recursive: true, force: true });
+  console.log(`node ${process.version}, ${os.platform()} ${os.release()}`);
+}

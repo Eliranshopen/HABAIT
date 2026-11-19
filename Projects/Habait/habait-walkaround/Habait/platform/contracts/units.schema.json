@@ -62,7 +62,8 @@
           "type": "array",
           "items": { "$ref": "#/$defs/hotspot" }
         },
-        "note": { "type": "string" }
+        "note": { "type": "string" },
+        "source": { "type": "string", "enum": ["sales-plan", "demo"], "description": "provenance of rooms / area_m2 / outdoor_m2 (Eliran 2026-11-10): sales-plan = from the developer's sales plan (תכנית מכר); demo = sample numbers — every page shows the «נתוני הדגמה» badge next to them. Absent = unknown, rendered like sales-plan (no badge)" }
       }
     },
     "hotspot": {

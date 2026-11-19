@@ -26,6 +26,9 @@
      on the pills and the canvas (Eliran 2.11 evening: "הבוחר נתקע"). */
   #pickerStage { position: fixed; inset: 0; pointer-events: none; }
   #pickerStage > .sheet, #pickerStage > .drawer { pointer-events: auto; }
+  /* while the unit card or the «דירות» list is open the stage (a fixed element = its own stacking context) rises above the top buttons and the
+     drag hint (z 6), which floated over the list and its title (rainbow-landing price round, 2026-11-08); closed = unchanged */
+  #pickerStage:has(> .drawer:not([hidden]), > .sheet:not([hidden])) { z-index: 8; }
   /* wide screens: the legend / units row sits at the inline-start edge, clear of the pills on the tower (826 touched it at the video pose) */
   @media (min-width: 900px) { #pickerStage .picker-bottom { justify-items: start; padding-inline-start: 24px; } #pickerStage .picker-row { justify-content: flex-start; } #pickerStage .picker-disclaimer { text-align: start; } }   /* the unit card and the units drawer take clicks; the pills via .hotspot (ab's css) */
   #fade { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity .6s; }
@@ -41,6 +44,13 @@
   #clipTitle { position: fixed; right: 6vw; bottom: 12vh; z-index: 6; display: none; text-align: right; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.55); pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
   #clipTitle .t1 { font: 700 clamp(28px, 5vw, 64px)/1.1 Heebo, system-ui, sans-serif; letter-spacing: .01em; }
   #clipTitle .t2 { font: 400 clamp(14px, 1.8vw, 22px)/1.4 Heebo, system-ui, sans-serif; opacity: .9; margin-top: 6px; }
+  /* the developer of the project (Eliran 2026-11-09: «צריך שיישאר השם של יזם הפרויקט»): project.json `developer`, text only */
+  #clipTitle .t3 { font: 500 clamp(13px, 1.3vw, 18px)/1.4 Heebo, system-ui, sans-serif; opacity: .92; margin-top: 10px; letter-spacing: .02em; }
+  #clipTitle .t3:empty { display: none; }
+  /* at the stop: the project and its developer, one quiet line under the title pill (app.js; text from project.json) */
+  #pickerStage .picker-dev { position: absolute; top: calc(var(--picker-top, 12px) + env(safe-area-inset-top, 0px) + 48px); left: 50%; transform: translateX(-50%);
+    max-width: calc(100% - 24px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font: 500 13px/1.3 Heebo, system-ui, sans-serif; color: #fff;
+    padding: 3px 12px; border-radius: 999px; background: rgba(6,8,12,.42); text-shadow: 0 1px 2px rgba(0,0,0,.45); pointer-events: none; }
   #clipLegal { position: fixed; left: 12px; bottom: max(10px, env(safe-area-inset-bottom)); z-index: 6; display: none; font: 400 11px/1.3 Heebo, system-ui, sans-serif; color: rgba(255,255,255,.75); text-shadow: 0 1px 6px rgba(0,0,0,.6); max-width: 70vw; direction: rtl; }
   #dragHint { position: fixed; left: 50%; bottom: max(96px, calc(env(safe-area-inset-bottom) + 96px)); transform: translateX(-50%); z-index: 6; display: none; opacity: 0; transition: opacity .6s; pointer-events: none; background: rgba(10,16,30,.5); color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: 9px 16px; font: 500 14px Heebo, system-ui, sans-serif; white-space: nowrap; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
   #dragHint.on { opacity: 1; }
@@ -79,9 +89,104 @@
 /* phone-portrait chrome up (3.11): at the hold the apartments sit on the lower floors = the lower half of a portrait screen, where the
    picker's bottom row (legend, the apartments button, the disclaimer) and the drag hint covered 846, 836 and 826. The sky/upper floors
    above carry no pills, so on a portrait phone that row and the hint live up there. */
-@media (max-width: 640px) and (orientation: portrait) {
-  #pickerStage .picker-bottom { top: calc(env(safe-area-inset-top) + 64px); bottom: auto !important; }
-  #dragHint { bottom: auto !important; top: calc(env(safe-area-inset-top) + 236px); }
+/* 2026-11-08 (rainbow-landing round 3; the hold is the first screen after the landing's «לסיור בפרויקט») + round 5 (Eliran on his iPhone:
+   «ההודעה של "הדמיה להמחשה בלבד" … לא אמור להופיע באמצע המסך ולהסתיר את הבניין, זה אמור להיות רק למטה ובקטן»):
+   - the LEGAL LINE (all widths) leaves the column: fixed to the bottom edge, 12 px white straight on the image, a multi-layer text-shadow
+     and a soft bottom fade (no panel), above the iOS toolbar (env(safe-area-inset-bottom)). The wording is untouched (project.json
+     disclaimer). Clamped to 2 lines; when the full text does not fit, a «פרטים» cue shows and a tap opens it whole (app.js). The two
+     lines always carry «הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית…» (the AI disclosure).
+   - phones (portrait): the top is compact — the title, then the legend and «דירות» side by side in ONE row; the hint «לחצו על דירה»
+     is dropped (the title says «בחרו דירה»); the drag hint goes under that block (app.js placeDragHint) and leaves on the first drag.
+   - wider screens and landscape: the legend / «דירות» row stands just above the legal strip (--picker-bottom); nothing else moves. */
+:root { --picker-bottom: 70px; }
+#pickerStage .picker-disclaimer {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1; box-sizing: border-box; max-width: none; margin: 0;
+  padding: 22px max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left)); padding-inline-end: 76px;
+  border-bottom: calc(8px + env(safe-area-inset-bottom)) solid transparent;   /* not padding: overflow clips at the padding box, so a 3rd line never peeks into it */
+  font: 400 12px/1.45 Heebo, system-ui, sans-serif; color: #fff; text-align: start; direction: rtl;
+  text-shadow: 0 0 1px #000, 0 1px 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.8), 0 0 12px rgba(0,0,0,.55);
+  background: linear-gradient(to top, rgba(6,8,12,.5) 0%, rgba(6,8,12,.3) 55%, rgba(6,8,12,0) 100%);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+  pointer-events: auto; cursor: pointer;
+}
+#pickerStage .picker-disclaimer.open { display: block; -webkit-line-clamp: unset; background: linear-gradient(to top, rgba(6,8,12,.62) 0%, rgba(6,8,12,.4) 70%, rgba(6,8,12,0) 100%); }
+#pickerStage .picker-disclaimer::after { content: attr(data-more); position: absolute; inset-inline-end: max(16px, env(safe-area-inset-left)); bottom: 0;
+  font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+#pickerStage .picker-disclaimer:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+@media (min-width: 900px) { #pickerStage .picker-disclaimer { text-align: start; padding-inline-start: 24px; } }
+/* phones in landscape: the tower and its pills fill the centre-left down to the bottom edge, so the legal line takes a narrower strip
+   on the inline-start side (the city, no pills) */
+@media (orientation: landscape) and (max-height: 500px) {
+  #pickerStage .picker-disclaimer { left: auto; width: min(44vw, 380px); padding-top: 14px; background: linear-gradient(to top, rgba(6,8,12,.5) 0%, rgba(6,8,12,.3) 55%, rgba(6,8,12,0) 100%); }
+}
+/* PHONES, portrait and landscape (touch, ≤ 900 px wide or ≤ 500 px tall) — rainbow-landing round 6 (Eliran 2026-11-09: «יש כמה דברים
+   שאפשר להוריד: את המשפט "מול החזית בחרו דירה", "הדמיית הבניין והסביבה". את הסרגל של "למכירה, שמורה, נמכרה" אני מעדיף שיהיה לאורך
+   בצד ימין בקטן. את הכפתור דירות גם שיהיה בצד ימין»). The stop shows the tower, its pills, ONE compact column on the physical right
+   edge and the legal line at the bottom:
+     sound (unchanged, top right) → «הדמיית הבניין והסביבה» as a 44 px icon (the same button and function: it opens the building
+     film; its name stays its text, read by screen readers) → «דירות» (44 px) → the legend as a small vertical stack, 12 px.
+   The title «מול החזית · בחרו דירה» and the hint «לחצו על דירה» are gone; the drag hint sits at the top-left corner (app.js leaves it
+   to this rule here) and still leaves on the first drag. Desktop (mouse) is untouched. */
+@media (hover: none) and (pointer: coarse) and (max-width: 900px), (hover: none) and (pointer: coarse) and (max-height: 500px) {
+  #pickerStage .picker-title, #pickerStage .picker-hint, #pickerStage .picker-dev { display: none !important; }
+  #pickerStage .picker-bottom { position: fixed !important; top: calc(max(14px, env(safe-area-inset-top)) + 104px); bottom: auto !important;
+    right: max(14px, env(safe-area-inset-right)); left: auto; width: auto; transform: none;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 0; }   /* RTL: flex-start = the physical right edge */
+  #pickerStage .picker-row { order: -1; justify-content: flex-start; }
+  #pickerStage .picker-units-btn { min-height: 44px; min-width: 44px; }
+  #pickerStage .picker-legend { flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 4px; padding: 7px 10px; border-radius: 12px; font-size: 12px; line-height: 1.25; }
+  #pickerStage .picker-legend .lg { gap: 6px; }
+  #pickerStage .picker-legend .dot { width: 8px; height: 8px; }
+  #buildingBtn { left: auto; right: max(14px, env(safe-area-inset-right)); top: calc(max(14px, env(safe-area-inset-top)) + 52px);
+    width: 44px; height: 44px; min-height: 44px; padding: 0; border-radius: 50%; font-size: 0; line-height: 0; color: transparent;
+    background: rgba(10,16,30,.62) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 21h16'/%3E%3Cpath d='M7 21V5.5L13 3v18'/%3E%3Cpath d='M13 9l4 1.5V21'/%3E%3Cpath d='M9.5 8h1M9.5 11.5h1M9.5 15h1M15 13.5h.5M15 17h.5'/%3E%3C/svg%3E") center / 22px 22px no-repeat; }
+  #dragHint { top: calc(max(14px, env(safe-area-inset-top)) + 4px) !important; bottom: auto !important; left: 12px !important; right: auto; transform: none !important;
+    max-width: calc(100% - 84px); white-space: normal; text-align: start; font-size: 13px; }
+}
+/* ===== hold-phone (2026-11-09; Eliran on a phone: the stop «לא נראה טוב, צריך לתקן»). PORTRAIT PHONES ONLY — desktop and landscape keep
+   every rule above. The picture is framed from the tower's own projected bounds (holdarc.js: the tower across the width, the right-edge
+   column on the sky beside it, blurred air above and below), so here the chrome lives in that air:
+     - the pills: dot + number, small, ON their floors (no stagger at this floor pitch), each with an invisible 44×44 px hit area;
+     - the right column (round 6, Eliran: «לאורך בצד ימין בקטן»): sound, the building icon, «דירות», the legend — one glass look;
+     - the drag hint: a short toast low in the air above the legal line, gone on the first touch or after 5 s (app.js);
+     - the legal line: ONE small line on a bottom gradient, «פרטים» opens it whole (unchanged wording, the AI words on the line);
+     - the unit card: a compact glass bottom sheet — the facts in one row and ONE button («כניסה לדירה» for 846, app.js), the other
+       ways («לסיור 360°», «עמוד הדירה») as small links under it. No prices (prices_public: false). */
+@media (hover: none) and (pointer: coarse) and (max-width: 900px) and (orientation: portrait) {
+  /* the pills */
+  #pickerStage .hotspot { padding: 3px 7px 3px 5px; font-size: 11px; gap: 4px; line-height: 1; overflow: visible;
+    background: rgba(10,16,30,.62); border: 1px solid rgba(255,255,255,.28); box-shadow: 0 2px 8px rgba(0,0,0,.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  #pickerStage .hotspot::before { content: ''; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); }
+  #pickerStage .hotspot .dot { width: 7px; height: 7px; }
+  #pickerStage .hotspot .sub, #pickerStage .hotspot.selected .sub { display: none; }
+  #pickerStage .hotspot.selected { background: rgba(238,169,39,.92); color: #1a1713; border-color: #fff; box-shadow: 0 0 0 2px rgba(238,169,39,.45), 0 0 14px rgba(238,169,39,.7); }
+  /* the right column: one glass look (positions unchanged from round 6) */
+  #soundBtn, #buildingBtn, #pickerStage .picker-units-btn, #pickerStage .picker-legend {
+    background-color: rgba(10,16,30,.5) !important; border: 1px solid rgba(255,255,255,.24) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 14px rgba(0,0,0,.28); }
+  #pickerStage .picker-legend { font-size: 11px; padding: 6px 9px; gap: 3px; }
+  #pickerStage .picker-units-btn { padding: 0 10px; font-size: 13px; }
+  #pickerStage .picker-legend .dot { width: 7px; height: 7px; }
+  /* the drag hint: a toast in the air above the legal line */
+  html body #dragHint { top: auto !important; bottom: calc(env(safe-area-inset-bottom) + 44px) !important; left: 50% !important; right: auto !important;
+    transform: translateX(-50%) !important; max-width: calc(100% - 32px); white-space: nowrap; font-size: 12px; padding: 7px 14px; }
+  /* the legal line: one line */
+  #pickerStage .picker-disclaimer { -webkit-line-clamp: 1; font-size: 11px; line-height: 1.4; padding-top: 18px; padding-inline-end: 64px;
+    min-height: 44px; box-sizing: border-box;   /* it is a control («פרטים» opens it): ≥ 44 px tall even as one line (predeploy target rule) */
+    background: linear-gradient(to top, rgba(6,8,12,.72) 0%, rgba(6,8,12,.4) 60%, rgba(6,8,12,0) 100%); }
+  /* the unit card: a compact glass sheet */
+  #unitSheet { background: rgba(12,16,26,.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 18px 18px 0 0;
+    border-top: 1px solid rgba(255,255,255,.18); padding: 4px 14px calc(10px + env(safe-area-inset-bottom)); max-height: 62dvh; }
+  #unitSheet .sheet-handle { margin: 2px auto 6px; }
+  #unitSheet .sheet-body { gap: 8px; }
+  #unitSheet .unit-head h2 { font-size: 20px; }
+  #unitSheet .fact { padding: 6px 4px; border-radius: 10px; }
+  #unitSheet .fact b { font-size: 16px; }
+  #unitSheet .fact span { font-size: 10.5px; }
+  #unitSheet .unit-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 8px; }
+  #unitSheet .unit-actions .btn-primary { grid-column: 1 / -1; min-height: 48px; font-size: 16px; margin-bottom: 2px; }
+  #unitSheet .unit-actions .btn-ghost { min-height: 44px; background: none; border: none; box-shadow: none; padding: 0 4px; font-size: 13px; font-weight: 600;
+    text-decoration: underline; text-underline-offset: 3px; color: rgba(255,255,255,.86); }
+  #unitSheet .unit-disclaimer { font-size: 10.5px; line-height: 1.4; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 }
 </style>
 </head>
@@ -103,7 +208,7 @@
 <canvas id="birds" style="position:fixed;inset:0;z-index:5;pointer-events:none"></canvas>
 <audio id="amb" loop preload="auto" src="./data/audio/ambience.m4a"></audio>
 <button id="clipSkip" type="button">דלג</button>
-<div id="clipTitle" aria-hidden="true"><div class="t1"></div><div class="t2"></div></div>
+<div id="clipTitle" aria-hidden="true"><div class="t1"></div><div class="t2"></div><div class="t3"></div></div>
 <div id="clipLegal">הדמיה להמחשה בלבד. הופקה בסיוע בינה מלאכותית על בסיס תכניות הפרויקט Rainbow תל אביב מיום 15.10.2025 ומקורות ציבוריים. המסמכים המחייבים הם המפרט והתכניות החתומים. הסביבה, הנוף, האנשים והתאורה להמחשה.</div>
 <button id="soundBtn" type="button" title="צליל" aria-label="צליל">🔇</button>
 <div id="clipLine"></div>
@@ -147,7 +252,11 @@
     skip.addEventListener('click', function () { o.skipped = true; skip.style.display = 'none'; });
     v.src = src; v.style.display = 'block'; skip.style.display = 'block';
     var ttl = document.getElementById('clipTitle'); ttl.style.display = 'block'; document.getElementById('clipLegal').style.display = 'block';
-    setTimeout(function () { ttl.style.opacity = '1'; }, 1000); setTimeout(function () { ttl.style.opacity = '0'; }, 6500); setTimeout(function () { ttl.style.display = 'none'; }, 8000);
+    // the title's timing scales with the clip (2026-11-09: the intro runs 2x, 8.5 s): in at 6 % (≥ 0.5 s), out at 45 %; the old 17 s clip
+    // gave the same 1 s / ~7 s. Until the duration is known (metadata), a 17 s clip is assumed.
+    var tt = function (d) { d = d && isFinite(d) ? d : 17; var tin = Math.max(500, d * 60), tout = Math.max(tin + 2200, d * 450);
+      setTimeout(function () { ttl.style.opacity = '1'; }, tin); setTimeout(function () { ttl.style.opacity = '0'; }, tout); setTimeout(function () { ttl.style.display = 'none'; }, tout + 1300); };
+    if (v.readyState >= 1) tt(v.duration); else v.addEventListener('loadedmetadata', function () { tt(v.duration); }, { once: true });
     var p = v.play(); if (p && p.catch) p.catch(function () { o.error = true; });
   })();
   function showErr(m){ var s=document.getElementById('status'); if(s) s.textContent='שגיאה: '+m; var l=document.getElementById('loading'); if(l) l.textContent='שגיאה: '+m; }

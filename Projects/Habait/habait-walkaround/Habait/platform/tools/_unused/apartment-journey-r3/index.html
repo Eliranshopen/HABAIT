@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#08131E">
+<title>דירה 846 · קומה 16 · Rainbow תל אביב · Habait</title>
+<meta name="description" content="דירה 846 בקומה 16: מהמגדל אל הקומה, החתך והחדרים, ומשם לסיור 360°. הדמיה.">
+<link rel="icon" type="image/svg+xml" href="../brand/habait-mark.svg">
+<link rel="apple-touch-icon" href="../brand/habait-touch-180.png">
+<!-- the LCP is the floor frame (the hold's own stop pose, so the hand-off from /hold/ shows the same picture); the project hero exists only
+     in the ?intro=hero test view (nothing links to it; /v2/ forwards to the landing), where its poster carries fetchpriority itself -->
+<link rel="preload" as="image" href="media/tower-16-1920.jpg" imagesrcset="media/tower-16-960.jpg 960w, media/tower-16-1920.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" href="../fonts/frank-ruhl-libre-hebrew-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="journey.css">
+<script>
+  // motion mode is decided before the first paint (no layout jump): JS on + no reduced-motion = the scroll story; otherwise the static page
+  (function () { var d = document.documentElement; try { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('is-motion'); } catch (e) {}
+    // the apartment journey opens at the floor; ?intro=hero (a test view only; nothing links to it) shows the 846 hero first, as the v2 test did
+    if (new URLSearchParams(location.search).get('intro') !== 'hero') d.classList.add('is-journey'); })();
+</script>
+</head>
+<!--
+  The apartment journey of 846 (plan development/plans/2026-11-09-rainbow-v2.md §8, round 2; Eliran 2026-11-09: «דף נחיתה … כללי ואז סיור לפרויקט
+  ויהיה את כל המסלול של הסרטון ובחירת דירה מתוך הבניין ומעוף ציפור»): landing → /hold/ (fly-around, bird's eye, pick from the building) →
+  «המשיכו אל הדירה» on 846 → HERE (floor 16 lit, the floor isolated, the cutaway, the rooms) → the 360 tour. Was the v2 test page (/v2/ is a stub).
+  The experience pattern was learnt from a reference screen recording (a tower site): hero film → a floor number beside the tower → that floor
+  isolated → the apartment's cutaway → full-screen rooms with a caption and a filmstrip. Our assets only, no copy of the reference's brand,
+  text or imagery. Facts: units.json / project.json (846: floor 16, 3 rooms, 106.72 m², sun terrace 26.15 m²; no prices).
+  Disclosure (root §6): every picture of the building or the apartment carries «הדמיה · AI-generated»; the project render carries «הדמיה».
+  No geometry is altered: the "isolated floor" is light and crop on the hold's own frame, never a moved slab.
+-->
+<body class="hb-base v2">
+<a class="v2-skip" href="#main">דילוג לתוכן</a>
+<header class="v2-top" id="top">
+  <a class="v2-brand" href="../" aria-label="Habait — לעמוד הפרויקט"><img src="../brand/habait-wordmark-white-small.svg" alt="Habait" width="131" height="68"></a>
+  <span class="v2-tag">גרסת בדיקה · <bdi>v2</bdi></span>
+  <a class="v2-back" id="backHold" href="../hold/?from=platform&amp;project=rainbow" data-route="hold"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>חזרה לבניין</span></a>
+</header>
+
+<main id="main">
+  <!-- 1. hero: the exterior orbit film (AI: Kling v2v + Topaz Starlight), poster first -->
+  <section class="v2-hero" id="hero" aria-labelledby="heroTitle">
+    <div class="v2-hero__media" data-hero-media>
+      <picture>
+        <source media="(max-aspect-ratio: 4/5)" srcset="../fixtures/rainbow/landing/hero-poster-portrait.jpg" width="720" height="1080">
+        <img class="v2-hero__poster" src="../fixtures/rainbow/landing/hero-poster-1920.jpg" srcset="../fixtures/rainbow/landing/hero-poster-960.jpg 960w, ../fixtures/rainbow/landing/hero-poster-1920.jpg 1920w" sizes="100vw" width="1920" height="1080" alt="" fetchpriority="high" decoding="async">
+      </picture>
+      <video class="v2-hero__video" id="heroVideo" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1"
+        data-src-1080="../fixtures/rainbow/landing/hero-1080.mp4" data-src-720="../fixtures/rainbow/landing/hero-720.mp4" data-src-portrait="../fixtures/rainbow/landing/hero-portrait.mp4"></video>
+    </div>
+    <span class="v2-scrim v2-scrim--hero" aria-hidden="true"></span>
+    <div class="v2-hero__body" data-hero-body>
+      <p class="v2-eyebrow"><span id="devName">ישראל קנדה</span> · תל אביב</p>
+      <h1 class="v2-hero__title" id="heroTitle"><span lang="en" class="v2-latin">Rainbow</span> <span class="v2-hero__city">תל אביב</span></h1>
+      <p class="v2-hero__lead">מהמגדל, דרך קומה 16, אל תוך דירה 846.</p>
+    </div>
+    <div class="v2-corner">
+      <span class="hb-ai-badge">הדמיה · <bdi>AI-generated</bdi></span>
+      <button class="v2-play" id="heroToggle" type="button" aria-label="הפעלת הסרטון" data-state="paused">
+        <svg class="v2-play__pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2" fill="currentColor"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2" fill="currentColor"/></svg>
+        <svg class="v2-play__play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a.8.8 0 0 0 1.2.7l10.4-6.5a.8.8 0 0 0 0-1.4L9.2 4.8A.8.8 0 0 0 8 5.5Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <a class="v2-cue" href="#floor"><span>גללו אל קומה 16</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
+
+  <!-- 2 + 3. the floor: the hold's stop pose (Kling frame 91), floor 16 marked where the 3D model puts apartment 846's terrace; then that
+       floor isolated by light and crop (no geometry moved). Positions: media/manifest.json floor16 (projection through the hold's camera). -->
+  <section class="v2-floor" id="floor" aria-labelledby="floorTitle">
+    <div class="v2-floor__stage" data-floor-stage>
+      <div class="v2-frame" data-floor-frame>
+        <picture>
+          <img class="v2-frame__img" src="media/tower-16-1920.jpg" srcset="media/tower-16-960.jpg 960w, media/tower-16-1920.jpg 1920w" sizes="100vw" width="1920" height="1080" fetchpriority="high" decoding="async" alt="מגדל Rainbow מול הים, וקומה 16 מסומנת עליו">
+        </picture>
+        <span class="v2-band" data-band aria-hidden="true"></span>
+        <span class="v2-pin" data-pin aria-hidden="true"><span class="v2-pin__dot"></span><span class="v2-pin__label"><bdi>846</bdi></span></span>
+      </div>
+      <picture class="v2-flyin" data-flyin aria-hidden="true"><source media="(max-aspect-ratio: 4/5)" srcset="media/walk/1-terraceLiving/t-00.webp"><img src="media/walk/1-terraceLiving/w-00.webp" width="1280" height="720" alt="" loading="lazy" decoding="async"></picture>
+      <span class="v2-scrim v2-scrim--floor" aria-hidden="true"></span>
+      <div class="v2-floor__copy" data-floor-copy>
+        <p class="v2-eyebrow" data-floor-eyebrow>קומה</p>
+        <h2 class="v2-floor__title" id="floorTitle"><span class="hb-sr">קומה 16</span><span class="v2-floor__num" data-floor-num aria-hidden="true">16</span></h2>
+        <p class="v2-floor__unit" data-floor-unit>דירה <bdi>846</bdi></p>
+        <ul class="v2-facts" data-floor-facts aria-label="נתוני הדירה">
+          <li><span data-fact="rooms">3</span> חדרים</li>
+          <li><bdi data-fact="area">106.72</bdi> מ״ר</li>
+          <li>מרפסת שמש <bdi data-fact="outdoor">26.15</bdi> מ״ר</li>
+        </ul>
+      </div>
+      <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+    </div>
+  </section>
+
+
+  <!-- 4. the rooms — ONE WALK (round 2): each room lands looking the way the visitor came in (room 1: the hold camera's own bearing, the fly-in),
+       turns until the next doorway is ahead, and the page pushes through it into the next room, which lands looking the same way. Bearings from
+       site_nodes.json + the tour's doorway hotspots (media/walk.json, made by tools/make_journey_media.py); frames = flat views of the gated
+       panoramas. Static page / no JS: one picture per room (the view picked by eye). -->
+  <section class="v2-rooms" id="rooms" aria-labelledby="roomsTitle">
+    <h2 class="hb-sr" id="roomsTitle">החדרים</h2>
+    <div class="v2-rooms__stage" data-rooms-stage>
+      <div class="v2-rooms__list" data-rooms-list>
+        <figure class="v2-room is-on" id="room-terraceLiving" data-room="terraceLiving" data-i="0">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-terraceLiving-tall.webp" width="900" height="1350"><img src="media/room-terraceLiving-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="מרפסת השמש: מיטת שיזוף, עץ בעציץ ומעקה זכוכית מול העיר"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">01 / 08</span><span class="v2-room__name">מרפסת שמש</span><span class="v2-room__zone">מרפסת השמש</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=terraceLiving&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="terraceLiving">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+        <figure class="v2-room" id="room-living" data-room="living" data-i="1">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-living-tall.webp" width="900" height="1350"><img src="media/room-living-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="הסלון: ספה, שולחן קפה, וחלונות אל מרפסת השמש"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">02 / 08</span><span class="v2-room__name">סלון</span><span class="v2-room__zone">מרחב מגורים פתוח</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=living&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="living">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+        <figure class="v2-room" id="room-dining" data-room="dining" data-i="2">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-dining-tall.webp" width="900" height="1350"><img src="media/room-dining-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="פינת האוכל מול החלונות והעיר"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">03 / 08</span><span class="v2-room__name">פינת אוכל</span><span class="v2-room__zone">מרחב מגורים פתוח</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=dining&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="dining">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+        <figure class="v2-room" id="room-kitchen" data-room="kitchen" data-i="3">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-kitchen-tall.webp" width="900" height="1350"><img src="media/room-kitchen-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="המטבח: משטח, כיריים, תנור ומדפים מוארים"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">04 / 08</span><span class="v2-room__name">מטבח</span><span class="v2-room__zone">מרחב מגורים פתוח</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=kitchen&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="kitchen">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+        <figure class="v2-room" id="room-bedroom2" data-room="bedroom2" data-i="4">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-bedroom2-tall.webp" width="900" height="1350"><img src="media/room-bedroom2-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="חדר השינה השני: מיטה, מנורת לילה וחלון אל העיר"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">05 / 08</span><span class="v2-room__name">חדר שינה</span><span class="v2-room__zone">אגף החדרים</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=bedroom2&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="bedroom2">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+        <figure class="v2-room" id="room-entrance" data-room="entrance" data-i="5">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-entrance-tall.webp" width="900" height="1350"><img src="media/room-entrance-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="הכניסה לדירה, במבט אל הסלון, פינת האוכל והחלונות"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">06 / 08</span><span class="v2-room__name">כניסה</span><span class="v2-room__zone">מרחב מגורים פתוח</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=entrance&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="entrance">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+        <figure class="v2-room" id="room-bedroomMain" data-room="bedroomMain" data-i="6">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-bedroomMain-tall.webp" width="900" height="1350"><img src="media/room-bedroomMain-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="חדר השינה של ההורים: מיטה זוגית ושני שולחנות לילה"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">07 / 08</span><span class="v2-room__name">חדר שינה הורים</span><span class="v2-room__zone">אגף החדרים</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=bedroomMain&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="bedroomMain">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+        <figure class="v2-room" id="room-bathMain" data-room="bathMain" data-i="7">
+          <div class="v2-room__media" data-room-media><picture><source media="(max-aspect-ratio: 4/5)" srcset="media/room-bathMain-tall.webp" width="900" height="1350"><img src="media/room-bathMain-wide.webp" width="1600" height="900" loading="lazy" decoding="async" alt="חדר הרחצה של ההורים: כיור אבן ומראה עגולה מוארת"></picture><canvas class="v2-room__walk" aria-hidden="true"></canvas></div>
+          <span class="v2-scrim v2-scrim--room" aria-hidden="true"></span>
+          <figcaption class="v2-room__cap" data-room-cap><span class="v2-room__n" aria-hidden="true">08 / 08</span><span class="v2-room__name">חדר רחצה הורים</span><span class="v2-room__zone">אגף החדרים</span><a class="v2-room__link" href="../tour/?scope=apartment&amp;room=bathMain&amp;floor=parquet&amp;video=0" data-route="tour-room" data-room="bathMain">לחדר הזה ב־<bdi>360°</bdi></a></figcaption>
+          <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+        </figure>
+      </div>
+      <nav class="v2-strip" aria-label="מעבר בין החדרים" data-strip>
+        <a class="v2-strip__item is-on" href="#room-terraceLiving" data-goto="0"><img src="media/room-terraceLiving-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>מרפסת שמש</span></a>
+        <a class="v2-strip__item" href="#room-living" data-goto="1"><img src="media/room-living-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>סלון</span></a>
+        <a class="v2-strip__item" href="#room-dining" data-goto="2"><img src="media/room-dining-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>פינת אוכל</span></a>
+        <a class="v2-strip__item" href="#room-kitchen" data-goto="3"><img src="media/room-kitchen-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>מטבח</span></a>
+        <a class="v2-strip__item" href="#room-bedroom2" data-goto="4"><img src="media/room-bedroom2-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>חדר שינה</span></a>
+        <a class="v2-strip__item" href="#room-entrance" data-goto="5"><img src="media/room-entrance-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>כניסה</span></a>
+        <a class="v2-strip__item" href="#room-bedroomMain" data-goto="6"><img src="media/room-bedroomMain-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>חדר שינה הורים</span></a>
+        <a class="v2-strip__item" href="#room-bathMain" data-goto="7"><img src="media/room-bathMain-thumb.webp" width="320" height="180" loading="lazy" decoding="async" alt=""><span>חדר רחצה הורים</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 5. the whole apartment: a still of the live dollhouse (tour/3d/dollhouse.html, AI-assisted from the sales plan); the live one on request -->
+  <section class="v2-cut" id="cutaway" aria-labelledby="cutTitle">
+    <div class="v2-cut__stage" data-cut-stage>
+      <div class="v2-cut__head" data-cut-head>
+        <p class="v2-eyebrow">קומה 16 · Rainbow תל אביב</p>
+        <h2 class="v2-cut__title" id="cutTitle">דירה <bdi>846</bdi></h2>
+      </div>
+      <figure class="v2-cut__fig" data-cut-fig>
+        <img class="v2-cut__img" src="media/dollhouse.webp" width="1710" height="1185" loading="lazy" decoding="async" alt="חתך תלת־ממדי של דירה 846: כניסה, סלון, פינת אוכל, מטבח, שני חדרי שינה, חדרי רחצה ומרפסת שמש">
+      </figure>
+      <div class="v2-cut__foot" data-cut-foot>
+        <nav class="v2-chips" aria-label="חדרי הדירה" data-chips><a class="v2-chip" href="#room-terraceLiving" data-goto="0">מרפסת שמש</a><a class="v2-chip" href="#room-living" data-goto="1">סלון</a><a class="v2-chip" href="#room-dining" data-goto="2">פינת אוכל</a><a class="v2-chip" href="#room-kitchen" data-goto="3">מטבח</a><a class="v2-chip" href="#room-bedroom2" data-goto="4">חדר שינה</a><a class="v2-chip" href="#room-entrance" data-goto="5">כניסה</a><a class="v2-chip" href="#room-bedroomMain" data-goto="6">חדר שינה הורים</a><a class="v2-chip" href="#room-bathMain" data-goto="7">חדר רחצה הורים</a></nav>
+        <button class="v2-btn v2-btn--ghost" type="button" id="open3d"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 0v9m0 0l8-4.5M12 12l-8-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>סיבוב חופשי בתלת־ממד</span></button>
+      </div>
+      <span class="hb-ai-badge v2-badge">הדמיה · <bdi>AI-generated</bdi></span>
+    </div>
+  </section>
+
+  <!-- 6. the way on: the 360 tour of this apartment, or every apartment on the hold -->
+  <section class="v2-go" id="go" aria-labelledby="goTitle">
+    <div class="v2-go__media" aria-hidden="true"><picture><source type="image/webp" srcset="../fixtures/rainbow/landing/renders/the-2-640.webp 640w, ../fixtures/rainbow/landing/renders/the-2-1056.webp 1056w" sizes="100vw"><img src="../fixtures/rainbow/landing/renders/the-2-1056.jpg" srcset="../fixtures/rainbow/landing/renders/the-2-640.jpg 640w, ../fixtures/rainbow/landing/renders/the-2-1056.jpg 1056w" sizes="100vw" width="1056" height="696" loading="lazy" decoding="async" alt=""></picture></div>
+    <span class="v2-scrim v2-scrim--go" aria-hidden="true"></span>
+    <span class="hb-ai-badge v2-badge">הדמיה</span>
+    <div class="v2-go__in">
+      <p class="v2-eyebrow">דירה <bdi>846</bdi> · קומה 16</p>
+      <h2 class="v2-go__title" id="goTitle">עכשיו להסתובב בה בעצמכם.</h2>
+      <div class="v2-go__ctas">
+        <a class="v2-btn v2-btn--accent" id="ctaTour" href="../tour/?scope=apartment&amp;room=living&amp;floor=parquet&amp;video=0" data-route="tour"><span>לסיור <bdi>360°</bdi> בדירה</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="v2-btn v2-btn--ghost" id="ctaHold" href="../hold/?from=platform&amp;project=rainbow" data-route="hold"><span>לכל הדירות בבניין</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="v2-foot">
+  <div class="v2-foot__row">
+    <a class="v2-brand v2-brand--foot" href="../" aria-label="Habait — לעמוד הפרויקט"><img src="../brand/habait-logo-sand.svg" alt="Habait — הבית של כל הבתים" width="131" height="81"></a>
+    <p class="v2-foot__dev">יזם: <span id="devFoot">ישראל קנדה</span></p>
+    <a class="v2-foot__back" href="../">לעמוד הפרויקט</a>
+  </div>
+  <details class="hb-legal v2-legal" id="legal" hidden>
+    <summary><span class="hb-legal__line" id="legalLine"></span><span class="hb-legal__more"><span class="hb-legal__open">לפרטים</span><span class="hb-legal__close">סגירה</span></span></summary>
+    <div class="hb-legal__full" id="legalFull"></div>
+  </details>
+</footer>
+
+<!-- the live dollhouse, loaded only when asked (3 MB) -->
+<dialog class="v2-dialog" id="dialog3d" aria-labelledby="dialog3dTitle">
+  <div class="v2-dialog__bar">
+    <h2 class="v2-dialog__title" id="dialog3dTitle">דירה <bdi>846</bdi> · תלת־ממד</h2>
+    <button class="v2-dialog__close" type="button" id="close3d" aria-label="סגירה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="v2-dialog__body" id="dialog3dBody"></div>
+</dialog>
+
+<script defer src="../js/vendor/gsap-3.13.0.min.js"></script>
+<script defer src="../js/vendor/ScrollTrigger-3.13.0.min.js"></script>
+<script defer src="../js/vendor/SplitText-3.13.0.min.js"></script>
+<script defer src="../js/vendor/lenis-1.3.4.min.js"></script>
+<script type="module" src="journey.js"></script>
+</body>
+</html>

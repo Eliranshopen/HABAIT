@@ -1,0 +1,53 @@
+// A1: event-triggered REAL kills. Usage: node a1-events.mjs <seed> <jobs> <callUsd> <cap>
+import fs from 'node:fs';
+import { mkEnv, sleep, S, setSeed, rnd, between, inv, spentOk, heavyOverlap, realKill, waitEvent, resume, approveWhen, toDone, finalCheck, violate, note, PAID } from './q.mjs';
+const [seed, jobs, callUsd, cap] = process.argv.slice(2).map(Number);
+setSeed(seed);
+const E = await mkEnv({ prefix: 'qa-a1-', callUsd, stepMs: 250, heartbeat: 0.05 });
+const HOOKS = ['ENGINE_TEST_PAUSE_AFTER_RESERVE_MS', 'ENGINE_TEST_PAUSE_AFTER_CACHE_MS', 'ENGINE_TEST_PAUSE_AFTER_SETTLE_MS'];
+const TRIG = ['tmp', 'joblock', 'joblock', 'reserved', 'cacheUnsettled', 'state:rendering', 'state:awaiting_approval', 'state:skinning', 'state:gating', 'state:finishing', 'state:packaging', 'state:qa', 'rows:1', 'rows:2', 'rows:3', 'rows:5', 'rows:7', 'settledcount:1', 'settledcount:2', 'heavyfile', 'heavyguard', 'delay:5', 'delay:60', 'delay:200', 'delay:500'];
+const byTrig = {};
+console.log(`a1 home ${E.home} seed ${seed} callUsd ${callUsd} cap ${cap}`);
+try {
+  for (let n = 0; n < jobs; n++) {
+    const name = `a1-${seed}-${n}.pdf`;
+    const pdf = E.pdf(name, name);
+    // hooks for first runner spawn
+    const hook = rnd() < 0.6 ? HOOKS[between(0, 2)] : null;
+    if (hook) process.env[hook] = String(between(20, 500));
+    let id;
+    try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { if (hook) delete process.env[hook]; }
+    const tag0 = `job ${n} ${id}`;
+    let kills = 0;
+    const nk = between(1, 3);
+    for (let k = 0; k < nk; k++) {
+      const trig = TRIG[between(0, TRIG.length - 1)];
+      // keep the job moving: approve unless the trigger is the approval wait itself
+      const j0 = E.job(id);
+      if (j0.state === 'done') break;
+      const approveTask = (async () => { if (trig !== 'state:awaiting_approval') for (let i = 0; i < 200; i++) { await approveWhen(E, id, cap); await sleep(25); const jj = E.job(id); if (!jj || jj.state === "done") return; } })();
+      const hit = await waitEvent(E, id, trig, 5000);
+      const pid = E.runnerPid(id);
+      const ok = hit && await realKill(E, pid, tag0 + ' ' + trig);
+      if (ok) { kills++; byTrig[trig] = (byTrig[trig] || 0) + 1; }
+      inv(E, id, `${tag0} after kill(${trig})`);
+      // stop approver by letting it finish; resume
+      if (E.job(id).state === 'done') break;
+      const rr = await resume(E, pdf, `${tag0} resume`);
+      if (rr && rr.ms > 2600) note(`${tag0}: resume took ${rr.ms} ms (${rr.tries} tries)`);
+      inv(E, id, `${tag0} after resume`);
+    }
+    const j = await toDone(E, id, tag0, { cap: Math.max(cap, 60) });
+    // cap-reached cases: approve with larger cap done inside toDone
+    finalCheck(E, id, `${tag0} final`);
+    await spentOk(E, id, `${tag0} final`);
+    const ledg = E.ledger(id);
+    if (ledg.rows.some((r) => r.status === 'orphaned')) byTrig.__orphaned = (byTrig.__orphaned || 0) + 1;
+    if (ledg.rows.some((r) => r.recovered)) byTrig.__recovered = (byTrig.__recovered || 0) + 1;
+    if ((n + 1) % 5 === 0) console.log(`  jobs ${n + 1}, kills ${S.kills}`);
+  }
+  const h = heavyOverlap(E, 'a1');
+  console.log('heavy rows', h);
+} catch (e) { console.log('ERROR', e.stack); S.violations.push('script error ' + e.message); }
+finally { await E.cleanup(); }
+console.log(JSON.stringify({ script: 'a1', seed, callUsd, kills: S.kills, jobsDone: S.jobs, checks: S.checks, byTrig, violations: S.violations, leftover: E.leftover }));

@@ -1,11 +1,11 @@
 # fixtures/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 Depth-golden test fixture (8x4 PNG and JSON) with the script that makes it and the script that checks the pipeline's depth output against it.
 
-## What's here (2026-11-05)
+## What's here (2026-11-10)
 4 files here · 0 subfolders · 4 files / 15.3 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |

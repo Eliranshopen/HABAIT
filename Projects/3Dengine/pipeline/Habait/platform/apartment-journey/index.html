@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#08131E">
+<title>דירה 846 · קומה 16 · Rainbow תל אביב · Habait</title>
+<meta name="description" content="דירה 846 בקומה 16: מהמגדל אל הקומה, ריחוף אל הדירה, ומשם לסיור 360°. הדמיה.">
+<link rel="icon" type="image/svg+xml" href="../brand/habait-mark.svg">
+<link rel="preload" as="image" href="media/tower-16-1920.jpg" imagesrcset="media/tower-16-960.jpg 960w, media/tower-16-1920.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" href="../fonts/frank-ruhl-libre-hebrew-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="journey.css">
+<script>
+  // motion decided before the first paint; reduced motion = no flight at all (journey.js hands straight to the tour)
+  (function () { try { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('is-motion'); } catch (e) {} })();
+</script>
+</head>
+<!--
+  The apartment journey of 846, round 4 (plan development/plans/2026-11-09-rainbow-v2.md §9; Eliran 2026-11-10: «משלב לחיצה על "המשיכו אל
+  הדירה" יש את הריחוף עם האנימציה של הקומות ואז זה ממשיך לסיור 360 של הדמיית הדירה»). ONE automatic sequence, no scrolling, ~10 s:
+    1. the floors — the counter runs up to «16» beside the tower, «דירה 846» and the facts; floor 16 glows (the hold's own frame, 846's
+       anchor projected through the hold camera; media/manifest.json floor16);
+    2. the bird flight (Eliran 2026-11-10) — a film from the tower down to 846's terrace and through the glass (media/fly-846-*.mp4);
+       if the film is not ready in time: the glide — that floor isolated, then one continuous push toward 846's terrace;
+    3. the landing — the living room drawn from the tour's own panorama with the tour's own first-view maths (room living, yaw, pitch −2,
+       hfov from the screen), so the 360 tour opens on the identical picture;
+    4. the hand-off — inside /hold/ the tour loads behind this frame and the hold cross-fades to it (the iOS sound unlock stays the
+       visitor's own tap in the hold); opened on its own, this page goes to the tour itself.
+  «דלג לסיור» skips; reduced motion goes straight to the tour. Badge «הדמיה · AI-generated»; facts from units.json; no prices; no geometry
+  altered (light, crop and zoom on the hold frame; the landing is a reprojection of the gated panorama). The round-3 scroll page is in
+  tools/_unused/apartment-journey-r3/.
+-->
+<body class="hb-base jr">
+<main class="jr-stage" id="stage">
+  <div class="jr-air" id="air" aria-hidden="true"></div>
+  <div class="jr-frame" id="frame">
+    <img class="jr-frame__img" src="media/tower-16-1920.jpg" srcset="media/tower-16-960.jpg 960w, media/tower-16-1920.jpg 1920w" sizes="100vw" width="1920" height="1080" fetchpriority="high" decoding="async" alt="מגדל Rainbow מול הים, וקומה 16 מסומנת עליו">
+    <span class="jr-band" id="band" aria-hidden="true"></span>
+    <span class="jr-pin" id="pin" aria-hidden="true"><span class="jr-pin__dot"></span><span class="jr-pin__label"><bdi>846</bdi></span></span>
+  </div>
+  <span class="jr-scrim" id="scrim" aria-hidden="true"></span>
+  <video class="jr-fly" id="fly" muted playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="-1" aria-hidden="true"></video>
+  <canvas class="jr-land" id="land" aria-hidden="true"></canvas>
+  <div class="jr-copy" id="copy">
+    <p class="jr-eyebrow" id="eyebrow">קומה</p>
+    <h1 class="jr-title"><span class="hb-sr">קומה 16, דירה 846</span><span class="jr-num" id="num" aria-hidden="true">16</span></h1>
+    <p class="jr-unit" id="unit">דירה <bdi>846</bdi></p>
+    <ul class="jr-facts" id="facts" aria-label="נתוני הדירה">
+      <li><span data-fact="rooms">3</span> חדרים</li>
+      <li><bdi data-fact="area">106.72</bdi> מ״ר</li>
+      <li>מרפסת שמש <bdi data-fact="outdoor">26.15</bdi> מ״ר</li>
+    </ul>
+  </div>
+  <span class="hb-ai-badge jr-badge">הדמיה · <bdi>AI-generated</bdi></span>
+  <a class="jr-skip" id="skip" href="../tour/?scope=apartment&amp;room=living&amp;yaw=180&amp;floor=parquet&amp;video=0">דלג לסיור<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</main>
+<script defer src="../js/vendor/gsap-3.13.0.min.js"></script>
+<script type="module" src="journey.js"></script>
+</body>
+</html>

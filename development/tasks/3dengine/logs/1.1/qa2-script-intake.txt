@@ -1,0 +1,27 @@
+// Intake (section 3): foreign things where the job's files belong, through the real MCP server. No raw file error may leave; nothing foreign overwritten or removed.
+import fs from 'node:fs';
+import { makeHome, startServer, E, GOLDEN, sha, cleanup, snapshot, sleep } from './qa-lib.mjs';
+const { jobId } = await E('engine/jobs.mjs');
+const { ENGINE_VERSION } = await E('engine/config.mjs');
+const S = sha(fs.readFileSync(GOLDEN));
+const ID = jobId({ pdfSha256: S, apartment: 'p1', mode: 'stub', version: ENGINE_VERSION });
+const RAW = /ENOENT|ENOTDIR|EEXIST|EPERM|EACCES|EISDIR|ENOTEMPTY|EBUSY|[A-Z]:[\\/]|qa2-home/;
+async function sc(name, setup, check = () => '') {
+  const h = await makeHome({ timeout: 90 });
+  fs.copyFileSync(GOLDEN, `${h.inbox}/p.pdf`);
+  const srv = startServer(h); await srv.init();
+  const jd = `${h.jobsDir}/${ID}`;
+  fs.mkdirSync(h.jobsDir, { recursive: true });
+  const info = setup({ h, jd, srv }) || {}; info.srv = srv;
+  const before = snapshot(h.jobsDir, (p) => /job\.lock$/.test(p));
+  const r = await srv.call('start_simulation', { pdf_path: `${h.inbox}/p.pdf` });
+  const after = snapshot(h.jobsDir, (p) => /job\.lock$/.test(p));
+  const changed = Object.keys({ ...before, ...after }).filter((k) => before[k] !== after[k]);
+  const text = JSON.stringify(r.m);
+  const verdict = r.m.error ? `RPC-ERROR ${r.m.error.code} ${r.m.error.message.slice(0, 100)}` : r.err ? `tool-error ${r.err.code}: ${String(r.err.message).slice(0, 140)}` : 'OK';
+  console.log(JSON.stringify({ name, verdict, rawLeak: RAW.test(text.replace(/"pdf_path":"[^"]*"/g, '')), changed, extra: check({ h, jd, info }) }));
+  await srv.stop(); try { cleanup(h); } catch {}
+}
+const foreignBytes = Buffer.from('%PDF-1.4 foreign');
+await sc('input has a read-only source.pdf of the TRUE bytes (unmarked resume)', ({ jd }) => { fs.mkdirSync(`${jd}/input`, { recursive: true }); fs.copyFileSync(GOLDEN, `${jd}/input/source.pdf`); },
+  ({ jd }) => 'readonly now: ' + ((fs.statSync(`${jd}/input/source.pdf`).mode & 0o200) === 0));

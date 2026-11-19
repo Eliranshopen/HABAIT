@@ -1,0 +1,136 @@
+# Milestone 1.4 is closed: the board, the tasks table, the plan of record, the plans and projects tables.
+# PREPARED before the verdict; run only after a fresh reviewer's PASS, with the facts of the closing round:
+#   python close_m14.py <code commit> <rounds> "<English: what the rounds were>" "<Hebrew: the same>" "<date YYYY-MM-DD>" "<English: the gate in one clause>" "<Hebrew: the gate in one clause>"
+# The plan PAGE and the engine home's context file are patched apart. Safe to run twice.
+import io
+import sys
+
+CODE, ROUNDS, QA_EN, QA_HE, DATE, GATE_EN, GATE_HE = sys.argv[1], int(sys.argv[2]), sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7]
+ROOT = 'C:/RnD/'
+LAST = 'qa-live.md' if ROUNDS == 1 else 'qa-live-r%d.md' % ROUNDS
+
+
+def read(rel):
+    return io.open(ROOT + rel, encoding='utf-8', newline='').read()
+
+
+def patch(rel, pairs, limit=None):
+    raw = read(rel)
+    nl = '\r\n' if '\r\n' in raw else '\n'
+    t = raw.replace('\r\n', '\n')
+    for a, b in pairs:
+        if b in t:
+            continue
+        if t.count(a) != 1:
+            raise SystemExit('%s: %d matches for %r' % (rel, t.count(a), a[:70]))
+        t = t.replace(a, b)
+    if limit:
+        for i, ln in enumerate(t.split('\n'), 1):
+            if len(ln) > limit and '3dengine' in ln.lower():
+                print('  OVER %d: %s line %d = %d chars' % (limit, rel, i, len(ln)))
+    io.open(ROOT + rel, 'w', encoding='utf-8', newline='').write(t.replace('\n', nl))
+    print('patched', rel)
+
+
+def line_of(rel, start, optional=False):
+    hits = [ln for ln in read(rel).replace('\r\n', '\n').split('\n') if ln.startswith(start)]
+    if optional and not hits:
+        return None
+    if len(hits) != 1:
+        raise SystemExit('%s: %d lines start with %r' % (rel, len(hits), start[:60]))
+    return hits[0]
+
+
+# ---------------------------------------------------------------- the board
+B = 'development/tasks/3dengine/'
+pairs = [
+    ("**State:** `EXECUTING` — cards 01 to 06 (milestones 0.1, 0.2, 0.3, 1.1, 1.2, 1.3) DONE; 6 of 27 milestones closed; card 07 (milestone 1.4) EXECUTING since 2026-11-18.",
+     "**State:** `EXECUTING` — cards 01 to 07 (milestones 0.1, 0.2, 0.3, 1.1, 1.2, 1.3, 1.4) DONE; 7 of 27 milestones closed; next: card 08 (milestone 2.1)."),
+    ("| 07 | `task-07-m1-4-saved-reading.md` | 1.4 · קריאה שמורה — A saved reading | engine-builder · opus · T0 | EXECUTING |",
+     "| 07 | `task-07-m1-4-saved-reading.md` | 1.4 · קריאה שמורה — A saved reading | engine-builder · opus · T0 | DONE |"),
+]
+now = line_of(B + 'README.md', '- **Now:** card 07 (milestone 1.4', optional=True)
+if now:
+    pairs.append((now,
+        "- **Now:** card 08 (milestone 2.1, render as an engine stage) is next. It starts with plan to tasks (`m2.1/`). It is the first card that starts Blender: the build from `plan.general.json` and the render become real stages, "
+        "checked on ONE room first and tested on two (Eliran, 2026-11-17: the whole apartment is rendered once, by the engine, at 3.1). It owes the items the board carried to it: an unknown room `type` in a plan (1.3's review, O-1), "
+        "and the gate on a saturated machine.\n"
+        "- **Done:** card 07 (milestone 1.4, a saved reading) on %s; the code is `%s` on the local `main`. The engine keeps the reading it paid for (`engine/readings.mjs`: one per PDF, the reading as the tool wrote it and a record "
+        "that is checked against it), so the same PDF is read by the model once. **Eliran's decision:** a kept reading stays valid across engine versions and stops being valid when the reading tool or the model changes. "
+        "The same reading gives the same bytes of `plan.general.json` on every day and in every job (ONE more listed line of the brought-in tool; the plan's day kept in the record; the id of the DRAWING handed to the tool); "
+        "the plan's hash for the 846 fixture is pinned. The command `trace` asks the store first and keeps a paid reading that passed; `reading show` / `reading import`. A number of the settings file is a JSON number. "
+        "The gate: %s; %s. $0. Two decisions of his during this gate, both in `run-tasks.md` step 3: each tier of tests runs once; on a loaded machine the stage tier may run once as a bounded background run of up to 25 minutes. "
+        "Details: `m1.4/README.md`; contract and what is not in 1.4: `Projects/3Dengine/contracts/CONTRACT-1.4.md` (§9, §10); evidence: `logs/1.4/`."
+        % (DATE, CODE, GATE_EN, QA_EN)))
+patch(B + 'README.md', pairs)
+
+card = line_of(B + 'task-07-m1-4-saved-reading.md', '**State:** `EXECUTING`', optional=True)
+if card:
+    patch(B + 'task-07-m1-4-saved-reading.md', [
+        (card, "**State:** `DONE` — closed %s on `%s`: the closing test on real processes at $0 (a first run paid against a scripted model keeps its reading; a second run, a real job of the same PDF, makes no request, books $0 and "
+               "gives the plan byte for byte), %s, %s, sync-context run. Task cards and findings: `m1.4/README.md`; contract: `Projects/3Dengine/contracts/CONTRACT-1.4.md` §9, §10; evidence: `logs/1.4/`." % (DATE, CODE, GATE_EN, QA_EN)),
+    ])
+
+mpairs = [("**State:** `EXECUTING`\n", "**State:** `CLOSED`\n")]
+first = line_of(B + 'm1.4/README.md', '- **RESUME HERE')
+mpairs.append((first,
+    "- **CLOSED %s.** All nine tasks are DONE: %s (`../logs/1.4/%s`, on `%s`). What the review saw outside the binding lines is written in the contract (§9 what is not in 1.4, §10) or carried on the board. The milestone cost $0. "
+    "The gate ran on a machine that other sessions held at 100 %% for hours and that slept once in the middle of a run: `../logs/1.4/gate-summary.txt` lists every run, the cut ones too." % (DATE, QA_EN, LAST, CODE)))
+row9 = line_of(B + 'm1.4/README.md', '| 09 | `task-09-qa-live.md`')
+if row9.endswith('| PLANNED |'):
+    mpairs.append((row9, row9[:-len('| PLANNED |')] + '| DONE |'))
+patch(B + 'm1.4/README.md', mpairs)
+
+t9 = line_of(B + 'm1.4/task-09-qa-live.md', '**State:** `PLANNED`', optional=True)
+if t9:
+    patch(B + 'm1.4/task-09-qa-live.md', [
+        (t9, "**State:** `DONE` — %s: %s (`../logs/1.4/%s`, on `%s`)." % (DATE, QA_EN, LAST, CODE)),
+    ])
+
+patch('development/tasks/CLAUDE.md', [
+    ("cards 01–06 DONE (1.3 on 2026-11-18), card 07 = milestone 1.4 EXECUTING;", "cards 01–07 DONE (1.4 on %s), card 08 = milestone 2.1 next;" % DATE),
+], limit=600)
+
+# ---------------------------------------------------------------- the plan of record
+MD = 'development/plans/2026-11-16-pdf-to-360-engine-mcp.md'
+state = line_of(MD, '**מצב (2026-11-18):**')
+new_state = state
+if '6 מתוך 27 אבני דרך סגורות:' in state:
+    new_state = state.replace('**מצב (2026-11-18):**', '**מצב (%s):**' % DATE).replace('6 מתוך 27 אבני דרך סגורות:', '7 מתוך 27 אבני דרך סגורות:')
+    tail_old = 'ו-1.3 שער הפענוח (2026-11-18, $0). הבאה: 1.4, קריאה שמורה.'
+    assert tail_old in new_state, 'the tail of the state line'
+    new_state = new_state.replace(tail_old, '1.3 שער הפענוח (2026-11-18, $0), ו-1.4 קריאה שמורה (%s, $0). שלב 1, פענוח ה-PDF, הושלם. הבאה: 2.1, רינדור כשלב במנוע.' % DATE)
+row = ('| 1.4 | קריאה שמורה | **סגורה** | על תהליכים אמיתיים, ב-$0: ריצה ראשונה בתשלום מול מודל מתוסרט (בלי רשת) מפענחת, עוברת, והקריאה נשמרת עם העלות שלה; ריצה שנייה, עבודה אמיתית על אותו PDF, '
+       'קוראת מהמחסן: בלי קריאה למודל, $0, ו-`plan.general.json` זהה בית-לבית. חתימת התכנית של 846 נעולה, והפקודה והעבודה משוות אליה בכל יום '
+       '| ' + GATE_HE + '; ' + QA_HE + ' | 99.77% שורות ב-`engine/**` ו-`mcp/**`; הקוד החדש 100% | ' + DATE + ', ‏`main` ‏`' + CODE + '` |')
+built = '''**מה נבנה ב-1.4** (חוזה: `Projects/3Dengine/contracts/CONTRACT-1.4.md`; ראיות: `development/tasks/3dengine/logs/1.4/`; כרטיסי המשימות: `development/tasks/3dengine/m1.4/README.md`):
+
+- **המנוע שומר את הקריאה ששילם עליה** (`engine/readings.mjs`): לכל PDF קריאה אחת, כמו שהכלי כתב אותה, ולידה רשומה: של מי היא, החתימה שלה, מי קרא אותה, מתי, וכמה עלתה. הרשומה נבדקת מול הקובץ בכל שימוש ולא מאמינים לה.
+- **ריצה שנייה על אותו PDF לא קוראת למודל ולא משלמת.** הפקודה `trace` שואלת קודם את המחסן, ועבודה (job) קוראת ממנו. מה שריצה בתשלום עדיין משלמת עליו: השופט (שלוש קריאות למודל, דוח ולא שער), שתשובותיו לא נשמרות.
+- **החלטה של אלירן (2026-11-18): קריאה שמורה נשארת תקפה בין גרסאות המנוע, ומתבטלת רק כשכלי הקריאה או המודל משתנים.** בתכנית נכתב «וגרסת המנוע»; כך כל סגירת אבן דרך הייתה מבטלת את כל הקריאות. ה«קורא» הוא שני קבצים: כלי הקריאה, והקובץ שנוקב בשם המודל.
+- **אותה קריאה נותנת אותה תכנית, בית-לבית, בכל יום ובכל עבודה.** שני דברים שינו את הבתים: הכלי כתב לתכנית את יום הריצה, ואת המזהה שקיבל (מזהה העבודה, שיש בו גרסת מנוע). עכשיו הכלי מקבל את היום (שורה אחת נוספת שרשומה ברשימת השינויים שלו), היום נשמר ברשומה, והמזהה הוא של השרטוט.
+- **קריאה ששולמה לא נמחקת לעולם:** קריאה שמוחלפת עוברת לתיקיית `superseded`. נשמרת רק קריאה שהריצה שלה עברה את הבדיקה.
+- **פקודות חדשות:** `reading show` (מה שמור ל-PDF, ואם עדיין תקף) ו-`reading import` (שמירה ביד; בלי `--go` לא נכתב כלום).
+- **הערת הסקירה של 1.3 נסגרה:** מספר בקובץ ההגדרות חייב להיות מספר JSON אמיתי.
+- **הסקירה הראשונה מצאה פגם אחד, והוא תוקן:** מנעול הקבצים של המנוע (נכתב ב-0.3) איפשר לשני תהליכים קצרים להחזיק בו באותו רגע, כך ששמירות בו-זמניות של אותו PDF יכלו לאבד רשומה של קריאה. המנעול הוחלף: תיקייה עם רשומה אחת על שם המחזיק, וכל החלפת מחזיק היא שינוי שם אחד (חוזה §11). אותו מנעול שומר גם על קובצי העבודה ועל המנעול הכבד.
+- **שתי החלטות תהליך של אלירן תוך כדי השער:** כל שכבת בדיקות רצה פעם אחת; ובמכונה עמוסה מותרת למבחני השלב של המנוע ריצה אחת חסומה של עד 25 דקות ברקע.
+- **גרסת המנוע** `1.4.0`. **עלות:** $0 (ה«תשלום» במבחן הוא מול מודל מתוסרט).
+- **מה לא ב-1.4** (חוזה §9): תשלום על קריאה בתוך עבודה (4.2, 4.3); שמירת תשובות השופט; חוברת של כמה דירות; ניקוי המחסן; שמירת הפענוח עצמו (ריצה שנייה עדיין מריצה את הכלי, כדקה).
+
+'''
+anchor = line_of(MD, '**מה נבנה ב-1.3**')
+patch(MD, [
+    (state, new_state),
+    ('| 1.4 | קריאה שמורה | הבאה | | | | |', row + chr(10) + '| 2.1 | רינדור כשלב במנוע | הבאה | | | | |'),
+    (anchor, built + anchor),
+])
+
+# ---------------------------------------------------------------- the plans table and the projects table
+patch('development/plans/CLAUDE.md', [
+    ("**6 of 27 CLOSED** (0.1, 0.2, 0.3, 1.1, 1.2, 1.3 on 2026-11-18); 1.4 is next.", "**7 of 27 CLOSED** (0.1 to 1.4; stage 1, reading the PDF, is complete since %s); 2.1 is next." % DATE),
+], limit=600)
+patch('Projects/CLAUDE.md', [
+    ("6 of 27 milestones closed: 0.1 the engine home, 0.2 a stub engine behind the agent, 0.3 a job on the disk, 1.1 intake and a real first look, 1.2 the reading tool run by the engine, 1.3 the reading as a job's first real stage.",
+     "7 of 27 milestones closed: 0.1 the engine home, 0.2 a stub engine behind the agent, 0.3 a job on the disk, 1.1 intake and a real first look, 1.2 the reading tool run by the engine, 1.3 the reading as a job's first real stage, 1.4 a kept reading (the same PDF is read once)."),
+], limit=600)
+print('done: now the plan page, the engine home context file (branch), memory, HOT, auto-memory, and the sync-context pass')

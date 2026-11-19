@@ -1,0 +1,81 @@
+{
+  "_comment": "Pinned CC0 probe assets for board 360-v2 T03. The binaries are gitignored; THIS FILE + fetch-assets.py + PROVENANCE.md are the committed truth (rail 4). Every entry is a Poly Haven asset: polyhaven.com publishes its whole library under CC0 (https://polyhaven.com/license). Re-fetch with:  PYTHONIOENCODING=utf-8 python 360walkaround/pipeline/probe/probe-assets/fetch-assets.py",
+  "source": "polyhaven.com",
+  "api": "https://api.polyhaven.com",
+  "licence": "CC0 1.0 Universal (Public Domain Dedication)",
+  "licence_url": "https://polyhaven.com/license",
+  "verified_utc": "2026-09-01",
+  "assets": [
+    {
+      "slug": "sofa_02",
+      "kind": "model",
+      "format": "blend",
+      "resolution": "2k",
+      "role": "living-room sofa",
+      "dest": "models/sofa_02"
+    },
+    {
+      "slug": "modern_coffee_table_01",
+      "kind": "model",
+      "format": "blend",
+      "resolution": "2k",
+      "role": "living-room coffee table",
+      "dest": "models/modern_coffee_table_01"
+    },
+    {
+      "slug": "modern_arm_chair_01",
+      "kind": "model",
+      "format": "blend",
+      "resolution": "2k",
+      "role": "living-room armchair",
+      "dest": "models/modern_arm_chair_01"
+    },
+    {
+      "slug": "potted_plant_02",
+      "kind": "model",
+      "format": "blend",
+      "resolution": "2k",
+      "role": "living-room plant",
+      "dest": "models/potted_plant_02"
+    },
+    {
+      "slug": "modern_ceiling_lamp_01",
+      "kind": "model",
+      "format": "blend",
+      "resolution": "2k",
+      "role": "living-room pendant lamp",
+      "dest": "models/modern_ceiling_lamp_01"
+    },
+    {
+      "slug": "clarens_midday",
+      "kind": "hdri",
+      "format": "hdr",
+      "resolution": "2k",
+      "role": "SUPERSEDED environment (T03-T12) - kept pinned so the pre-T13 scenes stay reproducible",
+      "dest": "hdri",
+      "exterior_class": "locating",
+      "exterior_class_reason": "A photographed, nameable landscape: the Clarens escarpment (Free State, South Africa) with a resolvable ridge line, vegetation mass and buildings. T05's own G0 pack captions it 'a stock HDRI of a place that is not Karnei Shomron'. Recorded human judgment, not a measurement (C-360-75's honesty). Classified `locating` by CONTRACT A9-8/C-360-91; ILLEGAL for a tour render.",
+      "exterior_class_by": "render-pipeline-engineer, board 360-v2 T13, 2026-09-02"
+    },
+    {
+      "slug": "qwantani_noon_puresky",
+      "kind": "hdri",
+      "format": "hdr",
+      "resolution": "4k",
+      "role": "world environment seen through every glazed opening (T13 onward)",
+      "dest": "hdri",
+      "exterior_class": "non-locating",
+      "exterior_class_reason": "Poly Haven 'Pure Sky': everything at and below the horizon is replaced by a smooth synthetic gradient, and the sky half is a cloudless blue with a single sun disc. Screened against 7 sibling pure-skies on three measured numbers before the pick - sky std-dev 28.09/255 (the lowest of the set, i.e. the fewest resolvable features), horizon vertical-gradient energy 1.329/255 (no silhouette step), sun elevation 52.8 deg (the closest match to the modelled sun rig's 52.0 deg). No terrain, ridge, skyline, vegetation, road or building is present to be named. Recorded human judgment supported by those numbers, not a measurement of 'nameability' itself (C-360-75's honesty).",
+      "exterior_class_by": "render-pipeline-engineer, board 360-v2 T13, 2026-09-02"
+    },
+    {
+      "slug": "laminate_floor_02",
+      "kind": "texture",
+      "format": "jpg",
+      "resolution": "2k",
+      "maps": ["Diffuse", "nor_gl", "Rough"],
+      "role": "living-room floor PBR",
+      "dest": "textures/laminate_floor_02"
+    }
+  ]
+}

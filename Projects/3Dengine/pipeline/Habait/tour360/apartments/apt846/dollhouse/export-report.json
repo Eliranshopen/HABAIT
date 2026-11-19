@@ -1,0 +1,626 @@
+{
+  "tool": "360walkaround/pipeline/export_dollhouse.py",
+  "version": "0.1.0",
+  "blender": "4.5.10 LTS",
+  "gltf_exporter": "4.5.51",
+  "generated_utc": "2026-11-02T12:42:32Z",
+  "input": {
+    "blend": "C:/RnD/Projects/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/scene.blend",
+    "blend_sha256": "2bc0d5d80e2d24a20b28cbd2a474a1a5e63598b40548d145e4783bb01ba7e53b",
+    "build_report": "C:/RnD/Projects/Habait/habait-walkaround/Habait/studio/_local/projects/apt846-rainbow-tlv/renders/scene.report.json",
+    "built_utc": "2026-11-01T14:55:05+00:00",
+    "build_floor_finish": "style-lock",
+    "build_skirting_objects": 0,
+    "build_material_board": "none"
+  },
+  "settings": {
+    "cut_height_m": 1.2,
+    "floor": "parquet",
+    "max_tris": 150000,
+    "target_bytes": 1000000,
+    "draco_level": 6,
+    "draco_q": {
+      "position": 14,
+      "normal": 8
+    },
+    "texcoords": false,
+    "furniture_colours": "neutral"
+  },
+  "glb": {
+    "path": "C:/RnD/Projects/Habait/habait-walkaround/Habait/engine/_local/apt846/dollhouse/apt846.glb",
+    "bytes": 174036,
+    "le_1MiB": true,
+    "nodes": 27,
+    "materials": [
+      "fabric_dark",
+      "fabric_light",
+      "glass",
+      "oak",
+      "web_cap",
+      "web_ceramic",
+      "web_door",
+      "web_floor_outdoor",
+      "web_floor_parquet",
+      "web_floor_wet",
+      "web_frame",
+      "web_furniture",
+      "web_lamp",
+      "web_metal",
+      "web_mirror",
+      "web_wall",
+      "web_walnut"
+    ],
+    "material_count": 17,
+    "triangles": 28820,
+    "attempts": [
+      {
+        "furniture_ratio": 1.0,
+        "triangles": 28820,
+        "bytes": 174036,
+        "export_s": 4.78
+      }
+    ]
+  },
+  "nodes": {
+    "floor_r-entrance": {
+      "kind": "floor",
+      "room_id": "r-entrance",
+      "triangles": 21,
+      "materials": [
+        "web_floor_parquet"
+      ]
+    },
+    "floor_r-kitchen": {
+      "kind": "floor",
+      "room_id": "r-kitchen",
+      "triangles": 35,
+      "materials": [
+        "web_floor_parquet"
+      ]
+    },
+    "floor_r-dining": {
+      "kind": "floor",
+      "room_id": "r-dining",
+      "triangles": 24,
+      "materials": [
+        "web_floor_parquet"
+      ]
+    },
+    "floor_r-living": {
+      "kind": "floor",
+      "room_id": "r-living",
+      "triangles": 43,
+      "materials": [
+        "web_floor_parquet"
+      ]
+    },
+    "floor_r-terrace-living": {
+      "kind": "floor",
+      "room_id": "r-terrace-living",
+      "triangles": 105,
+      "materials": [
+        "web_floor_outdoor"
+      ]
+    },
+    "floor_r-terrace-bedroom": {
+      "kind": "floor",
+      "room_id": "r-terrace-bedroom",
+      "triangles": 38,
+      "materials": [
+        "web_floor_outdoor"
+      ]
+    },
+    "floor_r-bedroom-main": {
+      "kind": "floor",
+      "room_id": "r-bedroom-main",
+      "triangles": 12,
+      "materials": [
+        "web_floor_parquet"
+      ]
+    },
+    "floor_r-wardrobe": {
+      "kind": "floor",
+      "room_id": "r-wardrobe",
+      "triangles": 15,
+      "materials": [
+        "web_floor_parquet"
+      ]
+    },
+    "floor_r-bath-main": {
+      "kind": "floor",
+      "room_id": "r-bath-main",
+      "triangles": 8,
+      "materials": [
+        "web_floor_wet"
+      ]
+    },
+    "floor_r-bedroom-2": {
+      "kind": "floor",
+      "room_id": "r-bedroom-2",
+      "triangles": 28,
+      "materials": [
+        "web_floor_parquet"
+      ]
+    },
+    "floor_r-bath-guest": {
+      "kind": "floor",
+      "room_id": "r-bath-guest",
+      "triangles": 9,
+      "materials": [
+        "web_floor_wet"
+      ]
+    },
+    "built_r-bath-guest": {
+      "kind": "builtin",
+      "room_id": null,
+      "triangles": 36,
+      "materials": [
+        "web_cap",
+        "glass",
+        "web_metal",
+        "web_ceramic"
+      ]
+    },
+    "built_r-bath-main": {
+      "kind": "builtin",
+      "room_id": null,
+      "triangles": 36,
+      "materials": [
+        "web_cap",
+        "glass",
+        "web_metal",
+        "web_ceramic"
+      ]
+    },
+    "built_r-bedroom-2": {
+      "kind": "builtin",
+      "room_id": null,
+      "triangles": 120,
+      "materials": [
+        "web_cap",
+        "web_metal",
+        "oak",
+        "web_walnut"
+      ]
+    },
+    "built_r-wardrobe": {
+      "kind": "builtin",
+      "room_id": null,
+      "triangles": 192,
+      "materials": [
+        "web_cap",
+        "web_metal",
+        "oak",
+        "web_walnut"
+      ]
+    },
+    "doors": {
+      "kind": "architecture",
+      "room_id": null,
+      "triangles": 420,
+      "materials": [
+        "web_cap",
+        "web_door",
+        "web_metal"
+      ]
+    },
+    "floorfill": {
+      "kind": "architecture",
+      "room_id": null,
+      "triangles": 5140,
+      "materials": [
+        "web_floor_parquet",
+        "web_floor_outdoor",
+        "web_floor_wet"
+      ]
+    },
+    "frames": {
+      "kind": "architecture",
+      "room_id": null,
+      "triangles": 24,
+      "materials": [
+        "web_cap",
+        "web_frame"
+      ]
+    },
+    "furn_r-bath-guest": {
+      "kind": "furniture",
+      "room_id": null,
+      "triangles": 528,
+      "materials": [
+        "web_metal",
+        "oak",
+        "web_ceramic",
+        "web_mirror"
+      ]
+    },
+    "furn_r-bath-main": {
+      "kind": "furniture",
+      "room_id": null,
+      "triangles": 528,
+      "materials": [
+        "web_metal",
+        "oak",
+        "web_ceramic",
+        "web_mirror"
+      ]
+    },
+    "furn_r-bedroom-2": {
+      "kind": "furniture",
+      "room_id": null,
+      "triangles": 696,
+      "materials": [
+        "web_metal",
+        "oak",
+        "fabric_light",
+        "web_lamp"
+      ]
+    },
+    "furn_r-bedroom-main": {
+      "kind": "furniture",
+      "room_id": null,
+      "triangles": 696,
+      "materials": [
+        "web_metal",
+        "oak",
+        "fabric_light",
+        "web_lamp"
+      ]
+    },
+    "furn_r-dining": {
+      "kind": "furniture",
+      "room_id": null,
+      "triangles": 304,
+      "materials": [
+        "web_metal",
+        "oak",
+        "fabric_dark"
+      ]
+    },
+    "furn_r-kitchen": {
+      "kind": "furniture",
+      "room_id": null,
+      "triangles": 1294,
+      "materials": [
+        "glass",
+        "web_metal",
+        "oak",
+        "web_walnut",
+        "fabric_dark"
+      ]
+    },
+    "furn_r-living": {
+      "kind": "furniture",
+      "room_id": null,
+      "triangles": 13840,
+      "materials": [
+        "web_furniture",
+        "web_metal",
+        "oak",
+        "fabric_dark"
+      ]
+    },
+    "glass": {
+      "kind": "architecture",
+      "room_id": null,
+      "triangles": 1896,
+      "materials": [
+        "glass"
+      ]
+    },
+    "walls": {
+      "kind": "architecture",
+      "room_id": null,
+      "triangles": 2732,
+      "materials": [
+        "web_wall",
+        "web_cap"
+      ]
+    }
+  },
+  "furniture_room": {
+    "kitchenFridge(Clone)": "r-kitchen",
+    "doorFridge": "r-kitchen",
+    "kitchenCabinet(Clone)": "r-kitchen",
+    "door": "r-kitchen",
+    "kitchenCabinet(Clone).001": "r-kitchen",
+    "door.001": "r-kitchen",
+    "kitchenCabinet(Clone).002": "r-kitchen",
+    "door.002": "r-kitchen",
+    "kitchenCabinet(Clone).003": "r-kitchen",
+    "door.003": "r-kitchen",
+    "kitchenCabinet(Clone).004": "r-kitchen",
+    "door.004": "r-kitchen",
+    "kitchenCabinet(Clone).005": "r-kitchen",
+    "door.005": "r-kitchen",
+    "kitchenCabinet(Clone).006": "r-kitchen",
+    "door.006": "r-kitchen",
+    "kitchenCabinet(Clone).007": "r-kitchen",
+    "door.007": "r-kitchen",
+    "kitchenCabinet(Clone).008": "r-kitchen",
+    "door.008": "r-kitchen",
+    "table(Clone)": "r-dining",
+    "chairModernCushion(Clone)": "r-dining",
+    "chairModernCushion(Clone).001": "r-dining",
+    "chairModernCushion(Clone).002": "r-kitchen",
+    "loungeDesignSofa(Clone)": "r-living",
+    "modern_arm_chair_01": "r-living",
+    "modern_coffee_table_01": "r-living",
+    "cabinetTelevision(Clone)": "r-living",
+    "cabinetTelevision(Clone).001": "r-living",
+    "televisionModern(Clone)": "r-living",
+    "bedDouble(Clone)": "r-bedroom-main",
+    "cover": "r-bedroom-main",
+    "pillowLeft": "r-bedroom-main",
+    "pillowRight": "r-bedroom-main",
+    "cabinetBedDrawerTable(Clone)": "r-bedroom-main",
+    "drawer": "r-bedroom-main",
+    "lampRoundTable(Clone)": "r-bedroom-main",
+    "cabinetBedDrawerTable(Clone).001": "r-bedroom-main",
+    "drawer.001": "r-bedroom-main",
+    "lampRoundTable(Clone).001": "r-bedroom-main",
+    "bedDouble(Clone).001": "r-bedroom-2",
+    "cover.001": "r-bedroom-2",
+    "pillowLeft.001": "r-bedroom-2",
+    "pillowRight.001": "r-bedroom-2",
+    "cabinetBedDrawerTable(Clone).002": "r-bedroom-2",
+    "drawer.002": "r-bedroom-2",
+    "lampRoundTable(Clone).002": "r-bedroom-2",
+    "cabinetBedDrawerTable(Clone).003": "r-bedroom-2",
+    "drawer.003": "r-bedroom-2",
+    "lampRoundTable(Clone).003": "r-bedroom-2",
+    "bathroomSinkSquare(Clone)": "r-bath-main",
+    "bathroomMirror(Clone)": "r-bath-main",
+    "toilet(Clone)": "r-bath-main",
+    "cover.002": "r-bath-main",
+    "toilet(Clone).001": "r-bath-guest",
+    "cover.003": "r-bath-guest",
+    "bathroomSinkSquare(Clone).001": "r-bath-guest",
+    "bathroomMirror(Clone).001": "r-bath-guest",
+    "CLOSET_w-closet-1_carcass": "r-wardrobe",
+    "CLOSET_w-closet-1_plinth": "r-wardrobe",
+    "CLOSET_w-closet-1_door1": "r-wardrobe",
+    "CLOSET_w-closet-1_handle1": "r-wardrobe",
+    "CLOSET_w-closet-1_door2": "r-wardrobe",
+    "CLOSET_w-closet-1_handle2": "r-wardrobe",
+    "CLOSET_w-closet-1_door3": "r-wardrobe",
+    "CLOSET_w-closet-1_handle3": "r-wardrobe",
+    "CLOSET_w-closet-2_carcass": "r-wardrobe",
+    "CLOSET_w-closet-2_plinth": "r-wardrobe",
+    "CLOSET_w-closet-2_door1": "r-wardrobe",
+    "CLOSET_w-closet-2_handle1": "r-wardrobe",
+    "CLOSET_w-closet-2_door2": "r-wardrobe",
+    "CLOSET_w-closet-2_handle2": "r-wardrobe",
+    "CLOSET_w-closet-2_door3": "r-wardrobe",
+    "CLOSET_w-closet-2_handle3": "r-wardrobe",
+    "CLOSET_b2-closet_carcass": "r-bedroom-2",
+    "CLOSET_b2-closet_plinth": "r-bedroom-2",
+    "CLOSET_b2-closet_door1": "r-bedroom-2",
+    "CLOSET_b2-closet_handle1": "r-bedroom-2",
+    "CLOSET_b2-closet_door2": "r-bedroom-2",
+    "CLOSET_b2-closet_handle2": "r-bedroom-2",
+    "CLOSET_b2-closet_door3": "r-bedroom-2",
+    "CLOSET_b2-closet_handle3": "r-bedroom-2",
+    "CLOSET_b2-closet_door4": "r-bedroom-2",
+    "CLOSET_b2-closet_handle4": "r-bedroom-2",
+    "SHOWER_bm-shower_tray": "r-bath-main",
+    "SHOWER_bm-shower_screen": "r-bath-main",
+    "SHOWER_bm-shower_riser": "r-bath-main",
+    "SHOWER_bg-shower_tray": "r-bath-guest",
+    "SHOWER_bg-shower_screen": "r-bath-guest",
+    "SHOWER_bg-shower_riser": "r-bath-guest"
+  },
+  "dropped": {
+    "ceiling": [
+      "CEIL_r-bath-guest",
+      "CEIL_r-bath-main",
+      "CEIL_r-bedroom-2",
+      "CEIL_r-bedroom-main",
+      "CEIL_r-dining",
+      "CEIL_r-entrance",
+      "CEIL_r-kitchen",
+      "CEIL_r-living",
+      "CEIL_r-terrace-bedroom",
+      "CEIL_r-terrace-living",
+      "CEIL_r-wardrobe"
+    ],
+    "wholly above the cut": [
+      "CEILFILL",
+      "DOORFRAME_o-13_facade-11_H",
+      "DOOR_o-10_head",
+      "DOOR_o-11_head",
+      "DOOR_o-6_head",
+      "DOOR_o-9_head",
+      "SHOWER_bg-shower_head",
+      "SHOWER_bg-shower_screen_rail",
+      "SHOWER_bm-shower_head",
+      "SHOWER_bm-shower_screen_rail",
+      "doorFreezer",
+      "hanging_picture_frame_01",
+      "hanging_picture_frame_01.001"
+    ],
+    "terrain": [
+      "TERRAIN_ground"
+    ],
+    "type LIGHT": [
+      "L_ceil_r-bath-guest",
+      "L_ceil_r-bath-main",
+      "L_ceil_r-bedroom-2",
+      "L_ceil_r-bedroom-main",
+      "L_ceil_r-dining",
+      "L_ceil_r-entrance",
+      "L_ceil_r-kitchen",
+      "L_ceil_r-living",
+      "L_ceil_r-wardrobe",
+      "L_sun"
+    ],
+    "luminaire": [
+      "FIXTURE_r-bath-guest",
+      "FIXTURE_r-bath-main",
+      "FIXTURE_r-bedroom-2",
+      "FIXTURE_r-bedroom-main",
+      "FIXTURE_r-dining",
+      "FIXTURE_r-entrance",
+      "FIXTURE_r-kitchen",
+      "FIXTURE_r-living",
+      "FIXTURE_r-wardrobe"
+    ],
+    "type EMPTY": [
+      "FURN_r-bath-guest_bg-vanity",
+      "FURN_r-bath-guest_bg-vanity-mirror",
+      "FURN_r-bath-guest_bg-wc",
+      "FURN_r-bath-main_bm-vanity",
+      "FURN_r-bath-main_bm-vanity-mirror",
+      "FURN_r-bath-main_bm-wc",
+      "FURN_r-bedroom-2_b2-bed",
+      "FURN_r-bedroom-2_b2-bed-art",
+      "FURN_r-bedroom-2_b2-bed-lamp-l",
+      "FURN_r-bedroom-2_b2-bed-lamp-r",
+      "FURN_r-bedroom-2_b2-bed-nightstand-l",
+      "FURN_r-bedroom-2_b2-bed-nightstand-r",
+      "FURN_r-bedroom-main_bm-bed",
+      "FURN_r-bedroom-main_bm-bed-art",
+      "FURN_r-bedroom-main_bm-bed-lamp-l",
+      "FURN_r-bedroom-main_bm-bed-lamp-r",
+      "FURN_r-bedroom-main_bm-bed-nightstand-l",
+      "FURN_r-bedroom-main_bm-bed-nightstand-r",
+      "FURN_r-dining_d-table",
+      "FURN_r-dining_d-table-chair-2",
+      "FURN_r-dining_d-table-chair-3",
+      "FURN_r-dining_d-table-chair-4",
+      "FURN_r-kitchen_k-counter-2-m1",
+      "FURN_r-kitchen_k-counter-2-m2",
+      "FURN_r-kitchen_k-counter-2-m3",
+      "FURN_r-kitchen_k-counter-m1",
+      "FURN_r-kitchen_k-counter-m2",
+      "FURN_r-kitchen_k-counter-m3",
+      "FURN_r-kitchen_k-counter-m4",
+      "FURN_r-kitchen_k-counter-m5",
+      "FURN_r-kitchen_k-counter-m6",
+      "FURN_r-kitchen_k-tall",
+      "FURN_r-living_l-armchair",
+      "FURN_r-living_l-coffee",
+      "FURN_r-living_l-sofa",
+      "FURN_r-living_l-tv-1",
+      "FURN_r-living_l-tv-2",
+      "FURN_r-living_l-tv-tv"
+    ],
+    "design rule: zero-line doors (no casing / architrave)": [
+      "ENTRY_o-12_casing_m_head",
+      "ENTRY_o-12_casing_m_m",
+      "ENTRY_o-12_casing_m_p",
+      "ENTRY_o-12_casing_p_head",
+      "ENTRY_o-12_casing_p_m",
+      "ENTRY_o-12_casing_p_p"
+    ],
+    "type CAMERA": [
+      "CAM_cp-living"
+    ]
+  },
+  "rooms": {
+    "r-entrance": {
+      "id": "r-entrance",
+      "name_en": "Entrance",
+      "type": "hall",
+      "is_outdoor": false,
+      "area_m2": 6.252
+    },
+    "r-kitchen": {
+      "id": "r-kitchen",
+      "name_en": "Kitchen",
+      "type": "kitchen",
+      "is_outdoor": false,
+      "area_m2": 10.374
+    },
+    "r-dining": {
+      "id": "r-dining",
+      "name_en": "Dining",
+      "type": "hall",
+      "is_outdoor": false,
+      "area_m2": 8.946
+    },
+    "r-living": {
+      "id": "r-living",
+      "name_en": "Living room",
+      "type": "living",
+      "is_outdoor": false,
+      "area_m2": 31.051
+    },
+    "r-terrace-living": {
+      "id": "r-terrace-living",
+      "name_en": "Sun terrace",
+      "type": "balcony",
+      "is_outdoor": true,
+      "area_m2": 15.707
+    },
+    "r-terrace-bedroom": {
+      "id": "r-terrace-bedroom",
+      "name_en": "Terrace, bedroom end",
+      "type": "balcony",
+      "is_outdoor": true,
+      "area_m2": 2.978
+    },
+    "r-bedroom-main": {
+      "id": "r-bedroom-main",
+      "name_en": "Main bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "area_m2": 12.188
+    },
+    "r-wardrobe": {
+      "id": "r-wardrobe",
+      "name_en": "Wardrobe",
+      "type": "storage",
+      "is_outdoor": false,
+      "area_m2": 5.135
+    },
+    "r-bath-main": {
+      "id": "r-bath-main",
+      "name_en": "Main bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "area_m2": 4.466
+    },
+    "r-bedroom-2": {
+      "id": "r-bedroom-2",
+      "name_en": "Bedroom",
+      "type": "bedroom",
+      "is_outdoor": false,
+      "area_m2": 9.314
+    },
+    "r-bath-guest": {
+      "id": "r-bath-guest",
+      "name_en": "Guest bathroom",
+      "type": "bathroom",
+      "is_outdoor": false,
+      "area_m2": 3.378
+    }
+  },
+  "frames": {
+    "world": "build_scene: metres, world X = x_cm/100, world Y = -y_cm/100, Z up",
+    "gltf": "Y up: glTF X = x_cm/100, glTF Y = height, glTF Z = y_cm/100"
+  },
+  "top": {
+    "path": "C:/RnD/Projects/Habait/habait-walkaround/Habait/engine/_local/apt846/dollhouse/top.png",
+    "engine": "BLENDER_EEVEE_NEXT",
+    "res_px": [
+      2048,
+      2048
+    ],
+    "ortho_scale_m": 16.5922,
+    "centre_world_m": [
+      7.611,
+      -8.2045
+    ],
+    "pixel_to_plan_cm": "x_cm = 100*(cx + (u/W - 0.5)*s) ; y_cm = -100*(cy - (v/H - 0.5)*s) (u right, v down, s = ortho_scale_m)"
+  },
+  "timings_s": {
+    "bake_s": 0.66,
+    "merge_s": 0.44,
+    "simplify_s": 0.06,
+    "export_s": 4.78,
+    "total_s": 31.1,
+    "top_s": 24.2
+  },
+  "design_rules": "skirting + door casings dropped, one flat colour per floor class, cream door leaves"
+}

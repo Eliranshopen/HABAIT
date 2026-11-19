@@ -1,0 +1,83 @@
+{
+ "at": "2026-11-09T10:45:01.141Z",
+ "base": "http://127.0.0.1:55789",
+ "runs": 2,
+ "sizes": {
+  "390": {
+   "runs": [
+    {
+     "tNav": 472,
+     "tFilm": 505,
+     "tStop": 8916,
+     "tPills": 8938,
+     "tCard": 8942,
+     "clip": {
+      "src": "orbit_fast.mp4",
+      "duration": 8.541667
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    },
+    {
+     "tNav": 206,
+     "tFilm": 231,
+     "tStop": 8723,
+     "tPills": 8749,
+     "tCard": 8766,
+     "clip": {
+      "src": "orbit_fast.mp4",
+      "duration": 8.541667
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    }
+   ],
+   "medianCardMs": 8942
+  },
+  "1440": {
+   "runs": [
+    {
+     "tNav": 219,
+     "tFilm": 233,
+     "tStop": 8711,
+     "tPills": 8739,
+     "tCard": 8747,
+     "clip": {
+      "src": "orbit_fast.mp4",
+      "duration": 8.541667
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    },
+    {
+     "tNav": 227,
+     "tFilm": 237,
+     "tStop": 8720,
+     "tPills": 8754,
+     "tCard": 8759,
+     "clip": {
+      "src": "orbit_fast.mp4",
+      "duration": 8.541667
+     },
+     "how": {
+      "ended": true,
+      "skipped": false,
+      "error": false
+     }
+    }
+   ],
+   "medianCardMs": 8759
+  }
+ },
+ "fails": [],
+ "pass": true
+}

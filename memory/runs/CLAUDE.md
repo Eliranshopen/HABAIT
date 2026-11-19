@@ -1,12 +1,12 @@
 # runs/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 One entry per board or round: what shipped, what it cost, what is owed (root `CLAUDE.md` §0.1). Append-only — correct with a new entry, never a rewrite.
 
-## What's here (2026-11-05)
-50 files here · 0 subfolders · 50 files / 106.8 KB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+68 files here · 0 subfolders · 68 files / 274.2 KB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
@@ -43,14 +43,14 @@ One entry per board or round: what shipped, what it cost, what is owed (root `CL
 | `2026-11-04-feature-split-A-live-flow.md` | 1.6 KB | 2026-11-04 |
 | `2026-11-04-feature-split-B-platform.md` | 1.7 KB | 2026-11-04 |
 | `2026-11-04-feature-split-C-film-apartment.md` | 1.7 KB | 2026-11-04 |
-| `2026-11-04-fix-846-fidelity.md` | 5.8 KB | 2026-11-05 |
+| `2026-11-04-fix-846-fidelity.md` | 24.6 KB | 2026-11-08 |
 | `2026-11-04-fix-disclosure-badge-deploy.md` | 2.6 KB | 2026-11-04 |
 | `2026-11-04-flow-deploy-5.md` | 1.4 KB | 2026-11-04 |
 | `2026-11-04-habait-flow-reverify-rnd67.md` | 937 B | 2026-11-04 |
 | `2026-11-04-hold-building-tour.md` | 1.3 KB | 2026-11-04 |
 | `2026-11-04-owed-024-deploy.md` | 754 B | 2026-11-04 |
 | `2026-11-04-owed-cleanup.md` | 2.1 KB | 2026-11-04 |
-| … and 10 more | | |
+| … and 28 more | | |
 
 ## Gotchas
 _none recorded_

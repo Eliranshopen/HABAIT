@@ -1,0 +1,10 @@
+K1 processes of the home before cancel: 3 21368:node.exe 43020:python.exe 19224:python.exe
+K1 cancel_job answer state: cancelled
+K1 secs to settle 5 | processes of the home after (minus the MCP server): 0 
+K1 job state cancelled reason null attempts {"tracing":1} manifest rows no file ledger rows no file review null
+K1 attempt-1 files: auto-trace.log,pages,plan-1 | index.json exists: false
+K2 restart: created false state tracing
+ERROR TypeError: h.runnerPids is not a function
+    at file:///C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa/qa-kill.mjs:42:16
+final: processes of the home before stop(): 3 15584|node.exe|611 ; 46392|python.exe|335 ; 35532|python.exe|335
+after stop(): processes naming the home: 0

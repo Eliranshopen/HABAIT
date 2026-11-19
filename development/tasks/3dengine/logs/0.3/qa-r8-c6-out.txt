@@ -1,0 +1,79 @@
+## c6 run1 (done+part)
+== state done (2bac2893113b50e7), 96 variants
+== state awaiting (41464a47e9b2bce8), 96 variants
+FAIL [awaiting] job_id null [start] runner.pid still names the stopped runner
+FAIL [awaiting] job_id trailing space [start] runner.pid still names the stopped runner
+FAIL [awaiting] job_id other, whole other ledger [start] runner.pid still names the stopped runner
+FAIL [awaiting] schema number [start] runner.pid still names the stopped runner
+FAIL [awaiting] cap text [start] runner.pid still names the stopped runner
+FAIL [awaiting] rows object [start] runner.pid still names the stopped runner
+FAIL [awaiting] rows [null] [start] runner.pid still names the stopped runner
+FAIL [awaiting] rows reversed [start] runner.pid still names the stopped runner
+FAIL [awaiting] rows seq null [start] runner.pid still names the stopped runner
+FAIL [awaiting] row0 call_key="" [start] runner.pid still names the stopped runner
+FAIL [awaiting] row0 stage="" [start] runner.pid still names the stopped runner
+FAIL [awaiting] row0 status="Settled" [start] runner.pid still names the stopped runner
+FAIL [awaiting] row0 status="RESERVED" [start] runner.pid still names the stopped runner
+FAIL [awaiting] row0 reserved_usd="0.6" [start] runner.pid still names the stopped runner
+FAIL [awaiting] row0 reserved_usd=[] [start] runner.pid still names the stopped runner
+FAIL [awaiting] settled row settled_usd=null [start] runner.pid still names the stopped runner
+FAIL [awaiting] settled row settled_usd=true [start] runner.pid still names the stopped runner
+FAIL [awaiting] row0 is text [start] runner.pid still names the stopped runner
+FAIL [awaiting] whitespace [start] runner.pid still names the stopped runner
+FAIL [awaiting] top 0 [start] runner.pid still names the stopped runner
+FAIL [awaiting] two docs concatenated [start] runner.pid still names the stopped runner
+FAIL [awaiting] __proto__ doc [start] runner.pid still names the stopped runner
+== state skinning (8e76f3028e5abe0c), 94 variants
+FAIL [skinning] job_id missing [approve] runner.pid still names the stopped runner
+FAIL [skinning] job_id null [start] runner.pid still names the stopped runner
+FAIL [skinning] job_id upper [approve] runner.pid still names the stopped runner
+FAIL [skinning] job_id trailing space [start] runner.pid still names the stopped runner
+leftover []
+node:fs:1282
+  return binding.rmSync(getValidatedPath(path), opts.maxRetries, opts.recursive, opts.retryDelay);
+                 ^
+
+Error: ENOTEMPTY, Directory not empty: 'C:\Users\elira\AppData\Local\Temp\qa8-c6-WNevfB\jobs-temp\8e76f3028e5abe0c'
+    at Object.rmSync (node:fs:1282:18)
+    at restore (file:///C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r8/c6.mjs:68:6)
+    at file:///C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r8/c6.mjs:182:7 {
+  errno: 41,
+  code: 'ENOTEMPTY',
+## c6 awaiting
+== state awaiting (41464a47e9b2bce8), 96 variants
+ok [awaiting] ledger.json is a directory: reads 0,0; dirs same: true
+SUMMARY variants=96 fails=0 specMismatch=0
+## c6 skinning
+== state skinning (8e76f3028e5abe0c), 94 variants
+ok [skinning] ledger.json is a directory: reads 0,0; dirs same: true
+SUMMARY variants=94 fails=0 specMismatch=0
+## c6 cancelled
+== state cancelled (2439416131749748), 94 variants
+ok [cancelled] ledger.json is a directory: reads 0,0; dirs same: true
+SUMMARY variants=94 fails=0 specMismatch=0
+## sample ok lines
+ok [skinning] valid-as-is (readable) -> spawn runner ended after 892 ms
+ok [skinning] job_id other -> resume runner stopped in 147 ms
+ok [skinning] job_id missing -> approve runner stopped in 143 ms
+ok [skinning] job_id null -> start runner stopped in 141 ms
+ok [skinning] job_id number -> spawn runner stopped in 139 ms
+ok [skinning] job_id empty -> resume runner stopped in 135 ms
+ok [skinning] job_id upper -> approve runner stopped in 146 ms
+ok [skinning] job_id trailing space -> start runner stopped in 138 ms
+ok [skinning] job_id traversal -> spawn runner stopped in 157 ms
+ok [skinning] job_id other + rows[] -> resume runner stopped in 143 ms
+ok [skinning] job_id missing + rows[] -> approve runner stopped in 142 ms
+ok [skinning] job_id other, whole other ledger -> start runner stopped in 148 ms
+ok [skinning] schema missing -> spawn runner stopped in 138 ms
+ok [skinning] schema v2 -> resume runner stopped in 145 ms
+ok [skinning] schema upper -> approve runner stopped in 141 ms
+ok [skinning] schema number -> start runner stopped in 143 ms
+ok [skinning] schema manifest -> spawn runner stopped in 137 ms
+ok [skinning] cap missing -> resume runner stopped in 134 ms
+ok [skinning] cap -1 -> approve runner stopped in 145 ms
+ok [skinning] cap text -> start runner stopped in 147 ms
+ok [skinning] cap true -> spawn runner stopped in 144 ms
+ok [skinning] cap array -> resume runner stopped in 142 ms
+ok [skinning] cap 1e999 -> approve runner stopped in 149 ms
+ok [skinning] cap 0 (valid) (readable) -> start runner ended after 894 ms
+ok [skinning] cap 60.5 (valid) (readable) -> spawn runner ended after 828 ms

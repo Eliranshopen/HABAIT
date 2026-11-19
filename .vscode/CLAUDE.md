@@ -1,16 +1,16 @@
 # .vscode/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 VS Code settings for the `C:\RnD` folder (Eliran, 2026-11-03, root `CLAUDE.md` §8.7): `settings.json` hides `.git`, keeps `.wt/` (the working folders) visible in the Explorer but out of search and quick-open, and sets `git.enabled: true` so VS Code shows the `main` branch (local git, Eliran 2026-11-04).
 
-## What's here (2026-11-05)
-1 files here · 0 subfolders · 1 files / 173 B in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+1 files here · 0 subfolders · 1 files / 183 B in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `settings.json` | 173 B | 2026-11-04 |
+| `settings.json` | 183 B | 2026-11-08 |
 
 ## Gotchas
 - A setting here applies only when VS Code opens `C:\RnD` itself as the folder; opening `Projects\Habait` alone uses that folder's own `.vscode/`.

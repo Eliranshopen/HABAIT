@@ -1,0 +1,128 @@
+milestone 1.4 gate: npm run test:stages, the WHOLE tier (five files side by side), ONE bounded run of up to 25 minutes in the background, on Eliran's decision of 2026-11-18 for the engine's stage tests on a loaded machine (the session's question dialog). The 1.4 file goes on from the checkpoint of its first run (made 14:41, 557 s).
+started: 2026-11-18T16:05:59+02:00
+machine load before: 81 %
+
+> habait-3dengine@1.4.0 test:stages
+> node --test "tests/stages/**/*.test.mjs"
+
+✔ 3. the paid path, walked without paying: the vision call is booked before it is sent, carries the key in its header on either route, and a refused call costs nothing (99678.2739ms)
+✖ 1. the 846 PDF from the saved reading, at $0: exit 0, 10 of 10 rooms, every printed dimension within 1 % (0.83 % at most); the measured run again, byte for byte (14810177.6202ms)
+✔ 2. the 846 PDF from ONE fresh reading (paid, $0.04 inside a cap of $0.50): PASS, 10 of 10 rooms, every printed dimension within 1 %; asserted from the evidence the run wrote, with no call (1531.628ms)
+✖ 4. the 846 PDF with its true saved reading: the reading passes, its five files are the stage's outputs, and the job stops at the build (14807121.1424ms)
+✖ 5. no answer of a tool, no job file and no line of the runner's log holds a name the reading took from the drawing (1153.3105ms)
+✔ the fixture: the saved reading of 846 with ONE printed dimension changed by hand, and nothing else (863.3528ms)
+✖ 1. a reading with a printed dimension changed by hand: the job ends in review with TRACE_GATE_FAIL, and the build never starts (14807010.0244ms)
+✔ 2. a PDF with no drawing: NO_PLAN_FOUND, and no job is made (25589.4848ms)
+✔ 3. a PDF that has a drawing and no saved reading: failed / BUDGET_CAP; the reading tool never starts, nothing is billed (20838.5719ms)
+✖ 5. no answer of a tool, no job file and no line of a runner's log holds a name the reading took from the drawing (57.3309ms)
+✔ 1. the FIRST run pays (a scripted model, a made-up cost): the real tool traces and passes, and the reading is kept with what it cost (660.8908ms)
+ℹ going on from the first run of an earlier invocation (made 2026-11-18T12:41:44.720Z, 557 s): it is not made again
+✖ 2. the SECOND run, a real job of the same PDF: it reads from the store, books $0, makes NO request, and its plan is the first run's, byte for byte (14804035.895ms)
+✔ 3. `reading show`: what is kept, in numbers and fixed words; and no room name of the reading in any answer, job file, record or log (8282.4027ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 7
+ℹ fail 3
+ℹ cancelled 3
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14855930.6568
+
+✖ failing tests:
+
+test at tests\stages\m1.2.test.mjs:62:1
+✖ 1. the 846 PDF from the saved reading, at $0: exit 0, 10 of 10 rooms, every printed dimension within 1 % (0.83 % at most); the measured run again, byte for byte (14810177.6202ms)
+  AssertionError [ERR_ASSERTION]: the command did not end in time: spawnSync C:\Program Files\nodejs\node.exe ETIMEDOUT
+  + actual - expected
+  
+  + Error: spawnSync C:\Program Files\nodejs\node.exe ETIMEDOUT
+  +     at Object.spawnSync (node:internal/child_process:1191:20)
+  +     at spawnSync (node:child_process:929:24)
+  +     at TestContext.<anonymous> (file:///c:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.2.test.mjs:74:13)
+  +     at Test.runInAsyncScope (node:async_hooks:227:14)
+  +     at Test.run (node:internal/test_runner/test:1402:25)
+  +     at Test.start (node:internal/test_runner/test:1262:17)
+  +     at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+  +   code: 'ETIMEDOUT',
+  +   errno: -4039,
+  +   path: 'C:\\Program Files\\nodejs\\node.exe',
+  +   spawnargs: [
+  +     'engine/cli.mjs',
+  +     'trace',
+  +     'c:/RnD/.wt/3dengine/Projects/3Dengine/tests/fixtures/apt846/source.pdf',
+  +     '--out',
+  +     'C:/Users/elira/AppData/Local/Temp/m12-home-cdu9co/run',
+  +     '--id',
+  +     '6c70d7885ca31965',
+  +     '--vlm-file',
+  +     'c:/RnD/.wt/3dengine/Projects/3Dengine/tests/fixtures/apt846/saved-reading.json',
+  +     '--no-judge',
+  +     '--json'
+  +   ],
+  +   syscall: 'spawnSync C:\\Program Files\\nodejs\\node.exe'
+  + }
+  - undefined
+  
+      at TestContext.<anonymous> (file:///c:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.2.test.mjs:77:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: spawnSync C:\Program Files\nodejs\node.exe ETIMEDOUT
+        at Object.spawnSync (node:internal/child_process:1191:20)
+        at spawnSync (node:child_process:929:24)
+        at TestContext.<anonymous> (file:///c:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.2.test.mjs:74:13)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.start (node:internal/test_runner/test:1262:17)
+        at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17),
+    expected: undefined,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\stages\m1.3-pass.test.mjs:42:1
+✖ 4. the 846 PDF with its true saved reading: the reading passes, its five files are the stage's outputs, and the job stops at the build (14807121.1424ms)
+  'test timed out after 1700000ms'
+
+test at tests\stages\m1.3-pass.test.mjs:114:1
+✖ 5. no answer of a tool, no job file and no line of the runner's log holds a name the reading took from the drawing (1153.3105ms)
+  Error: ENOENT: no such file or directory, open 'C:\Users\elira\AppData\Local\Temp\m13p-home-J33X9k\jobs-temp\eaa9f325bfb6c022\stages\tracing\attempt-1\plan-1\report.json'
+      at Object.readFileSync (node:fs:483:20)
+      at TestContext.<anonymous> (file:///c:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.3-pass.test.mjs:127:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\m13p-home-J33X9k\\jobs-temp\\eaa9f325bfb6c022\\stages\\tracing\\attempt-1\\plan-1\\report.json'
+  }
+
+test at tests\stages\m1.3.test.mjs:64:1
+✖ 1. a reading with a printed dimension changed by hand: the job ends in review with TRACE_GATE_FAIL, and the build never starts (14807010.0244ms)
+  'test timed out after 1700000ms'
+
+test at tests\stages\m1.3.test.mjs:155:1
+✖ 5. no answer of a tool, no job file and no line of a runner's log holds a name the reading took from the drawing (57.3309ms)
+  Error: ENOENT: no such file or directory, open 'C:\Users\elira\AppData\Local\Temp\m13-home-l6ZXxO\jobs-temp\eaa9f325bfb6c022\stages\tracing\attempt-1\plan-1\report.json'
+      at Object.readFileSync (node:fs:483:20)
+      at TestContext.<anonymous> (file:///c:/RnD/.wt/3dengine/Projects/3Dengine/tests/stages/m1.3.test.mjs:170:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'C:\\Users\\elira\\AppData\\Local\\Temp\\m13-home-l6ZXxO\\jobs-temp\\eaa9f325bfb6c022\\stages\\tracing\\attempt-1\\plan-1\\report.json'
+  }
+
+test at tests\stages\m1.4.test.mjs:164:1
+✖ 2. the SECOND run, a real job of the same PDF: it reads from the store, books $0, makes NO request, and its plan is the first run's, byte for byte (14804035.895ms)
+  'test timed out after 1700000ms'
+exit code: 1
+seconds: 14859
+machine load after: 8 %

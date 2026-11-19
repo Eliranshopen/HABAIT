@@ -45,6 +45,9 @@ const ALL_GROUPS = (() => {
   const nameOf = (rid) => { const r = (plan0.rooms || []).find((x) => x.id === rid) || {}; return r.type === 'kitchen' ? 'kitchen' : String(rid).replace(/^r-/, ''); };
   for (const f of plan0.fixtures || []) { if (!f.room_id) continue; const n = nameOf(f.room_id); (out[n] = out[n] || []).push(f.id); }
   if ((plan0.panes || []).some((q) => q.kind === 'railing')) out['terrace-railing'] = ['railing'];
+  // doors (2026-11-10, Eliran: «שהדלת והכניסה תראה אותו דבר בכל לשונית» — the entrance door read oak from 03-dining and taupe from 01/04
+  // while every fixture group passed): every door / entrance_door opening is its own group "door-<id>", the leaf a_cm..b_cm its element
+  for (const o of plan0.openings || []) if (o.kind !== 'opening' && o.a_cm && o.b_cm) out[`door-${o.id}`] = [`door:${o.id}`];
   return out;
 })();
 const allGroups = args.includes('--all-groups');
@@ -78,7 +81,9 @@ const scenes = JSON.parse(fs.readFileSync(path.join(APT, 'scenes.json'), 'utf8')
 const picks = (() => { try { return JSON.parse(fs.readFileSync(path.join(APT, '_local', 'picks.json'), 'utf8')); } catch { return {}; } })();
 const skinOverride = Object.fromEntries(flags('--skin').map((s) => s.split('=')));
 const railingFx = ids.includes('railing') ? plan.panes.filter((q) => q.kind === 'railing').map((q) => ({ id: q.id, polygon_cm: q.polygon_cm, kind: 'railing' })) : [];
-const fx = plan.fixtures.filter((f) => ids.includes(f.id)).concat(railingFx);
+// --group door:<opening id> (or door-<id>, as --all-groups names it): the door leaf as the element (2026-11-10)
+const doorFx = ids.map((i) => (i.match(/^door[:-](.+)$/) || [])[1]).filter(Boolean).map((oid) => { const o = (plan.openings || []).find((q) => q.id === oid && q.kind !== 'opening'); return o && { id: `door:${o.id}`, kind: o.kind, polygon_cm: [o.a_cm, o.b_cm], centre_cm: o.centre_cm, rooms: o.rooms }; }).filter(Boolean);
+const fx = plan.fixtures.filter((f) => ids.includes(f.id)).concat(railingFx, doorFx);
 if (!allGroups && !fx.length) { console.error(`no fixtures ${ids.join(',')} in the plan`); process.exit(2); }
 const pts = fx.flatMap((f) => f.polygon_cm || [f.centre_cm]);
 const centre = [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];

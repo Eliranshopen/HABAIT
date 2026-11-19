@@ -1,0 +1,483 @@
+{
+ "rows": [
+  {
+   "tag": "1440",
+   "ctx": "tour",
+   "default": {
+    "acts": [
+     "t-view-btn:סגנונות צפייה",
+     "t-tools-btn:כלי עזר",
+     "t-design-btn:שינוי עיצוב פרקט"
+    ],
+    "oldSwitchVisible": false,
+    "small": [],
+    "ai": true,
+    "overflowX": false
+   },
+   "view": {
+    "open": true,
+    "expanded": "true",
+    "gapUnderBtn": 8,
+    "edge": 0,
+    "aboveAi": 630,
+    "items": [
+     "t-view-360:360°*",
+     "t-map-btn:תוכנית",
+     "t-plan-btn:תלת-ממד"
+    ],
+    "small": []
+   },
+   "tools": {
+    "open": true,
+    "viewClosed": true,
+    "gapUnderBtn": 8,
+    "aboveAi": 676,
+    "items": [
+     "t-ruler:מדידה",
+     "t-guide:סיור קולי"
+    ]
+   },
+   "escTools": {
+    "closed": true,
+    "focus": "t-tools-btn"
+   },
+   "outsideClosed": true,
+   "rulerOn": {
+    "pressed": "true",
+    "lit": true,
+    "dot": "block",
+    "menuClosed": true,
+    "label": "כלי עזר · מדידה"
+   },
+   "rulerOff": true,
+   "kbd": {
+    "open": true,
+    "focus": "t-ruler"
+   },
+   "designClosesMenu": {
+    "design": true,
+    "viewClosed": true
+   },
+   "dh": {
+    "op": "1",
+    "ms": 13033
+   },
+   "menuClosedOn3d": true
+  },
+  {
+   "tag": "1440",
+   "ctx": "apartment",
+   "default": {
+    "acts": [
+     "t-view-btn:סגנונות צפייה",
+     "t-tools-btn:כלי עזר",
+     "t-design-btn:שינוי עיצוב פרקט"
+    ],
+    "oldSwitchVisible": false,
+    "small": [],
+    "ai": true,
+    "overflowX": false
+   },
+   "view": {
+    "open": true,
+    "expanded": "true",
+    "gapUnderBtn": 8,
+    "edge": 0,
+    "aboveAi": 630,
+    "items": [
+     "t-view-360:360°*",
+     "t-map-btn:תוכנית",
+     "t-plan-btn:תלת-ממד"
+    ],
+    "small": []
+   },
+   "tools": {
+    "open": true,
+    "viewClosed": true,
+    "gapUnderBtn": 8,
+    "aboveAi": 676,
+    "items": [
+     "t-ruler:מדידה",
+     "t-guide:סיור קולי"
+    ]
+   },
+   "escTools": {
+    "closed": true,
+    "focus": "t-tools-btn"
+   },
+   "outsideClosed": true,
+   "rulerOn": {
+    "pressed": "true",
+    "lit": true,
+    "dot": "block",
+    "menuClosed": true,
+    "label": "כלי עזר · מדידה"
+   },
+   "rulerOff": true,
+   "kbd": {
+    "open": true,
+    "focus": "t-ruler"
+   },
+   "designClosesMenu": {
+    "design": true,
+    "viewClosed": true
+   },
+   "dh": {
+    "op": "1",
+    "ms": 13117
+   },
+   "menuClosedOn3d": true
+  },
+  {
+   "tag": "1440",
+   "ctx": "hold",
+   "default": {
+    "acts": [
+     "t-view-btn:סגנונות צפייה",
+     "t-tools-btn:כלי עזר",
+     "t-design-btn:שינוי עיצוב פרקט"
+    ],
+    "oldSwitchVisible": false,
+    "small": [],
+    "ai": true,
+    "overflowX": false
+   },
+   "view": {
+    "open": true,
+    "expanded": "true",
+    "gapUnderBtn": 8,
+    "edge": 0,
+    "aboveAi": 630,
+    "items": [
+     "t-view-360:360°*",
+     "t-map-btn:תוכנית",
+     "t-plan-btn:תלת-ממד"
+    ],
+    "small": []
+   },
+   "tools": {
+    "open": true,
+    "viewClosed": true,
+    "gapUnderBtn": 8,
+    "aboveAi": 676,
+    "items": [
+     "t-ruler:מדידה",
+     "t-guide:סיור קולי"
+    ]
+   },
+   "escTools": {
+    "closed": true,
+    "focus": "t-tools-btn"
+   },
+   "outsideClosed": true,
+   "rulerOn": {
+    "pressed": "true",
+    "lit": true,
+    "dot": "block",
+    "menuClosed": true,
+    "label": "כלי עזר · מדידה"
+   },
+   "rulerOff": true,
+   "kbd": {
+    "open": true,
+    "focus": "t-ruler"
+   },
+   "designClosesMenu": {
+    "design": true,
+    "viewClosed": true
+   },
+   "dh": {
+    "op": "1",
+    "ms": 12753
+   },
+   "menuClosedOn3d": true
+  },
+  {
+   "tag": "1440",
+   "coach": true,
+   "open": true,
+   "steps": [
+    "modes",
+    "plan",
+    "map3d",
+    "tools",
+    "ruler",
+    "guide",
+    "design",
+    "lookDesigned",
+    "lookOriginal",
+    "floor_parquet",
+    "floor_concrete",
+    "floor_marble",
+    "help",
+    "back",
+    "lang",
+    "zoomIn",
+    "zoomOut",
+    "rotate",
+    "reset",
+    "full",
+    "hotspot",
+    "strip",
+    "pill"
+   ],
+   "walked": [
+    "modes",
+    "plan[view]",
+    "map3d[view]",
+    "tools",
+    "ruler[tools]",
+    "guide[tools]",
+    "design",
+    "lookDesigned",
+    "lookOriginal",
+    "floor_parquet",
+    "floor_concrete",
+    "floor_marble",
+    "help",
+    "back",
+    "lang",
+    "zoomIn",
+    "zoomOut",
+    "rotate",
+    "reset",
+    "full",
+    "hotspot",
+    "strip",
+    "pill"
+   ],
+   "menusClosedAtEnd": true
+  },
+  {
+   "tag": "390",
+   "ctx": "tour",
+   "default": {
+    "acts": [
+     "t-view-btn:סגנונות צפייה",
+     "t-tools-btn:כלי עזר",
+     "t-design-btn:עיצוב פרקט"
+    ],
+    "oldSwitchVisible": false,
+    "small": [],
+    "ai": true,
+    "overflowX": false
+   },
+   "view": {
+    "open": true,
+    "expanded": "true",
+    "gapUnderBtn": -315,
+    "edge": 7,
+    "aboveAi": 87,
+    "items": [
+     "t-view-360:360°*",
+     "t-map-btn:תוכנית",
+     "t-plan-btn:תלת-ממד"
+    ],
+    "small": []
+   },
+   "tools": {
+    "open": true,
+    "viewClosed": true,
+    "gapUnderBtn": -259,
+    "aboveAi": 87,
+    "items": [
+     "t-ruler:מדידה",
+     "t-guide:סיור קולי"
+    ]
+   },
+   "escTools": {
+    "closed": true,
+    "focus": "t-tools-btn"
+   },
+   "outsideClosed": true,
+   "rulerOn": {
+    "pressed": "true",
+    "lit": true,
+    "dot": "block",
+    "menuClosed": true,
+    "label": "כלי עזר · מדידה"
+   },
+   "rulerOff": true,
+   "designClosesMenu": {
+    "design": true,
+    "viewClosed": true
+   },
+   "dh": {
+    "op": "1",
+    "ms": 10316
+   },
+   "menuClosedOn3d": true
+  },
+  {
+   "tag": "390",
+   "ctx": "apartment",
+   "default": {
+    "acts": [
+     "t-view-btn:סגנונות צפייה",
+     "t-tools-btn:כלי עזר",
+     "t-design-btn:עיצוב פרקט"
+    ],
+    "oldSwitchVisible": false,
+    "small": [],
+    "ai": true,
+    "overflowX": false
+   },
+   "view": {
+    "open": true,
+    "expanded": "true",
+    "gapUnderBtn": -315,
+    "edge": 7,
+    "aboveAi": 87,
+    "items": [
+     "t-view-360:360°*",
+     "t-map-btn:תוכנית",
+     "t-plan-btn:תלת-ממד"
+    ],
+    "small": []
+   },
+   "tools": {
+    "open": true,
+    "viewClosed": true,
+    "gapUnderBtn": -259,
+    "aboveAi": 87,
+    "items": [
+     "t-ruler:מדידה",
+     "t-guide:סיור קולי"
+    ]
+   },
+   "escTools": {
+    "closed": true,
+    "focus": "t-tools-btn"
+   },
+   "outsideClosed": true,
+   "rulerOn": {
+    "pressed": "true",
+    "lit": true,
+    "dot": "block",
+    "menuClosed": true,
+    "label": "כלי עזר · מדידה"
+   },
+   "rulerOff": true,
+   "designClosesMenu": {
+    "design": true,
+    "viewClosed": true
+   },
+   "dh": {
+    "op": "1",
+    "ms": 9679
+   },
+   "menuClosedOn3d": true
+  },
+  {
+   "tag": "390",
+   "ctx": "hold",
+   "default": {
+    "acts": [
+     "t-view-btn:סגנונות צפייה",
+     "t-tools-btn:כלי עזר",
+     "t-design-btn:עיצוב פרקט"
+    ],
+    "oldSwitchVisible": false,
+    "small": [],
+    "ai": true,
+    "overflowX": false
+   },
+   "view": {
+    "open": true,
+    "expanded": "true",
+    "gapUnderBtn": -315,
+    "edge": 7,
+    "aboveAi": 87,
+    "items": [
+     "t-view-360:360°*",
+     "t-map-btn:תוכנית",
+     "t-plan-btn:תלת-ממד"
+    ],
+    "small": []
+   },
+   "tools": {
+    "open": true,
+    "viewClosed": true,
+    "gapUnderBtn": -259,
+    "aboveAi": 87,
+    "items": [
+     "t-ruler:מדידה",
+     "t-guide:סיור קולי"
+    ]
+   },
+   "escTools": {
+    "closed": true,
+    "focus": "t-tools-btn"
+   },
+   "outsideClosed": true,
+   "rulerOn": {
+    "pressed": "true",
+    "lit": true,
+    "dot": "block",
+    "menuClosed": true,
+    "label": "כלי עזר · מדידה"
+   },
+   "rulerOff": true,
+   "designClosesMenu": {
+    "design": true,
+    "viewClosed": true
+   },
+   "dh": {
+    "op": "1",
+    "ms": 10127
+   },
+   "menuClosedOn3d": true
+  },
+  {
+   "tag": "390",
+   "coach": true,
+   "open": true,
+   "steps": [
+    "help",
+    "back",
+    "lang",
+    "rotate",
+    "reset",
+    "full",
+    "hotspot",
+    "pill",
+    "modes",
+    "plan",
+    "map3d",
+    "tools",
+    "ruler",
+    "guide",
+    "design",
+    "lookDesigned",
+    "lookOriginal",
+    "floor_parquet",
+    "floor_concrete",
+    "floor_marble"
+   ],
+   "walked": [
+    "help",
+    "back",
+    "lang",
+    "rotate",
+    "reset",
+    "full",
+    "hotspot",
+    "pill",
+    "modes",
+    "plan[view]",
+    "map3d[view]",
+    "tools",
+    "ruler[tools]",
+    "guide[tools]",
+    "design",
+    "lookDesigned",
+    "lookOriginal",
+    "floor_parquet",
+    "floor_concrete",
+    "floor_marble"
+   ],
+   "menusClosedAtEnd": true
+  }
+ ],
+ "errors": []
+}

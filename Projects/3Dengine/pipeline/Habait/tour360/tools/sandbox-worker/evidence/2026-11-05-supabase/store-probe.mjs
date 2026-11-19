@@ -1,0 +1,21 @@
+// fork G: prove the storage adapter against the live Supabase project (keys from the process env via `vercel env run`; never printed).
+import { openStore, storeKind, toKey } from 'file:///C:/RnD/.wt/studio-supabase/Projects/Habait/habait-walkaround/Habait/studio-web/api/_store.mjs';
+const out = { kind: storeKind() };
+const s = await openStore();
+out.store = s.kind;
+const p = 'studio/u/forkG-probe/p/probe1/files/דירה 846- 16.json';
+out.key = toKey(p);
+await s.putJson(p, { hello: 'שלום', at: new Date().toISOString() });
+out.get = await s.getJson(p);
+out.missing = await s.getJson('studio/u/forkG-probe/p/probe1/nope.json');
+const up = await s.signUpload('studio/u/forkG-probe/p/probe1/files/.pages/דירה 846- 16.pdf/page-1.jpg');
+const r = await fetch(up.url, { method: 'PUT', headers: { 'content-type': 'image/jpeg', ...up.headers }, body: Buffer.from([0xff, 0xd8, 0xff, 0xd9]) });
+out.signedPut = r.status;
+out.list = (await s.list('studio/u/forkG-probe/p/probe1/files/')).map((b) => `${b.pathname} ${b.size}`);
+const dl = await s.signDownload(p, 60);
+out.signedGet = dl ? (await fetch(dl)).status : null;
+out.stream = Boolean(await s.stream(p));
+await s.del(p); await s.del('studio/u/forkG-probe/p/probe1/files/.pages/דירה 846- 16.pdf/page-1.jpg');
+out.afterDel = await s.getJson(p);
+out.ops = s.OPS;
+console.log(JSON.stringify(out, null, 1));

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "engine_status output",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "stub",
+        "real"
+      ],
+      "description": "\"stub\" = a demo replay, never a real simulation."
+    },
+    "ready": {
+      "type": "boolean"
+    },
+    "ready_except_keys": {
+      "type": "boolean"
+    },
+    "checked_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "When the readiness check last ran; null while the first one runs."
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "ok",
+          "detail"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "missing": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ids of the checks that are not ok."
+    }
+  },
+  "required": [
+    "mode",
+    "ready",
+    "ready_except_keys",
+    "checked_at",
+    "checks",
+    "missing"
+  ],
+  "additionalProperties": false
+}

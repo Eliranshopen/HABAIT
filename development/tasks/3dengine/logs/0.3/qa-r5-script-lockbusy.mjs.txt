@@ -1,0 +1,67 @@
+// O-G: the job lock is busy between the send and the cache write. node lockbusy.mjs <seconds> <real|plant|refresh> [kill]
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import { lib, check, rec, sleep, pidAlive, counters } from './h.mjs';
+const [secs, mode, killMode] = [Number(process.argv[2]), process.argv[3], process.argv[4]];
+const C = counters();
+const E = await lib.mkEnv({ prefix: 'qa-r5-lb-', heartbeat: 0.5 });
+const holders = [];
+try {
+  const pdf = E.pdf('lb.pdf', `lb-${secs}-${mode}-${killMode}`);
+  const wake = `${E.home}/wake`;
+  process.env.ENGINE_TEST_FREEZE_MS = '120000';
+  process.env.ENGINE_TEST_FREEZE_AT = 'skinning:sent';
+  process.env.ENGINE_TEST_FREEZE_WAKE = wake;
+  let id;
+  try { id = E.h.start_simulation({ pdf_path: pdf }).job_id; } finally { for (const k of lib.FREEZE_VARS) delete process.env[k]; }
+  const pid = await E.waitFor('runner pid', () => E.runnerPid(id), 15000);
+  await E.waitFor('blocked at sent', () => {
+    const j = E.job(id);
+    if (j.state === 'awaiting_approval' && !j.approval) E.approve(id);
+    return E.log(id).includes(`runner ${pid} test hook: thread blocked for 120000 ms at skinning:sent`);
+  }, 45000);
+  const lockFile = E.jobPath(id, 'job.lock');
+  const h = spawn(process.execPath, ['C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/40c3c5f2-e1ea-4dd3-baf1-ad71447227fd/scratchpad/qa-r5/holder.mjs', lockFile, String(secs), mode], { stdio: 'ignore', windowsHide: true });
+  holders.push(h.pid);
+  await E.waitFor('holder has the lock', () => fs.existsSync(lockFile + '.held'), 8000, 10);
+  const t0 = Date.now();
+  fs.writeFileSync(wake, 'w');
+  let outcome = '';
+  if (killMode === 'kill') {
+    await E.waitFor('runner waiting in keep()', () => /the cache write of seq 1 waits/.test(E.log(id)), 20000, 50);
+    process.kill(pid); C.add('kills');
+    await E.waitFor('runner gone', () => !pidAlive(pid), 5000, 10);
+    outcome = 'killed in keep after ' + (Date.now() - t0) + 'ms; ';
+    // free the lock, resume
+    await E.waitFor('holder finished', () => !pidAlive(h.pid), secs * 1000 + 15000, 100).catch(() => {});
+    try { process.kill(h.pid); } catch { /* */ }
+    fs.rmSync(lockFile, { force: true });
+    E.h.start_simulation({ pdf_path: pdf });
+  }
+  // wait for done (approve when asked), up to 120 s
+  await E.waitFor('done', () => {
+    const j = E.job(id);
+    if (j.state === 'awaiting_approval' && !j.approval) E.approve(id);
+    return j.state === 'done' || j.state === 'failed' || (!pidAlive(E.runnerPid(id) || 0) && j.state !== 'done' && Date.now() - t0 > 60000 && j.state !== 'awaiting_approval');
+  }, 150000, 100).catch((e) => { outcome += 'TIMEOUT ' + e.message.slice(0, 80); });
+  const dt = Date.now() - t0;
+  const led = E.ledger(id);
+  const sends = E.sends(id, 'skinning');
+  const log = E.log(id);
+  let j = E.job(id);
+  if (j.state !== 'done' && killMode !== 'kill') { // the runner may have died (20 transient errors): resume
+    outcome += `state=${j.state} runnerAlive=${pidAlive(E.runnerPid(id) || 0)}; resuming; `;
+    E.h.start_simulation({ pdf_path: pdf });
+    await E.waitFor('done after resume', () => { const x = E.job(id); if (x.state === 'awaiting_approval' && !x.approval) E.approve(id); return x.state === 'done'; }, 60000, 100).catch(() => {});
+    j = E.job(id);
+  }
+  const lines = log.split('\n').filter((l) => /waits|transient|error|orphan|settled|late|lock busy|taken over|superseded/.test(l)).slice(0, 8).map((l) => l.replace(/^\S+ runner \d+ /, '').slice(0, 110));
+  await sleep(500);
+  const viol = check(E, id, { quiet: true, done: j.state === 'done', label: 'lb' });
+  const nWaits = (log.match(/the cache write of seq 1 waits/g) || []).length;
+  rec(`O-G hold=${secs}s mode=${mode} ${killMode || ''}`, viol.length === 0 && j.state === 'done',
+    `${outcome}dt=${dt}ms state=${j.state} skinning sends=${sends} rows=${led.rows.filter((r) => r.stage === 'skinning').map((r) => `${r.seq}:${r.status}${r.late ? '/late' : ''}${r.recovered ? '/rec' : ''}`).join(' ')} cacheWaitLines=${nWaits} spent=${j.cost.spent_usd} viol=${JSON.stringify(viol)} log=${JSON.stringify(lines)}`);
+} finally {
+  for (const p of holders) { try { process.kill(p); } catch { /* */ } }
+  await E.cleanup();
+}

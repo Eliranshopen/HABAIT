@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://habait.ai/schemas/habait/job.v1.json",
+  "title": "Job",
+  "description": "jobs/<job_id>/job.json (contract 0.2 §3, extended by contract 0.3: attempts, waiting_for, the reason code STAGE_FAILED, and the computed runner field of get_job / list_jobs). Later milestones extend it, never break it: unknown top-level fields are allowed.",
+  "type": "object",
+  "required": [
+    "schema",
+    "job_id",
+    "mode",
+    "state",
+    "percent",
+    "created_at",
+    "updated_at",
+    "heartbeat_at",
+    "input",
+    "quote",
+    "approval",
+    "cost",
+    "result",
+    "reason"
+  ],
+  "properties": {
+    "schema": {
+      "const": "habait/job.v1"
+    },
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "stub",
+        "real"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "tracing",
+        "building",
+        "rendering",
+        "awaiting_approval",
+        "skinning",
+        "gating",
+        "finishing",
+        "packaging",
+        "qa",
+        "done",
+        "review",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "percent": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "heartbeat_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "pdf_path",
+        "pdf_name",
+        "pdf_sha256",
+        "apartment"
+      ],
+      "properties": {
+        "pdf_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pdf_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pdf_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "apartment": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The candidate id the job is for (from inspect_plan)."
+        },
+        "pdf_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Size of the job's own copy of the PDF (since milestone 1.1)."
+        }
+      }
+    },
+    "quote": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "estimate_usd",
+        "range_usd",
+        "rooms",
+        "basis"
+      ],
+      "properties": {
+        "estimate_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "range_usd": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "rooms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "basis": {
+          "type": "string"
+        },
+        "cap_reached": {
+          "type": "boolean",
+          "description": "true when this quote was written because a paid call would have crossed the approved cap (contract 0.3 §10.3)"
+        }
+      }
+    },
+    "approval": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "cap_usd",
+        "at"
+      ],
+      "properties": {
+        "cap_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "required": [
+        "spent_usd",
+        "cap_usd"
+      ],
+      "properties": {
+        "spent_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cap_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "result": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "local_url",
+        "tour_dir"
+      ],
+      "properties": {
+        "local_url": {
+          "type": "string",
+          "pattern": "^http://(127\\.0\\.0\\.1|localhost):[0-9]+/"
+        },
+        "tour_dir": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "reason": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "PATH_NOT_ALLOWED",
+            "NOT_A_PDF",
+            "FILE_TOO_LARGE",
+            "NO_PLAN_FOUND",
+            "JOB_NOT_FOUND",
+            "NOT_AWAITING_APPROVAL",
+            "NOT_DONE",
+            "BUDGET_CAP",
+            "TOOLCHAIN_MISSING",
+            "KEY_MISSING",
+            "TRACE_GATE_FAIL",
+            "GATE_FAIL_AFTER_REPAIRS",
+            "PROVIDER_LOCKED",
+            "STAGE_FAILED"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "attempts": {
+      "description": "(0.3) how many times a runner STARTED each stage of this job, raised before the stage starts",
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "waiting_for": {
+      "description": "(0.3) present only while the runner waits, in the state before a heavy stage, for the heavy lock",
+      "type": "string",
+      "enum": [
+        "heavy-lock"
+      ]
+    },
+    "runner": {
+      "description": "(0.3) COMPUTED by get_job, list_jobs and the CLI; never written to job.json. alive = the pid in runner.pid is a live process; a working state with alive false = STALLED",
+      "type": "object",
+      "required": [
+        "alive",
+        "pid",
+        "heartbeat_age_s"
+      ],
+      "properties": {
+        "alive": {
+          "type": "boolean"
+        },
+        "pid": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "heartbeat_age_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "approvals": {
+      "type": "array",
+      "description": "earlier approvals, oldest first, each replaced after the cap was reached (contract 0.3 §10.3)",
+      "items": {
+        "type": "object",
+        "required": [
+          "cap_usd",
+          "at"
+        ],
+        "properties": {
+          "cap_usd": {
+            "type": "number",
+            "minimum": 0
+          },
+          "at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "engine_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The engine version the job id was made with (since milestone 1.1). The id must be the id of the job's own input under that version."
+    },
+    "review": {
+      "description": "Since milestone 1.3, only while the state is review: which stage handed the job to a person, at which attempt, and the files to look at (paths relative to the job folder).",
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "stage",
+        "attempt",
+        "files"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": [
+            "tracing",
+            "building",
+            "rendering",
+            "skinning",
+            "gating",
+            "finishing",
+            "packaging",
+            "qa"
+          ]
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "files": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "report": {
+              "type": "string"
+            },
+            "overlay": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

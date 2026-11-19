@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>הליכה בדירה · אבני חפץ קדם</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%227%22 fill=%22%23eea927%22/%3E%3C/svg%3E">
+<style>
+  /* the Habait house design system (tokens of tour360/viewer/tour.css): dark glass chrome, Heebo, the amber disclosure badge */
+  @font-face { font-family: 'Heebo'; font-weight: 100 900; font-display: swap; src: url(fonts/heebo-hebrew.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+  @font-face { font-family: 'Heebo'; font-weight: 100 900; font-display: swap; src: url(fonts/heebo-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+2191, U+2193, U+2212; }
+  :root {
+    --n-50: #f9f6f3; --n-100: #f2ede8; --n-200: #dbd6d2; --n-500: #807b77; --n-800: #3c3935; --n-900: #24211e; --n-950: #1a1713;
+    --amber: #eea927; --amber-ink: #1a1713; --ink: var(--n-50); --muted: rgba(249, 246, 243, 0.72); --line: rgba(249, 246, 243, 0.14); --line-2: rgba(249, 246, 243, 0.24);
+    --glass: rgba(26, 23, 19, 0.58); --glass-2: rgba(26, 23, 19, 0.78); --blur: blur(16px) saturate(140%); --shadow: 0 10px 40px rgb(0 0 0 / 0.45); --shadow-sm: 0 4px 16px rgb(0 0 0 / 0.35);
+    --r: 14px; --ease: cubic-bezier(0.2, 0.7, 0.2, 1); --tap: 44px; --font: 'Heebo', system-ui, 'Segoe UI', Arial, sans-serif;
+    --st: env(safe-area-inset-top, 0px); --sb: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--n-950); font: 15px/1.4 var(--font); color: var(--ink); -webkit-tap-highlight-color: transparent; }
+  canvas { display: block; touch-action: none; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #80bee0; outline-offset: 2px; }
+  .hidden { display: none !important; }
+  .glass { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  svg.i { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* the place card (top start) */
+  #place { position: fixed; top: calc(12px + var(--st)); inset-inline-start: 12px; width: 320px; padding: 12px 16px 12px; border-radius: var(--r); z-index: 4; }
+  #place .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .brand { font-weight: 800; letter-spacing: 0.12em; font-size: 15px; } .brand small { font-weight: 400; letter-spacing: 0; color: var(--muted); font-size: 11px; margin-inline-end: 6px; }
+  .badge { background: var(--amber); color: var(--amber-ink); border-radius: 999px; padding: 2px 10px; font-weight: 700; font-size: 12px; }
+  #zone { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  #room { font-size: 26px; font-weight: 700; line-height: 1.15; }
+  #apt { color: var(--muted); font-size: 12px; }
+  #place .disc { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 8px; font-size: 11.5px; color: var(--ink); opacity: 0.9; }
+  /* the header tools (top end) */
+  #head { position: fixed; top: calc(12px + var(--st)); inset-inline-end: 12px; display: flex; gap: 8px; align-items: center; z-index: 5; }
+  .seg { display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px; }
+  .hb { border: 0; background: none; min-height: 38px; padding: 0 14px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 500; white-space: nowrap; }
+  .hb:hover { background: rgba(249, 246, 243, 0.1); }
+  .hb .car { width: 12px; height: 12px; opacity: 0.8; }
+  .hb.design { background: var(--n-50); color: var(--n-950); }
+  .hb.design .st { background: var(--n-100); border: 1px solid var(--n-200); border-radius: 999px; font-size: 12px; padding: 0 8px; color: var(--n-800); }
+  .hb[aria-expanded="true"]:not(.design) { background: rgba(249, 246, 243, 0.16); }
+  .round { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); padding: 0; }
+  /* dropdown menus */
+  .menu { position: fixed; z-index: 7; min-width: 230px; border-radius: var(--r); padding: 6px; background: var(--glass-2); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .menu button { display: flex; width: 100%; align-items: center; gap: 10px; border: 0; background: none; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 14px; text-align: start; }
+  .menu button:hover { background: rgba(249, 246, 243, 0.1); }
+  .menu button[aria-pressed="true"] { background: rgba(249, 246, 243, 0.16); }
+  .menu button[aria-pressed="true"]::after { content: '✓'; margin-inline-start: auto; color: var(--amber); font-weight: 700; }
+  .menu hr { border: 0; border-top: 1px solid var(--line); margin: 4px 6px; }
+  /* the side rail */
+  #rail { position: fixed; inset-inline-end: 12px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 2px; padding: 6px; border-radius: 999px; z-index: 4; }
+  #rail button { width: 40px; height: 40px; border: 0; background: none; border-radius: 50%; display: grid; place-items: center; }
+  #rail button:hover { background: rgba(249, 246, 243, 0.12); }
+  #rail hr { width: 22px; border: 0; border-top: 1px solid var(--line); margin: 4px auto; }
+  /* the clock (time of day) */
+  #clock { position: fixed; inset-inline-start: 12px; bottom: calc(170px + var(--sb)); display: flex; align-items: center; gap: 10px; padding: 6px 14px 6px 10px; border-radius: 999px; z-index: 4; }
+  #clock input { width: 170px; accent-color: var(--amber); }
+  #clock b { font-variant-numeric: tabular-nums; direction: ltr; min-width: 44px; text-align: center; }
+  #clock span { font-size: 12px; color: var(--muted); min-width: 44px; }
+  /* the rooms: thumbnails + the pill */
+  #strip { position: fixed; inset-inline: 0; bottom: calc(64px + var(--sb)); display: flex; gap: 8px; justify-content: center; padding: 0 12px; overflow-x: auto; scrollbar-width: none; z-index: 3; }
+  #strip::-webkit-scrollbar { display: none; }
+  .th { position: relative; flex: none; width: 112px; height: 66px; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--line-2); padding: 0; background: var(--n-900) center / cover; box-shadow: var(--shadow-sm); transition: transform 150ms var(--ease), border-color 150ms; }
+  .th:hover { transform: translateY(-2px); }
+  .th[aria-current="true"] { border-color: var(--n-50); box-shadow: 0 0 0 2px var(--n-50), var(--shadow-sm); }
+  .th i { position: absolute; top: 4px; inset-inline-start: 6px; font-style: normal; font-size: 11px; font-weight: 700; text-shadow: 0 1px 3px #000; }
+  .th b { position: absolute; inset-inline: 0; bottom: 0; padding: 14px 6px 4px; font-size: 12px; font-weight: 600; text-align: start; background: linear-gradient(transparent, rgba(0, 0, 0, 0.75)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #pill { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(14px + var(--sb)); display: flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; z-index: 4; }
+  #pill button { border: 0; background: none; height: 38px; min-width: 38px; border-radius: 999px; display: grid; place-items: center; }
+  #pill button:hover { background: rgba(249, 246, 243, 0.12); }
+  #pill .name { display: flex; align-items: center; gap: 10px; padding: 0 14px; font-weight: 700; font-size: 16px; }
+  #pill .name small { font-weight: 500; color: var(--muted); font-size: 13px; direction: ltr; }
+  /* the change actions (shown once something changed) */
+  #acts { position: fixed; inset-inline-end: 12px; bottom: calc(14px + var(--sb)); display: flex; gap: 2px; padding: 4px; border-radius: 999px; z-index: 4; }
+  #acts button { border: 0; background: none; min-height: 38px; padding: 0 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+  #acts button:hover { background: rgba(249, 246, 243, 0.12); }
+  #acts button[aria-pressed="true"] { background: var(--n-50); color: var(--n-950); }
+  #acts .n { background: var(--amber); color: var(--amber-ink); border-radius: 999px; font-size: 11px; font-weight: 700; padding: 0 6px; }
+  /* the disclosure line */
+  #ai { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(2px + var(--sb)); font-size: 11px; color: var(--ink); text-shadow: 0 1px 4px rgb(0 0 0 / 0.8); white-space: nowrap; pointer-events: none; z-index: 2; opacity: 0.95; }
+  #ai::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-inline-end: 6px; }
+  /* the rings on the pieces */
+  #vig { position: fixed; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(ellipse 75% 70% at 50% 48%, transparent 55%, rgba(20, 14, 8, 0.28) 100%); }
+  .shot #place, .shot #head, .shot #rail, .shot #clock, .shot #strip, .shot #pill, .shot #acts, .shot #ai, .shot #hint, .shot #rings { display: none !important; }
+  #rings { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+  .ring { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 0; padding: 0; background: none; pointer-events: auto; transition: opacity 200ms; }
+  .ring i { position: absolute; inset: 10px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.95); background: rgba(255, 255, 255, 0.12); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 2px 10px rgba(0, 0, 0, 0.35); transition: transform 150ms var(--ease), background 150ms; }
+  .ring:hover i { transform: scale(1.12); background: rgba(255, 255, 255, 0.3); }
+  .ring.on i { border-width: 3px; background: rgba(255, 255, 255, 0.35); box-shadow: 0 0 0 4px rgba(128, 190, 224, 0.55), 0 2px 10px rgba(0, 0, 0, 0.35); }
+  .ring b { position: absolute; top: 44px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; background: var(--glass-2); border: 1px solid var(--line); padding: 2px 10px; border-radius: 999px; opacity: 0; transition: opacity 150ms; pointer-events: none; }
+  .ring:hover b, .ring.on b { opacity: 1; }
+  .moving .ring { opacity: 0; pointer-events: none; }
+  /* the catalog bar (Rainbow's «בחרו פריט במקום…») */
+  #cat { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(150px + var(--sb)); z-index: 6; max-width: calc(100vw - 24px); }
+  #cat .lab { text-align: center; font-size: 13px; font-weight: 600; text-shadow: 0 1px 4px rgb(0 0 0 / 0.8); margin-bottom: 6px; }
+  #cat .row { display: flex; gap: 8px; align-items: flex-end; overflow-x: auto; scrollbar-width: none; padding: 4px; }
+  #cat .row::-webkit-scrollbar { display: none; }
+  .tile { flex: none; width: 92px; border-radius: 12px; padding: 5px; border: 1.5px solid var(--line-2); background: var(--glass-2); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); display: flex; flex-direction: column; gap: 4px; box-shadow: var(--shadow-sm); }
+  .tile .im { height: 64px; border-radius: 8px; background: #fff center / contain no-repeat; display: grid; place-items: center; color: var(--n-800); font-size: 11px; }
+  .tile span { font-size: 11px; line-height: 1.25; text-align: center; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-height: 2.5em; }
+  .tile[aria-pressed="true"] { border-color: var(--n-50); box-shadow: 0 0 0 2px var(--n-50), var(--shadow-sm); }
+  .tile.busy .im::after { content: ''; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--n-200); border-top-color: var(--n-800); animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #cat .x { position: absolute; top: 18px; inset-inline-end: -40px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--glass-2); display: grid; place-items: center; }
+  .sws { display: flex; gap: 6px; justify-content: center; margin-top: 8px; flex-wrap: wrap; }
+  .sw { width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.9); padding: 0; box-shadow: var(--shadow-sm); }
+  .sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--n-950), 0 0 0 4px var(--n-50); }
+  .sw.orig { background: conic-gradient(#ddd 0 25%, #999 0 50%, #ddd 0 75%, #999 0) !important; }
+  /* the design panel */
+  #design { position: fixed; top: calc(72px + var(--st)); inset-inline-end: 12px; width: 380px; max-height: calc(100vh - 260px); overflow-y: auto; overscroll-behavior: contain; border-radius: var(--r); padding: 14px 16px 16px; z-index: 6; background: var(--glass-2); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  #design h2 { margin: 0 0 8px; font-size: 18px; display: flex; justify-content: space-between; align-items: center; }
+  #design h3 { margin: 14px 0 7px; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+  .x2 { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: none; display: grid; place-items: center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { border: 1px solid var(--line-2); background: rgba(249, 246, 243, 0.06); min-height: 36px; padding: 0 12px; border-radius: 999px; font-size: 13px; }
+  .chip:hover { background: rgba(249, 246, 243, 0.14); }
+  .chip[aria-pressed="true"] { background: var(--n-50); color: var(--n-950); border-color: var(--n-50); }
+  .free { display: flex; gap: 6px; }
+  .free input { flex: 1; min-width: 0; min-height: 46px; border: 1px solid var(--line-2); border-radius: 12px; padding: 0 14px; font: inherit; font-size: 16px; color: var(--ink); background: rgba(0, 0, 0, 0.25); }
+  .free input::placeholder { color: rgba(249, 246, 243, 0.5); }
+  .free button { border: 0; border-radius: 12px; background: var(--amber); color: var(--amber-ink); min-height: 46px; padding: 0 18px; font-weight: 700; }
+  .say { margin: 8px 0 0; font-size: 13px; min-height: 1em; color: var(--ink); }
+  .ex .chip { font-size: 12px; min-height: 30px; }
+  .fine { font-size: 11px; color: var(--muted); margin: 12px 0 0; }
+  /* the plan sheet */
+  #plan { position: fixed; top: calc(72px + var(--st)); inset-inline-end: 12px; width: 400px; border-radius: var(--r); padding: 14px 16px 12px; z-index: 6; background: var(--glass-2); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  #plan h2 { margin: 0 0 8px; font-size: 18px; display: flex; justify-content: space-between; align-items: center; }
+  #plan canvas { width: 100%; height: auto; border-radius: 10px; cursor: pointer; touch-action: manipulation; }
+  .toast { position: fixed; left: 50%; transform: translateX(-50%); top: calc(84px + var(--st)); border-radius: 999px; padding: 8px 16px; font-size: 14px; z-index: 9; max-width: calc(100vw - 32px); }
+  #mlabel { position: fixed; pointer-events: none; background: var(--amber); color: var(--amber-ink); font-weight: 700; padding: 3px 10px; border-radius: 999px; transform: translate(-50%, -130%); font-size: 14px; z-index: 3; }
+  #hint { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 14px; padding: 12px 18px; font-size: 14px; text-align: center; transition: opacity 500ms; pointer-events: none; z-index: 3; max-width: calc(100vw - 48px); }
+  #load { position: fixed; inset: 0; display: grid; place-items: center; background: var(--n-950); color: var(--ink); text-align: center; z-index: 20; }
+  #load b { display: block; font-size: 20px; margin-bottom: 4px; } #load small { color: var(--muted); }
+  #load i { display: block; width: 220px; height: 3px; background: var(--n-800); border-radius: 3px; margin: 14px auto 0; overflow: hidden; }
+  #load i s { display: block; height: 100%; width: 0; background: var(--amber); transition: width 200ms; }
+  @media (max-width: 760px) {
+    #place { width: auto; inset-inline-end: 12px; padding: 8px 12px; }
+    #place .disc, #zone { display: none; }
+    #room { font-size: 19px; } #apt { font-size: 11px; }
+    #head { top: auto; bottom: calc(126px + var(--sb)); inset-inline: 12px; justify-content: center; }
+    #head .seg { flex: 1; justify-content: space-between; }
+    #head .hb { padding: 0 9px; font-size: 13px; gap: 5px; } #head .hb .lbl-l { display: none; }
+    #head .round { display: none; }
+    #rail { top: calc(90px + var(--st)); transform: none; flex-direction: column; }
+    #rail .dk { display: none; }
+    #strip { bottom: calc(176px + var(--sb)); justify-content: flex-start; }
+    .th { width: 84px; height: 52px; }
+    #clock { bottom: calc(242px + var(--sb)); inset-inline-start: 12px; } #clock input { width: 120px; }
+    #acts { bottom: calc(66px + var(--sb)); left: 50%; right: auto; transform: translateX(-50%); }
+    #acts .lbl { display: none; }
+    #cat { bottom: calc(180px + var(--sb)); } #cat .x { inset-inline-end: 4px; top: -34px; }
+    #design, #plan { top: auto; bottom: 0; inset-inline: 0; width: auto; max-height: 64vh; border-radius: 18px 18px 0 0; padding-bottom: calc(16px + var(--sb)); }
+    #ai { font-size: 10px; }
+  }
+</style>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+</head>
+<body>
+<div id="load"><div><b>הדירה נטענת…</b><small>אבני חפץ · קדם · דגם יורד · דירה 7 · 4 חדרים</small><i><s id="prog"></s></i></div></div>
+<div id="vig" aria-hidden="true"></div>
+<div id="rings"></div>
+<div id="mlabel" class="hidden"></div>
+
+<header id="place" class="glass" aria-live="polite">
+  <div class="top"><span class="brand"><small>הדמיה מאת:</small>HABAIT</span><span class="badge">הדמיה</span></div>
+  <div id="zone"></div>
+  <div id="room">כניסה</div>
+  <div id="apt">דירה 7 · קומה א׳ · אבני חפץ – קדם (הדמיה)</div>
+  <div class="disc">הדמיה על בסיס תכנית המכר. המידות תואמות לתכנית בסטייה של עד 2%. הריהוט והגימורים להמחשה בלבד.</div>
+</header>
+
+<nav id="head" aria-label="כלים">
+  <div class="seg glass">
+    <button class="hb" id="m-view" type="button" aria-expanded="false" aria-haspopup="true"><svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><span>סגנונות צפייה</span><svg class="i car" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg></button>
+    <button class="hb" id="m-tools" type="button" aria-expanded="false" aria-haspopup="true"><svg class="i" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0 5 5L21 13l-8 8-3-3 1.4-1.3a4 4 0 0 0-5-5L5 13 2 10l8-8 3 3-1.3 1.3Z"/></svg><span>כלי עזר</span><svg class="i car" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg></button>
+    <button class="hb design" id="m-design" type="button" aria-expanded="false"><svg class="i" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/><path d="m13 7 4 4"/></svg><span>שינוי עיצוב</span><span class="st hidden" id="d-state"></span><svg class="i car" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg></button>
+  </div>
+  <button class="round glass" id="b-help" type="button" aria-label="עזרה"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.5M12 17h.01"/></svg></button>
+</nav>
+
+<div class="menu hidden" id="menu-view" role="menu">
+  <button type="button" data-v="walk" aria-pressed="true"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="m9 22 1.5-7L8 13v-3l4-2 3 3 3 1M10.5 15 14 18v4"/></svg>הליכה בדירה</button>
+  <button type="button" data-v="doll" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5-9 5-9-5Z"/><path d="M3 9v6l9 5 9-5V9"/></svg>מבט על (תלת־ממד)</button>
+  <button type="button" data-v="plan" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 12h8v9M11 3v5M15 12h6"/></svg>תוכנית הדירה</button>
+</div>
+<div class="menu hidden" id="menu-tools" role="menu">
+  <button type="button" data-t="measure" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M3 17 17 3l4 4L7 21l-4-4Z"/><path d="m7 13 2 2m2-6 2 2m2-6 2 2"/></svg>מדידה</button>
+  <button type="button" data-t="share"><svg class="i" viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>העתקת קישור לעיצוב</button>
+  <button type="button" data-t="level"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>יישור המבט</button>
+</div>
+
+<div id="rail" class="glass" aria-label="תצוגה">
+  <button type="button" id="z-in" aria-label="התקרבות"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+  <button type="button" id="z-out" aria-label="התרחקות"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+  <hr>
+  <button type="button" id="r-level" aria-label="יישור המבט"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button>
+  <button type="button" id="r-full" class="dk" aria-label="מסך מלא"><svg class="i" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+
+<div id="clock" class="glass" aria-label="שעה ביום"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><b id="clock-t">12:30</b><input id="clock-in" type="range" min="7.5" max="21.5" step="0.25" value="12.5" aria-label="שעה ביום"><span id="clock-l">צהריים</span></div>
+
+<div id="cat" class="hidden" role="dialog" aria-label="בחירת פריט"><div class="lab" id="cat-lab"></div><div style="position:relative"><div class="row" id="cat-row"></div><button class="x" id="cat-x" type="button" aria-label="סגירה">✕</button></div><div class="sws" id="cat-sw"></div></div>
+
+<section id="design" class="hidden" role="dialog" aria-labelledby="design-t">
+  <h2><span id="design-t">שינוי עיצוב</span><button class="x2" id="design-x" type="button" aria-label="סגירה">✕</button></h2>
+  <h3>תארו במילים מה לשנות</h3>
+  <form class="free" id="free"><input id="free-in" type="text" enterkeyhint="go" autocomplete="off" placeholder="למשל: ספת עור ורצפת עץ" aria-label="תיאור השינוי"><button type="submit">החלה</button></form>
+  <p class="say" id="say" aria-live="polite"></p>
+  <div class="chips ex" id="examples"></div>
+  <h3>סגנון</h3><div class="chips" id="d-style"></div>
+  <h3>ריצוף</h3><div class="chips" id="d-floor"></div>
+  <h3>צבע הקירות</h3><div class="chips" id="d-walls"></div>
+  <h3>חזיתות המטבח</h3><div class="chips" id="d-kitchen"></div>
+  <h3>משטח המטבח</h3><div class="chips" id="d-ktop"></div>
+  <p class="fine">צבעים, ריצוף וסגנון משתנים מיד על המודל, בלי עלות. פריטי הקטלוג נוצרו מראש בבינה מלאכותית. לחיצה על עיגול בחדר פותחת את פריטי הקטלוג שלו.</p>
+</section>
+
+<section id="plan" class="hidden" role="dialog" aria-labelledby="plan-t"><h2><span id="plan-t">תוכנית הדירה</span><button class="x2" id="plan-x" type="button" aria-label="סגירה">✕</button></h2><canvas id="plan-c" width="760" height="560"></canvas><p class="fine">לחיצה על מקום בתוכנית מעבירה אליו.</p></section>
+
+<nav id="strip" aria-label="חדרים"></nav>
+<div id="pill" class="glass"><button type="button" id="p-next" aria-label="החדר הבא"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><div class="name"><span id="p-name">כניסה</span><small id="p-n">1 / 11</small></div><button type="button" id="p-prev" aria-label="החדר הקודם"><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></div>
+<div id="acts" class="glass hidden">
+  <button type="button" id="b-undo"><svg class="i" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg><span class="lbl">ביטול</span><span class="n" id="n-changes"></span></button>
+  <button type="button" id="b-compare" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v18"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg><span class="lbl">לפני / אחרי</span></button>
+  <button type="button" id="b-reset"><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span class="lbl">איפוס</span></button>
+</div>
+<div id="ai">הדמיה ממודל תלת־ממדי לפי תכנית המכר · פריטי הקטלוג נוצרו בבינה מלאכותית · לא צילום של הנכס</div>
+<div id="hint" class="glass"></div>
+
+<script type="module" src="./walk3d.js"></script>
+</body>
+</html>

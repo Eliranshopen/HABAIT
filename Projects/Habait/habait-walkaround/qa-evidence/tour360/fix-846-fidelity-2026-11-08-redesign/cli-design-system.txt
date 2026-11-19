@@ -1,0 +1,61 @@
+╔═════════════════════════════════════════════════════════════════════════════════════════╗
+║  TARGET: Habait Tour360 - RECOMMENDED DESIGN SYSTEM                                     ║
+╚═════════════════════════════════════════════════════════════════════════════════════════╝
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+├─── DESIGN DIALS ─────────────────────────────────────────────────────────────────────────┤
+│  Variance: 3/10 — Centered / Minimal                                                    │
+│  Motion:   3/10 — Subtle                                                                │
+│  Density:  4/10 — Standard                                                              │
+├─── PATTERN ──────────────────────────────────────────────────────────────────────────────┤
+│  Name: Immersive/Interactive Experience                                                 │
+│     Conversion: 40% higher engagement. Performance trade-off. Provide skip option. Mobile fallback essential.│
+│     CTA: After interaction complete + Skip option for impatient users                   │
+│     Sections:                                                                           │
+│       1. 1. Full-screen interactive element, 2. Guided product tour, 3. Key benefits revealed, 4. CTA after completion│
+├─── STYLE ────────────────────────────────────────────────────────────────────────────────┤
+│  Name: Exaggerated Minimalism                                                           │
+│     Mode Support: Light ✓ Full  Dark ✓ Full                                             │
+│     Keywords: Bold minimalism, oversized typography, high contrast, negative space,     │
+│     loud minimal, statement design                                                      │
+│     Best For: Fashion, architecture, portfolios, agency landing pages, luxury brands,   │
+│     editorial                                                                           │
+│     Performance: ⚡ Excellent | Accessibility: ✓ WCAG AA                                 │
+├─── COLORS ───────────────────────────────────────────────────────────────────────────────┤
+│     Primary:       #0F766E    (--color-primary)                                         │
+│     On Primary:    #FFFFFF    (--color-on-primary)                                      │
+│     Secondary:     #14B8A6    (--color-secondary)                                       │
+│     Accent/CTA:    #0369A1    (--color-accent)                                          │
+│     Background:    #F0FDFA    (--color-background)                                      │
+│     Foreground:    #134E4A    (--color-foreground)                                      │
+│     Muted:         #E8F0F3    (--color-muted)                                           │
+│     Border:        #99F6E4    (--color-border)                                          │
+│     Destructive:   #DC2626    (--color-destructive)                                     │
+│     Ring:          #0F766E    (--color-ring)                                            │
+│     Notes: Trust teal + professional blue                                               │
+├─── TYPOGRAPHY ───────────────────────────────────────────────────────────────────────────┤
+│  Cinzel / Josefin Sans                                                                  │
+│     Mood: real estate, luxury, elegant, sophisticated, property, premium                │
+│     Best For: Real estate, luxury properties, architecture, interior design             │
+│     Google Fonts: https://fonts.google.com/share?selection.family=Cinzel:wght@400;500;600;700|Josefin+Sans:wght@300;400;500;600;700│
+│     CSS Import: @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;...│
+├─── KEY EFFECTS ──────────────────────────────────────────────────────────────────────────┤
+│     font-size: clamp(3rem 10vw 12rem), font-weight: 900, letter-spacing: -0.05em,       │
+│     massive whitespace                                                                  │
+├─── MOTION ───────────────────────────────────────────────────────────────────────────────┤
+│  Page Transition (Subtle)                                                               │
+│     Trigger: route change | Duration: 200-300ms | Easing: power1.inOut                  │
+│     GSAP: gsap.to(main, { opacity: 0, duration: 0.2, onComplete: () => { navigate();    │
+│     gsap.fromTo(main, { opacity: 0 }, { opacity: 1, duration: 0.2 }); } });             │
+│     Framework: Pair with the router's transition hooks (Next.js App Router              │
+│     transitions, React Router's useNavigate, Vue Router's beforeEach/afterEach)         │
+├─── AVOID ────────────────────────────────────────────────────────────────────────────────┤
+│     Poor photos + No virtual tours                                                      │
+├─── PRE-DELIVERY CHECKLIST ───────────────────────────────────────────────────────────────┤
+│     [ ] No emojis as icons (use SVG: Heroicons/Lucide)                                  │
+│     [ ] cursor-pointer on all clickable elements                                        │
+│     [ ] Hover states with smooth transitions (150-300ms)                                │
+│     [ ] Light mode: text contrast 4.5:1 minimum                                         │
+│     [ ] Focus states visible for keyboard nav                                           │
+│     [ ] prefers-reduced-motion respected                                                │
+│     [ ] Responsive: 375px, 768px, 1024px, 1440px                                        │
+└─────────────────────────────────────────────────────────────────────────────────────────┘

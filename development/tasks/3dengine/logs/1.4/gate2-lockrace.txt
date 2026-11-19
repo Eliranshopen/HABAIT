@@ -1,0 +1,26 @@
+Milestone 1.4, after the first review: is withFileLock exclusive between short-lived processes?
+The script is the main session's own (gate2-lockrace-script.txt, the reviewer's shape of D-1): each child takes the lock once, creates a marker
+file with the wx flag (a marker that is already there = two holders at one moment), waits 25 ms, removes it, releases and exits.
+Run on 2026-11-18 between 22:00 and 22:20, AFTER the second gate, when the renders of the other sessions had let go of the machine.
+
+1. THE OLD LOCK (engine/lib of commit 21cd9f96, taken out of git into a temp folder), on a machine that is NOT held by renders:
+   load 31 %, 30 runs of 8 processes:    {"runs":30,"processes":8,"twoHolders":0,"busy":0,"errors":0,"runsWithViolation":0}
+   load 16 %, 30 runs of 16 processes:   {"runs":30,"processes":16,"twoHolders":0,"busy":0,"errors":0,"runsWithViolation":0}
+   load 16 %, 20 runs of 32 processes:   {"runs":20,"processes":32,"twoHolders":0,"busy":0,"errors":0,"runsWithViolation":0}
+   under 20 busy processes of the script's own (one per logical core), 30 runs of 8:   0 two holders (48 s); the new lock in the same run: 0 (51 s)
+   under 60 busy processes (three per core), 30 runs of 8:   0 two holders (381 s); the new lock's part of that run was cut by its time limit, no result
+   (these five lines are copied from the session's output of the runs; the line of section 2 below is written by the run itself)
+   SO: the defect of the old lock does NOT show on a quiet machine, nor under processor load alone. It showed while the renders of other sessions
+   held the machine (processor, memory and disk together): the reviewer's 4 of 15 and more (qa-lockrace-*.txt, qa-race-*.txt), and the main
+   session's own 10 of 30 before it changed anything. That first reproduction and the 80 clean runs of the new lock right after it (40 of 8 and
+   40 of 16, at the same 100 % load) were printed in the session and NOT kept as a file. What IS kept from that load: gate2-npm-test.txt (load
+   100 % before and after), whose tests/unit/lock-race.test.mjs is this same shape with real processes (8 runs of 8 holders, 4 storms of 8 keeps).
+   The new lock does not rest on these counts: every change of holder is one atomic rename that names the holder it expects (contract 1.4 section 11).
+
+2. THE NEW LOCK (the working folder, commit 5c9b049f), now:
+   load before: 32 %
+   40 runs of 8 processes:    {"runs":40,"processes":8,"twoHolders":0,"busy":0,"errors":0,"runsWithViolation":0}
+   exit code: 0
+   40 runs of 16 processes:   {"runs":40,"processes":16,"twoHolders":0,"busy":0,"errors":0,"runsWithViolation":0}
+   exit code: 0
+   load after: 33 %

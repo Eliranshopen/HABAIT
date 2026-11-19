@@ -1,0 +1,218 @@
+/* Rainbow v2 test page (plan development/plans/2026-11-09-rainbow-v2.md). Own file: the production pages' CSS is untouched.
+   Default = the STATIC page (no JS, or prefers-reduced-motion): every stage visible in order, no pinning, no scrubbing.
+   html.is-motion (set before first paint) = the scroll story: sticky stages driven by v2.js (GSAP ScrollTrigger + Lenis on desktop).
+   RTL throughout: logical properties only. */
+.v2 {
+  --v2-bg: #08131e; --v2-bg-2: #102235; --v2-ink: #f5f0e8; --v2-muted: rgb(245 240 232 / 0.72); --v2-line: rgb(245 240 232 / 0.2);
+  --v2-accent: var(--brand-accent); --v2-shade: rgb(4 10 18);
+  --v2-gutter: clamp(16px, 4vw, 56px);
+  /* floor 16 in the hold frame (media/manifest.json floor16: the 3D anchor of apartment 846 projected through the hold camera, frame 91).
+     Band x = the tower's width in that frame (measured on the frame); y = the anchor ± 1.6 m (one floor, 3.2 m). Landscape frame 1920x1080. */
+  --ax: 49.79%; --ay: 78.83%; --bx0: 14%; --bx1: 60%; --by0: 75.65%; --by1: 82.01%; --frame-ar: 16 / 9; --frame-k: 1.7778;
+  margin: 0; background: var(--v2-bg); color: var(--v2-ink); font-family: var(--font-text); overflow-x: clip;
+}
+/* round 2: ONE frame geometry on every screen — the 1920x1080 hold frame cover-fitted and centred, exactly as /hold/ fits it (holdarc.js
+   fit()), so the hand-off from the hold shows the same picture on a phone too. (The 2:3 crop media/tower-16-portrait.jpg is kept, unused.) */
+.v2 *, .v2 *::before, .v2 *::after { box-sizing: border-box; }
+.v2 img, .v2 video { display: block; max-inline-size: 100%; }
+.v2 a { color: inherit; }
+.v2 :focus-visible { outline: 2px solid var(--v2-accent); outline-offset: 3px; }
+.v2-skip { position: absolute; inset-inline-start: var(--sp-3); inset-block-start: -60px; z-index: 50; padding: var(--sp-2) var(--sp-4); background: var(--v2-ink); color: var(--v2-bg); border-radius: var(--r-sm); }
+.v2-skip:focus { inset-block-start: var(--sp-3); }
+.v2-latin { font-family: var(--font-display); letter-spacing: 0.01em; }
+.v2-eyebrow { margin: 0; font-size: 0.875rem; font-weight: var(--fw-medium); color: var(--v2-muted); letter-spacing: 0.02em; }
+.v2-badge { position: absolute; inset-block-start: 76px; inset-inline-end: var(--v2-gutter); z-index: 6; }
+.v2-scrim { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+
+/* ---------- top bar ---------- */
+.v2-top { position: fixed; inset-block-start: 0; inset-inline: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  padding: max(12px, env(safe-area-inset-top)) var(--v2-gutter) 12px; background: linear-gradient(to bottom, rgb(4 10 18 / 0.55), transparent); pointer-events: none; }
+.v2-top > * { pointer-events: auto; }
+.v2-brand { display: inline-flex; align-items: center; min-block-size: 44px; }
+.v2-brand img { block-size: 30px; inline-size: auto; }
+/* «חזרה לבניין»: back to /hold/ (the stop in front of the tower) */
+.v2-back { display: inline-flex; align-items: center; gap: 6px; min-block-size: 44px; padding: 0 16px 0 12px; border-radius: var(--r-full); border: 1px solid var(--v2-line);
+  background: rgb(4 10 18 / 0.5); color: var(--v2-ink); text-decoration: none; font-size: 0.92rem; font-weight: var(--fw-semibold); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.v2-back svg { inline-size: 18px; block-size: 18px; }
+.v2-back:hover { border-color: var(--v2-ink); }
+.v2-top { gap: var(--sp-2); }
+.v2-top .v2-brand { margin-inline-end: auto; }
+/* the journey (default) has no project hero and no test tag; ?intro=hero (a test view only, nothing links to it) shows both */
+.is-journey .v2-hero, .is-journey .v2-tag { display: none; }
+html:not(.is-journey) .v2-back { display: none; }
+.v2-tag { font-size: 0.8rem; font-weight: var(--fw-semibold); padding: 4px 10px; border-radius: var(--r-full); border: 1px solid var(--v2-line); background: rgb(4 10 18 / 0.45); color: var(--v2-ink); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+/* ---------- buttons ---------- */
+.v2-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); min-block-size: 48px; padding: 0 var(--sp-6); border-radius: var(--r-full);
+  font: var(--fw-semibold) 1rem/1 var(--font-text); text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: background-color var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); }
+.v2-btn svg { inline-size: 20px; block-size: 20px; flex: none; }
+.v2-btn--accent { background: var(--v2-accent); color: var(--brand-on-accent); }
+.v2-btn--accent:hover { background: color-mix(in srgb, var(--v2-accent) 86%, white); }
+.v2-btn--ghost { background: rgb(4 10 18 / 0.4); color: var(--v2-ink); border-color: var(--v2-line); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.v2-btn--ghost:hover { border-color: var(--v2-ink); }
+.v2-btn:active { transform: scale(0.98); }
+
+/* ---------- 1. hero ---------- */
+.v2-hero { position: relative; block-size: 100svh; min-block-size: 560px; overflow: hidden; isolation: isolate; }
+.v2-hero__media { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.v2-hero__poster, .v2-hero__video { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.v2-hero__video { opacity: 0; transition: opacity 0.8s var(--ease); }
+.v2-hero.is-playing .v2-hero__video { opacity: 1; }
+.v2-scrim--hero { background: linear-gradient(to top, rgb(4 10 18 / 0.78) 0%, rgb(4 10 18 / 0.25) 38%, transparent 60%), linear-gradient(to bottom, rgb(4 10 18 / 0.35), transparent 22%); }
+.v2-hero__body { position: absolute; inset-inline: var(--v2-gutter); inset-block-end: clamp(96px, 14svh, 150px); z-index: 2; display: grid; gap: var(--sp-3); max-inline-size: 760px; }
+.v2-hero__title { margin: 0; font-family: var(--font-display); font-weight: 500; line-height: 0.95; font-size: clamp(3.4rem, 1.6rem + 7.4vw, 8.5rem); display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.25em; }
+.v2-hero__city { font-size: 0.42em; color: var(--v2-muted); }
+.v2-hero__lead { margin: 0; font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem); color: var(--v2-ink); max-inline-size: 34ch; }
+.v2-corner { position: absolute; inset-block-start: 76px; inset-inline-end: var(--v2-gutter); z-index: 3; display: flex; align-items: center; gap: var(--sp-2); }
+.v2-play { inline-size: 44px; block-size: 44px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--v2-line); background: rgb(4 10 18 / 0.45); color: var(--v2-ink); cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.v2-play svg { inline-size: 20px; block-size: 20px; }
+.v2-play[data-state="playing"] .v2-play__play, .v2-play[data-state="paused"] .v2-play__pause { display: none; }
+.v2-cue { position: absolute; inset-block-end: max(20px, env(safe-area-inset-bottom)); inset-inline-start: 50%; translate: 50% 0; z-index: 2; display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+  min-block-size: 44px; min-inline-size: 44px; padding: 4px 12px; font-size: 0.8rem; color: var(--v2-muted); text-decoration: none; }
+.v2-cue svg { inline-size: 20px; block-size: 20px; animation: v2-bob 2.4s var(--ease) infinite; }
+@keyframes v2-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* ---------- 2+3. the floor ---------- */
+.v2-floor { position: relative; }
+.v2-floor__stage { position: relative; block-size: 100svh; min-block-size: 560px; overflow: hidden; container-type: size; isolation: isolate; background: var(--v2-bg); }
+/* the frame = the picture's own box, cover-fitted to the stage, so the band and the pin sit in the picture's coordinates */
+/* centred with margins, not translate: GSAP owns this element's transform (scale + x/y around the anchor) */
+.v2-frame { --fw: max(100cqw, calc(100cqh * var(--frame-k))); position: absolute; top: 50%; left: 50%; width: var(--fw); height: calc(var(--fw) / var(--frame-k));
+  margin-left: calc(var(--fw) / -2); margin-top: calc(var(--fw) / var(--frame-k) / -2); transform-origin: var(--ax) var(--ay); }
+.v2-frame__img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.v2-band { position: absolute; inset-inline-start: var(--bx0); inline-size: calc(var(--bx1) - var(--bx0)); inset-block-start: var(--by0); block-size: calc(var(--by1) - var(--by0));
+  border-block: 1px solid color-mix(in srgb, var(--v2-accent) 90%, transparent); background: color-mix(in srgb, var(--v2-accent) 10%, transparent);
+  box-shadow: 0 0 0 200vmax rgb(4 10 18 / var(--dim, 0.45)), 0 0 28px color-mix(in srgb, var(--v2-accent) 45%, transparent); }
+/* the band is placed in the frame's LEFT-to-right picture coordinates, whatever the page direction */
+.v2-frame .v2-band { inset-inline-start: auto; left: var(--bx0); }
+.v2-pin { position: absolute; left: var(--ax); top: var(--ay); z-index: 2; inline-size: 14px; block-size: 14px; margin: -7px 0 0 -7px; display: grid; justify-items: center; }
+.v2-pin__dot { inline-size: 14px; block-size: 14px; border-radius: 50%; background: var(--v2-accent); box-shadow: 0 0 0 4px rgb(238 169 39 / 0.3), 0 0 0 10px rgb(238 169 39 / 0.12); }
+.v2-pin__label { position: absolute; inset-block-end: 22px; padding: 3px 10px; border-radius: var(--r-full); background: rgb(4 10 18 / 0.78); border: 1px solid var(--v2-line); font-size: 0.85rem; font-weight: var(--fw-semibold); white-space: nowrap; }
+.v2-scrim--floor { background: linear-gradient(to left, rgb(4 10 18 / 0.55), transparent 46%); }
+.v2-floor__copy { position: absolute; z-index: 3; inset-inline-start: var(--v2-gutter); inset-block: 0; margin-block: auto; block-size: fit-content; display: grid; gap: var(--sp-2); max-inline-size: 420px; }
+.v2-floor__title { margin: 0; line-height: 0.85; }
+.v2-floor__num { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(7rem, 4rem + 12vw, 15rem); font-variant-numeric: lining-nums tabular-nums; letter-spacing: -0.02em; }
+.v2-floor__unit { margin: 0; font-family: var(--font-display); font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.4rem); }
+.v2-facts { list-style: none; margin: var(--sp-2) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.v2-facts li { padding: 6px 12px; border-radius: var(--r-full); border: 1px solid var(--v2-line); background: rgb(4 10 18 / 0.5); font-size: 0.9rem; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+@media (max-aspect-ratio: 4/5) {
+  .v2-scrim--floor { background: linear-gradient(to bottom, rgb(4 10 18 / 0.78) 0%, rgb(4 10 18 / 0.3) 38%, transparent 55%); }
+  .v2-floor__copy { inset-block: 84px auto; margin-block: 0; inset-inline: var(--v2-gutter); max-inline-size: none; grid-template-columns: auto 1fr; align-items: end; column-gap: var(--sp-4); }
+  .v2-floor__copy .v2-eyebrow, .v2-facts { grid-column: 1 / -1; }
+  .v2-floor__num { font-size: clamp(5.5rem, 30vw, 9rem); }
+  .v2-floor__unit { padding-block-end: 0.5em; }
+  .v2-facts li { font-size: 0.82rem; padding: 5px 10px; }
+  .v2-floor .v2-badge { inset-block-start: auto; inset-block-end: 20px; }
+}
+
+/* ---------- 4. the cutaway ---------- */
+.v2-cut { position: relative; }
+.v2-cut__stage { position: relative; min-block-size: 100svh; overflow: hidden; isolation: isolate; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4);
+  padding: 96px var(--v2-gutter) clamp(20px, 4svh, 40px); background: radial-gradient(90% 70% at 50% 52%, #1a3550 0%, var(--v2-bg-2) 45%, var(--v2-bg) 100%); }
+.v2-cut__head { text-align: center; display: grid; gap: var(--sp-1); }
+.v2-cut__title { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(2.2rem, 1.4rem + 3vw, 4.2rem); line-height: 1; }
+.v2-cut__fig { margin: 0; display: flex; align-items: center; justify-content: center; min-block-size: 0; min-inline-size: 0; }
+.v2-cut__img { inline-size: min(1120px, 100%); max-block-size: min(64svh, 760px); block-size: auto; object-fit: contain; transform-origin: 37% 21%; filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.45)); }
+.v2-cut__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--sp-3); }
+.v2-chips { display: flex; gap: var(--sp-2); overflow-x: auto; max-inline-size: 100%; scrollbar-width: none; padding-block: 2px; }
+.v2-chips::-webkit-scrollbar { display: none; }
+.v2-chip { flex: none; display: inline-flex; align-items: center; min-block-size: 44px; padding: 0 var(--sp-4); border-radius: var(--r-full); border: 1px solid var(--v2-line); background: rgb(4 10 18 / 0.4);
+  text-decoration: none; font-size: 0.92rem; white-space: nowrap; transition: border-color var(--dur-base) var(--ease), background-color var(--dur-base) var(--ease); }
+.v2-chip:hover { border-color: var(--v2-accent); background: rgb(238 169 39 / 0.12); }
+.v2-cut .v2-badge { inset-block-start: 84px; }
+@media (max-width: 759px) { .v2-cut__stage { padding-block-start: 84px; } .v2-cut .v2-badge { inset-block-start: auto; inset-block-end: 12px; } .v2-cut__foot { padding-block-end: 28px; } }
+
+/* ---------- 5. the rooms ---------- */
+.v2-rooms { position: relative; }
+.v2-rooms__stage { position: relative; }
+.v2-room { position: relative; margin: 0; block-size: 92svh; min-block-size: 480px; overflow: hidden; isolation: isolate; }
+.v2-room + .v2-room { margin-block-start: 4px; }
+.v2-room__media { position: absolute; inset: 0; transform-origin: 50% 55%; }
+.v2-room__media picture, .v2-room__media img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.v2-scrim--room { background: linear-gradient(to top, rgb(4 10 18 / 0.82) 0%, rgb(4 10 18 / 0.35) 26%, transparent 48%); }
+.v2-room__cap { position: absolute; z-index: 2; inset-inline: var(--v2-gutter); inset-block-end: clamp(24px, 5svh, 48px); display: grid; justify-items: start; gap: 4px; }
+.v2-room__n { direction: ltr; unicode-bidi: isolate; font-family: var(--font-display); font-size: 0.95rem; color: var(--v2-accent); letter-spacing: 0.08em; font-variant-numeric: tabular-nums; }
+.v2-room__name { font-family: var(--font-display); font-weight: 500; font-size: clamp(2.4rem, 1.4rem + 3.6vw, 5rem); line-height: 1; }
+.v2-room__zone { color: var(--v2-muted); font-size: 0.95rem; }
+.v2-room__link { margin-block-start: var(--sp-2); display: inline-flex; align-items: center; min-block-size: 44px; padding: 0 var(--sp-4); border-radius: var(--r-full); border: 1px solid var(--v2-line);
+  background: rgb(4 10 18 / 0.45); text-decoration: none; font-size: 0.92rem; font-weight: var(--fw-semibold); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.v2-room__link:hover { border-color: var(--v2-accent); }
+.v2-strip { display: none; }
+
+/* ---------- 6. the way on ---------- */
+.v2-go { position: relative; min-block-size: 92svh; display: grid; align-items: end; overflow: hidden; isolation: isolate; }
+.v2-go__media { position: absolute; inset: 0; z-index: -1; }
+.v2-go__media img { inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 70% 50%; }
+.v2-scrim--go { background: linear-gradient(to top, rgb(4 10 18 / 0.9) 0%, rgb(4 10 18 / 0.45) 45%, rgb(4 10 18 / 0.2) 100%); }
+.v2-go__in { position: relative; z-index: 2; padding: 0 var(--v2-gutter) clamp(48px, 10svh, 120px); display: grid; gap: var(--sp-3); max-inline-size: 820px; }
+.v2-go__title { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(2.2rem, 1.3rem + 3.4vw, 4.6rem); line-height: 1.05; }
+.v2-go__ctas { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-3); }
+
+/* ---------- footer ---------- */
+.v2-foot { padding: var(--sp-10) var(--v2-gutter) max(var(--sp-8), env(safe-area-inset-bottom)); border-block-start: 1px solid var(--v2-line); background: var(--v2-bg); }
+.v2-foot__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-4) var(--sp-8); }
+.v2-brand--foot img { block-size: 64px; }
+.v2-foot__dev { margin: 0; color: var(--v2-muted); }
+.v2-foot__back { display: inline-flex; align-items: center; min-block-size: 44px; margin-inline-start: auto; color: var(--v2-ink); text-underline-offset: 0.25em; }
+.v2-legal { margin-block-start: var(--sp-6); --text-muted: var(--v2-muted); --line: var(--v2-line); --brand-ink: var(--v2-accent); }
+
+/* ---------- the live 3D dialog ---------- */
+.v2-dialog { inline-size: min(1200px, 100vw - 24px); block-size: min(820px, 100svh - 24px); max-inline-size: none; max-block-size: none; padding: 0; border: 1px solid var(--v2-line); border-radius: var(--r-md);
+  background: var(--v2-bg); color: var(--v2-ink); overflow: hidden; }
+.v2-dialog[open] { display: grid; grid-template-rows: auto 1fr; }
+.v2-dialog::backdrop { background: rgb(4 10 18 / 0.72); backdrop-filter: blur(4px); }
+.v2-dialog__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4); border-block-end: 1px solid var(--v2-line); }
+[dir="rtl"] .v2-dialog__bar { padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-2); }
+.v2-dialog__title { margin: 0; font-size: 1rem; font-weight: var(--fw-semibold); }
+.v2-dialog__close { inline-size: 44px; block-size: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--v2-line); background: transparent; color: var(--v2-ink); cursor: pointer; }
+.v2-dialog__close svg { inline-size: 20px; block-size: 20px; }
+.v2-dialog__body iframe { inline-size: 100%; block-size: 100%; border: 0; display: block; background: #efe9e0; }
+
+/* =====================================================================================================================
+   MOTION (html.is-motion): the stages become sticky screens inside tall sections; v2.js scrubs them with ScrollTrigger.
+   ===================================================================================================================== */
+.is-motion .v2-floor { block-size: 360svh; }
+.is-motion .v2-floor__stage { position: sticky; inset-block-start: 0; }
+.is-motion .v2-cut { block-size: 280svh; }
+.is-motion .v2-cut__stage { position: sticky; inset-block-start: 0; block-size: 100svh; }
+.is-motion .v2-rooms { block-size: var(--rooms-h, calc(var(--rooms, 8) * 90svh + 30svh)); }
+/* round 2, the fly-in: the rooms section starts under the floor's last screen (no page scroll between the two shots); its stage shows only
+   once pinned, on the same frame the floor stage ended on (journey.js toggles .is-pinned) */
+.is-motion .v2-rooms { margin-block-start: -100svh; z-index: 2; }
+.is-motion .v2-rooms__stage { visibility: hidden; }
+.is-motion .v2-rooms__stage.is-pinned { visibility: visible; }
+.is-motion .v2-rooms__stage { position: sticky; inset-block-start: 0; block-size: 100svh; min-block-size: 520px; overflow: hidden; background: var(--v2-bg); }
+.is-motion .v2-room { position: absolute; inset: 0; block-size: auto; min-block-size: 0; margin: 0; opacity: 0; visibility: hidden; }
+.is-motion .v2-room.is-on { opacity: 1; visibility: visible; }
+.is-motion .v2-room__cap { inset-block-end: calc(clamp(24px, 4svh, 40px) + 96px); }
+.is-motion .v2-strip { position: absolute; z-index: 5; inset-inline: 0; inset-block-end: 0; display: flex; gap: 6px; padding: 10px var(--v2-gutter) max(12px, env(safe-area-inset-bottom));
+  overflow-x: auto; scrollbar-width: none; background: linear-gradient(to top, rgb(4 10 18 / 0.85), rgb(4 10 18 / 0.0)); }
+.is-motion .v2-strip::-webkit-scrollbar { display: none; }
+.v2-strip__item { position: relative; flex: none; inline-size: 128px; block-size: 72px; border-radius: 6px; overflow: hidden; border: 1px solid var(--v2-line); opacity: 0.62; text-decoration: none;
+  transition: opacity var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); }
+.v2-strip__item img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.v2-strip__item span { position: absolute; inset-inline: 0; inset-block-end: 0; padding: 10px 6px 3px; font-size: 0.72rem; font-weight: var(--fw-semibold); background: linear-gradient(to top, rgb(4 10 18 / 0.85), transparent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.v2-strip__item:hover, .v2-strip__item:focus-visible { opacity: 0.9; }
+.v2-strip__item.is-on { opacity: 1; border-color: var(--v2-accent); box-shadow: inset 0 -3px 0 var(--v2-accent); }
+@media (min-width: 1100px) { .is-motion .v2-strip { justify-content: center; } .v2-strip__item { inline-size: 150px; block-size: 84px; } .is-motion .v2-room__cap { inset-block-end: calc(clamp(24px, 4svh, 40px) + 108px); } }
+@media (max-width: 759px) { .v2-strip__item { inline-size: 96px; block-size: 60px; } .is-motion .v2-room__cap { inset-block-end: 96px; } }
+.is-motion .v2-cue { display: inline-flex; }
+
+/* reduced motion: never animate, whatever a script does */
+@media (prefers-reduced-motion: reduce) {
+  .v2 *, .v2 *::before, .v2 *::after { animation: none !important; transition: none !important; }
+}
+
+/* the 360 tour, opened in a full-screen frame of this page (journey.js openTour: the iOS sound unlock runs in the visitor's tap here) */
+#tourFrame { position: fixed; inset: 0; inline-size: 100%; block-size: 100%; border: 0; z-index: 60; background: #000; opacity: 0; transition: opacity .45s ease; }
+#tourFrame.is-on { opacity: 1; }
+.is-tour, .is-tour body { overflow: hidden; }
+.is-tour .v2-top { display: none; }
+
+/* round 2: the fly-in's landing frame (the walk's first frame) inside the floor stage, and each room's walk canvas (frame sequence) */
+.v2-flyin { display: none; }
+.is-motion .v2-flyin { display: block; position: absolute; inset: 0; z-index: 2; opacity: 0; pointer-events: none; }
+.v2-flyin img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.v2-room__walk { display: none; }
+.is-motion .is-walk .v2-room__walk { display: block; position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+.is-motion .is-walk .v2-room__media picture { visibility: hidden; }

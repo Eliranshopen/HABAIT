@@ -1,0 +1,217 @@
+seed look ok
+lock Read/None seed=false inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+lock Read/None seed=false start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921684562-2 EPERM
+lock Read/None seed=true inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+lock Read/None seed=true start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921692287-3 EPERM
+lock ReadWrite/None seed=false inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+lock ReadWrite/None seed=false start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921694440-4 EPERM
+lock ReadWrite/None seed=true inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+lock ReadWrite/None seed=true start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921710187-5 EPERM
+lock Read/Read seed=false inspect_plan: ok
+lock Read/Read seed=false start_simulation: ok
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921720498-6 EPERM
+lock Read/Read seed=true inspect_plan: ok
+lock Read/Read seed=true start_simulation: ok
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921736241-7 EPERM
+lock Write/Read seed=false inspect_plan: ok
+lock Write/Read seed=false start_simulation: ok
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921738631-8 EPERM
+lock Write/Read seed=true inspect_plan: ok
+lock Write/Read seed=true start_simulation: ok
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921748654-9 EPERM
+lock ReadWrite/ReadWrite seed=false inspect_plan: ok
+lock ReadWrite/ReadWrite seed=false start_simulation: ok
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921754674-10 EPERM
+lock ReadWrite/ReadWrite seed=true inspect_plan: ok
+lock ReadWrite/ReadWrite seed=true start_simulation: ok
+  after unlock inspect_plan: ok
+  after unlock start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921773613-11 EPERM
+acl deny (R,RD,GR) inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+acl deny (R,RD,GR) start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+acl deny (RX) inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+acl deny (RX) start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+acl deny (F) inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+acl deny (F) start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+acl deny on inbox folder inspect_plan: TOOL PATH_NOT_ALLOWED | pdf_path is outside the allowed upload folders
+acl deny on inbox folder start_simulation: TOOL PATH_NOT_ALLOWED | pdf_path is outside the allowed upload folders
+removed inspect_plan: TOOL NOT_A_PDF | no such file
+removed start_simulation: TOOL NOT_A_PDF | no such file
+replaced by folder inspect_plan: TOOL NOT_A_PDF | not a file
+replaced by folder start_simulation: TOOL NOT_A_PDF | not a file
+zero byte inspect_plan: TOOL NOT_A_PDF | the file does not start with %PDF-
+zero byte start_simulation: TOOL NOT_A_PDF | the file does not start with %PDF-
+truncated half inspect_plan: TOOL NOT_A_PDF | the scanner wrote a page list of the wrong shape
+truncated half start_simulation: TOOL NOT_A_PDF | the scanner wrote a page list of the wrong shape
+pdf header garbage inspect_plan: TOOL NOT_A_PDF | the scanner could not read the file (status 1)
+pdf header garbage start_simulation: TOOL NOT_A_PDF | the scanner could not read the file (status 1)
+restored inspect_plan: ok
+restored start_simulation: ok
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921776324-16 EPERM
+toggle seed=true #0 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #1 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #2 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #3 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #4 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #5 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #6 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #7 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #8 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #9 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #10 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #11 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #12 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #13 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #14 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #15 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #16 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #17 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #18 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #19 start_simulation: ok
+toggle seed=true #20 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #21 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #22 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #23 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #24 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #25 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #26 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #27 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #28 inspect_plan: ok
+toggle seed=true #29 start_simulation: ok
+toggle seed=true #30 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #31 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #32 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #33 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #34 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #35 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #36 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #37 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #38 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #39 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #40 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #41 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #42 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #43 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #44 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #45 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #46 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #47 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #48 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #49 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #50 inspect_plan: ok
+toggle seed=true #51 start_simulation: ok
+toggle seed=true #52 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #53 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #54 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #55 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #56 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #57 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #58 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #59 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #60 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #61 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #62 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #63 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #64 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #65 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #66 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #67 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #68 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #69 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #70 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #71 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #72 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #73 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #74 inspect_plan: ok
+toggle seed=true #75 start_simulation: ok
+toggle seed=true #76 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #77 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #78 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #79 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #80 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #81 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #82 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #83 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #84 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #85 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #86 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #87 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #88 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #89 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #90 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #91 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #92 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #93 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #94 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #95 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #96 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #97 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #98 inspect_plan: ok
+toggle seed=true #99 start_simulation: ok
+toggle seed=true #100 inspect_plan: ok
+toggle seed=true #101 start_simulation: ok
+toggle seed=true #102 inspect_plan: ok
+toggle seed=true #103 start_simulation: ok
+toggle seed=true #104 inspect_plan: ok
+toggle seed=true #105 start_simulation: ok
+toggle seed=true #106 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #107 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #108 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #109 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #110 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #111 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #112 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #113 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #114 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #115 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #116 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #117 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #118 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=true #119 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+records after toggle: ["SHA"] jobs: 1
+cleanup failed C:/Users/elira/AppData/Local/Temp/qa4-home-45404-1794921784745-17 EPERM
+toggle seed=false #0 inspect_plan: TOOL NOT_A_PDF | the file changed while it was being read
+toggle seed=false #1 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #2 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #3 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #4 inspect_plan: ok
+toggle seed=false #5 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #6 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #7 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #8 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #9 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #10 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #11 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #12 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #13 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #14 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #15 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #16 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #17 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #18 inspect_plan: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+toggle seed=false #19 start_simulation: TOOL NOT_A_PDF | the file cannot be read at this moment (another program holds it, or access is denied); as
+records after toggle: ["SHA"] jobs: 0
+TOTAL 200 calls, 0 bad {"TOOL NOT_A_PDF":148,"ok":50,"TOOL PATH_NOT_ALLOWED":2}
+holder pids started: 25292,45184,22040,44252,31048,47128,43332,13292,11548,47568,6088,16172

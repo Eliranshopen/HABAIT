@@ -1,0 +1,4 @@
+qa-r5 gate runs (C:\RnD\Projects\3Dengine @ 1e359d4), one at a time
+npm test (timeout 300): run1 pass 239/239 76s; run2 239/239 75s; run3 239/239 76s; run4 239/239 76s; run5 239/239 76s
+node --test tests/milestones/m0.3.test.mjs (timeout 200): 74s 75s 74s 74s 74s 73s 75s 74s - each 16/16 pass, 0 fail
+under CPU load (20 busy node processes on 20 logical cores): m0.3 test 16/16 in 153s; npm test 239/239 in 153s

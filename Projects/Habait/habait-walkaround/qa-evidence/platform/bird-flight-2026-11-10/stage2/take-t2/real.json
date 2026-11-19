@@ -1,0 +1,25 @@
+{
+ "endpoint": "kling/v4/video-to-video/edit",
+ "backend": "fal",
+ "request_id": "01a1c689-8833-7173-a56a-0acb2bc9cce7",
+ "args": {
+  "prompt": "@Video1 is a plain grey 3D clay render of ONE continuous 6-second shot: the camera glides from the terrace of a 16th-floor apartment through its open glass sliding door and travels into the living room, ending in the middle of the room looking at the far wall with the front door. Re-render the SAME footage as a photoreal architectural visualization: keep every frame's camera motion, perspective and horizon, every wall, column, opening, door, the slider frames and every piece of furniture exactly where @Video1 draws them; only replace the clay materials with real ones. Nothing static may change shape, count or position between frames. @Image1 is the real look of the FIRST frame: the terrace, its glass railing and the slim black-framed floor-to-ceiling glazing (use it for the terrace and the glazing only; the room behind the glass follows @Image2, @Image3 and @Image4). @Image2 is the real look of the living room as seen looking in from the terrace side, the view the shot ends on: a pale natural oak parquet floor of long planks; warm white plastered walls that meet the floor directly with NO skirting board; a plain WHITE flush zero-line front door with a slim black lever and the same white flush interior doors, no frames; a small light-oak console with a framed print above it beside the front door; flat white ceiling with small recessed spots. @Image3 is the wall on the LEFT of the shot: a greige textured plaster wall with a wall-mounted black TV above a long low sand-grey floating unit. @Image4 is the RIGHT side of the shot: a handleless sand-grey kitchen with a lit open shelf, a built-in black oven and a tall fridge cabinet. The furniture is cream boucle: a low sofa with beige cushions and a round swivel armchair; pale travertine coffee table. Soft bright morning daylight, neutral white, consistent exposure throughout. Smooth, continuous, no cuts, no text, no people, no watermark.",
+  "resolution": "720p"
+ },
+ "clay": "C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/6ebc3d8f-7b16-4880-90d0-725aacae9a04/scratchpad/fly/stage2/clay-enter-6s.mp4",
+ "refs": [
+  "C:/RnD/Projects/Habait/habait-walkaround/Habait/platform/_local/segments/rainbow-cine/enter-846.first.jpg",
+  "C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/6ebc3d8f-7b16-4880-90d0-725aacae9a04/scratchpad/fly/stage2/ref-in.jpg",
+  "C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/6ebc3d8f-7b16-4880-90d0-725aacae9a04/scratchpad/fly/stage2/ref-tv.jpg",
+  "C:/Users/elira/AppData/Local/Temp/claude/76e6db1160dffba0/6ebc3d8f-7b16-4880-90d0-725aacae9a04/scratchpad/fly/stage2/ref-kitchen.jpg"
+ ],
+ "result": {
+  "video": {
+   "url": "https://v3b.fal.media/files/b/0ab1ef15/8uV8JLwDyWXYqyu0WKHjK_output.mp4",
+   "content_type": "video/mp4",
+   "file_name": "output.mp4",
+   "file_size": 5617901
+  }
+ },
+ "secs": 119.3
+}

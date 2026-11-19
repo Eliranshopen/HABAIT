@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour UI directions</title>
+<!-- Static mockups of three directions for the Tour360 viewer UI (research.md §4). ?d=A|B|C. The panorama is the real tour (living
+     room, designed set) with its chrome removed (mock-bg.cjs); the markers are drawn on its real door and furniture positions. House
+     tokens (tokens.css: --chrome-*, --n-*, --sp-*, --r-*, --fs-*, --font-text). Nothing here is product code. -->
+<link rel="stylesheet" href="tokens.css">
+<style>
+  @font-face { font-family: 'Heebo'; src: url(fonts/heebo-hebrew.woff2) format('woff2'); unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; font-weight: 100 900; }
+  @font-face { font-family: 'Heebo'; src: url(fonts/heebo-latin.woff2) format('woff2'); font-weight: 100 900; }
+  :root {
+    --glass-thin: color-mix(in srgb, var(--n-950) 48%, transparent);
+    --glass-mid: color-mix(in srgb, var(--n-950) 64%, transparent);
+    --blur-thin: blur(16px) saturate(140%);
+    --blur-thick: blur(24px) saturate(160%);
+    --focus-chrome: #80bee0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #111; }
+  body { font-family: var(--font-text); color: var(--chrome-fg); overflow: hidden; -webkit-font-smoothing: antialiased; }
+  .stage { position: fixed; inset: 0; background: center / cover no-repeat; }
+  .shade-top, .shade-bottom { position: absolute; inset-inline: 0; pointer-events: none; }
+  .shade-top { top: 0; background: linear-gradient(to bottom, rgb(26 23 19 / .55), rgb(26 23 19 / 0)); }
+  .shade-bottom { bottom: 0; background: linear-gradient(to top, rgb(26 23 19 / .72), rgb(26 23 19 / 0)); }
+  svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+  .sm svg.i { width: 18px; height: 18px; }
+  .glass { background: var(--glass-thin); -webkit-backdrop-filter: var(--blur-thin); backdrop-filter: var(--blur-thin); border: 1px solid var(--chrome-line); }
+  .glass-mid { background: var(--glass-mid); -webkit-backdrop-filter: var(--blur-thick); backdrop-filter: var(--blur-thick); border: 1px solid var(--chrome-line); }
+  .panel { background: var(--chrome-panel); -webkit-backdrop-filter: var(--blur-thick); backdrop-filter: var(--blur-thick); border: 1px solid var(--chrome-line); box-shadow: var(--chrome-shadow); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: var(--tap-min); min-height: var(--tap-min); padding: 0; border: 0; background: transparent; color: var(--chrome-fg); font: var(--fw-semibold) var(--fs-small)/1 var(--font-text); border-radius: var(--r-full); white-space: nowrap; }
+  .btn.lbl { padding-inline: var(--sp-3) var(--sp-4); }
+  .btn.solo { border: 1px solid var(--chrome-line); background: var(--glass-thin); -webkit-backdrop-filter: var(--blur-thin); backdrop-filter: var(--blur-thin); }
+  .btn.primary { background: var(--chrome-fg); color: var(--chrome-bg); box-shadow: var(--chrome-shadow-sm); }
+  .btn .chip { padding: 3px 8px; border-radius: var(--r-full); background: color-mix(in srgb, var(--n-950) 12%, transparent); font-weight: var(--fw-medium); font-size: 12.5px; }
+  .btn.on { background: var(--chrome-fg); color: var(--chrome-bg); }
+  .cap { display: inline-flex; align-items: center; padding: var(--sp-1); gap: 2px; border-radius: var(--r-full); }
+  .cap.v { flex-direction: column; }
+  .sep { width: 1px; height: 24px; background: var(--chrome-line); margin-inline: 2px; }
+  .cap.v .sep { width: 24px; height: 1px; margin: 2px 0; }
+  .badge { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: var(--r-full); background: var(--brand-accent); color: var(--brand-on-accent); font: var(--fw-bold) 13px/1 var(--font-text); }
+  .brand { font: var(--fw-bold) var(--fs-body)/1 var(--font-text); direction: ltr; }
+  .zone { margin: 0; font: var(--fw-semibold) var(--fs-small)/1.3 var(--font-text); color: var(--chrome-muted); }
+  .room { margin: 2px 0 0; font: var(--fw-bold) 28px/1.15 var(--font-text); }
+  .apt { margin: 4px 0 0; font: var(--fw-regular) var(--fs-small)/1.4 var(--font-text); color: var(--chrome-muted); }
+  .concept { margin: 0; font: var(--fw-regular) 13px/1.55 var(--font-text); color: var(--chrome-fg); }
+  .ai { position: absolute; inset-inline: 0; bottom: 0; display: flex; justify-content: center; align-items: center; gap: 8px; padding: 6px 16px calc(6px + env(safe-area-inset-bottom)); font: var(--fw-regular) 13px/1.4 var(--font-text); color: var(--chrome-fg); text-align: center; }
+  .ai .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-accent); flex: 0 0 auto; }
+  .strip { display: flex; gap: 8px; overflow: hidden; -webkit-mask-image: linear-gradient(to left, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%); mask-image: linear-gradient(to left, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%); padding: 4px 32px; }
+  .card { position: relative; flex: 0 0 auto; border-radius: var(--r-md); overflow: hidden; background: center / cover; border: 1px solid var(--chrome-line); }
+  .card span { position: absolute; inset-inline: 0; bottom: 0; padding: 14px 8px 6px; font: var(--fw-semibold) 12.5px/1.2 var(--font-text); background: linear-gradient(to top, rgb(0 0 0 / .72), transparent); }
+  .card b { position: absolute; top: 6px; inset-inline-end: 6px; font: var(--fw-bold) 11px/1 var(--font-text); background: rgb(0 0 0 / .45); padding: 3px 5px; border-radius: 4px; }
+  .card.cur { outline: 2px solid var(--chrome-fg); outline-offset: 2px; }
+  .pill { display: inline-flex; align-items: center; gap: 4px; border-radius: var(--r-full); padding: 4px; }
+  .pill .name { padding-inline: 8px; font: var(--fw-semibold) var(--fs-body)/1 var(--font-text); }
+  .pill .cnt { font: var(--fw-regular) var(--fs-small)/1 var(--font-text); color: var(--chrome-muted); direction: ltr; unicode-bidi: isolate; }
+  .seg { display: inline-flex; padding: 4px; gap: 2px; border-radius: var(--r-full); }
+  .seg .btn { padding-inline: 14px; }
+  .dock { display: flex; align-items: stretch; padding: 6px; gap: 4px; border-radius: var(--r-md); }
+  .dock .it { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 72px; min-height: 56px; padding: 0 10px; border-radius: var(--r-md); font: var(--fw-semibold) 13px/1.1 var(--font-text); color: var(--chrome-fg); }
+  .dock .it.primary { background: var(--chrome-fg); color: var(--chrome-bg); }
+  .dock .vsep { width: 1px; align-self: center; height: 32px; background: var(--chrome-line); margin: 0 4px; }
+  /* markers: a door = a glass disc with a walk glyph + its name, always; a furniture ring = small, quiet, no dot */
+  .hs { position: absolute; display: flex; align-items: center; gap: 6px; transform: translateY(-50%); }
+  .hs .disc { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--glass-mid); -webkit-backdrop-filter: var(--blur-thin); backdrop-filter: var(--blur-thin); border: 2px solid var(--chrome-fg); box-shadow: var(--chrome-shadow-sm); }
+  .hs .lab { padding: 6px 12px; border-radius: var(--r-full); background: var(--chrome-panel); font: var(--fw-semibold) var(--fs-small)/1 var(--font-text); white-space: nowrap; }
+  .rg { position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; border: 1.5px solid rgb(255 255 255 / .75); background: rgb(26 23 19 / .18); box-shadow: 0 0 0 4px rgb(255 255 255 / .08); }
+  .tag { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 99; padding: 4px 10px; border-radius: 6px; background: #ffd54a; color: #1a1713; font: 700 13px/1.2 Arial, sans-serif; direction: ltr; }
+  .anno { position: absolute; z-index: 98; padding: 3px 7px; border-radius: 5px; background: rgb(255 213 74 / .92); color: #1a1713; font: 700 11px/1.2 Arial, sans-serif; direction: ltr; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage"></div>
+<div id="ui"></div>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search); const D = q.get('d') || 'C'; const phone = innerWidth <= 640; const W = phone ? '390' : '1440';
+  document.getElementById('stage').style.backgroundImage = `url(bg-${W}.jpg)`;
+  const M = await (await fetch('markers.json')).json();
+  const I = {
+    cube: '<path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/>',
+    plan: '<path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>', minus: '<path d="M5 12h14"/>',
+    rotate: '<path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4.5h-4.5"/>',
+    home: '<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>',
+    full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+    ruler: '<path d="M3 17 17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
+    speaker: '<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/>',
+    help: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1.1.9-1.1 1.6v.6"/><path d="M12 16.8h.01"/>',
+    pencil: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+    building: '<path d="M4 21V5l8-2v18M12 21V9l8 2v10M2 21h20M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    next: '<path d="m15 18-6-6 6-6"/>', prev: '<path d="m9 18 6-6-6-6"/>',
+    walk: '<path d="M8 14.5l4-4 4 4"/>', more: '<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>',
+    caret: '<path d="m7 10 5 5 5-5"/>', rooms: '<rect x="3" y="6" width="7" height="12" rx="1.5"/><rect x="14" y="6" width="7" height="12" rx="1.5"/>',
+    view: '<circle cx="12" cy="12" r="9"/><path d="M3 12c3-4 15-4 18 0M3 12c3 4 15 4 18 0"/>',
+  };
+  const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+  const ROOMS = [['01', 'כניסה', '01-entrance'], ['02', 'מטבח', '02-kitchen'], ['03', 'פינת אוכל', '03-dining'], ['04', 'סלון', '04-living'], ['05', 'מרפסת שמש', '05-terrace-living'], ['06', 'מרפסת · קצה החדרים', '06-terrace-bedroom'], ['07', 'חדר שינה הורים', '07-bedroom-main'], ['08', 'פינת ארונות', '08-wardrobe']];
+  const strip = (w, h) => `<div class="strip">${ROOMS.map(([n, t, f]) => `<div class="card${n === '04' ? ' cur' : ''}" style="width:${w}px;height:${h}px;background-image:url(thumbs/${f}.webp)"><b>${n}</b><span>${t}</span></div>`).join('')}</div>`;
+  const CONCEPT = 'הדמיה על בסיס תכנית המכר. המידות תואמות לתכנית בסטייה של עד 1%. הריהוט והגימורים להמחשה בלבד.';
+  const AI = '<span class="dot"></span><span>הדמיית AI על גבי מודל הדירה מהתוכנית. הריהוט והגימורים להמחשה בלבד · תמונות שנוצרו בבינה מלאכותית · לא צילום של הנכס</span>';
+  const markers = () => {
+    const m = M[W]; let h = '';
+    for (const s of m.hotspots) if (!(s.x < 60 && s.y < 60)) h += `<div class="hs" style="right:${innerWidth - s.x - 20}px;top:${s.y}px"><span class="disc">${ic('walk')}</span><span class="lab">${s.text}</span></div>`;
+    for (const r of m.rings) if (!(r.x < 60 && r.y < 60)) h += `<div class="rg" style="left:${r.x}px;top:${r.y}px"></div>`;
+    return h;
+  };
+  const abs = (css, html) => `<div style="position:absolute;${css}">${html}</div>`;
+  let ui = markers();
+  const tagText = { A: 'A · quiet glass', B: 'B · command bar + bottom dock', C: 'C · place card + three labelled clusters (recommended)' }[D];
+  if (D === 'A') {
+    ui += `<div class="shade-top" style="height:${phone ? 150 : 140}px"></div><div class="shade-bottom" style="height:${phone ? 220 : 180}px"></div>`;
+    if (!phone) {
+      ui += abs('top:16px;inset-inline-start:20px;max-width:400px', `<div style="display:flex;align-items:center;gap:10px"><span class="brand">Habait</span><span class="badge">הדמיה</span></div>
+        <div style="margin-top:14px;text-shadow:var(--chrome-text-shadow)"><p class="zone">מרחב מגורים פתוח</p><p class="room">סלון</p><p class="apt">דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)</p></div>
+        <div class="glass-mid" style="margin-top:10px;border-radius:var(--r-md);padding:8px 12px"><p class="concept">${CONCEPT}</p></div>`);
+      ui += abs('top:16px;inset-inline-end:20px;display:flex;gap:8px;align-items:center', `
+        <button class="btn primary lbl sm">${ic('pencil')}שינוי עיצוב <span class="chip">פרקט</span></button>
+        <div class="cap glass sm"><button class="btn">${ic('help')}</button><span class="sep"></span><button class="btn">${ic('ruler')}</button><span class="sep"></span><button class="btn">${ic('speaker')}</button></div>
+        <button class="btn solo lbl sm">${ic('building')}חזרה לבניין</button>
+        <button class="btn solo lbl sm">${ic('globe')}עב ${ic('caret')}</button>`);
+      ui += abs('top:50%;inset-inline-end:20px;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px', `
+        <div class="cap v glass"><button class="btn">${ic('cube')}</button><button class="btn">${ic('plan')}</button></div>
+        <div class="cap v glass"><button class="btn">${ic('plus')}</button><button class="btn">${ic('minus')}</button></div>
+        <div class="cap v glass"><button class="btn">${ic('rotate')}</button><button class="btn">${ic('home')}</button><button class="btn">${ic('full')}</button></div>`);
+      ui += abs('bottom:30px;inset-inline:0;display:flex;flex-direction:column;align-items:center;gap:6px', `<div style="font:600 14px/1 var(--font-text);color:var(--chrome-muted)"><span dir="ltr" style="unicode-bidi:isolate">4 / 11</span> נקודות מבט</div>
+        <div style="display:flex;align-items:center;gap:6px;max-width:1240px"><button class="btn solo">${ic('prev')}</button>${strip(132, 80)}<button class="btn solo">${ic('next')}</button></div>`);
+    } else {
+      ui += abs('top:12px;inset-inline:12px;display:flex;align-items:center;gap:6px', `<span class="badge">הדמיה</span><span style="flex:1"></span><button class="btn primary lbl sm">${ic('pencil')}<span class="chip">פרקט</span></button><button class="btn solo">${ic('more')}</button>`);
+      ui += abs('top:66px;inset-inline:16px', `<div style="text-shadow:var(--chrome-text-shadow)"><p class="room" style="font-size:22px">סלון</p><p class="apt" style="font-size:13px">דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)</p></div><div class="glass-mid" style="margin-top:8px;border-radius:var(--r-md);padding:8px 12px"><p class="concept">${CONCEPT}</p></div>`);
+      ui += abs('top:45%;inset-inline-end:12px', `<div class="cap v glass"><button class="btn">${ic('cube')}</button><button class="btn">${ic('rotate')}</button><button class="btn">${ic('home')}</button><button class="btn">${ic('full')}</button></div>`);
+      ui += abs('bottom:78px;inset-inline:0', strip(104, 64));
+    }
+    ui += `<div class="ai">${AI}</div>`;
+  }
+  if (D === 'B') {
+    ui += `<div class="shade-top" style="height:${phone ? 170 : 150}px"></div><div class="shade-bottom" style="height:${phone ? 260 : 220}px"></div>`;
+    if (!phone) {
+      ui += abs('top:16px;inset-inline-start:20px;max-width:400px', `<div style="display:flex;align-items:center;gap:10px"><span class="brand">Habait</span><span class="badge">הדמיה</span></div>
+        <div style="margin-top:14px;text-shadow:var(--chrome-text-shadow)"><p class="zone">מרחב מגורים פתוח</p><p class="room">סלון</p><p class="apt">דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)</p></div>
+        <div class="glass-mid" style="margin-top:10px;border-radius:var(--r-md);padding:8px 12px"><p class="concept">${CONCEPT}</p></div>`);
+      ui += abs('top:16px;inset-inline-end:20px;display:flex;gap:8px', `<button class="btn solo">${ic('help')}</button><button class="btn solo lbl sm">${ic('building')}חזרה לבניין</button><button class="btn solo lbl sm">${ic('globe')}עב ${ic('caret')}</button>`);
+      ui += abs('bottom:200px;inset-inline-end:20px', `<div class="cap v glass"><button class="btn">${ic('plus')}</button><button class="btn">${ic('minus')}</button><span class="sep"></span><button class="btn">${ic('rotate')}</button><button class="btn">${ic('home')}</button><button class="btn">${ic('full')}</button></div>`);
+      ui += abs('bottom:110px;inset-inline:0;display:flex;justify-content:center', `<div style="display:flex;align-items:center;gap:6px;max-width:1100px"><button class="btn solo">${ic('prev')}</button>${strip(120, 72)}<button class="btn solo">${ic('next')}</button></div>`);
+      ui += abs('bottom:34px;inset-inline:0;display:flex;justify-content:center', `<div class="dock panel">
+        <div class="it">${ic('cube')}תלת-ממד</div><div class="it">${ic('plan')}תוכנית</div><span class="vsep"></span>
+        <div class="it">${ic('speaker')}סיור קולי</div><div class="it">${ic('ruler')}מדידה</div><span class="vsep"></span>
+        <div class="it primary">${ic('pencil')}שינוי עיצוב · פרקט</div></div>`);
+    } else {
+      ui += abs('top:12px;inset-inline:12px;display:flex;align-items:center;gap:6px', `<span class="badge">הדמיה</span><span style="flex:1"></span><button class="btn solo">${ic('building')}</button><button class="btn solo lbl sm" style="padding-inline:12px">עב</button><button class="btn solo">${ic('help')}</button>`);
+      ui += abs('top:66px;inset-inline:12px', `<div class="glass-mid" style="border-radius:var(--r-md);padding:10px 12px"><p class="apt" style="margin:0 0 4px;font-size:13px">דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)</p><p class="concept">${CONCEPT}</p></div>`);
+      ui += abs('top:52%;inset-inline-end:12px', `<div class="cap v glass"><button class="btn">${ic('rotate')}</button><button class="btn">${ic('home')}</button><button class="btn">${ic('full')}</button></div>`);
+      ui += abs('bottom:156px;inset-inline:0;display:flex;justify-content:center', `<div class="pill panel"><button class="btn">${ic('prev')}</button><span class="name">סלון</span><span class="cnt">4/11</span><button class="btn">${ic('next')}</button></div>`);
+      ui += abs('bottom:76px;inset-inline:8px', `<div class="dock panel" style="justify-content:space-between">
+        <div class="it" style="min-width:0;flex:1;padding:0 4px">${ic('rooms')}חדרים</div><div class="it" style="min-width:0;flex:1;padding:0 4px">${ic('cube')}תלת-ממד</div><div class="it" style="min-width:0;flex:1;padding:0 4px">${ic('speaker')}סיור</div><div class="it" style="min-width:0;flex:1;padding:0 4px">${ic('ruler')}מדידה</div><div class="it primary" style="min-width:0;flex:1;padding:0 4px">${ic('pencil')}עיצוב</div></div>`);
+    }
+    ui += `<div class="ai">${AI}</div>`;
+  }
+  if (D === 'C') {
+    ui += `<div class="shade-top" style="height:${phone ? 0 : 120}px"></div><div class="shade-bottom" style="height:${phone ? 240 : 170}px"></div>`;
+    if (!phone) {
+      ui += abs('top:16px;inset-inline-start:20px;width:360px', `<div class="glass-mid" style="border-radius:var(--r-md);padding:12px 16px;box-shadow:var(--chrome-shadow-sm)">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span class="brand">Habait</span><span class="badge">הדמיה</span></div>
+        <p class="zone" style="margin-top:10px">מרחב מגורים פתוח</p><p class="room">סלון</p><p class="apt">דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)</p>
+        <div style="height:1px;background:var(--chrome-line);margin:10px 0"></div><p class="concept">${CONCEPT}</p></div>`);
+      ui += abs('top:16px;inset-inline-end:20px;display:flex;gap:8px;align-items:center', `
+        <div class="cap glass-mid sm"><button class="btn lbl">${ic('ruler')}מדידה</button><button class="btn lbl">${ic('speaker')}סיור קולי</button><button class="btn primary lbl">${ic('pencil')}שינוי עיצוב <span class="chip">פרקט</span>${ic('caret')}</button></div>
+        <button class="btn solo">${ic('help')}</button>
+        <button class="btn solo lbl sm">${ic('building')}חזרה לבניין</button>
+        <button class="btn solo lbl sm">${ic('globe')}עב ${ic('caret')}</button>`);
+      ui += abs('top:50%;inset-inline-end:20px;transform:translateY(-50%);opacity:.9', `<div class="cap v glass"><button class="btn">${ic('plus')}</button><button class="btn">${ic('minus')}</button><span class="sep"></span><button class="btn">${ic('rotate')}</button><button class="btn">${ic('home')}</button><button class="btn">${ic('full')}</button></div>`);
+      ui += abs('bottom:44px;inset-inline:0;display:flex;flex-direction:column;align-items:center;gap:10px', `<div style="max-width:1080px">${strip(120, 72)}</div>
+        <div class="pill panel"><button class="btn">${ic('prev')}</button><span class="name">סלון</span><span class="cnt">4 / 11</span><button class="btn">${ic('next')}</button></div>`);
+      ui += abs('bottom:44px;inset-inline-end:20px', `<div class="seg panel"><button class="btn on">360°</button><button class="btn">${ic('plan')}תוכנית</button><button class="btn">${ic('cube')}תלת-ממד</button></div>`);
+      ui += `<div class="ai glass" style="border:0;border-top:1px solid var(--chrome-line)">${AI}</div>`;
+    } else {
+      ui += abs('top:12px;inset-inline:12px', `<div class="glass-mid" style="border-radius:var(--r-md);padding:8px 12px 10px;box-shadow:var(--chrome-shadow-sm)">
+        <div style="display:flex;align-items:center;gap:8px"><span class="badge">הדמיה</span><span class="room" style="font-size:22px;margin:0">סלון</span><span style="flex:1"></span><button class="btn">${ic('building')}</button><button class="btn lbl sm" style="padding-inline:10px">עב</button></div>
+        <p class="apt" style="margin:2px 0 6px;font-size:13px">דירה 846 · קומה 16 · Rainbow תל אביב (הדמיה)</p><p class="concept">${CONCEPT}</p></div>`);
+      ui += abs('top:48%;inset-inline-end:12px', `<div class="cap v glass"><button class="btn">${ic('rotate')}</button><button class="btn">${ic('home')}</button><button class="btn">${ic('full')}</button><span class="sep"></span><button class="btn">${ic('help')}</button></div>`);
+      ui += abs('bottom:156px;inset-inline:0;display:flex;justify-content:center', `<div class="pill panel"><button class="btn">${ic('prev')}</button><span class="name">סלון</span><span class="cnt">4/11</span>${ic('caret')}<button class="btn">${ic('next')}</button></div>`);
+      ui += abs('bottom:76px;inset-inline:8px', `<div class="dock panel" style="justify-content:space-between">
+        <div class="it" style="min-width:0;flex:1">${ic('view')}תצוגה</div><div class="it" style="min-width:0;flex:1">${ic('speaker')}סיור</div><div class="it" style="min-width:0;flex:1">${ic('ruler')}מדידה</div><div class="it primary" style="min-width:0;flex:1.3">${ic('pencil')}עיצוב · פרקט</div></div>`);
+      ui += `<div class="ai glass" style="border:0;border-top:1px solid var(--chrome-line)">${AI}</div>`;
+    }
+  }
+  document.getElementById('ui').innerHTML = ui;
+  document.body.dataset.ready = '1';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "start_simulation output",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "created": {
+      "type": "boolean"
+    },
+    "resumed": {
+      "description": "(0.3) true when an existing job got a new runner: resumed after its runner died, or restarted after cancelled / failed / review",
+      "type": "boolean"
+    },
+    "job": {
+      "$ref": "../job.schema.json"
+    }
+  },
+  "required": [
+    "job_id",
+    "created",
+    "job"
+  ],
+  "additionalProperties": false
+}

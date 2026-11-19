@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "get_result output",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "stub",
+        "real"
+      ],
+      "description": "\"stub\" = a demo replay, never a real simulation."
+    },
+    "local_url": {
+      "type": "string"
+    },
+    "tour_dir": {
+      "type": "string"
+    },
+    "rooms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "room": {
+            "type": "string"
+          },
+          "deviation_pct": {
+            "type": "number"
+          },
+          "pass": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "room",
+          "deviation_pct",
+          "pass"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "cost": {
+      "type": "object",
+      "properties": {
+        "spent_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cap_usd": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "spent_usd",
+        "cap_usd"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "job_id",
+    "mode",
+    "local_url",
+    "tour_dir",
+    "rooms",
+    "deviations",
+    "cost"
+  ],
+  "additionalProperties": false
+}

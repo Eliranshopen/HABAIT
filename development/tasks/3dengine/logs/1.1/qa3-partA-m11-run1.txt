@@ -1,0 +1,14 @@
+✔ 6. a job file that names another job, or none: a real runner stops, names the job, and changes no file of any job (3553.7669ms)
+✔ 7. a look that cannot be stored (.runtime/inspect is a file): both tools answer TOOLCHAIN_MISSING, with no path, and start nothing (21.3651ms)
+✔ 8. the upload rewritten in place with the same bytes during first looks: no answer and no record under the plan's hash is another look (8488.9887ms)
+ℹ looks during the rewrite: 3 true, 3 refused NOT_A_PDF, 0 of half-written bytes under their own hash
+✔ 9. QA round 2: a planted record is scanned again; a job folder that is a file is NOT_A_PDF; resume through a foreign manifest exits 1 (6097.3399ms)
+✔ stdout held JSON-RPC lines only (3.2705ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31970.733

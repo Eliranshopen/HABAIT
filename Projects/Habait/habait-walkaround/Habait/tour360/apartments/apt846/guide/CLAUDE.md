@@ -1,21 +1,21 @@
 # guide/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 _Not written yet — one line on what this folder is for. Until then the parent card's row for this folder is the description._
 
-## What's here (2026-11-05)
-1 files here · 2 subfolders · 36 files / 56.9 MB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+1 files here · 2 subfolders · 39 files / 62.1 MB in the whole tree (vendor and build output excluded)
 
 | File | Size | Modified |
 |---|---|---|
-| `guide.json` | 4.9 KB | 2026-11-03 |
+| `guide.json` | 4.8 KB | 2026-11-08 |
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `he/` | [`he/CLAUDE.md`](he/CLAUDE.md) | 33 (56.8 MB) |
+| `he/` | [`he/CLAUDE.md`](he/CLAUDE.md) | 36 (62.0 MB) |
 | `presenter/` | [`presenter/CLAUDE.md`](presenter/CLAUDE.md) | 2 (169.8 KB) |
 
 ## Gotchas

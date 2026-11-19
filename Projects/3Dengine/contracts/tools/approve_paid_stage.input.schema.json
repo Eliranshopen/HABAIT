@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "approve_paid_stage input",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$",
+      "description": "The 16-hex job id from start_simulation or list_jobs."
+    },
+    "cap_usd": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10000,
+      "description": "The most the paid stage may spend, in USD; at least quote.estimate_usd."
+    }
+  },
+  "required": [
+    "job_id",
+    "cap_usd"
+  ],
+  "additionalProperties": false
+}

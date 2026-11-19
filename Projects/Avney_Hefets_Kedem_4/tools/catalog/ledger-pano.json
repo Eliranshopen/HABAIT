@@ -1,0 +1,702 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 20,
+ "note": "Eliran 2026-11-18: the 360 version, panoramas made photoreal against his room pictures",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T11:10:16.991Z",
+   "item": "living",
+   "op": "pano",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "cbed73ab765b91c408ee59029a5bcd5f2980089632f437d13f4ce9715095a1c2",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee59-b938-73d0-99dd-853a66a2be3e"
+   },
+   "settled_usd": 0.3,
+   "out": "C:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living.jpg"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T11:14:56.100Z",
+   "item": "living/front",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "ab7edc8d821185429c96b994d0f11b3fc11697293b958b6a0e8cf11df933cc08",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee5e-0abf-7b40-aebc-24eb15c58586"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_views\\e_front.jpg"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T11:14:56.249Z",
+   "item": "living/right",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "541382474960fcddb2fe8b947b2ee48555a3be4e802a025747e532245b79aceb",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee5e-2146-79f0-9b2c-7364810037fe"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_views\\e_right.jpg"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T11:14:56.306Z",
+   "item": "living/back",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "d0826b0f6d3b4e6d08c4491fee2df4b7d1f1ded894f70ca1d7a591f4855c5186",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee5e-23ff-7882-bf87-d23a76514df9"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_views\\e_back.jpg"
+  },
+  {
+   "seq": 5,
+   "at": "2026-11-18T11:14:56.364Z",
+   "item": "living/left",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "ace056b62c78ce3285147977c7cf7d268757637480ab2ec37b2e4986ca6c65c7",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee5e-26cf-7a01-8da0-7229dafe1be2"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_views\\e_left.jpg"
+  },
+  {
+   "seq": 6,
+   "at": "2026-11-18T11:14:56.414Z",
+   "item": "living/down",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "348d426eb3f615eae08e6c5ed184dfc9a2f8f7821d8cf41dfa5ea2309f8e4a6c",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee5e-162f-7952-a806-bf079e609b8e"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_views\\e_down.jpg"
+  },
+  {
+   "seq": 7,
+   "at": "2026-11-18T11:40:51.475Z",
+   "item": "living/y000",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "01ecf9ccd0637065f5a0c90a3fe577dfaa07e948d66328b74a24dd53ac318876",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-da34-7992-9adf-485ca0b653a4"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y000.jpg"
+  },
+  {
+   "seq": 8,
+   "at": "2026-11-18T11:40:51.500Z",
+   "item": "living/y045",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "4a369343573fc863daf02df2f308b355d2e8cf5f0d19fd3dab7e00dabd9d21e1",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-c879-79d0-9465-a33609506f8e"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y045.jpg"
+  },
+  {
+   "seq": 9,
+   "at": "2026-11-18T11:40:51.507Z",
+   "item": "living/y090",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "d858626ebd46e86b8a1c807e93cfb4c09fc1f060cb7fb0f1815af787a3d0f37d",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-caec-7aa2-bf78-e4ad7f3af4c6"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y090.jpg"
+  },
+  {
+   "seq": 10,
+   "at": "2026-11-18T11:40:51.514Z",
+   "item": "living/y135",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "74946f0e179121c2dd71934e860c85e369758d7e3b66512456a498c96cc4dda5",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-cc96-7030-bd4e-776ddeaa34bf"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y135.jpg"
+  },
+  {
+   "seq": 11,
+   "at": "2026-11-18T11:40:51.522Z",
+   "item": "living/y180",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "ef830d3069e293ce25793fdd8d01a2c713945e5163a6af4c709cf24d1d9539ed",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-cca9-7fb1-8a6e-af2448bc1354"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y180.jpg"
+  },
+  {
+   "seq": 12,
+   "at": "2026-11-18T11:40:51.529Z",
+   "item": "living/y225",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "11ccbdff8dbb0ef913f1fac0d860e4e12d90f0c3b2d846d9f6814e37327db8f4",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-d0f7-7ab1-88aa-3bd1df1b9973"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y225.jpg"
+  },
+  {
+   "seq": 13,
+   "at": "2026-11-18T11:40:51.536Z",
+   "item": "living/y270",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "d92135bdce3d069a70640145c6ffb7095c0cccdd03027ada7c42f4b98c6e3a73",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-d77c-7702-8183-66ea7881f20c"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y270.jpg"
+  },
+  {
+   "seq": 14,
+   "at": "2026-11-18T11:40:51.545Z",
+   "item": "living/y315",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "6f227f12b3f63c747c4464f960c22650ee79856c90928db2b79935dcdd573c7e",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee75-ca32-7b90-bbea-2e8b433774f3"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\e_y315.jpg"
+  },
+  {
+   "seq": 15,
+   "at": "2026-11-18T11:41:58.106Z",
+   "item": "living/y000",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "055fab1d36edc3fd3bfe045166112565cd6516023a8f0164774390bed7600540",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee76-bbbb-7c43-8552-065a106a72dd"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\n_y000.jpg"
+  },
+  {
+   "seq": 16,
+   "at": "2026-11-18T11:41:58.139Z",
+   "item": "living/y180",
+   "op": "pano-view",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "aeaea0dc17b15c387bf0884b7f33a99eaf5afa53ea996c257ca7176c5b023034",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee76-ba0b-7082-b5e0-4c242709d130"
+   },
+   "settled_usd": 0.15,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\n_y180.jpg"
+  },
+  {
+   "seq": 17,
+   "at": "2026-11-18T11:42:47.184Z",
+   "item": "living/y000",
+   "op": "pano-view",
+   "model": "fal-ai/flux/dev/image-to-image",
+   "reserved_usd": 0.075,
+   "status": "settled",
+   "inputs_hash": "737d541de3092d0e66c55b4270bdbef8819f847eb2acd7cdeafd2828234f186f",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee77-7b43-7162-88d5-69b900fe3f24"
+   },
+   "settled_usd": 0.075,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\f35_y000.jpg"
+  },
+  {
+   "seq": 18,
+   "at": "2026-11-18T11:42:47.208Z",
+   "item": "living/y180",
+   "op": "pano-view",
+   "model": "fal-ai/flux/dev/image-to-image",
+   "reserved_usd": 0.075,
+   "status": "settled",
+   "inputs_hash": "27ddd5e7c9fdd276b114e46649ac5c85c0201b8e72868491bd56c4eda0b107e2",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee77-7a9c-7e60-aed9-4a0e01edd775"
+   },
+   "settled_usd": 0.075,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\f35_y180.jpg"
+  },
+  {
+   "seq": 19,
+   "at": "2026-11-18T11:43:07.200Z",
+   "item": "living/y000",
+   "op": "pano-view",
+   "model": "fal-ai/flux/dev/image-to-image",
+   "reserved_usd": 0.075,
+   "status": "settled",
+   "inputs_hash": "23f9ec135404c276a2a5322a9a1afde3cf660145f9ba79dfc7e7d356399312a8",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee77-c901-7c53-bbfb-1b4df9085d3a"
+   },
+   "settled_usd": 0.075,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\f50_y000.jpg"
+  },
+  {
+   "seq": 20,
+   "at": "2026-11-18T11:43:07.228Z",
+   "item": "living/y180",
+   "op": "pano-view",
+   "model": "fal-ai/flux/dev/image-to-image",
+   "reserved_usd": 0.075,
+   "status": "settled",
+   "inputs_hash": "a7d70e2a7cc38232464d192b3a5c50b3abe26d8a251a822e813905f05b0008e6",
+   "seed": 7,
+   "queue": {
+    "request_id": "01a1ee77-c73c-7012-94cf-8689a0ccb872"
+   },
+   "settled_usd": 0.075,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\f50_y180.jpg"
+  },
+  {
+   "seq": 21,
+   "at": "2026-11-18T11:44:47.057Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-pro/kontext/max/multi",
+   "reserved_usd": 0.08,
+   "status": "settled",
+   "inputs_hash": "88e4faaec5e1fab59b79d9d872155d05d2b5fe8b570f6b2bb985ad9c7f84127c",
+   "queue": {
+    "request_id": "01a1ee79-6f6b-7ae1-b591-fbef1c20a618"
+   },
+   "settled_usd": 0.08,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_kontextmax_y000.jpg"
+  },
+  {
+   "seq": 22,
+   "at": "2026-11-18T11:44:47.201Z",
+   "item": "living/y180",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-pro/kontext/max/multi",
+   "reserved_usd": 0.08,
+   "status": "settled",
+   "inputs_hash": "31bef7600c9005be22d39b489cfef89fb4e0d59aff1947ca1528fb59ac06e6bd",
+   "queue": {
+    "request_id": "01a1ee79-723b-7d81-98a9-d9df8784c2d8"
+   },
+   "settled_usd": 0.08,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_kontextmax_y180.jpg"
+  },
+  {
+   "seq": 23,
+   "at": "2026-11-18T11:44:47.218Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-pro/kontext",
+   "reserved_usd": 0.04,
+   "status": "settled",
+   "inputs_hash": "8c9a3d727bd3126c13326aae32f0f79f25baa91317bf1440d401332391ba7ae0",
+   "queue": {
+    "request_id": "01a1ee79-6a8e-7a01-ac6b-e343f8fdebc7"
+   },
+   "settled_usd": 0.04,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_kontext_y000.jpg"
+  },
+  {
+   "seq": 24,
+   "at": "2026-11-18T11:44:47.276Z",
+   "item": "living/y180",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-pro/kontext",
+   "reserved_usd": 0.04,
+   "status": "settled",
+   "inputs_hash": "4b26a50a981694535ee9ed819a9be6679ff5ac9a5d2034686b648905052984d9",
+   "queue": {
+    "request_id": "01a1ee79-6507-7bc2-acc2-3c5cc77605cf"
+   },
+   "settled_usd": 0.04,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_kontext_y180.jpg"
+  },
+  {
+   "seq": 25,
+   "at": "2026-11-18T11:44:47.334Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/qwen-image-edit-plus",
+   "reserved_usd": 0.08,
+   "status": "settled",
+   "inputs_hash": "91059b64d07cffb4e8695870f905e6c02768ce45283facd25e1e0d30151d12f2",
+   "queue": {
+    "request_id": "01a1ee79-70fd-7c23-bdc2-122e399a7757"
+   },
+   "settled_usd": 0.08,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_qwen_y000.jpg"
+  },
+  {
+   "seq": 26,
+   "at": "2026-11-18T11:44:47.454Z",
+   "item": "living/y180",
+   "op": "view-bakeoff",
+   "model": "fal-ai/qwen-image-edit-plus",
+   "reserved_usd": 0.08,
+   "status": "settled",
+   "inputs_hash": "08cde2d968011ef730d1e8a48f6049197fa1d5caa93936d1032807328c0c9c75",
+   "queue": {
+    "request_id": "01a1ee79-71cc-7210-9d2b-acc0407f62a2"
+   },
+   "settled_usd": 0.08,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_qwen_y180.jpg"
+  },
+  {
+   "seq": 27,
+   "at": "2026-11-18T11:44:47.471Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/bytedance/seedream/v4/edit",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "ab4024a739c7f3f45fee14d1fe750cd41a07787a8dc6f85c6a6abcb47219b003",
+   "queue": {
+    "request_id": "01a1ee79-7bb5-7da1-8400-69e349235efe"
+   },
+   "settled_usd": 0.03,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_seedream_y000.jpg"
+  },
+  {
+   "seq": 28,
+   "at": "2026-11-18T11:44:47.542Z",
+   "item": "living/y180",
+   "op": "view-bakeoff",
+   "model": "fal-ai/bytedance/seedream/v4/edit",
+   "reserved_usd": 0.03,
+   "status": "settled",
+   "inputs_hash": "7342f7732decec78e5473c4125ec17783a30fec7d602b0b7fd40f777825c55a3",
+   "queue": {
+    "request_id": "01a1ee79-6b90-7c50-8ae4-7905a3b4d12d"
+   },
+   "settled_usd": 0.03,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_seedream_y180.jpg"
+  },
+  {
+   "seq": 29,
+   "at": "2026-11-18T11:44:47.743Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/gemini-25-flash-image/edit",
+   "reserved_usd": 0.039,
+   "status": "settled",
+   "inputs_hash": "98aeb5cd4e691be05267c490ddbab5dba69ce8a0c953de7cd81ba4d9676ff747",
+   "queue": {
+    "request_id": "01a1ee79-7896-7e31-9272-6d26387e4ab1"
+   },
+   "settled_usd": 0.039,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_gemini_y000.jpg"
+  },
+  {
+   "seq": 30,
+   "at": "2026-11-18T11:44:47.833Z",
+   "item": "living/y180",
+   "op": "view-bakeoff",
+   "model": "fal-ai/gemini-25-flash-image/edit",
+   "reserved_usd": 0.039,
+   "status": "settled",
+   "inputs_hash": "c5c56b25af6f4a1d14699d03a281d05cabad3b4148b90450bcbf88b0ca162132",
+   "queue": {
+    "request_id": "01a1ee79-7654-7e33-9ceb-fc77593b5d41"
+   },
+   "settled_usd": 0.039,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\bo_gemini_y180.jpg"
+  },
+  {
+   "seq": 31,
+   "at": "2026-11-18T11:47:34.644Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-general/image-to-image +tile",
+   "reserved_usd": 0.1,
+   "status": "settled",
+   "settled_usd": 0.1,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\ft60_y000.jpg"
+  },
+  {
+   "seq": 32,
+   "at": "2026-11-18T11:49:58.602Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-general/image-to-image +tile",
+   "reserved_usd": 0.1,
+   "status": "settled",
+   "settled_usd": 0.1,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\ft75_y000.jpg"
+  },
+  {
+   "seq": 33,
+   "at": "2026-11-18T11:50:23.081Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-general/image-to-image +tile",
+   "reserved_usd": 0.1,
+   "status": "settled",
+   "settled_usd": 0.1,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\ft85_y000.jpg"
+  },
+  {
+   "seq": 34,
+   "at": "2026-11-18T11:51:11.827Z",
+   "item": "living/y000",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-general/image-to-image +tile",
+   "reserved_usd": 0.1,
+   "status": "settled",
+   "settled_usd": 0.1,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\ft80c0.35_y000.jpg"
+  },
+  {
+   "seq": 35,
+   "at": "2026-11-18T11:52:26.641Z",
+   "item": "living/y180",
+   "op": "view-bakeoff",
+   "model": "fal-ai/flux-general/image-to-image +tile",
+   "reserved_usd": 0.1,
+   "status": "settled",
+   "settled_usd": 0.1,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_v8\\ft80c0.35_y180.jpg"
+  },
+  {
+   "seq": 36,
+   "at": "2026-11-18T12:31:07.647Z",
+   "item": "living",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "43916aa64c0d201fb0049235e5d433d48c493a1b6f52c54cff3b98ed7e038d5e",
+   "queue": {
+    "request_id": "01a1eea3-c9aa-78b3-865b-e0540ec3e732"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\living_gpt.jpg"
+  },
+  {
+   "seq": 37,
+   "at": "2026-11-18T13:30:19.642Z",
+   "item": "living",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "0f2acaff22c21f668e8fbff74075de0183f31d3f53dc9cdf23a21c4e812ac84f",
+   "settled_usd": 1.2,
+   "note": "settled by hand: output exists, a parallel run overwrote the settle"
+  },
+  {
+   "seq": 38,
+   "at": "2026-11-18T13:30:21.653Z",
+   "item": "dining",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "02088a59b432554f81be26565b6e316a0185cc87597e3caea7a69540ebfbcd75",
+   "queue": {
+    "request_id": "01a1eed9-f67b-7cb3-809f-5e9bbf96efbe"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\dining_gpt.jpg"
+  },
+  {
+   "seq": 40,
+   "at": "2026-11-18T15:31:46.695171",
+   "item": "kitchen",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "settled_usd": 1.2,
+   "status": "settled",
+   "note": "row restored: 4 parallel runs overwrote each other (output file exists)"
+  },
+  {
+   "seq": 41,
+   "at": "2026-11-18T15:31:46.695180",
+   "item": "foyer",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "settled_usd": 1.2,
+   "status": "settled",
+   "note": "row restored: 4 parallel runs overwrote each other (output file exists)"
+  },
+  {
+   "seq": 41,
+   "at": "2026-11-18T13:40:37.663Z",
+   "item": "corridor",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "60102335b9c7266aab93a2ea437036e783cb8c5b749eb45c0842dae48fc47dde",
+   "queue": {
+    "request_id": "01a1eee3-5bfe-7952-92c3-c197d9c9b0d1"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\corridor_gpt.jpg"
+  },
+  {
+   "seq": 42,
+   "at": "2026-11-18T13:45:46.493Z",
+   "item": "master",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "0d2b9d9dd195439bf1aa8b909937d8592b50088d3a6f8f2198c093461c3bf1e1",
+   "queue": {
+    "request_id": "01a1eee8-1baa-7171-b6bf-2c4e0cbcd564"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\master_gpt.jpg"
+  },
+  {
+   "seq": 43,
+   "at": "2026-11-18T13:53:33.297Z",
+   "item": "ensuite",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "146356ecc344c547ee0a29207352f861f3b612ea56ce998e59bed2be3655ceb1",
+   "queue": {
+    "request_id": "01a1eeef-3784-7f53-8384-491b119426ae"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\ensuite_gpt.jpg"
+  },
+  {
+   "seq": 44,
+   "at": "2026-11-18T13:59:33.832Z",
+   "item": "mamad",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "c97bfb204c7b20a3ec7aca06957c4ab6ec1f51575835031eb456f6142e4c2026",
+   "queue": {
+    "request_id": "01a1eef5-00ac-7832-887d-126891d0ea6e"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\mamad_gpt.jpg"
+  },
+  {
+   "seq": 45,
+   "at": "2026-11-18T14:07:48.588Z",
+   "item": "bedroom",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "a90e105b8148a87f793cdd57cad72071722c37d1ac2bfab9a3ee09ac2929750d",
+   "queue": {
+    "request_id": "01a1eefc-6963-7a92-b880-8f8b20c8c60d"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\bedroom_gpt.jpg"
+  },
+  {
+   "seq": 46,
+   "at": "2026-11-18T18:15:45.704Z",
+   "item": "balcony",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "efe2afd405ef44dbaf7afaa50df45ab00a13471be575f55fdd9dfa3b5853cc3f",
+   "queue": {
+    "request_id": "01a1efdf-3dad-76e1-a8dd-27f4294a665b"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\balcony_gpt.jpg"
+  },
+  {
+   "seq": 47,
+   "at": "2026-11-18T18:25:23.118Z",
+   "item": "bath",
+   "op": "pano-gpt",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "a1391a8aa10b927f85f147fb9c47179588c1fc9c1186fdd678c93ab1975fff07",
+   "queue": {
+    "request_id": "01a1efe8-0f50-7330-9ec1-b0f04412c44b"
+   },
+   "settled_usd": 1.2,
+   "out": "c:\\RnD\\.wt\\avnei-hefetz-kedem-4\\Projects\\Avney_Hefets_Kedem_4\\work\\pano-ai\\bath_gpt.jpg"
+  }
+ ],
+ "cap_note": "Eliran 2026-11-18 dialog: «מאשר עד $20» for the 360 realism pass (GPT Image 2.5, all 11 rooms)"
+}

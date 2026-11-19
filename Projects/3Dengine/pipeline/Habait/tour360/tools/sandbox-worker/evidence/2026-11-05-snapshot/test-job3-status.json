@@ -1,0 +1,33 @@
+<claude-code-hint v="1" type="plugin" value="vercel@claude-plugins-official" />
+{
+ "id": "jtmw3euv45",
+ "project": "ptmw3euv45",
+ "state": "failed",
+ "stage": "trace",
+ "percent": 10,
+ "needs": null,
+ "review": null,
+ "sandbox": {
+  "id": null,
+  "name": "job-jtmw3euv45-1",
+  "stage": "trace",
+  "vcpus": 2,
+  "timeoutMin": 30,
+  "started": "2026-11-05T10:36:46.129Z",
+  "snapshot": "snap_DXWv2R1bYGj8Q9ItGqBhsfg3UkQc",
+  "estUsd": 0.1704,
+  "ended": "2026-11-05T10:36:56.939Z",
+  "minutes": 0.2
+ },
+ "dispatches": 1,
+ "heartbeat": "2026-11-05T10:36:56.939Z",
+ "executor": "ef28b32e-7d8:656",
+ "error": "auto-trace failed (exit 1): [auto-trace 4s] plan 1: 3156×4257 (page 1) | [auto-trace 5s] auto_prep: sheet mode (saturated 0.00 %), unchanged | auto-trace: no FAL_KEY / OPENROUTER_API_KEY in the environment or the .env (--env-root)",
+ "log": [
+  "10:36:38 נכנס לתור הבנייה (בדיקת שרת העבודות)",
+  "10:36:47 הבנייה הופעלה בשרת (שרטוט ובדיקה, ניסיון 1)",
+  "10:36:51 הורדו 1 קבצים והקריאה המאושרת",
+  "10:36:51 הסוכן משרטט את הדירה מתוך תכנית המכר ובודק אותה מול התכנית",
+  "10:36:56 נכשל: auto-trace failed (exit 1): [auto-trace 4s] plan 1: 3156×4257 (page 1) | [auto-trace 5s] auto_prep: sheet mode (saturated 0.00 %), unchanged | auto-trace: no FAL_KEY / OPENROUTER_API_KEY in the enviro"
+ ]
+}

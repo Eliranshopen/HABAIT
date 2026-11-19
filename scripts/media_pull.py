@@ -35,6 +35,12 @@ ITEMS = [
     (W + r"\platform\node_modules", "dir"),
     (W + r"\studio\node_modules", "dir"),
     (W + r"\tour360\engine\node_modules", "dir"),
+    # the final CG renders the painters and the consistency judge read as the structure reference (gitignored pano.webp);
+    # 2026-11-10 (rainbow-sim-fixes): close-seam refused "no CG render" in a worktree without them
+] + [
+    (r"Projects\Habait\habait-walkaround\360walkaround\tours\apt846-furnished\renders\%s\pano.webp" % cam, "file")
+    for cam in ("cp-entrance", "cp-kitchen", "cp-dining", "cp-living", "cp-terraceLiving", "cp-terraceBedroom",
+                "cp-bedroomMain", "cp-wardrobe", "cp-bathMain", "cp-bedroom2", "cp-bathguest")
 ]
 
 

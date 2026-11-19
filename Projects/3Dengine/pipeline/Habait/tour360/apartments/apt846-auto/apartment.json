@@ -1,0 +1,65 @@
+{
+ "$schema": "tour360/apartment.v1",
+ "id": "apt846-auto",
+ "status": "concept",
+ "title": {
+  "he": "דירה 846 · קומה 16 · RAINBOW TEL AVIV – TOWER-RED Tel Aviv (הדמיה)",
+  "en": "Apartment 846 · floor 16 · RAINBOW TEL AVIV – TOWER-RED Tel Aviv (concept)",
+  "fr": "Appartement 846 · étage 16 · RAINBOW TEL AVIV – TOWER-RED Tel Aviv (concept)"
+ },
+ "project": null,
+ "projectNote": "built by tools/run-project.mjs from the sales-plan trace plan.general.json (sha256 bd58bf250fb9) and the portal's approved reading; the CG look until the gated skin exists",
+ "plan": {
+  "image": "plan/floorplan.webp",
+  "imageSize": [
+   1500,
+   1560
+  ],
+  "viewBox": [
+   86,
+   53,
+   1253,
+   1507
+  ],
+  "labelsLanguage": "he",
+  "northDeg": null,
+  "northSource": "the portal reading of the sales plan (spec.json drawing.north_deg_clockwise_from_up)"
+ },
+ "sets": {
+  "balanced": {
+   "dir": "panos/balanced",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true
+  },
+  "thumb": {
+   "dir": "panos/thumb",
+   "width": 640,
+   "height": 320,
+   "format": "webp",
+   "tracked": true
+  },
+  "original": {
+   "dir": "panos/original",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true,
+   "note": "the plain CG render of each camera (360walkaround/tours/<id>/renders/cp-*/pano.webp)"
+  }
+ },
+ "defaultScene": "living",
+ "returnUrl": "../landing.html?project=apt846-auto",
+ "disclosure": {
+  "badgeKey": "badge",
+  "conceptLineKey": "conceptLine",
+  "aiNoteKey": "aiNote",
+  "copyPack": "../../copy/tour360-copy.json",
+  "permanent": true
+ },
+ "provenance": {
+  "generation": "CG only: Blender Cycles 2048x1024, 16 spp, furniture by rule (furnish_from_plan.py); no AI image in this apartment",
+  "enhancement": "none"
+ }
+}

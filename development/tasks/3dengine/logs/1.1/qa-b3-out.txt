@@ -1,0 +1,90 @@
+junction: Junction created for C:\Users\elira\AppData\Local\Temp\qa-m11-home-18864-1794907513619-1\uploads\junc <<===>> C:\Users\elira\AppData\Local\Temp\qa-m11-home-18864-1794907513619-1\outside
+symlink: You do not have sufficient privilege to perform this operation.
+hardlink: Hardlink created for C:\Users\elira\AppData\Local\Temp\qa-m11-home-18864-1794907513619-1\uploads\hard.pdf <<===>> C:\Users\elira\AppData\Local\Temp\qa-m11-home-18864-1794907513619-1\outside\s.pdf
+short home: C:\"C:\Users\elira\AppData\Local\Temp\qa-m11-home-18864-1794907513619-1\"
+inspect_plan     dotdot fwd               PATH_NOT_ALLOWED 
+start_simulation dotdot fwd               PATH_NOT_ALLOWED 
+inspect_plan     dotdot back              PATH_NOT_ALLOWED 
+start_simulation dotdot back              PATH_NOT_ALLOWED 
+inspect_plan     dotdot mixed             PATH_NOT_ALLOWED 
+start_simulation dotdot mixed             PATH_NOT_ALLOWED 
+inspect_plan     dotdot deep              PATH_NOT_ALLOWED 
+start_simulation dotdot deep              PATH_NOT_ALLOWED 
+inspect_plan     junction                 PATH_NOT_ALLOWED 
+start_simulation junction                 PATH_NOT_ALLOWED 
+inspect_plan     junction+dotdot          NOT_A_PDF 
+start_simulation junction+dotdot          NOT_A_PDF 
+inspect_plan     symlink file             NOT_A_PDF 
+start_simulation symlink file             NOT_A_PDF 
+inspect_plan     prefix sibling           PATH_NOT_ALLOWED 
+start_simulation prefix sibling           PATH_NOT_ALLOWED 
+inspect_plan     prefix via dotdot        PATH_NOT_ALLOWED 
+start_simulation prefix via dotdot        PATH_NOT_ALLOWED 
+inspect_plan     extended-prefix outside  PATH_NOT_ALLOWED 
+start_simulation extended-prefix outside  PATH_NOT_ALLOWED 
+inspect_plan     extended-prefix dotdot   PATH_NOT_ALLOWED 
+start_simulation extended-prefix dotdot   PATH_NOT_ALLOWED 
+inspect_plan     UNC localhost outside    PATH_NOT_ALLOWED 
+start_simulation UNC localhost outside    PATH_NOT_ALLOWED 
+inspect_plan     UNC 127 outside          PATH_NOT_ALLOWED 
+start_simulation UNC 127 outside          PATH_NOT_ALLOWED 
+inspect_plan     UNC dotdot               PATH_NOT_ALLOWED 
+start_simulation UNC dotdot               PATH_NOT_ALLOWED 
+inspect_plan     drive-relative           PATH_NOT_ALLOWED 
+start_simulation drive-relative           PATH_NOT_ALLOWED 
+inspect_plan     ADS outside ::$DATA      PATH_NOT_ALLOWED 
+start_simulation ADS outside ::$DATA      PATH_NOT_ALLOWED 
+inspect_plan     ADS outside :x           PATH_NOT_ALLOWED 
+start_simulation ADS outside :x           PATH_NOT_ALLOWED 
+inspect_plan     trailing dot outside     PATH_NOT_ALLOWED 
+start_simulation trailing dot outside     PATH_NOT_ALLOWED 
+inspect_plan     trailing space outside   PATH_NOT_ALLOWED 
+start_simulation trailing space outside   PATH_NOT_ALLOWED 
+inspect_plan     trailing dot dir         PATH_NOT_ALLOWED 
+start_simulation trailing dot dir         PATH_NOT_ALLOWED 
+inspect_plan     short 8.3 outside        PATH_NOT_ALLOWED 
+start_simulation short 8.3 outside        PATH_NOT_ALLOWED 
+inspect_plan     upper outside            PATH_NOT_ALLOWED 
+start_simulation upper outside            PATH_NOT_ALLOWED 
+inspect_plan     NUL                      PATH_NOT_ALLOWED 
+start_simulation NUL                      PATH_NOT_ALLOWED 
+inspect_plan     NUL only                 PATH_NOT_ALLOWED 
+start_simulation NUL only                 PATH_NOT_ALLOWED 
+inspect_plan     long path                PATH_NOT_ALLOWED 
+start_simulation long path                PATH_NOT_ALLOWED 
+inspect_plan     very long name           NOT_A_PDF 
+start_simulation very long name           NOT_A_PDF 
+inspect_plan     empty                    PATH_NOT_ALLOWED 
+start_simulation empty                    PATH_NOT_ALLOWED 
+inspect_plan     space                    PATH_NOT_ALLOWED 
+start_simulation space                    PATH_NOT_ALLOWED 
+inspect_plan     dot                      PATH_NOT_ALLOWED 
+start_simulation dot                      PATH_NOT_ALLOWED 
+inspect_plan     inbox dir itself         NOT_A_PDF 
+start_simulation inbox dir itself         NOT_A_PDF 
+inspect_plan     relative to home         PATH_NOT_ALLOWED 
+start_simulation relative to home         PATH_NOT_ALLOWED 
+inspect_plan     relative ..              PATH_NOT_ALLOWED 
+start_simulation relative ..              PATH_NOT_ALLOWED 
+inspect_plan     file: url                PATH_NOT_ALLOWED 
+start_simulation file: url                PATH_NOT_ALLOWED 
+inspect_plan     tilde                    PATH_NOT_ALLOWED 
+start_simulation tilde                    PATH_NOT_ALLOWED 
+inspect_plan     env var                  PATH_NOT_ALLOWED 
+start_simulation env var                  PATH_NOT_ALLOWED 
+inspect_plan     con device               PATH_NOT_ALLOWED 
+start_simulation con device               PATH_NOT_ALLOWED 
+inspect_plan     nul device               PATH_NOT_ALLOWED 
+start_simulation nul device               PATH_NOT_ALLOWED 
+inspect_plan     pipe                     PATH_NOT_ALLOWED 
+start_simulation pipe                     PATH_NOT_ALLOWED 
+inspect_plan     device path              PATH_NOT_ALLOWED 
+start_simulation device path              PATH_NOT_ALLOWED 
+legit Hebrew name    OK C:/Users/elira/AppData/Local/Temp/qa-m11-home-18864-1794907513619-1/uploads/תכנית מכר 846 דירה.pdf
+legit spaces         OK C:/Users/elira/AppData/Local/Temp/qa-m11-home-18864-1794907513619-1/uploads/a b  c.pdf
+legit mixed slashes  OK C:/Users/elira/AppData/Local/Temp/qa-m11-home-18864-1794907513619-1/uploads/a.pdf
+legit UPPER inbox    OK C:/Users/elira/AppData/Local/Temp/qa-m11-home-18864-1794907513619-1/uploads/a.pdf
+legit extended inbox OK C:/Users/elira/AppData/Local/Temp/qa-m11-home-18864-1794907513619-1/uploads/a.pdf
+legit short inbox PATH_NOT_ALLOWED pdf_path is outside the allowed upload folders
+ATTEMPTS 84 ACCEPTED-outside-or-odd 0
+hebrew start pdf_name: תכנית מכר 846 דירה.pdf copy exists true

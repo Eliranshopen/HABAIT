@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B · Midnight Sea & Bronze</title>
+<link rel="stylesheet" href="../css/tokens.css"><link rel="stylesheet" href="../css/components.css">
+<style>
+/* DIRECTION B — "Midnight Sea & Bronze": the sea at dusk. Midnight #0A1A28, deep sea #10283B, sand #EDE3D3 text, bronze #C08E5C accent
+   (large type and lines; 6.6:1 on midnight). Heebo ExtraLight/200 at huge sizes for the display (architectural, modern), Frank Ruhl
+   Libre only for the RAINBOW wordmark. The film sits in a framed "window" with wide margins — a gallery, not a banner. */
+:root{--bg:#0A1A28;--deep:#10283B;--sand:#EDE3D3;--muted:rgb(237 227 211/.7);--bronze:#C08E5C;--line:rgb(192 142 92/.32)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--sand);font-family:'Heebo',sans-serif;font-weight:300}
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px clamp(16px,4vw,56px);font-size:13px}
+.top nav{display:flex;gap:26px;align-items:center}.top a{color:var(--sand);text-decoration:none;opacity:.85}
+.brand{font-family:'Frank Ruhl Libre',serif;letter-spacing:.34em;font-size:15px;color:var(--bronze)}
+.pill{border:1px solid var(--line);border-radius:999px;padding:10px 18px;min-height:44px;display:inline-flex;align-items:center}
+.hero{display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,64px);align-items:end;padding:clamp(12px,3vw,40px) clamp(16px,4vw,56px) clamp(40px,7vh,80px);min-height:calc(100svh - 88px)}
+.hcopy{display:grid;gap:22px;padding-bottom:12px}
+.kick{font-size:12px;letter-spacing:.3em;color:var(--bronze);margin:0;display:flex;gap:12px;align-items:center}.kick::before{content:'';width:40px;height:1px;background:var(--bronze)}
+h1{font-weight:200;font-size:clamp(2.8rem,1rem + 5.4vw,6.4rem);line-height:.98;margin:0;letter-spacing:-.01em}
+h1 b{font-weight:500;color:var(--bronze)}
+.sub{color:var(--muted);font-size:1.1rem;line-height:1.7;max-width:34ch;margin:0}
+.cta{justify-self:start;display:inline-flex;gap:14px;align-items:center;min-height:52px;padding:0 28px;background:var(--sand);color:var(--bg);border-radius:2px;font-weight:500;text-decoration:none;font-size:16px}
+.win{position:relative;height:min(78svh,820px);overflow:hidden;border-radius:2px}
+.win img{width:100%;height:100%;object-fit:cover;object-position:44% 50%;display:block}
+.win .hb-ai-badge{position:absolute;bottom:16px;inset-inline-end:16px}
+.win .cap{position:absolute;top:18px;inset-inline-start:18px;font-family:'Frank Ruhl Libre',serif;letter-spacing:.34em;font-size:clamp(1.6rem,1rem+2vw,3rem);color:#fff;direction:ltr;text-shadow:0 2px 24px rgb(0 0 0/.35)}
+.sec{background:var(--deep);padding:clamp(64px,10vw,140px) clamp(16px,4vw,56px);display:grid;grid-template-columns:7fr 5fr;gap:clamp(24px,5vw,80px);align-items:center}
+.sec figure{margin:0;position:relative;aspect-ratio:1056/696;overflow:hidden;border-radius:2px}.sec figure img{width:100%;height:100%;object-fit:cover}
+.sec figure .hb-ai-badge{position:absolute;top:16px;inset-inline-end:16px}
+h2{font-weight:200;font-size:clamp(2.2rem,1rem + 3.4vw,4.6rem);line-height:1;margin:0 0 18px}h2 b{font-weight:500;color:var(--bronze)}
+.n{font-size:12px;letter-spacing:.3em;color:var(--bronze);margin:0 0 18px}
+.sec p.t{color:var(--muted);line-height:1.7;max-width:36ch;margin:0}
+@media (max-width:760px){.top nav a:not(.pill){display:none}.hero{grid-template-columns:1fr;align-items:start;padding-top:0}.win{height:58svh;order:-1}.sec{grid-template-columns:1fr}}
+</style></head><body>
+<header class="top"><span class="brand" lang="en">RAINBOW</span><nav><a href="#">המיקום</a><a href="#">האדריכלות</a><a href="#">החוויה</a><a class="pill" href="#">EN</a></nav></header>
+<section class="hero"><div class="hcopy"><p class="kick">תל אביב · על קו הים</p><h1>מגדל על קו הים.<br><b>לפני שהוא קם.</b></h1>
+  <p class="sub">מגדל מגורים על קו הים בתל אביב. סיירו בו בטיסה, עצרו מול החזית, היכנסו פנימה.</p><a class="cta" href="#">לסיור בפרויקט <span aria-hidden="true">←</span></a></div>
+  <div class="win"><img src="../fixtures/rainbow/landing/hero-poster-1920.jpg" alt=""><span class="cap" lang="en">RAINBOW</span><span class="hb-ai-badge">הדמיה · <bdi>AI-generated</bdi></span></div></section>
+<section class="sec"><figure><img src="../fixtures/rainbow/landing/renders/the-2-1056.jpg" alt=""><span class="hb-ai-badge">הדמיה</span></figure>
+  <div><p class="n">02 — האדריכלות</p><h2>המגדל<br><b>בשעת ערב</b></h2><p class="t">המגדל והבניינים הנמוכים שלצידו, מול הים — כפי שהם נראים בהדמיות הפרויקט.</p></div></section>
+</body></html>

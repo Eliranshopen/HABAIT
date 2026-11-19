@@ -1,0 +1,182 @@
+{
+  "when": "2026-11-18T19:05:31.121Z",
+  "plain": "http://127.0.0.1:8940",
+  "stub": "http://127.0.0.1:8941",
+  "cells": [
+    {
+      "name": "desktop-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "checks": {
+        "opens on living": {
+          "pass": true,
+          "note": "living"
+        },
+        "living panorama requested 200": {
+          "pass": true,
+          "note": "200 /panos-full/living.webp"
+        },
+        "living panorama painted (centre stdev > 8)": {
+          "pass": true,
+          "note": 53.7
+        },
+        "badge הדמיה visible": {
+          "pass": true
+        },
+        "original/designed switch": {
+          "pass": true,
+          "note": "on"
+        },
+        "strip switches to kitchen": {
+          "pass": true,
+          "note": "kitchen"
+        },
+        "a door marker moves to another room": {
+          "pass": true,
+          "note": "3 door markers in the DOM; now dining"
+        },
+        "plan sheet opens (with pins)": {
+          "pass": true,
+          "note": "pins/marks 22"
+        },
+        "measure tool present": {
+          "pass": true
+        },
+        "English second (lang=en)": {
+          "pass": true,
+          "note": "{\"lang\":\"en\",\"dir\":\"ltr\",\"room\":\"Living room\"}"
+        },
+        "no page errors": {
+          "pass": true,
+          "note": ""
+        },
+        "stub host: page unlocks": {
+          "pass": true,
+          "note": "{\"unlocked\":true,\"rings\":4,\"ringsVisible\":2}"
+        },
+        "stub host: rings drawn in living": {
+          "pass": true,
+          "note": "{\"unlocked\":true,\"rings\":4,\"ringsVisible\":2}"
+        },
+        "stub host: free-text design line shown": {
+          "pass": true
+        },
+        "stub host: a ring opens the pick bar with our items": {
+          "pass": true,
+          "note": "{\"chip\":\"בחרו פריט במקום הספה\",\"items\":[\"sofa-boucle\",\"sofa-leather\",\"sofa-linen\"]}"
+        },
+        "stub host: no page errors": {
+          "pass": true,
+          "note": ""
+        }
+      },
+      "shots": [
+        "desktop-1440-01-living.png",
+        "desktop-1440-02-kitchen.png",
+        "desktop-1440-03-after-door.png",
+        "desktop-1440-04-plan.png",
+        "desktop-1440-05-tools.png",
+        "desktop-1440-06-en.png",
+        "desktop-1440-07-unlocked.png",
+        "desktop-1440-08-pick.png"
+      ],
+      "errors": [],
+      "failed": []
+    },
+    {
+      "name": "phone-390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": {
+        "opens on living": {
+          "pass": true,
+          "note": "living"
+        },
+        "living panorama requested 200": {
+          "pass": true,
+          "note": "200 /panos/living.webp"
+        },
+        "living panorama painted (centre stdev > 8)": {
+          "pass": true,
+          "note": 58.8
+        },
+        "badge הדמיה visible": {
+          "pass": true
+        },
+        "original/designed switch": {
+          "pass": true,
+          "note": "on"
+        },
+        "strip switches to kitchen": {
+          "pass": true,
+          "note": "kitchen"
+        },
+        "a door marker moves to another room": {
+          "pass": true,
+          "note": "3 door markers in the DOM; now dining"
+        },
+        "plan sheet opens (with pins)": {
+          "pass": true,
+          "note": "pins/marks 22"
+        },
+        "measure tool present": {
+          "pass": true
+        },
+        "English second (lang=en)": {
+          "pass": true,
+          "note": "{\"lang\":\"en\",\"dir\":\"ltr\",\"room\":\"Living room\"}"
+        },
+        "phone: no walking arrows (no walk pad / walk HUD; the ‹ room › switcher is room navigation)": {
+          "pass": true,
+          "note": "{\"roomSwitcher\":true,\"navHud\":false,\"walkControls\":0,\"buttons\":11}"
+        },
+        "no page errors": {
+          "pass": true,
+          "note": ""
+        },
+        "stub host: page unlocks": {
+          "pass": true,
+          "note": "{\"unlocked\":true,\"rings\":4,\"ringsVisible\":2}"
+        },
+        "stub host: rings drawn in living": {
+          "pass": true,
+          "note": "{\"unlocked\":true,\"rings\":4,\"ringsVisible\":2}"
+        },
+        "stub host: free-text design line shown": {
+          "pass": true
+        },
+        "stub host: a ring opens the pick bar with our items": {
+          "pass": true,
+          "note": "{\"chip\":\"בחרו פריט במקום הספה\",\"items\":[\"sofa-boucle\",\"sofa-leather\",\"sofa-linen\"]}"
+        },
+        "stub host: no page errors": {
+          "pass": true,
+          "note": ""
+        }
+      },
+      "shots": [
+        "phone-390-01-living.png",
+        "phone-390-02-kitchen.png",
+        "phone-390-03-after-door.png",
+        "phone-390-04-plan.png",
+        "phone-390-05-tools.png",
+        "phone-390-06-en.png",
+        "phone-390-07-unlocked.png",
+        "phone-390-08-pick.png"
+      ],
+      "phone": {
+        "roomSwitcher": true,
+        "navHud": false,
+        "walkControls": 0,
+        "buttons": 11
+      },
+      "errors": [],
+      "failed": []
+    }
+  ],
+  "pass": true
+}

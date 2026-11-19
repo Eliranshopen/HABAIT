@@ -1,0 +1,8 @@
+# point-move-2026-11-11/ — context file
+<!-- last-updated: 2026-11-11 -->
+
+## Purpose
+Evidence for the tour's point-to-point movement (plan `development/plans/2026-11-11-tour-point-move.md`): the runs of `Habait/tour360/tools/point-move-check.mjs` on the stage `test-r27` (`stage/`) and on the live test link `dpl_2YWYd8WjesFdmiJMVMQSi1EsZ2cJ` (`live/`, with the live entry path log), the journey test log and the smoke log. The floor-arrows round of the same day (the pad replaced): `arrows-stage/` (stage `test-r28`) and `arrows-live/` (`dpl_Fmw6yZriYZZf8KH5HCAZT1gLPMbb`). The keyboard + joystick round (the floor arrows replaced): `keys-stage/` (stage `test-r29`) and `keys-live/` (`dpl_Ara2jqN8u6eHWGpmzT9bgUSWt7yx`). The walker round (↑ step, ← → turn, ↓ step back; the joystick stays): `walker-stage/` (stage `test-r30`) and `walker-live/` (`dpl_GC6YPJNzArWANbMU5BgxfGEee3h1`). The room-buttons round: `doors/` (the plan with the camera links, every button on its picture before and after, the scripts) and `doors-live/` (`dpl_DXyNBwkGWv5dctSWJXzJXvrXTAQc`). The last round (pins, walkthrough, 44 px): `r33/` — stage and live logs, the walkthrough shots, the failed gate report of `test-r32`, the button check log, the two failed live entry-path logs. `hall-probe/`: the passage viewpoint tried on the 3D model and dropped, and the model-vs-picture sheets. `r35/`: the final button audit, the button check (24/26), the entry trace before and after the hold change. `r37/`: the joystick removed and the entrance's suite button — stage and live logs, the live shots of that button, the button check (23/27). Record: `memory/project/2026-11-11-tour-point-move.md`.
+
+## Links
+Parent: [../CLAUDE.md](../CLAUDE.md)

@@ -1,17 +1,18 @@
 # apartments/ — context file
-<!-- last-updated: 2026-11-05 -->
+<!-- last-updated: 2026-11-10 -->
 <!-- generated-by: generate-cards.py · tables are facts from disk and regenerate; Purpose and Gotchas are kept as written -->
 
 ## Purpose
 One folder per apartment tour (apt846, demo-01), each with its plan, prompts, cameras and panoramas.
 
-## What's here (2026-11-05)
-0 files here · 2 subfolders · 888 files / 2.2 GB in the whole tree (vendor and build output excluded)
+## What's here (2026-11-10)
+0 files here · 3 subfolders · 2771 files / 3.6 GB in the whole tree (vendor and build output excluded)
 
 ## Subfolders
 | Folder | Card | Files in tree |
 |---|---|---|
-| `apt846/` | [`apt846/CLAUDE.md`](apt846/CLAUDE.md) | 836 (2.2 GB) |
+| `apt846/` | [`apt846/CLAUDE.md`](apt846/CLAUDE.md) | 2675 (3.6 GB) |
+| `apt846-auto/` | [`apt846-auto/CLAUDE.md`](apt846-auto/CLAUDE.md) | 44 (3.5 MB) |
 | `demo-01/` | [`demo-01/CLAUDE.md`](demo-01/CLAUDE.md) | 52 (8.2 MB) |
 
 ## Gotchas

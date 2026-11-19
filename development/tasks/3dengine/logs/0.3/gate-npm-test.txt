@@ -1,0 +1,249 @@
+
+> habait-3dengine@0.2.0 test
+> node --test --experimental-test-coverage --test-coverage-lines=80 "--test-coverage-include=engine/**/*.mjs" "--test-coverage-include=mcp/**/*.mjs" "tests/unit/**/*.test.mjs" "tests/milestones/**/*.test.mjs"
+
+✔ a. parity: run-project.mjs --parity → 41 rows · PASS (306.6903ms)
+✔ b. catalog: fetch.mjs --verify-only → 57/57 rows OK (346.2475ms)
+✔ c. readiness: the doctor reports ready except keys (2428.3506ms)
+✔ d. port identity: pipeline/ equals commit a63494a, blob for blob (943.9677ms)
+✔ initialize handshake, ping, tools/list = the eight tools with both schemas (275.8829ms)
+✔ engine_status answers in time with a stub-site check (447.752ms)
+✔ one full job: inspect → start → awaiting_approval → BUDGET_CAP → approve → done → result → the link answers 200 (1788.5697ms)
+✔ the same PDF again → created: false and the same job (5.7558ms)
+✔ cancel_job on a fresh job: cancelled, the runner stops (42.1836ms)
+✔ every stub reason code (79.1613ms)
+✔ protocol errors: -32601, -32602, -32700 (2.0154ms)
+✔ stdout held JSON-RPC lines only; every tools/call answered under 2 s (0.83ms)
+✔ 1. kill in the middle of a stage: the state stays, runner.alive false, rows for tracing and building only (1278.0842ms)
+✔ 2. resume: created false, resumed true; tracing and building untouched; rendering one row, attempt 2 (1034.8772ms)
+✔ 3. kill between reserve and settle: one orphaned and one settled row for that call_key; the job goes on (4148.3497ms)
+✔ 4. kill after the settle, before the manifest row: gating runs again (attempt 2), still ONE ledger row for its call (1004.2679ms)
+✔ 5. the end: done, one valid row per stage, spent = 3 × 0.6, the orphan reported apart, the link answers 200 (1614.2448ms)
+✔ 6. two jobs, one heavy lock: rendering never overlaps; the one that waited showed waiting_for "heavy-lock" (2266.3751ms)
+✔ 7. restart after cancel: resumed, finishes, no stage that was done before the cancel ran again (4151.0182ms)
+✔ every engine/**/*.mjs and mcp/**/*.mjs imports cleanly (81.2106ms)
+✔ help and no command (2.3911ms)
+✔ unknown command → usage on stderr, exit 2 (0.4105ms)
+✔ doctor: exit 0 when ready or ready except keys, 1 otherwise; --json (1.1931ms)
+✔ env prints the pointers, never a key (0.4657ms)
+✔ setup-env: nothing to do / dry run / --go ok / --go failure (0.6962ms)
+✔ bring-assets: dry run, missing in source, --from, --go ok and failure (1.7012ms)
+✔ a config error is reported on stderr with exit 1 (0.4465ms)
+✔ main with the real config: env command (2.1943ms)
+✔ isMain compares the script path with the module url (0.5446ms)
+✔ job / jobs: human lines and --json; missing job exit 1; job needs an id (18.4505ms)
+✔ serve: --root required; serves until the server closes (11.2071ms)
+✔ mcp: runs the server with the loaded config (0.6093ms)
+✔ 0.3 job: stages with their rows, the ledger, orphans, STALLED; jobs marks STALLED; --json carries runner (41.2012ms)
+✔ 0.3 resume: a stalled job gets a runner; a live one does not; a cancelled one is restarted; done stays (36.8391ms)
+✔ ENGINE_HOME is the folder above engine/, absolute, forward slashes (2.1831ms)
+✔ defaults: relative paths resolve against home, absolute kept, basePython untouched (6.7987ms)
+✔ the real engine.config.json loads with the default home (2.2157ms)
+✔ local override merges shallow, assets one level deep (6.3273ms)
+✔ env overrides ENGINE_PYTHON / ENGINE_BLENDER / ENGINE_CHROME win over files (5.8557ms)
+✔ injected readFile / exists are used (0.7502ms)
+✔ a missing required field throws an Error naming it (27.8553ms)
+✔ wrong shapes are rejected (7.3863ms)
+✔ pipelineEnv returns exactly the eleven pointers (3.8684ms)
+✔ 0.2 blocks: inbox, stub, serve resolved; ENGINE_VERSION from package.json (8.5551ms)
+✔ 0.2 env overrides: ENGINE_HOME, ENGINE_JOBS_DIR, ENGINE_SERVE_PORT, ENGINE_STUB_STEP_MS (15.2309ms)
+✔ 0.2 local override merges stub and serve one level deep (6.8202ms)
+✔ 0.2 blocks: missing or wrong shapes are named (42.8515ms)
+✔ 0.3: the runner block and stub.callUsd, with defaults for a 0.2 settings file (49.5324ms)
+✔ RUNNER is engine/runner.mjs; configEnv; tourDir; the pid file and runnerAlive (15.2574ms)
+✔ runnerInfo / withRunner / isStalled: computed, never in the file (13.8737ms)
+✔ restartState: the first stage with no valid row; awaiting_approval for a paid stage with no approval; qa when all are valid (202.2322ms)
+✔ restartJob: state set back, reason cleared, waiting_for removed; not restartable → null (40.3238ms)
+✔ startOrResume: the four rules of contract 0.3 §6 (210.9591ms)
+✔ all checks ok with fakes → READY (10.019ms)
+✔ a fake secret value never reaches the report or the result (1.1654ms)
+✔ keys: from env, from env-file names, missing → READY EXCEPT KEYS (1.489ms)
+✔ node version too old (1.2799ms)
+✔ python: missing interpreter, probe failure, no JSON, import error, version mismatch (2.9071ms)
+✔ python snippet imports every module and asks every pin (0.4039ms)
+✔ node-libs: unresolvable, wrong version, no lock (1.9169ms)
+✔ blender: missing, wrong version; chrome and legal missing (1.1257ms)
+✔ pipeline: parity failure and the env it is given (0.8799ms)
+✔ assets-catalog: a missing row, an unreadable manifest (1.5898ms)
+✔ assets-hdri: missing file, mismatch, no record in the style file (3.7388ms)
+✔ assets-packs: zip missing, zip with the wrong hash, no sources array (1.2065ms)
+✔ readEnvNames returns names with non-empty values only, never values (5.262ms)
+✔ resolveNodeLib finds an installed library version, throws when absent (12.9859ms)
+✔ every pipeline env fallback is covered by pipelineEnv or the allow-list (205.676ms)
+✔ the allow-list carries a reason for each name (0.8659ms)
+✔ one holder at a time; a dead holder is stale and taken over; release only by the holder (54.6672ms)
+✔ a PDF inside the inbox passes: real path, given name, bytes (13.3184ms)
+✔ outside, .. escapes, empty, NUL → PATH_NOT_ALLOWED (8.9041ms)
+✔ an inbox folder that does not exist allows nothing (4.4318ms)
+✔ a link inside the inbox that leads outside is refused (a directory junction: no privilege needed) (12.223ms)
+✔ missing file, a folder, wrong magic → NOT_A_PDF; over 20 MB → FILE_TOO_LARGE (19.521ms)
+✔ isInside / allowedRoot / sha256Buffer (1.5399ms)
+✔ jobId: 16 hex, deterministic, sensitive to every part (3.0546ms)
+✔ states, percents, terminal set match the contract (1.7915ms)
+✔ newJob validates against contracts/job.schema.json; write/read round trip; no temp file left (7.8661ms)
+✔ readJob: malformed id or missing job → null; a broken file throws (9.2291ms)
+✔ writeJob gives up on a non-retryable rename error and removes its temp file (3005.1207ms)
+✔ updateJob: mutate writes, null writes nothing, missing job → job null; lock released (9.2716ms)
+✔ setState keeps percent for review/failed/cancelled (0.1483ms)
+✔ withJobLock: a busy lock times out; a stale one is taken over (52.2024ms)
+✔ listJobs: newest first, limit, skips foreign and broken folders; missing dir is empty (14.2423ms)
+✔ formatJob: one line with state, percent, name, and link or reason (0.4976ms)
+✔ usd rounds to micro-dollars; callKey depends on stage and key; empty ledger (7.7215ms)
+✔ no approval → BUDGET_CAP "no approved cap", nothing written; unknown job → JOB_NOT_FOUND (14.3909ms)
+✔ reserve, send, cache, settle; spent_usd updated; the same call again comes from the cache (no row, not sent) (39.0406ms)
+✔ a settled row whose cache is gone or altered is billed again (a new row), and the estimate is the default amount (74.8496ms)
+✔ a reserved row (runner died between reserve and settle) becomes orphaned, is kept, counts toward the cap (52.7651ms)
+✔ a cap that the estimate alone exceeds → BUDGET_CAP; a null cap does not limit (44.0687ms)
+✔ a failed call: row failed with settled_usd 0, the error rethrown, no cache (16.9101ms)
+✔ the test hooks sleep after the reserve and after the settle, only when set (48.5369ms)
+✔ normalizeName: lower-case, _ to - (1.9958ms)
+✔ parseLock reads name==version, skips comments and blanks (2.1996ms)
+✔ parseLock rejects an unpinned line (0.9737ms)
+✔ the real requirements lock parses as written (20 pins) (1.1779ms)
+✔ sha256File streams the hash of a file (19.7661ms)
+✔ run returns status, stdout and stderr (177.6538ms)
+✔ run through a shell sends one command string and raises no deprecation warning (134.0281ms)
+✔ run reports a spawn error as status -1 with the reason (5.4744ms)
+✔ run honours the timeout (224.3805ms)
+✔ JSON read/write and manifest rows (13.5482ms)
+✔ listFiles is recursive, sorted, forward slashes; missing folder is empty (4.4176ms)
+✔ path helpers (0.3077ms)
+✔ atomic writes: no temp file left; a non-retryable rename error removes the temp file; the file mutex; sync hash (210.0831ms)
+✔ read: a missing file is an empty manifest; write is atomic and round-trips; schema holds (25.0836ms)
+✔ inputsSha256 changes with every part, and with the previous outputs (0.7735ms)
+✔ the resume rule: valid only when done, not superseded, same inputs, outputs intact (14.159ms)
+✔ walkManifest / firstInvalidStage: chained inputs; a broken early output invalidates the rest (36.6244ms)
+✔ appendRow supersedes older done rows of the same stage, keeps them; supersede can keep one inputs hash (19.2776ms)
+✔ initialize negotiates the protocol version (3.6728ms)
+✔ ping, tools/list, notifications get no reply, unknown method -32601 (0.5508ms)
+✔ tools/call: success shape, tool failure is a RESULT, bad name/args -32602, crash -32603 (16.1224ms)
+✔ invalid requests -32600; client responses ignored; parse error -32700 with id null; blank lines ignored (0.7789ms)
+✔ toolSuccess / toolFailure shapes (0.2662ms)
+✔ runStdio: one JSON line per answer on stdout, logs on stderr, ends when stdin ends (15.1709ms)
+✔ runStdio with the default stub engine answers tools/list (52.0979ms)
+✔ exactly the eight tools of the contract, each with title, description, both schemas, annotations (15.2846ms)
+✔ tools/list schemas are the contract files, with the Job inlined (18.5465ms)
+✔ every contract schema uses only the keywords the checker implements (6.0501ms)
+✔ read-only tools are marked read-only; approve and cancel are not; cancel is destructive (0.3336ms)
+✔ inlineRefs refuses any other $ref (0.8458ms)
+✔ pidAlive: this process yes; junk and a finished process no (144.9298ms)
+✔ sleepSync blocks about as long as asked; negative is no wait (28.1452ms)
+✔ isMain (1.0134ms)
+✔ nextAfter, hooksFromEnv, StageInterrupted (3.5743ms)
+✔ a whole walk with the real stub stages: rows, quote, wait, approval, three paid calls, result, heartbeat, pid released (391.7253ms)
+✔ resume rule: every stage with a valid row is skipped, not run, not billed; rows untouched (259.094ms)
+✔ an earlier stage whose output changed: the runner goes back to it, its old row superseded (317.7123ms)
+✔ cancel in the middle of a stage: no row for it, heavy lock released, exits "cancelled" (61.5788ms)
+✔ a stage that throws: STAGE_FAILED for an Error, its own code for an EngineError; no row; lock released (1005.5985ms)
+✔ heavy lock busy: waits in building with waiting_for, takes the lock when the holder dies, field removed (81.7646ms)
+✔ the heavy lock is held until the job leaves the heavy state, and carried across two heavy stages in a row (56.1015ms)
+✔ heavy lock busy and the job is cancelled while it waits: exits, waiting_for removed (64.7886ms)
+✔ resumed IN a heavy stage with the lock busy: waits in that stage; cancelled meanwhile → exits (53.1139ms)
+✔ the job leaves the state while the heavy lock is taken: the lock is given back (31.091ms)
+✔ an approval already there: awaiting_approval is passed without a wait; a state with no earlier rows walks back first (76.8152ms)
+✔ already terminal / unknown job / malformed id / stuck / the job file vanishes (17.8075ms)
+✔ a second runner waits for runner.pid, then exits "busy"; a stale pid file is taken over; claim/release (160.5689ms)
+✔ a heartbeat that cannot take the job lock is skipped, not fatal (2013.9441ms)
+✔ a transient file error (EPERM, lock busy) is waited out, not a failure; past MAX_TRANSIENT it ends the runner (114.7829ms)
+✔ runnerMain: loads the config from env, passes the hooks, exit codes, logs to stderr (1.0178ms)
+✔ a valid value has no errors (3.6892ms)
+✔ every keyword reports its error with a path (1.3008ms)
+✔ assertSupported accepts the subset and annotations, refuses anything else (1.2513ms)
+✔ GET a file, a folder index, an encoded path; content types (48.7422ms)
+✔ HEAD has headers and no body; other methods → 405 (9.3705ms)
+✔ a folder without slash redirects (query kept); no listing; missing → 404 (11.6321ms)
+✔ no path outside the root: traversal, encoded traversal, bad encoding, NUL (5.1767ms)
+✔ a link inside the root that leads outside → 403 (a directory junction: no privilege needed) (6.4174ms)
+✔ contentType by extension; startServe refuses a missing root (4.4619ms)
+✔ isListening, localUrl, serveFile (13.0489ms)
+✔ ensureServe: already listening → nothing started (31.5652ms)
+✔ ensureServe: nothing listening → spawns detached cli serve, records serve.json, waits until it listens (83.7291ms)
+✔ ensureServe: a server that never comes up → listening false after waitMs (121.2076ms)
+✔ planAssets: present / copy / missing-in-source, pack and HDRI, with sizes (36.3823ms)
+✔ applyAssets copies, verifies, fails the missing row, writes a manifest row; second run copies nothing (85.2368ms)
+✔ a wrong file at the target is overwritten; a bad source is a post-copy mismatch (88.2353ms)
+✔ --from overrides the source; a missing HDRI / pack source is a failure; copy errors are caught (20.7115ms)
+✔ a style file without an HDRI record plans no HDRI entry (12.4624ms)
+✔ nothing needed when the probes pass (5.596ms)
+✔ everything needed on a bare machine; commands as specified (1.1112ms)
+✔ pip needed when a pin is off even though the venv exists (0.4503ms)
+✔ applyEnv runs needed steps in order and writes a manifest row each (7.2428ms)
+✔ applyEnv stops at the first failure with its reason (10.6531ms)
+✔ applyEnv with nothing needed runs nothing and writes nothing (1.1816ms)
+✔ the registry has one module per stage, in the runner order, each with a stub (3.8903ms)
+✔ the stub: waits in slices checking for a cancel, then writes stub.json (stage, job, attempt) as its one output (11.4931ms)
+✔ a paid stub stage makes ONE paid call with a stable key and stub.callUsd (6.7673ms)
+✔ a cancel stops the stub before it writes anything; the default sleep is real (11.1947ms)
+✔ engine_status: doctor checks + stub-site; mode stub; missing = failed ids (34.1397ms)
+✔ engine_status: no doctor result yet → not ready, a pending check; missing site → not ready (23.9394ms)
+✔ inspect_plan: sha256, bytes, the one candidate (6.5135ms)
+✔ start_simulation: creates job + input copy + one runner; again → same job, no second job (19.1652ms)
+✔ start_simulation: a live runner is not doubled; a terminal job gets no runner (25.3005ms)
+✔ start_simulation: unknown apartment → NO_PLAN_FOUND; bad path → PATH_NOT_ALLOWED (5.7365ms)
+✔ get_job / approve / cancel / get_result: reason codes and the happy path (33.1727ms)
+✔ approve with no quote on the job → estimate 0; cancel a live job keeps its percent (19.3984ms)
+✔ an unknown job id creates no folder (3.6255ms)
+✔ list_jobs: newest first, default 10 (37.5622ms)
+✔ configEnv points a child at the same home, jobs, port and step; tourDir; runner pid file (7.357ms)
+✔ spawnRunnerDefault starts the real runner detached; for an unknown job it exits at once (138.4319ms)
+✔ doctor cache: runs the child once, keeps the result in memory and on disk, never a key value (10.8026ms)
+✔ doctor cache: a slow first run → get returns null after the wait; an error is reported (28.4606ms)
+✔ doctor cache default child: the real CLI on a temp home answers with JSON (343.8044ms)
+✔ 0.3: start_simulation resumes a stalled job, restarts a cancelled one; get_job and list_jobs carry the computed runner (31.6793ms)
+ℹ tests 188
+ℹ suites 0
+ℹ pass 188
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15854.0317
+ℹ start of coverage report
+ℹ -------------------------------------------------------------------
+ℹ file               | line % | branch % | funcs % | uncovered lines
+ℹ -------------------------------------------------------------------
+ℹ engine             |        |          |         | 
+ℹ  cli.mjs           | 100.00 |    97.35 |   96.43 | 
+ℹ  config.mjs        | 100.00 |    97.18 |  100.00 | 
+ℹ  control.mjs       | 100.00 |    95.24 |  100.00 | 
+ℹ  doctor.mjs        | 100.00 |    95.39 |  100.00 | 
+ℹ  heavy-lock.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ  inbox.mjs         | 100.00 |    93.75 |  100.00 | 
+ℹ  jobs.mjs          | 100.00 |    95.65 |  100.00 | 
+ℹ  ledger.mjs        | 100.00 |   100.00 |   90.91 | 
+ℹ  lib               |        |          |         | 
+ℹ   atomic.mjs       | 100.00 |    92.59 |  100.00 | 
+ℹ   files.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   hash.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   json.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   lock.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   main.mjs         | 100.00 |    83.33 |  100.00 | 
+ℹ   paths.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   proc.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   run.mjs          | 100.00 |   100.00 |  100.00 | 
+ℹ  manifest.mjs      | 100.00 |   100.00 |  100.00 | 
+ℹ  runner.mjs        | 100.00 |    95.88 |   97.56 | 
+ℹ  serve.mjs         | 100.00 |   100.00 |   89.47 | 
+ℹ  setup             |        |          |         | 
+ℹ   assets.mjs       | 100.00 |    98.08 |  100.00 | 
+ℹ   env.mjs          | 100.00 |    87.50 |   80.00 | 
+ℹ  stages            |        |          |         | 
+ℹ   building.mjs     | 100.00 |   100.00 |  100.00 | 
+ℹ   finishing.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ   gating.mjs       | 100.00 |   100.00 |  100.00 | 
+ℹ   index.mjs        | 100.00 |   100.00 |  100.00 | 
+ℹ   packaging.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ   qa.mjs           | 100.00 |   100.00 |  100.00 | 
+ℹ   rendering.mjs    | 100.00 |   100.00 |  100.00 | 
+ℹ   skinning.mjs     | 100.00 |   100.00 |  100.00 | 
+ℹ   stub.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ   tracing.mjs      | 100.00 |   100.00 |  100.00 | 
+ℹ mcp                |        |          |         | 
+ℹ  schema-check.mjs  | 100.00 |   100.00 |  100.00 | 
+ℹ  server.mjs        | 100.00 |    98.46 |   88.89 | 
+ℹ  stub-engine.mjs   | 100.00 |    95.51 |   97.22 | 
+ℹ  tools.mjs         | 100.00 |   100.00 |  100.00 | 
+ℹ -------------------------------------------------------------------
+ℹ all files          | 100.00 |    97.19 |   97.18 | 
+ℹ -------------------------------------------------------------------
+ℹ end of coverage report

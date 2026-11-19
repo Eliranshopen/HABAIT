@@ -1,0 +1,234 @@
+{
+  "live": "https://habait-flow.vercel.app/tour/",
+  "size": "1440x900",
+  "room": "living",
+  "look": [
+    -6,
+    67,
+    75
+  ],
+  "text": "להוסיף שני רמקולים עומדים על הרצפה משני צידי הטלוויזיה",
+  "apartment": "apt846",
+  "pxPerCm": 0.9,
+  "scenes": [
+    "aerial",
+    "orbit1",
+    "orbit2",
+    "orbit3",
+    "orbit4",
+    "orbit5",
+    "tower",
+    "approach45",
+    "approach25",
+    "facade",
+    "terraceOut",
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "wardrobe",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "depth": [
+    "entrance",
+    "kitchen",
+    "dining",
+    "living",
+    "terraceLiving",
+    "terraceBedroom",
+    "bedroomMain",
+    "bathMain",
+    "bedroom2",
+    "bathguest"
+  ],
+  "served_vs_head_lines": {
+    "tour.js": 13,
+    "edit-live.js": 180
+  },
+  "real": true,
+  "when": "2026-11-16T14:50:21.819Z",
+  "cap": 0.35,
+  "booked": 0.278,
+  "ms_first_picture": 19276,
+  "turn": {
+    "text": "להוסיף שני רמקולים עומדים על הרצפה משני צידי הטלוויזיה",
+    "attempts": [
+      {
+        "attempt": 1,
+        "model": "fal-ai/flux-2/klein/9b/edit",
+        "reach": "object",
+        "living": false,
+        "ring": 0.078,
+        "ring_band": "ring",
+        "ring_n": 40640,
+        "ring_total": 40640,
+        "fraction": 0.242,
+        "judge": null,
+        "held": true,
+        "ms": 18320,
+        "ms_text": 4256,
+        "ms_edit": 14063
+      }
+    ],
+    "error": null,
+    "ms_total": 19265,
+    "follow": {
+      "rooms": [
+        {
+          "room": "entrance",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.06,
+              "judge": null,
+              "held": true,
+              "ms": 11992
+            }
+          ],
+          "ms": 12869
+        },
+        {
+          "room": "kitchen",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.022,
+              "judge": null,
+              "held": true,
+              "ms": 14263
+            }
+          ],
+          "ms": 14973
+        },
+        {
+          "room": "dining",
+          "ok": true,
+          "attempts": [
+            {
+              "attempt": 1,
+              "model": "fal-ai/nano-banana-2/edit",
+              "ring": 0,
+              "fraction": 0.033,
+              "judge": null,
+              "held": true,
+              "ms": 14998
+            }
+          ],
+          "ms": 15689
+        }
+      ],
+      "skip": null,
+      "ms": 17651,
+      "spot": {
+        "x": 6.95,
+        "y": 11.61,
+        "z": 0.52,
+        "w": 3.86,
+        "h": 0.2,
+        "dist": 2.3
+      },
+      "targets": [
+        {
+          "room": "dining",
+          "yaw": 154.76,
+          "pitch": 6.75,
+          "hfov": 100,
+          "dist": 4.43
+        },
+        {
+          "room": "entrance",
+          "yaw": 30.81,
+          "pitch": 5.51,
+          "hfov": 94,
+          "dist": 5.42
+        },
+        {
+          "room": "kitchen",
+          "yaw": 71.65,
+          "pitch": 4.67,
+          "hfov": 80.5,
+          "dist": 6.4
+        }
+      ]
+    }
+  },
+  "calls": [
+    {
+      "n": 1,
+      "kind": "edit",
+      "scene": "living",
+      "attempt": 1,
+      "t": 1794840581110,
+      "ok": true,
+      "ms": 18324,
+      "model": "fal-ai/flux-2/klein/9b/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.038,
+      "ms_text": 4256,
+      "ms_edit": 14063,
+      "prompt": "Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the lighting of the space. Keep everything else in the photo exactly as it is: the walls, the windows and the view outside, the floor, the ceiling, the lighting and shadows, and the camera angle. Do not move "
+    },
+    {
+      "n": 2,
+      "kind": "follow",
+      "scene": "dining",
+      "attempt": 1,
+      "t": 1794840602171,
+      "ok": true,
+      "ms": 15007,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 14998,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the li"
+    },
+    {
+      "n": 3,
+      "kind": "follow",
+      "scene": "entrance",
+      "attempt": 1,
+      "t": 1794840602192,
+      "ok": true,
+      "ms": 11998,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 11992,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the li"
+    },
+    {
+      "n": 4,
+      "kind": "follow",
+      "scene": "kitchen",
+      "attempt": 1,
+      "t": 1794840602202,
+      "ok": true,
+      "ms": 14268,
+      "model": "fal-ai/nano-banana-2/edit",
+      "reach": "object",
+      "living": false,
+      "usd": 0.08,
+      "ms_text": 0,
+      "ms_edit": 14263,
+      "prompt": "Edit this photo in place: keep the exact same camera position, framing, zoom and field of view. The second image shows this same room from a different camera position, after this change was made there: Add two sleek, tall floor-standing tower speakers on the floor, placing one on each side of the television. Make sure their design, height, and finish match the existing modern room decor and the li"
+    }
+  ],
+  "failed": [],
+  "errors": []
+}

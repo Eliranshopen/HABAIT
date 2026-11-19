@@ -1,0 +1,64 @@
+--- settings
+absent block           {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+empty block            {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+null block             {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+array block            {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+string block           {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+timeout 0              {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+timeout 0.1            {"ok":true,"trace":{"timeoutSeconds":0.1,"maxBudgetUsd":1,"judgeRuns":3}}
+timeout 7200           {"ok":true,"trace":{"timeoutSeconds":7200,"maxBudgetUsd":1,"judgeRuns":3}}
+timeout 7201           {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+timeout -1             {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+timeout "30"           {"ok":true,"trace":{"timeoutSeconds":30,"maxBudgetUsd":1,"judgeRuns":3}}
+timeout ""             {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+timeout null           {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+timeout true           {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+timeout [5]            {"ok":true,"trace":{"timeoutSeconds":5,"maxBudgetUsd":1,"judgeRuns":3}}
+timeout NaN-string     {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+timeout 1e999          {"ok":false,"err":"engine config: \"trace.timeoutSeconds\" must be a number 0.1..7200"}
+maxBudget 0            {"ok":false,"err":"engine config: \"trace.maxBudgetUsd\" must be a number 0.01..5"}
+maxBudget 0.01         {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":0.01,"judgeRuns":3}}
+maxBudget 5            {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":5,"judgeRuns":3}}
+maxBudget 5.01         {"ok":false,"err":"engine config: \"trace.maxBudgetUsd\" must be a number 0.01..5"}
+maxBudget -1           {"ok":false,"err":"engine config: \"trace.maxBudgetUsd\" must be a number 0.01..5"}
+maxBudget "2"          {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":2,"judgeRuns":3}}
+maxBudget [1]          {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+maxBudget " "          {"ok":false,"err":"engine config: \"trace.maxBudgetUsd\" must be a number 0.01..5"}
+judgeRuns 0            {"ok":false,"err":"engine config: \"trace.judgeRuns\" must be an integer 1..9"}
+judgeRuns 1            {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":1}}
+judgeRuns 9            {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":9}}
+judgeRuns 10           {"ok":false,"err":"engine config: \"trace.judgeRuns\" must be an integer 1..9"}
+judgeRuns 2.5          {"ok":false,"err":"engine config: \"trace.judgeRuns\" must be an integer 1..9"}
+judgeRuns "3"          {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+judgeRuns [3]          {"ok":true,"trace":{"timeoutSeconds":1500,"maxBudgetUsd":1,"judgeRuns":3}}
+unknown field          {"ok":true,"trace":{"timeoutSeconds":10,"maxBudgetUsd":1,"judgeRuns":3}}
+--- formatTrace with planted values
+false 5
+--- fake tool: results that are not this run's
+good (control)                                 PASS RESULT:1
+other input                                    RESULT_UNREADABLE no-result
+other input (a different real file)            RESULT_UNREADABLE no-result
+other id                                       RESULT_UNREADABLE no-result
+input case differs (windows)                   PASS RESULT:1
+input backslashes                              PASS RESULT:1
+input relative                                 PASS RESULT:1
+plan dir elsewhere                             RESULT_UNREADABLE no-result
+plan dir with ..                               PASS RESULT:1
+plan dir = outDir/plan-1/sub                   RESULT_UNREADABLE no-result
+plan dir relative                              RESULT_UNREADABLE no-result
+plan-0001                                      RESULT_UNREADABLE no-result
+plan-1 twice                                   PASS RESULT:2
+plans empty, PASS                              RESULT_UNREADABLE no-result
+plans empty, FAIL, exit 5                      FAIL RESULT:0
+status FAIL index, PASS plan, exit 5           RESULT_UNREADABLE no-result
+status PASS index, FAIL plan, exit 0           RESULT_UNREADABLE no-result
+exit 0 but index says FAIL (consistent FAIL)   RESULT_UNREADABLE no-result
+exit 5 but index says PASS                     RESULT_UNREADABLE no-result
+index not JSON                                 RESULT_UNREADABLE no-result
+index is an array                              RESULT_UNREADABLE no-result
+no index                                       RESULT_UNREADABLE no-result
+index.json is a folder                         RESULT_UNREADABLE no-result
+trace-check is a folder                        RESULT_UNREADABLE no-result
+check status marker                            RESULT_UNREADABLE no-result
+work C:/Users/elira/AppData/Local/Temp/qa12-b4-2Ll75i
+exit 0

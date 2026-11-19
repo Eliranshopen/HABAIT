@@ -1,0 +1,88 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "ribbed_vase",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:39.877Z",
+   "item": "ribbed_vase",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "58cf446683b61f9511b7f3e6a7a1c349521e719d1e7a839ff8e354b705fdf437",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 1.936,
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:39:59.299Z",
+   "item": "ribbed_vase",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "58cf446683b61f9511b7f3e6a7a1c349521e719d1e7a839ff8e354b705fdf437",
+   "queue": {
+    "request_id": "01a1eb3c-eb4b-7501-94b8-633959fe3937",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-eb4b-7501-94b8-633959fe3937/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-eb4b-7501-94b8-633959fe3937"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb3c-eb4b-7501-94b8-633959fe3937",
+   "seconds": 11.335,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\ribbed_vase.json",
+   "usage": {
+    "prompt_tokens": 1393,
+    "completion_tokens": 935,
+    "total_tokens": 2328,
+    "cost": 0.004551,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:40:11.018Z",
+   "item": "ribbed_vase",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "fc3151704c8c431dc373ae0f84fe0912585a31e11cb5f1be34921e708125d6c1",
+   "queue": {
+    "request_id": "01a1eb3d-1530-7dc3-89d4-e60fad0c8588",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3d-1530-7dc3-89d4-e60fad0c8588/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3d-1530-7dc3-89d4-e60fad0c8588"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb3d-1530-7dc3-89d4-e60fad0c8588",
+   "seconds": 29.536,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\ribbed_vase.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-17T20:56:35.140Z",
+   "item": "ribbed_vase",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "abd53c435f83307c08838903b8035cce44c5609ffe1929e5b0031f6240bff201",
+   "queue": {
+    "request_id": "01a1eb4c-255f-7740-992e-742117197df5",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4c-255f-7740-992e-742117197df5/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4c-255f-7740-992e-742117197df5"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb4c-255f-7740-992e-742117197df5",
+   "seconds": 211.804,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\ribbed_vase.glb"
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 36,
+ "item": "alt_bed_oak",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:48:37.984Z",
+   "item": "alt_bed_oak",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "failed",
+   "inputs_hash": "5ad20cd7240206c49bf0e2c6ab6aa33dd8e76d0f7b62241f2c6a110524e0ff9d",
+   "error": "fetch failed",
+   "seconds": 12.544
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:01:39.960Z",
+   "item": "alt_bed_oak",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "5ad20cd7240206c49bf0e2c6ab6aa33dd8e76d0f7b62241f2c6a110524e0ff9d",
+   "queue": {
+    "request_id": "01a1eb50-c9a1-7d42-93f6-fe2d2baa3c16",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb50-c9a1-7d42-93f6-fe2d2baa3c16/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb50-c9a1-7d42-93f6-fe2d2baa3c16"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb50-c9a1-7d42-93f6-fe2d2baa3c16",
+   "seconds": 32.033,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_bed_oak.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T21:39:28.590Z",
+   "item": "alt_bed_oak",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "failed-unbilled",
+   "inputs_hash": "79d46950fed786395a4ac3c755ea6535dcc5f2bf38a51d06bcdb0466c8eed715",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 1.923
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T06:28:11.158Z",
+   "item": "alt_bed_oak",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "79d46950fed786395a4ac3c755ea6535dcc5f2bf38a51d06bcdb0466c8eed715",
+   "queue": {
+    "request_id": "01a1ed57-7170-7b71-86f8-c47ca7358e5a",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed57-7170-7b71-86f8-c47ca7358e5a/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed57-7170-7b71-86f8-c47ca7358e5a"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ed57-7170-7b71-86f8-c47ca7358e5a",
+   "seconds": 318.053,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_bed_oak.glb"
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "alt_sofa_terracotta",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:44:17.989Z",
+   "item": "alt_sofa_terracotta",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "66ff5f069ab65e260429c20d189365ae6dae148ea52cf08f0e2b4a61a415b349",
+   "queue": {
+    "request_id": "01a1eb40-e447-7e61-9609-e216ef8ff2c0",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb40-e447-7e61-9609-e216ef8ff2c0/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb40-e447-7e61-9609-e216ef8ff2c0"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb40-e447-7e61-9609-e216ef8ff2c0",
+   "seconds": 37.157,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_sofa_terracotta.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:04:21.068Z",
+   "item": "alt_sofa_terracotta",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "75253bc5d42419886f28dafdc2503c283204759eb9499383094084f789e05d09",
+   "queue": {
+    "request_id": "01a1eb53-4216-7091-b392-4b88b069ff8c",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb53-4216-7091-b392-4b88b069ff8c/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb53-4216-7091-b392-4b88b069ff8c"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb53-4216-7091-b392-4b88b069ff8c",
+   "seconds": 168.2,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_sofa_terracotta.glb"
+  }
+ ]
+}

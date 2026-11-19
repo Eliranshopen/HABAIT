@@ -1,0 +1,1344 @@
+{
+ "model": "Hatzav (דגם חצב), 3 rooms, 80 m2, garden - Moshav Na'ama, Harei Zahav",
+ "source": {
+  "file": "input/plan-hatzav-colour.png",
+  "sha256": "f2262e246ea65b4d63a325e4e22a2332154a89f414720b5a18cd207a6d987aee",
+  "px_per_cm": 1.0,
+  "origin_px": [
+   480,
+   267
+  ]
+ },
+ "frame": "u,v in cm; X = u/100, Y = -v/100 (m); origin = outer NW corner; plan-top is called north by name only",
+ "heights": {
+  "ceiling_cm": {
+   "v": 270,
+   "cls": "ASSUMED",
+   "why": "no section on the sheet; common Israeli residential clear height 2.60-2.75 m"
+  },
+  "door_head_cm": {
+   "v": 210,
+   "cls": "ASSUMED",
+   "why": "standard interior door 2.05-2.10 m"
+  },
+  "safe_room_door_head_cm": {
+   "v": 200,
+   "cls": "ASSUMED",
+   "why": "standard steel safe-room door 80x200"
+  },
+  "window_sill_cm": {
+   "v": 100,
+   "cls": "ASSUMED",
+   "why": "the render shows windows with a sill at about one third of the wall"
+  },
+  "window_head_cm": {
+   "v": 210,
+   "cls": "ASSUMED",
+   "why": "the render shows window heads level with the sliding door head"
+  },
+  "sliding_door_head_cm": {
+   "v": 220,
+   "cls": "DERIVED",
+   "why": "exterior render: door height about two thirds of the facade"
+  },
+  "roof_slab_cm": {
+   "v": 20,
+   "cls": "ASSUMED",
+   "why": "flat concrete roof"
+  },
+  "parapet_top_cm": {
+   "v": 330,
+   "cls": "DERIVED",
+   "why": "exterior render: flat roof with a low parapet band"
+  },
+  "deck_top_cm": {
+   "v": -2,
+   "cls": "ASSUMED",
+   "why": "deck flush with the floor"
+  },
+  "ground_cm": {
+   "v": -15,
+   "cls": "ASSUMED",
+   "why": "garden a step below the floor"
+  }
+ },
+ "footprint": [
+  [
+   0,
+   0
+  ],
+  [
+   725,
+   0
+  ],
+  [
+   725,
+   436
+  ],
+  [
+   830,
+   436
+  ],
+  [
+   830,
+   1050
+  ],
+  [
+   50,
+   1050
+  ],
+  [
+   50,
+   540
+  ],
+  [
+   0,
+   540
+  ]
+ ],
+ "walls": [
+  {
+   "id": "ext-n-saferoom",
+   "box": [
+    0,
+    0,
+    384,
+    34
+   ],
+   "cls": "VERIFIED",
+   "note": "34 cm, north wall of the safe room"
+  },
+  {
+   "id": "ext-n-bedroom",
+   "box": [
+    384,
+    0,
+    725,
+    24
+   ],
+   "cls": "VERIFIED",
+   "note": "24 cm"
+  },
+  {
+   "id": "ext-w-saferoom",
+   "box": [
+    0,
+    0,
+    29,
+    324
+   ],
+   "cls": "VERIFIED",
+   "note": "29 cm"
+  },
+  {
+   "id": "ext-w-bath",
+   "box": [
+    0,
+    324,
+    24,
+    540
+   ],
+   "cls": "VERIFIED",
+   "note": "24 cm"
+  },
+  {
+   "id": "ext-e-bedroom",
+   "box": [
+    699,
+    0,
+    725,
+    436
+   ],
+   "cls": "VERIFIED",
+   "note": "26 cm"
+  },
+  {
+   "id": "int-saferoom-bedroom",
+   "box": [
+    364,
+    0,
+    384,
+    305
+   ],
+   "cls": "VERIFIED",
+   "note": "20 cm, safe room east wall"
+  },
+  {
+   "id": "int-saferoom-s",
+   "box": [
+    0,
+    304,
+    404,
+    324
+   ],
+   "cls": "VERIFIED",
+   "note": "20 cm, safe room south wall, with the safe-room door"
+  },
+  {
+   "id": "int-hall-bedroom",
+   "box": [
+    394,
+    324,
+    404,
+    436
+   ],
+   "cls": "VERIFIED",
+   "note": "10 cm partition with the bedroom door"
+  },
+  {
+   "id": "int-bath-e",
+   "box": [
+    204,
+    324,
+    212,
+    526
+   ],
+   "cls": "VERIFIED",
+   "note": "8 cm partition with the bathroom door"
+  },
+  {
+   "id": "int-bath-s",
+   "box": [
+    24,
+    514,
+    212,
+    526
+   ],
+   "cls": "VERIFIED",
+   "note": "12 cm partition bathroom | public space"
+  },
+  {
+   "id": "ext-sw-corner",
+   "box": [
+    0,
+    514,
+    74,
+    540
+   ],
+   "cls": "VERIFIED",
+   "note": "outer wall step at the entrance"
+  },
+  {
+   "id": "ext-w-public",
+   "box": [
+    50,
+    540,
+    74,
+    1050
+   ],
+   "cls": "VERIFIED",
+   "note": "24 cm, west wall of the public space, with the entrance door"
+  },
+  {
+   "id": "int-kitchen-nib",
+   "box": [
+    74,
+    658,
+    132,
+    666
+   ],
+   "cls": "VERIFIED",
+   "note": "8 cm nib beside the entrance, 58 cm long"
+  },
+  {
+   "id": "ext-s",
+   "box": [
+    50,
+    1026,
+    830,
+    1050
+   ],
+   "cls": "VERIFIED",
+   "note": "24 cm south wall"
+  },
+  {
+   "id": "ext-e-public",
+   "box": [
+    804,
+    436,
+    830,
+    1050
+   ],
+   "cls": "VERIFIED",
+   "note": "26 cm east wall with the sliding door"
+  },
+  {
+   "id": "ext-n-public-east",
+   "box": [
+    699,
+    436,
+    830,
+    461
+   ],
+   "cls": "VERIFIED",
+   "note": "25 cm, north wall of the living room's east part (the bedroom block is set back 105 cm)"
+  },
+  {
+   "id": "int-bedroom-living",
+   "box": [
+    404,
+    434,
+    699,
+    444
+   ],
+   "cls": "VERIFIED",
+   "note": "10 cm partition bedroom | living room"
+  },
+  {
+   "id": "shaft",
+   "box": [
+    325,
+    436,
+    404,
+    526
+   ],
+   "cls": "VERIFIED",
+   "note": "closed service shaft 79 x 90 cm, drawn with a crossed circle; modelled as a solid block"
+  }
+ ],
+ "openings": [
+  {
+   "id": "win-saferoom",
+   "kind": "window",
+   "box": [
+    159,
+    0,
+    262,
+    34
+   ],
+   "wall": "ext-n-saferoom",
+   "sill_cm": 105,
+   "head_cm": 205,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 103,
+   "note": "safe-room window, about 100 x 100, drawn with an outer blast shutter",
+   "panes": 2
+  },
+  {
+   "id": "win-bedroom",
+   "kind": "window",
+   "box": [
+    510,
+    0,
+    632,
+    24
+   ],
+   "wall": "ext-n-bedroom",
+   "sill_cm": 100,
+   "head_cm": 210,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 122,
+   "panes": 2
+  },
+  {
+   "id": "win-kitchen",
+   "kind": "window",
+   "box": [
+    163,
+    1026,
+    284,
+    1050
+   ],
+   "wall": "ext-s",
+   "sill_cm": 105,
+   "head_cm": 210,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 121,
+   "panes": 2,
+   "note": "above the sink; sill raised above the worktop"
+  },
+  {
+   "id": "win-living",
+   "kind": "window",
+   "box": [
+    672,
+    1026,
+    794,
+    1050
+   ],
+   "wall": "ext-s",
+   "sill_cm": 100,
+   "head_cm": 210,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 122,
+   "panes": 2
+  },
+  {
+   "id": "door-sliding",
+   "kind": "sliding_door",
+   "box": [
+    804,
+    706,
+    830,
+    1008
+   ],
+   "wall": "ext-e-public",
+   "sill_cm": 0,
+   "head_cm": 220,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 302,
+   "panes": 2,
+   "note": "two sliding panels to the deck"
+  },
+  {
+   "id": "door-entrance",
+   "kind": "door",
+   "box": [
+    50,
+    549,
+    74,
+    651
+   ],
+   "wall": "ext-w-public",
+   "sill_cm": 0,
+   "head_cm": 210,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 102,
+   "hinge": "n",
+   "swing": "in",
+   "swing_dir": "e",
+   "open_deg": 0,
+   "leaf_cm": 92,
+   "note": "leaf drawn dashed, hinged on the plan-north jamb, opens into the house"
+  },
+  {
+   "id": "door-saferoom",
+   "kind": "door",
+   "box": [
+    222,
+    304,
+    305,
+    324
+   ],
+   "wall": "int-saferoom-s",
+   "sill_cm": 0,
+   "head_cm": 200,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 83,
+   "hinge": "e",
+   "swing": "out_to_hall",
+   "swing_dir": "s",
+   "open_deg": 172,
+   "leaf_cm": 78,
+   "note": "steel safe-room door, solid arc into the hall"
+  },
+  {
+   "id": "door-bedroom",
+   "kind": "door",
+   "box": [
+    394,
+    338,
+    404,
+    419
+   ],
+   "wall": "int-hall-bedroom",
+   "sill_cm": 0,
+   "head_cm": 210,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 81,
+   "hinge": "s",
+   "swing": "into_bedroom",
+   "swing_dir": "e",
+   "open_deg": 90,
+   "leaf_cm": 76
+  },
+  {
+   "id": "door-bath",
+   "kind": "door",
+   "box": [
+    204,
+    333,
+    212,
+    414
+   ],
+   "wall": "int-bath-e",
+   "sill_cm": 0,
+   "head_cm": 210,
+   "cls_position": "VERIFIED",
+   "cls_heights": "ASSUMED",
+   "width_cm": 81,
+   "hinge": "n",
+   "swing": "into_bath",
+   "swing_dir": "w",
+   "open_deg": 90,
+   "leaf_cm": 76
+  }
+ ],
+ "rooms": [
+  {
+   "id": "public",
+   "he": "חלל ציבורי",
+   "en": "living, dining and kitchen",
+   "printed_sqm": 39,
+   "cls": "VERIFIED",
+   "poly": [
+    [
+     74,
+     526
+    ],
+    [
+     404,
+     526
+    ],
+    [
+     404,
+     444
+    ],
+    [
+     699,
+     444
+    ],
+    [
+     699,
+     461
+    ],
+    [
+     804,
+     461
+    ],
+    [
+     804,
+     1026
+    ],
+    [
+     74,
+     1026
+    ]
+   ]
+  },
+  {
+   "id": "hall",
+   "he": "מבואה",
+   "en": "hall",
+   "printed_sqm": null,
+   "cls": "DERIVED",
+   "poly": [
+    [
+     212,
+     324
+    ],
+    [
+     394,
+     324
+    ],
+    [
+     394,
+     436
+    ],
+    [
+     325,
+     436
+    ],
+    [
+     325,
+     526
+    ],
+    [
+     212,
+     526
+    ]
+   ]
+  },
+  {
+   "id": "saferoom",
+   "he": "ממ\"ד",
+   "en": "safe room (second bedroom)",
+   "printed_sqm": 9,
+   "cls": "VERIFIED",
+   "poly": [
+    [
+     29,
+     34
+    ],
+    [
+     364,
+     34
+    ],
+    [
+     364,
+     304
+    ],
+    [
+     29,
+     304
+    ]
+   ]
+  },
+  {
+   "id": "bedroom",
+   "he": "חדר שינה",
+   "en": "primary bedroom",
+   "printed_sqm": 12,
+   "cls": "VERIFIED",
+   "poly": [
+    [
+     384,
+     24
+    ],
+    [
+     699,
+     24
+    ],
+    [
+     699,
+     434
+    ],
+    [
+     404,
+     434
+    ],
+    [
+     404,
+     305
+    ],
+    [
+     384,
+     305
+    ]
+   ]
+  },
+  {
+   "id": "bath",
+   "he": "חדר רחצה",
+   "en": "bathroom",
+   "printed_sqm": null,
+   "cls": "VERIFIED",
+   "poly": [
+    [
+     24,
+     324
+    ],
+    [
+     204,
+     324
+    ],
+    [
+     204,
+     514
+    ],
+    [
+     24,
+     514
+    ]
+   ]
+  }
+ ],
+ "dimensions": [
+  {
+   "label": "overall width (top)",
+   "printed_cm": 830,
+   "axis": "x",
+   "from_px": 480,
+   "to_px": 1310,
+   "model_cm": 830,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "north block width",
+   "printed_cm": 725,
+   "axis": "x",
+   "from_px": 480,
+   "to_px": 1205,
+   "model_cm": 725,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "set-back of the bedroom block",
+   "printed_cm": 105,
+   "axis": "x",
+   "from_px": 1205,
+   "to_px": 1310,
+   "model_cm": 105,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "overall depth (left)",
+   "printed_cm": 1050,
+   "axis": "y",
+   "from_px": 267,
+   "to_px": 1317,
+   "model_cm": 1050,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "north block depth",
+   "printed_cm": 540,
+   "axis": "y",
+   "from_px": 267,
+   "to_px": 807,
+   "model_cm": 540,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "south block depth",
+   "printed_cm": 510,
+   "axis": "y",
+   "from_px": 807,
+   "to_px": 1317,
+   "model_cm": 510,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "west offset of the south block",
+   "printed_cm": 50,
+   "axis": "x",
+   "from_px": 480,
+   "to_px": 530,
+   "model_cm": 50,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "south block width",
+   "printed_cm": 780,
+   "axis": "x",
+   "from_px": 530,
+   "to_px": 1310,
+   "model_cm": 780,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "safe room width",
+   "printed_cm": 335,
+   "axis": "x",
+   "from_px": 509,
+   "to_px": 844,
+   "model_cm": 335,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "safe room depth",
+   "printed_cm": 270,
+   "axis": "y",
+   "from_px": 301,
+   "to_px": 571,
+   "model_cm": 270,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "bedroom width (wall to wall)",
+   "printed_cm": 315,
+   "axis": "x",
+   "from_px": 864,
+   "to_px": 1179,
+   "model_cm": 315,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "bedroom depth",
+   "printed_cm": 410,
+   "axis": "y",
+   "from_px": 291,
+   "to_px": 701,
+   "model_cm": 410,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "bedroom clear width (to the 20 cm band)",
+   "printed_cm": 295,
+   "axis": "x",
+   "from_px": 884,
+   "to_px": 1179,
+   "model_cm": 295,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "bathroom width",
+   "printed_cm": 180,
+   "axis": "x",
+   "from_px": 504,
+   "to_px": 684,
+   "model_cm": 180,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "bathroom depth",
+   "printed_cm": 190,
+   "axis": "y",
+   "from_px": 591,
+   "to_px": 781,
+   "model_cm": 190,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "public space width",
+   "printed_cm": 730,
+   "axis": "x",
+   "from_px": 554,
+   "to_px": 1284,
+   "model_cm": 730,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "public space depth, kitchen side",
+   "printed_cm": 500,
+   "axis": "y",
+   "from_px": 793,
+   "to_px": 1293,
+   "model_cm": 500,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "public space depth, living side",
+   "printed_cm": 565,
+   "axis": "y",
+   "from_px": 728,
+   "to_px": 1293,
+   "model_cm": 565,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "living width east of the shaft",
+   "printed_cm": 400,
+   "axis": "x",
+   "from_px": 884,
+   "to_px": 1284,
+   "model_cm": 400,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  },
+  {
+   "label": "deck depth",
+   "printed_cm": 300,
+   "axis": "x",
+   "from_px": 1310,
+   "to_px": 1610,
+   "model_cm": 300,
+   "delta_cm": 0,
+   "delta_pct": 0.0
+  }
+ ],
+ "items": [
+  {
+   "id": "k-fridge",
+   "kind": "fridge",
+   "room": "public",
+   "box": [
+    74,
+    668,
+    140,
+    756
+   ],
+   "cls": "DERIVED",
+   "note": "65 deep x 88 long; read as a refrigerator"
+  },
+  {
+   "id": "k-tall",
+   "kind": "tall_unit",
+   "room": "public",
+   "box": [
+    74,
+    761,
+    132,
+    823
+   ],
+   "cls": "DERIVED",
+   "note": "60 x 62 unit between the fridge and the worktop; read as an oven tower"
+  },
+  {
+   "id": "k-run-w",
+   "kind": "base_units",
+   "room": "public",
+   "box": [
+    74,
+    823,
+    132,
+    1026
+   ],
+   "cls": "VERIFIED",
+   "note": "worktop run on the west wall, 59 deep"
+  },
+  {
+   "id": "k-hob",
+   "kind": "hob",
+   "room": "public",
+   "box": [
+    86,
+    873,
+    140,
+    929
+   ],
+   "cls": "VERIFIED",
+   "note": "four-ring hob"
+  },
+  {
+   "id": "k-run-s",
+   "kind": "base_units",
+   "room": "public",
+   "box": [
+    132,
+    966,
+    410,
+    1026
+   ],
+   "cls": "VERIFIED",
+   "note": "sink run on the south wall under the kitchen window, to 890 as drawn; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "k-sink",
+   "kind": "sink",
+   "room": "public",
+   "box": [
+    173,
+    970,
+    233,
+    1023
+   ],
+   "cls": "VERIFIED",
+   "note": "single bowl under the kitchen window"
+  },
+  {
+   "id": "d-table",
+   "kind": "dining_table",
+   "room": "public",
+   "box": [
+    255,
+    675,
+    345,
+    855
+   ],
+   "cls": "VERIFIED",
+   "note": "table 90 x 180, long side north-south; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "d-chair-w1",
+   "kind": "dining_chair",
+   "room": "public",
+   "box": [
+    210,
+    686,
+    258,
+    734
+   ],
+   "cls": "VERIFIED",
+   "face": "e",
+   "note": "chair half under the table's west side; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "d-chair-e1",
+   "kind": "dining_chair",
+   "room": "public",
+   "box": [
+    342,
+    686,
+    390,
+    734
+   ],
+   "cls": "VERIFIED",
+   "face": "w",
+   "note": "chair half under the table's east side; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "d-chair-w2",
+   "kind": "dining_chair",
+   "room": "public",
+   "box": [
+    210,
+    740,
+    258,
+    788
+   ],
+   "cls": "VERIFIED",
+   "face": "e",
+   "note": "chair half under the table's west side; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "d-chair-e2",
+   "kind": "dining_chair",
+   "room": "public",
+   "box": [
+    342,
+    740,
+    390,
+    788
+   ],
+   "cls": "VERIFIED",
+   "face": "w",
+   "note": "chair half under the table's east side; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "d-chair-w3",
+   "kind": "dining_chair",
+   "room": "public",
+   "box": [
+    210,
+    794,
+    258,
+    842
+   ],
+   "cls": "VERIFIED",
+   "face": "e",
+   "note": "chair half under the table's west side; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "d-chair-e3",
+   "kind": "dining_chair",
+   "room": "public",
+   "box": [
+    342,
+    794,
+    390,
+    842
+   ],
+   "cls": "VERIFIED",
+   "face": "w",
+   "note": "chair half under the table's east side; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "l-rug",
+   "kind": "rug",
+   "room": "public",
+   "box": [
+    448,
+    514,
+    750,
+    818
+   ],
+   "cls": "VERIFIED",
+   "note": "rug 302 x 304; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "l-sofa",
+   "kind": "sofa",
+   "room": "public",
+   "box": [
+    500,
+    465,
+    800,
+    565
+   ],
+   "cls": "VERIFIED",
+   "back": "n",
+   "note": "corner sofa, its 300 x 100 run along the north wall; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "l-chaise",
+   "kind": "sofa",
+   "room": "public",
+   "box": [
+    700,
+    565,
+    800,
+    765
+   ],
+   "cls": "VERIFIED",
+   "back": "e",
+   "note": "corner sofa, its chaise 100 x 200 along the east wall (300 with the corner); the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "l-table-nest",
+   "kind": "coffee_table",
+   "room": "public",
+   "box": [
+    551,
+    635,
+    633,
+    696
+   ],
+   "cls": "VERIFIED",
+   "note": "two nested coffee tables 61 x 60 and 40 x 41; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "l-armchair",
+   "kind": "armchair",
+   "room": "public",
+   "box": [
+    448,
+    738,
+    528,
+    818
+   ],
+   "cls": "VERIFIED",
+   "rot_deg": 45,
+   "note": "armchair 80 x 80 turned 45 degrees toward the sofa; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "l-console",
+   "kind": "tv_console",
+   "room": "public",
+   "box": [
+    420,
+    985,
+    670,
+    1026
+   ],
+   "cls": "VERIFIED",
+   "note": "TV console 250 x 41 on the south wall between the windows; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "l-tv",
+   "kind": "tv",
+   "room": "public",
+   "box": [
+    485,
+    1022,
+    625,
+    1026
+   ],
+   "cls": "VERIFIED",
+   "note": "TV on the south wall above the console; the sales sheet (plan-hatzav-colour.png), measured on a 20 px grid; the look comes from the developer's renders"
+  },
+  {
+   "id": "b-bed",
+   "kind": "double_bed",
+   "room": "bedroom",
+   "box": [
+    499,
+    91,
+    699,
+    251
+   ],
+   "cls": "VERIFIED",
+   "head": "e",
+   "note": "160 x 201, head on the east wall"
+  },
+  {
+   "id": "b-night-n",
+   "kind": "nightstand",
+   "room": "bedroom",
+   "box": [
+    659,
+    51,
+    699,
+    91
+   ],
+   "cls": "VERIFIED"
+  },
+  {
+   "id": "b-night-s",
+   "kind": "nightstand",
+   "room": "bedroom",
+   "box": [
+    659,
+    251,
+    699,
+    291
+   ],
+   "cls": "VERIFIED"
+  },
+  {
+   "id": "b-wardrobe",
+   "kind": "wardrobe",
+   "room": "bedroom",
+   "box": [
+    499,
+    374,
+    699,
+    434
+   ],
+   "cls": "VERIFIED",
+   "note": "201 x 60 on the south wall"
+  },
+  {
+   "id": "b-band",
+   "kind": "wall_unit",
+   "room": "bedroom",
+   "box": [
+    384,
+    24,
+    404,
+    305
+   ],
+   "cls": "DERIVED",
+   "note": "20 cm band along the west wall, not counted in the printed 12 sqm and outside the printed 295; read as a shallow wall unit that carries the television"
+  },
+  {
+   "id": "b-tv",
+   "kind": "tv",
+   "room": "bedroom",
+   "box": [
+    388,
+    89,
+    396,
+    211
+   ],
+   "cls": "DERIVED",
+   "note": "television symbol on the band"
+  },
+  {
+   "id": "s-bed",
+   "kind": "single_bed",
+   "room": "saferoom",
+   "box": [
+    29,
+    34,
+    119,
+    234
+   ],
+   "cls": "VERIFIED",
+   "head": "n",
+   "note": "90 x 200, head on the north wall"
+  },
+  {
+   "id": "s-desk",
+   "kind": "desk",
+   "room": "saferoom",
+   "box": [
+    302,
+    34,
+    364,
+    174
+   ],
+   "cls": "VERIFIED",
+   "note": "62 x 140 on the east wall"
+  },
+  {
+   "id": "s-chair",
+   "kind": "desk_chair",
+   "room": "saferoom",
+   "box": [
+    245,
+    78,
+    295,
+    133
+   ],
+   "cls": "VERIFIED",
+   "face": "e"
+  },
+  {
+   "id": "s-closet",
+   "kind": "wardrobe",
+   "room": "saferoom",
+   "box": [
+    302,
+    174,
+    364,
+    304
+   ],
+   "cls": "VERIFIED",
+   "note": "62 x 131 on the east wall"
+  },
+  {
+   "id": "t-wc-wall",
+   "kind": "build_out",
+   "room": "bath",
+   "box": [
+    24,
+    324,
+    43,
+    433
+   ],
+   "cls": "VERIFIED",
+   "note": "18-20 cm build-out behind the toilet (concealed cistern)"
+  },
+  {
+   "id": "t-wc",
+   "kind": "toilet",
+   "room": "bath",
+   "box": [
+    43,
+    347,
+    88,
+    385
+   ],
+   "cls": "VERIFIED",
+   "face": "e"
+  },
+  {
+   "id": "t-shower",
+   "kind": "shower",
+   "room": "bath",
+   "box": [
+    24,
+    436,
+    115,
+    514
+   ],
+   "cls": "VERIFIED",
+   "note": "90 x 80 shower in the south-west corner"
+  },
+  {
+   "id": "t-vanity",
+   "kind": "vanity",
+   "room": "bath",
+   "box": [
+    115,
+    468,
+    204,
+    514
+   ],
+   "cls": "VERIFIED",
+   "note": "90 x 48 vanity with a basin"
+  }
+ ],
+ "outside": [
+  {
+   "id": "deck",
+   "kind": "deck",
+   "box": [
+    830,
+    436,
+    1130,
+    1050
+   ],
+   "cls": "VERIFIED",
+   "note": "timber deck drawn 300 x 614; the printed '-380-' beside it does NOT match the drawing (see source-evidence.md, conflict C1); the drawn size is modelled"
+  },
+  {
+   "id": "pergola",
+   "kind": "pergola",
+   "box": [
+    830,
+    436,
+    1130,
+    1050
+   ],
+   "cls": "DERIVED",
+   "note": "slatted pergola at roof level over the deck: shown in the developer's exterior render of this model (brochure p.5), not drawn on the plan; size taken as the deck's"
+  },
+  {
+   "id": "entrance-step",
+   "kind": "paving",
+   "box": [
+    0,
+    540,
+    50,
+    723
+   ],
+   "cls": "VERIFIED",
+   "note": "paved strip at the entrance door"
+  },
+  {
+   "id": "future-extension",
+   "kind": "not_built",
+   "box": [
+    725,
+    0,
+    1550,
+    433
+   ],
+   "cls": "VERIFIED",
+   "note": "dashed outline east of the bedroom, 825 x 433: an optional extension envelope (725 + 825 = 1550 = the length of model Eshel); NOT part of this house, not modelled"
+  }
+ ],
+ "plan_furniture_public": {
+  "source": "the sales sheet (plan-hatzav-colour.png); the model follows it again since 2026-11-18 (Eliran: no island, by the plan)",
+  "dining": "table 90 x 180 at plan px (735, 942)-(825, 1122), six chairs",
+  "living": "corner sofa 300 x 101 + 100 x 301 along the north and east walls, two nested coffee tables, armchair at 45 degrees, rug 302 x 303, TV console 250 x 41 and TV on the south wall"
+ }
+}

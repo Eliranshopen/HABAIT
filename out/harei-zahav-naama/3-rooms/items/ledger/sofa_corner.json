@@ -1,0 +1,113 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 81,
+ "item": "sofa_corner",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T08:19:56.371Z",
+   "item": "sofa_corner",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "405e68e0904f0d14824255775a46df4afbccafba250ee6778fc27dc4a07aa3a7",
+   "queue": {
+    "request_id": "01a1edbd-c34b-77e1-adc8-e3823f9ca3d7",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1edbd-c34b-77e1-adc8-e3823f9ca3d7/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1edbd-c34b-77e1-adc8-e3823f9ca3d7"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1edbd-c34b-77e1-adc8-e3823f9ca3d7",
+   "seconds": 21.841,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\sofa_corner.json",
+   "usage": {
+    "prompt_tokens": 2538,
+    "completion_tokens": 1348,
+    "total_tokens": 3886,
+    "cost": 0.0069585,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T08:20:18.271Z",
+   "item": "sofa_corner",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "612b5d318c7b8f58eab95845d93bb44f9a8e70936c0f4530b7817dc995d04407",
+   "queue": {
+    "request_id": "01a1edbe-1537-7cc3-b6e6-6510e9c138ec",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edbe-1537-7cc3-b6e6-6510e9c138ec/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1edbe-1537-7cc3-b6e6-6510e9c138ec"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1edbe-1537-7cc3-b6e6-6510e9c138ec",
+   "seconds": 41.595,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\sofa_corner.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T08:21:23.963Z",
+   "item": "sofa_corner",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "238cf9249f4538b3ad568c5e24eaa28bdd0914a8c5e449aba62474232a92512e",
+   "queue": {
+    "request_id": "01a1edbf-2914-71c1-ad45-c0e214cd1764",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edbf-2914-71c1-ad45-c0e214cd1764/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1edbf-2914-71c1-ad45-c0e214cd1764"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1edbf-2914-71c1-ad45-c0e214cd1764",
+   "seconds": 288.675,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\sofa_corner.glb"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T09:50:43.735Z",
+   "item": "sofa_corner",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "9ca88d333da5ee92ef3af8c978c9ba7c5439b171e2484ca4c0bdad8b05ae7799",
+   "queue": {
+    "request_id": "01a1ee10-e724-73e1-b3ea-e25198112d8e",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee10-e724-73e1-b3ea-e25198112d8e/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee10-e724-73e1-b3ea-e25198112d8e"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ee10-e724-73e1-b3ea-e25198112d8e",
+   "seconds": 42.944,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\sofa_corner.png"
+  },
+  {
+   "seq": 5,
+   "at": "2026-11-18T09:51:59.008Z",
+   "item": "sofa_corner",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "9ab7acadb3d4cbb4d5365dbf457ab4bbc21f82cad49478bf6e320406f5232c7e",
+   "queue": {
+    "request_id": "01a1ee12-062f-7c10-8e45-1e5549fbe2d1",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee12-062f-7c10-8e45-1e5549fbe2d1/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee12-062f-7c10-8e45-1e5549fbe2d1"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1ee12-062f-7c10-8e45-1e5549fbe2d1",
+   "seconds": 41.588,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\sofa_corner.png"
+  }
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "paper_lantern",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:36:45.191Z",
+   "item": "paper_lantern",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "031975ec292ed5930875779b1eba1962d78a3d4a6fbd59d3f48f49789fd91865",
+   "queue": {
+    "request_id": "01a1eb39-f646-7221-bf0e-5f0ebb50dd35",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-f646-7221-bf0e-5f0ebb50dd35/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-f646-7221-bf0e-5f0ebb50dd35"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb39-f646-7221-bf0e-5f0ebb50dd35",
+   "seconds": 11.341,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\paper_lantern.json",
+   "usage": {
+    "prompt_tokens": 1369,
+    "completion_tokens": 849,
+    "total_tokens": 2218,
+    "cost": 0.0042105,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:36:56.649Z",
+   "item": "paper_lantern",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "8d9717909e42549f5caa8f5e55fc6e6a2eff5a91b266112bd662069f0f0a7e76",
+   "queue": {
+    "request_id": "01a1eb3a-1df3-7423-ba16-6c76b03cfc0e",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3a-1df3-7423-ba16-6c76b03cfc0e/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3a-1df3-7423-ba16-6c76b03cfc0e"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb3a-1df3-7423-ba16-6c76b03cfc0e",
+   "seconds": 25.147,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\paper_lantern.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:49:21.753Z",
+   "item": "paper_lantern",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "8b9498a3ef088221e4aa879d217645e0e07fa1cb5312811c1f1149f4a22e9bdb",
+   "queue": {
+    "request_id": "01a1eb45-8781-7fd3-806f-1fdc95fa3d53",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb45-8781-7fd3-806f-1fdc95fa3d53/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb45-8781-7fd3-806f-1fdc95fa3d53"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb45-8781-7fd3-806f-1fdc95fa3d53",
+   "seconds": 212.321,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\paper_lantern.glb"
+  }
+ ]
+}

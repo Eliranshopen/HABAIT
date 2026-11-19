@@ -1,0 +1,87 @@
+{
+ "project": "Harei Zahav - Moshav Na'ama - model Hatzav (3 rooms, 80 m2) - interactive 3D walkaround",
+ "task_received_local": "2026-11-17T14:14:18+02:00",
+ "task_completed_local": "2026-11-17T18:25:38+02:00",
+ "elapsed": "4 h 11 min (14:14 -> 18:25), of it ~1 h 35 min CPU render and bake time on this machine",
+ "paid_calls_usd": 0.0,
+ "paid_calls": [],
+ "claude": {
+  "plan": "Claude Team subscription (billing tool: monthly plan cost $0 extra; usage counts against the plan's limits, not billed per token)",
+  "note": "token counts summed from the session's own records; the 5-hour usage limit was reached once at ~14:55 (the audit sub-agent stopped)",
+  "main_session": {
+   "models": "claude-fable-5-2 then claude-opus-5-5 (switched by Eliran)",
+   "calls": 163,
+   "output_tokens": 312119,
+   "input_tokens_uncached": 348,
+   "cache_write_tokens": 841369,
+   "cache_read_tokens": 59592300
+  },
+  "subagents": [
+   {
+    "agent": "knowledge reuse report",
+    "model": "claude-fable-5-2",
+    "calls": 51,
+    "output_tokens": 49754,
+    "cache_write_tokens": 342337,
+    "cache_read_tokens": 11149564,
+    "minutes": 15.4
+   },
+   {
+    "agent": "fal.ai model research (capability-scout)",
+    "model": "claude-sonnet-5-5",
+    "calls": 29,
+    "output_tokens": 33421,
+    "cache_write_tokens": 116189,
+    "cache_read_tokens": 2161147,
+    "minutes": 9.9
+   },
+   {
+    "agent": "independent plan audit (stopped at the usage limit, no result)",
+    "model": "claude-fable-5-2",
+    "calls": 34,
+    "output_tokens": 62748,
+    "cache_write_tokens": 213370,
+    "cache_read_tokens": 5277321,
+    "minutes": 16.4
+   }
+  ],
+  "totals": {
+   "calls": 277,
+   "output_tokens": 458042,
+   "cache_write_tokens": 1513265,
+   "cache_read_tokens": 78180332
+  }
+ },
+ "free_tools": [
+  {
+   "tool": "Blender 4.5 Cycles, this machine's CPU",
+   "usd": 0,
+   "use": "scene build, test renders, 6-group light bake, GLB export"
+  },
+  {
+   "tool": "Poly Haven (CC0)",
+   "usd": 0,
+   "use": "8 textures, 24 small models, 1 HDRI (332 MB downloaded, no account)"
+  },
+  {
+   "tool": "three.js 0.170 (MIT), Pannellum 2.5.6 (MIT)",
+   "usd": 0,
+   "use": "the walkaround; the (unused) panorama viewer"
+  },
+  {
+   "tool": "PyMuPDF, OpenCV, Shapely, Pillow, NumPy",
+   "usd": 0,
+   "use": "PDF scan, wall extraction, checks"
+  },
+  {
+   "tool": "headless Chrome + playwright-core",
+   "usd": 0,
+   "use": "browser QA at 1440 and 390"
+  },
+  {
+   "tool": "fal.ai",
+   "usd": 0,
+   "use": "public docs and schemas only; the approved $1.50 test was not run"
+  }
+ ]
+}

@@ -1,0 +1,69 @@
+{
+ "furniture": {
+  "objects": 319,
+  "note": "drawn pieces stand in their sheet boxes; heights, finishes, decor are ASSUMED"
+ },
+ "hdri": {
+  "file": "dry_orchard_meadow_4k.hdr",
+  "sun_elevation_deg": 22.5,
+  "sun_azimuth_image_deg": -36.2,
+  "sun_azimuth_model_deg": 142.0,
+  "note": "the sheet has no north arrow: the sun direction is ASSUMED"
+ },
+ "blend": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\scene\\hatzav.blend",
+ "objects": 670,
+ "meshes": 587,
+ "tris": 2824419,
+ "collections": {
+  "01_Architecture": 189,
+  "02_Furniture": 220,
+  "03_Decor": 124,
+  "04_Lighting": 76,
+  "05_Cameras": 15,
+  "06_Site": 46
+ },
+ "panos": {
+  "pano_living": [
+   640,
+   890
+  ],
+  "pano_kitchen": [
+   192,
+   890
+  ],
+  "pano_entrance": [
+   178,
+   598
+  ],
+  "pano_bedroom": [
+   462,
+   322
+  ],
+  "pano_saferoom": [
+   190,
+   215
+  ],
+  "pano_bath": [
+   128,
+   398
+  ],
+  "pano_deck": [
+   985,
+   760
+  ],
+  "pano_hall": [
+   268,
+   400
+  ]
+ },
+ "stills": [
+  "still_hero_living",
+  "still_kitchen_dining",
+  "still_living_to_deck",
+  "still_bedroom",
+  "still_saferoom",
+  "still_bath",
+  "still_exterior"
+ ],
+ "blender": "4.5.10 LTS"
+}

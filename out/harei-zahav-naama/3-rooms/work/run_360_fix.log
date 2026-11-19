@@ -1,0 +1,50 @@
+== render kitchen at 172,890 20:42
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+stitched work/pano360/kitchen.png 2048 1024 render seconds 492
+OK gpt25 3840x1920 88 s
+SEAM work/pano360/real/kitchen.png 11.3 -> 0.0 4096x2048
+== render bath at 150,420 20:52
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+stitched work/pano360/bath.png 2048 1024 render seconds 456
+OK gpt25 3840x1920 104 s
+SEAM work/pano360/real/bath.png 4.7 -> 0.0 4096x2048
+== render saferoom at 160,255 21:02
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+stitched work/pano360/saferoom.png 2048 1024 render seconds 448
+OK gpt25 3840x1920 108 s
+SEAM work/pano360/real/saferoom.png 3.1 -> 0.0 4096x2048
+== render dining at 420,620 21:12
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+stitched work/pano360/dining.png 2048 1024 render seconds 510
+OK gpt25 3840x1920 90 s
+SEAM work/pano360/real/dining.png 4.4 -> 0.0 4096x2048
+== render living at 700,880 21:22
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+stitched work/pano360/living.png 2048 1024 render seconds 386
+OK gpt25 3840x1920 133 s
+SEAM work/pano360/real/living.png 5.0 -> 0.0 4096x2048
+== render entrance at 150,590 21:31
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+stitched work/pano360/entrance.png 2048 1024 render seconds 408
+OK gpt25 3840x1920 60 s
+SEAM work/pano360/real/entrance.png 6.1 -> 0.0 4096x2048
+== render hall at 270,400 21:39
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+stitched work/pano360/hall.png 2048 1024 render seconds 421
+OK gpt25 3840x1920 52 s
+SEAM work/pano360/real/hall.png 5.6 -> 0.0 4096x2048
+== render deck at 980,760 21:48
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+RENDER OK {"res": [2048, 1024], "samples": 48, "threshold": 0.019999999552965164, "camera": "pano_li
+Error: Not freed memory blocks: 1, total unfreed memory 0.000023 MB
+stitched work/pano360/deck.png 2048 1024 render seconds 221
+OK gpt25 3840x1920 65 s
+SEAM work/pano360/real/deck.png 12.2 -> 0.0 4096x2048
+RUN_360_FIX_DONE 21:53

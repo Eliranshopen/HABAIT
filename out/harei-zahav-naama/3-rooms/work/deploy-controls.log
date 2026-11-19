@@ -1,0 +1,46 @@
+<claude-code-hint v="1" type="plugin" value="vercel@claude-plugins-official" />
+Vercel CLI 65.9.0 (Node.js 24.22.1)
+  Inspect         https://vercel.com/eliran-5390/hatzav-walk/6ZTkH73uWA7Rz3J8KKaPwRXsoKiM
+  Production      https://hatzav-walk-muomx7t34-eliran-5390.vercel.app
+▲ Aliased         https://hatzav-walk.vercel.app
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_6ZTkH73uWA7Rz3J8KKaPwRXsoKiM",
+    "url": "https://hatzav-walk-muomx7t34-eliran-5390.vercel.app",
+    "productionUrl": "https://hatzav-walk.vercel.app",
+    "inspectorUrl": "https://vercel.com/eliran-5390/hatzav-walk/6ZTkH73uWA7Rz3J8KKaPwRXsoKiM",
+    "readyState": "READY",
+    "target": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_6ZTkH73uWA7Rz3J8KKaPwRXsoKiM",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "message": "Deployment hatzav-walk-muomx7t34-eliran-5390.vercel.app ready. Production URL: https://hatzav-walk.vercel.app",
+  "next": [
+    {
+      "command": "vercel git connect",
+      "when": "Automatically deploy changes on every push"
+    },
+    {
+      "command": "vercel curl https://hatzav-walk.vercel.app",
+      "when": "Verify deployment, including when Deployment Protection is enabled"
+    },
+    {
+      "command": "vercel inspect hatzav-walk-muomx7t34-eliran-5390.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}

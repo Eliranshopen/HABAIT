@@ -1,0 +1,59 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 36,
+ "item": "alt_rug_stripe",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:49:30.657Z",
+   "item": "alt_rug_stripe",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "9ce246a0d9e612554785c6efd87b1b13a8078f921df3362f9b92d91caa6593d8",
+   "queue": {
+    "request_id": "01a1eb45-f804-7b63-a6d9-623ba6dc2a3d",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb45-f804-7b63-a6d9-623ba6dc2a3d/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb45-f804-7b63-a6d9-623ba6dc2a3d"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb45-f804-7b63-a6d9-623ba6dc2a3d",
+   "seconds": 8.645,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_rug_stripe.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:39:41.206Z",
+   "item": "alt_rug_stripe",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "failed-unbilled",
+   "inputs_hash": "5dbb4f22c70c4598c1e6991d1d1cb5d44f8d33321c06de0cbf610a6bfe2c7f16",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.479
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T06:37:51.927Z",
+   "item": "alt_rug_stripe",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "5dbb4f22c70c4598c1e6991d1d1cb5d44f8d33321c06de0cbf610a6bfe2c7f16",
+   "queue": {
+    "request_id": "01a1ed61-291d-7c63-8317-1d62696de0f7",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed61-291d-7c63-8317-1d62696de0f7/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed61-291d-7c63-8317-1d62696de0f7"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ed61-291d-7c63-8317-1d62696de0f7",
+   "seconds": 479.753,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_rug_stripe.glb"
+  }
+ ]
+}

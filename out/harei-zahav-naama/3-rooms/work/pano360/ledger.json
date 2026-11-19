@@ -1,0 +1,469 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "note": "the 360 realism pass; project ceiling $95 (Eliran 2026-11-18)",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T12:04:39.919Z",
+   "op": "pano-realism",
+   "model": "fal-ai/bytedance/seedream/v4.5/edit",
+   "room": "kitchen",
+   "reserved_usd": 0.04,
+   "status": "settled",
+   "inputs_hash": "dd711c56ce3219b2777a0df34c1e115f15a9873840dc6de2333a025da822103b",
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\compare\\kitchen_sd45.png",
+   "queue": {
+    "request_id": "01a1ee8b-7d7e-7f20-afa8-c3a9ac5e9cb0",
+    "status_url": "https://queue.fal.run/fal-ai/bytedance/requests/01a1ee8b-7d7e-7f20-afa8-c3a9ac5e9cb0/status",
+    "response_url": "https://queue.fal.run/fal-ai/bytedance/requests/01a1ee8b-7d7e-7f20-afa8-c3a9ac5e9cb0"
+   },
+   "settled_usd": 0.04,
+   "seconds": 51.773,
+   "model_size": [
+    4096,
+    2048
+   ]
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T12:05:40.188Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "kitchen",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "a497b206e3007cb02addaa0ea92d3327a38e82811e6148b52f69cece6892b01e",
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\compare\\kitchen_gpt25.png",
+   "queue": {
+    "request_id": "01a1ee8c-6d1e-7b42-9acf-ea17f6386e3d",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee8c-6d1e-7b42-9acf-ea17f6386e3d/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee8c-6d1e-7b42-9acf-ea17f6386e3d"
+   },
+   "settled_usd": 1.2,
+   "seconds": 73.505,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T12:07:07.243Z",
+   "op": "pano-realism",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "room": "kitchen",
+   "reserved_usd": 0.3,
+   "status": "settled",
+   "inputs_hash": "bcdd1a9cbd5417183d2dc0751d17b1d6c55f330e7c6348bff59e473f9dc55947",
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\compare\\kitchen_nbp.png",
+   "queue": {
+    "request_id": "01a1ee8d-c1ce-7b83-b12b-298f94566cba",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8d-c1ce-7b83-b12b-298f94566cba/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1ee8d-c1ce-7b83-b12b-298f94566cba"
+   },
+   "settled_usd": 0.3,
+   "seconds": 83.221,
+   "model_size": [
+    5824,
+    2880
+   ]
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T12:10:11.783Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "bedroom",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "64d3b5f8b4be1959673e21341b0745ba3ebc2d7a135f52557e6049f9b0169573",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\bedroom.png",
+   "queue": {
+    "request_id": "01a1ee90-8f2e-7430-8618-aad28ca2c539",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee90-8f2e-7430-8618-aad28ca2c539/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee90-8f2e-7430-8618-aad28ca2c539"
+   },
+   "settled_usd": 1.2,
+   "seconds": 54.642,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 5,
+   "at": "2026-11-18T12:18:58.983Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "saferoom",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "fa2798a81999f780917a0bf455096ad27e928ffb244212d76c8dfd8ea0414de2",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\saferoom.png",
+   "queue": {
+    "request_id": "01a1ee98-99e3-7371-8138-64b77bdbbf39",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee98-99e3-7371-8138-64b77bdbbf39/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1ee98-99e3-7371-8138-64b77bdbbf39"
+   },
+   "error": "terminated",
+   "settled_usd": 1.2,
+   "seconds": 16.597,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 6,
+   "at": "2026-11-18T12:32:45.824Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "bath",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "2ce506a0a146a1576fde91964309ecfea0285bd844bb814e4d307d2b41073e8c",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\bath.png",
+   "queue": {
+    "request_id": "01a1eea5-37e7-71d3-aca4-fa0db32f1893",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea5-37e7-71d3-aca4-fa0db32f1893/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eea5-37e7-71d3-aca4-fa0db32f1893"
+   },
+   "settled_usd": 1.2,
+   "seconds": 57.534,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 7,
+   "at": "2026-11-18T12:39:26.134Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "entrance",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "8bc55ca7de492b1d652db40fe18089270baccce160bae2a578e40c7afc310a44",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\entrance.png",
+   "queue": {
+    "request_id": "01a1eeab-548e-7242-9549-d4bfd7ceee8b",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeab-548e-7242-9549-d4bfd7ceee8b/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeab-548e-7242-9549-d4bfd7ceee8b"
+   },
+   "settled_usd": 1.2,
+   "seconds": 63.223,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 8,
+   "at": "2026-11-18T12:47:13.329Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "hall",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "2b8f06c7d19b405190aba06749981685712e5c47210883b0d060792e02d3aa02",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\hall.png",
+   "queue": {
+    "request_id": "01a1eeb2-78f8-7502-a2af-ffa250c1c9db",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeb2-78f8-7502-a2af-ffa250c1c9db/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeb2-78f8-7502-a2af-ffa250c1c9db"
+   },
+   "settled_usd": 1.2,
+   "seconds": 64.924,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 9,
+   "at": "2026-11-18T12:54:48.024Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "dining",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "4446a0b8cdf42240f9fc5df300cb62fc266512a344ecaa5068aef8ed218f35cf",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\dining.png",
+   "queue": {
+    "request_id": "01a1eeb9-69cf-7502-b267-2a7d2e2fea42",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeb9-69cf-7502-b267-2a7d2e2fea42/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eeb9-69cf-7502-b267-2a7d2e2fea42"
+   },
+   "settled_usd": 1.2,
+   "seconds": 66.78,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 10,
+   "at": "2026-11-18T12:58:03.138Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "deck",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "2cdbb4518afa33fa1a54e55f8084b32c23f33e713b20fb9dd025a2e12320ec54",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\deck.png",
+   "queue": {
+    "request_id": "01a1eebc-61a2-7b12-b72d-0480f907a6b1",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eebc-61a2-7b12-b72d-0480f907a6b1/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eebc-61a2-7b12-b72d-0480f907a6b1"
+   },
+   "settled_usd": 1.2,
+   "seconds": 65.627,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 11,
+   "at": "2026-11-18T13:00:12.860Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "garden",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "1a1f5af065e48ca3d477db10ede95ea2ba255cb571dc96d93c93f57676022747",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\garden.png",
+   "queue": {
+    "request_id": "01a1eebe-5b3a-7df1-856a-544cb1cfde22",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eebe-5b3a-7df1-856a-544cb1cfde22/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eebe-5b3a-7df1-856a-544cb1cfde22"
+   },
+   "settled_usd": 1.2,
+   "seconds": 104.695,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 12,
+   "at": "2026-11-18T13:06:26.325Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "living",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "b60a405cfae6680ca3b1273bf6705e4aa124ec35ab0e8c5910d4715777493dce",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\living.png",
+   "queue": {
+    "request_id": "01a1eec4-0d6e-7123-af1d-c16e3e067c8f",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eec4-0d6e-7123-af1d-c16e3e067c8f/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eec4-0d6e-7123-af1d-c16e3e067c8f"
+   },
+   "settled_usd": 1.2,
+   "seconds": 63.226,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 13,
+   "at": "2026-11-18T13:12:33.991Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "dining",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "3481281ea9a2f867ba14c86be91999bd30690429ea85cb33eb1b5a563b76f335",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\dining.png",
+   "queue": {
+    "request_id": "01a1eec9-adcb-7bd0-90d9-bc994f089bcd",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eec9-adcb-7bd0-90d9-bc994f089bcd/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1eec9-adcb-7bd0-90d9-bc994f089bcd"
+   },
+   "settled_usd": 1.2,
+   "seconds": 72.816,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 14,
+   "at": "2026-11-18T18:51:17.474Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "kitchen",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "c5873d7f5f6a29c8752ee66d50903c1603ed0f7a8a3897f7b38454356ae91907",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\kitchen.png",
+   "queue": {
+    "request_id": "01a1efff-c2ea-7bd0-885a-18d1a445f0fa",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efff-c2ea-7bd0-885a-18d1a445f0fa/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1efff-c2ea-7bd0-885a-18d1a445f0fa"
+   },
+   "settled_usd": 1.2,
+   "seconds": 87.823,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 15,
+   "at": "2026-11-18T19:00:44.881Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "bath",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "40bbedbe290f837c1816d12120b0edb83258f61375e299c0cd8345126911d37c",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\bath.png",
+   "queue": {
+    "request_id": "01a1f008-6b75-7321-a2bf-d92d472d6a95",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f008-6b75-7321-a2bf-d92d472d6a95/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f008-6b75-7321-a2bf-d92d472d6a95"
+   },
+   "settled_usd": 1.2,
+   "seconds": 103.63,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 16,
+   "at": "2026-11-18T19:10:21.722Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "saferoom",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "a8ca206fde46c53cf0d7ce9268b6d3d6f5391a0b6e93eaf2af0068a43061e89d",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\saferoom.png",
+   "queue": {
+    "request_id": "01a1f011-39f5-7d71-a54f-9752f566c51b",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f011-39f5-7d71-a54f-9752f566c51b/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f011-39f5-7d71-a54f-9752f566c51b"
+   },
+   "settled_usd": 1.2,
+   "seconds": 107.506,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 17,
+   "at": "2026-11-18T19:21:04.027Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "dining",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "ecf6b66fd42ce3ebf058b3dc70ce484f7fbdb8fdcfaaa8b7a6292a1cdbb54691",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\dining.png",
+   "queue": {
+    "request_id": "01a1f01b-057c-77b2-bc5c-38f82ca73803",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f01b-057c-77b2-bc5c-38f82ca73803/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f01b-057c-77b2-bc5c-38f82ca73803"
+   },
+   "settled_usd": 1.2,
+   "seconds": 89.665,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 18,
+   "at": "2026-11-18T19:29:21.889Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "living",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "4234d5656e4bfbb43252e231087cc46ad517db4291445e4f660fe34aafd3122d",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\living.png",
+   "queue": {
+    "request_id": "01a1f022-9e69-7492-b516-1b59f9782a4f",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f022-9e69-7492-b516-1b59f9782a4f/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f022-9e69-7492-b516-1b59f9782a4f"
+   },
+   "settled_usd": 1.2,
+   "seconds": 133.394,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 19,
+   "at": "2026-11-18T19:38:46.375Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "entrance",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "778232d6b990abdb15d3ea2f96de62b85879527295a791915dc6fd29471dee4d",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\entrance.png",
+   "queue": {
+    "request_id": "01a1f02b-3b34-7d91-a0a1-8f5a110a3ba1",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f02b-3b34-7d91-a0a1-8f5a110a3ba1/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f02b-3b34-7d91-a0a1-8f5a110a3ba1"
+   },
+   "settled_usd": 1.2,
+   "seconds": 60.211,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 20,
+   "at": "2026-11-18T19:47:11.502Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "hall",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "f21245b5e1fffcbfee3d061f7e7cab25a5e07447eb8e7ad21ca0a5307806cd98",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\hall.png",
+   "queue": {
+    "request_id": "01a1f032-f047-71a3-a6ed-afa38f5e0733",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f032-f047-71a3-a6ed-afa38f5e0733/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f032-f047-71a3-a6ed-afa38f5e0733"
+   },
+   "settled_usd": 1.2,
+   "seconds": 51.668,
+   "model_size": [
+    3840,
+    1920
+   ]
+  },
+  {
+   "seq": 21,
+   "at": "2026-11-18T19:52:04.467Z",
+   "op": "pano-realism",
+   "model": "openai/gpt-image-2.5/sunburst/edit",
+   "room": "deck",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "bc58a8b0e0313919ebc30dbc103d148a63f916ee581d4a3bf9022f20f7107a80",
+   "out": "C:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\work\\pano360\\real\\deck.png",
+   "queue": {
+    "request_id": "01a1f037-693b-71f3-8375-2df677a94ac7",
+    "status_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f037-693b-71f3-8375-2df677a94ac7/status",
+    "response_url": "https://queue.fal.run/openai/gpt-image-2.5/requests/01a1f037-693b-71f3-8375-2df677a94ac7"
+   },
+   "settled_usd": 1.2,
+   "seconds": 65.213,
+   "model_size": [
+    3840,
+    1920
+   ]
+  }
+ ]
+}

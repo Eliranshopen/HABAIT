@@ -1,0 +1,10 @@
+import { createRequire } from 'node:module';
+const require = createRequire('C:/RnD/Projects/3Dengine/appdeps/package.json');
+const { chromium } = require('playwright-core');
+const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', args: ['--use-angle=d3d11'] });
+const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 })).newPage();
+await p.goto(process.argv[2], { waitUntil: 'load' }); await p.waitForTimeout(6000);
+await p.screenshot({ path: 'qa/360/live-first-load-390.png' });
+console.log(await p.evaluate(() => { const c = document.querySelector('.t-coach-block'); const s = c && getComputedStyle(c);
+  return JSON.stringify({ block: !!c, display: s?.display, opacity: s?.opacity, bg: s?.backgroundColor, pe: s?.pointerEvents, coachText: (document.querySelector('[class*=coach]:not(.t-coach-block)')?.textContent || '').trim().slice(0, 160) }); }));
+await b.close();

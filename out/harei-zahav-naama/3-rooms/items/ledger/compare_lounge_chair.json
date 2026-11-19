@@ -1,0 +1,83 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 48,
+ "note": "image-to-3D comparison, Eliran 2026-11-18",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T08:30:46.269Z",
+   "item": "lounge_chair",
+   "op": "compare",
+   "model": "fal-ai/hyper3d/rodin/v2.5",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "1ccb3ec7e35c9db0158f4fa0703a5c0341c0392e99d62e0c687e6eb6eaa995ec",
+   "queue": {
+    "request_id": "01a1edc7-d410-7903-9d76-c3f69e47a5dc",
+    "status_url": "https://queue.fal.run/fal-ai/hyper3d/requests/01a1edc7-d410-7903-9d76-c3f69e47a5dc/status",
+    "response_url": "https://queue.fal.run/fal-ai/hyper3d/requests/01a1edc7-d410-7903-9d76-c3f69e47a5dc"
+   },
+   "settled_usd": 1.2,
+   "request_id": "01a1edc7-d410-7903-9d76-c3f69e47a5dc",
+   "seconds": 210.843,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\rodin\\lounge_chair.glb"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T08:34:17.178Z",
+   "item": "lounge_chair",
+   "op": "compare",
+   "model": "meshy/v7.1/image-to-3d",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "b8e5e78cae652c56bbe1065b2694efc659df2b056b0cf9ef271b3f736a8d50ab",
+   "queue": {
+    "request_id": "01a1edca-f2f9-7a00-80d8-2f05bae59058",
+    "status_url": "https://queue.fal.run/meshy/v7.1/requests/01a1edca-f2f9-7a00-80d8-2f05bae59058/status",
+    "response_url": "https://queue.fal.run/meshy/v7.1/requests/01a1edca-f2f9-7a00-80d8-2f05bae59058"
+   },
+   "settled_usd": 1.2,
+   "request_id": "01a1edca-f2f9-7a00-80d8-2f05bae59058",
+   "seconds": 760.017,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\meshy\\lounge_chair.glb"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T08:46:57.256Z",
+   "item": "lounge_chair",
+   "op": "compare",
+   "model": "tripo3d/h3.1/image-to-3d",
+   "reserved_usd": 0.6,
+   "status": "settled",
+   "inputs_hash": "50d08509fbed71fe7487dccc6bf6ae3c2e83cbd8fe32530f49363f0163dafc05",
+   "queue": {
+    "request_id": "01a1edd6-8bf1-7c82-961c-57e586cb3452",
+    "status_url": "https://queue.fal.run/tripo3d/h3.1/requests/01a1edd6-8bf1-7c82-961c-57e586cb3452/status",
+    "response_url": "https://queue.fal.run/tripo3d/h3.1/requests/01a1edd6-8bf1-7c82-961c-57e586cb3452"
+   },
+   "settled_usd": 0.6,
+   "request_id": "01a1edd6-8bf1-7c82-961c-57e586cb3452",
+   "seconds": 211.529,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\tripo\\lounge_chair.glb"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T08:50:29.659Z",
+   "item": "lounge_chair",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "d552384724b83ff9fa5139b677abec532c90d27fc554031c596b69d089f481b0",
+   "queue": {
+    "request_id": "01a1edda-a95d-7ab1-aafa-5e85ecc9ccda",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1edda-a95d-7ab1-aafa-5e85ecc9ccda/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1edda-a95d-7ab1-aafa-5e85ecc9ccda"
+   },
+   "settled_usd": 2.1,
+   "request_id": "01a1edda-a95d-7ab1-aafa-5e85ecc9ccda",
+   "seconds": 639.666,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\hitem\\lounge_chair.glb"
+  }
+ ]
+}

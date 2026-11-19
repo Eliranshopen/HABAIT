@@ -1,0 +1,22 @@
+blender exit 143 in 660s
+BLENDER TIMEOUT after 560s - killed
+RENDER OK {"res": [4096, 2048], "samples": 64, "threshold": 0.029999999329447746, "camera": "pano_living", "location_m": [6.4, -8.9, 1.55], "strip": {"i": 5, "n": 8, "x0": 2512, "x1": 3120, "pad": 48}, "seconds": 555.6}
+blender exit 124 in 561s
+BLENDER TIMEOUT after 560s - killed
+blender exit 124 in 566s
+RENDER OK {"res": [4096, 2048], "samples": 64, "threshold": 0.029999999329447746, "camera": "pano_living", "location_m": [6.4, -8.9, 1.55], "strip": {"i": 7, "n": 8, "x0": 3536, "x1": 4096, "pad": 48}, "seconds": 496.4}
+blender exit 0 in 501s
+Traceback (most recent call last):
+  File "C:\RnD\.wt\harei-zahav-naama\out\harei-zahav-naama\3-rooms\scripts\07_stitch.py", line 14, in <module>
+    metas = [json.load(open(p + ".json", encoding="utf-8")) for p in parts]
+                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'work/strips/pano_living_4.png.json'
+RENDER OK {"res": [2048, 1024], "samples": 40, "threshold": 0.029999999329447746, "camera": "pano_kitchen", "location_m": [1.92, -8.9, 1.55], "strip": {"i": 0, "n": 2, "x0": 0, "x1": 1072, "pad": 48}, "seconds": 329.6}
+blender exit 0 in 575s
+Traceback (most recent call last):
+  File "C:\RnD\.wt\harei-zahav-naama\out\harei-zahav-naama\3-rooms\scripts\07_stitch.py", line 14, in <module>
+    metas = [json.load(open(p + ".json", encoding="utf-8")) for p in parts]
+                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'work/strips/pano_kitchen_1.png.json'
+RENDER OK {"res": [2048, 1024], "samples": 40, "threshold": 0.029999999329447746, "camera": "pano_bedroom", "location_m": [4.62, -3.22, 1.55], "strip": {"i": 0, "n": 2, "x0": 0, "x1": 1072, "pad": 48}, "seconds": 314.6}
+blender exit 0 in 332s

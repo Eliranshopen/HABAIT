@@ -1,0 +1,194 @@
+{
+ "$schema": "tour360/apartment.v1",
+ "id": "hatzav",
+ "status": "concept",
+ "title": {
+  "he": "דגם חצב · 3 חדרים · 80 מ\"ר · הרי זהב, מושב נעמה (הדמיה)",
+  "en": "Hatzav model · 3 rooms · 80 m² · Harei Zahav, Moshav Na'ama (concept)",
+  "fr": "Modèle Hatzav · 3 pièces · 80 m² · Harei Zahav, moshav Na'ama (concept)"
+ },
+ "project": null,
+ "projectNote": "the Hatzav house from the developer's sales plan (JOB/input/plan-hatzav-colour.png); geometry of record JOB/geometry/geometry.json, gated by JOB/scripts/05_check_geometry.py; furniture from the developer's interior renders, made as 3D items with AI (JOB/items)",
+ "plan": {
+  "image": "plan/floorplan.webp",
+  "imageSize": [
+   1250,
+   919
+  ],
+  "viewBox": [
+   264,
+   136,
+   978,
+   783
+  ],
+  "labelsLanguage": "he",
+  "northSource": "none: geometry.json says plan-top is called north by name only; no north arrow was measured, so the tour shows no compass"
+ },
+ "sets": {
+  "balanced": {
+   "dir": "panos/balanced",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true
+  },
+  "thumb": {
+   "dir": "panos/thumb",
+   "width": 640,
+   "height": 320,
+   "format": "webp",
+   "tracked": true
+  },
+  "full": {
+   "dir": "_local/full",
+   "width": 4096,
+   "height": 2048,
+   "format": "webp",
+   "tracked": false,
+   "note": "the realism pass at its native 4096×2048, carried by build-tour --full"
+  },
+  "original": {
+   "dir": "panos/original",
+   "width": 2048,
+   "height": 1024,
+   "format": "webp",
+   "tracked": true,
+   "note": "the Blender renders the realism pass was made over (one yaw frame); the Original switch shows them"
+  }
+ },
+ "disclosure": {
+  "badgeKey": "badge",
+  "conceptLineKey": "conceptLine",
+  "aiNoteKey": "aiNote",
+  "copyPack": "../../copy/tour360-copy.json + copy.json (this apartment's disclosure)",
+  "permanent": true
+ },
+ "fidelity": {
+  "mode": "ai-over-cg",
+  "note": "the realism pass is an AI image pass over the Blender renders; RAINBOW's fidelity gate (tools/fidelity-gate.mjs) needs a paid depth call and a plan.general.json trace, neither made for Hatzav — build-tour refuses without --ungated-ok, which is Eliran's call (root §6)"
+ },
+ "provenance": {
+  "panoramas": "real: the realism pass over the Blender renders, 4096×2048 JPEG with the 360 seam closed (written by the main session; an AI image pass). The .png beside each is the raw model answer with an open seam and is NEVER used",
+  "rings": "geometric projection of JOB/items/placements.json, $0 (no vision scan)",
+  "ruler": "depth ray-cast from geometry.json, $0",
+  "catalog": "JOB/items/catalog-spec.json + JOB/items/studio (our own AI-made items; nothing from RAINBOW's catalog)"
+ },
+ "panoSource": "real",
+ "panoramas": [
+  {
+   "room": "living",
+   "asset": "01-living",
+   "source": "work/pano360/real/living.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "f11c34382c1a7a39a8fd134032880dfa095607f22fb6127fac9e96907efeb284",
+   "mtime": "2026-11-18T19:31:36.689Z"
+  },
+  {
+   "room": "dining",
+   "asset": "02-dining",
+   "source": "work/pano360/real/dining.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "dca253f20d3ab1f548a028b37864f74502290772e7f62e0f4b368e0cdc88c52c",
+   "mtime": "2026-11-18T19:22:35.344Z"
+  },
+  {
+   "room": "kitchen",
+   "asset": "03-kitchen",
+   "source": "work/pano360/real/kitchen.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "7002c4ad891f2ec2c2ef6f64ef3f942736ec56cbaa9e53efcb6199c951a2951b",
+   "mtime": "2026-11-18T18:52:46.981Z"
+  },
+  {
+   "room": "entrance",
+   "asset": "04-entrance",
+   "source": "work/pano360/real/entrance.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "473fb288484c4733aa0923bcbe57c781e0541f023efaad6049eb30fbd77f24f9",
+   "mtime": "2026-11-18T19:39:47.992Z"
+  },
+  {
+   "room": "hall",
+   "asset": "05-hall",
+   "source": "work/pano360/real/hall.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "b31e58a5062dfe7ea6856368782cb63ae14b0263a20cd41654dcf95e42490b7c",
+   "mtime": "2026-11-18T19:48:04.914Z"
+  },
+  {
+   "room": "bedroom",
+   "asset": "06-bedroom",
+   "source": "work/pano360/real/bedroom.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "8c8d00abb9c76782f7e56e24f00a138e70d8b5b06097376bae600eeed215b470",
+   "mtime": "2026-11-18T12:11:09.658Z"
+  },
+  {
+   "room": "saferoom",
+   "asset": "07-saferoom",
+   "source": "work/pano360/real/saferoom.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "c4881bfa7498bdc6688b83725ad991acfdb6556b8bd2bc38a977c8fcb968096d",
+   "mtime": "2026-11-18T19:12:10.634Z"
+  },
+  {
+   "room": "bath",
+   "asset": "08-bath",
+   "source": "work/pano360/real/bath.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "9b124b616da27d01facc8409b21b9c8263c70735f27a0e16bccccfb36d78d91b",
+   "mtime": "2026-11-18T19:02:30.278Z"
+  },
+  {
+   "room": "deck",
+   "asset": "09-deck",
+   "source": "work/pano360/real/deck.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "1cf79a8e9d7c4d222e95fb57439630136156f5d4c9ba9c1f4973c1d27fd03e4b",
+   "mtime": "2026-11-18T19:53:12.090Z"
+  },
+  {
+   "room": "garden",
+   "asset": "10-garden",
+   "source": "work/pano360/real/garden.jpg",
+   "px": [
+    4096,
+    2048
+   ],
+   "sha256": "f6241288d78455d43556804f7f50537a45dadf05b639050b005d83fecb1ec433",
+   "mtime": "2026-11-18T13:02:02.791Z"
+  }
+ ],
+ "missingRooms": [],
+ "cameraNotes": [],
+ "sceneCount": 10,
+ "defaultScene": "living",
+ "intakeDate": "2026-11-18"
+}

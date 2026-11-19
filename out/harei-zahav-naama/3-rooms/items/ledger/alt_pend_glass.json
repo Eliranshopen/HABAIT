@@ -1,0 +1,72 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 36,
+ "item": "alt_pend_glass",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:48:16.804Z",
+   "item": "alt_pend_glass",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "5418900177242f33d61de820eded4cc4b6fdaf06a8b091fbcc35f92956e04eff",
+   "queue": {
+    "request_id": "01a1eb44-8d97-75d1-b297-962954ec2f2e",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb44-8d97-75d1-b297-962954ec2f2e/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb44-8d97-75d1-b297-962954ec2f2e"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb44-8d97-75d1-b297-962954ec2f2e",
+   "seconds": 33.35,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_pend_glass.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:39:25.769Z",
+   "item": "alt_pend_glass",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "failed-unbilled",
+   "inputs_hash": "fed67c9c5f989a4a252285a323cb44f72d9c051929c636ae71a441294702f1a2",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.306
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T06:18:29.622Z",
+   "item": "alt_pend_glass",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "failed-unbilled",
+   "inputs_hash": "fed67c9c5f989a4a252285a323cb44f72d9c051929c636ae71a441294702f1a2",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.618
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T06:23:21.386Z",
+   "item": "alt_pend_glass",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "fed67c9c5f989a4a252285a323cb44f72d9c051929c636ae71a441294702f1a2",
+   "queue": {
+    "request_id": "01a1ed53-071b-75c1-8325-94397c105885",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed53-071b-75c1-8325-94397c105885/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed53-071b-75c1-8325-94397c105885"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ed53-071b-75c1-8325-94397c105885",
+   "seconds": 277.056,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_pend_glass.glb"
+  }
+ ]
+}

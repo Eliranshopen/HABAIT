@@ -1,0 +1,59 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 36,
+ "item": "alt_rug_jute",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:49:05.164Z",
+   "item": "alt_rug_jute",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "71e41555af93453c78b97b1be03cf5dfd26ea6bbe2f7136863d82a2e83afbc7f",
+   "queue": {
+    "request_id": "01a1eb45-9a34-7f42-8310-b54e7c5b8fb9",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb45-9a34-7f42-8310-b54e7c5b8fb9/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb45-9a34-7f42-8310-b54e7c5b8fb9"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb45-9a34-7f42-8310-b54e7c5b8fb9",
+   "seconds": 64.603,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_rug_jute.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:39:37.728Z",
+   "item": "alt_rug_jute",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "failed-unbilled",
+   "inputs_hash": "5c7101e2f19bcc27d40e9770b021dca2b112cf7ad83da5faaf9865f6eedd1ad7",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.79
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T06:33:31.799Z",
+   "item": "alt_rug_jute",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "5c7101e2f19bcc27d40e9770b021dca2b112cf7ad83da5faaf9865f6eedd1ad7",
+   "queue": {
+    "request_id": "01a1ed5c-58d4-7150-8f54-5e27cab6c372",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed5c-58d4-7150-8f54-5e27cab6c372/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed5c-58d4-7150-8f54-5e27cab6c372"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ed5c-58d4-7150-8f54-5e27cab6c372",
+   "seconds": 336.431,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_rug_jute.glb"
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "coffee_table",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:21.857Z",
+   "item": "coffee_table",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "c2de584a685f2d80a6a8f311269bd3c8f9a8b72e7a57668e878e5f8ff9212866",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.107,
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:39:09.975Z",
+   "item": "coffee_table",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "c2de584a685f2d80a6a8f311269bd3c8f9a8b72e7a57668e878e5f8ff9212866",
+   "queue": {
+    "request_id": "01a1eb3c-2c94-7700-a05c-395ef37d2dac",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-2c94-7700-a05c-395ef37d2dac/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-2c94-7700-a05c-395ef37d2dac"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb3c-2c94-7700-a05c-395ef37d2dac",
+   "seconds": 11.795,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\coffee_table.json",
+   "usage": {
+    "prompt_tokens": 1398,
+    "completion_tokens": 940,
+    "total_tokens": 2338,
+    "cost": 0.0045735,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:39:21.896Z",
+   "item": "coffee_table",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "97184b3e46914062e7373b779054fb095d3a6f6c48bd52e022fbd85a263e233f",
+   "queue": {
+    "request_id": "01a1eb3c-572e-71d1-ab6d-5ea2c12625e5",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3c-572e-71d1-ab6d-5ea2c12625e5/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3c-572e-71d1-ab6d-5ea2c12625e5"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb3c-572e-71d1-ab6d-5ea2c12625e5",
+   "seconds": 35.047,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\coffee_table.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-17T20:45:49.315Z",
+   "item": "coffee_table",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "a1572bc7184316fe151421021c0fa0788242e9ae9b237af4cbac2c637ee9e243",
+   "queue": {
+    "request_id": "01a1eb42-4983-77c0-a431-1e055b828b3e",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb42-4983-77c0-a431-1e055b828b3e/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb42-4983-77c0-a431-1e055b828b3e"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb42-4983-77c0-a431-1e055b828b3e",
+   "seconds": 193.541,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\coffee_table.glb"
+  }
+ ]
+}

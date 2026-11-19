@@ -1,0 +1,75 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "kids_rug",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:36:45.245Z",
+   "item": "kids_rug",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "8977cf312fdd78aca1d1ea3f79eb2a5023997d3943b3f36d60e15c14b974e0f0",
+   "queue": {
+    "request_id": "01a1eb39-f791-75a3-a99e-15b8c2cacb87",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-f791-75a3-a99e-15b8c2cacb87/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-f791-75a3-a99e-15b8c2cacb87"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb39-f791-75a3-a99e-15b8c2cacb87",
+   "seconds": 16.187,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\kids_rug.json",
+   "usage": {
+    "prompt_tokens": 1389,
+    "completion_tokens": 1182,
+    "total_tokens": 2571,
+    "cost": 0.00547425,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:37:03.231Z",
+   "item": "kids_rug",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "6cc22b6d159c35993e90e5ad3cee2d32348ac6342e3a292302b17af8818655e8",
+   "queue": {
+    "request_id": "01a1eb3a-3a3a-7c62-b055-ea4a337c0be8",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3a-3a3a-7c62-b055-ea4a337c0be8/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3a-3a3a-7c62-b055-ea4a337c0be8"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb3a-3a3a-7c62-b055-ea4a337c0be8",
+   "seconds": 33.551,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\kids_rug.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:52:57.715Z",
+   "item": "kids_rug",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "43756342f397b9330f97042d6603ec1536193d6e63903ea73c1dc4e8cebc8e5f",
+   "queue": {
+    "request_id": "01a1eb48-d7cd-7f90-8919-a7ed6e0397ea",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb48-d7cd-7f90-8919-a7ed6e0397ea/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb48-d7cd-7f90-8919-a7ed6e0397ea"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb48-d7cd-7f90-8919-a7ed6e0397ea",
+   "seconds": 210.982,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\kids_rug.glb"
+  }
+ ]
+}

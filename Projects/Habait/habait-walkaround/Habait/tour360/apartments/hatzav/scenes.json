@@ -1,0 +1,518 @@
+{
+ "$schema": "tour360/scenes.v1",
+ "apartment": "hatzav",
+ "coordinateNotes": {
+  "u_v": "normalized position on the equirectangular image: u 0→1 left→right (0.5 = image centre = yaw 0 = plan +u); v 0.68 on the floor line",
+  "plan": "x/y in the pixel space of plan/floorplan.webp = JOB/input/plan-hatzav-colour.png × 0.6; plan px = origin_px + u,v cm × px_per_cm (geometry.json source)",
+  "hotspots": "u from the plan direction camera → opening (or → the target camera in open space); computed by prep.mjs, not calibrated by eye",
+  "heading": "source.json headings when set by eye; else toward the area centroid of the camera’s room polygon (geometry.json rooms); else the longest clear look; outside rooms look at the house"
+ },
+ "scenes": [
+  {
+   "id": "living",
+   "name": {
+    "he": "סלון",
+    "en": "Living room",
+    "fr": "Séjour"
+   },
+   "zone": {
+    "he": "סלון · מטבח · פינת אוכל",
+    "en": "Living · kitchen · dining",
+    "fr": "Séjour · cuisine · repas"
+   },
+   "asset": "01-living",
+   "heading": -153,
+   "plan": {
+    "x": 708,
+    "y": 688.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "dining",
+     "u": 0.1191,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל פינת אוכל",
+      "en": "To the dining",
+      "fr": "Vers : Coin repas"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (700,880) to the dining camera (open space)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.997,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מטבח",
+      "en": "To the kitchen",
+      "fr": "Vers : Cuisine"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (700,880) to the kitchen camera (open space)"
+    },
+    {
+     "to": "entrance",
+     "u": 0.0772,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל כניסה",
+      "en": "To the entrance",
+      "fr": "Vers : Entrée"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (700,880) to the entrance camera (open space)"
+    },
+    {
+     "to": "hall",
+     "u": 0.1093,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מבואה",
+      "en": "To the hall",
+      "fr": "Vers : Dégagement"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (700,880) to the opening at (268,526)"
+    },
+    {
+     "to": "deck",
+     "u": 0.4691,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל דק",
+      "en": "To the deck",
+      "fr": "Vers : Terrasse"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (700,880) to the opening at (817,857)"
+    }
+   ]
+  },
+  {
+   "id": "dining",
+   "name": {
+    "he": "פינת אוכל",
+    "en": "Dining",
+    "fr": "Coin repas"
+   },
+   "zone": {
+    "he": "סלון · מטבח · פינת אוכל",
+    "en": "Living · kitchen · dining",
+    "fr": "Séjour · cuisine · repas"
+   },
+   "asset": "02-dining",
+   "heading": 77,
+   "plan": {
+    "x": 540,
+    "y": 532.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.6191,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל סלון",
+      "en": "To the living room",
+      "fr": "Vers : Séjour"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (420,620) to the living camera (open space)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.8682,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מטבח",
+      "en": "To the kitchen",
+      "fr": "Vers : Cuisine"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (420,620) to the kitchen camera (open space)"
+    },
+    {
+     "to": "entrance",
+     "u": 0.0176,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל כניסה",
+      "en": "To the entrance",
+      "fr": "Vers : Entrée"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (420,620) to the entrance camera (open space)"
+    },
+    {
+     "to": "hall",
+     "u": 0.0881,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מבואה",
+      "en": "To the hall",
+      "fr": "Vers : Dégagement"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (420,620) to the opening at (268,526)"
+    }
+   ]
+  },
+  {
+   "id": "kitchen",
+   "name": {
+    "he": "מטבח",
+    "en": "Kitchen",
+    "fr": "Cuisine"
+   },
+   "zone": {
+    "he": "סלון · מטבח · פינת אוכל",
+    "en": "Living · kitchen · dining",
+    "fr": "Séjour · cuisine · repas"
+   },
+   "asset": "03-kitchen",
+   "heading": -26,
+   "plan": {
+    "x": 391.2,
+    "y": 694.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.497,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל סלון",
+      "en": "To the living room",
+      "fr": "Vers : Séjour"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (172,890) to the living camera (open space)"
+    },
+    {
+     "to": "dining",
+     "u": 0.3682,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל פינת אוכל",
+      "en": "To the dining",
+      "fr": "Vers : Coin repas"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (172,890) to the dining camera (open space)"
+    },
+    {
+     "to": "entrance",
+     "u": 0.2383,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל כניסה",
+      "en": "To the entrance",
+      "fr": "Vers : Entrée"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (172,890) to the entrance camera (open space)"
+    }
+   ]
+  },
+  {
+   "id": "entrance",
+   "name": {
+    "he": "כניסה",
+    "en": "Entrance",
+    "fr": "Entrée"
+   },
+   "zone": {
+    "he": "סלון · מטבח · פינת אוכל",
+    "en": "Living · kitchen · dining",
+    "fr": "Séjour · cuisine · repas"
+   },
+   "asset": "04-entrance",
+   "heading": 28,
+   "plan": {
+    "x": 378,
+    "y": 514.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.5772,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל סלון",
+      "en": "To the living room",
+      "fr": "Vers : Séjour"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (150,590) to the living camera (open space)"
+    },
+    {
+     "to": "dining",
+     "u": 0.5176,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל פינת אוכל",
+      "en": "To the dining",
+      "fr": "Vers : Coin repas"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (150,590) to the dining camera (open space)"
+    },
+    {
+     "to": "kitchen",
+     "u": 0.7383,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מטבח",
+      "en": "To the kitchen",
+      "fr": "Vers : Cuisine"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (150,590) to the kitchen camera (open space)"
+    },
+    {
+     "to": "hall",
+     "u": 0.3772,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מבואה",
+      "en": "To the hall",
+      "fr": "Vers : Dégagement"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (150,590) to the opening at (222,520)"
+    }
+   ]
+  },
+  {
+   "id": "hall",
+   "name": {
+    "he": "מבואה",
+    "en": "Hall",
+    "fr": "Dégagement"
+   },
+   "zone": {
+    "he": "אגף השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "05-hall",
+   "heading": 90,
+   "plan": {
+    "x": 450,
+    "y": 400.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "entrance",
+     "u": 0.7525,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל כניסה",
+      "en": "To the entrance",
+      "fr": "Vers : Entrée"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (270,400) to the opening at (268,526)"
+    },
+    {
+     "to": "bedroom",
+     "u": 0.4737,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל חדר שינה",
+      "en": "To the bedroom",
+      "fr": "Vers : Chambre"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (270,400) to the opening at (399,379)"
+    },
+    {
+     "to": "saferoom",
+     "u": 0.238,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל ממ\"ד",
+      "en": "To the safe room",
+      "fr": "Vers : Pièce sécurisée"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (270,400) to the opening at (264,314)"
+    },
+    {
+     "to": "bath",
+     "u": 0.0643,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל חדר רחצה",
+      "en": "To the bathroom",
+      "fr": "Vers : Salle de bains"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (270,400) to the opening at (208,374)"
+    }
+   ]
+  },
+  {
+   "id": "bedroom",
+   "name": {
+    "he": "חדר שינה",
+    "en": "Bedroom",
+    "fr": "Chambre"
+   },
+   "zone": {
+    "he": "אגף השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "06-bedroom",
+   "heading": -42,
+   "plan": {
+    "x": 558,
+    "y": 347.4
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "hall",
+     "u": 0.8541,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מבואה",
+      "en": "To the hall",
+      "fr": "Vers : Dégagement"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (450,312) to the opening at (399,379)"
+    }
+   ]
+  },
+  {
+   "id": "saferoom",
+   "name": {
+    "he": "ממ\"ד",
+    "en": "Safe room",
+    "fr": "Pièce sécurisée"
+   },
+   "zone": {
+    "he": "אגף השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "07-saferoom",
+   "heading": -67,
+   "plan": {
+    "x": 384,
+    "y": 313.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "hall",
+     "u": 0.5825,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מבואה",
+      "en": "To the hall",
+      "fr": "Vers : Dégagement"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (160,255) to the opening at (264,314)"
+    }
+   ]
+  },
+  {
+   "id": "bath",
+   "name": {
+    "he": "חדר רחצה",
+    "en": "Bathroom",
+    "fr": "Salle de bains"
+   },
+   "zone": {
+    "he": "אגף השינה",
+    "en": "Bedroom wing",
+    "fr": "Espace nuit"
+   },
+   "asset": "08-bath",
+   "heading": -36,
+   "plan": {
+    "x": 378,
+    "y": 412.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "hall",
+     "u": 0.3924,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל מבואה",
+      "en": "To the hall",
+      "fr": "Vers : Dégagement"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (150,420) to the opening at (208,374)"
+    }
+   ]
+  },
+  {
+   "id": "deck",
+   "name": {
+    "he": "דק",
+    "en": "Deck",
+    "fr": "Terrasse"
+   },
+   "zone": {
+    "he": "בחוץ",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "09-deck",
+   "heading": 156.8,
+   "plan": {
+    "x": 876,
+    "y": 616.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "living",
+     "u": 0.9146,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל סלון",
+      "en": "To the living room",
+      "fr": "Vers : Séjour"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (980,760) to the opening at (817,857)"
+    },
+    {
+     "to": "garden",
+     "u": 0.4744,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל גינה",
+      "en": "To the garden",
+      "fr": "Vers : Jardin"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (980,760) to the garden camera (open space)"
+    }
+   ]
+  },
+  {
+   "id": "garden",
+   "name": {
+    "he": "גינה",
+    "en": "Garden",
+    "fr": "Jardin"
+   },
+   "zone": {
+    "he": "בחוץ",
+    "en": "Outside",
+    "fr": "Extérieur"
+   },
+   "asset": "10-garden",
+   "heading": 164.52,
+   "plan": {
+    "x": 1098,
+    "y": 580.2
+   },
+   "centreBearingDeg": 90,
+   "hotspots": [
+    {
+     "to": "deck",
+     "u": 0.9744,
+     "v": 0.68,
+     "label": {
+      "he": "כניסה אל דק",
+      "en": "To the deck",
+      "fr": "Vers : Terrasse"
+     },
+     "source": "apartments/hatzav/prep.mjs: plan bearing from (1350,700) to the deck camera (open space)"
+    }
+   ]
+  }
+ ]
+}

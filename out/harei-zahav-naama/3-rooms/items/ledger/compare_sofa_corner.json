@@ -1,0 +1,102 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 48,
+ "note": "image-to-3D comparison, Eliran 2026-11-18",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T08:30:46.338Z",
+   "item": "sofa_corner",
+   "op": "compare",
+   "model": "fal-ai/hyper3d/rodin/v2.5",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "8e6ffac4e0d7378515aab291c6bb2d5f5f416dda7801ce2e0383a65a67b00135",
+   "queue": {
+    "request_id": "01a1edc7-c461-7351-be50-a90659545673",
+    "status_url": "https://queue.fal.run/fal-ai/hyper3d/requests/01a1edc7-c461-7351-be50-a90659545673/status",
+    "response_url": "https://queue.fal.run/fal-ai/hyper3d/requests/01a1edc7-c461-7351-be50-a90659545673"
+   },
+   "settled_usd": 1.2,
+   "request_id": "01a1edc7-c461-7351-be50-a90659545673",
+   "seconds": 252.194,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\rodin\\sofa_corner.glb"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T08:34:58.854Z",
+   "item": "sofa_corner",
+   "op": "compare",
+   "model": "meshy/v7.1/image-to-3d",
+   "reserved_usd": 1.2,
+   "status": "settled",
+   "inputs_hash": "6b84908fed9defbca585711451eaffd592b580ef9699dc8f4572b9b87f90a0f5",
+   "queue": {
+    "request_id": "01a1edcb-989d-7333-8491-bbe1ce3d3fcb",
+    "status_url": "https://queue.fal.run/meshy/v7.1/requests/01a1edcb-989d-7333-8491-bbe1ce3d3fcb/status",
+    "response_url": "https://queue.fal.run/meshy/v7.1/requests/01a1edcb-989d-7333-8491-bbe1ce3d3fcb"
+   },
+   "settled_usd": 1.2,
+   "request_id": "01a1edcb-989d-7333-8491-bbe1ce3d3fcb",
+   "seconds": 495.355,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\meshy\\sofa_corner.glb"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T08:43:19.553Z",
+   "item": "sofa_corner",
+   "op": "compare",
+   "model": "tripo3d/h3.1/image-to-3d",
+   "reserved_usd": 0.6,
+   "status": "settled",
+   "inputs_hash": "263e4970ad59ca40864f77cb69fc88c9fd1915b3ed799d506da2c1ca3f7dbb2f",
+   "queue": {
+    "request_id": "01a1edd3-4958-7743-abd1-8dffb65c8029",
+    "status_url": "https://queue.fal.run/tripo3d/h3.1/requests/01a1edd3-4958-7743-abd1-8dffb65c8029/status",
+    "response_url": "https://queue.fal.run/tripo3d/h3.1/requests/01a1edd3-4958-7743-abd1-8dffb65c8029"
+   },
+   "settled_usd": 0.6,
+   "request_id": "01a1edd3-4958-7743-abd1-8dffb65c8029",
+   "seconds": 203.959,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\tripo\\sofa_corner.glb"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-18T08:46:43.578Z",
+   "item": "sofa_corner",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "2a063d5fdf7d6c528629596b47188bf7181c3e5823ecbfd91d78a8b6b464c990",
+   "queue": {
+    "request_id": "01a1edd6-5780-7213-99ed-2e25afc7753f",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1edd6-5780-7213-99ed-2e25afc7753f/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1edd6-5780-7213-99ed-2e25afc7753f"
+   },
+   "settled_usd": 2.1,
+   "request_id": "01a1edd6-5780-7213-99ed-2e25afc7753f",
+   "seconds": 515.834,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\hitem\\sofa_corner.glb"
+  },
+  {
+   "seq": 5,
+   "at": "2026-11-18T09:53:05.971Z",
+   "item": "sofa_corner",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "92af3234edacf89a91e04f2fe5f04ca3a8d8d119e733c7de8b9e1a3f3bda4e2e",
+   "queue": {
+    "request_id": "01a1ee13-1f3b-71e0-8749-b03e09dce2d6",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee13-1f3b-71e0-8749-b03e09dce2d6/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee13-1f3b-71e0-8749-b03e09dce2d6"
+   },
+   "settled_usd": 2.1,
+   "request_id": "01a1ee13-1f3b-71e0-8749-b03e09dce2d6",
+   "seconds": 533.482,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\hitem\\sofa_corner.glb"
+  }
+ ]
+}

@@ -11,6 +11,7 @@ Tour360 build and QA scripts (build-tour, catalog checks, seam and coverage prob
 | File | Size | Modified |
 |---|---|---|
 | `app-require.mjs` | 944 B | 2026-11-01 |
+| `apartment-overrides.mjs` | 1.9 KB | 2026-11-18 — an apartment's own copy.json and catalog/items.json over the shared ones (build-tour, smoke; Hatzav) |
 | `apply-brand-to-dist.py` | 3.4 KB | 2026-11-09 |
 | `approve-build.mjs` | 4.4 KB | 2026-11-08 |
 | `auto-trace.mjs` | 35.8 KB | 2026-11-07 |

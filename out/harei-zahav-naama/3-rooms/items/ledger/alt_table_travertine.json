@@ -1,0 +1,46 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "alt_table_travertine",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:46:28.523Z",
+   "item": "alt_table_travertine",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "25bdbde9d896360acad23c0a97cd283cc1c5bb96fd2e1c40a5214e4f380ad338",
+   "queue": {
+    "request_id": "01a1eb42-e9e0-7952-ab09-ef9ab638d9b9",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb42-e9e0-7952-ab09-ef9ab638d9b9/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb42-e9e0-7952-ab09-ef9ab638d9b9"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb42-e9e0-7952-ab09-ef9ab638d9b9",
+   "seconds": 29.783,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_table_travertine.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:24:29.625Z",
+   "item": "alt_table_travertine",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "107b09eec608563f181d6d3e70926bb69782463a2fef8f43c8e00d622c959bbb",
+   "queue": {
+    "request_id": "01a1eb65-ade9-79a1-adbc-5f6224f4f3b6",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb65-ade9-79a1-adbc-5f6224f4f3b6/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb65-ade9-79a1-adbc-5f6224f4f3b6"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb65-ade9-79a1-adbc-5f6224f4f3b6",
+   "seconds": 235.399,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_table_travertine.glb"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 81,
+ "note": "image-to-3D comparison, Eliran 2026-11-18",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:24.710Z",
+   "item": "dining_chair",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "failed-unbilled",
+   "inputs_hash": "87d67aaea1a7c2f90fc4b43df01208e6a5ef7de18d612207dbbdb49536071694",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:50:38.409Z",
+   "item": "dining_chair",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "87d67aaea1a7c2f90fc4b43df01208e6a5ef7de18d612207dbbdb49536071694",
+   "queue": {
+    "request_id": "01a1ee11-1abd-72d3-9d99-e6dec2ea0286",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee11-1abd-72d3-9d99-e6dec2ea0286/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee11-1abd-72d3-9d99-e6dec2ea0286"
+   },
+   "settled_usd": 2.1,
+   "request_id": "01a1ee11-1abd-72d3-9d99-e6dec2ea0286",
+   "seconds": 519.579,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\hitem\\dining_chair.glb"
+  }
+ ]
+}

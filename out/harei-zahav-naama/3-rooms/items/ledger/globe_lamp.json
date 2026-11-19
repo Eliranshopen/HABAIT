@@ -1,0 +1,75 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "globe_lamp",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:54.412Z",
+   "item": "globe_lamp",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "61f56453caca54d0ecb0b4968b9d802ddf5c66b833ef763be04fb8d16e6e4145",
+   "queue": {
+    "request_id": "01a1eb39-2f34-79b1-a857-3bf36f821de0",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-2f34-79b1-a857-3bf36f821de0/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-2f34-79b1-a857-3bf36f821de0"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb39-2f34-79b1-a857-3bf36f821de0",
+   "seconds": 11.245,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\globe_lamp.json",
+   "usage": {
+    "prompt_tokens": 1377,
+    "completion_tokens": 1097,
+    "total_tokens": 2474,
+    "cost": 0.0051465,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:36:05.691Z",
+   "item": "globe_lamp",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "d4416902411095785c59a5cf944ed34ac208aed56a93e623cc8d226528cc64bd",
+   "queue": {
+    "request_id": "01a1eb39-563f-7c51-bb08-4a8839f66fb2",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-563f-7c51-bb08-4a8839f66fb2/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-563f-7c51-bb08-4a8839f66fb2"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb39-563f-7c51-bb08-4a8839f66fb2",
+   "seconds": 29.822,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\globe_lamp.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T21:00:16.242Z",
+   "item": "globe_lamp",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "3b6cddbab1fdde41ee40894b8c6088016ac1a2a7a64175e3dfc024da47c880f3",
+   "queue": {
+    "request_id": "01a1eb4f-922a-7a20-9e75-ac84b9f868b5",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4f-922a-7a20-9e75-ac84b9f868b5/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4f-922a-7a20-9e75-ac84b9f868b5"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb4f-922a-7a20-9e75-ac84b9f868b5",
+   "seconds": 233.677,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\globe_lamp.glb"
+  }
+ ]
+}

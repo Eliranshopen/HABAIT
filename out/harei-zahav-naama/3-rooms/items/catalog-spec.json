@@ -1,0 +1,61 @@
+{
+ "_doc": "Swap alternatives for the rings (Eliran 2026-11-17: 3 per category ≈ $16). New pieces in the house's design line (oak, linen, bouclé, rattan, walnut, travertine) — generic descriptions, no brand or named design. Each: studio photo by nano-banana-pro/edit with the original piece's studio photo as the style reference, then Hunyuan 3D (scripts/16_item_3d.mjs alt mode).",
+ "categories": {
+  "sofa": { "ref": "sofa_modular", "size": "about 260 cm wide, 95 cm deep, 75 cm high", "items": [
+   { "id": "alt_sofa_boucle", "name_he": "ספת בוקלה מעוגלת", "name_en": "curved boucle sofa", "colour": "ivory", "material": "boucle, oak",
+     "desc": "a gently curved three-seat sofa upholstered in thick ivory boucle (#ece6dc) with rounded continuous back and arms, sitting on a low recessed light-oak plinth" },
+   { "id": "alt_sofa_terracotta", "name_he": "ספה טרקוטה", "name_en": "terracotta linen sofa", "colour": "terracotta", "material": "linen velvet, walnut",
+     "desc": "a straight three-seat sofa with deep box cushions in soft terracotta linen-velvet (#b4674a), slim tapered walnut legs, tight back" },
+   { "id": "alt_sofa_sage", "name_he": "ספת פשתן מרווה", "name_en": "sage linen sofa", "colour": "sage green", "material": "washed linen",
+     "desc": "a deep lounge sofa with loose feather seat and back cushions in washed sage-green linen (#9aa088), relaxed slipcover with soft wrinkles, low profile" } ] },
+  "armchair": { "ref": "lounge_chair", "size": "about 75 cm wide, 75 cm deep, 72 cm high", "items": [
+   { "id": "alt_chair_boucle", "name_he": "כורסת בוקלה עגולה", "name_en": "round boucle armchair", "colour": "cream", "material": "boucle",
+     "desc": "a round barrel armchair fully upholstered in cream boucle (#eee8de), wraparound back, plump seat cushion, no visible legs" },
+   { "id": "alt_chair_leather", "name_he": "כורסת עור קוניאק", "name_en": "cognac leather lounge chair", "colour": "cognac", "material": "leather, oak",
+     "desc": "a low lounge chair with a solid light-oak frame and a cognac leather sling seat and back (#9a5a2e) held by leather straps" },
+   { "id": "alt_chair_rattan", "name_he": "כורסת ראטן", "name_en": "rattan armchair", "colour": "natural", "material": "rattan, linen",
+     "desc": "a low armchair of natural bent rattan with a curved woven back and a thick off-white linen seat cushion" } ] },
+  "dining_chair": { "ref": "dining_chair", "size": "about 50 cm wide, 52 cm deep, 80 cm high", "items": [
+   { "id": "alt_dchair_cane", "name_he": "כיסא קש", "name_en": "oak and cane chair", "colour": "natural oak", "material": "oak, cane, linen",
+     "desc": "a light solid-oak dining chair with a curved woven cane backrest and an upholstered oatmeal linen seat" },
+   { "id": "alt_dchair_cord", "name_he": "כיסא חבל קלוע", "name_en": "oak chair with cord seat", "colour": "natural oak", "material": "oak, paper cord",
+     "desc": "a light-oak dining chair with a curved bent-wood backrest and a seat of woven natural paper cord" },
+   { "id": "alt_dchair_boucle", "name_he": "כיסא בוקלה מרופד", "name_en": "upholstered boucle chair", "colour": "ivory", "material": "boucle, oak",
+     "desc": "a fully upholstered dining chair in ivory boucle with a rounded back that curves into the arms, short tapered oak legs" } ] },
+  "dining_table": { "ref": "dining_table", "size": "about 180 cm long, 90 cm wide, 75 cm high", "items": [
+   { "id": "alt_table_round", "name_he": "שולחן עגול מאלון", "name_en": "round oak pedestal table", "colour": "natural oak", "material": "oak",
+     "desc": "a round 130 cm solid light-oak dining table on a thick fluted round pedestal" },
+   { "id": "alt_table_travertine", "name_he": "שולחן טרוורטין", "name_en": "travertine dining table", "colour": "warm beige", "material": "travertine",
+     "desc": "a rectangular dining table with a honed warm-beige travertine top and two thick travertine slab legs" },
+   { "id": "alt_table_walnut", "name_he": "שולחן אגוז", "name_en": "walnut dining table", "colour": "walnut", "material": "walnut",
+     "desc": "a rectangular solid walnut dining table with softly rounded corners and four slender tapered legs" } ] },
+  "coffee_table": { "ref": "coffee_table", "size": "about 90 cm diameter, 38 cm high", "items": [
+   { "id": "alt_ctable_travertine", "name_he": "שולחן קפה טרוורטין", "name_en": "travertine drum coffee table", "colour": "warm beige", "material": "travertine",
+     "desc": "a round low drum coffee table carved from honed warm-beige travertine with visible pores" },
+   { "id": "alt_ctable_walnut", "name_he": "שולחן קפה אגוז אובלי", "name_en": "oval walnut coffee table", "colour": "walnut", "material": "walnut",
+     "desc": "an oval low coffee table in solid walnut with a thick top and a recessed oval base" },
+   { "id": "alt_ctable_nesting", "name_he": "שולחנות קפה מקוננים", "name_en": "nesting oak coffee tables", "colour": "natural oak", "material": "oak",
+     "desc": "two round nesting coffee tables in light oak, one taller and smaller partly over the larger one, slim legs" } ] },
+  "pendant": { "ref": "rattan_pendant", "size": "about 50 cm diameter, 45 cm high", "items": [
+   { "id": "alt_pend_paper", "name_he": "מנורת נייר עגולה", "name_en": "round paper lantern", "colour": "white", "material": "rice paper",
+     "desc": "a large round rice-paper lantern pendant shade with fine horizontal ribs" },
+   { "id": "alt_pend_linen", "name_he": "מנורת פשתן", "name_en": "linen drum pendant", "colour": "oatmeal", "material": "linen",
+     "desc": "a wide drum pendant shade in oatmeal linen with a soft glow, slightly tapered" },
+   { "id": "alt_pend_glass", "name_he": "מנורת זכוכית מעושנת", "name_en": "smoked glass dome pendant", "colour": "smoked amber", "material": "glass, brass",
+     "desc": "a dome pendant of smoked amber glass with a small brushed brass cap" } ] },
+  "bed": { "ref": "kids_bed", "size": "single bed 100 cm wide, 200 cm long, headboard 95 cm high", "items": [
+   { "id": "alt_bed_oak", "name_he": "מיטת אלון", "name_en": "oak single bed", "colour": "natural oak", "material": "oak, linen",
+     "desc": "a single bed in solid light oak with a slatted oak headboard, white and sand linen bedding" },
+   { "id": "alt_bed_sage", "name_he": "מיטה מרופדת מרווה", "name_en": "sage upholstered bed", "colour": "sage", "material": "linen",
+     "desc": "a single bed with a tall rounded headboard upholstered in sage linen, matching base, cream bedding" },
+   { "id": "alt_bed_rattan", "name_he": "מיטת ראטן", "name_en": "rattan headboard bed", "colour": "natural", "material": "rattan, oak",
+     "desc": "a single bed with an arched woven rattan headboard and a light oak frame, oatmeal linen bedding" } ] },
+  "rug": { "ref": "kids_rug", "size": "about 140 x 200 cm", "items": [
+   { "id": "alt_rug_jute", "name_he": "שטיח יוטה", "name_en": "jute rug", "colour": "natural", "material": "jute",
+     "desc": "a flat rectangular natural jute rug with a chunky braided weave" },
+   { "id": "alt_rug_stripe", "name_he": "שטיח צמר פסים", "name_en": "striped wool rug", "colour": "cream and taupe", "material": "wool",
+     "desc": "a rectangular hand-woven wool rug in cream with wide soft taupe stripes and short fringe" },
+   { "id": "alt_rug_round", "name_he": "שטיח בוקלה עגול", "name_en": "round boucle rug", "colour": "ivory", "material": "wool boucle",
+     "desc": "a round thick ivory wool boucle rug with a looped texture" } ] }
+ }
+}

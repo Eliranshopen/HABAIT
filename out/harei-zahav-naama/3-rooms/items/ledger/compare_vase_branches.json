@@ -1,0 +1,35 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 81,
+ "note": "image-to-3D comparison, Eliran 2026-11-18",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:51.509Z",
+   "item": "vase_branches",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "failed-unbilled",
+   "inputs_hash": "28d1d74909b6b761d6c30e831507f2fa41b2a1939a10ffd98f0986a0134c3b16",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T10:07:21.755Z",
+   "item": "vase_branches",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "failed",
+   "inputs_hash": "28d1d74909b6b761d6c30e831507f2fa41b2a1939a10ffd98f0986a0134c3b16",
+   "queue": {
+    "request_id": "01a1ee20-3177-7d83-bfc0-9ddddd8fe56a",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee20-3177-7d83-bfc0-9ddddd8fe56a/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee20-3177-7d83-bfc0-9ddddd8fe56a"
+   },
+   "error": "result 500: {\"detail\":[{\"loc\":[\"body\"],\"msg\":\"Downstream service error\",\"type\":\"downstream_service_error\",\"url\":\"https://docs.fal.ai/errors#downstream_service_error\",\"input\":{\"model\":\"hi3dv3.0\",\"resolution\":\"2048quality\",\"enable_texture\":true,\"enable_pbr\":true,\"face_count\":300000,\"export_format\":\"gl"
+  }
+ ]
+}

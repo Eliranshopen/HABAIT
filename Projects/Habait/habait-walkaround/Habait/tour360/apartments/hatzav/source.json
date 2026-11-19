@@ -1,0 +1,43 @@
+{
+ "_note": "The ONE switch: panoSource = \"blender\" (JOB/work/pano360/<room>.png) or \"real\" (JOB/work/pano360/real/<room>.jpg). Then run prep.mjs and build-tour (REBUILD.md in JOB/qa/360/). prep.mjs --source <name> overrides this line for one run.",
+ "panoSource": "real",
+ "job": "../../../../../../../out/harei-zahav-naama/3-rooms",
+ "appDepsFallback": "C:/RnD/Projects/3Dengine/appdeps",
+ "sources": {
+  "blender": { "dir": "work/pano360", "ext": ".png", "note": "Blender Cycles equirectangular renders of the Hatzav scene, 2048×1024, 48 samples (JOB/work/pano360/<room>.png + .png.json)" },
+  "real": { "dir": "work/pano360/real", "ext": ".jpg", "note": "the realism pass over the Blender renders, 4096×2048 JPEG with the 360 seam closed (written by the main session; an AI image pass). The .png beside each is the raw model answer with an open seam and is NEVER used" }
+ },
+ "cameraOverrides": {
+  "living": { "at": [700, 880], "why": "coordinator 2026-11-18: the walk view (560,930) stood 0.6–0.9 m from the TV unit; the 360 living camera is at u=700, v=880, eye 155" },
+  "dining": { "at": [420, 620], "why": "coordinator 2026-11-18: the walk view (300,630) stood 45 cm from the table; the 360 dining camera is at u=420, v=620, eye 155" }
+ },
+ "planScale": 0.6,
+ "planView": [-40, -40, 1590, 1290],
+ "markerMaxDistCm": 900,
+ "markerMinSpanDeg": 4,
+ "copy": {
+  "common": {
+   "badge": { "he": "הדמיה · AI-generated", "en": "הדמיה · AI-generated", "fr": "הדמיה · AI-generated" },
+   "conceptLine": {
+    "he": "הדמיה ממודל תלת־ממדי לפי תכנית המכר. הריהוט והחומרים להמחשה בלבד; חלק מהפריטים נוצרו בעזרת AI לפי הדמיות היזם.",
+    "en": "A visualization from a 3D model built to the sales plan. Furniture and materials are for illustration only; some items were made with AI from the developer's renderings.",
+    "fr": "Visualisation d'après un modèle 3D construit selon le plan de vente. Mobilier et matériaux à titre indicatif ; certains objets ont été créés par IA d'après les rendus du promoteur."
+   },
+   "ui": {
+    "title": { "he": "סיור 360°", "en": "360° tour", "fr": "Visite 360°" }
+   }
+  },
+  "blender": {
+   "aiNote": { "he": "רינדור ממודל תלת־ממדי · פריטי ריהוט שנוצרו בעזרת AI · לא צילום של הנכס", "en": "Rendered from a 3D model · some furniture made with AI · not photographs of the property", "fr": "Rendu d'un modèle 3D · mobilier en partie créé par IA · pas des photographies du bien" }
+  },
+  "real": {
+   "aiNote": { "he": "תמונות שעובדו בבינה מלאכותית מעל רינדור המודל · לא צילום של הנכס", "en": "AI-processed images over the model's rendering · not photographs of the property", "fr": "Images retouchées par IA sur le rendu du modèle · pas des photographies du bien" },
+   "ui": {
+    "lookDesigned": { "he": "ריאליסטי", "en": "Realistic", "fr": "Réaliste" },
+    "lookOriginal": { "he": "רינדור המודל", "en": "Model render", "fr": "Rendu du modèle" },
+    "lookDesignedNote": { "he": "עיבוד AI מעל רינדור המודל מהתוכנית. הריהוט והחומרים להמחשה בלבד.", "en": "An AI pass over the render of the model from the plan. Furniture and materials are for illustration only.", "fr": "Une passe IA sur le rendu du modèle d'après le plan. Mobilier et matériaux à titre indicatif." },
+    "lookOriginalNote": { "he": "רינדור ישיר של המודל התלת־ממדי לפי תכנית המכר, ללא עיבוד AI.", "en": "A direct render of the 3D model built to the sales plan, with no AI pass.", "fr": "Un rendu direct du modèle 3D construit selon le plan de vente, sans passe IA." }
+   }
+  }
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 81,
+ "note": "image-to-3D comparison, Eliran 2026-11-18",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:42:49.766Z",
+   "item": "mushroom_lamp",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "failed-unbilled",
+   "inputs_hash": "ab2bab476998ee9b179a81b933ce5eb8518eefdf79138ed884d115b9491c8674",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T09:59:21.765Z",
+   "item": "mushroom_lamp",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "ab2bab476998ee9b179a81b933ce5eb8518eefdf79138ed884d115b9491c8674",
+   "queue": {
+    "request_id": "01a1ee18-d280-7c10-af88-47f3558ba129",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee18-d280-7c10-af88-47f3558ba129/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee18-d280-7c10-af88-47f3558ba129"
+   },
+   "settled_usd": 2.1,
+   "request_id": "01a1ee18-d280-7c10-af88-47f3558ba129",
+   "seconds": 473.02,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\hitem\\mushroom_lamp.glb"
+  }
+ ]
+}

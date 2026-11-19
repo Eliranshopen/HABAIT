@@ -1,0 +1,75 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "kitchen_props",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:52.160Z",
+   "item": "kitchen_props",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "11a21252a917ee5d61d95539c6e388ba894c946cc9c023156bb1dbc73f76eed1",
+   "queue": {
+    "request_id": "01a1eb39-285d-72f2-9be0-d2680fae4bd2",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-285d-72f2-9be0-d2680fae4bd2/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-285d-72f2-9be0-d2680fae4bd2"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb39-285d-72f2-9be0-d2680fae4bd2",
+   "seconds": 16.5,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\kitchen_props.json",
+   "usage": {
+    "prompt_tokens": 1376,
+    "completion_tokens": 992,
+    "total_tokens": 2368,
+    "cost": 0.004752,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:36:08.696Z",
+   "item": "kitchen_props",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "868bce838771df78ed0b6443f5be924f758214e25facc7b84e520c29077a1068",
+   "queue": {
+    "request_id": "01a1eb39-63e8-74c1-bd90-2aa8d167e753",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-63e8-74c1-bd90-2aa8d167e753/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-63e8-74c1-bd90-2aa8d167e753"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb39-63e8-74c1-bd90-2aa8d167e753",
+   "seconds": 30.519,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\kitchen_props.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T21:00:15.863Z",
+   "item": "kitchen_props",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "85f82e905321948b6656a98347d25391563c9fec5a3423663c245df9d6ab6138",
+   "queue": {
+    "request_id": "01a1eb4f-9254-7413-b766-267bcced9e73",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4f-9254-7413-b766-267bcced9e73/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4f-9254-7413-b766-267bcced9e73"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb4f-9254-7413-b766-267bcced9e73",
+   "seconds": 208.395,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\kitchen_props.glb"
+  }
+ ]
+}

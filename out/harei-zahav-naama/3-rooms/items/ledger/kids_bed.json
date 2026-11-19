@@ -1,0 +1,75 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "kids_bed",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:36:03.216Z",
+   "item": "kids_bed",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "9fcff844e362ded9b1f09601763aaab8bd74c34360f0b1b7e6dc3464e5b37485",
+   "queue": {
+    "request_id": "01a1eb39-54a7-7a42-862e-6732c02e6a78",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-54a7-7a42-862e-6732c02e6a78/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-54a7-7a42-862e-6732c02e6a78"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb39-54a7-7a42-862e-6732c02e6a78",
+   "seconds": 16.248,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\kids_bed.json",
+   "usage": {
+    "prompt_tokens": 1397,
+    "completion_tokens": 1342,
+    "total_tokens": 2739,
+    "cost": 0.00608025,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:36:19.620Z",
+   "item": "kids_bed",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "78e0e5852fc8a492856af5f19a58d8b0633798419ac1963687fcef2332001a28",
+   "queue": {
+    "request_id": "01a1eb39-9083-7b62-b6ef-50d42621446d",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-9083-7b62-b6ef-50d42621446d/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-9083-7b62-b6ef-50d42621446d"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb39-9083-7b62-b6ef-50d42621446d",
+   "seconds": 31.047,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\kids_bed.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:45:58.008Z",
+   "item": "kids_bed",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "9c4375e50591995ba521e6f8d9f7f749135e46a035f87e23ae56d8a4a6566c0e",
+   "queue": {
+    "request_id": "01a1eb42-6ecc-7222-ae30-4117b9fac63c",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb42-6ecc-7222-ae30-4117b9fac63c/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb42-6ecc-7222-ae30-4117b9fac63c"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb42-6ecc-7222-ae30-4117b9fac63c",
+   "seconds": 197.123,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\kids_bed.glb"
+  }
+ ]
+}

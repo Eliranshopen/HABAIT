@@ -1,0 +1,107 @@
+{
+ "_doc": "Four lighting keyframes for the Hatzav walk (2026-11-17 PoC). Bearings are plan bearings (0 = plan up = world +Y, clockwise); plan up = north is ASSUMED (the house's north was not read). The scene had no sun lamp (daylight came from its HDRI); relight.py adds one and replaces the HDRI with a Nishita sky (day) or a dark colour (night). Exposure is applied at export from the linear EXR bakes, so it can be retuned without re-baking (--export-only). Hatzav v2 (2026-11-17 evening): warm lamp colour at sunset and night (the skill: many spots give a flat grey night).",
+ "keyframes": [
+  {
+   "name": "morning",
+   "label": "בוקר",
+   "hour": 7.5,
+   "sun": {
+    "az": 100,
+    "el": 14,
+    "energy": 3.0,
+    "color": [
+     1.0,
+     0.84,
+     0.68
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 14,
+    "az": 100,
+    "strength": 1.0,
+    "dust": 2.0
+   },
+   "interior": 0.0,
+   "exposure": 0.9
+  },
+  {
+   "name": "noon",
+   "label": "צהריים",
+   "hour": 12.5,
+   "sun": {
+    "az": 185,
+    "el": 55,
+    "energy": 4.5,
+    "color": [
+     1.0,
+     0.97,
+     0.93
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 55,
+    "az": 185,
+    "strength": 1.0,
+    "dust": 1.0
+   },
+   "interior": 0.0,
+   "exposure": 0.6
+  },
+  {
+   "name": "golden",
+   "label": "שקיעה",
+   "hour": 17.5,
+   "sun": {
+    "az": 262,
+    "el": 7,
+    "energy": 6.0,
+    "color": [
+     1.0,
+     0.62,
+     0.36
+    ],
+    "angle_deg": 0.53
+   },
+   "sky": {
+    "type": "nishita",
+    "el": 7,
+    "az": 262,
+    "strength": 1.0,
+    "dust": 3.0
+   },
+   "interior": 0.5,
+   "exposure": -1.1,
+   "lamp_color": [
+    1.0,
+    0.76,
+    0.52
+   ]
+  },
+  {
+   "name": "night",
+   "label": "לילה",
+   "hour": 21.5,
+   "sun": null,
+   "sky": {
+    "type": "color",
+    "color": [
+     0.006,
+     0.01,
+     0.022
+    ],
+    "strength": 1.0
+   },
+   "interior": 1.0,
+   "exposure": -1.9,
+   "lamp_color": [
+    1.0,
+    0.76,
+    0.52
+   ]
+  }
+ ]
+}

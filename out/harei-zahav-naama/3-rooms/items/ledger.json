@@ -1,0 +1,160 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 2.5,
+ "note": "Eliran 2026-11-17: pilot 3 items ׳’ג€°ֻ† $2.5 (dialog answer); reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T18:24:34.968Z",
+   "item": "sofa_modular",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "232ccbc604bca7cb6d3fa27c7c90f0f5811e2f1eec35fb7ca24a5c341d3f24b9",
+   "settled_usd": 0.005,
+   "request_id": "01a1eac0-f77a-7cb1-994b-2e108a492df9",
+   "seconds": 22.398,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\sofa_modular.json",
+   "usage": {
+    "prompt_tokens": 2530,
+    "completion_tokens": 1517,
+    "total_tokens": 4047,
+    "cost": 0.0151725,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T18:24:57.435Z",
+   "item": "sofa_modular",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "48c371c6c7c34a24ef80d7b347adab1bf08dc323499ed4e267cb02eab1966712",
+   "settled_usd": 0.15,
+   "request_id": "01a1eac1-4a45-7b90-82f4-a443e52149a6",
+   "seconds": 30.85,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\sofa_modular.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T18:25:41.852Z",
+   "item": "lounge_chair",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "ee8d41f5da482d9bf45e8c6f917146ed030a7687fabf3e265dfdfe65caa42afd",
+   "settled_usd": 0.005,
+   "request_id": "01a1eac1-f971-7d01-9865-355be4ed460d",
+   "seconds": 24.881,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\lounge_chair.json",
+   "usage": {
+    "prompt_tokens": 1404,
+    "completion_tokens": 1444,
+    "total_tokens": 2848,
+    "cost": 0.012936,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-17T18:26:06.793Z",
+   "item": "lounge_chair",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "f7a5d1099cb7cf77102672fe36292fd712af9d61af11c8103b4066a5090e7ee2",
+   "settled_usd": 0.15,
+   "request_id": "01a1eac2-5992-7200-9e39-fc3a89579585",
+   "seconds": 30.591,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\lounge_chair.png"
+  },
+  {
+   "seq": 5,
+   "at": "2026-11-17T20:26:02.144459",
+   "item": "rattan_pendant",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "settled_usd": 0.005,
+   "status": "settled",
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\rattan_pendant.json",
+   "note": "row restored by hand: two runs wrote the ledger at once and this row was overwritten; the call ran and its output is on disk; request_id lost"
+  },
+  {
+   "seq": 6,
+   "at": "2026-11-17T20:26:32.260031",
+   "item": "rattan_pendant",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "settled_usd": 0.15,
+   "status": "settled",
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\rattan_pendant.png",
+   "note": "row restored by hand: two runs wrote the ledger at once and this row was overwritten; the call ran and its output is on disk; request_id lost"
+  },
+  {
+   "seq": 7,
+   "at": "2026-11-17T18:27:36.507Z",
+   "item": "sofa_modular",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "8ceb78d42f2ddfa9a5b99150f2477a19b198d25a54eb05676f5df8a9e23c1428",
+   "settled_usd": 0.525,
+   "request_id": "01a1eac3-bb17-7422-8af6-574f160b0c9d",
+   "seconds": 198.4,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\sofa_modular.glb",
+   "note": "collected by hand: the run was cut by the shell timeout while downloading; fal request history shows status 200, 198 s"
+  },
+  {
+   "seq": 8,
+   "at": "2026-11-17T18:45:36.904Z",
+   "item": "lounge_chair",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "f452479ff34d9b35e1887781f0fcb93fd54fec77f1daa03c226b356f3a6998d4",
+   "queue": {
+    "request_id": "01a1ead4-3899-7c53-b135-d7057894cac0",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ead4-3899-7c53-b135-d7057894cac0/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ead4-3899-7c53-b135-d7057894cac0"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ead4-3899-7c53-b135-d7057894cac0",
+   "seconds": 10.044,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\lounge_chair.glb"
+  },
+  {
+   "seq": 9,
+   "at": "2026-11-17T18:53:02.828Z",
+   "item": "rattan_pendant",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "bf22068ce9f2080de1c086ac707ccadd0578eb5c70181603d53a8a9bedb46c80",
+   "queue": {
+    "request_id": "01a1eadb-10d8-78e2-a0ed-818fbac0a143",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eadb-10d8-78e2-a0ed-818fbac0a143/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eadb-10d8-78e2-a0ed-818fbac0a143"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eadb-10d8-78e2-a0ed-818fbac0a143",
+   "seconds": 291.083,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\rattan_pendant.glb"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 81,
+ "note": "image-to-3D comparison, Eliran 2026-11-18",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:43:38.604Z",
+   "item": "paper_lantern",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "failed-unbilled",
+   "inputs_hash": "08628ae0a7e02c6ed658cc9a33900f320ee658b25b759dcbab2a5fb1acb5771c",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T10:39:58.156Z",
+   "item": "paper_lantern",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "08628ae0a7e02c6ed658cc9a33900f320ee658b25b759dcbab2a5fb1acb5771c",
+   "queue": {
+    "request_id": "01a1ee3e-04df-75a1-8dc9-2d7ad4b6c6c9",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee3e-04df-75a1-8dc9-2d7ad4b6c6c9/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee3e-04df-75a1-8dc9-2d7ad4b6c6c9"
+   },
+   "settled_usd": 2.1,
+   "request_id": "01a1ee3e-04df-75a1-8dc9-2d7ad4b6c6c9",
+   "seconds": 523.182,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\hitem\\paper_lantern.glb"
+  }
+ ]
+}

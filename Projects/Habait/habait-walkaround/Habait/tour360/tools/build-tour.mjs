@@ -10,6 +10,7 @@
    Usage (from the harness root, Git Bash):  timeout 540 node Habait/tour360/tools/build-tour.mjs demo-01 [--catalog] */
 import fs from 'node:fs';
 import { appRequire } from './app-require.mjs';
+import { loadCopy, catalogFile } from './apartment-overrides.mjs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -46,7 +47,7 @@ const fail = (msg) => { console.error('build-tour: ' + msg); process.exit(1); };
 if (!fs.existsSync(APT)) fail('no apartment folder ' + path.relative(process.cwd(), APT));
 const apartment = readJson(path.join(APT, 'apartment.json'));
 const scenesDoc = readJson(path.join(APT, 'scenes.json'));
-const copy = readJson(path.join(ROOT, 'copy', 'tour360-copy.json'));
+const copy = loadCopy(ROOT, APT); // 2026-11-18: an apartment's own copy.json (its disclosure) over the pack — tools/apartment-overrides.mjs
 for (const key of ['badge', 'conceptLine', 'aiNote']) {
   for (const l of ['he', 'en', 'fr']) if (!copy[key] || !copy[key][l]) fail(`copy pack is missing ${key}.${l} — the disclosure is structural`);
 }
@@ -109,13 +110,14 @@ if (editsDoc) {
 let catalogItems = null;
 if (withCatalog) {
   const { checkCatalog, photoPath, isAi } = await import('./catalog-check.mjs');
-  const r = checkCatalog({ only: catalogAiOnly ? 'ai' : null });
+  const CAT_FILE = catalogFile(ROOT, APT); // 2026-11-18: an apartment's own catalog when it has one (never RAINBOW's items elsewhere)
+  const r = checkCatalog({ only: catalogAiOnly ? 'ai' : null, file: CAT_FILE });
   if (!r.ok) fail('catalog-check: ' + r.problems.join('; '));
-  const doc = readJson(path.join(ROOT, 'catalog', 'items.json'));
+  const doc = readJson(CAT_FILE);
   if (catalogAiOnly) doc.items = doc.items.filter(isAi);
   fs.mkdirSync(path.join(OUT, 'catalog'), { recursive: true });
   catalogItems = doc.items.map((it) => {
-    const src = photoPath(it);
+    const src = photoPath(it, CAT_FILE);
     if (!fs.existsSync(src)) fail('missing catalog photo ' + it.image);
     fs.mkdirSync(path.dirname(path.join(OUT, 'catalog', it.image)), { recursive: true });
     fs.copyFileSync(src, path.join(OUT, 'catalog', it.image));
@@ -198,7 +200,15 @@ if (origSpec && origSpec.dir) {
 // The build refuses to package while any shipped interior picture lacks a PASS row in the apartment's gate.json for ITS EXACT BYTES
 // (the gate hashes the 2048x1024 PNG re-encoding of the picture; the same chain here) at the rule's max_deviation_pct, and while the
 // disclosure line does not carry that number. A failing room is never dropped: the fix loop runs until it passes (fidelity-gate.mjs).
-{
+// 2026-11-18 (Hatzav): apartment.json `fidelity.mode` — "cg-render": every picture is a direct render of a plan-gated 3D model (no
+// AI image model drew the room; the model's own gate is named in `evidence`), so the per-picture gate below does not apply;
+// "ai-over-cg": an AI pass over such renders that this gate has not measured — refused unless --ungated-ok (Eliran's call, root §6).
+const fidelityMode = apartment.fidelity && apartment.fidelity.mode;
+if (fidelityMode === 'cg-render') console.log('fidelity: cg-render — ' + apartment.fidelity.evidence);
+else if (fidelityMode === 'ai-over-cg') {
+  if (!process.argv.includes('--ungated-ok')) fail('fidelity: these pictures are an AI pass the fidelity gate has not measured (' + apartment.fidelity.note + '). Building them is Eliran’s call: pass --ungated-ok once he says so');
+  console.warn('build-tour: WARNING - fidelity: AI-pass pictures shipped WITHOUT the per-picture gate (--ungated-ok)');
+} else {
   const rule = readJson(path.join(ROOT, 'fidelity.json'));
   const bar = Number(rule.max_deviation_pct);
   if (!(bar > 0)) fail('fidelity.json has no max_deviation_pct');
@@ -316,7 +326,7 @@ if (fs.existsSync(path.join(APT, 'depth', 'depth.json'))) {
 // "מצב סיור" (2026-11-03): the guided tour's narration (apartments/<id>/guide/guide.json + audio) → dist/guide, data.guide
 if (fs.existsSync(path.join(APT, 'guide', 'guide.json'))) {
   const gj = JSON.parse(read(path.join(APT, 'guide', 'guide.json')));
-  for (const L of ['he', 'en', 'fr']) if (gj[L] && gj[L].steps) { fs.mkdirSync(path.join(OUT, 'guide', L), { recursive: true }); for (const st of gj[L].steps) { for (const k of ['audio', 'video']) { if (!st[k]) continue; const f = path.join(APT, st[k]); if (fs.existsSync(f)) fs.copyFileSync(f, path.join(OUT, st[k])); } } }
+  for (const L of ['he', 'en', 'fr']) if (gj[L] && gj[L].steps) { fs.mkdirSync(path.join(OUT, 'guide', L), { recursive: true }); for (const st of gj[L].steps) { for (const k of ['audio', 'video']) { if (!st[k]) continue; const f = path.join(APT, st[k]); if (fs.existsSync(f)) { fs.mkdirSync(path.dirname(path.join(OUT, st[k])), { recursive: true }); fs.copyFileSync(f, path.join(OUT, st[k])); } } } }
   data.guide = Object.fromEntries(['he', 'en', 'fr'].filter((L) => gj[L]).map((L) => [L, { name: gj[L].name, steps: gj[L].steps }]));
 }
 // board dollhouse-in-tour (2026-11-03): the apartment's 3D dollhouse (the platform's build_zip output for this unit,

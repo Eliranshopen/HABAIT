@@ -1,0 +1,88 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "dining_chair",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:15.765Z",
+   "item": "dining_chair",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "647b00d3dbc7b89c107ce9a8981480806b69e4629acc66a8faf7935ad7093882",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 5.016,
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:38:27.071Z",
+   "item": "dining_chair",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "647b00d3dbc7b89c107ce9a8981480806b69e4629acc66a8faf7935ad7093882",
+   "queue": {
+    "request_id": "01a1eb3b-8850-7321-ac33-03f9fc9e7e85",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3b-8850-7321-ac33-03f9fc9e7e85/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3b-8850-7321-ac33-03f9fc9e7e85"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb3b-8850-7321-ac33-03f9fc9e7e85",
+   "seconds": 12.396,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\dining_chair.json",
+   "usage": {
+    "prompt_tokens": 1399,
+    "completion_tokens": 1010,
+    "total_tokens": 2409,
+    "cost": 0.00483675,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:38:39.531Z",
+   "item": "dining_chair",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "c82b9dc113ad02418c1ff5681d73a008dcb0081d0c36e35eefbf78d4bc868dd4",
+   "queue": {
+    "request_id": "01a1eb3b-b073-72d3-8a0a-4b9751d80dd5",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3b-b073-72d3-8a0a-4b9751d80dd5/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3b-b073-72d3-8a0a-4b9751d80dd5"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb3b-b073-72d3-8a0a-4b9751d80dd5",
+   "seconds": 29.864,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\dining_chair.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-17T20:42:02.753Z",
+   "item": "dining_chair",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "8d326c92dd21dbaa3d034636a05b718b72c41a3ce1c3cc51ced14f7a0b1c3062",
+   "queue": {
+    "request_id": "01a1eb3e-d709-7573-872d-87efefaba1a2",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb3e-d709-7573-872d-87efefaba1a2/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb3e-d709-7573-872d-87efefaba1a2"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb3e-d709-7573-872d-87efefaba1a2",
+   "seconds": 232.225,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\dining_chair.glb"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 81,
+ "note": "image-to-3D comparison, Eliran 2026-11-18",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-18T09:43:29.979Z",
+   "item": "kids_bed",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "failed-unbilled",
+   "inputs_hash": "2b3a5e8c5741427d3d9915941a0c1e459f54c08dbe18c1b867a279db95b9bb11",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-18T10:33:57.755Z",
+   "item": "kids_bed",
+   "op": "compare",
+   "model": "hitem3d/hi3d/v3.0/image-to-3d",
+   "reserved_usd": 2.1,
+   "status": "settled",
+   "inputs_hash": "2b3a5e8c5741427d3d9915941a0c1e459f54c08dbe18c1b867a279db95b9bb11",
+   "queue": {
+    "request_id": "01a1ee38-8871-71e3-9cc9-90017af86f70",
+    "status_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee38-8871-71e3-9cc9-90017af86f70/status",
+    "response_url": "https://queue.fal.run/hitem3d/hi3d/requests/01a1ee38-8871-71e3-9cc9-90017af86f70"
+   },
+   "settled_usd": 2.1,
+   "request_id": "01a1ee38-8871-71e3-9cc9-90017af86f70",
+   "seconds": 513.377,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\compare\\hitem\\kids_bed.glb"
+  }
+ ]
+}

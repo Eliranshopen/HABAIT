@@ -1,0 +1,46 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "alt_pend_linen",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:48:05.088Z",
+   "item": "alt_pend_linen",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "574d0f3ad3c5315c1ef89b3b5df3c107595759529a11aec1ca8ab50c41cb94c6",
+   "queue": {
+    "request_id": "01a1eb44-5f60-72e0-a011-e7dbae620a74",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb44-5f60-72e0-a011-e7dbae620a74/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb44-5f60-72e0-a011-e7dbae620a74"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb44-5f60-72e0-a011-e7dbae620a74",
+   "seconds": 34.951,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_pend_linen.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:36:57.535Z",
+   "item": "alt_pend_linen",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "22a3aca40dbf276b07a9aadf3a24617f0e9145b1bf5cce6a4484e1e46650c901",
+   "queue": {
+    "request_id": "01a1eb71-1a60-7fc3-b804-283277f98f6f",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb71-1a60-7fc3-b804-283277f98f6f/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb71-1a60-7fc3-b804-283277f98f6f"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb71-1a60-7fc3-b804-283277f98f6f",
+   "seconds": 333.089,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_pend_linen.glb"
+  }
+ ]
+}

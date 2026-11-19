@@ -1,0 +1,7 @@
+
+## 2026-11-17 · main session · Harei Zahav Na'ama, model Hatzav (3 rooms, 80 m2): interactive 3D walkaround built, 0 USD
+- **Did:** From the colour sales plan (1 px = 1 cm, 20 of 20 printed dimensions met, 80.02 of 80 m2) a Blender scene; furniture and look after the developer's 9 Corona interior renders (Eliran: layout and look from the renders, walls by the sheet); light baked into 6 atlases on the CPU in about 14 min, walked in three.js (keys, drag, tap to walk, free-floor grid). Chrome QA at 1440 and 390 PASS. Panoramas dropped on Eliran's ask. The approved fal test was not run, 0 USD. Worktree .wt\harei-zahav-naama, nothing committed.
+- **Evidence:** `.wt/harei-zahav-naama/out/harei-zahav-naama/3-rooms/qa/QA-REPORT.md`
+- **Learned:** Eliran adds source files mid-job: the 9 interior renders arrived 25 min after the first scan and were missed until he asked; re-list the folder before every heavy phase. CPU bake: 4096 atlases at 64 samples timed out per group; 2048 at 32 samples plus denoise takes 90 to 180 s a group. A furniture change can cut the walk graph: rebuild the walk grid and check it is connected before baking. The sun formula in build_scene.py was off by 180 degrees (fixed and recorded).
+- **Owed / open:** Eliran's look at the walkaround (viewer\serve-walk.cmd). Not done: panoramas, the fal test, the independent plan audit (sub-agent stopped at the usage limit). Commit of branch harei-zahav-naama and worktree removal are Eliran's word.
+- **Second reader:** none

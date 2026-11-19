@@ -1,0 +1,40 @@
+{
+ "encoding": "rgb24-be",
+ "scale": 100,
+ "invalid": 0,
+ "decode": "(R<<16 | G<<8 | B) / 100 => metres (radial distance from the camera)",
+ "frame": "u = 0.5 + yaw/360 (yaw 0 = the panorama centre = plan +u), v = 0.5 - pitch/180",
+ "source": "apartments/hatzav/prep.mjs: ray-cast in JOB/geometry/geometry.json (walls as boxes, doors open between sill and head, windows stop at the pane, floor at 0, ceiling at 270 cm indoors). FURNITURE IS NOT IN IT: a point on a sofa measures to the floor or wall behind it",
+ "scenes": {
+  "living": {
+   "file": "01-living.png"
+  },
+  "dining": {
+   "file": "02-dining.png"
+  },
+  "kitchen": {
+   "file": "03-kitchen.png"
+  },
+  "entrance": {
+   "file": "04-entrance.png"
+  },
+  "hall": {
+   "file": "05-hall.png"
+  },
+  "bedroom": {
+   "file": "06-bedroom.png"
+  },
+  "saferoom": {
+   "file": "07-saferoom.png"
+  },
+  "bath": {
+   "file": "08-bath.png"
+  },
+  "deck": {
+   "file": "09-deck.png"
+  },
+  "garden": {
+   "file": "10-garden.png"
+  }
+ }
+}

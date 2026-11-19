@@ -1,0 +1,52 @@
+{
+ "wall_iou": 0.9132,
+ "wall_px_model_only": 7921,
+ "wall_px_sheet_only": 523,
+ "wall_px_beyond_2cm_model_only": 330,
+ "wall_px_beyond_2cm_sheet_only": 156,
+ "gross_footprint_sqm": 80.02,
+ "printed_gross_sqm": 80,
+ "rooms": [
+  {
+   "id": "public",
+   "model_sqm": 39.6,
+   "printed_sqm": 39
+  },
+  {
+   "id": "hall",
+   "model_sqm": 3.06,
+   "printed_sqm": null
+  },
+  {
+   "id": "saferoom",
+   "model_sqm": 9.04,
+   "printed_sqm": 9
+  },
+  {
+   "id": "bedroom",
+   "model_sqm": 12.66,
+   "printed_sqm": 12,
+   "model_sqm_without_band": 12.1
+  },
+  {
+   "id": "bath",
+   "model_sqm": 3.42,
+   "printed_sqm": null
+  }
+ ],
+ "worst_dimension": {
+  "label": "overall width (top)",
+  "printed_cm": 830,
+  "axis": "x",
+  "from_px": 480,
+  "to_px": 1310,
+  "model_cm": 830,
+  "delta_cm": 0,
+  "delta_pct": 0.0
+ },
+ "dimensions_over_1pct": [],
+ "dimensions_over_2pct": [],
+ "problems": [],
+ "wall_px_sheet": 89323,
+ "wall_beyond_2cm_pct": 0.54
+}

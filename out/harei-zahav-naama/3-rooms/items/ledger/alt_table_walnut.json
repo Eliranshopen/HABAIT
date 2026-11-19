@@ -1,0 +1,46 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "alt_table_walnut",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:46:42.144Z",
+   "item": "alt_table_walnut",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "5309625dc49a28625b1245ada6a3f5b31c42dce15259d284355defed5848fe4e",
+   "queue": {
+    "request_id": "01a1eb43-180a-7bb3-a4f3-e016306b0f47",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb43-180a-7bb3-a4f3-e016306b0f47/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb43-180a-7bb3-a4f3-e016306b0f47"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb43-180a-7bb3-a4f3-e016306b0f47",
+   "seconds": 33.059,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_table_walnut.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:27:06.396Z",
+   "item": "alt_table_walnut",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "c0b1bb7ac433ace4ad2e244f9e6cb25e1f2a455ed69f47b8956ffa82b158ccb6",
+   "queue": {
+    "request_id": "01a1eb68-122a-7691-9a74-f0f044d9ffed",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb68-122a-7691-9a74-f0f044d9ffed/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb68-122a-7691-9a74-f0f044d9ffed"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb68-122a-7691-9a74-f0f044d9ffed",
+   "seconds": 226.252,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_table_walnut.glb"
+  }
+ ]
+}

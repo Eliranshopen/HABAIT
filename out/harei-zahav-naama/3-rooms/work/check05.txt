@@ -1,0 +1,63 @@
+{
+ "wall_iou": 0.9132,
+ "wall_px_model_only": 7921,
+ "wall_px_sheet_only": 523,
+ "wall_px_beyond_2cm_model_only": 330,
+ "wall_px_beyond_2cm_sheet_only": 156,
+ "gross_footprint_sqm": 80.02,
+ "printed_gross_sqm": 80,
+ "rooms": [
+  {
+   "id": "public",
+   "model_sqm": 39.6,
+   "printed_sqm": 39
+  },
+  {
+   "id": "hall",
+   "model_sqm": 3.06,
+   "printed_sqm": null
+  },
+  {
+   "id": "saferoom",
+   "model_sqm": 9.04,
+   "printed_sqm": 9
+  },
+  {
+   "id": "bedroom",
+   "model_sqm": 12.66,
+   "printed_sqm": 12,
+   "model_sqm_without_band": 12.1
+  },
+  {
+   "id": "bath",
+   "model_sqm": 3.42,
+   "printed_sqm": null
+  }
+ ],
+ "dimensions_over_1pct": [],
+ "dimensions_over_2pct": [],
+ "problems": []
+}
+worst dim: overall width (top) 830 830 0.0 %
+printed dimensions:
+  overall width (top)                            printed   830  model   830  delta +0 cm  0.0 %
+  north block width                              printed   725  model   725  delta +0 cm  0.0 %
+  set-back of the bedroom block                  printed   105  model   105  delta +0 cm  0.0 %
+  overall depth (left)                           printed  1050  model  1050  delta +0 cm  0.0 %
+  north block depth                              printed   540  model   540  delta +0 cm  0.0 %
+  south block depth                              printed   510  model   510  delta +0 cm  0.0 %
+  west offset of the south block                 printed    50  model    50  delta +0 cm  0.0 %
+  south block width                              printed   780  model   780  delta +0 cm  0.0 %
+  safe room width                                printed   335  model   335  delta +0 cm  0.0 %
+  safe room depth                                printed   270  model   270  delta +0 cm  0.0 %
+  bedroom width (wall to wall)                   printed   315  model   315  delta +0 cm  0.0 %
+  bedroom depth                                  printed   410  model   410  delta +0 cm  0.0 %
+  bedroom clear width (to the 20 cm band)        printed   295  model   295  delta +0 cm  0.0 %
+  bathroom width                                 printed   180  model   180  delta +0 cm  0.0 %
+  bathroom depth                                 printed   190  model   190  delta +0 cm  0.0 %
+  public space width                             printed   730  model   730  delta +0 cm  0.0 %
+  public space depth, kitchen side               printed   500  model   500  delta +0 cm  0.0 %
+  public space depth, living side                printed   565  model   565  delta +0 cm  0.0 %
+  living width east of the shaft                 printed   400  model   400  delta +0 cm  0.0 %
+  deck depth                                     printed   300  model   300  delta +0 cm  0.0 %
+wall pixels on the sheet 89323; further than 2 cm from the model or the sheet: 0.54 % (bar 1 %)

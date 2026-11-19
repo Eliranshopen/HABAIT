@@ -1,0 +1,88 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "vase_branches",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:36.873Z",
+   "item": "vase_branches",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "db80b647384a985e59ee8bd190b5831b420dcc57e3b2df251b238823507298b8",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.257,
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:39:50.509Z",
+   "item": "vase_branches",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "db80b647384a985e59ee8bd190b5831b420dcc57e3b2df251b238823507298b8",
+   "queue": {
+    "request_id": "01a1eb3c-c8db-7881-a341-92e1fbbcfca8",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-c8db-7881-a341-92e1fbbcfca8/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-c8db-7881-a341-92e1fbbcfca8"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb3c-c8db-7881-a341-92e1fbbcfca8",
+   "seconds": 15.665,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\vase_branches.json",
+   "usage": {
+    "prompt_tokens": 1376,
+    "completion_tokens": 1231,
+    "total_tokens": 2607,
+    "cost": 0.00564825,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:40:06.321Z",
+   "item": "vase_branches",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "a774edf1f8f7b075aa893dc9b269db61b0b48cf4086b30cf56e4e9abc58918d0",
+   "queue": {
+    "request_id": "01a1eb3d-04c1-76c0-b586-3014f60cf580",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3d-04c1-76c0-b586-3014f60cf580/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3d-04c1-76c0-b586-3014f60cf580"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb3d-04c1-76c0-b586-3014f60cf580",
+   "seconds": 30.293,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\vase_branches.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-17T20:56:34.957Z",
+   "item": "vase_branches",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "7262f38c4ada560074f3d2467ae8ce5a7a95f3860ad2775b3d2e4bec3c771733",
+   "queue": {
+    "request_id": "01a1eb4c-2354-7a73-9529-666e55b9c0fc",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4c-2354-7a73-9529-666e55b9c0fc/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb4c-2354-7a73-9529-666e55b9c0fc"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb4c-2354-7a73-9529-666e55b9c0fc",
+   "seconds": 210.157,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\vase_branches.glb"
+  }
+ ]
+}

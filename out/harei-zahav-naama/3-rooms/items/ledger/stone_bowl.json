@@ -1,0 +1,76 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "stone_bowl",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:55.247Z",
+   "item": "stone_bowl",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "c2aacb73f3a090d441b8a4c78e8ec151b7222f6daf2d5eac3062bb232f422822",
+   "queue": {
+    "request_id": "01a1eb39-3433-7950-bc13-9c346e854511",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-3433-7950-bc13-9c346e854511/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb39-3433-7950-bc13-9c346e854511"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb39-3433-7950-bc13-9c346e854511",
+   "seconds": 11.642,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\stone_bowl.json",
+   "usage": {
+    "prompt_tokens": 1360,
+    "completion_tokens": 887,
+    "total_tokens": 2247,
+    "cost": 0.00434625,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:36:06.923Z",
+   "item": "stone_bowl",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "6f9bf349ab4bc3e55a7a895fdad7d69cf0c510d5831686b9940b2f647b60554d",
+   "queue": {
+    "request_id": "01a1eb39-5b11-7511-8a76-3949d01c4953",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-5b11-7511-8a76-3949d01c4953/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb39-5b11-7511-8a76-3949d01c4953"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb39-5b11-7511-8a76-3949d01c4953",
+   "seconds": 29.047,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\stone_bowl.png"
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T21:02:37.787Z",
+   "item": "stone_bowl",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "a5eae70f83083055b3e94a14c371be0a4bb8a62e74abd7866a82a15696374def",
+   "queue": {
+    "request_id": "01a1eb51-af8f-79f3-b393-5e7545637e77",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb51-af8f-79f3-b393-5e7545637e77/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb51-af8f-79f3-b393-5e7545637e77"
+   },
+   "error": "The operation was aborted due to timeout",
+   "seconds": 65.986,
+   "settled_usd": 0.525,
+   "request_id": "01a1eb51-af8f-79f3-b393-5e7545637e77",
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\stone_bowl.glb"
+  }
+ ]
+}

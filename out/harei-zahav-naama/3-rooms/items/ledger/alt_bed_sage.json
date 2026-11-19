@@ -1,0 +1,59 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 36,
+ "item": "alt_bed_sage",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:48:53.132Z",
+   "item": "alt_bed_sage",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "bfae8b3c41b0f48d221f6eec94472c6a526f1eb5299c3102e97a8d5287859a51",
+   "queue": {
+    "request_id": "01a1eb45-1911-7cc2-a23c-89302faa4a89",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb45-1911-7cc2-a23c-89302faa4a89/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb45-1911-7cc2-a23c-89302faa4a89"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb45-1911-7cc2-a23c-89302faa4a89",
+   "seconds": 33.347,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\alt_bed_sage.png"
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T21:39:31.049Z",
+   "item": "alt_bed_sage",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "failed-unbilled",
+   "inputs_hash": "225c4f188c13598ac19ae544bb1d9d1a4ee75e78a8331d65d0f6c260ec85bdc8",
+   "settled_usd": 0,
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 2.331
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-18T06:28:11.521Z",
+   "item": "alt_bed_sage",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "225c4f188c13598ac19ae544bb1d9d1a4ee75e78a8331d65d0f6c260ec85bdc8",
+   "queue": {
+    "request_id": "01a1ed57-7430-78e2-b367-28b26ab3025c",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed57-7430-78e2-b367-28b26ab3025c/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1ed57-7430-78e2-b367-28b26ab3025c"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1ed57-7430-78e2-b367-28b26ab3025c",
+   "seconds": 288.604,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\alt_bed_sage.glb"
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "$schema": "tour360/ledger.v1",
+ "cap_usd": 31.5,
+ "item": "mushroom_lamp",
+ "note": "reserve before send, settle after",
+ "rows": [
+  {
+   "seq": 1,
+   "at": "2026-11-17T20:35:34.469Z",
+   "item": "mushroom_lamp",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "failed-unbilled",
+   "inputs_hash": "fdce619fc2a2db1b8b21ffae24981ea49587f7fb321ff9d4e434cac6f32404f0",
+   "error": "submit HTTP 403: {\"detail\":\"User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.\"}",
+   "seconds": 1.999,
+   "settled_usd": 0
+  },
+  {
+   "seq": 2,
+   "at": "2026-11-17T20:39:11.524Z",
+   "item": "mushroom_lamp",
+   "op": "spec",
+   "model": "openrouter/router/vision",
+   "reserved_usd": 0.005,
+   "status": "settled",
+   "inputs_hash": "fdce619fc2a2db1b8b21ffae24981ea49587f7fb321ff9d4e434cac6f32404f0",
+   "queue": {
+    "request_id": "01a1eb3c-2f5b-7142-88c6-ed6b2a2cc0d0",
+    "status_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-2f5b-7142-88c6-ed6b2a2cc0d0/status",
+    "response_url": "https://queue.fal.run/openrouter/router/requests/01a1eb3c-2f5b-7142-88c6-ed6b2a2cc0d0"
+   },
+   "settled_usd": 0.005,
+   "request_id": "01a1eb3c-2f5b-7142-88c6-ed6b2a2cc0d0",
+   "seconds": 10.605,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\specs\\mushroom_lamp.json",
+   "usage": {
+    "prompt_tokens": 1379,
+    "completion_tokens": 662,
+    "total_tokens": 2041,
+    "cost": 0.00351675,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0
+    }
+   }
+  },
+  {
+   "seq": 3,
+   "at": "2026-11-17T20:39:22.282Z",
+   "item": "mushroom_lamp",
+   "op": "studio",
+   "model": "fal-ai/nano-banana-pro/edit",
+   "reserved_usd": 0.15,
+   "status": "settled",
+   "inputs_hash": "bcef5a1e318817781b4527a38419adb49ce192e31d770fe870f73af3dfab2cc5",
+   "queue": {
+    "request_id": "01a1eb3c-56cc-71f2-87b7-584a1de02430",
+    "status_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3c-56cc-71f2-87b7-584a1de02430/status",
+    "response_url": "https://queue.fal.run/fal-ai/nano-banana-pro/requests/01a1eb3c-56cc-71f2-87b7-584a1de02430"
+   },
+   "settled_usd": 0.15,
+   "request_id": "01a1eb3c-56cc-71f2-87b7-584a1de02430",
+   "seconds": 25.4,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\studio\\mushroom_lamp.png"
+  },
+  {
+   "seq": 4,
+   "at": "2026-11-17T20:53:17.882Z",
+   "item": "mushroom_lamp",
+   "op": "mesh",
+   "model": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+   "reserved_usd": 0.525,
+   "status": "settled",
+   "inputs_hash": "c2a33ca8a7666e6fedf6105906f6bab411ad62dfd0ce2c5f431231229f693a2f",
+   "queue": {
+    "request_id": "01a1eb49-219c-75b3-adff-445ccc180740",
+    "status_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb49-219c-75b3-adff-445ccc180740/status",
+    "response_url": "https://queue.fal.run/fal-ai/hunyuan-3d/requests/01a1eb49-219c-75b3-adff-445ccc180740"
+   },
+   "settled_usd": 0.525,
+   "request_id": "01a1eb49-219c-75b3-adff-445ccc180740",
+   "seconds": 191.873,
+   "out": "c:\\RnD\\.wt\\harei-zahav-naama\\out\\harei-zahav-naama\\3-rooms\\items\\glb\\mushroom_lamp.glb"
+  }
+ ]
+}

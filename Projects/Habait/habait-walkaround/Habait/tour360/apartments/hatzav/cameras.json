@@ -1,0 +1,140 @@
+{
+ "$schema": "tour360/cameras.v1",
+ "apartment": "hatzav",
+ "note": "positions in the plan frame (u right, v down, cm; geometry.json); eye 155 cm; living moved to 700,880 (coordinator 2026-11-18: the walk view stood 0.6–0.9 m from the TV unit). The plan block lets build-tour give the page the sheet's px per cm.",
+ "plan": {
+  "crop": "JOB/input/plan-hatzav-colour.png",
+  "pxPerCm": 1,
+  "planScale": 0.6,
+  "sheet": "plan/floorplan.webp"
+ },
+ "eye_cm": 155,
+ "scenes": [
+  {
+   "id": "living",
+   "asset": "01-living",
+   "at_uv_cm": [
+    700,
+    880
+   ],
+   "links": [
+    "dining",
+    "kitchen",
+    "entrance",
+    "hall",
+    "deck"
+   ]
+  },
+  {
+   "id": "dining",
+   "asset": "02-dining",
+   "at_uv_cm": [
+    420,
+    620
+   ],
+   "links": [
+    "living",
+    "kitchen",
+    "entrance",
+    "hall"
+   ]
+  },
+  {
+   "id": "kitchen",
+   "asset": "03-kitchen",
+   "at_uv_cm": [
+    172,
+    890
+   ],
+   "links": [
+    "living",
+    "dining",
+    "entrance"
+   ]
+  },
+  {
+   "id": "entrance",
+   "asset": "04-entrance",
+   "at_uv_cm": [
+    150,
+    590
+   ],
+   "links": [
+    "living",
+    "dining",
+    "kitchen",
+    "hall"
+   ]
+  },
+  {
+   "id": "hall",
+   "asset": "05-hall",
+   "at_uv_cm": [
+    270,
+    400
+   ],
+   "links": [
+    "entrance",
+    "bedroom",
+    "saferoom",
+    "bath"
+   ]
+  },
+  {
+   "id": "bedroom",
+   "asset": "06-bedroom",
+   "at_uv_cm": [
+    450,
+    312
+   ],
+   "links": [
+    "hall"
+   ]
+  },
+  {
+   "id": "saferoom",
+   "asset": "07-saferoom",
+   "at_uv_cm": [
+    160,
+    255
+   ],
+   "links": [
+    "hall"
+   ]
+  },
+  {
+   "id": "bath",
+   "asset": "08-bath",
+   "at_uv_cm": [
+    150,
+    420
+   ],
+   "links": [
+    "hall"
+   ]
+  },
+  {
+   "id": "deck",
+   "asset": "09-deck",
+   "at_uv_cm": [
+    980,
+    760
+   ],
+   "links": [
+    "living",
+    "garden"
+   ]
+  },
+  {
+   "id": "garden",
+   "asset": "10-garden",
+   "at_uv_cm": [
+    1350,
+    700
+   ],
+   "links": [
+    "deck"
+   ]
+  }
+ ]
+}

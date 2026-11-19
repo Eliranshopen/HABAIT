@@ -49,3 +49,10 @@
 - **Learned:** A layer may come from a BRANCH for paths that are one session's alone (the engine home and its board): the mirror then holds work that local main does not. When the head moves between the fetch and the push, fetch and build again; it moved twice in five minutes.
 - **Owed / open:** None. What the mirror does not hold for another computer is in the handoff entry of 2026-11-19 (the first evidence file of this entry).
 - **Second reader:** none
+
+## 2026-11-19 · main session (3dengine) · layer 216665e6 on 788b8455: Claude's own notes and the engine's handoff records, on Eliran's word («אני רוצה שיעלו לגיטהאב»)
+- **Did:** Asked in a dialog where Claude's own notes should travel, Eliran chose the GitHub mirror. A copy of the 52 notes went into docs/claude-memory-export (with a context file that says how to put them back on another computer; one private gmail address replaced by words; names of keys only) and was committed on local main (c1bc10d2) with the memory made true after the merge of the engine's work in progress. The mirror's head had moved again (788b8455, the Kedma session). The layer was built on that head with the same rule as before (adds and updates only, nothing removed, media-free, never forced): 62 files = 54 added, 4 taken from the commit, 4 shared record files as they stand in the working tree; the tree went from 7527 to 7581 files. Secret scan of every file: 0 hits across 20 patterns; no gmail address in any of them. Pushed as a fast-forward; ls-remote = 216665e6. A small follow-up layer carries this record and the two notes refreshed after it.
+- **Evidence:** `docs/claude-memory-export/CLAUDE.md` · `memory/project/2026-11-19-engine-handoff-other-computer.md`
+- **Learned:** The record of a layer always trails the layer by one (the record is written after the push). One company address (office@) is in a note; it was already public in five files of the mirror.
+- **Owed / open:** The mirror still holds no history, no media and no render assets: for a true continuation on another computer the carry pack is the way (see the handoff file). The branch blender-walk is in no snapshot.
+- **Second reader:** none
